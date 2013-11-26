@@ -1,0 +1,59 @@
+set(sources
+  particle2d.cc
+  unicycle.cc
+  car.cc
+  kinbody2dmanifold.cc
+  gunicycle.cc
+  gunicyclemanifold.cc
+  gunicyclecost.cc
+  qrotor.cc
+  hrotor.cc
+  heli.cc
+  kinbody2d.cc
+  body3dmanifold.cc
+  mbsmanifold.cc
+  mbscspace.cc
+  mbstspace.cc
+  chain.cc
+  airm.cc
+  airbot.cc
+  mbs.cc
+  snake.cc
+  dem.cc
+  airplanecost.cc
+)
+
+set(headers
+  rn.h
+  manifold.h
+  system.h
+  cost.h
+  lqcost.h
+  rnlqcost.h
+  particle2d.h
+  unicycle.h
+  car.h
+  kinbody2dmanifold.h
+  gunicycle.h
+  gunicyclemanifold.h
+  gunicyclecost.h
+  body3d.h
+  body3dmanifold.h
+  body3dcost.h
+  qrotor.h
+  hrotor.h
+  heli.h
+  kinbody2d.h
+  wrench.h
+  mbsmanifold.h
+  mbscspace.h
+  mbstspace.h
+  mbs.h
+  chain.h
+  airm.h
+  airbot.h
+  snake.h
+  autodiff.h
+  dem.h
+  airplanecost.h
+)

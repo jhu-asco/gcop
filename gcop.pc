@@ -1,0 +1,10 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib
+
+Name: gcop
+Description: Geometric Control, Optimization, and Planning
+Version: 1.0.0
+Cflags: -I${includedir}/gcop
+Libs: -L${libdir} -lgcop

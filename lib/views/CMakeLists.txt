@@ -1,0 +1,52 @@
+set(sources
+  viewer.cc
+  view.cc
+  particle2dview.cc
+  unicycleview.cc
+  carview.cc
+  gunicycleview.cc
+  qrotorview.cc
+  hrotorview.cc
+  hrotorgeom3dview.cc
+  heliview.cc
+  kinbody2dview.cc
+  posegraph2dview.cc
+  chainview.cc  
+  geom3dview.cc
+  boxview.cc
+  cylinderview.cc
+  airmview.cc
+  airbotview.cc
+  mbsview.cc
+  snakeview.cc
+  demview.cc
+  airplaneview.cc
+  normal2dview.cc
+)
+
+set(headers
+  viewer.h
+  view.h
+  systemview.h
+  particle2dview.h
+  unicycleview.h
+  carview.h
+  gunicycleview.h
+  body3dview.h
+  qrotorview.h
+  hrotorview.h
+  hrotorgeom3dview.h
+  heliview.h
+  kinbody2dview.h
+  posegraph2dview.h
+  mbsview.h
+  chainview.h
+  geom3dview.h
+  boxview.h
+  cylinderview.h
+  airmview.h
+  airbotview.h
+  snakeview.h
+  airplaneview.h
+  normal2dview.h
+)

@@ -1,0 +1,46 @@
+link_directories(${RPC_BINARY_DIR}/lib) 
+
+add_executable(particle2dtest particle2dtest.cc)
+target_link_libraries(particle2dtest rpc  ${LIBS})
+
+add_executable(unicycletest unicycletest.cc)
+target_link_libraries(unicycletest rpc  ${LIBS})
+
+add_executable(gunicycletest gunicycletest.cc)
+target_link_libraries(gunicycletest rpc  ${LIBS})
+
+add_executable(chaintest chaintest.cc)
+target_link_libraries(chaintest rpc  ${LIBS})
+
+add_executable(airmtest airmtest.cc)
+target_link_libraries(airmtest rpc  ${LIBS})
+
+add_executable(airmopttest airmopttest.cc)
+target_link_libraries(airmopttest rpc  ${LIBS})
+
+add_executable(airbottest airbottest.cc)
+target_link_libraries(airbottest rpc  ${LIBS})
+
+add_executable(airbotsim airbotsim.cc)
+target_link_libraries(airbotsim rpc  ${LIBS})
+
+
+add_executable(chainopttest chainopttest.cc)
+target_link_libraries(chainopttest rpc  ${LIBS})
+
+add_executable(body3dtest body3dtest.cc)
+target_link_libraries(body3dtest rpc  ${LIBS})
+
+add_executable(batest batest.cc)
+target_link_libraries(batest rpc  ${LIBS})
+
+
+#add_executable(snakeopttest snakeopttest.cc)
+#target_link_libraries(snakeopttest rpc  ${LIBS})
+
+
+
+#INSTALL(TARGETS rpctest
+#        RUNTIME
+#        DESTINATION bin)
+
