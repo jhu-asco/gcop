@@ -31,6 +31,10 @@ target_link_libraries(batest gcop  ${LIBS})
 add_executable(cartest cartest.cc)
 target_link_libraries(cartest gcop  ${LIBS})
 
+add_executable(rccartest rccartest.cc)
+target_link_libraries(rccartest gcop  ${LIBS})
+
+
 add_executable(chaintest chaintest.cc)
 target_link_libraries(chaintest gcop  ${LIBS})
 

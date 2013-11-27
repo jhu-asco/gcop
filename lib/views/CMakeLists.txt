@@ -4,6 +4,7 @@ set(sources
   particle2dview.cc
   unicycleview.cc
   carview.cc
+  rccarview.cc
   gunicycleview.cc
   qrotorview.cc
   hrotorview.cc
@@ -31,6 +32,7 @@ set(headers
   particle2dview.h
   unicycleview.h
   carview.h
+  rccarview.h
   gunicycleview.h
   body3dview.h
   qrotorview.h

@@ -10,6 +10,7 @@
 #include "cost.h"
 #include "mbsstate.h"
 #include <cmath>
+#include "rn.h"
 
 namespace gcop {
   
@@ -456,8 +457,20 @@ namespace gcop {
         const Matrixcnd &Kux = Kuxs[k];
         
         du = a*ku + Kux*dx;
-
         un = u + du;
+        
+        Rn<c> &U = (Rn<c>&)sys.U;
+        if (U.bnd) {
+          for (int j = 0; j < u.size(); ++j) 
+            if (un[j] < U.lb[j]) {
+              un[j] = U.lb[j];
+              du[j] = un[j] - u[j];
+            } else
+              if (un[j] > U.ub[j]) {
+                un[j] = U.ub[j];
+                du[j] = un[j] - u[j];
+              }
+        }
         
         const double &t = ts[k];
         double h = ts[k+1] - t;

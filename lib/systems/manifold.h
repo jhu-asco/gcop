@@ -80,11 +80,14 @@ namespace gcop {
  
   int n;  ///< dimension
   
+  bool bnd;    ///< is the space bounded (false by default). Bounds are defined below: these "box" bounds make sense when there is a natural ordering on the manifold, e.g. of the natural numbers)
+  T lb;        ///< lower bound (-inf by default)
+  T ub;        ///< upper bound (inf by default)
   };
 
   template <typename T, int _n>
-    Manifold<T, _n>::Manifold(int n) : n(n) {
-    assert(n > 0);
+    Manifold<T, _n>::Manifold(int n) : n(n), bnd(false) {
+    assert(n > 0);    
   }
 }
 

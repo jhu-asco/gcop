@@ -2,6 +2,7 @@
 #define GCOP_RN_H
 
 #include "manifold.h"
+#include <cfloat>
 
 namespace gcop {
   
@@ -37,11 +38,16 @@ namespace gcop {
     void dtau(Matrixnd &M, const Vectornd &v);
     
     void Adtau(Matrixnd &M, const Vectornd &v);
-
   };
 
   template <int _n> 
     Rn<_n>::Rn(int n) : Manifold<Matrix<double, _n, 1>, _n>(n) {
+    if (_n == Dynamic) {
+      this->lb.resize(n);
+      this->ub.resize(n);
+    }
+    this->lb.setConstant(-1e16);
+    this->ub.setConstant(1e16);      
   }
   
   template <int _n> 

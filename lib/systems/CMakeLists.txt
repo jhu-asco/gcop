@@ -2,6 +2,7 @@ set(sources
   particle2d.cc
   unicycle.cc
   car.cc
+  rccar.cc
   kinbody2dmanifold.cc
   gunicycle.cc
   gunicyclemanifold.cc
@@ -33,6 +34,7 @@ set(headers
   particle2d.h
   unicycle.h
   car.h
+  rccar.h
   kinbody2dmanifold.h
   gunicycle.h
   gunicyclemanifold.h
