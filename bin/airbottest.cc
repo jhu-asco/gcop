@@ -63,7 +63,7 @@ void solver_process(Viewer* viewer)
   VectorXd R(10);  
   VectorXd Qf(24);
 
-  params.GetVectorXd("Q", Q);  
+  params.GetVectorXd("Q", Q);
   params.GetVectorXd("R", R);
   params.GetVectorXd("Qf", Qf);
 

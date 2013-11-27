@@ -5,8 +5,17 @@
 #include "params.h"
 
 
-using namespace std;
 using namespace gcop;
+using namespace std;
+
+static void replace(std::string& str, const std::string& a, const std::string& b)
+{
+  size_t pos = 0;
+  while((pos = str.find(a, pos)) != std::string::npos) {
+    str.replace(pos, a.length(), b);
+    pos += b.length();
+  }
+}
 
 
 
@@ -179,6 +188,110 @@ void Params::SetDouble(const char *name, double value)
   valueMap[name] = string(buf);
 }
 
+
+void Params::SetVector2d(const char *name, const Vector2d &v)
+{
+  vector<double>::const_iterator it;
+  stringstream s;
+  unsigned int i = 0;
+  for (int i = 0; i < v.size(); ++i) {
+    s << v[i];
+    if (i < v.size()-1)
+      s << ",";
+  }
+  valueMap[name] = s.str();
+}
+
+bool Params::GetVector2d(const char *name, Vector2d &v) const
+{
+  std::map<string, string>::const_iterator i = valueMap.find(name);
+  if (i == valueMap.end()) {
+    // cerr << "Error:\tParams::Get:\tparameter <" << name << "> not found!" << endl;
+    return false;
+  }
+
+  vector<string> tokens;
+  Tokenize(i->second, tokens, ", ");
+  vector<string>::iterator it;
+  int vi = 0;
+  for (it = tokens.begin(); it != tokens.end(); ++it) {
+    string str = *it;
+    replace(str, string("pi"), string("3.141592"));  
+    v[vi] = atof(str.c_str());
+    ++vi;
+  }
+  return true;
+}
+
+void Params::SetVector3d(const char *name, const Vector3d &v)
+{
+  vector<double>::const_iterator it;
+  stringstream s;
+  unsigned int i = 0;
+  for (int i = 0; i < v.size(); ++i) {
+    s << v[i];
+    if (i < v.size()-1)
+      s << ",";
+  }
+  valueMap[name] = s.str();
+}
+
+bool Params::GetVector3d(const char *name, Vector3d &v) const
+{
+  std::map<string, string>::const_iterator i = valueMap.find(name);
+  if (i == valueMap.end()) {
+    // cerr << "Error:\tParams::Get:\tparameter <" << name << "> not found!" << endl;
+    return false;
+  }
+
+  vector<string> tokens;
+  Tokenize(i->second, tokens, ", ");
+  vector<string>::iterator it;
+  int vi = 0;
+  for (it = tokens.begin(); it != tokens.end(); ++it) {
+    string str = *it;
+    replace(str, string("pi"), string("3.141592"));  
+    v[vi] = atof(str.c_str());
+    ++vi;
+  }
+  return true;
+}
+
+void Params::SetVector4d(const char *name, const Vector4d &v)
+{
+  vector<double>::const_iterator it;
+  stringstream s;
+  unsigned int i = 0;
+  for (int i = 0; i < v.size(); ++i) {
+    s << v[i];
+    if (i < v.size()-1)
+      s << ",";
+  }
+  valueMap[name] = s.str();
+}
+
+bool Params::GetVector4d(const char *name, Vector4d &v) const
+{
+  std::map<string, string>::const_iterator i = valueMap.find(name);
+  if (i == valueMap.end()) {
+    // cerr << "Error:\tParams::Get:\tparameter <" << name << "> not found!" << endl;
+    return false;
+  }
+
+  vector<string> tokens;
+  Tokenize(i->second, tokens, ", ");
+  vector<string>::iterator it;
+  int vi = 0;
+  for (it = tokens.begin(); it != tokens.end(); ++it) {
+    string str = *it;
+    replace(str, string("pi"), string("3.141592"));  
+    v[vi] = atof(str.c_str());
+    ++vi;
+  }
+  return true;
+}
+
+
 void Params::SetVectorXd(const char *name, const VectorXd &v)
 {
   vector<double>::const_iterator it;
@@ -191,6 +304,28 @@ void Params::SetVectorXd(const char *name, const VectorXd &v)
   }
   valueMap[name] = s.str();
 }
+
+bool Params::GetVectorXd(const char *name, VectorXd &v) const
+{
+  std::map<string, string>::const_iterator i = valueMap.find(name);
+  if (i == valueMap.end()) {
+    // cerr << "Error:\tParams::Get:\tparameter <" << name << "> not found!" << endl;
+    return false;
+  }
+
+  vector<string> tokens;
+  Tokenize(i->second, tokens, ", ");
+  vector<string>::iterator it;
+  int vi = 0;
+  for (it = tokens.begin(); it != tokens.end(); ++it) {
+    string str = *it;
+    replace(str, string("pi"), string("3.141592"));  
+    v[vi] = atof(str.c_str());
+    ++vi;
+  }
+  return true;
+}
+
 
 
 void Params::SetDoubleVec(const char *name, const vector<double> &v)
@@ -250,15 +385,6 @@ bool Params::GetInt(const char *name, int &v) const
   return true;
 }
 
-static void replace(std::string& str, const std::string& a, const std::string& b)
-{
-  size_t pos = 0;
-  while((pos = str.find(a, pos)) != std::string::npos) {
-    str.replace(pos, a.length(), b);
-    pos += b.length();
-  }
-}
-
 
 bool Params::GetFloat(const char *name, float &v) const
 {
@@ -284,27 +410,6 @@ bool Params::GetDouble(const char *name, double &v) const
   string str = i->second;
   replace(str, string("pi"), string("3.141592"));  
   v = atof(str.c_str());
-  return true;
-}
-
-bool Params::GetVectorXd(const char *name, VectorXd &v) const
-{
-  std::map<string, string>::const_iterator i = valueMap.find(name);
-  if (i == valueMap.end()) {
-    // cerr << "Error:\tParams::Get:\tparameter <" << name << "> not found!" << endl;
-    return false;
-  }
-
-  vector<string> tokens;
-  Tokenize(i->second, tokens, ", ");
-  vector<string>::iterator it;
-  int vi = 0;
-  for (it = tokens.begin(); it != tokens.end(); ++it) {
-    string str = *it;
-    replace(str, string("pi"), string("3.141592"));  
-    v[vi] = atof(str.c_str());
-    ++vi;
-  }
   return true;
 }
 

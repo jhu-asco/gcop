@@ -54,6 +54,15 @@ class Params
   void SetVectorXd(const char *name, const VectorXd &v);
   bool GetVectorXd(const char *name, VectorXd &v) const;
 
+  void SetVector2d(const char *name, const Vector2d &v);
+  bool GetVector2d(const char *name, Vector2d &v) const;
+
+  void SetVector3d(const char *name, const Vector3d &v);
+  bool GetVector3d(const char *name, Vector3d &v) const;
+
+  void SetVector4d(const char *name, const Vector4d &v);
+  bool GetVector4d(const char *name, Vector4d &v) const;
+
   void SetDoubleVec(const char *name, const std::vector<double> &v);
   bool GetDoubleVec(const char *name, std::vector<double> &v) const;
 

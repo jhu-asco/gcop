@@ -5,6 +5,7 @@
 #include "rccarview.h"
 #include "utils.h"
 #include "rnlqcost.h"
+#include "params.h"
 
 using namespace std;
 using namespace Eigen;
@@ -12,22 +13,44 @@ using namespace gcop;
 
 typedef Dmoc<Vector4d, 4, 2> RccarDmoc;
 
+Params params;
+
 void solver_process(Viewer* viewer)
 {
+  if (viewer)
+    viewer->SetCamera(-5, 51, -0.2, -0.15, -2.3);
+
   int N = 64;        // number of segments
   double tf = 20;    // time horizon
+
+  params.GetInt("N", N);  
+  params.GetDouble("tf", tf);
+
   double h = tf/N;   // time step
 
   Rccar sys;
 
+  // initial state
+  Vector4d x0 = Vector4d::Zero();
+  params.GetVector4d("x0", x0);
+
   // final state
   Vector4d xf = Vector4d::Zero();
+  params.GetVector4d("xf", xf);  
 
   // cost
   RnLqCost<4, 2> cost(tf, xf);
-  cost.Q(0,0) = 0.1; cost.Q(1,1) = 0.1; cost.Q(2,2) = 0.1; cost.Q(3,3) = .5;
-  cost.Qf(0,0) = 5; cost.Qf(1,1) = 5; cost.Qf(2,2) = 10; cost.Qf(3,3) = 1;
-  cost.R(0,0) = 1; cost.R(1,1) = .1;  
+  VectorXd Q(4);
+  VectorXd R(2);  
+  VectorXd Qf(4);
+
+  params.GetVectorXd("Q", Q);
+  params.GetVectorXd("Qf", Qf);
+  params.GetVectorXd("R", R);
+ 
+  cost.Q = Q.asDiagonal();
+  cost.R = R.asDiagonal();
+  cost.Qf = Qf.asDiagonal();
 
   // times
   vector<double> ts(N+1);
@@ -37,10 +60,7 @@ void solver_process(Viewer* viewer)
   // states
   vector<Vector4d> xs(N+1);
   // initial state
-  xs[0][0] = .5; 
-  xs[0][1] = .5;
-  xs[0][2] = M_PI/4;
-  xs[0][3] = 0;
+  xs[0] = x0;
 
   // initial controls
   vector<Vector2d> us(N);
@@ -50,7 +70,8 @@ void solver_process(Viewer* viewer)
   }
   
   RccarDmoc dmoc(sys, cost, ts, xs, us);  
-  dmoc.mu = .1;
+  dmoc.mu = .01;
+  params.GetDouble("mu", dmoc.mu);
 
   RccarView view(sys, &dmoc.xs);
   
@@ -61,7 +82,6 @@ void solver_process(Viewer* viewer)
   getchar();
 
   for (int i = 0; i < 30; ++i) {
-
     timer_start(timer);
     dmoc.Iterate();
     long te = timer_us(timer);
@@ -79,6 +99,12 @@ void solver_process(Viewer* viewer)
 
 int main(int argc, char** argv)
 {
+
+  if (argc > 1)
+    params.Load(argv[1]);
+  else
+    params.Load("rccar.cfg");
+
 
 #ifdef DISP
   Viewer *viewer = new Viewer;
