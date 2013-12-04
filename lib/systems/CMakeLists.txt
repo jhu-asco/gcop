@@ -49,6 +49,7 @@ set(headers
   wrench.h
   mbsmanifold.h
   mbscspace.h
+	mbsstate.h
   mbstspace.h
   mbs.h
   chain.h
