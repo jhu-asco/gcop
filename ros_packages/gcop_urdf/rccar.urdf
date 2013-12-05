@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot name="Unicycle">
+  <link name="carbody">
+    <visual>
+      <geometry>
+        <box size="0.3 .10 0.05"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+  </link>
+  <link name="backwheel1">
+    <visual>
+      <geometry>
+        <cylinder length="0.06" radius="0.08"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+  </link>
+  <link name="backwheel2">
+    <visual>
+      <geometry>
+        <cylinder length="0.06" radius="0.08"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+  </link>
+  <link name="frontwheel1">
+    <visual>
+      <geometry>
+        <cylinder length="0.04" radius="0.04"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  <link name="frontwheel2">
+    <visual>
+      <geometry>
+        <cylinder length="0.04" radius="0.04"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joints -->
+  <joint name="base_to_backwheel1" type="continuous">
+    <parent link="carbody"/>
+    <child link="backwheel1"/>
+    <origin rpy="-1.5707 0 0" xyz="-0.15 -0.08 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <joint name="base_to_frontwheel1" type="continuous">
+    <parent link="carbody"/>
+    <child link="frontwheel1"/>
+    <origin rpy="-1.5707 0 0" xyz="0.10 -0.07 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <joint name="frontwheel1_to_frontwheel2" type="fixed">
+    <parent link="frontwheel1"/>
+    <child link="frontwheel2"/>
+    <origin rpy="0 0 0" xyz="0 0 0.14"/>
+  </joint>
+  <joint name="backwheel1_to_backwheel2" type="fixed">
+    <parent link="backwheel1"/>
+    <child link="backwheel2"/>
+    <origin rpy="0 0 0" xyz="0 0 0.16"/>
+  </joint>
+</robot>

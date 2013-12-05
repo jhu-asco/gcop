@@ -1,0 +1,9 @@
+*.cpp.swp
+*.swp
+*.tar.gz
+*.bag
+*.bak
+*.csv
+*.dat
+build*
+bin*
