@@ -83,17 +83,16 @@ double Mbs::F(VectorXd &v, double t, const MbsState &x,
   }
   
   // a = -M.inverse()*f;
-  v.head(6) = h*(x.vs[0] + h*a.head(6));
-  v.segment(6, nb-1) = h*(x.dr + h*a.tail(nb-1));
-  v.segment(nb+5, 6) = h*a.head(6);
+  v.head(6) = h*(x.vs[0] + h*a.head(6));            // updated base velocity
+  v.segment(6, nb-1) = h*(x.dr + h*a.tail(nb-1));   // updated joint velocities
+  v.segment(nb+5, 6) = h*a.head(6);                 
   v.segment(nb+11, nb-1) = h*a.tail(nb-1);
 }
 
 
 void Mbs::Mass(MatrixXd &M, const MbsState &x) 
 {
-    
-  // assumes that FK has been called on x
+  // assumes that FK has been called on x, i.e. that it is consistent
   M.setZero();
 
   vector<Matrix6d> Ics(nb);
@@ -329,6 +328,6 @@ void Mbs::KStep(MbsState &xb, const MbsState &xa, double h) {
 
     xb.gs[i] = xa.gs[i]*dg;
     
-    //TODO: add else above
+    //TODO: add else above for efficiency
   }
 }

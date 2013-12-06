@@ -121,7 +121,7 @@ namespace gcop {
     
     char type;   ///< type of algorithm (choices are PURE, DDP, LQS), LQS is default. In the current implementation second-order expansion of the dynamics is ignored, so DDP and LQS are identical. Both LQS and DDP are implemented using the true nonlinear dynamics integration in the Forward step, while PURE uses the linearized version in order to match exactly the true Newton step. 
     
-    static const char PURE = 0;     ///< PURE version of algorithm
+    static const char PURE = 0;     ///< PURE version of algorithm (i.e. stage-wise Newton)
     static const char DDP = 1;      ///< DDP version of algorithm
     static const char LQS = 2;      ///< Linear-Quadratic Subproblem version of algorithm due to Dreyfus / Dunn&Bertsekas / Pantoja
 
@@ -242,15 +242,14 @@ namespace gcop {
     }
     
     if (c == Dynamic)
-      du.resize(sys.c);
-    
+      du.resize(sys.c);    
 
     double eps = 1e-10;    
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
       if (der) {
-        static const double q = 1093121342312;
+        static const double q = 1093121342312;  // a random number
         As[k](0,0) = q;
         Bs[k](0,0) = q;
         
@@ -305,7 +304,6 @@ namespace gcop {
           }
         }
         
-
       } else {
         sys.Step(xs[k+1], ts[k], xs[k], us[k], h);
       }
@@ -528,7 +526,7 @@ namespace gcop {
 
   template <typename T, int n, int c> 
     void Dmoc<T, n, c>::Iterate() {
-
+    
     Backward();
     Forward();
     for (int k = 0; k < N; ++k)

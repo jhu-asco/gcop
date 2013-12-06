@@ -18,8 +18,8 @@ namespace gcop {
     //    Joint();
 
     Vector6d a;    ///< axis
-    Matrix4d gp;   ///< from parent to joint
-    Matrix4d gc;   ///< from child to joint
+    Matrix4d gp;   ///< fixed xform from parent to joint
+    Matrix4d gc;   ///< fixed xfom from child to joint
 
     Matrix6d Ac;   ///< change of frame Ad(gc)
     Matrix4d gpi;  ///< from parent to joint inverse
@@ -28,11 +28,7 @@ namespace gcop {
     Vector6d S;    ///< Jacobian S=Ac*a
   };
   
-  
   /**
-   * Control system modeled as an underactuated rigid body in 3d. It is meant as 
-   * a base class for implementing specific vehicles. 
-   *
    * The discrete mechanics is
    * based on an implicit symplectic variational integrator which is second-order accurate
    * and momentum-balance preserving. Regularity is guaranteed by choosing a time-step 
@@ -155,23 +151,65 @@ namespace gcop {
              const VectorXd &u, double h,
              MatrixXd *A = 0, MatrixXd *B = 0);
 
-    
+
+    /**
+     * Inverse-dynamics function. Computes the residual of the
+     * dynamical update from xa to xb given controls u 
+     * @param f residual
+     * @param t time
+     * @param xb next state
+     * @param xa current state
+     * @param u controls
+     * @param h time-step
+     */
     void ID(VectorXd &f,
             double t, const MbsState &xb, const MbsState &xa,
             const VectorXd &u, double h);
 
+    /**
+     * Forward kinematics: given base pose and joint angles, update the poses of
+     * all bodies in the graph.
+     * @param x state
+     */
     void FK(MbsState &x);
 
+    /**
+     * Kinematic-step. Given previous state xa, the next state xb is updated
+     * by taking the joint angles from xa, and joint velocities from xb, updating the
+     * joint angles in xb, and updating the xb body poses
+     * @param xa previous state
+     * @param xb next state
+     * @param h time-step
+     */
     void KStep(MbsState &xb, const MbsState &xa, double h);
 
+    /**
+     * Compute the mass matrix at a given state x
+     * @param M mass matrix
+     * @param x state
+     */
     void Mass(MatrixXd &M, const MbsState &x);
 
+    /**
+     * Total resulting force on the system from external (e.g. gravity)
+     * and internal (control) inputs
+     * @param f total force f(x,u,t)
+     * @param t time
+     * @param x state
+     * @param u controls
+     * @param A jacobian Dxf
+     * @param B jacobian Duf
+     */
     virtual void Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
                        MatrixXd *A = 0, MatrixXd *B = 0) = 0;
     
+
+    /**
+     * Reconstruct state x
+     */
     void Rec(MbsState &x, double h);
 
-    int nb;    
+    int nb;  ///< number of rigid bodies
 
     //    MbsManifold X;
     //    Rn<> U;
@@ -192,7 +230,7 @@ namespace gcop {
 
     vector<vector<int> > cs;  ///< child lists
 
-    SE3 &se3;
+    SE3 &se3;              ///< singleton reference for performing SE(3) operations
 
     bool debug;
 

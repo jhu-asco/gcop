@@ -21,36 +21,40 @@ void solver_process(Viewer* viewer)
     viewer->SetCamera(-5, 51, -0.2, -0.15, -2.3);
 
   int N = 64;        // number of segments
-  double tf = 20;    // time horizon
+  double tf = 5;    // time horizon
 
   params.GetInt("N", N);  
   params.GetDouble("tf", tf);
+  
 
   double h = tf/N;   // time step
 
   Rccar sys;
 
+  //  sys.U.lb[1] = tan(-M_PI/5);
+  //  sys.U.ub[1] = tan(M_PI/5);
+
   // initial state
-  Vector4d x0 = Vector4d::Zero();
+  Vector4d x0(1,1,0,0);
   params.GetVector4d("x0", x0);
 
   // final state
-  Vector4d xf = Vector4d::Zero();
+  Vector4d xf(0,0,0,0);
   params.GetVector4d("xf", xf);  
 
   // cost
   RnLqCost<4, 2> cost(tf, xf);
   VectorXd Q(4);
-  VectorXd R(2);  
+  if (params.GetVectorXd("Q", Q))
+    cost.Q = Q.asDiagonal();
+  
   VectorXd Qf(4);
-
-  params.GetVectorXd("Q", Q);
-  params.GetVectorXd("Qf", Qf);
-  params.GetVectorXd("R", R);
- 
-  cost.Q = Q.asDiagonal();
-  cost.R = R.asDiagonal();
-  cost.Qf = Qf.asDiagonal();
+  if (params.GetVectorXd("Qf", Qf))
+    cost.Qf = Qf.asDiagonal();
+  
+  VectorXd R(2);
+  if (params.GetVectorXd("R", R)) 
+    cost.R = R.asDiagonal();
 
   // times
   vector<double> ts(N+1);
@@ -81,7 +85,7 @@ void solver_process(Viewer* viewer)
   // dmoc.debug = false; // turn off debug for speed
   getchar();
 
-  for (int i = 0; i < 30; ++i) {
+  for (int i = 0; i < 10; ++i) {
     timer_start(timer);
     dmoc.Iterate();
     long te = timer_us(timer);
@@ -89,6 +93,9 @@ void solver_process(Viewer* viewer)
     getchar();
   }
 
+  //  xs[1][3]  velocity
+  //atan(us[0][1]) steering angle
+ 
   cout << "done!" << endl;
   while(1)
     usleep(10);    

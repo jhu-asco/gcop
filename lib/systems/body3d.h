@@ -19,14 +19,7 @@ namespace gcop {
   typedef Matrix<double, 12, 12> Matrix12d;
   
   /**
-   * Control system modeled as an underactuated rigid body in 3d. It is meant as 
-   * a base class for implementing specific vehicles. 
-   *
-   * The discrete mechanics is
-   * based on an implicit symplectic variational integrator which is second-order accurate
-   * and momentum-balance preserving. Regularity is guaranteed by choosing a time-step 
-   * which does not jump out of the convex region around the initial guess from the previous
-   * dynamics iteration.
+   * A single rigid body system
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
@@ -250,7 +243,7 @@ namespace gcop {
     xb.second.segment<3>(3) = wb;
     xb.second.tail<3>() = vb;
 
-    return 1;
+    //    return 1;
     
     const Matrix3d &I3 = Matrix3d::Identity();
     

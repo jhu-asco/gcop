@@ -9,7 +9,7 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
   
-  // state dimension for nb-body system
+  // state dimension for nb-body system with 1-dof joints
 #define MBS_DIM(nb) (12 + 2*(nb - 1))
   
   class MbsManifold : public Manifold<MbsState> {

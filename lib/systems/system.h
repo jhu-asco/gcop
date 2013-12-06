@@ -7,10 +7,6 @@
 #include "manifold.h"
 #include <iostream>
 
-namespace gcop {
-  
-  using namespace Eigen;
-
 /*! \mainpage Robotic Planning and Control (GCOP) software library
  *
  * \section Intro
@@ -51,6 +47,10 @@ namespace gcop {
  * discrete optimal control, discrete mechanics, motion planning, nonlinear control
  */
 
+namespace gcop {
+  
+  using namespace Eigen;
+  
   
   /**
    * Control system interface for dynamic systems on manifolds. 
@@ -81,15 +81,46 @@ namespace gcop {
   
   System(Manifold<T, _n> &X, Manifold<Tu, _c> &U);
   
+  /**
+   * Discrete dynamics update. The function computes a change in the state
+   * v, regarded as a vector field which can then be used to update the new state 
+   * x_b the old state x_a according to x_b = x_a + v (that is when the space is 
+   * Euclidean). In general manifolds the update is x_b = Retract(x_a, v), i.e.
+   * a retraction mapping is used to update x_b intrinsically.
+   * @param v resulting change in state
+   * @param t current time
+   * @param xa current state
+   * @param u current control
+   * @param h current time-step
+   * @param A jacobian of v(x)
+   * @param B jacobian of v(u)
+   */
   virtual double F(Vectornd &v, double t, const T& xa, 
                    const Tu &u, double h,
                    Matrixnd *A = 0, Matrixncd *B = 0);
   
-  virtual double F(Vectornd &v, double t, const T& xa,
-                    const Tu &u, double h,
-                    const Vectormd &p,
-                    Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
 
+  /**
+   * Discrete dynamics update. The function computes a change in the state
+   * v, regarded as a vector field which can then be used to update the new state 
+   * x_b the old state x_a according to x_b = x_a + v (that is when the space is 
+   * Euclidean). In general manifolds the update is x_b = Retract(x_a, v), i.e.
+   * a retraction mapping is used to update x_b intrinsically.
+   * @param v resulting change in state
+   * @param t current time
+   * @param xa current state
+   * @param u current control
+   * @param h current time-step
+   * @param p static parameters
+   * @param A jacobian of f(x)
+   * @param B jacobian of f(u)
+   * @param C jacobian of f(p)
+   */
+  virtual double F(Vectornd &v, double t, const T& xa,
+                   const Tu &u, double h,
+                   const Vectormd &p,
+                   Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
+  
   virtual double Step(T& xb, double t, const T& xa,
                       const Tu &u, double h,
                       Matrixnd *A = 0, Matrixncd *B = 0);
@@ -98,12 +129,19 @@ namespace gcop {
                       const Tu &u, double h,
                       const Vectormd &p,
                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
-
-
+  
+  
+  /**
+   * Reconstruct the full state. Some states contain redundant parameters 
+   * for efficiency and it is useful to reconstruct them to maintain a 
+   * consisten state.
+   * @param x state
+   * @param h time-step
+   */
   virtual void Rec(T &x, double h) {};
   
-  Manifold<T, _n> &X;
-  Manifold<Tu,_c> &U;
+  Manifold<T, _n> &X;   ///< state manifold 
+  Manifold<Tu, _c> &U;   ///< control manifold
   
   int n;   ///< state dimension
   int c;   ///< control dimension
@@ -147,7 +185,7 @@ namespace gcop {
       v.resize(n);
 
     double d = F(v, t, xa, u, h, A, B);
-    X.Retract(xb, xa, v);
+    X.Retract(xb, xa, v); // in R^n this is just xb = xa + v
     Rec(xb, h);
     return d;
   }
@@ -163,7 +201,7 @@ namespace gcop {
       v.resize(n);
 
     double d = F(v, t, xa, u, h, p, A, B, C);
-    X.Retract(xb, xa, v);
+    X.Retract(xb, xa, v); // in R^n this is just xb = xa + v
     Rec(xb, h);
     return d;
   }

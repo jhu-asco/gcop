@@ -55,7 +55,6 @@ void solver_process(Viewer* viewer)
 
   */
 
-
   // times
   vector<double> ts(N+1);
   for (int k = 0; k <= N; ++k)
