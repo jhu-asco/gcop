@@ -13,7 +13,7 @@
   <link name="backwheel1">
     <visual>
       <geometry>
-        <cylinder length="0.06" radius="0.08"/>
+        <cylinder length="0.04" radius="0.04"/>
       </geometry>
       <material name="blue">
         <color rgba="0 0 0.8 1"/>
@@ -23,7 +23,7 @@
   <link name="backwheel2">
     <visual>
       <geometry>
-        <cylinder length="0.06" radius="0.08"/>
+        <cylinder length="0.04" radius="0.04"/>
       </geometry>
       <material name="blue">
         <color rgba="0 0 0.8 1"/>
@@ -54,23 +54,24 @@
   <joint name="base_to_backwheel1" type="continuous">
     <parent link="carbody"/>
     <child link="backwheel1"/>
-    <origin rpy="-1.5707 0 0" xyz="-0.15 -0.08 0"/>
+    <origin rpy="-1.5707 0 0" xyz="-0.15 -0.07 0"/>
     <axis xyz="0 0 1"/>
   </joint>
   <joint name="base_to_frontwheel1" type="continuous">
     <parent link="carbody"/>
     <child link="frontwheel1"/>
     <origin rpy="-1.5707 0 0" xyz="0.10 -0.07 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 -1 0"/>
   </joint>
-  <joint name="frontwheel1_to_frontwheel2" type="fixed">
-    <parent link="frontwheel1"/>
+  <joint name="base_to_frontwheel2" type="continuous">
+    <parent link="carbody"/>
     <child link="frontwheel2"/>
-    <origin rpy="0 0 0" xyz="0 0 0.14"/>
+    <origin rpy="-1.5707 0 0" xyz="0.10 0.07 0"/>
+    <axis xyz="0 -1 0"/>
   </joint>
   <joint name="backwheel1_to_backwheel2" type="fixed">
     <parent link="backwheel1"/>
     <child link="backwheel2"/>
-    <origin rpy="0 0 0" xyz="0 0 0.16"/>
+    <origin rpy="0 0 0" xyz="0 0 0.14"/>
   </joint>
 </robot>

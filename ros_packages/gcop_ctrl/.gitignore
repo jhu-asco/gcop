@@ -5,5 +5,8 @@
 *.bak
 *.csv
 *.dat
+*.cfgc
+*.pyc
+*.py
 build*
 bin*

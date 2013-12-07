@@ -38,6 +38,11 @@ set(LIBS ${LIBS} ${GLUT_LIBRARY})
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
+# dynamic reconfigure
+rosbuild_find_ros_package(dynamic_reconfigure)
+include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
+gencfg()
+
 rosbuild_add_executable(rcctrl src/rccartest.cc)
 target_link_libraries(rcctrl ${LIBS})
 

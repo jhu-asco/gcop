@@ -10,6 +10,7 @@
   <url>http://ros.org/wiki/gcop_ctrl</url>
   <depend package="roscpp"/>
   <depend package="rospy"/>
+  <depend package="gcop_comm"/>
   <depend package="dynamic_reconfigure" />
 
 </package>

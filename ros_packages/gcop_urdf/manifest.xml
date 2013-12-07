@@ -11,6 +11,10 @@
   <depend package="roscpp"/>
 	<depend package="robot_state_publisher"/>
 	<depend package="joint_state_publisher"/>
+	<depend package="gcop_comm"/>
+	<depend package="sensor_msgs"/>
+	<depend package="tf"/>
+	<depend package="urdf"/>
 
 </package>
 

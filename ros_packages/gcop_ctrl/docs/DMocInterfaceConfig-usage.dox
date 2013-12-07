@@ -1,0 +1,28 @@
+\subsubsection usage Usage
+\verbatim
+<node name="Config" pkg="gcop_ctrl" type="Config">
+  <param name="iterate" type="bool" value="False" />
+  <param name="tf" type="double" value="5.0" />
+  <param name="N" type="int" value="64" />
+  <param name="x0" type="double" value="-1.0" />
+  <param name="y0" type="double" value="-1.0" />
+  <param name="theta0" type="double" value="1.0" />
+  <param name="v0" type="double" value="0.0" />
+  <param name="xN" type="double" value="0.0" />
+  <param name="yN" type="double" value="0.0" />
+  <param name="thetaN" type="double" value="0.0" />
+  <param name="vN" type="double" value="0.0" />
+  <param name="Q1" type="double" value="0.0" />
+  <param name="Q2" type="double" value="0.0" />
+  <param name="Q3" type="double" value="0.0" />
+  <param name="Q4" type="double" value="1.0" />
+  <param name="Qf1" type="double" value="50.0" />
+  <param name="Qf2" type="double" value="50.0" />
+  <param name="Qf3" type="double" value="30.0" />
+  <param name="Qf4" type="double" value="1.0" />
+  <param name="R1" type="double" value="1.0" />
+  <param name="R2" type="double" value="0.1" />
+  <param name="mu" type="double" value="0.01" />
+</node>
+\endverbatim
+
