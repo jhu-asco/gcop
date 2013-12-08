@@ -27,10 +27,14 @@ Rccar sys;
 //Optimal Controller
 	RccarDmoc *dmoc;
 
+//Cost class
+RnLqCost<4, 2>*cost;
+
 //Define states and controls for system
 	vector<double> ts;
   vector<Vector4d> xs;
   vector<Vector2d> us;
+  Vector4d xf = Vector4d::Zero();// final state initialization passed by reference so needs to be global to be changed
 
 
 void pubtraj() //N is the number of segments
@@ -81,7 +85,7 @@ void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level)
 
 	int N = config.N;
 	double h = config.tf/N;   // time step
-	Vector4d xf = Vector4d::Zero();// final state
+	//Vector4d xf = Vector4d::Zero();// final state
 	Vector4d x0 = Vector4d::Zero();// initial state
 	VectorXd Q(4);//Costs
 	VectorXd R(2);  
@@ -120,11 +124,13 @@ void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level)
 	
 	// cost
 
-	RnLqCost<4, 2> cost(config.tf, xf);
+	//RnLqCost<4, 2> cost(config.tf, xf);
+	cost->tf = config.tf;
+	//cost->xf = xf; //xf is already changed when we assign xf its new values
 
-	cost.Q = Q.asDiagonal();
-	cost.R = R.asDiagonal();
-	cost.Qf = Qf.asDiagonal();
+	cost->Q = Q.asDiagonal();
+	cost->R = R.asDiagonal();
+	cost->Qf = Qf.asDiagonal();
 
 
 	for (int k = 0; k <=N; ++k)
@@ -165,7 +171,6 @@ int main(int argc, char** argv)
   int N = 64;        // number of segments
   double tf = 20,mu = 0.01;    // time horizon
   Vector4d x0 = Vector4d::Zero();// initial state
-  Vector4d xf = Vector4d::Zero();// final state
   VectorXd Q(4);//Costs
   VectorXd R(2);  
   VectorXd Qf(4);
@@ -207,12 +212,12 @@ int main(int argc, char** argv)
 
 	  //conversions:
   double h = tf/N;   // time step
-  // cost
-  RnLqCost<4, 2> cost(tf, xf);
 
-	cost.Q = Q.asDiagonal();
-  cost.R = R.asDiagonal();
-  cost.Qf = Qf.asDiagonal();
+	cost = new RnLqCost<4, 2>(tf,xf);
+
+	cost->Q = Q.asDiagonal();
+  cost->R = R.asDiagonal();
+  cost->Qf = Qf.asDiagonal();
 
   for (int k = 0; k <=N; ++k)
     ts[k] = k*h;
@@ -226,7 +231,7 @@ int main(int argc, char** argv)
   }
  
  
-  dmoc = new RccarDmoc(sys, cost, ts, xs, us);  
+  dmoc = new RccarDmoc(sys, *cost, ts, xs, us);  
   dmoc->mu = mu;
 
 

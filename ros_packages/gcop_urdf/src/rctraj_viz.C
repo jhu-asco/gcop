@@ -23,7 +23,7 @@ void joint_publish(const gcop_comm::CtrlTraj::ConstPtr& trajectory)
 
 	//publish zero transform 
 		global_trans.header.frame_id = "world";
-		global_trans.child_frame_id = "carbody";
+		global_trans.child_frame_id = "baselink";
 		global_trans.header.stamp = ros::Time::now();
 		global_trans.transform.translation.x = trajectory->statemsg[0].statevector[0];
 		global_trans.transform.translation.y = trajectory->statemsg[0].statevector[1];
@@ -83,7 +83,7 @@ int main(int argc, char** argv) {
 	ros::Rate loop_rate(100);
 	//initialize the position and state
 	global_trans.header.frame_id = "world";
-	global_trans.child_frame_id = "carbody";
+	global_trans.child_frame_id = "baselink";
 	global_trans.transform.translation.x = 0;
 	global_trans.transform.translation.y = 0;
 	global_trans.transform.translation.z = .1;
