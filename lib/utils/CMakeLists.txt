@@ -6,6 +6,7 @@ set(sources
   params.cc
 	link.cpp
 	joint.cpp
+	urdf_parser.cpp
   )
 
 set(headers
@@ -16,6 +17,10 @@ set(headers
   se3.h
 	link.h
 	joint.h
+	pose.h
+	color.h
+  model.h
+	urdf_parser.h
   function.h
   params.h
   )

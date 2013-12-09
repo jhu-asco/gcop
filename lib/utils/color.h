@@ -40,11 +40,10 @@
 #include <string>
 #include <vector>
 #include <math.h>
-//#include <ros/console.h>
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
 
-namespace urdf
+namespace gcop_urdf
 {
 
 class Color

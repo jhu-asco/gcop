@@ -41,14 +41,12 @@
 #include <map>
 #include <tinyxml.h>
 #include <boost/function.hpp>
-//#include "model.h"
-//add mbs classes
-#include "mbs.h"
+#include "model.h"
 
 
-namespace urdf{
+namespace gcop_urdf{
 
-  boost::shared_ptr<Mbs> parseURDF(const std::string &xml_string);
+  boost::shared_ptr<ModelInterface> parseURDF(const std::string &xml_string);
 
 }
 

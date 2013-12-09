@@ -34,12 +34,12 @@
 
 /* Author: John Hsu */
 
-#include <joint.h>
+#include "joint.h"
 //#include <ros/console.h>
 #include <boost/lexical_cast.hpp>
 #include <stdio.h>
 
-namespace urdf{
+namespace gcop_urdf{
 
 bool JointDynamics::initXml(TiXmlElement* config)
 {
