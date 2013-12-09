@@ -2,14 +2,18 @@
 <robot name="Unicycle">
   <link name="baselink"/>
   <link name="carbody">
-    <visual>
-			<origin xyz="-0.13 0 0" rpy="1.57070 0 1.5707 " />
-      <geometry>
-			 <mesh filename="package://gcop_urdf/meshes/carwithoutfronttyres.dae" scale="0.001 0.001 0.001"/>
-			 <!--mesh filename="package://gcop_urdf/meshes/Slash.dae"/-->
-        <!--box size="0.3 .10 0.05"/-->
-      </geometry>
-   </visual>
+			<visual>
+				<origin xyz="-0.13 0 0" rpy="1.57070 0 1.5707 " />
+				<geometry>
+				 <mesh filename="package://gcop_urdf/meshes/carwithoutfronttyres.dae" scale="0.001 0.001 0.001"/>
+				 <!--mesh filename="package://gcop_urdf/meshes/Slash.dae"/-->
+					<!--box size="0.3 .10 0.05"/-->
+				</geometry>
+		 </visual>
+			<inertial>
+				<mass value="10"/>
+				<inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+			</inertial>
   </link>
   <link name="kinect">
     <visual>

@@ -52,6 +52,10 @@ set (LIBS ${LIBS} ${CMAKE_THREAD_LIBS_INIT})
 find_package(Eigen REQUIRED)
 include_directories(${Eigen_INCLUDE_DIRS})
 
+find_package(TinyXML REQUIRED)
+include_directories(${TINYXML_INCLUDE_DIR})
+set(LIBS ${LIBS} ${TINYXML_LIBRARIES})
+
 include_directories(
   lib
   lib/algos
@@ -62,7 +66,7 @@ include_directories(
 
 add_subdirectory (lib) 
 add_subdirectory (bin)
-add_subdirectory (docs)
+#add_subdirectory (docs)
 
 #SET(CPACK_PACKAGE_EXECUTABLES test "An Example Trajectory Planner")
 

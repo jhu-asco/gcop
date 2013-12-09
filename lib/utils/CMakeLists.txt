@@ -4,6 +4,8 @@ set(sources
   so3.cc
   se3.cc
   params.cc
+	link.cpp
+	joint.cpp
   )
 
 set(headers
@@ -12,6 +14,8 @@ set(headers
   se2.h
   so3.h
   se3.h
+	link.h
+	joint.h
   function.h
   params.h
   )
