@@ -93,6 +93,8 @@ void solver_process(Viewer* viewer)
     getchar();
   }
 
+  cout << xs[N] << endl;
+
   //  xs[1][3]  velocity
   //atan(us[0][1]) steering angle
  

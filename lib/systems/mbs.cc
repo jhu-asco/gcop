@@ -43,13 +43,12 @@ void Mbs::Init()
     Ips[i+1] = jnt.Ac.transpose()*links[i+1].I.asDiagonal()*jnt.Ac;
   }
   
-  pis[0] = -1;
-  
+  pis[0] = -1; // root has no parent
+
+  // assume that parent indices pis[*] are already filled in   
   for (int i= nb-1; i > 0; --i)
     cs[pis[i]].push_back(i);
-  
 }
-
 
 
 double Mbs::F(VectorXd &v, double t, const MbsState &x, 

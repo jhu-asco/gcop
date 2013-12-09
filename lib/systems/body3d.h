@@ -17,6 +17,127 @@ namespace gcop {
   typedef Matrix<double, 6, 1> Vector6d;
   typedef Matrix<double, 6, 6> Matrix6d;
   typedef Matrix<double, 12, 12> Matrix12d;
+
+
+
+class Geometry
+{
+public:
+  enum {SPHERE, BOX, CYLINDER, MESH} type;
+};
+
+class Sphere : public Geometry
+{
+public:
+  Sphere() { this->clear(); };
+  double radius;
+  void clear()
+  {
+    radius = 0;
+  };
+};
+
+class Box : public Geometry
+{
+public:
+  Box() { this->clear(); };
+  Vector3d dim;
+
+  void clear()
+  {
+    dim << 1, 1, 1;
+  };
+};
+
+class Cylinder : public Geometry
+{
+public:
+  Cylinder() { this->clear(); };
+  double length;
+  double radius;
+
+  void clear()
+  {
+    length = 0;
+    radius = 0;
+  };
+};
+
+class Mesh : public Geometry
+{
+public:
+  Mesh() { this->clear(); };
+  std::string filename;
+  Vector3d scale;
+
+  void clear()
+  {
+    filename.clear();
+    scale << 1,1,1;
+  };
+  //  bool initXml(TiXmlElement *);
+  //  bool fileExists(std::string filename);
+};
+
+
+class Material
+{
+public:
+  Material() { this->clear(); };
+  std::string name;
+  std::string texture_filename;
+  Vector4d color;
+
+  void clear()
+  {
+    color << .5, .5, .5, .5;
+    texture_filename.clear();
+    name.clear();
+  };
+  //  bool initXml(TiXmlElement* config);
+};
+/*
+class Visual
+{
+public:
+  Visual() { this->clear(); };
+  Matrix4d origin;
+  boost::shared_ptr<Geometry> geometry;
+
+  std::string material_name;
+  boost::shared_ptr<Material> material;
+
+  void clear()
+  {
+    origin.setIdentity();
+    material_name.clear();
+    material.reset();
+    geometry.reset();
+    this->group_name.clear();
+  };
+  //  bool initXml(TiXmlElement* config);
+  std::string group_name;
+};
+
+
+class Collision
+{
+public:
+  Collision() { this->clear(); };
+  Matrix4d origin;
+  //  Pose origin;
+  boost::shared_ptr<Geometry> geometry;
+
+  void clear()
+  {
+    origin.setIdentity();
+    geometry.reset();
+    this->group_name.clear();
+  };
+  //  bool initXml(TiXmlElement* config);
+  std::string group_name;
+};
+*/
   
   /**
    * A single rigid body system
@@ -70,7 +191,12 @@ namespace gcop {
      * @param ds dimensions (assume a rectangular body)
      */
     static void Compute(Vector6d &I, double m, const Vector3d &ds);
+
+    /// TODO: visual element
+    //    boost::shared_ptr<Visual> visual;
     
+    /// TODO: collision element
+    //    boost::shared_ptr<Collision> collision;
     
     Vector3d ds;    ///< body dimensions
     

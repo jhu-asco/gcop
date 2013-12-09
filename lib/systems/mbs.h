@@ -2,6 +2,7 @@
 #define GCOP_MBS_H
 
 #include "body3d.h"
+#include "joint.h"
 #include "mbsmanifold.h"
 #include "function.h"
 #include "mbscspace.h"
@@ -11,22 +12,6 @@ namespace gcop {
   
   using namespace std;
   using namespace Eigen;
-
-
-  class Joint {
-  public:
-    //    Joint();
-
-    Vector6d a;    ///< axis
-    Matrix4d gp;   ///< fixed xform from parent to joint
-    Matrix4d gc;   ///< fixed xfom from child to joint
-
-    Matrix6d Ac;   ///< change of frame Ad(gc)
-    Matrix4d gpi;  ///< from parent to joint inverse
-    Matrix4d gci;  ///< from child to joint inverse
-
-    Vector6d S;    ///< Jacobian S=Ac*a
-  };
   
   /**
    * The discrete mechanics is
@@ -204,44 +189,34 @@ namespace gcop {
                        MatrixXd *A = 0, MatrixXd *B = 0) = 0;
     
 
-    /**
-     * Reconstruct state x
-     */
     void Rec(MbsState &x, double h);
 
-    int nb;  ///< number of rigid bodies
+    int nb;                   ///< number of rigid bodies
 
+    vector<Body3d<>> links;   ///< links
+    vector<Joint> joints;     ///< joints
+
+    vector<Matrix6d> Ips;     ///< A'*I*A (nb) vector
+    
+    vector<int> pis;          ///< parent indexes
+    vector<vector<int> > cs;  ///< child lists
+    
+    SE3 &se3;                 ///< singleton reference for performing SE(3) operations
+
+    bool debug;
+
+
+    // below is for autodiff stuff
     //    MbsManifold X;
     //    Rn<> U;
     //    MbsCspace cspace;
     //    MbsTspace tspace;
 
-    vector<Body3d<>> links;    ///< link params
-    
-    vector<Joint> joints;
-
-    //    vector<Vector6d> joints; ///< joint screws (nb-1) vector
-
-    vector<Matrix6d> Ips;    ///< A'*I*A (nb) vector
-    //    vector<Matrix4d> g0s;    ///< offsets (nb) vector
-    //    vector<Matrix4d> g0is;   ///< their inverses (nb) vector
-
-    vector<int> pis;          ///< parent index
-
-    vector<vector<int> > cs;  ///< child lists
-
-    SE3 &se3;              ///< singleton reference for performing SE(3) operations
-
-    bool debug;
 
     //    Fq fq;
     //    Fva fva;
     //    Fvb fvb;
     //    Fu fu;
-    
-
-    /*
-    */
   };
 }
 
