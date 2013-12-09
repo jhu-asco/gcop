@@ -55,7 +55,7 @@ public:
   Cylinder() { this->clear(); };
   double length;
   double radius;
-
+  
   void clear()
   {
     length = 0;
@@ -158,7 +158,8 @@ public:
     Body3d(const Vector3d &ds, double m);
     
     Body3d(const Vector3d &ds, double m, const Vector3d &J);
-    
+
+    virtual ~Body3d();    
     
     double Step(Body3dState &xb, double t, const Body3dState &xa, 
                 const Vectorcd &u, double h,
@@ -259,7 +260,10 @@ public:
     symp(true) {
     
   }
-    
+
+template<int c>  Body3d<c>::~Body3d()
+{
+}
 
   template <int c> 
     void Body3d<c>::Compute(Vector3d &J, double m, const Vector3d &ds) {

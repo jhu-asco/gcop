@@ -27,7 +27,6 @@ Mbs::~Mbs()
 
 void Mbs::Init() 
 {
-
   Ips[0] = links[0].I.asDiagonal();
   
   for (int i = 0; i < nb-1; ++i) {    
