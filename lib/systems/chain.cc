@@ -41,7 +41,7 @@ Chain::Chain() :
 
   Body3d<>::Compute(this->links[0].I, m, ds);
   Body3d<>::Compute(this->links[1].I, m, ds);
-  Body3d<>::Compute(this->links[2].I, m, ds);  
+  Body3d<>::Compute(this->links[2].I, m, ds);
   
   this->Init();
 }

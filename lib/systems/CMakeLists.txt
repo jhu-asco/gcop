@@ -22,6 +22,7 @@ set(sources
   snake.cc
   dem.cc
   airplanecost.cc
+  joint.cc
 )
 
 set(headers
