@@ -33,27 +33,17 @@
 *********************************************************************/
 
 /* Author: Wim Meeussen */
-/* ReAuthoring: Gowtham Garimella */
 
 #include <boost/algorithm/string.hpp>
-#include <ros/console.h>
 #include <vector>
-#include "urdf_parser/urdf_parser.h"
+#include "urdf_parser.h"
 
-
-namespace urdf{
-
-
+namespace gcop_urdf{
 
 boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
 {
-  //boost::shared_ptr<ModelInterface> model(new ModelInterface);
-  boost::shared_ptr<gcop::Mbs> model(new gcop::Mbs());//do this after we know number of joints and links
-	std::vector<gcop::Body3d> linklist;
-  //model->clear();
-	/*Create Multi Body system and return that*/
-	/**/
-	/**/
+  boost::shared_ptr<ModelInterface> model(new ModelInterface);
+  model->clear();
 
   TiXmlDocument xml_doc;
   xml_doc.Parse(xml_string.c_str());
@@ -61,53 +51,112 @@ boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
   TiXmlElement *robot_xml = xml_doc.FirstChildElement("robot");
   if (!robot_xml)
   {
-    ROS_ERROR("Could not find the 'robot' element in the xml file");
+    printf("Could not find the 'robot' element in the xml file");
     model.reset();
     return model;
   }
 
- 	/*Convert these link elements to mbs Body3d */
+  // Get robot name
+  const char *name = robot_xml->Attribute("name");
+  if (!name)
+  {
+    printf("No name given for the robot.");
+    model.reset();
+    return model;
+  }
+  model->name_ = std::string(name);
+
+  // Get all Material elements
+  for (TiXmlElement* material_xml = robot_xml->FirstChildElement("material"); material_xml; material_xml = material_xml->NextSiblingElement("material"))
+  {
+    boost::shared_ptr<Material> material;
+    material.reset(new Material);
+
+    if (material->initXml(material_xml))
+    {
+      if (model->getMaterial(material->name))
+      {
+        printf("material '%s' is not unique.", material->name.c_str());
+        material.reset();
+        model.reset();
+        return model;
+      }
+      else
+      {
+        model->materials_.insert(make_pair(material->name,material));
+        printf("successfully added a new material '%s'", material->name.c_str());
+      }
+    }
+    else
+    {
+      printf("material xml is not initialized correctly");
+      material.reset();
+      model.reset();
+      return model;
+    }
+  }
+
   // Get all Link elements
   for (TiXmlElement* link_xml = robot_xml->FirstChildElement("link"); link_xml; link_xml = link_xml->NextSiblingElement("link"))
   {
     boost::shared_ptr<Link> link;
-		gcop::Body3d gcoplink;
-
-		
     link.reset(new Link);
 
     if (link->initXml(link_xml))
     {
       if (model->getLink(link->name))
       {
-        ROS_ERROR("link '%s' is not unique.", link->name.c_str());
+        printf("link '%s' is not unique.", link->name.c_str());
         model.reset();
         return model;
       }
       else
       {
-        if (link->inertial)
-				{
+        // set link visual material
+        printf("setting link '%s' material", link->name.c_str());
+        if (link->visual)
+        {
+          if (!link->visual->material_name.empty())
+          {
+            if (model->getMaterial(link->visual->material_name))
+            {
+              printf("setting link '%s' material to '%s'", link->name.c_str(),link->visual->material_name.c_str());
+              link->visual->material = model->getMaterial( link->visual->material_name.c_str() );
+            }
+            else
+            {
+              if (link->visual->material)
+              {
+                printf("link '%s' material '%s' defined in Visual.", link->name.c_str(),link->visual->material_name.c_str());
+                model->materials_.insert(make_pair(link->visual->material->name,link->visual->material));
+              }
+              else
+              {
+                printf("link '%s' material '%s' undefined.", link->name.c_str(),link->visual->material_name.c_str());
+                model.reset();
+                return model;
+              }
+            }
+          }
+        }
 
-				}
         model->links_.insert(make_pair(link->name,link));
-        ROS_DEBUG("successfully added a new link '%s'", link->name.c_str());
+        printf("successfully added a new link '%s'", link->name.c_str());
       }
     }
     else
     {
-      ROS_ERROR("link xml is not initialized correctly");
-      //model.reset();
-      //return model;
+      printf("link xml is not initialized correctly");
+      model.reset();
+      return model;
     }
   }
   if (model->links_.empty()){
-    ROS_ERROR("No link elements found in urdf file");
+    printf("No link elements found in urdf file");
     model.reset();
     return model;
   }
 
-	/* Convert all these joints to mbs joints */
   // Get all Joint elements
   for (TiXmlElement* joint_xml = robot_xml->FirstChildElement("joint"); joint_xml; joint_xml = joint_xml->NextSiblingElement("joint"))
   {
@@ -118,19 +167,19 @@ boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
     {
       if (model->getJoint(joint->name))
       {
-        ROS_ERROR("joint '%s' is not unique.", joint->name.c_str());
+        printf("joint '%s' is not unique.", joint->name.c_str());
         model.reset();
         return model;
       }
       else
       {
         model->joints_.insert(make_pair(joint->name,joint));
-        ROS_DEBUG("successfully added a new joint '%s'", joint->name.c_str());
+        printf("successfully added a new joint '%s'", joint->name.c_str());
       }
     }
     else
     {
-      ROS_ERROR("joint xml is not initialized correctly");
+      printf("joint xml is not initialized correctly");
       model.reset();
       return model;
     }
@@ -145,7 +194,7 @@ boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
   // building tree: name mapping
   if (!model->initTree(parent_link_tree))
   {
-    ROS_ERROR("failed to build tree");
+    printf("failed to build tree");
     model.reset();
     return model;
   }
@@ -153,7 +202,7 @@ boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
   // find the root link
   if (!model->initRoot(parent_link_tree))
   {
-    ROS_ERROR("failed to find root link");
+    printf("failed to find root link");
     model.reset();
     return model;
   }

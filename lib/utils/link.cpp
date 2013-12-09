@@ -44,7 +44,7 @@
 #include <stdio.h>
 #include <stdio.h>
 
-namespace urdf{
+namespace gcop_urdf{
 
 boost::shared_ptr<Geometry> parseGeometry(TiXmlElement *g)
 {

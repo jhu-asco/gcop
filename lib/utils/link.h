@@ -47,7 +47,7 @@
 #include "joint.h"
 #include "color.h"
 
-namespace urdf{
+namespace gcop_urdf{
 
 class Geometry
 {

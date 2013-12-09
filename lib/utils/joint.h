@@ -44,7 +44,7 @@
 
 #include "pose.h"
 
-namespace urdf{
+namespace gcop_urdf{
 
 class Link;
 

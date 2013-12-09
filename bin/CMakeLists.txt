@@ -62,11 +62,11 @@ target_link_libraries(ukftest gcop ${LIBS})
 add_executable(imuukftest imuukftest.cc)
 target_link_libraries(imuukftest gcop ${LIBS})
 
-add_executable(gptest gptest.cc)
-target_link_libraries(gptest gcop ${LIBS})
+#add_executable(gptest gptest.cc)
+#target_link_libraries(gptest gcop ${LIBS})
 
-add_executable(gpadd gpadd.cc)
-target_link_libraries(gpadd gcop ${LIBS})
+#add_executable(gpadd gpadd.cc)
+#target_link_libraries(gpadd gcop ${LIBS})
 
 
 # Cross-entropy simple example

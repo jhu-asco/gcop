@@ -46,7 +46,7 @@
 #include <tinyxml.h> // FIXME: remove parser from here
 //#include <ros/console.h>
 
-namespace urdf{
+namespace gcop_urdf{
 
 class Vector3
 {
