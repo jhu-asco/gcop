@@ -37,10 +37,150 @@
 #include <boost/algorithm/string.hpp>
 #include <vector>
 #include "urdf_parser.h"
+#include "se3.h"
+
+using namespace std;
+using namespace Eigen;
 
 namespace gcop_urdf{
+/*
+gcop::Matrix4d diffpose(Pose &posej_p,Pose &posei_p)
+{
+	//p parent i inertial j joint we need j_i joint wrt i = j_i = j_p * p_i = j_p *(i_p)^-1
+	gcop::Matrix4d gposei_p;
+	gcop::Matrix4d gposep_i;
+	gcop::Matrix4d gposej_p;
+	gcop::Matrix4d gposej_i;
+	double r, p, y;
+	posej_p.rotation.getRPY(r,p,y);
+	gcop::SE3::Instance().rpyxyz2g(gposej_p, Vector3d(r,p,y), Vector3d(posej_p.position.x,posej_p.position.y,posej_p.position.z));
+	//get i_p
+	posei_p.rotation.getRPY(r,p,y);
+	gcop::SE3::Instance().rpyxyz2g(gposei_p, Vector3d(r,p,y), Vector3d(posei_p.position.x,posei_p.position.y,posei_p.position.z));
+	gcop::SE3::Instance().inv(gposep_i,gposei_p);
 
-boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
+	gposej_i = gposej_p*gposep_i;
+
+	return gposej_i;
+}
+
+//link is the parent link and level is the index of the link in pis;
+//bodies, pis and joints are the list to be used in the mbs class
+void walkTree(boost::shared_ptr<const Link> link, int level,int &index,boost::shared_ptr<gcop::Mbs> mbs)
+{
+	//int count = 0;
+	for (vector<boost::shared_ptr<Link> >::const_iterator child = link->child_links.begin(); child != link->child_links.end(); child++)
+	{
+		if (*child)
+		{
+			boost::shared_ptr<const Link> childlink = *child;
+			// first grandchild
+
+			//get parent joint of the child:
+			//boost::shared_ptr<Joint> parentj = child->
+			//create joint
+			//gcop::Joint gcopjoint;
+			//based on type  of joint decide the axis
+		 switch(childlink->parent_joint.type)
+		 {
+			 case Joint::REVOLUTE :
+				 mbs->joints[index].a.setZero();
+				 mbs->joints[index].a[0]  = childlink->parent_joint->axis.x;
+				 mbs->joints[index].a[1]  = childlink->parent_joint->axis.y;
+				 mbs->joints[index].a[2]  = childlink->parent_joint->axis.z;
+				 break;
+			 case Joint::PRISMATIC :
+				 mbs->joints[index].a.setZero();
+				 mbs->joints[index].a[3]  = childlink->parent_joint->axis.x;
+				 mbs->joints[index].a[4]  = childlink->parent_joint->axis.y;
+				 mbs->joints[index].a[5]  = childlink->parent_joint->axis.z;
+				 break;
+		 }
+		 //decide the transformations:
+			mbs->joints[index].gp = diffpose(childlink->parent_joint->parent_to_joint_origin_transform,link->inertial->origin);
+			double r,p,y;
+			childlink->inertial->origin.rotation.getRPY(r,p,y);
+
+			gcop::SE3::Instance().rpyxyz2g(mbs->joints[index].gc,Vector3d(r,p,y),Vector3d(childlink->inertial->origin.position.x,childlink->inertial->origin.position.y,childlink->inertial->origin.position.z));
+
+			cout<<"level: "<<level<<endl;
+			
+			index++;
+
+			//create body3d from the current link and make a joint connecting them. This joint is the parent joint of the child link
+			
+			//gcop::Body3d<> body;
+			//copy m
+			mbs->links[index].m = childlink->inertial->mass;
+			//copy J
+			mbs->links[index].J(0) = childlink->inertial->ixx;
+			mbs->links[index].J(1) = childlink->inertial->iyy;
+			mbs->links[index].J(2) = childlink->inertial->izz;//we assume the axes are aligned with principal axes
+			// make ds = 0;
+			mbs->links[index].ds = Vector3d(0,0,0);
+
+			mbs->pis[index] = level; //added parent index to the list.
+
+
+			walkTree(*child,index,index,mbs);
+		}
+		else
+		{
+			for(int j=0;j<level;j++) cout << " "; //indent
+			cout << "root link: " << link->name << " has a null child!" << *child << endl;
+		}
+	}
+}
+*/
+boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string)
+{
+	//parse the xml file into a urdf model
+	boost::shared_ptr<ModelInterface> urdfmodel = parseURDF(xml_string);
+
+	if (!urdfmodel){
+		cerr << "ERROR: Model Parsing the xml failed" << endl;
+		return boost::shared_ptr<gcop::Mbs>();
+	}
+	cout << "robot name is: " << urdfmodel->getName() << endl;
+
+	// get root link
+	boost::shared_ptr<const Link> root_link = urdfmodel->getRoot();
+	if (!root_link) return boost::shared_ptr<gcop::Mbs>();
+
+	boost::shared_ptr<Link> baselink = root_link->child_links[0];
+	if(!root_link) return boost::shared_ptr<gcop::Mbs>();
+
+	cout<<urdfmodel->links_.size() <<"\t"<<urdfmodel->joints_.size()<<endl;
+
+
+	//create Mbs with the number of links and joints
+	boost::shared_ptr<gcop::Mbs> mbs (new gcop::Mbs(urdfmodel->links_.size(),6 + (urdfmodel->joints_.size()-1)));//hack for now
+
+	int index = 0;
+
+	//add the first link to mbs
+	mbs->links[index].m = baselink->inertial->mass;
+	//copy J
+	mbs->links[index].J(0) = baselink->inertial->ixx;
+	mbs->links[index].J(1) = baselink->inertial->iyy;
+	mbs->links[index].J(2) = baselink->inertial->izz;//we assume the axes are aligned with principal axes
+	// make ds = 0;
+	mbs->links[index].ds = Vector3d(0,0,0);
+
+	mbs->pis[index] = -1; //added parent index to the list.
+
+
+	//walkTree(root_link,-1,index,mbs);
+	cout<<index<<endl;
+	cout<<"Number of links parsed: "<<bodies.size()<<endl;
+	cout<<" Number of joints parsed: "<<joints.size()<<endl;
+	//cout<<"Pis: "<<pis<<endl;
+	return mbs;
+}
+
+
+
+boost::shared_ptr<ModelInterface>  parseURDF(const string &xml_string)
 {
   boost::shared_ptr<ModelInterface> model(new ModelInterface);
   model->clear();
@@ -64,7 +204,7 @@ boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
     model.reset();
     return model;
   }
-  model->name_ = std::string(name);
+  model->name_ = string(name);
 
   // Get all Material elements
   for (TiXmlElement* material_xml = robot_xml->FirstChildElement("material"); material_xml; material_xml = material_xml->NextSiblingElement("material"))
@@ -188,7 +328,7 @@ boost::shared_ptr<ModelInterface>  parseURDF(const std::string &xml_string)
 
   // every link has children links and joints, but no parents, so we create a
   // local convenience data structure for keeping child->parent relations
-  std::map<std::string, std::string> parent_link_tree;
+  map<string, string> parent_link_tree;
   parent_link_tree.clear();
 
   // building tree: name mapping

@@ -42,6 +42,7 @@
 #include <tinyxml.h>
 #include <boost/function.hpp>
 #include "model.h"
+#include "mbs.h"
 
 
 namespace gcop_urdf{

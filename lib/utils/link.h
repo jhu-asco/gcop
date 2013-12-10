@@ -44,7 +44,7 @@
 #include <boost/weak_ptr.hpp>
 #include <map>
 
-#include "joint.h"
+#include "urdfjoint.h"
 #include "color.h"
 
 namespace gcop_urdf{
