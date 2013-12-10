@@ -17,7 +17,7 @@ Mbs::Mbs(int nb, int c) : nb(nb),
                           //                          fu(*this)
 {
 }
-  
+ 
   
 Mbs::~Mbs()
 {
@@ -27,19 +27,11 @@ Mbs::~Mbs()
 
 void Mbs::Init() 
 {
-  
   Ips[0] = links[0].I.asDiagonal();
   
-  for (int i = 0; i < nb-1; ++i) {
-    
+  for (int i = 0; i < nb-1; ++i) {    
     Joint &jnt = joints[i];
-    
-    se3.Ad(jnt.Ac, jnt.gc);
-    se3.inv(jnt.gpi, jnt.gp);
-    se3.inv(jnt.gci, jnt.gc);
-    
-    jnt.S = jnt.Ac*jnt.a;
-    
+    jnt.Init();    
     Ips[i+1] = jnt.Ac.transpose()*links[i+1].I.asDiagonal()*jnt.Ac;
   }
   
