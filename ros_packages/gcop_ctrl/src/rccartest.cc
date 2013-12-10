@@ -64,6 +64,11 @@ void pubtraj() //N is the number of segments
 		}
 	}
 	trajectory.time = ts;
+	//final goal:
+	for(int count = 0;count<4;count++)
+	{
+		trajectory.finalgoal.statevector[count] = xf(count);
+	}
 	trajpub.publish(trajectory);
 }
 
@@ -139,14 +144,15 @@ void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level)
 	xs[0] = x0;
 
 	//initial controls
-	for (int i = 0; i < N/2; ++i) {
+	/*for (int i = 0; i < N/2; ++i) {
 		us[i] = Vector2d(.01, .0);
 		us[N/2+i] = Vector2d(-.01, .0);
 	}
+	*/
 	//change parameters in dmoc:
 	dmoc->ts = ts;
-	dmoc->xs = xs;
-	dmoc->us = us;
+//	dmoc->xs = xs;
+	//dmoc->us = us;
 	dmoc->mu = config.mu;
 
 
@@ -239,6 +245,7 @@ int main(int argc, char** argv)
 	trajectory.statemsg.resize(N+1);
 	trajectory.ctrl.resize(N);
 	trajectory.time = ts;
+	trajectory.finalgoal.statevector.resize(4);
 	//trajectory.time.resize(N);
 //Dynamic Reconfigure setup Callback ! immediately gets called with default values	
 	dynamic_reconfigure::Server<gcop_ctrl::DMocInterfaceConfig> server;

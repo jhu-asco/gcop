@@ -11,6 +11,7 @@
 ros::Subscriber traj_sub;
 ros::Publisher joint_pub;
 ros::Publisher traj_pub;
+ros::Publisher goal_pub;
 tf::TransformBroadcaster *broadcaster;
 
 
@@ -18,6 +19,7 @@ tf::TransformBroadcaster *broadcaster;
 geometry_msgs::TransformStamped global_trans;
 sensor_msgs::JointState joint_state;
 visualization_msgs::Marker line_strip;
+visualization_msgs::Marker goal;
 
 void joint_publish(const gcop_comm::CtrlTraj::ConstPtr& trajectory)
 {
@@ -26,20 +28,43 @@ void joint_publish(const gcop_comm::CtrlTraj::ConstPtr& trajectory)
 	bool animate = false;
 	ros::param::getCached("/animate", animate);
 
+	goal.header.frame_id = "world";
+	goal.header.stamp = ros::Time::now();
+	goal.ns ="goalmarker";
+	goal.id = 2;
+	goal.type = visualization_msgs::Marker::ARROW;
+	goal.action = visualization_msgs::Marker::ADD;
+	goal.pose.position.x = trajectory->finalgoal.statevector[0];
+	goal.pose.position.y = trajectory->finalgoal.statevector[1];
+	goal.pose.position.z = 0.1;
+	goal.pose.orientation = tf::createQuaternionMsgFromYaw(trajectory->finalgoal.statevector[2]);
+	goal.scale.x = 1;
+	goal.scale.y = 1;
+	goal.scale.z = trajectory->finalgoal.statevector[3];
+
+	goal.color.r = 0.8;
+	goal.color.g = 0.0;
+	goal.color.b = 0.0;
+	goal.color.a = 1.0;
+
+	goal_pub.publish(goal);
+
+	//publish zero transform 
+	global_trans.header.frame_id = "world";
+	global_trans.child_frame_id = "baselink";
+	global_trans.header.stamp = ros::Time::now();
+	global_trans.transform.translation.x = trajectory->statemsg[0].statevector[0];
+	global_trans.transform.translation.y = trajectory->statemsg[0].statevector[1];
+	global_trans.transform.translation.z = .1;
+	global_trans.transform.rotation = tf::createQuaternionMsgFromYaw(trajectory->statemsg[0].statevector[2]);
+
+	broadcaster->sendTransform(global_trans);//send 0 posn
+
+
+
 	if(animate)
 	{
 		double pos = 0, dt = 0; //starting wheel position
-
-		//publish zero transform 
-		global_trans.header.frame_id = "world";
-		global_trans.child_frame_id = "baselink";
-		global_trans.header.stamp = ros::Time::now();
-		global_trans.transform.translation.x = trajectory->statemsg[0].statevector[0];
-		global_trans.transform.translation.y = trajectory->statemsg[0].statevector[1];
-		global_trans.transform.translation.z = .1;
-		global_trans.transform.rotation = tf::createQuaternionMsgFromYaw(trajectory->statemsg[0].statevector[2]);
-
-		broadcaster->sendTransform(global_trans);//send 0 posn
 
 
 		for(int i = 1;i<(trajectory->N)+1; i++)
@@ -106,6 +131,7 @@ int main(int argc, char** argv) {
 
 	joint_pub = n.advertise<sensor_msgs::JointState>("joint_states", 1);
 	traj_pub = n.advertise<visualization_msgs::Marker>("desired_traj", 1);
+	goal_pub = n.advertise<visualization_msgs::Marker>("goal_config", 1);
 
 	ros::Rate loop_rate(100);
 	//initialize the position and state
