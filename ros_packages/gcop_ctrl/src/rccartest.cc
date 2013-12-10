@@ -20,6 +20,9 @@ gcop_comm::CtrlTraj trajectory;
 //Publisher
 ros::Publisher trajpub;
 
+//Timer
+ros::Timer iteratetimer;
+
 
 //Initialize the rccar system
 Rccar sys;
@@ -35,6 +38,7 @@ RnLqCost<4, 2>*cost;
   vector<Vector4d> xs;
   vector<Vector2d> us;
   Vector4d xf = Vector4d::Zero();// final state initialization passed by reference so needs to be global to be changed
+	int Nit = 10;//number of iterations for dmoc
 
 
 void pubtraj() //N is the number of segments
@@ -63,26 +67,21 @@ void pubtraj() //N is the number of segments
 	trajpub.publish(trajectory);
 }
 
+void iterateCallback(const ros::TimerEvent & event)
+{
+	//ros::Time startime = ros::Time::now(); 
+	for (int count = 1;count <= Nit;count++)
+		dmoc->Iterate();//Updates us and xs after one iteration
+	//double te = 1e6*(ros::Time::now() - startime).toSec();
+	//cout << "Time taken " << te << " us." << endl;
+	//publish the message
+	pubtraj();
+}
+
+
 void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level) 
 {
-	if(config.iterate)
-	{
-		//Reloaded Message:
-		/*
-		cout<<"Loaded the following conditions"<<endl;
-		cout<<"Initial state:\n "<<x0<<"\nFinal State:\n "<<xf<<endl;
-		cout<<"Final time: "<<config.tf<<"\tNumber of segments: "<<N<<endl;
-		*/
-		ros::Time startime = ros::Time::now(); 
-		dmoc->Iterate();//Updates us and xs after one iteration
-		double te = 1e6*(ros::Time::now() - startime).toSec();
-		cout << "Time taken " << te << " us." << endl;
-		config.iterate = false;
-		//publish the message
-		pubtraj();
-		return;
-	}
-
+	Nit = config.Nit; 
 	int N = config.N;
 	double h = config.tf/N;   // time step
 	//Vector4d xf = Vector4d::Zero();// final state
@@ -244,12 +243,11 @@ int main(int argc, char** argv)
 //Dynamic Reconfigure setup Callback ! immediately gets called with default values	
 	dynamic_reconfigure::Server<gcop_ctrl::DMocInterfaceConfig> server;
 	dynamic_reconfigure::Server<gcop_ctrl::DMocInterfaceConfig>::CallbackType f;
-
 	f = boost::bind(&paramreqcallback, _1, _2);
 	server.setCallback(f);
-
+	//create timer for iteration
+  iteratetimer = rosdmoc.createTimer(ros::Duration(0.02), iterateCallback);
+	iteratetimer.start();
 	ros::spin();
-  
-	
   return 0;
 }

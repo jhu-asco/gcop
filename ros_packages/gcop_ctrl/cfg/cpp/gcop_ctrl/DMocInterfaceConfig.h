@@ -263,7 +263,7 @@ class DEFAULT
         boost::any val;
         (*i)->getValue(config, val);
 
-        if("iterate"==(*i)->name){iterate = boost::any_cast<bool>(val);}
+        if("Nit"==(*i)->name){Nit = boost::any_cast<double>(val);}
         if("tf"==(*i)->name){tf = boost::any_cast<double>(val);}
         if("N"==(*i)->name){N = boost::any_cast<int>(val);}
         if("x0"==(*i)->name){x0 = boost::any_cast<double>(val);}
@@ -288,7 +288,7 @@ class DEFAULT
       }
     }
 
-    bool iterate;
+    double Nit;
 double tf;
 int N;
 double x0;
@@ -320,7 +320,7 @@ double mu;
 
 
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      bool iterate;
+      double Nit;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double tf;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -499,15 +499,15 @@ double mu;
     {
 DMocInterfaceConfig::GroupDescription<DMocInterfaceConfig::DEFAULT, DMocInterfaceConfig> Default("Default", "", 0, 0, true, &DMocInterfaceConfig::groups);
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.iterate = 0;
+      __min__.Nit = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.iterate = 1;
+      __max__.Nit = 30.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.iterate = 0;
+      __default__.Nit = 10.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(DMocInterfaceConfig::AbstractParamDescriptionConstPtr(new DMocInterfaceConfig::ParamDescription<bool>("iterate", "bool", 0, "Run one iteration of dmoc", "", &DMocInterfaceConfig::iterate)));
+      Default.abstract_parameters.push_back(DMocInterfaceConfig::AbstractParamDescriptionConstPtr(new DMocInterfaceConfig::ParamDescription<double>("Nit", "double", 0, "Number of iterations of dmoc", "", &DMocInterfaceConfig::Nit)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(DMocInterfaceConfig::AbstractParamDescriptionConstPtr(new DMocInterfaceConfig::ParamDescription<bool>("iterate", "bool", 0, "Run one iteration of dmoc", "", &DMocInterfaceConfig::iterate)));
+      __param_descriptions__.push_back(DMocInterfaceConfig::AbstractParamDescriptionConstPtr(new DMocInterfaceConfig::ParamDescription<double>("Nit", "double", 0, "Number of iterations of dmoc", "", &DMocInterfaceConfig::Nit)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.tf = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
