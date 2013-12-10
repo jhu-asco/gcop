@@ -22,7 +22,6 @@ set(sources
   snake.cc
   dem.cc
   airplanecost.cc
-  joint.cc
 )
 
 set(headers
@@ -43,6 +42,7 @@ set(headers
   body3d.h
   body3dmanifold.h
   body3dcost.h
+	joint.h
   qrotor.h
   hrotor.h
   heli.h

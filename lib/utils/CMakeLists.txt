@@ -5,7 +5,7 @@ set(sources
   se3.cc
   params.cc
 	link.cpp
-	joint.cpp
+	urdfjoint.cpp
 	urdf_parser.cpp
   )
 
@@ -16,7 +16,7 @@ set(headers
   so3.h
   se3.h
 	link.h
-	joint.h
+	urdfjoint.h
 	pose.h
 	color.h
   model.h

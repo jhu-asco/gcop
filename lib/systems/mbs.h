@@ -185,8 +185,7 @@ namespace gcop {
      * @param A jacobian Dxf
      * @param B jacobian Duf
      */
-    virtual void Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
-                       MatrixXd *A = 0, MatrixXd *B = 0) = 0;
+    virtual void Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,MatrixXd *A = 0, MatrixXd *B = 0);
     
 
     void Rec(MbsState &x, double h);

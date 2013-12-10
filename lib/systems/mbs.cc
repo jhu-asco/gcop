@@ -25,6 +25,16 @@ Mbs::~Mbs()
   delete &X;
 }
 
+void Mbs::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
+                       MatrixXd *A, MatrixXd *B) 
+{
+  f = u;
+  if (A)
+    A->setZero();
+  if (B)
+    B->setIdentity();
+}
+
 void Mbs::Init() 
 {
   Ips[0] = links[0].I.asDiagonal();
