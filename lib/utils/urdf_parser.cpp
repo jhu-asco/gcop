@@ -172,8 +172,8 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string)
 
 	//walkTree(root_link,-1,index,mbs);
 	cout<<index<<endl;
-	cout<<"Number of links parsed: "<<bodies.size()<<endl;
-	cout<<" Number of joints parsed: "<<joints.size()<<endl;
+	//cout<<"Number of links parsed: "<<es.size()<<endl;
+	//cout<<" Number of joints parsed: "<<joints.size()<<endl;
 	//cout<<"Pis: "<<pis<<endl;
 	return mbs;
 }
