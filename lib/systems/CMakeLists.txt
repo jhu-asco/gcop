@@ -20,6 +20,7 @@ set(sources
   airbot.cc
   mbs.cc
   snake.cc
+	joint.cc
   dem.cc
   airplanecost.cc
 )

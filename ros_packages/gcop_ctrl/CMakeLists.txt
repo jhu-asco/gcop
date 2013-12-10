@@ -33,6 +33,10 @@ set(LIBS ${LIBS} ${GLU_LIBRARIES} ${GLU_LIBRARY})
 find_package(GLUT REQUIRED)
 include_directories(${GLUT_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${GLUT_LIBRARY})
+
+find_package(TinyXML REQUIRED)
+include_directories(${TINYXML_INCLUDE_DIR})
+set(LIBS ${LIBS} ${TINYXML_LIBRARIES})
 #uncomment if you have defined messages
 #rosbuild_genmsg()
 #uncomment if you have defined services
@@ -42,6 +46,10 @@ set(LIBS ${LIBS} ${GLUT_LIBRARY})
 rosbuild_find_ros_package(dynamic_reconfigure)
 include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
 gencfg()
+
+
+rosbuild_add_executable(chainload src/chainload.cc)
+target_link_libraries(chainload ${LIBS})
 
 rosbuild_add_executable(rcctrl src/rccartest.cc)
 target_link_libraries(rcctrl ${LIBS})
