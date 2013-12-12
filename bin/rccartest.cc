@@ -23,8 +23,12 @@ void solver_process(Viewer* viewer)
   int N = 64;        // number of segments
   double tf = 5;    // time horizon
 
+  int iters = 30;
+
   params.GetInt("N", N);  
   params.GetDouble("tf", tf);
+
+  params.GetInt("iters", iters);
   
 
   double h = tf/N;   // time step
@@ -85,7 +89,7 @@ void solver_process(Viewer* viewer)
   // dmoc.debug = false; // turn off debug for speed
   getchar();
 
-  for (int i = 0; i < 10; ++i) {
+  for (int i = 0; i < iters; ++i) {
     timer_start(timer);
     dmoc.Iterate();
     long te = timer_us(timer);
@@ -118,7 +122,7 @@ int main(int argc, char** argv)
 #ifdef DISP
   Viewer *viewer = new Viewer;
   viewer->Init(&argc, argv);
-  viewer->frameName = "videos/sys";
+  viewer->frameName = "../../logs/rccar/frames/frame";
 
   pthread_t dummy;
   pthread_create( &dummy, NULL, (void *(*) (void *)) solver_process, viewer);

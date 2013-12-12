@@ -17,8 +17,9 @@ Params params;
 
 void solver_process(Viewer* viewer)
 {
-  if (viewer)
+  if (viewer) {
     viewer->SetCamera(45.25, 37, -0.14, 0.05, -1.75);
+  }
 
   int N = 128;      // discrete trajectory segments
   double tf = 2;   // time-horizon
@@ -109,7 +110,6 @@ void solver_process(Viewer* viewer)
   CylinderView bv(.05, 1, &g);
   viewer->Add(bv);
 
-
   for (int i = 0; i < 50; ++i) {    
     timer_start(timer);
     dmoc.Iterate();
@@ -159,6 +159,7 @@ int main(int argc, char** argv)
 
 
 #ifdef DISP
+  viewer->SetColor((float[3]){1,1,1});
   viewer->Start();
 #endif
 
