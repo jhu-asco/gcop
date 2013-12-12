@@ -48,7 +48,7 @@ bool JointDynamics::initXml(TiXmlElement* config)
   // Get joint damping
   const char* damping_str = config->Attribute("damping");
   if (damping_str == NULL){
-    printf("joint dynamics: no damping, defaults to 0");
+    //printf("joint dynamics: no damping, defaults to 0");
     this->damping = 0;
   }
   else
@@ -59,7 +59,7 @@ bool JointDynamics::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("damping value (%s) is not a float",damping_str);
+      //printf("damping value (%s) is not a float",damping_str);
       return false;
     }
   }
@@ -67,7 +67,7 @@ bool JointDynamics::initXml(TiXmlElement* config)
   // Get joint friction
   const char* friction_str = config->Attribute("friction");
   if (friction_str == NULL){
-    printf("joint dynamics: no friction, defaults to 0");
+    //printf("joint dynamics: no friction, defaults to 0");
     this->friction = 0;
   }
   else
@@ -78,18 +78,18 @@ bool JointDynamics::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("friction value (%s) is not a float",friction_str);
+      //printf("friction value (%s) is not a float",friction_str);
       return false;
     }
   }
 
   if (damping_str == NULL && friction_str == NULL)
   {
-    printf("joint dynamics element specified with no damping and no friction");
+    //printf("joint dynamics element specified with no damping and no friction");
     return false;
   }
   else{
-    printf("joint dynamics: damping %f and friction %f", damping, friction);
+    //printf("joint dynamics: damping %f and friction %f", damping, friction);
     return true;
   }
 }
@@ -101,7 +101,7 @@ bool JointLimits::initXml(TiXmlElement* config)
   // Get lower joint limit
   const char* lower_str = config->Attribute("lower");
   if (lower_str == NULL){
-    printf("joint limit: no lower, defaults to 0");
+    //printf("joint limit: no lower, defaults to 0");
     this->lower = 0;
   }
   else
@@ -112,7 +112,7 @@ bool JointLimits::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("lower value (%s) is not a float",lower_str);
+      //printf("lower value (%s) is not a float",lower_str);
       return false;
     }
   }
@@ -120,7 +120,7 @@ bool JointLimits::initXml(TiXmlElement* config)
   // Get upper joint limit
   const char* upper_str = config->Attribute("upper");
   if (upper_str == NULL){
-    printf("joint limit: no upper, , defaults to 0");
+    //printf("joint limit: no upper, , defaults to 0");
     this->upper = 0;
   }
   else
@@ -131,7 +131,7 @@ bool JointLimits::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("upper value (%s) is not a float",upper_str);
+      //printf("upper value (%s) is not a float",upper_str);
       return false;
     }
   }
@@ -139,7 +139,7 @@ bool JointLimits::initXml(TiXmlElement* config)
   // Get joint effort limit
   const char* effort_str = config->Attribute("effort");
   if (effort_str == NULL){
-    printf("joint limit: no effort");
+    //printf("joint limit: no effort");
     return false;
   }
   else
@@ -150,7 +150,7 @@ bool JointLimits::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("effort value (%s) is not a float",effort_str);
+      //printf("effort value (%s) is not a float",effort_str);
       return false;
     }
   }
@@ -158,7 +158,7 @@ bool JointLimits::initXml(TiXmlElement* config)
   // Get joint velocity limit
   const char* velocity_str = config->Attribute("velocity");
   if (velocity_str == NULL){
-    printf("joint limit: no velocity");
+    //printf("joint limit: no velocity");
     return false;
   }
   else
@@ -169,7 +169,7 @@ bool JointLimits::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("velocity value (%s) is not a float",velocity_str);
+      //printf("velocity value (%s) is not a float",velocity_str);
       return false;
     }
   }
@@ -185,7 +185,7 @@ bool JointSafety::initXml(TiXmlElement* config)
   const char* soft_lower_limit_str = config->Attribute("soft_lower_limit");
   if (soft_lower_limit_str == NULL)
   {
-    printf("joint safety: no soft_lower_limit, using default value");
+    //printf("joint safety: no soft_lower_limit, using default value");
     this->soft_lower_limit = 0;
   }
   else
@@ -196,7 +196,7 @@ bool JointSafety::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("soft_lower_limit value (%s) is not a float",soft_lower_limit_str);
+      //printf("soft_lower_limit value (%s) is not a float",soft_lower_limit_str);
       return false;
     }
   }
@@ -205,7 +205,7 @@ bool JointSafety::initXml(TiXmlElement* config)
   const char* soft_upper_limit_str = config->Attribute("soft_upper_limit");
   if (soft_upper_limit_str == NULL)
   {
-    printf("joint safety: no soft_upper_limit, using default value");
+    //printf("joint safety: no soft_upper_limit, using default value");
     this->soft_upper_limit = 0;
   }
   else
@@ -216,7 +216,7 @@ bool JointSafety::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("soft_upper_limit value (%s) is not a float",soft_upper_limit_str);
+      //printf("soft_upper_limit value (%s) is not a float",soft_upper_limit_str);
       return false;
     }
   }
@@ -225,7 +225,7 @@ bool JointSafety::initXml(TiXmlElement* config)
   const char* k_position_str = config->Attribute("k_position");
   if (k_position_str == NULL)
   {
-    printf("joint safety: no k_position, using default value");
+    //printf("joint safety: no k_position, using default value");
     this->k_position = 0;
   }
   else
@@ -236,7 +236,7 @@ bool JointSafety::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("k_position value (%s) is not a float",k_position_str);
+      //printf("k_position value (%s) is not a float",k_position_str);
       return false;
     }
   }
@@ -244,7 +244,7 @@ bool JointSafety::initXml(TiXmlElement* config)
   const char* k_velocity_str = config->Attribute("k_velocity");
   if (k_velocity_str == NULL)
   {
-    printf("joint safety: no k_velocity");
+    //printf("joint safety: no k_velocity");
     return false;
   }
   else
@@ -255,7 +255,7 @@ bool JointSafety::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("k_velocity value (%s) is not a float",k_velocity_str);
+      //printf("k_velocity value (%s) is not a float",k_velocity_str);
       return false;
     }
   }
@@ -271,7 +271,7 @@ bool JointCalibration::initXml(TiXmlElement* config)
   const char* rising_position_str = config->Attribute("rising");
   if (rising_position_str == NULL)
   {
-    printf("joint calibration: no rising, using default value");
+    //printf("joint calibration: no rising, using default value");
     this->rising.reset();
   }
   else
@@ -282,7 +282,7 @@ bool JointCalibration::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("risingvalue (%s) is not a float",rising_position_str);
+      //printf("risingvalue (%s) is not a float",rising_position_str);
       return false;
     }
   }
@@ -291,7 +291,7 @@ bool JointCalibration::initXml(TiXmlElement* config)
   const char* falling_position_str = config->Attribute("falling");
   if (falling_position_str == NULL)
   {
-    printf("joint calibration: no falling, using default value");
+    //printf("joint calibration: no falling, using default value");
     this->falling.reset();
   }
   else
@@ -302,7 +302,7 @@ bool JointCalibration::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("fallingvalue (%s) is not a float",falling_position_str);
+      //printf("fallingvalue (%s) is not a float",falling_position_str);
       return false;
     }
   }
@@ -319,7 +319,7 @@ bool JointMimic::initXml(TiXmlElement* config)
 
   if (joint_name_str == NULL)
   {
-    printf("joint mimic: no mimic joint specified");
+    //printf("joint mimic: no mimic joint specified");
     //return false;
   }
   else
@@ -330,7 +330,7 @@ bool JointMimic::initXml(TiXmlElement* config)
 
   if (multiplier_str == NULL)
   {
-    printf("joint mimic: no multiplier, using default value of 1");
+    //printf("joint mimic: no multiplier, using default value of 1");
     this->multiplier = 1;    
   }
   else
@@ -341,7 +341,7 @@ bool JointMimic::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("multiplier value (%s) is not a float",multiplier_str);
+      //printf("multiplier value (%s) is not a float",multiplier_str);
       return false;
     }
   }
@@ -351,7 +351,7 @@ bool JointMimic::initXml(TiXmlElement* config)
   const char* offset_str = config->Attribute("offset");
   if (offset_str == NULL)
   {
-    printf("joint mimic: no offset, using default value of 0");
+    //printf("joint mimic: no offset, using default value of 0");
     this->offset = 0;
   }
   else
@@ -362,7 +362,7 @@ bool JointMimic::initXml(TiXmlElement* config)
     }
     catch (boost::bad_lexical_cast &e)
     {
-      printf("offset value (%s) is not a float",offset_str);
+      //printf("offset value (%s) is not a float",offset_str);
       return false;
     }
   }
@@ -378,7 +378,7 @@ bool Joint::initXml(TiXmlElement* config)
   const char *name = config->Attribute("name");
   if (!name)
   {
-    printf("unnamed joint found");
+    //printf("unnamed joint found");
     return false;
   }
   this->name = name;
@@ -387,14 +387,14 @@ bool Joint::initXml(TiXmlElement* config)
   TiXmlElement *origin_xml = config->FirstChildElement("origin");
   if (!origin_xml)
   {
-    printf("Joint '%s' missing origin tag under parent describing transform from Parent Link to Joint Frame, (using Identity transform).", this->name.c_str());
+    //printf("Joint '%s' missing origin tag under parent describing transform from Parent Link to Joint Frame, (using Identity transform).", this->name.c_str());
     this->parent_to_joint_origin_transform.clear();
   }
   else
   {
     if (!this->parent_to_joint_origin_transform.initXml(origin_xml))
     {
-      printf("Malformed parent origin element for joint '%s'", this->name.c_str());
+      //printf("Malformed parent origin element for joint '%s'", this->name.c_str());
       this->parent_to_joint_origin_transform.clear();
       return false;
     }
@@ -405,9 +405,8 @@ bool Joint::initXml(TiXmlElement* config)
   if (parent_xml)
   {
     const char *pname = parent_xml->Attribute("link");
-    if (!pname)
-      printf("no parent link name specified for Joint link '%s'. this might be the root?", this->name.c_str());
-    else
+      //printf("no parent link name specified for Joint link '%s'. this might be the root?", this->name.c_str());
+    if (pname)
     {
       this->parent_link_name = std::string(pname);
 
@@ -419,9 +418,8 @@ bool Joint::initXml(TiXmlElement* config)
   if (child_xml)
   {
     const char *pname = child_xml->Attribute("link");
-    if (!pname)
-      printf("no child link name specified for Joint link '%s'.", this->name.c_str());
-    else
+      //printf("no child link name specified for Joint link '%s'.", this->name.c_str());
+    if (pname)
     {
       this->child_link_name = std::string(pname);
 
@@ -432,19 +430,19 @@ bool Joint::initXml(TiXmlElement* config)
   const char* type_char = config->Attribute("type");
   if (!type_char)
   {
-    printf("joint '%s' has no type, check to see if it's a reference.", this->name.c_str());
+    //printf("joint '%s' has no type, check to see if it's a reference.", this->name.c_str());
     return false;
   }
   std::string type_str = type_char;
   if (type_str == "planar")
   {
     type = PLANAR;
-    printf("Planar joints are deprecated in the URDF!\n");
+    //printf("Planar joints are deprecated in the URDF!\n");
   }
   else if (type_str == "floating")
   {
     type = FLOATING;
-    printf("Floating joints are deprecated in the URDF!\n");
+    //printf("Floating joints are deprecated in the URDF!\n");
   }
   else if (type_str == "revolute")
     type = REVOLUTE;
@@ -456,7 +454,7 @@ bool Joint::initXml(TiXmlElement* config)
     type = FIXED;
   else
   {
-    printf("Joint '%s' has no known type '%s'", this->name.c_str(), type_str.c_str());
+    //printf("Joint '%s' has no known type '%s'", this->name.c_str(), type_str.c_str());
     return false;
   }
 
@@ -466,17 +464,17 @@ bool Joint::initXml(TiXmlElement* config)
     // axis
     TiXmlElement *axis_xml = config->FirstChildElement("axis");
     if (!axis_xml){
-      printf("no axis elemement for Joint link '%s', defaulting to (1,0,0) axis", this->name.c_str());
+      //printf("no axis elemement for Joint link '%s', defaulting to (1,0,0) axis", this->name.c_str());
       this->axis = Vector3(1.0, 0.0, 0.0);
     }
     else{
       if (!axis_xml->Attribute("xyz")){
-        printf("no xyz attribute for axis element for Joint link '%s'", this->name.c_str());
+        //printf("no xyz attribute for axis element for Joint link '%s'", this->name.c_str());
       }
       else {
         if (!this->axis.init(axis_xml->Attribute("xyz")))
         {
-          printf("Malformed axis element for joint '%s'", this->name.c_str());
+          //printf("Malformed axis element for joint '%s'", this->name.c_str());
           this->axis.clear();
           return false;
         }
@@ -491,19 +489,19 @@ bool Joint::initXml(TiXmlElement* config)
     limits.reset(new JointLimits);
     if (!limits->initXml(limit_xml))
     {
-      printf("Could not parse limit element for joint '%s'", this->name.c_str());
+      //printf("Could not parse limit element for joint '%s'", this->name.c_str());
       limits.reset();
       return false;
     }
   }
   else if (this->type == REVOLUTE)
   {
-    printf("Joint '%s' is of type REVOLUTE but it does not specify limits", this->name.c_str());
+    //printf("Joint '%s' is of type REVOLUTE but it does not specify limits", this->name.c_str());
     return false;
   }
   else if (this->type == PRISMATIC)
   {
-    printf("Joint '%s' is of type PRISMATIC without limits", this->name.c_str());
+    //printf("Joint '%s' is of type PRISMATIC without limits", this->name.c_str());
     limits.reset();
   }
 
@@ -514,7 +512,7 @@ bool Joint::initXml(TiXmlElement* config)
     safety.reset(new JointSafety);
     if (!safety->initXml(safety_xml))
     {
-      printf("Could not parse safety element for joint '%s'", this->name.c_str());
+      //printf("Could not parse safety element for joint '%s'", this->name.c_str());
       safety.reset();
       return false;
     }
@@ -527,7 +525,7 @@ bool Joint::initXml(TiXmlElement* config)
     calibration.reset(new JointCalibration);
     if (!calibration->initXml(calibration_xml))
     {
-      printf("Could not parse calibration element for joint  '%s'", this->name.c_str());
+      //printf("Could not parse calibration element for joint  '%s'", this->name.c_str());
       calibration.reset();
       return false;
     }
@@ -540,7 +538,7 @@ bool Joint::initXml(TiXmlElement* config)
     mimic.reset(new JointMimic);
     if (!mimic->initXml(mimic_xml))
     {
-      printf("Could not parse mimic element for joint  '%s'", this->name.c_str());
+      //printf("Could not parse mimic element for joint  '%s'", this->name.c_str());
       mimic.reset();
       return false;
     }
@@ -553,7 +551,7 @@ bool Joint::initXml(TiXmlElement* config)
     dynamics.reset(new JointDynamics);
     if (!dynamics->initXml(prop_xml))
     {
-      printf("Could not parse joint_dynamics element for joint '%s'", this->name.c_str());
+      //printf("Could not parse joint_dynamics element for joint '%s'", this->name.c_str());
       dynamics.reset();
       return false;
     }

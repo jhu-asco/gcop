@@ -20,6 +20,9 @@ gcop_comm::CtrlTraj trajectory;
 //Publisher
 ros::Publisher trajpub;
 
+//Timer
+ros::Timer iteratetimer;
+
 
 //Initialize the rccar system
 Rccar sys;
@@ -35,6 +38,7 @@ RnLqCost<4, 2>*cost;
   vector<Vector4d> xs;
   vector<Vector2d> us;
   Vector4d xf = Vector4d::Zero();// final state initialization passed by reference so needs to be global to be changed
+	int Nit = 10;//number of iterations for dmoc
 
 
 void pubtraj() //N is the number of segments
@@ -60,29 +64,29 @@ void pubtraj() //N is the number of segments
 		}
 	}
 	trajectory.time = ts;
+	//final goal:
+	for(int count = 0;count<4;count++)
+	{
+		trajectory.finalgoal.statevector[count] = xf(count);
+	}
 	trajpub.publish(trajectory);
 }
 
+void iterateCallback(const ros::TimerEvent & event)
+{
+	//ros::Time startime = ros::Time::now(); 
+	for (int count = 1;count <= Nit;count++)
+		dmoc->Iterate();//Updates us and xs after one iteration
+	//double te = 1e6*(ros::Time::now() - startime).toSec();
+	//cout << "Time taken " << te << " us." << endl;
+	//publish the message
+	pubtraj();
+}
+
+
 void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level) 
 {
-	if(config.iterate)
-	{
-		//Reloaded Message:
-		/*
-		cout<<"Loaded the following conditions"<<endl;
-		cout<<"Initial state:\n "<<x0<<"\nFinal State:\n "<<xf<<endl;
-		cout<<"Final time: "<<config.tf<<"\tNumber of segments: "<<N<<endl;
-		*/
-		ros::Time startime = ros::Time::now(); 
-		dmoc->Iterate();//Updates us and xs after one iteration
-		double te = 1e6*(ros::Time::now() - startime).toSec();
-		cout << "Time taken " << te << " us." << endl;
-		config.iterate = false;
-		//publish the message
-		pubtraj();
-		return;
-	}
-
+	Nit = config.Nit; 
 	int N = config.N;
 	double h = config.tf/N;   // time step
 	//Vector4d xf = Vector4d::Zero();// final state
@@ -140,14 +144,15 @@ void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level)
 	xs[0] = x0;
 
 	//initial controls
-	for (int i = 0; i < N/2; ++i) {
+	/*for (int i = 0; i < N/2; ++i) {
 		us[i] = Vector2d(.01, .0);
 		us[N/2+i] = Vector2d(-.01, .0);
 	}
+	*/
 	//change parameters in dmoc:
 	dmoc->ts = ts;
-	dmoc->xs = xs;
-	dmoc->us = us;
+//	dmoc->xs = xs;
+	//dmoc->us = us;
 	dmoc->mu = config.mu;
 
 
@@ -240,16 +245,16 @@ int main(int argc, char** argv)
 	trajectory.statemsg.resize(N+1);
 	trajectory.ctrl.resize(N);
 	trajectory.time = ts;
+	trajectory.finalgoal.statevector.resize(4);
 	//trajectory.time.resize(N);
 //Dynamic Reconfigure setup Callback ! immediately gets called with default values	
 	dynamic_reconfigure::Server<gcop_ctrl::DMocInterfaceConfig> server;
 	dynamic_reconfigure::Server<gcop_ctrl::DMocInterfaceConfig>::CallbackType f;
-
 	f = boost::bind(&paramreqcallback, _1, _2);
 	server.setCallback(f);
-
+	//create timer for iteration
+  iteratetimer = rosdmoc.createTimer(ros::Duration(0.02), iterateCallback);
+	iteratetimer.start();
 	ros::spin();
-  
-	
   return 0;
 }

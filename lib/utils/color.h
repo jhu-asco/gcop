@@ -76,7 +76,7 @@ public:
         }
         catch (boost::bad_lexical_cast &e)
         {
-          printf("color rgba element (%s) is not a valid float",pieces[i].c_str());
+          //printf("color rgba element (%s) is not a valid float",pieces[i].c_str());
           return false;
         }
       }
@@ -84,7 +84,7 @@ public:
 
     if (rgba.size() != 4)
     {
-	printf("Color contains %i elements instead of 4 elements", (int)rgba.size());
+	//printf("Color contains %i elements instead of 4 elements", (int)rgba.size());
       return false;
     }
 
