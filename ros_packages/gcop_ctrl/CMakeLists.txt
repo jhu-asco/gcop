@@ -54,6 +54,8 @@ target_link_libraries(chainload ${LIBS})
 rosbuild_add_executable(rcctrl src/rccartest.cc)
 target_link_libraries(rcctrl ${LIBS})
 
+#rosbuild_add_executable(rcctrlharware src/rccartestharware.cc)
+#target_link_libraries(rcctrlharware ${LIBS})
 #common commands for building c++ executables and libraries
 #rosbuild_add_library(${PROJECT_NAME} src/example.cpp)
 #target_link_libraries(${PROJECT_NAME} another_library)

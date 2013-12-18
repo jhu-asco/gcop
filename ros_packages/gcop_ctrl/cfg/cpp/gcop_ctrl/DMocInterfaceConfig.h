@@ -263,6 +263,7 @@ class DEFAULT
         boost::any val;
         (*i)->getValue(config, val);
 
+        if("usemocap"==(*i)->name){usemocap = boost::any_cast<bool>(val);}
         if("Nit"==(*i)->name){Nit = boost::any_cast<int>(val);}
         if("tf"==(*i)->name){tf = boost::any_cast<double>(val);}
         if("N"==(*i)->name){N = boost::any_cast<int>(val);}
@@ -288,7 +289,8 @@ class DEFAULT
       }
     }
 
-    int Nit;
+    bool usemocap;
+int Nit;
 double tf;
 int N;
 double x0;
@@ -319,6 +321,8 @@ double mu;
 
 
 
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      bool usemocap;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       int Nit;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -498,6 +502,16 @@ double mu;
     DMocInterfaceConfigStatics()
     {
 DMocInterfaceConfig::GroupDescription<DMocInterfaceConfig::DEFAULT, DMocInterfaceConfig> Default("Default", "", 0, 0, true, &DMocInterfaceConfig::groups);
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.usemocap = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.usemocap = 1;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.usemocap = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(DMocInterfaceConfig::AbstractParamDescriptionConstPtr(new DMocInterfaceConfig::ParamDescription<bool>("usemocap", "bool", 0, "To use mocap or not", "", &DMocInterfaceConfig::usemocap)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(DMocInterfaceConfig::AbstractParamDescriptionConstPtr(new DMocInterfaceConfig::ParamDescription<bool>("usemocap", "bool", 0, "To use mocap or not", "", &DMocInterfaceConfig::usemocap)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.Nit = 0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
