@@ -1,6 +1,7 @@
 \subsubsection usage Usage
 \verbatim
 <node name="Config" pkg="gcop_ctrl" type="Config">
+  <param name="usemocap" type="bool" value="False" />
   <param name="Nit" type="int" value="10" />
   <param name="tf" type="double" value="5.0" />
   <param name="N" type="int" value="64" />

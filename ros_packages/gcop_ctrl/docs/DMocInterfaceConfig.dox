@@ -2,6 +2,7 @@
 
 Reads and maintains the following parameters on the ROS server
 
+- \b "~usemocap" : \b [bool] To use mocap or not min: False, default: False, max: True
 - \b "~Nit" : \b [int] Number of iterations of dmoc min: 0, default: 10, max: 30
 - \b "~tf" : \b [double] Final Time min: 0.0, default: 5.0, max: 10.0
 - \b "~N" : \b [int] Number of segments min: 0, default: 64, max: 100

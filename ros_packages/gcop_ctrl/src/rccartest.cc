@@ -7,6 +7,9 @@
 #include "gcop/rccar.h"
 #include "gcop_comm/CtrlTraj.h"//msg for publishing ctrl trajectory
 #include "gcop_ctrl/DMocInterfaceConfig.h"
+#include "geometry_msgs/TransformStamped.h"
+#include <tf/transform_listener.h>
+
 
 using namespace std;
 using namespace Eigen;
@@ -22,6 +25,9 @@ ros::Publisher trajpub;
 
 //Timer
 ros::Timer iteratetimer;
+
+//Subscriber
+ros::Subscriber initialposn_sub;
 
 
 //Initialize the rccar system
@@ -82,7 +88,26 @@ void iterateCallback(const ros::TimerEvent & event)
 	//publish the message
 	pubtraj();
 }
+void initialposnCallback(const geometry_msgs::TransformStamped::ConstPtr &currframe)
+{
+	tf::StampedTransform UV_O;
+        transformStampedMsgToTF(*currframe,UV_O);//converts to the right format 
+        //getrpy:
 
+	double roll,pitch,yaw;
+        UV_O.getBasis().getRPY(roll,pitch,yaw);
+        double tcurr = currframe->header.stamp.toSec();
+        tf::Vector3 y = UV_O.getOrigin();
+	Vector4d x0 = Vector4d::Zero();// initial state
+        x0[0] = y[0];
+        x0[1] = y[1];
+        x0[2] = yaw;
+        x0[3] =0;/// need to calculate velocity
+	xs[0] = x0;
+	//ros::TimerEvent e1;
+	//iterateCallback(e1);
+	return;
+}
 
 void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level) 
 {
@@ -141,7 +166,8 @@ void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level)
 		ts[k] = k*h;
 
 	// initial state
-	xs[0] = x0;
+	if(!config.usemocap)
+		xs[0] = x0;
 
 	//initial controls
 	/*for (int i = 0; i < N/2; ++i) {
@@ -171,6 +197,9 @@ int main(int argc, char** argv)
 	ros::NodeHandle rosdmoc("/dmoc");
 	//Initialize publisher
 	trajpub = rosdmoc.advertise<gcop_comm::CtrlTraj>("ctrltraj",1);
+	//Subscribe to initial posn from tf
+	initialposn_sub = rosdmoc.subscribe("mocap",1,initialposnCallback);
+	
 
 	//define parameters for the system
   int N = 64;        // number of segments
