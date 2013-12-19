@@ -76,9 +76,8 @@ void walkTree(boost::shared_ptr<const Link> link, int level,int &index,boost::sh
 			// first grandchild
 
 			//get parent joint of the child:
-			//boost::shared_ptr<Joint> parentj = child->
-			//create joint
-			//gcop::Joint gcopjoint;
+			//set name of the joint:
+			mbs->joints[index].name = childlink->parent_joint->name;
 			//based on type  of joint decide the axis
 		 switch(childlink->parent_joint->type)
 		 {
@@ -117,8 +116,9 @@ void walkTree(boost::shared_ptr<const Link> link, int level,int &index,boost::sh
 			mbs->links[index].J(0) = childlink->inertial->ixx;
 			mbs->links[index].J(1) = childlink->inertial->iyy;
 			mbs->links[index].J(2) = childlink->inertial->izz;//we assume the axes are aligned with principal axes
+			mbs->links[index].name = childlink->name;
 			// make ds = 0;
-			mbs->links[index].ds = Vector3d(0,0,0);
+			mbs->links[index].ds = Vector3d(0.1,0.1,0.1);
 
 			mbs->pis[index] = level; //added parent index to the list.
 
@@ -150,11 +150,13 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string)
 	boost::shared_ptr<Link> baselink = root_link->child_links[0];
 	if(!root_link) return boost::shared_ptr<gcop::Mbs>();
 
-	cout<<urdfmodel->links_.size() <<"\t"<<urdfmodel->joints_.size()<<endl;
+	assert(urdfmodel->links_.size()-1 == urdfmodel->joints_.size());
+
+	cout<<"Number of links excluding baselink and it's joint: "<<urdfmodel->links_.size()-1 <<"\t"<<urdfmodel->joints_.size()-1<<endl;
 
 
 	//create Mbs with the number of links and joints
-	boost::shared_ptr<gcop::Mbs> mbs (new gcop::Mbs(urdfmodel->links_.size(),6 + (urdfmodel->joints_.size()-1)));//hack for now
+	boost::shared_ptr<gcop::Mbs> mbs (new gcop::Mbs(urdfmodel->links_.size()-1,6 + (urdfmodel->links_.size()-2)));//hack for now
 
 	int index = 0;
 
@@ -164,13 +166,16 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string)
 	mbs->links[index].J(0) = baselink->inertial->ixx;
 	mbs->links[index].J(1) = baselink->inertial->iyy;
 	mbs->links[index].J(2) = baselink->inertial->izz;//we assume the axes are aligned with principal axes
+	mbs->links[index].name = baselink->name;
 	// make ds = 0;
 	mbs->links[index].ds = Vector3d(0,0,0);
 
 	mbs->pis[index] = -1; //added parent index to the list.
 
 
-	cout<<index<<endl;
+	cout<<"index: "<<index<<endl;
+	cout<<"Level: -1"<<endl;
+	cout<<"Root name "<<baselink->name<<endl;
 	walkTree(baselink,0,index,mbs);
 	//cout<<"Number of links parsed: "<<es.size()<<endl;
 	//cout<<" Number of joints parsed: "<<joints.size()<<endl;

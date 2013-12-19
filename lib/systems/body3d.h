@@ -216,6 +216,8 @@ public:
     Matrix6xcd Bu; ///< control input transformation
 
     bool symp;     ///< symplectic?
+		
+		string name;   ///< Unique name of the body
 
   };  
   

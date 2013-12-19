@@ -1,39 +1,158 @@
 #include "ros/ros.h"
 #include <iomanip>
 #include <iostream>
-#include <fstream>
 #include <dynamic_reconfigure/server.h>
+#include "gcop_comm/CtrlTraj.h"//msg for publishing ctrl trajectory
 #include <gcop/urdf_parser.h>
+#include "tf/transform_datatypes.h"
+#include <gcop/se3.h>
 
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
+//ros messages
+gcop_comm::CtrlTraj trajectory;
+
+//Publisher
+ros::Publisher trajpub;
+
+void q2pose(geometry_msgs::Pose &posemsg, Vector6d &bpose)
+{
+	btQuaternion bq;
+	bq.setEulerZYX(bpose[2],bpose[1],bpose[0]);
+	btVector3 bv(bpose[3],bpose[4],bpose[5]);
+	tf::Pose tfpose(bq,bv);
+	tf::poseTFToMsg(tfpose,posemsg);
+}
+
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "chainload");
 	ros::NodeHandle n;
+	//Initialize publisher
+	trajpub = n.advertise<gcop_comm::CtrlTraj>("ctrltraj",1);
 	//get parameter for xml_string:
 	string xml_string, xml_filename;
-	if(!ros::param::get("/robot_description", xml_filename))
+	if(!ros::param::get("/robot_description", xml_string))
 	{
-		ROS_ERROR("Could not fetch xml file parameter");
+		ROS_ERROR("Could not fetch xml file name");
 		return 0;
 	}
-	cout<<xml_filename<<endl;
-	fstream xml_file(xml_filename.c_str(), fstream::in);
-	while ( xml_file.good() )
+	//cout<<xml_filename<<endl;
+	//fstream xml_file(xml_filename.c_str(), fstream::in);
+	/*while ( xml_file.good() )
 	{
 		string line;
 		getline( xml_file, line);
 		xml_string += (line + "\n");
 	}
 	xml_file.close();
+	*/
 
 	boost::shared_ptr<Mbs> mbsmodel = gcop_urdf::mbsgenerator(xml_string);
 
 	//check if mbsmodel is good by using it.
+	//first try printing the mbsmodel params:
+	for(int count = 0;count<(mbsmodel->nb);count++)
+	{
+		cout<<"Ds["<<mbsmodel->links[count].name<<"]"<<endl<<mbsmodel->links[count].ds<<endl;
+		cout<<"J["<<mbsmodel->links[count].name<<"]"<<endl<<mbsmodel->links[count].J<<endl;
+	}
+	for(int count = 0;count<(mbsmodel->nb)-1;count++)
+	{
+		cout<<"Joint["<<mbsmodel->joints[count].name<<"].gc"<<endl<<mbsmodel->joints[count].gc<<endl;
+		cout<<"Joint["<<mbsmodel->joints[count].name<<"].gp"<<endl<<mbsmodel->joints[count].gp<<endl;
+		cout<<"Joint["<<mbsmodel->joints[count].name<<"].a"<<endl<<mbsmodel->joints[count].a<<endl;
+	}
+	//Looks ok till now
+	//Using it:
 
+  double h = .01;
+  int N = 1000;     // discrete trajectory segments
+  double tf = h*N;   // time-horizon
+	vector<double> ts;
+	ts.resize(N+1);
+	int nb = mbsmodel->nb;
+
+	for (int k = 0; k <=N; ++k)
+		ts[k] = k*h;
+  //Trajectory message initialization
+	trajectory.N = N;
+	trajectory.statemsg.resize(N+1);
+	trajectory.ctrl.resize(N);
+	trajectory.time = ts;
+	//trajectory.finalgoal.statevector.resize(4);
+
+  //mbsmodel->debug = true;
+
+
+  MbsState x(nb);
+  x.gs[0].setIdentity();
+  x.r[0] = 0;   
+  x.r[1] = 0;
+  mbsmodel->FK(x);
+
+  // states
+  vector<MbsState> xs(N+1, x);
+  xs[0].vs[0].setZero();
+  xs[0].dr[0] = .5;
+  xs[0].dr[1] = .5;
+  mbsmodel->KStep(xs[0], x, h);
+
+  // initial controls (e.g. hover at one place)
+  VectorXd u(6+ (nb-1));
+  u.setZero();
+  vector<VectorXd> us(N, u);
+
+  //struct timeval timer;
+  //  dmoc.debug = false; // turn off debug for speed
+
+	//Initialize root pose
+	//Initialize 0 state
+	Vector6d bpose;
+	gcop::SE3::Instance().g2q(bpose, xs[0].gs[0]);
+	q2pose(trajectory.statemsg[0].basepose,bpose);
+
+	trajectory.statemsg[0].statevector.resize(nb-1);
+	for(int count1 = 0;count1 < nb-1;count1++)
+	{
+		trajectory.statemsg[0].statevector[count1] = xs[0].r[count1];
+	}
+	for (int i = 0; i < N; ++i) 
+	{
+		//timer_start(timer);
+		mbsmodel->Step(xs[i+1], i*h, xs[i], us[i], h);
+		cout<<"Iteration#"<<i<<endl;
+		//long te = timer_us(timer);
+		//cout << "Iteration #" << i << ": took " << te << " us." << endl;
+		trajectory.statemsg[i+1].statevector.resize(nb-1);
+		gcop::SE3::Instance().g2q(bpose, xs[i+1].gs[0]);
+		q2pose(trajectory.statemsg[0].basepose,bpose);
+		for(int count1 = 0;count1 < nb-1;count1++)
+		{
+			trajectory.statemsg[i+1].statevector[count1] = xs[i+1].r[count1];
+		}
+		trajectory.ctrl[i].ctrlvec.resize(6+nb-1);
+		for(int count1 = 0;count1 < 6+nb-1;count1++)
+		{
+			trajectory.ctrl[i].ctrlvec[count1] = us[i](count1);
+		}
+	}
+	//final goal:
+	/*for(int count = 0;count<4;count++)
+	{
+		trajectory.finalgoal.statevector[count] = xf(count);
+	}
+	*/
+	trajpub.publish(trajectory);
+
+  cout << "dr=" << xs[1].dr << endl;
+
+  cout << "done!" << endl;
+
+	return 0;
+}
 
 
 	//boost::shared_ptr<gcop_urdf::ModelInterface> robot = gcop_urdf::parseURDF(xml_string);
@@ -56,5 +175,3 @@ int main(int argc, char** argv)
 
 
 
-	return 0;
-}
