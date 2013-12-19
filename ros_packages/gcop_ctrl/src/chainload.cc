@@ -17,13 +17,14 @@ gcop_comm::CtrlTraj trajectory;
 //Publisher
 ros::Publisher trajpub;
 
-void q2pose(geometry_msgs::Pose &posemsg, Vector6d &bpose)
+void q2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
 {
-	btQuaternion bq;
-	bq.setEulerZYX(bpose[2],bpose[1],bpose[0]);
-	btVector3 bv(bpose[3],bpose[4],bpose[5]);
-	tf::Pose tfpose(bq,bv);
-	tf::poseTFToMsg(tfpose,posemsg);
+	tf::Quaternion q;
+	q.setEulerZYX(bpose[2],bpose[1],bpose[0]);
+	tf::Vector3 v(bpose[3],bpose[4],bpose[5]);
+	tf::Transform tftransform(q,v);
+	tf::transformTFToMsg(tftransform,transformmsg);
+	//cout<<"---------"<<endl<<transformmsg.position.x<<endl<<transformmsg.position.y<<endl<<transformmsg.position.z<<endl<<endl<<"----------"<<endl;
 }
 
 int main(int argc, char** argv)
@@ -31,7 +32,7 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "chainload");
 	ros::NodeHandle n;
 	//Initialize publisher
-	trajpub = n.advertise<gcop_comm::CtrlTraj>("ctrltraj",1);
+	trajpub = n.advertise<gcop_comm::CtrlTraj>("ctrltraj",2);
 	//get parameter for xml_string:
 	string xml_string, xml_filename;
 	if(!ros::param::get("/robot_description", xml_string))
@@ -57,7 +58,7 @@ int main(int argc, char** argv)
 	for(int count = 0;count<(mbsmodel->nb);count++)
 	{
 		cout<<"Ds["<<mbsmodel->links[count].name<<"]"<<endl<<mbsmodel->links[count].ds<<endl;
-		cout<<"J["<<mbsmodel->links[count].name<<"]"<<endl<<mbsmodel->links[count].J<<endl;
+		cout<<"I["<<mbsmodel->links[count].name<<"]"<<endl<<mbsmodel->links[count].I<<endl;
 	}
 	for(int count = 0;count<(mbsmodel->nb)-1;count++)
 	{
@@ -103,6 +104,7 @@ int main(int argc, char** argv)
   // initial controls (e.g. hover at one place)
   VectorXd u(6+ (nb-1));
   u.setZero();
+	u[5] = 30*9.81;
   vector<VectorXd> us(N, u);
 
   //struct timeval timer;
@@ -112,44 +114,54 @@ int main(int argc, char** argv)
 	//Initialize 0 state
 	Vector6d bpose;
 	gcop::SE3::Instance().g2q(bpose, xs[0].gs[0]);
-	q2pose(trajectory.statemsg[0].basepose,bpose);
+	//cout<<"----"<<endl<<xs[0].gs[0]<<"----"<<endl;
 
-	trajectory.statemsg[0].statevector.resize(nb-1);
-	for(int count1 = 0;count1 < nb-1;count1++)
+	while(ros::ok())
 	{
-		trajectory.statemsg[0].statevector[count1] = xs[0].r[count1];
-	}
-	for (int i = 0; i < N; ++i) 
-	{
-		//timer_start(timer);
-		mbsmodel->Step(xs[i+1], i*h, xs[i], us[i], h);
-		cout<<"Iteration#"<<i<<endl;
-		//long te = timer_us(timer);
-		//cout << "Iteration #" << i << ": took " << te << " us." << endl;
-		trajectory.statemsg[i+1].statevector.resize(nb-1);
-		gcop::SE3::Instance().g2q(bpose, xs[i+1].gs[0]);
-		q2pose(trajectory.statemsg[0].basepose,bpose);
+		q2transform(trajectory.statemsg[0].basepose,bpose);
+		trajectory.statemsg[0].statevector.resize(nb-1);
+		trajectory.statemsg[0].names.resize(nb-1);
 		for(int count1 = 0;count1 < nb-1;count1++)
 		{
-			trajectory.statemsg[i+1].statevector[count1] = xs[i+1].r[count1];
+			trajectory.statemsg[0].statevector[count1] = xs[0].r[count1];
+			trajectory.statemsg[0].names[count1] = mbsmodel->joints[count1].name;
 		}
-		trajectory.ctrl[i].ctrlvec.resize(6+nb-1);
-		for(int count1 = 0;count1 < 6+nb-1;count1++)
+		for (int i = 0; i < N; ++i) 
 		{
-			trajectory.ctrl[i].ctrlvec[count1] = us[i](count1);
+			//timer_start(timer);
+			mbsmodel->Step(xs[i+1], i*h, xs[i], us[i], h);
+			//long te = timer_us(timer);
+			//cout << "Iteration #" << i << ": took " << te << " us." << endl;
+			trajectory.statemsg[i+1].statevector.resize(nb-1);
+			trajectory.statemsg[i+1].names.resize(nb-1);
+			gcop::SE3::Instance().g2q(bpose, xs[i+1].gs[0]);
+			q2transform(trajectory.statemsg[i+1].basepose,bpose);
+			for(int count1 = 0;count1 < nb-1;count1++)
+			{
+				trajectory.statemsg[i+1].statevector[count1] = xs[i+1].r[count1];
+				trajectory.statemsg[i+1].names[count1] = mbsmodel->joints[count1].name;
+			}
+			trajectory.ctrl[i].ctrlvec.resize(6+nb-1);
+			for(int count1 = 0;count1 < 6+nb-1;count1++)
+			{
+				trajectory.ctrl[i].ctrlvec[count1] = us[i](count1);
+			}
 		}
-	}
-	//final goal:
-	/*for(int count = 0;count<4;count++)
-	{
-		trajectory.finalgoal.statevector[count] = xf(count);
-	}
-	*/
-	trajpub.publish(trajectory);
+		//final goal:
+		/*for(int count = 0;count<4;count++)
+			{
+			trajectory.finalgoal.statevector[count] = xf(count);
+			}
+		 */
+		trajpub.publish(trajectory);
+		ros::spinOnce();
 
-  cout << "dr=" << xs[1].dr << endl;
+		cout << "dr=" << xs[1].dr << endl;
 
-  cout << "done!" << endl;
+		cout << "done!" << endl;
+		ros::Duration(0.05).sleep();
+		getchar();
+	}
 
 	return 0;
 }

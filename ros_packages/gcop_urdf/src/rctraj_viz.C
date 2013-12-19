@@ -23,6 +23,7 @@ visualization_msgs::Marker goal;
 
 void joint_publish(const gcop_comm::CtrlTraj::ConstPtr& trajectory)
 {
+	ROS_INFO("Hello");
 	//This function is specific to car and should be changed for other vehicles
 	//ros param define stuff	
 	bool animate = false;
@@ -60,6 +61,19 @@ void joint_publish(const gcop_comm::CtrlTraj::ConstPtr& trajectory)
 
 	broadcaster->sendTransform(global_trans);//send 0 posn
 
+	//just publish the trajectory
+	line_strip.header.stamp  = ros::Time::now();
+	line_strip.points.resize(trajectory->N + 1);
+
+	for(int i =0;i<(trajectory->N)+1; i++)
+	{
+		//geometry_msgs::Point p;
+		line_strip.points[i].x = trajectory->statemsg[i].statevector[0];
+		line_strip.points[i].y =  trajectory->statemsg[i].statevector[1];
+		line_strip.points[i].z = 0.1;
+		//line_strip.points.push_back(p);
+	}
+	traj_pub.publish(line_strip);
 
 
 	if(animate)
@@ -94,23 +108,6 @@ void joint_publish(const gcop_comm::CtrlTraj::ConstPtr& trajectory)
 			broadcaster->sendTransform(global_trans);
 		}
 	}
-	else
-	{
-		//just publish the trajectory
-		line_strip.header.stamp  = ros::Time::now();
-		line_strip.points.resize(trajectory->N + 1);
-
-		for(int i =0;i<(trajectory->N)+1; i++)
-		{
-			//geometry_msgs::Point p;
-			line_strip.points[i].x = trajectory->statemsg[i].statevector[0];
-			line_strip.points[i].y =  trajectory->statemsg[i].statevector[1];
-			line_strip.points[i].z = 0.1;
-			//line_strip.points.push_back(p);
-		}
-		traj_pub.publish(line_strip);
-	}
-
 
 }
 int main(int argc, char** argv) {

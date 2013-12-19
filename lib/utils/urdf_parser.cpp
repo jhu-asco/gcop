@@ -113,12 +113,15 @@ void walkTree(boost::shared_ptr<const Link> link, int level,int &index,boost::sh
 			//copy m
 			mbs->links[index].m = childlink->inertial->mass;
 			//copy J
-			mbs->links[index].J(0) = childlink->inertial->ixx;
-			mbs->links[index].J(1) = childlink->inertial->iyy;
-			mbs->links[index].J(2) = childlink->inertial->izz;//we assume the axes are aligned with principal axes
+			mbs->links[index].I(0) = childlink->inertial->ixx;
+			mbs->links[index].I(1) = childlink->inertial->iyy;
+			mbs->links[index].I(2) = childlink->inertial->izz;//we assume the axes are aligned with principal axes
+			mbs->links[index].I(3) = childlink->inertial->mass;
+			mbs->links[index].I(4) = childlink->inertial->mass;
+			mbs->links[index].I(5) = childlink->inertial->mass;
 			mbs->links[index].name = childlink->name;
 			// make ds = 0;
-			mbs->links[index].ds = Vector3d(0.1,0.1,0.1);
+			mbs->links[index].ds = Vector3d(0,0,0);
 
 			mbs->pis[index] = level; //added parent index to the list.
 
@@ -163,9 +166,12 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string)
 	//add the first link to mbs
 	mbs->links[index].m = baselink->inertial->mass;
 	//copy J
-	mbs->links[index].J(0) = baselink->inertial->ixx;
-	mbs->links[index].J(1) = baselink->inertial->iyy;
-	mbs->links[index].J(2) = baselink->inertial->izz;//we assume the axes are aligned with principal axes
+	mbs->links[index].I(0) = baselink->inertial->ixx;
+	mbs->links[index].I(1) = baselink->inertial->iyy;
+	mbs->links[index].I(2) = baselink->inertial->izz;//we assume the axes are aligned with principal axes
+	mbs->links[index].I(3) = baselink->inertial->mass;
+	mbs->links[index].I(4) = baselink->inertial->mass;
+	mbs->links[index].I(5) = baselink->inertial->mass;
 	mbs->links[index].name = baselink->name;
 	// make ds = 0;
 	mbs->links[index].ds = Vector3d(0,0,0);
@@ -177,6 +183,7 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string)
 	cout<<"Level: -1"<<endl;
 	cout<<"Root name "<<baselink->name<<endl;
 	walkTree(baselink,0,index,mbs);
+	mbs->Init();
 	//cout<<"Number of links parsed: "<<es.size()<<endl;
 	//cout<<" Number of joints parsed: "<<joints.size()<<endl;
 	//cout<<"Pis: "<<pis<<endl;
