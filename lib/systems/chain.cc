@@ -6,6 +6,9 @@ using namespace Eigen;
 Chain::Chain() : 
   Mbs(3, 8) {
 
+  // no gravity
+  ag << 0, 0, 0; 
+  
   // structural properties
   Vector3d ds(.3, .1, .1);
   double m = 1;
