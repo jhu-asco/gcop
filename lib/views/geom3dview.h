@@ -28,9 +28,9 @@ namespace gcop {
 
     virtual void RenderGeom() = 0;
 
-    virtual void Render();
+    virtual bool RenderFrame(int i = 0);
 
-    static void Transform(const Matrix4d &g);
+    static void Transform(const Matrix4d &g);    
     
     /**
      * Set the rgb color of the trajectory

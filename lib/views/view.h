@@ -36,7 +36,7 @@ class View {
    * @param i frame #
    * @return return true if more frames should be rendered
    */
-  virtual bool RenderFrame(int i = 0);  
+  virtual bool RenderFrame(int i = 0);
 
   /**
    * Lock a view. This is done when updating data inside this object. 

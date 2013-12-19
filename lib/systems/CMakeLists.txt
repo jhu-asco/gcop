@@ -23,6 +23,7 @@ set(sources
 	joint.cc
   dem.cc
   airplanecost.cc
+  joint.cc
 )
 
 set(headers
@@ -43,7 +44,7 @@ set(headers
   body3d.h
   body3dmanifold.h
   body3dcost.h
-	joint.h
+  joint.h
   qrotor.h
   hrotor.h
   heli.h
@@ -51,7 +52,7 @@ set(headers
   wrench.h
   mbsmanifold.h
   mbscspace.h
-	mbsstate.h
+  mbsstate.h
   mbstspace.h
   mbs.h
   chain.h

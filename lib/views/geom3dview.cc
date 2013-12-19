@@ -24,7 +24,7 @@ void Geom3dView::SetColor(const double rgba[4]) {
 }
 
 
-void Geom3dView::Render()
+bool Geom3dView::RenderFrame(int i)
 {
   //  glColor4dv(rgba);
   Viewer::SetColor(rgba[0], rgba[1], rgba[2], 0);
@@ -37,7 +37,10 @@ void Geom3dView::Render()
     
   RenderGeom();
   glPopMatrix();
+
+  return false;
 }
+
 
 void Geom3dView::Transform(const Matrix4d &g) 
 {  

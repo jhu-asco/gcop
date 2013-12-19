@@ -16,6 +16,7 @@ Mbs::Mbs(int nb, int c) : nb(nb),
                           //                          fvb(*this), 
                           //                          fu(*this)
 {
+  ag << 0, 0, -9.81;
 }
  
   
@@ -173,7 +174,6 @@ void Mbs::ID(VectorXd &f,
 
   VectorXd b(nb+5); // bias
   
-  Vector3d ag(0, 0, -9.81);
   Vector6d gr;
   gr.setZero();
 
