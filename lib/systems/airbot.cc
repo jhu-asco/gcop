@@ -6,6 +6,7 @@ using namespace Eigen;
 Airbot::Airbot() : 
   Mbs(7, 10) {
 
+//  ag << 0, 0, 0.0; 
   hrotor.l = 1.5*hrotor.l;
   hrotor.r = 1.5*hrotor.r;
 

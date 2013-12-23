@@ -10,12 +10,14 @@
 #include "gcop/lqcost.h" //gcop lqr header
 #include "gcop/rn.h"
 #include <tf/transform_listener.h>
+#include <XmlRpcValue.h>
 
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
 typedef Dmoc<MbsState> MbsDmoc;//defining chaindmoc
+
 
 //ros messages
 gcop_comm::CtrlTraj trajectory;
@@ -38,7 +40,7 @@ boost::shared_ptr<MbsDmoc> mbsdmoc;
 //MbsState final state
 boost::shared_ptr<MbsState> xf;
 
-int Nit = 1;//number of iterations for dmoc
+int Nit = 100;//number of iterations for dmoc
 
 void q2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
 {
@@ -50,6 +52,21 @@ void q2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
 	//cout<<"---------"<<endl<<transformmsg.position.x<<endl<<transformmsg.position.y<<endl<<transformmsg.position.z<<endl<<endl<<"----------"<<endl;
 }
 
+void xml2vec(VectorXd &vec, XmlRpc::XmlRpcValue &my_list)
+{
+	ROS_ASSERT(my_list.getType() == XmlRpc::XmlRpcValue::TypeArray);
+	ROS_ASSERT(my_list.size() > 0);
+	vec.resize(my_list.size());
+	//cout<<my_list.size()<<endl;
+	//ROS_ASSERT(vec.size() <= my_list.size()); //Desired size
+
+	for (int32_t i = 0; i < my_list.size(); i++) 
+	{
+				ROS_ASSERT(my_list[i].getType() == XmlRpc::XmlRpcValue::TypeDouble);
+				cout<<"my_list["<<i<<"]\t"<<my_list[i]<<endl;
+			  vec[i] =  (double)(my_list[i]);
+	}
+}
 void pubtraj() //N is the number of segments
 {
 	int N = mbsdmoc->us.size();
@@ -103,6 +120,7 @@ void pubtraj() //N is the number of segments
 }
 void iterateCallback(const ros::TimerEvent & event)
 {
+	getchar();
 	//ros::Time startime = ros::Time::now(); 
 	for (int count = 1;count <= Nit;count++)
 		mbsdmoc->Iterate();//Updates us and xs after one iteration
@@ -137,7 +155,7 @@ void initialposnCallback(const geometry_msgs::TransformStamped::ConstPtr &currfr
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "chainload");
-	ros::NodeHandle n;
+	ros::NodeHandle n("mbsdmoc");
 	//Initialize publisher
 	trajpub = n.advertise<gcop_comm::CtrlTraj>("ctrltraj",2);
 	//Subscribe to initial posn from tf
@@ -149,10 +167,16 @@ int main(int argc, char** argv)
 		ROS_ERROR("Could not fetch xml file name");
 		return 0;
 	}
+	VectorXd xmlconversion;
 	//Create Mbs system
 	mbsmodel = gcop_urdf::mbsgenerator(xml_string);
-	//set no gravity:
-	mbsmodel->ag << 0, 0, -9.81;
+	mbsmodel->ag << 0, 0, -0.05;
+	//get ag from parameters
+	XmlRpc::XmlRpcValue ag_list;
+	if(n.getParam("ag", ag_list))
+		xml2vec(xmlconversion,ag_list);
+	ROS_ASSERT(xmlconversion.size() == 3);
+	mbsmodel->ag = xmlconversion.head(3);
 
 	//Printing the mbsmodel params:
 	for(int count = 0;count<(mbsmodel->nb);count++)
@@ -172,7 +196,13 @@ int main(int argc, char** argv)
 	int nb = mbsmodel->nb;
 	int N = 100;      // discrete trajectory segments
 	double tf = 20;   // time-horizon
+
+	n.getParam("tf",tf);
+	n.getParam("N",N);
+
 	double h = tf/N; // time-step
+
+	
 
 	//times
 	vector<double> ts(N+1);
@@ -186,62 +216,88 @@ int main(int argc, char** argv)
 	//xf->gs[0](0,3) = 0.0;
 	xf->vs[0].setZero();
 	xf->dr.setZero();
-	xf->r[0] =0;
-	xf->r[1] =0;
+	xf->r[0] =-M_PI/2;
+	xf->r[1] =M_PI/2;
 	//xf->r.fill(M_PI/4);   
+	
+	//Params:
+  n.getParam("xN",xf->gs[0](0,3));
+  n.getParam("yN",xf->gs[0](1,3));
+  n.getParam("zN",xf->gs[0](2,3));
+	//list of joint angles:
+	XmlRpc::XmlRpcValue j_list;
+	if(n.getParam("JN", j_list))
+		xml2vec(xf->r,j_list);
+	cout<<"xf->r"<<endl<<xf->r<<endl;
+		//xf->r
+
 
 	//Define Lqr Cost
 	LqCost<MbsState> cost(mbsmodel->X, (Rn<>&)mbsmodel->U, tf, *xf);
 	cost.Qf(0,0) = 2; cost.Qf(1,1) = 2; cost.Qf(2,2) = 2;
-	cost.Qf(3,3) = 50; cost.Qf(4,4) = 50; cost.Qf(5,5) = 50;
+	cost.Qf(3,3) = 20; cost.Qf(4,4) = 20; cost.Qf(5,5) = 20;
 	//cost.Qf(9,9) = 20; cost.Qf(10,10) = 20; cost.Qf(11,11) = 20;
-	
-	
-//Initial State
-	MbsState x(nb);
-  x.gs[0].setIdentity();
-	//x.gs[0](0,3) = 1.0;
-	x.r[0] = -M_PI/2;
-	x.r[1] = M_PI/2;
-  //x.r.setZero();   
-  mbsmodel->FK(x);
-
-  // states
-  vector<MbsState> xs(N+1, x);
-  xs[0].vs[0].setZero();
-//	xs[0].r[0] = 1.57;
-	//xs[0].r[1] = -1.57;
-  xs[0].dr[0] = 0;
-  xs[0].dr[1] = 0;
-	//cout<<"xs0"<<xs[0].r[0]<<"\t"<<xs[0].r[1]<<"\t"<<endl;
-	mbsmodel->KStep(xs[0], x, h);
-
-
+	//list of final cost :
+	XmlRpc::XmlRpcValue finalcost_list;
+	if(n.getParam("Qf", finalcost_list))
+	{
+		cout<<mbsmodel->X.n<<endl;
+		xml2vec(xmlconversion,finalcost_list);
+		cout<<"conversion"<<endl<<xmlconversion<<endl;
+		cost.Qf = xmlconversion.asDiagonal();
+		cout<<"Cost.Qf"<<endl<<cost.Qf<<endl;
+	}
+//
+	XmlRpc::XmlRpcValue statecost_list;
+	if(n.getParam("Q", statecost_list))
+	{
+		cout<<mbsmodel->X.n<<endl;
+		xml2vec(xmlconversion,statecost_list);
+		cout<<"conversion"<<endl<<xmlconversion<<endl;
+		cost.Q = xmlconversion.asDiagonal();
+		cout<<"Cost.Q"<<endl<<cost.Q<<endl;
+	}
+	XmlRpc::XmlRpcValue ctrlcost_list;
+	if(n.getParam("R", ctrlcost_list))
+	{
+		cout<<mbsmodel->U.n<<endl;
+		xml2vec(xmlconversion,ctrlcost_list);
+		cout<<"conversion"<<endl<<xmlconversion<<endl;
+		cost.R = xmlconversion.asDiagonal();
+	}
+		cout<<"Cost.R"<<endl<<cost.R<<endl;
+//
 
 
 	//Define the initial state mbs
-	/*
 	MbsState x(nb);
 	x.gs[0].setIdentity();
-	x.gs[0](0,3) = -2;
+	//x.gs[0](0,3) = 0;
 	//gcop::SE3::Instance().rpyxyz2g(x.gs[0], Vector3d(0,0,0), Vector3d(-2,0,0));
 	x.r[0] = -M_PI/2;
 	x.r[1] = M_PI/2;
 	x.vs[0].setZero();
-	x.dr.fill(0);
+	x.dr.setZero();
+	//Params:
+  n.getParam("x0",x.gs[0](0,3));
+  n.getParam("y0",x.gs[0](1,3));
+  n.getParam("z0",x.gs[0](2,3));
+	//list of joint angles:
+	//XmlRpc::XmlRpcValue j_list;
+	n.getParam("J0", j_list);
+	xml2vec(x.r,j_list);
+
 	mbsmodel->Rec(x, h);
-	cout<<"x.r0: "<<x.r[0]<<"\t"<<x.r[1]<<endl;
-	*/
 
 
 	// initial controls (e.g. hover at one place)
 	VectorXd u(6+ (nb-1));
 	u.setZero();
-	u[5] = 30*9.81;
+	n.getParam("ua",u[5]);
 
 	//States and controls for system
 	vector<VectorXd> us(N,u);
-	//vector<MbsState> xs(N+1,x);
+	vector<MbsState> xs(N+1,x);
 
 	mbsdmoc.reset(new MbsDmoc(*mbsmodel, cost, ts, xs, us));
 	mbsdmoc->mu = 10;
@@ -255,10 +311,13 @@ int main(int argc, char** argv)
 	
 	//Debug true for mbs
 
-  mbsmodel->debug = true;
+  //mbsmodel->debug = true;
 
+	
+	// Get number of iterations
+	n.getParam("Nit",Nit);
 	// Create timer for iterating	
-	iteratetimer = n.createTimer(ros::Duration(0.02), iterateCallback);
+	iteratetimer = n.createTimer(ros::Duration(1), iterateCallback);
 	iteratetimer.start();
 	ros::spin();
 	return 0;

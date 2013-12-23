@@ -62,8 +62,8 @@ void solver_process(Viewer* viewer)
 
   MbsState x(3);
   SE3::Instance().rpyxyz2g(x.gs[0], Vector3d(M_PI/4,M_PI/4,0), Vector3d(-2,0,0));
-  x.r[0] = 0.2;   
-  x.r[1] = 0.2;
+  x.r[0] = -M_PI/2;   
+  x.r[1] = -M_PI/2;
   x.vs[0].setZero();
   x.dr[0] = 0;
   x.dr[1] = 0;
@@ -82,6 +82,7 @@ void solver_process(Viewer* viewer)
   // initial controls (e.g. hover at one place)
   VectorXd u(8);
   u.setZero();
+	u[5] = m*9.81;
   vector<VectorXd> us(N, u);
 
   ChainDmoc dmoc(sys, cost, ts, xs, us);

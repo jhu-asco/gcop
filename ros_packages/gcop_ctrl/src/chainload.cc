@@ -52,6 +52,8 @@ int main(int argc, char** argv)
 	*/
 
 	boost::shared_ptr<Mbs> mbsmodel = gcop_urdf::mbsgenerator(xml_string);
+	//set no gravity:
+	mbsmodel->ag << 0, 0, -9.81;
 
 	//check if mbsmodel is good by using it.
 	//first try printing the mbsmodel params:
@@ -90,16 +92,24 @@ int main(int argc, char** argv)
 
   MbsState x(nb);
   x.gs[0].setIdentity();
-  x.r[0] = 0;   
-  x.r[1] = 0;
+	x.gs[0](0,3) = 1.0;
+	x.r[0] = -M_PI/2;
+	x.r[1] = M_PI/2;
+  //x.r.setZero();   
   mbsmodel->FK(x);
 
   // states
   vector<MbsState> xs(N+1, x);
   xs[0].vs[0].setZero();
-  xs[0].dr[0] = .5;
-  xs[0].dr[1] = .5;
-  mbsmodel->KStep(xs[0], x, h);
+//	xs[0].r[0] = 1.57;
+	//xs[0].r[1] = -1.57;
+  xs[0].dr[0] = 0;
+  xs[0].dr[1] = 0;
+	//cout<<"xs0"<<xs[0].r[0]<<"\t"<<xs[0].r[1]<<"\t"<<endl;
+	mbsmodel->KStep(xs[0], x, h);
+
+	//cout<<"M_PI"<<endl;
+	//cout<<M_PI<<endl;
 
   // initial controls (e.g. hover at one place)
   VectorXd u(6+ (nb-1));
@@ -112,12 +122,12 @@ int main(int argc, char** argv)
 
 	//Initialize root pose
 	//Initialize 0 state
-	Vector6d bpose;
-	gcop::SE3::Instance().g2q(bpose, xs[0].gs[0]);
 	//cout<<"----"<<endl<<xs[0].gs[0]<<"----"<<endl;
 
 	while(ros::ok())
 	{
+		Vector6d bpose;
+		gcop::SE3::Instance().g2q(bpose, xs[0].gs[0]);
 		q2transform(trajectory.statemsg[0].basepose,bpose);
 		trajectory.statemsg[0].statevector.resize(nb-1);
 		trajectory.statemsg[0].names.resize(nb-1);
@@ -126,6 +136,8 @@ int main(int argc, char** argv)
 			trajectory.statemsg[0].statevector[count1] = xs[0].r[count1];
 			trajectory.statemsg[0].names[count1] = mbsmodel->joints[count1].name;
 		}
+		//cout<<"xs0"<<xs[0].r[0]<<"\t"<<xs[0].r[1]<<"\t"<<trajectory.statemsg[0].statevector[0]<<trajectory.statemsg[0].statevector[1]<<"\t"<<endl;
+
 		for (int i = 0; i < N; ++i) 
 		{
 			//timer_start(timer);
@@ -153,6 +165,7 @@ int main(int argc, char** argv)
 			trajectory.finalgoal.statevector[count] = xf(count);
 			}
 		 */
+		//cout<<"xs0"<<xs[0].r[0]<<"\t"<<xs[0].r[1]<<"\t"<<trajectory.statemsg[0].statevector[0]<<trajectory.statemsg[0].statevector[1]<<"\t"<<endl;
 		trajpub.publish(trajectory);
 		ros::spinOnce();
 

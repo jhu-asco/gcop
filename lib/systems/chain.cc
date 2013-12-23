@@ -7,7 +7,7 @@ Chain::Chain() :
   Mbs(3, 8) {
 
   // no gravity
-  ag << 0, 0, 0; 
+  //ag << 0, 0, -9.81; 
   
   // structural properties
   Vector3d ds(.3, .1, .1);

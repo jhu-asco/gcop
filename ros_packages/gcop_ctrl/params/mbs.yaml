@@ -1,0 +1,36 @@
+## Controller Params
+mbsdmoc/tf: 10 # Final Time
+mbsdmoc/N: 64 # Number of segments
+
+mbsdmoc/x0: 0.1 # Inital state
+mbsdmoc/y0: 0.0
+mbsdmoc/z0: 0.0
+mbsdmoc/vx0: 0 
+mbsdmoc/vy0: 0
+mbsdmoc/vz0: 0
+
+mbsdmoc/xN:  0 # Final state
+mbsdmoc/yN:  0 
+mbsdmoc/zN:  0 
+mbsdmoc/vxN: 0 
+mbsdmoc/vyN: 0
+mbsdmoc/vzN: 0
+
+                  #rpy                   #xyz               #r            #w0                      #v0             #dr
+mbsdmoc/Qf:   [20.0,20.0,20.0,         200.0,200.0,200.0,      30.0,30.0,      1.0,1.0,1.0,            1.0,1.0,1.0,      1.0,1.0]   #   Final   Cost
+mbsdmoc/Q:    [1.0,1.0,1.0,         2.0,2.0,2.0,         1.0,1.0,      1.0,1.0,1.0,            1.0,1.0,1.0,      1.0,1.0]   #   Final   Cost
+mbsdmoc/R: [0.1, 0.1, 0.1,   0.001,0.001,0.0001, 0.01,0.01] #Control Cost
+
+mbsdmoc/ag: [0.0, 0.0, -10.0] # Gravity
+
+mbsdmoc/J0: [rad(-pi/2), rad(pi/2)]
+mbsdmoc/JN: [rad(-pi/2), rad(pi/2)] # Joint angles
+
+mbsdmoc/ua: 300 
+
+
+mbsdmoc/mu: 100
+
+mbsdmoc/Nit: 1 
+
+
