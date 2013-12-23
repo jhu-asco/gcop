@@ -33,6 +33,9 @@ void solver_process(Viewer* viewer)
   // system
   Chain sys;
 
+  // acceleration due to gravity
+  params.GetVector3d("ag", sys.ag);
+
   VectorXd qv0(16);
   params.GetVectorXd("x0", qv0);  
 
@@ -108,11 +111,12 @@ void solver_process(Viewer* viewer)
   struct timeval timer;
   //  dmoc.debug = false; // turn off debug for speed
 
-  for (int i = 0; i < 20; ++i) {
+  for (int i = 0; i < 50; ++i) {
     timer_start(timer);
     dmoc.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;
+    getchar();
   }
 
   int Nd;
