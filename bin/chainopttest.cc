@@ -23,7 +23,7 @@ void solver_process(Viewer* viewer)
   }
 
   int N = 64;      // discrete trajectory segments
-  double tf = 10;   // time-horizon
+  double tf = 5;   // time-horizon
 
   params.GetInt("N", N);
   params.GetDouble("tf", tf);  
@@ -55,9 +55,6 @@ void solver_process(Viewer* viewer)
   xf.dr = qvf.tail(2);
 
   LqCost<MbsState> cost(sys.X, (Rn<>&)sys.U, tf, xf);
-
-  //  cost.Qf(3,3) = 50; cost.Qf(4,4) = 50; cost.Qf(5,5) = 50;
-  //  cost.Qf(11,11) = 5; cost.Qf(12,12) = 5; cost.Qf(13,13) = 5;
   
   VectorXd Q(16);
   VectorXd R(8);
@@ -66,8 +63,6 @@ void solver_process(Viewer* viewer)
   params.GetVectorXd("Q", Q);
   params.GetVectorXd("R", R);
   params.GetVectorXd("Qf", Qf);
-
-  cout << "Q=" << Q << endl;
  
   cost.Q = Q.asDiagonal();
   cost.R = R.asDiagonal();
@@ -93,7 +88,7 @@ void solver_process(Viewer* viewer)
   if (viewer)
     viewer->Add(view);
 
-
+  // @MK: this is the new part, initialize trajectory using a controller
   MbsController ctrl(sys);
   params.GetVectorXd("Kp", ctrl.Kp);
   params.GetVectorXd("Kd", ctrl.Kd);
@@ -104,6 +99,7 @@ void solver_process(Viewer* viewer)
     sys.Step(xs[i+1], i*h, xs[i], us[i], h);
   }
 
+  // see the result before running optimization
   getchar();
 
   ChainDmoc dmoc(sys, cost, ts, xs, us);
@@ -112,12 +108,11 @@ void solver_process(Viewer* viewer)
   struct timeval timer;
   //  dmoc.debug = false; // turn off debug for speed
 
-  for (int i = 0; i < 50; ++i) {
+  for (int i = 0; i < 20; ++i) {
     timer_start(timer);
     dmoc.Iterate();
     long te = timer_us(timer);
-    cout << "Iteration #" << i << ": took " << te << " us." << endl;        
-    getchar();
+    cout << "Iteration #" << i << ": took " << te << " us." << endl;
   }
 
   int Nd;
