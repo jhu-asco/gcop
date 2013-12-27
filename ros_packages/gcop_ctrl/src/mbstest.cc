@@ -9,6 +9,8 @@
 #include "gcop/dmoc.h" //gcop dmoc header
 #include "gcop/lqcost.h" //gcop lqr header
 #include "gcop/rn.h"
+#include "gcop/mbscontroller.h"
+#include "gcop_ctrl/MbsDMocInterfaceConfig.h"
 #include <tf/transform_listener.h>
 #include <XmlRpcValue.h>
 
@@ -40,7 +42,12 @@ boost::shared_ptr<MbsDmoc> mbsdmoc;
 //MbsState final state
 boost::shared_ptr<MbsState> xf;
 
-int Nit = 100;//number of iterations for dmoc
+//Cost lqcost
+boost::shared_ptr<LqCost<MbsState>> cost;
+
+boost::shared_ptr<MbsController> ctrl;
+int Nit = 10;//number of iterations for dmoc
+int N = 100;      // discrete trajectory segments
 
 void q2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
 {
@@ -120,7 +127,7 @@ void pubtraj() //N is the number of segments
 }
 void iterateCallback(const ros::TimerEvent & event)
 {
-	getchar();
+	//getchar();
 	//ros::Time startime = ros::Time::now(); 
 	for (int count = 1;count <= Nit;count++)
 		mbsdmoc->Iterate();//Updates us and xs after one iteration
@@ -151,6 +158,123 @@ void initialposnCallback(const geometry_msgs::TransformStamped::ConstPtr &currfr
 	return;
 }
 */
+void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level) 
+{
+	int nb = mbsmodel->nb;
+	Nit = config.Nit; 
+	//int N = config.N;
+	double h = config.tf/N;   // time step
+
+	if(level & 0x00000001)
+	{
+		Vector3d rpy;
+		Vector3d xyz;
+
+		ROS_ASSERT((config.i_Q <= mbsmodel->X.n)&& (config.i_Q > 0));
+		config.Qfi = cost->Qf(config.i_Q -1,config.i_Q -1);
+		config.Qi = cost->Q(config.i_Q -1,config.i_Q -1);
+
+		ROS_ASSERT((config.i_R <= mbsmodel->U.n)&& (config.i_R > 0));
+		config.Ri = cost->R(config.i_R -1,config.i_R -1);
+
+		if(config.final)
+		{
+			// overwrite the config with values from final state
+			config.vroll = xf->vs[0](0);
+			config.vpitch = xf->vs[0](1);
+			config.vyaw = xf->vs[0](2);
+			config.vx = xf->vs[0](3);
+			config.vy = xf->vs[0](4);
+			config.vz = xf->vs[0](5);
+
+			gcop::SE3::Instance().g2rpyxyz(rpy,xyz,xf->gs[0]);
+			config.roll = rpy(0);
+			config.pitch = rpy(1);
+			config.yaw = rpy(2);
+			config.x = xyz(0);
+			config.y = xyz(1);
+			config.z = xyz(2);
+
+			ROS_ASSERT((config.i_J <= nb) && (config.i_J > 0));
+			config.Ji = xf->r[config.i_J-1];     
+		}
+		else
+		{
+			// overwrite the config with values from initial state
+			config.vroll = mbsdmoc->xs[0].vs[0](0);
+			config.vpitch = mbsdmoc->xs[0].vs[0](1);
+			config.vyaw = mbsdmoc->xs[0].vs[0](2);
+			config.vx = mbsdmoc->xs[0].vs[0](3);
+			config.vy = mbsdmoc->xs[0].vs[0](4);
+			config.vz = mbsdmoc->xs[0].vs[0](5);
+
+			gcop::SE3::Instance().g2rpyxyz(rpy,xyz,mbsdmoc->xs[0].gs[0]);
+			config.roll = rpy(0);
+			config.pitch = rpy(1);
+			config.yaw = rpy(2);
+			config.x = xyz(0);
+			config.y = xyz(1);
+			config.z = xyz(2);
+
+			ROS_ASSERT((config.i_J <= nb) && (config.i_J > 0));
+			config.Ji = mbsdmoc->xs[0].r[config.i_J-1];     
+		}
+		return;
+	}
+
+	if(config.final)
+	{
+		gcop::SE3::Instance().rpyxyz2g(xf->gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
+		xf->vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
+		ROS_ASSERT((config.i_J <= nb)&&(config.i_J > 0));
+		xf->r[config.i_J-1] = config.Ji;
+		xf->dr[config.i_J-1] = config.Jvi;
+	}
+	else
+	{
+		gcop::SE3::Instance().rpyxyz2g(mbsdmoc->xs[0].gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
+		mbsdmoc->xs[0].vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
+		ROS_ASSERT((config.i_J <= nb)&&(config.i_J > 0));
+		mbsdmoc->xs[0].r[config.i_J -1] = config.Ji;
+		mbsdmoc->xs[0].dr[config.i_J -1] = config.Jvi;
+		mbsmodel->Rec(mbsdmoc->xs[0], h);
+	}
+
+	ROS_ASSERT((config.i_Q <= mbsmodel->X.n)&& (config.i_Q > 0));
+	cost->Qf(config.i_Q -1,config.i_Q -1) = config.Qfi;
+	cost->Q(config.i_Q -1,config.i_Q -1) = config.Qi;
+
+	ROS_ASSERT((config.i_R <= mbsmodel->U.n)&& (config.i_R > 0));
+	cost->R(config.i_R -1,config.i_R -1) = config.Ri;
+
+	//resize
+	//mbsdmoc->xs.resize(N+1);
+	//mbsdmoc->us.resize(N);
+	//mbsdmoc->ts.resize(N+1);
+	//trajectory.N = N;
+	//trajectory.statemsg.resize(N+1);
+	//trajectory.ctrl.resize(N);
+
+ //Setting Values
+	//for (int k = 0; k <=N; ++k)
+	//	mbsdmoc->ts[k] = k*h;
+
+	/*VectorXd u(6+ (nb-1));
+	u.setZero();
+	for(int count = 0;count < nb;count++)
+		u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
+		*/
+
+	for (int i = 0; i < mbsdmoc->xs.size()-1; ++i) 
+	{
+		double t = i*h;
+		ctrl->Set(mbsdmoc->us[i], t, mbsdmoc->xs[i]);
+		mbsmodel->Step(mbsdmoc->xs[i+1], i*h, mbsdmoc->xs[i], mbsdmoc->us[i], h);
+	}
+
+	mbsdmoc->mu = config.mu;
+}
+
 
 int main(int argc, char** argv)
 {
@@ -194,7 +318,6 @@ int main(int argc, char** argv)
 	//Using it:
 	//define parameters for the system
 	int nb = mbsmodel->nb;
-	int N = 100;      // discrete trajectory segments
 	double tf = 20;   // time-horizon
 
 	n.getParam("tf",tf);
@@ -213,29 +336,28 @@ int main(int argc, char** argv)
 	//Define Final State
 	xf.reset( new MbsState(nb));
 	xf->gs[0].setIdentity();
-	//xf->gs[0](0,3) = 0.0;
 	xf->vs[0].setZero();
 	xf->dr.setZero();
-	xf->r[0] =-M_PI/2;
-	xf->r[1] =M_PI/2;
-	//xf->r.fill(M_PI/4);   
-	
-	//Params:
-  n.getParam("xN",xf->gs[0](0,3));
-  n.getParam("yN",xf->gs[0](1,3));
-  n.getParam("zN",xf->gs[0](2,3));
-	//list of joint angles:
-	XmlRpc::XmlRpcValue j_list;
-	if(n.getParam("JN", j_list))
-		xml2vec(xf->r,j_list);
+	xf->r.setZero();
+
+	// Get Xf	 from params
+	XmlRpc::XmlRpcValue xf_list;
+	if(n.getParam("XN", xf_list))
+		xml2vec(xmlconversion,xf_list);
+	ROS_ASSERT(xmlconversion.size() == 12);
+	xf->vs[0] = xmlconversion.tail<6>();
+  gcop::SE3::Instance().rpyxyz2g(xf->gs[0],xmlconversion.head<3>(),xmlconversion.segment<3>(3)); 
+  //list of joint angles:
+	XmlRpc::XmlRpcValue xfj_list;
+	if(n.getParam("JN", xfj_list))
+		xml2vec(xf->r,xfj_list);
 	cout<<"xf->r"<<endl<<xf->r<<endl;
-		//xf->r
 
 
 	//Define Lqr Cost
-	LqCost<MbsState> cost(mbsmodel->X, (Rn<>&)mbsmodel->U, tf, *xf);
-	cost.Qf(0,0) = 2; cost.Qf(1,1) = 2; cost.Qf(2,2) = 2;
-	cost.Qf(3,3) = 20; cost.Qf(4,4) = 20; cost.Qf(5,5) = 20;
+	cost.reset(new LqCost<MbsState>(mbsmodel->X, (Rn<>&)mbsmodel->U, tf, *xf));
+	cost->Qf(0,0) = 2; cost->Qf(1,1) = 2; cost->Qf(2,2) = 2;
+	cost->Qf(3,3) = 20; cost->Qf(4,4) = 20; cost->Qf(5,5) = 20;
 	//cost.Qf(9,9) = 20; cost.Qf(10,10) = 20; cost.Qf(11,11) = 20;
 	//list of final cost :
 	XmlRpc::XmlRpcValue finalcost_list;
@@ -244,8 +366,9 @@ int main(int argc, char** argv)
 		cout<<mbsmodel->X.n<<endl;
 		xml2vec(xmlconversion,finalcost_list);
 		cout<<"conversion"<<endl<<xmlconversion<<endl;
-		cost.Qf = xmlconversion.asDiagonal();
-		cout<<"Cost.Qf"<<endl<<cost.Qf<<endl;
+		ROS_ASSERT(xmlconversion.size() == mbsmodel->X.n);
+		cost->Qf = xmlconversion.asDiagonal();
+		cout<<"Cost.Qf"<<endl<<cost->Qf<<endl;
 	}
 //
 	XmlRpc::XmlRpcValue statecost_list;
@@ -254,53 +377,90 @@ int main(int argc, char** argv)
 		cout<<mbsmodel->X.n<<endl;
 		xml2vec(xmlconversion,statecost_list);
 		cout<<"conversion"<<endl<<xmlconversion<<endl;
-		cost.Q = xmlconversion.asDiagonal();
-		cout<<"Cost.Q"<<endl<<cost.Q<<endl;
+		ROS_ASSERT(xmlconversion.size() == mbsmodel->X.n);
+		cost->Q = xmlconversion.asDiagonal();
+		cout<<"Cost.Q"<<endl<<cost->Q<<endl;
 	}
 	XmlRpc::XmlRpcValue ctrlcost_list;
 	if(n.getParam("R", ctrlcost_list))
 	{
 		cout<<mbsmodel->U.n<<endl;
 		xml2vec(xmlconversion,ctrlcost_list);
+		ROS_ASSERT(xmlconversion.size() == mbsmodel->U.n);
 		cout<<"conversion"<<endl<<xmlconversion<<endl;
-		cost.R = xmlconversion.asDiagonal();
+		cost->R = xmlconversion.asDiagonal();
 	}
-		cout<<"Cost.R"<<endl<<cost.R<<endl;
+		cout<<"Cost.R"<<endl<<cost->R<<endl;
 //
 
 
 	//Define the initial state mbs
 	MbsState x(nb);
 	x.gs[0].setIdentity();
-	//x.gs[0](0,3) = 0;
-	//gcop::SE3::Instance().rpyxyz2g(x.gs[0], Vector3d(0,0,0), Vector3d(-2,0,0));
-	x.r[0] = -M_PI/2;
-	x.r[1] = M_PI/2;
 	x.vs[0].setZero();
 	x.dr.setZero();
-	//Params:
-  n.getParam("x0",x.gs[0](0,3));
-  n.getParam("y0",x.gs[0](1,3));
-  n.getParam("z0",x.gs[0](2,3));
-	//list of joint angles:
-	//XmlRpc::XmlRpcValue j_list;
-	n.getParam("J0", j_list);
-	xml2vec(x.r,j_list);
+	x.r.setZero();
 
+	// Get X0	 from params
+	XmlRpc::XmlRpcValue x0_list;
+	if(n.getParam("X0", x0_list))
+		xml2vec(xmlconversion,x0_list);
+	ROS_ASSERT(xmlconversion.size() == 12);
+	x.vs[0] = xmlconversion.tail<6>();
+  gcop::SE3::Instance().rpyxyz2g(x.gs[0],xmlconversion.head<3>(),xmlconversion.segment<3>(3)); 
+  //list of joint angles:
+	XmlRpc::XmlRpcValue j_list;
+	if(n.getParam("J0", j_list))
+		xml2vec(x.r,j_list);
+	cout<<"x.r"<<endl<<x.r<<endl;
 	mbsmodel->Rec(x, h);
-
 
 	// initial controls (e.g. hover at one place)
 	VectorXd u(6+ (nb-1));
 	u.setZero();
-	n.getParam("ua",u[5]);
+	for(int count = 0;count < nb;count++)
+		u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
+
+	cout<<"u[5]: "<<u[5]<<endl;
+	//n.getParam("ua",u[5]);
+
 
 	//States and controls for system
 	vector<VectorXd> us(N,u);
 	vector<MbsState> xs(N+1,x);
 
-	mbsdmoc.reset(new MbsDmoc(*mbsmodel, cost, ts, xs, us));
-	mbsdmoc->mu = 10;
+	// @MK: this is the new part, initialize trajectory using a controller
+  ctrl.reset(new MbsController(*mbsmodel, xf.get()));
+
+	XmlRpc::XmlRpcValue kp_list;
+	if(n.getParam("Kp", kp_list))
+	xml2vec(xmlconversion,kp_list);
+	ROS_ASSERT(xmlconversion.size() == 6+nb-1);
+	ctrl->Kp = xmlconversion.head(6+nb-1);
+	cout<<"Kp"<<endl<<ctrl->Kp<<endl;
+
+	XmlRpc::XmlRpcValue kd_list;
+	if(n.getParam("Kd", kd_list))
+	xml2vec(xmlconversion,kd_list);
+	ROS_ASSERT(xmlconversion.size() == 6+nb-1);
+	ctrl->Kd = xmlconversion.head(6+nb-1);
+	cout<<"Kd"<<endl<<ctrl->Kd<<endl;
+
+
+  for (int i = 0; i < xs.size()-1; ++i) {
+    double t = i*h;
+    ctrl->Set(us[i], t, xs[i]); 
+    mbsmodel->Step(xs[i+1], i*h, xs[i], us[i], h);
+  }
+	//cout<<"us"<<endl<<us<<endl;
+
+
+  // see the result before running optimization
+//  getchar();
+
+
+	mbsdmoc.reset(new MbsDmoc(*mbsmodel, *cost, ts, xs, us));
+	mbsdmoc->mu = 0.001;
 
 	//Trajectory message initialization
 	trajectory.N = N;
@@ -319,6 +479,11 @@ int main(int argc, char** argv)
 	// Create timer for iterating	
 	iteratetimer = n.createTimer(ros::Duration(1), iterateCallback);
 	iteratetimer.start();
+	//Dynamic Reconfigure setup Callback ! immediately gets called with default values	
+	dynamic_reconfigure::Server<gcop_ctrl::MbsDMocInterfaceConfig> server;
+	dynamic_reconfigure::Server<gcop_ctrl::MbsDMocInterfaceConfig>::CallbackType f;
+	f = boost::bind(&paramreqcallback, _1, _2);
+	server.setCallback(f);
 	ros::spin();
 	return 0;
 }

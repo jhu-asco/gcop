@@ -1,7 +1,7 @@
 Background\ ColorB=0.466667
 Background\ ColorG=0
 Background\ ColorR=0.0941176
-Camera\ Config=0.954796 5.11587 2.47307 -0.20003 0.168575 -0.279462
+Camera\ Config=0.439796 4.94087 2.47307 -0.20003 0.168575 -0.279462
 Camera\ Type=rviz::OrbitViewController
 Fixed\ Frame=/world
 Grid.Alpha=0.5
@@ -82,5 +82,5 @@ world.Enabled=1
 [Window]
 Height=1050
 Width=1930
-X=-55
-Y=-198
+X=-60
+Y=-216

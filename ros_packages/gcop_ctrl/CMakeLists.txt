@@ -7,10 +7,10 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  Release        : w/o debug symbols, w/ optimization
 #  RelWithDebInfo : w/ debug symbols, w/ optimization
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-set(ROS_BUILD_TYPE Debug)
+set(ROS_BUILD_TYPE Coverage)
 rosbuild_init()
 
-ADD_DEFINITIONS(-g -O -std=c++0x -pthread)
+ADD_DEFINITIONS(-g -std=c++0x -pthread)
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 

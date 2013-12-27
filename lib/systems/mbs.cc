@@ -67,7 +67,7 @@ double Mbs::F(VectorXd &v, double t, const MbsState &x,
   VectorXd f(nb + 5);  // bias forces
   
   // compute bias
-  ID(f, t, x, x, u, h);
+  ID(f, t, x, u);
   
   if (debug)
     cout << "f=" << f << endl;
@@ -84,7 +84,7 @@ double Mbs::F(VectorXd &v, double t, const MbsState &x,
     return 0;
   }
   
-  // a = -M.inverse()*f;
+  // a = -M.inverse()*f; 
   v.head(6) = h*(x.vs[0] + h*a.head(6));            // updated base velocity
   v.segment(6, nb-1) = h*(x.dr + h*a.tail(nb-1));   // updated joint velocities
   v.segment(nb+5, 6) = h*a.head(6);                 
@@ -92,7 +92,7 @@ double Mbs::F(VectorXd &v, double t, const MbsState &x,
 }
 
 
-void Mbs::Mass(MatrixXd &M, const MbsState &x) 
+void Mbs::Mass(MatrixXd &M, const MbsState &x) const 
 {
   // assumes that FK has been called on x, i.e. that it is consistent
   M.setZero();
@@ -160,20 +160,98 @@ void Mbs::FK(MbsState &x)
 }
 
 
+
+
 void Mbs::ID(VectorXd &f,
-             double t, const MbsState &xb, const MbsState &xa,
-             const VectorXd &u, double h) 
+             double t, const MbsState &x, const VectorXd &u) 
+{
+  VectorXd b(nb+5); // bias
+  Bias(b, t, x);
+
+  VectorXd fu(nb + 5);
+  Force(fu, t, x, u);  // compute control/external forces
+
+  //  cout << "control fu=" << fu << endl;
+
+  f = b - fu;
+}
+
+
+
+void Mbs::Bias(VectorXd &b,
+               double t,
+               const MbsState &x) const 
 {
   
   // assume that Kstep was called so that all velocities are propagated
+  //   VectorXd b(nb+5); // bias
+    
+  vector<Vector6d> ps(nb);
+  Matrix6d A;
+  Matrix4d gi;
+
+  Vector6d gr;
+  gr.setZero();
+
+  for (int i = nb - 1; i >= 0; --i) {
+    const Vector6d &v = x.vs[i];
+    const Vector6d &I = links[i].I;
+    Vector6d mu = I.cwiseProduct(v);
+
+    gr.tail<3>() = links[i].m*(x.gs[i].topLeftCorner<3,3>().transpose()*ag);
+    
+    ps[i].head(3) = v.head<3>().cross(mu.head<3>());
+    ps[i].tail(3) = v.tail<3>().cross(mu.head<3>()) + v.head<3>().cross(mu.tail<3>());    
+    ps[i] = ps[i] - gr;
+
+    if (debug) {
+      cout << "i=" << i << endl;
+      cout << "v=" << v << endl;
+      //      cout << "mua=" << mua << endl;
+      //      cout << "mub=" << mub << endl;      
+      cout << "ps[" << i << "]=" << ps[i] << endl;
+    }
+    
+    for (int ci = 0; ci < cs[i].size(); ++ci) {
+      
+      int j = cs[i][ci];   // index of ci-th child of i
+      
+      if (debug)
+        cout << "CHILD: i=" << i << " j=" << j << endl;
+      assert(j > 0);
+      se3.inv(gi, x.dgs[j-1]);
+      se3.Ad(A, gi);
+      ps[i] += A.transpose()*ps[j];
+    }
+    
+    //      if (i > 0)
+    //        ps[i] = joints[i-1].Ac.transpose()*ps[i];
+    
+    if (debug)
+      cout << "i=" << i << "ps=" << ps[i] << endl;
+    
+    if (i > 0)
+      b[6+i-1] = ps[i].dot(joints[i-1].S);
+    else
+      b.head(6) = ps[0];
+  }
+}
+
+
+void Mbs::DBias(VectorXd &b,
+                double t,
+                const MbsState &xb, 
+                const MbsState &xa, double h) 
+{
   
+  // assume that Kstep was called so that all velocities are propagated
+  //   VectorXd b(nb+5); // bias
+    
   vector<Vector6d> ps(nb);
   Matrix6d Da, Db;
   Matrix6d A;
   Matrix4d gi;
 
-  VectorXd b(nb+5); // bias
-  
   Vector6d gr;
   gr.setZero();
 
@@ -187,18 +265,6 @@ void Mbs::ID(VectorXd &f,
     se3.dcayinv(Db, h*vb);
     se3.dcayinv(Da, -h*va);
     ps[i] = (Db.transpose()*(I.cwiseProduct(vb)) -  Da.transpose()*(I.cwiseProduct(va)))/h - gr;
-
-    /*
-    Vector6d mua, mub;
-
-    se3.tln(mub, h*vb, I.cwiseProduct(vb));
-    se3.tln(mua, -h*va, I.cwiseProduct(va));
-
-    //    mub = I.cwiseProduct(vb);
-    //    mua = I.cwiseProduct(va);    
-
-    ps[i] = (mub - mua)/h;    
-    */
 
     if (debug) {
       cout << "i=" << i << endl;
@@ -232,36 +298,8 @@ void Mbs::ID(VectorXd &f,
     else
       b.head(6) = ps[0];
   }
-  
-  //  cout << "bias b=" << b << endl;
-
-  VectorXd fu(nb + 5);
-  Force(fu, t, xa, u);  // compute control/external forces
-
-  //  cout << "control fu=" << fu << endl;
-
-  f = b - fu;
-
-  /*
-  
-  MatrixXd M(nb+5,nb+5);
-  Mass(M, xa);
-
-  VectorXd vdra(nb+5);
-  VectorXd vdrb(nb+5);
-
-  vdra.head(6) = xa.vs[0];  
-  vdra.tail(nb-1) = xa.dr;  
-  vdrb.head(6) = xb.vs[0];  
-  vdrb.tail(nb-1) = xb.dr;  
-
-  cout << "M=" << M << endl;
-
-  f = M*(vdrb - vdra)/h + b - fu;
-
-  */
-
 }
+
 
 
 void Mbs::Rec(MbsState &x, double h)

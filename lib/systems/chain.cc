@@ -11,7 +11,8 @@ Chain::Chain() :
   
   // structural properties
   Vector3d ds(.3, .1, .1);
-  double m = 1;
+  double m = 10;
+	cout<<"Mass1"<<m<<endl;
   
   double l0 = .3;
   double l1 = .3;
@@ -20,6 +21,10 @@ Chain::Chain() :
   this->links[0].ds= ds;
   this->links[1].ds= ds;
   this->links[2].ds= ds;
+
+  this->links[0].m= m;
+  this->links[1].m= m;
+  this->links[2].m= m;
 
   // base body
   //  this->g0s[0].setIdentity();

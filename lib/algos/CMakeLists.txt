@@ -4,10 +4,13 @@ set(headers
       ba.h
       bacost.h
       posegraph2d.h
+      controller.h
+      mbscontroller.h
 )
 
 set(sources
       ba.cc
       bacost.cc
       posegraph2d.cc
+      mbscontroller.cc
 )
