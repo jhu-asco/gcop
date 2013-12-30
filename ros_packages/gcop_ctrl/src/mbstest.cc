@@ -46,7 +46,7 @@ boost::shared_ptr<MbsState> xf;
 boost::shared_ptr<LqCost<MbsState>> cost;
 
 boost::shared_ptr<MbsController> ctrl;
-int Nit = 10;//number of iterations for dmoc
+int Nit = 1;//number of iterations for dmoc
 int N = 100;      // discrete trajectory segments
 
 void q2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
@@ -84,8 +84,6 @@ void pubtraj() //N is the number of segments
 
 	gcop::SE3::Instance().g2q(bpose, mbsdmoc->xs[0].gs[0]);
 	q2transform(trajectory.statemsg[0].basepose,bpose);
-	trajectory.statemsg[0].statevector.resize(nb-1);
-	trajectory.statemsg[0].names.resize(nb-1);
 
 	for(int count1 = 0;count1 < nb-1;count1++)
 	{
@@ -95,8 +93,6 @@ void pubtraj() //N is the number of segments
 
 	for (int i = 0; i < N; ++i) 
 	{
-		trajectory.statemsg[i+1].statevector.resize(nb-1);
-		trajectory.statemsg[i+1].names.resize(nb-1);
 		gcop::SE3::Instance().g2q(bpose, mbsdmoc->xs[i+1].gs[0]);
 		q2transform(trajectory.statemsg[i+1].basepose,bpose);
 		for(int count1 = 0;count1 < nb-1;count1++)
@@ -104,7 +100,6 @@ void pubtraj() //N is the number of segments
 			trajectory.statemsg[i+1].statevector[count1] = mbsdmoc->xs[i+1].r[count1];
 			trajectory.statemsg[i+1].names[count1] = mbsmodel->joints[count1].name;
 		}
-		trajectory.ctrl[i].ctrlvec.resize(6+nb-1);
 		for(int count1 = 0;count1 < 6+nb-1;count1++)
 		{
 			trajectory.ctrl[i].ctrlvec[count1] = mbsdmoc->us[i](count1);
@@ -113,8 +108,6 @@ void pubtraj() //N is the number of segments
 	//final goal:
 	gcop::SE3::Instance().g2q(bpose, xf->gs[0]);
 	q2transform(trajectory.finalgoal.basepose,bpose);
-	trajectory.finalgoal.statevector.resize(nb-1);
-	trajectory.finalgoal.names.resize(nb-1);
 
 	for(int count1 = 0;count1 < nb-1;count1++)
 	{
@@ -128,11 +121,13 @@ void pubtraj() //N is the number of segments
 void iterateCallback(const ros::TimerEvent & event)
 {
 	//getchar();
-	//ros::Time startime = ros::Time::now(); 
+	ros::Time startime = ros::Time::now(); 
 	for (int count = 1;count <= Nit;count++)
+	{
 		mbsdmoc->Iterate();//Updates us and xs after one iteration
-	//double te = 1e6*(ros::Time::now() - startime).toSec();
-	//cout << "Time taken " << te << " us." << endl;
+	}
+	double te = 1e6*(ros::Time::now() - startime).toSec();
+	cout << "Time taken " << te << " us." << endl;
 	//publish the message
 	pubtraj();
 }
@@ -170,11 +165,19 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 		Vector3d rpy;
 		Vector3d xyz;
 
-		ROS_ASSERT((config.i_Q <= mbsmodel->X.n)&& (config.i_Q > 0));
+		if(config.i_Q > mbsmodel->X.n)
+			config.i_Q = mbsmodel->X.n; 
+		else if(config.i_J <= 0)
+			config.i_Q = 1;
+
 		config.Qfi = cost->Qf(config.i_Q -1,config.i_Q -1);
 		config.Qi = cost->Q(config.i_Q -1,config.i_Q -1);
 
-		ROS_ASSERT((config.i_R <= mbsmodel->U.n)&& (config.i_R > 0));
+		if(config.i_R > mbsmodel->U.n)
+			config.i_R = mbsmodel->U.n; 
+		else if(config.i_R <= 0)
+			config.i_R = 1;
+
 		config.Ri = cost->R(config.i_R -1,config.i_R -1);
 
 		if(config.final)
@@ -195,7 +198,10 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 			config.y = xyz(1);
 			config.z = xyz(2);
 
-			ROS_ASSERT((config.i_J <= nb) && (config.i_J > 0));
+			if(config.i_J > nb-1)
+				config.i_J = nb-1; 
+			else if(config.i_J < 1)
+				config.i_J = 1;
 			config.Ji = xf->r[config.i_J-1];     
 		}
 		else
@@ -216,7 +222,11 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 			config.y = xyz(1);
 			config.z = xyz(2);
 
-			ROS_ASSERT((config.i_J <= nb) && (config.i_J > 0));
+			if(config.i_J > nb-1)
+				config.i_J = nb-1; 
+			else if(config.i_J < 1)
+				config.i_J = 1;
+
 			config.Ji = mbsdmoc->xs[0].r[config.i_J-1];     
 		}
 		return;
@@ -226,7 +236,12 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 	{
 		gcop::SE3::Instance().rpyxyz2g(xf->gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
 		xf->vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
-		ROS_ASSERT((config.i_J <= nb)&&(config.i_J > 0));
+
+		if(config.i_J > nb-1)
+			config.i_J = nb-1; 
+		else if(config.i_J < 1)
+			config.i_J = 1;
+			
 		xf->r[config.i_J-1] = config.Ji;
 		xf->dr[config.i_J-1] = config.Jvi;
 	}
@@ -234,17 +249,30 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 	{
 		gcop::SE3::Instance().rpyxyz2g(mbsdmoc->xs[0].gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
 		mbsdmoc->xs[0].vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
-		ROS_ASSERT((config.i_J <= nb)&&(config.i_J > 0));
+
+		if(config.i_J > nb-1)
+			config.i_J = nb-1; 
+		else if(config.i_J <= 0)
+			config.i_J = 1;
+
 		mbsdmoc->xs[0].r[config.i_J -1] = config.Ji;
 		mbsdmoc->xs[0].dr[config.i_J -1] = config.Jvi;
 		mbsmodel->Rec(mbsdmoc->xs[0], h);
 	}
 
-	ROS_ASSERT((config.i_Q <= mbsmodel->X.n)&& (config.i_Q > 0));
+	if(config.i_Q > mbsmodel->X.n)
+		config.i_Q = mbsmodel->X.n; 
+	else if(config.i_J <= 0)
+		config.i_Q = 1;
+
 	cost->Qf(config.i_Q -1,config.i_Q -1) = config.Qfi;
 	cost->Q(config.i_Q -1,config.i_Q -1) = config.Qi;
 
-	ROS_ASSERT((config.i_R <= mbsmodel->U.n)&& (config.i_R > 0));
+	if(config.i_R > mbsmodel->U.n)
+		config.i_R = mbsmodel->U.n; 
+	else if(config.i_R <= 0)
+		config.i_R = 1;
+
 	cost->R(config.i_R -1,config.i_R -1) = config.Ri;
 
 	//resize
@@ -256,23 +284,25 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 	//trajectory.ctrl.resize(N);
 
  //Setting Values
-	//for (int k = 0; k <=N; ++k)
-	//	mbsdmoc->ts[k] = k*h;
+	for (int k = 0; k <=N; ++k)
+		mbsdmoc->ts[k] = k*h;
 
+  cost->tf = config.tf;
 	/*VectorXd u(6+ (nb-1));
 	u.setZero();
 	for(int count = 0;count < nb;count++)
 		u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
 		*/
 
-	for (int i = 0; i < mbsdmoc->xs.size()-1; ++i) 
+/*	for (int i = 0; i < mbsdmoc->xs.size()-1; ++i) 
 	{
 		double t = i*h;
 		ctrl->Set(mbsdmoc->us[i], t, mbsdmoc->xs[i]);
 		mbsmodel->Step(mbsdmoc->xs[i+1], i*h, mbsdmoc->xs[i], mbsdmoc->us[i], h);
 	}
+	*/
 
-	mbsdmoc->mu = config.mu;
+	//mbsdmoc->mu = config.mu;
 }
 
 
@@ -281,7 +311,7 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "chainload");
 	ros::NodeHandle n("mbsdmoc");
 	//Initialize publisher
-	trajpub = n.advertise<gcop_comm::CtrlTraj>("ctrltraj",2);
+	trajpub = n.advertise<gcop_comm::CtrlTraj>("ctrltraj",1);
 	//Subscribe to initial posn from tf
 	//initialposn_sub = rosdmoc.subscribe("mocap",1,initialposnCallback);
 	//get parameter for xml_string:
@@ -460,7 +490,7 @@ int main(int argc, char** argv)
 
 
 	mbsdmoc.reset(new MbsDmoc(*mbsmodel, *cost, ts, xs, us));
-	mbsdmoc->mu = 0.001;
+	mbsdmoc->mu = 10.0;
 
 	//Trajectory message initialization
 	trajectory.N = N;
@@ -468,7 +498,17 @@ int main(int argc, char** argv)
 	trajectory.ctrl.resize(N);
 	trajectory.time = ts;
 	trajectory.finalgoal.statevector.resize(nb-1);
-	
+	trajectory.finalgoal.names.resize(nb-1);
+
+	trajectory.statemsg[0].statevector.resize(nb-1);
+	trajectory.statemsg[0].names.resize(nb-1);
+
+	for (int i = 0; i < N; ++i) 
+	{
+		trajectory.statemsg[i+1].statevector.resize(nb-1);
+		trajectory.statemsg[i+1].names.resize(nb-1);
+		trajectory.ctrl[i].ctrlvec.resize(6+nb-1);
+	}
 	//Debug true for mbs
 
   //mbsmodel->debug = true;
@@ -477,7 +517,7 @@ int main(int argc, char** argv)
 	// Get number of iterations
 	n.getParam("Nit",Nit);
 	// Create timer for iterating	
-	iteratetimer = n.createTimer(ros::Duration(1), iterateCallback);
+	iteratetimer = n.createTimer(ros::Duration(0.1), iterateCallback);
 	iteratetimer.start();
 	//Dynamic Reconfigure setup Callback ! immediately gets called with default values	
 	dynamic_reconfigure::Server<gcop_ctrl::MbsDMocInterfaceConfig> server;

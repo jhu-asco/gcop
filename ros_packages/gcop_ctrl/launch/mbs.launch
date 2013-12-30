@@ -1,6 +1,10 @@
 <launch>	
-	<include file="$(find gcop_urdf)/launch/display_chain.launch"/>
-  <arg name="parameters" default="$(find gcop_ctrl)/params/chain1.yaml"/>
+	<arg name="parameters" default="$(find gcop_ctrl)/params/chain1.yaml"/>
+
+	<include file="$(find gcop_urdf)/launch/display_chain.launch">
+		<arg name="model" default="$(find gcop_ctrl)/params/chain1.urdf"/>
+	</include>
+
   <rosparam command="load" file="$(arg parameters)" />
 	<node name="dmoc_mbs" pkg="gcop_ctrl" type="mbstest" output="screen"/>
 	<node name="mbsreconfigure" pkg="dynamic_reconfigure" type="reconfigure_gui" />
