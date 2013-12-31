@@ -18,6 +18,7 @@ set(sources
   chain.cc
   airm.cc
   airbot.cc
+  airbase.cc
   mbs.cc
   snake.cc
 	joint.cc
@@ -58,6 +59,7 @@ set(headers
   chain.h
   airm.h
   airbot.h
+  airbase.h
   snake.h
   autodiff.h
   dem.h

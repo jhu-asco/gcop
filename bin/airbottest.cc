@@ -32,6 +32,7 @@ void solver_process(Viewer* viewer)
   // system
   Airbot sys;
 
+
   VectorXd qv0(24);
   params.GetVectorXd("x0", qv0);  
 
@@ -83,6 +84,7 @@ void solver_process(Viewer* viewer)
   vector<MbsState> xs(N+1, x0);
 
   double m = sys.links[0].m + sys.links[1].m  + sys.links[2].m + sys.links[3].m + sys.links[4].m  + sys.links[5].m + sys.links[6].m;
+	cout<<"M = "<<m<<endl;
   
   // initial controls (e.g. hover at one place)
   VectorXd u(10);
@@ -90,6 +92,7 @@ void solver_process(Viewer* viewer)
   u(3) = 9.81*m;
   u(1) = .00;
   vector<VectorXd> us(N, u);
+	cout<<"u[3]: "<<u[3]<<endl;
 
   AirbotView view(sys, &xs);
   if (viewer)
@@ -110,12 +113,33 @@ void solver_process(Viewer* viewer)
   CylinderView bv(.05, 1, &g);
   viewer->Add(bv);
 
+	//Lets print stuff to compare:
+	for(int count = 0;count<(sys.nb);count++)
+	{
+		cout<<"Ds["<<sys.links[count].name<<"]"<<endl<<sys.links[count].ds<<endl;
+		cout<<"I["<<sys.links[count].name<<"]"<<endl<<sys.links[count].I<<endl;
+		cout<<"M["<<sys.links[count].name<<"]"<<endl<<sys.links[count].m<<endl;
+
+	}
+	for(int count = 0;count<(sys.nb)-1;count++)
+	{
+		cout<<"Joint["<<sys.joints[count].name<<"].gc"<<endl<<sys.joints[count].gc<<endl;
+		cout<<"Joint["<<sys.joints[count].name<<"].gp"<<endl<<sys.joints[count].gp<<endl;
+		cout<<"Joint["<<sys.joints[count].name<<"].a"<<endl<<sys.joints[count].a<<endl;
+	}
+	
+	cout<<"xf.r"<<endl<<xf.r<<endl;
+	cout<<"Cost.Qf"<<endl<<cost.Qf<<endl;
+	cout<<"Cost.Q"<<endl<<cost.Q<<endl;
+	cout<<"Cost.R"<<endl<<cost.R<<endl;
+
+
   for (int i = 0; i < 50; ++i) {    
     timer_start(timer);
     dmoc.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
-    //    getchar();
+        getchar();
   }
 
   int Nd;

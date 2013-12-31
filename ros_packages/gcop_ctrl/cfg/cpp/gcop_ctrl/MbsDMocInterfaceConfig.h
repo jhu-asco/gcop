@@ -265,6 +265,7 @@ class DEFAULT
 
         if("Nit"==(*i)->name){Nit = boost::any_cast<int>(val);}
         if("tf"==(*i)->name){tf = boost::any_cast<double>(val);}
+        if("ureset"==(*i)->name){ureset = boost::any_cast<bool>(val);}
         if("final"==(*i)->name){final = boost::any_cast<bool>(val);}
         if("x"==(*i)->name){x = boost::any_cast<double>(val);}
         if("y"==(*i)->name){y = boost::any_cast<double>(val);}
@@ -292,6 +293,7 @@ class DEFAULT
 
     int Nit;
 double tf;
+bool ureset;
 bool final;
 double x;
 double y;
@@ -327,6 +329,8 @@ double mu;
       int Nit;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double tf;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      bool ureset;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       bool final;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -526,6 +530,16 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
       Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("tf", "double", 2, "Final Time", "", &MbsDMocInterfaceConfig::tf)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("tf", "double", 2, "Final Time", "", &MbsDMocInterfaceConfig::tf)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.ureset = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.ureset = 1;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.ureset = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("ureset", "bool", 2, "reset control", "", &MbsDMocInterfaceConfig::ureset)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("ureset", "bool", 2, "reset control", "", &MbsDMocInterfaceConfig::ureset)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.final = 0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"

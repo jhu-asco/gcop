@@ -48,6 +48,7 @@ boost::shared_ptr<LqCost<MbsState>> cost;
 boost::shared_ptr<MbsController> ctrl;
 int Nit = 1;//number of iterations for dmoc
 int N = 100;      // discrete trajectory segments
+string mbstype; // Type of system
 
 void q2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
 {
@@ -78,6 +79,8 @@ void pubtraj() //N is the number of segments
 {
 	int N = mbsdmoc->us.size();
 	cout<<"N: "<<N<<endl;
+	int csize = mbsmodel->U.n;
+	cout<<"csize: "<<csize<<endl;
 	int nb = mbsmodel->nb;
 	cout<<"nb: "<<nb<<endl;
 	Vector6d bpose;
@@ -100,7 +103,7 @@ void pubtraj() //N is the number of segments
 			trajectory.statemsg[i+1].statevector[count1] = mbsdmoc->xs[i+1].r[count1];
 			trajectory.statemsg[i+1].names[count1] = mbsmodel->joints[count1].name;
 		}
-		for(int count1 = 0;count1 < 6+nb-1;count1++)
+		for(int count1 = 0;count1 < csize;count1++)
 		{
 			trajectory.ctrl[i].ctrlvec[count1] = mbsdmoc->us[i](count1);
 		}
@@ -229,8 +232,12 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 
 			config.Ji = mbsdmoc->xs[0].r[config.i_J-1];     
 		}
+		config.mu = mbsdmoc->mu;
+		config.tf = cost->tf;
 		return;
 	}
+
+	cout<<"Config.tf: "<<config.tf<<endl;
 
 	if(config.final)
 	{
@@ -241,7 +248,7 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 			config.i_J = nb-1; 
 		else if(config.i_J < 1)
 			config.i_J = 1;
-			
+
 		xf->r[config.i_J-1] = config.Ji;
 		xf->dr[config.i_J-1] = config.Jvi;
 	}
@@ -258,7 +265,34 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 		mbsdmoc->xs[0].r[config.i_J -1] = config.Ji;
 		mbsdmoc->xs[0].dr[config.i_J -1] = config.Jvi;
 		mbsmodel->Rec(mbsdmoc->xs[0], h);
+		//return;
+		//mbsdmoc->xs[size] = mbsdmoc->xs[0];
 	}
+	if(config.ureset)
+	{
+		cout<<"Hello"<<endl;
+		VectorXd u(mbsmodel->U.n);
+		u.setZero();
+		if(mbstype == "airbase")
+		{
+			for(int count = 0;count < nb;count++)
+				u[3] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
+			cout<<"u[3]: "<<u[3]<<endl;
+		}
+		else
+		{
+			for(int count = 0;count < nb;count++)
+				u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
+			cout<<"u[5]: "<<u[5]<<endl;
+		}
+		int size = mbsdmoc->us.size();
+		for(int count = 0;count < size;count++)
+		{
+			mbsdmoc->us[count] = u;
+			//mbsdmoc->xs[count] = mbsdmoc->xs[0];
+		}
+	}
+
 
 	if(config.i_Q > mbsmodel->X.n)
 		config.i_Q = mbsmodel->X.n; 
@@ -283,26 +317,27 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 	//trajectory.statemsg.resize(N+1);
 	//trajectory.ctrl.resize(N);
 
- //Setting Values
+	//Setting Values
 	for (int k = 0; k <=N; ++k)
-		mbsdmoc->ts[k] = k*h;
+	mbsdmoc->ts[k] = k*h;
 
-  cost->tf = config.tf;
+	cost->tf = config.tf;
+
 	/*VectorXd u(6+ (nb-1));
-	u.setZero();
-	for(int count = 0;count < nb;count++)
+		u.setZero();
+		for(int count = 0;count < nb;count++)
 		u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
-		*/
+	 */
 
-/*	for (int i = 0; i < mbsdmoc->xs.size()-1; ++i) 
-	{
-		double t = i*h;
-		ctrl->Set(mbsdmoc->us[i], t, mbsdmoc->xs[i]);
-		mbsmodel->Step(mbsdmoc->xs[i+1], i*h, mbsdmoc->xs[i], mbsdmoc->us[i], h);
-	}
-	*/
+	/*	for (int i = 0; i < mbsdmoc->xs.size()-1; ++i) 
+			{
+			double t = i*h;
+			ctrl->Set(mbsdmoc->us[i], t, mbsdmoc->xs[i]);
+			mbsmodel->Step(mbsdmoc->xs[i+1], i*h, mbsdmoc->xs[i], mbsdmoc->us[i], h);
+			}
+	 */
 
-	//mbsdmoc->mu = config.mu;
+	mbsdmoc->mu = config.mu;
 }
 
 
@@ -323,7 +358,8 @@ int main(int argc, char** argv)
 	}
 	VectorXd xmlconversion;
 	//Create Mbs system
-	mbsmodel = gcop_urdf::mbsgenerator(xml_string);
+	mbsmodel = gcop_urdf::mbsgenerator(xml_string, mbstype);
+	cout<<"Mbstype: "<<mbstype<<endl;
 	mbsmodel->ag << 0, 0, -0.05;
 	//get ag from parameters
 	XmlRpc::XmlRpcValue ag_list;
@@ -446,51 +482,62 @@ int main(int argc, char** argv)
 	mbsmodel->Rec(x, h);
 
 	// initial controls (e.g. hover at one place)
-	VectorXd u(6+ (nb-1));
+	VectorXd u(mbsmodel->U.n);
 	u.setZero();
-	for(int count = 0;count < nb;count++)
-		u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
-
-	cout<<"u[5]: "<<u[5]<<endl;
-	//n.getParam("ua",u[5]);
-
+	if(mbstype == "airbase")
+	{
+		for(int count = 0;count < nb;count++)
+			u[3] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
+		cout<<"u[3]: "<<u[3]<<endl;
+	}
+	else
+	{
+		for(int count = 0;count < nb;count++)
+			u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
+		cout<<"u[5]: "<<u[5]<<endl;
+	}
 
 	//States and controls for system
 	vector<VectorXd> us(N,u);
 	vector<MbsState> xs(N+1,x);
 
 	// @MK: this is the new part, initialize trajectory using a controller
-  ctrl.reset(new MbsController(*mbsmodel, xf.get()));
+	if(mbstype != "airbase")
+	{
+		ctrl.reset(new MbsController(*mbsmodel, xf.get()));
 
-	XmlRpc::XmlRpcValue kp_list;
-	if(n.getParam("Kp", kp_list))
-	xml2vec(xmlconversion,kp_list);
-	ROS_ASSERT(xmlconversion.size() == 6+nb-1);
-	ctrl->Kp = xmlconversion.head(6+nb-1);
-	cout<<"Kp"<<endl<<ctrl->Kp<<endl;
+		XmlRpc::XmlRpcValue kp_list;
+		if(n.getParam("Kp", kp_list))
+			xml2vec(xmlconversion,kp_list);
+		ROS_ASSERT(xmlconversion.size() == 6+nb-1);
+		ctrl->Kp = xmlconversion.head(6+nb-1);
+		cout<<"Kp"<<endl<<ctrl->Kp<<endl;
 
-	XmlRpc::XmlRpcValue kd_list;
-	if(n.getParam("Kd", kd_list))
-	xml2vec(xmlconversion,kd_list);
-	ROS_ASSERT(xmlconversion.size() == 6+nb-1);
-	ctrl->Kd = xmlconversion.head(6+nb-1);
-	cout<<"Kd"<<endl<<ctrl->Kd<<endl;
+		XmlRpc::XmlRpcValue kd_list;
+		if(n.getParam("Kd", kd_list))
+			xml2vec(xmlconversion,kd_list);
+		ROS_ASSERT(xmlconversion.size() == 6+nb-1);
+		ctrl->Kd = xmlconversion.head(6+nb-1);
+		cout<<"Kd"<<endl<<ctrl->Kd<<endl;
 
 
-  for (int i = 0; i < xs.size()-1; ++i) {
-    double t = i*h;
-    ctrl->Set(us[i], t, xs[i]); 
-    mbsmodel->Step(xs[i+1], i*h, xs[i], us[i], h);
-  }
+		for (int i = 0; i < xs.size()-1; ++i) {
+			double t = i*h;
+			ctrl->Set(us[i], t, xs[i]); 
+			mbsmodel->Step(xs[i+1], i*h, xs[i], us[i], h);
+		}
+	}
 	//cout<<"us"<<endl<<us<<endl;
 
 
   // see the result before running optimization
-//  getchar();
+  //getchar();
 
 
 	mbsdmoc.reset(new MbsDmoc(*mbsmodel, *cost, ts, xs, us));
+
 	mbsdmoc->mu = 10.0;
+	n.getParam("mu",mbsdmoc->mu);
 
 	//Trajectory message initialization
 	trajectory.N = N;
@@ -507,7 +554,7 @@ int main(int argc, char** argv)
 	{
 		trajectory.statemsg[i+1].statevector.resize(nb-1);
 		trajectory.statemsg[i+1].names.resize(nb-1);
-		trajectory.ctrl[i].ctrlvec.resize(6+nb-1);
+		trajectory.ctrl[i].ctrlvec.resize(mbsmodel->U.n);
 	}
 	//Debug true for mbs
 
@@ -519,7 +566,7 @@ int main(int argc, char** argv)
 	// Create timer for iterating	
 	iteratetimer = n.createTimer(ros::Duration(0.1), iterateCallback);
 	iteratetimer.start();
-	//Dynamic Reconfigure setup Callback ! immediately gets called with default values	
+//	Dynamic Reconfigure setup Callback ! immediately gets called with default values	
 	dynamic_reconfigure::Server<gcop_ctrl::MbsDMocInterfaceConfig> server;
 	dynamic_reconfigure::Server<gcop_ctrl::MbsDMocInterfaceConfig>::CallbackType f;
 	f = boost::bind(&paramreqcallback, _1, _2);

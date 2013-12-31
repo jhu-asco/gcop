@@ -20,8 +20,7 @@ mbsdmoc/J0: [rad(-pi/2), 0.0, rad(pi/2), 0.0]
 mbsdmoc/JN: [rad(pi/2), 0.0, rad(-pi/2), rad(pi/2)] # Joint angles
 
 
-
-mbsdmoc/mu: 0.001 
+mbsdmoc/mu: 10
 
 mbsdmoc/Nit: 1 
 

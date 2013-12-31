@@ -43,6 +43,7 @@
 #include <boost/function.hpp>
 #include "urdfmodel.h"
 #include "mbs.h"
+#include "airbase.h"
 
 
 namespace gcop_urdf{
@@ -50,7 +51,7 @@ namespace gcop_urdf{
   boost::shared_ptr<ModelInterface> parseURDF(const std::string &xml_string);
 	void walkTree(boost::shared_ptr<const Link> link, int level,int &index,boost::shared_ptr<gcop::Mbs> mbs);
 	gcop::Matrix4d diffpose(Pose &posej_p,Pose &posei_p);
-	boost::shared_ptr<gcop::Mbs> mbsgenerator(const std::string &xml_string);
+	boost::shared_ptr<gcop::Mbs> mbsgenerator(const std::string &xml_string, std::string &type);
 }
 
 #endif

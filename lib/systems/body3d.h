@@ -269,7 +269,6 @@ template<int c>  Body3d<c>::~Body3d()
 
   template <int c> 
     void Body3d<c>::Compute(Vector3d &J, double m, const Vector3d &ds) {
-
     J[0] = m*(ds[1]*ds[1] + ds[2]*ds[2])/3;
     J[1] = m*(ds[0]*ds[0] + ds[2]*ds[2])/3;
     J[2] = m*(ds[0]*ds[0] + ds[1]*ds[1])/3;
@@ -277,7 +276,6 @@ template<int c>  Body3d<c>::~Body3d()
 
   template <int c> 
     void Body3d<c>::Compute(Vector6d &I, double m, const Vector3d &ds) {
-    
     I[0] = m*(ds[1]*ds[1] + ds[2]*ds[2])/3;
     I[1] = m*(ds[0]*ds[0] + ds[2]*ds[2])/3;
     I[2] = m*(ds[0]*ds[0] + ds[1]*ds[1])/3;
@@ -288,7 +286,7 @@ template<int c>  Body3d<c>::~Body3d()
 
   
   
-  static void Gcay(Matrix3d& m, const Vector3d &w, const Vector3d &J, double h, bool plus = true) {
+  static void Gcay(Matrix3d& m1, const Vector3d &w, const Vector3d &J, double h, bool plus = true) {
     SO3 &so3 = SO3::Instance();
     Matrix3d wh;
     so3.hat(wh, w);
@@ -299,7 +297,7 @@ template<int c>  Body3d<c>::~Body3d()
     
     int s = (plus ? 1 : -1);
     
-    m =  (so3.Id + ((h*h/2)*w)*w.transpose())*J.asDiagonal() + (s*h/2)*(-Jwh + wh*J.asDiagonal()) + (h*h/4*w.dot(Jw))*so3.Id;
+    m1 =  (so3.Id + ((h*h/2)*w)*w.transpose())*J.asDiagonal() + (s*h/2)*(-Jwh + wh*J.asDiagonal()) + (h*h/4*w.dot(Jw))*so3.Id;
     /*
       m << J1*((h^2*v1^2)/4 + 1) + (J1*h^2*v1^2)/2 + (J2*h^2*v2^2)/4 + (J3*h^2*v3^2)/4,  J2*((v1*v2*h^2)/4 + (v3*h)/2) - (J3*h*v3)/2 + (J2*h^2*v1*v2)/4,              (J2*h*v2)/2 - J3*((h*v2)/2 - (h^2*v1*v3)/4) + (J3*h^2*v1*v3)/4]
       [              (J3*h*v3)/2 - J1*((h*v3)/2 - (h^2*v1*v2)/4) + (J1*h^2*v1*v2)/4, J2*((h^2*v2^2)/4 + 1) + (J1*h^2*v1^2)/4 + (J2*h^2*v2^2)/2 + (J3*h^2*v3^2)/4,              J3*((v2*v3*h^2)/4 + (v1*h)/2) - (J1*h*v1)/2 + (J3*h^2*v2*v3)/4]

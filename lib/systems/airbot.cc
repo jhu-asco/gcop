@@ -16,7 +16,7 @@ Airbot::Airbot() :
   double l3 = .3;
 
   // structural properties
-  double m0 = 3;
+  double m0 = 1;
   double m1 = .2;
   double m2 = .3;
   double m3 = .2;
@@ -103,7 +103,14 @@ Airbot::Airbot() :
   Body3d<>::Compute(this->links[4].I, m1, this->links[4].ds);  
   Body3d<>::Compute(this->links[5].I, m2, this->links[5].ds);
   Body3d<>::Compute(this->links[6].I, m3, this->links[6].ds);  
-  
+
+	this->links[0].m = m0;
+	this->links[1].m = m1;
+	this->links[2].m = m2;
+	this->links[3].m = m3;
+	this->links[4].m = m1;
+	this->links[5].m = m2;
+	this->links[6].m = m3;
   this->Init();
 }
 
@@ -120,21 +127,21 @@ void Airbot::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
   f[4] = 0;
   f[5] = u[3];
 
-  /*
   f[6] = u[4];
   f[7] = u[5];
   f[8] = u[6];
   f[9] = u[7];
   f[10] = u[8];
   f[11] = u[9];
-  */
 
+/*
   f[6] = u[4] - .1*x.dr[0];
   f[7] = u[5] - .1*x.dr[1];
   f[8] = u[6] - .1*x.dr[2];
   f[9] = u[7] - .1*x.dr[3];
   f[10] = u[8] - .1*x.dr[4];
   f[11] = u[9] - .1*x.dr[5];
+	*/
 
   if (A)
     A->setZero();

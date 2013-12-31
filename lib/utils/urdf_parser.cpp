@@ -135,7 +135,7 @@ void walkTree(boost::shared_ptr<const Link> link, int level,int &index,boost::sh
 		}
 	}
 }
-boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string)
+boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, string &type)
 {
 	//parse the xml file into a urdf model
 	boost::shared_ptr<ModelInterface> urdfmodel = parseURDF(xml_string);
@@ -150,8 +150,8 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string)
 	boost::shared_ptr<const Link> root_link = urdfmodel->getRoot();
 	if (!root_link) return boost::shared_ptr<gcop::Mbs>();
 
-	boost::shared_ptr<Link> baselink = root_link->child_links[0];
-	if(!root_link) return boost::shared_ptr<gcop::Mbs>();
+	boost::shared_ptr<const Link> baselink = root_link->child_links[0];
+	if(!baselink) return boost::shared_ptr<gcop::Mbs>();
 
 	assert(urdfmodel->links_.size()-1 == urdfmodel->joints_.size());
 
@@ -159,7 +159,12 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string)
 
 
 	//create Mbs with the number of links and joints
-	boost::shared_ptr<gcop::Mbs> mbs (new gcop::Mbs(urdfmodel->links_.size()-1,6 + (urdfmodel->links_.size()-2)));//hack for now
+	boost::shared_ptr<gcop::Mbs> mbs;
+	type = baselink->name;
+	if(baselink->name == "airbase")
+		mbs.reset(new gcop::Airbase(urdfmodel->links_.size()-1,urdfmodel->links_.size()-2));
+	else
+		mbs.reset(new gcop::Mbs(urdfmodel->links_.size()-1,6 + (urdfmodel->links_.size()-2)));
 
 	int index = 0;
 

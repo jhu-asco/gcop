@@ -51,7 +51,8 @@ int main(int argc, char** argv)
 	xml_file.close();
 	*/
 
-	boost::shared_ptr<Mbs> mbsmodel = gcop_urdf::mbsgenerator(xml_string);
+	string mbstype;
+	boost::shared_ptr<Mbs> mbsmodel = gcop_urdf::mbsgenerator(xml_string,mbstype);
 	//set no gravity:
 	mbsmodel->ag << 0, 0, -9.81;
 
