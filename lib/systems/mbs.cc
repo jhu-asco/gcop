@@ -160,12 +160,10 @@ void Mbs::FK(MbsState &x)
 }
 
 
-
-
 void Mbs::ID(VectorXd &f,
              double t, const MbsState &x, const VectorXd &u) 
 {
-  VectorXd b(nb+5); // bias
+  VectorXd b(nb + 5); // bias
   Bias(b, t, x);
 
   VectorXd fu(nb + 5);
@@ -180,7 +178,7 @@ void Mbs::ID(VectorXd &f,
 
 void Mbs::Bias(VectorXd &b,
                double t,
-               const MbsState &x) const 
+               const MbsState &x) const
 {
   
   // assume that Kstep was called so that all velocities are propagated
