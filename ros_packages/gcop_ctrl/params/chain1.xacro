@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Chain">
+
+<xacro:property name="m" value="1" />
+<xacro:property name="l" value="0.3" />
+<xacro:property name="b" value="0.1" />
+<xacro:property name="h" value="0.1" />
+<xacro:macro name="compute_inertia" params="mass x y z">
+      <mass value="${mass}"/>
+      <inertia ixx="${mass*(y*y + z*z)/3}" ixy="0.0" ixz="0.0" iyy="${mass*(x*x + z*z)/3}" iyz="0.0" izz="${mass*(x*x + y*y)/3}"/>
+</xacro:macro>
+
+
+  <link name="baselink"/>
+  <link name="chainbase">
+    <visual>
+      <geometry>
+        <box size="${l} ${b} ${h}"/>
+      </geometry>
+    </visual>
+    <inertial>
+		<xacro:compute_inertia mass="${m}" x="${l}" y="${b}" z="${h}"/>
+    </inertial>
+  </link>
+  <link name="link1">
+    <visual>
+			<origin rpy="0 0 0" xyz="${l/2} 0.0 0"/>
+      <geometry>
+        <box size="${l} ${b} ${h}"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <inertial>
+			<origin rpy="0 0 0" xyz="${l/2} 0.0 0"/>
+			<xacro:compute_inertia mass="${m}" x="${l}" y="${b}" z="${h}"/>
+    </inertial>
+  </link>
+  <link name="link2">
+    <visual>
+			<origin rpy="0 0 0" xyz="${l/2} 0.0 0"/>
+      <geometry>
+        <box size="${l} ${b} ${h}"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <inertial>
+			<origin rpy="0 0 0" xyz="${l/2} 0.0 0"/>
+			<xacro:compute_inertia mass="${m}" x="${l}" y="${b}" z="${h}"/>
+    </inertial>
+  </link>
+ <!-- Joints -->
+  <joint name="basetoroot" type="fixed">
+    <parent link="baselink"/>
+    <child link="chainbase"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  <joint name="roottolink1" type="revolute">
+    <parent link="chainbase"/>
+    <child link="link1"/>
+    <origin rpy="0 0 0" xyz="${l/2} 0.0 0"/>
+    <axis xyz="0 0 1"/>
+		<limit effort="30" velocity="5.0" lower="-5" upper="5" />
+  </joint>
+  <joint name="link1tolink2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin rpy="0 0 0" xyz="${l} 0.0 0"/>
+    <axis xyz="0 0 1"/>
+		<limit effort="30" velocity="5.0" lower="-5" upper="5" />
+  </joint>
+</robot>

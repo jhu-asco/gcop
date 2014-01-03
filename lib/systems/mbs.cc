@@ -2,6 +2,8 @@
 #include <iostream>
 #include <utility>
 #include "mbs.h"
+#include <iomanip>
+
 
 using namespace gcop;
 
@@ -321,14 +323,22 @@ void Mbs::Rec(MbsState &x, double h)
   xp.gs[0] = x.gs[0]*g;
   xp.r = x.r - h*x.dr;    // get previous joint angles
   FK(xp);                 // expand previous configuration
+  //std::cout << std::setprecision(5) ;
+
   
   for (int i = 1; i < nb; ++i) { // take the difference and divide by time for each body
     se3.inv(g, xp.gs[i]);
+		//cout<<"xp.gs["<<i<<"]: "<<endl<<xp.gs[i]<<endl;
+		//cout<<"g"<<endl<<g<<endl;
+		//cout<<"g*x.gs["<<i<<"]: "<<endl<<g*x.gs[i]<<endl;
 
     //    se3.cayinv(x.vs[i], g*x.gs[i]);
     se3.log(x.vs[i], g*x.gs[i]);
 
+		//cout<<"x.vs["<<i<<"]: "<<endl<<x.vs[i]<<endl;
     x.vs[i] /= h;
+		//cout<<"h "<<h<<endl;
+		//cout<<"x.vs["<<i<<"]: "<<endl<<x.vs[i]<<endl;
   }
 }
 

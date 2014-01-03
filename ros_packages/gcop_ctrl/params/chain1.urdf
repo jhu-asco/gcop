@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <robot name="Chain">
   <link name="baselink"/>
-  <link name="root">
+  <link name="chainbase">
     <visual>
       <geometry>
         <box size="0.3 .10 0.05"/>
       </geometry>
     </visual>
     <inertial>
-      <mass value="10"/>
+      <mass value="3"/>
       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
     </inertial>
   </link>
@@ -24,7 +24,7 @@
     </visual>
     <inertial>
 			<origin rpy="0 0 0" xyz="0.05 0.0 0"/>
-      <mass value="10"/>
+      <mass value="1"/>
       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
     </inertial>
   </link>
@@ -40,25 +40,25 @@
     </visual>
     <inertial>
 			<origin rpy="0 0 0" xyz="-0.05 0.0 0"/>
-      <mass value="10"/>
+      <mass value="1"/>
       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
     </inertial>
   </link>
  <!-- Joints -->
   <joint name="basetoroot" type="fixed">
     <parent link="baselink"/>
-    <child link="root"/>
+    <child link="chainbase"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
   <joint name="roottolink1" type="revolute">
-    <parent link="root"/>
+    <parent link="chainbase"/>
     <child link="link1"/>
     <origin rpy="0 0 0" xyz="0.15 0.0 0"/>
     <axis xyz="0 -1 0"/>
 		<limit effort="30" velocity="5.0" lower="-5" upper="5" />
   </joint>
   <joint name="roottolink2" type="revolute">
-    <parent link="root"/>
+    <parent link="chainbase"/>
     <child link="link2"/>
     <origin rpy="0 0 0" xyz="-0.15 0.0 0"/>
     <axis xyz="0 -1 0"/>

@@ -45,7 +45,7 @@ void joint_publish(const gcop_comm::CtrlTraj::ConstPtr& trajectory)
 			joint_pub.publish(joint_state);
 
 			dt = trajectory->time[i] - trajectory->time[i-1];
-			ros::Duration(10*dt).sleep();//sleeps for dt time
+			ros::Duration(dt).sleep();//sleeps for dt time
 
 			// update transform
 			global_trans.header.stamp = ros::Time::now();
@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 	//initializing joint msg
 	
 
-	traj_sub = n.subscribe("/ctrltraj",1, joint_publish);
+	traj_sub = n.subscribe("/mbsdmoc/ctrltraj",1, joint_publish);
 
 	joint_pub = n.advertise<sensor_msgs::JointState>("joint_states", 1);
 

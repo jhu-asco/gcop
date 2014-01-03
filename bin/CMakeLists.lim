@@ -12,6 +12,9 @@ target_link_libraries(gunicycletest rpc  ${LIBS})
 add_executable(chaintest chaintest.cc)
 target_link_libraries(chaintest rpc  ${LIBS})
 
+add_executable(chain1test chain1test.cc)
+target_link_libraries(chain1test rpc  ${LIBS})
+
 add_executable(airmtest airmtest.cc)
 target_link_libraries(airmtest rpc  ${LIBS})
 

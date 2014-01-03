@@ -80,6 +80,7 @@ void solver_process(Viewer* viewer)
   vector<MbsState> xs(N+1, x0);
 
   double m = sys.links[0].m + sys.links[1].m  + sys.links[2].m;
+	cout<<"Mass: "<<m<<endl;
   
   // initial controls (e.g. hover at one place)
   VectorXd u(8);

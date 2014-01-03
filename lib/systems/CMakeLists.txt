@@ -16,8 +16,10 @@ set(sources
   mbscspace.cc
   mbstspace.cc
   chain.cc
+  chain1.cc
   airm.cc
   airbot.cc
+  airbase.cc
   mbs.cc
   snake.cc
 	joint.cc
@@ -56,8 +58,10 @@ set(headers
   mbstspace.h
   mbs.h
   chain.h
+  chain1.h
   airm.h
   airbot.h
+  airbase.h
   snake.h
   autodiff.h
   dem.h
