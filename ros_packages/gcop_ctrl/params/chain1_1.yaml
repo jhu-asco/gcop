@@ -20,6 +20,8 @@ mbsdmoc/J0: [1.0, 1.0]
 mbsdmoc/JN: [0.0, 0.0] # Joint angles
 
 
+mbsdmoc/basetype: "chainbase"
+
 mbsdmoc/mu: 0.001 
 
 mbsdmoc/Nit: 1 

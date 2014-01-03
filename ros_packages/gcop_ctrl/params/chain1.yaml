@@ -22,6 +22,8 @@ mbsdmoc/JN: [rad(-pi/2), rad(pi/2)] # Joint angles
 
 mbsdmoc/mu: 10
 
+mbsdmoc/basetype: "chainbase"
+
 mbsdmoc/Nit: 1 
 
 

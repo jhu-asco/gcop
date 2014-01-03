@@ -9,6 +9,7 @@ namespace gcop {
   using namespace Eigen;
 
   typedef Matrix<double, 6, 1> Vector6d;
+  typedef Matrix<double, 7, 1> Vector7d;
   typedef Matrix<double, 4, 4> Matrix4d;
   typedef Matrix<double, 6, 6> Matrix6d;
 
@@ -51,6 +52,10 @@ namespace gcop {
     void tln(Vector6d& mup, const Vector6d& v, const Vector6d &mu) const;
 
     void q2g(Matrix4d &g, const Vector6d &q) const;
+
+    void quatxyz2g(Matrix4d &g, const Vector7d &wquatxyz) const;
+
+    void g2quatxyz(Vector7d &wquatxyz, const Matrix4d &g) const;
 
     void g2q(Vector6d &q, const Matrix4d &g) const;
 

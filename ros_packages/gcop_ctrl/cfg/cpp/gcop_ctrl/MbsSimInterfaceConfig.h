@@ -44,8 +44,8 @@
 // Author: Blaise Gassend
 
 
-#ifndef __gcop_ctrl__MBSDMOCINTERFACECONFIG_H__
-#define __gcop_ctrl__MBSDMOCINTERFACECONFIG_H__
+#ifndef __gcop_ctrl__MBSSIMINTERFACECONFIG_H__
+#define __gcop_ctrl__MBSSIMINTERFACECONFIG_H__
 
 #include <dynamic_reconfigure/config_tools.h>
 #include <limits>
@@ -58,9 +58,9 @@
 
 namespace gcop_ctrl
 {
-  class MbsDMocInterfaceConfigStatics;
+  class MbsSimInterfaceConfigStatics;
   
-  class MbsDMocInterfaceConfig
+  class MbsSimInterfaceConfig
   {
   public:
     class AbstractParamDescription : public dynamic_reconfigure::ParamDescription
@@ -76,13 +76,13 @@ namespace gcop_ctrl
         edit_method = e;
       }
       
-      virtual void clamp(MbsDMocInterfaceConfig &config, const MbsDMocInterfaceConfig &max, const MbsDMocInterfaceConfig &min) const = 0;
-      virtual void calcLevel(uint32_t &level, const MbsDMocInterfaceConfig &config1, const MbsDMocInterfaceConfig &config2) const = 0;
-      virtual void fromServer(const ros::NodeHandle &nh, MbsDMocInterfaceConfig &config) const = 0;
-      virtual void toServer(const ros::NodeHandle &nh, const MbsDMocInterfaceConfig &config) const = 0;
-      virtual bool fromMessage(const dynamic_reconfigure::Config &msg, MbsDMocInterfaceConfig &config) const = 0;
-      virtual void toMessage(dynamic_reconfigure::Config &msg, const MbsDMocInterfaceConfig &config) const = 0;
-      virtual void getValue(const MbsDMocInterfaceConfig &config, boost::any &val) const = 0;
+      virtual void clamp(MbsSimInterfaceConfig &config, const MbsSimInterfaceConfig &max, const MbsSimInterfaceConfig &min) const = 0;
+      virtual void calcLevel(uint32_t &level, const MbsSimInterfaceConfig &config1, const MbsSimInterfaceConfig &config2) const = 0;
+      virtual void fromServer(const ros::NodeHandle &nh, MbsSimInterfaceConfig &config) const = 0;
+      virtual void toServer(const ros::NodeHandle &nh, const MbsSimInterfaceConfig &config) const = 0;
+      virtual bool fromMessage(const dynamic_reconfigure::Config &msg, MbsSimInterfaceConfig &config) const = 0;
+      virtual void toMessage(dynamic_reconfigure::Config &msg, const MbsSimInterfaceConfig &config) const = 0;
+      virtual void getValue(const MbsSimInterfaceConfig &config, boost::any &val) const = 0;
     };
 
     typedef boost::shared_ptr<AbstractParamDescription> AbstractParamDescriptionPtr;
@@ -93,14 +93,14 @@ namespace gcop_ctrl
     {
     public:
       ParamDescription(std::string name, std::string type, uint32_t level, 
-          std::string description, std::string edit_method, T MbsDMocInterfaceConfig::* f) :
+          std::string description, std::string edit_method, T MbsSimInterfaceConfig::* f) :
         AbstractParamDescription(name, type, level, description, edit_method),
         field(f)
       {}
 
-      T (MbsDMocInterfaceConfig::* field);
+      T (MbsSimInterfaceConfig::* field);
 
-      virtual void clamp(MbsDMocInterfaceConfig &config, const MbsDMocInterfaceConfig &max, const MbsDMocInterfaceConfig &min) const
+      virtual void clamp(MbsSimInterfaceConfig &config, const MbsSimInterfaceConfig &max, const MbsSimInterfaceConfig &min) const
       {
         if (config.*field > max.*field)
           config.*field = max.*field;
@@ -109,33 +109,33 @@ namespace gcop_ctrl
           config.*field = min.*field;
       }
 
-      virtual void calcLevel(uint32_t &comb_level, const MbsDMocInterfaceConfig &config1, const MbsDMocInterfaceConfig &config2) const
+      virtual void calcLevel(uint32_t &comb_level, const MbsSimInterfaceConfig &config1, const MbsSimInterfaceConfig &config2) const
       {
         if (config1.*field != config2.*field)
           comb_level |= level;
       }
 
-      virtual void fromServer(const ros::NodeHandle &nh, MbsDMocInterfaceConfig &config) const
+      virtual void fromServer(const ros::NodeHandle &nh, MbsSimInterfaceConfig &config) const
       {
         nh.getParam(name, config.*field);
       }
 
-      virtual void toServer(const ros::NodeHandle &nh, const MbsDMocInterfaceConfig &config) const
+      virtual void toServer(const ros::NodeHandle &nh, const MbsSimInterfaceConfig &config) const
       {
         nh.setParam(name, config.*field);
       }
 
-      virtual bool fromMessage(const dynamic_reconfigure::Config &msg, MbsDMocInterfaceConfig &config) const
+      virtual bool fromMessage(const dynamic_reconfigure::Config &msg, MbsSimInterfaceConfig &config) const
       {
         return dynamic_reconfigure::ConfigTools::getParameter(msg, name, config.*field);
       }
 
-      virtual void toMessage(dynamic_reconfigure::Config &msg, const MbsDMocInterfaceConfig &config) const
+      virtual void toMessage(dynamic_reconfigure::Config &msg, const MbsSimInterfaceConfig &config) const
       {
         dynamic_reconfigure::ConfigTools::appendParameter(msg, name, config.*field);
       }
 
-      virtual void getValue(const MbsDMocInterfaceConfig &config, boost::any &val) const
+      virtual void getValue(const MbsSimInterfaceConfig &config, boost::any &val) const
       {
         val = config.*field;
       }
@@ -158,7 +158,7 @@ namespace gcop_ctrl
 
       virtual void toMessage(dynamic_reconfigure::Config &msg, const boost::any &config) const = 0;
       virtual bool fromMessage(const dynamic_reconfigure::Config &msg, boost::any &config) const =0;
-      virtual void updateParams(boost::any &cfg, MbsDMocInterfaceConfig &top) const= 0;
+      virtual void updateParams(boost::any &cfg, MbsSimInterfaceConfig &top) const= 0;
       virtual void setInitialState(boost::any &cfg) const = 0;
 
 
@@ -218,7 +218,7 @@ namespace gcop_ctrl
 
       }
       
-      virtual void updateParams(boost::any &cfg, MbsDMocInterfaceConfig &top) const
+      virtual void updateParams(boost::any &cfg, MbsSimInterfaceConfig &top) const
       {
         PT* config = boost::any_cast<PT*>(cfg);
 
@@ -244,7 +244,7 @@ namespace gcop_ctrl
       }
 
       T (PT::* field);
-      std::vector<MbsDMocInterfaceConfig::AbstractGroupDescriptionConstPtr> groups;
+      std::vector<MbsSimInterfaceConfig::AbstractGroupDescriptionConstPtr> groups;
     };
     
 class DEFAULT
@@ -256,17 +256,14 @@ class DEFAULT
       name = "Default";
     }
 
-    void setParams(MbsDMocInterfaceConfig &config, const std::vector<AbstractParamDescriptionConstPtr> params)
+    void setParams(MbsSimInterfaceConfig &config, const std::vector<AbstractParamDescriptionConstPtr> params)
     {
       for (std::vector<AbstractParamDescriptionConstPtr>::const_iterator i = params.begin(); i != params.end(); i++)
       {
         boost::any val;
         (*i)->getValue(config, val);
 
-        if("Nit"==(*i)->name){Nit = boost::any_cast<int>(val);}
         if("tf"==(*i)->name){tf = boost::any_cast<double>(val);}
-        if("ureset"==(*i)->name){ureset = boost::any_cast<bool>(val);}
-        if("final"==(*i)->name){final = boost::any_cast<bool>(val);}
         if("x"==(*i)->name){x = boost::any_cast<double>(val);}
         if("y"==(*i)->name){y = boost::any_cast<double>(val);}
         if("z"==(*i)->name){z = boost::any_cast<double>(val);}
@@ -282,19 +279,12 @@ class DEFAULT
         if("i_J"==(*i)->name){i_J = boost::any_cast<int>(val);}
         if("Ji"==(*i)->name){Ji = boost::any_cast<double>(val);}
         if("Jvi"==(*i)->name){Jvi = boost::any_cast<double>(val);}
-        if("i_Q"==(*i)->name){i_Q = boost::any_cast<int>(val);}
-        if("Qi"==(*i)->name){Qi = boost::any_cast<double>(val);}
-        if("Qfi"==(*i)->name){Qfi = boost::any_cast<double>(val);}
-        if("i_R"==(*i)->name){i_R = boost::any_cast<int>(val);}
-        if("Ri"==(*i)->name){Ri = boost::any_cast<double>(val);}
-        if("mu"==(*i)->name){mu = boost::any_cast<double>(val);}
+        if("i_u"==(*i)->name){i_u = boost::any_cast<int>(val);}
+        if("ui"==(*i)->name){ui = boost::any_cast<double>(val);}
       }
     }
 
-    int Nit;
-double tf;
-bool ureset;
-bool final;
+    double tf;
 double x;
 double y;
 double z;
@@ -310,12 +300,8 @@ double vyaw;
 int i_J;
 double Ji;
 double Jvi;
-int i_Q;
-double Qi;
-double Qfi;
-int i_R;
-double Ri;
-double mu;
+int i_u;
+double ui;
 
     bool state;
     std::string name;
@@ -326,13 +312,7 @@ double mu;
 
 
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      int Nit;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double tf;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      bool ureset;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      bool final;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double x;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -364,17 +344,9 @@ double mu;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double Jvi;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      int i_Q;
+      int i_u;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      double Qi;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      double Qfi;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      int i_R;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      double Ri;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      double mu;
+      double ui;
 //#line 255 "/opt/ros/fuerte/stacks/dynamic_reconfigure/templates/ConfigType.h"
 
     bool __fromMessage__(dynamic_reconfigure::Config &msg)
@@ -399,7 +371,7 @@ double mu;
 
       if (count != dynamic_reconfigure::ConfigTools::size(msg))
       {
-        ROS_ERROR("MbsDMocInterfaceConfig::__fromMessage__ called with an unexpected parameter.");
+        ROS_ERROR("MbsSimInterfaceConfig::__fromMessage__ called with an unexpected parameter.");
         ROS_ERROR("Booleans:");
         for (unsigned int i = 0; i < msg.bools.size(); i++)
           ROS_ERROR("  %s", msg.bools[i].name.c_str());
@@ -471,13 +443,13 @@ double mu;
     void __clamp__()
     {
       const std::vector<AbstractParamDescriptionConstPtr> &__param_descriptions__ = __getParamDescriptions__();
-      const MbsDMocInterfaceConfig &__max__ = __getMax__();
-      const MbsDMocInterfaceConfig &__min__ = __getMin__();
+      const MbsSimInterfaceConfig &__max__ = __getMax__();
+      const MbsSimInterfaceConfig &__min__ = __getMin__();
       for (std::vector<AbstractParamDescriptionConstPtr>::const_iterator i = __param_descriptions__.begin(); i != __param_descriptions__.end(); i++)
         (*i)->clamp(*this, __max__, __min__);
     }
 
-    uint32_t __level__(const MbsDMocInterfaceConfig &config) const
+    uint32_t __level__(const MbsSimInterfaceConfig &config) const
     {
       const std::vector<AbstractParamDescriptionConstPtr> &__param_descriptions__ = __getParamDescriptions__();
       uint32_t level = 0;
@@ -487,69 +459,39 @@ double mu;
     }
     
     static const dynamic_reconfigure::ConfigDescription &__getDescriptionMessage__();
-    static const MbsDMocInterfaceConfig &__getDefault__();
-    static const MbsDMocInterfaceConfig &__getMax__();
-    static const MbsDMocInterfaceConfig &__getMin__();
+    static const MbsSimInterfaceConfig &__getDefault__();
+    static const MbsSimInterfaceConfig &__getMax__();
+    static const MbsSimInterfaceConfig &__getMin__();
     static const std::vector<AbstractParamDescriptionConstPtr> &__getParamDescriptions__();
     static const std::vector<AbstractGroupDescriptionConstPtr> &__getGroupDescriptions__();
     
   private:
-    static const MbsDMocInterfaceConfigStatics *__get_statics__();
+    static const MbsSimInterfaceConfigStatics *__get_statics__();
   };
   
   template <> // Max and min are ignored for strings.
-  inline void MbsDMocInterfaceConfig::ParamDescription<std::string>::clamp(MbsDMocInterfaceConfig &config, const MbsDMocInterfaceConfig &max, const MbsDMocInterfaceConfig &min) const
+  inline void MbsSimInterfaceConfig::ParamDescription<std::string>::clamp(MbsSimInterfaceConfig &config, const MbsSimInterfaceConfig &max, const MbsSimInterfaceConfig &min) const
   {
     return;
   }
 
-  class MbsDMocInterfaceConfigStatics
+  class MbsSimInterfaceConfigStatics
   {
-    friend class MbsDMocInterfaceConfig;
+    friend class MbsSimInterfaceConfig;
     
-    MbsDMocInterfaceConfigStatics()
+    MbsSimInterfaceConfigStatics()
     {
-MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMocInterfaceConfig> Default("Default", "", 0, 0, true, &MbsDMocInterfaceConfig::groups);
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.Nit = 0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.Nit = 30;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.Nit = 1;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<int>("Nit", "int", 2, "Number of iterations of dmoc", "", &MbsDMocInterfaceConfig::Nit)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<int>("Nit", "int", 2, "Number of iterations of dmoc", "", &MbsDMocInterfaceConfig::Nit)));
+MbsSimInterfaceConfig::GroupDescription<MbsSimInterfaceConfig::DEFAULT, MbsSimInterfaceConfig> Default("Default", "", 0, 0, true, &MbsSimInterfaceConfig::groups);
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.tf = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.tf = 10.0;
+      __max__.tf = 50.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.tf = 5.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("tf", "double", 2, "Final Time", "", &MbsDMocInterfaceConfig::tf)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("tf", "double", 2, "Final Time", "", &MbsSimInterfaceConfig::tf)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("tf", "double", 2, "Final Time", "", &MbsDMocInterfaceConfig::tf)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.ureset = 0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.ureset = 1;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.ureset = 0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("ureset", "bool", 2, "reset control", "", &MbsDMocInterfaceConfig::ureset)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("ureset", "bool", 2, "reset control", "", &MbsDMocInterfaceConfig::ureset)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.final = 0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.final = 1;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.final = 0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("final", "bool", 1, "Change final posn and joint", "", &MbsDMocInterfaceConfig::final)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("final", "bool", 1, "Change final posn and joint", "", &MbsDMocInterfaceConfig::final)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("tf", "double", 2, "Final Time", "", &MbsSimInterfaceConfig::tf)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.x = -10.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -557,9 +499,9 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.x = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("x", "double", 2, "base xposn", "", &MbsDMocInterfaceConfig::x)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("x", "double", 2, "base xposn", "", &MbsSimInterfaceConfig::x)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("x", "double", 2, "base xposn", "", &MbsDMocInterfaceConfig::x)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("x", "double", 2, "base xposn", "", &MbsSimInterfaceConfig::x)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.y = -10.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -567,9 +509,9 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.y = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("y", "double", 2, "base yposn", "", &MbsDMocInterfaceConfig::y)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("y", "double", 2, "base yposn", "", &MbsSimInterfaceConfig::y)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("y", "double", 2, "base yposn", "", &MbsDMocInterfaceConfig::y)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("y", "double", 2, "base yposn", "", &MbsSimInterfaceConfig::y)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.z = -10.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -577,9 +519,9 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.z = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("z", "double", 2, "base zposn", "", &MbsDMocInterfaceConfig::z)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("z", "double", 2, "base zposn", "", &MbsSimInterfaceConfig::z)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("z", "double", 2, "base zposn", "", &MbsDMocInterfaceConfig::z)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("z", "double", 2, "base zposn", "", &MbsSimInterfaceConfig::z)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.vx = -1.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -587,9 +529,9 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.vx = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vx", "double", 2, "base body xvel", "", &MbsDMocInterfaceConfig::vx)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vx", "double", 2, "base body xvel", "", &MbsSimInterfaceConfig::vx)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vx", "double", 2, "base body xvel", "", &MbsDMocInterfaceConfig::vx)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vx", "double", 2, "base body xvel", "", &MbsSimInterfaceConfig::vx)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.vy = -1.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -597,9 +539,9 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.vy = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vy", "double", 2, "base body yvel", "", &MbsDMocInterfaceConfig::vy)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vy", "double", 2, "base body yvel", "", &MbsSimInterfaceConfig::vy)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vy", "double", 2, "base body yvel", "", &MbsDMocInterfaceConfig::vy)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vy", "double", 2, "base body yvel", "", &MbsSimInterfaceConfig::vy)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.vz = -1.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -607,39 +549,39 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.vz = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vz", "double", 2, "base body zvel", "", &MbsDMocInterfaceConfig::vz)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vz", "double", 2, "base body zvel", "", &MbsSimInterfaceConfig::vz)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vz", "double", 2, "base body zvel", "", &MbsDMocInterfaceConfig::vz)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vz", "double", 2, "base body zvel", "", &MbsSimInterfaceConfig::vz)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.roll = -3.15;
+      __min__.roll = -3.14;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.roll = 3.15;
+      __max__.roll = 3.14;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.roll = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("roll", "double", 2, "base roll", "", &MbsDMocInterfaceConfig::roll)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("roll", "double", 2, "base roll", "", &MbsSimInterfaceConfig::roll)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("roll", "double", 2, "base roll", "", &MbsDMocInterfaceConfig::roll)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("roll", "double", 2, "base roll", "", &MbsSimInterfaceConfig::roll)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.pitch = -3.15;
+      __min__.pitch = -3.14;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.pitch = 3.15;
+      __max__.pitch = 3.14;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.pitch = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("pitch", "double", 2, "base pitch", "", &MbsDMocInterfaceConfig::pitch)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("pitch", "double", 2, "base pitch", "", &MbsSimInterfaceConfig::pitch)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("pitch", "double", 2, "base pitch", "", &MbsDMocInterfaceConfig::pitch)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("pitch", "double", 2, "base pitch", "", &MbsSimInterfaceConfig::pitch)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.yaw = -3.15;
+      __min__.yaw = -3.14;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.yaw = 3.15;
+      __max__.yaw = 3.14;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.yaw = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("yaw", "double", 2, "base yaw", "", &MbsDMocInterfaceConfig::yaw)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("yaw", "double", 2, "base yaw", "", &MbsSimInterfaceConfig::yaw)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("yaw", "double", 2, "base yaw", "", &MbsDMocInterfaceConfig::yaw)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("yaw", "double", 2, "base yaw", "", &MbsSimInterfaceConfig::yaw)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.vroll = -1.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -647,9 +589,9 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.vroll = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vroll", "double", 2, "base rollvel", "", &MbsDMocInterfaceConfig::vroll)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vroll", "double", 2, "base rollvel", "", &MbsSimInterfaceConfig::vroll)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vroll", "double", 2, "base rollvel", "", &MbsDMocInterfaceConfig::vroll)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vroll", "double", 2, "base rollvel", "", &MbsSimInterfaceConfig::vroll)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.vpitch = -1.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -657,9 +599,9 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.vpitch = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vpitch", "double", 2, "base pitchvel", "", &MbsDMocInterfaceConfig::vpitch)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vpitch", "double", 2, "base pitchvel", "", &MbsSimInterfaceConfig::vpitch)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vpitch", "double", 2, "base pitchvel", "", &MbsDMocInterfaceConfig::vpitch)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vpitch", "double", 2, "base pitchvel", "", &MbsSimInterfaceConfig::vpitch)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.vyaw = -1.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -667,9 +609,9 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.vyaw = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vyaw", "double", 2, "base yawvel", "", &MbsDMocInterfaceConfig::vyaw)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vyaw", "double", 2, "base yawvel", "", &MbsSimInterfaceConfig::vyaw)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("vyaw", "double", 2, "base yawvel", "", &MbsDMocInterfaceConfig::vyaw)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("vyaw", "double", 2, "base yawvel", "", &MbsSimInterfaceConfig::vyaw)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.i_J = 1;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -677,19 +619,19 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.i_J = 1;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<int>("i_J", "int", 1, "Joint index starting with 1", "", &MbsDMocInterfaceConfig::i_J)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<int>("i_J", "int", 1, "Joint index starting with 1", "", &MbsSimInterfaceConfig::i_J)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<int>("i_J", "int", 1, "Joint index starting with 1", "", &MbsDMocInterfaceConfig::i_J)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<int>("i_J", "int", 1, "Joint index starting with 1", "", &MbsSimInterfaceConfig::i_J)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.Ji = -3.15;
+      __min__.Ji = -3.14;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.Ji = 3.15;
+      __max__.Ji = 3.14;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.Ji = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Ji", "double", 2, "Jointangle", "", &MbsDMocInterfaceConfig::Ji)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("Ji", "double", 2, "Jointangle", "", &MbsSimInterfaceConfig::Ji)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Ji", "double", 2, "Jointangle", "", &MbsDMocInterfaceConfig::Ji)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("Ji", "double", 2, "Jointangle", "", &MbsSimInterfaceConfig::Ji)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.Jvi = -0.1;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -697,76 +639,36 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.Jvi = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Jvi", "double", 2, "Jointanglevel", "", &MbsDMocInterfaceConfig::Jvi)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("Jvi", "double", 2, "Jointanglevel", "", &MbsSimInterfaceConfig::Jvi)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Jvi", "double", 2, "Jointanglevel", "", &MbsDMocInterfaceConfig::Jvi)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("Jvi", "double", 2, "Jointanglevel", "", &MbsSimInterfaceConfig::Jvi)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.i_Q = 1;
+      __min__.i_u = 1;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.i_Q = 40;
+      __max__.i_u = 40;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.i_Q = 1;
+      __default__.i_u = 1;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<int>("i_Q", "int", 1, "StateCost_index starting with 1", "", &MbsDMocInterfaceConfig::i_Q)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<int>("i_u", "int", 1, "control index starting with 1", "", &MbsSimInterfaceConfig::i_u)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<int>("i_Q", "int", 1, "StateCost_index starting with 1", "", &MbsDMocInterfaceConfig::i_Q)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<int>("i_u", "int", 1, "control index starting with 1", "", &MbsSimInterfaceConfig::i_u)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.Qi = 0.0;
+      __min__.ui = -2.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.Qi = 100.0;
+      __max__.ui = 2.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.Qi = 0.0;
+      __default__.ui = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Qi", "double", 2, "Statecost", "", &MbsDMocInterfaceConfig::Qi)));
+      Default.abstract_parameters.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("ui", "double", 2, "Constant control value for entire time", "", &MbsSimInterfaceConfig::ui)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Qi", "double", 2, "Statecost", "", &MbsDMocInterfaceConfig::Qi)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.Qfi = 0.0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.Qfi = 100.0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.Qfi = 50.0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Qfi", "double", 2, "FinStatecost", "", &MbsDMocInterfaceConfig::Qfi)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Qfi", "double", 2, "FinStatecost", "", &MbsDMocInterfaceConfig::Qfi)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.i_R = 1;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.i_R = 40;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.i_R = 1;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<int>("i_R", "int", 1, "ControlCost_index starting with 1", "", &MbsDMocInterfaceConfig::i_R)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<int>("i_R", "int", 1, "ControlCost_index starting with 1", "", &MbsDMocInterfaceConfig::i_R)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.Ri = 0.0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.Ri = 10.0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.Ri = 1.0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Ri", "double", 2, "Controlcost", "", &MbsDMocInterfaceConfig::Ri)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Ri", "double", 2, "Controlcost", "", &MbsDMocInterfaceConfig::Ri)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.mu = 0.0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.mu = 100.0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.mu = 0.001;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("mu", "double", 2, "Regularization constant", "", &MbsDMocInterfaceConfig::mu)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("mu", "double", 2, "Regularization constant", "", &MbsDMocInterfaceConfig::mu)));
+      __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("ui", "double", 2, "Constant control value for entire time", "", &MbsSimInterfaceConfig::ui)));
 //#line 233 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       Default.convertParams();
 //#line 233 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __group_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractGroupDescriptionConstPtr(new MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMocInterfaceConfig>(Default)));
+      __group_descriptions__.push_back(MbsSimInterfaceConfig::AbstractGroupDescriptionConstPtr(new MbsSimInterfaceConfig::GroupDescription<MbsSimInterfaceConfig::DEFAULT, MbsSimInterfaceConfig>(Default)));
 //#line 390 "/opt/ros/fuerte/stacks/dynamic_reconfigure/templates/ConfigType.h"
     
-      for (std::vector<MbsDMocInterfaceConfig::AbstractGroupDescriptionConstPtr>::const_iterator i = __group_descriptions__.begin(); i != __group_descriptions__.end(); i++)
+      for (std::vector<MbsSimInterfaceConfig::AbstractGroupDescriptionConstPtr>::const_iterator i = __group_descriptions__.begin(); i != __group_descriptions__.end(); i++)
       {
         __description_message__.groups.push_back(**i);
       }
@@ -774,57 +676,57 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
       __min__.__toMessage__(__description_message__.min, __param_descriptions__, __group_descriptions__); 
       __default__.__toMessage__(__description_message__.dflt, __param_descriptions__, __group_descriptions__); 
     }
-    std::vector<MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr> __param_descriptions__;
-    std::vector<MbsDMocInterfaceConfig::AbstractGroupDescriptionConstPtr> __group_descriptions__;
-    MbsDMocInterfaceConfig __max__;
-    MbsDMocInterfaceConfig __min__;
-    MbsDMocInterfaceConfig __default__;
+    std::vector<MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr> __param_descriptions__;
+    std::vector<MbsSimInterfaceConfig::AbstractGroupDescriptionConstPtr> __group_descriptions__;
+    MbsSimInterfaceConfig __max__;
+    MbsSimInterfaceConfig __min__;
+    MbsSimInterfaceConfig __default__;
     dynamic_reconfigure::ConfigDescription __description_message__;
 
-    static const MbsDMocInterfaceConfigStatics *get_instance()
+    static const MbsSimInterfaceConfigStatics *get_instance()
     {
       // Split this off in a separate function because I know that
       // instance will get initialized the first time get_instance is
       // called, and I am guaranteeing that get_instance gets called at
       // most once.
-      static MbsDMocInterfaceConfigStatics instance;
+      static MbsSimInterfaceConfigStatics instance;
       return &instance;
     }
   };
 
-  inline const dynamic_reconfigure::ConfigDescription &MbsDMocInterfaceConfig::__getDescriptionMessage__() 
+  inline const dynamic_reconfigure::ConfigDescription &MbsSimInterfaceConfig::__getDescriptionMessage__() 
   {
     return __get_statics__()->__description_message__;
   }
 
-  inline const MbsDMocInterfaceConfig &MbsDMocInterfaceConfig::__getDefault__()
+  inline const MbsSimInterfaceConfig &MbsSimInterfaceConfig::__getDefault__()
   {
     return __get_statics__()->__default__;
   }
   
-  inline const MbsDMocInterfaceConfig &MbsDMocInterfaceConfig::__getMax__()
+  inline const MbsSimInterfaceConfig &MbsSimInterfaceConfig::__getMax__()
   {
     return __get_statics__()->__max__;
   }
   
-  inline const MbsDMocInterfaceConfig &MbsDMocInterfaceConfig::__getMin__()
+  inline const MbsSimInterfaceConfig &MbsSimInterfaceConfig::__getMin__()
   {
     return __get_statics__()->__min__;
   }
   
-  inline const std::vector<MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr> &MbsDMocInterfaceConfig::__getParamDescriptions__()
+  inline const std::vector<MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr> &MbsSimInterfaceConfig::__getParamDescriptions__()
   {
     return __get_statics__()->__param_descriptions__;
   }
 
-  inline const std::vector<MbsDMocInterfaceConfig::AbstractGroupDescriptionConstPtr> &MbsDMocInterfaceConfig::__getGroupDescriptions__()
+  inline const std::vector<MbsSimInterfaceConfig::AbstractGroupDescriptionConstPtr> &MbsSimInterfaceConfig::__getGroupDescriptions__()
   {
     return __get_statics__()->__group_descriptions__;
   }
 
-  inline const MbsDMocInterfaceConfigStatics *MbsDMocInterfaceConfig::__get_statics__()
+  inline const MbsSimInterfaceConfigStatics *MbsSimInterfaceConfig::__get_statics__()
   {
-    const static MbsDMocInterfaceConfigStatics *statics;
+    const static MbsSimInterfaceConfigStatics *statics;
   
     if (statics) // Common case
       return statics;
@@ -834,7 +736,7 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
     if (statics) // In case we lost a race.
       return statics;
 
-    statics = MbsDMocInterfaceConfigStatics::get_instance();
+    statics = MbsSimInterfaceConfigStatics::get_instance();
     
     return statics;
   }
@@ -842,4 +744,4 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 
 }
 
-#endif // __MBSDMOCINTERFACERECONFIGURATOR_H__
+#endif // __MBSSIMINTERFACERECONFIGURATOR_H__

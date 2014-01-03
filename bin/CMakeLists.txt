@@ -38,6 +38,9 @@ target_link_libraries(rccartest gcop  ${LIBS})
 add_executable(chaintest chaintest.cc)
 target_link_libraries(chaintest gcop  ${LIBS})
 
+add_executable(chain1test chain1test.cc)
+target_link_libraries(chain1test gcop  ${LIBS})
+
 add_executable(airmtest airmtest.cc)
 target_link_libraries(airmtest gcop  ${LIBS})
 

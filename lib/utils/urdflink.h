@@ -219,6 +219,9 @@ public:
   ///   every link can have one parent
   boost::shared_ptr<Joint> parent_joint;
 
+	/// Tag for combining:
+	bool visited;
+
   std::vector<boost::shared_ptr<Joint> > child_joints;
   std::vector<boost::shared_ptr<Link> > child_links;
 
@@ -239,6 +242,7 @@ public:
     this->child_joints.clear();
     this->child_links.clear();
     this->collision_groups.clear();
+		visited = false;
   };
   void setParentJoint(boost::shared_ptr<Joint> child);
   void addChild(boost::shared_ptr<Link> child);

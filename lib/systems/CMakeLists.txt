@@ -16,6 +16,7 @@ set(sources
   mbscspace.cc
   mbstspace.cc
   chain.cc
+  chain1.cc
   airm.cc
   airbot.cc
   airbase.cc
@@ -57,6 +58,7 @@ set(headers
   mbstspace.h
   mbs.h
   chain.h
+  chain1.h
   airm.h
   airbot.h
   airbase.h

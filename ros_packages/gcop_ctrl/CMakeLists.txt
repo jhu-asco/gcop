@@ -54,6 +54,9 @@ target_link_libraries(chainload ${LIBS})
 rosbuild_add_executable(mbstest src/mbstest.cc)
 target_link_libraries(mbstest ${LIBS})
 
+rosbuild_add_executable(mbssim src/mbssim.cc)
+target_link_libraries(mbssim ${LIBS})
+
 rosbuild_add_executable(rcctrl src/rccartest.cc)
 target_link_libraries(rcctrl ${LIBS})
 

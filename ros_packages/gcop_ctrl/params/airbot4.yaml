@@ -1,6 +1,6 @@
 ## Controller Params
-mbsdmoc/tf: 3 # Final Time
-mbsdmoc/N: 128 # Number of segments
+mbsdmoc/tf: 1 # Final Time
+mbsdmoc/N: 500 # Number of segments
 
                  #rpy                  #xyz            #vrpy            #vxyz
 mbsdmoc/X0:   [0.0,0.0,0.0,   -2.0,0.0,0.0,      0.0,0.0,0.0,      0.0,0.0,0.0]
@@ -20,6 +20,8 @@ mbsdmoc/ag: [0.0, 0.0, -9.81] # Gravity
 mbsdmoc/J0: [0.0,0.0,0.0,    0.0,0.0,0.0]
 mbsdmoc/JN: [-0.3,-1.0,-1.5, 0.3,-1.0,-1.5] # Joint angles
 
+
+mbsdmoc/basetype: "airbase"
 
 mbsdmoc/mu: 1
 

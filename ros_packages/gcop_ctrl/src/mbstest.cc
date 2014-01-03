@@ -356,6 +356,7 @@ int main(int argc, char** argv)
 		ROS_ERROR("Could not fetch xml file name");
 		return 0;
 	}
+	n.getParam("basetype",mbstype);
 	VectorXd xmlconversion;
 	//Create Mbs system
 	mbsmodel = gcop_urdf::mbsgenerator(xml_string, mbstype);
@@ -500,6 +501,7 @@ int main(int argc, char** argv)
 	//States and controls for system
 	vector<VectorXd> us(N,u);
 	vector<MbsState> xs(N+1,x);
+	bool usectrl = true;
 
 	// @MK: this is the new part, initialize trajectory using a controller
 	if(mbstype != "airbase")
@@ -520,18 +522,20 @@ int main(int argc, char** argv)
 		ctrl->Kd = xmlconversion.head(6+nb-1);
 		cout<<"Kd"<<endl<<ctrl->Kd<<endl;
 
-
-		for (int i = 0; i < xs.size()-1; ++i) {
-			double t = i*h;
-			ctrl->Set(us[i], t, xs[i]); 
-			mbsmodel->Step(xs[i+1], i*h, xs[i], us[i], h);
+		n.getParam("usectrl",usectrl);
+		if(usectrl)
+		{
+			for (int i = 0; i < xs.size()-1; ++i) {
+				double t = i*h;
+				ctrl->Set(us[i], t, xs[i]); 
+				mbsmodel->Step(xs[i+1], i*h, xs[i], us[i], h);
+			}
 		}
 	}
 	//cout<<"us"<<endl<<us<<endl;
 
-
   // see the result before running optimization
-  //getchar();
+  getchar();
 
 
 	mbsdmoc.reset(new MbsDmoc(*mbsmodel, *cost, ts, xs, us));

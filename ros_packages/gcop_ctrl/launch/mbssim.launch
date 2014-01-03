@@ -8,6 +8,6 @@
 	</include>
 
   <rosparam command="load" file="$(arg parameters)" />
-	<node name="dmoc_mbs" pkg="gcop_ctrl" type="mbstest" output="screen"/>
+	<node name="mbs_sim" pkg="gcop_ctrl" type="mbssim" output="screen"/>
 	<node name="mbsreconfigure" pkg="dynamic_reconfigure" type="reconfigure_gui" />
 </launch>
