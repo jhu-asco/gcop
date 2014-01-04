@@ -633,9 +633,9 @@ MbsSimInterfaceConfig::GroupDescription<MbsSimInterfaceConfig::DEFAULT, MbsSimIn
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<double>("Ji", "double", 2, "Jointangle", "", &MbsSimInterfaceConfig::Ji)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.Jvi = -0.1;
+      __min__.Jvi = -0.5;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.Jvi = 0.1;
+      __max__.Jvi = 0.5;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.Jvi = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"

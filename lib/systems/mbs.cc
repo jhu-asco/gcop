@@ -12,13 +12,15 @@ Mbs::Mbs(int nb, int c) : nb(nb),
                           links(nb),
                           joints(nb-1), Ips(nb),
                           pis(nb), cs(nb), se3(SE3::Instance()),
-                          debug(false)
+                          debug(false), basetype("chainbase"),
+													damping(VectorXd::Zero(nb-1)),
+													ag(0,0,-9.81)
                           //                          fq(*this), 
                           //                          fva(*this),
                           //                          fvb(*this), 
                           //                          fu(*this)
 {
-  ag << 0, 0, -9.81;
+  //ag << 0, 0, -9.81;
 }
  
   
@@ -31,11 +33,39 @@ Mbs::~Mbs()
 void Mbs::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
                        MatrixXd *A, MatrixXd *B) 
 {
-  f = u;
+	if(basetype == "chainbase")	 
+	{
+		assert(6 + nb-1 == f.size());
+		f.head(6) = u.head(6);
+	}
+	else if(basetype == "airbase")
+	{
+		f[0] = u[0];
+		f[1] = u[1];
+		f[2] = u[2];
+		f[3] = 0;
+		f[4] = 0;
+		f[5] = u[3];
+	}
+
+  f.tail(nb-1) = u.tail(nb-1) - damping.cwiseProduct(x.dr);
+
   if (A)
     A->setZero();
   if (B)
-    B->setIdentity();
+	{
+		if(basetype == "chainbase")
+			B->setIdentity();
+		else if(basetype == "airbase")
+		{
+			B->setZero();
+			(*B)(0,0) = 1;
+			(*B)(1,1) = 1;
+			(*B)(2,2) = 1;
+			for(int count = 5;count < f.size();count++)
+				(*B)(count,count-2) = 1;
+		}
+	}
 }
 
 void Mbs::Init() 

@@ -1,10 +1,10 @@
 <launch>	
-	<!--arg name="parameters" default="$(find gcop_ctrl)/params/chain3.yaml"/-->
-	<arg name="parameters" default="$(find baxter_description)/urdf/baxter.yaml"/>
+	<arg name="parameters" default="$(find gcop_ctrl)/params/chain1.yaml"/>
+	<!--arg name="parameters" default="$(find baxter_description)/urdf/baxter.yaml"/-->
 
 	<include file="$(find gcop_urdf)/launch/display_chain.launch">
-		<!--arg name="model" default="$(find gcop_ctrl)/params/chain3.urdf"/-->
-		<arg name="model" default="$(find baxter_description)/urdf/baxter.urdf"/>
+		<arg name="model" default="$(find gcop_ctrl)/params/chain1_3.urdf"/>
+		<!--arg name="model" default="$(find baxter_description)/urdf/baxter.urdf"/-->
 	</include>
 
   <rosparam command="load" file="$(arg parameters)" />
