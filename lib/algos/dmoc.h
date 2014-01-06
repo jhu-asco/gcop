@@ -359,7 +359,6 @@ namespace gcop {
       
       V += L;
 
-
       
       const Matrixnd &A = As[k];
       const Matrixncd &B = Bs[k];

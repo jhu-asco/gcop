@@ -107,7 +107,6 @@ void SO3::log(Vector3d &v, const Matrix3d &m) const
   }
   
   hatinv(v, (phi/(2.0*sphi))*(m-m.transpose()));
-	//cout<<"frac: "<<(phi/(2.0*sphi))<<endl;
 }
 
 

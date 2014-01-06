@@ -50,6 +50,9 @@ target_link_libraries(airmopttest gcop  ${LIBS})
 add_executable(chainopttest chainopttest.cc)
 target_link_libraries(chainopttest gcop  ${LIBS})
 
+add_executable(chaineltest chaineltest.cc)
+target_link_libraries(chaineltest gcop  ${LIBS})
+
 #add_executable(snakeopttest snakeopttest.cc)
 #target_link_libraries(snakeopttest gcop  ${LIBS})
 

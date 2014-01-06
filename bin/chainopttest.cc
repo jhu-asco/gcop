@@ -22,7 +22,7 @@ void solver_process(Viewer* viewer)
     viewer->SetCamera(45.25, 37, -0.14, 0.05, -1.75);
   }
 
-  int N = 64;      // discrete trajectory segments
+  int N = 128;      // discrete trajectory segments
   double tf = 5;   // time-horizon
 
   params.GetInt("N", N);
@@ -32,6 +32,9 @@ void solver_process(Viewer* viewer)
 
   // system
   Chain sys;
+
+  params.GetInt("method", sys.method);
+  params.GetInt("iters", sys.iters);
 
   // acceleration due to gravity
   params.GetVector3d("ag", sys.ag);
@@ -80,12 +83,12 @@ void solver_process(Viewer* viewer)
   vector<MbsState> xs(N+1, x0);
 
   double m = sys.links[0].m + sys.links[1].m  + sys.links[2].m;
-	cout<<"Mass: "<<m<<endl;
+  cout<<"Mass: "<<m<<endl;
   
   // initial controls (e.g. hover at one place)
   VectorXd u(8);
   u.setZero();
-  u(5) = 9.81*m;
+  u(5) = -sys.ag[2]*m;
   vector<VectorXd> us(N, u);
 
   ChainView view(sys, &xs);
@@ -99,7 +102,7 @@ void solver_process(Viewer* viewer)
 
   for (int i = 0; i < xs.size()-1; ++i) {
     double t = i*h;
-    ctrl.Set(us[i], t, xs[i]); 
+    //    ctrl.Set(us[i], t, xs[i]); 
     sys.Step(xs[i+1], i*h, xs[i], us[i], h);
   }
 
@@ -144,7 +147,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("chainopt.cfg");
+    params.Load("../../bin/chainopt.cfg");
 
 
 #ifdef DISP

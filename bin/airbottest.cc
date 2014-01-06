@@ -32,6 +32,8 @@ void solver_process(Viewer* viewer)
   // system
   Airbot sys;
 
+  params.GetInt("method", sys.method);
+  params.GetInt("iters", sys.iters);
 
   VectorXd qv0(24);
   params.GetVectorXd("x0", qv0);  
@@ -166,7 +168,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("airflip.cfg");
+    params.Load("../../bin/airbot.cfg");
 
 
 #ifdef DISP

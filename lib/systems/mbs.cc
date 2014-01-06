@@ -12,6 +12,8 @@ Mbs::Mbs(int nb, int c) : nb(nb),
                           links(nb),
                           joints(nb-1), Ips(nb),
                           pis(nb), cs(nb), se3(SE3::Instance()),
+                          method(TRAP),
+                          iters(2),
                           debug(false)
                           //                          fq(*this), 
                           //                          fva(*this),
@@ -238,6 +240,125 @@ void Mbs::Bias(VectorXd &b,
 }
 
 
+double Mbs::HeunStep(MbsState& xb, double t, const MbsState& xa,
+                     const VectorXd &u, double h,
+                     MatrixXd *A, MatrixXd *B)
+{
+  VectorXd a(nb+5);
+  Acc(a, t, xa, u);  
+
+  MbsState xn(nb);
+  xn.vs[0] = xa.vs[0] + h*a.head(6);
+  xn.dr = xa.dr + h*a.tail(nb-1);
+  KStep(xn, xa, h);
+  VectorXd an(nb+5);
+  Acc(an, t+h, xn, u);  
+
+  xb.vs[0] = xa.vs[0] + h/2*(a.head(6) + an.head(6));
+  xb.dr = xa.dr + h/2*(a.tail(nb - 1) + an.tail(nb - 1));
+  KStep(xb, xa, h);
+  return 0;
+}
+
+
+void Mbs::Acc(VectorXd &a, double t, const MbsState& x, const VectorXd &u)
+{
+  MatrixXd M(nb + 5, nb + 5);
+  Mass(M, x);
+
+  VectorXd b(nb + 5); // bias
+  Bias(b, t, x);
+
+  VectorXd f(nb + 5);
+  Force(f, t, x, u);  // compute control/external forces
+  
+  if (debug)
+    cout << "f=" << f << endl;  
+  
+  // compute acceleration
+  LLT<MatrixXd> llt;
+  llt.compute(M);
+  if (llt.info() == Eigen::Success) {
+    a = llt.solve(f - b);
+  } else {
+    cout << "[W] Mbs::Acc Mass matrix not positive definite!" << endl;
+  }  
+}
+
+
+
+double Mbs::Step(MbsState& xb, double t, const MbsState& xa,
+                 const VectorXd &u, double h,
+                 MatrixXd *A, MatrixXd *B)
+{
+  if (method == EULER)
+    return System::Step(xb, t, xa, u, h, A, B);
+
+  if (method == HEUN)
+    return HeunStep(xb, t, xa, u, h, A, B);
+
+  // initialize new velocity with old velocity
+  VectorXd vdr(nb + 5);
+  vdr.head(6) = xa.vs[0];
+  vdr.tail(nb-1) = xa.dr;
+
+  // Newton-Euler error
+  VectorXd e(nb + 5);
+
+  // Jacobian
+  VectorXd en(nb + 5);
+  VectorXd dvdr(nb + 5); 
+  MatrixXd De(nb + 5, nb + 5);
+
+  // search direction
+  VectorXd d(nb + 5);
+
+  double eps = 1e-6;
+  for (int j = 0; j < iters; ++j) {    
+    NE(e, vdr, xb, t, xa, u, h);      
+    for (int i = 0; i < nb + 5; ++i) {
+      dvdr.setZero();
+      dvdr[i] = eps;
+      NE(en, vdr + dvdr, xb, t, xa, u, h);    
+      De.col(i) = (en - e)/eps;
+    }    
+    // take a Newton step
+    //    vdr = vdr - De.inverse()*e;
+    //    De.lu().solve(e, &d);
+    //vdr = vdr - d;
+    vdr = vdr - De.lu().solve(e);
+  }  
+
+  if (e.norm() > 1e-3) {
+    cout << "[W] Mbs::Step: residual e seems high e=" << e << endl;
+  }
+  
+  xb.vs[0] = vdr.head(6);
+  xb.dr = vdr.tail(nb-1);
+  KStep(xb, xa, h);
+}
+
+
+
+void Mbs::NE(VectorXd &e, const VectorXd &vdr, 
+             MbsState &xb,               
+             double t, const MbsState &xa, 
+             const VectorXd &u, double h)
+{
+  xb.vs[0] = vdr.head(6);
+  xb.dr = vdr.tail(nb-1);
+  KStep(xb, xa, h);
+  VectorXd b(nb + 5);
+
+  DBias(b, t, xb, xa, h);
+
+  VectorXd f(nb + 5);
+  Force(f, t, xa, u);  // compute control/external forces
+
+  e = b - f;
+}
+
+
 void Mbs::DBias(VectorXd &b,
                 double t,
                 const MbsState &xb, 
@@ -335,7 +456,8 @@ void Mbs::Rec(MbsState &x, double h)
     //    se3.cayinv(x.vs[i], g*x.gs[i]);
     se3.log(x.vs[i], g*x.gs[i]);
 
-		//cout<<"x.vs["<<i<<"]: "<<endl<<x.vs[i]<<endl;
+    //    cout<<"x.vs["<<i<<"]: "<<endl<<x.vs[i]<<endl;
+
     x.vs[i] /= h;
 		//cout<<"h "<<h<<endl;
 		//cout<<"x.vs["<<i<<"]: "<<endl<<x.vs[i]<<endl;

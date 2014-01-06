@@ -131,10 +131,25 @@ namespace gcop {
       const VectorXd &u, double h,
       MatrixXd *A = 0, MatrixXd *B = 0);
     */
-
+    
     double F(VectorXd &v, double t, const MbsState &xa, 
              const VectorXd &u, double h,
              MatrixXd *A = 0, MatrixXd *B = 0);
+    
+    
+    double Step(MbsState& xb, double t, const MbsState& xa,
+                const VectorXd &u, double h,
+                MatrixXd *A = 0, MatrixXd *B = 0);
+
+    double HeunStep(MbsState& xb, double t, const MbsState& xa,
+                    const VectorXd &u, double h,
+                    MatrixXd *A = 0, MatrixXd *B = 0);
+
+
+    void NE(VectorXd &e, const VectorXd &vdr, 
+            MbsState &xb,               
+            double t, const MbsState &xa, 
+            const VectorXd &u, double h);
 
 
     /**
@@ -196,6 +211,8 @@ namespace gcop {
      */
     void Mass(MatrixXd &M, const MbsState &x) const;
 
+    void Acc(VectorXd &a, double t, const MbsState& x, const VectorXd &u);
+
     /**
      * Total resulting force on the system from external (e.g. gravity)
      * and internal (control) inputs
@@ -225,6 +242,12 @@ namespace gcop {
 
     
     SE3 &se3;                 ///< singleton reference for performing SE(3) operations
+
+    int method;                   ///< type of integration method employed (Euler by default)
+    static const int EULER = 1;   ///< Euler time-stepping of dynamics
+    static const int HEUN = 2;    ///< Heun's explicit 2nd order method
+    static const int TRAP = 3;    ///< symplectic trapezoidal 2nd order method
+    int iters;                    ///< max number of Newton iterations used in symplectic method
 
     bool debug;
 
