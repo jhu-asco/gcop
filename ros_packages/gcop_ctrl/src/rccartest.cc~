@@ -49,8 +49,6 @@ bool usemocap = false;
 
 double tprev = 0;
 
-tf::Vector3 yprev;
-
 void pubtraj() //N is the number of segments
 {
 	int N = us.size();
@@ -103,19 +101,14 @@ void initialposnCallback(const geometry_msgs::TransformStamped::ConstPtr &currfr
 	double roll,pitch,yaw;
         UV_O.getBasis().getRPY(roll,pitch,yaw);
         double tcurr = currframe->header.stamp.toSec();
-	double dt = (tcurr - tprev);
+	double tprev = 
         tf::Vector3 y = UV_O.getOrigin();
-	tf::Vector3 dydt = (y - yprev)/dt;
-	tf::Vector3 yawvec(cos(yaw),sin(yaw),0);
 	Vector4d x0 = Vector4d::Zero();// initial state
         x0[0] = y[0];
         x0[1] = y[1];
         x0[2] = yaw;
-	x0[3] = xf(3);
-        //x0[3] =dydt.dot(yawvec);/// need to calculate velocity
+        x0[3] =0;/// need to calculate velocity
 	xs[0] = x0;
-	tprev = tcurr;
-	yprev = y;
 	//ros::TimerEvent e1;
 	//iterateCallback(e1);
 	return;
