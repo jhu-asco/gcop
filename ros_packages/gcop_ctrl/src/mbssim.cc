@@ -257,6 +257,12 @@ int main(int argc, char** argv)
 		xml2vec(x.r,j_list);
 	}
 	cout<<"x.r"<<endl<<x.r<<endl;
+
+	if(n.getParam("Jv0", j_list))
+	{
+		xml2vec(x.dr,j_list);
+		cout<<"x.dr"<<endl<<x.dr<<endl;
+	}
 	mbsmodel->Rec(x, h);
 
 	// initial controls (e.g. hover at one place)

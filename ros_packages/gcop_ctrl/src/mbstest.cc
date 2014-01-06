@@ -206,6 +206,7 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 			else if(config.i_J < 1)
 				config.i_J = 1;
 			config.Ji = xf->r[config.i_J-1];     
+			config.Jvi = xf->dr[config.i_J-1];     
 		}
 		else
 		{
@@ -231,6 +232,7 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 				config.i_J = 1;
 
 			config.Ji = mbsdmoc->xs[0].r[config.i_J-1];     
+			config.Jvi = mbsdmoc->xs[0].dr[config.i_J-1];     
 		}
 		config.mu = mbsdmoc->mu;
 		config.tf = cost->tf;
@@ -381,6 +383,7 @@ int main(int argc, char** argv)
 		cout<<"Joint["<<mbsmodel->joints[count].name<<"].gp"<<endl<<mbsmodel->joints[count].gp<<endl;
 		cout<<"Joint["<<mbsmodel->joints[count].name<<"].a"<<endl<<mbsmodel->joints[count].a<<endl;
 	}
+	cout<<"mbsmodel damping: "<<mbsmodel->damping.transpose()<<endl;
 
 	//Using it:
 	//define parameters for the system
@@ -419,6 +422,10 @@ int main(int argc, char** argv)
 	if(n.getParam("JN", xfj_list))
 		xml2vec(xf->r,xfj_list);
 	cout<<"xf->r"<<endl<<xf->r<<endl;
+
+	if(n.getParam("JvN", xfj_list))
+		xml2vec(xf->dr,xfj_list);
+	cout<<"xf->dr"<<endl<<xf->dr<<endl;
 
 
 	//Define Lqr Cost
@@ -480,6 +487,9 @@ int main(int argc, char** argv)
 	if(n.getParam("J0", j_list))
 		xml2vec(x.r,j_list);
 	cout<<"x.r"<<endl<<x.r<<endl;
+	if(n.getParam("Jv0", j_list))
+		xml2vec(x.dr,j_list);
+	cout<<"x.dr"<<endl<<x.dr<<endl;
 	mbsmodel->Rec(x, h);
 
 	// initial controls (e.g. hover at one place)

@@ -239,7 +239,8 @@ namespace gcop {
     vector<vector<int> > cs;  ///< child lists
 
     Vector3d ag;             ///< acceleration due to gravity (0, 0, -9.81) by default
-
+    VectorXd damping;        ///< damping vector
+    string basetype;        ///< basetype currently supported chainbase, airbase
     
     SE3 &se3;                 ///< singleton reference for performing SE(3) operations
 

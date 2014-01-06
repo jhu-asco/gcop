@@ -691,9 +691,9 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<double>("Ji", "double", 2, "Jointangle", "", &MbsDMocInterfaceConfig::Ji)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.Jvi = -0.1;
+      __min__.Jvi = -1.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.Jvi = 0.1;
+      __max__.Jvi = 1.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.Jvi = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"

@@ -1,5 +1,5 @@
 ## Controller Params
-mbsdmoc/tf: 1 # Final Time
+mbsdmoc/tf: 3 # Final Time
 mbsdmoc/N: 500 # Number of segments
 
                  #rpy                  #xyz            #vrpy            #vxyz
