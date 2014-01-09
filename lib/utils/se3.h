@@ -32,6 +32,8 @@ namespace gcop {
 
     void ad(Matrix6d &M, const Vector6d &v) const;
 
+    void adt(Matrix6d &M, const Vector6d &mu) const;
+
     void adinv(Vector6d& v, const Matrix6d& m) const;
 
     void exp(Matrix4d &g, const Vector6d &v) const;
@@ -49,7 +51,9 @@ namespace gcop {
     
     void dcayinv(Matrix6d& M, const Vector6d& v) const;
 
-    void tln(Vector6d& mup, const Vector6d& v, const Vector6d &mu) const;
+    void tlnmu(Vector6d& mup, const Vector6d& v, const Vector6d &mu) const;
+
+    void tln(Matrix6d &M, const Vector6d &v) const;
 
     void q2g(Matrix4d &g, const Vector6d &q) const;
 

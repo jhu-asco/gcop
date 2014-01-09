@@ -34,6 +34,12 @@ target_link_libraries(cartest gcop  ${LIBS})
 add_executable(rccartest rccartest.cc)
 target_link_libraries(rccartest gcop  ${LIBS})
 
+add_executable(cecartest cecartest.cc)
+target_link_libraries(cecartest gcop  ${LIBS})
+
+add_executable(cechaintest cechaintest.cc)
+target_link_libraries(cechaintest gcop  ${LIBS})
+
 
 add_executable(chaintest chaintest.cc)
 target_link_libraries(chaintest gcop  ${LIBS})
@@ -49,6 +55,13 @@ target_link_libraries(airmopttest gcop  ${LIBS})
 
 add_executable(chainopttest chainopttest.cc)
 target_link_libraries(chainopttest gcop  ${LIBS})
+
+add_executable(fixedchaintest fixedchaintest.cc)
+target_link_libraries(fixedchaintest gcop  ${LIBS})
+
+add_executable(pendtest pendtest.cc)
+target_link_libraries(pendtest gcop  ${LIBS})
+
 
 add_executable(chaineltest chaineltest.cc)
 target_link_libraries(chaineltest gcop  ${LIBS})

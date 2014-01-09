@@ -318,6 +318,10 @@ bool Params::GetVectorXd(const char *name, VectorXd &v) const
   vector<string>::iterator it;
   int vi = 0;
   for (it = tokens.begin(); it != tokens.end(); ++it) {
+    if (vi >= v.size()) {
+      cout << "[E] Params::GetVectorXd: mismatched size in element " << name << " with expected v.size=" << v.size() << endl;
+      return false;
+    }
     string str = *it;
     replace(str, string("pi"), string("3.141592"));  
     v[vi] = atof(str.c_str());

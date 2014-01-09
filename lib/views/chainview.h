@@ -26,9 +26,10 @@ namespace gcop {
      */
     ChainView(const Chain &sys,
               vector<MbsState> *xs);
-    
-    
-    BoxView views[3];
+        
+    virtual ~ChainView();
+
+    BoxView **views;
   };
 }
 #endif

@@ -7,20 +7,37 @@
 
 using namespace gcop;
 
-Mbs::Mbs(int nb, int c) : nb(nb), 
-                          System(*new MbsManifold(nb), *new Rn<>(c)), 
-                          links(nb),
-                          joints(nb-1), Ips(nb),
-                          pis(nb), cs(nb), se3(SE3::Instance()),
-                          method(TRAP),
-                          iters(2),
-                          debug(false), basetype("chainbase"),
-                          damping(VectorXd::Zero(nb-1)),
-                          ag(0,0,-9.81)
-                          //                          fq(*this), 
-                          //                          fva(*this),
-                          //                          fvb(*this), 
-                          //                          fu(*this)
+void print(const MbsState &x)
+{
+  for (int i =0; i < x.gs.size(); ++i) {
+    cout << "gs[" << i << "]=" << endl << x.gs[i] << endl;
+  }
+  for (int i =0; i < x.vs.size(); ++i) {
+    cout << "vs[" << i << "]=" << endl << x.vs[i].transpose() << endl;
+  }  
+  for (int i =0; i < x.dgs.size(); ++i) {
+    cout << "dgs[" << i << "]=" << endl << x.dgs[i] << endl;
+  }
+
+  cout << "r=" << x.r.transpose() << endl;
+  cout << "dr=" << x.dr.transpose() << endl;
+}
+
+
+Mbs::Mbs(int nb, int c, bool fixed) : nb(nb), fixed(fixed),
+                                      System(*new MbsManifold(nb, fixed), *new Rn<>(c)), 
+                                      links(nb),
+                                      joints(nb-1), 
+                                      pis(nb), cs(nb), se3(SE3::Instance()),
+                                      method(EULER),
+                                      iters(2),
+                                      debug(false), basetype(FLOATBASE),
+                                      damping(VectorXd::Zero(nb - 1)),
+                                      ag(0,0,-9.81)
+                                      //                          fq(*this), 
+                                      //                          fva(*this),
+                                      //                          fvb(*this), 
+                                      //                          fu(*this)
 {
   //ag << 0, 0, -9.81;
 }
@@ -33,51 +50,50 @@ Mbs::~Mbs()
 }
 
 void Mbs::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
-                       MatrixXd *A, MatrixXd *B) 
+                MatrixXd *A, MatrixXd *B) 
 {
-	if(basetype == "chainbase")	 
-	{
-		assert(6 + nb-1 == f.size());
-		f.head(6) = u.head(6);
-	}
-	else if(basetype == "airbase")
-	{
-		f[0] = u[0];
-		f[1] = u[1];
-		f[2] = u[2];
-		f[3] = 0;
-		f[4] = 0;
-		f[5] = u[3];
-	}
-
+  if(basetype == FLOATBASE) {
+    assert(!fixed);
+    assert(6 + nb - 1 == f.size());
+    f.head(6) = u.head(6);
+  } else if(basetype == AIRBASE) {
+    assert(!fixed);
+    f[0] = u[0];
+    f[1] = u[1];
+    f[2] = u[2];
+    f[3] = 0;
+    f[4] = 0;
+    f[5] = u[3];
+  }
+  
+  // this is ok for fixed base also 
   f.tail(nb-1) = u.tail(nb-1) - damping.cwiseProduct(x.dr);
-
+  
   if (A)
     A->setZero();
-  if (B)
-	{
-		if(basetype == "chainbase")
-			B->setIdentity();
-		else if(basetype == "airbase")
-		{
-			B->setZero();
-			(*B)(0,0) = 1;
-			(*B)(1,1) = 1;
-			(*B)(2,2) = 1;
-			for(int count = 5;count < f.size();count++)
-				(*B)(count,count-2) = 1;
-		}
-	}
+  
+  if (B) {
+    if(basetype == AIRBASE) {
+      B->setZero();
+      (*B)(0,0) = 1;
+      (*B)(1,1) = 1;
+      (*B)(2,2) = 1;
+      for(int count = 5;count < f.size();count++)
+        (*B)(count,count-2) = 1;
+    } else {
+      B->setIdentity();      
+    }
+  }
 }
 
 void Mbs::Init() 
 {
-  Ips[0] = links[0].I.asDiagonal();
+  //  Ips[0] = links[0].I.asDiagonal();
   
   for (int i = 0; i < nb-1; ++i) {    
     Joint &jnt = joints[i];
     jnt.Init();    
-    Ips[i+1] = jnt.Ac.transpose()*links[i+1].I.asDiagonal()*jnt.Ac;
+    //    Ips[i+1] = jnt.Ac.transpose()*links[i+1].I.asDiagonal()*jnt.Ac;
   }
   
   pis[0] = -1; // root has no parent
@@ -98,11 +114,16 @@ double Mbs::F(VectorXd &v, double t, const MbsState &x,
   //  cout << M << endl;
      
   VectorXd a(nb + 5);  // accelerations
-  VectorXd f(nb + 5);  // bias forces
   
-  // compute bias
-  ID(f, t, x, u);
-  
+  VectorXd b(nb + 5); // bias
+  Bias(b, t, x);
+  //DBias(b, t, x, x, h);
+
+  VectorXd f(nb + 5);
+  Force(f, t, x, u);  // compute control/external forces
+
+  //  cout << "control fu=" << fu << endl;
+
   if (debug)
     cout << "f=" << f << endl;
   
@@ -112,7 +133,7 @@ double Mbs::F(VectorXd &v, double t, const MbsState &x,
   LLT<MatrixXd> llt;
   llt.compute(M);
   if (llt.info() == Eigen::Success) {
-    a = -llt.solve(f);
+    a = llt.solve(f - b);
   } else {
     cout << "[W] Mbs::F Mass matrix not positive definite!" << endl;
     return 0;
@@ -128,6 +149,8 @@ double Mbs::F(VectorXd &v, double t, const MbsState &x,
 
 void Mbs::Mass(MatrixXd &M, const MbsState &x) const 
 {
+  int n = nb - 1 + 6*(!fixed);
+
   // assumes that FK has been called on x, i.e. that it is consistent
   M.setZero();
 
@@ -136,6 +159,8 @@ void Mbs::Mass(MatrixXd &M, const MbsState &x) const
   for (int i=0; i < nb; ++i) {
     Ics[i] = links[i].I.asDiagonal();
   }
+
+  int i0 = 6*(!fixed);
   
   for(int i = nb-1; i >= 0; --i) {
     int j = pis[i];
@@ -150,9 +175,9 @@ void Mbs::Mass(MatrixXd &M, const MbsState &x) const
       Ics[j] += Aij.transpose()*Ics[i]*Aij;
     }
     
-    if (i > 0) {
+    if (i > 0) { // if not the root
       Vector6d F(Ics[i]*joints[i-1].S);
-      M(6+i-1, 6+i-1) = joints[i-1].S.dot(F);
+      M(i0 + i - 1, i0 + i - 1) = joints[i-1].S.dot(F);
       
       j=i;
       while(pis[j] >= 0) {
@@ -164,18 +189,18 @@ void Mbs::Mass(MatrixXd &M, const MbsState &x) const
         F = Ajl.transpose()*F;
         j = l;
         if (j > 0) {
-          M(6+i-1, 6+j-1) = F.dot(joints[j-1].S);
-          M(6+j-1, 6+i-1) = M(6+i-1, 6+j-1);
+          M(i0 + i - 1, i0 + j - 1) = F.dot(joints[j - 1].S);
+          M(i0 + j - 1, i0 + i - 1) = M(i0 + i - 1, i0 + j - 1);
         }
       }
-      //        M.block<6,1>(0, 6+i-1) = F;
-      //        M.block<1,6>(6+i-1, 0) = F.transpose();
-      M.block(0, 6+i-1, 6, 1) = F;
-      M.block(6+i-1, 0, 1, 6) = F.transpose();
+      if (!fixed) {
+        M.block(0, 6+i-1, 6, 1) = F;
+        M.block(6+i-1, 0, 1, 6) = F.transpose();
+      }
     }
   }
-  // M.topLeftCorner<6,6>() = Ics[0];
-  M.topLeftCorner(6,6) = Ics[0];
+  if (!fixed)
+    M.topLeftCorner(6,6) = Ics[0];
 }
 
   
@@ -199,6 +224,7 @@ void Mbs::ID(VectorXd &f,
 {
   VectorXd b(nb + 5); // bias
   Bias(b, t, x);
+  //  DBias(b, t, x, x, h);
 
   VectorXd fu(nb + 5);
   Force(fu, t, x, u);  // compute control/external forces
@@ -225,23 +251,32 @@ void Mbs::Bias(VectorXd &b,
   Vector6d gr;
   gr.setZero();
 
+  int i0 = 6*(!fixed);
+
   for (int i = nb - 1; i >= 0; --i) {
+
     const Vector6d &v = x.vs[i];
+
+    //    cout << "Bias v[ " << i << "]=" << v.transpose() << endl;
+
     const Vector6d &I = links[i].I;
     Vector6d mu = I.cwiseProduct(v);
 
     gr.tail<3>() = links[i].m*(x.gs[i].topLeftCorner<3,3>().transpose()*ag);
     
+    //    ps[i].head(3) = v.head<3>().cross(mu.head<3>()) + v.tail<3>().cross(mu.tail<3>());
+    //    ps[i].tail(3) = v.head<3>().cross(mu.tail<3>());    
     ps[i].head(3) = v.head<3>().cross(mu.head<3>());
-    ps[i].tail(3) = v.tail<3>().cross(mu.head<3>()) + v.head<3>().cross(mu.tail<3>());    
+    ps[i].tail(3) = v.head<3>().cross(mu.tail<3>());    
+
     ps[i] = ps[i] - gr;
 
     if (debug) {
-      cout << "i=" << i << endl;
-      cout << "v=" << v << endl;
+      //cout << "i=" << i << endl;
+      //      cout << "v=" << v << endl;
       //      cout << "mua=" << mua << endl;
       //      cout << "mub=" << mub << endl;      
-      cout << "ps[" << i << "]=" << ps[i] << endl;
+      //      cout << "ps[" << i << "]=" << ps[i] << endl;
     }
     
     for (int ci = 0; ci < cs[i].size(); ++ci) {
@@ -256,16 +291,13 @@ void Mbs::Bias(VectorXd &b,
       ps[i] += A.transpose()*ps[j];
     }
     
-    //      if (i > 0)
-    //        ps[i] = joints[i-1].Ac.transpose()*ps[i];
-    
     if (debug)
       cout << "i=" << i << "ps=" << ps[i] << endl;
     
     if (i > 0)
-      b[6+i-1] = ps[i].dot(joints[i-1].S);
-    else
-      b.head(6) = ps[0];
+      b[i0 + i - 1] = ps[i].dot(joints[i-1].S);
+    else if (!fixed)
+      b.head(i0) = ps[0];
   }
 }
 
@@ -275,7 +307,7 @@ double Mbs::HeunStep(MbsState& xb, double t, const MbsState& xa,
                      MatrixXd *A, MatrixXd *B)
 {
   VectorXd a(nb+5);
-  Acc(a, t, xa, u);  
+  Acc(a, t, xa, u);
 
   MbsState xn(nb);
   xn.vs[0] = xa.vs[0] + h*a.head(6);
@@ -291,15 +323,88 @@ double Mbs::HeunStep(MbsState& xb, double t, const MbsState& xa,
 }
 
 
-void Mbs::Acc(VectorXd &a, double t, const MbsState& x, const VectorXd &u)
+double Mbs::EulerStep(MbsState& xb, double t, const MbsState& xa,
+                      const VectorXd &u, double h,
+                      MatrixXd *A, MatrixXd *B)
 {
-  MatrixXd M(nb + 5, nb + 5);
+  int n = nb - 1 + 6*(!fixed);
+
+  VectorXd a(n);
+  Acc(a, t, xa, u);
+
+  if (!fixed)
+    xb.vs[0] = xa.vs[0] + h*a.head(6);
+
+  xb.dr = xa.dr + h*a.tail(nb - 1);
+
+  ClampVelocity(xb);
+
+  KStep(xb, xa, h);
+
+  return 0;
+
+}
+
+
+void Mbs::ClampPose(MbsState &x, int i) const
+{
+  assert(i >= 0 && i < nb);
+  for (int j = 0; j < 3; ++j) {
+    if (x.gs[i](j,3) > X.ub.gs[i](j,3))
+      x.gs[i](j,3) = X.ub.gs[i](j,3);
+    else if (x.gs[i](j,3) < X.lb.gs[i](j,3))
+      x.gs[i](j,3) = X.lb.gs[i](j,3);
+  }
+}
+
+
+void Mbs::ClampShape(MbsState &x, int i) const
+{
+  assert(i >= 0 && i < x.r.size());
+  if (x.r[i] > X.ub.r[i])
+    x.r[i] = X.ub.r[i];
+  else if (x.r[i] < X.lb.r[i])
+    x.r[i] = X.lb.r[i];
+}
+
+
+void Mbs::ClampVelocity(MbsState &x) const
+{
+  if (!fixed) {
+    Vector6d &v = x.vs[0];
+    const Vector6d &vu = X.ub.vs[0];
+    const Vector6d &vl = X.lb.vs[0];
+    
+    for (int i = 0; i < 6; ++i)
+      if (v[i] > vu[i])
+        v[i] = vu[i];
+      else if (v[i] < vl[i])
+        v[i] = vl[i];
+  }
+
+  for (int i = 0; i < nb-1; ++i)
+    if (x.dr[i] > X.ub.dr[i])
+      x.dr[i] = X.ub.dr[i];
+    else if (x.dr[i] < X.lb.dr[i])
+      x.dr[i] = X.lb.dr[i];
+}
+
+
+void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u)
+{
+  int n = nb - 1 + 6*(!fixed);
+
+  MatrixXd M(n, n);
   Mass(M, x);
+  //  M.setIdentity();
 
-  VectorXd b(nb + 5); // bias
+  VectorXd b(n); // bias
   Bias(b, t, x);
+  //  b.setZero();
+  
+  //  cout << "b=" << b.transpose() << endl;
 
-  VectorXd f(nb + 5);
+  VectorXd f(n);
   Force(f, t, x, u);  // compute control/external forces
   
   if (debug)
@@ -321,12 +426,26 @@ double Mbs::Step(MbsState& xb, double t, const MbsState& xa,
                  const VectorXd &u, double h,
                  MatrixXd *A, MatrixXd *B)
 {
+  //  if (method == EULER)
+  //    return System::Step(xb, t, xa, u, h, A, B);
+
+  
   if (method == EULER)
-    return System::Step(xb, t, xa, u, h, A, B);
-
-  if (method == HEUN)
+    return EulerStep(xb, t, xa, u, h, A, B);
+  else if (method == HEUN)
     return HeunStep(xb, t, xa, u, h, A, B);
+  else if (method == TRAP)
+    return TrapStep(xb, t, xa, u, h, A, B);
+  else 
+    cout << "[W] Mbs::Step: unsupported method " << method << endl;
+  return 0;
+}
 
+
+double Mbs::TrapStep(MbsState &xb, double t, const MbsState& xa,
+                     const VectorXd &u, double h,
+                     MatrixXd *A, MatrixXd *B)
+{
   // initialize new velocity with old velocity
   VectorXd vdr(nb + 5);
   vdr.head(6) = xa.vs[0];
@@ -336,29 +455,90 @@ double Mbs::Step(MbsState& xb, double t, const MbsState& xa,
   VectorXd e(nb + 5);
 
   // Jacobian
-  VectorXd en(nb + 5);
+  VectorXd em(nb + 5);
+  VectorXd ep(nb + 5);
   VectorXd dvdr(nb + 5); 
   MatrixXd De(nb + 5, nb + 5);
 
   // search direction
   VectorXd d(nb + 5);
 
-  double eps = 1e-6;
+  double eps = 1e-3;
+
   for (int j = 0; j < iters; ++j) {    
-    NE(e, vdr, xb, t, xa, u, h);      
+    NE(e, vdr, xb, t, xa, u, h);    
+    NewtonEulerJacobian(De, xb, xa, h);
+
+    vdr = vdr - De.lu().solve(e);
+    continue;
+
+    // finite differences
     for (int i = 0; i < nb + 5; ++i) {
       dvdr.setZero();
       dvdr[i] = eps;
-      NE(en, vdr + dvdr, xb, t, xa, u, h);    
-      De.col(i) = (en - e)/eps;
-    }    
-    // take a Newton step
-    //    vdr = vdr - De.inverse()*e;
-    //    De.lu().solve(e, &d);
-    //vdr = vdr - d;
-    vdr = vdr - De.lu().solve(e);
-  }  
+      //      NE(em, vdr - dvdr, xb, t, xa, u, h);
+      NE(ep, vdr + dvdr, xb, t, xa, u, h);
+      
+      //      De.col(i) = (ep - em)/(2*eps);
+      De.col(i) = (ep - e)/(eps);
+      //      std::cout << std::setprecision(15) ;
+      if (0 && i==nb+2) {
+        cout << "e=" << e.transpose() << endl;       
+        cout << "ep=" << ep.transpose() << endl;
+        cout << "em=" << em.transpose() << endl;
+        cout << "KUR" << endl;
+        print(xa);
+        print(xb);
+        cout << "PUT" << endl;
+        //        exit(0);
+      }
+      //      assert(De.col(i).norm() > 1e-10);    
+    }  
 
+    vdr = vdr - De.lu().solve(e);
+    continue;
+    
+    FullPivHouseholderQR<MatrixXd> qr;
+    qr.compute(De);
+
+
+    
+    if(qr.rank() == nb + 5) {
+      
+      // take a Newton step
+      //    vdr = vdr - De.inverse()*e;
+      //    De.lu().solve(e, &d);
+      //vdr = vdr - d;
+      
+      //    vdr = vdr - De.lu().solve(e);
+      
+      /*
+        FullPivHouseholderQR<MatrixXd> qr1;
+        qr1.compute(De.block(0,0,6,6));
+        cout << "J rank=" << qr1.rank() << endl;
+        
+        FullPivHouseholderQR<MatrixXd> qr2;
+        qr2.compute(De.block(6,6,nb-1,nb-1));
+        cout << "m rank=" << qr2.rank() << endl;
+        
+        FullPivHouseholderQR<MatrixXd> qr3;
+        qr3.compute(De.block(6,6,3,3));
+        cout << "m rank=" << qr3.rank() << endl;
+        
+        FullPivHouseholderQR<MatrixXd> qr4;
+        qr4.compute(De.block(9,9,3,3));
+        cout << "m rank=" << qr4.rank() << endl;
+      */
+      
+      //    cout << "rank=" << qr.rank() << endl;
+      
+      VectorXd a = qr.solve(e);
+      vdr = vdr - a;
+      //    cout << "De=" << endl << De << endl;
+      //    assert(e.isApprox(De*a));    
+    }
+  }
+  
   if (e.norm() > 1e-3) {
     cout << "[W] Mbs::Step: residual e seems high e=" << e << endl;
   }
@@ -366,33 +546,43 @@ double Mbs::Step(MbsState& xb, double t, const MbsState& xa,
   xb.vs[0] = vdr.head(6);
   xb.dr = vdr.tail(nb-1);
   KStep(xb, xa, h);
+
+  if (B) {
+    assert(B->rows() == 2*(nb + 5));
+    assert(B->cols() == c);
+    MatrixXd Bv(nb + 5, c);
+    VectorXd f(nb + 5);
+    Force(f, t, xa, u, 0, &Bv);  // compute control/external forces
+    B->topRows(nb + 5).setZero();
+    B->bottomRows(nb + 5) = -h*Bv;
+  }
 }
 
 
 
-void Mbs::NE(VectorXd &e, const VectorXd &vdr, 
-             MbsState &xb,               
-             double t, const MbsState &xa, 
+void Mbs::NE(VectorXd &e, const VectorXd &vdr,
+             MbsState &xb,
+             double t, const MbsState &xa,
              const VectorXd &u, double h)
 {
   xb.vs[0] = vdr.head(6);
   xb.dr = vdr.tail(nb-1);
   KStep(xb, xa, h);
-  VectorXd b(nb + 5);
+  VectorXd bd(nb + 5);
 
-  DBias(b, t, xb, xa, h);
+  DBias(bd, t, xb, xa, h);
 
   VectorXd f(nb + 5);
   Force(f, t, xa, u);  // compute control/external forces
 
-  e = b - f;
+  e = bd - h*f;
 }
 
 
 void Mbs::DBias(VectorXd &b,
                 double t,
-                const MbsState &xb, 
-                const MbsState &xa, double h) 
+                const MbsState &xb,
+                const MbsState &xa, double h)
 {
   
   // assume that Kstep was called so that all velocities are propagated
@@ -405,17 +595,24 @@ void Mbs::DBias(VectorXd &b,
 
   Vector6d gr;
   gr.setZero();
-
+  
   for (int i = nb - 1; i >= 0; --i) {
     const Vector6d &va = xa.vs[i];
     const Vector6d &vb = xb.vs[i];
     const Vector6d &I = links[i].I;
-
-    gr.tail<3>() = links[i].m*(xa.gs[i].topLeftCorner<3,3>().transpose()*ag);
     
+    gr.tail<3>() = links[i].m*(xa.gs[i].topLeftCorner<3,3>().transpose()*ag);
+
+    /*    
     se3.dcayinv(Db, h*vb);
     se3.dcayinv(Da, -h*va);
-    ps[i] = (Db.transpose()*(I.cwiseProduct(vb)) -  Da.transpose()*(I.cwiseProduct(va)))/h - gr;
+    ps[i] = Db.transpose()*(I.cwiseProduct(vb)) -  Da.transpose()*(I.cwiseProduct(va)) - h*gr;
+    */
+    Vector6d pb, pa;
+    se3.tlnmu(pb, h*vb, I.cwiseProduct(vb));
+    se3.tlnmu(pa, -h*va, I.cwiseProduct(va));
+    ps[i] = pb - pa - h*gr;
+    //    ps[i] = I.cwiseProduct(vb) - I.cwiseProduct(va) - h*gr;
 
     if (debug) {
       cout << "i=" << i << endl;
@@ -442,7 +639,7 @@ void Mbs::DBias(VectorXd &b,
     //        ps[i] = joints[i-1].Ac.transpose()*ps[i];
     
     if (debug)
-      cout << "i=" << i << "ps=" << ps[i] << endl;
+      cout << "i=" << i << "ps=" << ps[i].transpose() << endl;
     
     if (i > 0)
       b[6+i-1] = ps[i].dot(joints[i-1].S);
@@ -450,6 +647,7 @@ void Mbs::DBias(VectorXd &b,
       b.head(6) = ps[0];
   }
 }
+
 
 
 
@@ -469,9 +667,9 @@ void Mbs::Rec(MbsState &x, double h)
   Matrix4d g;
 
   //  se3.cay(g, -h*x.vs[0]); // get previous pose
-  se3.exp(g, -h*x.vs[0]); // get previous pose
-
+  se3.exp(g, -h*x.vs[0]); // get previous pose    
   xp.gs[0] = x.gs[0]*g;
+
   xp.r = x.r - h*x.dr;    // get previous joint angles
   FK(xp);                 // expand previous configuration
   //std::cout << std::setprecision(5) ;
@@ -495,38 +693,108 @@ void Mbs::Rec(MbsState &x, double h)
 }
 
 
-void Mbs::KStep(MbsState &xb, const MbsState &xa, double h) {
+
+void Mbs::KStep(MbsState &xb, const MbsState &xa, double h, bool impl) {
   
   // given: xa, xb.vs[0], xb.dr[*]
-  // compute: xb.dgs[*], xb.gs[*],  xb.vs[*], xb.r[*]
+  // compute: xb.dgs[*], xb.gs[*],  xb.vs[*], xb.r[*]    
+
+  Matrix4d dg;
+  Matrix4d gi;
+    
+  if (!fixed) {
+    se3.exp(dg, impl ? h*xb.vs[0] : h*xa.vs[0]);
+    xb.gs[0] = xa.gs[0]*dg;
+    ClampPose(xb, 0);
+  }
+  
+  for (int i = 1; i < nb; ++i) {
+    Joint &jnt = joints[i-1];
+    xb.r[i-1] = xa.r[i-1] + (impl ? h*xb.dr[i-1] : h*xa.dr[i-1]);
+    ClampShape(xb, i-1);
+
+    //    cout << xb.r[i-1]*jnt.a << endl;
+
+    se3.exp(dg, xb.r[i-1]*jnt.a);
+    
+    assert(!std::isnan(dg(0,0)));
+    xb.dgs[i-1] = jnt.gp*dg*jnt.gci;  // this is also in FK
+    
+    int pi = pis[i];
+    xb.gs[i] = xb.gs[pi]*xb.dgs[i-1];
+
+    //      se3.cayinv(xb.vs[i], gi*xb.gs[pi]*xb.dgs[i-1]);
+    se3.inv(gi, xa.gs[i]);
+
+    se3.log(xb.vs[i], gi*xb.gs[i]);
+    assert(!std::isnan(xb.vs[i][0]));
+    
+    xb.vs[i] /= h;
+  }
+}
+
+
+void Mbs::NewtonEulerJacobian(MatrixXd &De, const MbsState &xb, const MbsState &xa, double h) 
+{  
+  // given: xa, xb.vs[0], xb.dr[*]
+  // compute: xb.dgs[*], xb.gs[*],  xb.vs[*], xb.r[*]    
+
+  Matrix6d Dv[nb];
+  MatrixXd Dr[nb];
+
+  Matrix6d Dp; 
+  Matrix6d Dm; 
+  se3.tln(Dp, h*xb.vs[0]);  // this must be dtau(-h*v[0])
+
+  Dv[0] = Dp;
+  Dr[0] = MatrixXd::Zero(6, nb-1);
   
   Matrix4d dg;
   Matrix4d gi;
-  
-  //    xb.Ms[0].setIdentity();
-  
-  for (int i = 0; i < nb; ++i) {
-    if (i > 0) {
-      xb.r[i-1] = xa.r[i-1] + h*xb.dr[i-1];
-      
-      Joint &jnt = joints[i-1];
-      
-      int pi = pis[i];
-      se3.inv(gi, xa.gs[i]);
-      se3.exp(dg, xb.r[i-1]*jnt.a);
-      xb.dgs[i-1] = jnt.gp*dg*jnt.gci;  // this is also in FK
-      
-      //      se3.cayinv(xb.vs[i], gi*xb.gs[pi]*xb.dgs[i-1]);
-      se3.log(xb.vs[i], gi*xb.gs[pi]*xb.dgs[i-1]);
-
-      xb.vs[i] /= h;
-    } 
-
-    //    se3.cay(dg, h*xb.vs[i]);
-    se3.exp(dg, h*xb.vs[i]);
-
-    xb.gs[i] = xa.gs[i]*dg;
+  Matrix6d A;
     
-    //TODO: add else above for efficiency
+
+  for (int i = 1; i < nb; ++i) {
+    Joint &jnt = joints[i-1];    
+    int pi = pis[i];
+
+    se3.inv(gi, xa.dgs[i-1]);
+    se3.Ad(A, gi);
+
+    Dv[i] = A*Dv[pi];
+    Dr[i] = A*Dr[pi];
+    Dr[i].col(i-1) += jnt.S;
+  }
+
+  MatrixXd P[nb];
+
+  for (int i = nb - 1; i >= 0; --i) {
+    const Vector6d &v = xb.vs[i];
+    const Vector6d &I = links[i].I;
+    
+    se3.adt(A, -I.cwiseProduct(v)/2);
+    se3.tln(Dp, h*v);
+    A = A + Dp.transpose()*I.asDiagonal();
+    se3.tln(Dm, -h*v);
+    A = A*Dm;
+    P[i].resize(6, nb + 5);
+    P[i].leftCols(6) = A*Dv[i];
+    P[i].rightCols(nb-1) = A*Dr[i];
+
+    for (int ci = 0; ci < cs[i].size(); ++ci) {      
+      int j = cs[i][ci];   // index of ci-th child of i      
+      assert(j > 0);
+
+      se3.inv(gi, xa.dgs[j-1]);
+      se3.Ad(A, gi);
+
+      P[i] += A.transpose()*P[j];
+    }
+    
+    if (i > 0) {
+      De.row(6 + i - 1) = joints[i-1].S.transpose()*P[i];
+    } else {
+      De.topRows(6) = P[0];
+    }
   }
 }

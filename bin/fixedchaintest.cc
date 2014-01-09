@@ -28,47 +28,50 @@ void solver_process(Viewer* viewer)
   params.GetInt("N", N);
   params.GetDouble("tf", tf);  
 
+  int nb = 3;     // nof bodies
+  params.GetInt("nb", nb);
+
   double h = tf/N; // time-step
 
-  // system
-  Chain sys;
+  // fixed chain
+  Chain sys(nb, true);
 
   params.GetInt("method", sys.method);
   params.GetInt("iters", sys.iters);
 
+  params.GetVectorXd("damping", sys.damping);
+  
   params.GetVectorXd("ulb", sys.U.lb);
   params.GetVectorXd("uub", sys.U.ub);
-
 
   // acceleration due to gravity
   params.GetVector3d("ag", sys.ag);
 
-  VectorXd qv0(16);
-  params.GetVectorXd("x0", qv0);  
+  int n = nb - 1; // movable bodies
 
-  MbsState x0(3);
-  SE3::Instance().rpyxyz2g(x0.gs[0], qv0.head(3), qv0.segment<3>(3));
-    
-  x0.r = qv0.segment<2>(6);
-  x0.vs[0] = qv0.segment<6>(8);
-  x0.dr = qv0.tail(2);
+  VectorXd qv0(2*n);
+  params.GetVectorXd("x0", qv0);
+
+  MbsState x0(nb, true);
+  x0.gs[0].setIdentity();    
+  x0.r = qv0.head(n);
+  x0.dr = qv0.tail(n);
   sys.Rec(x0, h);
 
-  VectorXd qvf(16);
+  VectorXd qvf(2*n);
   params.GetVectorXd("xf", qvf);  
 
-  MbsState xf(7);
-  SE3::Instance().rpyxyz2g(xf.gs[0], qvf.head(3), qvf.segment<3>(3));
+  MbsState xf(nb, true);
+  xf.gs[0].setIdentity();
     
-  xf.r = qvf.segment<2>(6);
-  xf.vs[0] = qvf.segment<6>(8);
-  xf.dr = qvf.tail(2);
+  xf.r = qvf.head(n);
+  xf.dr = qvf.tail(n);
 
   LqCost<MbsState> cost(sys.X, (Rn<>&)sys.U, tf, xf);
   
-  VectorXd Q(16);
-  VectorXd R(8);
-  VectorXd Qf(16);
+  VectorXd Q(2*n);
+  VectorXd R(n);
+  VectorXd Qf(2*n);
 
   params.GetVectorXd("Q", Q);
   params.GetVectorXd("R", R);
@@ -79,20 +82,16 @@ void solver_process(Viewer* viewer)
   cost.Qf = Qf.asDiagonal();
 
   // times
-  vector<double> ts(N+1);
+  vector<double> ts(N + 1);
   for (int k = 0; k <= N; ++k)
     ts[k] = k*h;
 
   // states
-  vector<MbsState> xs(N+1, x0);
+  vector<MbsState> xs(N + 1, x0);
 
-  double m = sys.links[0].m + sys.links[1].m  + sys.links[2].m;
-  cout<<"Mass: "<<m<<endl;
-  
-  // initial controls (e.g. hover at one place)
-  VectorXd u(8);
+  // initial controls
+  VectorXd u(n);
   u.setZero();
-  u(5) = -sys.ag[2]*m;
   vector<VectorXd> us(N, u);
 
   ChainView view(sys, &xs);
@@ -153,7 +152,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("../../bin/chainopt.cfg");
+    params.Load("../../bin/fixedchain.cfg");
 
 
 #ifdef DISP

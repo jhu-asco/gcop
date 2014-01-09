@@ -16,8 +16,16 @@ ChainView::ChainView(const Chain &sys,
                      vector<MbsState> *xs) : 
   MbsView(sys, xs)
 {
-  for (int i = 0; i < 3; ++i) {
-    views[i].d = sys.links[i].ds;
-    this->geomViews.push_back(&views[i]);
+  views = new BoxView*[sys.nb];
+  for (int i = 0; i < sys.nb; ++i) {
+    views[i] = new BoxView(sys.links[i].ds);
+    this->geomViews.push_back(views[i]);
   }
+}
+
+ChainView::~ChainView()
+{
+  for (int i = 0; i < sys.nb; ++i)
+    delete views[i];
+  delete[] views;
 }

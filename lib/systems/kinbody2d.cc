@@ -28,8 +28,7 @@ double Kinbody2d::Step(Matrix3d& xb, double t, const Matrix3d& xa,
     se2.cay(m, -h*u);
     se2.Ad(*A, m);
   }
- 
- 
+  
   if (B) {
     se2.dcay(m, -h*u);
     *B = h*m;
@@ -45,3 +44,4 @@ double Kinbody2d::Step(Matrix3d &xb, double t, const Matrix3d &xa,
     C->setZero();
   return Step(xb, t, xa, u, h, A, B);
 }
+

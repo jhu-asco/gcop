@@ -76,12 +76,12 @@ bool Ce::Fit()
     for (int j = 0; j < N; ++j) 
       zps[j].second /= cn;               // normalize
     
-    gmm.Fit(zps, 50, &S);
+    gmm.Fit(zps, alpha, 50, &S);
   } else {
     for (int j = 0; j < N; ++j) 
       zps[j].second = 1.0/N;             // probability
     
-    gmm.Fit(zps, 50, &S);
+    gmm.Fit(zps, alpha, 50, &S);
   }
 
   return gmm.Update();

@@ -361,7 +361,7 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, string type 
 	if(type == "airbase")
 	{
 		mbs.reset(new gcop::Mbs(nofactivejoints+1,4+nofactivejoints));
-		mbs->basetype = "airbase";
+		mbs->basetype = mbs->AIRBASE;
 	}
 	else
 		mbs.reset(new gcop::Mbs(nofactivejoints+1,6 + nofactivejoints));

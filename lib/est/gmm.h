@@ -30,7 +30,15 @@ namespace gcop {
  
     void Init(const VectorXd &xlb, const VectorXd &xub);
     
-    void Fit(const vector<pair<VectorXd, double> > &xps,
+    /**
+     * Fit a GMM to data
+     * @param xps data (pairs of vectors and weights), weights should add to one
+     * @param a smoothing factor for updating the parameter v according to
+     *         [ v_new = a*v_est + (1-a)*v_old ]; it set to 1 by default
+     * @param iter maximum number of EM iterations (only applies for multiple mixtures)
+     * @param S use additional noise matrix during EM for stability
+     */
+    void Fit(const vector<pair<VectorXd, double> > &xps, double a = 1,
              int iter = 50, const MatrixXd *S = 0);
     
     int k;              ///< number of mixture components

@@ -82,17 +82,17 @@ double Normal::Sample(VectorXd &x)
 }
 
 
-void Normal::Fit(const vector<pair<VectorXd, double> > xws)
+void Normal::Fit(const vector<pair<VectorXd, double> > xws, double a)
 {
   int N = xws.size();
-
-  mu.setZero();
+  
+  VectorXd mu = VectorXd::Zero(this->mu.size());
   for (int j = 0; j < N; ++j) {
     const pair<VectorXd, double> &xw = xws[j];
     mu += xw.first*xw.second;
   }
   
-  P.setZero();
+  MatrixXd P = MatrixXd::Zero(this->mu.size(), this->mu.size());  
   for (int j = 0; j < N; ++j) {
     const pair<VectorXd, double> &xw = xws[j];
     VectorXd dx = xw.first - mu;
@@ -106,5 +106,13 @@ void Normal::Fit(const vector<pair<VectorXd, double> > xws)
         P.block(bi, bi, bd, bd) += (xw.second*bdx)*bdx.transpose();       
       }
     }
+  }
+  
+  if (fabs(a-1) < 1e-16) {
+    this->mu = mu;
+    this->P = P;
+  } else {
+    this->mu = a*mu + (1-a)*this->mu;
+    this->P = a*P + (1-a)*this->P;
   }
 }

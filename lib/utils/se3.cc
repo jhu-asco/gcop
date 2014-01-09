@@ -94,6 +94,21 @@ void SE3::ad(Matrix6d &M, const Vector6d &v) const
   M.bottomRightCorner<3,3>() = wh;
 }
 
+void SE3::adt(Matrix6d &M, const Vector6d &mu) const
+{
+  Matrix3d mwh;  
+  so3.ad(mwh, mu.head<3>());
+
+  Matrix3d mvh;  
+  so3.ad(mvh, mu.tail<3>());
+
+  M.topLeftCorner<3,3>() = mwh;
+  M.topRightCorner<3,3>() = mvh;
+  M.bottomLeftCorner<3,3>() = mvh;
+  M.bottomRightCorner<3,3>().setZero();
+}
+
+
 
 void SE3::adinv(Vector6d& v, const Matrix6d& M) const
 {
@@ -176,10 +191,17 @@ void SE3::cay(Matrix4d &g, const Vector6d &v) const
 }
 
 
-void SE3::tln(Vector6d& mup, const Vector6d& v, const Vector6d &mu) const
+void SE3::tlnmu(Vector6d& mup, const Vector6d& v, const Vector6d &mu) const
 {
   mup.head<3>() = mu.head<3>() + v.head<3>().cross(mu.head<3>())/2;
   mup.tail<3>() = mu.tail<3>() + v.head<3>().cross(mu.tail<3>())/2;
+}
+
+
+void SE3::tln(Matrix6d &M, const Vector6d &v) const
+{
+  ad(M, v/2);  
+  M = Matrix6d::Identity() - M;
 }
 
 

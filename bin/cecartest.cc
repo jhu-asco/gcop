@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "systemce.h"
 #include "viewer.h"
 #include "rccarview.h"
 #include "utils.h"
@@ -11,7 +11,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Vector4d, 4, 2> RccarDmoc;
+typedef SystemCe<Vector4d, 4, 2> RccarCe;
 
 Params params;
 
@@ -20,7 +20,7 @@ void solver_process(Viewer* viewer)
   if (viewer)
     viewer->SetCamera(-5, 51, -0.2, -0.15, -2.3);
 
-  int N = 64;        // number of segments
+  int N = 16;        // number of segments
   double tf = 5;    // time horizon
 
   int iters = 30;
@@ -72,16 +72,29 @@ void solver_process(Viewer* viewer)
 
   // initial controls
   vector<Vector2d> us(N);
+
   for (int i = 0; i < N/2; ++i) {
     us[i] = Vector2d(.01, .0);
-    us[N/2+i] = Vector2d(-.01, .0);
+    us[N/2+i] = Vector2d(-.01, .0);    
   }
-  
-  RccarDmoc dmoc(sys, cost, ts, xs, us);  
-  dmoc.mu = .01;
-  params.GetDouble("mu", dmoc.mu);
 
-  RccarView view(sys, &dmoc.xs);
+  Vector2d du(.2, .1);
+  params.GetVector2d("du", du);
+
+  Vector2d e(.001, .001);
+  params.GetVector2d("e", e);
+
+  vector<Vector2d> dus(N, du);
+  vector<Vector2d> es(N, e);
+  
+  RccarCe ce(sys, cost, ts, xs, us, dus, es);
+  //  dmoc.mu = .01;
+  //  params.GetDouble("mu", dmoc.mu);
+
+  params.GetInt("Ns", ce.Ns);
+
+
+  RccarView view(sys, &ce.xs);
   
   viewer->Add(view);
 
@@ -91,9 +104,10 @@ void solver_process(Viewer* viewer)
 
   for (int i = 0; i < iters; ++i) {
     timer_start(timer);
-    dmoc.Iterate();
+    ce.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
+    cout << "Cost=" << ce.J << endl;
     getchar();
   }
 
@@ -116,7 +130,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("../../bin/rccar.cfg"); 
+    params.Load("../../bin/cecar.cfg");
 
 
 #ifdef DISP

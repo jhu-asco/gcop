@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "systemce.h"
 #include "viewer.h"
 #include "chainview.h"
 #include "utils.h"
@@ -12,7 +12,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<MbsState> ChainDmoc;
+typedef SystemCe<MbsState> ChainCe;
 
 Params params;
 
@@ -33,12 +33,11 @@ void solver_process(Viewer* viewer)
   // system
   Chain sys;
 
+  params.GetBool("debug", sys.debug);
+  
+
   params.GetInt("method", sys.method);
   params.GetInt("iters", sys.iters);
-
-  params.GetVectorXd("ulb", sys.U.lb);
-  params.GetVectorXd("uub", sys.U.ub);
-
 
   // acceleration due to gravity
   params.GetVector3d("ag", sys.ag);
@@ -95,6 +94,16 @@ void solver_process(Viewer* viewer)
   u(5) = -sys.ag[2]*m;
   vector<VectorXd> us(N, u);
 
+
+  VectorXd du(8);
+  params.GetVectorXd("du", du);
+
+  VectorXd e(8);
+  params.GetVectorXd("e", e);
+
+  vector<VectorXd> dus(N, du);
+  vector<VectorXd> es(N, e);
+
   ChainView view(sys, &xs);
   if (viewer)
     viewer->Add(view);
@@ -106,24 +115,23 @@ void solver_process(Viewer* viewer)
 
   for (int i = 0; i < xs.size()-1; ++i) {
     double t = i*h;
-    // ctrl.Set(us[i], t, xs[i]); 
+    //    ctrl.Set(us[i], t, xs[i]); 
     sys.Step(xs[i+1], i*h, xs[i], us[i], h);
   }
 
   // see the result before running optimization
   getchar();
 
-  ChainDmoc dmoc(sys, cost, ts, xs, us);
-  params.GetDouble("mu", dmoc.mu);
+  ChainCe ce(sys, cost, ts, xs, us, dus, es);
 
-  params.GetDouble("eps", dmoc.eps);
+  params.GetInt("Ns", ce.Ns);
 
   struct timeval timer;
   //  dmoc.debug = false; // turn off debug for speed
 
   for (int i = 0; i < 50; ++i) {
     timer_start(timer);
-    dmoc.Iterate();
+    ce.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;
     getchar();
@@ -131,7 +139,7 @@ void solver_process(Viewer* viewer)
 
   int Nd;
   params.GetInt("Nd", Nd);
-  vector<MbsState> xds(Nd+1, x0);
+  vector<MbsState> xds(Nd+1, x0);  
   int d = N/Nd;
   for (int i=Nd, j = N; i>=0 && j>= 0; --i, j-=d)
     xds[i] = xs[j];
@@ -153,7 +161,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("../../bin/chainopt.cfg");
+    params.Load("../../bin/cechainopt.cfg");
 
 
 #ifdef DISP

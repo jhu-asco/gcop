@@ -6,6 +6,7 @@ set(headers
       posegraph2d.h
       controller.h
       mbscontroller.h
+      systemce.h
 )
 
 set(sources
