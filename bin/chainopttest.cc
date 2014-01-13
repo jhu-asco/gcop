@@ -24,14 +24,27 @@ void solver_process(Viewer* viewer)
 
   int N = 128;      // discrete trajectory segments
   double tf = 5;   // time-horizon
+	int basetype = 1;
+	const int FLOAT = 1;
+	const int FIXED = 0;
 
   params.GetInt("N", N);
   params.GetDouble("tf", tf);  
+	params.GetInt("fixed",basetype);
+	assert((basetype == 0)||(basetype == 1));
+	//basetype 1 is false that is floating
+	//basetype 0 is true that is fixed
+
+
+  int nb = 3;     // nof bodies
+  params.GetInt("nb", nb);
+	int n = nb -1;
+	cout<<"n "<<n<<endl;
 
   double h = tf/N; // time-step
 
   // system
-  Chain sys;
+  Chain sys(nb,(basetype == FIXED));
 
   params.GetInt("method", sys.method);
   params.GetInt("iters", sys.iters);
@@ -42,33 +55,38 @@ void solver_process(Viewer* viewer)
 
   // acceleration due to gravity
   params.GetVector3d("ag", sys.ag);
-
-  VectorXd qv0(16);
+  VectorXd qv0(2*n+ 12*basetype);
   params.GetVectorXd("x0", qv0);  
 
-  MbsState x0(3);
-  SE3::Instance().rpyxyz2g(x0.gs[0], qv0.head(3), qv0.segment<3>(3));
-    
-  x0.r = qv0.segment<2>(6);
-  x0.vs[0] = qv0.segment<6>(8);
-  x0.dr = qv0.tail(2);
+  MbsState x0(nb,(basetype==0));
+	if(basetype == FLOAT)
+	{
+		SE3::Instance().rpyxyz2g(x0.gs[0], qv0.head(3), qv0.segment<3>(3));
+		x0.vs[0] = qv0.segment<6>(6*basetype+n);
+		cout<<"1"<<endl;
+	}
+  x0.r = qv0.segment(6*basetype,n);
+  x0.dr = qv0.tail(n);
   sys.Rec(x0, h);
 
-  VectorXd qvf(16);
+  VectorXd qvf(2*n + 12*basetype);
   params.GetVectorXd("xf", qvf);  
 
-  MbsState xf(7);
-  SE3::Instance().rpyxyz2g(xf.gs[0], qvf.head(3), qvf.segment<3>(3));
-    
-  xf.r = qvf.segment<2>(6);
-  xf.vs[0] = qvf.segment<6>(8);
-  xf.dr = qvf.tail(2);
+  MbsState xf(nb,(basetype==0));
+	if(basetype==FLOAT)
+	{
+		SE3::Instance().rpyxyz2g(xf.gs[0], qvf.head(3), qvf.segment<3>(3));
+		xf.vs[0] = qvf.segment<6>(6*basetype+n);
+		cout<<"2"<<endl;
+	}
+  xf.r = qvf.segment(6*basetype,n);
+  xf.dr = qvf.tail(n);
 
   LqCost<MbsState> cost(sys.X, (Rn<>&)sys.U, tf, xf);
   
-  VectorXd Q(16);
-  VectorXd R(8);
-  VectorXd Qf(16);
+  VectorXd Q(2*n + 12*basetype);
+  VectorXd R(n + 6*basetype);
+  VectorXd Qf(2*n + 12*basetype);
 
   params.GetVectorXd("Q", Q);
   params.GetVectorXd("R", R);
@@ -90,9 +108,10 @@ void solver_process(Viewer* viewer)
   cout<<"Mass: "<<m<<endl;
   
   // initial controls (e.g. hover at one place)
-  VectorXd u(8);
+  VectorXd u(6*basetype + n);
   u.setZero();
-  u(5) = -sys.ag[2]*m;
+	if(basetype==FLOAT)
+		u(5) = -sys.ag[2]*m;
   vector<VectorXd> us(N, u);
 
   ChainView view(sys, &xs);

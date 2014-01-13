@@ -653,9 +653,9 @@ MbsSimInterfaceConfig::GroupDescription<MbsSimInterfaceConfig::DEFAULT, MbsSimIn
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(MbsSimInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsSimInterfaceConfig::ParamDescription<int>("i_u", "int", 1, "control index starting with 1", "", &MbsSimInterfaceConfig::i_u)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.ui = -2.0;
+      __min__.ui = -300.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.ui = 2.0;
+      __max__.ui = 300.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __default__.ui = 0.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"

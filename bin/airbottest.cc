@@ -34,6 +34,8 @@ void solver_process(Viewer* viewer)
 
   //  sys.debug=true;
 
+	sys.ag<<0,0,-9.81;
+
   params.GetInt("method", sys.method);
   params.GetInt("iters", sys.iters);
 

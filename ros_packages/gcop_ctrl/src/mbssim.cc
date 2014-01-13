@@ -41,7 +41,7 @@ vector<double> ts;
 string mbstype; // Type of system
 double tfinal = 20;   // time-horizon
 
-void q2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
+void rpy2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
 {
 	tf::Quaternion q;
 	q.setEulerZYX(bpose[2],bpose[1],bpose[0]);
@@ -78,7 +78,7 @@ void simtraj(const ros::TimerEvent &event) //N is the number of segments
 	Vector6d bpose;
 
 	gcop::SE3::Instance().g2q(bpose, xs[0].gs[0]);
-	q2transform(trajectory.statemsg[0].basepose,bpose);
+	rpy2transform(trajectory.statemsg[0].basepose,bpose);
 
 	for(int count1 = 0;count1 < nb-1;count1++)
 	{
@@ -91,7 +91,7 @@ void simtraj(const ros::TimerEvent &event) //N is the number of segments
 		cout<<"i "<<i<<endl;
 		mbsmodel->Step(xs[i+1], i*h, xs[i], us[i], h);
 		gcop::SE3::Instance().g2q(bpose, xs[i+1].gs[0]);
-		q2transform(trajectory.statemsg[i+1].basepose,bpose);
+		rpy2transform(trajectory.statemsg[i+1].basepose,bpose);
 		for(int count1 = 0;count1 < nb-1;count1++)
 		{
 			trajectory.statemsg[i+1].statevector[count1] = xs[i+1].r[count1];
@@ -168,9 +168,11 @@ void paramreqcallback(gcop_ctrl::MbsSimInterfaceConfig &config, uint32_t level)
 	for (int k = 0; k <=N; ++k)
 		ts[k] = k*h;
 
-
-	gcop::SE3::Instance().rpyxyz2g(xs[0].gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
-	xs[0].vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
+  if(mbstype == "FLOATBASE")
+	{
+		gcop::SE3::Instance().rpyxyz2g(xs[0].gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
+		xs[0].vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
+	}
 
 	xs[0].r[config.i_J -1] = config.Ji;
 	xs[0].dr[config.i_J -1] = config.Jvi;
@@ -197,9 +199,13 @@ int main(int argc, char** argv)
 		return 0;
 	}
 	n.getParam("basetype",mbstype);
+	assert((mbstype == "FIXEDBASE")||(mbstype == "AIRBASE")||(mbstype == "FLOATBASE"));
 	VectorXd xmlconversion;
 	//Create Mbs system
 	mbsmodel = gcop_urdf::mbsgenerator(xml_string, mbstype);
+	//getchar();
+	mbsmodel->method = 1;
+	mbsmodel->iters = 4;
 	cout<<"Mbstype: "<<mbstype<<endl;
 	mbsmodel->ag << 0, 0, -0.05;
 	//get ag from parameters
@@ -222,6 +228,35 @@ int main(int argc, char** argv)
 		cout<<"Joint["<<mbsmodel->joints[count].name<<"].a"<<endl<<mbsmodel->joints[count].a<<endl;
 	}
 
+	cout<<"mbsmodel damping: "<<mbsmodel->damping.transpose()<<endl;
+	int ctrlveclength = (mbstype == "AIRBASE")? 4:
+		(mbstype == "FLOATBASE")? 6:
+		(mbstype == "FIXEDBASE")? 0:0;
+	cout<<"ctrlveclength "<<ctrlveclength<<endl;
+	//set bounds on basebody controls
+	XmlRpc::XmlRpcValue ub_list;
+	if(n.getParam("ulb", ub_list))
+	{
+		xml2vec(xmlconversion,ub_list);
+		ROS_ASSERT(xmlconversion.size() == ctrlveclength);
+		mbsmodel->U.lb.head(ctrlveclength) = xmlconversion;
+	}
+	//upper bound
+	if(n.getParam("uub", ub_list))
+	{
+		xml2vec(xmlconversion,ub_list);
+		ROS_ASSERT(xmlconversion.size() == ctrlveclength);
+		mbsmodel->U.ub.head(ctrlveclength) = xmlconversion;
+	}
+	cout<<"mbsmodel U.lb: "<<mbsmodel->U.lb.transpose()<<endl;
+	cout<<"mbsmodel U.ub: "<<mbsmodel->U.ub.transpose()<<endl;
+	cout<<"mbsmodel X.lb.gs[0]"<<endl<<mbsmodel->X.lb.gs[0]<<endl;
+	cout<<"mbsmodel X.ub.gs[0]"<<endl<<mbsmodel->X.ub.gs[0]<<endl;
+	cout<<"mbsmodel X.lb.vs[0]: "<<mbsmodel->X.lb.vs[0].transpose()<<endl;
+	cout<<"mbsmodel X.ub.vs[0]: "<<mbsmodel->X.ub.vs[0].transpose()<<endl;
+	//Initialize after setting everything up
+	mbsmodel->Init();
+
 	//Using it:
 	//define parameters for the system
 	int nb = mbsmodel->nb;
@@ -235,7 +270,7 @@ int main(int argc, char** argv)
 
 
 	//Define the initial state mbs
-	MbsState x(nb);
+	MbsState x(nb,(mbstype == "FIXEDBASE"));
 	x.gs[0].setIdentity();
 	x.vs[0].setZero();
 	x.dr.setZero();
@@ -265,16 +300,27 @@ int main(int argc, char** argv)
 	}
 	mbsmodel->Rec(x, h);
 
+	//Compute Mass matrix:
+  MatrixXd M(nb-1 + 6*(!mbsmodel->fixed), nb-1 + 6*(!mbsmodel->fixed));
+	mbsmodel->Mass(M,x);
+	cout<<"Mass Matrix: "<<endl<<M<<endl;
+	//Printing parent indices and joint names and link names:
+	for(int count = 0;count <(mbsmodel->nb);count++) 
+	{
+		cout<<"Links["<<count<<"] "<<mbsmodel->links[count].name<<endl;
+		cout<<"pis["<<count<<"]: "<<mbsmodel->pis[count]<<endl;
+	}
+
 	// initial controls (e.g. hover at one place)
 	VectorXd u(mbsmodel->U.n);
 	u.setZero();
-	if(mbstype == "airbase")
+	if(mbstype == "AIRBASE")
 	{
 		for(int count = 0;count < nb;count++)
 			u[3] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
 		cout<<"u[3]: "<<u[3]<<endl;
 	}
-	else
+	else if(mbstype == "FLOATBASE")
 	{
 		for(int count = 0;count < nb;count++)
 			u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
@@ -304,7 +350,7 @@ int main(int argc, char** argv)
 		trajectory.statemsg[i+1].names.resize(nb-1);
 		trajectory.ctrl[i].ctrlvec.resize(mbsmodel->U.n);
 	}
-	getchar();
+	//getchar();
 	
 	// Create timer for iterating	and publishing data
 	iteratetimer = n.createTimer(ros::Duration(0.1), simtraj);
