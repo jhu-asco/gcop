@@ -23,45 +23,51 @@ void MbsController::Set(VectorXd &u, double t, const MbsState &x)
 {
   // error in base body configuration
   Vector6d ge;
+  
+  int n = sys.nb - 1 + 6*(!sys.fixed);
 
   // full error in configuration
-  VectorXd e(5 + sys.nb); 
+  VectorXd e(n); 
 
   if (xd) {
-    Matrix4d gi;
-    SE3::Instance().inv(gi, xd->gs[0]);
-    SE3::Instance().log(ge, gi*x.gs[0]);
-    
-    e.head(6) = ge;
-    e.tail(sys.nb-1) = x.r - xd->r;    
-    
+    if (!fixed) {
+      Matrix4d gi;
+      SE3::Instance().inv(gi, xd->gs[0]);
+      SE3::Instance().log(ge, gi*x.gs[0]);      
+      e.head(6) = ge;
+    }
+    e.tail(sys.nb-1) = x.r - xd->r;        
   } else {
-    SE3::Instance().log(ge, x.gs[0]);
-    e.head(6) = ge;
+    if (!fixed) {
+      SE3::Instance().log(ge, x.gs[0]);
+      e.head(6) = ge;
+    }
     e.tail(sys.nb-1) = x.r;
   }
   
   // full error in velocity
-  VectorXd de(5 + sys.nb); 
+  VectorXd de(n);  
 
   if (xd) {
-    de.head(6) = x.vs[0] - xd->vs[0];
+    if (!fixed)
+      de.head(6) = x.vs[0] - xd->vs[0];
     de.tail(sys.nb - 1) = x.dr - xd->dr;
   } else {
-    de.head(6) = x.vs[0];
+    if (!fixed)
+      de.head(6) = x.vs[0];
     de.tail(sys.nb - 1) = x.dr;
   }
-
+  
   // desired change in velocity
   VectorXd dv = -Kp.cwiseProduct(e) - Kd.cwiseProduct(de);
   // add desired acceleration if provided
   if (ad)
     dv = dv + *ad;
 
-  MatrixXd M(sys.nb + 5, sys.nb + 5);
+  MatrixXd M(n, n);
   sys.Mass(M, x);
 
-  VectorXd b(sys.nb + 5);  // bias forces
+  VectorXd b(n);  // bias forces
   
   // compute bias b (bias means that M*dv + b = u)
   sys.Bias(b, t, x);
