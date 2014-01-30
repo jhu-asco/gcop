@@ -7,6 +7,7 @@
 #include "lqcost.h"
 #include "params.h"
 #include "mbscontroller.h"
+#include "se3.h"
 
 using namespace std;
 using namespace Eigen;
@@ -28,13 +29,13 @@ void solver_process(Viewer* viewer)
   params.GetInt("N", N);
   params.GetDouble("tf", tf);  
 
-  int nb = 3;     // nof bodies
+  int nb = 4;     // nof bodies
   params.GetInt("nb", nb);
 
   double h = tf/N; // time-step
 
   // fixed chain
-  Chain sys(nb, true);
+  Chain sys(nb,true);
 
   params.GetInt("method", sys.method);
   params.GetInt("iters", sys.iters);
@@ -46,6 +47,7 @@ void solver_process(Viewer* viewer)
 
   // acceleration due to gravity
   params.GetVector3d("ag", sys.ag);
+	sys.Init();
 
   int n = nb - 1; // movable bodies
 
@@ -53,8 +55,7 @@ void solver_process(Viewer* viewer)
   params.GetVectorXd("x0", qv0);
 
   MbsState x0(nb, true);
-  SE3::Instance().rpyxyz2g(x0.gs[0], Vector3d(M_PI/2,0,0), Vector3d(0,0,0));
-  //  x0.gs[0].setIdentity();
+  x0.gs[0].setIdentity();    
   x0.r = qv0.head(n);
   x0.dr = qv0.tail(n);
   sys.Rec(x0, h);
@@ -99,7 +100,7 @@ void solver_process(Viewer* viewer)
   if (viewer)
     viewer->Add(view);
 
-  // @MK: this is the new part, initialize trajectory using a controller
+  // not using it @MK: this is the new part, initialize trajectory using a controller
   MbsController ctrl(sys);
   params.GetVectorXd("Kp", ctrl.Kp);
   params.GetVectorXd("Kd", ctrl.Kd);
