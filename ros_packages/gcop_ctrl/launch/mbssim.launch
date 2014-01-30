@@ -1,8 +1,8 @@
 <launch>	
-	<arg name="parameters" default="$(find gcop_ctrl)/params/chain3.yaml"/>
-
-	<include file="$(find gcop_urdf)/launch/display_chain.launch">
-		<arg name="model" default="$(find gcop_ctrl)/params/chain3.urdf"/>
+	<arg name="parameters" default="$(find gcop_ctrl)/params/chain1_4.yaml"/>
+	<param name="mbssim" value="true"/>
+	<include file="$(find gcop_urdf)/launch/display_chainsim.launch">
+		<arg name="model" default="$(find gcop_ctrl)/params/chain1_4.urdf"/>
 	</include>
 
   <rosparam command="load" file="$(arg parameters)" />

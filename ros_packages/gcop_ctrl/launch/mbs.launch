@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>	
 	<arg name="parameters" default="$(find gcop_ctrl)/params/airbot4.yaml"/>
 

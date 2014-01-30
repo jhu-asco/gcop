@@ -7,7 +7,7 @@ mbsdmoc/Qf:   [2.0,2.0,2.0,2.0,  1.0,1.0,1.0,1.0]   #   Final   Cost
 mbsdmoc/Q:    [1.0,1.0,1.0,1.0,  1.0,1.0,1.0,1.0]   #   Final   Cost
 mbsdmoc/R:    [0.1,0.1,0.1,0.1] #Control Cost
 
-mbsdmoc/ag: [0.0, 0.0, 0.0] # Gravity
+mbsdmoc/ag: [0.0, 0.0, -9.81] # Gravity
 
 mbsdmoc/Kp:   [2.0,2.0,2.0,2.0]
 mbsdmoc/Kd:   [2.0,2.0,2.0,2.0]

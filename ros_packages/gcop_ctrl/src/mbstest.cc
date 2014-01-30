@@ -49,6 +49,7 @@ boost::shared_ptr<MbsController> ctrl;
 int Nit = 1;//number of iterations for dmoc
 int N = 100;      // discrete trajectory segments
 string mbstype; // Type of system
+Matrix4d gposeroot_i; //inital inertial frame wrt the joint frame
 
 void q2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
 {
@@ -85,7 +86,8 @@ void pubtraj() //N is the number of segments
 	cout<<"nb: "<<nb<<endl;
 	Vector6d bpose;
 
-	gcop::SE3::Instance().g2q(bpose, mbsdmoc->xs[0].gs[0]);
+	//gcop::SE3::Instance().g2q(bpose, mbsdmoc->xs[0].gs[0]);
+	gcop::SE3::Instance().g2q(bpose,gposeroot_i*mbsdmoc->xs[0].gs[0]);
 	q2transform(trajectory.statemsg[0].basepose,bpose);
 
 	for(int count1 = 0;count1 < nb-1;count1++)
@@ -96,7 +98,7 @@ void pubtraj() //N is the number of segments
 
 	for (int i = 0; i < N; ++i) 
 	{
-		gcop::SE3::Instance().g2q(bpose, mbsdmoc->xs[i+1].gs[0]);
+		gcop::SE3::Instance().g2q(bpose, gposeroot_i*mbsdmoc->xs[i+1].gs[0]);
 		q2transform(trajectory.statemsg[i+1].basepose,bpose);
 		for(int count1 = 0;count1 < nb-1;count1++)
 		{
@@ -109,7 +111,7 @@ void pubtraj() //N is the number of segments
 		}
 	}
 	//final goal:
-	gcop::SE3::Instance().g2q(bpose, xf->gs[0]);
+	gcop::SE3::Instance().g2q(bpose, gposeroot_i*xf->gs[0]);
 	q2transform(trajectory.finalgoal.basepose,bpose);
 
 	for(int count1 = 0;count1 < nb-1;count1++)
@@ -313,12 +315,26 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 			cout<<"u[5]: "<<u[5]<<endl;
 		}
 		int size = mbsdmoc->us.size();
-		for(int count = 0;count < size;count++)
+		double t1;
+		/*if((mbstype == "FLOATBASE")||(mbstype == "FIXEDBASE"))
 		{
-			mbsdmoc->us[count] = u;
-			mbsmodel->Step(mbsdmoc->xs[count+1], count*h, mbsdmoc->xs[count], mbsdmoc->us[count], h);
-			//mbsdmoc->xs[count] = mbsdmoc->xs[0];
+			cout<<"Using Controller"<<endl;
+			for (int i = 0; i < size; ++i) {
+				t1 = i*h;
+				ctrl->Set(mbsdmoc->us[i], t1, mbsdmoc->xs[i]); 
+				mbsmodel->Step(mbsdmoc->xs[i+1], t1, mbsdmoc->xs[i], mbsdmoc->us[i], h);
+			}
 		}
+		else
+		{
+			*/
+			for(int count = 0;count < size;count++)
+			{
+				mbsdmoc->us[count] = u;
+				mbsmodel->Step(mbsdmoc->xs[count+1], count*h, mbsdmoc->xs[count], mbsdmoc->us[count], h);
+				//mbsdmoc->xs[count] = mbsdmoc->xs[0];
+			}
+		//}
 	}
 
 
@@ -388,8 +404,11 @@ int main(int argc, char** argv)
 	n.getParam("basetype",mbstype);
 	assert((mbstype == "FIXEDBASE")||(mbstype == "AIRBASE")||(mbstype == "FLOATBASE"));
 	VectorXd xmlconversion;
+	Matrix4d gposei_root;
 	//Create Mbs system
-	mbsmodel = gcop_urdf::mbsgenerator(xml_string, mbstype);
+	mbsmodel = gcop_urdf::mbsgenerator(xml_string,gposei_root, mbstype);
+	mbsmodel->U.bnd = false;
+	gcop::SE3::Instance().inv(gposeroot_i,gposei_root);
 	cout<<"Mbstype: "<<mbstype<<endl;
 	mbsmodel->ag << 0, 0, -0.05;
 	//get ag from parameters
@@ -477,6 +496,7 @@ int main(int argc, char** argv)
 		xf->vs[0] = xmlconversion.tail<6>();
 		gcop::SE3::Instance().rpyxyz2g(xf->gs[0],xmlconversion.head<3>(),xmlconversion.segment<3>(3)); 
 	}
+	xf->gs[0] = gposei_root*xf->gs[0];//new stuff with transformations
   //list of joint angles:
 	XmlRpc::XmlRpcValue xfj_list;
 	if(n.getParam("JN", xfj_list))
@@ -549,6 +569,7 @@ int main(int argc, char** argv)
 		x0.vs[0] = xmlconversion.tail<6>();
 		gcop::SE3::Instance().rpyxyz2g(x0.gs[0],xmlconversion.head<3>(),xmlconversion.segment<3>(3)); 
 	}
+	x0.gs[0] = gposei_root*x0.gs[0];//new stuff with transformations
   //list of joint angles:
 	XmlRpc::XmlRpcValue j_list;
 	if(n.getParam("J0", j_list))
@@ -581,7 +602,7 @@ int main(int argc, char** argv)
 	bool usectrl = true;
 
 	// @MK: this is the new part, initialize trajectory using a controller
-	if(mbstype == "FLOATBASE")
+	if((mbstype == "FLOATBASE")||(mbstype == "FIXEDBASE"))
 	{
 		ctrl.reset(new MbsController(*mbsmodel, xf.get()));
 
@@ -602,6 +623,7 @@ int main(int argc, char** argv)
 		n.getParam("usectrl",usectrl);
 		if(usectrl)
 		{
+			cout<<"Using Controller"<<endl;
 			for (int i = 0; i < xs.size()-1; ++i) {
 				double t = i*h;
 				ctrl->Set(us[i], t, xs[i]); 
@@ -625,6 +647,8 @@ int main(int argc, char** argv)
 	trajectory.statemsg.resize(N+1);
 	trajectory.ctrl.resize(N);
 	trajectory.time = ts;
+	trajectory.rootname = mbsmodel->links[0].name;
+
 	trajectory.finalgoal.statevector.resize(nb-1);
 	trajectory.finalgoal.names.resize(nb-1);
 

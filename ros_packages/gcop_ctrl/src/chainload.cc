@@ -53,7 +53,8 @@ int main(int argc, char** argv)
 
 	string mbstype;
 	n.getParam("basetype",mbstype);
-	boost::shared_ptr<Mbs> mbsmodel = gcop_urdf::mbsgenerator(xml_string,mbstype);
+	Matrix4d gposei_root;
+	boost::shared_ptr<Mbs> mbsmodel = gcop_urdf::mbsgenerator(xml_string,gposei_root,mbstype);
 	//set no gravity:
 	mbsmodel->ag << 0, 0, -9.81;
 

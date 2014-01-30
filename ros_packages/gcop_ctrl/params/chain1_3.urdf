@@ -8,43 +8,44 @@
       </geometry>
     </visual>
     <inertial>
-      <mass value="3"/>
-      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.0001"/>
+      <inertia ixx="1e-08" ixy="0" ixz="0" iyy="1e-08" iyz="0" izz="1e-08"/>
     </inertial>
   </link>
   <link name="link1">
     <visual>
-			<origin rpy="0 0 0" xyz="0.05 0.0 0"/>
+      <origin rpy="0 0 0" xyz="0.05 0.0 0"/>
       <geometry>
-        <box size="0.1 .10 0.05"/>
+        <box size="0.1 0.1 0.05"/>
       </geometry>
       <material name="blue">
         <color rgba="0 0 0.8 1"/>
       </material>
     </visual>
     <inertial>
-			<origin rpy="0 0 0" xyz="0.05 0.0 0"/>
-      <mass value="1"/>
-      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+      <origin rpy="0 0 0" xyz="0.05 0.0 0.0"/>
+      <mass value="5.70044"/>
+      <inertia ixx="0.04709102262" ixy="0.00012787556" ixz="0.00614870039" iyy="0.03766976455" iyz="0.00078086899" izz="0.03595988478"/>
     </inertial>
   </link>
   <link name="link2">
     <visual>
-			<origin rpy="0 0 0" xyz="-0.05 0.0 0"/>
+      <origin rpy="0 0 0" xyz="0.05 0.0 0"/>
       <geometry>
-        <box size="0.1 .10 0.05"/>
+        <box size="0.1 0.1 0.05"/>
       </geometry>
       <material name="blue">
         <color rgba="0 0 0.8 1"/>
       </material>
     </visual>
     <inertial>
-			<origin rpy="0 0 0" xyz="-0.05 0.0 0"/>
-      <mass value="1"/>
-      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+      <origin rpy="0 0 0" xyz="0.05 0.0 0.0"/>
+      <mass value="3.22698"/>
+      <inertia ixx="0.01175209419" ixy="-0.00030096398" ixz="0.00207675762" iyy="0.0278859752" iyz="-0.00018821993" izz="0.02078749298"/>
     </inertial>
   </link>
- <!-- Joints -->
+  <!-- Joints -->
   <joint name="basetoroot" type="fixed">
     <parent link="baselink"/>
     <child link="chainbase"/>
@@ -53,17 +54,17 @@
   <joint name="roottolink1" type="revolute">
     <parent link="chainbase"/>
     <child link="link1"/>
-    <origin rpy="0 0 0" xyz="0.15 0.0 0"/>
-    <axis xyz="0 -1 0"/>
-		<limit effort="30" velocity="5.0" lower="-5" upper="5" />
-		<dynamics damping="0.1" friction="0.0"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7" friction="0.0"/>
+    <limit effort="100" velocity="1.5" lower="-1.7" upper="1.7"/>
   </joint>
-  <joint name="roottolink2" type="revolute">
-    <parent link="chainbase"/>
+  <joint name="link1tolink2" type="revolute">
+    <parent link="link1"/>
     <child link="link2"/>
-    <origin rpy="0 0 0" xyz="-0.15 0.0 0"/>
-    <axis xyz="0 -1 0"/>
-		<limit effort="30" velocity="5.0" lower="-5" upper="5" />
-		<dynamics damping="0.1" friction="0.0"/>
+		<origin rpy="-1.57079632679 0 0" xyz="0.1 0 0.0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7" friction="0.0"/>
+    <limit effort="100" velocity="1.5" lower="-2.147" upper="1.047"/>
   </joint>
 </robot>

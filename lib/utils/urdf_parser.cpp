@@ -96,7 +96,7 @@ void transformtoprincipal(boost::shared_ptr<Link> link)
 	Matrix3d zero = principaltransform*principaltransform.transpose() - Matrix3d::Identity();
 	//cout<<"trial lpnorm "<<zero.determinant()<<endl;
 	//assert statement for checking rotation matrix:
-	assert(abs(zero.determinant()) < 1e-3);
+	assert((zero.transpose()*zero).trace() < 1e-6);
 
 	gcop::Vector4d vrotfi_pi;
 	gcop::SO3::Instance().g2quat(vrotfi_pi,principaltransform);
@@ -308,11 +308,14 @@ void walkTree(boost::shared_ptr<Link> link, int level,int &index,boost::shared_p
 				//decide the transformations:
 				mbs->joints[index].gp = diffpose(childlink->parent_joint->parent_to_joint_origin_transform,link->inertial->origin);
 
-				//can change to convert to quatxyz2g
-				double r,p,y;
-				childlink->inertial->origin.rotation.getRPY(r,p,y);
+				Pose cinv = childlink->inertial->origin.GetInverse();
+				//childlink->inertial->origin.rotation.getRPY(r,p,y);
+				gcop::Matrix4d gposei_c;
+				gcop::Vector7d cposevec;
+				cposevec<<cinv.rotation.w,cinv.rotation.x,cinv.rotation.y,cinv.rotation.z,cinv.position.x,cinv.position.y,cinv.position.z;
+				gcop::SE3::Instance().quatxyz2g(mbs->joints[index].gc,cposevec);
 
-				gcop::SE3::Instance().rpyxyz2g(mbs->joints[index].gc,Vector3d(r,p,y),Vector3d(childlink->inertial->origin.position.x,childlink->inertial->origin.position.y,childlink->inertial->origin.position.z));
+				//gcop::SE3::Instance().rpyxyz2g(mbs->joints[index].gc,Vector3d(r,p,y),Vector3d(childlink->inertial->origin.position.x,childlink->inertial->origin.position.y,childlink->inertial->origin.position.z));
 				cout<<"level: "<<level<<endl;
 				cout<<" Child name "<<childlink->name<<endl;
 
@@ -332,10 +335,12 @@ void walkTree(boost::shared_ptr<Link> link, int level,int &index,boost::shared_p
 				mbs->links[index].I(4) = childlink->inertial->mass;
 				mbs->links[index].I(5) = childlink->inertial->mass;
 				mbs->links[index].name = childlink->name;
+				cout<<"Inertia matrix "<<mbs->links[index].I<<endl;
 				// make ds = 0;
 				mbs->links[index].ds = Vector3d(0,0,0);
 				mbs->pis[index] = level; //added parent index to the list.
 				cout<<"Index: "<<index<<" Level: "<<level<<" childlink visited status false;  childlink name: "<<childlink->name<<endl;
+				//Debug stuff to see if the joints are made right:
 				//getchar();
 				walkTree(*child,index,index,mbs);
 			}
@@ -371,7 +376,7 @@ void findnofactivejoints(boost::shared_ptr<Link> link, int &count)
 			
 	}
 }
-boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, string type)
+boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, gcop::Matrix4d &gposei_root, string type)
 {
 	//parse the xml file into a urdf model
 	boost::shared_ptr<ModelInterface> urdfmodel = parseURDF(xml_string);
@@ -436,6 +441,10 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, string type)
 
 	mbs->pis[index] = -1; //added parent index to the list.
 	
+	gcop::Vector7d posevec;
+	//Pose ci_v = root_link->inertial->origin.GetInverse()*root_link->visual->origin;
+	posevec<<root_link->inertial->origin.rotation.w,root_link->inertial->origin.rotation.x,root_link->inertial->origin.rotation.y,root_link->inertial->origin.rotation.z,root_link->inertial->origin.position.x,root_link->inertial->origin.position.y,root_link->inertial->origin.position.z;
+	gcop::SE3::Instance().quatxyz2g(gposei_root,posevec);
 
 	cout<<"index: "<<index<<endl;
 	cout<<"Level: -1"<<endl;
@@ -443,8 +452,8 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, string type)
 	walkTree(root_link,0,index,mbs);
 	//assign bounds on X and U:
 	//make U bounded
-	mbs->U.bnd = true;
-	mbs->X.bnd = false;
+	//mbs->U.bnd = true;
+	//mbs->X.bnd = false;
 	mbs->X.lb.gs[0].setIdentity();
 	mbs->X.ub.gs[0].setIdentity();
 	if(type == "FIXEDBASE")

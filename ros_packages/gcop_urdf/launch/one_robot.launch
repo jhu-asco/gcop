@@ -1,0 +1,10 @@
+<launch>
+	<arg name="robot_name"/>
+	<arg name="init_pose"/>
+
+	<node pkg="robot_state_publisher" type="state_publisher" 
+	name="robot_state_publisher" output="screen"/>
+
+	<!-- The odometry estimator, throttling, fake laser etc. go here -->
+	<!-- All the stuff as from usual robot launch file -->
+</launch>

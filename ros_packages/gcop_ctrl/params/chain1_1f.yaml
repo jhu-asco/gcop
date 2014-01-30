@@ -1,0 +1,27 @@
+## Controller Params
+mbsdmoc/tf: 5 # Final Time
+mbsdmoc/N: 200 # Number of segments
+
+             #rpy         #xyz            #vrpy       #vxyz
+mbsdmoc/X0: [-1.57,0.0,0.0, -2.0,-1.0,0.0,  0.0,0.0,0.0, 0.0,0.0,0.0]
+                  #rpy                   #xyz               #r            #w0                      #v0             #dr
+mbsdmoc/Qf:   [1.0,1.0, 1.0,1.0]   #   Final   Cost
+mbsdmoc/Q:    [1.0,1.0, 1.0,1.0]   #   Final   Cost
+mbsdmoc/R:    [0.1,0.1] #Control Cost
+
+mbsdmoc/ag: [0.0, 0.0, -9.81] # Gravity
+
+mbsdmoc/Kp:   [2.0,2.0]
+mbsdmoc/Kd:   [2.0,2.0]
+
+mbsdmoc/J0: [1.0, 1.0]
+mbsdmoc/JN: [0.0, 0.0] # Joint angles
+
+
+mbsdmoc/basetype: "FIXEDBASE"
+
+mbsdmoc/mu: 0.001 
+
+mbsdmoc/Nit: 1 
+
+

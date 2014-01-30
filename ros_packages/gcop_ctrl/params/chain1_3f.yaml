@@ -12,8 +12,8 @@ mbsdmoc/ag: [0.0, 0.0, -9.81] # Gravity
 mbsdmoc/Kp:   [2.0,2.0]
 mbsdmoc/Kd:   [2.0,2.0]
 
-mbsdmoc/J0: [rad(pi/2), rad(0)]
-mbsdmoc/JN: [rad(pi/2), rad(0)] # Joint angles
+mbsdmoc/J0: [0.0, 0.0]
+mbsdmoc/JN: [0.0, 0.0] # Joint angles
 
 mbsdmoc/Jv0: [0.0, 0.0]
 mbsdmoc/JvN: [0.0, 0.0] # Joint angles
