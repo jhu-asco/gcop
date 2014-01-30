@@ -59,7 +59,6 @@ namespace gcop {
      */
     void Iterate();
 
-
     /**
      * Update the trajectory and (optionally) its linearization
      * @param der whether to update derivatives (A and B matrices)
@@ -272,7 +271,7 @@ namespace gcop {
         T &xb = xs[k+1];
         const Vectorcd &u = us[k];
 
-        sys.Step(xb, ts[k], xa, u, h, &As[k], &Bs[k]);
+        sys.Step(xb, ts[k], xa, u, h, 0, &As[k], &Bs[k], 0);
 
         //        cout << "B=" << endl << Bs[k] << endl;
         

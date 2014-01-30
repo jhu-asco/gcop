@@ -16,8 +16,8 @@ Rccar::Rccar() : System(Rn<4>::Instance(), Rn<2>::Instance()), l(.3)
 
 
 double Rccar::Step(Vector4d& xb, double t, const Vector4d& xa,
-                 const Vector2d& u, double h,
-                 Matrix4d *A, Matrix42d *B) {
+                   const Vector2d& u, double h, const VectorXd *p,
+                   Matrix4d *A, Matrix42d *B, Matrix4Xd *C) {
   double c = cos(xa[2]);
   double s = sin(xa[2]);
   const double &v = xa[3];

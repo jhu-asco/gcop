@@ -3,10 +3,12 @@
 
 #include <Eigen/Dense>
 #include "manifold.h"
+#include <iostream>
 
 namespace gcop {
 
   using namespace Eigen;
+  using namespace std;
   
   /**
    * Cost interface for optimal control on manifolds. 
@@ -98,6 +100,7 @@ namespace gcop {
                                   Matrix<double, _n, 1> *Lx, Matrix<double, _n, _n>* Lxx,
                                   Matrix<double, _c, 1> *Lu, Matrix<double, _c, _c>* Luu,
                                   Matrix<double, _n, _c> *Lxu) {
+    cout << "[W] Cost:L: unimplemented!" << endl;
     return 0;
   }
   
@@ -109,6 +112,7 @@ namespace gcop {
                                    Matrix<double, _n, _c> *Lxu,
                                    Matrix<double, Dynamic, 1> *Lp, Matrix<double, Dynamic, Dynamic> *Lpp,
                                    Matrix<double, Dynamic, _n> *Lpx) {
+    cout << "[W] Cost:Lp: unimplemented!" << endl;
     return 0;
   }
 }

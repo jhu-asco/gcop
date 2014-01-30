@@ -3,8 +3,9 @@
 using namespace gcop;
 
 MbsView::MbsView(const Mbs &sys,
-                 vector<MbsState> *xs) : 
-  SystemView<MbsState>("Mbs", xs), sys(sys)
+                 vector<MbsState> *xs,
+                 vector<VectorXd> *us) : 
+  SystemView<MbsState, VectorXd>("Mbs", xs, us), sys(sys)
 {
   this->rgba[0] = 0.5;
   this->rgba[1] = 0.5;
@@ -20,7 +21,7 @@ MbsView::~MbsView()
   free(this->qobj);
 }
 
-void MbsView::Render(const MbsState &x)
+void MbsView::Render(const MbsState *x, const VectorXd *u)
 {
   //   glColor4f(1,0.5,0.5,0.5);
   assert(geomViews.size() == sys.nb);
@@ -28,7 +29,7 @@ void MbsView::Render(const MbsState &x)
   for (int i = 0; i < sys.nb; ++i) {
     glPushMatrix();
     
-    Geom3dView::Transform(x.gs[i]);
+    Geom3dView::Transform(x->gs[i]);
     
     // glScaled(sys.links[i].ds[0], sys.links[i].ds[1], sys.links[i].ds[2]); 
     assert(geomViews[i]);
@@ -41,7 +42,8 @@ void MbsView::Render(const MbsState &x)
 }
 
 
-void MbsView::Render(const vector<MbsState> &xs, 
+void MbsView::Render(const vector<MbsState> *xs, 
+                     const vector<VectorXd> *us, 
                      bool rs, 
                      int is, int ie,
                      int dis, int dit,
@@ -54,16 +56,16 @@ void MbsView::Render(const vector<MbsState> &xs,
   if (is == -1)
     is = 0;
   if (ie == -1)
-    ie = xs.size()-1;
+    ie = xs->size()-1;
   
-  assert(is >= 0 && is <= xs.size()-1 && ie >= 0 && ie <= xs.size()-1);
+  assert(is >= 0 && is <= xs->size()-1 && ie >= 0 && ie <= xs->size()-1);
   assert(is <= ie);
 
   glDisable(GL_LIGHTING);
   glLineWidth(this->lineWidth);
   glBegin(GL_LINE_STRIP);
   for (int i = is; i <= ie; i+=dit) {
-    const MbsState &x = xs[i];
+    const MbsState &x = (*xs)[i];
     glVertex3d(x.gs[0](0,3), x.gs[0](1,3), x.gs[0](2,3));
   }
   glEnd();
@@ -71,11 +73,15 @@ void MbsView::Render(const vector<MbsState> &xs,
   glEnable(GL_LIGHTING);
   
   if (rs) {
-    for (int i = 0; i < xs.size(); i+=dis) {
-      Render(xs[i]);
+    for (int i = 0; i < xs->size(); i+=dis) {
+      if (us) {
+        Render(&(*xs)[i], i < us->size() ? &(*us)[i] : 0);
+      } else {
+        Render(&(*xs)[i]);
+      }
     }
   }
 
   if (dl)
-    Render(xs.back());
+    Render(&xs->back());
 }

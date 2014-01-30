@@ -9,6 +9,9 @@ target_link_libraries(unicycletest gcop  ${LIBS})
 add_executable(gunicycletest gunicycletest.cc)
 target_link_libraries(gunicycletest gcop  ${LIBS})
 
+add_executable(body2dtest body2dtest.cc)
+target_link_libraries(body2dtest gcop  ${LIBS})
+
 add_executable(body3dtest body3dtest.cc)
 target_link_libraries(body3dtest gcop  ${LIBS})
 
@@ -18,7 +21,6 @@ target_link_libraries(qrotortest gcop  ${LIBS})
 add_executable(hrotortest hrotortest.cc)
 target_link_libraries(hrotortest gcop  ${LIBS})
 
-
 add_executable(helitest helitest.cc)
 target_link_libraries(helitest gcop  ${LIBS})
 
@@ -27,6 +29,20 @@ target_link_libraries(helicartest gcop  ${LIBS})
 
 add_executable(batest batest.cc)
 target_link_libraries(batest gcop  ${LIBS})
+
+add_executable(body2dslamtest body2dslamtest.cc)
+target_link_libraries(body2dslamtest gcop  ${LIBS})
+
+add_executable(body2dtracktest body2dtracktest.cc)
+target_link_libraries(body2dtracktest gcop  ${LIBS})
+
+add_executable(body2dtracktest2 body2dtracktest2.cc)
+target_link_libraries(body2dtracktest2 gcop  ${LIBS})
+
+
+add_executable(extforceslamtest extforceslamtest.cc)
+target_link_libraries(extforceslamtest gcop  ${LIBS})
+
 
 add_executable(cartest cartest.cc)
 target_link_libraries(cartest gcop  ${LIBS})
@@ -39,7 +55,6 @@ target_link_libraries(cecartest gcop  ${LIBS})
 
 add_executable(cechaintest cechaintest.cc)
 target_link_libraries(cechaintest gcop  ${LIBS})
-
 
 add_executable(chaintest chaintest.cc)
 target_link_libraries(chaintest gcop  ${LIBS})
@@ -61,7 +76,6 @@ target_link_libraries(fixedchaintest gcop  ${LIBS})
 
 add_executable(pendtest pendtest.cc)
 target_link_libraries(pendtest gcop  ${LIBS})
-
 
 add_executable(chaineltest chaineltest.cc)
 target_link_libraries(chaineltest gcop  ${LIBS})

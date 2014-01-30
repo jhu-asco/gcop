@@ -11,8 +11,8 @@ Particle2d::Particle2d() : System(Rn<4>::Instance(), Rn<2>::Instance()), m(1), r
 
 
 double Particle2d::Step(Vector4d& xb, double t, const Vector4d& xa,
-                        const Vector2d& u, double h,
-                        Matrix4d *A, Matrix<double, 4, 2> *B) {
+                        const Vector2d& u, double h, const VectorXd *p,
+                        Matrix4d *A, Matrix<double, 4, 2> *B, Matrix<double, 4, Dynamic> *C) {
 
   xb.head(2) = xa.head(2) + h*xa.tail(2);
   xb.tail(2) = xa.tail(2) + (h/m)*u;

@@ -1,7 +1,7 @@
 #ifndef GCOP_UTILS_H
 #define GCOP_UTILS_H
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <cmath>
 #include <sys/time.h>
 #include <cstring>
@@ -34,7 +34,7 @@ namespace gcop {
 #endif
 
 #ifndef RND
-#define RND (rand()/(double)RAND_MAX)
+#define RND (std::rand()/(double)RAND_MAX)
 #endif
 
 #define TIME_CMP(a,b) (a.tv_sec != b.tv_sec || a.tv_usec != b.tv_usec)
@@ -135,8 +135,8 @@ inline double random_normal()
   double U1,U2,V1,V2;
   double S = 2;
   while(S>=1) {
-    U1 = rand()/r_max;
-    U2 = rand()/r_max;
+    U1 = std::rand()/r_max;
+    U2 = std::rand()/r_max;
     V1 = 2*U1-1;
     V2 = 2*U2-1;
     S = V1*V1+V2*V2;

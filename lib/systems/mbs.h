@@ -127,13 +127,13 @@ namespace gcop {
     void Init();
 
     double F(VectorXd &v, double t, const MbsState &xa, 
-             const VectorXd &u, double h,
-             MatrixXd *A = 0, MatrixXd *B = 0);
+             const VectorXd &u, double h, const VectorXd *p = 0,
+             MatrixXd *A = 0, MatrixXd *B = 0, MatrixXd *C = 0);
     
     
     double Step(MbsState& xb, double t, const MbsState& xa,
-                const VectorXd &u, double h,
-                MatrixXd *A = 0, MatrixXd *B = 0);
+                const VectorXd &u, double h, const VectorXd *p = 0,
+                MatrixXd *A = 0, MatrixXd *B = 0, MatrixXd *C = 0);
 
 
     double EulerStep(MbsState& xb, double t, const MbsState& xa,

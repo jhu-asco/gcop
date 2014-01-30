@@ -7,20 +7,23 @@
 namespace gcop {
   using namespace Eigen;
 
-  class Normal2dView : public SystemView<Normal> {
+  class Normal2dView : public SystemView<Normal, Vector2d> {
   public:
     /**
      *  Create a normal view of trajectory traj
      * @param sys normal
      * @param xs trajectory
      */
-    Normal2dView(vector<Normal> *gds = 0);
+    Normal2dView(vector<Normal> *gds = 0,
+                 vector<Vector2d> *us = 0);
 
     virtual ~Normal2dView();       
 
-    void Render(const Normal &gd);
+    void Render(const Normal *gd,
+                const Vector2d *u = 0);
     
-    void Render(const vector<Normal> &gds,
+    void Render(const vector<Normal> *gds = 0,
+                const vector<Vector2d> *us = 0,
                 bool rs = true,
                 int is = -1, int ie = -1,
                 int dis = 1, int dit = 1,

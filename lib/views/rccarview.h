@@ -7,7 +7,7 @@
 namespace gcop {
   using namespace Eigen;
 
-  class RccarView : public SystemView<Vector4d> {
+  class RccarView : public SystemView<Vector4d, Vector2d> {
   public:
 
     /**
@@ -16,14 +16,16 @@ namespace gcop {
      * @param xs trajectory
      */
     RccarView(const Rccar &sys,
-            vector<Vector4d> *xs = 0);
+              vector<Vector4d> *xs = 0,
+              vector<Vector2d> *us = 0);
 
     virtual ~RccarView();
        
 
-    void Render(const Vector4d &x);
+    void Render(const Vector4d *x, const Vector2d *u = 0);
     
-    void Render(const vector<Vector4d> &xs, 
+    void Render(const vector<Vector4d> *xs, 
+                const vector<Vector2d> *us = 0, 
                 bool rs = true,
                 int is = -1, int ie = -1,
                 int dis = 1, int dit = 1,

@@ -53,7 +53,8 @@ void solver_process(Viewer* viewer)
   params.GetVectorXd("x0", qv0);
 
   MbsState x0(nb, true);
-  x0.gs[0].setIdentity();    
+  SE3::Instance().rpyxyz2g(x0.gs[0], Vector3d(M_PI/2,0,0), Vector3d(0,0,0));
+  //  x0.gs[0].setIdentity();
   x0.r = qv0.head(n);
   x0.dr = qv0.tail(n);
   sys.Rec(x0, h);

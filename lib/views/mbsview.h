@@ -18,7 +18,7 @@ namespace gcop {
 
   using namespace Eigen;
   
-    class MbsView : public SystemView<MbsState> {
+  class MbsView : public SystemView<MbsState, VectorXd> {
   public:
     
     /**
@@ -27,14 +27,17 @@ namespace gcop {
      * @param xs trajectory
      */
     MbsView(const Mbs &sys,
-            vector<MbsState> *xs = 0);
+            vector<MbsState> *xs = 0,
+            vector<VectorXd> *us = 0);
     
     virtual ~MbsView();
     
     
-    virtual void Render(const MbsState &x);
+    virtual void Render(const MbsState *x,
+                        const VectorXd *u = 0);
     
-    void Render(const vector<MbsState> &xs, 
+    void Render(const vector<MbsState> *xs,
+                const vector<VectorXd> *us = 0,
                 bool rs = true,
                 int is = -1, int ie = -1,
                 int dis = 1, int dit = 1,

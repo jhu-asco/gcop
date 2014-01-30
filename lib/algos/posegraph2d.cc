@@ -197,19 +197,6 @@ void Posegraph2d::Synthesize2(Posegraph2d &pgt, Posegraph2d &pgn, double tf)
     }
   }
 
-  /*
-  cout << "N=" << N << " " << gs.size() << endl;
-  cout << p.size() << endl;
-  cout << "p=" << p << endl;
-  cout << "gs[N]=" << gs[N];
-  cout << "Is[N]=" << Is[N][0].first << " " << Is[N][0].second << endl;
- 
-  for (int k=0; k< Js[Is[N][0].first].size(); ++k)
-    cout << "Js[x]=" << Js[Is[N][0].first][k].first << " " << Js[Is[N][0].first][k].second << endl;
-  */
-  //  exit(0);
-  
-  // estimate noisy features
 
   pgn.Is = pgt.Is;
   pgn.Js = pgt.Js;

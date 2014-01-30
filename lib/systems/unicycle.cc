@@ -11,8 +11,8 @@ Unicycle::Unicycle() : System(Rn<5>::Instance(), Rn<2>::Instance()), dx(.25), dy
 
 
 double Unicycle::Step(Vector5d& xb, double t, const Vector5d& xa,
-                   const Vector2d& u, double h,
-                   Matrix5d *A, Matrix52d *B) {
+                      const Vector2d& u, double h, const VectorXd *p,
+                      Matrix5d *A, Matrix52d *B, Matrix5Xd *C) {
   double c = cos(xa[2]);
   double s = sin(xa[2]);
   double v = xa[3];

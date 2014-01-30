@@ -2,16 +2,26 @@ set(headers
       dmoc.h
       pdmoc.h
       ba.h
+      body2dslam.h
       bacost.h
+      body2dslamcost.h
+      body2dgraph.h
       posegraph2d.h
       controller.h
       mbscontroller.h
       systemce.h
+      body2dtrack.h
+      body2dtrackcost.h
 )
 
 set(sources
       ba.cc
       bacost.cc
+      body2dslam.cc
+      body2dslamcost.cc
+      body2dgraph.cc
       posegraph2d.cc
       mbscontroller.cc
+      body2dtrack.cc
+      body2dtrackcost.cc
 )

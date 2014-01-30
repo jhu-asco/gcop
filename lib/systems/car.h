@@ -12,6 +12,7 @@ namespace gcop {
   typedef Matrix<double, 5, 1> Vector5d;
   typedef Matrix<double, 5, 5> Matrix5d;
   typedef Matrix<double, 5, 2> Matrix52d;
+  typedef Matrix<double, 5, Dynamic> Matrix5Xd;
 
    /**
    * A simple rear-drive car model with 2nd order dynamics. 
@@ -28,8 +29,8 @@ namespace gcop {
     Car();
     
     double Step(Vector5d &xb, double t, const Vector5d &xa,
-                const Vector2d &u, double h,
-                Matrix5d *A = 0, Matrix52d *B = 0);
+                const Vector2d &u, double h, const VectorXd *p = 0,
+                Matrix5d *A = 0, Matrix52d *B = 0, Matrix5Xd *C = 0);
     
     double l; ///< distance between axles
   };  

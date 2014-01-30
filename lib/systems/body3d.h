@@ -323,7 +323,6 @@ template<int c>  Body3d<c>::~Body3d()
   }
 
 
-
   template <int c>
     double Body3d<c>::Feuler(double t, Body3dState &xb, const Body3dState &xa, 
                              const Matrix<double, c, 1> &u, double h,

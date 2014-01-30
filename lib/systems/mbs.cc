@@ -41,8 +41,8 @@ Mbs::Mbs(int nb, int c, bool fixed) : nb(nb), fixed(fixed),
 {
   //ag << 0, 0, -9.81;
 }
+
  
-  
 Mbs::~Mbs()
 {
   delete &U;
@@ -86,6 +86,7 @@ void Mbs::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
   }
 }
 
+
 void Mbs::Init() 
 {
   //  Ips[0] = links[0].I.asDiagonal();
@@ -105,8 +106,8 @@ void Mbs::Init()
 
 
 double Mbs::F(VectorXd &v, double t, const MbsState &x, 
-              const VectorXd &u, double h,
-              MatrixXd *A, MatrixXd *B)
+              const VectorXd &u, double h, const VectorXd *p,
+              MatrixXd *A, MatrixXd *B, MatrixXd *C)
 {
   MatrixXd M(nb + 5, nb + 5);
   Mass(M, x);
@@ -400,6 +401,7 @@ void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u)
 
   VectorXd b(n); // bias
   Bias(b, t, x);
+
   //  b.setZero();
   
   //  cout << "b=" << b.transpose() << endl;
@@ -423,8 +425,8 @@ void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u)
 
 
 double Mbs::Step(MbsState& xb, double t, const MbsState& xa,
-                 const VectorXd &u, double h,
-                 MatrixXd *A, MatrixXd *B)
+                 const VectorXd &u, double h, const VectorXd *p,
+                 MatrixXd *A, MatrixXd *B, MatrixXd *C)
 {
   //  if (method == EULER)
   //    return System::Step(xb, t, xa, u, h, A, B);
@@ -714,7 +716,6 @@ void Mbs::KStep(MbsState &xb, const MbsState &xa, double h, bool impl) {
     ClampShape(xb, i-1);
 
     //    cout << xb.r[i-1]*jnt.a << endl;
-
     se3.exp(dg, xb.r[i-1]*jnt.a);
     
     assert(!std::isnan(dg(0,0)));

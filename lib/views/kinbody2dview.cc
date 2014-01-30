@@ -22,8 +22,9 @@ Kinbody2dView::Kinbody2dView(const Kinbody2d &sys) :
 }
 
 Kinbody2dView::Kinbody2dView(const Kinbody2d &sys, 
-                             vector<Matrix3d> *xs) : 
-  SystemView("Kinbody2d", xs), sys(sys)
+                             vector<Matrix3d> *xs,
+                             vector<Vector3d> *us) : 
+  SystemView("Kinbody2d", xs, us), sys(sys)
 {
   rgba[0] = 0.5;
   rgba[1] = 0.5;
@@ -40,10 +41,11 @@ Kinbody2dView::~Kinbody2dView()
 }
 
 
-void Kinbody2dView::Render(const Matrix3d &x)
+void Kinbody2dView::Render(const Matrix3d *x,
+                           const Vector3d *u)
 {
   Vector3d q;
-  SE2::Instance().g2q(q, x);
+  SE2::Instance().g2q(q, *x);
 
   Viewer::SetColor(rgba[0], rgba[1], rgba[2], rgba[3]);
   glPushMatrix();
@@ -55,7 +57,8 @@ void Kinbody2dView::Render(const Matrix3d &x)
 }
 
 
-void Kinbody2dView::Render(const vector<Matrix3d> &xs, 
+void Kinbody2dView::Render(const vector<Matrix3d> *xs,
+                           const vector<Vector3d> *us,
                            bool rs, 
                            int is, int ie,
                            int dis, int dit,
@@ -68,9 +71,9 @@ void Kinbody2dView::Render(const vector<Matrix3d> &xs,
   if (is == -1)
     is = 0;
   if (ie == -1)
-    ie = xs.size()-1;
+    ie = xs->size()-1;
 
-  assert(is >= 0 && is <= xs.size()-1 && ie >= 0 && ie <= xs.size()-1);
+  assert(is >= 0 && is <= xs->size()-1 && ie >= 0 && ie <= xs->size()-1);
   assert(is <= ie);
 
   glDisable(GL_LIGHTING);
@@ -78,7 +81,7 @@ void Kinbody2dView::Render(const vector<Matrix3d> &xs,
   glLineWidth(lineWidth);
   glBegin(GL_LINE_STRIP);
   for (int i = is; i <= ie; i+=dit) {
-    const Matrix3d &x = xs[i];
+    const Matrix3d &x = (*xs)[i];
     glVertex3d(x(0,2), x(1,2), 0);
   }
   glEnd();
@@ -87,11 +90,11 @@ void Kinbody2dView::Render(const vector<Matrix3d> &xs,
     glEnable(GL_LIGHTING);
   
   if (rs) {
-    for (int i = 0; i < xs.size(); i+=dis) {
-      Render(xs[i]);
+    for (int i = 0; i < xs->size(); i+=dis) {
+      Render(&(*xs)[i]);
     }
   }
 
   if (dl)
-    Render(xs.back());
+    Render(&xs->back());
 }

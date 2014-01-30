@@ -80,25 +80,6 @@ namespace gcop {
   typedef Matrix<double, Dynamic, _n> Matrixmnd;
   
   System(Manifold<T, _n> &X, Manifold<Tu, _c> &U);
-  
-  /**
-   * Discrete dynamics update. The function computes a change in the state
-   * v, regarded as a vector field which can then be used to update the new state 
-   * x_b the old state x_a according to x_b = x_a + v (that is when the space is 
-   * Euclidean). In general manifolds the update is x_b = Retract(x_a, v), i.e.
-   * a retraction mapping is used to update x_b intrinsically.
-   * @param v resulting change in state
-   * @param t current time
-   * @param xa current state
-   * @param u current control
-   * @param h current time-step
-   * @param A jacobian of v(x)
-   * @param B jacobian of v(u)
-   */
-  virtual double F(Vectornd &v, double t, const T& xa, 
-                   const Tu &u, double h,
-                   Matrixnd *A = 0, Matrixncd *B = 0);
-  
 
   /**
    * Discrete dynamics update. The function computes a change in the state
@@ -111,23 +92,18 @@ namespace gcop {
    * @param xa current state
    * @param u current control
    * @param h current time-step
-   * @param p static parameters
-   * @param A jacobian of f(x)
-   * @param B jacobian of f(u)
-   * @param C jacobian of f(p)
+   * @param p static parameters  (optional)
+   * @param A jacobian of f(x)   (optional)
+   * @param B jacobian of f(u)   (optional)
+   * @param C jacobian of f(p)   (optional)
    */
-  virtual double F(Vectornd &v, double t, const T& xa,
+  virtual double F(Vectornd &v, double t, const T& x,
                    const Tu &u, double h,
-                   const Vectormd &p,
+                   const Vectormd *p,
                    Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
-  
-  virtual double Step(T& xb, double t, const T& xa,
-                      const Tu &u, double h,
-                      Matrixnd *A = 0, Matrixncd *B = 0);
-  
-  virtual double Step(T& xb, double t, const T& xa,
-                      const Tu &u, double h,
-                      const Vectormd &p,
+
+  virtual double Step(T &xb, double t, const T &xa,
+                      const Tu &u, double h, const Vectormd *p = 0, 
                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
   
   
@@ -159,41 +135,19 @@ namespace gcop {
 
   
   template <typename T, typename Tu, int _n, int _c> 
-    double System<T, Tu, _n, _c>::F(Vectornd &v, double t, const T &xa, 
+    double System<T, Tu, _n, _c>::F(Vectornd &v, double t, const T& x,
                                     const Tu &u, double h,
-                                    Matrix<double, _n, _n> *A, Matrix<double, _n, _c> *B) {
-    std::cout << "[W] System::F: unimplemented!" << std::endl;
-    return 0;
-  }
-  
-  template <typename T, typename Tu, int _n, int _c> 
-    double System<T, Tu, _n, _c>::F(Vectornd &v, double t, const T& xa,
-                                     const Tu &u, double h,
-                                     const VectorXd &p,
+                                     const VectorXd *p,
                                      Matrix<double, _n, _n> *A, Matrix<double, _n, _c> *B, 
                                      Matrix<double, _n, Dynamic> *C) {
     std::cout << "[W] System::F: unimplemented!" << std::endl;
     return 0;
   }
-
-  template <typename T, typename Tu, int _n, int _c> 
-    double System<T, Tu, _n, _c>::Step(T &xb, double t, const T &xa,
-                                       const Tu &u, double h,
-                                       Matrix<double, _n, _n> *A, Matrix<double, _n, _c> *B) {
-    Vectornd v;
-    if (_n == Dynamic)
-      v.resize(n);
-
-    double d = F(v, t, xa, u, h, A, B);
-    X.Retract(xb, xa, v); // in R^n this is just xb = xa + v
-    Rec(xb, h);
-    return d;
-  }
   
   template <typename T, typename Tu, int _n, int _c> 
     double System<T, Tu, _n, _c>::Step(T& xb, double t, const T& xa,
                                        const Tu &u, double h,
-                                       const VectorXd &p,
+                                       const VectorXd *p,
                                        Matrix<double, _n, _n> *A, Matrix<double, _n, _c> *B, 
                                        Matrix<double, _n, Dynamic> *C) {
     Vectornd v;
@@ -208,3 +162,4 @@ namespace gcop {
 }
 
 #endif
+

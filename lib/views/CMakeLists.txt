@@ -11,7 +11,10 @@ set(sources
   hrotorgeom3dview.cc
   heliview.cc
   kinbody2dview.cc
+  body2dview.cc
   posegraph2dview.cc
+  body2dgraphview.cc
+  body2dtrackview.cc
   chainview.cc  
   geom3dview.cc
   boxview.cc
@@ -40,7 +43,10 @@ set(headers
   hrotorgeom3dview.h
   heliview.h
   kinbody2dview.h
+  body2dview.h
   posegraph2dview.h
+  body2dgraphview.h
+  body2dtrackview.h
   mbsview.h
   chainview.h
   geom3dview.h

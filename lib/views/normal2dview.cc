@@ -10,8 +10,8 @@
 using namespace gcop;
 using namespace Eigen;
 
-Normal2dView::Normal2dView(vector<Normal> *xs) : 
-  SystemView("Normal", xs)
+Normal2dView::Normal2dView(vector<Normal> *xs, vector<Vector2d> *us) : 
+  SystemView("Normal", xs, us)
 {
   rgba[0] = 0.5;
   rgba[1] = 0.5;
@@ -30,7 +30,7 @@ Normal2dView::~Normal2dView()
 }
 
 
-void Normal2dView::Render(const Normal &gd)
+void Normal2dView::Render(const Normal *gd, const Vector2d *u)
 {
   glColor4dv(rgba);
   
@@ -51,10 +51,10 @@ void Normal2dView::Render(const Normal &gd)
     //    glCullFace(GL_BACK);
   }
 
-  double xl = gd.mu[0] - 2*sqrt(gd.P(0,0));
-  double xu = gd.mu[0] + 2*sqrt(gd.P(0,0));
-  double yl = gd.mu[1] - 2*sqrt(gd.P(1,1));
-  double yu = gd.mu[1] + 2*sqrt(gd.P(1,1));
+  double xl = gd->mu[0] - 2*sqrt(gd->P(0,0));
+  double xu = gd->mu[0] + 2*sqrt(gd->P(0,0));
+  double yl = gd->mu[1] - 2*sqrt(gd->P(1,1));
+  double yu = gd->mu[1] + 2*sqrt(gd->P(1,1));
   int N = 50;
   double dx = (xu - xl)/N;
   double dy = (yu - yl)/N;
@@ -64,7 +64,7 @@ void Normal2dView::Render(const Normal &gd)
     glBegin(GL_TRIANGLE_STRIP);    
     for (double x = xl; x < xu; x+=dx) {
 
-      double l = s*gd.L(Vector2d(x, y));
+      double l = s*gd->L(Vector2d(x, y));
       
       //       glNormal3dv(dem.normals + 3*(i*dem.nj+j));
 
@@ -72,7 +72,7 @@ void Normal2dView::Render(const Normal &gd)
       //      if (texture)
       //        glTexCoord2d( (p[0]-dem.o[0])/dem.w, (dem.h - (p[1]-dem.o[1]) )/dem.h);
       
-      l = s*gd.L(Vector2d(x, y+dy));
+      l = s*gd->L(Vector2d(x, y+dy));
       //      glNormal3dv(dem.normals + 3*((i+1)*dem.nj+j));
       
       glVertex3f(x, y + dy, l);
@@ -91,7 +91,8 @@ void Normal2dView::Render(const Normal &gd)
 }
 
 
-void Normal2dView::Render(const vector<Normal> &gds, 
+void Normal2dView::Render(const vector<Normal> *gds, 
+                          const vector<Vector2d> *us,
                           bool rs, 
                           int is, int ie,
                           int dis, int dit,
@@ -104,27 +105,27 @@ void Normal2dView::Render(const vector<Normal> &gds,
   if (is == -1)
     is = 0;
   if (ie == -1)
-    ie = gds.size()-1;
+    ie = gds->size()-1;
 
-  assert(is >= 0 && is <= gds.size()-1 && ie >= 0 && ie <= gds.size()-1);
+  assert(is >= 0 && is <= gds->size()-1 && ie >= 0 && ie <= gds->size()-1);
   assert(is <= ie);
 
   glDisable(GL_LIGHTING);
   glLineWidth(lineWidth);
   glBegin(GL_LINE_STRIP);
   for (int i = is; i <= ie; i+=dit) {
-    glVertex3d(gds[i].mu[0], gds[i].mu[1], 0);
+    glVertex3d((*gds)[i].mu[0], (*gds)[i].mu[1], 0);
   }
   glEnd();
   glLineWidth(1);
   glEnable(GL_LIGHTING);
   
   if (rs) {
-    for (int i = 0; i < gds.size(); i+=dis) {
-      Render(gds[i]);
+    for (int i = 0; i < gds->size(); i+=dis) {
+      Render(&(*gds)[i]);
     }
   }
 
   if (dl)
-    Render(gds.back());
+    Render(&gds->back());
 }

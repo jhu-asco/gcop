@@ -20,12 +20,8 @@ namespace gcop {
 
     Kinbody2d();
     
-    double Step(Matrix3d &xb, double t, const Matrix3d &xa, 
-                const Vector3d &u, double h,
-                Matrix3d *A = 0, Matrix3d *B = 0);
-    
     double Step(Matrix3d &xb, double t, const Matrix3d &xa,
-                const Vector3d &u, double h,  const VectorXd &p,
+                const Vector3d &u, double h,  const VectorXd *p,
                 Matrix3d *A = 0, Matrix3d *B = 0, Matrix<double, 3, Dynamic> *C = 0);
     
     

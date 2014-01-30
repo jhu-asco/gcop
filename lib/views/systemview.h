@@ -18,7 +18,7 @@ namespace gcop {
   /**
    * Discrete Dynamical system view.
    */
-  template <typename T>
+  template <typename Tx, typename Tu>
     class SystemView : public View {
   public:
     
@@ -27,11 +27,14 @@ namespace gcop {
      * @param name name
      * @param s rigid body state
      */
-    SystemView(const char *name = 0, vector<T> *xs = 0);
+    SystemView(const char *name = 0, 
+               vector<Tx> *xs = 0,
+               vector<Tu> *us = 0);
 
     virtual ~SystemView();
 
-    virtual void Render(const T &x) = 0;
+    virtual void Render(const Tx *x,
+                        const Tu *u = 0) = 0;
 
     /**
      * Render a trajectory
@@ -43,18 +46,12 @@ namespace gcop {
      * @param dit index step for rendering states(points) along trajectory
      * @param dl always draw last state
      */
-    virtual void Render(const vector<T>& xs,
+    virtual void Render(const vector<Tx> *xs,
+                        const vector<Tu> *us = 0,
                         bool rs = true, 
                         int is = -1, int ie = -1,
                         int dis = 1, int dit = 1,
                         bool dl = true) = 0;
-
-    /**
-     * Render only states along the trajectory at time-steps h
-     * @param tarj trajectory
-     * @param h time-step
-     */
-    void RenderStates(const vector<T>& xs, double h);    
 
     virtual void Render();
     
@@ -66,7 +63,8 @@ namespace gcop {
      */
     void SetColor(const double rgba[4]);
 
-    vector<T> *xs;  ///< trajectory to render
+    vector<Tx> *xs;  ///< trajectory to render
+    vector<Tu> *us;  ///< controls to render
     
     int dis;                   ///< when rendering a trajectory only render a body corresponding to every di-th state (default is 1)
     
@@ -75,49 +73,38 @@ namespace gcop {
     double rgba[4];            ///< color
 
     double lineWidth;         ///< trajectory line width (default is 1)
+
+    bool renderSystem;        ///< whether to render the physical system (e.g. a body)
+    bool renderForces;       ///< whether to render forces
   };
 
   
-  template <typename T>
-    SystemView<T>::SystemView(const char *name, vector<T> *xs) : View(name),
+  template <typename Tx, typename Tu>
+    SystemView<Tx,Tu>::SystemView(const char *name, vector<Tx> *xs, vector<Tu> *us) : View(name),
     xs(xs),
+    us(us),
     dis(1),
     dit(1),
-    lineWidth(1) {
+    lineWidth(1),
+    renderSystem(true),
+    renderForces(false) {
     rgba[0] = 1;
     rgba[1] = 1;
     rgba[2] = 1;
     rgba[3] = 0;
   }
   
-  template <typename T>
-    SystemView<T>::~SystemView() {
+  template <typename Tx, typename Tu>
+    SystemView<Tx, Tu>::~SystemView() {
   }
   
-  template <typename T>
-    void SystemView<T>::SetColor(const double rgba[4]) {
+  template <typename Tx, typename Tu>
+    void SystemView<Tx,Tu>::SetColor(const double rgba[4]) {
     memcpy(this->rgba, rgba, 4*sizeof(double));
   }
   
-  
-
-  
-  template <typename T>
-    void SystemView<T>::RenderStates(const vector<T> &xs, double h) {
-    /*
-      assert(h>0);
-      glColor4dv(rgba);
-      State s(traj.sys);
-      for (s.t =0 ; s.t <= traj.states[traj.sn]->t; s.t+=h) {
-      traj.Get(s);
-      Render(s);  
-      }
-    */
-  }
-  
-  
-  template <typename T>
-    void SystemView<T>::Render() {
+  template <typename Tx, typename Tu>
+    void SystemView<Tx, Tu>::Render() {
     glColor4dv(rgba);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //  glEnable(GL_BLEND);
@@ -125,14 +112,14 @@ namespace gcop {
     //  glColor4f(1,0,0,0);
     
     if (xs)
-      Render(*xs, true, 0, xs->size()-1, dis, dit); 
+      Render(xs, us, renderSystem, 0, xs->size()-1, dis, dit); 
     
     //  glDisable(GL_BLEND);
   }
   
   
-  template <typename T>
-    bool SystemView<T>::RenderFrame(int i) {
+  template <typename Tx, typename Tu>
+    bool SystemView<Tx, Tu>::RenderFrame(int i) {
     
     // glColor4dv(rgba);
     
@@ -144,11 +131,14 @@ namespace gcop {
         return false;
       
       // draw path without states (only last if applicable)
-      Render(*xs, false, 0, i, dis, dit, false);
+      Render(xs, us, false, 0, i, dis, dit, false);
       
       // draw current state
-      Render((*xs)[i]);
-      
+      if (us && i < us->size())
+        Render(&(*xs)[i], &(*us)[i]);
+      else
+        Render(&(*xs)[i]);
+        
       //    glDisable(GL_BLEND);
       // more states left
       return true;
