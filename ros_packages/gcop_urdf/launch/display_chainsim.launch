@@ -12,5 +12,5 @@
 
   <!--node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/-->
 	<node name="rcview" pkg="gcop_urdf" type="chain_viz" output="screen"/>
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gcop_urdf)/chain.vcg"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gcop_urdf)/chainsim.vcg"/>
 </launch>
