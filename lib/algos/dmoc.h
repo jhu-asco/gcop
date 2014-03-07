@@ -244,7 +244,7 @@ namespace gcop {
     if (c == Dynamic)
       du.resize(sys.c);    
 
-    double eps = 1e-10;    
+    double eps = 1e-6;    
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];

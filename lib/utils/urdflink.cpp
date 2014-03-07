@@ -54,7 +54,7 @@ boost::shared_ptr<Geometry> parseGeometry(TiXmlElement *g)
   TiXmlElement *shape = g->FirstChildElement();
   if (!shape)
   {
-    //printf("Geometry tag contains no child element.");
+    printf("Geometry tag contains no child element.");
     return geom;
   }
 
@@ -69,13 +69,13 @@ boost::shared_ptr<Geometry> parseGeometry(TiXmlElement *g)
     geom.reset(new Mesh);
   else
   {
-    //printf("Unknown geometry type '%s'", type_name.c_str());
+    printf("Unknown geometry type '%s'", type_name.c_str());
     return geom;
   }
 
   // clear geom object when fails to initialize
   if (!geom->initXml(shape)){
-    //printf("Geometry failed to parse");
+    printf("Geometry failed to parse");
     geom.reset();
   }
 
@@ -240,7 +240,7 @@ bool Visual::initXml(TiXmlElement *config)
   geometry = parseGeometry(geom);
   if (!geometry)
   {
-    //printf("Malformed geometry for Visual element");
+    printf("Malformed geometry for Visual element");
     return false;
   }
 
@@ -408,7 +408,7 @@ bool Mesh::initXml(TiXmlElement *c)
   this->type = MESH;
   if (!c->Attribute("filename"))
   {
-    //printf("Mesh must contain a filename attribute");
+    printf("Mesh must contain a filename attribute");
     return false;
   }
 
@@ -418,13 +418,13 @@ bool Mesh::initXml(TiXmlElement *c)
   {
     if (!this->scale.init(c->Attribute("scale")))
     {
-      //printf("Mesh scale was specified, but could not be parsed");
+      printf("Mesh scale was specified, but could not be parsed");
       this->scale.clear();
       return false;
     }
   }
   else
-    //printf("Mesh scale was not specified, default to (1,1,1)");
+    printf("Mesh scale was not specified, default to (1,1,1)");
 
   return true;
 }

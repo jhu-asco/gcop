@@ -268,6 +268,25 @@ void SE3::g2q(Vector6d &q, const Matrix4d &g) const
   q.tail<3>() = g.topRightCorner<3,1>();
 }
 
+void SE3::quatxyz2g(Matrix4d &g, const Vector7d &wquatxyz) const
+{
+	Matrix3d R;
+  so3.quat2g(R,wquatxyz.head<4>().normalized());
+	g.topLeftCorner<3,3>() = R;
+	g.topRightCorner<3,1>() = wquatxyz.tail<3>();
+  g.bottomLeftCorner<1,3>().setZero();
+  g(3,3) = 1;  
+}
+
+void SE3::g2quatxyz(Vector7d &wquatxyz, const Matrix4d &g) const
+{
+	Vector4d head ;
+	so3.g2quat(head,g.topLeftCorner<3,3>());
+	wquatxyz.head<4>() = head;
+	wquatxyz.tail<3>() = g.topRightCorner<3,1>();
+	return;
+}
+
 
 void SE3::rpyxyz2g(Matrix4d &g, const Vector3d &rpy, const Vector3d &xyz) const
 {

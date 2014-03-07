@@ -139,18 +139,39 @@ namespace gcop {
 
     /**
      * Inverse-dynamics function. Computes the residual of the
-     * dynamical update from xa to xb given controls u 
+     * dynamical update from xa to xb given controls u. This is regarded as
+     * the discrete-time equivalent of (b - B*u)
      * @param f residual
      * @param t time
-     * @param xb next state
-     * @param xa current state
+     * @param x state
      * @param u controls
-     * @param h time-step
      */
     void ID(VectorXd &f,
-            double t, const MbsState &xb, const MbsState &xa,
-            const VectorXd &u, double h);
+            double t, const MbsState &x,
+            const VectorXd &u);
 
+    /**
+     * Compute total bias b, i.e. such that M*a + b = B*u
+     * @param b bias
+     * @param t time
+     * @param x state
+     */
+    void Bias(VectorXd &b,
+              double t, const MbsState &x) const;
+
+    /**
+     * Discrete bias
+     * @param b bias
+     * @param t time
+     * @param xb state
+     * @param xa state
+     * @param h time-step
+     */
+    void DBias(VectorXd &b,
+                double t,
+                const MbsState &xb, 
+                const MbsState &xa, double h);    
+    
     /**
      * Forward kinematics: given base pose and joint angles, update the poses of
      * all bodies in the graph.
@@ -173,7 +194,7 @@ namespace gcop {
      * @param M mass matrix
      * @param x state
      */
-    void Mass(MatrixXd &M, const MbsState &x);
+    void Mass(MatrixXd &M, const MbsState &x) const;
 
     /**
      * Total resulting force on the system from external (e.g. gravity)
@@ -199,6 +220,10 @@ namespace gcop {
     
     vector<int> pis;          ///< parent indexes
     vector<vector<int> > cs;  ///< child lists
+
+    Vector3d ag;             ///< acceleration due to gravity (0, 0, -9.81) by default
+		VectorXd damping;        ///< damping vector
+		string basetype;        ///< basetype currently supported chainbase, airbase
     
     SE3 &se3;                 ///< singleton reference for performing SE(3) operations
 

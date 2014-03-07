@@ -16,13 +16,16 @@ set(sources
   mbscspace.cc
   mbstspace.cc
   chain.cc
+  chain1.cc
   airm.cc
   airbot.cc
+  airbase.cc
   mbs.cc
   snake.cc
 	joint.cc
   dem.cc
   airplanecost.cc
+  joint.cc
 )
 
 set(headers
@@ -43,7 +46,7 @@ set(headers
   body3d.h
   body3dmanifold.h
   body3dcost.h
-	joint.h
+  joint.h
   qrotor.h
   hrotor.h
   heli.h
@@ -51,12 +54,14 @@ set(headers
   wrench.h
   mbsmanifold.h
   mbscspace.h
-	mbsstate.h
+  mbsstate.h
   mbstspace.h
   mbs.h
   chain.h
+  chain1.h
   airm.h
   airbot.h
+  airbase.h
   snake.h
   autodiff.h
   dem.h

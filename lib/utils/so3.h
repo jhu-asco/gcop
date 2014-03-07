@@ -54,6 +54,10 @@ namespace gcop {
 
     void q2g(Matrix3d &m, const Vector3d &rpy);
 
+    void quat2g(Matrix3d &m, const Vector4d &wxyz);
+
+    void g2quat(Vector4d &wxyz, const Matrix3d &m);
+
     void g2q(Vector3d &rpy, const Matrix3d &m);
 
     double tol;               ///< numerical tolerance

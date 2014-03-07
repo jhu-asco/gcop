@@ -10,3 +10,5 @@
 *.py
 build*
 bin*
+docs/
+*.vim

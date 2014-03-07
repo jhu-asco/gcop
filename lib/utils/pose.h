@@ -93,6 +93,10 @@ public:
   {
     return Vector3(this->x+vec.x,this->y+vec.y,this->z+vec.z);
   };
+	Vector3 operator-()
+  {
+    return Vector3(-this->x,-this->y,-this->z);
+  };
 };
 
 class Rotation
@@ -245,62 +249,81 @@ public:
 
 class Pose
 {
-public:
-  Pose() { this->clear(); };
+	public:
+		Pose() { this->clear(); };
 
-  Vector3  position;
-  Rotation rotation;
+		Vector3  position;
+		Rotation rotation;
 
-  void clear()
-  {
-    this->position.clear();
-    this->rotation.clear();
-  };
-  bool initXml(TiXmlElement* xml)
-  {
-    this->clear();
-    if (!xml)
-    {
-      printf("parsing pose: xml empty");
-      return false;
-    }
-    else
-    {
-      const char* xyz_str = xml->Attribute("xyz");
-      if (xyz_str == NULL)
-      {
-        printf("parsing pose: no xyz, using default values.");
-        return true;
-      }
-      else
-      {
-        if (!this->position.init(xyz_str))
-        {
-          printf("malformed xyz");
-          this->position.clear();
-          return false;
-        }
-      }
+		void clear()
+		{
+			this->position.clear();
+			this->rotation.clear();
+		};
+		bool initXml(TiXmlElement* xml)
+		{
+			this->clear();
+			if (!xml)
+			{
+				printf("parsing pose: xml empty");
+				return false;
+			}
+			else
+			{
+				const char* xyz_str = xml->Attribute("xyz");
+				if (xyz_str == NULL)
+				{
+					printf("parsing pose: no xyz, using default values.");
+					return true;
+				}
+				else
+				{
+					if (!this->position.init(xyz_str))
+					{
+						printf("malformed xyz");
+						this->position.clear();
+						return false;
+					}
+				}
 
-      const char* rpy_str = xml->Attribute("rpy");
-      if (rpy_str == NULL)
-      {
-        printf("parsing pose: no rpy, using default values.");
-        return true;
-      }
-      else
-      {
-        if (!this->rotation.init(rpy_str))
-        {
-          printf("malformed rpy");
-          return false;
-          this->rotation.clear();
-        }
-      }
+				const char* rpy_str = xml->Attribute("rpy");
+				if (rpy_str == NULL)
+				{
+					printf("parsing pose: no rpy, using default values.");
+					return true;
+				}
+				else
+				{
+					if (!this->rotation.init(rpy_str))
+					{
+						printf("malformed rpy");
+						return false;
+						this->rotation.clear();
+					}
+				}
 
-      return true;
-    }
-  };
+				return true;
+			}
+		};
+		Pose GetInverse() const
+		{
+			Pose res;
+			res.rotation = this->rotation.GetInverse();
+			res.position = -(res.rotation*this->position);
+			return res;
+		}
+		Pose operator*( const Pose &p2 ) const
+		{
+			Pose res;
+			res.rotation = this->rotation * p2.rotation;
+			res.position = this->rotation * p2.position + this->position; 
+			return res;
+		}
+		friend std::ostream& operator<<(std::ostream& out, const Pose& vec) // output
+		{
+			out << vec.rotation.w << " "<<vec.rotation.x << " "<<vec.rotation.y << " "<<vec.rotation.z << " "<<vec.position.x << " "<<vec.position.y << " "<<vec.position.z << " "<<std::endl;
+			return out;
+		}
 };
 
 }

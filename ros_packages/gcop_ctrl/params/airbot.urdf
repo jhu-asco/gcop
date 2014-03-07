@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot name="Airbot">
+  <link name="baselink"/>
+  <link name="airbase">
+    <visual>
+      <geometry>
+        <box size="0.3 0.1 0.05"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1"/>
+      <inertia ixx="0.02104" ixy="0.0" ixz="0.0" iyy="0.02104" iyz="0.0" izz="0.0416"/>
+    </inertial>
+  </link>
+  <link name="link1">
+    <visual>
+			<origin rpy="0 0 0" xyz="0.05 0.0 0"/>
+      <geometry>
+        <box size="0.1 .10 0.05"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <inertial>
+			<origin rpy="0 0 0" xyz="0.05 0.0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>
+  <link name="link2">
+    <visual>
+			<origin rpy="0 0 0" xyz="-0.05 0.0 0"/>
+      <geometry>
+        <box size="0.1 .10 0.05"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <inertial>
+			<origin rpy="0 0 0" xyz="-0.05 0.0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>
+ <!-- Joints -->
+  <joint name="basetoairbase" type="fixed">
+    <parent link="baselink"/>
+    <child link="airbase"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  <joint name="airbasetolink1" type="revolute">
+    <parent link="airbase"/>
+    <child link="link1"/>
+    <origin rpy="0 0 0" xyz="0.15 0.0 0"/>
+    <axis xyz="0 -1 0"/>
+		<limit effort="30" velocity="5.0" lower="-5" upper="5" />
+  </joint>
+  <joint name="airbasetolink2" type="revolute">
+    <parent link="airbase"/>
+    <child link="link2"/>
+    <origin rpy="0 0 0" xyz="-0.15 0.0 0"/>
+    <axis xyz="0 -1 0"/>
+		<limit effort="30" velocity="5.0" lower="-5" upper="5" />
+  </joint>
+</robot>

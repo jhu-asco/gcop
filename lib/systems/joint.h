@@ -37,6 +37,7 @@ namespace gcop {
     Matrix4d gci;  ///< from child to joint inverse
 
     Vector6d S;    ///< Jacobian S=Ac*a
+		string name;   ///< Unique name of the joint
   };
 }
 
