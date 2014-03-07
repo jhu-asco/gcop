@@ -13,16 +13,15 @@ namespace gcop {
 
   class MbsState {
   public:
-  MbsState(int nb = 1) : 
+  MbsState(int nb = 1, bool fixed = false) : 
     gs(nb), vs(nb), dgs(nb-1),
-      r(nb-1), dr(nb-1) {
+      r(nb-1), dr(nb-1), fixed(fixed) {
     }
 
   MbsState(const MbsState &x) : 
     gs(x.gs), vs(x.vs), dgs(x.dgs),
-      r(x.r), dr(x.dr) {
+      r(x.r), dr(x.dr), fixed(x.fixed) {
     }
-
     
     vector<Matrix4d> gs;        ///< configurations
     vector<Vector6d> vs;        ///< body-vixed velocities
@@ -30,6 +29,8 @@ namespace gcop {
     
     VectorXd r;  ///< joint angles
     VectorXd dr; ///< joint velocities
+
+    bool fixed;  ///< fixed base?
   };
 }
 

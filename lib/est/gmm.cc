@@ -128,12 +128,12 @@ void Gmm::Init(const VectorXd &xlb, const VectorXd &xub)
 
 
 
-void Gmm::Fit(const vector<pair<VectorXd, double> > &xps, int iter, const MatrixXd *S)
+void Gmm::Fit(const vector<pair<VectorXd, double> > &xps, double a, int iter, const MatrixXd *S)
 {
   int N = xps.size();
 
   if (k == 1) {
-    ns[0].Fit(xps);
+    ns[0].Fit(xps, a);
     if (S)
       ns[0].P += *S;
     return;

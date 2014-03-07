@@ -120,21 +120,40 @@ namespace gcop {
     };
     */
 
-    Mbs(int nb, int c);
+    Mbs(int nb, int c, bool fixed = false);
 
     virtual ~Mbs();
 
     void Init();
 
-    /*
-      double Step(MbsState &xb, double t, const MbsState &xa, 
-      const VectorXd &u, double h,
-      MatrixXd *A = 0, MatrixXd *B = 0);
-    */
-
     double F(VectorXd &v, double t, const MbsState &xa, 
-             const VectorXd &u, double h,
-             MatrixXd *A = 0, MatrixXd *B = 0);
+             const VectorXd &u, double h, const VectorXd *p = 0,
+             MatrixXd *A = 0, MatrixXd *B = 0, MatrixXd *C = 0);
+    
+    
+    double Step(MbsState& xb, double t, const MbsState& xa,
+                const VectorXd &u, double h, const VectorXd *p = 0,
+                MatrixXd *A = 0, MatrixXd *B = 0, MatrixXd *C = 0);
+
+
+    double EulerStep(MbsState& xb, double t, const MbsState& xa,
+                     const VectorXd &u, double h,
+                     MatrixXd *A = 0, MatrixXd *B = 0);
+
+
+    double HeunStep(MbsState& xb, double t, const MbsState& xa,
+                    const VectorXd &u, double h,
+                    MatrixXd *A = 0, MatrixXd *B = 0);
+
+    double TrapStep(MbsState& xb, double t, const MbsState& xa,
+                    const VectorXd &u, double h,
+                    MatrixXd *A, MatrixXd *B);      
+
+
+    void NE(VectorXd &e, const VectorXd &vdr, 
+            MbsState &xb,               
+            double t, const MbsState &xa, 
+            const VectorXd &u, double h);
 
 
     /**
@@ -186,8 +205,11 @@ namespace gcop {
      * @param xa previous state
      * @param xb next state
      * @param h time-step
+     * @param impl whether to update configuration using the newly updated velocity
      */
-    void KStep(MbsState &xb, const MbsState &xa, double h);
+    void KStep(MbsState &xb, const MbsState &xa, double h, bool impl = true);
+
+    void NewtonEulerJacobian(MatrixXd &De, const MbsState &xb, const MbsState &xa, double h);  
 
     /**
      * Compute the mass matrix at a given state x
@@ -195,6 +217,8 @@ namespace gcop {
      * @param x state
      */
     void Mass(MatrixXd &M, const MbsState &x) const;
+
+    void Acc(VectorXd &a, double t, const MbsState& x, const VectorXd &u);
 
     /**
      * Total resulting force on the system from external (e.g. gravity)
@@ -206,14 +230,23 @@ namespace gcop {
      * @param A jacobian Dxf
      * @param B jacobian Duf
      */
-    virtual void Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,MatrixXd *A = 0, MatrixXd *B = 0);
-    
+    virtual void Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u, 
+                       MatrixXd *A = 0, MatrixXd *B = 0);
 
     void Rec(MbsState &x, double h);
 
-    int nb;                   ///< number of rigid bodies
+    void ClampPose(MbsState &x, int i) const;
+
+    void ClampShape(MbsState &x, int i) const;
+
+    void ClampVelocity(MbsState &x) const;
+
+    int nb;                   ///< number of rigid bodies (including base body)
+
+    bool fixed;               ///< whether base body is fixed
 
     vector<Body3d<>> links;   ///< links
+
     vector<Joint> joints;     ///< joints
 
     vector<Matrix6d> Ips;     ///< A'*I*A (nb) vector
@@ -222,13 +255,23 @@ namespace gcop {
     vector<vector<int> > cs;  ///< child lists
 
     Vector3d ag;             ///< acceleration due to gravity (0, 0, -9.81) by default
-		VectorXd damping;        ///< damping vector
-		string basetype;        ///< basetype currently supported chainbase, airbase
+
+    VectorXd damping;        ///< damping vector
     
+    int basetype;            ///< type of base (used for interpreting base-body forces)
+    static const int FIXEDBASE = 0;   ///< fixed base
+    static const int FLOATBASE = 1;   ///< fully controllable floating base
+    static const int AIRBASE = 2;     ///< free-flying base with torques and a lift force
+
     SE3 &se3;                 ///< singleton reference for performing SE(3) operations
 
-    bool debug;
+    int method;                   ///< type of integration method employed (Euler by default)
+    static const int EULER = 1;   ///< Euler time-stepping of dynamics
+    static const int HEUN = 2;    ///< Heun's explicit 2nd order method
+    static const int TRAP = 3;    ///< symplectic trapezoidal 2nd order method
+    int iters;                    ///< max number of Newton iterations used in symplectic method
 
+    bool debug;
 
     // below is for autodiff stuff
     //    MbsManifold X;

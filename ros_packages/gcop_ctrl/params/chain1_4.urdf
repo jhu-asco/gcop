@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<robot name="Chain">
+  <link name="baselink"/>
+  <link name="chainbase">
+    <visual>
+      <geometry>
+        <box size="0.0 .0 0.0"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.0001"/>
+      <inertia ixx="1e-08" ixy="0" ixz="0" iyy="1e-08" iyz="0" izz="1e-08"/>
+    </inertial>
+  </link>
+  <link name="link1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0.05 0.0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.05 0.0 0.0"/>
+      <mass value="5.70044"/>
+      <inertia ixx="0.04709102262" ixy="0.0" ixz="0.0" iyy="0.03766976455" iyz="0.0" izz="0.03595988478"/>
+    </inertial>
+  </link>
+  <link name="link2">
+    <visual>
+      <origin rpy="0 0 0" xyz="0.1 0.0 0"/>
+      <geometry>
+        <box size="0.2 0.05 0.05"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0 0 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.1 0.0 0.0"/>
+      <mass value="3.22698"/>
+      <inertia ixx="0.01175209419" ixy="0.0" ixz="0.0" iyy="0.0278859752" iyz="0.0" izz="0.02078749298"/>
+    </inertial>
+  </link>
+	<link name="link3">
+    <visual>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.025"/>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.00 0.0 0.025"/>
+      <mass value="4.31272"/>
+      <inertia ixx="0.02661733557" ixy="0.0" ixz="0.0" iyy="0.02844355207" iyz="0.0" izz="0.01248008322"/>
+    </inertial>
+  </link>
+	<link name="link4">
+    <visual>
+      <origin rpy="0 0 0" xyz="0.05 0.0 0.0"/>
+      <geometry>
+        <box size="0.1 0.05 0.05"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.05 0.0 0.0"/>
+      <mass value="2.07206"/>
+      <inertia ixx="0.00711582686" ixy="0.0" ixz="0.0" iyy="0.01318227876" iyz="0.0" izz="0.00926852064"/>
+    </inertial>
+  </link>
+	<link name="link5">
+    <visual>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.025"/>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.05 0.0 0.0"/>
+      <mass value="2.24665"/>
+      <inertia ixx="0.01667742825" ixy="0.0" ixz="0.0" iyy="0.01675457264" iyz="0.0" izz="0.0037463115"/>
+    </inertial>
+  </link>
+
+
+  <!-- Joints -->
+  <joint name="basetoroot" type="fixed">
+    <parent link="baselink"/>
+    <child link="chainbase"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  <joint name="roottolink1" type="revolute">
+    <parent link="chainbase"/>
+    <child link="link1"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7" friction="0.0"/>
+    <limit effort="100" velocity="1.5" lower="-1.7" upper="1.7"/>
+  </joint>
+  <joint name="link1tolink2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+		<origin rpy="-1.57079632679 0 0" xyz="0.1 0 0.0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7" friction="0.0"/>
+    <!--limit effort="100.0" lower="-2.147" upper="1.047" velocity="10.0"/-->
+    <limit effort="100.0" lower="-2.0" upper="1.0" velocity="10.0"/>
+  </joint>
+  <joint name="link2tolink3" type="revolute">
+    <parent link="link2"/>
+    <child link="link3"/>
+    <origin rpy="1.57079632679 0 1.57079632679" xyz="0.2 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7" friction="0.0"/>
+    <limit effort="100.0" lower="-3.05417993878" upper="3.05417993878" velocity="10.0"/>
+  </joint>
+	<joint name="link3tolink4" type="revolute">
+    <origin rpy="-1.57079632679 -1.57079632679 0" xyz="0.0 0 0.05"/>
+    <axis xyz="0 0 1"/>
+    <parent link="link3"/>
+    <child link="link4"/>
+    <limit effort="100.0" lower="-0.05" upper="2.618" velocity="10.0"/>
+    <dynamics damping="0.7" friction="0.0"/>
+  </joint>
+	<joint name="link4tolink5" type="revolute">
+    <origin rpy="1.57079632679 0 1.57079632679" xyz="0.1 0 0"/>
+    <axis xyz="0 0 1"/>
+    <parent link="link4"/>
+    <child link="link5"/>
+    <limit effort="15.0" lower="-3.059" upper="3.059" velocity="10.0"/>
+    <dynamics damping="0.7" friction="0.0"/>
+  </joint>
+
+</robot>

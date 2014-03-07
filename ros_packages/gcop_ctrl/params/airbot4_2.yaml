@@ -1,0 +1,36 @@
+## Controller Params
+mbsdmoc/tf: 3 # Final Time
+mbsdmoc/N: 128 # Number of segments
+
+                 #rpy                  #xyz            #vrpy            #vxyz
+mbsdmoc/X0:   [0.0,0.0,0.0,   0.0,0.0,0.0,      0.0,0.0,0.0,      0.0,0.0,0.0]
+mbsdmoc/XN:   [0.0,-3.1,0.0,   0.0,0.0,0.0,       0.0,0.0,0.0,   0.0,0.0,0.0]
+
+                  #rpy                   #xyz               #r        #w0                      #v0             #dr
+mbsdmoc/Qf:   [10.0,10.0,10.0,         150.0,150.0,150.0,      10.0,10.0,10.0,10.0,10.0,10.0,      5.0,5.0,5.0,               2.0,2.0,2.0,      1.0,1.0,1.0,1.0,1.0,1.0]   #   Final   Cost
+mbsdmoc/Q:   [2.0,2.0,2.0,            20.0,20.0,20.0,            0.0,0.0,0.0,0.0,0.0,0.0,      5.0,5.0,5.0,            20.0,20.0,20.0,      1.0,1.0,1.0,1.0,1.0,1.0]   #   Final   Cost
+
+mbsdmoc/R:    [0.1, 0.1, 0.1, 0.0,   0.1,0.1,0.1,0.1,0.1,0.1] #Control Cost
+
+mbsdmoc/ag: [0.0, 0.0, -9.81] # Gravity
+
+#mbsdmoc/Kp:   [.2,.2,.2,         2.0,2.0,2.0,   2.0,2.0]
+#mbsdmoc/Kd:   [1.0,1.0,1.0,      2.0,2.0,2.0,   2.0,2.0]
+
+mbsdmoc/J0: [0.0,0.0,0.0,    0.0,0.0,0.0]
+mbsdmoc/JN: [-0.3,-1.0,-1.5, 0.3,-1.0,-1.5] # Joint angles
+
+
+mbsdmoc/ulb: [-5.0, -5.0, -5.0, 0.0] # lower bound on base body controls
+mbsdmoc/uub: [5.0, 5.0, 5.0, 300.0] # upper bound on base body controls
+
+mbsdmoc/basetype: "AIRBASE"
+
+mbsdmoc/mu: 1
+
+mbsdmoc/Nit: 1 
+
+mbsdmoc/mode: "user"
+
+
+

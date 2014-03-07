@@ -20,10 +20,13 @@ mbsdmoc/ag: [0.0, 0.0, -9.81] # Gravity
 mbsdmoc/J0: [0.0,0.0,0.0,    0.0,0.0,0.0]
 mbsdmoc/JN: [-0.3,-1.0,-1.5, 0.3,-1.0,-1.5] # Joint angles
 
+mbsdmoc/ulb: [-5.0, -5.0, -5.0, 0.0] # lower bound on base body controls
+mbsdmoc/uub: [5.0, 5.0, 5.0, 300.0] # upper bound on base body controls
 
-mbsdmoc/basetype: "airbase"
 
-mbsdmoc/mu: 1
+mbsdmoc/basetype: "AIRBASE"
+
+mbsdmoc/mu: 1.0 
 
 mbsdmoc/Nit: 1 
 

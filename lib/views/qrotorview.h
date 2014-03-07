@@ -25,11 +25,13 @@ namespace gcop {
    * @param xs trajectory
    */
   QrotorView(const Qrotor &sys,
-              vector<pair<Matrix3d, Vector9d> > *xs = 0);
+             vector<pair<Matrix3d, Vector9d> > *xs = 0,
+             vector<Vector4d> *us = 0);
   
   //  virtual ~QrotorView();  
   
-  void Render(const pair<Matrix3d, Vector9d> &x);
+  void Render(const pair<Matrix3d, Vector9d> *x,
+              const Vector4d *u = 0);
 
   const Qrotor &sys;
   };

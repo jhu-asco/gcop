@@ -17,8 +17,9 @@ HeliView::HeliView(const Heli &sys) :
 }
 
 HeliView::HeliView(const Heli &sys, 
-                   vector< pair<Matrix3d, Vector9d> > *xs) : 
-  Body3dView(sys, xs), sys(sys)
+                   vector< pair<Matrix3d, Vector9d> > *xs,
+                   vector<Vector4d> *us) : 
+  Body3dView(sys, xs, us), sys(sys)
 {
   body = gluNewQuadric();
   tail = gluNewQuadric();
@@ -36,12 +37,13 @@ HeliView::~HeliView()
   free(body);
 }
 
-void HeliView::Render(const pair<Matrix3d, Vector9d> &x)
+void HeliView::Render(const pair<Matrix3d, Vector9d> *x,
+                      const Vector4d *u)
 {
   //   glColor4f(1,0.5,0.5,0.5);
-
+  
   glPushMatrix();
-  Transform(x.first, x.second.head<3>());
+  Transform(x->first, x->second.head<3>());
   
   Viewer::SetColor(0,0.5,0.5,0);
 

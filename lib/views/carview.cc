@@ -10,8 +10,9 @@ using namespace gcop;
 using namespace Eigen;
 
 CarView::CarView(const Car &sys, 
-                           vector<Vector5d> *xs) : 
-  SystemView("Car", xs), sys(sys)
+                 vector<Vector5d> *xs,
+                 vector<Vector2d> *us) : 
+  SystemView("Car", xs, us), sys(sys)
 {
   rgba[0] = 0.5;
   rgba[1] = 0.5;
@@ -28,13 +29,13 @@ CarView::~CarView()
 }
 
 
-void CarView::Render(const Vector5d &x)
+void CarView::Render(const Vector5d *x, const Vector2d *u)
 {
-  const double &px = x[0];
-  const double &py = x[1];
-  const double &theta = x[2];
-  const double &v = x[3];
-  const double &k = x[4];
+  const double &px = (*x)[0];
+  const double &py = (*x)[1];
+  const double &theta = (*x)[2];
+  const double &v = (*x)[3];
+  const double &k = (*x)[4];
 
   double phi = atan(k*sys.l);
   double d = sys.l;
@@ -90,7 +91,8 @@ void CarView::Render(const Vector5d &x)
 }
 
 
-void CarView::Render(const vector<Vector5d> &xs, 
+void CarView::Render(const vector<Vector5d> *xs, 
+                     const vector<Vector2d> *us,
                      bool rs, 
                      int is, int ie,
                      int dis, int dit,
@@ -103,16 +105,16 @@ void CarView::Render(const vector<Vector5d> &xs,
   if (is == -1)
     is = 0;
   if (ie == -1)
-    ie = xs.size()-1;
+    ie = xs->size()-1;
 
-  assert(is >= 0 && is <= xs.size()-1 && ie >= 0 && ie <= xs.size()-1);
+  assert(is >= 0 && is <= xs->size()-1 && ie >= 0 && ie <= xs->size()-1);
   assert(is <= ie);
 
   glDisable(GL_LIGHTING);
   glLineWidth(lineWidth);
   glBegin(GL_LINE_STRIP);
   for (int i = is; i <= ie; i+=dit) {
-    const Vector5d &x = xs[i];
+    const Vector5d &x = (*xs)[i];
     glVertex3d(x[0], x[1], 0);
   }
   glEnd();
@@ -120,12 +122,12 @@ void CarView::Render(const vector<Vector5d> &xs,
   glEnable(GL_LIGHTING);
 
   if (rs) {
-    Render(xs[0]);
-    for (int i = 1; i < xs.size(); i+=dis) {
+    Render(&(*xs)[0]);
+    for (int i = 1; i < xs->size(); i+=dis) {
       //Render(xs[i]);
     }
   }
 
   if (dl)
-    Render(xs.back());
+    Render(&xs->back());
 }

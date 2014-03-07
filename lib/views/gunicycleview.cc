@@ -11,8 +11,9 @@ using namespace gcop;
 using namespace Eigen;
 
 GunicycleView::GunicycleView(const Gunicycle &sys, 
-                           vector< pair<Matrix3d, Vector2d> > *xs) : 
-  SystemView("Gunicycle", xs), sys(sys)
+                             vector< pair<Matrix3d, Vector2d> > *xs,
+                             vector<Vector2d> *us) : 
+  SystemView("Gunicycle", xs, us), sys(sys)
 {
   rgba[0] = 0.5;
   rgba[1] = 0.5;
@@ -29,15 +30,16 @@ GunicycleView::~GunicycleView()
 }
 
 
-void GunicycleView::Render(const pair<Matrix3d, Vector2d> &x)
+void GunicycleView::Render(const pair<Matrix3d, Vector2d> *x,
+                           const Vector2d *u)
 {
   Vector3d q;
-  SE2::Instance().g2q(q, x.first);
+  SE2::Instance().g2q(q, x->first);
   const double &theta = q[0];
   const double &px = q[1];
   const double &py = q[2];
-  const double &w = x.second[0];
-  const double &v = x.second[1];
+  const double &w = x->second[0];
+  const double &v = x->second[1];
 
   double phi = 0;
   double d = sys.dx;
@@ -93,11 +95,12 @@ void GunicycleView::Render(const pair<Matrix3d, Vector2d> &x)
 }
 
 
-void GunicycleView::Render(const vector<pair<Matrix3d, Vector2d> > &xs, 
-                          bool rs, 
-                          int is, int ie,
-                          int dis, int dit,
-                          bool dl)
+void GunicycleView::Render(const vector<pair<Matrix3d, Vector2d> > *xs,
+                           const vector<Vector2d> *us,
+                           bool rs, 
+                           int is, int ie,
+                           int dis, int dit,
+                           bool dl)
 {
   Viewer::SetColor(rgba[0], rgba[1], rgba[2], rgba[3]);
   //  glColor4f(
@@ -106,31 +109,31 @@ void GunicycleView::Render(const vector<pair<Matrix3d, Vector2d> > &xs,
   if (is == -1)
     is = 0;
   if (ie == -1)
-    ie = xs.size()-1;
+    ie = xs->size()-1;
 
-  assert(is >= 0 && is <= xs.size()-1 && ie >= 0 && ie <= xs.size()-1);
+  assert(is >= 0 && is <= xs->size()-1 && ie >= 0 && ie <= xs->size()-1);
   assert(is <= ie);
 
   glDisable(GL_LIGHTING);
   glLineWidth(lineWidth);
   glBegin(GL_LINE_STRIP);
   for (int i = is; i <= ie; i+=dit) {
-    const pair<Matrix3d, Vector2d> &x = xs[i];
+    const pair<Matrix3d, Vector2d> &x = (*xs)[i];
     glVertex3d(x.first(0,2), x.first(1,2), 0);
   }
   glEnd();
   glLineWidth(1);
   glEnable(GL_LIGHTING);
   
-  if (xs.size())
-    Render(xs[0]);
+  if (xs->size())
+    Render(&(*xs)[0]);
   
   if (rs) {    
-    for (int i = 1; i < xs.size(); i+=dis) {
-      Render(xs[i]);
+    for (int i = 1; i < xs->size(); i+=dis) {
+      Render(&(*xs)[i]);
     }    
   }
   
   if (dl)
-    Render(xs.back());
+    Render(&xs->back());
 }

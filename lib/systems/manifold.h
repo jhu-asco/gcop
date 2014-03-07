@@ -8,7 +8,7 @@ namespace gcop {
   
   using namespace Eigen;
   /**
-   * Homogeneous manifold 
+   * Homogeneous manifold
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */

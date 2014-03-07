@@ -3,4 +3,5 @@
   <rosparam command="load" file="$(find gcop_ctrl)/params/rccar.yaml" />
 	<node name="dmoc_rc" pkg="gcop_ctrl" type="rcctrl" output="screen"/>
 	<node name="rcreconfigure" pkg="dynamic_reconfigure" type="reconfigure_gui" />
+	<include file="$(find gcop_urdf)/launch/display_rccar.launch"/>
 </launch>

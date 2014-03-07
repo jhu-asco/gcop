@@ -11,6 +11,9 @@ set(sources
   hrotor.cc
   heli.cc
   kinbody2d.cc
+  body2d.cc
+  body2dcost.cc
+  body2dmanifold.cc
   body3dmanifold.cc
   mbsmanifold.cc
   mbscspace.cc
@@ -22,10 +25,11 @@ set(sources
   airbase.cc
   mbs.cc
   snake.cc
-	joint.cc
+  joint.cc
   dem.cc
   airplanecost.cc
   joint.cc
+  body2dforce.cc
 )
 
 set(headers
@@ -40,9 +44,12 @@ set(headers
   car.h
   rccar.h
   kinbody2dmanifold.h
+  body2dmanifold.h
   gunicycle.h
   gunicyclemanifold.h
   gunicyclecost.h
+  body2d.h
+  body2dcost.h
   body3d.h
   body3dmanifold.h
   body3dcost.h
@@ -66,4 +73,6 @@ set(headers
   autodiff.h
   dem.h
   airplanecost.h
+  force.h
+  body2dforce.h
 )

@@ -16,9 +16,9 @@ Gunicycle::Gunicycle() : System(GunicycleManifold::Instance(), Rn<2>::Instance()
 
 
 double Gunicycle::Step(M3V2d& xb, double t, const M3V2d& xa,
-                    const Vector2d& u, double h,
-                    Matrix5d *A, Matrix52d *B) {
-
+                       const Vector2d& u, double h, const VectorXd *p,
+                       Matrix5d *A, Matrix52d *B, Matrix5Xd *C) {
+  
   xb.second = xa.second + h*u;
   
   Vector3d hxib(h*xb.second[0], h*xb.second[1], 0);
@@ -29,7 +29,7 @@ double Gunicycle::Step(M3V2d& xb, double t, const M3V2d& xa,
   
   se2.cay(m, hxib);
   xb.first = xa.first*m;
-
+  
   if (A) {
     se2.cay(m, -hxib);
     Matrix3d Adm;

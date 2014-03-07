@@ -7,7 +7,7 @@
 namespace gcop {
   using namespace Eigen;
 
-  class Kinbody2dView : public SystemView<Matrix3d> {
+  class Kinbody2dView : public SystemView<Matrix3d, Vector3d> {
   public:
 
     /**
@@ -22,14 +22,17 @@ namespace gcop {
      * @param xs trajectory
      */
     Kinbody2dView(const Kinbody2d &sys,
-                  vector<Matrix3d> *xs);
+                  vector<Matrix3d> *xs,
+                  vector<Vector3d> *us = 0);
 
     virtual ~Kinbody2dView();
        
 
-    void Render(const Matrix3d &x);
+    void Render(const Matrix3d *x,
+                const Vector3d *u = 0);
     
-    void Render(const vector<Matrix3d> &xs, 
+    void Render(const vector<Matrix3d> *xs,
+                const vector<Vector3d> *us = 0,
                 bool rs = true,
                 int is = -1, int ie = -1,
                 int dis = 1, int dit = 1,

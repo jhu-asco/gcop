@@ -34,7 +34,7 @@ namespace gcop {
     Kinbody2d sys;     ///< system
 
     BaCost cost;       ///< cost function
-
+    
     PDmoc<Matrix3d, 3, 3> pdmoc;  ///< parametric discrete-mechanics optimal control
   };
 }

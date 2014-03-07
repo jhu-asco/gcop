@@ -22,8 +22,9 @@ namespace gcop {
     Particle2d();
     
     double Step(Vector4d &xb, double t, const Vector4d &xa, 
-                const Vector2d &u, double h,
-                Matrix<double, 4, 4> *A = 0, Matrix<double, 4, 2> *B = 0);
+                const Vector2d &u, double h, const VectorXd *p = 0,
+                Matrix<double, 4, 4> *A = 0, Matrix<double, 4, 2> *B = 0, 
+                Matrix<double, 4, Dynamic> *C = 0);
     
     double m;  ///< mass
     double r;  ///< radius    

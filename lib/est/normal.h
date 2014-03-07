@@ -50,8 +50,9 @@ namespace gcop {
     /**
      * Estimate the distribution using data xs and costs cs (optional)
      * @param xps data points and corresponding probabilities (should sum up to 1)
+     * @param a smoothing parameter [ mu_new = a*mu + (1-a)*mu_old ], equation to 1 by default
      */
-    void Fit(const vector<pair<VectorXd, double> > xps);
+    void Fit(const vector<pair<VectorXd, double> > xps, double a = 1);
 
     VectorXd mu;     ///< mean
     MatrixXd P;      ///< covariance

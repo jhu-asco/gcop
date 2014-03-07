@@ -79,24 +79,24 @@ void transformtoprincipal(boost::shared_ptr<Link> link)
 	//solve for principal inertial vector:
 	SelfAdjointEigenSolver<Matrix3d> es(linkinertia.selfadjointView<Eigen::Upper>());
 	Vector3d finalprincipal = es.eigenvalues();
-	cout<<"Final principal inertia values"<<endl<<es.eigenvalues()<<endl;
+	//cout<<"Final principal inertia values"<<endl<<es.eigenvalues()<<endl;
 	link->inertial->ixx = finalprincipal(0);	link->inertial->ixy = 0; link->inertial->ixz = 0; link->inertial->iyy = finalprincipal(1); link->inertial->iyz = 0; link->inertial->izz = finalprincipal(2);	
 	//add the new transform  for new COM 
 	Matrix3d principaltransform = es.eigenvectors();
-	cout<<"Principal transform"<<endl<<principaltransform<<endl;
+	//cout<<"Principal transform"<<endl<<principaltransform<<endl;
 	if((principaltransform.determinant()) < 0)
 	{
 		principaltransform.col(0).swap(principaltransform.col(1));
 		link->inertial->ixx = finalprincipal(1);	link->inertial->ixy = 0; link->inertial->ixz = 0; link->inertial->iyy = finalprincipal(0); link->inertial->iyz = 0; link->inertial->izz = finalprincipal(2);	
-		cout<<"Final principal inertia values "<<finalprincipal(1)<<" "<<finalprincipal(0)<<" "<<finalprincipal(2)<<endl;
-		cout<<"principaltransform "<<endl<<principaltransform<<endl;
+		//cout<<"Final principal inertia values "<<finalprincipal(1)<<" "<<finalprincipal(0)<<" "<<finalprincipal(2)<<endl;
+		//cout<<"principaltransform "<<endl<<principaltransform<<endl;
 	}
-	cout<<"Determinant of evectors: "<<principaltransform.determinant()<<endl;
+	//cout<<"Determinant of evectors: "<<principaltransform.determinant()<<endl;
 	//Matrix3d R = principaltransform.topLeftCorner<3,3>();
 	Matrix3d zero = principaltransform*principaltransform.transpose() - Matrix3d::Identity();
 	//cout<<"trial lpnorm "<<zero.determinant()<<endl;
 	//assert statement for checking rotation matrix:
-	assert(abs(zero.determinant()) < 1e-3);
+	assert((zero.transpose()*zero).trace() < 1e-6);
 
 	gcop::Vector4d vrotfi_pi;
 	gcop::SO3::Instance().g2quat(vrotfi_pi,principaltransform);
@@ -117,8 +117,8 @@ void combineinertia(boost::shared_ptr<Link> clink, boost::shared_ptr<Link> plink
 {
 	Pose poseci_p =  posec_p*(clink->inertial->origin);
 	Pose poseci_pi = plink->inertial->origin.GetInverse()*poseci_p;
-	cout<<"Poseci_p"<<poseci_p<<endl;
-	cout<<"Poseci_pi"<<poseci_pi<<endl;
+	//cout<<"Poseci_p"<<poseci_p<<endl;
+	//cout<<"Poseci_pi"<<poseci_pi<<endl;
 
 
 	//	Inertial finalinertia;//implicit copy constructor is enough here
@@ -131,27 +131,27 @@ void combineinertia(boost::shared_ptr<Link> clink, boost::shared_ptr<Link> plink
 	//convert inertia of childlink to pi frame
 	gcop::Matrix3d rotationci_pi = gposeci_pi.topLeftCorner<3,3>();
 	gcop::Matrix3d childinertia;
-	cout<<"rotationci_pi"<<endl<<rotationci_pi<<endl;
+	//cout<<"rotationci_pi"<<endl<<rotationci_pi<<endl;
 	childinertia(0,0) = clink->inertial->ixx; childinertia(0,1) = clink->inertial->ixy; childinertia(0,2) = clink->inertial->ixz; childinertia(1,1) = clink->inertial->iyy;childinertia(1,2) = clink->inertial->iyz;childinertia(2,2) = clink->inertial->izz;
 
-	cout<<"Childinertia before rotation"<<endl<<childinertia<<endl;
+	//cout<<"Childinertia before rotation"<<endl<<childinertia<<endl;
 
 	childinertia.triangularView<Upper>()  = rotationci_pi * childinertia.selfadjointView<Eigen::Upper>() *rotationci_pi.transpose();
 
-	cout<<"Childinertia after rotation"<<endl<<childinertia<<endl;
+	//cout<<"Childinertia after rotation"<<endl<<childinertia<<endl;
 
 
 	gcop::Matrix3d parentinertia;
 	parentinertia(0,0) = plink->inertial->ixx; parentinertia(0,1) = plink->inertial->ixy; parentinertia(0,2) = plink->inertial->ixz; parentinertia(1,1) = plink->inertial->iyy;parentinertia(1,2) = plink->inertial->iyz;parentinertia(2,2) = plink->inertial->izz;
-	cout<<"ParentInertia "<<endl<<parentinertia<<endl;
+	//cout<<"ParentInertia "<<endl<<parentinertia<<endl;
 
 	//Using parallel axis theorem:
 	double pmass = plink->inertial->mass, cmass = clink->inertial->mass;
-	cout<<"pmass "<<pmass<<" cmass "<<cmass<<endl;
+	//cout<<"pmass "<<pmass<<" cmass "<<cmass<<endl;
 	Vector3d vecfi_pi = gposeci_pi.topRightCorner<3,1>()*(pmass/(cmass + pmass)); 
 	Vector3d vecfi_ci = vecfi_pi - gposeci_pi.topRightCorner<3,1>();
 
-	cout<<"vecfi_pi "<<vecfi_pi.transpose()<<" vecfi_ci "<<vecfi_ci.transpose()<<endl;
+	//cout<<"vecfi_pi "<<vecfi_pi.transpose()<<" vecfi_ci "<<vecfi_ci.transpose()<<endl;
 
 	gcop::Matrix3d finalinertia;
 	finalinertia.triangularView<Upper>() = parentinertia + pmass*(vecfi_pi.squaredNorm()*Matrix3d::Identity() - vecfi_pi*vecfi_pi.transpose())+ childinertia + cmass*(vecfi_ci.squaredNorm()*Matrix3d::Identity() - vecfi_ci*vecfi_ci.transpose()) ;
@@ -181,15 +181,16 @@ void assign(boost::shared_ptr<const Link> link, boost::shared_ptr<Link> parentli
 			//Now we have a fixed joint try assigning the inertial frame 
 			Pose posec_p = cumpose*childlink->parent_joint->parent_to_joint_origin_transform;
 			childlink->inertial->origin = posec_p.GetInverse()*parentlink->inertial->origin;
-			cout<<"Posec_p "<<posec_p<<endl;
+			//cout<<"Posec_p "<<posec_p<<endl;
 
 			gcop::Matrix4d gposei_c;
 			gcop::Vector7d posevec;
 			posevec<<childlink->inertial->origin.rotation.w,childlink->inertial->origin.rotation.x,childlink->inertial->origin.rotation.y,childlink->inertial->origin.rotation.z,childlink->inertial->origin.position.x,childlink->inertial->origin.position.y,childlink->inertial->origin.position.z;
 			gcop::SE3::Instance().quatxyz2g(gposei_c,posevec);
-			cout<<"gposei_c"<<endl<<gposei_c<<endl;
-			cout<<"Posei_c "<<posevec.transpose()<<endl;
+			//cout<<"gposei_c"<<endl<<gposei_c<<endl;
+			//cout<<"Posei_c "<<posevec.transpose()<<endl;
 			childlink->visited = true;
+			cout<<childlink->name<<endl;
 			assign(childlink,parentlink,posec_p);
 		}
 		else
@@ -244,13 +245,19 @@ void walkTree(boost::shared_ptr<Link> link, int level,int &index,boost::shared_p
 				childlink->visited = true;//marks the link as visited for aggregation purposes
 				Pose idpose;
 				idpose.clear();
+				cout<<"aggregating " <<childlink->name<<endl;
 				aggregate(childlink,childlink,idpose);//aggregates all the fixed joint links and updates parent link inertia
 				transformtoprincipal(childlink);//convert the link's inertia into principal directions first
 				idpose.clear();
+				cout<<"assigning " <<childlink->name<<endl;
 				assign(childlink,childlink,idpose);//assigns parent link inertia to all the fixed child links.
 				assert((childlink->parent_joint->type == Joint::REVOLUTE)||(childlink->parent_joint->type == Joint::PRISMATIC));
 				//set name of the joint:
-					mbs->joints[index].name = childlink->parent_joint->name;
+				mbs->joints[index].name = childlink->parent_joint->name;
+				static int ctrlbias = (mbs->basetype == mbs->AIRBASE)? 4:
+					(mbs->basetype == mbs->FLOATBASE)? 6:
+					(mbs->basetype == mbs->FIXEDBASE)? 0:0;
+				//cout<<ctrlbias<<endl;
 				//based on type  of joint decide the axis
 				switch(childlink->parent_joint->type)
 				{
@@ -259,6 +266,19 @@ void walkTree(boost::shared_ptr<Link> link, int level,int &index,boost::shared_p
 						mbs->joints[index].a[0]  = childlink->parent_joint->axis.x;
 						mbs->joints[index].a[1]  = childlink->parent_joint->axis.y;
 						mbs->joints[index].a[2]  = childlink->parent_joint->axis.z;
+						assert(childlink->parent_joint->limits);
+						//joint limits
+						mbs->joints[index].lower = childlink->parent_joint->limits->lower;
+						mbs->joints[index].upper = childlink->parent_joint->limits->upper;
+						mbs->X.lb.r[index] = childlink->parent_joint->limits->lower;
+						mbs->X.ub.r[index] = childlink->parent_joint->limits->upper;
+						//velocity limits
+						assert(childlink->parent_joint->limits->velocity > 0);
+						mbs->X.lb.dr[index] = -childlink->parent_joint->limits->velocity;
+						mbs->X.ub.dr[index] = childlink->parent_joint->limits->velocity;
+						//joint effort
+						mbs->U.lb[ctrlbias+index] = -childlink->parent_joint->limits->effort;
+						mbs->U.ub[ctrlbias+index] = childlink->parent_joint->limits->effort;
 						if(childlink->parent_joint->dynamics)
 						{
 							mbs->damping[index] = childlink->parent_joint->dynamics->damping;
@@ -269,6 +289,16 @@ void walkTree(boost::shared_ptr<Link> link, int level,int &index,boost::shared_p
 						mbs->joints[index].a[3]  = childlink->parent_joint->axis.x;
 						mbs->joints[index].a[4]  = childlink->parent_joint->axis.y;
 						mbs->joints[index].a[5]  = childlink->parent_joint->axis.z;
+						assert(childlink->parent_joint->limits);
+						mbs->joints[index].lower = childlink->parent_joint->limits->lower;
+						mbs->joints[index].upper = childlink->parent_joint->limits->upper;
+						mbs->X.lb.r[index] = childlink->parent_joint->limits->lower;
+						mbs->X.ub.r[index] = childlink->parent_joint->limits->upper;
+						assert(childlink->parent_joint->limits->velocity > 0);
+						mbs->X.lb.dr[index] = -childlink->parent_joint->limits->velocity;
+						mbs->X.ub.dr[index] = childlink->parent_joint->limits->velocity;
+						mbs->U.lb[ctrlbias+index] = -childlink->parent_joint->limits->effort;
+						mbs->U.ub[ctrlbias+index] = childlink->parent_joint->limits->effort;
 						if(childlink->parent_joint->dynamics)
 						{
 							mbs->damping[index] = childlink->parent_joint->dynamics->damping;
@@ -278,11 +308,14 @@ void walkTree(boost::shared_ptr<Link> link, int level,int &index,boost::shared_p
 				//decide the transformations:
 				mbs->joints[index].gp = diffpose(childlink->parent_joint->parent_to_joint_origin_transform,link->inertial->origin);
 
-				//can change to convert to quatxyz2g
-				double r,p,y;
-				childlink->inertial->origin.rotation.getRPY(r,p,y);
+				Pose cinv = childlink->inertial->origin.GetInverse();
+				//childlink->inertial->origin.rotation.getRPY(r,p,y);
+				gcop::Matrix4d gposei_c;
+				gcop::Vector7d cposevec;
+				cposevec<<cinv.rotation.w,cinv.rotation.x,cinv.rotation.y,cinv.rotation.z,cinv.position.x,cinv.position.y,cinv.position.z;
+				gcop::SE3::Instance().quatxyz2g(mbs->joints[index].gc,cposevec);
 
-				gcop::SE3::Instance().rpyxyz2g(mbs->joints[index].gc,Vector3d(r,p,y),Vector3d(childlink->inertial->origin.position.x,childlink->inertial->origin.position.y,childlink->inertial->origin.position.z));
+				//gcop::SE3::Instance().rpyxyz2g(mbs->joints[index].gc,Vector3d(r,p,y),Vector3d(childlink->inertial->origin.position.x,childlink->inertial->origin.position.y,childlink->inertial->origin.position.z));
 				cout<<"level: "<<level<<endl;
 				cout<<" Child name "<<childlink->name<<endl;
 
@@ -302,13 +335,21 @@ void walkTree(boost::shared_ptr<Link> link, int level,int &index,boost::shared_p
 				mbs->links[index].I(4) = childlink->inertial->mass;
 				mbs->links[index].I(5) = childlink->inertial->mass;
 				mbs->links[index].name = childlink->name;
+				cout<<"Inertia matrix "<<mbs->links[index].I<<endl;
 				// make ds = 0;
 				mbs->links[index].ds = Vector3d(0,0,0);
-
 				mbs->pis[index] = level; //added parent index to the list.
-
+				cout<<"Index: "<<index<<" Level: "<<level<<" childlink visited status false;  childlink name: "<<childlink->name<<endl;
+				//Debug stuff to see if the joints are made right:
+				//getchar();
+				walkTree(*child,index,index,mbs);
 			}
-			walkTree(*child,index,index,mbs);
+			else
+			{
+				cout<<"Index: "<<index<<" Level: "<<level<<" childlink visited status true; childlink name: "<<childlink->name<<endl;
+				//getchar();
+				walkTree(*child,level,index,mbs);
+			}
 		}
 		else
 		{
@@ -335,7 +376,7 @@ void findnofactivejoints(boost::shared_ptr<Link> link, int &count)
 			
 	}
 }
-boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, string type = "chainbase")
+boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, gcop::Matrix4d &gposei_root, string type)
 {
 	//parse the xml file into a urdf model
 	boost::shared_ptr<ModelInterface> urdfmodel = parseURDF(xml_string);
@@ -358,13 +399,22 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, string type 
 	findnofactivejoints(root_link,nofactivejoints);
 	cout<<"Number of active joints: "<<nofactivejoints<<endl;
 	boost::shared_ptr<gcop::Mbs> mbs;
-	if(type == "airbase")
+	if(type == "AIRBASE")
 	{
 		mbs.reset(new gcop::Mbs(nofactivejoints+1,4+nofactivejoints));
-		mbs->basetype = "airbase";
+		mbs->basetype = mbs->AIRBASE;
+		cout<<"Creating airbase "<<mbs->U.n<<endl;
 	}
-	else
+	else if(type == "FLOATBASE")
+	{
 		mbs.reset(new gcop::Mbs(nofactivejoints+1,6 + nofactivejoints));
+		mbs->basetype = mbs->FLOATBASE;
+	}
+	else if(type == "FIXEDBASE")
+	{
+		mbs.reset(new gcop::Mbs(nofactivejoints+1,nofactivejoints,true));
+		mbs->basetype = mbs->FIXEDBASE;
+	}
 	//aggregate and assign rootlink
 	root_link->visited = true;//marks the link as visited for aggregation purposes
 	Pose idpose;
@@ -391,12 +441,90 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, string type 
 
 	mbs->pis[index] = -1; //added parent index to the list.
 	
+	gcop::Vector7d posevec;
+	//Pose ci_v = root_link->inertial->origin.GetInverse()*root_link->visual->origin;
+	posevec<<root_link->inertial->origin.rotation.w,root_link->inertial->origin.rotation.x,root_link->inertial->origin.rotation.y,root_link->inertial->origin.rotation.z,root_link->inertial->origin.position.x,root_link->inertial->origin.position.y,root_link->inertial->origin.position.z;
+	gcop::SE3::Instance().quatxyz2g(gposei_root,posevec);
 
 	cout<<"index: "<<index<<endl;
 	cout<<"Level: -1"<<endl;
 	cout<<"Root name "<<root_link->name<<endl;
 	walkTree(root_link,0,index,mbs);
-	mbs->Init();
+	//assign bounds on X and U:
+	//make U bounded
+	//mbs->U.bnd = true;
+	//mbs->X.bnd = false;
+	mbs->X.lb.gs[0].setIdentity();
+	mbs->X.ub.gs[0].setIdentity();
+	if(type == "FIXEDBASE")
+	{
+    /*for (int i = 0; i < nofactivejoints; ++i) {
+      mbs->U.lb[i] = -1;
+      mbs->U.ub[i] = 1;
+    }
+		*/
+	for (int i = 0; i < 3; ++i) {
+			mbs->X.lb.gs[0](i,3) = -100;
+			mbs->X.ub.gs[0](i,3) = 100;
+		}
+
+		mbs->X.lb.vs[0] << -100, -100, -100, -100, -100, -100;
+		mbs->X.ub.vs[0] << 100, 100, 100, 100, 100, 100;    
+
+
+	}
+	else if(type == "AIRBASE")
+	{ //defaults 
+		for (int i = 0; i < 3; ++i) {
+			mbs->X.lb.gs[0](i,3) = -10;
+			mbs->X.ub.gs[0](i,3) = 10;
+		}
+
+		mbs->X.lb.vs[0] << -10, -10, -10, -100, -100, -100;
+		mbs->X.ub.vs[0] << 10, 10, 10, 100, 100, 100;    
+
+		// max torques
+		for (int i = 0; i < 3; ++i) {
+			mbs->U.lb[i] = -1;
+			mbs->U.ub[i] = 1;
+		}
+		mbs->U.lb[3] = 0;
+		mbs->U.ub[3] = 300; // max lift
+
+/*		for (int i = 4; i < nofactivejoints+4; ++i) {
+			mbs->U.lb[i] = -1;
+			mbs->U.ub[i] = 1;
+		}
+		*/
+	}
+	else if(type == "FLOATBASE")
+	{
+		for (int i = 0; i < 3; ++i) {
+			mbs->X.lb.gs[0](i,3) = -10;
+			mbs->X.ub.gs[0](i,3) = 10;
+		}
+		mbs->X.lb.vs[0] << -10, -10, -10, -100, -100, -100;
+		mbs->X.ub.vs[0] << 10, 10, 10, 100, 100, 100;    
+
+		for (int i = 0; i < 3; ++i) {
+			mbs->U.lb[i] = -2;
+			mbs->U.ub[i] = 2;
+		}
+		for (int i = 3; i < 5; ++i) {
+			mbs->U.lb[i] = -10;
+			mbs->U.ub[i] = 10;
+		}
+		//keep atleast 100 N for lifting stuff
+		mbs->U.lb[5] = -300;
+		mbs->U.ub[5] = 300;
+		/*
+		for (int i = 6; i < nofactivejoints+6; ++i) {
+			mbs->U.lb[i] = -1;
+			mbs->U.ub[i] = 1;
+		}
+		*/
+	}
+	//mbs->Init();
 	//cout<<"Number of links excluding baselink and it's joint: "<<urdfmodel->links_.size()-1 <<"\t"<<urdfmodel->joints_.size()-1<<endl;
 	//cout<<"Number of links parsed: "<<es.size()<<endl;
 	//cout<<" Number of joints parsed: "<<joints.size()<<endl;

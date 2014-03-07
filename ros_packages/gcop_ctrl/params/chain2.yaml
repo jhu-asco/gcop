@@ -1,9 +1,9 @@
 ## Controller Params
-mbsdmoc/tf: 10 # Final Time
+mbsdmoc/tf: 1 # Final Time
 mbsdmoc/N: 200 # Number of segments
 
              #rpy         #xyz            #vrpy       #vxyz
-mbsdmoc/X0: [0.0,0.0,0.0, 1.2,0.5,0.0,  0.0,0.0,0.0, 0.0,0.0,0.0]
+mbsdmoc/X0: [0.0,0.0,0.0, 0.0,0.0,0.0,  0.0,0.0,0.0, 0.0,0.0,0.0]
 mbsdmoc/XN: [0.0,0.0,0.0, 0.0,0.0,0.0,  0.0,0.0,0.0, 0.0,0.0,0.0]
                   #rpy                   #xyz               #r            #w0                      #v0             #dr
 mbsdmoc/Qf:   [2.0,2.0,2.0,         20.0,20.0,20.0,      2.0,2.0,2.0,2.0,      1.0,1.0,1.0,            1.0,1.0,1.0,      1.0,1.0,1.0,1.0]   #   Final   Cost
@@ -11,16 +11,18 @@ mbsdmoc/Q:    [1.0,1.0,1.0,         2.0,2.0,2.0,         1.0,1.0,1.0,1.0,     1.
 
 mbsdmoc/R:    [0.1, 0.1, 0.1,       0.1,0.1,0.00001,     0.1,0.1,0.1,0.1] #Control Cost
 
-mbsdmoc/ag: [0.0, 0.0, 0.0] # Gravity
+mbsdmoc/ag: [0.0, 0.0, 9.81] # Gravity
 
 mbsdmoc/Kp:   [.2,.2,.2,   2.0,2.0,2.0,   2.0,2.0,2.0,2.0]
 mbsdmoc/Kd:   [1.0,1.0,1.0,      2.0,2.0,2.0,   2.0,2.0,2.0,2.0]
 
-mbsdmoc/J0: [rad(-pi/2), 0.0, rad(pi/2), 0.0]
-mbsdmoc/JN: [rad(pi/2), 0.0, rad(-pi/2), rad(pi/2)] # Joint angles
+mbsdmoc/J0: [0.0, 0.5, 0.0, 0.0]
+mbsdmoc/JN: [rad(-pi/2), 0.0, rad(pi/2), 0.0] # Joint angles
+mbsdmoc/Jv0: [0.0, 0.0, 0.0, 0.0]
+mbsdmoc/JvN: [0.0, 0.0, 0.0, 0.0] # Joint angles
 
 
-mbsdmoc/basetype: "chainbase"
+mbsdmoc/basetype: "FLOATBASE"
 
 mbsdmoc/mu: 10
 

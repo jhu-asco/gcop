@@ -20,7 +20,7 @@ void Airbase::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
   f[3] = 0;
   f[4] = 0;
   f[5] = u[3];
-	f.tail(f.size()-6) = u.tail(u.size()- 4);
+  f.tail(f.size()-6) = u.tail(u.size()- 4);
 
   /*
   f[6] = u[4];
@@ -47,11 +47,13 @@ void Airbase::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
     (*B)(0,0) = 1;
     (*B)(1,1) = 1;
     (*B)(2,2) = 1;
-		for(int count = 5;count < f.size();count++)
-			(*B)(count,count-2) = 1;
-		cout<<"F.size: "<<f.size()<<endl;
+
+    for(int count = 5;count < f.size();count++)
+      (*B)(count,count-2) = 1;
+    cout<<"F.size: "<<f.size()<<endl;
+
     /*(*B)(7,5) = 1;
-    (*B)(8,6) = 1;
+      (*B)(8,6) = 1;
     (*B)(9,7) = 1;
     (*B)(10,8) = 1;
     (*B)(11,9) = 1;

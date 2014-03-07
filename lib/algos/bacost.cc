@@ -29,8 +29,8 @@ static double cross2(Vector2d a, Vector2d b)
 double BaCost::Lp(double t, const Matrix3d &g, const Vector3d &u, const VectorXd &p,
                   Vector3d *Lx, Matrix3d *Lxx,
                   Vector3d *Lu, Matrix3d *Luu,
-                  Matrix3d *Lxu, 
-                  VectorXd *Lp, MatrixXd *Lpp, MatrixX3d *Lpx) 
+                  Matrix3d *Lxu,
+                  VectorXd *Lp, MatrixXd *Lpp, MatrixX3d *Lpx)
 {
   double L = 0;
 

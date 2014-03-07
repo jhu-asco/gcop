@@ -47,7 +47,16 @@ namespace gcop {
     void g2q(Vector3d &q, const Matrix3d &g) const;
 
     double tol;               ///< numerical tolerance
+
+    static RowVector2d r2hat(const Vector2d &a) 
+    {
+      return RowVector2d(-a[1], a[0]);
+    }    
     
+    static double cross2(Vector2d a, Vector2d b)
+    {
+      return a[0]*b[1] - a[1]*b[0];
+    }
   };
 }
 

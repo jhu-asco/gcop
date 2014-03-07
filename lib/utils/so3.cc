@@ -11,7 +11,7 @@ using namespace std;
 //mat SO3::E[3] = {SO3::ad(e[0]), SO3::ad(e[1]), SO3::ad(e[2])};
 
 SO3::SO3() : Group(),
-             tol(1e-16)
+             tol(1e-32)
 {
 }
 
@@ -76,38 +76,52 @@ void SO3::exp(Matrix3d &m, const Vector3d &v) const
     return;
   }
   
-  Matrix3d vh;
-  hat(vh, v);  
-  m = Id + sin(theta)/theta*vh + ((1.0-cos(theta))/(theta*theta))*vh*vh;
+  Matrix3d vnh;
+  hat(vnh, v/theta);
+  m = Id + sin(theta)*vnh + (1.0-cos(theta))*vnh*vnh;
 }
 
 
 void SO3::log(Vector3d &v, const Matrix3d &m) const
 {
-  //std::cout << std::setprecision(100) ;
-	//cout<<"m :"<<endl<<m<<endl;
-	double arg = (m.trace()-1)/2;
-	//cout<<" Arg: "<<arg<<endl;
-	//assert(abs(arg) <= 1 + tol);
+
+  bool debug = false;
+  if (debug) {
+    std::cout << std::setprecision(100) ;
+    cout<<"m :"<<endl<<m<<endl;
+  }
+
+  double arg = (m.trace()-1)/2;
+
+  if (debug) {
+    cout<<" Arg: "<<arg<<endl;
+    assert(abs(arg) <= 1 + tol);
+  }
+
   double phi = 0;
-	if(arg >= 1)
-		phi = 0;
-	else if(arg <= -1)
-		phi = M_PI;
-	else
-		phi = acos(arg);
-	//cout<<"phi "<<phi<<endl;
-	//cout<<"m trace"<<m.trace()<<endl;
-	double sphi = sin(phi);
-	//cout<<"sphi "<<sphi<<endl;
+  if(arg >= 1)
+    phi = 0;
+  else if(arg <= -1)
+    phi = M_PI;
+  else
+    phi = acos(arg);
+  
+  if (debug) {
+    cout<<"phi "<<phi<<endl;
+    cout<<"m trace"<<m.trace()<<endl;
+  }
+  
+  double sphi = sin(phi);
+
+  if (debug)
+    cout<<"sphi "<<sphi<<endl;
   
   if (fabs(sphi) < tol) {
     v.setZero();
     return;    
   }
   
-  hatinv(v, (phi/(2.0*sphi))*(m-m.transpose()));
-	//cout<<"frac: "<<(phi/(2.0*sphi))<<endl;
+  hatinv(v, (phi/(2.0*sphi))*(m-m.transpose()) );
 }
 
 
@@ -159,10 +173,10 @@ void SO3::dexp(Matrix3d &m, const Vector3d &v) const
     return;
   }
 
-  Matrix3d vh;
-  hat(vh, v);
+  Matrix3d vnh;
+  hat(vnh, v/a);
 
-  m = Id + (1-cos(a))*vh/(a*a) + (1-sin(a)/a)*vh*vh/(a*a);
+  m = Id + (1-cos(a))/a*vnh + (1-sin(a)/a)*vnh*vnh;
 }
 
 void SO3::dexpinv(Matrix3d &m, const Vector3d &v) const
@@ -174,7 +188,11 @@ void SO3::dexpinv(Matrix3d &m, const Vector3d &v) const
   }
   Matrix3d vh;
   hat(vh, v);
-  m = Id - vh/2.0 + ( (1 - theta/(2*tan(theta/2.0))) / (theta*theta))*vh*vh;
+
+  Matrix3d vnh;
+  hat(vnh, v/theta);
+
+  m = Id - vh/2.0 + (1 - theta/(2*tan(theta/2.0)))*vnh*vnh;
 }
 
 void SO3::skew(Vector3d& v, const Matrix3d& m) const

@@ -17,130 +17,11 @@ namespace gcop {
   typedef Matrix<double, 6, 1> Vector6d;
   typedef Matrix<double, 6, 6> Matrix6d;
   typedef Matrix<double, 12, 12> Matrix12d;
-
-
-
-class Geometry
-{
-public:
-  enum {SPHERE, BOX, CYLINDER, MESH} type;
-};
-
-class Sphere : public Geometry
-{
-public:
-  Sphere() { this->clear(); };
-  double radius;
-  void clear()
-  {
-    radius = 0;
-  };
-};
-
-class Box : public Geometry
-{
-public:
-  Box() { this->clear(); };
-  Vector3d dim;
-
-  void clear()
-  {
-    dim << 1, 1, 1;
-  };
-};
-
-class Cylinder : public Geometry
-{
-public:
-  Cylinder() { this->clear(); };
-  double length;
-  double radius;
-  
-  void clear()
-  {
-    length = 0;
-    radius = 0;
-  };
-};
-
-class Mesh : public Geometry
-{
-public:
-  Mesh() { this->clear(); };
-  std::string filename;
-  Vector3d scale;
-
-  void clear()
-  {
-    filename.clear();
-    scale << 1,1,1;
-  };
-  //  bool initXml(TiXmlElement *);
-  //  bool fileExists(std::string filename);
-};
-
-
-class Material
-{
-public:
-  Material() { this->clear(); };
-  std::string name;
-  std::string texture_filename;
-  Vector4d color;
-
-  void clear()
-  {
-    color << .5, .5, .5, .5;
-    texture_filename.clear();
-    name.clear();
-  };
-  //  bool initXml(TiXmlElement* config);
-};
-/*
-class Visual
-{
-public:
-  Visual() { this->clear(); };
-  Matrix4d origin;
-  boost::shared_ptr<Geometry> geometry;
-
-  std::string material_name;
-  boost::shared_ptr<Material> material;
-
-  void clear()
-  {
-    origin.setIdentity();
-    material_name.clear();
-    material.reset();
-    geometry.reset();
-    this->group_name.clear();
-  };
-  //  bool initXml(TiXmlElement* config);
-  std::string group_name;
-};
-
-
-class Collision
-{
-public:
-  Collision() { this->clear(); };
-  Matrix4d origin;
-  //  Pose origin;
-  boost::shared_ptr<Geometry> geometry;
-
-  void clear()
-  {
-    origin.setIdentity();
-    geometry.reset();
-    this->group_name.clear();
-  };
-  //  bool initXml(TiXmlElement* config);
-  std::string group_name;
-};
-*/
   
   /**
    * A single rigid body system
+   *
+   * Note: damping is currently supported only by Euler's method
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
@@ -203,7 +84,7 @@ public:
     
     double m;      ///< mass
     
-    Vector3d J;    ///< 3x1 inertia matrix
+    Vector3d J;    ///< 3x1 principal moments of inertia
     
     Vector6d I;    ///< 6x1 spatial inertia matrix
     
@@ -217,7 +98,7 @@ public:
 
     bool symp;     ///< symplectic?
 		
-		string name;   ///< Unique name of the body
+    string name;   ///< Unique name of the body
 
   };  
   
@@ -364,19 +245,34 @@ template<int c>  Body3d<c>::~Body3d()
     Rb = Ra*chwb;
     
     Vector3d fuv = Bu.bottomRows(3)*u;
-    
-    Vector3d vb = va + h/m*(fp + Ra*fuv);
-    
-    Vector3d pb = pa + h*vb;
+
+    const Matrix3d &I3 = Matrix3d::Identity();
+
+    Vector3d vb;
+    Vector3d pb;
+
+    bool vdamp = (Dv.norm() > 1e-16); // is there linear velocity damping
+    // modified mass matrix to include damping
+    Matrix3d Mp;
+    Matrix3d Mm;    
+
+    if (vdamp) {
+      Mp = I3*m + h/2*(Ra*Dv.asDiagonal());
+      Mm = I3*m - h/2*(Ra*Dv.asDiagonal());
+
+      vb = Mp.inverse()*(Mm*va + h*(fp + Ra*fuv));    
+      pb = pa + h*vb;
+    } else {
+      vb = va + h/m*(fp + Ra*fuv);    
+      pb = pa + h*vb;
+    }
     
     xb.second.head<3>() = pb;
     xb.second.segment<3>(3) = wb;
     xb.second.tail<3>() = vb;
 
     //    return 1;
-    
-    const Matrix3d &I3 = Matrix3d::Identity();
-    
+        
     if (A) {
       Matrix6d D1;
       D1.setZero();
@@ -427,7 +323,6 @@ template<int c>  Body3d<c>::~Body3d()
   }
 
 
-
   template <int c>
     double Body3d<c>::Feuler(double t, Body3dState &xb, const Body3dState &xa, 
                              const Matrix<double, c, 1> &u, double h,
@@ -445,15 +340,15 @@ template<int c>  Body3d<c>::~Body3d()
 
     Vector3d Jwa = J.cwiseProduct(wa);
 
-    Vector3d wb = wa + h*(Jwa.cross(wa) + Bu.topRows(3)*u).cwiseQuotient(J);
+    Vector3d wb = wa + h*(Jwa.cross(wa) + Dw.cwiseProduct(wa) + Bu.topRows(3)*u).cwiseQuotient(J);
     
     Matrix3d chwb;
     so3.cay(chwb, h*wb);
     Rb = Ra*chwb;
     
-    Vector3d fuv = Bu.bottomRows(3)*u;
-    
-    Vector3d vb = va + h/m*(fp + Ra*Bu.bottomRows(3)*u);
+    Vector3d fuv = Dv.cwiseProduct(Ra.transpose()*va) + Bu.bottomRows(3)*u;
+
+    Vector3d vb = va + h/m*(fp + Ra*fuv);
     
     xb.second.head<3>() = pa + h*vb;
     xb.second.segment<3>(3) = wb;
@@ -470,16 +365,16 @@ template<int c>  Body3d<c>::~Body3d()
     if (A) {
       Matrix6d D1;
       D1.setZero();
-      D1.topLeftCorner<3,3>() = -Matrix3d(J.asDiagonal()) - h*Jwah + wah*(J.asDiagonal());
+      D1.topLeftCorner<3,3>() = -Matrix3d(J.asDiagonal()) - h*(Jwah + Matrix3d(Dw.asDiagonal())) + wah*(J.asDiagonal());
       D1.bottomRightCorner<3,3>() = -m*I3;
       
       Matrix6d D2;
       D2.setZero();
-      Matrix3d fuvh; 
+      Matrix3d fuvh;
       so3.hat(fuvh, fuv);
       D2.bottomLeftCorner<3,3>() = h*Ra*fuvh;
       
-      Matrix6xcd D3; 
+      Matrix6xcd D3;
       D3.topRows(3) = -h*Bu.topRows(3);
       D3.bottomRows(3) = -h*Ra*Bu.bottomRows(3);
 
@@ -504,6 +399,8 @@ template<int c>  Body3d<c>::~Body3d()
       
       Matrix12d A2;
       A2.setIdentity();
+      A2.block<3,3>(0,0).diagonal() -= h*Dw.cwiseQuotient(J);
+      A2.block<3,3>(3,3) -= (h/m)*Ra*Dv.asDiagonal()*Ra;
       A2.block<6,6>(6,0) = -D2;
       A2.block<6,6>(6,6) = -D1;
       
@@ -524,3 +421,127 @@ template<int c>  Body3d<c>::~Body3d()
 
 }
 #endif
+
+
+
+/*
+
+for reference: properties that ROS uses
+
+class Geometry
+{
+public:
+  enum {SPHERE, BOX, CYLINDER, MESH} type;
+};
+
+class Sphere : public Geometry
+{
+public:
+  Sphere() { this->clear(); };
+  double radius;
+  void clear()
+  {
+    radius = 0;
+  };
+};
+
+class Box : public Geometry
+{
+public:
+  Box() { this->clear(); };
+  Vector3d dim;
+
+  void clear()
+  {
+    dim << 1, 1, 1;
+  };
+};
+
+class Cylinder : public Geometry
+{
+public:
+  Cylinder() { this->clear(); };
+  double length;
+  double radius;
+  
+  void clear()
+  {
+    length = 0;
+    radius = 0;
+  };
+};
+
+class Mesh : public Geometry
+{
+public:
+  Mesh() { this->clear(); };
+  std::string filename;
+  Vector3d scale;
+
+  void clear()
+  {
+    filename.clear();
+    scale << 1,1,1;
+  };
+  //  bool initXml(TiXmlElement *);
+  //  bool fileExists(std::string filename);
+};
+
+
+class Material
+{
+public:
+  Material() { this->clear(); };
+  std::string name;
+  std::string texture_filename;
+  Vector4d color;
+
+  void clear()
+  {
+    color << .5, .5, .5, .5;
+    texture_filename.clear();
+    name.clear();
+  };
+  //  bool initXml(TiXmlElement* config);
+};
+class Visual
+{
+public:
+  Visual() { this->clear(); };
+  Matrix4d origin;
+  boost::shared_ptr<Geometry> geometry;
+
+  std::string material_name;
+  boost::shared_ptr<Material> material;
+
+  void clear()
+  {
+    origin.setIdentity();
+    material_name.clear();
+    material.reset();
+    geometry.reset();
+    this->group_name.clear();
+  };
+  //  bool initXml(TiXmlElement* config);
+  std::string group_name;
+};
+
+
+class Collision
+{
+public:
+  Collision() { this->clear(); };
+  Matrix4d origin;
+  //  Pose origin;
+  boost::shared_ptr<Geometry> geometry;
+
+  void clear()
+  {
+    origin.setIdentity();
+    geometry.reset();
+    this->group_name.clear();
+  };
+  //  bool initXml(TiXmlElement* config);
+  std::string group_name;
+};
+*/

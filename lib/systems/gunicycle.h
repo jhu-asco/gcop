@@ -12,6 +12,7 @@ namespace gcop {
   typedef Matrix<double, 5, 1> Vector5d;
   typedef Matrix<double, 5, 5> Matrix5d;
   typedef Matrix<double, 5, 2> Matrix52d;
+  typedef Matrix<double, 5, Dynamic> Matrix5Xd;
   
   typedef pair<Matrix3d, Vector2d> M3V2d;
 
@@ -32,8 +33,8 @@ namespace gcop {
     Gunicycle();
     
     double Step(M3V2d &xb, double t, const M3V2d &xa, 
-                const Vector2d &u, double h,
-                Matrix5d *A = 0, Matrix52d *B = 0);
+                const Vector2d &u, double h, const VectorXd *p,
+                Matrix5d *A = 0, Matrix52d *B = 0, Matrix5Xd *C = 0);
     
     double dx; ///< distance between left and right tires
     double dy; ///< distance between front and back axles

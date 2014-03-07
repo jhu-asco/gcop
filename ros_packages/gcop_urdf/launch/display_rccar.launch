@@ -8,7 +8,18 @@
 	 <!--remap from =  "/st/gains" to = "/gcs/usergains"/-->
 	<!--rosparam param="source_list">["rcjointstate"]</rosparam-->
   <!--node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/-->
+	<group ns="movingcar">
+	  <param name="tf_prefix" value="movingcar" />
+		<param name="rate" value="100" />
+		<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+	</group>
+
+	<group ns="goalcar">
+	  <param name="tf_prefix" value="goalcar" />
+		<param name="rate" value="100" />
+		<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+	</group>
+
 	<node name="rcview" pkg="gcop_urdf" type="rctraj_viz"/>
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gcop_urdf)/rccar.vcg"/>
 </launch>

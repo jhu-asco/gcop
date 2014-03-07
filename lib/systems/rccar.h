@@ -10,6 +10,7 @@ namespace gcop {
   using namespace Eigen;
 
   typedef Matrix<double, 4, 2> Matrix42d;
+  typedef Matrix<double, 4, Dynamic> Matrix4Xd;
 
    /**
    * A simple rear-drive Rccar model with 2nd order dynamics. 
@@ -26,8 +27,8 @@ namespace gcop {
     Rccar();
     
     double Step(Vector4d &xb, double t, const Vector4d &xa,
-                const Vector2d &u, double h,
-                Matrix4d *A = 0, Matrix42d *B = 0);
+                const Vector2d &u, double h, const VectorXd *p = 0,
+                Matrix4d *A = 0, Matrix42d *B = 0, Matrix4Xd *C = 0);
 
     double l; ///< distance between axles    
   };

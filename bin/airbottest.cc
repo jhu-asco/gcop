@@ -32,6 +32,15 @@ void solver_process(Viewer* viewer)
   // system
   Airbot sys;
 
+  //  sys.debug=true;
+
+	sys.ag<<0,0,-9.81;
+
+  params.GetInt("method", sys.method);
+  params.GetInt("iters", sys.iters);
+
+  params.GetVectorXd("damping", sys.damping);
+  
 
   VectorXd qv0(24);
   params.GetVectorXd("x0", qv0);  
@@ -101,8 +110,12 @@ void solver_process(Viewer* viewer)
 
   AirbotDmoc dmoc(sys, cost, ts, xs, us);
   params.GetDouble("mu", dmoc.mu);
+  params.GetDouble("eps", dmoc.eps);
 
   struct timeval timer;
+
+  params.GetBool("debug", dmoc.debug);
+
   //  dmoc.debug = false; // turn off debug for speed
 
   Matrix4d g = Matrix4d::Identity();
@@ -166,7 +179,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("airflip.cfg");
+    params.Load("../../bin/airbot.cfg");
 
 
 #ifdef DISP

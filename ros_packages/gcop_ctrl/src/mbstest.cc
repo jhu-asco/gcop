@@ -49,6 +49,7 @@ boost::shared_ptr<MbsController> ctrl;
 int Nit = 1;//number of iterations for dmoc
 int N = 100;      // discrete trajectory segments
 string mbstype; // Type of system
+Matrix4d gposeroot_i; //inital inertial frame wrt the joint frame
 
 void q2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
 {
@@ -85,7 +86,8 @@ void pubtraj() //N is the number of segments
 	cout<<"nb: "<<nb<<endl;
 	Vector6d bpose;
 
-	gcop::SE3::Instance().g2q(bpose, mbsdmoc->xs[0].gs[0]);
+	//gcop::SE3::Instance().g2q(bpose, mbsdmoc->xs[0].gs[0]);
+	gcop::SE3::Instance().g2q(bpose,gposeroot_i*mbsdmoc->xs[0].gs[0]);
 	q2transform(trajectory.statemsg[0].basepose,bpose);
 
 	for(int count1 = 0;count1 < nb-1;count1++)
@@ -96,7 +98,7 @@ void pubtraj() //N is the number of segments
 
 	for (int i = 0; i < N; ++i) 
 	{
-		gcop::SE3::Instance().g2q(bpose, mbsdmoc->xs[i+1].gs[0]);
+		gcop::SE3::Instance().g2q(bpose, gposeroot_i*mbsdmoc->xs[i+1].gs[0]);
 		q2transform(trajectory.statemsg[i+1].basepose,bpose);
 		for(int count1 = 0;count1 < nb-1;count1++)
 		{
@@ -109,7 +111,7 @@ void pubtraj() //N is the number of segments
 		}
 	}
 	//final goal:
-	gcop::SE3::Instance().g2q(bpose, xf->gs[0]);
+	gcop::SE3::Instance().g2q(bpose, gposeroot_i*xf->gs[0]);
 	q2transform(trajectory.finalgoal.basepose,bpose);
 
 	for(int count1 = 0;count1 < nb-1;count1++)
@@ -118,6 +120,7 @@ void pubtraj() //N is the number of segments
 		trajectory.finalgoal.names[count1] = mbsmodel->joints[count1].name;
 	}
 
+	trajectory.time = mbsdmoc->ts;
 	trajpub.publish(trajectory);
 
 }
@@ -185,21 +188,24 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 
 		if(config.final)
 		{
-			// overwrite the config with values from final state
-			config.vroll = xf->vs[0](0);
-			config.vpitch = xf->vs[0](1);
-			config.vyaw = xf->vs[0](2);
-			config.vx = xf->vs[0](3);
-			config.vy = xf->vs[0](4);
-			config.vz = xf->vs[0](5);
+			if(mbstype != "FIXEDBASE")
+			{
+				// overwrite the config with values from final state
+				config.vroll = xf->vs[0](0);
+				config.vpitch = xf->vs[0](1);
+				config.vyaw = xf->vs[0](2);
+				config.vx = xf->vs[0](3);
+				config.vy = xf->vs[0](4);
+				config.vz = xf->vs[0](5);
 
-			gcop::SE3::Instance().g2rpyxyz(rpy,xyz,xf->gs[0]);
-			config.roll = rpy(0);
-			config.pitch = rpy(1);
-			config.yaw = rpy(2);
-			config.x = xyz(0);
-			config.y = xyz(1);
-			config.z = xyz(2);
+				gcop::SE3::Instance().g2rpyxyz(rpy,xyz,xf->gs[0]);
+				config.roll = rpy(0);
+				config.pitch = rpy(1);
+				config.yaw = rpy(2);
+				config.x = xyz(0);
+				config.y = xyz(1);
+				config.z = xyz(2);
+			}
 
 			if(config.i_J > nb-1)
 				config.i_J = nb-1; 
@@ -210,21 +216,24 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 		}
 		else
 		{
-			// overwrite the config with values from initial state
-			config.vroll = mbsdmoc->xs[0].vs[0](0);
-			config.vpitch = mbsdmoc->xs[0].vs[0](1);
-			config.vyaw = mbsdmoc->xs[0].vs[0](2);
-			config.vx = mbsdmoc->xs[0].vs[0](3);
-			config.vy = mbsdmoc->xs[0].vs[0](4);
-			config.vz = mbsdmoc->xs[0].vs[0](5);
+			if(mbstype != "FIXEDBASE")
+			{
+				// overwrite the config with values from initial state
+				config.vroll = mbsdmoc->xs[0].vs[0](0);
+				config.vpitch = mbsdmoc->xs[0].vs[0](1);
+				config.vyaw = mbsdmoc->xs[0].vs[0](2);
+				config.vx = mbsdmoc->xs[0].vs[0](3);
+				config.vy = mbsdmoc->xs[0].vs[0](4);
+				config.vz = mbsdmoc->xs[0].vs[0](5);
 
-			gcop::SE3::Instance().g2rpyxyz(rpy,xyz,mbsdmoc->xs[0].gs[0]);
-			config.roll = rpy(0);
-			config.pitch = rpy(1);
-			config.yaw = rpy(2);
-			config.x = xyz(0);
-			config.y = xyz(1);
-			config.z = xyz(2);
+				gcop::SE3::Instance().g2rpyxyz(rpy,xyz,mbsdmoc->xs[0].gs[0]);
+				config.roll = rpy(0);
+				config.pitch = rpy(1);
+				config.yaw = rpy(2);
+				config.x = xyz(0);
+				config.y = xyz(1);
+				config.z = xyz(2);
+			}
 
 			if(config.i_J > nb-1)
 				config.i_J = nb-1; 
@@ -236,6 +245,17 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 		}
 		config.mu = mbsdmoc->mu;
 		config.tf = cost->tf;
+		if(config.iterate)
+		{
+			config.iterate = false;
+			ros::TimerEvent timerevent;
+			iterateCallback(timerevent);
+		}
+		if(config.animate)
+		{
+			config.animate = false;
+			pubtraj();
+		}
 		return;
 	}
 
@@ -243,8 +263,12 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 
 	if(config.final)
 	{
-		gcop::SE3::Instance().rpyxyz2g(xf->gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
-		xf->vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
+
+		if(mbstype != "FIXEDBASE")
+		{
+			gcop::SE3::Instance().rpyxyz2g(xf->gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
+			xf->vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
+		}
 
 		if(config.i_J > nb-1)
 			config.i_J = nb-1; 
@@ -256,8 +280,11 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 	}
 	else
 	{
-		gcop::SE3::Instance().rpyxyz2g(mbsdmoc->xs[0].gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
-		mbsdmoc->xs[0].vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
+		if(mbstype != "FIXEDBASE")
+		{
+			gcop::SE3::Instance().rpyxyz2g(mbsdmoc->xs[0].gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
+			mbsdmoc->xs[0].vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
+		}
 
 		if(config.i_J > nb-1)
 			config.i_J = nb-1; 
@@ -272,27 +299,42 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 	}
 	if(config.ureset)
 	{
-		cout<<"Hello"<<endl;
+		//cout<<"Hello"<<endl;
 		VectorXd u(mbsmodel->U.n);
 		u.setZero();
-		if(mbstype == "airbase")
+		if(mbstype == "AIRBASE")
 		{
 			for(int count = 0;count < nb;count++)
 				u[3] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
 			cout<<"u[3]: "<<u[3]<<endl;
 		}
-		else
+		else if(mbstype == "FLOATBASE")
 		{
 			for(int count = 0;count < nb;count++)
 				u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
 			cout<<"u[5]: "<<u[5]<<endl;
 		}
 		int size = mbsdmoc->us.size();
-		for(int count = 0;count < size;count++)
+		double t1;
+		/*if((mbstype == "FLOATBASE")||(mbstype == "FIXEDBASE"))
 		{
-			mbsdmoc->us[count] = u;
-			//mbsdmoc->xs[count] = mbsdmoc->xs[0];
+			cout<<"Using Controller"<<endl;
+			for (int i = 0; i < size; ++i) {
+				t1 = i*h;
+				ctrl->Set(mbsdmoc->us[i], t1, mbsdmoc->xs[i]); 
+				mbsmodel->Step(mbsdmoc->xs[i+1], t1, mbsdmoc->xs[i], mbsdmoc->us[i], h);
+			}
 		}
+		else
+		{
+			*/
+			for(int count = 0;count < size;count++)
+			{
+				mbsdmoc->us[count] = u;
+				mbsmodel->Step(mbsdmoc->xs[count+1], count*h, mbsdmoc->xs[count], mbsdmoc->us[count], h);
+				//mbsdmoc->xs[count] = mbsdmoc->xs[0];
+			}
+		//}
 	}
 
 
@@ -340,6 +382,7 @@ void paramreqcallback(gcop_ctrl::MbsDMocInterfaceConfig &config, uint32_t level)
 	 */
 
 	mbsdmoc->mu = config.mu;
+	
 }
 
 
@@ -359,9 +402,13 @@ int main(int argc, char** argv)
 		return 0;
 	}
 	n.getParam("basetype",mbstype);
+	assert((mbstype == "FIXEDBASE")||(mbstype == "AIRBASE")||(mbstype == "FLOATBASE"));
 	VectorXd xmlconversion;
+	Matrix4d gposei_root;
 	//Create Mbs system
-	mbsmodel = gcop_urdf::mbsgenerator(xml_string, mbstype);
+	mbsmodel = gcop_urdf::mbsgenerator(xml_string,gposei_root, mbstype);
+	mbsmodel->U.bnd = false;
+	gcop::SE3::Instance().inv(gposeroot_i,gposei_root);
 	cout<<"Mbstype: "<<mbstype<<endl;
 	mbsmodel->ag << 0, 0, -0.05;
 	//get ag from parameters
@@ -385,6 +432,36 @@ int main(int argc, char** argv)
 	}
 	cout<<"mbsmodel damping: "<<mbsmodel->damping.transpose()<<endl;
 
+	int ctrlveclength = (mbstype == "AIRBASE")? 4:
+		(mbstype == "FIXEDBASE")? 6:
+		(mbstype == "FLOATBASE")? 0:0;
+	cout<<"ctrlveclength "<<ctrlveclength<<endl;
+	//set bounds on basebody controls
+	XmlRpc::XmlRpcValue ub_list;
+
+	if(n.getParam("ulb", ub_list))
+	{
+		xml2vec(xmlconversion,ub_list);
+		ROS_ASSERT(xmlconversion.size() == ctrlveclength);
+		mbsmodel->U.lb.head(ctrlveclength) = xmlconversion;
+	}
+	//upper bound
+	if(n.getParam("uub", ub_list))
+	{
+		xml2vec(xmlconversion,ub_list);
+		ROS_ASSERT(xmlconversion.size() == ctrlveclength);
+		mbsmodel->U.ub.head(ctrlveclength) = xmlconversion;
+	}
+	cout<<"mbsmodel U.lb: "<<mbsmodel->U.lb.transpose()<<endl;
+	cout<<"mbsmodel U.ub: "<<mbsmodel->U.ub.transpose()<<endl;
+	cout<<"mbsmodel X.lb.gs[0]"<<endl<<mbsmodel->X.lb.gs[0]<<endl;
+	cout<<"mbsmodel X.ub.gs[0]"<<endl<<mbsmodel->X.ub.gs[0]<<endl;
+	cout<<"mbsmodel X.lb.vs[0]: "<<mbsmodel->X.lb.vs[0].transpose()<<endl;
+	cout<<"mbsmodel X.ub.vs[0]: "<<mbsmodel->X.ub.vs[0].transpose()<<endl;
+	//Initialize after setting everything up
+	mbsmodel->Init();
+
+
 	//Using it:
 	//define parameters for the system
 	int nb = mbsmodel->nb;
@@ -404,7 +481,7 @@ int main(int argc, char** argv)
 
 
 	//Define Final State
-	xf.reset( new MbsState(nb));
+	xf.reset( new MbsState(nb,(mbstype == "FIXEDBASE")));
 	xf->gs[0].setIdentity();
 	xf->vs[0].setZero();
 	xf->dr.setZero();
@@ -413,10 +490,13 @@ int main(int argc, char** argv)
 	// Get Xf	 from params
 	XmlRpc::XmlRpcValue xf_list;
 	if(n.getParam("XN", xf_list))
+	{
 		xml2vec(xmlconversion,xf_list);
-	ROS_ASSERT(xmlconversion.size() == 12);
-	xf->vs[0] = xmlconversion.tail<6>();
-  gcop::SE3::Instance().rpyxyz2g(xf->gs[0],xmlconversion.head<3>(),xmlconversion.segment<3>(3)); 
+		ROS_ASSERT(xmlconversion.size() == 12);
+		xf->vs[0] = xmlconversion.tail<6>();
+		gcop::SE3::Instance().rpyxyz2g(xf->gs[0],xmlconversion.head<3>(),xmlconversion.segment<3>(3)); 
+	}
+	xf->gs[0] = gposei_root*xf->gs[0];//new stuff with transformations
   //list of joint angles:
 	XmlRpc::XmlRpcValue xfj_list;
 	if(n.getParam("JN", xfj_list))
@@ -430,8 +510,13 @@ int main(int argc, char** argv)
 
 	//Define Lqr Cost
 	cost.reset(new LqCost<MbsState>(mbsmodel->X, (Rn<>&)mbsmodel->U, tf, *xf));
-	cost->Qf(0,0) = 2; cost->Qf(1,1) = 2; cost->Qf(2,2) = 2;
-	cost->Qf(3,3) = 20; cost->Qf(4,4) = 20; cost->Qf(5,5) = 20;
+	cost->Qf.setIdentity();
+/*	if(mbstype != "FIXEDBASE")
+	{
+		cost->Qf(0,0) = 2; cost->Qf(1,1) = 2; cost->Qf(2,2) = 2;
+		cost->Qf(3,3) = 20; cost->Qf(4,4) = 20; cost->Qf(5,5) = 20;
+	}
+	*/
 	//cost.Qf(9,9) = 20; cost.Qf(10,10) = 20; cost.Qf(11,11) = 20;
 	//list of final cost :
 	XmlRpc::XmlRpcValue finalcost_list;
@@ -469,39 +554,42 @@ int main(int argc, char** argv)
 
 
 	//Define the initial state mbs
-	MbsState x(nb);
-	x.gs[0].setIdentity();
-	x.vs[0].setZero();
-	x.dr.setZero();
-	x.r.setZero();
+	MbsState x0(nb,(mbstype == "FIXEDBASE"));
+	x0.gs[0].setIdentity();
+	x0.vs[0].setZero();
+	x0.dr.setZero();
+	x0.r.setZero();
 
 	// Get X0	 from params
 	XmlRpc::XmlRpcValue x0_list;
 	if(n.getParam("X0", x0_list))
+	{
 		xml2vec(xmlconversion,x0_list);
-	ROS_ASSERT(xmlconversion.size() == 12);
-	x.vs[0] = xmlconversion.tail<6>();
-  gcop::SE3::Instance().rpyxyz2g(x.gs[0],xmlconversion.head<3>(),xmlconversion.segment<3>(3)); 
+		ROS_ASSERT(xmlconversion.size() == 12);
+		x0.vs[0] = xmlconversion.tail<6>();
+		gcop::SE3::Instance().rpyxyz2g(x0.gs[0],xmlconversion.head<3>(),xmlconversion.segment<3>(3)); 
+	}
+	x0.gs[0] = gposei_root*x0.gs[0];//new stuff with transformations
   //list of joint angles:
 	XmlRpc::XmlRpcValue j_list;
 	if(n.getParam("J0", j_list))
-		xml2vec(x.r,j_list);
-	cout<<"x.r"<<endl<<x.r<<endl;
+		xml2vec(x0.r,j_list);
+	cout<<"x.r"<<endl<<x0.r<<endl;
 	if(n.getParam("Jv0", j_list))
-		xml2vec(x.dr,j_list);
-	cout<<"x.dr"<<endl<<x.dr<<endl;
-	mbsmodel->Rec(x, h);
+		xml2vec(x0.dr,j_list);
+	cout<<"x.dr"<<endl<<x0.dr<<endl;
+	mbsmodel->Rec(x0, h);
 
 	// initial controls (e.g. hover at one place)
 	VectorXd u(mbsmodel->U.n);
 	u.setZero();
-	if(mbstype == "airbase")
+	if(mbstype == "AIRBASE")
 	{
 		for(int count = 0;count < nb;count++)
 			u[3] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
 		cout<<"u[3]: "<<u[3]<<endl;
 	}
-	else
+	else if(mbstype == "FLOATBASE")
 	{
 		for(int count = 0;count < nb;count++)
 			u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
@@ -510,31 +598,32 @@ int main(int argc, char** argv)
 
 	//States and controls for system
 	vector<VectorXd> us(N,u);
-	vector<MbsState> xs(N+1,x);
+	vector<MbsState> xs(N+1,x0);
 	bool usectrl = true;
 
 	// @MK: this is the new part, initialize trajectory using a controller
-	if(mbstype != "airbase")
+	if((mbstype == "FLOATBASE")||(mbstype == "FIXEDBASE"))
 	{
 		ctrl.reset(new MbsController(*mbsmodel, xf.get()));
 
 		XmlRpc::XmlRpcValue kp_list;
 		if(n.getParam("Kp", kp_list))
 			xml2vec(xmlconversion,kp_list);
-		ROS_ASSERT(xmlconversion.size() == 6+nb-1);
-		ctrl->Kp = xmlconversion.head(6+nb-1);
+		ROS_ASSERT(xmlconversion.size() == mbsmodel->U.n);
+		ctrl->Kp = xmlconversion.head(mbsmodel->U.n);
 		cout<<"Kp"<<endl<<ctrl->Kp<<endl;
 
 		XmlRpc::XmlRpcValue kd_list;
 		if(n.getParam("Kd", kd_list))
 			xml2vec(xmlconversion,kd_list);
-		ROS_ASSERT(xmlconversion.size() == 6+nb-1);
-		ctrl->Kd = xmlconversion.head(6+nb-1);
+		ROS_ASSERT(xmlconversion.size() == mbsmodel->U.n);
+		ctrl->Kd = xmlconversion.head(mbsmodel->U.n);
 		cout<<"Kd"<<endl<<ctrl->Kd<<endl;
 
 		n.getParam("usectrl",usectrl);
 		if(usectrl)
 		{
+			cout<<"Using Controller"<<endl;
 			for (int i = 0; i < xs.size()-1; ++i) {
 				double t = i*h;
 				ctrl->Set(us[i], t, xs[i]); 
@@ -545,7 +634,7 @@ int main(int argc, char** argv)
 	//cout<<"us"<<endl<<us<<endl;
 
   // see the result before running optimization
-  getchar();
+  //getchar();
 
 
 	mbsdmoc.reset(new MbsDmoc(*mbsmodel, *cost, ts, xs, us));
@@ -558,6 +647,8 @@ int main(int argc, char** argv)
 	trajectory.statemsg.resize(N+1);
 	trajectory.ctrl.resize(N);
 	trajectory.time = ts;
+	trajectory.rootname = mbsmodel->links[0].name;
+
 	trajectory.finalgoal.statevector.resize(nb-1);
 	trajectory.finalgoal.names.resize(nb-1);
 
@@ -579,7 +670,13 @@ int main(int argc, char** argv)
 	n.getParam("Nit",Nit);
 	// Create timer for iterating	
 	iteratetimer = n.createTimer(ros::Duration(0.1), iterateCallback);
-	iteratetimer.start();
+	string mode = "continuous";//or user
+	n.getParam("mode",mode);//otherwise user based
+	cout<<"mode: "<<mode<<endl;
+	if(mode == "continuous")
+		iteratetimer.start();
+	else
+		iteratetimer.stop();
 //	Dynamic Reconfigure setup Callback ! immediately gets called with default values	
 	dynamic_reconfigure::Server<gcop_ctrl::MbsDMocInterfaceConfig> server;
 	dynamic_reconfigure::Server<gcop_ctrl::MbsDMocInterfaceConfig>::CallbackType f;

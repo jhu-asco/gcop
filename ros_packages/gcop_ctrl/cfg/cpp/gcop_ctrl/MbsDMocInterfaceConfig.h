@@ -267,6 +267,8 @@ class DEFAULT
         if("tf"==(*i)->name){tf = boost::any_cast<double>(val);}
         if("ureset"==(*i)->name){ureset = boost::any_cast<bool>(val);}
         if("final"==(*i)->name){final = boost::any_cast<bool>(val);}
+        if("iterate"==(*i)->name){iterate = boost::any_cast<bool>(val);}
+        if("animate"==(*i)->name){animate = boost::any_cast<bool>(val);}
         if("x"==(*i)->name){x = boost::any_cast<double>(val);}
         if("y"==(*i)->name){y = boost::any_cast<double>(val);}
         if("z"==(*i)->name){z = boost::any_cast<double>(val);}
@@ -295,6 +297,8 @@ class DEFAULT
 double tf;
 bool ureset;
 bool final;
+bool iterate;
+bool animate;
 double x;
 double y;
 double z;
@@ -333,6 +337,10 @@ double mu;
       bool ureset;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       bool final;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      bool iterate;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      bool animate;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double x;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -550,6 +558,26 @@ MbsDMocInterfaceConfig::GroupDescription<MbsDMocInterfaceConfig::DEFAULT, MbsDMo
       Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("final", "bool", 1, "Change final posn and joint", "", &MbsDMocInterfaceConfig::final)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("final", "bool", 1, "Change final posn and joint", "", &MbsDMocInterfaceConfig::final)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.iterate = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.iterate = 1;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.iterate = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("iterate", "bool", 1, "Iterate mbs Nit times", "", &MbsDMocInterfaceConfig::iterate)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("iterate", "bool", 1, "Iterate mbs Nit times", "", &MbsDMocInterfaceConfig::iterate)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.animate = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.animate = 1;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.animate = 1;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("animate", "bool", 1, "Animate mbs 1 time", "", &MbsDMocInterfaceConfig::animate)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(MbsDMocInterfaceConfig::AbstractParamDescriptionConstPtr(new MbsDMocInterfaceConfig::ParamDescription<bool>("animate", "bool", 1, "Animate mbs 1 time", "", &MbsDMocInterfaceConfig::animate)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.x = -10.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"

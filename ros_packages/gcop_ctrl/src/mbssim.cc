@@ -40,8 +40,9 @@ vector<double> ts;
 
 string mbstype; // Type of system
 double tfinal = 20;   // time-horizon
+Matrix4d gposeroot_i; //inital inertial frame wrt the joint frame
 
-void q2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
+void rpy2transform(geometry_msgs::Transform &transformmsg, Vector6d &bpose)
 {
 	tf::Quaternion q;
 	q.setEulerZYX(bpose[2],bpose[1],bpose[0]);
@@ -70,15 +71,15 @@ void simtraj(const ros::TimerEvent &event) //N is the number of segments
 {
 	int N = us.size();
 	double h = tfinal/N; // time-step
-	cout<<"N: "<<N<<endl;
+	//cout<<"N: "<<N<<endl;
 	int csize = mbsmodel->U.n;
 	//cout<<"csize: "<<csize<<endl;
 	int nb = mbsmodel->nb;
-	cout<<"nb: "<<nb<<endl;
+	//cout<<"nb: "<<nb<<endl;
 	Vector6d bpose;
 
-	gcop::SE3::Instance().g2q(bpose, xs[0].gs[0]);
-	q2transform(trajectory.statemsg[0].basepose,bpose);
+	gcop::SE3::Instance().g2q(bpose,gposeroot_i*xs[0].gs[0]);
+	rpy2transform(trajectory.statemsg[0].basepose,bpose);
 
 	for(int count1 = 0;count1 < nb-1;count1++)
 	{
@@ -88,10 +89,11 @@ void simtraj(const ros::TimerEvent &event) //N is the number of segments
 
 	for (int i = 0; i < N; ++i) 
 	{
-		cout<<"i "<<i<<endl;
+//		cout<<"i "<<i<<endl;
 		mbsmodel->Step(xs[i+1], i*h, xs[i], us[i], h);
-		gcop::SE3::Instance().g2q(bpose, xs[i+1].gs[0]);
-		q2transform(trajectory.statemsg[i+1].basepose,bpose);
+		//getchar();
+		gcop::SE3::Instance().g2q(bpose, gposeroot_i*xs[i+1].gs[0]);
+		rpy2transform(trajectory.statemsg[i+1].basepose,bpose);
 		for(int count1 = 0;count1 < nb-1;count1++)
 		{
 			trajectory.statemsg[i+1].statevector[count1] = xs[i+1].r[count1];
@@ -168,9 +170,11 @@ void paramreqcallback(gcop_ctrl::MbsSimInterfaceConfig &config, uint32_t level)
 	for (int k = 0; k <=N; ++k)
 		ts[k] = k*h;
 
-
-	gcop::SE3::Instance().rpyxyz2g(xs[0].gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
-	xs[0].vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
+  if((mbstype == "FLOATBASE")||(mbstype == "AIRBASE"))
+	{
+		gcop::SE3::Instance().rpyxyz2g(xs[0].gs[0], Vector3d(config.roll,config.pitch,config.yaw), Vector3d(config.x,config.y,config.z));
+		xs[0].vs[0]<<config.vroll, config.vpitch, config.vyaw, config.vx, config.vy, config.vz;
+	}
 
 	xs[0].r[config.i_J -1] = config.Ji;
 	xs[0].dr[config.i_J -1] = config.Jvi;
@@ -197,17 +201,29 @@ int main(int argc, char** argv)
 		return 0;
 	}
 	n.getParam("basetype",mbstype);
+	assert((mbstype == "FIXEDBASE")||(mbstype == "AIRBASE")||(mbstype == "FLOATBASE"));
 	VectorXd xmlconversion;
+	Matrix4d gposei_root; //inital inertial frame wrt the joint frame
 	//Create Mbs system
-	mbsmodel = gcop_urdf::mbsgenerator(xml_string, mbstype);
+	mbsmodel = gcop_urdf::mbsgenerator(xml_string,gposei_root, mbstype);
+	cout<<"gposei_root: "<<endl<<gposei_root<<endl;
+	gcop::SE3::Instance().inv(gposeroot_i,gposei_root);
+	//getchar();
+	//mbsmodel->debug = true;
+	//mbsmodel->method = 1;
+	//mbsmodel->iters = 4;
 	cout<<"Mbstype: "<<mbstype<<endl;
-	mbsmodel->ag << 0, 0, -0.05;
+	mbsmodel->ag << 0, 0, -0.05;//default
 	//get ag from parameters
 	XmlRpc::XmlRpcValue ag_list;
 	if(n.getParam("ag", ag_list))
 		xml2vec(xmlconversion,ag_list);
 	ROS_ASSERT(xmlconversion.size() == 3);
+	//mbsmodel->ag = gposei_root.topLeftCorner(3,3).transpose()*xmlconversion.head(3);
 	mbsmodel->ag = xmlconversion.head(3);
+
+	cout<<"mbsmodel->ag: "<<endl<<mbsmodel->ag<<endl;
+	//mbsmodel->ag = xmlconversion.head(3);
 
 	//Printing the mbsmodel params:
 	for(int count = 0;count<(mbsmodel->nb);count++)
@@ -222,6 +238,35 @@ int main(int argc, char** argv)
 		cout<<"Joint["<<mbsmodel->joints[count].name<<"].a"<<endl<<mbsmodel->joints[count].a<<endl;
 	}
 
+	cout<<"mbsmodel damping: "<<mbsmodel->damping.transpose()<<endl;
+	int ctrlveclength = (mbstype == "AIRBASE")? 4:
+		(mbstype == "FLOATBASE")? 6:
+		(mbstype == "FIXEDBASE")? 0:0;
+	cout<<"ctrlveclength "<<ctrlveclength<<endl;
+	//set bounds on basebody controls
+	XmlRpc::XmlRpcValue ub_list;
+	if(n.getParam("ulb", ub_list))
+	{
+		xml2vec(xmlconversion,ub_list);
+		ROS_ASSERT(xmlconversion.size() == ctrlveclength);
+		mbsmodel->U.lb.head(ctrlveclength) = xmlconversion;
+	}
+	//upper bound
+	if(n.getParam("uub", ub_list))
+	{
+		xml2vec(xmlconversion,ub_list);
+		ROS_ASSERT(xmlconversion.size() == ctrlveclength);
+		mbsmodel->U.ub.head(ctrlveclength) = xmlconversion;
+	}
+	cout<<"mbsmodel U.lb: "<<mbsmodel->U.lb.transpose()<<endl;
+	cout<<"mbsmodel U.ub: "<<mbsmodel->U.ub.transpose()<<endl;
+	cout<<"mbsmodel X.lb.gs[0]"<<endl<<mbsmodel->X.lb.gs[0]<<endl;
+	cout<<"mbsmodel X.ub.gs[0]"<<endl<<mbsmodel->X.ub.gs[0]<<endl;
+	cout<<"mbsmodel X.lb.vs[0]: "<<mbsmodel->X.lb.vs[0].transpose()<<endl;
+	cout<<"mbsmodel X.ub.vs[0]: "<<mbsmodel->X.ub.vs[0].transpose()<<endl;
+	//Initialize after setting everything up
+	mbsmodel->Init();
+
 	//Using it:
 	//define parameters for the system
 	int nb = mbsmodel->nb;
@@ -235,7 +280,7 @@ int main(int argc, char** argv)
 
 
 	//Define the initial state mbs
-	MbsState x(nb);
+	MbsState x(nb,(mbstype == "FIXEDBASE"));
 	x.gs[0].setIdentity();
 	x.vs[0].setZero();
 	x.dr.setZero();
@@ -250,6 +295,8 @@ int main(int argc, char** argv)
 		x.vs[0] = xmlconversion.tail<6>();
 		gcop::SE3::Instance().rpyxyz2g(x.gs[0],xmlconversion.head<3>(),xmlconversion.segment<3>(3)); 
 	}
+	x.gs[0] = gposei_root*x.gs[0];//new stuff with transformations
+	cout<<"x.gs[0]"<<endl<<x.gs[0]<<endl;
   //list of joint angles:
 	XmlRpc::XmlRpcValue j_list;
 	if(n.getParam("J0", j_list))
@@ -265,16 +312,42 @@ int main(int argc, char** argv)
 	}
 	mbsmodel->Rec(x, h);
 
+	//Compute Mass matrix:
+  MatrixXd M(nb-1 + 6*(!mbsmodel->fixed), nb-1 + 6*(!mbsmodel->fixed));
+	mbsmodel->Mass(M,x);
+	cout<<"Mass Matrix: "<<endl<<M<<endl;
+	//Printing parent indices and joint names and link names:
+	for(int count = 0;count <(mbsmodel->nb);count++) 
+	{
+		cout<<"Links["<<count<<"] "<<mbsmodel->links[count].name<<endl;
+		cout<<"pis["<<count<<"]: "<<mbsmodel->pis[count]<<endl;
+	}
+	Matrix3d rposei_root = gposei_root.topLeftCorner(3,3);
+	cout<<"rposei_root"<<endl<<rposei_root<<endl;
+
+	//printing body fixed axes:
+	for(int count =0;count<(mbsmodel->nb-1);count++)
+	{
+		cout<<"Joint body axis["<<mbsmodel->joints[count].name<<"]: "<<mbsmodel->joints[count].a.transpose()<<endl;
+		cout<<"x.gs["<<count+1<<"]"<<endl<<x.gs[count+1].topLeftCorner(3,3)<<endl;
+		cout<<"mbsmodel->joints["<<count<<"]"<<endl<<mbsmodel->joints[count].gc<<endl;
+		cout<<"Joint wrt visual axis["<<(count+1)<<"] "<<(x.gs[count+1].topLeftCorner(3,3)*(mbsmodel->joints[count].gc.topLeftCorner(3,3))*mbsmodel->joints[count].a.head(3)).transpose()<<endl;
+	  getchar();
+		//cout<<" Dot product: "<<mbsmodel->ag.transpose()*mbsmodel->joints[count].S.head(3)<<endl;
+
+		//cout<<"Joint body axis wrt the visual frame: "<< (rposeroot_i*mbsmodel->joints[count].S.head(3)).transpose()<<endl;
+	}
+
 	// initial controls (e.g. hover at one place)
 	VectorXd u(mbsmodel->U.n);
 	u.setZero();
-	if(mbstype == "airbase")
+	if(mbstype == "AIRBASE")
 	{
 		for(int count = 0;count < nb;count++)
 			u[3] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
 		cout<<"u[3]: "<<u[3]<<endl;
 	}
-	else
+	else if(mbstype == "FLOATBASE")
 	{
 		for(int count = 0;count < nb;count++)
 			u[5] += (mbsmodel->links[count].m)*(-mbsmodel->ag(2));
@@ -294,6 +367,7 @@ int main(int argc, char** argv)
 	trajectory.statemsg.resize(N+1);
 	trajectory.ctrl.resize(N);
 	trajectory.time = ts;
+	trajectory.rootname = mbsmodel->links[0].name;
 
 	trajectory.statemsg[0].statevector.resize(nb-1);
 	trajectory.statemsg[0].names.resize(nb-1);
@@ -304,7 +378,7 @@ int main(int argc, char** argv)
 		trajectory.statemsg[i+1].names.resize(nb-1);
 		trajectory.ctrl[i].ctrlvec.resize(mbsmodel->U.n);
 	}
-	getchar();
+	//getchar();
 	
 	// Create timer for iterating	and publishing data
 	iteratetimer = n.createTimer(ros::Duration(0.1), simtraj);

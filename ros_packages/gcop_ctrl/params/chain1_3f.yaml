@@ -1,0 +1,28 @@
+## Controller Params
+mbsdmoc/tf: 5 # Final Time
+mbsdmoc/N: 500 # Number of segments
+
+                  #r      #dr
+mbsdmoc/Qf:   [1.0,1.0, 1.0,1.0]   #   Final   Cost
+mbsdmoc/Q:    [1.0,1.0, 1.0,1.0]   #   Final   Cost
+mbsdmoc/R:    [0.1,0.1] #Control Cost
+
+mbsdmoc/ag: [0.0, 0.0, -9.81] # Gravity
+
+mbsdmoc/Kp:   [2.0,2.0]
+mbsdmoc/Kd:   [2.0,2.0]
+
+mbsdmoc/J0: [0.0, 0.0]
+mbsdmoc/JN: [0.0, 0.0] # Joint angles
+
+mbsdmoc/Jv0: [0.0, 0.0]
+mbsdmoc/JvN: [0.0, 0.0] # Joint angles
+
+mbsdmoc/mu: 10
+
+mbsdmoc/basetype: "FIXEDBASE"
+
+mbsdmoc/Nit: 1 
+mbsdmoc/mode: "user" # Will iterate only when user specifies
+
+mbsdmoc/usectrl: true 

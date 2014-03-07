@@ -41,7 +41,7 @@ void SE2::q2g(Matrix3d &m, const Vector3d &q) const
 
   m(0,0) = ct;   m(0,1) = -st;  m(0,2) = q[1];
   m(1,0) = st;   m(1,1) = ct;   m(1,2) = q[2];
-  m(2,0) = 0;    m(2,1) = 0;    m(2,2) = 1;  
+  m(2,0) = 0;    m(2,1) = 0;    m(2,2) = 1;
 }
 
 void SE2::g2q(Vector3d &q, const Matrix3d &m) const

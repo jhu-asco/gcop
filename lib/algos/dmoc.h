@@ -59,7 +59,6 @@ namespace gcop {
      */
     void Iterate();
 
-
     /**
      * Update the trajectory and (optionally) its linearization
      * @param der whether to update derivatives (A and B matrices)
@@ -91,6 +90,7 @@ namespace gcop {
     double mu;    ///< current regularization factor mu
     double mu0;   ///< minimum regularization factor mu
     double dmu0;  ///< regularization factor modification step-size
+    double mumax; ///< maximum regularization factor mu
     double a;     ///< step-size
     
     std::vector<Vectorcd> dus;  ///< computed control change
@@ -124,6 +124,8 @@ namespace gcop {
     static const char PURE = 0;     ///< PURE version of algorithm (i.e. stage-wise Newton)
     static const char DDP = 1;      ///< DDP version of algorithm
     static const char LQS = 2;      ///< Linear-Quadratic Subproblem version of algorithm due to Dreyfus / Dunn&Bertsekas / Pantoja
+
+    double eps;                     ///< epsilon used for finite differences
 
     /*
     class Fx : public Function<T, n, n> {
@@ -169,9 +171,21 @@ namespace gcop {
 
     */
 
+    bool pd(const Matrixnd &P) {
+      LLT<Matrixnd> llt;     
+      llt.compute(P);
+      return llt.info() == Eigen::Success;
+    }
+
+    bool pdX(const MatrixXd &P) {
+      LLT<MatrixXd> llt;     
+      llt.compute(P);
+      return llt.info() == Eigen::Success;
+    }  
+
+
   };
-  
-  
+
   using namespace std;
   using namespace Eigen;
   
@@ -183,11 +197,11 @@ namespace gcop {
                         vector<Matrix<double, c, 1> > &us,
                         bool update) : 
     sys(sys), cost(cost), ts(ts), xs(xs), us(us), N(us.size()), 
-    mu(1e-3), mu0(1e-3), dmu0(2), a(1), 
+    mu(1e-3), mu0(1e-3), dmu0(2), mumax(1e6), a(1), 
     dus(N),
     As(N), Bs(N), kus(N), Kuxs(N), 
     s1(0.1), s2(0.5), b1(0.25), b2(2),
-    debug(true), type(LQS)
+    debug(true), type(LQS), eps(1e-6)
     {
       assert(N > 0);
       assert(ts.size() == N+1);
@@ -230,7 +244,8 @@ namespace gcop {
     
     Vectornd dx;
     Vectorcd du;
-    Vectornd df;
+    Vectornd dfp;
+    Vectornd dfm;
     T xav(xs[0]);
     T xbv(xs[0]);
     
@@ -238,13 +253,12 @@ namespace gcop {
     
     if (n == Dynamic) {
       dx.resize(sys.n);
-      df.resize(sys.n);
+      dfp.resize(sys.n);
+      dfm.resize(sys.n);
     }
     
     if (c == Dynamic)
       du.resize(sys.c);    
-
-    double eps = 1e-6;    
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
@@ -257,8 +271,10 @@ namespace gcop {
         T &xb = xs[k+1];
         const Vectorcd &u = us[k];
 
-        sys.Step(xb, ts[k], xa, u, h, &As[k], &Bs[k]);
+        sys.Step(xb, ts[k], xa, u, h, 0, &As[k], &Bs[k], 0);
 
+        //        cout << "B=" << endl << Bs[k] << endl;
+        
 
         //        if (fabs(As[k](0,0) - q) < 1e-10) {
         //          autodiff.DF(xb, ts[k], xa, u, h, &As[k], &Bs[k]);
@@ -284,8 +300,21 @@ namespace gcop {
             sys.Step(xbv, ts[k], xav, u, h);
             
             // df = xbv - xb
-            cost.X.Lift(df, xb, xbv);
-            As[k].col(i) = df/eps;
+            cost.X.Lift(dfp, xb, xbv);
+
+            // xav = xa - dx
+            cost.X.Retract(xav, xa, -dx);
+            
+            // reconstruct state using previous time-step
+            sys.Rec(xav, h);
+            
+            // xbv = F(xav)
+            sys.Step(xbv, ts[k], xav, u, h);
+            
+            // dfm = xbv - xb
+            cost.X.Lift(dfm, xb, xbv);
+
+            As[k].col(i) = (dfp - dfm)/(2*eps);
           }
         }
         
@@ -299,8 +328,15 @@ namespace gcop {
             sys.Step(xbv, ts[k], xa, u + du, h);
             
             // df = xbv - xb
-            cost.X.Lift(df, xb, xbv);
-            Bs[k].col(i) = df/eps;
+            cost.X.Lift(dfp, xb, xbv);
+
+            // xbv = F(xa, u - du)
+            sys.Step(xbv, ts[k], xa, u - du, h);
+            
+            // df = xbv - xb
+            cost.X.Lift(dfm, xb, xbv);
+
+            Bs[k].col(i) = (dfp - dfm)/eps;
           }
         }
         
@@ -358,8 +394,6 @@ namespace gcop {
       }
       
       V += L;
-
-
       
       const Matrixnd &A = As[k];
       const Matrixncd &B = Bs[k];
@@ -377,8 +411,20 @@ namespace gcop {
       
       double mu = this->mu;
       double dmu = 1;
-      
-      LLT<Matrixcd> llt;
+     
+      if (debug) {
+      if (!pd(P)) {
+        cout << "P[" << k << "] is not pd =" << endl << P << endl;
+        cout << "Luu=" << endl << Luu << endl;
+      }
+
+      Matrixcd Pp = Bt*P*B;
+      if (!pdX(Pp)) {
+        cout << "B'PB is not positive definite:" << endl << Pp << endl;
+      }
+      }
+
+      LLT<Matrixcd> llt;     
       
       while (1) {
         Quum = Quu + mu*Ic;
@@ -392,19 +438,33 @@ namespace gcop {
             mu = mu*dmu;
           else
             mu = this->mu0;
+          
+        if (debug) 
+          cout << "[I] Dmoc::Backward: reduced mu=" << mu << " at k=" << k << endl;
+
 
           break;
         }
         
         // if negative then increase mu
         dmu = max(this->dmu0, dmu*this->dmu0);
-        mu = max(this->mu0, mu*dmu);   
+        mu = max(this->mu0, mu*dmu);
         
         if (debug) {
           cout << "[I] Dmoc::Backward: increased mu=" << mu << " at k=" << k << endl;
           cout << "[I] Dmoc::Backward: Quu=" << Quu << endl;
         }
+
+        if (mu > mumax) {
+          cout << "[W] Dmoc::Backward: mu= " << mu << " exceeded maximum !" << endl;          
+          if (debug)
+            getchar();
+          break;
+        }
       }
+
+      if (mu > mumax)
+        break;
       
       ku = -llt.solve(Qu);
       Kux = -llt.solve(Qux);

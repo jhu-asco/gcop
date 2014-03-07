@@ -116,7 +116,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("rccar.cfg");
+    params.Load("../../bin/rccar.cfg"); 
 
 
 #ifdef DISP
