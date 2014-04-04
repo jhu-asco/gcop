@@ -36,6 +36,7 @@ set(headers
   rn.h
   manifold.h
   system.h
+  system_extstep.h
   cost.h
   lqcost.h
   rnlqcost.h

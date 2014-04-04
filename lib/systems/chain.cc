@@ -35,8 +35,8 @@ Chain::Chain(int nb, bool fixed) :
 		this->se3.rpyxyz2g(this->joints[0].gc, Vector3d(0,0,0), Vector3d(-0.05, 0, 0));
 		this->joints[0].a.setZero();
 		this->joints[0].a[2] = 1;
-		this->joints[0].lower = -1.7;
-		this->joints[0].upper = 1.7;    
+		this->joints[0].lower = -11.7;
+		this->joints[0].upper = 11.7;    
 
 		X.lb.r[0] = this->joints[0].lower;
 		X.ub.r[0] = this->joints[0].upper;      
@@ -59,8 +59,8 @@ Chain::Chain(int nb, bool fixed) :
 		this->se3.rpyxyz2g(this->joints[1].gc, Vector3d(0,0,0), Vector3d(-0.05, 0.0, 0));
 		this->joints[1].a.setZero();
 		this->joints[1].a[1] = 1;
-		this->joints[1].lower = -0.147;
-		this->joints[1].upper = 1.047;    
+		this->joints[1].lower = -10.147;
+		this->joints[1].upper = 11.047;    
 
 		X.lb.r[1] = this->joints[1].lower;
 		X.ub.r[1] = this->joints[1].upper;      
@@ -83,8 +83,8 @@ Chain::Chain(int nb, bool fixed) :
 		this->se3.rpyxyz2g(this->joints[2].gc, Vector3d(0,0,0), Vector3d(-0.05, 0.0, 0));
 		this->joints[2].a.setZero();
 		this->joints[2].a[1] = 1;
-		this->joints[2].lower = -0.05;
-		this->joints[2].upper = 2.618;    
+		this->joints[2].lower = -12.618;
+		this->joints[2].upper = 12.618;    
 
 		X.lb.r[2] = this->joints[2].lower;
 		X.ub.r[2] = this->joints[2].upper;      

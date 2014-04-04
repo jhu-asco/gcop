@@ -105,6 +105,7 @@ namespace gcop {
   virtual double Step(T &xb, double t, const T &xa,
                       const Tu &u, double h, const Vectormd *p = 0, 
                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
+	virtual void reset(){};// Adding a reset virtual function which can be formalized later
   
   
   /**
