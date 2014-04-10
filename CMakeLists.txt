@@ -56,6 +56,10 @@ find_package(TinyXML REQUIRED)
 include_directories(${TINYXML_INCLUDE_DIR})
 set(LIBS ${LIBS} ${TINYXML_LIBRARIES})
 
+FIND_PACKAGE(Ceres REQUIRED)
+INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
+set(LIBS ${LIBS} ${CERES_LIBRARIES})
+
 include_directories(
   lib
   lib/algos

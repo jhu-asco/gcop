@@ -42,18 +42,29 @@ namespace gcop {
      * @param diag whether the Q, R, and Qf matrices are diagonal?
      */
     LqCost(Manifold<T, _n> &X, double tf, const T &xf, bool diag = true);
+
+    /**
+     * Updates the square root gains, i.e. sets Qsqrt = Q.sqrt(), etc...
+     *
+     */
+    void UpdateGains(); 
     
     virtual double L(double t, const T& x, const Vectorcd& u, double h,
                      Vectornd *Lx = 0, Matrixnd* Lxx = 0,
                      Vectorcd *Lu = 0, Matrixcd* Luu = 0,
                      Matrixncd *Lxu = 0);
 
+    virtual void ResX(Vectornd &r, double t, const T& x, double h);
+
+    virtual void ResU(Vectorcd &r, double t, const Vectorcd& u, double h);
+                     
+
     /**
      * Set optional desired reference trajectory and controls
      * @param xds desired state trajectory (optional)
      * @param uds desired control sequence (optional)
      */
-    void SetReference(const vector<T> *xds, const vector<Vectorcd> *uds);                          
+    void SetReference(const vector<T> *xds, const vector<Vectorcd> *uds);        
     
     const T &xf; ///< reference to a desired final state
     
@@ -62,6 +73,10 @@ namespace gcop {
     Matrixnd Q;       ///< state matrix Q
     Matrixnd Qf;      ///< final state matrix Qf
     Matrixcd R;       ///< control matrix R
+
+    Matrixnd Qsqrt;       ///< state matrix Q sqrt
+    Matrixnd Qfsqrt;      ///< final state matrix Qf sqrt
+    Matrixcd Rsqrt;       ///< control matrix R sqrt
 
     const vector<T> *xds;         ///< optional reference trajectory 
     const vector<Vectorcd> *uds;  ///< optional reference control 
@@ -81,6 +96,9 @@ namespace gcop {
       Q.resize(X.n, X.n);
       Qf.resize(X.n, X.n);
       R.resize(U.n, U.n);
+      Qsqrt.resize(X.n, X.n);
+      Qfsqrt.resize(X.n, X.n);
+      Rsqrt.resize(U.n, U.n);
       dx.resize(X.n);
       du.resize(U.n);
     }
@@ -90,8 +108,17 @@ namespace gcop {
     Qf.setIdentity();
     R.setIdentity();
 
+    UpdateGains();
+
     xds = 0;
     uds = 0;
+  }
+
+  template <typename T, int _n, int _c>
+    void LqCost<T, _n, _c>::UpdateGains() {
+    Qsqrt = Q.array().sqrt();
+    Qfsqrt = Qf.array().sqrt();
+    Rsqrt = R.array().sqrt();
   }
 
   template <typename T, int _n, int _c>
@@ -119,6 +146,53 @@ namespace gcop {
     this->xds = xds;
     this->uds = uds;
   }
+
+  template <typename T, int _n, int _c> 
+    void LqCost<T, _n, _c>::ResX(Vectornd &r, double t, const T& x, double h)
+    {    
+      if (xds) {
+        int k = (int)(t/h);
+        assert(k < xds->size());
+        this->X.Lift(dx, (*xds)[k], x); // difference (on a vector space we have dx = x - xf)
+      } else {
+        this->X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)     
+      }
+      assert(!std::isnan(dx[0]));
+      
+      // check if final state
+      if (t > this->tf - 1e-10) {
+        if (diag)
+          r = Qfsqrt.diagonal().cwiseProduct(dx);
+        else
+          r = Qfsqrt*dx;      
+      } else {
+        if (diag)
+          r = Qsqrt.diagonal().cwiseProduct(sqrt(h)*dx);
+        else
+          r = Qsqrt*(sqrt(h)*dx);
+      }
+    }
+
+  template <typename T, int _n, int _c> 
+    void LqCost<T, _n, _c>::ResU(Vectorcd &r, double t, const Vectorcd& u, double h)
+    {
+      if (t < this->tf - 1e-10) {
+
+        if (uds) {
+          int k = (int)(t/h);
+          assert(k < uds->size());
+          du = sqrt(h)*(u - (*uds)[k]);
+        } else {
+          du = sqrt(h)*u;
+        }
+        
+        if (diag)
+          r = Rsqrt.diagonal().cwiseProduct(du);
+        else
+          r = Rsqrt*(du);
+      }
+    }
+
   
   template <typename T, int _n, int _c> 
     double LqCost<T, _n, _c>::L(double t, const T &x, const Matrix<double, _c, 1> &u,

@@ -50,6 +50,10 @@ target_link_libraries(cartest gcop  ${LIBS})
 add_executable(rccartest rccartest.cc)
 target_link_libraries(rccartest gcop  ${LIBS})
 
+add_executable(gnrccartest gnrccartest.cc)
+target_link_libraries(gnrccartest gcop  ${LIBS})
+
+
 add_executable(cecartest cecartest.cc)
 target_link_libraries(cecartest gcop  ${LIBS})
 
