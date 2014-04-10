@@ -24,25 +24,25 @@ void solver_process(Viewer* viewer)
 
   int N = 128;      // discrete trajectory segments
   double tf = 5;   // time-horizon
-	int basetype = 1;
-	const int FLOAT = 1;
-	const int FIXED = 0;
-
+  int basetype = 1;
+  const int FLOAT = 1;
+  const int FIXED = 0;
+  
   params.GetInt("N", N);
   params.GetDouble("tf", tf);  
-	params.GetInt("fixed",basetype);
-	assert((basetype == 0)||(basetype == 1));
-	//basetype 1 is false that is floating
-	//basetype 0 is true that is fixed
-
+  params.GetInt("fixed",basetype);
+  assert((basetype == 0)||(basetype == 1));
+  //basetype 1 is false that is floating
+  //basetype 0 is true that is fixed
+  
 
   int nb = 3;     // nof bodies
   params.GetInt("nb", nb);
-	int n = nb -1;
-	cout<<"n "<<n<<endl;
-
+  int n = nb -1;
+  cout<<"n "<<n<<endl;
+  
   double h = tf/N; // time-step
-
+  
   // system
   Chain sys(nb,(basetype == FIXED));
 

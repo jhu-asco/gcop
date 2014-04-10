@@ -20,10 +20,11 @@ namespace gcop {
     
     Body3dCost(double tf, const Body3dState &xf, bool diag = true);
     
-    double L(double t, const Body3dState &x, const Vectorcd &u,
+    /*    double L(double t, const Body3dState &x, const Vectorcd &u,
              Vector12d *Lx = 0, Matrix12d *Lxx = 0,
              Vectorcd *Lu = 0, Matrixcd *Luu = 0,
              Matrix12xcd *Lxu = 0);
+    */
   };  
   
   template <int c> Body3dCost<c>::Body3dCost(double tf, const Body3dState &xf, bool diag) : 
@@ -60,7 +61,7 @@ namespace gcop {
     
     this->R.diagonal() = Matrix<double, c, 1>::Constant(.1);
   }
-  
+  /*  
 template <int c>
   double Body3dCost<c>::L(double t, const Body3dState &x, const Matrix<double, c, 1> &u,
                           Vector12d *Lx, Matrix12d *Lxx,
@@ -70,21 +71,6 @@ template <int c>
   Vector12d dx;
   this->X.Lift(dx, this->xf, x);
 
-  /*
-  const Matrix3d &R = x.first;
-  const Matrix3d &Rf = this->xf.first;
-  
-  Vector3d eR;
-  //  SO3::Instance().log(eR, Rf.transpose()*R);
-  SO3::Instance().cayinv(eR, Rf.transpose()*R);
-
-
-  dx.head<3>() = eR;
-  dx.tail<9>() = x.second -  this->xf.second;
-  */
-  
-  //  Matrix3d m;
-  //  SE2::Instance().Tg(m, x.first);
   
   // check if final state
   if (t > this->tf - 1e-10) {
@@ -144,7 +130,7 @@ template <int c>
       return (dx.dot(this->Q*dx) + u.dot(this->R*u))/2;
   }
 }
-
+  */
 }
 
 

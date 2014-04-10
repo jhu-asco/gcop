@@ -10,12 +10,6 @@
 #include "geometry_msgs/TransformStamped.h"
 #include <tf/transform_listener.h>
 
-////
-#include "geometry_msgs/Vector3.h"
-#include "geometry_msgs/Quaternion.h"
-#include "tf/transform_datatypes.h"
-//#include "LinearMath/btMatrix3x3.h"
-
 
 using namespace std;
 using namespace Eigen;
@@ -54,8 +48,6 @@ RnLqCost<4, 2>*cost;
 bool usemocap = false;
 
 double tprev = 0;
-
-tf::Vector3 yprev;
 
 void pubtraj() //N is the number of segments
 {
@@ -103,27 +95,19 @@ void initialposnCallback(const geometry_msgs::TransformStamped::ConstPtr &currfr
 	if(!usemocap)
 		return;
 	tf::StampedTransform UV_O;
-	tf::Quaternion quat;
-	tf::quaternionMsgToTF((*currframe).transform.rotation,quat);
-	transformStampedMsgToTF(*currframe,UV_O);//converts to the right format 
-	//getrpy:
+        transformStampedMsgToTF(*currframe,UV_O);//converts to the right format 
+        //getrpy:
+
 	double roll,pitch,yaw;
         UV_O.getBasis().getRPY(roll,pitch,yaw);
         double tcurr = currframe->header.stamp.toSec();
+	double tprev = 
         tf::Vector3 y = UV_O.getOrigin();
-
-	 tf::Matrix3x3(quat).getRPY(roll, pitch, yaw);
-/*
-	double dt = (tcurr - tprev);
-	tf::Vector3 dydt = (y - yprev)/dt;
-	tf::Vector3 yawvec(cos(yaw),sin(yaw),0);
-*/
 	Vector4d x0 = Vector4d::Zero();// initial state
         x0[0] = y[0];
         x0[1] = y[1];
         x0[2] = yaw;
-	x0[3] = xf(3);
-
+        x0[3] =0;/// need to calculate velocity
 	xs[0] = x0;
 	//ros::TimerEvent e1;
 	//iterateCallback(e1);
@@ -188,7 +172,7 @@ void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level)
 
 	// initial state
 	if(!config.usemocap)
-	{	xs[0] = x0;}
+		xs[0] = x0;
 	usemocap = config.usemocap;
 
 	//initial controls

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <rosparam command="load" file="$(find gcop_ctrl)/params/rccar.yaml" />
+	<node name="dmoc_rc" pkg="gcop_ctrl" type="rcctrlharware" output="screen"/>
+	<node name="rcreconfigure" pkg="dynamic_reconfigure" type="reconfigure_gui" />
+</launch>

@@ -13,6 +13,7 @@
   <depend package="gcop_comm"/>
   <depend package="tf"/>
   <depend package="dynamic_reconfigure" />
+  <depend package="geometry_msgs"/>
 
 </package>
 

@@ -18,7 +18,7 @@ namespace gcop {
    */  
   class Chain : public Mbs {
   public:
-    Chain(int nb = 4, bool fixed = false);    
+    Chain(int nb = 4, bool fixed = false);
 
     //    void Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
     //               MatrixXd *A = 0, MatrixXd *B = 0);

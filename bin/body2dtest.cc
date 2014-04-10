@@ -32,6 +32,9 @@ void solver_process(Viewer* viewer)
 
   SE2 &se2 = SE2::Instance();  
   Body2dForce force;
+  force.D(2)= 5;
+  params.GetVector3d("D", force.D);
+
   Body2d sys(&force);
 
   M3V3d x0;

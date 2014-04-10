@@ -24,11 +24,11 @@ void solver_process(Viewer* viewer)
   Chain sys;
   sys.debug = true;
 
-
-  MbsState x(3);
+  MbsState x(4);
   x.gs[0].setIdentity();
   x.r[0] = 0;   
   x.r[1] = 0;
+  x.r[2] = 0;
   sys.FK(x);
 
   // states
@@ -36,6 +36,7 @@ void solver_process(Viewer* viewer)
   xs[0].vs[0].setZero();
   xs[0].dr[0] = .5;
   xs[0].dr[1] = .5;
+  xs[0].dr[2] = .5;
   sys.KStep(xs[0], x, h);
 
   // initial controls (e.g. hover at one place)

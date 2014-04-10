@@ -80,6 +80,7 @@ void solver_process(Viewer* viewer)
 
   cout << "Q=" << Q << endl;
  
+
   cost.Q = Q.asDiagonal();
   cost.R = R.asDiagonal();
   cost.Qf = Qf.asDiagonal();
@@ -101,7 +102,9 @@ void solver_process(Viewer* viewer)
   u(3) = 9.81*m;
   u(1) = .00;
   vector<VectorXd> us(N, u);
-	cout<<"u[3]: "<<u[3]<<endl;
+  
+  vector<VectorXd> uds = us;
+  cost.SetReference(0, &uds);
 
   AirbotView view(sys, &xs);
   if (viewer)

@@ -218,7 +218,7 @@ namespace gcop {
      */
     void Mass(MatrixXd &M, const MbsState &x) const;
 
-    void Acc(VectorXd &a, double t, const MbsState& x, const VectorXd &u);
+    void Acc(VectorXd &a, double t, const MbsState& x, const VectorXd &u, double h);
 
     /**
      * Total resulting force on the system from external (e.g. gravity)
@@ -237,7 +237,9 @@ namespace gcop {
 
     void ClampPose(MbsState &x, int i) const;
 
-    void ClampShape(MbsState &x, int i) const;
+    void CheckLimits(MbsState &x, int i, double h) const;
+
+    void GetImpulse(double f, const MbsState &x, int i, double h) const;
 
     void ClampVelocity(MbsState &x) const;
 
@@ -257,6 +259,13 @@ namespace gcop {
     Vector3d ag;             ///< acceleration due to gravity (0, 0, -9.81) by default
 
     VectorXd damping;        ///< damping vector
+    
+    VectorXd lbK;            ///< lower bound K term
+    VectorXd lbD;            ///< lower bound K term
+    VectorXd ubK;            ///< upper bound K term
+    VectorXd ubD;            ///< upper bound K term
+    VectorXd fsl;             ///< spring force
+    VectorXd fsu;             ///< spring force
     
     int basetype;            ///< type of base (used for interpreting base-body forces)
     static const int FIXEDBASE = 0;   ///< fixed base

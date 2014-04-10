@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot name="Satellite">
+  <link name="baselink">
+    <visual>
+      <geometry>
+        <box size="0.3 .10 0.05"/>
+        <!--mesh filename="package://gcop_urdf/meshes/pelican1.dae" scale="0.025 0.025 0.025"/-->
+      </geometry>
+    </visual>
+	</link>
+</robot>
