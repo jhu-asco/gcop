@@ -89,13 +89,13 @@ void solver_process(Viewer* viewer)
   // dmoc.debug = false; // turn off debug for speed
   getchar();
 
-  for (int i = 0; i < iters; ++i) {
     timer_start(timer);
+  for (int i = 0; i < iters; ++i) {
     dmoc.Iterate();
-    long te = timer_us(timer);
-    cout << "Iteration #" << i << " took: " << te << " us." << endl;
-    getchar();
   }
+    long te = timer_us(timer);
+    cout << "Iterations" << iters << " took: " << te << " us." << endl;
+    getchar();
 
   cout << xs[N] << endl;
 
