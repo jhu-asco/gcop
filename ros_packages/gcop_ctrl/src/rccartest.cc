@@ -304,7 +304,7 @@ int main(int argc, char** argv)
 	f = boost::bind(&paramreqcallback, _1, _2);
 	server.setCallback(f);
 	//create timer for iteration
-  iteratetimer = rosdmoc.createTimer(ros::Duration(0.02), iterateCallback);
+  iteratetimer = rosdmoc.createTimer(ros::Duration(0.01), iterateCallback);
 	iteratetimer.start();
 	ros::spin();
   return 0;

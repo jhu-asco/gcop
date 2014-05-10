@@ -1,6 +1,6 @@
 ## Controller Params
 dmoc/tf: 5 # Final Time
-dmoc/N: 64 # Number of segments
+dmoc/N: 32 # Number of segments
 
 dmoc/x0: -1.0 # Inital state
 dmoc/y0: -1.0
