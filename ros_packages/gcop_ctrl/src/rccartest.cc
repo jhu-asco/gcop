@@ -324,7 +324,7 @@ int main(int argc, char** argv)
 
 //  iterateCallback(event);
 	//create timer for iteration
- iteratetimer = rosdmoc.createTimer(ros::Duration(0.01), iterateCallback);
+  iteratetimer = rosdmoc.createTimer(ros::Duration(0.01), iterateCallback);
 	iteratetimer.start();
 	ros::spin();
   return 0;

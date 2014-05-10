@@ -19,15 +19,16 @@ Params params;
 
 void solver_process(Viewer* viewer)
 {
+
   if (viewer) {
-    viewer->SetCamera(45.25, 37, -0.14, 0.05, -1.75);
+    viewer->SetCamera(11.25, 40, -0.14, 0.05, -0.03);
   }
 
   int N = 128;      // discrete trajectory segments
   double tf = 5;   // time-horizon
 
   params.GetInt("N", N);
-  params.GetDouble("tf", tf);  
+  params.GetDouble("tf", tf);
 
   int nb = 4;     // nof bodies
   params.GetInt("nb", nb);
@@ -36,6 +37,7 @@ void solver_process(Viewer* viewer)
 
   // fixed chain
   Chain sys(nb,true);
+  sys.debug=false;
 
   params.GetInt("method", sys.method);
   params.GetInt("iters", sys.iters);
@@ -120,7 +122,7 @@ void solver_process(Viewer* viewer)
   params.GetDouble("eps", dmoc.eps);
 
   struct timeval timer;
-  //  dmoc.debug = false; // turn off debug for speed
+  //  dmoc.debug = false; // turn off debug for speed  
 
   for (int i = 0; i < 50; ++i) {
     timer_start(timer);

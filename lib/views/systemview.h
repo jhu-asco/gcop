@@ -15,6 +15,8 @@
 
 namespace gcop {
 
+  using namespace std;
+
   /**
    * Discrete Dynamical system view.
    */

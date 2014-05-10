@@ -50,11 +50,21 @@ target_link_libraries(cartest gcop  ${LIBS})
 add_executable(rccartest rccartest.cc)
 target_link_libraries(rccartest gcop  ${LIBS})
 
+add_executable(gnrccartest gnrccartest.cc)
+target_link_libraries(gnrccartest gcop  ${LIBS})
+
+
 add_executable(cecartest cecartest.cc)
 target_link_libraries(cecartest gcop  ${LIBS})
 
 add_executable(cechaintest cechaintest.cc)
 target_link_libraries(cechaintest gcop  ${LIBS})
+
+add_executable(spsacartest spsacartest.cc)
+target_link_libraries(spsacartest gcop  ${LIBS})
+
+add_executable(aspsacartest aspsacartest.cc)
+target_link_libraries(aspsacartest gcop  ${LIBS})
 
 add_executable(chaintest chaintest.cc)
 target_link_libraries(chaintest gcop  ${LIBS})

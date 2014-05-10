@@ -27,6 +27,7 @@ void solver_process(Viewer* viewer)
   // cost 
   Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
   Body3dCost<4> cost(tf, xf);  
+
   cost.Qf(0,0) = 2; cost.Qf(1,1) = 2; cost.Qf(2,2) = 2;
   cost.Qf(3,3) = 50; cost.Qf(4,4) = 50; cost.Qf(5,5) = 50;
 
@@ -53,7 +54,10 @@ void solver_process(Viewer* viewer)
     us[i].head(3).setZero();
     us[i][3] = 9.81*sys.m;
   }
-    
+
+  vector<Vector4d> usd = us;
+  cost.SetReference(0, &usd);
+
   HeliDmoc dmoc(sys, cost, ts, xs, us);
   dmoc.mu = 1;
 

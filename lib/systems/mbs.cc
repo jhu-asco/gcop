@@ -3,7 +3,7 @@
 #include <utility>
 #include "mbs.h"
 #include <iomanip>
-
+#include "utils.h"
 
 using namespace gcop;
 
@@ -32,8 +32,14 @@ Mbs::Mbs(int nb, int c, bool fixed) : nb(nb), fixed(fixed),
                                       method(EULER),
                                       iters(2),
                                       debug(false), basetype(FLOATBASE),
+                                      ag(0,0,-9.81),
                                       damping(VectorXd::Zero(nb - 1)),
-                                      ag(0,0,-9.81)
+                                      lbK(VectorXd::Constant(nb - 1, 100)),
+                                      lbD(VectorXd::Constant(nb - 1, 10)),
+                                      ubK(VectorXd::Constant(nb - 1, 100)),
+                                      ubD(VectorXd::Constant(nb - 1, 10)),
+                                      fsl(VectorXd::Zero(nb - 1)),
+                                      fsu(VectorXd::Zero(nb - 1))
                                       //                          fq(*this), 
                                       //                          fva(*this),
                                       //                          fvb(*this), 
@@ -67,7 +73,25 @@ void Mbs::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
   }
   
   // this is ok for fixed base also 
-  f.tail(nb-1) = u.tail(nb-1) - damping.cwiseProduct(x.dr);
+  f.tail(nb-1) = u.tail(nb-1) - damping.cwiseProduct(x.dr);    
+
+  //  dz = - (K*z + f)/D;
+
+  for (int i = 0; i < nb-1; ++i){
+    if (x.r[i] <= X.lb.r[i] + x.zl[i]) {
+      fsl[i] = MAX(0, -lbK[i]*x.zl[i] - lbD[i]*x.dr[i]);
+      f.tail(nb-1)[i] += fsl[i];
+    } else {
+      fsl[i] = 0;
+    }
+    if (x.r[i] >= X.ub.r[i] - x.zu[i]) {
+      fsu[i] = MAX(0, -ubK[i]*x.zu[i] + ubD[i]*x.dr[i]);
+      f.tail(nb-1)[i] += -fsu[i];
+    } else {
+      fsu[i] = 0;
+    }
+    
+  }
   
   if (A)
     A->setZero();
@@ -230,8 +254,6 @@ void Mbs::ID(VectorXd &f,
   VectorXd fu(nb + 5);
   Force(fu, t, x, u);  // compute control/external forces
 
-  //  cout << "control fu=" << fu << endl;
-
   f = b - fu;
 }
 
@@ -258,18 +280,15 @@ void Mbs::Bias(VectorXd &b,
 
     const Vector6d &v = x.vs[i];
 
-    //    cout << "Bias v[ " << i << "]=" << v.transpose() << endl;
-
     const Vector6d &I = links[i].I;
     Vector6d mu = I.cwiseProduct(v);
 
     gr.tail<3>() = links[i].m*(x.gs[i].topLeftCorner<3,3>().transpose()*ag);
     
-    //    ps[i].head(3) = v.head<3>().cross(mu.head<3>()) + v.tail<3>().cross(mu.tail<3>());
-    //    ps[i].tail(3) = v.head<3>().cross(mu.tail<3>());    
-    ps[i].head(3) = v.head<3>().cross(mu.head<3>());
+    ps[i].head(3) = v.head<3>().cross(mu.head<3>()) + v.tail<3>().cross(mu.tail<3>());
     ps[i].tail(3) = v.head<3>().cross(mu.tail<3>());    
-
+    //    ps[i].head(3) = v.head<3>().cross(mu.head<3>());
+    //    ps[i].tail(3) = v.head<3>().cross(mu.tail<3>());
     ps[i] = ps[i] - gr;
 
     if (debug) {
@@ -308,14 +327,14 @@ double Mbs::HeunStep(MbsState& xb, double t, const MbsState& xa,
                      MatrixXd *A, MatrixXd *B)
 {
   VectorXd a(nb+5);
-  Acc(a, t, xa, u);
+  Acc(a, t, xa, u, h);
 
   MbsState xn(nb);
   xn.vs[0] = xa.vs[0] + h*a.head(6);
   xn.dr = xa.dr + h*a.tail(nb-1);
   KStep(xn, xa, h);
   VectorXd an(nb+5);
-  Acc(an, t+h, xn, u);  
+  Acc(an, t+h, xn, u, h);  
 
   xb.vs[0] = xa.vs[0] + h/2*(a.head(6) + an.head(6));
   xb.dr = xa.dr + h/2*(a.tail(nb - 1) + an.tail(nb - 1));
@@ -331,14 +350,17 @@ double Mbs::EulerStep(MbsState& xb, double t, const MbsState& xa,
   int n = nb - 1 + 6*(!fixed);
 
   VectorXd a(n);
-  Acc(a, t, xa, u);
+  Acc(a, t, xa, u, h);
 
   if (!fixed)
-    xb.vs[0] = xa.vs[0] + h*a.head(6);
+    xb.vs[0] = xa.vs[0] + h*a.head(6);  
 
   xb.dr = xa.dr + h*a.tail(nb - 1);
 
-  ClampVelocity(xb);
+  xb.zl = xa.zl + h*(- (lbK.cwiseProduct(xa.zl) + fsl).cwiseQuotient(lbD));
+  xb.zu = xa.zu + h*(- (ubK.cwiseProduct(xa.zu) + fsu).cwiseQuotient(ubD));
+
+  //  ClampVelocity(xb);
 
   KStep(xb, xa, h);
 
@@ -359,13 +381,32 @@ void Mbs::ClampPose(MbsState &x, int i) const
 }
 
 
-void Mbs::ClampShape(MbsState &x, int i) const
+void Mbs::CheckLimits(MbsState &x, int i, double h) const
+{
+  double eps = 1e-16;
+  x.ub[i] = false;
+  x.lb[i] = false;
+
+  assert(i >= 0 && i < x.r.size());
+  if (x.r[i] >= X.ub.r[i]) {   // if above upper bound
+    if (x.dr[i] > -eps) {     // if positive velocity
+      x.ub[i] = true;
+    }
+  } else
+  if (x.r[i] <= X.lb.r[i]) {   // if below lower bound
+    if (x.dr[i] < -eps) {    // if negative velocity
+      x.lb[i] = true;
+    }
+  }
+}
+
+void Mbs::GetImpulse(double f, const MbsState &x, int i, double h) const
 {
   assert(i >= 0 && i < x.r.size());
-  if (x.r[i] > X.ub.r[i])
-    x.r[i] = X.ub.r[i];
-  else if (x.r[i] < X.lb.r[i])
-    x.r[i] = X.lb.r[i];
+  if (x.ub[i])
+    f = (X.ub.r[i] - x.r[i])/(h*h);
+  else if (x.lb[i])
+    f = (X.lb.r[i] - x.r[i])/(h*h);
 }
 
 
@@ -391,7 +432,7 @@ void Mbs::ClampVelocity(MbsState &x) const
 }
 
 
-void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u)
+void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u, double h)
 {
   int n = nb - 1 + 6*(!fixed);
 
@@ -402,24 +443,36 @@ void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u)
   VectorXd b(n); // bias
   Bias(b, t, x);
 
-  //  b.setZero();
-  
-  //  cout << "b=" << b.transpose() << endl;
+  VectorXd fc(n);
+  Force(fc, t, x, u);  // compute control/external forces
 
-  VectorXd f(n);
-  Force(f, t, x, u);  // compute control/external forces
-  
+  VectorXd f = fc - b;  // all forces
+
+  /*
+  double fimp;
+  for (int i = 0; i < nb-1; ++i) {
+    if (x.lb[i] && f[i] < 0)
+      f[i] = 0;
+    else
+      if (x.ub[i] && f[i] > 0)
+        f[i] = 0;
+
+    GetImpulse(fimp, x, i, h);
+    f[i] += fimp;
+  }
+  */
+
   if (debug)
-    cout << "f=" << f << endl;  
-  
+    cout << "f=" << f << endl;
+
   // compute acceleration
   LLT<MatrixXd> llt;
   llt.compute(M);
   if (llt.info() == Eigen::Success) {
-    a = llt.solve(f - b);
+    a = llt.solve(f);
   } else {
     cout << "[W] Mbs::Acc Mass matrix not positive definite!" << endl;
-  }  
+  }
 }
 
 
@@ -707,13 +760,13 @@ void Mbs::KStep(MbsState &xb, const MbsState &xa, double h, bool impl) {
   if (!fixed) {
     se3.exp(dg, impl ? h*xb.vs[0] : h*xa.vs[0]);
     xb.gs[0] = xa.gs[0]*dg;
-    ClampPose(xb, 0);
+    //    ClampPose(xb, 0);
   }
   
   for (int i = 1; i < nb; ++i) {
     Joint &jnt = joints[i-1];
     xb.r[i-1] = xa.r[i-1] + (impl ? h*xb.dr[i-1] : h*xa.dr[i-1]);
-    ClampShape(xb, i-1);
+    CheckLimits(xb, i-1, h);
 
     //    cout << xb.r[i-1]*jnt.a << endl;
     se3.exp(dg, xb.r[i-1]*jnt.a);

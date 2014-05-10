@@ -1,5 +1,7 @@
 set(headers
       dmoc.h
+      docp.h
+      gndocp.h
       pdmoc.h
       ba.h
       body2dslam.h
@@ -10,6 +12,8 @@ set(headers
       controller.h
       mbscontroller.h
       systemce.h
+      aspsa.h
+      spsa.h
       body2dtrack.h
       body2dtrackcost.h
 )

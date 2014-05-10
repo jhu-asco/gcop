@@ -68,7 +68,7 @@ namespace gcop {
 
     bool extforce;         ///< is there a constant external force that need to be estimated
 
-    bool forces;         ///< is there a constant external force that need to be estimated
+    bool forces;           ///< is there a constant external force that need to be estimated
     
     vector<double> ts;     ///< sequence of times (N+1 vector)
 

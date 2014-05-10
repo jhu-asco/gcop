@@ -31,6 +31,7 @@ namespace gcop {
     typedef Matrix<double, c, c> Matrixcd;
     typedef Matrix<double, 6, c> Matrix6xcd;
     typedef Matrix<double, 12, c> Matrix12xcd;
+    typedef Matrix<double, 12, Dynamic> Matrix12Xd;
     
   public:
     
@@ -43,16 +44,16 @@ namespace gcop {
     virtual ~Body3d();    
     
     double Step(Body3dState &xb, double t, const Body3dState &xa, 
-                const Vectorcd &u, double h,
-                Matrix12d *A = 0, Matrix12xcd *B = 0);
+                const Vectorcd &u, double h, const VectorXd *p = 0,
+                Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
 
-    double Fsymp(double t, Body3dState &xb, const Body3dState &xa, 
-                 const Vectorcd &u, double h,
-                 Matrix12d *A = 0, Matrix12xcd *B = 0);
+    double SympStep(double t, Body3dState &xb, const Body3dState &xa, 
+                    const Vectorcd &u, double h, const VectorXd *p = 0,
+                    Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
     
-    double Feuler(double t, Body3dState &xb, const Body3dState &xa, 
-                  const Vectorcd &u, double h,
-                  Matrix12d *A = 0, Matrix12xcd *B = 0);    
+    double EulerStep(double t, Body3dState &xb, const Body3dState &xa, 
+                     const Vectorcd &u, double h, const VectorXd *p = 0,
+                     Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);    
     
     void ID(Vector6d &f,
             double t, const Body3dState &xb, const Body3dState &xa,
@@ -189,18 +190,18 @@ template<int c>  Body3d<c>::~Body3d()
 
   template <int c>
     double Body3d<c>::Step(Body3dState &xb, double t, const Body3dState &xa, 
-                           const Matrix<double, c, 1> &u, double h,
-                           Matrix12d *A, Matrix<double, 12, c> *B) {
+                           const Matrix<double, c, 1> &u, double h, const VectorXd *p,
+                           Matrix12d *A, Matrix<double, 12, c> *B, Matrix12Xd *C) {
     if (symp)
-      return Fsymp(t, xb, xa, u, h, A, B);
+      return SympStep(t, xb, xa, u, h, p, A, B, C);
     else
-      return Feuler(t, xb, xa, u, h, A, B);      
+      return EulerStep(t, xb, xa, u, h, p, A, B, C);      
   }
   
   template <int c>
-    double Body3d<c>::Fsymp(double t, Body3dState &xb, const Body3dState &xa, 
-                            const Matrix<double, c, 1> &u, double h,
-                            Matrix12d *A, Matrix<double, 12, c> *B) {
+    double Body3d<c>::SympStep(double t, Body3dState &xb, const Body3dState &xa, 
+                               const Matrix<double, c, 1> &u, double h, const VectorXd *p,
+                               Matrix12d *A, Matrix<double, 12, c> *B, Matrix12Xd *C) {
     // cwiseProduct
     
     SO3 &so3 = SO3::Instance();
@@ -324,9 +325,9 @@ template<int c>  Body3d<c>::~Body3d()
 
 
   template <int c>
-    double Body3d<c>::Feuler(double t, Body3dState &xb, const Body3dState &xa, 
-                             const Matrix<double, c, 1> &u, double h,
-                             Matrix12d *A, Matrix<double, 12, c> *B) {
+    double Body3d<c>::EulerStep(double t, Body3dState &xb, const Body3dState &xa, 
+                                const Matrix<double, c, 1> &u, double h, const VectorXd *p,
+                                Matrix12d *A, Matrix<double, 12, c> *B, Matrix12Xd *C) {
     // cwiseProduct
     
     SO3 &so3 = SO3::Instance();

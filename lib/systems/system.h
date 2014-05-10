@@ -11,7 +11,7 @@
  *
  * \section Intro
  *
- * This is a partial distribution containing only discrete optimal control functionality.
+ * This is a partial distribution focusing on optimal control functionality
  * Several example systems are included such as a simple car model and a quadrotor model.
  *
  * In addition, a parameter-dependent discrete optimal control method is included for solving
@@ -102,12 +102,25 @@ namespace gcop {
                    const Vectormd *p,
                    Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
 
+  /**
+   * Discrete dynamics update. The function computes the next system state xb given 
+   * current state xa and applied forces u
+   * @param xb resulting state
+   * @param t current time
+   * @param xa current state
+   * @param u current control
+   * @param h current time-step
+   * @param p static parameters  (optional)
+   * @param A jacobian w.r.t. x   (optional)
+   * @param B jacobian w.r.t. u   (optional)
+   * @param C jacobian w.r.t. p   (optional)
+   */
   virtual double Step(T &xb, double t, const T &xa,
                       const Tu &u, double h, const Vectormd *p = 0, 
-                      Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
-	virtual void reset(){};// Adding a reset virtual function which can be formalized later
-  
-  
+                      Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);  
+
+  virtual void reset(){};// Adding a reset virtual function which can be formalized later
+    
   /**
    * Reconstruct the full state. Some states contain redundant parameters 
    * for efficiency and it is useful to reconstruct them to maintain a 
