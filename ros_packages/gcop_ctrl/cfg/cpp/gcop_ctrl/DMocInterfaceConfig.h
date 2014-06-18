@@ -517,7 +517,7 @@ DMocInterfaceConfig::GroupDescription<DMocInterfaceConfig::DEFAULT, DMocInterfac
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __max__.Nit = 30;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.Nit = 10;
+      __default__.Nit = 30;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       Default.abstract_parameters.push_back(DMocInterfaceConfig::AbstractParamDescriptionConstPtr(new DMocInterfaceConfig::ParamDescription<int>("Nit", "int", 0, "Number of iterations of dmoc", "", &DMocInterfaceConfig::Nit)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"

@@ -9,8 +9,7 @@
 #include "gcop_ctrl/DMocInterfaceConfig.h"
 #include "geometry_msgs/TransformStamped.h"
 #include <tf/transform_listener.h>
-
-////
+#include "gcop/utils.h"////
 #include "geometry_msgs/Vector3.h"
 #include "geometry_msgs/Quaternion.h"
 #include "tf/transform_datatypes.h"
@@ -50,7 +49,7 @@ RnLqCost<4, 2>*cost;
   vector<Vector4d> xs;
   vector<Vector2d> us;
   Vector4d xf = Vector4d::Zero();// final state initialization passed by reference so needs to be global to be changed
-	int Nit = 10;//number of iterations for dmoc
+	int Nit = 30;//number of iterations for dmoc
 bool usemocap = false;
 
 double tprev = 0;
@@ -89,13 +88,22 @@ void pubtraj() //N is the number of segments
 }
 
 void iterateCallback(const ros::TimerEvent & event)
+//void iterateCallback()
 {
-	//ros::Time startime = ros::Time::now(); 
-	for (int count = 1;count <= Nit;count++)
+//	ros::Time startime = ros::Time::now();
+struct timeval timer; 
+timer_start(timer);
+	for (int count = 1;count <= Nit;count++){
+		 
 		dmoc->Iterate();//Updates us and xs after one iteration
-	//double te = 1e6*(ros::Time::now() - startime).toSec();
-	//cout << "Time taken " << te << " us." << endl;
-	//publish the message
+	}//double te = 1e6*(ros::Time::now() - startime).toSec();
+ long te = timer_us(timer);
+	cout << "Time taken " << te << " us." << endl;
+	
+//publish the message
+//	ros::Duration d1 = ros::Time::now()-startime;
+//	ROS_INFO("Duration %f",d1.toSec());
+	//iteratetimer.stop();
 	pubtraj();
 }
 void initialposnCallback(const geometry_msgs::TransformStamped::ConstPtr &currframe)
@@ -133,8 +141,8 @@ void initialposnCallback(const geometry_msgs::TransformStamped::ConstPtr &currfr
 void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level) 
 {
 	Nit = config.Nit; 
-	int N = config.N;
-	double h = config.tf/N;   // time step
+	//int N = config.N;
+	//double h = config.tf/N;   // time step
 	//Vector4d xf = Vector4d::Zero();// final state
 	Vector4d x0 = Vector4d::Zero();// initial state
 	VectorXd Q(4);//Costs
@@ -165,13 +173,14 @@ void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level)
 	R(1) = config.R2;
 
 	//resize
+/*
 	ts.resize(N+1);
 	xs.resize(N+1);
 	us.resize(N);
 	trajectory.N = N;
 	trajectory.statemsg.resize(N+1);
 	trajectory.ctrl.resize(N);
-	
+*/	
 	// cost
 
 	//RnLqCost<4, 2> cost(config.tf, xf);
@@ -183,8 +192,8 @@ void paramreqcallback(gcop_ctrl::DMocInterfaceConfig &config, uint32_t level)
 	cost->Qf = Qf.asDiagonal();
 
 
-	for (int k = 0; k <=N; ++k)
-		ts[k] = k*h;
+//	for (int k = 0; k <=N; ++k)
+//		ts[k] = k*h;
 
 	// initial state
 	if(!config.usemocap)
@@ -218,19 +227,23 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "rccarctrl");
 	ros::NodeHandle rosdmoc("/dmoc");
 	//Initialize publisher
-	trajpub = rosdmoc.advertise<gcop_comm::CtrlTraj>("ctrltraj",1);
+   trajpub = rosdmoc.advertise<gcop_comm::CtrlTraj>("ctrltraj",1);
 	//Subscribe to initial posn from tf
-	initialposn_sub = rosdmoc.subscribe("mocap",1,initialposnCallback);
+	//initialposn_sub = rosdmoc.subscribe("mocap",1,initialposnCallback);
 	
 
 	//define parameters for the system
   int N = 64;        // number of segments
-  double tf = 20,mu = 0.01;    // time horizon
+  double tf = 10,mu = 0.01;    // time horizon
   Vector4d x0 = Vector4d::Zero();// initial state
   VectorXd Q(4);//Costs
   VectorXd R(2);  
   VectorXd Qf(4);
-
+	xf.setZero();
+/* x0[0] = 1;x0[1] = 1;
+  Q(0) = 0.5; Q(1) = 0.5;Q(2) = 0.1; Q(3) = 1;
+	R(0)=0.5;R(1) = 0.1;
+	Qf(0) = 10;Qf(1) = 10;Qf(2)=10;Qf(3) = 1;*/ 
 
 		//get parameters from ros:
 	ros::param::get("/dmoc/tf", tf);
@@ -260,7 +273,10 @@ int main(int argc, char** argv)
 	ros::param::get("/dmoc/R2", R(1));
 
 	ros::param::get("/dmoc/mu", mu);
+	
+	ros::param::get("/dmoc/Nit", Nit);
 
+	
 	//resize the states and controls
 	ts.resize(N+1);
 	xs.resize(N+1);
@@ -303,6 +319,10 @@ int main(int argc, char** argv)
 	dynamic_reconfigure::Server<gcop_ctrl::DMocInterfaceConfig>::CallbackType f;
 	f = boost::bind(&paramreqcallback, _1, _2);
 	server.setCallback(f);
+	
+//	ros::TimerEvent event;
+
+//  iterateCallback(event);
 	//create timer for iteration
   iteratetimer = rosdmoc.createTimer(ros::Duration(0.01), iterateCallback);
 	iteratetimer.start();
