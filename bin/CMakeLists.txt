@@ -1,7 +1,7 @@
 link_directories(${RPC_BINARY_DIR}/lib) 
 
 add_executable(particle2dtest particle2dtest.cc)
-target_link_libraries(particle2dtest gcop  ${LIBS})
+target_link_libraries(particle2dtest gcop ${LIBS})
 
 add_executable(unicycletest unicycletest.cc)
 target_link_libraries(unicycletest gcop  ${LIBS})
@@ -120,7 +120,9 @@ target_link_libraries(cetest gcop ${LIBS})
 add_executable(airplanetest airplanetest.cc)
 target_link_libraries(airplanetest gcop ${LIBS})
 
-
+# Camera testing 6dof pose example
+#add_executable(camtest camtest.cc)
+#target_link_libraries(camtest gcop ${LIBS})
 #INSTALL(TARGETS gcoptest
 #        RUNTIME
 #        DESTINATION bin)

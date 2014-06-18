@@ -1,0 +1,10 @@
+<library path="lib/libgcop_est">
+
+  <class name="gcop_est/estimator1"
+	 type="gcop_est::PoseEstimator1"
+	 base_class_type="nodelet::Nodelet">
+    <description>
+			Estimates the 6DOF Pose given a known object and a calibrated monocular camera
+    </description>
+  </class>
+</library>

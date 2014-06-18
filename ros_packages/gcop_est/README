@@ -1,0 +1,1 @@
+Since this code somehow needs the opencv libraries to be present after gcop, we modify the opencv2, cv_bridge, image_geometry to remove the opencv export symbols from their manifest.xml and explicity mention FindOpenCV in the CMakeLists

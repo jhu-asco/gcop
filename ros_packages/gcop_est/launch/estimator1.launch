@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" output="screen"/>
+  <node pkg="nodelet" type="nodelet" name="camera_driver" args="load camera1394/driver camera_nodelet_manager">
+    <param name="guid" type="string" value="00b09d0100bc512e"/>
+    <param name="video_mode" type="string" value="640x480_mono8"/>
+    <param name="frame_rate" type="double" value="30.0"/>
+    <param name="auto_shutter" type="int" value="3"/>
+    <param name="shutter" type="double" value="1.0"/>
+  </node>
+  <node pkg="nodelet" type="nodelet" name="image_view" args="load image_view/image camera_nodelet_manager">
+		<remap from="image" to="camera/image_raw" />
+	</node>
+  <node pkg="nodelet" type="nodelet" name="Pose_Est" args="load gcop_est/estimator1 camera_nodelet_manager">
+		<remap from="image" to="camera/image_raw" />
+	</node>
+</launch>
