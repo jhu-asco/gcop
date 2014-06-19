@@ -2,6 +2,5 @@
 build*
 msg_gen*
 bin*
-cmake*
 lib*
 
