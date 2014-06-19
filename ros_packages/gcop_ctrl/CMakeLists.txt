@@ -23,6 +23,10 @@ find_package(GCOP REQUIRED)
 include_directories(${GCOP_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${GCOP_LIBRARIES})
 
+find_package(OpenCV REQUIRED core highgui imgproc calib3d)
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+set(LIBS ${LIBS} ${OpenCV_LIBS})
+
 find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
