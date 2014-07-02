@@ -7,7 +7,6 @@ set(sources
 	urdflink.cpp
 	urdfjoint.cpp
 	urdf_parser.cpp
-	camera.cc
   )
 
 set(headers
@@ -24,5 +23,4 @@ set(headers
 	urdf_parser.h
   function.h
   params.h
-	camera.h
   )

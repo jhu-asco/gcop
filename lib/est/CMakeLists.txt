@@ -8,6 +8,7 @@ set(headers
   gp.h
   normal.h
   gmm.h
+	camera.h
   ce.h)
 
 
@@ -20,5 +21,6 @@ set(sources
   imuukf.cc
   gp.cc
   normal.cc
+	camera.cc
   gmm.cc
   ce.cc)

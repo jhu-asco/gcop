@@ -4,14 +4,25 @@
   <node pkg="nodelet" type="nodelet" name="camera_driver" args="load camera1394/driver camera_nodelet_manager">
     <param name="guid" type="string" value="00b09d0100bc512e"/>
     <param name="video_mode" type="string" value="640x480_mono8"/>
-    <param name="frame_rate" type="double" value="30.0"/>
+    <param name="frame_rate" type="double" value="60.0"/>
     <param name="auto_shutter" type="int" value="3"/>
-    <param name="shutter" type="double" value="1.0"/>
+    <!--param name="shutter" type="double" value="4.0"/-->
+    <param name="shutter" type="double" value="60.0"/>
+    <param name="auto_gain" type="int" value="3"/>
+    <param name="gain" type="double" value="16.0"/>
   </node>
   <node pkg="nodelet" type="nodelet" name="image_view" args="load image_view/image camera_nodelet_manager">
-		<remap from="image" to="camera/image_raw" />
+		<remap from="image" to="camera/image_cont" />
 	</node>
+	<param name="/camera/tolerance_radius" type="double" value="2.0"/>
+	<param name="/camera/kernel_blur" type="int" value="2"/>
   <node pkg="nodelet" type="nodelet" name="Pose_Est" args="load gcop_est/estimator1 camera_nodelet_manager">
 		<remap from="image" to="camera/image_raw" />
+		<remap from="image_cont" to="camera/image_cont" />
 	</node>
+  <!--node pkg="nodelet" type="nodelet" name="image_proc" args="load image_proc/rectify camera_nodelet_manager">
+		<remap from="image_mono" to="camera/image_raw" />
+		<remap from="image_rect" to="camera/image_rect" />
+	</node-->
+	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find gcop_est)/launch/rviz_config.vcg"/>
 </launch>
