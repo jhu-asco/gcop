@@ -20,6 +20,7 @@ using namespace Eigen;
     dc1394error_t err;
 
     cv::Mat raw; //Raw Image being set from the camera
+    cv::Mat cont; //Raw Image being set from the camera
 
 
 void signal_callback_handler(int signum)//Terminate signal
@@ -179,7 +180,7 @@ int main(int argc, char** argv)
 
 	while (1) {
 		CaptureCamera();//Get a raw frame  from camera
-		bool ok = cam.Pose(q,raw);//Compute the pose
+		bool ok = cam.Pose(q,raw,cont);//Compute the pose
 		if (!ok) {
 			cout << "no object" << endl;
 			continue;
