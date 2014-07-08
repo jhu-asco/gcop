@@ -6,7 +6,6 @@ set(headers
   imumodel.h
   imuukf.h
   gp.h
-  normal.h
   gmm.h
 	camera.h
   ce.h)
@@ -20,7 +19,6 @@ set(sources
   imumodel.cc
   imuukf.cc
   gp.cc
-  normal.cc
 	camera.cc
   gmm.cc
   ce.cc)

@@ -30,6 +30,7 @@ set(sources
   airplanecost.cc
   joint.cc
   body2dforce.cc
+	urdf_parser.cpp
 )
 
 set(headers
@@ -76,4 +77,5 @@ set(headers
   airplanecost.h
   force.h
   body2dforce.h
+	urdf_parser.h
 )

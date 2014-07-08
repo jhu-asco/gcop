@@ -4,7 +4,7 @@
 #include "opencv/cv.h"
 #include "opencv/highgui.h"
 #include <iostream>
-#include <pthread.h>
+//#include <pthread.h>
 #include "utils.h"
 #include <stdint.h>
 #include <Eigen/Dense>

@@ -6,7 +6,7 @@ set(sources
   params.cc
 	urdflink.cpp
 	urdfjoint.cpp
-	urdf_parser.cpp
+  normal.cc
   )
 
 set(headers
@@ -20,7 +20,7 @@ set(headers
 	pose.h
 	color.h
   urdfmodel.h
-	urdf_parser.h
   function.h
   params.h
+  normal.h
   )
