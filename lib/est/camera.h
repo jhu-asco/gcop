@@ -30,6 +30,7 @@ using namespace Eigen;
     virtual ~Camera();
 
     bool Pose(Vector6d &q, const cv::Mat &raw, cv::Mat &cont);
+    bool Pose(Vector6d &q, const cv::Mat &raw);
 		float tolerance;
 		int kernel_size;
 
@@ -50,6 +51,7 @@ using namespace Eigen;
 		cv::Mat dccoeffs;
 	  cv::Point2f iprs[np];
 		std::ofstream pointfile;
+		bool find_contours;
 		//bool init_obj;
   };
 
