@@ -1,7 +1,7 @@
 #ifndef GCOP_BODY3DCOST_H
 #define GCOP_BODY3DCOST_H
 
-#include "body3dmanifold.h"
+#include "body3d.h"
 #include "lqcost.h"
 
 namespace gcop {
@@ -18,7 +18,7 @@ namespace gcop {
     
   public:
     
-    Body3dCost(double tf, const Body3dState &xf, bool diag = true);
+    Body3dCost(Body3d<c> &sys, double tf, const Body3dState &xf, bool diag = true);
     
     /*    double L(double t, const Body3dState &x, const Vectorcd &u,
              Vector12d *Lx = 0, Matrix12d *Lxx = 0,
@@ -27,8 +27,8 @@ namespace gcop {
     */
   };  
   
-  template <int c> Body3dCost<c>::Body3dCost(double tf, const Body3dState &xf, bool diag) : 
-    LqCost<Body3dState, 12, c>(Body3dManifold::Instance(), tf, xf, diag) {
+  template <int c> Body3dCost<c>::Body3dCost(Body3d<c> &sys, double tf, const Body3dState &xf, bool diag) : 
+    LqCost<Body3dState, 12, c>(sys, tf, xf, diag) {
 
     /*
       Q(0,0) = .05;
@@ -120,7 +120,7 @@ template <int c>
 
     if (Luu)
       *Luu = this->R;
-    
+      
     if (Lxu)
       Lxu->setZero();
 

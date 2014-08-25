@@ -5,7 +5,7 @@
 using namespace gcop;
 using namespace Eigen;
 
-Car::Car() : System(Rn<5>::Instance(), Rn<2>::Instance()), l(1)
+Car::Car() : System(Rn<5>::Instance()), l(1)
 {
 }
 

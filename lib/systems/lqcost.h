@@ -2,27 +2,40 @@
 #define GCOP_LQCOST_H
 
 #include <limits>
-#include "cost.h"
+#include "lscost.h"
 #include <iostream>
-#include "rn.h"
 
 namespace gcop {
   
   using namespace std;
   using namespace Eigen;
   
-  template <typename T, int _n = Dynamic, int _c = Dynamic> class LqCost :
-    public Cost<T, Matrix<double, _c, 1>, _n, _c>
-    {
+  template <typename T, 
+    int _nx = Dynamic, 
+    int _nu = Dynamic,
+    int _np = Dynamic,
+    int _ng = Dynamic> class LqCost : public LsCost<T, _nx, _nu, _np, _ng> {
     public:
+
+  typedef Matrix<double, _ng, 1> Vectorgd;
+  typedef Matrix<double, _ng, _nx> Matrixgxd;
+  typedef Matrix<double, _ng, _nu> Matrixgud;
+  typedef Matrix<double, _ng, _np> Matrixgpd;
+
+  typedef Matrix<double, _nx, 1> Vectornd;
+  typedef Matrix<double, _nu, 1> Vectorcd;
+  typedef Matrix<double, _np, 1> Vectormd;
+
+  typedef Matrix<double, _nx, _nx> Matrixnd;
+  typedef Matrix<double, _nx, _nu> Matrixncd;
+  typedef Matrix<double, _nu, _nx> Matrixcnd;
+  typedef Matrix<double, _nu, _nu> Matrixcd;
+  
+  //  typedef Matrix<double, Dynamic, 1> Vectormd;
+  typedef Matrix<double, _np, _np> Matrixmd;
+  typedef Matrix<double, _nx, _np> Matrixnmd;
+  typedef Matrix<double, _np, _nx> Matrixmnd;
       
-    typedef Matrix<double, _n, 1> Vectornd;
-    typedef Matrix<double, _c, 1> Vectorcd;
-    typedef Matrix<double, _n, _n> Matrixnd;
-    typedef Matrix<double, _n, _c> Matrixncd;
-    typedef Matrix<double, _c, _n> Matrixcnd;
-    typedef Matrix<double, _c, _c> Matrixcd;
-    
     /**
      * Linear-quadratic cost on a general manifold. Use this constructor for dynamic-size
      * control problem, i.e. LqCost<T>(X, U, tf, xf, ...)
@@ -32,16 +45,7 @@ namespace gcop {
      * @param xf desired final state
      * @param diag whether the Q, R, and Qf matrices are diagonal?
      */
-    LqCost(Manifold<T, _n> &X, Rn<_c> &U, double tf, const T &xf, bool diag = true);
-
-    /**
-     * Linear-quadratic cost on a general manifold. Use this constructor for fixed-size
-     * control problem, i.e. LqCost<T, n, c>(X, tf, xf, ...)
-     * @param tf final time
-     * @param xf desired final state
-     * @param diag whether the Q, R, and Qf matrices are diagonal?
-     */
-    LqCost(Manifold<T, _n> &X, double tf, const T &xf, bool diag = true);
+    LqCost(System<T, _nx, _nu, _np> &sys, double tf, const T &xf, bool diag = true);
 
     /**
      * Updates the square root gains, i.e. sets Qsqrt = Q.sqrt(), etc...
@@ -50,14 +54,18 @@ namespace gcop {
     void UpdateGains(); 
     
     virtual double L(double t, const T& x, const Vectorcd& u, double h,
+                     const Vectormd *p = 0,
                      Vectornd *Lx = 0, Matrixnd* Lxx = 0,
                      Vectorcd *Lu = 0, Matrixcd* Luu = 0,
-                     Matrixncd *Lxu = 0);
+                     Matrixncd *Lxu = 0,
+                     Vectormd *Lp = 0, Matrixmd *Lpp = 0,
+                     Matrixmnd *Lpx = 0);
 
-    virtual void ResX(Vectornd &r, double t, const T& x, double h);
-
-    virtual void ResU(Vectorcd &r, double t, const Vectorcd& u, double h);
-                     
+    bool Res(Vectorgd &g, 
+             double t, const T &x, const Vectorcd &u, double h,
+             const Vectormd *p = 0,
+             Matrixgxd *dgdx = 0, Matrixgud *dgdu = 0,
+             Matrixgpd *dgdp = 0);                 
 
     /**
      * Set optional desired reference trajectory and controls
@@ -88,23 +96,24 @@ namespace gcop {
 
     };
   
-  template <typename T, int _n, int _c>
-    LqCost<T, _n, _c>::LqCost(Manifold<T, _n> &X, Rn<_c> &U, double tf, const T &xf, bool diag) : 
-    Cost<T, Matrix<double, _c, 1>, _n, _c>(X, U, tf), xf(xf), diag(diag) {
+  template <typename T, int _nx, int _nu, int _np, int _ng>
+    LqCost<T, _nx, _nu, _np, _ng>::LqCost(System<T, _nx, _nu, _np> &sys, 
+                                          double tf, const T &xf, bool diag) : 
+    LsCost<T, _nx, _nu, _np, _ng>(sys, tf, sys.X.n + sys.U.n), xf(xf), diag(diag) {
     
-    if (_n == Dynamic || _c == Dynamic) {
-      Q.resize(X.n, X.n);
-      Qf.resize(X.n, X.n);
-      R.resize(U.n, U.n);
-      Qsqrt.resize(X.n, X.n);
-      Qfsqrt.resize(X.n, X.n);
-      Rsqrt.resize(U.n, U.n);
-      dx.resize(X.n);
-      du.resize(U.n);
+    if (_nx == Dynamic || _nu == Dynamic) {
+      Q.resize(sys.X.n, sys.X.n);
+      Qf.resize(sys.X.n, sys.X.n);
+      R.resize(sys.U.n, sys.U.n);
+      Qsqrt.resize(sys.X.n, sys.X.n);
+      Qfsqrt.resize(sys.X.n, sys.X.n);
+      Rsqrt.resize(sys.U.n, sys.U.n);
+      dx.resize(sys.X.n);
+      du.resize(sys.U.n);
     }
 
-    //    Q.setZero();
-    Q.setIdentity();
+    Q.setZero();
+    //    Q.setIdentity();
     Qf.setIdentity();
     R.setIdentity();
 
@@ -113,101 +122,97 @@ namespace gcop {
     xds = 0;
     uds = 0;
   }
-
-  template <typename T, int _n, int _c>
-    void LqCost<T, _n, _c>::UpdateGains() {
+  
+  template <typename T, int _nx, int _nu, int _np, int _ng>
+    void LqCost<T, _nx, _nu, _np, _ng>::UpdateGains() {
     Qsqrt = Q.array().sqrt();
     Qfsqrt = Qf.array().sqrt();
     Rsqrt = R.array().sqrt();
   }
 
-  template <typename T, int _n, int _c>
-    LqCost<T, _n, _c>::LqCost(Manifold<T, _n> &X, double tf, const T &xf, bool diag) : 
-    Cost<T, Matrix<double, _c, 1>, _n, _c>(X, Rn<_c>::Instance(), tf), xf(xf), diag(diag) {
-    
-    assert(_c != Dynamic); 
-    
-    if (_n == Dynamic) {
-      Q.resize(X.n, X.n);
-      Qf.resize(X.n, X.n);
-      dx.resize(X.n);
-    }
-    
-    Q.setZero();
-    Qf.setIdentity();
-    R.setIdentity();
-    
-    xds = 0;
-    uds = 0;
-  }
 
-  template <typename T, int _n, int _c>  
-    void LqCost<T, _n, _c>::SetReference(const vector<T> *xds, const vector<Vectorcd> *uds) {
+  template <typename T, int _nx, int _nu, int _np, int _ng>  
+    void LqCost<T, _nx, _nu, _np, _ng>::SetReference(const vector<T> *xds, const vector<Vectorcd> *uds) {
     this->xds = xds;
     this->uds = uds;
   }
 
-  template <typename T, int _n, int _c> 
-    void LqCost<T, _n, _c>::ResX(Vectornd &r, double t, const T& x, double h)
-    {    
+  template <typename T, int _nx, int _nu, int _np, int _ng> 
+    bool LqCost<T, _nx, _nu, _np, _ng>::Res(Vectorgd &g, 
+                                            double t, const T &x, const Vectorcd &u, double h,
+                                            const Vectormd *p,
+                                            Matrixgxd *dgdx, Matrixgud *dgdu,
+                                            Matrixgpd *dgdp) {
+    assert(g.size() == this->sys.U.n + this->sys.X.n);
+    
+    int &nx = this->sys.X.n;
+    int &nu = this->sys.U.n;
+    
+    // check if final state
+    if (t > this->tf - 1e-10) {
       if (xds) {
-        int k = (int)(t/h);
-        assert(k < xds->size());
-        this->X.Lift(dx, (*xds)[k], x); // difference (on a vector space we have dx = x - xf)
+        this->sys.X.Lift(dx, xds->back(), x); // difference (on a vector space we have dx = x - xf)
       } else {
-        this->X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)     
+        this->sys.X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)     
       }
       assert(!std::isnan(dx[0]));
-      
-      // check if final state
-      if (t > this->tf - 1e-10) {
-        if (diag)
-          r = Qfsqrt.diagonal().cwiseProduct(dx);
-        else
-          r = Qfsqrt*dx;      
+
+      if (diag)
+        g.head(nx) = Qfsqrt.diagonal().cwiseProduct(dx);
+      else
+        g.head(nx) = Qfsqrt*dx;      
+
+      g.tail(nu).setZero();
+
+    } else {
+      assert(h > 0);
+      int k = (int)(t/h);
+      if (xds) {
+        assert(k < xds->size());
+        this->sys.X.Lift(dx, (*xds)[k], x); // difference (on a vector space we have dx = x - xf)
       } else {
-        if (diag)
-          r = Qsqrt.diagonal().cwiseProduct(sqrt(h)*dx);
-        else
-          r = Qsqrt*(sqrt(h)*dx);
+        this->sys.X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)     
       }
-    }
+      assert(!std::isnan(dx[0]));
 
-  template <typename T, int _n, int _c> 
-    void LqCost<T, _n, _c>::ResU(Vectorcd &r, double t, const Vectorcd& u, double h)
-    {
-      if (t < this->tf - 1e-10) {
+      if (diag)
+        g.head(nx) = Qsqrt.diagonal().cwiseProduct(sqrt(h)*dx);
+      else
+        g.head(nx) = Qsqrt*(sqrt(h)*dx);
 
-        if (uds) {
-          int k = (int)(t/h);
-          assert(k < uds->size());
-          du = sqrt(h)*(u - (*uds)[k]);
-        } else {
-          du = sqrt(h)*u;
-        }
-        
-        if (diag)
-          r = Rsqrt.diagonal().cwiseProduct(du);
-        else
-          r = Rsqrt*(du);
+      if (uds) {
+        assert(k < uds->size());
+        du = sqrt(h)*(u - (*uds)[k]);
+      } else {
+        du = sqrt(h)*u;
       }
+      
+      if (diag)
+        g.tail(nu) = Rsqrt.diagonal().cwiseProduct(du);
+      else
+        g.tail(nu) = Rsqrt*(du);
     }
-
+    return true;
+  }
   
-  template <typename T, int _n, int _c> 
-    double LqCost<T, _n, _c>::L(double t, const T &x, const Matrix<double, _c, 1> &u,
-                                double h,
-                                Matrix<double, _n, 1> *Lx, Matrix<double, _n, _n> *Lxx,
-                                Matrix<double, _c, 1> *Lu, Matrix<double, _c, _c> *Luu,
-                                Matrix<double, _n, _c> *Lxu) {
-
+  
+  template <typename T, int _nx, int _nu, int _np, int _ng> 
+    double LqCost<T, _nx, _nu, _np, _ng>::L(double t, const T &x, const Matrix<double, _nu, 1> &u,
+                                            double h,
+                                            const Matrix<double, _np, 1> *p,
+                                            Matrix<double, _nx, 1> *Lx, Matrix<double, _nx, _nx> *Lxx,
+                                            Matrix<double, _nu, 1> *Lu, Matrix<double, _nu, _nu> *Luu,
+                                            Matrix<double, _nx, _nu> *Lxu,
+                                            Matrix<double, _np, 1> *Lp, Matrix<double, _np, _np> *Lpp,
+                                            Matrix<double, _np, _nx> *Lpx) {
+    
     int k = (int)(t/h);
     
     if (xds) {
       assert(k < xds->size());
-      this->X.Lift(dx, (*xds)[k], x); // difference (on a vector space we have dx = x - xf)
+      this->sys.X.Lift(dx, (*xds)[k], x); // difference (on a vector space we have dx = x - xf)
     } else {
-      this->X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)      
+      this->sys.X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)      
     }
     assert(!std::isnan(dx[0]));
     

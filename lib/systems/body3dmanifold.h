@@ -16,7 +16,6 @@ namespace gcop {
   class Body3dManifold : public Manifold<Body3dState, 12> {
     
   public:
-
     static Body3dManifold& Instance();
 
     void Lift(Vector12d &v,
@@ -30,7 +29,6 @@ namespace gcop {
     void dtau(Matrix12d &M, const Vector12d &v);
 
     void Adtau(Matrix12d &M, const Vector12d &v);
-
 
   private:
     Body3dManifold();

@@ -12,7 +12,7 @@ using namespace gcop;
 using namespace Eigen;
 
 Body2d::Body2d(Body2dForce *force) : 
-  System(Body2dManifold::Instance(), Rn<3>::Instance()), 
+  System(Body2dManifold::Instance()), 
   d(.3, .1), I(1,1,1), force(force)
 {
 }

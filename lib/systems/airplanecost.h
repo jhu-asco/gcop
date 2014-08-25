@@ -19,7 +19,7 @@ namespace gcop {
   class AirplaneCost : public LqCost<M3V2d, 5, 2> {
   public:      
     
-    AirplaneCost(double tf, const M3V2d &xf, int N);
+    AirplaneCost(Airdouble tf, const M3V2d &xf, int N);
     
     double L(double t, const M3V2d &x, const Vector2d &u, double h,
              Vector5d *Lx = 0, Matrix5d *Lxx = 0,

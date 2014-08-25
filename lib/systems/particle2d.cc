@@ -5,7 +5,7 @@
 using namespace gcop;
 using namespace Eigen;
  
-Particle2d::Particle2d() : System(Rn<4>::Instance(), Rn<2>::Instance()), m(1), r(.1)
+Particle2d::Particle2d() : System(Rn<4>::Instance()), m(1), r(.1)
 {
 }
 

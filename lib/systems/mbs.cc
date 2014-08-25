@@ -1,3 +1,11 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #include <limits>
 #include <iostream>
 #include <utility>
@@ -7,25 +15,9 @@
 
 using namespace gcop;
 
-void print(const MbsState &x)
-{
-  for (int i =0; i < x.gs.size(); ++i) {
-    cout << "gs[" << i << "]=" << endl << x.gs[i] << endl;
-  }
-  for (int i =0; i < x.vs.size(); ++i) {
-    cout << "vs[" << i << "]=" << endl << x.vs[i].transpose() << endl;
-  }  
-  for (int i =0; i < x.dgs.size(); ++i) {
-    cout << "dgs[" << i << "]=" << endl << x.dgs[i] << endl;
-  }
-
-  cout << "r=" << x.r.transpose() << endl;
-  cout << "dr=" << x.dr.transpose() << endl;
-}
-
 
 Mbs::Mbs(int nb, int c, bool fixed) : nb(nb), fixed(fixed),
-                                      System(*new MbsManifold(nb, fixed), *new Rn<>(c)), 
+                                      System(*new MbsManifold(nb, fixed), c), 
                                       links(nb),
                                       joints(nb-1), 
                                       pis(nb), cs(nb), se3(SE3::Instance()),
@@ -40,10 +32,6 @@ Mbs::Mbs(int nb, int c, bool fixed) : nb(nb), fixed(fixed),
                                       ubD(VectorXd::Constant(nb - 1, 10)),
                                       fsl(VectorXd::Zero(nb - 1)),
                                       fsu(VectorXd::Zero(nb - 1))
-                                      //                          fq(*this), 
-                                      //                          fva(*this),
-                                      //                          fvb(*this), 
-                                      //                          fu(*this)
 {
   //ag << 0, 0, -9.81;
 }
@@ -129,6 +117,7 @@ void Mbs::Init()
 }
 
 
+/*
 double Mbs::F(VectorXd &v, double t, const MbsState &x, 
               const VectorXd &u, double h, const VectorXd *p,
               MatrixXd *A, MatrixXd *B, MatrixXd *C)
@@ -170,6 +159,7 @@ double Mbs::F(VectorXd &v, double t, const MbsState &x,
   v.segment(nb+5, 6) = h*a.head(6);                 
   v.segment(nb+11, nb-1) = h*a.tail(nb-1);
 }
+*/
 
 
 void Mbs::Mass(MatrixXd &M, const MbsState &x) const 
@@ -496,6 +486,24 @@ double Mbs::Step(MbsState& xb, double t, const MbsState& xa,
   return 0;
 }
 
+void print(const MbsState &x)
+{
+  for (int i =0; i < x.gs.size(); ++i) {
+    cout << "gs[" << i << "]=" << endl << x.gs[i] << endl;
+  }
+  for (int i =0; i < x.vs.size(); ++i) {
+    cout << "vs[" << i << "]=" << endl << x.vs[i].transpose() << endl;
+  }  
+  for (int i =0; i < x.dgs.size(); ++i) {
+    cout << "dgs[" << i << "]=" << endl << x.dgs[i] << endl;
+  }
+
+  cout << "r=" << x.r.transpose() << endl;
+  cout << "dr=" << x.dr.transpose() << endl;
+}
+
+
+
 
 double Mbs::TrapStep(MbsState &xb, double t, const MbsState& xa,
                      const VectorXd &u, double h,
@@ -604,8 +612,8 @@ double Mbs::TrapStep(MbsState &xb, double t, const MbsState& xa,
 
   if (B) {
     assert(B->rows() == 2*(nb + 5));
-    assert(B->cols() == c);
-    MatrixXd Bv(nb + 5, c);
+    assert(B->cols() == U.n);
+    MatrixXd Bv(nb + 5, U.n);
     VectorXd f(nb + 5);
     Force(f, t, xa, u, 0, &Bv);  // compute control/external forces
     B->topRows(nb + 5).setZero();

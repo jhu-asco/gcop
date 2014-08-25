@@ -161,7 +161,7 @@ Airbot::Airbot() :
   U.lb[3] = 0;
   U.ub[3] = 50; // max lift
 
-  for (int i = 4; i < c; ++i) {
+  for (int i = 4; i < U.n; ++i) {
     U.lb[i] = -1;
     U.ub[i] = 1;
   }

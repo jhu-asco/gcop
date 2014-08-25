@@ -17,7 +17,7 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */  
-  class Particle2d : public System<Vector4d, Vector2d, 4, 2> {
+  class Particle2d : public System<Vector4d, 4, 2> {
   public:
     Particle2d();
     

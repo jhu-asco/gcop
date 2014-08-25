@@ -25,6 +25,10 @@ namespace gcop {
 class Params
 {
  public:
+
+  typedef Matrix<double, 6, 6> Matrix6d;
+  typedef Matrix<double, 6, 1> Vector6d;
+
   Params();
   Params(FILE *file);
   Params(const char *fileName);
@@ -63,6 +67,15 @@ class Params
   void SetVector4d(const char *name, const Vector4d &v);
   bool GetVector4d(const char *name, Vector4d &v) const;
 
+  void SetVector6d(const char *name, const Vector6d &v);
+  bool GetVector6d(const char *name, Vector6d &v) const;
+
+  void SetMatrix3d(const char *name, const Matrix3d &m);
+  bool GetMatrix3d(const char *name, Matrix3d &m) const;
+
+  void SetMatrix6d(const char *name, const Matrix6d &m);
+  bool GetMatrix6d(const char *name, Matrix6d &m) const;
+
   void SetDoubleVec(const char *name, const std::vector<double> &v);
   bool GetDoubleVec(const char *name, std::vector<double> &v) const;
 
@@ -82,6 +95,16 @@ class Params
   void Print(std::iostream &io) const;
 
  protected:
+
+
+  struct RemoveDelimiter
+  {
+    bool operator()(char c)
+    {
+      return (c =='\r' || c =='\t' || c == ' ' || c == '\n');
+    }
+  };
+  
 
   void Parse(char *line);
 

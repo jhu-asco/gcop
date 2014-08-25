@@ -1,31 +1,33 @@
-#ifndef GCOP_PDMOC_H
-#define GCOP_PDMOC_H
+#ifndef GCOP_PDDP_H
+#define GCOP_PDDP_H
 
 #include <Eigen/Dense>
 #include <vector>
 #include <type_traits>
 #include <algorithm>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 
 namespace gcop {
   
-  template <typename T, int n = Dynamic, int c = Dynamic> class PDmoc : public Dmoc<T, n, c> {
+  template <typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic> 
+    class PDdp : public Ddp<T, n, c, np> {
     
     typedef Eigen::Matrix<double, n, 1> Vectornd;
     typedef Eigen::Matrix<double, c, 1> Vectorcd;
+
     typedef Eigen::Matrix<double, n, n> Matrixnd;
     typedef Eigen::Matrix<double, n, c> Matrixncd;
     typedef Eigen::Matrix<double, c, n> Matrixcnd;
     typedef Eigen::Matrix<double, c, c> Matrixcd;  
     
-    typedef Eigen::Matrix<double, Dynamic, 1> Vectormd;
-    typedef Eigen::Matrix<double, Dynamic, Dynamic> Matrixmd;
-    typedef Eigen::Matrix<double, n, Dynamic> Matrixnmd;
-    typedef Eigen::Matrix<double, Dynamic, n> Matrixmnd;
+    typedef Eigen::Matrix<double, np, 1> Vectormd;
+    typedef Eigen::Matrix<double, np, np> Matrixmd;
+    typedef Eigen::Matrix<double, n, np> Matrixnmd;
+    typedef Eigen::Matrix<double, np, n> Matrixmnd;
 
-    typedef Eigen::Matrix<double, c, Dynamic> Matrixcmd;
-    typedef Eigen::Matrix<double, Dynamic, c> Matrixmcd;
+    typedef Eigen::Matrix<double, c, np> Matrixcmd;
+    typedef Eigen::Matrix<double, np, c> Matrixmcd;
     
 
   public:
@@ -50,12 +52,12 @@ namespace gcop {
      * @param update whether to update trajectory xs using initial state xs[0], inputs us, 
      *               and parameters p. This is necessary only if xs was not already generated.
      */    
-    PDmoc(System<T, Vectorcd, n, c> &sys, Cost<T, Vectorcd, n, c> &cost, 
+    PDdp(System<T, n, c, np> &sys, Cost<T, n, c, np> &cost, 
           vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
-          VectorXd &p, int dynParams = 0, bool update = true);
+          Vectormd &p, int dynParams = 0, bool update = true);
     
     /**
-     * Perform one DMOC iteration. Internally calls:
+     * Perform one DDP iteration. Internally calls:
      *
      * Backward -> Forward -> Update. The controls us and trajectory xs
      * are updated. 
@@ -116,14 +118,14 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
   
-  template <typename T, int n, int c> 
-    PDmoc<T, n, c>::PDmoc(System<T, Matrix<double, c, 1>, n, c> &sys, 
-                          Cost<T, Matrix<double, c, 1>, n, c> &cost, 
-                          vector<double> &ts, 
-                          vector<T> &xs, 
-                          vector<Matrix<double, c, 1> > &us,
-                          VectorXd &p, int dynParams, bool update) : 
-    Dmoc<T, n, c>(sys, cost, ts, xs, us, false),
+  template <typename T, int n, int c, int np> 
+    PDdp<T, n, c, np>::PDdp(System<T, n, c, np> &sys, 
+                              Cost<T, n, c, np> &cost, 
+                              vector<double> &ts, 
+                              vector<T> &xs, 
+                              vector<Matrix<double, c, 1> > &us,
+                              Matrix<double, np, 1> &p, int dynParams, bool update) : 
+    Ddp<T, n, c, np>(sys, cost, ts, xs, us, &p, false),
     m(p.size()), dynParams(dynParams), p(p), dp(m), Cs(this->N), 
     Lxs(this->N+1), Lxxs(this->N+1), 
     Lus(this->N), Luus(this->N), Lxus(this->N),    
@@ -131,33 +133,33 @@ namespace gcop {
     Kups(this->N),
     Hxs(this->N+1), hxs(this->N+1),
     nu(1e-3), nu0(1e-3), dnu0(2) {
-
+    
     for (int k = 0; k <= this->N; ++k) {
       if (k < this->N) {
         if (dynParams)
-          Cs[k].resize(sys.n, dynParams);
-        Kups[k].resize(sys.c, m);
+          Cs[k].resize(sys.X.n, dynParams);
+        Kups[k].resize(sys.U.n, m);
       }
-      Hxs[k].resize(sys.n, m);
-
+      Hxs[k].resize(sys.X.n, m);
+      
       Lps[k].resize(m, 1);
       Lpps[k].resize(m, m);
-      Lpxs[k].resize(m, sys.n);
+      Lpxs[k].resize(m, sys.X.n);
     }
 
 
     if (n == Dynamic || c == Dynamic) {      
       for (int i = 0; i <= this->N; ++i) {
-        Lxs[i].resize(sys.n);
-        Lxxs[i].resize(sys.n, sys.n);
+        Lxs[i].resize(sys.X.n);
+        Lxxs[i].resize(sys.X.n, sys.X.n);
 
         if (i < this->N) {
-          Lus[i].resize(sys.c);
-          Luus[i].resize(sys.c, sys.c);
-          Lxus[i].resize(sys.n, sys.c);
+          Lus[i].resize(sys.U.n);
+          Luus[i].resize(sys.U.n, sys.U.n);
+          Lxus[i].resize(sys.X.n, sys.U.n);
         }
 
-        hxs[i].resize(sys.n);
+        hxs[i].resize(sys.X.n);
       }
     }
 
@@ -166,8 +168,8 @@ namespace gcop {
   }
   
 
-  template <typename T, int n, int c> 
-    void PDmoc<T, n, c>::Update(bool der) {
+  template <typename T, int n, int c, int np> 
+    void PDdp<T, n, c, np>::Update(bool der) {
     
     VectorXd pdyn;
     if (dynParams)
@@ -184,8 +186,8 @@ namespace gcop {
     }
   }
   
-  template <typename T, int n, int c> 
-    void PDmoc<T, n, c>::Backward() {
+  template <typename T, int n, int c, int np> 
+    void PDdp<T, n, c, np>::Backward() {
     
     int N = this->us.size();
 
@@ -204,9 +206,9 @@ namespace gcop {
     const T &x = this->xs.back();
     const Vectorcd &u = this->us.back();
 
-    double L = this->cost.Lp(t, x, u, p, 
-                             &Lxs[N], &Lxxs[N], 0, 0, 0, 
-                             &Lps[N], &Lpps[N], &Lpxs[N]);
+    double L = this->cost.L(t, x, u, 0, &p, 
+                            &Lxs[N], &Lxxs[N], 0, 0, 0, 
+                            &Lps[N], &Lpps[N], &Lpxs[N]);
     
     this->V = L;
     this->dV.setZero();
@@ -231,7 +233,7 @@ namespace gcop {
     Matrixcnd Bt;
     Matrixmnd Ct;
     
-    Matrixcd Ic = MatrixXd::Identity(this->sys.c, this->sys.c);
+    Matrixcd Ic = MatrixXd::Identity(this->sys.U.n, this->sys.U.n);
 
     for (int k = N - 1; k >=0; --k) {
       t = this->ts[k];
@@ -247,7 +249,9 @@ namespace gcop {
       Matrixmd &Lpp = Lpps[k];
       Matrixmnd &Lpx = Lpxs[k];
 
-      double L = this->cost.Lp(t, x, u, p, &Lx, &Lxx, &Lu, &Luu, &Lxu, &Lp, &Lpp, &Lpx);
+      double h = this->ts[k+1] - this->ts[k];
+      assert(h >0);
+      double L = this->cost.L(t, x, u, h, &p, &Lx, &Lxx, &Lu, &Luu, &Lxu, &Lp, &Lpp, &Lpx);
 
       //      cout << "L=" << L << endl;
       
@@ -324,7 +328,7 @@ namespace gcop {
         this->mu = max(this->mu0, this->mu*dmu);   
         
         if (this->debug)
-          cout << "[I] PDmoc::Backward: increased mu=" << mu << " at k=" << k << endl;
+          cout << "[I] PDdp::Backward: increased mu=" << mu << " at k=" << k << endl;
       }
       
       ku = -llt.solve(Qu);
@@ -341,15 +345,15 @@ namespace gcop {
     }
     
     if (this->debug)
-      cout << "[I] PDmoc::Backward: current V=" << this->V << endl;
+      cout << "[I] PDdp::Backward: current V=" << this->V << endl;
     
   }
   
   template <int n = Dynamic, int c = Dynamic> 
     Matrix<double, n, c> sym(const Matrix<double, n, c> &A) { return A+A.transpose(); };
   
-  template <typename T, int n, int c> 
-    void PDmoc<T, n, c>::Forward() {
+  template <typename T, int n, int c, int np> 
+    void PDdp<T, n, c, np>::Forward() {
 
     typedef Matrix<double, n, 1> Vectornd;
     typedef Matrix<double, c, 1> Vectorcd;
@@ -357,37 +361,16 @@ namespace gcop {
     typedef Matrix<double, n, c> Matrixncd;
     typedef Matrix<double, c, n> Matrixcnd;
     typedef Matrix<double, c, c> Matrixcd;  
-    typedef Matrix<double, Dynamic, 1> Vectormd;
-    typedef Matrix<double, Dynamic, Dynamic> Matrixmd;
-    typedef Matrix<double, n, Dynamic> Matrixnmd;
-    typedef Matrix<double, Dynamic, n> Matrixmnd;
+    typedef Matrix<double, np, 1> Vectormd;
+    typedef Matrix<double, np, np> Matrixmd;
+    typedef Matrix<double, n, np> Matrixnmd;
+    typedef Matrix<double, np, n> Matrixmnd;
 
     // find dp
     int N = this->us.size();
 
     hxs[0].setZero();
     Hxs[0].setZero();
-
-    /*
-
-    Matrixmd Ap = Lpps[0];
-    Vectormd bp = Lps[0];
-
-    Matrixnd E;
-    for (int k = 0; k < N; ++k) {
-      E = this->As[k] + this->Bs[k]*this->Kuxs[k];
-
-      Hxs[k+1] = E*Hxs[k] + this->Bs[k]*Kups[k] + Cs[k];
-      hxs[k+1] = E*hxs[k] + this->Bs[k]*this->kus[k];
-      
-      Ap = Ap + Lpxs[k+1]*Hxs[k+1] + Lpps[k+1];
-
-      //      Ap = Ap + Lpxs[k+1]*Hxs[k+1] + (Lpxs[k+1]*Hxs[k+1]).transpose() + Lpps[k+1];
-      // Ap = Ap + Lpxs[k+1]*Hxs[k+1] + Lps[k+1]*Lps[k+1].transpose();
-      //      Ap = Ap + Lpps[k+1];
-      bp = bp + Lpxs[k+1]*hxs[k+1] + Lps[k+1];
-    }
-    */
 
     Matrixmd Ap = Lpps[0] + Kups[0].transpose()*this->Luus[0]*Kups[0];
     Vectormd bp = Lps[0] + Kups[0].transpose()*(this->Lus[0] + this->Luus[0]*this->kus[0]);
@@ -434,7 +417,6 @@ namespace gcop {
       llt.compute(Apm);
       // if OK, then reduce mu and break
       if (llt.info() == Eigen::Success) {
-        // Tassa and Todorov recently proposed this quadratic rule, seems pretty good
         dnu = min(1/this->dnu0, dnu/this->dnu0);
         if (nu*dnu > this->nu0)
           nu *= dnu;
@@ -448,14 +430,14 @@ namespace gcop {
       nu = max(this->nu0, nu*dnu);   
       
       if (this->debug)
-        cout << "[I] PDmoc::Backward: increased nu=" << nu << endl;
+        cout << "[I] PDdp::Backward: increased nu=" << nu << endl;
     }
     
     dp = -llt.solve(bp);
 
     //    dp = -dp./diag(Ap);
 
-    //      cout << "[W] Pdmoc::Backward: Ap not positive definite!" << endl;
+    //      cout << "[W] Pddp::Backward: Ap not positive definite!" << endl;
     //      ColPivHouseholderQR<Matrixmd> dec(Ap);
     //      dp = -dec.solve(bp);    
 
@@ -483,7 +465,7 @@ namespace gcop {
     Vectormd dp1 = dp;
 
     while (dVm > 0) {
-      Vectornd dx = VectorXd::Zero(this->sys.n);
+      Vectornd dx = VectorXd::Zero(this->sys.X.n);
       //      Vectornd dx = Vectornd::Zero();
       T xn = this->xs[0];
       Vectorcd un;
@@ -504,7 +486,7 @@ namespace gcop {
         un = u + du;
         
         const double &t = this->ts[k];
-        double L = this->cost.Lp(t, xn, un, pn);
+        double L = this->cost.L(t, xn, un, 0, &pn);
         Vc += L;
         
         // update dx
@@ -512,21 +494,21 @@ namespace gcop {
           dx = this->As[k]*dx + this->Bs[k]*du;
           if (dynParams)
             dx += Cs[k]*dp.head(dynParams);
-          this->cost.X.Retract(xn, xn, dx);
+          this->sys.X.Retract(xn, xn, dx);
         } else {
           double h = this->ts[k+1] - t;
           T xn_(xn);
           this->sys.Step(xn_, t, xn, un, h, dynParams ? &pdyn : 0);
           xn = xn_;
-          this->cost.X.Lift(dx, this->xs[k+1], xn);
+          this->sys.X.Lift(dx, this->xs[k+1], xn);
         }
       }
       
-      double L = this->cost.Lp(this->ts[N], xn, un, pn);
+      double L = this->cost.L(this->ts[N], xn, un, 0, &pn);
       Vc += L;
       
       if (this->debug)
-        cout << "[I] PDmoc::Forward: computed V=" << Vc << endl;
+        cout << "[I] PDdp::Forward: computed V=" << Vc << endl;
       
       dVm = Vc - this->V;
       
@@ -535,7 +517,7 @@ namespace gcop {
         if (a < 1e-12)
           break;
         if (this->debug)
-          cout << "[I] PDmoc::Forward: step-size reduced a=" << this->a << endl;
+          cout << "[I] PDdp::Forward: step-size reduced a=" << this->a << endl;
         
         continue;
       }
@@ -548,12 +530,12 @@ namespace gcop {
           a *= this->b2;    
     
       if (this->debug)
-        cout << "[I] PDmoc::Forward: step-size a=" << a << endl;    
+        cout << "[I] PDdp::Forward: step-size a=" << a << endl;    
     }
   }
 
-  template <typename T, int n, int c> 
-    void PDmoc<T, n, c>::Iterate() {
+  template <typename T, int n, int c, int np> 
+    void PDdp<T, n, c, np>::Iterate() {
 
     Backward();
     Forward();

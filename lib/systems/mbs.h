@@ -1,3 +1,11 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #ifndef GCOP_MBS_H
 #define GCOP_MBS_H
 
@@ -14,122 +22,21 @@ namespace gcop {
   using namespace Eigen;
   
   /**
-   * The discrete mechanics is
+   * General multi-body dynamics time-stepping. The discrete mechanics is
    * based on an implicit symplectic variational integrator which is second-order accurate
-   * and momentum-balance preserving. Regularity is guaranteed by choosing a time-step 
-   * which does not jump out of the convex region around the initial guess from the previous
-   * dynamics iteration.
+   * and momentum-balance preserving. 
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
-  class Mbs : public System< MbsState, VectorXd> {
-    
-    /*
-    typedef Matrix<double, c, 1> Vectorcd;
-    typedef Matrix<double, c, c> Matrixcd;
-    typedef Matrix<double, 6, c> Matrix6xcd;
-    typedef Matrix<double, MBS_DIM(nb), c> Matrixncd;
-    typedef Matrix<double, MBS_DIM(nb), MBS_DIM(nb)> Matrixnd;
-    
-    typedef Matrix<double, 6 + nb - 1, 1> Vectormd;
-    */
-    //    typedef pair<Matrix4d, Vector<double, 2*m - 6> > MbsState;
+  class Mbs : public System<MbsState> {
     
   public:
-    /*
-    class Fq : public Function<MbsState> {
-    public:
-    Fq(Mbs &sys) :
-      Function<MbsState>(sys.cspace), sys(sys), xa(sys.nb) {
-      }
-      
-      void F(VectorXd &f, const MbsState &xa) {
-        this->xa = xa;
-        sys.FK(this->xa);
-        sys.ID(f, t, *xb, this->xa, *u, h);
-      }
-      
-      Mbs &sys;
-      
-      double t;
-      MbsState xa;
-      const MbsState *xb;
-      const Vectorcd *u;
-      double h;
-    };
-
-    class Fva : public Function<MbsState> {
-    public:
-    Fva(Mbs &sys) :
-      Function<MbsState>(sys.tspace), sys(sys), x(sys.nb), xa(sys.nb) {        
-      }
-      
-      void F(VectorXd &f, const MbsState &xa) {
-        this->xa = xa;
-        sys.Rec(this->xa, h);        
-        sys.ID(f, t, *xb, this->xa, *u, h);
-      }
-      
-      Mbs &sys;
-
-      MbsState x;      ///< previous state before xa
-      double t;      
-      MbsState xa;     ///< temporary object for xa
-      const MbsState *xb;    ///< pointer to xb
-      const Vectorcd *u;         ///< pointer to u
-      double h;
-    };    
-
-    class Fvb : public Function<MbsState> {
-    public:
-    Fvb(Mbs &sys) :
-      Function<MbsState>(sys.tspace), sys(sys), xb(sys.nb) {  
-      }
-      
-      void F(VectorXd &f, const MbsState &xb) {
-        this->xb = xb;
-        sys.KStep(this->xb, *xa, h);
-        sys.ID(f, t, this->xb, *xa, *u, h);
-      }
-      
-      Mbs &sys;
-      
-      double t;
-      const MbsState *xa;
-      MbsState xb;
-      const Vectorcd *u;
-      double h;
-    };
-
-    class Fu : public Function<VectorXd> {
-    public:
-    Fu(Mbs &sys) :
-      Function<VectorXd>(sys.U), sys(sys) {
-      }
-      
-      void F(VectorXd &f, const VectorXd &u) {
-        sys.ID(f, t, *xb, *xa, u, h);
-      }
-      
-      Mbs &sys;
-      
-      double t;
-      const MbsState *xa;
-      const MbsState *xb;
-      double h;
-    };
-    */
 
     Mbs(int nb, int c, bool fixed = false);
 
     virtual ~Mbs();
 
     void Init();
-
-    double F(VectorXd &v, double t, const MbsState &xa, 
-             const VectorXd &u, double h, const VectorXd *p = 0,
-             MatrixXd *A = 0, MatrixXd *B = 0, MatrixXd *C = 0);
-    
     
     double Step(MbsState& xb, double t, const MbsState& xa,
                 const VectorXd &u, double h, const VectorXd *p = 0,
@@ -218,6 +125,14 @@ namespace gcop {
      */
     void Mass(MatrixXd &M, const MbsState &x) const;
 
+    /**
+     * Compute acceleration 
+     * @param a acceleration
+     * @param t time 
+     * @param x state
+     * @param u control inputs
+     * @param h time-step
+     */
     void Acc(VectorXd &a, double t, const MbsState& x, const VectorXd &u, double h);
 
     /**
@@ -232,7 +147,7 @@ namespace gcop {
      */
     virtual void Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u, 
                        MatrixXd *A = 0, MatrixXd *B = 0);
-
+    
     void Rec(MbsState &x, double h);
 
     void ClampPose(MbsState &x, int i) const;
@@ -258,19 +173,19 @@ namespace gcop {
 
     Vector3d ag;             ///< acceleration due to gravity (0, 0, -9.81) by default
 
-    VectorXd damping;        ///< damping vector
+    VectorXd damping;        ///< joint damping vector
     
-    VectorXd lbK;            ///< lower bound K term
-    VectorXd lbD;            ///< lower bound K term
-    VectorXd ubK;            ///< upper bound K term
-    VectorXd ubD;            ///< upper bound K term
-    VectorXd fsl;             ///< spring force
-    VectorXd fsu;             ///< spring force
+    VectorXd lbK;            ///< joint lower bound K term
+    VectorXd lbD;            ///< joint lower bound D term
+    VectorXd ubK;            ///< joint upper bound K term
+    VectorXd ubD;            ///< joint upper bound D term
+    VectorXd fsl;             ///< spring force lower bound
+    VectorXd fsu;             ///< spring force upper bound
     
     int basetype;            ///< type of base (used for interpreting base-body forces)
     static const int FIXEDBASE = 0;   ///< fixed base
     static const int FLOATBASE = 1;   ///< fully controllable floating base
-    static const int AIRBASE = 2;     ///< free-flying base with torques and a lift force
+    static const int AIRBASE = 2;     ///< specialized free-flying base with three torques and one lift force
 
     SE3 &se3;                 ///< singleton reference for performing SE(3) operations
 
@@ -281,18 +196,6 @@ namespace gcop {
     int iters;                    ///< max number of Newton iterations used in symplectic method
 
     bool debug;
-
-    // below is for autodiff stuff
-    //    MbsManifold X;
-    //    Rn<> U;
-    //    MbsCspace cspace;
-    //    MbsTspace tspace;
-
-
-    //    Fq fq;
-    //    Fva fva;
-    //    Fvb fvb;
-    //    Fu fu;
   };
 }
 

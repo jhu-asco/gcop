@@ -16,18 +16,23 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
  
-  template <typename T, int n = Dynamic, int c = Dynamic> class Docp {
+  template <typename T, 
+    int nx = Dynamic, 
+    int nu = Dynamic,
+    int np = Dynamic> class Docp {
     
-    typedef Matrix<double, n, 1> Vectornd;
-    typedef Matrix<double, c, 1> Vectorcd;
-    typedef Matrix<double, n, n> Matrixnd;
-    typedef Matrix<double, n, c> Matrixncd;
-    typedef Matrix<double, c, n> Matrixcnd;
-    typedef Matrix<double, c, c> Matrixcd;  
+    typedef Matrix<double, nx, 1> Vectornd;
+    typedef Matrix<double, nu, 1> Vectorcd;
+    typedef Matrix<double, np, 1> Vectormd;
+
+    typedef Matrix<double, nx, nx> Matrixnd;
+    typedef Matrix<double, nx, nu> Matrixncd;
+    typedef Matrix<double, nu, nx> Matrixcnd;
+    typedef Matrix<double, nu, nu> Matrixcd;  
     
   public:
     /**
-     * Create an optimal control problem using a system, a cost, and 
+     * Create a discrete optimal control problem using a system, a cost, and 
      * a trajectory given by a sequence of times, states, and controls. 
      * The times ts must be given, the initial state xs[0] must be set, and
      * the controls us will be used as an initial guess for the optimization.
@@ -44,29 +49,26 @@ namespace gcop {
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
      */
-    Docp(System<T, Vectorcd, n, c> &sys, Cost<T, Vectorcd, n, c> &cost, 
-         vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, bool update = true);
+    Docp(System<T, nx, nu, np> &sys, Cost<T, nx, nu, np> &cost, 
+         vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
+         Vectormd *p = 0, bool update = true);
     
     virtual ~Docp();
 
-
     /**
-     * Perform one DOCP iteration. Internally calls:
-     *
-     * Backward -> Forward -> Update. The controls us and trajectory xs
-     * are updated. 
+     * Perform one DOCP iteration. 
      */
-    void Iterate();
+    virtual void Iterate();
 
     /**
      * Update the trajectory and (optionally) its linearization
      * @param der whether to update derivatives (A and B matrices)
      */
-    void Update(bool der = true);    
+    void Update(bool der = true);
     
-    System<T, Vectorcd, n, c> &sys;    ///< dynamical system 
+    System<T, nx, nu, np> &sys;    ///< dynamical system 
 
-    Cost<T, Vectorcd, n, c> &cost;     ///< given cost function
+    Cost<T, nx, nu> &cost;     ///< given cost function
 
     std::vector<double> &ts; ///< times (N+1) vector
 
@@ -74,95 +76,42 @@ namespace gcop {
 
     std::vector<Vectorcd> &us;      ///< controls (N) vector
     
-    int N;        ///< number of discrete trajectory segments
+    Vectormd *p;               ///< parameter vector
     
-    double mu;    ///< current regularization factor mu
-    double mu0;   ///< minimum regularization factor mu
-    double dmu0;  ///< regularization factor modification step-size
-    double mumax; ///< maximum regularization factor mu
-    double a;     ///< step-size
+    std::vector<Matrixnd> As;    ///< state jacobians along the path (computed internally)
+    std::vector<Matrixncd> Bs;   ///< control jacobians along the path (computed internally)
     
-    std::vector<Vectorcd> dus;  ///< computed control change
-    
-    std::vector<Matrixnd> As;
-    std::vector<Matrixncd> Bs;
-    
-    std::vector<Vectorcd> kus;
-    std::vector<Matrixcnd> Kuxs;
-    
-    Vectornd Lx;
-    Matrixnd Lxx;
-    Vectorcd Lu;
-    Matrixcd Luu;
-    
-    Matrixnd P;
-    Vectornd v;
-    
-    double V;
-    Vector2d dV;
-
-    double s1;   ///< Armijo/Bertsekas step-size control factor s1
-    double s2;   ///< Armijo/Bertsekas step-size control factor s2
-    double b1;   ///< Armijo/Bertsekas step-size control factor b1
-    double b2;   ///< Armijo/Bertsekas step-size control factor b2
-
     bool debug;  ///< whether to display debugging info
     
-    double eps;                     ///< epsilon used for finite differences
-
-    bool pd(const Matrixnd &P) {
-      LLT<Matrixnd> llt;     
-      llt.compute(P);
-      return llt.info() == Eigen::Success;
-    }
-
-    bool pdX(const MatrixXd &P) {
-      LLT<MatrixXd> llt;     
-      llt.compute(P);
-      return llt.info() == Eigen::Success;
-    }  
-
+    double eps;  ///< epsilon used for finite differences
 
   };
 
   using namespace std;
   using namespace Eigen;
   
-  template <typename T, int n, int c> 
-    Docp<T, n, c>::Docp(System<T, Matrix<double, c, 1>, n, c> &sys, 
-                        Cost<T, Matrix<double, c, 1>, n, c> &cost, 
-                        vector<double> &ts, 
-                        vector<T> &xs, 
-                        vector<Matrix<double, c, 1> > &us,
-                        bool update) : 
-    sys(sys), cost(cost), ts(ts), xs(xs), us(us), N(us.size()), 
-    mu(1e-3), mu0(1e-3), dmu0(2), mumax(1e6), a(1), 
-    dus(N),
-    As(N), Bs(N), kus(N), Kuxs(N), 
-    s1(0.1), s2(0.5), b1(0.25), b2(2),
+  template <typename T, int nx, int nu, int np> 
+    Docp<T, nx, nu, np>::Docp(System<T, nx, nu, np> &sys, 
+                              Cost<T, nx, nu, np> &cost, 
+                              vector<double> &ts, 
+                              vector<T> &xs, 
+                              vector<Matrix<double, nu, 1> > &us,
+                              Matrix<double, np, 1> *p,
+                              bool update) : 
+    sys(sys), cost(cost), ts(ts), xs(xs), us(us), p(p),
+    As(us.size()), Bs(us.size()), 
     debug(true), eps(1e-6)
     {
+      int N = us.size();
       assert(N > 0);
       assert(ts.size() == N+1);
       assert(xs.size() == N+1);
-      assert(us.size() == N);
 
-      if (n == Dynamic || c == Dynamic) {
+      if (nx == Dynamic || nu == Dynamic) {
         for (int i = 0; i < N; ++i) {
-          dus[i].resize(sys.c);
-          As[i].resize(sys.n, sys.n);
-          Bs[i].resize(sys.n, sys.c);
-          kus[i].resize(sys.c);
-          Kuxs[i].resize(sys.c, sys.n);
+          As[i].resize(sys.X.n, sys.X.n);
+          Bs[i].resize(sys.X.n, sys.U.n);
         }
-
-        Lx.resize(sys.n);
-        Lxx.resize(sys.n, sys.n);
-        Lu.resize(sys.c);
-        Luu.resize(sys.c, sys.c);
-
-        P.resize(sys.n, sys.n);
-        v.resize(sys.n);       
       }
 
       if (update) {
@@ -170,16 +119,16 @@ namespace gcop {
       }
     }
   
-  template <typename T, int n, int c> 
-    Docp<T, n, c>::~Docp()
+  template <typename T, int nx, int nu, int np> 
+    Docp<T, nx, nu, np>::~Docp()
     {
     }
   
-  template <typename T, int n, int c> 
-    void Docp<T, n, c>::Update(bool der) {
+  template <typename T, int nx, int nu, int np> 
+    void Docp<T, nx, nu, np>::Update(bool der) {
 
-    typedef Matrix<double, n, 1> Vectornd;
-    typedef Matrix<double, c, 1> Vectorcd;
+    typedef Matrix<double, nx, 1> Vectornd;
+    typedef Matrix<double, nu, 1> Vectorcd;
     
     Vectornd dx;
     Vectorcd du;
@@ -190,14 +139,16 @@ namespace gcop {
     
     //    cout << "SIZE=" << ((MbsState*)&xav)->r.size() << endl;
     
-    if (n == Dynamic) {
-      dx.resize(sys.n);
-      dfp.resize(sys.n);
-      dfm.resize(sys.n);
+    if (nx == Dynamic) {
+      dx.resize(sys.X.n);
+      dfp.resize(sys.X.n);
+      dfm.resize(sys.X.n);
     }
     
-    if (c == Dynamic)
-      du.resize(sys.c);    
+    if (nu == Dynamic)
+      du.resize(sys.U.n);    
+
+    int N = us.size();
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
@@ -210,7 +161,7 @@ namespace gcop {
         T &xb = xs[k+1];
         const Vectorcd &u = us[k];
 
-        sys.Step(xb, ts[k], xa, u, h, 0, &As[k], &Bs[k], 0);
+        sys.Step(xb, ts[k], xa, u, h, p, &As[k], &Bs[k], 0);
 
         //        cout << "B=" << endl << Bs[k] << endl;
         
@@ -223,35 +174,35 @@ namespace gcop {
         // if no jacobians were provided use finite differences
         if (fabs(As[k](0,0) - q) < 1e-10) {
                     
-          assert(sys.n > 0 && sys.c > 0);
+          assert(sys.X.n > 0 && sys.U.n > 0);
 
-          for (int i = 0; i < sys.n; ++i) {
+          for (int i = 0; i < sys.X.n; ++i) {
             dx.setZero();
             dx[i] = eps;
             
             // xav = xa + dx
-            cost.X.Retract(xav, xa, dx);
+            sys.X.Retract(xav, xa, dx);
             
             // reconstruct state using previous time-step
             sys.Rec(xav, h);
             
             // xbv = F(xav)
-            sys.Step(xbv, ts[k], xav, u, h);
+            sys.Step(xbv, ts[k], xav, u, h, p);
             
             // df = xbv - xb
-            cost.X.Lift(dfp, xb, xbv);
+            sys.X.Lift(dfp, xb, xbv);
 
             // xav = xa - dx
-            cost.X.Retract(xav, xa, -dx);
+            sys.X.Retract(xav, xa, -dx);
             
             // reconstruct state using previous time-step
             sys.Rec(xav, h);
             
             // xbv = F(xav)
-            sys.Step(xbv, ts[k], xav, u, h);
+            sys.Step(xbv, ts[k], xav, u, h, p);
             
             // dfm = xbv - xb
-            cost.X.Lift(dfm, xb, xbv);
+            sys.X.Lift(dfm, xb, xbv);
 
             As[k].col(i) = (dfp - dfm)/(2*eps);
           }
@@ -259,34 +210,34 @@ namespace gcop {
         
         if (fabs(Bs[k](0,0) - q) < 1e-10) {
           
-          for (int i = 0; i < sys.c; ++i) {
+          for (int i = 0; i < sys.U.n; ++i) {
             du.setZero();
             du[i] = eps;
             
             // xbv = F(xa, u + du)
-            sys.Step(xbv, ts[k], xa, u + du, h);
+            sys.Step(xbv, ts[k], xa, u + du, h, p);
             
             // df = xbv - xb
-            cost.X.Lift(dfp, xb, xbv);
+            sys.X.Lift(dfp, xb, xbv);
 
             // xbv = F(xa, u - du)
-            sys.Step(xbv, ts[k], xa, u - du, h);
+            sys.Step(xbv, ts[k], xa, u - du, h, p);
             
             // df = xbv - xb
-            cost.X.Lift(dfm, xb, xbv);
+            sys.X.Lift(dfm, xb, xbv);
 
             Bs[k].col(i) = (dfp - dfm)/eps;
           }
-        }
-        
+        }        
       } else {
-        sys.Step(xs[k+1], ts[k], xs[k], us[k], h);
+        sys.Step(xs[k+1], ts[k], xs[k], us[k], h, p);
       }
     }
   }  
 
-  template <typename T, int n, int c> 
-    void Docp<T, n, c>::Iterate() {
+  template <typename T, int nx, int nu, int np> 
+    void Docp<T, nx, nu, np>::Iterate() {
+    cout << "[W] Docp::Iterate: subclasses should implement this!" << endl;
   }
 }
 

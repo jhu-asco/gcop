@@ -7,8 +7,8 @@ using namespace std;
 using namespace gcop;
 using namespace Eigen;
 
-BaCost::BaCost(double tf, const Posegraph2d &pg) : 
-  Cost(Kinbody2dManifold::Instance(), Rn<3>::Instance(), tf), pg(pg)
+BaCost::BaCost(Kinbody2d &sys, double tf, const Posegraph2d &pg) : 
+  Cost(sys, tf), pg(pg)
 {
   
 }
@@ -26,7 +26,8 @@ static double cross2(Vector2d a, Vector2d b)
 }
 
 
-double BaCost::Lp(double t, const Matrix3d &g, const Vector3d &u, const VectorXd &p,
+double BaCost::L(double t, const Matrix3d &g, const Vector3d &u, double h,
+                 const VectorXd *p,
                   Vector3d *Lx, Matrix3d *Lxx,
                   Vector3d *Lu, Matrix3d *Luu,
                   Matrix3d *Lxu,
@@ -62,9 +63,10 @@ double BaCost::Lp(double t, const Matrix3d &g, const Vector3d &u, const VectorXd
   const Vector2d &x = g.block<2,1>(0,2);
   
   int N = pg.Is.size() - 1;
-  double h = this->tf/N;
+  //  double h = this->tf/N;
 
-  int k = (int)round(t/h);
+  int k = (h < 1e-16 ? N : (int)round(t/h));
+  //  cout <<"h="<<h<<endl;
   assert(k >=0 && k <= N);
   const vector< pair<int, Vector2d> > &I = pg.Is[k];
 
@@ -74,7 +76,7 @@ double BaCost::Lp(double t, const Matrix3d &g, const Vector3d &u, const VectorXd
     int l = I[i].first;
     const Vector2d &z = I[i].second;
 
-    const Vector2d &pf = p.segment<2>(2*l);
+    const Vector2d &pf = p->segment<2>(2*l);
     Vector2d y = R.transpose()*(pf - x);
     Vector2d r = (y - z)/pg.cp;
 

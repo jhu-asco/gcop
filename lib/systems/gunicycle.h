@@ -28,7 +28,7 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */  
-  class Gunicycle : public System<M3V2d, Vector2d, 5, 2> {
+  class Gunicycle : public System<M3V2d, 5, 2> {
   public:
     Gunicycle();
     

@@ -23,7 +23,7 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */  
-  class Car : public System<Vector5d, Vector2d, 5, 2>
+  class Car : public System<Vector5d, 5, 2>
   {
   public:
     Car();

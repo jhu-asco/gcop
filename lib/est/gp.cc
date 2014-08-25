@@ -37,9 +37,9 @@ bool GP::Add(const VectorXd &x, double f)
   VectorXd k(n);
   
   for (int i = 0; i < n; ++i)  {
-    k(i) = SqExp(Xs.col(i), x);
     if (eps > 0 && (x - Xs.col(i)).norm() < eps)
       return false;
+    k(i) = SqExp(Xs.col(i), x);
   }
   
   double kn = SqExp(x, x);
@@ -232,4 +232,3 @@ double GP::PI(const VectorXd &x, double fmin) const
   double m = Predict(x, &s);
   return ncdf((fmin - m)/s);
 }
-

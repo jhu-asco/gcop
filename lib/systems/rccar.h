@@ -21,7 +21,7 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
-  class Rccar : public System<Vector4d, Vector2d, 4, 2>
+  class Rccar : public System<Vector4d, 4, 2>
   {
   public:
     Rccar();

@@ -8,8 +8,8 @@
 using namespace gcop;
 using namespace Eigen;
 
-GunicycleCost::GunicycleCost(double tf, const M3V2d &xf) : 
-  LqCost(GunicycleManifold::Instance(), tf, xf)
+GunicycleCost::GunicycleCost(Gunicycle &sys, double tf, const M3V2d &xf) : 
+  LqCost(sys, tf, xf)
 {
   Q(0,0) = .01;
   Q(1,1) = .01;

@@ -8,7 +8,7 @@ using namespace gcop;
 using namespace Eigen;
 
 Body2dTrackCost::Body2dTrackCost(double tf, const Body2dTrack &pg) :
-  Cost(Body2dManifold::Instance(), Rn<3>::Instance(), tf), pg(pg)
+  Cost(pg.sys, tf), pg(pg)
 {
   
 }
@@ -26,7 +26,9 @@ static double cross2(Vector2d a, Vector2d b)
 }
 
 
-double Body2dTrackCost::Lp(double t, const M3V3d &x, const Vector3d &u, const VectorXd &p,
+double Body2dTrackCost::L(double t, const M3V3d &x, const Vector3d &u, 
+                          double h,
+                          const VectorXd *p,
                           Vector6d *Lx, Matrix6d *Lxx,
                           Vector3d *Lu, Matrix3d *Luu,
                           Matrix63d *Lxu,
@@ -66,7 +68,10 @@ double Body2dTrackCost::Lp(double t, const M3V3d &x, const Vector3d &u, const Ve
   const Vector3d &v = x.second;               // velocity
   
   int N = pg.Is.size() - 1;
-  double h = this->tf/N;
+  
+  h = this->tf/N;
+
+  //  int k = (h < 1e-16 ? N : (int)round(t/h));
 
   int k = (int)round(t/h);
   assert(k >=0 && k <= N);
@@ -79,7 +84,7 @@ double Body2dTrackCost::Lp(double t, const M3V3d &x, const Vector3d &u, const Ve
     int l = pg.cis[I[i].first];  // feature index
     const Vector2d &z = I[i].second;
 
-    const Vector2d &pf = p.segment<2>(i0 + 2*l);
+    const Vector2d &pf = p->segment<2>(i0 + 2*l);
     Vector2d y = R.transpose()*(pf - xp);
     Vector2d r = (y - z)/pg.cp;
 

@@ -1,3 +1,11 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #ifndef GCOP_BODY2D_H
 #define GCOP_BODY2D_H
 
@@ -18,18 +26,16 @@ namespace gcop {
   typedef pair<Matrix3d, Vector3d> M3V3d;
 
    /**
-   * A "geometric" unicycle model with 2nd order dynamics. This is often used to
-   * model simple wheeled robots or fixed-wing aircraft. The control system
+   * A "geometric" planar rigid body system. The control system
    * is implemented as an evolution on SE(2) as opposed to a vector space.
    *
    * The state is
-   * \f$ \bm x = (g, \omega, v) \f$ where \f$ g\in SE(2)\f$ is the pose, 
-   * the controls \f$ \bm u = (u_\omega,u_v) \in\mathbb{R}^2\f$ 
-   * correspond to turn rate acceleration and forward acceleration.
+   * \f$ \bm x = (g, v) \f$ where \f$ g\in SE(2)\f$ is the pose, 
+   * and \f$ v\in \mathbb{R}^3\f$ is the velocity
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */  
-  class Body2d : public System<M3V3d, Vector3d, 6, 3> {
+  class Body2d : public System<M3V3d, 6, 3> {
   public:
     Body2d(Body2dForce *f = 0);
 
@@ -39,10 +45,8 @@ namespace gcop {
    
     Vector2d d; ///< body dimensions
     Vector3d I; ///< inertia components
-    //    Vector3d D; ///< linear damping terms
 
     Body2dForce *force;  ///< force from controls and external disturbances
-    //    Vector3d f; ///< constant external force
   };
 }
 

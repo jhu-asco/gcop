@@ -29,7 +29,6 @@ namespace gcop {
     double LogL(double dll[2] = 0);
 
     double PI(const Eigen::VectorXd &x, double fmin) const;
-    
 
     double OptParams();
     

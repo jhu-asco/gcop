@@ -15,7 +15,7 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
-  class Kinbody2d : public System<Matrix3d, Vector3d, 3, 3> {
+  class Kinbody2d : public System<Matrix3d, 3, 3> {
   public:
 
     Kinbody2d();

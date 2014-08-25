@@ -90,14 +90,6 @@ void Params::Load(const char *fileName)
   fclose(file);
 }
 
-struct RemoveDelimiter
-{
-  bool operator()(char c)
-  {
-    return (c =='\r' || c =='\t' || c == ' ' || c == '\n');
-  }
-};
-
 void Params::Parse(char *line)
 {
   line[strcspn(line, "\n\r\t")] = 0;    
@@ -270,6 +262,7 @@ void Params::SetVector4d(const char *name, const Vector4d &v)
   valueMap[name] = s.str();
 }
 
+
 bool Params::GetVector4d(const char *name, Vector4d &v) const
 {
   std::map<string, string>::const_iterator i = valueMap.find(name);
@@ -287,6 +280,97 @@ bool Params::GetVector4d(const char *name, Vector4d &v) const
     replace(str, string("pi"), string("3.141592"));  
     v[vi] = atof(str.c_str());
     ++vi;
+  }
+  return true;
+}
+
+void Params::SetVector6d(const char *name, const Vector6d &v)
+{
+  vector<double>::const_iterator it;
+  stringstream s;
+  unsigned int i = 0;
+  for (int i = 0; i < v.size(); ++i) {
+    s << v[i];
+    if (i < v.size()-1)
+      s << ",";
+  }
+  valueMap[name] = s.str();
+}
+
+
+bool Params::GetVector6d(const char *name, Vector6d &v) const
+{
+  std::map<string, string>::const_iterator i = valueMap.find(name);
+  if (i == valueMap.end()) {
+    // cerr << "Error:\tParams::Get:\tparameter <" << name << "> not found!" << endl;
+    return false;
+  }
+
+  vector<string> tokens;
+  Tokenize(i->second, tokens, ", ");
+
+  if (tokens.size() != 6) {
+    cout << "[E] Params::GetMatrix6d: expecting 6 doubles, got: " << tokens.size() << endl;
+    return false;
+  }
+
+  vector<string>::iterator it;
+  int vi = 0;
+  for (it = tokens.begin(); it != tokens.end(); ++it) {
+    string str = *it;
+    replace(str, string("pi"), string("3.141592"));  
+    v[vi] = atof(str.c_str());
+    ++vi;
+  }
+  return true;
+}
+
+
+void Params::SetMatrix6d(const char *name, const Matrix6d &m)
+{
+  vector<double>::const_iterator it;
+  stringstream s;
+  for (int i = 0; i < m.rows(); ++i) {
+    for (int j = 0; j < m.cols(); ++j) {
+      s << m(i,j);
+      if (i < m.rows() - 1 && j < m.cols() - 1)
+        s << ",";
+    }
+  }
+  valueMap[name] = s.str();
+}
+
+
+bool Params::GetMatrix6d(const char *name, Matrix6d &m) const
+{
+  std::map<string, string>::const_iterator si = valueMap.find(name);
+  if (si == valueMap.end()) {
+    // cerr << "Error:\tParams::Get:\tparameter <" << name << "> not found!" << endl;
+    return false;
+  }
+
+  vector<string> tokens;
+  Tokenize(si->second, tokens, ", ");
+
+  if (tokens.size() != 36) {
+    cout << "[E] Params::GetMatrix6d: expecting 36 doubles, got: " << tokens.size() << endl;
+    return false;
+  }
+
+  vector<string>::iterator it;
+  int i = 0, j = 0;
+  for (it = tokens.begin(); it != tokens.end(); ++it) {
+    string str = *it;
+    replace(str, string("pi"), string("3.141592"));  
+    // row
+    
+    m(i,j) = atof(str.c_str());
+    
+    j++;
+    if (j==6) {
+      i++;
+      j = 0;
+    }
   }
   return true;
 }

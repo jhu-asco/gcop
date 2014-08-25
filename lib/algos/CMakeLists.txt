@@ -1,8 +1,8 @@
 set(headers
-      dmoc.h
+      ddp.h
       docp.h
       gndocp.h
-      pdmoc.h
+      pddp.h
       ba.h
       body2dslam.h
       bacost.h

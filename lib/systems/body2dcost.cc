@@ -8,8 +8,8 @@
 using namespace gcop;
 using namespace Eigen;
 
-Body2dCost::Body2dCost(double tf, const M3V3d &xf) : 
-  LqCost(Body2dManifold::Instance(), tf, xf), track(0), ko(.3)
+Body2dCost::Body2dCost(Body2d &sys, double tf, const M3V3d &xf) : 
+  LqCost(sys, tf, xf), track(0), ko(.3)
 {
   Q(0,0) = .01;
   Q(1,1) = .01;

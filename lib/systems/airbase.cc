@@ -1,3 +1,11 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #include "airbase.h"
 
 using namespace gcop;
@@ -50,7 +58,6 @@ void Airbase::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
 
     for(int count = 5;count < f.size();count++)
       (*B)(count,count-2) = 1;
-    cout<<"F.size: "<<f.size()<<endl;
 
     /*(*B)(7,5) = 1;
       (*B)(8,6) = 1;

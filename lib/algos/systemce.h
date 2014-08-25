@@ -46,7 +46,7 @@ namespace gcop {
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
      */
-    SystemCe(System<T, Vectorcd, n, c> &sys, Cost<T, Vectorcd, n, c> &cost, 
+    SystemCe(System<T, n, c> &sys, Cost<T, n, c> &cost, 
              vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
              vector<Vectorcd> &dus, vector<Vectorcd> &es, 
              bool update = true);
@@ -72,9 +72,9 @@ namespace gcop {
 
     void z2us(std::vector<Vectorcd> &us, const VectorXd &z) const;
 
-    System<T, Vectorcd, n, c> &sys;    ///< dynamical system
+    System<T, n, c> &sys;    ///< dynamical system
 
-    Cost<T, Vectorcd, n, c> &cost;     ///< given cost function
+    Cost<T, n, c> &cost;     ///< given cost function
 
     std::vector<double> &ts; ///< times (N+1) vector
 
@@ -104,8 +104,8 @@ namespace gcop {
   using namespace Eigen;
   
   template <typename T, int n, int c> 
-    SystemCe<T, n, c>::SystemCe(System<T, Matrix<double, c, 1>, n, c> &sys, 
-                                Cost<T, Matrix<double, c, 1>, n, c> &cost, 
+    SystemCe<T, n, c>::SystemCe(System<T, n, c> &sys, 
+                                Cost<T, n, c> &cost, 
                                 vector<double> &ts, 
                                 vector<T> &xs, 
                                 vector<Matrix<double, c, 1> > &us,
@@ -113,7 +113,7 @@ namespace gcop {
                                 vector<Matrix<double, c, 1> > &es,
                                 bool update) : 
     sys(sys), cost(cost), ts(ts), xs(xs), us(us), dus(dus), xss(xs), uss(us), N(us.size()), 
-    ce(N*sys.c, 1), Ns(1000), debug(true)
+    ce(N*sys.U.n, 1), Ns(1000), debug(true)
     {
       assert(N > 0);
       assert(ts.size() == N+1);
@@ -126,11 +126,11 @@ namespace gcop {
       if (n == Dynamic || c == Dynamic) {
         /*
         for (int i = 0; i < N; ++i) {
-          dus[i].resize(sys.c);
+          dus[i].resize(sys.U.n);
           As[i].resize(sys.n, sys.n);
-          Bs[i].resize(sys.n, sys.c);
-          kus[i].resize(sys.c);
-          Kuxs[i].resize(sys.c, sys.n);
+          Bs[i].resize(sys.n, sys.U.n);
+          kus[i].resize(sys.U.n);
+          Kuxs[i].resize(sys.U.n, sys.n);
         }
         */
       }
@@ -142,11 +142,11 @@ namespace gcop {
       }
       
       us2z(ce.gmm.ns[0].mu, us);
-      VectorXd zdu(sys.c*N);
+      VectorXd zdu(sys.U.n*N);
       us2z(zdu, dus);
       ce.gmm.ns[0].P = zdu.asDiagonal();
       ce.gmm.Update();
-      VectorXd ze(sys.c*N);
+      VectorXd ze(sys.U.n*N);
       us2z(ze, es);
       ce.S = ze.asDiagonal();
     }
@@ -162,7 +162,7 @@ namespace gcop {
       assert(us.size() > 0);
       assert(z.size() == us.size()*us[0].size());
       for (int i = 0; i < us.size(); ++i) {
-        z.segment(i*sys.c, sys.c) = us[i];
+        z.segment(i*sys.U.n, sys.U.n) = us[i];
       }
     }
   
@@ -172,7 +172,7 @@ namespace gcop {
       assert(us.size() > 0);
       assert(z.size() == us.size()*us[0].size());
       for (int i = 0; i < us.size(); ++i) {
-        us[i] = z.segment(i*sys.c, sys.c);
+        us[i] = z.segment(i*sys.U.n, sys.U.n);
       }
     }
 
@@ -180,7 +180,9 @@ namespace gcop {
   template <typename T, int n, int c> 
     double SystemCe<T, n, c>::Update(vector<T> &xs, const vector<Vectorcd> &us, bool evalCost) {    
     double J = 0;
-		sys.reset();//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14
+    // @mk:TODO fix that
+    // sys.reset();//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14
+
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
       sys.Step(xs[k+1], ts[k], xs[k], us[k], h);
@@ -198,7 +200,7 @@ namespace gcop {
 
     ce.Reset();
     
-    VectorXd z(sys.c*N);            // parameter vector
+    VectorXd z(sys.U.n*N);            // parameter vector
 
     for (int j = 0; j < Ns; ++j) {
       ce.Sample(z);

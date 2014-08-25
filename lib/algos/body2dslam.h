@@ -6,7 +6,7 @@
 #include <type_traits>
 #include <algorithm>
 #include <iterator>
-#include "pdmoc.h"
+#include "pddp.h"
 #include "body2dslamcost.h"
 #include "body2dgraph.h"
 
@@ -32,7 +32,7 @@ namespace gcop {
     
     Body2dSlamCost cost;       ///< cost function
     
-    PDmoc<M3V3d, 6, 3> *pdmoc;  ///< parametric discrete-mechanics optimal control
+    PDdp<M3V3d, 6, 3> *pddp;  ///< parametric discrete-mechanics optimal control
   };
 }
 

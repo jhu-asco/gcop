@@ -3,6 +3,7 @@
 
 #include <Eigen/Dense>
 #include <assert.h>
+#include <iostream>
 
 namespace gcop {
   
@@ -76,8 +77,7 @@ namespace gcop {
    * @param v Lie algebra element
    */
   virtual void Adtau(Matrixnd &M, const Vectornd &v) = 0;
-  
- 
+   
   int n;  ///< dimension
   
   bool bnd;    ///< is the space bounded (false by default). Bounds are defined below: these "box" bounds make sense when there is a natural ordering on the manifold, e.g. of the natural numbers)
@@ -86,8 +86,11 @@ namespace gcop {
   };
 
   template <typename T, int _n>
-    Manifold<T, _n>::Manifold(int n) : n(n), bnd(false) {
-    assert(n > 0);    
+    Manifold<T, _n>::Manifold(int n) : n(_n != Dynamic ? _n : n), bnd(false) {
+    
+    //    std::cout << "n= " <<n <<std::endl;
+    //    std::cout << "_n= " <<_n <<std::endl;    
+    //    assert(n > 0);
   }
 }
 

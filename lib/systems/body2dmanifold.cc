@@ -7,7 +7,7 @@
 using namespace gcop;
 using namespace Eigen;
 
-Body2dManifold::Body2dManifold()
+Body2dManifold::Body2dManifold() : Manifold()
 {
 }
 

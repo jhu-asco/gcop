@@ -5,7 +5,7 @@
 using namespace gcop;
 using namespace Eigen;
 
-Unicycle::Unicycle() : System(Rn<5>::Instance(), Rn<2>::Instance()), dx(.25), dy(.5)
+Unicycle::Unicycle() : System(Rn<5>::Instance()), dx(.25), dy(.5)
 {
 }
 

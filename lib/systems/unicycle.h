@@ -24,7 +24,7 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */  
-  class Unicycle : public System<Vector5d, Vector2d, 5, 2>
+  class Unicycle : public System<Vector5d, 5, 2>
   {
   public:
     Unicycle();

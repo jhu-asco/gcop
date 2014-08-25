@@ -25,7 +25,7 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
-  template <int c = 6> class Body3d : public System<Body3dState, Matrix<double, c, 1>, 12, c> {
+  template <int c = 6> class Body3d : public System<Body3dState, 12, c> {
     
     typedef Matrix<double, c, 1> Vectorcd;
     typedef Matrix<double, c, c> Matrixcd;
@@ -41,7 +41,7 @@ namespace gcop {
     
     Body3d(const Vector3d &ds, double m, const Vector3d &J);
 
-    virtual ~Body3d();    
+    virtual ~Body3d();
     
     double Step(Body3dState &xb, double t, const Body3dState &xa, 
                 const Vectorcd &u, double h, const VectorXd *p = 0,
@@ -103,10 +103,11 @@ namespace gcop {
 
   };  
   
-  
+
+
   template <int c> 
     Body3d<c>::Body3d() : 
-    System<Body3dState, Matrix<double, c, 1>, 12, c>(Body3dManifold::Instance(), Rn<c>::Instance()),
+    System<Body3dState, 12, c>(Body3dManifold::Instance()),
     ds(1, .5, .5), m(1),
     Dw(0,0,0),
     Dv(0,0,0),
@@ -121,7 +122,7 @@ namespace gcop {
   
   template <int c> 
     Body3d<c>::Body3d(const Vector3d &ds, double m) : 
-    System<Body3dState, Matrix<double, c, 1>, 12, c>(Body3dManifold::Instance(), Rn<c>::Instance()),
+    System<Body3dState, 12, c>(Body3dManifold::Instance()),
     ds(ds), m(m),
     Dw(0,0,0),
     Dv(0,0,0),
@@ -135,7 +136,7 @@ namespace gcop {
 
   template <int c> 
     Body3d<c>::Body3d(const Vector3d &ds, double m, const Vector3d &J) : 
-    System<Body3dState, Matrix<double, c, 1>, 12, c>(Body3dManifold::Instance(), Rn<c>::Instance()),
+    System<Body3dState, 12, c>(Body3dManifold::Instance()),
     ds(ds), m(m), J(J),
     Dw(0,0,0),
     Dv(0,0,0),
@@ -323,6 +324,8 @@ template<int c>  Body3d<c>::~Body3d()
     return 1;
   }
 
+
+  /////////////////////////////////////////////////
 
   template <int c>
     double Body3d<c>::EulerStep(double t, Body3dState &xb, const Body3dState &xa, 

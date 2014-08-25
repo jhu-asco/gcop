@@ -9,8 +9,8 @@
 using namespace gcop;
 using namespace Eigen;
 
-Kinbody2d::Kinbody2d() : System(Kinbody2dManifold::Instance(), Rn<3>::Instance()), 
-                         d(.1, .05)
+Kinbody2d::Kinbody2d() : System(Kinbody2dManifold::Instance()), 
+  d(.1, .05)
 {
 }
 

@@ -4,6 +4,7 @@
 #include "lqcost.h"
 #include <limits>
 #include "body2dtrack.h"
+#include "body2d.h"
 
 namespace gcop {
   
@@ -16,10 +17,10 @@ namespace gcop {
   typedef pair<Matrix3d, Vector3d> M3V3d;
   
   
-  class Body2dCost : public LqCost<M3V3d, 6, 3> {
-  public:      
+  class Body2dCost : public LqCost<M3V3d, 6, 3, Dynamic, 9> {
+  public:
     
-    Body2dCost(double tf, const M3V3d &xf);
+    Body2dCost(Body2d &sys, double tf, const M3V3d &xf);
     
     double L(double t, const M3V3d &x, const Vector3d &u, double h,
              Vector6d *Lx = 0, Matrix6d *Lxx = 0,

@@ -9,7 +9,7 @@
 using namespace gcop;
 using namespace Eigen;
 
-Gunicycle::Gunicycle() : System(GunicycleManifold::Instance(), Rn<2>::Instance()), 
+Gunicycle::Gunicycle() : System(GunicycleManifold::Instance()), 
                          dx(1), dy(2)
 {
 }

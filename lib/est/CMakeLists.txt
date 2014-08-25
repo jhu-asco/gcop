@@ -1,24 +1,35 @@
 set(headers 
-  model.h
-  filter.h
-  ukf.h
+  predictor.h
+  corrector.h
+  kalmanpredictor.h
+  kalmancorrector.h
+  unscentedpredictor.h
+  unscentedcorrector.h
   quat.h
-  imumodel.h
-  imuukf.h
   gp.h
   normal.h
   gmm.h
-  ce.h)
+  ce.h
+  imu.h
+  imumanifold.h
+  sensor.h
+  imusensor.h
+  ins.h
+  insmanifold.h
+  insimu.h
+  insgps.h
+)
+
 
 
 set(sources 
-  model.cc
-  filter.cc
-  ukf.cc
   quat.cc
-  imumodel.cc
-  imuukf.cc
   gp.cc
   normal.cc
   gmm.cc
-  ce.cc)
+  ce.cc
+  imu.cc
+  imumanifold.cc
+  ins.cc
+  insmanifold.cc
+)

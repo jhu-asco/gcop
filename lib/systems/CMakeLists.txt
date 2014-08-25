@@ -15,6 +15,7 @@ set(sources
   body2dcost.cc
   body2dmanifold.cc
   body3dmanifold.cc
+  uuvmanifold.cc
   mbsmanifold.cc
   mbscspace.cc
   mbstspace.cc
@@ -27,9 +28,11 @@ set(sources
   snake.cc
   joint.cc
   dem.cc
-  airplanecost.cc
+#  airplanecost.cc
   joint.cc
   body2dforce.cc
+  arm.cc
+#  imusensor.cc
 )
 
 set(headers
@@ -52,6 +55,8 @@ set(headers
   body2d.h
   body2dcost.h
   body3d.h
+  uuv.h
+  uuvmanifold.h
   body3dmanifold.h
   body3dcost.h
   joint.h
@@ -73,7 +78,8 @@ set(headers
   snake.h
   autodiff.h
   dem.h
-  airplanecost.h
+#  airplanecost.h
   force.h
   body2dforce.h
+  arm.h
 )

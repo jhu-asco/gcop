@@ -7,8 +7,8 @@ using namespace std;
 using namespace gcop;
 using namespace Eigen;
 
-Body2dSlamCost::Body2dSlamCost(double tf, const Body2dGraph &pg) : 
-  Cost(Body2dManifold::Instance(), Rn<3>::Instance(), tf), pg(pg)
+Body2dSlamCost::Body2dSlamCost(Body2d &sys, double tf, const Body2dGraph &pg) : 
+Cost(sys, tf), pg(pg)
 {
   
 }

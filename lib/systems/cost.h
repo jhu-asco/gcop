@@ -2,8 +2,8 @@
 #define GCOP_COST_H
 
 #include <Eigen/Dense>
-#include "manifold.h"
 #include <iostream>
+#include "system.h"
 
 namespace gcop {
 
@@ -21,27 +21,32 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
-  template <typename T, typename Tu, int _n = Dynamic, int _c = Dynamic> class Cost {
+  template <typename T, 
+    int _nx = Dynamic, 
+    int _nu = Dynamic,
+    int _np = Dynamic> class Cost {
   public:
   
-  typedef Matrix<double, _n, 1> Vectornd;
-  typedef Matrix<double, _c, 1> Vectorcd;
-  typedef Matrix<double, _n, _n> Matrixnd;
-  typedef Matrix<double, _n, _c> Matrixnc;
-  typedef Matrix<double, _c, _n> Matrixcn;
-  typedef Matrix<double, _c, _c> Matrixcd;
+  typedef Matrix<double, _nx, 1> Vectornd;
+  typedef Matrix<double, _nu, 1> Vectorcd;
+  typedef Matrix<double, _np, 1> Vectormd;
+
+  typedef Matrix<double, _nx, _nx> Matrixnd;
+  typedef Matrix<double, _nx, _nu> Matrixncd;
+  typedef Matrix<double, _nu, _nx> Matrixcnd;
+  typedef Matrix<double, _nu, _nu> Matrixcd;
   
-  typedef Matrix<double, Dynamic, 1> Vectormd;
-  typedef Matrix<double, Dynamic, Dynamic> Matrixmd;
-  typedef Matrix<double, _n, Dynamic> Matrixnmd;
-  typedef Matrix<double, Dynamic, _n> Matrixmnd;
+  //  typedef Matrix<double, Dynamic, 1> Vectormd;
+  typedef Matrix<double, _np, _np> Matrixmd;
+  typedef Matrix<double, _nx, _np> Matrixnmd;
+  typedef Matrix<double, _np, _nx> Matrixmnd;
   
   /**
-   * _create a _cost interface
+   * _nureate a _nuost interface
    * @param X the state manifold which is used to perform addition/subtraction of states
    * @param tf time horizon: when the cost function L is called it will internally check whether its argument t is equation to tf and return the terminal cost
    */
-  Cost(Manifold<T, _n> &X, Manifold<Tu, _c> &U, double tf);
+  Cost(System<T, _nx, _nu, _np> &sys, double tf);
   
   /**
    * Cost function L
@@ -55,64 +60,33 @@ namespace gcop {
    * @param Luu derivative wrt u,u
    * @param Lxu derivative wrt x,u     
    */
-  virtual double L(double t, const T& x, const Tu& u, double h,
+  virtual double L(double t, const T &x, const Vectorcd &u, double h,
+                   const Vectormd *p = 0,
                    Vectornd *Lx = 0, Matrixnd* Lxx = 0,
                    Vectorcd *Lu = 0, Matrixcd* Luu = 0,
-                   Matrixnc *Lxu = 0);
+                   Matrixncd *Lxu = 0,
+                   Vectormd *Lp = 0, Matrixmd *Lpp = 0,
+                   Matrixmnd *Lpx = 0);  
   
-  
-  /**
-   * Parameter-dependent cost function L
-   * @param t time
-   * @param x state
-   * @param u control
-   * @param p parameter
-   * @param Lx derivative wrt x
-   * @param Lxx derivative wrt x,x
-   * @param Lu derivative wrt u
-   * @param Luu derivative wrt u,u
-   * @param Lxu derivative wrt x,u     
-   * @param Lp derivative wrt p
-   * @param Lpp derivative wrt p,p
-   * @param Lpx derivative wrt p,x     
-   */
-  virtual double Lp(double t, const T& x, const Tu& u,
-                    const Vectormd &p,
-                    Vectornd *Lx = 0, Matrixnd* Lxx = 0,
-                    Vectorcd *Lu = 0, Matrixcd* Luu = 0,
-                    Matrixnc *Lxu = 0,
-                    Vectormd *Lp = 0, Matrixmd *Lpp = 0,
-                    Matrixmnd *Lpx = 0);
-  
-  Manifold<T, _n> &X;   ///< the state manifold
-  Manifold<Tu, _c> &U;  ///< the control manifold
-  
-  double tf;         ///< final time of trajectory
-  };
-  
-  
-  template <typename T, typename Tu, int _n, int _c> 
-    Cost<T, Tu, _n, _c>::Cost(Manifold<T, _n> &X, Manifold<Tu, _c> &U, double tf) : X(X), U(U), tf(tf) {
+  System<T, _nx, _nu, _np> &sys;  ///< system  
+  double tf;               ///< final time of trajectory
+};
+
+
+  template <typename T, int _nx, int _nu, int _np> 
+    Cost<T, _nx, _nu, _np>::Cost(System<T, _nx, _nu, _np> &sys, 
+                                 double tf) : sys(sys), tf(tf) {
   }  
   
-  template <typename T, typename Tu, int _n, int _c> 
-    double Cost<T, Tu, _n, _c>::L(double t, const T& x, const Tu& u, double h,
-                                  Matrix<double, _n, 1> *Lx, Matrix<double, _n, _n>* Lxx,
-                                  Matrix<double, _c, 1> *Lu, Matrix<double, _c, _c>* Luu,
-                                  Matrix<double, _n, _c> *Lxu) {
+  template <typename T, int _nx, int _nu, int _np> 
+    double Cost<T, _nx, _nu, _np>::L(double t, const T& x, const Vectorcd& u, double h,
+                                     const Vectormd *p,
+                                     Matrix<double, _nx, 1> *Lx, Matrix<double, _nx, _nx>* Lxx,
+                                     Matrix<double, _nu, 1> *Lu, Matrix<double, _nu, _nu>* Luu,
+                                     Matrix<double, _nx, _nu> *Lxu,
+                                     Vectormd *Lp, Matrixmd *Lpp,
+                                     Matrixmnd *Lpx) {
     cout << "[W] Cost:L: unimplemented!" << endl;
-    return 0;
-  }
-  
-  template <typename T, typename Tu, int _n, int _c> 
-    double Cost<T, Tu, _n, _c>::Lp(double t, const T &x, const Tu &u,
-                                   const VectorXd &p,
-                                   Matrix<double, _n, 1> *Lx, Matrix<double, _n, _n> *Lxx,
-                                   Matrix<double, _c, 1> *Lu, Matrix<double, _c, _c> *Luu,
-                                   Matrix<double, _n, _c> *Lxu,
-                                   Matrix<double, Dynamic, 1> *Lp, Matrix<double, Dynamic, Dynamic> *Lpp,
-                                   Matrix<double, Dynamic, _n> *Lpx) {
-    cout << "[W] Cost:Lp: unimplemented!" << endl;
     return 0;
   }
 }
