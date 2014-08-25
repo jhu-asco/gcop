@@ -61,10 +61,6 @@ target_link_libraries(cecartest gcop  ${LIBS})
 #add_executable(cechaintest cechaintest.cc)
 #target_link_libraries(cechaintest gcop  ${LIBS})
 
-<<<<<<< HEAD
-#add_executable(chaintest chaintest.cc)
-#target_link_libraries(chaintest gcop  ${LIBS})
-=======
 add_executable(spsacartest spsacartest.cc)
 target_link_libraries(spsacartest gcop  ${LIBS})
 
@@ -73,7 +69,6 @@ target_link_libraries(aspsacartest gcop  ${LIBS})
 
 add_executable(chaintest chaintest.cc)
 target_link_libraries(chaintest gcop  ${LIBS})
->>>>>>> a36204e4682e5a9ec62ed43ab91f97be625659c7
 
 #add_executable(chain1test chain1test.cc)
 #target_link_libraries(chain1test gcop  ${LIBS})
