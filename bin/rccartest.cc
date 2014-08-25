@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "rccarview.h"
 #include "utils.h"
@@ -11,7 +11,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Vector4d, 4, 2> RccarDmoc;
+typedef Ddp<Vector4d, 4, 2> RccarDdp;
 
 Params params;
 
@@ -47,7 +47,7 @@ void solver_process(Viewer* viewer)
   params.GetVector4d("xf", xf);  
 
   // cost
-  RnLqCost<4, 2> cost(tf, xf);
+  RnLqCost<4, 2> cost(sys, tf, xf);
   VectorXd Q(4);
   if (params.GetVectorXd("Q", Q))
     cost.Q = Q.asDiagonal();
@@ -77,21 +77,21 @@ void solver_process(Viewer* viewer)
     us[N/2+i] = Vector2d(-.01, .0);
   }
   
-  RccarDmoc dmoc(sys, cost, ts, xs, us);  
-  dmoc.mu = .01;
-  params.GetDouble("mu", dmoc.mu);
+  RccarDdp ddp(sys, cost, ts, xs, us);  
+  ddp.mu = .01;
+  params.GetDouble("mu", ddp.mu);
 
-  RccarView view(sys, &dmoc.xs);
+  RccarView view(sys, &ddp.xs);
   
   viewer->Add(view);
 
   struct timeval timer;
-  // dmoc.debug = false; // turn off debug for speed
+  // ddp.debug = false; // turn off debug for speed
   getchar();
 
   for (int i = 0; i < iters; ++i) {
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
     getchar();

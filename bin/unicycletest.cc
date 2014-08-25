@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "unicycleview.h"
 #include "utils.h"
@@ -10,7 +10,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Vector5d, 5, 2> UnicycleDmoc;
+typedef Ddp<Vector5d, 5, 2> UnicycleDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -21,7 +21,7 @@ void solver_process(Viewer* viewer)
   Unicycle sys;
 
   Vector5d xf = Vector5d::Zero();
-  RnLqCost<5, 2> cost(tf, xf);
+  RnLqCost<5, 2> cost(sys, tf, xf);
   cost.Q(0,0) = .1; cost.Q(1,1) = .1; cost.Q(2,2) = .1; cost.Q(3,3) = 1; cost.Q(4,4) = 1;
   cost.Qf(0,0) = 5; cost.Qf(1,1) = 5; cost.Qf(2,2) = 1; cost.Qf(3,3) = 1; cost.Qf(4,4) = 1;  
   cost.R(0,0) = .1; cost.R(1,1) = .05;  
@@ -47,28 +47,28 @@ void solver_process(Viewer* viewer)
   }
   
 
-  UnicycleDmoc dmoc(sys, cost, ts, xs, us);  
-  dmoc.mu = 1;
+  UnicycleDdp ddp(sys, cost, ts, xs, us);  
+  ddp.mu = 1;
 
-  UnicycleView view(sys, &dmoc.xs);
+  UnicycleView view(sys, &ddp.xs);
   viewer->Add(view);
 
   struct timeval timer;
-  // dmoc.debug = false; // turn off debug for speed
+  // ddp.debug = false; // turn off debug for speed
   getchar();
 
   for (int i = 0; i < 20; ++i) {
 
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
     getchar();
   }
 
   //  for (int k = 0; k <= N; ++k)
-  //    cout << dmoc.xs[k] << "|" << endl;  
-  //  cout << "xf=" << dmoc.xs.back() << endl;  
+  //    cout << ddp.xs[k] << "|" << endl;  
+  //  cout << "xf=" << ddp.xs.back() << endl;  
   
   cout << "done!" << endl;
   while(1)

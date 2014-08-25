@@ -7,11 +7,13 @@
 #include "rnlqcost.h"
 #include "params.h"
 
+#include "controltparam.h"
+
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef GnDocp<Vector4d, 4, 2> RccarDmoc;
+typedef GnDocp<Vector4d, 4, 2, Dynamic, 6> RccarDdp;
 
 Params params;
 
@@ -47,7 +49,7 @@ void solver_process(Viewer* viewer)
   params.GetVector4d("xf", xf);  
 
   // cost
-  RnLqCost<4, 2> cost(tf, xf);
+  RnLqCost<4, 2, Dynamic, 6> cost(sys, tf, xf);
   VectorXd Q(4);
   if (params.GetVectorXd("Q", Q))
     cost.Q = Q.asDiagonal();
@@ -79,21 +81,28 @@ void solver_process(Viewer* viewer)
     us[N/2+i] = Vector2d(-.01, .0);
   }
   
-  RccarDmoc dmoc(sys, cost, ts, xs, us);  
-  dmoc.mu = .01;
-  params.GetDouble("mu", dmoc.mu);
+  Tparam<Vector4d, 4, 2> tp(sys, us.size()*sys.U.n);
 
-  RccarView view(sys, &dmoc.xs);
+  int Nk = 10;
+  vector<double> tks(Nk+1);
+  for (int k = 0; k <=Nk; ++k)
+    tks[k] = k*(tf/Nk);
+  
+  ControlTparam<Vector4d, 4, 2> ctp(sys, tks);
+
+  RccarDdp ddp(sys, cost, ctp, ts, xs, us);  
+
+  RccarView view(sys, &ddp.xs);
   
   viewer->Add(view);
 
   struct timeval timer;
-  // dmoc.debug = false; // turn off debug for speed
+  // ddp.debug = false; // turn off debug for speed
   getchar();
 
   for (int i = 0; i < iters; ++i) {
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
     getchar();

@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "airplaneview.h"
 #include "airplanecost.h"
@@ -13,7 +13,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<pair<Matrix3d, Vector2d>, 5, 2> GunicycleDmoc;
+typedef Ddp<pair<Matrix3d, Vector2d>, 5, 2> GunicycleDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -52,10 +52,10 @@ void solver_process(Viewer* viewer)
     //    us[N/2+i] = Vector2d(0.01,-.1);
   }  
 
-  GunicycleDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = 0;
+  GunicycleDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 0;
 
-  AirplaneView view(sys, &dmoc.xs);
+  AirplaneView view(sys, &ddp.xs);
   viewer->Add(view);
 
   //  double cs = .1;
@@ -71,7 +71,7 @@ void solver_process(Viewer* viewer)
 
   struct timeval timer;
 
-  dmoc.debug = false; // turn off debug for speed
+  ddp.debug = false; // turn off debug for speed
 
   //  for (cost.n = 0; cost.n < 5; cost.n += .5) {
   for (double s = 2; s >= .01; s -= .1) {
@@ -81,14 +81,14 @@ void solver_process(Viewer* viewer)
     
     for (int i = 0; i < 10; ++i) {      
       timer_start(timer);
-      dmoc.Iterate();
+      ddp.Iterate();
       long te = timer_us(timer);      
       cout << "Iteration #" << i << " took: " << te << " us." << endl;    
     }
   }
   //  for (int k = 0; k <= N; ++k)
-  //    cout << dmoc.xs[k] << "|" << endl;  
-  //  cout << "xf=" << dmoc.xs.back() << endl;  
+  //    cout << ddp.xs[k] << "|" << endl;  
+  //  cout << "xf=" << ddp.xs.back() << endl;  
   
   cout << "done!" << endl;
   while(1)

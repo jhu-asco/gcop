@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "carview.h"
 #include "utils.h"
@@ -10,7 +10,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Vector5d, 5, 2> CarDmoc;
+typedef Ddp<Vector5d, 5, 2> CarDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -24,7 +24,7 @@ void solver_process(Viewer* viewer)
   Vector5d xf = Vector5d::Zero();
 
   // cost
-  RnLqCost<5, 2> cost(tf, xf);
+  RnLqCost<5, 2> cost(sys, tf, xf);
   cost.Q(0,0) = 0.1; cost.Q(1,1) = 0.1; cost.Q(2,2) = 0.1; cost.Q(3,3) = .5; cost.Q(4,4) = .5;
   cost.Qf(0,0) = 5; cost.Qf(1,1) = 5; cost.Qf(2,2) = 10; cost.Qf(3,3) = 1; cost.Qf(4,4) = 1;  
   cost.R(0,0) = .1; cost.R(1,1) = .05;  
@@ -37,9 +37,9 @@ void solver_process(Viewer* viewer)
   // states
   vector<Vector5d> xs(N+1);
   // initial state
-  xs[0][0] = 0; 
-  xs[0][1] = -1;
-  xs[0][2] = M_PI;
+  xs[0][0] = -5; 
+  xs[0][1] = -2;
+  xs[0][2] = -M_PI/4;
   xs[0][3] = 0;
   xs[0][4] = 0;
 
@@ -50,21 +50,21 @@ void solver_process(Viewer* viewer)
     us[N/2+i] = Vector2d(.0, 0.0);
   }
   
-  CarDmoc dmoc(sys, cost, ts, xs, us);  
-  dmoc.mu = 10;
+  CarDdp ddp(sys, cost, ts, xs, us);  
+  ddp.mu = .01;
 
-  CarView view(sys, &dmoc.xs);
+  CarView view(sys, &ddp.xs);
   
   viewer->Add(view);
 
   struct timeval timer;
-  // dmoc.debug = false; // turn off debug for speed
+  // ddp.debug = false; // turn off debug for speed
   getchar();
 
   for (int i = 0; i < 30; ++i) {
 
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
     getchar();

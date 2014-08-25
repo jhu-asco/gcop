@@ -47,7 +47,7 @@ void solver_process(Viewer* viewer)
   params.GetVector4d("xf", xf);  
 
   // cost
-  RnLqCost<4, 2> cost(tf, xf);
+  RnLqCost<4, 2> cost(sys, tf, xf);
   VectorXd Q(4);
   if (params.GetVectorXd("Q", Q))
     cost.Q = Q.asDiagonal();
@@ -88,8 +88,8 @@ void solver_process(Viewer* viewer)
   vector<Vector2d> es(N, e);
   
   RccarCe ce(sys, cost, ts, xs, us, dus, es);
-  //  dmoc.mu = .01;
-  //  params.GetDouble("mu", dmoc.mu);
+  //  ddp.mu = .01;
+  //  params.GetDouble("mu", ddp.mu);
 
   params.GetInt("Ns", ce.Ns);
 
@@ -99,7 +99,7 @@ void solver_process(Viewer* viewer)
   viewer->Add(view);
 
   struct timeval timer;
-  // dmoc.debug = false; // turn off debug for speed
+  // ddp.debug = false; // turn off debug for speed
   getchar();
 
   for (int i = 0; i < iters; ++i) {

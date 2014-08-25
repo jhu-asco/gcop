@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "heliview.h"
 #include "utils.h"
@@ -15,8 +15,8 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Body3dState, 12, 4> HeliDmoc;
-typedef Dmoc<Vector5d, 5, 2> CarDmoc;
+typedef Ddp<Body3dState, 12, 4> HeliDdp;
+typedef Ddp<Vector5d, 5, 2> CarDdp;
 
 
 int N = 256;      // discrete trajectory segments
@@ -33,7 +33,7 @@ void car_process(Viewer* viewer)
   Car sys;
 
   Vector5d xf = Vector5d::Zero();
-  RnLqCost<5, 2> cost(tf, xf);
+  RnLqCost<5, 2> cost(sys, tf, xf);
   cost.Q(0,0) = 0.1; cost.Q(1,1) = 0.1; cost.Q(2,2) = 0.1; cost.Q(3,3) = .5; cost.Q(4,4) = .5;
   cost.Qf(0,0) = 10; cost.Qf(1,1) = 10; cost.Qf(2,2) = 1; cost.Qf(3,3) = 1; cost.Qf(4,4) = 0;  
   cost.R(0,0) = .01; cost.R(1,1) = .001;  
@@ -58,23 +58,23 @@ void car_process(Viewer* viewer)
     us[N/2+i] = Vector2d(0,0);
   }
 
-  CarDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = 10;
+  CarDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 10;
 
-  CarView view(sys, &dmoc.xs);
+  CarView view(sys, &ddp.xs);
   viewer->Add(view);
 
   struct timeval timer;
 
-  dmoc.debug = false; // turn off debug for speed
+  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < 20; ++i) {
-    dmoc.Iterate();
+    ddp.Iterate();
   }
 
   //  for (int k = 0; k <= N; ++k)
-  //    cout << dmoc.xs[k] << "|" << endl;  
-  //  cout << "xf=" << dmoc.xs.back() << endl;
+  //    cout << ddp.xs[k] << "|" << endl;  
+  //  cout << "xf=" << ddp.xs.back() << endl;
   while(1)
     usleep(10);    
 }
@@ -93,7 +93,7 @@ void heli_process(Viewer* viewer)
   Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
   xf.second[0] = .5;
   xf.second[2] = .4;
-  Body3dCost<4> cost(tf, xf);  
+  Body3dCost<4> cost(sys, tf, xf);  
   cost.Qf(0,0) = .1; cost.Qf(1,1) = .1; cost.Qf(2,2) = .1;
   cost.Qf(3,3) = 5; cost.Qf(4,4) = 5; cost.Qf(5,5) = 5;
 
@@ -121,21 +121,21 @@ void heli_process(Viewer* viewer)
     us[i][3] = 9.81*sys.m;
   }
     
-  HeliDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = 1;
+  HeliDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 1;
 
-  HeliView view(sys, &dmoc.xs);
+  HeliView view(sys, &ddp.xs);
   if (viewer)
     viewer->Add(view);  
 
 
   while(1) {    
     struct timeval timer;
-    //  dmoc.debug = false; // turn off debug for speed
+    //  ddp.debug = false; // turn off debug for speed
     
     timer_start(timer);
     for (int i = 0; i < 20; ++i) {
-      dmoc.Iterate();
+      ddp.Iterate();
     }
     long te = timer_us(timer);
     cout << "Took " << te << " us." << endl;        
@@ -145,7 +145,7 @@ void heli_process(Viewer* viewer)
     std::rotate(us.begin(), us.begin() + 1, us.end());
     us.back() = us[us.size()-2];
 
-    dmoc.Update();
+    ddp.Update();
     cout << xs[0].first << " " << xs[0].second  << endl;
     cout << "Moved forward" << endl;
     getchar();

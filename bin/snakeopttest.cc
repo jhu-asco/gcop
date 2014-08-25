@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "snakeview.h"
 #include "utils.h"
@@ -10,7 +10,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<MbsState> SnakeDmoc;
+typedef Ddp<MbsState> SnakeDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -31,7 +31,7 @@ void solver_process(Viewer* viewer)
   xf.vs[0].setZero();
   xf.dr.setZero();
 
-  LqCost<MbsState> cost(sys.X, sys.U, tf, xf);
+  LqCost<MbsState> cost(sys, tf, xf);
 
   cost.Qf(0,0) = 5; cost.Qf(1,1) = 5; cost.Qf(2,2) = 5;
   cost.Qf(3,3) = 50; cost.Qf(4,4) = 50; cost.Qf(5,5) = 50;
@@ -81,19 +81,19 @@ void solver_process(Viewer* viewer)
   u.setZero();
   vector<VectorXd> us(N, u);
 
-  SnakeDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = 1;
+  SnakeDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 1;
 
-  SnakeView view(sys, &dmoc.xs);
+  SnakeView view(sys, &ddp.xs);
   if (viewer)
     viewer->Add(view);  
 
   struct timeval timer;
-  dmoc.debug = false; // turn off debug for speed
+  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < 100; ++i) {    
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
     getchar();

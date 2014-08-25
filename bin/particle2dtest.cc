@@ -1,5 +1,5 @@
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "particle2d.h"
 #include "rnlqcost.h"
 #include "viewer.h"
@@ -10,7 +10,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Vector4d, 4, 2> Particle2dDmoc;
+typedef Ddp<Vector4d, 4, 2> Particle2dDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -21,7 +21,7 @@ void solver_process(Viewer* viewer)
   Particle2d sys;
 
   Vector4d xf = Vector4d::Zero();
-  RnLqCost<4, 2> cost(tf, xf);
+  RnLqCost<4, 2> cost(sys, tf, xf);
   cost.Q = Matrix4d(Vector4d(.01, .01, .005, .005).asDiagonal());
   cost.Qf = Matrix4d(Vector4d(1, 1, 5, 5).asDiagonal());
   cost.R = Matrix2d(Vector2d(.1, .1).asDiagonal());  
@@ -44,21 +44,21 @@ void solver_process(Viewer* viewer)
   }
   
 
-  Particle2dDmoc dmoc(sys, cost, ts, xs, us);
+  Particle2dDdp ddp(sys, cost, ts, xs, us);
 
   // should converge in one iteration since it is a linear system
   int iters = 5;  
 
-  Particle2dView view(sys, &dmoc.xs);
+  Particle2dView view(sys, &ddp.xs);
   viewer->Add(view);  
 
   struct timeval timer;
-  //  dmoc.debug = false; // turn off debug for speed
+  //  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < iters; ++i) {
 
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
 
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
@@ -66,7 +66,7 @@ void solver_process(Viewer* viewer)
   }
   //  for (int k = 0; k <= N; ++k)
   //cout << "xf=" << endl;
-  //  cout << dmoc.xs.back() << endl;
+  //  cout << ddp.xs.back() << endl;
 
   cout << "done!" << endl;
 

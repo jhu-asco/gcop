@@ -63,7 +63,7 @@ void solver_process(Viewer* viewer)
   xf.vs[0] = qvf.segment<6>(8);
   xf.dr = qvf.tail(2);
 
-  LqCost<MbsState> cost(sys.X, (Rn<>&)sys.U, tf, xf);
+  LqCost<MbsState> cost(sys, tf, xf);
   
   VectorXd Q(16);
   VectorXd R(8);
@@ -127,7 +127,7 @@ void solver_process(Viewer* viewer)
   params.GetInt("Ns", ce.Ns);
 
   struct timeval timer;
-  //  dmoc.debug = false; // turn off debug for speed
+  //  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < 50; ++i) {
     timer_start(timer);

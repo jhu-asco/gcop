@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "airmview.h"
 #include "utils.h"
@@ -10,7 +10,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<MbsState> AirmDmoc;
+typedef Ddp<MbsState> AirmDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -32,7 +32,7 @@ void solver_process(Viewer* viewer)
   xf.vs[0].setZero();
   xf.dr.setZero();
 
-  LqCost<MbsState> cost(sys.X, (Rn<>&)sys.U, tf, xf);
+  LqCost<MbsState> cost(sys, tf, xf);
 
   //  cost.Qf(3,3) = 50; cost.Qf(4,4) = 50; cost.Qf(5,5) = 50;
   //  cost.Qf(11,11) = 5; cost.Qf(12,12) = 5; cost.Qf(13,13) = 5;
@@ -85,21 +85,21 @@ void solver_process(Viewer* viewer)
   u(3) = 9.81*m;
   vector<VectorXd> us(N, u);
 
-  AirmDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = 1;
+  AirmDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 1;
 
-  AirmView view(sys, &dmoc.xs);
+  AirmView view(sys, &ddp.xs);
   if (viewer)
     viewer->Add(view);  
 
   struct timeval timer;
-  //  dmoc.debug = false; // turn off debug for speed
+  //  ddp.debug = false; // turn off debug for speed
 
   getchar();
 
   for (int i = 0; i < 100; ++i) {    
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
     getchar();

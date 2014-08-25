@@ -14,7 +14,7 @@ using namespace Eigen;
 using namespace gcop;
 
 
-typedef Dmoc<pair<Matrix3d, Vector3d>, 6, 3> Body2dDmoc;
+typedef Ddp<pair<Matrix3d, Vector3d>, 6, 3> Body2dDdp;
 
 Params params;
 
@@ -126,11 +126,11 @@ void Run(Viewer* viewer)
   vector<Vector3d> ups(Nc, u);
 
 
-  Body2dDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = .01;
-  params.GetDouble("mu", dmoc.mu);
+  Body2dDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = .01;
+  params.GetDouble("mu", ddp.mu);
 
-  Body2dView cview(sys, &dmoc.xs);
+  Body2dView cview(sys, &ddp.xs);
   viewer->Add(cview);
 
   Body2dView pview(sys, &xps);
@@ -143,7 +143,7 @@ void Run(Viewer* viewer)
 
     for (int j = 0; j < iters; ++j) {      
       timer_start(timer);
-      dmoc.Iterate();
+      ddp.Iterate();
       long te = timer_us(timer);      
       cout << "Iteration #" << j << " took: " << te << " us." << endl;    
     }
@@ -173,9 +173,9 @@ void Run(Viewer* viewer)
 
   /*
   Body2dSlam ba(pg);
-  ba.pdmoc->debug = true; // turn off debug for speed
-  ba.pdmoc->mu = .01;
-  ba.pdmoc->nu = .01;
+  ba.pddp->debug = true; // turn off debug for speed
+  ba.pddp->mu = .01;
+  ba.pddp->nu = .01;
 
   for (int i = 0; i < 1000; ++i) {
 
@@ -183,11 +183,11 @@ void Run(Viewer* viewer)
     getchar();    
     
     timer_start(timer);
-    ba.pdmoc->Iterate();
+    ba.pddp->Iterate();
     long te = timer_us(timer);
-    cout << ba.pdmoc->dus[0] << endl;
+    cout << ba.pddp->dus[0] << endl;
     cout << "Iteration #" << i << " took: " << te << " us." << endl;    
-    cout << "p=" << ba.pdmoc->p.head<2>().transpose() << endl;    
+    cout << "p=" << ba.pddp->p.head<2>().transpose() << endl;    
     cout << "ut=" << pgt.us[2] << endl;    
     cout << "u=" << pg.us[2] << endl;    
 

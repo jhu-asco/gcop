@@ -1,4 +1,4 @@
-link_directories(${GCOP_BINARY_DIR}/lib) 
+link_directories(${RPC_BINARY_DIR}/lib) 
 
 add_executable(particle2dtest particle2dtest.cc)
 target_link_libraries(particle2dtest gcop  ${LIBS})
@@ -9,13 +9,12 @@ target_link_libraries(unicycletest gcop  ${LIBS})
 add_executable(gunicycletest gunicycletest.cc)
 target_link_libraries(gunicycletest gcop  ${LIBS})
 
-#add_executable(body2dtest body2dtest.cc)
-#target_link_libraries(body2dtest gcop  ${LIBS})
+add_executable(body2dtest body2dtest.cc)
+target_link_libraries(body2dtest gcop  ${LIBS})
 
 add_executable(body3dtest body3dtest.cc)
 target_link_libraries(body3dtest gcop  ${LIBS})
 
-# use qrotor.cfg as input
 add_executable(qrotortest qrotortest.cc)
 target_link_libraries(qrotortest gcop  ${LIBS})
 
@@ -28,21 +27,21 @@ target_link_libraries(helitest gcop  ${LIBS})
 add_executable(helicartest helicartest.cc)
 target_link_libraries(helicartest gcop  ${LIBS})
 
-#add_executable(batest batest.cc)
-#target_link_libraries(batest gcop  ${LIBS})
+add_executable(batest batest.cc)
+target_link_libraries(batest gcop  ${LIBS})
 
-#add_executable(body2dslamtest body2dslamtest.cc)
-#target_link_libraries(body2dslamtest gcop  ${LIBS})
+add_executable(body2dslamtest body2dslamtest.cc)
+target_link_libraries(body2dslamtest gcop  ${LIBS})
 
-#add_executable(body2dtracktest body2dtracktest.cc)
-#target_link_libraries(body2dtracktest gcop  ${LIBS})
+add_executable(body2dtracktest body2dtracktest.cc)
+target_link_libraries(body2dtracktest gcop  ${LIBS})
 
 add_executable(body2dtracktest2 body2dtracktest2.cc)
 target_link_libraries(body2dtracktest2 gcop  ${LIBS})
 
 
-#add_executable(extforceslamtest extforceslamtest.cc)
-#target_link_libraries(extforceslamtest gcop  ${LIBS})
+add_executable(extforceslamtest extforceslamtest.cc)
+target_link_libraries(extforceslamtest gcop  ${LIBS})
 
 
 add_executable(cartest cartest.cc)
@@ -58,33 +57,32 @@ target_link_libraries(gnrccartest gcop  ${LIBS})
 add_executable(cecartest cecartest.cc)
 target_link_libraries(cecartest gcop  ${LIBS})
 
-#add_executable(cechaintest cechaintest.cc)
-#target_link_libraries(cechaintest gcop  ${LIBS})
+add_executable(cechaintest cechaintest.cc)
+target_link_libraries(cechaintest gcop  ${LIBS})
 
-#add_executable(chaintest chaintest.cc)
-#target_link_libraries(chaintest gcop  ${LIBS})
+add_executable(chaintest chaintest.cc)
+target_link_libraries(chaintest gcop  ${LIBS})
 
-#add_executable(chain1test chain1test.cc)
-#target_link_libraries(chain1test gcop  ${LIBS})
+add_executable(chain1test chain1test.cc)
+target_link_libraries(chain1test gcop  ${LIBS})
 
-#add_executable(airmtest airmtest.cc)
-#target_link_libraries(airmtest gcop  ${LIBS})
+add_executable(airmtest airmtest.cc)
+target_link_libraries(airmtest gcop  ${LIBS})
 
 add_executable(airmopttest airmopttest.cc)
 target_link_libraries(airmopttest gcop  ${LIBS})
 
-#add_executable(chainopttest chainopttest.cc)
-#target_link_libraries(chainopttest gcop  ${LIBS})
+add_executable(chainopttest chainopttest.cc)
+target_link_libraries(chainopttest gcop  ${LIBS})
 
-# to be used with bin/fixedchain1.cfg
 add_executable(fixedchaintest fixedchaintest.cc)
 target_link_libraries(fixedchaintest gcop  ${LIBS})
 
-#add_executable(pendtest pendtest.cc)
-#target_link_libraries(pendtest gcop  ${LIBS})
+add_executable(pendtest pendtest.cc)
+target_link_libraries(pendtest gcop  ${LIBS})
 
-#add_executable(chaineltest chaineltest.cc)
-#target_link_libraries(chaineltest gcop  ${LIBS})
+add_executable(chaineltest chaineltest.cc)
+target_link_libraries(chaineltest gcop  ${LIBS})
 
 #add_executable(snakeopttest snakeopttest.cc)
 #target_link_libraries(snakeopttest gcop  ${LIBS})
@@ -101,6 +99,9 @@ target_link_libraries(airbottest gcop  ${LIBS})
 #add_executable(imuukftest imuukftest.cc)
 #target_link_libraries(imuukftest gcop ${LIBS})
 
+add_executable(imukftest imukftest.cc)
+target_link_libraries(imukftest gcop ${LIBS})
+
 #add_executable(gptest gptest.cc)
 #target_link_libraries(gptest gcop ${LIBS})
 
@@ -110,22 +111,20 @@ target_link_libraries(airbottest gcop  ${LIBS})
 add_executable(imukftest imukftest.cc)
 target_link_libraries(imukftest gcop ${LIBS})
 
-add_executable(imuekftest imuekftest.cc)
-target_link_libraries(imuekftest gcop ${LIBS})
 
-add_executable(insekftest insekftest.cc)
-target_link_libraries(insekftest gcop ${LIBS})
-
+add_executable(cartest cartest.cc)
+target_link_libraries(cartest gcop  ${LIBS})
 
 add_executable(helirhc helirhc.cc)
 target_link_libraries(helirhc gcop  ${LIBS})
 
-# with bin/jhurov.cfg
 add_executable(uuvtest uuvtest.cc)
 target_link_libraries(uuvtest gcop  ${LIBS})
 
 add_executable(armtest armtest.cc)
 target_link_libraries(armtest gcop  ${LIBS})
+
+
 
 # Cross-entropy simple example
 

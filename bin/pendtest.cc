@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "chainview.h"
 #include "utils.h"
@@ -12,7 +12,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<MbsState> ChainDmoc;
+typedef Ddp<MbsState> ChainDdp;
 
 Params params;
 
@@ -67,7 +67,7 @@ void solver_process(Viewer* viewer)
   xf.r = qvf.head(n);
   xf.dr = qvf.tail(n);
 
-  LqCost<MbsState> cost(sys.X, (Rn<>&)sys.U, tf, xf);
+  LqCost<MbsState> cost(sys, tf, xf);
   
   VectorXd Q(2*n);
   VectorXd R(n);
@@ -112,17 +112,17 @@ void solver_process(Viewer* viewer)
   // see the result before running optimization
   getchar();
 
-  ChainDmoc dmoc(sys, cost, ts, xs, us);
-  params.GetDouble("mu", dmoc.mu);
+  ChainDdp ddp(sys, cost, ts, xs, us);
+  params.GetDouble("mu", ddp.mu);
 
-  params.GetDouble("eps", dmoc.eps);
+  params.GetDouble("eps", ddp.eps);
 
   struct timeval timer;
-  //  dmoc.debug = false; // turn off debug for speed
+  //  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < 50; ++i) {
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;
     getchar();

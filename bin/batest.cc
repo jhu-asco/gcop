@@ -60,7 +60,7 @@ void Run(Viewer* viewer)
   struct timeval timer;
 
   //  ba.pddp.debug = false; // turn off debug for speed
-  ba.pdmoc.nu = .1;
+  ba.pddp.nu = .1;
 
   for (int i = 0; i < 1000; ++i) {
 
@@ -68,7 +68,7 @@ void Run(Viewer* viewer)
     getchar();    
     
     timer_start(timer);
-    ba.pdmoc.Iterate();
+    ba.pddp.Iterate();
     long te = timer_us(timer);
     
     cout << "Iteration #" << i << " took: " << te << " us." << endl;    

@@ -49,7 +49,7 @@ void solver_process(Viewer* viewer)
   //  us[2][4] = .1;
 
   struct timeval timer;
-  //  dmoc.debug = false; // turn off debug for speed
+  //  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < N; ++i) {    
     timer_start(timer);

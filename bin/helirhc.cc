@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "heliview.h"
 #include "utils.h"
@@ -10,7 +10,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Body3dState, 12, 4> HeliDmoc;
+typedef Ddp<Body3dState, 12, 4> HeliDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -27,14 +27,16 @@ void solver_process(Viewer* viewer)
 
   // cost 
   Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
-  Body3dCost<4> cost(tf, xf);  
+  Body3dCost<4> cost(sys, tf, xf);  
   cost.Qf(0,0) = .1; cost.Qf(1,1) = .1; cost.Qf(2,2) = .1;
   cost.Qf(3,3) = 5; cost.Qf(4,4) = 5; cost.Qf(5,5) = 5;
 
   cost.Qf(6,6) = 1; cost.Qf(7,7) = 1; cost.Qf(8,8) = 1;
   cost.Qf(9,9) = 10; cost.Qf(10,10) = 10; cost.Qf(11,11) = 10;
 
-  cost.R(0,0) = 0; cost.R(1,1) = 0; cost.R(2,2) = 0; cost.R(3,3) = 0;
+  cost.Q.setZero();
+
+  cost.R(0,0) = 0.1; cost.R(1,1) = 0.1; cost.R(2,2) = 0.1; cost.R(3,3) = 1;
 
 
   // times
@@ -55,32 +57,37 @@ void solver_process(Viewer* viewer)
     us[i].head(3).setZero();
     us[i][3] = 9.81*sys.m;
   }
-    
-  HeliDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = 1;
 
-  HeliView view(sys, &dmoc.xs);
+  cost.SetReference(0, &us);
+    
+  HeliDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 1;
+
+  HeliView view(sys, &ddp.xs);
   if (viewer)
     viewer->Add(view);  
 
 
   while(1) {    
     struct timeval timer;
-    //  dmoc.debug = false; // turn off debug for speed
+    //  ddp.debug = false; // turn off debug for speed
     
     timer_start(timer);
     for (int i = 0; i < 20; ++i) {
-      dmoc.Iterate();
+      ddp.Iterate();
     }
     long te = timer_us(timer);
     cout << "Took " << te << " us." << endl;        
     getchar();
     xs[0] = xs[1];
+    //    xs[0].second[0] += .01;
+    //    xs[0].second[1] += .01;
+    xs[0].second[2] += .01;
 
     std::rotate(us.begin(), us.begin() + 1, us.end());
     us.back() = us[us.size()-2];
 
-    dmoc.Update();
+    ddp.Update();
     cout << xs[0].first << " " << xs[0].second  << endl;
     cout << "Moved forward" << endl;
     getchar();

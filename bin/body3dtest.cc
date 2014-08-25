@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "body3dview.h"
 #include "body3dcost.h"
@@ -11,7 +11,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Body3dState, 12, 6> Body3dDmoc;
+typedef Ddp<Body3dState, 12, 6> Body3dDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -27,9 +27,10 @@ void solver_process(Viewer* viewer)
   Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
 
   //  Body3dCost<> cost(tf, xf);
-  LqCost<Body3dState, 12, 6> cost(Body3dManifold::Instance(), tf, xf);
+  LqCost<Body3dState, 12, 6> cost(sys, tf, xf);
 
   // times
+
   vector<double> ts(N+1);
   for (int k = 0; k <=N; ++k)
     ts[k] = k*h;
@@ -55,28 +56,28 @@ void solver_process(Viewer* viewer)
   }
   
 
-  Body3dDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = 1;
-  //  dmoc.a = .5;
+  Body3dDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 1;
+  //  ddp.a = .5;
 
-  Body3dView<> view(sys, &dmoc.xs);
+  Body3dView<> view(sys, &ddp.xs);
   viewer->Add(view);  
 
   struct timeval timer;
 
-  //  dmoc.debug = false; // turn off debug for speed
+  //  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < 20; ++i) {
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;    
     getchar();
   }
 
   //  for (int k = 0; k <= N; ++k)
-  //    cout << dmoc.xs[k] << "|" << endl;  
-  //  cout << "xf=" << dmoc.xs.back() << endl;
+  //    cout << ddp.xs[k] << "|" << endl;  
+  //  cout << "xf=" << ddp.xs.back() << endl;
   
   
   cout << "done!" << endl;

@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "heliview.h"
 #include "utils.h"
@@ -10,7 +10,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Body3dState, 12, 4> HeliDmoc;
+typedef Ddp<Body3dState, 12, 4> HeliDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -26,7 +26,7 @@ void solver_process(Viewer* viewer)
 
   // cost 
   Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
-  Body3dCost<4> cost(tf, xf);  
+  Body3dCost<4> cost(sys, tf, xf);  
 
   cost.Qf(0,0) = 2; cost.Qf(1,1) = 2; cost.Qf(2,2) = 2;
   cost.Qf(3,3) = 50; cost.Qf(4,4) = 50; cost.Qf(5,5) = 50;
@@ -58,19 +58,19 @@ void solver_process(Viewer* viewer)
   vector<Vector4d> usd = us;
   cost.SetReference(0, &usd);
 
-  HeliDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = 1;
+  HeliDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 1;
 
-  HeliView view(sys, &dmoc.xs);
+  HeliView view(sys, &ddp.xs);
   if (viewer)
     viewer->Add(view);  
 
   struct timeval timer;
-  //  dmoc.debug = false; // turn off debug for speed
+  //  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < 20; ++i) {    
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
   }

@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "hrotorview.h"
 #include "utils.h"
@@ -10,7 +10,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Body3dState, 12, 4> HrotorDmoc;
+typedef Ddp<Body3dState, 12, 4> HrotorDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -26,7 +26,7 @@ void solver_process(Viewer* viewer)
 
   // cost 
   Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
-  Body3dCost<4> cost(tf, xf);  
+  Body3dCost<4> cost(sys, tf, xf);  
   cost.Qf(0,0) = 2; cost.Qf(1,1) = 2; cost.Qf(2,2) = 2;
   cost.Qf(3,3) = 20; cost.Qf(4,4) = 20; cost.Qf(5,5) = 20;
 
@@ -54,19 +54,19 @@ void solver_process(Viewer* viewer)
     us[i][3] = 9.81*sys.m;
   }
     
-  HrotorDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = 1;
+  HrotorDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 1;
 
-  HrotorView view(sys, &dmoc.xs);
+  HrotorView view(sys, &ddp.xs);
   if (viewer)
     viewer->Add(view);  
 
   struct timeval timer;
-  //  dmoc.debug = false; // turn off debug for speed
+  //  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < 10; ++i) {    
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
   }

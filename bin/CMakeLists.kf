@@ -1,0 +1,20 @@
+link_directories(${RPC_BINARY_DIR}/lib) 
+
+add_executable(imukftest imukftest.cc)
+target_link_libraries(imukftest gcop ${LIBS})
+
+
+add_executable(cartest cartest.cc)
+target_link_libraries(cartest gcop  ${LIBS})
+
+add_executable(helitest helitest.cc)
+target_link_libraries(helitest gcop  ${LIBS})
+
+add_executable(helirhc helirhc.cc)
+target_link_libraries(helirhc gcop  ${LIBS})
+
+add_executable(uuvtest uuvtest.cc)
+target_link_libraries(uuvtest gcop  ${LIBS})
+
+add_executable(armtest armtest.cc)
+target_link_libraries(armtest gcop  ${LIBS})

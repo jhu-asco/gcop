@@ -67,9 +67,9 @@ void Run(Viewer* viewer)
   getchar();
 
   Body2dSlam ba(pg);
-  ba.pdmoc->debug = true; // turn off debug for speed
-  ba.pdmoc->mu = .01;
-  ba.pdmoc->nu = .01;
+  ba.pddp->debug = true; // turn off debug for speed
+  ba.pddp->mu = .01;
+  ba.pddp->nu = .01;
 
   for (int i = 0; i < 1000; ++i) {
 
@@ -77,9 +77,9 @@ void Run(Viewer* viewer)
     getchar();    
     
     timer_start(timer);
-    ba.pdmoc->Iterate();
+    ba.pddp->Iterate();
     long te = timer_us(timer);
-    cout << ba.pdmoc->dus[0] << endl;
+    cout << ba.pddp->dus[0] << endl;
     cout << "Iteration #" << i << " took: " << te << " us." << endl;    
     cout << "p=" << pg.p.transpose() << endl;
   }

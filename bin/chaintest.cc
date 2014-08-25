@@ -45,7 +45,7 @@ void solver_process(Viewer* viewer)
   vector<VectorXd> us(N, u);
 
   struct timeval timer;
-  //  dmoc.debug = false; // turn off debug for speed
+  //  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < N; ++i) {    
     timer_start(timer);

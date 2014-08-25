@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "body2dview.h"
 #include "body2dcost.h"
@@ -12,7 +12,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<pair<Matrix3d, Vector3d>, 6, 3> Body2dDmoc;
+typedef Ddp<pair<Matrix3d, Vector3d>, 6, 3> Body2dDdp;
 
 Params params;
 
@@ -53,7 +53,7 @@ void solver_process(Viewer* viewer)
   }
 
   // cost
-  Body2dCost cost(tf, xf);  
+  Body2dCost cost(sys, tf, xf);  
 
   VectorXd Q(6);
   if (params.GetVectorXd("Q", Q))
@@ -83,23 +83,23 @@ void solver_process(Viewer* viewer)
   //    us[N/2+i] = Vector3d(0.01,-.1,0);
   //  }  
 
-  Body2dDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = .01;
-  params.GetDouble("mu", dmoc.mu);
+  Body2dDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = .01;
+  params.GetDouble("mu", ddp.mu);
 
-  Body2dView view(sys, &dmoc.xs);
+  Body2dView view(sys, &ddp.xs);
   viewer->Add(view);
 
   struct timeval timer;
 
-  dmoc.debug = false; // turn off debug for speed
+  ddp.debug = false; // turn off debug for speed
 
   getchar();
 
   for (int i = 0; i < 50; ++i) {
 
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
 
     cout << "Iteration #" << i << " took: " << te << " us." << endl;    
@@ -107,8 +107,8 @@ void solver_process(Viewer* viewer)
   }
 
   //  for (int k = 0; k <= N; ++k)
-  //    cout << dmoc.xs[k] << "|" << endl;  
-  //  cout << "xf=" << dmoc.xs.back() << endl;
+  //    cout << ddp.xs[k] << "|" << endl;  
+  //  cout << "xf=" << ddp.xs.back() << endl;
   
   
   cout << "done!" << endl;

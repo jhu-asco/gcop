@@ -35,11 +35,9 @@ find_package(OpenGL REQUIRED)
 include_directories(${OpenGL_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${OpenGL_LIBRARIES})
 
-find_package(Adolc REQUIRED)
+find_package(Adolc)
 include_directories(${Adolc_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${Adolc_LIBRARIES})
-
-
 
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
@@ -52,11 +50,13 @@ set (LIBS ${LIBS} ${CMAKE_THREAD_LIBS_INIT})
 find_package(Eigen REQUIRED)
 include_directories(${Eigen_INCLUDE_DIRS})
 
-find_package(TinyXML REQUIRED)
+
+find_package(TinyXML)
 include_directories(${TINYXML_INCLUDE_DIR})
 set(LIBS ${LIBS} ${TINYXML_LIBRARIES})
 
-FIND_PACKAGE(Ceres REQUIRED)
+
+FIND_PACKAGE(Ceres)
 INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${CERES_LIBRARIES})
 

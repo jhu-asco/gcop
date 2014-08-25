@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "dmoc.h"
+#include "ddp.h"
 #include "viewer.h"
 #include "qrotorview.h"
 #include "utils.h"
@@ -11,7 +11,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Dmoc<Body3dState, 12, 4> QrotorDmoc;
+typedef Ddp<Body3dState, 12, 4> QrotorDdp;
 
 Params params;
 
@@ -46,7 +46,7 @@ void solver_process(Viewer* viewer)
   SO3::Instance().q2g(xf.first, qvf.head(3));
   xf.second= qvf.tail(9);
 
-  Body3dCost<4> cost(tf, xf);  
+  Body3dCost<4> cost(sys, tf, xf);  
 
   VectorXd Q(12);
   VectorXd R(4);  
@@ -75,19 +75,19 @@ void solver_process(Viewer* viewer)
     us[i][3] = 9.81*sys.m;
   }
     
-  QrotorDmoc dmoc(sys, cost, ts, xs, us);
-  dmoc.mu = 1;
+  QrotorDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 1;
 
-  QrotorView view(sys, &dmoc.xs);
+  QrotorView view(sys, &ddp.xs);
   if (viewer)
     viewer->Add(view);  
 
   struct timeval timer;
-  //  dmoc.debug = false; // turn off debug for speed
+  //  ddp.debug = false; // turn off debug for speed
 
   for (int i = 0; i < 10; ++i) {    
     timer_start(timer);
-    dmoc.Iterate();
+    ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
   }
