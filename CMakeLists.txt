@@ -4,6 +4,7 @@ project (gcop)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 ADD_DEFINITIONS(-g -O -std=c++0x -pthread)
+#ADD_DEFINITIONS(-g -O -pthread)
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Robotic Planning and Control")
 SET(CPACK_PACKAGE_VENDOR "Marin Kobilarov")
@@ -22,6 +23,21 @@ SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSIO
 #include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
 #target_link_libraries( ${OpenGL_LIBRARIES} ${GLUT_LIBRARY} )
 
+find_package(PkgConfig REQUIRED)
+
+find_package( OpenCV 2.4 REQUIRED core highgui imgproc calib3d)
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+set(LIBS ${LIBS} ${OpenCV_LIBS})
+message(STATUS "Hello ${OpenCV_LIBS}")
+
+find_package(DC1394 REQUIRED)
+include_directories(${DC1394_INCLUDE_DIR})
+set(LIBS ${LIBS} ${DC1394_LIBRARIES})
+message(STATUS "Hello2 ${LIBS}")
+
+find_package(LibUSB REQUIRED)
+include_directories(${LIBUSB_INCLUDE_DIR})
+set(LIBS ${LIBS} ${LIBUSB_LIBRARIES})
 
 find_package(GLU REQUIRED)
 include_directories(${GLU_INCLUDE_DIRS})

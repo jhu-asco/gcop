@@ -12,6 +12,8 @@ set(headers
       controller.h
       mbscontroller.h
       systemce.h
+      aspsa.h
+      spsa.h
       body2dtrack.h
       body2dtrackcost.h
 )

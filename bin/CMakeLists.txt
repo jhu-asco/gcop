@@ -1,7 +1,7 @@
 link_directories(${GCOP_BINARY_DIR}/lib) 
 
 add_executable(particle2dtest particle2dtest.cc)
-target_link_libraries(particle2dtest gcop  ${LIBS})
+target_link_libraries(particle2dtest gcop ${LIBS})
 
 add_executable(unicycletest unicycletest.cc)
 target_link_libraries(unicycletest gcop  ${LIBS})
@@ -61,8 +61,19 @@ target_link_libraries(cecartest gcop  ${LIBS})
 #add_executable(cechaintest cechaintest.cc)
 #target_link_libraries(cechaintest gcop  ${LIBS})
 
+<<<<<<< HEAD
 #add_executable(chaintest chaintest.cc)
 #target_link_libraries(chaintest gcop  ${LIBS})
+=======
+add_executable(spsacartest spsacartest.cc)
+target_link_libraries(spsacartest gcop  ${LIBS})
+
+add_executable(aspsacartest aspsacartest.cc)
+target_link_libraries(aspsacartest gcop  ${LIBS})
+
+add_executable(chaintest chaintest.cc)
+target_link_libraries(chaintest gcop  ${LIBS})
+>>>>>>> a36204e4682e5a9ec62ed43ab91f97be625659c7
 
 #add_executable(chain1test chain1test.cc)
 #target_link_libraries(chain1test gcop  ${LIBS})
@@ -135,7 +146,9 @@ target_link_libraries(cetest gcop ${LIBS})
 #add_executable(airplanetest airplanetest.cc)
 #target_link_libraries(airplanetest gcop ${LIBS})
 
-
+# Camera testing 6dof pose example
+#add_executable(camtest camtest.cc)
+#target_link_libraries(camtest gcop ${LIBS})
 #INSTALL(TARGETS gcoptest
 #        RUNTIME
 #        DESTINATION bin)

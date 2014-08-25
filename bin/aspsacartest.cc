@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "ddp.h"
+#include "aspsa.h"
 #include "viewer.h"
 #include "rccarview.h"
 #include "utils.h"
@@ -11,7 +11,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Ddp<Vector4d, 4, 2> RccarDdp;
+typedef ASPSA<Vector4d, 4, 2> RccarASPSA;
 
 Params params;
 
@@ -20,16 +20,17 @@ void solver_process(Viewer* viewer)
   if (viewer)
     viewer->SetCamera(-5, 51, -0.2, -0.15, -2.3);
 
-  int N = 64;        // number of segments
+  int N = 10;        // number of segments
   double tf = 5;    // time horizon
 
   int iters = 30;
 
   params.GetInt("N", N);  
+
+  params.GetInt("iters", iters);  
+
   params.GetDouble("tf", tf);
 
-  params.GetInt("iters", iters);
-  
 
   double h = tf/N;   // time step
 
@@ -37,6 +38,9 @@ void solver_process(Viewer* viewer)
 
   //  sys.U.lb[1] = tan(-M_PI/5);
   //  sys.U.ub[1] = tan(M_PI/5);
+
+  Vector4d stepcfs(0,0,0,0);
+  params.GetVector4d("stepcoeffs", stepcfs); //Step coeffs for ASPSA
 
   // initial state
   Vector4d x0(1,1,0,0);
@@ -47,7 +51,7 @@ void solver_process(Viewer* viewer)
   params.GetVector4d("xf", xf);  
 
   // cost
-  RnLqCost<4, 2> cost(sys, tf, xf);
+  RnLqCost<4, 2> cost(tf, xf);
   VectorXd Q(4);
   if (params.GetVectorXd("Q", Q))
     cost.Q = Q.asDiagonal();
@@ -72,34 +76,47 @@ void solver_process(Viewer* viewer)
 
   // initial controls
   vector<Vector2d> us(N);
-  for (int i = 0; i < N/2; ++i) {
-    us[i] = Vector2d(.01, .0);
-    us[N/2+i] = Vector2d(-.01, .0);
-  }
-  
-  RccarDdp ddp(sys, cost, ts, xs, us);  
-  ddp.mu = .01;
-  params.GetDouble("mu", ddp.mu);
+	Vector2d u0;
+	params.GetVector2d("u0",u0);
 
-  RccarView view(sys, &ddp.xs);
+  for (int i = 0; i < N/2; ++i) {
+    us[i] = Vector2d(u0(0), u0(1));
+    us[N/2+i] = Vector2d(-u0(0), -u0(1));    
+  }
+
+  RccarASPSA aspsa(sys, cost, ts, xs, us);
+	//aspsa.debug = false;
+  //  dmoc.mu = .01;
+  //  params.GetDouble("mu", dmoc.mu);
+
+  params.GetInt("Nit", aspsa.Nit);
+
+	aspsa.stepc.a = stepcfs[0];
+	aspsa.stepc.A = 0.1*aspsa.Nit*iters;//10 percent of total number of iterations
+	aspsa.stepc.a1 = 1;
+	aspsa.stepc.c1 = stepcfs[1];
+	aspsa.stepc.c2 = 2*stepcfs[1];//ASPSA c11
+	aspsa.stepc.c11 = 2*stepcfs[1];//Big value than c1 to ensure stability
+	aspsa.stepc.alpha = stepcfs[2];
+	aspsa.stepc.gamma = stepcfs[3];//Set coeffs based on parameters
+
+
+  RccarView view(sys, &aspsa.xs);
   
   viewer->Add(view);
 
   struct timeval timer;
-  // ddp.debug = false; // turn off debug for speed
+  aspsa.debug = false; // turn off debug for speed
   getchar();
 
-    timer_start(timer);
-<<<<<<< HEAD
-    ddp.Iterate();
-=======
   for (int i = 0; i < iters; ++i) {
-    dmoc.Iterate();
-  }
->>>>>>> a36204e4682e5a9ec62ed43ab91f97be625659c7
+    timer_start(timer);
+    aspsa.Iterate();
     long te = timer_us(timer);
-    cout << "Iterations" << iters << " took: " << te << " us." << endl;
+    cout << "Iteration #" << i << " took: " << te << " us." << endl;
+    cout << "Cost=" << aspsa.J << endl;
     getchar();
+  }
 
   cout << xs[N] << endl;
 
@@ -120,7 +137,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("../../bin/rccar.cfg"); 
+    params.Load("../../bin/aspsacar.cfg");
 
 
 #ifdef DISP
