@@ -18,15 +18,21 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
  
-  template <typename T, int n = Dynamic, int c = Dynamic> class SPSA {
+  template <typename T, int n = Dynamic, int c = Dynamic, int _np = Dynamic> class SPSA {
     
     typedef Matrix<double, n, 1> Vectornd;
     typedef Matrix<double, c, 1> Vectorcd;
+    typedef Matrix<double, _np, 1> Vectormd;
     typedef Matrix<double, n, n> Matrixnd;
     typedef Matrix<double, n, c> Matrixncd;
     typedef Matrix<double, c, n> Matrixcnd;
     typedef Matrix<double, c, c> Matrixcd;  
     
+    typedef Matrix<double, _np, _np> Matrixmd;
+    typedef Matrix<double, n, _np> Matrixnmd;
+    typedef Matrix<double, _np, n> Matrixmnd;
+
+
   public:
     /**
 		 * Implementing a Simultaneous Perturbation and Stochastic Approximation algorithm
@@ -49,9 +55,10 @@ namespace gcop {
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
      */
-    SPSA(System<T, Vectorcd, n, c> &sys, Cost<T, Vectorcd, n, c> &cost, 
-             vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
-             bool update = true);
+    SPSA(System<T, n, c, _np> &sys, Cost<T, n, c, _np> &cost, 
+         vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
+         Vectormd *p = 0,          
+         bool update = true);
     
     virtual ~SPSA();
     
@@ -71,9 +78,9 @@ namespace gcop {
     double Update(std::vector<T> &xs, const std::vector<Vectorcd> &us, bool evalCost = true);
         
 
-    System<T, Vectorcd, n, c> &sys;    ///< dynamical system
+    System<T, n, c, _np> &sys;    ///< dynamical system
 
-    Cost<T, Vectorcd, n, c> &cost;     ///< given cost function
+    Cost<T, n, c, _np> &cost;     ///< given cost function
 
     std::vector<double> &ts; ///< times (N+1) vector
 
@@ -119,13 +126,14 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
   
-  template <typename T, int n, int c> 
-    SPSA<T, n, c>::SPSA(System<T, Matrix<double, c, 1>, n, c> &sys, 
-                                Cost<T, Matrix<double, c, 1>, n, c> &cost, 
-                                vector<double> &ts, 
-                                vector<T> &xs, 
-                                vector<Matrix<double, c, 1> > &us,
-                                bool update) : 
+  template <typename T, int n, int c, int _np> 
+    SPSA<T, n, c, _np>::SPSA(System<T, n, c, _np> &sys, 
+                             Cost<T, n, c, _np> &cost, 
+                             vector<double> &ts, 
+                             vector<T> &xs, 
+                             vector<Matrix<double, c, 1> > &us,
+                             Matrix<double, _np, 1> *p,
+                             bool update) : 
     sys(sys), cost(cost), ts(ts), xs(xs), us(us), dus(dus), N(us.size()), xss(xs), uss(us)
     ,Nit(200), debug(true), prevcount(0)//Choosing a, A can be done adaptively TODO
 		{
@@ -149,16 +157,16 @@ namespace gcop {
 			}
 		}
   
-  template <typename T, int n, int c> 
-    SPSA<T, n, c>::~SPSA()
+  template <typename T, int n, int c, int _np> 
+    SPSA<T, n, c, _np>::~SPSA()
     {
     }
 
     
-  template <typename T, int n, int c> 
-    double SPSA<T, n, c>::Update(vector<T> &xs, const vector<Vectorcd> &us, bool evalCost) {    
+  template <typename T, int n, int c, int _np> 
+    double SPSA<T, n, c, _np>::Update(vector<T> &xs, const vector<Vectorcd> &us, bool evalCost) {    
     double J = 0;
-		sys.reset();//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14
+    sys.reset();//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
       sys.Step(xs[k+1], ts[k], xs[k], us[k], h);
@@ -171,8 +179,8 @@ namespace gcop {
     return J;
   }
 
-  template <typename T, int n, int c> 
-		void SPSA<T, n, c>::Iterate() {
+  template <typename T, int n, int c, int _np> 
+    void SPSA<T, n, c, _np>::Iterate() {
 			//Reset seed of the random generator
 			randgenerator.seed(370212);
 			int ussize = us[0].rows();//Number of rows in each us

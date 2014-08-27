@@ -90,17 +90,14 @@ void solver_process(Viewer* viewer)
   getchar();
 
     timer_start(timer);
-<<<<<<< HEAD
-    ddp.Iterate();
-=======
   for (int i = 0; i < iters; ++i) {
-    dmoc.Iterate();
+    ddp.Iterate();
   }
->>>>>>> a36204e4682e5a9ec62ed43ab91f97be625659c7
-    long te = timer_us(timer);
-    cout << "Iterations" << iters << " took: " << te << " us." << endl;
-    getchar();
 
+  long te = timer_us(timer);
+  cout << "Iterations" << iters << " took: " << te << " us." << endl;
+  getchar();
+  
   cout << xs[N] << endl;
 
   //  xs[1][3]  velocity

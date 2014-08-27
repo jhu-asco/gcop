@@ -19,14 +19,20 @@ namespace gcop {
 	using namespace std;
 	using namespace Eigen;
 
-	template <typename T, int n = Dynamic, int c = Dynamic> class ASPSA {
+	template <typename T, int n = Dynamic, int c = Dynamic, int _np = Dynamic> class ASPSA {
 
 		typedef Matrix<double, n, 1> Vectornd;
 		typedef Matrix<double, c, 1> Vectorcd;
+		typedef Matrix<double, _np, 1> Vectormd;
 		typedef Matrix<double, n, n> Matrixnd;
 		typedef Matrix<double, n, c> Matrixncd;
 		typedef Matrix<double, c, n> Matrixcnd;
 		typedef Matrix<double, c, c> Matrixcd;  
+
+                typedef Matrix<double, _np, _np> Matrixmd;
+                typedef Matrix<double, n, _np> Matrixnmd;
+                typedef Matrix<double, _np, n> Matrixmnd;
+
 
 		public:
 		/**
@@ -50,10 +56,11 @@ namespace gcop {
 		 * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
 		 *               This is necessary only if xs was not already generated from us.
 		 */
-		ASPSA(System<T, Vectorcd, n, c> &sys, Cost<T, Vectorcd, n, c> &cost, 
-				vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
-				bool update = true);
-
+		ASPSA(System<T, n, c, _np> &sys, Cost<T, n, c, _np> &cost, 
+                      vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
+                      Vectormd *p = 0, 
+                      bool update = true);
+                
 		virtual ~ASPSA();
 
 
@@ -72,9 +79,9 @@ namespace gcop {
 		double Update(std::vector<T> &xs, const std::vector<Vectorcd> &us, bool evalCost = true);
 
 
-		System<T, Vectorcd, n, c> &sys;    ///< dynamical system
+		System<T, n, c, _np> &sys;    ///< dynamical system
 
-		Cost<T, Vectorcd, n, c> &cost;     ///< given cost function
+		Cost<T, n, c, _np> &cost;     ///< given cost function
 
 		std::vector<double> &ts; ///< times (N+1) vector
 
@@ -158,14 +165,15 @@ namespace gcop {
 	using namespace std;
 	using namespace Eigen;
 
-	template <typename T, int n, int c> 
-		ASPSA<T, n, c>::ASPSA(System<T, Matrix<double, c, 1>, n, c> &sys, 
-				Cost<T, Matrix<double, c, 1>, n, c> &cost, 
+	template <typename T, int n, int c, int _np> 
+          ASPSA<T, n, c, _np>::ASPSA(System<T, n, c, _np> &sys, 
+				Cost<T, n, c, _np> &cost, 
 				vector<double> &ts, 
 				vector<T> &xs, 
 				vector<Matrix<double, c, 1> > &us,
+                                Matrix<double, _np, 1> *p,                                
 				bool update) : 
-			sys(sys), cost(cost), ts(ts), xs(xs), us(us), dus1(us), dus2(us), N(us.size()), xss(xs), uss1(us), uss2(us), ustemp(us)
+          sys(sys), cost(cost), ts(ts), xs(xs), us(us), dus1(us), dus2(us), N(us.size()), xss(xs), uss1(us), uss2(us), ustemp(us)
 			,Nit(200), debug(true), prevcount(0), toleranceJ(0.0001), toleranceHessianmag(0.1)//Choosing a, A can be done adaptively TODO
 	{
 		assert(N > 0);
@@ -206,188 +214,188 @@ namespace gcop {
 		}
 	}
 
-	template <typename T, int n, int c> 
-		ASPSA<T, n, c>::~ASPSA()
-		{
-		}
+	template <typename T, int n, int c, int _np> 
+          ASPSA<T, n, c, _np>::~ASPSA()
+          {
+          }
 
 
-	template <typename T, int n, int c> 
-		double ASPSA<T, n, c>::Update(vector<T> &xs, const vector<Vectorcd> &us, bool evalCost) {    
-			double J = 0;
-			sys.reset();//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14
-			for (int k = 0; k < N; ++k) {
-				double h = ts[k+1] - ts[k];
-				sys.Step(xs[k+1], ts[k], xs[k], us[k], h);
-				if (evalCost) 
-					J += cost.L(ts[k], xs[k], us[k], h);
-
-			}
-			if (evalCost)
-				J += cost.L(ts[N], xs[N], us[N-1], 0);
-			return J;
-		}
-
-	template <typename T, int n, int c> 
-		void ASPSA<T, n, c>::Iterate() {
-			//Reset seed of the random generator
-			randgenerator.seed(370212);
-			int ussize = us[0].rows();//Number of rows in each us
-			if(debug)
-				cout<<"Number of rows: "<<ussize<<endl;
-			float ak, ck, cktilde;//step sizes for 1SPSA and 2SPSA
-			float J1, J2, J3, J4, Jtemp;
-
-			//1SPSA for Nit steps
-			for(int k = 0;k < 40;k ++)
-			{
-				ak = stepc.a/pow((prevcount+k+1+stepc.A),(stepc.alpha));
-				ck = stepc.c1/pow((prevcount+k+1),(stepc.gamma));
-				if(debug)
-					cout<<"Step ak, ck: "<<ak<<"\t"<<ck<<"\t"<<stepc.c1<<"\t"<<pow((prevcount+k+1),(stepc.gamma))<<endl;
-				for(int count1 = 0;count1 < N;count1++)
-				{
-					for(int count2 = 0; count2< ussize; count2++)
-					{
-						if(bernoulli_dist(randgenerator))
-							dus1[count1][count2] = 1;
-						else
-							dus1[count1][count2] = -1;
-					}//Perturbation Vector - dus
-					uss1[count1] = us[count1] + ck*dus1[count1];
-					uss2[count1] = us[count1] - ck*dus1[count1];
-					/*
-						 if(debug)
-						 {
-						 cout<<"Uss1 #"<<count1<<": "<<uss1[count1].transpose()<<endl;
-						 cout<<"Uss2 #"<<count1<<": "<<uss2[count1].transpose()<<endl;
-						 }
-					 */
-				}//Perturbed once thetahatk + ck deltak
-				J1 = Update(xss, uss1);//Find the cost of the perturbed trajectory 1
-				J2 = Update(xss, uss2);//Find the cost of the perturbed trajectory 2
-
-
-
-				//Update the control vector based on the simultaneous gradient:
-				for(int count1 =0; count1 < N;count1++)
-				{
-					ghat[count1] = ((J1 - J2)/(2*ck))*(dus1[count1].cwiseInverse());
-					us[count1] = us[count1] - ak*ghat[count1];
-				}
-				if(debug)
-				{
-					J = Update(xs,us);
-					cout<<"J #"<<k<<"\t: "<<J<<endl;
-				}
-			}
-			J = Update(xs,us);
-			cout<<"J "<<"\t: "<<J<<endl;
-			getchar();
-
-			prevcount += 40;//Adding the number of iterations done till now
-
-			//2SPSA Begin:
-			for(int k = 0;k < Nit;k++)
-			{
-				ak = stepc.a1/pow((prevcount+k+1+stepc.A1),(stepc.alpha1));
-				ck = stepc.c11/pow((prevcount+k+1),(stepc.gamma1));
-				cktilde = stepc.c2/pow((prevcount+k+1),(stepc.gamma1));
-				if(debug)
-					cout<<"Step ak, ck, cktilde: "<<ak<<"\t"<<ck<<"\t"<<cktilde<<endl;
-				//Averagind Gradient and Hessian information
-
-				for(int count1 = 0;count1 < N;count1++)
-				{
-					hessian_currestavg[count1].setZero();//Initialize hessian avg to 0
-					ghatavg[count1].setZero();//initialize ghatavg
-				}
-
-				for(int mavg = 1;mavg <= stepc.Navg;mavg++)
-				{
-					for(int count1 = 0;count1 < N;count1++)
-					{
-						for(int count2 = 0; count2< ussize; count2++)
-						{
-							if(bernoulli_dist(randgenerator))
-								dus1[count1][count2] = 1;
-							else
-								dus1[count1][count2] = -1;
-						}//Perturbation Vector - delta
-						uss1[count1] = us[count1] + ck*dus1[count1];
-						uss2[count1] = us[count1] - ck*dus1[count1];
-						/*
-							 if(debug)
-							 {
-							 cout<<"Uss1 #"<<count1<<": "<<uss1[count1].transpose()<<endl;
-							 cout<<"Uss2 #"<<count1<<": "<<uss2[count1].transpose()<<endl;
-							 }
-						 */
-					}//Perturbed once thetahatk +/- ck deltak
-					J1 = Update(xss, uss1);//Find the cost of the perturbed trajectory 1
-					J2 = Update(xss, uss2);//Find the cost of the perturbed trajectory 2
-
-
-					//Second perturbation to find the gradient at thethatk + ck deltak
-					for(int count1 = 0;count1 < N;count1++)
-					{
-						for(int count2 = 0; count2< ussize; count2++)
-						{
-							if(bernoulli_dist(randgenerator))
-								dus2[count1][count2] = 1;
-							else
-								dus2[count1][count2] = -1;
-						}//Perturbation Vector - deltatilde
-						uss1[count1] += cktilde*dus2[count1];
-						uss2[count1] += cktilde*dus2[count1];
-						/*if(debug)
-							{
-							cout<<"Uss1 #"<<count1<<": "<<uss1[count1].transpose()<<endl;
-							cout<<"Uss2 #"<<count1<<": "<<uss2[count1].transpose()<<endl;
+	template <typename T, int n, int c, int _np> 
+          double ASPSA<T, n, c, _np>::Update(vector<T> &xs, const vector<Vectorcd> &us, bool evalCost) {    
+          double J = 0;
+          sys.reset();//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14
+          for (int k = 0; k < N; ++k) {
+            double h = ts[k+1] - ts[k];
+            sys.Step(xs[k+1], ts[k], xs[k], us[k], h);
+            if (evalCost) 
+              J += cost.L(ts[k], xs[k], us[k], h);
+            
+          }
+          if (evalCost)
+            J += cost.L(ts[N], xs[N], us[N-1], 0);
+          return J;
+        }
+        
+	template <typename T, int n, int c, int _np> 
+          void ASPSA<T, n, c, _np>::Iterate() {
+          //Reset seed of the random generator
+          randgenerator.seed(370212);
+          int ussize = us[0].rows();//Number of rows in each us
+          if(debug)
+            cout<<"Number of rows: "<<ussize<<endl;
+          float ak, ck, cktilde;//step sizes for 1SPSA and 2SPSA
+          float J1, J2, J3, J4, Jtemp;
+          
+          //1SPSA for Nit steps
+          for(int k = 0;k < 40;k ++)
+            {
+              ak = stepc.a/pow((prevcount+k+1+stepc.A),(stepc.alpha));
+              ck = stepc.c1/pow((prevcount+k+1),(stepc.gamma));
+              if(debug)
+                cout<<"Step ak, ck: "<<ak<<"\t"<<ck<<"\t"<<stepc.c1<<"\t"<<pow((prevcount+k+1),(stepc.gamma))<<endl;
+              for(int count1 = 0;count1 < N;count1++)
+                {
+                  for(int count2 = 0; count2< ussize; count2++)
+                    {
+                      if(bernoulli_dist(randgenerator))
+                        dus1[count1][count2] = 1;
+                      else
+                        dus1[count1][count2] = -1;
+                    }//Perturbation Vector - dus
+                  uss1[count1] = us[count1] + ck*dus1[count1];
+                  uss2[count1] = us[count1] - ck*dus1[count1];
+                  /*
+                    if(debug)
+                    {
+                    cout<<"Uss1 #"<<count1<<": "<<uss1[count1].transpose()<<endl;
+                    cout<<"Uss2 #"<<count1<<": "<<uss2[count1].transpose()<<endl;
+                    }
+                  */
+                }//Perturbed once thetahatk + ck deltak
+              J1 = Update(xss, uss1);//Find the cost of the perturbed trajectory 1
+              J2 = Update(xss, uss2);//Find the cost of the perturbed trajectory 2
+              
+              
+              
+              //Update the control vector based on the simultaneous gradient:
+              for(int count1 =0; count1 < N;count1++)
+                {
+                  ghat[count1] = ((J1 - J2)/(2*ck))*(dus1[count1].cwiseInverse());
+                  us[count1] = us[count1] - ak*ghat[count1];
+                }
+              if(debug)
+                {
+                  J = Update(xs,us);
+                  cout<<"J #"<<k<<"\t: "<<J<<endl;
+                }
+            }
+          J = Update(xs,us);
+          cout<<"J "<<"\t: "<<J<<endl;
+          getchar();
+          
+          prevcount += 40;//Adding the number of iterations done till now
+          
+          //2SPSA Begin:
+          for(int k = 0;k < Nit;k++)
+            {
+              ak = stepc.a1/pow((prevcount+k+1+stepc.A1),(stepc.alpha1));
+              ck = stepc.c11/pow((prevcount+k+1),(stepc.gamma1));
+              cktilde = stepc.c2/pow((prevcount+k+1),(stepc.gamma1));
+              if(debug)
+                cout<<"Step ak, ck, cktilde: "<<ak<<"\t"<<ck<<"\t"<<cktilde<<endl;
+              //Averagind Gradient and Hessian information
+              
+              for(int count1 = 0;count1 < N;count1++)
+                {
+                  hessian_currestavg[count1].setZero();//Initialize hessian avg to 0
+                  ghatavg[count1].setZero();//initialize ghatavg
+                }
+              
+              for(int mavg = 1;mavg <= stepc.Navg;mavg++)
+                {
+                  for(int count1 = 0;count1 < N;count1++)
+                    {
+                      for(int count2 = 0; count2< ussize; count2++)
+                        {
+                          if(bernoulli_dist(randgenerator))
+                            dus1[count1][count2] = 1;
+                          else
+                            dus1[count1][count2] = -1;
+                        }//Perturbation Vector - delta
+                      uss1[count1] = us[count1] + ck*dus1[count1];
+                      uss2[count1] = us[count1] - ck*dus1[count1];
+                      /*
+                        if(debug)
+                        {
+                        cout<<"Uss1 #"<<count1<<": "<<uss1[count1].transpose()<<endl;
+                        cout<<"Uss2 #"<<count1<<": "<<uss2[count1].transpose()<<endl;
+                        }
+                      */
+                    }//Perturbed once thetahatk +/- ck deltak
+                  J1 = Update(xss, uss1);//Find the cost of the perturbed trajectory 1
+                  J2 = Update(xss, uss2);//Find the cost of the perturbed trajectory 2
+                  
+                  
+                  //Second perturbation to find the gradient at thethatk + ck deltak
+                  for(int count1 = 0;count1 < N;count1++)
+                    {
+                      for(int count2 = 0; count2< ussize; count2++)
+                        {
+                          if(bernoulli_dist(randgenerator))
+                            dus2[count1][count2] = 1;
+                          else
+                            dus2[count1][count2] = -1;
+                        }//Perturbation Vector - deltatilde
+                      uss1[count1] += cktilde*dus2[count1];
+                      uss2[count1] += cktilde*dus2[count1];
+                      /*if(debug)
+                        {
+                        cout<<"Uss1 #"<<count1<<": "<<uss1[count1].transpose()<<endl;
+                        cout<<"Uss2 #"<<count1<<": "<<uss2[count1].transpose()<<endl;
 							}
-						 */
-					}
-					J3 = Update(xss, uss1);//Find the cost of the additional perturbations
-					J4 = Update(xss, uss2);
-					//Estimate the gradients:
-					//Gk1(thetahatk + ck deltak) =  (y(thethatk + ckdeltak + cktilde deltak) - y(thetahatk + ck deltak))/cktilde * deltak inverse
-					//float minhessianval = 1e4, minhesscount1 = 0;
-					//Finding average Hessian and Average Gradient
-					for(int count1 =0; count1 < N;count1++)
-					{
-						deltaG[count1] = ((J3 - J1 - (J4 - J2))/cktilde)*(dus2[count1].cwiseInverse());
-						hessian_currest[count1] = (1/(2*ck))*(deltaG[count1].cwiseProduct(dus1[count1].cwiseInverse()));//Considering only diagonal elements
-						/*if(debug
-							{
-							cout<<"hesscount2 #"<<count1<<":\n "<<hessian_currest[count1]<<endl;
-							}
-						 */
-						//hessian_currest[count1] = 0.5*(hessian_currest[count1] + hessian_currest[count1].transpose());
-
-						//Computing the averages:
-						ghat[count1] = ((J1 - J2)/(2*ck))*(dus1[count1].cwiseInverse());
-						ghatavg[count1] = (float(mavg-1)/float(mavg))*ghatavg[count1] + (1.0/float(mavg))*ghat[count1];//Estimating avg of the gradient
-						hessian_currestavg[count1] = (float(mavg-1)/float(mavg))*hessian_currestavg[count1] + (1.0/float(mavg))*hessian_currest[count1];//Estimating hessian avg 
-						/*	if(debug)
-								{
-						//cout<<"us[#"<<count1<<"]: "<<us[count1].transpose()<<endl;
-						//cout<<"hesscount #"<<count1<<":\n "<<hessian_estreg[count1]<<endl;
-						cout<<"hesscount2 #"<<count1<<":\n "<<hessian_currest[count1]<<endl;
-						}*/
-					}
-					if(debug)
-					{
-						cout<<"J1,J2,J3,J4:"<<J1<<"\t"<<J2<<"\t"<<J3<<"\t"<<J4<<"\t"<<endl;
-						cout<<"Magof Hessian"<<(J3 - J1 - (J4 - J2))/(2*cktilde*ck)<<"\t First Gradient: "<<(J3 - J1)/(cktilde)<<"\t Second Gradient: "<<(J4 - J2)/(cktilde)<<endl;
-						cout<<"Magof Gradient"<<((J1 - J2)/(2*ck))<<endl;
-						getchar();
-					}
-					//					if(debug)
-					//getchar();//DEBUG STUFF
-				}//Averaging Done
-
-				float magofHessian = abs((J3 - J1 - (J4 - J2))/(2*cktilde*ck));//Just checking one of it instead of the actual average TODO
-				/*if(magofHessian >toleranceHessianmag)
+                      */
+                    }
+                  J3 = Update(xss, uss1);//Find the cost of the additional perturbations
+                  J4 = Update(xss, uss2);
+                  //Estimate the gradients:
+                  //Gk1(thetahatk + ck deltak) =  (y(thethatk + ckdeltak + cktilde deltak) - y(thetahatk + ck deltak))/cktilde * deltak inverse
+                  //float minhessianval = 1e4, minhesscount1 = 0;
+                  //Finding average Hessian and Average Gradient
+                  for(int count1 =0; count1 < N;count1++)
+                    {
+                      deltaG[count1] = ((J3 - J1 - (J4 - J2))/cktilde)*(dus2[count1].cwiseInverse());
+                      hessian_currest[count1] = (1/(2*ck))*(deltaG[count1].cwiseProduct(dus1[count1].cwiseInverse()));//Considering only diagonal elements
+                      /*if(debug
+                        {
+                        cout<<"hesscount2 #"<<count1<<":\n "<<hessian_currest[count1]<<endl;
+                        }
+                      */
+                      //hessian_currest[count1] = 0.5*(hessian_currest[count1] + hessian_currest[count1].transpose());
+                      
+                      //Computing the averages:
+                      ghat[count1] = ((J1 - J2)/(2*ck))*(dus1[count1].cwiseInverse());
+                      ghatavg[count1] = (float(mavg-1)/float(mavg))*ghatavg[count1] + (1.0/float(mavg))*ghat[count1];//Estimating avg of the gradient
+                      hessian_currestavg[count1] = (float(mavg-1)/float(mavg))*hessian_currestavg[count1] + (1.0/float(mavg))*hessian_currest[count1];//Estimating hessian avg 
+                      /*	if(debug)
+                                {
+                                //cout<<"us[#"<<count1<<"]: "<<us[count1].transpose()<<endl;
+                                //cout<<"hesscount #"<<count1<<":\n "<<hessian_estreg[count1]<<endl;
+                                cout<<"hesscount2 #"<<count1<<":\n "<<hessian_currest[count1]<<endl;
+                                }*/
+                    }
+                  if(debug)
+                    {
+                      cout<<"J1,J2,J3,J4:"<<J1<<"\t"<<J2<<"\t"<<J3<<"\t"<<J4<<"\t"<<endl;
+                      cout<<"Magof Hessian"<<(J3 - J1 - (J4 - J2))/(2*cktilde*ck)<<"\t First Gradient: "<<(J3 - J1)/(cktilde)<<"\t Second Gradient: "<<(J4 - J2)/(cktilde)<<endl;
+                      cout<<"Magof Gradient"<<((J1 - J2)/(2*ck))<<endl;
+                      getchar();
+                    }
+                  //					if(debug)
+                  //getchar();//DEBUG STUFF
+                }//Averaging Done
+              
+              float magofHessian = abs((J3 - J1 - (J4 - J2))/(2*cktilde*ck));//Just checking one of it instead of the actual average TODO
+              /*if(magofHessian >toleranceHessianmag)
 					{
 					cerr<<"Magnitude of Hessian Big: "<<magofHessian<<endl;
 					for(int count1 =0; count1 < N;count1++)
@@ -397,46 +405,46 @@ namespace gcop {
 					}
 					else
 					{
-				 */
-				//Update the control vector based on the simultaneous gradient:
-				for(int count1 =0; count1 < N;count1++)
-				{
-					hessian_est[count1] = (float(k+1)/float(k+2))*hessian_est[count1] + (1/float(k+2))*hessian_currestavg[count1];//Find the Current Hessian estimate using iterative process This is slightly modified to use the initial estimate 
-					//hessian_estreg[count1] = hessian_est[count1].cwiseAbs() + (0.001/(k+1)) * Vectorcd::Ones();//Regulated
-					hessian_estreg[count1] = hessian_est[count1].cwiseMax(toleranceHessianmag*Vectorcd::Ones());//Regulated
-					//hessian_estreg[count1] = Vectorcd::Ones();
-					ustemp[count1] = us[count1] - ak*(hessian_estreg[count1].cwiseInverse()).cwiseProduct(ghatavg[count1]);//Can add constraints here TODO
-					if(debug)
-					{
-						//cout<<"us[#"<<count1<<"]: "<<us[count1].transpose()<<endl;
-						//cout<<"Hess eig values: "<<hessian_estreg[count1].eigenvalues().transpose()<<endl;
-						cout<<"hesscountreg #"<<count1<<": "<<hessian_estreg[count1].transpose()<<endl;
-						cout<<"hesscountavgest #"<<count1<<": "<<hessian_currestavg[count1].transpose()<<endl;
-						//.part<Eigen::LowerTriangular>() 
-						//cout<<"hesscount2 #"<<count1<<":\n "<<hessian_currest[count1]<<endl;
-					}
-				}
-				//}
-				Jtemp = Update(xs,ustemp);//Evaluate the new cost
-				if(Jtemp < (J + toleranceJ))
-				{
-					J = Jtemp;
-					us = ustemp;	
-				}//Else neglect
-				else
-				{
-					cerr<<"Neglecting Jtemp, J: "<<Jtemp<<"\t"<<J<<endl;
-				}
-				if(debug)
-				{
-					cout<<"J Jtemp J1,J2,J3,J4 #"<<k<<"\t: "<<J<<"\t"<<Jtemp<<"\t"<<J1<<"\t"<<J2<<"\t"<<J3<<"\t"<<J4<<endl;
-					getchar();
-				}
-			}
-			prevcount += Nit;
-			//Terminal xs and J:
-			J = Update(xs,us);
-		}
+              */
+              //Update the control vector based on the simultaneous gradient:
+              for(int count1 =0; count1 < N;count1++)
+                {
+                  hessian_est[count1] = (float(k+1)/float(k+2))*hessian_est[count1] + (1/float(k+2))*hessian_currestavg[count1];//Find the Current Hessian estimate using iterative process This is slightly modified to use the initial estimate 
+                  //hessian_estreg[count1] = hessian_est[count1].cwiseAbs() + (0.001/(k+1)) * Vectorcd::Ones();//Regulated
+                  hessian_estreg[count1] = hessian_est[count1].cwiseMax(toleranceHessianmag*Vectorcd::Ones());//Regulated
+                  //hessian_estreg[count1] = Vectorcd::Ones();
+                  ustemp[count1] = us[count1] - ak*(hessian_estreg[count1].cwiseInverse()).cwiseProduct(ghatavg[count1]);//Can add constraints here TODO
+                  if(debug)
+                    {
+                      //cout<<"us[#"<<count1<<"]: "<<us[count1].transpose()<<endl;
+                      //cout<<"Hess eig values: "<<hessian_estreg[count1].eigenvalues().transpose()<<endl;
+                      cout<<"hesscountreg #"<<count1<<": "<<hessian_estreg[count1].transpose()<<endl;
+                      cout<<"hesscountavgest #"<<count1<<": "<<hessian_currestavg[count1].transpose()<<endl;
+                      //.part<Eigen::LowerTriangular>() 
+                      //cout<<"hesscount2 #"<<count1<<":\n "<<hessian_currest[count1]<<endl;
+                    }
+                }
+              //}
+              Jtemp = Update(xs,ustemp);//Evaluate the new cost
+              if(Jtemp < (J + toleranceJ))
+                {
+                  J = Jtemp;
+                  us = ustemp;	
+                }//Else neglect
+              else
+                {
+                  cerr<<"Neglecting Jtemp, J: "<<Jtemp<<"\t"<<J<<endl;
+                }
+              if(debug)
+                {
+                  cout<<"J Jtemp J1,J2,J3,J4 #"<<k<<"\t: "<<J<<"\t"<<Jtemp<<"\t"<<J1<<"\t"<<J2<<"\t"<<J3<<"\t"<<J4<<endl;
+                  getchar();
+                }
+            }
+          prevcount += Nit;
+          //Terminal xs and J:
+          J = Update(xs,us);
+        }
 }
 
 #endif

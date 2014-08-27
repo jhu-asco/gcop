@@ -113,9 +113,6 @@ target_link_libraries(airbottest gcop  ${LIBS})
 #add_executable(gpadd gpadd.cc)
 #target_link_libraries(gpadd gcop ${LIBS})
 
-add_executable(imukftest imukftest.cc)
-target_link_libraries(imukftest gcop ${LIBS})
-
 add_executable(imuekftest imuekftest.cc)
 target_link_libraries(imuekftest gcop ${LIBS})
 
@@ -130,8 +127,8 @@ target_link_libraries(helirhc gcop  ${LIBS})
 add_executable(uuvtest uuvtest.cc)
 target_link_libraries(uuvtest gcop  ${LIBS})
 
-add_executable(armtest armtest.cc)
-target_link_libraries(armtest gcop  ${LIBS})
+#add_executable(armtest armtest.cc)
+#target_link_libraries(armtest gcop  ${LIBS})
 
 # Cross-entropy simple example
 

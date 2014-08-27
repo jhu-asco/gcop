@@ -51,7 +51,7 @@ void solver_process(Viewer* viewer)
   params.GetVector4d("xf", xf);  
 
   // cost
-  RnLqCost<4, 2> cost(tf, xf);
+  RnLqCost<4, 2> cost(sys, tf, xf);
   VectorXd Q(4);
   if (params.GetVectorXd("Q", Q))
     cost.Q = Q.asDiagonal();
