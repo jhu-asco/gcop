@@ -19,6 +19,9 @@ set(headers
   insmanifold.h
   insimu.h
   insgps.h
+  point3d.h
+  point3dmanifold.h
+  point3dgps.h
 )
 
 
@@ -33,4 +36,6 @@ set(sources
   imumanifold.cc
   ins.cc
   insmanifold.cc
+  point3d.cc
+  point3dmanifold.cc
 )

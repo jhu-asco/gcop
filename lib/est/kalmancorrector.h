@@ -82,8 +82,9 @@ namespace gcop {
     sensor(y, t, xa, u, p, &H);
     
     //    std::cout << "y=" << y << std::endl;
-    //    std::cout << "Pa=" << Pa << std::endl;    
-    //    std::cout << "S=" << H*Pa*H.transpose() + R << std::endl;
+    //    std::cout << "Pa=" << xa.P << std::endl;    
+    //    std::cout << "S=" << H*xa.P*H.transpose() + this->sensor.R << std::endl;
+    //    std::cout << "xa.P*H.transpose()=" << xa.P*H.transpose() << std::endl;
     
     K = xa.P*H.transpose()*(H*xa.P*H.transpose() + this->sensor.R).inverse();
     
@@ -93,7 +94,7 @@ namespace gcop {
       xb.P = (MatrixXd::Identity(this->sys.X.n, this->sys.X.n) - K*H)*xa.P;
     
     //    std::cout << "K=" << K << std::endl;            
-
+    //    std::cout << "z-y=" << z-y << std::endl;            
     //    %x = x*S.exp(K*(z - y));    
     //%K = inv(inv(P) + H'*inv(S.R)*H)*H'*inv(S.R);
     //%P = (eye(length(x)) - K*H)*P*(eye(length(x)) - K*H)' + K*S.R*K';

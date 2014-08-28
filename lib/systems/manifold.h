@@ -68,7 +68,7 @@ namespace gcop {
    * @param M matrix operator
    * @param v Lie algebra element
    */
-  virtual void dtau(Matrixnd &M, const Vectornd &v) = 0;
+  virtual void dtau(Matrixnd &M, const Vectornd &v) { M.setIdentity(); };
 
   /**
    * Adjoint map of the retraction, i.e. Ad(\tau(v))
@@ -76,7 +76,7 @@ namespace gcop {
    * @param M resulting matrix operator
    * @param v Lie algebra element
    */
-  virtual void Adtau(Matrixnd &M, const Vectornd &v) = 0;
+  virtual void Adtau(Matrixnd &M, const Vectornd &v) {M.setIdentity(); };
    
   int n;  ///< dimension
   

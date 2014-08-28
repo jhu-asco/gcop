@@ -119,6 +119,9 @@ target_link_libraries(imuekftest gcop ${LIBS})
 add_executable(insekftest insekftest.cc)
 target_link_libraries(insekftest gcop ${LIBS})
 
+add_executable(point3dkftest point3dkftest.cc)
+target_link_libraries(point3dkftest gcop ${LIBS})
+
 
 add_executable(helirhc helirhc.cc)
 target_link_libraries(helirhc gcop  ${LIBS})
