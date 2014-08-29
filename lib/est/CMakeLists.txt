@@ -7,7 +7,6 @@ set(headers
   unscentedcorrector.h
   quat.h
   gp.h
-  normal.h
   gmm.h
   ce.h
   camera.h
@@ -28,7 +27,6 @@ set(headers
 set(sources 
   quat.cc
   gp.cc
-  normal.cc
   camera.cc
   gmm.cc
   ce.cc

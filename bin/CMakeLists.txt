@@ -1,150 +1,159 @@
 link_directories(${GCOP_BINARY_DIR}/lib) 
+# Use these dependency libs when linking with gcop
+# EST_LIBS VIEWER_LIBS SYS_LIBS  UTIL_LIBS  ALGO_LIBS ALL_LIBS
+message(" EST_LIBS: ${EST_LIBS}\n")
+message(" VIEWER_LIBS: ${VIEWER_LIBS}\n")
+message(" SYS_LIBS: ${SYS_LIBS}\n")
+message(" UTIL_LIBS: ${UTIL_LIBS}\n")
+message(" ALGO_LIBS: ${ALGO_LIBS}\n")
+if (BUILD_TESTS)
+	add_executable(particle2dtest particle2dtest.cc)
+	target_link_libraries(particle2dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})# We could just use VIEWER,ALGO,SYS,UTIL
 
-add_executable(particle2dtest particle2dtest.cc)
-target_link_libraries(particle2dtest gcop ${LIBS})
+	add_executable(unicycletest unicycletest.cc)
+	target_link_libraries(unicycletest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(unicycletest unicycletest.cc)
-target_link_libraries(unicycletest gcop  ${LIBS})
+	add_executable(gunicycletest gunicycletest.cc)
+	target_link_libraries(gunicycletest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(gunicycletest gunicycletest.cc)
-target_link_libraries(gunicycletest gcop  ${LIBS})
+#	add_executable(body2dtest body2dtest.cc)
+#	target_link_libraries(body2dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
-#add_executable(body2dtest body2dtest.cc)
-#target_link_libraries(body2dtest gcop  ${LIBS})
-
-add_executable(body3dtest body3dtest.cc)
-target_link_libraries(body3dtest gcop  ${LIBS})
+	add_executable(body3dtest body3dtest.cc)
+	target_link_libraries(body3dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 # use qrotor.cfg as input
-add_executable(qrotortest qrotortest.cc)
-target_link_libraries(qrotortest gcop  ${LIBS})
+	add_executable(qrotortest qrotortest.cc)
+	target_link_libraries(qrotortest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(hrotortest hrotortest.cc)
-target_link_libraries(hrotortest gcop  ${LIBS})
+	add_executable(hrotortest hrotortest.cc)
+	target_link_libraries(hrotortest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(helitest helitest.cc)
-target_link_libraries(helitest gcop  ${LIBS})
+	add_executable(helitest helitest.cc)
+	target_link_libraries(helitest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(helicartest helicartest.cc)
-target_link_libraries(helicartest gcop  ${LIBS})
+	add_executable(helicartest helicartest.cc)
+	target_link_libraries(helicartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-#add_executable(batest batest.cc)
-#target_link_libraries(batest gcop  ${LIBS})
+	#add_executable(batest batest.cc)
+	#target_link_libraries(batest gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
-#add_executable(body2dslamtest body2dslamtest.cc)
-#target_link_libraries(body2dslamtest gcop  ${LIBS})
+	#add_executable(body2dslamtest body2dslamtest.cc)
+	#target_link_libraries(body2dslamtest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-#add_executable(body2dtracktest body2dtracktest.cc)
-#target_link_libraries(body2dtracktest gcop  ${LIBS})
+	#add_executable(body2dtracktest body2dtracktest.cc)
+	#target_link_libraries(body2dtracktest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(body2dtracktest2 body2dtracktest2.cc)
-target_link_libraries(body2dtracktest2 gcop  ${LIBS})
-
-
-#add_executable(extforceslamtest extforceslamtest.cc)
-#target_link_libraries(extforceslamtest gcop  ${LIBS})
+	#add_executable(body2dtracktest2 body2dtracktest2.cc)
+	#target_link_libraries(body2dtracktest2  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 
-add_executable(cartest cartest.cc)
-target_link_libraries(cartest gcop  ${LIBS})
+	#add_executable(extforceslamtest extforceslamtest.cc)
+	#target_link_libraries(extforceslamtest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(rccartest rccartest.cc)
-target_link_libraries(rccartest gcop  ${LIBS})
+	add_executable(cartest cartest.cc)
+	target_link_libraries(cartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(gnrccartest gnrccartest.cc)
-target_link_libraries(gnrccartest gcop  ${LIBS})
+	add_executable(rccartest rccartest.cc)
+	target_link_libraries(rccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+	add_executable(gnrccartest gnrccartest.cc)
+	target_link_libraries(gnrccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 
-add_executable(cecartest cecartest.cc)
-target_link_libraries(cecartest gcop  ${LIBS})
+	add_executable(cecartest cecartest.cc)
+	target_link_libraries(cecartest  gcop_algos gcop_views gcop_systems gcop_est ${ALL_LIBS})
 
-#add_executable(cechaintest cechaintest.cc)
-#target_link_libraries(cechaintest gcop  ${LIBS})
+	#add_executable(cechaintest cechaintest.cc)
+	#target_link_libraries(cechaintest  gcop_algos gcop_views gcop_systems gcop_est ${ALL_LIBS})
 
-add_executable(spsacartest spsacartest.cc)
-target_link_libraries(spsacartest gcop  ${LIBS})
+	add_executable(spsacartest spsacartest.cc)
+	target_link_libraries(spsacartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(aspsacartest aspsacartest.cc)
-target_link_libraries(aspsacartest gcop  ${LIBS})
+	add_executable(aspsacartest aspsacartest.cc)
+	target_link_libraries(aspsacartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(chaintest chaintest.cc)
-target_link_libraries(chaintest gcop  ${LIBS})
+	add_executable(chaintest chaintest.cc)
+	target_link_libraries(chaintest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-#add_executable(chain1test chain1test.cc)
-#target_link_libraries(chain1test gcop  ${LIBS})
+	#add_executable(chain1test chain1test.cc)
+	#target_link_libraries(chain1test  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-#add_executable(airmtest airmtest.cc)
-#target_link_libraries(airmtest gcop  ${LIBS})
 
-add_executable(airmopttest airmopttest.cc)
-target_link_libraries(airmopttest gcop  ${LIBS})
+	#add_executable(airmtest airmtest.cc)
+	#target_link_libraries(airmtest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-#add_executable(chainopttest chainopttest.cc)
-#target_link_libraries(chainopttest gcop  ${LIBS})
+	add_executable(airmopttest airmopttest.cc)
+	target_link_libraries(airmopttest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+	#add_executable(chainopttest chainopttest.cc)
+	#target_link_libraries(chainopttest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+
+
 
 # to be used with bin/fixedchain1.cfg
-add_executable(fixedchaintest fixedchaintest.cc)
-target_link_libraries(fixedchaintest gcop  ${LIBS})
+	add_executable(fixedchaintest fixedchaintest.cc)
+	target_link_libraries(fixedchaintest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-#add_executable(pendtest pendtest.cc)
-#target_link_libraries(pendtest gcop  ${LIBS})
+#	add_executable(pendtest pendtest.cc)
+#	target_link_libraries(pendtest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-#add_executable(chaineltest chaineltest.cc)
-#target_link_libraries(chaineltest gcop  ${LIBS})
+#	add_executable(chaineltest chaineltest.cc)
+#	target_link_libraries(chaineltest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 #add_executable(snakeopttest snakeopttest.cc)
-#target_link_libraries(snakeopttest gcop  ${LIBS})
+#target_link_libraries(snakeopttest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-add_executable(airbottest airbottest.cc)
-target_link_libraries(airbottest gcop  ${LIBS})
+	add_executable(airbottest airbottest.cc)
+	target_link_libraries(airbottest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 
 # Estimation-related tests
+	#add_executable(ukftest ukftest.cc)
+	#target_link_libraries(ukftest gcop_est gcop_systems ${ALL_LIBS})
 
-#add_executable(ukftest ukftest.cc)
-#target_link_libraries(ukftest gcop ${LIBS})
-
-#add_executable(imuukftest imuukftest.cc)
-#target_link_libraries(imuukftest gcop ${LIBS})
+	#add_executable(imuukftest imuukftest.cc)
+	#target_link_libraries(imuukftest gcop_est gcop_systems ${ALL_LIBS})
 
 #add_executable(gptest gptest.cc)
-#target_link_libraries(gptest gcop ${LIBS})
+#target_link_libraries(gptest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 #add_executable(gpadd gpadd.cc)
-#target_link_libraries(gpadd gcop ${LIBS})
+#target_link_libraries(gpadd gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 add_executable(imuekftest imuekftest.cc)
-target_link_libraries(imuekftest gcop ${LIBS})
+target_link_libraries(imuekftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 add_executable(insekftest insekftest.cc)
-target_link_libraries(insekftest gcop ${LIBS})
+target_link_libraries(insekftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 add_executable(point3dkftest point3dkftest.cc)
-target_link_libraries(point3dkftest gcop ${LIBS})
+target_link_libraries(point3dkftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 
 add_executable(helirhc helirhc.cc)
-target_link_libraries(helirhc gcop  ${LIBS})
+target_link_libraries(helirhc gcop_est gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 # with bin/jhurov.cfg
 add_executable(uuvtest uuvtest.cc)
-target_link_libraries(uuvtest gcop  ${LIBS})
+target_link_libraries(uuvtest gcop_est gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 #add_executable(armtest armtest.cc)
-#target_link_libraries(armtest gcop  ${LIBS})
+#target_link_libraries(armtest gcop_est gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 # Cross-entropy simple example
 
-add_executable(cetest cetest.cc)
-target_link_libraries(cetest gcop ${LIBS})
+	add_executable(cetest cetest.cc)
+	target_link_libraries(cetest gcop_est gcop_systems gcop_est ${ALL_LIBS})
 
-#add_executable(airplanetest airplanetest.cc)
-#target_link_libraries(airplanetest gcop ${LIBS})
+	#add_executable(airplanetest airplanetest.cc)
+	#target_link_libraries(airplanetest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 # Camera testing 6dof pose example
 #add_executable(camtest camtest.cc)
-#target_link_libraries(camtest gcop ${LIBS})
+#target_link_libraries(camtest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 #INSTALL(TARGETS gcoptest
 #        RUNTIME
 #        DESTINATION bin)
-
+endif (BUILD_TESTS)

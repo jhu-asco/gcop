@@ -33,6 +33,7 @@ set(sources
   body2dforce.cc
   arm.cc
 #  imusensor.cc
+	urdf_parser.cpp
 )
 
 set(headers
@@ -82,4 +83,5 @@ set(headers
   force.h
   body2dforce.h
   arm.h
+	urdf_parser.h
 )
