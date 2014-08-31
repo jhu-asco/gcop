@@ -3,6 +3,7 @@ set(headers
   corrector.h
   kalmanpredictor.h
   kalmancorrector.h
+  unscentedbase.h
   unscentedpredictor.h
   unscentedcorrector.h
   quat.h

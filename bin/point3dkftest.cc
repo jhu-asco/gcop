@@ -40,7 +40,7 @@ int main(int argc, char** argv)
   for (int i = 0; i < N-1; ++i) {
     double t = i*dt;
 
-    // true input (drifted angular velocity)
+    // Constant velocity model no acceleration
     Vector3d u(0, 0, 0); // no inputs
 
     // generate true

@@ -43,6 +43,7 @@ set(headers
   system_extstep.h
   cost.h
   lqcost.h
+  lscost.h
   rnlqcost.h
   particle2d.h
   unicycle.h
