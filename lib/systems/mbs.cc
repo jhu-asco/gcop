@@ -39,8 +39,14 @@ Mbs::Mbs(int nb, int c, bool fixed) : nb(nb), fixed(fixed),
  
 Mbs::~Mbs()
 {
+	std::cout<<"Entering Mbs Destructor"<<std::endl;
+	/* Since the parent object system is already deleted, U, X are deleted by default should not delete them again
   delete &U;
+	//DEBUG
+	std::cout<<"Deleted U"<<std::endl;
   delete &X;
+	std::cout<<"Deleted X"<<std::endl;
+	*/
 }
 
 void Mbs::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
