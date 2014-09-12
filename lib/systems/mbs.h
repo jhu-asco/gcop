@@ -15,6 +15,8 @@
 #include "function.h"
 #include "mbscspace.h"
 #include "mbstspace.h"
+#include <exception>      // std::exception
+#include <stdexcept>
 
 namespace gcop {
   

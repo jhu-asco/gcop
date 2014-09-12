@@ -229,14 +229,25 @@ void Mbs::FK(MbsState &x)
 {
   // given: x.gs[0], x.r 
   // compute: x.gs[*], x.dgs[*], x.Ms[*]
+	//[DEBUG]
+	//cout<<" ================FK BEGIN============ "<<endl;
   
   Matrix4d dg;
-  for (int i = 1; i < nb; ++i) {
-    int pi = pis[i];
-    se3.exp(dg, x.r[i-1]*joints[i-1].a);
-    x.dgs[i-1] = joints[i-1].gp*dg;
-    x.gs[i] = x.gs[pi]*x.dgs[i-1]*joints[i-1].gci;
-  }
+	for (int i = 1; i < nb; ++i) {
+		int pi = pis[i];
+		se3.exp(dg, x.r[i-1]*joints[i-1].a);
+		x.dgs[i-1] = joints[i-1].gp*dg*joints[i-1].gci;
+		x.gs[i] = x.gs[pi]*x.dgs[i-1];
+		//x.gs[i] = x.gs[pi]*x.dgs[i-1]*joints[i-1].gci;
+
+	/*	cout<<"dg_"<<i<<": "<<endl<<dg<<endl;//[DEBUG]
+		cout<<"Joints.a["<<i-1<<"]"<<endl<<joints[i-1].a.transpose()<<endl;
+		cout<<"joints.gp: ["<<i-1<<"]"<<endl<<joints[i-1].gp<<endl;
+		cout<<"x.dgs: ["<<i-1<<"]"<<endl<<x.dgs[i-1]<<endl;
+		cout<<"x.gs: ["<<i<<"]"<<endl<<x.gs[i]<<endl;
+		*/
+	}
+	//cout<<" ================FK END============ "<<endl;
 }
 
 
@@ -357,8 +368,18 @@ double Mbs::EulerStep(MbsState& xb, double t, const MbsState& xa,
   xb.zu = xa.zu + h*(- (ubK.cwiseProduct(xa.zu) + fsu).cwiseQuotient(ubD));
 
   //  ClampVelocity(xb);
-
-  KStep(xb, xa, h);
+	//try
+	//{
+		KStep(xb, xa, h);
+	/*}
+	catch (std::exception& e)
+	{
+		std::cerr << "exception caught: " << e.what() << '\n';
+		cout<<"Input Control u: "<<u.transpose()<<endl;
+	//	throw std::runtime_error(std::string("Nan observed"));
+		return -1;
+	}
+	*/
 
   return 0;
 
@@ -427,6 +448,21 @@ void Mbs::ClampVelocity(MbsState &x) const
       x.dr[i] = X.lb.dr[i];
 }
 
+void print(const MbsState &x)
+{
+  for (int i =0; i < x.gs.size(); ++i) {
+    cout << "gs[" << i << "]=" << endl << x.gs[i] << endl;
+  }
+  for (int i =0; i < x.vs.size(); ++i) {
+    cout << "vs[" << i << "]=" << endl << x.vs[i].transpose() << endl;
+  }  
+  for (int i =0; i < x.dgs.size(); ++i) {
+    cout << "dgs[" << i << "]=" << endl << x.dgs[i] << endl;
+  }
+
+  cout << "r=" << x.r.transpose() << endl;
+  cout << "dr=" << x.dr.transpose() << endl;
+}
 
 void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u, double h)
 {
@@ -469,6 +505,15 @@ void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u, doubl
   } else {
     cout << "[W] Mbs::Acc Mass matrix not positive definite!" << endl;
   }
+	//[DEBUG]
+	/*
+	cout<<" ================ACC BEGIN============ "<<endl;
+	print(x);//Print input to Bias
+	cout<<"b: "<<b.transpose()<<endl;
+	cout<<"Net Force: "<<f.transpose()<<endl;
+	cout<<"Acc: "<<a.transpose()<<endl;
+	cout<<" ================ACC END============ "<<endl;
+	*/
 }
 
 
@@ -477,36 +522,21 @@ double Mbs::Step(MbsState& xb, double t, const MbsState& xa,
                  const VectorXd &u, double h, const VectorXd *p,
                  MatrixXd *A, MatrixXd *B, MatrixXd *C)
 {
-  //  if (method == EULER)
-  //    return System::Step(xb, t, xa, u, h, A, B);
+	//  if (method == EULER)
+	//    return System::Step(xb, t, xa, u, h, A, B);
 
-  
-  if (method == EULER)
-    return EulerStep(xb, t, xa, u, h, A, B);
-  else if (method == HEUN)
-    return HeunStep(xb, t, xa, u, h, A, B);
-  else if (method == TRAP)
-    return TrapStep(xb, t, xa, u, h, A, B);
-  else 
-    cout << "[W] Mbs::Step: unsupported method " << method << endl;
-  return 0;
+		if (method == EULER)
+			return EulerStep(xb, t, xa, u, h, A, B);
+		else if (method == HEUN)
+			return HeunStep(xb, t, xa, u, h, A, B);
+		else if (method == TRAP)
+			return TrapStep(xb, t, xa, u, h, A, B);
+		else 
+			cout << "[W] Mbs::Step: unsupported method " << method << endl;
+	return 0;
 }
 
-void print(const MbsState &x)
-{
-  for (int i =0; i < x.gs.size(); ++i) {
-    cout << "gs[" << i << "]=" << endl << x.gs[i] << endl;
-  }
-  for (int i =0; i < x.vs.size(); ++i) {
-    cout << "vs[" << i << "]=" << endl << x.vs[i].transpose() << endl;
-  }  
-  for (int i =0; i < x.dgs.size(); ++i) {
-    cout << "dgs[" << i << "]=" << endl << x.dgs[i] << endl;
-  }
 
-  cout << "r=" << x.r.transpose() << endl;
-  cout << "dr=" << x.dr.transpose() << endl;
-}
 
 
 
@@ -784,8 +814,18 @@ void Mbs::KStep(MbsState &xb, const MbsState &xa, double h, bool impl) {
 
     //    cout << xb.r[i-1]*jnt.a << endl;
     se3.exp(dg, xb.r[i-1]*jnt.a);
+		//cout<<"dg: ["<<i<<"]"<<endl<<dg<<endl;
     
-    assert(!std::isnan(dg(0,0)));
+    //assert(!std::isnan(dg(0,0)));
+		if(std::isnan(dg(0,0)))
+		{
+			//Print some details for us to understand what is going on:
+			cout<<"Xa State: "<<endl;
+			print(xa);
+			cout<<"Xb State: "<<endl;
+			print(xb);
+			throw std::runtime_error(std::string("Nan observed"));
+		}
     xb.dgs[i-1] = jnt.gp*dg*jnt.gci;  // this is also in FK
     
     int pi = pis[i];
@@ -799,6 +839,9 @@ void Mbs::KStep(MbsState &xb, const MbsState &xa, double h, bool impl) {
     
     xb.vs[i] /= h;
   }
+	//[DEBUG]
+	//cout<<"==========KStep Propagating Forward==================="<<endl;
+	//print(xb);
 }
 
 

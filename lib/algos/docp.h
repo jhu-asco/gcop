@@ -100,7 +100,7 @@ namespace gcop {
                               bool update) : 
     sys(sys), cost(cost), ts(ts), xs(xs), us(us), p(p),
     As(us.size()), Bs(us.size()), 
-    debug(true), eps(1e-6)
+    debug(true), eps(1e-3)
     {
       int N = us.size();
       assert(N > 0);

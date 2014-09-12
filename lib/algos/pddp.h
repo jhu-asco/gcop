@@ -466,6 +466,7 @@ namespace gcop {
 
     while (dVm > 0) {
       Vectornd dx = VectorXd::Zero(this->sys.X.n);
+			dx.setZero();//Redundancy
       //      Vectornd dx = Vectornd::Zero();
       T xn = this->xs[0];
       Vectorcd un;

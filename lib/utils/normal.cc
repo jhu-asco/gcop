@@ -87,12 +87,14 @@ void Normal::Fit(const vector<pair<VectorXd, double> > xws, double a)
   int N = xws.size();
   
   VectorXd mu = VectorXd::Zero(this->mu.size());
+	mu.setZero();//Redundancy
   for (int j = 0; j < N; ++j) {
     const pair<VectorXd, double> &xw = xws[j];
     mu += xw.first*xw.second;
   }
   
   MatrixXd P = MatrixXd::Zero(this->mu.size(), this->mu.size());  
+	P.setZero();//Redundancy
   for (int j = 0; j < N; ++j) {
     const pair<VectorXd, double> &xw = xws[j];
     VectorXd dx = xw.first - mu;

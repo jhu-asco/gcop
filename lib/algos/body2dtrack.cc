@@ -227,7 +227,8 @@ void Body2dTrack::Optp(VectorXd &p, const vector<M3V3d> &xs)
   for (int l = 0; l < nf; ++l) {
     const vector< pair<int,Vector2d> > &J = Js[l];
     assert(J.size());
-    Vector2d pf = Vector2d::Zero();
+    Vector2d pf;// = Vector2d::Zero();
+		pf.setZero();
     for (int j = 0; j < J.size(); ++j) {
       int k = J[j].first;
       const Vector2d &z = J[j].second;

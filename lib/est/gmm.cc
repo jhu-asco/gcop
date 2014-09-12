@@ -176,7 +176,9 @@ void Gmm::Fit(const vector<pair<VectorXd, double> > &xps, double a, int iter, co
     for (int i = 0; i < k; ++i) {
       double t1 = 0;
       VectorXd t2 = VectorXd::Zero(ns[0].mu.size());
+			t2.setZero();//Redundancy
       MatrixXd t3 = MatrixXd::Zero(ns[0].mu.size(), ns[0].mu.size());
+			t3.setZero();
       
       for (int j = 0; j < N; ++j) {
         const VectorXd &x = xps[j].first;

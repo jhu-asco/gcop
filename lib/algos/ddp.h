@@ -2,6 +2,8 @@
 #define GCOP_DDP_H
 
 #include "docp.h"
+#include <exception>      // std::exception
+#include <stdexcept>
 
 namespace gcop {
   
@@ -367,6 +369,7 @@ namespace gcop {
     while (dVm > 0) {
 
       Vectornd dx = VectorXd::Zero(this->sys.X.n);
+			dx.setZero();//Redundancy
       T xn = this->xs[0];
       Vectorcd un;
       
@@ -408,8 +411,28 @@ namespace gcop {
         } else {
           double h = this->ts[k+1] - t;
           T xn_(xn);
-          this->sys.Step(xn_, t, xn, un, h, this->p);
+					//Adding nan catching :
+					try
+					{
+						this->sys.Step(xn_, t, xn, un, h, this->p);
+					}
+					catch(std::exception &e)
+					{
+						//[DEBUG] Statement
+						std::cerr << "exception caught: " << e.what() << '\n';
+						std::cout<<" Iteration counter: "<<k<<endl;
+						std::cout<<" u: "<<u.transpose()<<endl;
+						std::cout<<" du: "<<du.transpose()<<endl;
+						//More debug statements:
+						//std::cout<<" a: "<<a<<"\t ku: "<<ku.transpose()<<"\t dx: "<<dx.transpose()<<"\n kux: \n"<<Kux<<endl;
+						//[Culprit dx]
+
+						throw std::runtime_error(std::string("Nan observed"));
+						return;
+					}
           xn = xn_;
+					//cout<<"dx: "<<dx.transpose()<<endl;//[DEBUG]//Previous iteration dx
+					//std::cout<<" du: "<<du.transpose()<<endl;//[DEBUG]
           this->sys.X.Lift(dx, this->xs[k+1], xn);
           
           //          cout << xn.gs[0] << " " << xn.r << " " << xn.vs[0] << " " << xn.dr << endl;

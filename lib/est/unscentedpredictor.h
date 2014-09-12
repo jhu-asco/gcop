@@ -70,7 +70,8 @@ namespace gcop {
     this->Points(this->Xs, xa);
     
     // average difference
-    Vectornd dx = Vectornd::Zero();
+    Vectornd dx;// = Vectornd::Zero();
+		dx.setZero();
     vector<Vectornd> dxs(2*this->L+1);
     
     for (int i = 0; i < 2*this->L + 1; ++i) {
