@@ -6,6 +6,7 @@
 #include "utils.h"
 #include "rnlqcost.h"
 #include "params.h"
+#include "controltparam.h"
 
 using namespace std;
 using namespace Eigen;
@@ -15,15 +16,18 @@ typedef SystemCe<Vector4d, 4, 2> RccarCe;
 
 Params params;
 
+// whether to use a specific trajectory parametrization
+#define USE_TPARAM
+
 void solver_process(Viewer* viewer)
 {
   if (viewer)
     viewer->SetCamera(-5, 51, -0.2, -0.15, -2.3);
 
-  int N = 16;        // number of segments
+  int N = 32;        // number of segments
   double tf = 5;    // time horizon
 
-  int iters = 30;
+  int iters = 30;  
 
   params.GetInt("N", N);  
   params.GetDouble("tf", tf);
@@ -87,7 +91,21 @@ void solver_process(Viewer* viewer)
   vector<Vector2d> dus(N, du);
   vector<Vector2d> es(N, e);
   
-  RccarCe ce(sys, cost, ts, xs, us, dus, es);
+#ifdef USE_TPARAM
+  int Nk = 5;
+  vector<double> tks(Nk+1);
+  for (int k = 0; k <=Nk; ++k)
+    tks[k] = k*(tf/Nk);
+  
+  ControlTparam<Vector4d, 4, 2> ctp(sys, tks);
+
+  RccarCe ce(sys, cost, ctp, ts, xs, us, 0, dus, es);
+#else
+  RccarCe ce(sys, cost, ts, xs, us, 0, dus, es);
+#endif
+
+  params.GetBool("mras", ce.ce.mras);
+
   //  ddp.mu = .01;
   //  params.GetDouble("mu", ddp.mu);
 

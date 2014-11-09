@@ -51,7 +51,7 @@ int main(int argc, char** argv)
   
   MatrixXd S = VectorXd::Constant(2*K, .01).asDiagonal();
 
-  Ce ce(2*K, 1, &S);
+  Ce<> ce(2*K, 1, &S);
 
   // initialize using unit variance centered at zero
   ce.gmm.ns[0].mu.setZero();

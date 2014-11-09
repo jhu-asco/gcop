@@ -10,7 +10,6 @@ set(headers
   gp.h
   gmm.h
   ce.h
-  camera.h
   imu.h
   imumanifold.h
   sensor.h
@@ -24,13 +23,14 @@ set(headers
   point3dgps.h
 )
 
+if(OPENCV_FOUND)
+  set(headers ${headers} camera.h)
+endif(OPENCV_FOUND)
+
 
 set(sources 
   quat.cc
   gp.cc
-  camera.cc
-  gmm.cc
-  ce.cc
   imu.cc
   imumanifold.cc
   ins.cc
@@ -38,3 +38,7 @@ set(sources
   point3d.cc
   point3dmanifold.cc
 )
+
+if(OPENCV_FOUND)
+  set(sources ${sources} camera.cc)
+endif(OPENCV_FOUND)

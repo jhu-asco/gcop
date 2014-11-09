@@ -4,7 +4,7 @@ project (gcop)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 #ADD_DEFINITIONS(-g -O -std=c++0x -pthread)
-ADD_DEFINITIONS(-g -O -std=c++0x -pthread -Wl,--no-undefined )
+ADD_DEFINITIONS(-g -O -std=c++0x -pthread -Wl,--no-undefined  -I/usr/include/eigen3)
 #ADD_DEFINITIONS(-g -O -pthread)
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Robotic Planning and Control")
@@ -41,12 +41,20 @@ option(BUILD_TESTS "BUILD_TESTS" ON)
 
 find_package(PkgConfig REQUIRED)
 
-find_package( OpenCV 2.4 REQUIRED core highgui imgproc calib3d)
+
+find_package( PkgConfig )
+pkg_check_modules( EIGEN3 REQUIRED eigen3 )
+include_directories( ${EIGEN3_INCLUDE_DIRS} )
+
+#find_package(Eigen REQUIRED)
+#include_directories(${Eigen_INCLUDE_DIRS})
+
+find_package( OpenCV 2.4 COMPONENTS core highgui imgproc calib3d)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 set(EST_LIBS ${EST_LIBS} ${OpenCV_LIBS})
 message(STATUS "Hello ${OpenCV_LIBS}")
 
-find_package(DC1394 REQUIRED)
+find_package(DC1394)
 include_directories(${DC1394_INCLUDE_DIR})
 set(cam_LIBS ${cam_LIBS} ${DC1394_LIBRARIES})
 message(STATUS "Hello2 ${LIBS}")
@@ -68,30 +76,26 @@ find_package(OpenGL REQUIRED)
 include_directories(${OpenGL_INCLUDE_DIRS})
 set(VIEWER_LIBS ${VIEWER_LIBS} ${OpenGL_LIBRARIES})
 
-find_package(Adolc)
-include_directories(${Adolc_INCLUDE_DIRS})
-set(SYS_LIBS ${SYS_LIBS} ${Adolc_LIBRARIES})
+#find_package(Adolc)
+#include_directories(${Adolc_INCLUDE_DIRS})
+#set(SYS_LIBS ${SYS_LIBS} ${Adolc_LIBRARIES})
 
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 set(UTIL_LIBS ${UTIL_LIBS} ${Boost_LIBRARY})
 
-
 find_package (Threads)
 set (VIEWER_LIBS ${VIEWER_LIBS} ${CMAKE_THREAD_LIBS_INIT})
-
-find_package(Eigen REQUIRED)
-include_directories(${Eigen_INCLUDE_DIRS})
-
 
 find_package(TinyXML)
 include_directories(${TINYXML_INCLUDE_DIR})
 set(UTIL_LIBS ${UTIL_LIBS} ${TINYXML_LIBRARIES})
 
 
-FIND_PACKAGE(Ceres)
-INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
-set(ALGO_LIBS ${ALGO_LIBS} ${CERES_LIBRARIES})
+#FIND_PACKAGE(Ceres)
+#INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
+#set(ALGO_LIBS ${ALGO_LIBS})
+
 
 set(ALL_LIBS ${ALGO_LIBS} ${SYS_LIBS} ${VIEWER_LIBS} ${EST_LIBS} ${UTIL_LIBS})
 

@@ -66,7 +66,7 @@ namespace gcop {
                       Vectormd *p = 0);
     
     System<T, nx, nu, np> &sys;     ///< system
-    int ntp;                            ///< parameter vector dimension
+    int ntp;                        ///< parameter vector dimension
   };
   
   template <typename T, int nx, int nu, int np, int _ntp> 

@@ -1,7 +1,7 @@
 #ifndef GCOP_BA_H
 #define GCOP_BA_H
 
-#include <Eigen/Dense>
+#include <eigen3/Eigen/Dense>
 #include <vector>
 #include <type_traits>
 #include <algorithm>
