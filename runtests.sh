@@ -26,5 +26,6 @@ cd build/bin
 
 ./imukftest
 
-./uuvtest
+./uuvtest ../../bin/jhurov.cfg
 
+./cecartest ../../bin/cecar.cfg
