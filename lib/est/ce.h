@@ -86,7 +86,7 @@ namespace gcop {
 
   Matrixnd S;     ///< extra noise
 
-  vector<pair<Vectornd, double> > zps;  ///< samples
+  vector<pair<Vectornd, double> > zps;  ///< samples (pair of vector and its likelihood)
 
   vector<double> cs;    ///< costs
 
@@ -99,7 +99,13 @@ namespace gcop {
   double b;       ///< Gibbs factor (only applicable if mras = true)
 
   bool bAuto;    ///< let b be determined automatically (true by default)
-        
+
+  bool inc;      ///< incremental version of mras
+
+  Vectornd zmin; ///< current best
+
+  double Jmin;    ///< minimum cost
+
   };
   
   template <int _n>
@@ -112,12 +118,16 @@ namespace gcop {
     alpha(.9),
     mras(false),
     b(1),
-    bAuto(true)
+    bAuto(true),
+    inc(false),
+    Jmin(std::numeric_limits<double>::max())
       {
-        if (_n == Dynamic)
+        if (_n == Dynamic) {
           this->S.resize(n, n);
-        else
+          this->zmin.resize(n);
+        } else {
           assert(_n == n);
+        }
 
         if (S)
           this->S = *S;
@@ -136,6 +146,7 @@ namespace gcop {
     {
       zps.clear();
       cs.clear();
+      Jmin = std::numeric_limits<double>::max();
     }
 
   template <int _n>
@@ -143,6 +154,11 @@ namespace gcop {
     { 
       zps.push_back(make_pair(z, c));
       cs.push_back(c);
+
+      if (Jmin > c) {
+        zmin = z;
+        Jmin = c;
+      }
     }
 
   template <int _n>
@@ -157,11 +173,14 @@ namespace gcop {
       if (mras) {
         // set b to minimum cost
         if (bAuto) {
+          b = Jmin;
+          /*
           b = std::numeric_limits<double>::max();
           for (int j = 0; j < cs.size(); ++j) {
             if (b > cs[j])
               b = cs[j];
           }
+          */
         }
         return;
       }
@@ -187,7 +206,7 @@ namespace gcop {
         double cn = 0;
         for (int j = 0; j < N; ++j) {
           pair<Vectornd, double> &zp = zps[j];
-          zp.second = exp(-b*cs[j]);     // cost
+          zp.second = exp(-b*cs[j]);     // pdf
           cn += zp.second;               // normalizer
         }
         assert(cn > 0);
@@ -214,7 +233,7 @@ namespace gcop {
   template <int _n>
     const Matrix<double, _n, 1>& Ce<_n>::Best() 
     {
-      return zps[0].first;
+      return zmin;
     }
 }
 

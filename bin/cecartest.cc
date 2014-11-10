@@ -105,6 +105,7 @@ void solver_process(Viewer* viewer)
 #endif
 
   params.GetBool("mras", ce.ce.mras);
+  params.GetBool("inc", ce.ce.inc);
 
   //  ddp.mu = .01;
   //  params.GetDouble("mu", ddp.mu);

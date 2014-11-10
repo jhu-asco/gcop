@@ -1,1 +1,4 @@
-see docs/html/index.html
+1.) if ./docs is empty, run command "doxygen"
+
+2.) See docs/html/index.html
+

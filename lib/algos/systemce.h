@@ -291,37 +291,50 @@ namespace gcop {
   template <typename T, int n, int c, int np, int ntp> 
     void SystemCe<T, n, c, np, ntp>::Iterate() {
 
-    ce.Reset();
-    
-    Vectortpd z;
-    if (ntp == Dynamic)
-      z.resize(sys.U.n*N);            // parameter vector
-
-    for (int j = 0; j < Ns; ++j) {
+    if (ce.inc) {
+      Vectortpd z;
+      if (ntp == Dynamic)
+        z.resize(sys.U.n*N);            // parameter vector
+      
       ce.Sample(z);
       if (tp)
         tp->From(ts, xss, uss, z, p);
       else
         z2us(uss, z);
       ce.AddSample(z, Update(xss, uss));
+      
+    } else {
+      ce.Reset();
+      
+      Vectortpd z;
+      if (ntp == Dynamic)
+        z.resize(sys.U.n*N);            // parameter vector
+      
+      for (int j = 0; j < Ns; ++j) {
+        ce.Sample(z);
+        if (tp)
+          tp->From(ts, xss, uss, z, p);
+        else
+          z2us(uss, z);
+        ce.AddSample(z, Update(xss, uss));
+      }
     }
 
     // estimate distribution
     ce.Select();    
+
     if (!ce.Fit()) {
       cout << "[W] TrajectoryPrmSample::Sample: ce.Fit failed!" << endl;
     }
-    
-    if (ce.cs[0] < J) {
 
-      //      
+    if (ce.Jmin < J) {
       if (tp)
-        tp->From(ts, xs, us, ce.zps[0].first, p);
+        tp->From(ts, xs, us, ce.zmin, p);
       else
-        z2us(us, ce.zps[0].first);
+        z2us(us, ce.zmin);
 
       Update(xs, us, false);
-      J = ce.cs[0];
+      J = ce.Jmin;
     }
 
     // construct trajectory using the first sample (this is the one with lowest cost)
