@@ -349,9 +349,8 @@ namespace gcop {
     //    if (debug)
     cout << "[I] Ddp::Backward: current V=" << V << endl;    
   }
-  
-  
-  template <typename T, int nx, int nu, int np> 
+
+	template <typename T, int nx, int nu, int np> 
     void Ddp<T, nx, nu, np>::Forward() {
 
     typedef Matrix<double, nx, 1> Vectornd;
@@ -384,11 +383,18 @@ namespace gcop {
         
         du = a*ku + Kux*dx;
         un = u + du;
+				//[DEBUG]:
+				/*cout<<"du[ "<<k<<"]:\t"<<du.transpose()<<endl;
+				cout<<"dx[ "<<k<<"]:\t"<<dx.transpose()<<endl;
+				cout<<"ku[ "<<k<<"]:\t"<<ku.transpose()<<endl;
+				cout<<"Kux[ "<<k<<"]:"<<endl<<Kux<<endl;
+				*/
         
         Rn<nu> &U = (Rn<nu>&)this->sys.U;
         if (U.bnd) {
           for (int j = 0; j < u.size(); ++j) 
             if (un[j] < U.lb[j]) {
+							//cout<<"I hit bound"<<endl;//[DEBUG]
               un[j] = U.lb[j];
               du[j] = un[j] - u[j];
             } else
@@ -434,6 +440,24 @@ namespace gcop {
 					//cout<<"dx: "<<dx.transpose()<<endl;//[DEBUG]//Previous iteration dx
 					//std::cout<<" du: "<<du.transpose()<<endl;//[DEBUG]
           this->sys.X.Lift(dx, this->xs[k+1], xn);
+					/*if((k == 29) || (k == 30) || (k == 31))
+					{
+						//cout dx:
+						cout<<"dx[ "<<(k+1)<<"]:\t"<<dx.transpose()<<endl;
+						cout<<"un[ "<<(k+1)<<"]:\t"<<un.transpose()<<endl;
+						cout<<"du[ "<<k<<"]:\t"<<du.transpose()<<endl;
+						cout<<"Printing states ["<<(k+1)<<"]"<<endl;
+						this->sys.print(this->xs[k+1]);
+						cout<<"Printing xn: "<<endl;
+						this->sys.print(xn);
+						if(k == 31)
+						{
+							//exit(0);
+						}
+					}
+					*/
+					//cout<<"xs[ "<<(k+1)<<"]:\t"<<this->xs[k+1]<<endl;
+					//cout<<"un[ "<<(k+1)<<"]:\t"<<un.transpose()<<endl;
           
           //          cout << xn.gs[0] << " " << xn.r << " " << xn.vs[0] << " " << xn.dr << endl;
 

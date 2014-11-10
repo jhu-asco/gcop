@@ -4,36 +4,40 @@
 #include <iostream>
 
 namespace gcop {
-	template <typename T, typename Tu, int _n = Dynamic, int _c = Dynamic> 
-		class System_extstep : public System<T,Tu,_n,_c>
+	template <typename T, 
+		int _nx = Dynamic, 
+		int _nu = Dynamic,
+		int _np = Dynamic> 
+		class System_extstep : public System<T,_nx,_nu,_np>
 	{
 		public:
+			typedef Matrix<double, _nx, 1> Vectornd;
+			typedef Matrix<double, _nu, 1> Vectorcd;
+			typedef Matrix<double, _np, 1> Vectormd;
 
-			typedef Matrix<double, _n, 1> Vectornd;
-			typedef Matrix<double, _c, 1> Vectorcd;
-			typedef Matrix<double, _n, _n> Matrixnd;
-			typedef Matrix<double, _n, _c> Matrixncd;
-			typedef Matrix<double, _c, _n> Matrixcnd;
-			typedef Matrix<double, _c, _c> Matrixcd;
+			typedef Matrix<double, _nx, _nx> Matrixnd;
+			typedef Matrix<double, _nx, _nu> Matrixncd;
+			typedef Matrix<double, _nu, _nx> Matrixcnd;
+			typedef Matrix<double, _nu, _nu> Matrixcd;
 
-			typedef Matrix<double, Dynamic, 1> Vectormd;
-			typedef Matrix<double, Dynamic, Dynamic> Matrixmd;
-			typedef Matrix<double, _n, Dynamic> Matrixnmd;
-			typedef Matrix<double, Dynamic, _n> Matrixmnd;
+			typedef Matrix<double, _np, _np> Matrixmd;
+			typedef Matrix<double, _nx, _np> Matrixnmd;
+			typedef Matrix<double, _np, _nx> Matrixmnd;
 
 		private: 
-			typedef boost::function<void(T &, const Tu &, double)> Func_type;
+			typedef boost::function<void(T &, const Vectorcd &, double)> Func_type;
 			typedef boost::function<void(void)> resetFuncType;
 			Func_type  extstep;
 			resetFuncType  extreset;
 			//void (*extstep)(T &, const Tu &, double);// Outstate, Controls, Timestep, 
 
 		public: 
-			System_extstep(Manifold<T, _n> &X, Manifold<Tu, _c> &U, Func_type steparg, resetFuncType resetarg = NULL): System<T, Tu, _n, _c>(X,U) 
+		//np is not added but can be added if needed
+			System_extstep(Manifold<T, _nx> &X, int nu, Func_type steparg, resetFuncType resetarg = NULL): System<T,_nx,_nu,_np>(X,nu) 
 																																																					,extstep(steparg), extreset(resetarg){}
 
 			double Step(T &xb, double t, const T &xa,
-					const Tu &u, double h, const Vectormd *p = 0, 
+					const Vectorcd &u, double h, const Vectormd *p = 0, 
 					Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0)
 			{
 				if(!extstep)

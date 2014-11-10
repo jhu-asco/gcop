@@ -181,7 +181,7 @@ namespace gcop {
     double SystemCe<T, n, c>::Update(vector<T> &xs, const vector<Vectorcd> &us, bool evalCost) {    
     double J = 0;
     // @mk:TODO fix that
-    // sys.reset();//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14
+    sys.reset();//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];

@@ -26,10 +26,10 @@ Mbs::Mbs(int nb, int c, bool fixed) : nb(nb), fixed(fixed),
                                       debug(false), basetype(FLOATBASE),
                                       ag(0,0,-9.81),
                                       damping(VectorXd::Zero(nb - 1)),
-                                      lbK(VectorXd::Constant(nb - 1, 100)),
-                                      lbD(VectorXd::Constant(nb - 1, 10)),
-                                      ubK(VectorXd::Constant(nb - 1, 100)),
-                                      ubD(VectorXd::Constant(nb - 1, 10)),
+                                      lbK(VectorXd::Constant(nb - 1, 0.01)),
+                                      lbD(VectorXd::Constant(nb - 1, 0.001)),
+                                      ubK(VectorXd::Constant(nb - 1, 0.01)),
+                                      ubD(VectorXd::Constant(nb - 1, 0.001)),
                                       fsl(VectorXd::Zero(nb - 1)),
                                       fsu(VectorXd::Zero(nb - 1))
 {
@@ -68,12 +68,21 @@ void Mbs::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
   
   // this is ok for fixed base also 
   f.tail(nb-1) = u.tail(nb-1) - damping.cwiseProduct(x.dr);    
+	/*if(t == 3.1)
+	{
+		cout<<"F.tail : "<<f.tail(nb-1).transpose()<<endl;
+		cout<<"U.tail : "<<u.tail(nb-1).transpose()<<endl;
+		cout<<"damping : "<<damping.transpose()<<endl;
+		cout<<"dr : "<<x.dr.transpose()<<endl;
+	}
+	*/
 
   //  dz = - (K*z + f)/D;
 
   for (int i = 0; i < nb-1; ++i){
     if (x.r[i] <= X.lb.r[i] + x.zl[i]) {
       fsl[i] = MAX(0, -lbK[i]*x.zl[i] - lbD[i]*x.dr[i]);
+			cout<<"Lower Bound Hit"<<endl;//[DEBUG]
       f.tail(nb-1)[i] += fsl[i];
     } else {
       fsl[i] = 0;
@@ -81,12 +90,28 @@ void Mbs::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
     if (x.r[i] >= X.ub.r[i] - x.zu[i]) {
       fsu[i] = MAX(0, -ubK[i]*x.zu[i] + ubD[i]*x.dr[i]);
       f.tail(nb-1)[i] += -fsu[i];
+			cout<<"Upper Bound Hit"<<endl;//[DEBUG]
     } else {
       fsu[i] = 0;
     }
     
   }
-  
+
+  /*if(t == 3.1)
+	{
+		cout<<"X.r and its bounds: "<<endl;
+		cout<<"X.r : "<<x.r.transpose()<<endl;
+		cout<<"X.ub.r: "<<X.ub.r.transpose()<<endl;
+		cout<<"X.zu: "<<x.zu.transpose()<<endl<<endl;
+		cout<<"X.lb.r: "<<X.lb.r.transpose()<<endl;
+		cout<<"X.zl: "<<x.zl.transpose()<<endl<<endl;
+		cout<<"After Bounds: "<<endl;
+		cout<<"F.tail : "<<f.tail(nb-1).transpose()<<endl;
+		cout<<"U.tail : "<<u.tail(nb-1).transpose()<<endl;
+		cout<<"damping : "<<damping.transpose()<<endl;
+		cout<<"dr : "<<x.dr.transpose()<<endl;
+	}
+	*/
   if (A)
     A->setZero();
   
@@ -358,6 +383,17 @@ double Mbs::EulerStep(MbsState& xb, double t, const MbsState& xa,
 
   VectorXd a(n);
   Acc(a, t, xa, u, h);
+	//[DEBUG] Specific statement:
+	/*if(t == 3.1 || t == 3.0)
+	{
+		cout<<"Acc: "<<a.transpose()<<endl;
+		cout<<"U: "<<u.transpose()<<endl;
+		cout<<"Xa dr: "<<xa.dr.transpose()<<endl;
+		cout<<"Xa r: "<<xa.r.transpose()<<endl;
+		cout<<"h: "<<h<<endl;
+		cout<<"t: "<<t<<endl;
+	}
+	*/
 
   if (!fixed)
     xb.vs[0] = xa.vs[0] + h*a.head(6);  
@@ -448,7 +484,7 @@ void Mbs::ClampVelocity(MbsState &x) const
       x.dr[i] = X.lb.dr[i];
 }
 
-void print(const MbsState &x)
+void Mbs::print(const MbsState &x) const
 {
   for (int i =0; i < x.gs.size(); ++i) {
     cout << "gs[" << i << "]=" << endl << x.gs[i] << endl;
@@ -466,6 +502,7 @@ void print(const MbsState &x)
 
 void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u, double h)
 {
+	//[DEBUG] specific to t = 3.1
   int n = nb - 1 + 6*(!fixed);
 
   MatrixXd M(n, n);
@@ -475,10 +512,27 @@ void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u, doubl
   VectorXd b(n); // bias
   Bias(b, t, x);
 
+	/*if(t == 3.1 || t == 3.0)
+		cout<<"Bias_specific: "<<b.transpose()<<endl;//[DEBUG]
+		*/
+
   VectorXd fc(n);
   Force(fc, t, x, u);  // compute control/external forces
 
+	/*if(t == 3.1 || t == 3.0)
+	{
+		cout<<"Input u: "<<u.transpose()<<endl;//[DEBUG]
+		cout<<"Ext Forces: "<<fc.transpose()<<endl;//[DEBUG]
+	}
+	*/
+
   VectorXd f = fc - b;  // all forces
+
+	/*if(t == 3.1 || t == 3.0)
+	{
+		cout<<"Net Forces: "<<f.transpose()<<endl;//[DEBUG]
+	}
+	*/
 
   /*
   double fimp;
@@ -500,6 +554,11 @@ void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u, doubl
   // compute acceleration
   LLT<MatrixXd> llt;
   llt.compute(M);
+	/*if(t == 3.1)
+	{
+		cout<<"Mass Matrix: "<<endl<<M<<endl;
+	}
+	*/
   if (llt.info() == Eigen::Success) {
     a = llt.solve(f);
   } else {

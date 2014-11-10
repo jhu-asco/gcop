@@ -26,7 +26,7 @@ namespace gcop {
     }
     
     vector<Matrix4d> gs;        ///< configurations
-    vector<Vector6d> vs;        ///< body-vixed velocities
+    vector<Vector6d> vs;        ///< body-fixed velocities
     vector<Matrix4d> dgs;       ///< relative xforms from b/n bodies
     
     VectorXd r;  ///< joint angles

@@ -134,6 +134,11 @@ namespace gcop {
    * @param h time-step
    */
   virtual void Rec(T &x, double h) {};
+
+  /**
+	 * General print function to print the state
+	 */
+	virtual void print(const T &x) const {};
   
   /**
    * For filtering purposes, it is often necessary to provide 

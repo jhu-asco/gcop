@@ -160,6 +160,8 @@ namespace gcop {
 
     void ClampVelocity(MbsState &x) const;
 
+		void print(const MbsState &x) const; 
+
     int nb;                   ///< number of rigid bodies (including base body)
 
     bool fixed;               ///< whether base body is fixed
