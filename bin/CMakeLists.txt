@@ -144,15 +144,18 @@ target_link_libraries(uuvtest gcop_est gcop_algos gcop_views gcop_systems  ${ALL
 
 # Cross-entropy simple example
 
-	add_executable(cetest cetest.cc)
-	target_link_libraries(cetest gcop_est gcop_systems gcop_est ${ALL_LIBS})
+add_executable(cetest cetest.cc)
+target_link_libraries(cetest gcop_est gcop_systems gcop_est ${ALL_LIBS})
 
-	#add_executable(airplanetest airplanetest.cc)
-	#target_link_libraries(airplanetest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+#add_executable(airplanetest airplanetest.cc)
+#target_link_libraries(airplanetest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 # Camera testing 6dof pose example
-#add_executable(camtest camtest.cc)
-#target_link_libraries(camtest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+if(OPENCV_FOUND)
+  add_executable(camtest camtest.cc)
+  target_link_libraries(camtest gcop_est gcop_algos gcop_views gcop_systems ${cam_LIBS} ${ALL_LIBS})
+endif(OPENCV_FOUND)
+
 #INSTALL(TARGETS gcoptest
 #        RUNTIME
 #        DESTINATION bin)

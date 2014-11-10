@@ -25,7 +25,7 @@ set(sources
   snakeview.cc
   demview.cc
   airplaneview.cc
-  normal2dview.cc
+#  normal2dview.cc
 )
 
 set(headers

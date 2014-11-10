@@ -4,9 +4,9 @@ set(sources
   so3.cc
   se3.cc
   params.cc
-	urdflink.cpp
-	urdfjoint.cpp
-  normal.cc
+  urdflink.cpp
+  urdfjoint.cpp
+#  normal.cc
   )
 
 set(headers

@@ -13,7 +13,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef GnDocp<Vector4d, 4, 2, Dynamic, 6> RccarDdp;
+typedef GnDocp<Vector4d, 4, 2, Dynamic, 6> RccarGn;
 
 Params params;
 
@@ -81,7 +81,7 @@ void solver_process(Viewer* viewer)
     us[N/2+i] = Vector2d(-.01, .0);
   }
   
-  Tparam<Vector4d, 4, 2> tp(sys, us.size()*sys.U.n);
+  //  Tparam<Vector4d, 4, 2> tp(sys, us.size()*sys.U.n);
 
   int Nk = 10;
   vector<double> tks(Nk+1);
@@ -90,19 +90,19 @@ void solver_process(Viewer* viewer)
   
   ControlTparam<Vector4d, 4, 2> ctp(sys, tks);
 
-  RccarDdp ddp(sys, cost, ctp, ts, xs, us);  
+  RccarGn gn(sys, cost, ctp, ts, xs, us);  
 
-  RccarView view(sys, &ddp.xs);
+  RccarView view(sys, &gn.xs);
   
   viewer->Add(view);
 
   struct timeval timer;
-  // ddp.debug = false; // turn off debug for speed
+  // Gn.debug = false; // turn off debug for speed
   getchar();
 
   for (int i = 0; i < iters; ++i) {
     timer_start(timer);
-    ddp.Iterate();
+    gn.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
     getchar();

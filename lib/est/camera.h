@@ -31,8 +31,9 @@ using namespace Eigen;
 
     bool Pose(Vector6d &q, const cv::Mat &raw, cv::Mat &cont);
     bool Pose(Vector6d &q, const cv::Mat &raw);
-		float tolerance;
-		int kernel_size;
+
+    float tolerance;
+    int kernel_size;
 
   protected:
     
@@ -45,14 +46,14 @@ using namespace Eigen;
     
     double bl;
 
-		//static double _cm[9];//<The camera matrix
-		//static double _dc[5];//<Distortion coefficients
-		cv::Mat camMatrix;
-		cv::Mat dccoeffs;
-	  cv::Point2f iprs[np];
-		std::ofstream pointfile;
-		bool find_contours;
-		//bool init_obj;
+    //static double _cm[9];//<The camera matrix
+    //static double _dc[5];//<Distortion coefficients
+    cv::Mat camMatrix;
+    cv::Mat dccoeffs;
+    cv::Point2f iprs[np];
+    std::ofstream pointfile;
+    bool find_contours;
+    //bool init_obj;
   };
 
 }
