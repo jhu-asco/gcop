@@ -370,6 +370,7 @@ namespace gcop {
       Vectornd dx = VectorXd::Zero(this->sys.X.n);
 			dx.setZero();//Redundancy
       T xn = this->xs[0];
+      this->sys.reset(xn,this->ts[0]);//Reset to initial state
       Vectorcd un;
       
       double Vm = 0;
@@ -416,11 +417,10 @@ namespace gcop {
           this->sys.X.Retract(xn, xn, dx);
         } else {
           double h = this->ts[k+1] - t;
-          T xn_(xn);
 					//Adding nan catching :
 					try
 					{
-						this->sys.Step(xn_, t, xn, un, h, this->p);
+						this->sys.Step(xn, un, h, this->p);
 					}
 					catch(std::exception &e)
 					{
@@ -436,7 +436,6 @@ namespace gcop {
 						throw std::runtime_error(std::string("Nan observed"));
 						return;
 					}
-          xn = xn_;
 					//cout<<"dx: "<<dx.transpose()<<endl;//[DEBUG]//Previous iteration dx
 					//std::cout<<" du: "<<du.transpose()<<endl;//[DEBUG]
           this->sys.X.Lift(dx, this->xs[k+1], xn);

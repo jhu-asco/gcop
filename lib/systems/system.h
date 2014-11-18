@@ -120,11 +120,42 @@ namespace gcop {
   virtual double Step(T &xb, double t, const T &xa,
                       const Vectorcd &u, double h, const Vectormd *p = 0, 
                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
-  
-  // @mk: the system should not maintain any state, it only specifies dynamics, sensing, etc...
-  //  Reset should be added to an appropriate State object, e.g. MbsState
-  virtual void reset(){};// Adding a reset virtual function which can be formalized later
-      
+  /**
+   * Discrete Dynamics update of internal state and no output
+   * @param t current time
+   * @param u current control
+   * @param h current time-step
+   * @param p static parameters  (optional)
+   * @param A jacobian w.r.t. x   (optional)
+   * @param B jacobian w.r.t. u   (optional)
+   * @param C jacobian w.r.t. p   (optional)
+
+   */
+  virtual double Step(const Vectorcd &u,
+      double h, const Vectormd *p = 0, 
+      Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
+
+  /**
+   * Discrete Dynamics Update. This function computes the next state xb using the internal
+   * state x_int and applied forces u
+   * @param xb resulting state
+   * @param t current time
+   * @param u current control
+   * @param h current time-step
+   * @param p static parameters  (optional)
+   * @param A jacobian w.r.t. x   (optional)
+   * @param B jacobian w.r.t. u   (optional)
+   * @param C jacobian w.r.t. p   (optional)
+   */
+  virtual double Step(T &xb, const Vectorcd &u,
+      double h, const Vectormd *p = 0, 
+      Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
+
+  /** Resets the internal state of the system to one specified
+   * @param x State to reset to
+   * @param t  time to reset to (optional)
+   */
+  virtual bool reset(const T &x, double t = 0);
 
   /**
    * Reconstruct the full state. Some states contain redundant parameters 
@@ -158,6 +189,8 @@ namespace gcop {
   Manifold<T, _nx> &X;   ///< state manifold 
   Rn<_nu> U;             ///< control Euclidean manifold
   Rn<_np> P;             ///< parameter Euclidean manifold  
+  T x;               ///< Internal State of the system
+  double t;          ///< Internal time of the system
   
   };
 
@@ -197,6 +230,34 @@ namespace gcop {
     */
     return 0;
   }
+  template <typename T, int _nx, int _nu, int _np> 
+    double System<T, _nx, _nu, _np>::Step(T& xb, const Vectorcd &u, double h,
+                                          const Vectormd *p,
+                                          Matrixnd *A, Matrix<double, _nx, _nu> *B, 
+                                          Matrix<double, _nx, _np> *C) {
+    double result = this->Step(xb, this->t, this->x, u, h, p, A, B, C);
+    this->x = xb;
+    this->t = (this->t + h);
+    return result;
+  }
+  template <typename T, int _nx, int _nu, int _np> 
+    double System<T, _nx, _nu, _np>::Step(const Vectorcd &u, double h,
+                                          const Vectormd *p,
+                                          Matrixnd *A, Matrix<double, _nx, _nu> *B, 
+                                          Matrix<double, _nx, _np> *C) {
+      double result = this->Step(this->x, this->t, this->x, u, h, p, A, B, C);
+      this->t = (this->t + h);
+      return result;
+  }
+
+  template <typename T, int _nx, int _nu, int _np>
+    bool System<T, _nx, _nu, _np>::reset(const T& x, double t)
+    {
+      this->x = x;//Copying state and time 
+      this->t = t;
+      return true;
+    }
+
 
   template <typename T, int _nx, int _nu, int _np> 
     bool System<T, _nx, _nu, _np>::Noise(Matrixnd &Q, double t, const T &x, const Vectorcd &u, 

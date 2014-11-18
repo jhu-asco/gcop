@@ -273,12 +273,11 @@ namespace gcop {
   template <typename T, int n, int c, int np, int ntp> 
     double SystemCe<T, n, c, np, ntp>::Update(vector<T> &xs, const vector<Vectorcd> &us, bool evalCost) {    
     double J = 0;
-    // @mk:TODO fix that
-    sys.reset();//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14
+    sys.reset(xs[0],ts[0]);//gives a chance for physics engines to reset to specific state and time.
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
-      sys.Step(xs[k+1], ts[k], xs[k], us[k], h, p);
+      sys.Step(xs[k+1], us[k], h, p);
       if (evalCost) 
         J += cost.L(ts[k], xs[k], us[k], h, p);
       
