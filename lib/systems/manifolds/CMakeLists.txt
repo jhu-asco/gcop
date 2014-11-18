@@ -1,0 +1,32 @@
+set(sources
+    body2dmanifold.cc
+    body3dmanifold.cc
+    gunicyclemanifold.cc
+    imumanifold.cc
+    insmanifold.cc
+    kinbody2dmanifold.cc
+    mbscspace.cc
+    mbsmanifold.cc
+    mbstspace.cc
+    point3dmanifold.cc
+    uuvmanifold.cc
+#airmmanifold.cc
+)
+
+set(headers
+    body2dmanifold.h
+    body3dmanifold.h
+    gunicyclemanifold.h
+    imumanifold.h
+    insmanifold.h
+    kinbody2dmanifold.h
+    manifold.h
+    mbscspace.h
+    mbsmanifold.h
+    mbsstate.h
+    mbstspace.h
+    point3dmanifold.h
+    rn.h
+    uuvmanifold.h
+#airmmanifold.h
+)

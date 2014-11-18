@@ -42,11 +42,18 @@ namespace gcop {
   typedef Matrix<double, _np, _nx> Matrixmnd;
   
   /**
-   * _nureate a _nuost interface
+   * create a cost interface
    * @param X the state manifold which is used to perform addition/subtraction of states
    * @param tf time horizon: when the cost function L is called it will internally check whether its argument t is equation to tf and return the terminal cost
    */
   Cost(System<T, _nx, _nu, _np> &sys, double tf);
+
+  /**
+   * Create a Sensor Based Cost interface
+   * @param sys the system for which cost function is defined. Provides the system manifold X
+   * @param  
+   */
+  //Cost(System<T, _nx, _nu, _np> &sys, Sensor<double tf);
   
   /**
    * Cost function L

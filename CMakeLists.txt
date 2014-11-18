@@ -104,6 +104,10 @@ include_directories(
   lib/algos
   lib/est
   lib/systems
+  lib/systems/manifolds
+  lib/systems/sensors
+  lib/systems/parametrization
+  lib/systems/costs
   lib/utils
   lib/views)
 

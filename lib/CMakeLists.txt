@@ -17,23 +17,24 @@ add_subdirectory (est)
 # systems viewers algos utils est
 
 append_subdir_files(sys_sources sources systems)
-#append_subdir_files(sys_headers headers systems)
 append_subdir_files(util_sources sources utils)
-#append_subdir_files(util_headers headers utils)
+append_subdir_files(algo_sources sources algos)
+append_subdir_files(viewer_sources sources views)
+append_subdir_files(est_sources sources est)
+
 #append_subdir_files(sources sources devices)
 #append_subdir_files(headers headers devices)
-append_subdir_files(algo_sources sources algos)
-#append_subdir_files(algo_headers headers algos)
 #append_subdir_files(sources obstacles)
 #append_subdir_files(headers obstacles)
-append_subdir_files(viewer_sources sources views)
-#append_subdir_files(viewer_headers headers views)
-append_subdir_files(est_sources sources est)
+
+#append_subdir_files(sys_headers headers systems)
+#append_subdir_files(util_headers headers utils)
 #append_subdir_files(est_headers headers est)
+#append_subdir_files(viewer_headers headers views)
+#append_subdir_files(algo_headers headers algos)
 
-
-append_subdir_files(headers headers utils)
 append_subdir_files(headers headers systems)
+append_subdir_files(headers headers utils)
 append_subdir_files(headers headers views)
 append_subdir_files(headers headers est)
 append_subdir_files(headers headers algos)
