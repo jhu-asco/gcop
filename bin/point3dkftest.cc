@@ -19,10 +19,10 @@ int main(int argc, char** argv)
 {
   Point3d point3d;
 
-  Point3dGps gps;
+  Point3dGps<> gps;
 
   Point3dKalmanPredictor kp(point3d);
-  Point3dGpsKalmanCorrector kc(point3d, gps);
+  Point3dGpsKalmanCorrector kc(point3d.X, gps);
 
   int N = 1000;
 

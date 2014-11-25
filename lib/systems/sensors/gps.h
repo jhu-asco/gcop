@@ -1,9 +1,10 @@
-#ifndef GCOP_POINT3DGPS_H
-#define GCOP_POINT3DGPS_H
+#ifndef GCOP_GPS_H
+#define GCOP_GPS_H
 
 #include <Eigen/Dense>
 #include "sensor.h"
 #include "point3d.h"
+#include "ins.h"
 
 namespace gcop {
 
@@ -19,9 +20,16 @@ namespace gcop {
 	 * sensor function ()
 	 *
 	 * Author: Marin Kobilarov marin(at)jhu.edu
-	 */
-  template<int _nu = 3, int _np = Dynamic>
-	class Point3dGps : public Sensor<Point3dState, 6, _nu, _np, Vector3d, 3> {
+	 */ 
+   //Most General Form of Gps
+	template <typename T, int _nx, int _nu = 3, int _np = Dynamic> class Gps : public Sensor<T, _nx, _nu, _np, Vector3d, 3> {
+    public:
+    Gps(): Sensor<T, _nx, _nu, _np, Vector3d, 3> (Rn<3>::Instance()) {    
+    };
+  };
+
+  //Specialization1 Using Point3d State
+	template <int _nu, int _np> class Gps<Point3dState, 6,  _nu, _np> : public Sensor<Point3dState, 6, _nu, _np, Vector3d, 3> {
 
 		public:  
 
@@ -32,7 +40,7 @@ namespace gcop {
       typedef Matrix<double, 3, _nu> Matrixrcd;
       typedef Matrix<double, 3, _np> Matrixrmd;
 
-			Point3dGps(): Sensor<Point3dState, 6, _nu, _np, Vector3d, 3>(Rn<3>::Instance()) {    
+			Gps(): Sensor<Point3dState, 6, _nu, _np, Vector3d, 3> (Rn<3>::Instance()) {    
 
 				sxy = .02;
 				sz = .02;
@@ -48,7 +56,7 @@ namespace gcop {
 					Matrix36d *dydx = 0, Matrixrcd *dydu = 0,
 					Matrixrmd *dydp = 0) {
 
-				y = x.q; //#TODO Sample the sensor output from a gaussian distribution of x.q and this->R
+				y = x.q;//#TODO Sample from distribution Gaussian (x.q, x.P) or try different distributions 
 
 				if (dydx){
 					dydx->topLeftCorner<3,3>().setIdentity();
@@ -59,10 +67,9 @@ namespace gcop {
 
 			double sxy;   ///< x-y position standard deviation
 			double sz;    ///< altitute stdev
-	};
+	}; 
 
-
-	// Point3dGps::Point3dGps() : 
+	// Gps::Gps() : 
 }
 
 #endif

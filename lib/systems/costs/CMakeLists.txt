@@ -10,8 +10,12 @@ set(headers
     cost.h
     gunicyclecost.h
     lqcost.h
+    lqsensorcost.h
     lscost.h
+    lssensorcost.h
     mbslqcost.h
     rnlqcost.h
+    rnlqsensorcost.h
+    sensorcost.h
 #airplanecost.h
 )

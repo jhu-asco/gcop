@@ -226,7 +226,7 @@ namespace gcop {
           sys.reset(xs[0],ts[0]);//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14
           for (int k = 0; k < N; ++k) {
             double h = ts[k+1] - ts[k];
-            sys.Step(xs[k+1], us[k], h);
+            sys.Step1(xs[k+1], us[k], h);
             if (evalCost) 
               J += cost.L(ts[k], xs[k], us[k], h);
             

@@ -33,7 +33,7 @@ namespace gcop {
   typedef Matrix<double, _nz, _nu> Matrixrcd;
   typedef Matrix<double, _nz, _np> Matrixrmd;
 
-  KalmanCorrector(System<T, _nx, _nu, _np> &sys,
+  KalmanCorrector(Manifold<T, _nx> &X,
                   Sensor<T, _nx, _nu, _np, Tz, _nz> &sensor);
   
   virtual ~KalmanCorrector();
@@ -52,19 +52,19 @@ namespace gcop {
   
   
   template <typename T, int _nx, int _nu, int _np, typename Tz, int _nz> 
-    KalmanCorrector<T, _nx, _nu, _np, Tz, _nz>::KalmanCorrector(System<T, _nx, _nu, _np>  &sys, 
+    KalmanCorrector<T, _nx, _nu, _np, Tz, _nz>::KalmanCorrector(Manifold<T, _nx>  &X, 
                                                                 Sensor<T, _nx, _nu, _np, Tz, _nz> &sensor) : 
-    Corrector<T, _nx, _nu, _np, Tz, _nz>(sys, sensor) {
+    Corrector<T, _nx, _nu, _np, Tz, _nz>(X, sensor) {
 
     if (_nz == Dynamic) {
       y.resize(sensor.Z.n);
     }
     if (_nx == Dynamic) {
-      dx.resize(sys.X.n);
+      dx.resize(X.n);
     }
     if (_nx == Dynamic || _nz == Dynamic) {
-      K.resize(sys.X.n, sensor.Z.n);
-      H.resize(sensor.Z.n, sys.X.n);
+      K.resize(X.n, sensor.Z.n);
+      H.resize(sensor.Z.n, X.n);
     }
 
     H.setZero();
@@ -91,7 +91,7 @@ namespace gcop {
     
     //    std::cout <<"K=" << K<<std::endl;
     if (cov)
-      xb.P = (MatrixXd::Identity(this->sys.X.n, this->sys.X.n) - K*H)*xa.P;
+      xb.P = (MatrixXd::Identity(this->X.n, this->X.n) - K*H)*xa.P;
     
     //    std::cout << "K=" << K << std::endl;            
     //    std::cout << "z-y=" << z-y << std::endl;            
@@ -100,7 +100,7 @@ namespace gcop {
     //%P = (eye(length(x)) - K*H)*P*(eye(length(x)) - K*H)' + K*S.R*K';
 
     dx = K*(z - y);
-    this->sys.X.Retract(xb, xa, dx);
+    this->X.Retract(xb, xa, dx);
   }
 }
 

@@ -31,11 +31,11 @@ int main(int argc, char** argv)
   //  int nz = mag ? 6 : 3;
 
   InsImu<3> imu;
-  InsGps gps;
+  InsGps<> gps;
 
   InsKalmanPredictor kp(ins);
-  InsImuKalmanCorrector kci(ins, imu);
-  InsGpsKalmanCorrector kcg(ins, gps);
+  InsImuKalmanCorrector kci(ins.X, imu);
+  InsGpsKalmanCorrector kcg(ins.X, gps);
 
   //  InsUnscentedPredictor kp(ins);
   // InsUnscentedCorrector kc(ins, sensor);

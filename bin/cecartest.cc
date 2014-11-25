@@ -12,7 +12,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef SystemCe<Vector4d, 4, 2> RccarCe;
+typedef SystemCe<Vector4d, 4, 2, Dynamic> RccarCe;
 
 Params params;
 

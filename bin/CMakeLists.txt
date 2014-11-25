@@ -60,6 +60,11 @@ if (BUILD_TESTS)
 	add_executable(gnrccartest gnrccartest.cc)
 	target_link_libraries(gnrccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(gnrccarestimation gnrccarestimation.cc)
+	target_link_libraries(gnrccarestimation  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+	add_executable(gnrccarestimation1 gnrccarestimation1.cc)
+	target_link_libraries(gnrccarestimation1  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 	add_executable(cecartest cecartest.cc)
 	target_link_libraries(cecartest  gcop_algos gcop_views gcop_systems gcop_est ${ALL_LIBS})

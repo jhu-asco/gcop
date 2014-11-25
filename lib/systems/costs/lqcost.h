@@ -166,7 +166,7 @@ namespace gcop {
 
     } else {
       assert(h > 0);
-      int k = (int)(t/h);
+      int k = round(t/h);
       if (xds) {
         assert(k < xds->size());
         this->sys.X.Lift(dx, (*xds)[k], x); // difference (on a vector space we have dx = x - xf)
@@ -206,7 +206,7 @@ namespace gcop {
                                             Matrix<double, _np, 1> *Lp, Matrix<double, _np, _np> *Lpp,
                                             Matrix<double, _np, _nx> *Lpx) {
     
-    int k = (int)(t/h);
+    int k = round(t/h);
     
     if (xds) {
       assert(k < xds->size());

@@ -15,6 +15,7 @@
 #include "manifold.h"
 #include <iostream>
 #include "rn.h"
+
 //#include "sensor.h"
 
 /*! \mainpage Geometric Control, Optimization, and Planning (GCOP) software library
@@ -118,22 +119,8 @@ namespace gcop {
    * @param C jacobian w.r.t. p   (optional)
    */
   virtual double Step(T &xb, double t, const T &xa,
-                      const Vectorcd &u, double h, const Vectormd *p = 0, 
+                      const Vectorcd &u, double h, const Vectormd *p = 0,
                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
-  /**
-   * Discrete Dynamics update of internal state and no output
-   * @param t current time
-   * @param u current control
-   * @param h current time-step
-   * @param p static parameters  (optional)
-   * @param A jacobian w.r.t. x   (optional)
-   * @param B jacobian w.r.t. u   (optional)
-   * @param C jacobian w.r.t. p   (optional)
-
-   */
-  virtual double Step(const Vectorcd &u,
-      double h, const Vectormd *p = 0, 
-      Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
 
   /**
    * Discrete Dynamics Update. This function computes the next state xb using the internal
@@ -147,9 +134,42 @@ namespace gcop {
    * @param B jacobian w.r.t. u   (optional)
    * @param C jacobian w.r.t. p   (optional)
    */
-  virtual double Step(T &xb, const Vectorcd &u,
-      double h, const Vectormd *p = 0, 
+  double Step1(T &xb, const Vectorcd &u,
+      double h, const Vectormd *p = 0,
       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
+
+   /**
+   * Discrete Dynamics update of internal state and no output
+   * @param t current time
+   * @param u current control
+   * @param h current time-step
+   * @param p static parameters  (optional)
+   * @param A jacobian w.r.t. x   (optional)
+   * @param B jacobian w.r.t. u   (optional)
+   * @param C jacobian w.r.t. p   (optional)
+
+   */
+  double Step2(const Vectorcd &u,
+      double h,const Vectormd *p = 0,
+      Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
+
+  /** 
+   * Additional step function with input noise of the same dimension as state x and propagates by one dynamic step
+   * Noise in the system is modeled as x[i+1] = f(xi,ui,ti,p) + noisematrix(xi,ui,ti,p)*wi
+   * The noise matrix is implemented as a virtual function and by default is just the identity
+   * @param xb resulting state
+   * @param u current control
+   * @param h current time-step
+   * @param w noise of same size as state
+   * @param p static parameters  (optional)
+   * @param A jacobian w.r.t. x   (optional)
+   * @param B jacobian w.r.t. u   (optional)
+   * @param C jacobian w.r.t. p   (optional)
+   * @param D jacobian w.r.t  w   (optional)
+   */
+  double Step3(T &xb, const Vectorcd &u,
+                      const Vectornd &w, double h,
+                      const Vectormd *p = 0,Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0, Matrixnd *D = 0);
 
   /** Resets the internal state of the system to one specified
    * @param x State to reset to
@@ -185,11 +205,25 @@ namespace gcop {
    */
   virtual bool Noise(Matrixnd &Q, double t, const T &x, const Vectorcd &u, 
                      double dt, const Vectormd *p = 0);
-  
+  /**
+   * Noise in the system is modeled as x[i+1] = f(xi,ui,ti,p) + noisematrix(xi,ui,ti,p)*wi
+   * This function provides the necessary noise coefficient matrix
+   * @param Q provides the noise matrix
+   * @param t current time
+   * @param x current state
+   * @param u current control
+   * @param h time-step
+   * @param p parameter (optional)
+   * @return true if all arguments are feasible
+   */
+  virtual bool NoiseMatrix(Matrixnd &Q, double t, const T &x, const Vectorcd &u, 
+                     double h, const Vectormd *p = 0);
+
   Manifold<T, _nx> &X;   ///< state manifold 
   Rn<_nu> U;             ///< control Euclidean manifold
   Rn<_np> P;             ///< parameter Euclidean manifold  
   T x;               ///< Internal State of the system
+  int np;            ///< Number of Parameters
   double t;          ///< Internal time of the system
   
   };
@@ -197,7 +231,7 @@ namespace gcop {
   
   template <typename T, int _nx, int _nu, int _np> 
     System<T, _nx, _nu, _np>::System(Manifold<T, _nx> &X, int nu, int np) : 
-    X(X), U(nu), P(np) {
+    X(X), U(nu), P(np), np(np) {
   }
 
   /*
@@ -214,8 +248,7 @@ namespace gcop {
 
   template <typename T, int _nx, int _nu, int _np> 
     double System<T, _nx, _nu, _np>::Step(T& xb, double t, const T& xa,
-                                          const Vectorcd &u, double h,
-                                          const Vectormd *p,
+                                          const Vectorcd &u, double h, const Vectormd *p,
                                           Matrixnd *A, Matrix<double, _nx, _nu> *B, 
                                           Matrix<double, _nx, _np> *C) {
     /*
@@ -231,8 +264,7 @@ namespace gcop {
     return 0;
   }
   template <typename T, int _nx, int _nu, int _np> 
-    double System<T, _nx, _nu, _np>::Step(T& xb, const Vectorcd &u, double h,
-                                          const Vectormd *p,
+    double System<T, _nx, _nu, _np>::Step1(T& xb, const Vectorcd &u, double h, const Vectormd *p,
                                           Matrixnd *A, Matrix<double, _nx, _nu> *B, 
                                           Matrix<double, _nx, _np> *C) {
     double result = this->Step(xb, this->t, this->x, u, h, p, A, B, C);
@@ -241,13 +273,25 @@ namespace gcop {
     return result;
   }
   template <typename T, int _nx, int _nu, int _np> 
-    double System<T, _nx, _nu, _np>::Step(const Vectorcd &u, double h,
-                                          const Vectormd *p,
+    double System<T, _nx, _nu, _np>::Step2(const Vectorcd &u, double h, const Vectormd *p,
                                           Matrixnd *A, Matrix<double, _nx, _nu> *B, 
                                           Matrix<double, _nx, _np> *C) {
       double result = this->Step(this->x, this->t, this->x, u, h, p, A, B, C);
       this->t = (this->t + h);
       return result;
+  }
+
+  template <typename T, int _nx, int _nu, int _np>
+  double System<T, _nx, _nu, _np>::Step3(T &xb, const Vectorcd &u,
+                      const Vectornd &w, double h, const Vectormd *p,
+                      Matrixnd *A, Matrixncd *B, Matrixnmd *C, Matrixnd *D)
+  {
+    double result = this->Step(xb, this->t, this->x, u, h, p, A, B, C);
+    Matrixnd noise_matrix;
+    this->NoiseMatrix(noise_matrix, this->t, this->x, u, h, p);
+    this->X.Retract(xb, xb, (noise_matrix*w));
+    this->x = xb;//Update internal state
+    this->t = (this->t + h);
   }
 
   template <typename T, int _nx, int _nu, int _np>
@@ -266,6 +310,12 @@ namespace gcop {
     return false;
   }
 
+  template <typename T, int _nx, int _nu, int _np> 
+    bool System<T, _nx, _nu, _np>::NoiseMatrix(Matrixnd &Q, double t, const T &x, const Vectorcd &u, 
+               double dt, const Vectormd *p) {
+      Q.setIdentity();
+    return true;
+  }
 }
 
 #endif

@@ -3,6 +3,7 @@ set(sources
     unicycle.cc
     car.cc
     rccar.cc
+    rccar1.cc
     gunicycle.cc
     qrotor.cc
     hrotor.cc
@@ -35,6 +36,7 @@ set(headers
     unicycle.h
     car.h
     rccar.h
+    rccar1.h
     gunicycle.h
     body2d.h
     body3d.h

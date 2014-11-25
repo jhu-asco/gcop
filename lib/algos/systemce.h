@@ -110,7 +110,7 @@ namespace gcop {
 
     System<T, n, c, np> &sys;    ///< dynamical system
 
-    Cost<T, n, c> &cost;     ///< given cost function
+    Cost<T, n, c, np> &cost;     ///< given cost function
 
     Tparam<T, n, c, np, ntp> *tp;     ///< trajectory parametrization
 
@@ -277,7 +277,7 @@ namespace gcop {
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
-      sys.Step(xs[k+1], us[k], h, p);
+      sys.Step1(xs[k+1], us[k], h, p);
       if (evalCost) 
         J += cost.L(ts[k], xs[k], us[k], h, p);
       

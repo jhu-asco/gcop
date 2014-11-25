@@ -15,23 +15,26 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
-  template<int _nz = 6>
-    class ImuSensor : public Sensor<ImuState, 9, 3, Dynamic, Matrix<double, _nz, 1>, _nz> {
+  template<int _nz = 6, int _nu = 3, int _np = Dynamic>
+    class ImuSensor : public Sensor<ImuState, 9, _nu, _np, Matrix<double, _nz, 1>, _nz> {
     
   public:  
   
   typedef Matrix<double, _nz, 1> Vectorzd;
-  typedef Matrix<double, _nz, 3> Matrixz3d;
+  typedef Matrix<double, _nu, 1> Vectorcd;
+  typedef Matrix<double, _np, 1> Vectormd;
+
+  typedef Matrix<double, _nz, _nu> Matrixzcd;
   typedef Matrix<double, _nz, 6> Matrixz6d;
   typedef Matrix<double, _nz, 9> Matrixz9d;
-  typedef Matrix<double, _nz, Dynamic> MatrixzXd;
+  typedef Matrix<double, _nz, _np> Matrixzmd;
   
   ImuSensor();
 
-  bool operator()(Vectorzd &y, double t, const ImuState &x, const Vector3d &u,
-                  const VectorXd *p = 0, 
-                  Matrixz9d *dydx = 0, Matrixz3d *dydu = 0,
-                  MatrixzXd *dydp = 0) {
+  bool operator()(Vectorzd &y, double t, const ImuState &x, const Vectorcd &u,
+                  const Vectormd *p = 0, 
+                  Matrixz9d *dydx = 0, Matrixzcd *dydu = 0,
+                  Matrixzmd *dydp = 0) {
     
     y.template head<3>() = x.R.transpose()*a0 - x.ba;
 
@@ -63,9 +66,9 @@ namespace gcop {
   };
   
   
-  template<int _nz>
-    ImuSensor<_nz>::ImuSensor() : 
-    Sensor<ImuState, 9, 3, Dynamic, Matrix<double, _nz, 1>, _nz>(Rn<_nz>::Instance()) {
+  template<int _nz, int _nu, int _np>
+    ImuSensor<_nz, _nu, _np>::ImuSensor() : 
+    Sensor<ImuState, 9, _nu, _np, Matrix<double, _nz, 1>, _nz>(Rn<_nz>::Instance()) {
     
     a0 << 0, 0, -9.81; 
     m0 << 1, 0, 0;     

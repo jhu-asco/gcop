@@ -31,7 +31,7 @@ int main(int argc, char** argv)
   //  sensor.sv = 0;  // no acceleration bias drift
 
   ImuKalmanPredictor kp(imu);
-  ImuKalmanCorrector kc(imu, sensor);
+  ImuKalmanCorrector kc(imu.X, sensor);
 
   //  ImuUnscentedPredictor kp(imu);
   // ImuUnscentedCorrector kc(imu, sensor);

@@ -420,7 +420,7 @@ namespace gcop {
 					//Adding nan catching :
 					try
 					{
-						this->sys.Step(xn, un, h, this->p);
+						this->sys.Step1(xn, un, h, this->p);
 					}
 					catch(std::exception &e)
 					{

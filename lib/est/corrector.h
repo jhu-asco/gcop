@@ -1,8 +1,8 @@
 #ifndef GCOP_CORRECTOR_H
 #define GCOP_CORRECTOR_H
 
-#include "system.h"
 #include "sensor.h"
+#include "manifold.h"
 
 namespace gcop {
   
@@ -30,10 +30,10 @@ namespace gcop {
 
   /**
    * Basic Corrector
-   * @param sys system dynamical model
+   * @param X sensor input manifold
    * @param sensor sensor 
    */
-  Corrector(System<T, _nx, _nu, _np>  &sys,
+  Corrector(Manifold<T, _nx>  &X,
             Sensor<T, _nx, _nu, _np, Tz, _nz> &sensor);
   
   virtual ~Corrector();
@@ -53,16 +53,16 @@ namespace gcop {
                        const Vectorcd &u, const Tz &z, 
                        const Vectormd *p = 0, bool cov = true) = 0;
     
-  System<T, _nx, _nu, _np>  &sys;             ///< system
+  Manifold<T, _nx>  &X;             ///< system
   Sensor<T, _nx, _nu, _np, Tz, _nz> &sensor;  ///< sensor
     
   };
   
   
   template <typename T, int _nx, int _nu, int _np, typename Tz, int _nz> 
-    Corrector<T, _nx, _nu, _np, Tz, _nz>::Corrector( System<T, _nx, _nu, _np>  &sys, 
+    Corrector<T, _nx, _nu, _np, Tz, _nz>::Corrector( Manifold<T, _nx>  &X, 
                                                      Sensor<T, _nx, _nu, _np, Tz, _nz> &sensor) : 
-    sys(sys), sensor(sensor) {
+    X(X), sensor(sensor) {
   }  
 
   template <typename T, int _nx, int _nu, int _np, typename Tz, int _nz> 

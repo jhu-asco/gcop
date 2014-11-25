@@ -1,7 +1,9 @@
 set(headers
       ddp.h
       docp.h
+      doep.h
       gndocp.h
+      gndoep.h
       pddp.h
       ba.h
       body2dslam.h

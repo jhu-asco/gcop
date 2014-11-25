@@ -21,23 +21,28 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
-  template<int _nz = 6>
-    class InsImu : public Sensor<InsState, 15, 6, Dynamic, Matrix<double, _nz, 1>, _nz> {
+  template<int _nz = 6, int _nu = 6, int _np = Dynamic>
+    class InsImu : public Sensor<InsState, 15, _nu, _np, Matrix<double, _nz, 1>, _nz> {
     
   public:  
   
+  typedef Matrix<double, _nu, 1> Vectorcd;
+
+  typedef Matrix<double, _np, 1> Vectormd;
+
+
   typedef Matrix<double, _nz, 1> Vectorzd;
   typedef Matrix<double, _nz, 3> Matrixz3d;
-  typedef Matrix<double, _nz, 6> Matrixz6d;
+  typedef Matrix<double, _nz, _nu> Matrixzcd;
   typedef Matrix<double, _nz, 15> Matrixz15d;
-  typedef Matrix<double, _nz, Dynamic> MatrixzXd;
+  typedef Matrix<double, _nz, _np> Matrixzmd;
   
   InsImu();
   
-  bool operator()(Vectorzd &y, double t, const InsState &x, const Vector6d &u,
-                  const VectorXd *p = 0, 
-                  Matrixz15d *dydx = 0, Matrixz6d *dydu = 0,
-                  MatrixzXd *dydp = 0) {
+  bool operator()(Vectorzd &y, double t, const InsState &x, const Vectorcd &u,
+                  const Vectormd *p = 0, 
+                  Matrixz15d *dydx = 0, Matrixzcd *dydu = 0,
+                  Matrixzmd *dydp = 0) {
     
     //    y.template head<3>() = x.first.transpose()*a0 - ba;
     y.template head<3>() = x.R.transpose()*a0 - x.ba;
@@ -70,9 +75,9 @@ namespace gcop {
   };
   
   
-  template<int _nz>
-    InsImu<_nz>::InsImu() : 
-    Sensor<InsState, 15, 6, Dynamic, Matrix<double, _nz, 1>, _nz>(Rn<_nz>::Instance()) {
+  template<int _nz, int _nu, int _np>
+    InsImu<_nz, _nu, _np>::InsImu() : 
+    Sensor<InsState, 15, _nu, _np, Matrix<double, _nz, 1>, _nz>(Rn<_nz>::Instance()) {
     
     a0 << 0, 0, -9.81;
     m0 << 1, 0, 0;

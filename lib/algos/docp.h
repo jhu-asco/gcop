@@ -68,7 +68,7 @@ namespace gcop {
     
     System<T, nx, nu, np> &sys;    ///< dynamical system 
 
-    Cost<T, nx, nu> &cost;     ///< given cost function
+    Cost<T, nx, nu, np> &cost;     ///< given cost function
 
     std::vector<double> &ts; ///< times (N+1) vector
 
@@ -230,7 +230,7 @@ namespace gcop {
           }
         }        
       } else {
-        sys.Step(xs[k+1], ts[k], xs[k], us[k], h, p);
+        sys.Step(xs[k+1], ts[k], xs[k], us[k], h, p);//#TODO Replace this with more efficient version
       }
     }
   }  
