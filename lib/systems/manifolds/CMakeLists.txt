@@ -14,6 +14,7 @@ set(sources
 )
 
 set(headers
+    manifold.h
     body2dmanifold.h
     body3dmanifold.h
     gunicyclemanifold.h

@@ -43,6 +43,7 @@ append_subdir_files(headers headers algos)
 # they will be treated as separate modules
 #Util Headers:
 #INSTALL(FILES ${util_headers} DESTINATION include/gcop/utils)              
+#message("HEADERS: ${headers}")
 INSTALL(FILES ${headers} DESTINATION include/gcop)#This will be changed later TODO              
 #Utils
 add_library(gcop_utils  SHARED ${util_sources})

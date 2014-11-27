@@ -29,7 +29,6 @@ set(sources
 )
 
 set(headers
-    manifold.h
     system.h
     system_extstep.h
     particle2d.h

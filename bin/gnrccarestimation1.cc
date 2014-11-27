@@ -98,11 +98,12 @@ void solver_process(Viewer* viewer)
   VectorXd mup(6);//Initial Prior
   VectorXd p0(6);//Initial Guess
 
-  mup<<0.5, 0.3, 0.1, 0.3, 0.1, 1;
+  //mup<<0.5, 0.3, 0.1, 0.3, 0.1, 1;
   //p0<<0.3, 0.1, 0.01, 0.1, 0.01, 1.2;
   //p0<<0.4, 0.1, 0.0, 0.1, 0.0, 1;
   params.GetVectorXd("p0", p0);
   cout<<"p0: "<<p0.transpose()<<endl;
+  mup = p0;//initial guess is the prior for the parameters
     //cost.P = P.asDiagonal();
 
   w0.setZero();//Initial guess for noise
