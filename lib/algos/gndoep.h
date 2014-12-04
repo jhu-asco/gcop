@@ -199,7 +199,7 @@ struct Functor
      }
      ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Resp(gp, doep->p);
      fvec.tail(np) += gp;
-     //cout<<"Gp: "<<gp<<endl;
+     //cout<<"Gp: "<<gp<<endl;//#DEBUG
 
      if(doep->debug)
      {

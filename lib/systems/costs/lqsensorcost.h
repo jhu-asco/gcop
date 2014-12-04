@@ -85,7 +85,7 @@ namespace gcop {
      * @param zs observed measurements
      * @param mup mean parameters (Prior for parameters)
      */
-    void SetReference(const vector<Tz> *zs, const Vectormd *mup = 0);        
+    void SetReference(const vector<Tz> *zs, Vectormd *mup = 0);        
     
     //const Tz &zf; ///< reference to a desired final state
     
@@ -100,7 +100,7 @@ namespace gcop {
     Matrixmd Psqrt;       ///< P sqrt
 
     const vector<Tz> *zs;         ///< measured sensor data
-    const Vectormd *mup;          ///< Prior for parameter data
+    Vectormd *mup;          ///< Prior for parameter data
 
     protected:
 
@@ -146,9 +146,14 @@ namespace gcop {
 
 
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz>
-    void LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>::SetReference(const vector<Tz> *zs, const Vectormd *mup) {
+    void LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>::SetReference(const vector<Tz> *zs, Vectormd *mup) {
     this->zs = zs;
-    this->mup = mup;
+    //this->mup = mup;
+    if(mup)
+    {
+      this->mup = new VectorXd(mup->size());
+      *(this->mup) = *mup;//Copy the vector over
+    }
     //Add assert statments to make sure there are enough measurements and parameters#TODO
   }
 

@@ -6,7 +6,7 @@
 using namespace gcop;
 using namespace Eigen;
 
-Rccar::Rccar(int np) : System(Rn<4>::Instance(),2,np), l(.3), r(0.5)
+Rccar::Rccar(int np) : System(Rn<4>::Instance(),2,np), l(.3), r(0.5), h(0.001)
 {
   U.bnd = true;
   U.lb[0] = -100;
@@ -19,9 +19,6 @@ Rccar::Rccar(int np) : System(Rn<4>::Instance(),2,np), l(.3), r(0.5)
 double Rccar::Step(Vector4d& xb, double t, const Vector4d& xa,
                    const Vector2d& u, double h, const VectorXd *p,
                    Matrix4d *A, Matrix42d *B, Matrix4pd *C) {
-  double c = cos(xa[2]);
-  double s = sin(xa[2]);
-  const double &v = xa[3];
 
   if(p)
   {
@@ -30,11 +27,29 @@ double Rccar::Step(Vector4d& xb, double t, const Vector4d& xa,
   }
  const double &force = r*u[0];
  const double &tansteer = u[1];
-  xb[0] = xa[0] + h*c*v;
-  xb[1] = xa[1] + h*s*v;
-  xb[2] = xa[2] + h*tansteer/l*v;
-  xb[3] = v + h*force;
-  
+ int nofsteps = floor(h/(this->h));
+ Vector4d xtemp = xa;
+ if (nofsteps > 0)
+ {
+   const double &v = xtemp[3];
+   for(int count = 0;count < nofsteps; count++)
+   {
+     xtemp[0] = xtemp[0] + (this->h)*cos(xtemp[2])*v;
+     xtemp[1] = xtemp[1] + (this->h)*sin(xtemp[2])*v;
+     xtemp[2] = xtemp[2] + (this->h)*tansteer/l*v;
+     xtemp[3] = v + (this->h)*force;
+   }
+ }
+ double remh = h - nofsteps*(this->h);//Left remainder
+
+ xb[0] = xtemp[0] + remh*cos(xtemp[2])*xtemp[3];
+ xb[1] = xtemp[1] + remh*sin(xtemp[2])*xtemp[3];
+ xb[2] = xtemp[2] + remh*tansteer/l*xtemp[3];
+ xb[3] = xtemp[3] + remh*force;
+
+  const double &v = xa[3];
+  double c = cos(xa[2]);
+  double s = sin(xa[2]);
   if (A) {
     A->setIdentity();
     (*A)(0,2) = -h*s*v;

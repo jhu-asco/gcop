@@ -34,6 +34,7 @@ namespace gcop {
 
     double l; ///< distance between axles    
     double r; ///< radius of the wheel
+    double h; ///< Internal step size
   };
 }
 

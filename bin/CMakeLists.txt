@@ -165,3 +165,11 @@ endif(OPENCV_FOUND)
 #        RUNTIME
 #        DESTINATION bin)
 endif (BUILD_TESTS)
+
+if (USE_BULLET)
+  if (BULLET_FOUND)
+    add_subdirectory (SimpleOpenGL3)
+    add_subdirectory (BulletVehicleEstimation)
+    add_subdirectory (BulletVehicleEstimation1)
+  endif (BULLET_FOUND)
+endif (USE_BULLET)

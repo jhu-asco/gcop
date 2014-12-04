@@ -18,6 +18,7 @@ SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSIO
 
 ## Options for building this Project:
 option(BUILD_TESTS "BUILD_TESTS" ON)
+option(USE_BULLET "USE_BULLET" ON)
 # Will add more like disabling est if not needed etc
 #option(USE_VIEWER "USE_VIEWER" ON)
 #option(DISABLE_EST "DISABLE_ESTIMATION" OFF)
@@ -90,6 +91,18 @@ set (VIEWER_LIBS ${VIEWER_LIBS} ${CMAKE_THREAD_LIBS_INIT})
 find_package(TinyXML)
 include_directories(${TINYXML_INCLUDE_DIR})
 set(UTIL_LIBS ${UTIL_LIBS} ${TINYXML_LIBRARIES})
+
+if (USE_BULLET)
+  find_package(Bullet REQUIRED)
+  set(BULLET_PHYSICS_SOURCE_DIR ${PROJECT_SOURCE_DIR}/bullet3)
+  set(BULLET_INCLUDE_DIR ${BULLET_INCLUDE_DIR})
+  include_directories(${BULLET_INCLUDE_DIR})
+  link_directories( ${BULLET_PHYSICS_SOURCE_DIR}/build3/btgui/OpenGLWindow
+                    ${BULLET_PHYSICS_SOURCE_DIR}/build3/btgui/Gwen
+                    ${BULLET_PHYSICS_SOURCE_DIR}/build3/btgui/Bullet3AppSupport
+                    ${BULLET_PHYSICS_SOURCE_DIR}/build3/btgui/lua-5.2.3
+                    ${BULLET_PHYSICS_SOURCE_DIR}/build3/Demos/OpenGL)
+endif (USE_BULLET)
 
 
 #FIND_PACKAGE(Ceres)
