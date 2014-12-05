@@ -4,6 +4,7 @@ set(headers
       doep.h
       gndocp.h
       gndoep.h
+      gndoepv2.h
       pddp.h
       ba.h
       body2dslam.h

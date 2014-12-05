@@ -23,5 +23,5 @@ set(headers
   function.h
   params.h
   normal.h
-  bulletparser.h
+  bulletworld.h
   )
