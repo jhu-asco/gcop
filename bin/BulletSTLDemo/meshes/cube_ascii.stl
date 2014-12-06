@@ -1,0 +1,86 @@
+solid Exported from Blender-2.69 (sub 10)
+facet normal 0 0 0
+outer loop
+vertex 1.000000 -1.000000 1.000000
+vertex -1.000000 -1.000000 1.000000
+vertex -1.000000 -1.000000 -1.000000
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex -1.000000 -1.000000 -1.000000
+vertex 1.000000 -1.000000 -1.000000
+vertex 1.000000 -1.000000 1.000000
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex 0.999999 1.000000 1.000000
+vertex 1.000000 1.000000 -1.000000
+vertex -1.000000 1.000000 -1.000000
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex -1.000000 1.000000 -1.000000
+vertex -1.000001 1.000000 0.999999
+vertex 0.999999 1.000000 1.000000
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex 1.000000 -1.000000 1.000000
+vertex 0.999999 1.000000 1.000000
+vertex -1.000001 1.000000 0.999999
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex -1.000001 1.000000 0.999999
+vertex -1.000000 -1.000000 1.000000
+vertex 1.000000 -1.000000 1.000000
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex -1.000000 -1.000000 1.000000
+vertex -1.000001 1.000000 0.999999
+vertex -1.000000 1.000000 -1.000000
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex -1.000000 1.000000 -1.000000
+vertex -1.000000 -1.000000 -1.000000
+vertex -1.000000 -1.000000 1.000000
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex -1.000000 -1.000000 -1.000000
+vertex -1.000000 1.000000 -1.000000
+vertex 1.000000 1.000000 -1.000000
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex 1.000000 1.000000 -1.000000
+vertex 1.000000 -1.000000 -1.000000
+vertex -1.000000 -1.000000 -1.000000
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex 0.999999 1.000000 1.000000
+vertex 1.000000 -1.000000 1.000000
+vertex 1.000000 -1.000000 -1.000000
+endloop
+endfacet
+facet normal 0 0 0
+outer loop
+vertex 1.000000 -1.000000 -1.000000
+vertex 1.000000 1.000000 -1.000000
+vertex 0.999999 1.000000 1.000000
+endloop
+endfacet
+endsolid Exported from Blender-2.69 (sub 10)

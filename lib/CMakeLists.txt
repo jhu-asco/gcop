@@ -39,6 +39,23 @@ append_subdir_files(headers headers views)
 append_subdir_files(headers headers est)
 append_subdir_files(headers headers algos)
 
+if (USE_BULLET)
+  add_subdirectory (bulletsystems)
+  append_subdir_files(headers headers bulletsystems)
+  append_subdir_files(bulletsys_sources sources bulletsystems)
+# Bullet Systems: 
+  add_library(gcop_bulletsystems SHARED ${bulletsys_sources})
+#target_link_libraries(gcop_systems gcop_utils)#Dependency of modules
+
+  INSTALL(TARGETS gcop_bulletsystems DESTINATION lib)
+#INSTALL(FILES ${sys_headers} DESTINATION include/gcop/bulletsystems)              
+
+  SET_TARGET_PROPERTIES(gcop_bulletsystems
+                        PROPERTIES
+                        VERSION 1.0.0
+                        SOVERSION 0)
+endif (USE_BULLET)
+
 # Creating separate libraries for each of the subdirectories 
 # they will be treated as separate modules
 #Util Headers:
@@ -65,6 +82,7 @@ SET_TARGET_PROPERTIES(gcop_systems
                       PROPERTIES
                       VERSION 1.0.0
                       SOVERSION 0)
+
 # Viewers:
 add_library(gcop_views SHARED ${viewer_sources})
 #target_link_libraries(gcop_views gcop_utils)#Dependency of modules

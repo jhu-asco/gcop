@@ -8,7 +8,9 @@ void inline creategreyscaledata()
   MyHeightfield = (char *)malloc(width*height);
   char pixel[3];//Pixel data
   char *pointer = header_data;
-  for(int count = 0;count < width*height; count++)
+  int count;
+#pragma omp parallel for private(count)
+  for(count = 0;count < width*height; count++)
   {
     HEADER_PIXEL(pointer, pixel);
     MyHeightfield[count] = round(double(pixel[0] + pixel[1] + pixel[3])/3.0);

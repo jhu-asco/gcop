@@ -1,3 +1,5 @@
+#ifndef BULLET_WORLD
+#define BULLET_WORLD
 /** Bullet Helper Class:
  * This class is derived from the Bullet Demo application to provide 
  * helper functions to setup a default world (The code here is just copy paste from above sources without addition OpenGL stuff).
@@ -21,12 +23,10 @@
 
 using namespace std;
 
-namespace BulletWorld{
+namespace gcop{
 	class BulletWorld
 	{
 		protected:
-			btAlignedObjectArray<btCollisionShape*> m_collisionShapes;///<Stores all the collision shapes in a world for drawing and other purposes
-
 			class btBroadphaseInterface*	m_overlappingPairCache;///<Broadphase collision checker
 
 			class btCollisionDispatcher*	m_dispatcher;///<Collision checker
@@ -35,24 +35,39 @@ namespace BulletWorld{
 
 			class btDefaultCollisionConfiguration* m_collisionConfiguration;///<Default Collision configuration used from bullet demos
 
-			btDynamicsWorld*		m_dynamicsWorld;///<this is the most important class It represents the Discrete Dynamics World 
 
       btVector3 worldMin;
       btVector3 worldMax;
+      bool usezupaxis;
+
+    public: 
+			btDynamicsWorld*		m_dynamicsWorld;///<this is the most important class It represents the Discrete Dynamics World 
+      btScalar m_defaultContactProcessingThreshold;
+			btAlignedObjectArray<btCollisionShape*> m_collisionShapes;///<Stores all the collision shapes in a world for drawing and other purposes
+
 
 		public:
-      BulletWorld(btVector3 worldmin_ = btVector3(-1000,-1000,-1000), btVector3 worldMax_ = btVector3(1000,1000,1000), btVector3 gravity_ = btVector3(0,0,-9.81)):
-        m_collisionConfiguration(new btDefaultCollisionConfiguration())
-        ,m_dispatcher(new btCollisionDispatcher(m_collisionConfiguration))
-        ,worldMin(worldMin_), worldMax(worldMax_)
-        ,m_overlappingPairCache(new btAxisSweep3(worldMin,worldMax))
-        ,m_constraintSolver(new btSequentialImpulseConstraintSolver())
-        ,m_dynamicsWorld(new btDiscreteDynamicsWorld(m_dispatcher,m_overlappingPairCache,m_constraintSolver,m_collisionConfiguration))
-			{
-				m_dynamicsWorld->setGravity(gravity_);//Sets Gravity Vector
-			}
+      BulletWorld(bool usezupaxis_ = false, btVector3 worldMin_ = btVector3(-1000,-1000,-1000), btVector3 worldMax_ = btVector3(1000,1000,1000)):
+        m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
+        ,worldMin(worldMin_), worldMax(worldMax_), usezupaxis(usezupaxis_)
+      {
+        m_collisionConfiguration = new btDefaultCollisionConfiguration();
+        m_dispatcher = new btCollisionDispatcher(m_collisionConfiguration);
+        m_overlappingPairCache = new btAxisSweep3(worldMin,worldMax);
+        m_constraintSolver = new btSequentialImpulseConstraintSolver();
+        m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher,m_overlappingPairCache,m_constraintSolver,m_collisionConfiguration);
+        if(usezupaxis)
+          m_dynamicsWorld->setGravity(btVector3(0,0,-9.81));//Sets Gravity Vector
+        else
+          m_dynamicsWorld->setGravity(btVector3(0,-9.81,0));//Sets Gravity Vector
+      }
 
-			btRigidBody*  localCreateRigidBody(float mass, const btTransform& startTransform,btCollisionShape* shape, bool use_motion_state = false)
+      void SetGravity(btVector3 gravity_)
+      {
+				m_dynamicsWorld->setGravity(gravity_);//Sets Gravity Vector
+      }
+
+			btRigidBody*  LocalCreateRigidBody(float mass, const btTransform& startTransform,btCollisionShape* shape, bool use_motion_state = false)
 			{
 				btAssert((!shape || shape->getShapeType() != INVALID_SHAPE_PROXYTYPE));
 
@@ -64,6 +79,7 @@ namespace BulletWorld{
 				if (isDynamic)
 					shape->calculateLocalInertia(mass,localInertia);
 
+        btRigidBody* body = NULL;
 				//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
         if(use_motion_state)
         {
@@ -71,16 +87,16 @@ namespace BulletWorld{
 
           btRigidBody::btRigidBodyConstructionInfo cInfo(mass,myMotionState,shape,localInertia);
 
-          btRigidBody* body = new btRigidBody(cInfo);
+          body = new btRigidBody(cInfo);
           body->setContactProcessingThreshold(m_defaultContactProcessingThreshold);
         }
         else
         {
-          btRigidBody* body = new btRigidBody(mass,0,shape,localInertia);
+          body = new btRigidBody(mass,0,shape,localInertia);
           body->setWorldTransform(startTransform);
         }
-
-				m_dynamicsWorld->addRigidBody(body);
+        if(body != NULL)
+          m_dynamicsWorld->addRigidBody(body);
 
 				return body;
 			}
@@ -88,25 +104,26 @@ namespace BulletWorld{
       //Creates a triangular mesh from vertex data. The number of indices should be equal to 3 times the number of triangles
       // The vertex data can be smaller than 3*noftriangles since different triangles can share vertices
       // By default assumes each index corresponds to a vertex
-      btCollisionShape *CreateMeshFromData(float *verts, int *inds, int noftriangles, int nofverts = (3*noftriangles))
+      btCollisionShape *CreateMeshFromData(float *verts, int *inds, int noftriangles, int nofverts)
       {
         if(!inds || !verts)
-          return;
-        int vertStride = sizeof(float); 
+          return 0;
+        int vertStride = 3*sizeof(float); 
         int indexStride = 3*sizeof(int);
-        m_indexVertexArrays = new btTriangleIndexVertexArray(noftriangles,
-            inds,
-            indexStride,
-            nofverts,groundverts,vertStride);
+        btTriangleIndexVertexArray *m_indexVertexArrays = new btTriangleIndexVertexArray(noftriangles
+                                                                                        ,inds
+                                                                                        ,indexStride
+                                                                                        ,nofverts,verts,vertStride);
         cout<<"2"<<endl;
 
         bool useQuantizedAabbCompression = true;
-        btCollisionShape *groundShape = new btBvhTriangleMeshShape(m_TriMesh,useQuantizedAabbCompression);
-        return groundShape;
+        btCollisionShape *collshape = new btBvhTriangleMeshShape(m_indexVertexArrays,useQuantizedAabbCompression);
+        m_collisionShapes.push_back(collshape);
+        return collshape;
       }
 
       //Loads a mesh from Binary STL Files. Modified from LoadMeshFromSTL used by Bullet3 Demo
-			btCollisionShape *CreateMeshFromSTL(const char *filename)
+			btCollisionShape *CreateMeshFromSTL(const char *filename, btVector3 scale = btVector3(1,1,1))
       {
         FILE* file = fopen(filename,"rb");
         if(file)
@@ -142,23 +159,30 @@ namespace BulletWorld{
                     }
 
                   }
-                  float *verts = (float *)malloc(3*numTriangles*sizeof(float));//No compression used Can use trees if needed later
+                  float *verts = (float *)malloc(3*3*numTriangles*sizeof(float));//No compression used Can use trees if needed later 3 vertices per triangle, 3 indices per vertex
                   int *inds = (int *)malloc(3*numTriangles*sizeof(int));
                   int i;
+                  if(scale != btVector3(1,1,1))
+                  {
+#pragma omp parallel for private(i)
+                    for(i = 0;i < 9*numTriangles;i++)
+                    {
+                      verts[i] *= scale[i%3];
+                    }
+                  }
 #pragma omp parallel for private(i)
                   for (i=0;i<numTriangles;i++)
                   {
-#pragma omp section
-                    char* curPtr = &memoryBuffer[84+i*50];
-                    memcpy(verts+3*i,curPtr+12,36);
-#pragma omp section
-                    inds[3*i+0] = i;
-                    inds[3*i+1] = i+1;
-                    inds[3*i+2] = i+2;
+                      memcpy(&verts[9*i],&memoryBuffer[96+i*50],36);//9 floats of 4 bytes each (3 floats per vertex)
+                      inds[3*i+0] = 3*i;
+                      inds[3*i+1] = 3*i+1;
+                      inds[3*i+2] = 3*i+2;
+                      //cout<<"Vertices["<<3*i<<"]: "<<verts[3*i]<<"\t"<<verts[3*i+1]<<"\t"<<verts[3*i+2]<<endl;
+                      //cout<<"Vertices["<<(3*i+1)<<"]: "<<verts[3*(i+1)]<<"\t"<<verts[3*(i+1)+1]<<"\t"<<verts[3*(i+1)+2]<<endl;
+                      //cout<<"Vertices["<<(3*i+2)<<"]: "<<verts[3*(i+2)]<<"\t"<<verts[3*(i+2)+1]<<"\t"<<verts[3*(i+2)+2]<<endl;
                   }
+                  return CreateMeshFromData(verts, inds, numTriangles, 3*numTriangles);
                 }
-                return CreateMeshFromData(verts, inds, numTriangles);
-
                 delete[] memoryBuffer;
               }
             }
@@ -166,6 +190,70 @@ namespace BulletWorld{
           }
         }
         return 0;
+      }
+
+			btCollisionShape *CreateGroundPlane(float length, float width, float(*heightfunc)(float, float)=0,int subdivisions = 1)
+      {
+        cout<<"Subdivisions: "<<subdivisions<<endl;
+        int i;
+
+        const float TRIANGLE_SIZE_X = (length/subdivisions);
+        const float TRIANGLE_SIZE_Y = (width/subdivisions);
+
+        const int NUM_VERTS_X = subdivisions+1;
+        const int NUM_VERTS_Y = subdivisions+1;
+        const int totalVerts = NUM_VERTS_X*NUM_VERTS_Y;
+
+        const int totalTriangles = 2*(NUM_VERTS_X-1)*(NUM_VERTS_Y-1);
+
+        float *m_vertices = new float[3*totalVerts];
+        int*	gIndices = new int[totalTriangles*3];
+
+        cout<<"Number of Verts: "<<NUM_VERTS_X<<"\t"<<NUM_VERTS_Y<<endl;
+
+#pragma omp parallel for private(i)
+        for ( i=0;i<NUM_VERTS_X;i++)
+        {
+          for (int j=0;j<NUM_VERTS_Y;j++)
+          {
+            float height = 0.f;//20.f*sinf(float(i)*wl)*cosf(float(j)*wl);
+            if(heightfunc != 0)
+            {
+              height = heightfunc(i*TRIANGLE_SIZE_X, j*TRIANGLE_SIZE_Y);
+            }
+
+            m_vertices[3*(i+j*NUM_VERTS_X)] = (i-NUM_VERTS_X*0.5f)*TRIANGLE_SIZE_X + 0.5*TRIANGLE_SIZE_X;
+            if(usezupaxis)
+            {
+              m_vertices[3*(i+j*NUM_VERTS_X)+1] = (j-NUM_VERTS_Y*0.5f)*TRIANGLE_SIZE_Y + 0.5*TRIANGLE_SIZE_Y;
+              m_vertices[3*(i+j*NUM_VERTS_X)+2] = height;
+            }
+            else
+            {
+              m_vertices[3*(i+j*NUM_VERTS_X)+1] = height;
+              m_vertices[3*(i+j*NUM_VERTS_X)+2] = (j-NUM_VERTS_Y*0.5f)*TRIANGLE_SIZE_Y + 0.5*TRIANGLE_SIZE_Y;
+            }
+            //cout<<"Vertices: "<<3*(i+j*NUM_VERTS_X)<<"\t"<<m_vertices[3*(i+j*NUM_VERTS_X)]<<"\t"<<m_vertices[3*(i+j*NUM_VERTS_X)+1]<<"\t"<<m_vertices[3*(i+j*NUM_VERTS_X)+2]<<endl;
+          }
+        }
+
+#pragma omp parallel for private(i)
+        for ( i=0;i<NUM_VERTS_X-1;i++)
+        {
+          for (int j=0;j<NUM_VERTS_Y-1;j++)
+          {
+            int index = (i*(NUM_VERTS_Y-1) + j)*6;
+            gIndices[index++] = j*NUM_VERTS_X+i;
+            gIndices[index++] = j*NUM_VERTS_X+i+1;
+            gIndices[index++] = (j+1)*NUM_VERTS_X+i+1;
+
+            gIndices[index++] = j*NUM_VERTS_X+i;
+            gIndices[index++] = (j+1)*NUM_VERTS_X+i+1;
+            gIndices[index++] = (j+1)*NUM_VERTS_X+i;
+            //cout<<"Indices: "<<j*NUM_VERTS_X+i<<"\t"<<j*NUM_VERTS_X+i+1<<(j+1)*NUM_VERTS_X+i+1<<"\t"<<j*NUM_VERTS_X+i<<"\t"<<(j+1)*NUM_VERTS_X+i+1<<"\t"<<(j+1)*NUM_VERTS_X+i<<endl;
+          }
+        }
+        return CreateMeshFromData(m_vertices, gIndices, totalTriangles, totalVerts);
       }
 
 			//Simulates the time dt in seconds with the specified number of substeps
@@ -230,3 +318,4 @@ namespace BulletWorld{
 			}
 	};
 };
+#endif

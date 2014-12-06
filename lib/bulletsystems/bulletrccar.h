@@ -6,9 +6,7 @@
 #include <BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <btBulletDynamicsCommon.h>
-#include "DemoApplication.h"
-
-//#define RCCAR_RADIO_INPUTS
+#include "bulletworld.h"
 
 namespace gcop {
   
@@ -35,7 +33,7 @@ namespace gcop {
   class Bulletrccar : public Rccar 
   {
   public:
-    Bulletrccar(btDynamicsWorld* m_dynamicsWorld_, btAlignedObjectArray<btCollisionShape*> &m_collisionShapes, DemoApplication *appinstance);
+    Bulletrccar(BulletWorld& m_world);
 
     ~Bulletrccar()
     {
@@ -91,6 +89,7 @@ namespace gcop {
     float gain_cmdvelocity;
     float kp_torque;
     float kp_steer;//Ideally should be between 0 and 1(Can define a map to do this #TODO)
+    float initialz;
 
     //Bullet classes for holding car
     btRigidBody* m_carChassis;
@@ -98,7 +97,8 @@ namespace gcop {
     btCollisionShape*	m_wheelShape;
     btRaycastVehicle::btVehicleTuning	m_tuning;
     btVehicleRaycaster*	m_vehicleRayCaster;
-    btDynamicsWorld*		m_dynamicsWorld;
+    BulletWorld &m_world;
+    //btDynamicsWorld*		m_dynamicsWorld;
   };
 }
 

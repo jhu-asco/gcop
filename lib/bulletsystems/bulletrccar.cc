@@ -3,7 +3,7 @@
 using namespace gcop;
 using namespace Eigen;
 
-Bulletrccar::Bulletrccar(btDynamicsWorld*		m_dynamicsWorld_,btAlignedObjectArray<btCollisionShape*> &m_collisionShapes, DemoApplication* appinstance) : 
+Bulletrccar::Bulletrccar(BulletWorld&		m_world_) : 
   Rccar(3),m_carChassis(0), m_vehicle(0), m_wheelShape(0)
   ,carmass(20.0f),rightIndex(0),upIndex(1),forwardIndex(2)
   ,gEngineForce(0),gBreakingForce(0.f),maxEngineForce(100.f),maxBreakingForce(10.f)
@@ -12,8 +12,8 @@ Bulletrccar::Bulletrccar(btDynamicsWorld*		m_dynamicsWorld_,btAlignedObjectArray
   ,suspensionStiffness(1000.f),suspensionDamping(100.f),suspensionCompression(0.02f)
   ,rollInfluence(0.1f),suspensionRestLength(0.122)
   ,m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
-  , m_dynamicsWorld(m_dynamicsWorld_)
-  , gain_cmdvelocity(2), kp_torque(50), kp_steer(0.1)
+  , gain_cmdvelocity(2), kp_torque(50), kp_steer(0.1), initialz(0)
+  ,m_world(m_world_)
 {
   wheelDirectionCS0.setValue(0,-1,0);
   wheelAxleCS.setValue(-1,0,0);
@@ -23,12 +23,12 @@ Bulletrccar::Bulletrccar(btDynamicsWorld*		m_dynamicsWorld_,btAlignedObjectArray
   {
     //The car details are hardcoded
     btCollisionShape* chassisShape = new btBoxShape(btVector3(car_halfdims[0],car_halfdims[1],car_halfdims[2]));//Need to use half extents of the box to create the chassis shape  in BULLET !!	
-    m_collisionShapes.push_back(chassisShape);
+    m_world.m_collisionShapes.push_back(chassisShape);
 
     {
       btTransform initialtr;//temporary transform
       initialtr.setIdentity();
-      m_carChassis = appinstance->localCreateRigidBody(carmass,initialtr,chassisShape);//(chassis Rigid Body)
+      m_carChassis = m_world.LocalCreateRigidBody(carmass,initialtr,chassisShape);//(chassis Rigid Body)
     }
 
     //Loading Wheel Shapes:
@@ -37,14 +37,14 @@ Bulletrccar::Bulletrccar(btDynamicsWorld*		m_dynamicsWorld_,btAlignedObjectArray
     /// create vehicle
     {
       // Ray casting helper class for the vehicle
-      m_vehicleRayCaster = new btDefaultVehicleRaycaster(m_dynamicsWorld);
+      m_vehicleRayCaster = new btDefaultVehicleRaycaster(m_world.m_dynamicsWorld);
       // Ray Casting Vehicle is made from existing rigid body. It converts a rigid body into a vehicle by attaching four rays looking downwards at four ends which are equivalent to wheels and uses the forces generated to move the rigid body.
       m_vehicle = new btRaycastVehicle(m_tuning,m_carChassis,m_vehicleRayCaster);
 
       ///never deactivate the vehicle from computing collisions etc. Usually the bodies are deactivated after some time if they are not moving
       m_carChassis->setActivationState(DISABLE_DEACTIVATION);
 
-      m_dynamicsWorld->addVehicle(m_vehicle);
+      (m_world.m_dynamicsWorld)->addVehicle(m_vehicle);
 
       float connectionHeight = 0.17f - 0.03f - car_halfdims[1];// Suspension tip connection height - ground clearance - half the height of car
 
@@ -162,9 +162,9 @@ double Bulletrccar::Step1(Vector4d& xb, const Vector2d& u,
   {
     //Do the simulation:
     int nofsteps = round(h/(this->h));//Nosteps 
-    if(m_dynamicsWorld)
+    if(m_world.m_dynamicsWorld)
     {
-      int numSimSteps = m_dynamicsWorld->stepSimulation(h,nofsteps,this->h);//No interpolation used
+      int numSimSteps = (m_world.m_dynamicsWorld)->stepSimulation(h,nofsteps,this->h);//No interpolation used
       btTransform &chassistr = m_carChassis->getWorldTransform();
       btVector3 &chassisorig = chassistr.getOrigin();
       btMatrix3x3 &chbasis = chassistr.getBasis();
@@ -202,21 +202,21 @@ double Bulletrccar::Step3(Vector4d &xb, const Vector2d &u,
 
 bool Bulletrccar::reset(const Vector4d &x, double t)
 {
-  if(m_dynamicsWorld)
+  if(m_world.m_dynamicsWorld)
   {
     gVehicleSteering = 0.f;
     gEngineForce = 0.f;
     gBreakingForce = 0.f;
 
     //Set to the specified state:
-    btTransform cartransform(btQuaternion(x[3],0,0),btVector3(x[0],0,x[2]));
+    btTransform cartransform(btQuaternion(x[2],0,0),btVector3(x[0], initialz,x[1]));
     m_carChassis->setCenterOfMassTransform(cartransform);
     btVector3 carvel(x[3]*6.4817,0,0);
     carvel = cartransform*carvel;
     m_carChassis->setLinearVelocity(carvel);
     m_carChassis->setAngularVelocity(btVector3(0,0,0));
 
-    m_dynamicsWorld->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(m_carChassis->getBroadphaseHandle(),m_dynamicsWorld->getDispatcher());
+    (m_world.m_dynamicsWorld)->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(m_carChassis->getBroadphaseHandle(),(m_world.m_dynamicsWorld)->getDispatcher());
     m_vehicle->resetSuspension();
     //Can synchronize wheels with the new transform or ignore
   }

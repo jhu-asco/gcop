@@ -18,12 +18,11 @@ ${GLUT_INCLUDE_DIR}
 
 LINK_LIBRARIES(
  OpenGLSupport  BulletDynamics BulletCollision LinearMath    ${GLUT_glut_LIBRARY} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY}
- gcop_algos gcop_views gcop_bulletsystems gcop_systems ${ALL_LIBS}
+ gcop_algos gcop_systems ${ALL_LIBS}
 )
 
-	#heightfield128x128.cpp
-ADD_EXECUTABLE(AppVehicleDemo
-	VehicleDemo.cpp
+ADD_EXECUTABLE(AppSTLDemo
+	STLDemo.cpp
 	main.cpp
 )
 
