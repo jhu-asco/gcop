@@ -6,7 +6,7 @@
 using namespace gcop;
 using namespace Eigen;
 
-Rccar::Rccar(int np) : System(Rn<4>::Instance(),2,np), l(.3), r(0.5), h(0.001)
+Rccar::Rccar(int np) : System(Rn<4>::Instance(),2,np), l(.3), r(0.5), h(0.01)
 {
   U.bnd = true;
   U.lb[0] = -100;

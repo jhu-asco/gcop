@@ -28,12 +28,12 @@ namespace gcop {
   public:
     Rccar(int np = 2);
     
-    double Step(Vector4d &xb, double t, const Vector4d &xa,
-                const Vector2d &u, double h, const VectorXd *p,
-                Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
+    virtual double Step(Vector4d &xb, double t, const Vector4d &xa,
+                    const Vector2d &u, double h, const VectorXd *p,
+                    Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
 
     double l; ///< distance between axles    
-    double r; ///< radius of the wheel
+    double r; ///< Gain on the car acc vs wheel torque
     double h; ///< Internal step size
   };
 }

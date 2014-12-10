@@ -1,5 +1,5 @@
 
-#include "STLDemo.h"
+#include "VehicleDemo.h"
 #include "GlutStuff.h"
 #include "GLDebugDrawer.h"
 #include "btBulletDynamicsCommon.h"
@@ -8,13 +8,11 @@ GLDebugDrawer	gDebugDrawer;
 int main(int argc,char** argv)
 {
 
-        STLDemo* stlDemo = new STLDemo;
-        if(argc > 1)
-          stlDemo->filename = argv[1];
+        VehicleDemo* vehicleDemo = new VehicleDemo;
 
-        stlDemo->initPhysics(); 
-		stlDemo->getDynamicsWorld()->setDebugDrawer(&gDebugDrawer);
+        vehicleDemo->initPhysics(); 
+		vehicleDemo->getDynamicsWorld()->setDebugDrawer(&gDebugDrawer);
 
-        return glutmain(argc, argv,640,480,"Bullet STL Demo.", stlDemo);
+        return glutmain(argc, argv,640,480,"Bullet Vehicle Demo. http://www.continuousphysics.com/Bullet/phpBB2/", vehicleDemo);
 }
 

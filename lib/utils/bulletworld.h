@@ -57,9 +57,19 @@ namespace gcop{
         m_constraintSolver = new btSequentialImpulseConstraintSolver();
         m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher,m_overlappingPairCache,m_constraintSolver,m_collisionConfiguration);
         if(usezupaxis)
+        {
           m_dynamicsWorld->setGravity(btVector3(0,0,-9.81));//Sets Gravity Vector
+          btVector3 gravity_ = m_dynamicsWorld->getGravity();
+        }
         else
+        {
           m_dynamicsWorld->setGravity(btVector3(0,-9.81,0));//Sets Gravity Vector
+        }
+      }
+
+      bool IsZupAxis()
+      {
+        return usezupaxis;
       }
 
       void SetGravity(btVector3 gravity_)

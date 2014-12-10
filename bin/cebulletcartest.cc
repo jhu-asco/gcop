@@ -7,6 +7,8 @@
 #include "rnlqcost.h"
 #include "params.h"
 #include "controltparam.h"
+#include "bulletrccar.h"
+#include "bulletworld.h"
 
 using namespace std;
 using namespace Eigen;
@@ -36,8 +38,19 @@ void solver_process(Viewer* viewer)
   
 
   double h = tf/N;   // time step
+  //Create Bullet world and rccar system:
+  BulletWorld world(true);//Set the up axis as z for this world
 
-  Rccar sys;
+  Bulletrccar sys(world);
+
+  //Load Ground
+  {
+    btCollisionShape *groundShape = world.CreateGroundPlane(50, 50);//20 by 20 long plane
+    btTransform tr;
+    tr.setOrigin(btVector3(0, 0, 0));
+    tr.setRotation(btQuaternion(0,0,0));
+    world.LocalCreateRigidBody(0,tr, groundShape);
+  }
 
   //  sys.U.lb[1] = tan(-M_PI/5);
   //  sys.U.ub[1] = tan(M_PI/5);
@@ -78,8 +91,8 @@ void solver_process(Viewer* viewer)
   vector<Vector2d> us(N);
 
   for (int i = 0; i < N/2; ++i) {
-    us[i] = Vector2d(.01, .0);
-    us[N/2+i] = Vector2d(-.01, .0);    
+    us[i] = Vector2d(.2, .0);
+    us[N/2+i] = Vector2d(-.2, .0);    
   }
 
   Vector2d du(.2, .1);
@@ -118,7 +131,7 @@ void solver_process(Viewer* viewer)
   viewer->Add(view);
 
   struct timeval timer;
-  // ddp.debug = false; // turn off debug for speed
+  ce.debug = true; // turn off debug for speed
   getchar();
 
   for (int i = 0; i < iters; ++i) {

@@ -59,6 +59,19 @@ if (BUILD_TESTS)
 
 	add_executable(gnrccartest gnrccartest.cc)
 	target_link_libraries(gnrccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+if (USE_BULLET)
+	add_executable(ddpbulletrccartest ddpbulletrccartest.cc)
+	target_link_libraries(ddpbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems  BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
+
+	add_executable(bulletrccartest bulletrccartest.cc)
+	target_link_libraries(bulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems  BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
+
+	add_executable(gnbulletrccartest gnbulletrccartest.cc)
+	target_link_libraries(gnbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems  BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
+
+	add_executable(cebulletcartest cebulletcartest.cc)
+	target_link_libraries(cebulletcartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
+endif (USE_BULLET)
 
 	add_executable(gnrccarestimation gnrccarestimation.cc)
 	target_link_libraries(gnrccarestimation  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
@@ -172,6 +185,6 @@ if (USE_BULLET)
     add_subdirectory (BulletVehicleEstimation)
     add_subdirectory (BulletVehicleEstimation1)
     add_subdirectory (BulletSTLDemo)
-    add_subdirectory (BulletVehicleOptimalControl)
+    add_subdirectory (BulletZVehicleTest)
   endif (BULLET_FOUND)
 endif (USE_BULLET)

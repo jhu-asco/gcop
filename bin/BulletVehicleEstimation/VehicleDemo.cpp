@@ -128,8 +128,10 @@ void VehicleDemo::initPhysics()
   xs.resize(N+1);
   zs.resize(N);
   us.resize(N);
-  //Set initial posn to 0:
+  //Set initial posn to 0 and initial velocity to -0.5
   xs[0].setZero();
+  //xs[0][3] = -0.5;//testing
+  //xs[0][2] = M_PI/4;//testing
   //Initialize the controls and times;
   double h = tf/double(N);
   ts[0] = 0;

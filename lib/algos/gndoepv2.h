@@ -1,5 +1,5 @@
-#ifndef GCOP_GNDOEP_H
-#define GCOP_GNDOEP_H
+#ifndef GCOP_GNDOEP1_H
+#define GCOP_GNDOEP1_H
 
 #include "doep.h"
 #include "lqsensorcost.h"

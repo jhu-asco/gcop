@@ -44,8 +44,12 @@ namespace gcop {
       delete m_wheelShape;
     }
     
+    double Step(Vector4d &xb, double t, const Vector4d &xa,
+                const Vector2d &u, double h, const VectorXd *p,
+                Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
+
     double Step1(Vector4d &xb, const Vector2d &u, 
-                double h, const VectorXd *p,
+                double h, const VectorXd *p = 0,
                 Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
 
     double Step3(Vector4d &xb, const Vector2d &u,
@@ -90,6 +94,9 @@ namespace gcop {
     float kp_torque;
     float kp_steer;//Ideally should be between 0 and 1(Can define a map to do this #TODO)
     float initialz;
+
+    btTransform offsettrans;//To Account for the difference to coordinate system Usage: worldpose_inregcoordsys = offsettrans.inv()*worldpose_bullet*offsettrans
+    btTransform offsettransinv;
 
     //Bullet classes for holding car
     btRigidBody* m_carChassis;

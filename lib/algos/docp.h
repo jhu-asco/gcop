@@ -150,6 +150,8 @@ namespace gcop {
 
     int N = us.size();
 
+    sys.reset(xs[0],ts[0]);//Reset the internal state
+
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
       if (der) {
@@ -161,7 +163,8 @@ namespace gcop {
         T &xb = xs[k+1];
         const Vectorcd &u = us[k];
 
-        sys.Step(xb, ts[k], xa, u, h, p, &As[k], &Bs[k], 0);
+        //sys.Step(xb, ts[k], xa, u, h, p, &As[k], &Bs[k], 0);
+        sys.Step1(xs[k+1], us[k], h, p, &As[k], &Bs[k], 0);
 
         //        cout << "B=" << endl << Bs[k] << endl;
         
@@ -206,6 +209,8 @@ namespace gcop {
 
             As[k].col(i) = (dfp - dfm)/(2*eps);
           }
+          sys.reset(xs[k+1],ts[k+1]);//Reset the internal state
+          //cout<<"As["<<k<<"]: "<<endl<<As[k]<<endl;
         }
         
         if (fabs(Bs[k](0,0) - q) < 1e-10) {
@@ -228,12 +233,14 @@ namespace gcop {
 
             Bs[k].col(i) = (dfp - dfm)/eps;
           }
+          sys.reset(xs[k+1],ts[k+1]);//Reset the internal state
+         // cout<<"Bs["<<k<<"]: "<<endl<<Bs[k]<<endl;
         }        
       } else {
-        sys.Step(xs[k+1], ts[k], xs[k], us[k], h, p);//#TODO Replace this with more efficient version
+        sys.Step1(xs[k+1], us[k], h, p);
       }
     }
-  }  
+  } 
 
   template <typename T, int nx, int nu, int np> 
     void Docp<T, nx, nu, np>::Iterate() {
