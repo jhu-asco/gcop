@@ -1,5 +1,6 @@
 set(headers
       ddp.h
+      sddp.h
       docp.h
       doep.h
       gndocp.h

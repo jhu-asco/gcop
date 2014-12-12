@@ -90,8 +90,10 @@ void solver_process(Viewer* viewer)
   vector<double> ts(N+1);
   // states
   vector<Vector4d> xs(N+1);
-  vector<Vector3d> zs(N+1);
   vector<Vector2d> us(N);
+  //sensor
+  vector<Vector3d> zs(N/10);//Same as ts_sensor
+  vector<double> ts_sensor(N/10);
 
   // Testing Cost Function:
   Vector4d w0;//Just for testing noise
@@ -116,6 +118,10 @@ void solver_process(Viewer* viewer)
   for (int k = 0; k <=N; ++k)
     ts[k] = k*h;
 
+  //Set sensor times:
+  for (int k = 0; k <(N/10); ++k)
+    ts_sensor[k] = 10*k*h;
+
   //////////////Creating the problem////////
   //Temporary point3d state:
   Point3dState projected_state;
@@ -129,6 +135,7 @@ void solver_process(Viewer* viewer)
   //Using the controls Update the sys trajectory and find the sensor measurements:
   //Reset the system:
   sys.reset(xs[0], ts[0]);
+  int sensor_index = 0;
   for(int i = 0; i< N; ++i)
   {
     //Set Control:
@@ -146,7 +153,16 @@ void solver_process(Viewer* viewer)
 
     cout<<"Xs["<<(i+1)<<"]: "<<xs[i+1].transpose()<<endl;
     //cout<<"Point3dState: "<<projected_state.q.transpose()<<endl;
-    gps(zs[i+1], ts[i+1], projected_state, us[i]);
+    if((ts_sensor[sensor_index] - ts[i])>= 0 && (ts_sensor[sensor_index] - ts[i+1]) < 0)
+    {
+      int near_index = (ts_sensor[sensor_index] - ts[i]) > -(ts_sensor[sensor_index] - ts[i+1])?(i+1):i;
+      //Project the state
+      projectmanifold(xs[near_index],projected_state);
+      //cout<<"Point3dState: "<<projected_state.q.transpose()<<endl;
+      gps(zs[sensor_index], ts[near_index], projected_state, us[near_index]);
+      cout<<"Zs ["<<(sensor_index)<<"]: "<<zs[sensor_index].transpose()<<"ts_sensor: "<<ts_sensor[sensor_index]<<endl;
+      sensor_index = sensor_index < (ts_sensor.size()-1)?sensor_index+1:sensor_index;
+    }
     //cout<<"Zs ["<<(i+1)<<"]: "<<zs[i+1].transpose()<<endl;
   }
   RccarView view((Rccar)sys, &xs);
@@ -157,7 +173,7 @@ void solver_process(Viewer* viewer)
   //Assign  Zs:
   cost.SetReference(&zs, &mup);//Set reference for zs
   //Create Gauss newton estimation problem
-  GnDoep<Vector4d, 4, 2, Dynamic, 13, Vector3d, 3, Point3dState, 6> gn(sys, gps, cost, ts, xs, us, p0, &projectmanifold);  
+  GnDoep<Vector4d, 4, 2, Dynamic, 13, Vector3d, 3, Point3dState, 6> gn(sys, gps, cost, ts, xs, us, p0, ts_sensor, &projectmanifold);  
   getchar();
 
 

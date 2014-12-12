@@ -57,11 +57,17 @@ if (BUILD_TESTS)
 	add_executable(rccartest rccartest.cc)
 	target_link_libraries(rccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(sddprccartest sddprccartest.cc)
+	target_link_libraries(sddprccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
 	add_executable(gnrccartest gnrccartest.cc)
 	target_link_libraries(gnrccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 if (USE_BULLET)
 	add_executable(ddpbulletrccartest ddpbulletrccartest.cc)
 	target_link_libraries(ddpbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems  BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
+
+	add_executable(sddpbulletrccartest sddpbulletrccartest.cc)
+	target_link_libraries(sddpbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems  BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
 
 	add_executable(bulletrccartest bulletrccartest.cc)
 	target_link_libraries(bulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems  BulletDynamics BulletCollision LinearMath ${ALL_LIBS})

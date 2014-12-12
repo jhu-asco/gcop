@@ -18,7 +18,7 @@ SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSIO
 
 ## Options for building this Project:
 option(BUILD_TESTS "BUILD_TESTS" ON)
-option(USE_BULLET "USE_BULLET" ON)
+option(USE_BULLET "USE_BULLET" OFF)
 # Will add more like disabling est if not needed etc
 #option(USE_VIEWER "USE_VIEWER" ON)
 #option(DISABLE_EST "DISABLE_ESTIMATION" OFF)

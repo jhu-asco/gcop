@@ -25,7 +25,7 @@ subject to the following restrictions:
 //
 // By default, Bullet Vehicle uses Y as up axis.
 // You can override the up axis, for example Z-axis up. Enable this define to see how to:
-//#define FORCE_ZAXIS_UP 1
+#define FORCE_ZAXIS_UP 1
 //
 #include "GLDebugDrawer.h"
 #include <stdio.h> //printf debugging
@@ -51,9 +51,9 @@ const int maxOverlap = 65535;
 
 VehicleDemo::VehicleDemo()
 :
-m_cameraHeight(2.7f),
+m_cameraHeight(4.f),
 m_minCameraDistance(0.1f),
-m_maxCameraDistance(5.f),
+m_maxCameraDistance(10.f),
 gVehicleSteering(0),gVehicleVelocity(0),
 steeringIncrement(0.04),velocityIncrement(0.1),
 tf(5)
@@ -72,12 +72,12 @@ VehicleDemo::~VehicleDemo()
 
 void VehicleDemo::initPhysics()
 {
-  world = new BulletWorld;
+  world = new BulletWorld(true);
   this->m_dynamicsWorld = world->m_dynamicsWorld;
 
   //btCollisionShape *groundShape = world->CreateGroundPlane(50, 50);
-  btCollisionShape *groundShape = world->CreateGroundPlane(20, 20, 0, 20);
   {
+    btCollisionShape *groundShape = world->CreateGroundPlane(20, 20, 0, 20);
     btTransform tr;
     tr.setOrigin(btVector3(0, 0, 0));
     tr.setRotation(btQuaternion(0,0,0));
@@ -86,14 +86,14 @@ void VehicleDemo::initPhysics()
 
   /////////////Loading Car:
   brccar = new Bulletrccar(*world);//Creating a brand new bullet car system
-  brccar->kp_steer = 0.5f;//Steering angle
+  //brccar->initialz = 0.15;//Initial height of the car
 
   //////////// Setup the Optimization Problem:
   cost = new RccarCost(*brccar, gps.Z);
   {
     //Load Params
     Params params;
-    params.Load("../../../bin/BulletVehicleEstimation/gnrccarestimation.cfg"); 
+    params.Load("../../../bin/BulletZVehicleTest/gnrccarestimation.cfg"); 
     //Gcop Initialization:
     params.GetInt("iters", iters);
 
@@ -122,42 +122,46 @@ void VehicleDemo::initPhysics()
       p0<<2, 50, 0.1;//random values
     }
   }
+  cout<<"tf: "<<tf<<endl;
 
   //Resize the vectors for states etc
   ts.resize(N+1);
   xs.resize(N+1);
   us.resize(N);
+  //sensor resize
   int subdivide = 1;
   zs.resize(N/subdivide);
   ts_sensor.resize(N/subdivide);
-
   //Set initial posn to 0 and initial velocity to -0.5
   xs[0].setZero();
   //xs[0][3] = -0.5;//testing
   //xs[0][2] = M_PI/4;//testing
   //Initialize the controls and times;
   double h = tf/double(N);
-
-  //Set sensor times:
-  for (int k = 0; k <(N/subdivide); ++k)
-    ts_sensor[k] = subdivide*k*h;
-
+  for(int i = 0;i < N/subdivide; i++)
+  {
+    ts_sensor[i] = subdivide*i*h;
+  }
   ts[0] = 0;
+  /*
   for(int i = 0;i < N; i++)
   {
     ts[i+1] = (i+1)*h;
     if(i < N/2)
     {
       double temp = (double(2*i)/double(N));
-      us[i] = Vector2d(2*temp, 0.2+0.1*temp);
+      //us[i] = Vector2d(2*temp, 0.2+0.1*temp);
+      us[i] = Vector2d(0.5,0);
     }
     else
     {
       double temp = (double(2*i - N)/double(N));
-      us[i] = Vector2d(2 - 2*temp, 0.3 - 0.3*temp);
+     // us[i] = Vector2d(2 - 2*temp, 0.3 - 0.3*temp);
+      us[i] = Vector2d(0.5,0);
     }
   }
-  /*for(int i = 0;i < N; i++)
+  */
+  for(int i = 0;i < N; i++)
   {
     ts[i+1] = (i+1)*h;
     if(i < N/3)
@@ -176,16 +180,18 @@ void VehicleDemo::initPhysics()
       us[i] = Vector2d(1 - 1 *temp, 0.1 - 0.1*temp);
     }
   }
-  */
 
   ////////////Record the sensor data with the true params
+  //Testing:
   cout<<"Recording Sensor Data"<<endl;
   {
     clientResetScene();
-    int sensor_index = 0;
     //Record the car trajectory
+    int sensor_index = 0;
     for (int i =0 ; i < N; i++)
     { 
+      //Set zsi:
+      //zs[i]<<brccar->x[0],brccar->x[1],0.2;
       if (brccar)
       {
         //cout<<"u: "<<us[i].transpose()<<endl;
@@ -195,7 +201,7 @@ void VehicleDemo::initPhysics()
       {
         int near_index = (ts_sensor[sensor_index] - ts[i]) > -(ts_sensor[sensor_index] - ts[i+1])?(i+1):i;
         //Set zsi:
-        zs[sensor_index]<<xs[near_index][0],0,xs[near_index][1];
+        zs[sensor_index]<<xs[near_index][0],xs[near_index][1],0.2;
         cout<<"Zs ["<<(sensor_index)<<"]: "<<zs[sensor_index].transpose()<<"ts_sensor: "<<ts_sensor[sensor_index]<<endl;
         sensor_index = sensor_index < (ts_sensor.size()-1)?sensor_index+1:sensor_index;
       }
@@ -244,7 +250,15 @@ void VehicleDemo::renderme()
   DemoApplication::renderme();
 
 }
+/*void VehicleDemo::clientMoveAndDisplay()
+{
+	float dt = getDeltaTimeMicroseconds() * 0.000001f;
+  if(m_idle)
+    dt = 10.0f/500.0f;
+  MoveAndDisplay(dt);
 
+}
+*/
 
 void VehicleDemo::MoveAndDisplay(double h)
 {
@@ -296,11 +310,10 @@ void VehicleDemo::renderTrajectory(vector<Vector3d> *zs, btVector3 *color)
     else
       glColor3f(1.0, 0.0, 0.0);
     glBegin(GL_LINE_STRIP);
-    int size = zs->size();
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < zs->size(); i++) {
       const Vector3d &z = (*zs)[i];
       //glVertex3d(-i*0.1, 0.2, -2);
-      glVertex3d(z[0], 0.2, z[2]);
+      glVertex3d(z[0], z[1], z[2]);
     }
     glEnd();
   }
@@ -392,14 +405,11 @@ void VehicleDemo::keyboardCallback(unsigned char key, int x, int y)
             //long te = timer_us(timer);
             cout << "Parameter: "<< p0 << endl;
             //cout << "Iteration #" << i << " took: " << te << " us." << endl;
-            //getchar();
+            getchar();
           }
           for(int i =0;i < N;i++)
           {
             cout<<"Xs["<<i<<"]: "<<xs[i].transpose()<<endl;
-          }
-          for(int i =0;i < zs.size();i++)
-          {
             cout<<"Zs["<<i<<"]: "<<zs[i].transpose()<<endl;
           }
           cout<<p0<<endl;

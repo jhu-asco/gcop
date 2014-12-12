@@ -52,6 +52,7 @@ namespace gcop {
      * @param sensor sensor
      * @param cost cost
      * @param ts (N+1) sequence of discrete times
+     * @param ts1 (N1+1) sequence of discrete times for sensor measurements
      * @param xs (N+1) sequence of discrete states
      * @param us (N) sequence of control inputs
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
@@ -60,7 +61,7 @@ namespace gcop {
     Doep(System<T, nx, nu, np> &sys, Sensor<T1, nx1, nu, np, Tz, nz> &sensor, 
          SensorCost<T, nx, nu, np, Tz, nz> &cost, 
          vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
-         Vectormd &p, Func_type _project=NULL, bool update = true);
+         Vectormd &p, vector<double> &ts1, Func_type _project=NULL, bool update = true);
     
     virtual ~Doep();
 
@@ -82,6 +83,8 @@ namespace gcop {
     SensorCost<T, nx, nu, np, Tz, nz> &cost;     ///< given cost function
 
     std::vector<double> &ts; ///< times (N+1) vector
+
+    std::vector<double> &ts1; ///< times (N+1) vector for sensor measurements
 
     std::vector<T> &xs;      ///< states (N+1) vector
 
@@ -111,8 +114,8 @@ namespace gcop {
                               vector<T> &xs, 
                               vector<Matrix<double, nu, 1> > &us,
                               Matrix<double, np, 1> &p,
-                              Func_type _project, bool update) : 
-    sys(sys), sensor(sensor), cost(cost), ts(ts), xs(xs), us(us), p(p), project(_project),
+                              vector<double> &ts1, Func_type _project, bool update) : 
+    sys(sys), sensor(sensor), cost(cost), ts(ts), xs(xs), us(us), p(p), ts1(ts1), project(_project),
     debug(true), eps(1e-3)
     {
       int N = us.size();
@@ -127,10 +130,10 @@ namespace gcop {
           ws[i].resize(sys.X.n);
         }
       }
-      zs.resize(N); //Internal sensor measurements
+      zs.resize(ts1.size()); //Internal sensor measurements
       if(nz == Dynamic)
       {
-        for(int i = 0; i<N; ++i)
+        for(int i = 0; i<ts1.size(); ++i)
         {
           zs[i].resize(sensor.Z.n);
         }
@@ -162,22 +165,28 @@ namespace gcop {
     T1 x1; //Temporary projection for finding sensor measurements
 
     sys.reset(xs[0],ts[0]);//Reset
+    int sensor_index = 0;
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
       sys.Step3(xs[k+1], us[k], ws[k], h, &p);
-      //Project the state
-      if(std::is_same<T, T1>::value)
+      if((ts1[sensor_index] - ts[k])>= 0 && (ts1[sensor_index] - ts[k+1]) < 0)//Nearest state to find the sensor measurement
       {
-        x1 = (T1)(*((T1 *)(&xs[k])));//Hacky way of copying pointer over
-        sensor(zs[k], ts[k], x1, us[k], &p);
-      }
-      else
-      {
-        assert(project != NULL);// Can be removed
-        project(xs[k],x1);
-        sensor(zs[k], ts[k], x1, us[k], &p);
-        //cout<<"Zs["<<k<<"]: "<<zs[k].transpose()<<endl;//#DEBUG
+        int near_index = (ts1[sensor_index] - ts[k]) > -(ts1[sensor_index] - ts[k+1])?(k+1):k;
+        //Project the state
+        if(std::is_same<T, T1>::value)
+        {
+          x1 = (T1)(*((T1 *)(&xs[near_index])));//Hacky way of copying pointer over
+          sensor(zs[sensor_index], ts[near_index], x1, us[near_index], &p);
+        }
+        else
+        {
+          assert(project != NULL);// Can be removed
+          project(xs[near_index],x1);
+          sensor(zs[sensor_index], ts[near_index], x1, us[near_index], &p);
+          //cout<<"Zs["<<k<<"]: "<<zs[k].transpose()<<endl;//#DEBUG
+        }
+        sensor_index = sensor_index < (ts1.size()-1)?sensor_index+1:sensor_index;
       }
     }
   }  

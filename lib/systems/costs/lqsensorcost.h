@@ -62,7 +62,7 @@ namespace gcop {
     void UpdateGains(); 
 
     double L(double t, const Tz &z, const Vectornd &w,
-                   const Vectormd &p, double h, 
+                   const Vectormd &p, double h, int sensor_index, 
                    Vectornd *Lw = 0, Matrixnd* Lww = 0,
                    Vectormd *Lp = 0, Matrixmd* Lpp = 0,
                    Vectorrd *Lz = 0, Matrixrd* Lzz = 0,
@@ -73,7 +73,8 @@ namespace gcop {
 
     bool Res(Vectorgd &g, 
                      double t, const Tz &z,
-                     const Vectornd &w, const Vectormd &p, double h,
+                     const Vectornd &w, const Vectormd &p, 
+                     double h, int sensor_index,
                      Matrixgxd *dgdw = 0, Matrixgpd *dgdp = 0,
                      Matrixgzd *dgdz = 0);    
 
@@ -160,7 +161,8 @@ namespace gcop {
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz>
     bool LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>::Res(Vectorgd &g, 
                      double t, const Tz &z,
-                     const Vectornd &w, const Vectormd &p, double h,
+                     const Vectornd &w, const Vectormd &p, 
+                     double h,int sensor_index,
                      Matrixgxd *dgdw, Matrixgpd *dgdp,
                      Matrixgzd *dgdz)
     {
@@ -173,8 +175,8 @@ namespace gcop {
       assert(h > 0);
       int k = round(t/h);
       if (zs) {
-        assert(k < zs->size());
-        this->Z.Lift(dz, (*zs)[k], z); // difference (on a vector space we have dx = x - xf)
+        assert(sensor_index < zs->size());
+        this->Z.Lift(dz, (*zs)[sensor_index], z); // difference (on a vector space we have dx = x - xf)
         //std::cout<<"dz: "<<dz.transpose()<<"\t"<<t<<"\t"<<h<<endl;
         //std::cout<<"zs["<<k<<"]: "<<(*zs)[k].transpose()<<endl;
         //std::cout<<"z["<<k<<"]: "<<z.transpose()<<endl;
@@ -183,14 +185,14 @@ namespace gcop {
 
       if (diag)
       {
-        g.head(nz) = Rsqrt.diagonal().cwiseProduct(sqrt(h)*dz);
-        g.segment(nz, nw) = Ssqrt.diagonal().cwiseProduct(sqrt(h)*w);
+        g.head(nw) = Ssqrt.diagonal().cwiseProduct(sqrt(h)*w);
+        g.segment(nw, nz) = Rsqrt.diagonal().cwiseProduct(sqrt(h)*dz);
   //     cout<<"w: "<<w.transpose()<<endl;
       }
       else
       {
-        g.head(nz) = Rsqrt*(sqrt(h)*dz);
-        g.segment(nz, nw) = Ssqrt*(sqrt(h)*w);
+        g.head(nw) = Ssqrt*(sqrt(h)*w);
+        g.segment(nw, nz) = Rsqrt*(sqrt(h)*dz);
       }
       g.tail(np).setZero();
       //cout<<"g: "<<g.transpose()<<endl;
@@ -221,7 +223,7 @@ namespace gcop {
 
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz>
     double LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>::L(double t, const Tz &z, const Vectornd &w,
-                                                           const Vectormd &p, double h, 
+                                                           const Vectormd &p, double h, int sensor_index,
                                                            Vectornd *Lw, Matrixnd* Lww,
                                                            Vectormd *Lp, Matrixmd* Lpp,
                                                            Vectorrd *Lz, Matrixrd* Lzz,
@@ -230,8 +232,8 @@ namespace gcop {
       int k = (int)(t/h);
 
       if (zs) {
-        assert(k < zs->size());
-        this->Z.Lift(dz, (*zs)[k], z); // difference (on a vector space we have dx = x - xf)
+        assert(sensor_index < zs->size());
+        this->Z.Lift(dz, (*zs)[sensor_index], z); // difference (on a vector space we have dx = x - xf)
       } 
       assert(!std::isnan(dz[0]));
 

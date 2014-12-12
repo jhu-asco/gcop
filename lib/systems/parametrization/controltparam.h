@@ -89,7 +89,7 @@ namespace gcop {
     assert(this->ntp == tks.size()*this->sys.U.n);
     
     int ki = 0; // knot index
-    for (int i = 0; i < ts.size(); ++i) {
+    for (int i = 0; i < us.size(); ++i) {
       int si = ki*this->sys.U.n;
       assert(si + this->sys.U.n < s.size());
       const Vectorcd &ua = s.segment(si, this->sys.U.n);   // left control

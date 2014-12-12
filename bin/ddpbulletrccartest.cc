@@ -39,6 +39,7 @@ void solver_process(Viewer* viewer)
   BulletWorld world(true);//Set the up axis as z for this world
 
   Bulletrccar sys(world);
+  sys.kp_steer = 1.0f;//Removes the fake steering angular velocity state
 
   //Load Ground
   {
@@ -87,8 +88,8 @@ void solver_process(Viewer* viewer)
   // initial controls
   vector<Vector2d> us(N);
   for (int i = 0; i < N/2; ++i) {
-    us[i] = Vector2d(.1, .1);
-    us[N/2+i] = Vector2d(-.1, .1);
+    us[i] = Vector2d(.1, .3);
+    us[N/2+i] = Vector2d(.1, -.3);
   }
   
   RccarDdp ddp(sys, cost, ts, xs, us);  

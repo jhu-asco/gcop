@@ -19,8 +19,6 @@ class btVehicleTuning;
 struct btVehicleRaycaster;
 class btCollisionShape;
 
-#include "BulletDynamics/Vehicle/btRaycastVehicle.h"
-
 #include "GlutDemoApplication.h"
 
 #include <stdio.h>
@@ -28,21 +26,22 @@ class btCollisionShape;
 #include <stdlib.h>
 
 #include "point3dgps.h"
-#include "gndoep.h"
+#include "gndoepv2.h"
 #include "params.h"
 #include "lqsensorcost.h"
 #include "utils.h"
-#include "rccar.h"
+#include "bulletrccar.h"
+#include "bulletworld.h"
 
-using namespace gcop;
 using namespace std;
+using namespace gcop;
 using namespace Eigen;
 
 ///VehicleDemo shows how to setup and use the built-in raycast vehicle
 class VehicleDemo : public GlutDemoApplication
 {
-  typedef LqSensorCost<Vector4d, 4, 2, Dynamic, 9, Vector3d, 3> RccarCost;
-  typedef GnDoep<Vector4d, 4, 2, Dynamic, 9, Vector3d, 3, Point3dState, 6> RccarDoep;
+  typedef LqSensorCost<Vector4d, 4, 2, Dynamic, 10, Vector3d, 3> RccarCost;
+  typedef GnDoep1<Vector4d, 4, 2, Dynamic, 10, Vector3d, 3, Point3dState, 6> RccarDoep;
 
   protected:
     int iters; //Number of iterations
@@ -50,7 +49,6 @@ class VehicleDemo : public GlutDemoApplication
     int N;// Number of segments
     VectorXd p0;//Initial Guess for parameters
     Point3dGps<2> gps;//Gps sensor with controls and nofparams
-    Rccar sys;
     RccarCost *cost;
     RccarDoep *gn;
     vector<Vector4d> xs;
@@ -58,30 +56,14 @@ class VehicleDemo : public GlutDemoApplication
     vector<Vector2d> us;
     vector<double> ts;
     vector<double> ts_sensor;
+    Bulletrccar *brccar;
+
+    float gVehicleSteering;
+    float gVehicleVelocity;
+    float	steeringIncrement;//Steering Increment for the steering angle
+    float velocityIncrement;//Velocity Increment for vehicle
 
 	public:
-
-	btRigidBody* m_carChassis;
-
-	btAlignedObjectArray<btCollisionShape*> m_collisionShapes;
-
-	class btBroadphaseInterface*	m_overlappingPairCache;
-
-	class btCollisionDispatcher*	m_dispatcher;
-
-	class btConstraintSolver*	m_constraintSolver;
-
-	class btDefaultCollisionConfiguration* m_collisionConfiguration;
-
-	class btTriangleIndexVertexArray*	m_indexVertexArrays;
-
-	btVector3*	m_vertices;
-
-	
-	btRaycastVehicle::btVehicleTuning	m_tuning;
-	btVehicleRaycaster*	m_vehicleRayCaster;
-	btRaycastVehicle*	m_vehicle;
-	btCollisionShape*	m_wheelShape;
 
 	float		m_cameraHeight;
 
@@ -89,11 +71,15 @@ class VehicleDemo : public GlutDemoApplication
 	float	m_maxCameraDistance;
 
 
+  BulletWorld *world;///<Bullet World helper class from GCOP
+
 	VehicleDemo();
 
 	virtual ~VehicleDemo();
 
-	virtual void clientMoveAndDisplay();
+	void MoveAndDisplay(double h = 0.01);//For debugging purposes
+
+	virtual void clientMoveAndDisplay(){};
 
   void renderTrajectory(vector<Vector3d> *zs, btVector3 *color);
 
@@ -108,13 +94,11 @@ class VehicleDemo : public GlutDemoApplication
 
 	virtual void specialKeyboardUp(int key, int x, int y);
 
-  void keyboardCallback(unsigned char key, int x, int y);
+	virtual void keyboardCallback(unsigned char key, int x, int y);
 
 	void renderme();
 
 	void initPhysics();
-
-  void sampleSensor(Vector3d &z);
 
 	static DemoApplication* Create()
 	{
@@ -126,9 +110,12 @@ class VehicleDemo : public GlutDemoApplication
 
   static void projectmanifold(const Vector4d &rccarstate, Point3dState &pstate)
   {
-    pstate.q.head<2>() = rccarstate.head<2>();//First 2 elements are x and y
-    pstate.q[2] = 0;//Set z to 0. This is enough for GPS
+    //pstate.q.head<2>() = rccarstate.head<2>();//First 2 elements are x and y
+    //pstate.q[3] = 0.2;
+    pstate.q<<rccarstate[0],rccarstate[1],0.2;
+    //pstate.q[2] = 0;//Set z to 0. This is enough for GPS
   }
+
 };
 
 #endif //VEHICLE_DEMO_H

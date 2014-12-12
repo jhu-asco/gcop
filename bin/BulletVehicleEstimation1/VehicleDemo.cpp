@@ -143,11 +143,20 @@ tf(5)
   //Resize the vectors for states etc
   ts.resize(N+1);
   xs.resize(N+1);
-  zs.resize(N);
   us.resize(N);
   p0.resize(2);
+  //sensor
+  int subdivide = 3;
+  zs.resize(N/subdivide);
+  ts_sensor.resize(N/subdivide);
+
   //Initialize the controls and times;
   double h = tf/double(N);
+
+  //Set sensor times:
+  for (int k = 0; k <(N/subdivide); ++k)
+    ts_sensor[k] = subdivide*k*h;
+
   ts[0] = 0;
   for(int i = 0;i < N; i++)
   {
@@ -165,7 +174,7 @@ tf(5)
   {
     p0<<0.5, 0.01;//random values
   }
-  gn = new RccarDoep(sys, gps, *cost, ts, xs, us, p0, &projectmanifold);  
+  gn = new RccarDoep(sys, gps, *cost, ts, xs, us, p0, ts_sensor, &projectmanifold);  
 }
 
 VehicleDemo::~VehicleDemo()
@@ -616,7 +625,7 @@ void VehicleDemo::renderTrajectory(vector<Vector3d> *zs, btVector3 *color)
     else
       glColor3f(1.0, 0.0, 0.0);
     glBegin(GL_LINE_STRIP);
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < zs->size(); i++) {
       const Vector3d &z = (*zs)[i];
       //glVertex3d(-i*0.1, 0.2, -2);
       glVertex3d(-z[1], 0.2, -z[0]);
@@ -723,6 +732,7 @@ void VehicleDemo::keyboardCallback(unsigned char key, int x, int y)
       {
         this->clientResetScene();//Reset the scene
         //Record the car trajectory
+        int sensor_index = 0;
         for (int i =0 ; i < N; i++)
         { 
           gEngineForce = -us[i](0);
@@ -733,9 +743,19 @@ void VehicleDemo::keyboardCallback(unsigned char key, int x, int y)
           //btMatrix3x3 wheelbasis = (m_carChassis->getWorldTransform().inverse()* m_vehicle->getWheelTransformWS(0)).getBasis();
           //btVector3 wheelrpybasis;
           //wheelbasis.getEulerZYX(wheelrpybasis[2],wheelrpybasis[1],wheelrpybasis[0]);
-          this->sampleSensor(zs[i]);
+          if((ts_sensor[sensor_index] - ts[i])>= 0 && (ts_sensor[sensor_index] - ts[i+1]) < 0)
+          {
+            int near_index = (ts_sensor[sensor_index] - ts[i]) > -(ts_sensor[sensor_index] - ts[i+1])?(i+1):i;
+            if(near_index == (i+1))
+            {
+              this->clientMoveAndDisplay();
+              i++;
+            }
+            this->sampleSensor(zs[sensor_index]);
+            cout<<"Zs ["<<(sensor_index)<<"]: "<<zs[sensor_index].transpose()<<"ts_sensor: "<<ts_sensor[sensor_index]<<endl;
+            sensor_index = sensor_index < (ts_sensor.size()-1)?sensor_index+1:sensor_index;
+          }
           //printf("Zs:[%d]: %f\t%f\t Wheel_angle: %f\t%f\t%f\n",i, zs[i](0), zs[i](1), wheelrpybasis[0], wheelrpybasis[1], wheelrpybasis[2]);
-          printf("Zs:[%d]: %f\t%f\n",i, zs[i](0), zs[i](1));
         }
         //set this to the initial state:
         xs[0].setZero();

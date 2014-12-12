@@ -93,7 +93,7 @@ namespace gcop {
     GnDoep1(System<T, _nx, _nu, _np> &sys, Sensor<T1, _nx1, _nu, _np, Tz, _nz> &sensor,
            LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz> &cost, 
            vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, Vectormd &p,
-           Func_type _project=NULL, bool update = true);
+           vector<double> &ts1, Func_type _project=NULL, bool update = true);
     
     virtual ~GnDoep1();
 
@@ -183,14 +183,20 @@ struct Functor
 
      //Compute and set residuals
      int i = 0;
+     int sensor_index = 0;
      for(int k = 0; k< N; ++k)
      {
        double h = doep->ts[k+1] - doep->ts[k];
-       ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Res(g, doep->ts[k], doep->zs[k], doep->ws[k], doep->p, h);
-       memcpy(fvec.data() + i, g.data(), (nz)*sizeof(double));
+       ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Res(g, doep->ts[k], doep->zs[sensor_index], doep->ws[k], doep->p, h, sensor_index);
+
+       if((doep->ts1[sensor_index] - doep->ts[k])>= 0 && (doep->ts1[sensor_index] - doep->ts[k+1]) < 0)//Nearest state to find the sensor measurement
+       {
+         fvec.segment(i,nz) = g.segment(nw,nz);
+         i += nz;
+         sensor_index = sensor_index < (doep->ts1.size()-1)?sensor_index+1:sensor_index;
+       }
        //cout<<"Res: "<<g<<endl;
        //cout<<"i: "<<i<<endl;
-       i += nz;
        fvec.tail(np) += g.tail(np);//The tail is a constant residual for parameters
      }
      ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Resp(gp, doep->p);
@@ -218,11 +224,12 @@ struct Functor
                                                 vector<T> &xs, 
                                                 vector<Vectorcd > &us,
                                                 Vectormd &p,
+                                                vector<double> &ts1,
                                                 Func_type _project,
                                                 bool update) : 
-    Doep<T, _nx, _nu, _np, Tz, _nz, T1, _nx1>(sys, sensor, cost, ts, xs, us, p, _project, update),
+    Doep<T, _nx, _nu, _np, Tz, _nz, T1, _nx1>(sys, sensor, cost, ts, xs, us, p, ts1, _project, update),
     inputs(sys.P.n),
-    values((sensor.Z.n)*us.size()+sys.P.n), s(inputs), 
+    values((sensor.Z.n)*ts1.size()+sys.P.n), s(inputs), 
     functor(0), numDiff(0), lm(0)
     {
       cout <<"inputs=" <<inputs<<" values= "<<values<< endl;
@@ -242,7 +249,7 @@ struct Functor
     if (!lm) {
       functor = new GnCost<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1>(inputs, values);
       functor->doep = this;
-      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1> >(*functor);
+      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1> >(*functor,1e-12);
       lm = new LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1> > >(*numDiff);
 
       //Set doep noise to zero redundancy:

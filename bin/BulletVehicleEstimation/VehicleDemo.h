@@ -55,6 +55,7 @@ class VehicleDemo : public GlutDemoApplication
     vector<Vector3d> zs;
     vector<Vector2d> us;
     vector<double> ts;
+    vector<double> ts_sensor;
     Bulletrccar *brccar;
 
     float gVehicleSteering;
