@@ -545,6 +545,7 @@ namespace gcop {
       //getchar();
 
       dxsmatrix.block(0,0,nx,nofsamples).setZero();//Set zero first block
+      Vectornd dx;
       //NonParallelizable code for now
       for(count = 0;count < nofsamples;count++)
       {
@@ -554,7 +555,8 @@ namespace gcop {
           du = dusmatrix.block<nu,1>(count1*nu,count);
           us1 = this->us[count1] + du;
           this->sys.Step2(us1,(this->ts[count1+1])-(this->ts[count1]), this->p);
-          dxsmatrix.block<nx,1>((count1+1)*nx,count) = (this->sys.x - this->xs[count1+1]);
+          this->sys.X.Lift(dx, this->xs[count1+1], this->sys.x);
+          dxsmatrix.block<nx,1>((count1+1)*nx,count) = dx;
 //          cout<<"xs["<<(count1+1)<<"]: "<<this->xs[count1+1].transpose()<<endl;
         }
         //cout<<dxsmatrix<<endl;//#DEBUG
