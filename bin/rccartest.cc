@@ -1,17 +1,31 @@
 #include <iomanip>
 #include <iostream>
-#include "ddp.h"
 #include "viewer.h"
 #include "rccarview.h"
 #include "utils.h"
 #include "rnlqcost.h"
 #include "params.h"
 
+//#define USE_SDDP
+
+#ifdef USE_SDDP
+#include "sddp.h"
+#else
+#include "ddp.h"
+#endif
+
+
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
+#ifdef USE_SDDP
+typedef SDdp<Vector4d, 4, 2> RccarDdp;
+#else
 typedef Ddp<Vector4d, 4, 2> RccarDdp;
+#endif
+
+
 
 Params params;
 

@@ -1,17 +1,30 @@
 #include <iomanip>
 #include <iostream>
-#include "ddp.h"
 #include "viewer.h"
 #include "qrotorview.h"
 #include "utils.h"
 #include "body3dcost.h"
 #include "params.h"
 
+
+//#define USE_SDDP
+
+#ifdef USE_SDDP
+#include "sddp.h"
+#else
+#include "ddp.h"
+#endif
+
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
+
+#ifdef USE_SDDP
+typedef SDdp<Body3dState, 12, 4> QrotorDdp;
+#else
 typedef Ddp<Body3dState, 12, 4> QrotorDdp;
+#endif
 
 Params params;
 

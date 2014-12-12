@@ -57,9 +57,6 @@ if (BUILD_TESTS)
 	add_executable(rccartest rccartest.cc)
 	target_link_libraries(rccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-	add_executable(sddprccartest sddprccartest.cc)
-	target_link_libraries(sddprccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
-
 	add_executable(gnrccartest gnrccartest.cc)
 	target_link_libraries(gnrccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 if (USE_BULLET)
@@ -110,8 +107,8 @@ endif (USE_BULLET)
 	add_executable(airmopttest airmopttest.cc)
 	target_link_libraries(airmopttest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-	#add_executable(chainopttest chainopttest.cc)
-	#target_link_libraries(chainopttest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+	add_executable(chainopttest chainopttest.cc)
+	target_link_libraries(chainopttest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 
 
