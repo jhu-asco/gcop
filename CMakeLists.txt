@@ -91,6 +91,12 @@ find_package(TinyXML)
 include_directories(${TINYXML_INCLUDE_DIR})
 set(UTIL_LIBS ${UTIL_LIBS} ${TINYXML_LIBRARIES})
 
+find_package(PQP)
+IF (PQP_FOUND)
+  include_directories(${PQP_INCLUDE_DIRS})
+  set(UTIL_LIBS ${UTIL_LIBS} ${PQP_LIBRARY})
+ENDIF (PQP_FOUND)
+
 
 #FIND_PACKAGE(Ceres)
 #INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
@@ -108,6 +114,7 @@ include_directories(
   lib/systems/sensors
   lib/systems/parametrization
   lib/systems/costs
+  lib/systems/constraints
   lib/utils
   lib/views)
 

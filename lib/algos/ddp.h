@@ -272,6 +272,7 @@ namespace gcop {
       
       Qx = Lx + At*v;
       Qu = Lu + Bt*v;
+
       Qxx = Lxx + At*P*A;
       Quu = Luu + Bt*P*B;
       Qux = Bt*P*A;

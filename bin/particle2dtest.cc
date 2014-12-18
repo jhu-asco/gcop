@@ -5,12 +5,18 @@
 #include "viewer.h"
 #include "particle2dview.h"
 #include "utils.h"
+#include "disk.h"
+#include "constraintcost.h"
+#include "multicost.h"
 
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
 typedef Ddp<Vector4d, 4, 2> Particle2dDdp;
+typedef Disk<Vector4d, 4, 2> Particle2dDisk;
+typedef ConstraintCost<Vector4d, 4, 2, Dynamic, 1> DiskCost;
+
 
 void solver_process(Viewer* viewer)
 {
@@ -34,7 +40,7 @@ void solver_process(Viewer* viewer)
 
   // states
   vector<Vector4d> xs(N+1);
-  xs[0] << -1, -1, .1, 0;
+  xs[0] << -5, -5, .1, 0;
 
   // initial guess for the controls (almost any guess should work for this system)
   vector<Vector2d> us(N);
@@ -43,11 +49,18 @@ void solver_process(Viewer* viewer)
     us[N/2+i] = Vector2d(-.05, -.025);
   }
   
+  Particle2dDisk disk(Vector2d(-2.5,-2.5), 2, 0);
+  DiskCost dcost(sys, tf, disk);
+  
+  MultiCost<Vector4d, 4, 2> mcost(sys, tf);
+  mcost.costs.push_back(&cost);   
+  mcost.costs.push_back(&dcost);
 
-  Particle2dDdp ddp(sys, cost, ts, xs, us);
+
+  Particle2dDdp ddp(sys, mcost, ts, xs, us);
 
   // should converge in one iteration since it is a linear system
-  int iters = 5;  
+  int iters = 25;  
 
   Particle2dView view(sys, &ddp.xs);
   viewer->Add(view);  
@@ -60,6 +73,8 @@ void solver_process(Viewer* viewer)
     timer_start(timer);
     ddp.Iterate();
     long te = timer_us(timer);
+
+    dcost.b = 2*dcost.b;
 
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
     getchar();

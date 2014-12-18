@@ -157,7 +157,7 @@ bool DemView::RenderFrame(int i)
   // glDrawElements(GL_TRIANGLES, mesh_ind_count, GL_UNSIGNED_INT, mesh_inds);
   */
 
-  glColor3fv(color);
+  //  glColor3fv(color);
 
   
   if (texture) {
@@ -166,9 +166,10 @@ bool DemView::RenderFrame(int i)
   } else {
     glEnable(GL_LIGHTING);
   }
+  Viewer::SetColor(color[0], color[1], color[2], 0);
 
-  double c = .5;
-  Viewer::SetMaterial(c,c,c, c,c,c, c,c,c,5);
+  // double c = .5;
+  // Viewer::SetMaterial(c,c,c, c,c,c, c,c,c,5);
   //  glColor3f(.5,.5,.5);
 
   if (wire) {
@@ -188,7 +189,7 @@ bool DemView::RenderFrame(int i)
 
       glVertex3f(p[0], p[1], p[2]);
       if (texture)
-        glTexCoord2d( (p[0]-dem.o[0])/dem.w, (dem.h - (p[1]-dem.o[1]) )/dem.h);
+        glTexCoord2d( (p[0]-dem.o[0])/dem.w, (dem.h - (p[1]-dem.o[1]) )/dem.h);      
       
       dem.Get(p, i+1, j);
 

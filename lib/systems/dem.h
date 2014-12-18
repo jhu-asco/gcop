@@ -139,6 +139,13 @@ namespace gcop {
      * Helper for interpolation
      */
     static double bilinterp(const double* z, int w, int h, double xi, double yi, double eps = 1e-10);
+
+    /**
+     * Dilate the DEM
+     * @param r distance (radius of ball, or half side-length of cube)
+     * @param cube whether to use cube or ball
+     */
+    void Dilate(double r, bool cube = true);
     
     /**
      * Adds a boundary of height h around the whole Dem

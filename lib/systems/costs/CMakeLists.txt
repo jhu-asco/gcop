@@ -17,5 +17,14 @@ set(headers
     rnlqcost.h
     rnlqsensorcost.h
     sensorcost.h
+    multicost.h
+    constraintcost.h
 #airplanecost.h
 )
+
+IF (PQP_FOUND)
+set(headers
+  ${headers}
+  pqpdemcost.h
+)
+ENDIF (PQP_FOUND)

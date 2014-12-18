@@ -29,6 +29,25 @@ if (BUILD_TESTS)
 	add_executable(hrotortest hrotortest.cc)
 	target_link_libraries(hrotortest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+
+IF (PQP_FOUND)
+	add_executable(hrotordem hrotordem.cc)
+	target_link_libraries(hrotordem  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+	add_executable(body3ddem body3ddem.cc)
+	target_link_libraries(body3ddem  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+	add_executable(body3drhc body3drhc.cc)
+	target_link_libraries(body3drhc  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+ENDIF (PQP_FOUND)
+
+
+	add_executable(hrotorshell hrotorshell.cc)
+	target_link_libraries(hrotorshell  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+	add_executable(body3dshell body3dshell.cc)
+	target_link_libraries(body3dshell  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
 	add_executable(helitest helitest.cc)
 	target_link_libraries(helitest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
@@ -44,8 +63,8 @@ if (BUILD_TESTS)
 	#add_executable(body2dtracktest body2dtracktest.cc)
 	#target_link_libraries(body2dtracktest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-	#add_executable(body2dtracktest2 body2dtracktest2.cc)
-	#target_link_libraries(body2dtracktest2  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+	add_executable(body2dtracktest2 body2dtracktest2.cc)
+	target_link_libraries(body2dtracktest2  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 
 	#add_executable(extforceslamtest extforceslamtest.cc)

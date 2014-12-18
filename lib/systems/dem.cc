@@ -162,6 +162,37 @@ void Dem::ComputeNormals()
   //  cout << ni << " " <<  nj << endl;
 }
 
+void Dem::Dilate(double r, bool cube) 
+{
+  if (!odata) {
+    odata = new double[ni*nj];
+  }
+  memcpy(odata, data, ni*nj*sizeof(double));
+
+  // only cube supported for now
+  assert(cube);
+
+  int di = (int)ceil(r/cs);
+  if (di <= 0)
+    return;
+
+  cout << "Dem::Dilate: dilating with di=" << di << endl;
+
+  for (int i = di; i < ni - di; ++i) {
+    for (int j = di; j < nj - di; ++j) {
+      // double z = odata[i*nj + j]; // height at center
+      for (int k = -di; k <= di; ++k) {
+        for (int l = -di; l <= di; ++l) {
+          int ik = i + k;
+          int jl = j + l;
+          data[ik*nj + jl] = max(data[ik*nj + jl], odata[ik*nj + jl]);
+        }        
+      }
+    }
+  }
+  ComputeNormals();
+  //  memcpy(odata, data, ni*nj*sizeof(double));
+}
 
 void Dem::Convolve(double sigma, bool cn, double thresh)
 {

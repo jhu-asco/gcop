@@ -50,6 +50,7 @@ set(headers
   mbsview.h
   chainview.h
   geom3dview.h
+  demview.h
   boxview.h
   cylinderview.h
   airmview.h

@@ -99,4 +99,3 @@ namespace gcop {
 }
 
 #endif
-

@@ -1,5 +1,5 @@
-#ifndef GCOP_DEMVIEW_H
-#define GCOP_DEMVIEW_H
+#ifndef DemVIEW_H
+#define DemVIEW_H
 
 #include "view.h"
 #include "dem.h"
@@ -30,11 +30,11 @@ namespace gcop {
     //    GLUquadricObj *qobj;
     const Dem& dem;
 
-    GLfloat* vertices; // GL_T2F_C4F_N3F_V3F
+    float* vertices; // GL_T2F_C4F_N3F_V3F
     int mesh_ind_count;
     GLuint* mesh_inds;
 
-    GLfloat *normals;
+    float *normals;
 
     GLuint texture;     ///< texture
 
