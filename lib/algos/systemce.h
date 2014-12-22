@@ -205,13 +205,15 @@ namespace gcop {
                                          bool update) : 
     sys(sys), cost(cost), tp(&tp), 
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
-    ce(N*sys.U.n, 1), Ns(1000), debug(true)
+    ce(tp.ntp, 1), Ns(1000), debug(true)
     {
+      /*
       if (ntp != Dynamic) {
         assert(ntp == N*sys.U.n);
         if (ntp > 16)
           cout << "[W] gcop::SystemCe::SystemCe: fixed Eigen size is not recommended above 16!" << endl;
       }
+      */
 
       assert(N > 0);
       assert(ts.size() == N+1);
@@ -230,9 +232,11 @@ namespace gcop {
       tp.To(ce.gmm.ns[0].mu, ts, xs, us, p);
             //      us2z(ce.gmm.ns[0].mu, us);
       Vectortpd z;
-      if (ntp == Dynamic)
-        z.resize(sys.U.n*N);
-  
+      if (ntp == Dynamic) {
+        z.resize(tp.ntp);
+      }  
+
+
       tp.To(z, ts, xs, dus, p);
       // us2z(z, dus);
       ce.gmm.ns[0].P = z.asDiagonal();
@@ -293,7 +297,10 @@ namespace gcop {
     if (ce.inc) {
       Vectortpd z;
       if (ntp == Dynamic)
-        z.resize(sys.U.n*N);            // parameter vector
+        if (tp)
+          z.resize(tp->ntp);
+        else 
+          z.resize(us.size()*this->N);        
       
       ce.Sample(z);
       if (tp)
@@ -307,7 +314,10 @@ namespace gcop {
       
       Vectortpd z;
       if (ntp == Dynamic)
-        z.resize(sys.U.n*N);            // parameter vector
+        if (tp)
+          z.resize(tp->ntp);
+        else 
+          z.resize(us.size()*this->N);        
       
       for (int j = 0; j < Ns; ++j) {
         ce.Sample(z);
