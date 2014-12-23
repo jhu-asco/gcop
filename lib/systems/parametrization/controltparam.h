@@ -63,6 +63,7 @@ namespace gcop {
                                              const vector<Vectorcd> &us,
                                              const Vectormd *p) {
     int j =0;//Iterator for tks
+    cout<<"s.size: "<<s.size()<<endl;
     for(int i = 0;i < us.size(); ++i)
     {
       if ((ts[i] - tks[j]) >= 0)

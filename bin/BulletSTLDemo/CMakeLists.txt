@@ -17,8 +17,8 @@ ${GLUT_INCLUDE_DIR}
 )
 
 LINK_LIBRARIES(
- OpenGLSupport  BulletDynamics BulletCollision LinearMath    ${GLUT_glut_LIBRARY} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY}
- gcop_algos gcop_bulletsystems gcop_systems ${ALL_LIBS}
+ OpenGLSupport ${GLUT_glut_LIBRARY} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY}
+ gcop_algos gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALGO_LIBS} ${SYS_LIBS} ${UTIL_LIBS}
 )
 
 ADD_EXECUTABLE(AppVehiclewithSTLDemo

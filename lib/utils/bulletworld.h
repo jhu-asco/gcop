@@ -16,6 +16,7 @@
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
 #include <BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h>
+#include "BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h"
 #include <BulletDynamics/ConstraintSolver/btConstraintSolver.h>
 
 #include <iostream>
@@ -114,11 +115,11 @@ namespace gcop{
       //Creates a triangular mesh from vertex data. The number of indices should be equal to 3 times the number of triangles
       // The vertex data can be smaller than 3*noftriangles since different triangles can share vertices
       // By default assumes each index corresponds to a vertex
-      btCollisionShape *CreateMeshFromData(float *verts, int *inds, int noftriangles, int nofverts)
+      btCollisionShape *CreateMeshFromData(btScalar *verts, int *inds, int noftriangles, int nofverts)
       {
         if(!inds || !verts)
           return 0;
-        int vertStride = 3*sizeof(float); 
+        int vertStride = 3*sizeof(btScalar); 
         int indexStride = 3*sizeof(int);
         btTriangleIndexVertexArray *m_indexVertexArrays = new btTriangleIndexVertexArray(noftriangles
                                                                                         ,inds
@@ -169,10 +170,35 @@ namespace gcop{
                     }
 
                   }
-                  float *verts = (float *)malloc(3*3*numTriangles*sizeof(float));//No compression used Can use trees if needed later 3 vertices per triangle, 3 indices per vertex
+                  btScalar *verts = (btScalar *)malloc(3*3*numTriangles*sizeof(btScalar));//No compression used Can use trees if needed later 3 vertices per triangle, 3 indices per vertex
                   int *inds = (int *)malloc(3*numTriangles*sizeof(int));
                   int i;
-                  if(scale != btVector3(1,1,1))
+
+                  {
+                    float *vert_temp = (float *)malloc(3*3*numTriangles*sizeof(float));
+
+#pragma omp parallel for private(i)
+                    for (i=0;i<numTriangles;i++)
+                    {
+                      memcpy(&vert_temp[9*i],&memoryBuffer[96+i*50],36);//9 floats of 4 bytes each (3 loats per vertex)
+                      inds[3*i+0] = 3*i;
+                      inds[3*i+1] = 3*i+1;
+                      inds[3*i+2] = 3*i+2;
+                      //cout<<"Vertices["<<3*i<<"]: "<<verts[3*i]<<"\t"<<verts[3*i+1]<<"\t"<<verts[3*i+2]<<endl;
+                      //cout<<"Vertices["<<(3*i+1)<<"]: "<<verts[3*(i+1)]<<"\t"<<verts[3*(i+1)+1]<<"\t"<<verts[3*(i+1)+2]<<endl;
+                      //cout<<"Vertices["<<(3*i+2)<<"]: "<<verts[3*(i+2)]<<"\t"<<verts[3*(i+2)+1]<<"\t"<<verts[3*(i+2)+2]<<endl;
+                    }
+
+                    //Convert float vertices into  double vertices:
+#pragma omp parallel for private(i)
+                    for(i = 0; i < 9*numTriangles; i++)
+                    {
+                      verts[i] = double(vert_temp[i]);//explicit casting 
+                    }
+                  }
+
+                  //Scale the vertices accordingly
+                  if((scale - btVector3(1,1,1)).norm()>1e-6)
                   {
 #pragma omp parallel for private(i)
                     for(i = 0;i < 9*numTriangles;i++)
@@ -180,17 +206,7 @@ namespace gcop{
                       verts[i] *= scale[i%3];
                     }
                   }
-#pragma omp parallel for private(i)
-                  for (i=0;i<numTriangles;i++)
-                  {
-                      memcpy(&verts[9*i],&memoryBuffer[96+i*50],36);//9 floats of 4 bytes each (3 floats per vertex)
-                      inds[3*i+0] = 3*i;
-                      inds[3*i+1] = 3*i+1;
-                      inds[3*i+2] = 3*i+2;
-                      //cout<<"Vertices["<<3*i<<"]: "<<verts[3*i]<<"\t"<<verts[3*i+1]<<"\t"<<verts[3*i+2]<<endl;
-                      //cout<<"Vertices["<<(3*i+1)<<"]: "<<verts[3*(i+1)]<<"\t"<<verts[3*(i+1)+1]<<"\t"<<verts[3*(i+1)+2]<<endl;
-                      //cout<<"Vertices["<<(3*i+2)<<"]: "<<verts[3*(i+2)]<<"\t"<<verts[3*(i+2)+1]<<"\t"<<verts[3*(i+2)+2]<<endl;
-                  }
+
                   return CreateMeshFromData(verts, inds, numTriangles, 3*numTriangles);
                 }
                 delete[] memoryBuffer;
@@ -202,13 +218,27 @@ namespace gcop{
         return 0;
       }
 
-			btCollisionShape *CreateGroundPlane(float length, float width, float(*heightfunc)(float, float)=0,int subdivisions = 1)
+			btCollisionShape *CreateHeightMap(btScalar length, btScalar width, const char *data, btScalar maxHeight = 100)
+      {
+        btHeightfieldTerrainShape* heightFieldShape;
+        if(usezupaxis)
+        {
+          heightFieldShape = new btHeightfieldTerrainShape(width,length,data,maxHeight,2,false, false);
+        }
+        else
+        {
+          heightFieldShape = new btHeightfieldTerrainShape(width,length,data,maxHeight,1,false,false);
+        }
+        return (btCollisionShape*)heightFieldShape;
+      }
+
+			btCollisionShape *CreateGroundPlane(btScalar length, btScalar width, btScalar(*heightfunc)(btScalar, btScalar)=0,int subdivisions = 1)
       {
         cout<<"Subdivisions: "<<subdivisions<<endl;
         int i;
 
-        const float TRIANGLE_SIZE_X = (length/subdivisions);
-        const float TRIANGLE_SIZE_Y = (width/subdivisions);
+        const btScalar TRIANGLE_SIZE_X = (length/subdivisions);
+        const btScalar TRIANGLE_SIZE_Y = (width/subdivisions);
 
         const int NUM_VERTS_X = subdivisions+1;
         const int NUM_VERTS_Y = subdivisions+1;
@@ -216,7 +246,7 @@ namespace gcop{
 
         const int totalTriangles = 2*(NUM_VERTS_X-1)*(NUM_VERTS_Y-1);
 
-        float *m_vertices = new float[3*totalVerts];
+        btScalar *m_vertices = new btScalar[3*totalVerts];
         int*	gIndices = new int[totalTriangles*3];
 
         cout<<"Number of Verts: "<<NUM_VERTS_X<<"\t"<<NUM_VERTS_Y<<endl;
@@ -226,22 +256,22 @@ namespace gcop{
         {
           for (int j=0;j<NUM_VERTS_Y;j++)
           {
-            float height = 0.f;//20.f*sinf(float(i)*wl)*cosf(float(j)*wl);
+            btScalar height = 0.f;//20.f*sinf(float(i)*wl)*cosf(float(j)*wl);
             if(heightfunc != 0)
             {
               height = heightfunc(i*TRIANGLE_SIZE_X, j*TRIANGLE_SIZE_Y);
             }
 
-            m_vertices[3*(i+j*NUM_VERTS_X)] = (i-NUM_VERTS_X*0.5f)*TRIANGLE_SIZE_X + 0.5*TRIANGLE_SIZE_X;
+            m_vertices[3*(i+j*NUM_VERTS_X)] = (i-NUM_VERTS_X*0.5)*TRIANGLE_SIZE_X + 0.5*TRIANGLE_SIZE_X;
             if(usezupaxis)
             {
-              m_vertices[3*(i+j*NUM_VERTS_X)+1] = (j-NUM_VERTS_Y*0.5f)*TRIANGLE_SIZE_Y + 0.5*TRIANGLE_SIZE_Y;
+              m_vertices[3*(i+j*NUM_VERTS_X)+1] = (j-NUM_VERTS_Y*0.5)*TRIANGLE_SIZE_Y + 0.5*TRIANGLE_SIZE_Y;
               m_vertices[3*(i+j*NUM_VERTS_X)+2] = height;
             }
             else
             {
               m_vertices[3*(i+j*NUM_VERTS_X)+1] = height;
-              m_vertices[3*(i+j*NUM_VERTS_X)+2] = (j-NUM_VERTS_Y*0.5f)*TRIANGLE_SIZE_Y + 0.5*TRIANGLE_SIZE_Y;
+              m_vertices[3*(i+j*NUM_VERTS_X)+2] = (j-NUM_VERTS_Y*0.5)*TRIANGLE_SIZE_Y + 0.5*TRIANGLE_SIZE_Y;
             }
             //cout<<"Vertices: "<<3*(i+j*NUM_VERTS_X)<<"\t"<<m_vertices[3*(i+j*NUM_VERTS_X)]<<"\t"<<m_vertices[3*(i+j*NUM_VERTS_X)+1]<<"\t"<<m_vertices[3*(i+j*NUM_VERTS_X)+2]<<endl;
           }
@@ -267,14 +297,14 @@ namespace gcop{
       }
 
 			//Simulates the time dt in seconds with the specified number of substeps
-			void Step(float dt, int substeps)
+			void Step(double dt, int substeps)
 			{
 				if(!m_dynamicsWorld)
         {
           cerr<<"m_dynamicsWorld not defined"<<endl;
           return;
         }
-				float fixedstepsize = dt/substeps;
+				double fixedstepsize = dt/substeps;
 				int numSimSteps = m_dynamicsWorld->stepSimulation(dt,substeps,fixedstepsize);//No interpolation used
 			}
 

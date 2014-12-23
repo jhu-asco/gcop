@@ -92,8 +92,8 @@ void solver_process(Viewer* viewer)
 
   vector<Vector2d> us(N);
   for (int i = 0; i < N/2; ++i) {
-    us[i] = Vector2d(0.1, 0.1);
-    us[N/2+i] = Vector2d(0.1, 0.1);
+    us[i] = Vector2d(0.1, 0);
+    us[N/2+i] = Vector2d(0.1, -0);
   }
 
   
@@ -111,6 +111,14 @@ void solver_process(Viewer* viewer)
   RccarView view((Rccar)sys, &gn.xs);
   
   viewer->Add(view);
+
+  //Print xs and us
+  for(int j =0;j < N;j++)
+  {
+    cout<<"us["<<j<<"]"<<us[j].transpose()<<endl;
+    cout<<"xs["<<j<<"]"<<xs[j].transpose()<<endl;
+  }
+  cout<<"xN"<<xs[N].transpose()<<endl;
 
   struct timeval timer;
   // Gn.debug = false; // turn off debug for speed

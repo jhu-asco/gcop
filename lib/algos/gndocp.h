@@ -272,11 +272,13 @@ struct Functor
                                                 vector<Matrix<double, _nu, 1> > &us,
                                                 Matrix<double, _np, 1> *p,
                                                 bool update) : 
-    Docp<T, _nx, _nu, _np>(sys, cost, ts, xs, us, p, update), tparam(tparam),
+    Docp<T, _nx, _nu, _np>(sys, cost, ts, xs, us, p, false), tparam(tparam),
     inputs(tparam.ntp),
     values(cost.ng*xs.size()), s(inputs), 
     functor(0), numDiff(0), lm(0)
     {
+      if(update)
+        this->Update(false);//No need of derivatives
       cout <<"ntp=" <<tparam.ntp << endl;
     }
   

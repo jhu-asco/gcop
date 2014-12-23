@@ -79,7 +79,7 @@ class VehicleDemo : public GlutDemoApplication
 
 	void MoveAndDisplay(double h = 0.01);//For debugging purposes
 
-	virtual void clientMoveAndDisplay(){};
+	virtual void clientMoveAndDisplay();
 
   void renderTrajectory(vector<Vector3d> *zs, btVector3 *color);
 

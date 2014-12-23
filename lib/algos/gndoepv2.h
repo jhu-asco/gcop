@@ -187,18 +187,23 @@ struct Functor
      for(int k = 0; k< N; ++k)
      {
        double h = doep->ts[k+1] - doep->ts[k];
-       ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Res(g, doep->ts[k], doep->zs[sensor_index], doep->ws[k], doep->p, h, sensor_index);
-
-       if((doep->ts1[sensor_index] - doep->ts[k])>= 0 && (doep->ts1[sensor_index] - doep->ts[k+1]) < 0)//Nearest state to find the sensor measurement
+       //getchar();
+       while((doep->ts1[sensor_index] - doep->ts[k])>= 0 && (doep->ts1[sensor_index] - doep->ts[k+1]) < 0)//Nearest state to find the sensor measurement
        {
+         ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Res(g, doep->ts[k], doep->zs[sensor_index], doep->ws[k], doep->p, h, sensor_index);
          fvec.segment(i,nz) = g.segment(nw,nz);
          i += nz;
          sensor_index = sensor_index < (doep->ts1.size()-1)?sensor_index+1:sensor_index;
+         if(sensor_index == (doep->ts1.size()-1))
+           break;
+         fvec.tail(np) += g.tail(np);//The tail is a constant residual for parameters
        }
+       //cout<<"doep->ts: "<<(doep->ts1[sensor_index])<<"\t"<<(doep->ts[k])<<"\t"<<(doep->ts[k+1])<<endl;
+       //getchar();
        //cout<<"Res: "<<g<<endl;
        //cout<<"i: "<<i<<endl;
-       fvec.tail(np) += g.tail(np);//The tail is a constant residual for parameters
      }
+     assert(sensor_index == (doep->ts1.size()-1));//Assert that we collected all the sensor data
      ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Resp(gp, doep->p);
      fvec.tail(np) += gp;
      //cout<<"Gp: "<<gp<<endl;//#DEBUG
@@ -227,12 +232,16 @@ struct Functor
                                                 vector<double> &ts1,
                                                 Func_type _project,
                                                 bool update) : 
-    Doep<T, _nx, _nu, _np, Tz, _nz, T1, _nx1>(sys, sensor, cost, ts, xs, us, p, ts1, _project, update),
+    Doep<T, _nx, _nu, _np, Tz, _nz, T1, _nx1>(sys, sensor, cost, ts, xs, us, p, ts1, _project, false),
     inputs(sys.P.n),
     values((sensor.Z.n)*ts1.size()+sys.P.n), s(inputs), 
     functor(0), numDiff(0), lm(0)
     {
       cout <<"inputs=" <<inputs<<" values= "<<values<< endl;
+      if(update)
+      {
+        this->Update(false);
+      }
     }
   
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz, typename T1, int _nx1> 

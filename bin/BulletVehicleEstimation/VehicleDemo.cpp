@@ -29,6 +29,7 @@ subject to the following restrictions:
 //
 #include "GLDebugDrawer.h"
 #include <stdio.h> //printf debugging
+#include <fstream> //Open file
 
 #include "GL_ShapeDrawer.h"
 
@@ -121,66 +122,142 @@ void VehicleDemo::initPhysics()
     {
       p0<<2, 50, 0.1;//random values
     }
+
+    params.GetString("sensordata", sensordatafilename);
+    params.GetString("controldata", ctrldatafilename);
   }
 
   //Resize the vectors for states etc
-  ts.resize(N+1);
-  xs.resize(N+1);
-  us.resize(N);
-  int subdivide = 1;
-  zs.resize(N/subdivide);
-  ts_sensor.resize(N/subdivide);
-
-  //Set initial posn to 0 and initial velocity to -0.5
-  xs[0].setZero();
-  //xs[0][3] = -0.5;//testing
-  //xs[0][2] = M_PI/4;//testing
-  //Initialize the controls and times;
-  double h = tf/double(N);
-
-  //Set sensor times:
-  for (int k = 0; k <(N/subdivide); ++k)
-    ts_sensor[k] = subdivide*k*h;
-
-  ts[0] = 0;
-  for(int i = 0;i < N; i++)
-  {
-    ts[i+1] = (i+1)*h;
-    if(i < N/2)
-    {
-      double temp = (double(2*i)/double(N));
-      us[i] = Vector2d(2*temp, 0.2+0.1*temp);
-    }
-    else
-    {
-      double temp = (double(2*i - N)/double(N));
-      us[i] = Vector2d(2 - 2*temp, 0.3 - 0.3*temp);
-    }
-  }
-  /*for(int i = 0;i < N; i++)
-  {
-    ts[i+1] = (i+1)*h;
-    if(i < N/3)
-    {
-      double temp = (double(3*i)/double(N));
-      us[i] = Vector2d(2*temp, 0.2*temp);
-    }
-    else if(i < 2*N/3)
-    {
-      double temp = (double(3*i - N)/double(N));
-      us[i] = Vector2d(2 - 1*temp, 0.2 - 0.1*temp);
-    }
-    else
-    {
-      double temp = (double(3*i - 2*N)/double(N));
-      us[i] = Vector2d(1 - 1 *temp, 0.1 - 0.1*temp);
-    }
-  }
-  */
 
   ////////////Record the sensor data with the true params
   cout<<"Recording Sensor Data"<<endl;
+  if(!sensordatafilename.empty() && !ctrldatafilename.empty())
   {
+    cout<<"Reading Sensor Data"<<endl;
+    std::ifstream ifs1 (ctrldatafilename.c_str(), std::ifstream::in);
+    std::ifstream ifs2 (sensordatafilename.c_str(), std::ifstream::in);
+    Vector3d z_temp;
+    Vector2d us_temp;
+    double timez_temp, timeu_temp;
+    char comma;
+    bool read_result = true;
+    N = 0;//Number of segments
+    while(ifs1.good())
+    {
+      if(!(ifs1>>timeu_temp))
+        break;
+      for(int count1 = 0;count1 < 2;count1++)
+      {
+        read_result = ifs1.get(comma);
+        if(!read_result)
+          break;
+        read_result = ifs1>>us_temp[count1];
+      }
+      ts.push_back(timeu_temp);
+      us.push_back(us_temp);
+      cout<<"us["<<(us.size()-1)<<"]: "<<us.back().transpose()<<"\t"<<ts.back()<<endl;
+      if(N > 1)
+        assert((ts[N] - ts[N-1])>0);
+      N++;
+    }
+    assert(N >=2);//Need atleast two control segments to interpolate the timestep
+    ts.push_back(ts[N-1] + (ts[N-1]-ts[N-2]));
+    xs.resize(N+1);
+
+    read_result = true;//Reset the state
+    int Nz = 0;
+    while(ifs2.good())
+    {
+      if(!(ifs2>>timez_temp))
+        break;
+      for(int count1 = 0;count1 < 3;count1++)
+      {
+        read_result = ifs2.get(comma);
+        if(!read_result)
+          break;
+        read_result = ifs2>>z_temp[count1];
+      }
+      if(!read_result)
+        break;
+      cout<<timez_temp<<"\t"<<z_temp.transpose()<<endl;
+      if(Nz > 0)
+      {
+        if((timez_temp - ts_sensor[Nz-1]) <= 0)
+        {
+          cout<<"Skipping Data: New ts[k] is smaller or equal to ts[k-1]; Possible duplicate data: "<<timez_temp<<"\t"<<ts_sensor[Nz-1]<<"\t"<<Nz<<endl;
+          continue;
+        }
+      }
+      Nz++;
+      ts_sensor.push_back(timez_temp);
+      //Convert to Y up and z forward:
+      zs.push_back(Vector3d(-z_temp[0], z_temp[2], z_temp[1]));
+      cout<<"zs["<<(zs.size()-1)<<"]: "<<zs.back().transpose()<<"\t"<<ts_sensor.back()<<endl;
+    }
+    cout<<"N: "<<N<<endl;
+    cout<<"Nz: "<<Nz<<endl;
+    ifs1.close();
+    ifs2.close();//Close the streams
+    xs[0]<<zs[0][0],zs[0][2],0,0;
+    getchar();
+  }
+  else
+  {
+    ts.resize(N+1);
+    xs.resize(N+1);
+    us.resize(N);
+    int subdivide = 1;
+    zs.resize(N/subdivide);
+    ts_sensor.resize(N/subdivide);
+
+    //Set initial posn to 0 and initial velocity to -0.5
+    xs[0].setZero();
+    //xs[0][3] = -0.5;//testing
+    //xs[0][2] = M_PI/4;//testing
+    //Initialize the controls and times;
+    double h = tf/double(N);
+
+    //Set sensor times:
+    for (int k = 0; k <(N/subdivide); ++k)
+      ts_sensor[k] = subdivide*k*h;
+
+    ts[0] = 0;
+    for(int i = 0;i < N; i++)
+    {
+      ts[i+1] = (i+1)*h;
+      if(i < N/2)
+      {
+        double temp = (double(2*i)/double(N));
+        us[i] = Vector2d(2*temp, 0.2+0.1*temp);
+      }
+      else
+      {
+        double temp = (double(2*i - N)/double(N));
+        us[i] = Vector2d(2 - 2*temp, 0.3 - 0.3*temp);
+      }
+    }
+    /*for(int i = 0;i < N; i++)
+      {
+      ts[i+1] = (i+1)*h;
+      if(i < N/3)
+      {
+      double temp = (double(3*i)/double(N));
+      us[i] = Vector2d(2*temp, 0.2*temp);
+      }
+      else if(i < 2*N/3)
+      {
+      double temp = (double(3*i - N)/double(N));
+      us[i] = Vector2d(2 - 1*temp, 0.2 - 0.1*temp);
+      }
+      else
+      {
+      double temp = (double(3*i - 2*N)/double(N));
+      us[i] = Vector2d(1 - 1 *temp, 0.1 - 0.1*temp);
+      }
+      }
+     */
+
+
     clientResetScene();
     int sensor_index = 0;
     //Record the car trajectory
@@ -201,8 +278,8 @@ void VehicleDemo::initPhysics()
       }
       //printf("Zs:[%d]: %f\t%f\n",i, zs[i](0), zs[i](2));
     }
-    cost->SetReference(&zs, &this->p0);//Set reference for zs
   }
+  cost->SetReference(&zs, &this->p0);//Set reference for zs
 
   //Setup the Estimator
   gn = new RccarDoep(*brccar, gps, *cost, ts, xs, us, p0, ts_sensor, &projectmanifold);  
@@ -300,7 +377,7 @@ void VehicleDemo::renderTrajectory(vector<Vector3d> *zs, btVector3 *color)
     for (int i = 0; i < size; i++) {
       const Vector3d &z = (*zs)[i];
       //glVertex3d(-i*0.1, 0.2, -2);
-      glVertex3d(z[0], 0.2, z[2]);
+      glVertex3d(z[0], 0.15, z[2]);
     }
     glEnd();
   }

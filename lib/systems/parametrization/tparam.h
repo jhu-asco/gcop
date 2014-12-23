@@ -73,6 +73,7 @@ namespace gcop {
     Tparam<T, nx, nu, np, _ntp>::Tparam(System<T, nx, nu, np> &sys, int ntp) : 
     sys(sys), ntp(_ntp != Dynamic ? _ntp : ntp) {
     assert(ntp > 0);
+    std::cout<<"ntp: "<<ntp<<std::endl;//#DEBUG
   }
 
   template <typename T, int nx, int nu, int np, int _ntp> 

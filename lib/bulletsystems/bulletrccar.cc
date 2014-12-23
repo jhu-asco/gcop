@@ -3,7 +3,7 @@
 using namespace gcop;
 using namespace Eigen;
 
-Bulletrccar::Bulletrccar(BulletWorld&		m_world_) : 
+Bulletrccar::Bulletrccar(BulletWorld&		m_world_, vector<double> *zs_) : 
   Rccar(3),m_carChassis(0), m_vehicle(0), m_wheelShape(0)
   ,gEngineForce(0),gBreakingForce(0.f),maxEngineForce(100.f),maxBreakingForce(10.f)
   ,gVehicleSteering(0.f),steeringClamp(0.5f), velocityClamp(5.f)
@@ -11,8 +11,8 @@ Bulletrccar::Bulletrccar(BulletWorld&		m_world_) :
   ,suspensionStiffness(1000.f),suspensionDamping(100.f),suspensionCompression(0.02f)
   ,rollInfluence(0.1f),suspensionRestLength(0.122)
   ,m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
-  , gain_cmdvelocity(2), kp_torque(25), kp_steer(0.1), initialz(0.15)
-  ,m_world(m_world_)
+  , gain_cmdvelocity(1), kp_torque(25), kp_steer(0.1), initialz(0.15)
+  ,m_world(m_world_), zs(zs_), reset_drivevel(false)
 {
 //,rightIndex(0),upIndex(1),forwardIndex(2)
   if(!m_world.IsZupAxis())
@@ -23,9 +23,9 @@ Bulletrccar::Bulletrccar(BulletWorld&		m_world_) :
     forwardIndex = 2;
     wheelDirectionCS0.setValue(0,-1,0);
     wheelAxleCS.setValue(-1,0,0);
-    this->car_halfdims[0] = 0.19f;//width
-    this->car_halfdims[1] = 0.1f;//height
-    this->car_halfdims[2] =  0.32f;//length
+    this->car_halfdims[0] = 0.19;//width
+    this->car_halfdims[1] = 0.1;//height
+    this->car_halfdims[2] =  0.32;//length
     this->l = 2*(this->car_halfdims[2]-wheelRadius); 
 
     //Set offset transform between car in GCOP coordsys and bullet
@@ -40,9 +40,9 @@ Bulletrccar::Bulletrccar(BulletWorld&		m_world_) :
     upIndex = 2;
     wheelDirectionCS0.setValue(0,0,-1);
     wheelAxleCS.setValue(1,0,0);//Can change on testing
-    this->car_halfdims[0] = 0.19f;//width
-    this->car_halfdims[1] = 0.32f;//length
-    this->car_halfdims[2] =  0.1f;//height
+    this->car_halfdims[0] = 0.19;//width
+    this->car_halfdims[1] = 0.32;//length
+    this->car_halfdims[2] =  0.1;//height
     this->l = 2*(this->car_halfdims[0]-wheelRadius); 
 
     //Set offset transform between car in GCOP coordsys and bullet
@@ -79,7 +79,7 @@ Bulletrccar::Bulletrccar(BulletWorld&		m_world_) :
   /// create wheel connections
   if(!m_world.IsZupAxis())
   {
-    float connectionHeight = 0.17f - 0.03f - car_halfdims[1];// Suspension tip connection height - ground clearance - half the height of car
+    double connectionHeight = 0.17 - 0.03 - car_halfdims[1];// Suspension tip connection height - ground clearance - half the height of car
 
 
     bool isFrontWheel=true;
@@ -118,7 +118,7 @@ Bulletrccar::Bulletrccar(BulletWorld&		m_world_) :
   }
   else
   {
-    float connectionHeight = 0.17f - 0.03f - car_halfdims[2];// Suspension tip connection height - ground clearance - half the height of car
+    double connectionHeight = 0.17 - 0.03 - car_halfdims[2];// Suspension tip connection height - ground clearance - half the height of car
 
 
     bool isFrontWheel=true;
@@ -190,32 +190,12 @@ double Bulletrccar::Step1(Vector4d& xb, const Vector2d& u,
     else
       kp_steer = (*p)[2];
   }
-  //Applies the Forces to the Vehicle
-  {
-    //Set Controls
-    gEngineForce = kp_torque*(gain_cmdvelocity*u[0] - this->x(3));
-    gVehicleSteering = (1-kp_steer)*gVehicleSteering + kp_steer*u[1];
-    //std::cout<<"Engine Force: "<<gEngineForce<<"\tgVehicleSteering: "<<gVehicleSteering<<std::endl;
-    if(!m_vehicle)
-    {
-      cout<<"M_Vehicle not defined"<<endl;
-    }
-    int wheelIndex = 2;
-    m_vehicle->applyEngineForce(gEngineForce,wheelIndex);
-
-    wheelIndex = 3;
-    m_vehicle->applyEngineForce(gEngineForce,wheelIndex);
-    wheelIndex = 0;
-    m_vehicle->setSteeringValue(gVehicleSteering,wheelIndex);
-    wheelIndex = 1;
-    m_vehicle->setSteeringValue(gVehicleSteering,wheelIndex);
-  }
-
-  //Set Linearization parameters:
+ 
+  /*Set Linearization parameters:
   const double v = this->x[3];
   double c = cos(this->x[2]);
   double s = sin(this->x[2]);//Can find a better derivative based on initial and final values #TODO
-  /*if (A) {
+  if (A) {
     A->setIdentity();
     (*A)(0,2) = -h*s*v;
     (*A)(0,3) = h*c;
@@ -236,43 +216,79 @@ double Bulletrccar::Step1(Vector4d& xb, const Vector2d& u,
   {
     //Do the simulation:
     int nofsteps = round(h/(this->h));//Nosteps 
-    if(m_world.m_dynamicsWorld)
+    for(int count_steps = 0;count_steps < nofsteps; count_steps++)
     {
-      int numSimSteps = (m_world.m_dynamicsWorld)->stepSimulation(h,nofsteps,this->h);//No interpolation used
-      btTransform chassistr = m_carChassis->getWorldTransform();
-      if(m_world.IsZupAxis())
+      //Set Controls
+      //double vel = m_carChassis->getLinearVelocity().length();
+      double vel = m_vehicle->getCurrentSpeedKmHour()*(1.0/3.6);
+      if(reset_drivevel)
       {
-        chassistr = offsettransinv*chassistr*offsettrans;
+        vel = m_carChassis->getLinearVelocity().length();
+        //cout<<"Vel:(Chassis vs Vehicle vel) "<<vel<<"\t"<<m_vehicle->getCurrentSpeedKmHour()*(1.0/3.6)<<endl;//#DEBUG
+        reset_drivevel = false;
       }
-      btVector3 &chassisorig = chassistr.getOrigin();
-      btMatrix3x3 &chbasis = chassistr.getBasis();
-      btVector3 rpybasis;
-      chbasis.getEulerZYX(rpybasis[2],rpybasis[1],rpybasis[0]);
-      //Set the state
-      if(!m_world.IsZupAxis())
+      gEngineForce = kp_torque*(gain_cmdvelocity*u[0] - vel);
+      //cout<<"More DEBUG: "<<gain_cmdvelocity<<"\t"<<u[0]<<"this_vel: "<<vel<<"\t"<<kp_torque<<"\t"<<gEngineForce<<endl;//#DEBUG
+      gVehicleSteering = (1-kp_steer)*gVehicleSteering + kp_steer*u[1];
+      //std::cout<<"Engine Force: "<<gEngineForce<<"\tgVehicleSteering: "<<gVehicleSteering<<std::endl;
+      if(!m_vehicle)
       {
-        xb<<chassisorig.x(), chassisorig.z(), rpybasis[1], m_vehicle->getCurrentSpeedKmHour()*(18.0/5.0)*(1.0f/12.9634f);//The gain factor 1 is from MATLAB (6.4817)
+        cout<<"M_Vehicle not defined"<<endl;
       }
-      else
-      {
-        xb<<chassisorig.x(), chassisorig.y(), rpybasis[2], m_vehicle->getCurrentSpeedKmHour()*(18.0/5.0)*(1.0f/12.9634f);//The gain factor 1 is from MATLAB
-      } 
-      //#DEBUG: USEFUL
-      //cout<<"Before Step:"<<endl;
-      //cout<<(this->x).transpose()<<"\t"<<u.transpose()<<"\t"<<(this->t)<<endl;
-      btVector3 chassisvel = m_carChassis->getLinearVelocity();
-      //cout<<"Velocity: "<<chassisvel.x()<<"\t"<<chassisvel.y()<<"\t"<<chassisvel.z()<<endl;
-      /*if(numSimSteps == 0)
-      {
-        cout<<"No simulation done"<<endl;
-        cout<<"h: "<<h<<"\t"<<nofsteps<<"\t"<<(this->h)<<endl;
-      }
-      */
-      this->x = xb;
-      this->t += nofsteps*(this->h);
-      //cout<<"After Step:"<<endl;
-      //std::cout<<chassisorig.x()<<"\t"<<chassisorig.y()<<"\t"<<chassisorig.z()<<std::endl;
+      int wheelIndex = 2;
+      m_vehicle->applyEngineForce(gEngineForce,wheelIndex);
+
+      wheelIndex = 3;
+      m_vehicle->applyEngineForce(gEngineForce,wheelIndex);
+      wheelIndex = 0;
+      m_vehicle->setSteeringValue(gVehicleSteering,wheelIndex);
+      wheelIndex = 1;
+      m_vehicle->setSteeringValue(gVehicleSteering,wheelIndex);
+      (m_world.m_dynamicsWorld)->stepSimulation((this->h),1,this->h);//No interpolation used Doing control of car at 50 Hz Depends on the physics engine timestep 100Hz
     }
+
+    btTransform chassistr = m_carChassis->getWorldTransform();
+    if(m_world.IsZupAxis())
+    {
+      chassistr = offsettransinv*chassistr*offsettrans;
+    }
+    btVector3 &chassisorig = chassistr.getOrigin();
+    btMatrix3x3 &chbasis = chassistr.getBasis();
+    btVector3 rpybasis;
+    chbasis.getEulerZYX(rpybasis[2],rpybasis[1],rpybasis[0]);
+    //Set the state
+    if(!m_world.IsZupAxis())
+    {
+      xb<<chassisorig.x(), chassisorig.z(), rpybasis[1], m_vehicle->getCurrentSpeedKmHour()*(1.0/3.6);//The gain factor 1 is from MATLAB (6.4817)
+    }
+    else
+    {
+      xb<<chassisorig.x(), chassisorig.y(), rpybasis[2], m_vehicle->getCurrentSpeedKmHour()*(1.0/3.6);//The gain factor 1 is from MATLAB
+    } 
+    //#DEBUG: USEFUL
+    //cout<<"Before Step:"<<endl;
+    //cout<<(this->x).transpose()<<"\t"<<u.transpose()<<"\t"<<(this->t)<<endl;
+    //btVector3 chassisvel = m_carChassis->getLinearVelocity();
+    //cout<<"Compare vehicle Vel with chassis vel: "<<m_vehicle->getCurrentSpeedKmHour()*(18.0/5.0)*(1.0/12.9634)<<"\t"<<chassisvel.length()<<endl;
+    //cout<<"Velocity: "<<chassisvel.x()<<"\t"<<chassisvel.y()<<"\t"<<chassisvel.z()<<endl;
+    /*if(numSimSteps == 0)
+      {
+      cout<<"No simulation done"<<endl;
+      cout<<"h: "<<h<<"\t"<<nofsteps<<"\t"<<(this->h)<<endl;
+      }
+     */
+    this->x = xb;
+    this->t += nofsteps*(this->h);
+    //Set internal zs:
+    if(this->zs)
+    {
+      count_zs++;
+      assert(count_zs < zs->size());//#ASSERT
+      (*zs)[count_zs] = chassisorig.z();
+    }
+    //cout<<"After Step:"<<endl;
+    //std::cout<<(this->x).transpose()<<endl;//#DEBUG
+    //std::cout<<chassisorig.x()<<"\t"<<chassisorig.y()<<"\t"<<chassisorig.z()<<std::endl;
   }
   
   return 1;
@@ -293,16 +309,17 @@ bool Bulletrccar::reset(const Vector4d &x, double t)
 {
   if(m_world.m_dynamicsWorld)
   {
-    gVehicleSteering = 0.f;
-    gEngineForce = 0.f;
-    gBreakingForce = 0.f;
+    gVehicleSteering = 0;
+    gEngineForce = 0;
+    gBreakingForce = 0;
 
     //Set to the specified state:
     if(!m_world.IsZupAxis())
     {
       btTransform cartransform(btQuaternion(x[2],0,0),btVector3(x[0], initialz,x[1]));
       m_carChassis->setCenterOfMassTransform(cartransform);
-      double v = x[3]*12.9634;
+      double v = x[3];
+      //double v = x[3];
       btVector3 carvel(-v*sin(x[2]),0,v*cos(x[2]));
       m_carChassis->setLinearVelocity(carvel);
     }
@@ -311,8 +328,8 @@ bool Bulletrccar::reset(const Vector4d &x, double t)
       btTransform cartransform(btQuaternion(0,0,x[2]),btVector3(x[0], x[1], initialz));
       cartransform = offsettrans*cartransform*offsettransinv;
       m_carChassis->setCenterOfMassTransform(cartransform);
-      //double v = x[3]*12.9634;
       double v = x[3];
+      //double v = x[3];
       btVector3 carvel(-v*sin(x[2]),v*cos(x[2]),0);
       m_carChassis->setLinearVelocity(carvel);
 //      cout<<"Car Vel: "<<carvel.x()<<"\t"<<carvel.y()<<"\t"<<carvel.z()<<endl;
@@ -322,9 +339,17 @@ bool Bulletrccar::reset(const Vector4d &x, double t)
     (m_world.m_dynamicsWorld)->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(m_carChassis->getBroadphaseHandle(),(m_world.m_dynamicsWorld)->getDispatcher());
     m_vehicle->resetSuspension();
     //Can synchronize wheels with the new transform or ignore
+    //set reset_drivevel to true:
+    reset_drivevel = true;
   }
   this->x = x;
   this->t = t;
+  //Set internal zs also:
+  if(zs)
+  {
+    (*zs)[0] = initialz;
+    count_zs = 0;
+  }
 }
 
 bool Bulletrccar::NoiseMatrix(Matrix4d &Q, double t, const Vector4d &x, const Vector2d &u,

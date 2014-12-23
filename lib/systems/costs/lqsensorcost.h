@@ -173,7 +173,7 @@ namespace gcop {
       int &np = this->sys.P.n;
 
       assert(h > 0);
-      int k = round(t/h);
+      //int k = round(t/h);
       if (zs) {
         assert(sensor_index < zs->size());
         this->Z.Lift(dz, (*zs)[sensor_index], z); // difference (on a vector space we have dx = x - xf)
@@ -181,6 +181,8 @@ namespace gcop {
         //std::cout<<"zs["<<k<<"]: "<<(*zs)[k].transpose()<<endl;
         //std::cout<<"z["<<k<<"]: "<<z.transpose()<<endl;
       } 
+      //cout<<"zs["<<sensor_index<<"]: "<<(*zs)[sensor_index].transpose()<<"\t"<<z.transpose()<<endl;
+      //getchar();
       assert(!std::isnan(dz[0]));
 
       if (diag)

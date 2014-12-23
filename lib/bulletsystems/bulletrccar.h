@@ -33,7 +33,7 @@ namespace gcop {
   class Bulletrccar : public Rccar 
   {
   public:
-    Bulletrccar(BulletWorld& m_world);
+    Bulletrccar(BulletWorld& m_world, vector<double> *zs_ = 0);
 
     ~Bulletrccar()
     {
@@ -64,25 +64,25 @@ namespace gcop {
     int upIndex;
     int forwardIndex;
 
-    float carmass;//Mass of the car
+    double carmass;//Mass of the car
     btVector3 car_halfdims;//half dimensions of car width, height, length
 
-    float	gEngineForce ;//Engine Torque
-    float	gBreakingForce;//Breaking Force on the vehicle
+    double	gEngineForce ;//Engine Torque
+    double	gBreakingForce;//Breaking Force on the vehicle
 
-    float	maxEngineForce;
-    float	maxBreakingForce;
+    double maxEngineForce;
+    double	maxBreakingForce;
 
-    float	gVehicleSteering;//Vehicle Steering angle
-    float	steeringClamp;// Clamp on Steering angle
-    float velocityClamp;//Clamp on velocity of car
-    float	wheelRadius;//Radius of wheel
-    float	wheelWidth;//Width of wheel
-    float	wheelFriction;//wheel friction usually large value
-    float	suspensionStiffness;//Stiffness of suspension. If not enough, the car will sink into ground
-    float	suspensionDamping;//Damping on suspension
-    float	suspensionCompression;//Compression factor decides by how much the car will compress wrto external loads
-    float	rollInfluence;//Decides whether the car will topple or not
+    double	gVehicleSteering;//Vehicle Steering angle
+    double	steeringClamp;// Clamp on Steering angle
+    double velocityClamp;//Clamp on velocity of car
+    double	wheelRadius;//Radius of wheel
+    double	wheelWidth;//Width of wheel
+    double	wheelFriction;//wheel friction usually large value
+    double	suspensionStiffness;//Stiffness of suspension. If not enough, the car will sink into ground
+    double	suspensionDamping;//Damping on suspension
+    double	suspensionCompression;//Compression factor decides by how much the car will compress wrto external loads
+    double	rollInfluence;//Decides whether the car will topple or not
     btScalar suspensionRestLength;//Rest length of suspension
     btScalar m_defaultContactProcessingThreshold;// if contact goes above this value, it will process
 
@@ -90,13 +90,20 @@ namespace gcop {
     btVector3 wheelAxleCS;//Wheel Axle Direction
 
     //Parameters for the car:
-    float gain_cmdvelocity;
-    float kp_torque;
-    float kp_steer;//Ideally should be between 0 and 1(Can define a map to do this #TODO)
-    float initialz;
+    double gain_cmdvelocity;
+    double kp_torque;
+    double kp_steer;//Ideally should be between 0 and 1(Can define a map to do this #TODO)
+    double initialz;
 
     btTransform offsettrans;//To Account for the difference to coordinate system Usage: worldpose_inregcoordsys = offsettrans.inv()*worldpose_bullet*offsettrans
     btTransform offsettransinv;
+
+    //Additional Hidden state for publishing/rendering trajectories:
+    vector<double> *zs;///<Height of the rccar only used for visualization only x and y are used in optimization
+    int count_zs;
+
+    //Hacky way of ensuring the vehicle_velocity is reset after every reset
+    bool reset_drivevel;///< Used to make sure the velocity of the chassis is used just after reset instead of vehicle vel
 
     //Bullet classes for holding car
     btRigidBody* m_carChassis;

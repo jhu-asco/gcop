@@ -63,6 +63,7 @@ class VehicleDemo : public GlutDemoApplication
     float	steeringIncrement;//Steering Increment for the steering angle
     float velocityIncrement;//Velocity Increment for vehicle
 
+    string sensordatafilename, ctrldatafilename;///<Filenames for control and sensor value data
 	public:
 
 	float		m_cameraHeight;
@@ -111,7 +112,7 @@ class VehicleDemo : public GlutDemoApplication
   static void projectmanifold(const Vector4d &rccarstate, Point3dState &pstate)
   {
     //pstate.q.head<2>() = rccarstate.head<2>();//First 2 elements are x and y
-    pstate.q<<rccarstate[0],0,rccarstate[1];
+    pstate.q<<rccarstate[0],0.15,rccarstate[1];
     //pstate.q[2] = 0;//Set z to 0. This is enough for GPS
   }
 

@@ -10,15 +10,16 @@
 ########################################################
 
 message("BULLET INCLUDE: ${BULLET_INCLUDE_DIR}")
+message("Bullet LIBS: ${BULLET_LIBRARIES}")
 
 INCLUDE_DIRECTORIES(
 ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL 
 ${GLUT_INCLUDE_DIR}
 )
-
+#BulletDynamics BulletCollision LinearMath 
 LINK_LIBRARIES(
- OpenGLSupport  BulletDynamics BulletCollision LinearMath    ${GLUT_glut_LIBRARY} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY}
- gcop_algos gcop_views gcop_bulletsystems gcop_systems ${ALL_LIBS}
+ OpenGLSupport ${GLUT_glut_LIBRARY} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY}
+ gcop_algos gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALGO_LIBS} ${SYS_LIBS} ${UTIL_LIBS}
 )
 
 	#heightfield128x128.cpp

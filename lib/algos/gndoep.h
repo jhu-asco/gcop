@@ -191,24 +191,31 @@ struct Functor
      for(int k = 0; k< N; ++k)
      {
        double h = doep->ts[k+1] - doep->ts[k];
-       ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Res(g, doep->ts[k], doep->zs[sensor_index], doep->ws[k], doep->p, h, sensor_index);
        //cout<<"Res: "<<g.transpose()<<endl;
        //cout<<"i: "<<i<<endl;
        //cout<<"More Time debug Info: "<<doep->ts1[sensor_index]<<"\t"<<doep->ts[k]<<"\t"<<doep->ts[k+1]<<"\t"<<k<<"\t"<<sensor_index<<endl;
 
-       if((doep->ts1[sensor_index] - doep->ts[k])>= 0 && (doep->ts1[sensor_index] - doep->ts[k+1]) < 0)//Nearest state to find the sensor measurement
+       if((doep->ts1[sensor_index] - doep->ts[k])>= 0 && (doep->ts1[sensor_index] - doep->ts[k+1]) < 0)
        {
-         memcpy(fvec.data() + i, g.data(), (nw+nz)*sizeof(double));
-         i += (nw+nz);
-         sensor_index = sensor_index < (doep->ts1.size()-1)?sensor_index+1:sensor_index;
+         while((doep->ts1[sensor_index] - doep->ts[k])>= 0 && (doep->ts1[sensor_index] - doep->ts[k+1]) < 0)//Nearest state to find the sensor measurement
+         {
+           ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Res(g, doep->ts[k], doep->zs[sensor_index], doep->ws[k], doep->p, h, sensor_index);
+           memcpy(fvec.data() + i, g.data(), (nw+nz)*sizeof(double));
+           i += (nw+nz);
+           sensor_index = sensor_index < (doep->ts1.size()-1)?sensor_index+1:sensor_index;
+           if(sensor_index == (doep->ts1.size()-1))
+             break;
+           fvec.tail(np) += g.tail(np);//The tail is a constant residual for parameters
+         }
        }
        else
        {
+         ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Res(g, doep->ts[k], doep->zs[sensor_index], doep->ws[k], doep->p, h, sensor_index);
          memcpy(fvec.data() + i, g.data(), nw*sizeof(double));
          i += nw;
        }
-       fvec.tail(np) += g.tail(np);//The tail is a constant residual for parameters
      }
+     assert(sensor_index == (doep->ts1.size()-1));//Assert that we collected all the sensor data
      ((LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>&)doep->cost).Resp(gp, doep->p);
      fvec.tail(np) += gp;
      //cout<<"Gp: "<<gp<<endl;//#DEBUG
@@ -260,7 +267,7 @@ struct Functor
     if (!lm) {
       functor = new GnCost<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1>(inputs, values);
       functor->doep = this;
-      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1> >(*functor,1e-12);
+      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1> >(*functor);
       lm = new LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1> > >(*numDiff);
 
       s.setZero();//Set the initial noise ws to zero

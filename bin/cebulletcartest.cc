@@ -14,6 +14,25 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
+//#define USE_3DTERRAIN
+#ifdef USE_3DTERRAIN
+//y is forward axis for creating terrains
+btScalar height_terrain(btScalar x, btScalar y)
+{
+  float slope = 0.1; //2 = dy/dx
+  if(y > 13)
+  {return 0;}
+  else if(y >= 12.5)
+  {return  slope*(13.0 - y);}
+  else if(y >=11.5)
+  {return slope*0.5;}
+  else if(y >= 11)
+  {return slope*(y - 11);}
+
+  return 0;
+}
+#endif
+
 typedef SystemCe<Vector4d, 4, 2, Dynamic> RccarCe;
 
 Params params;
@@ -45,7 +64,11 @@ void solver_process(Viewer* viewer)
 
   //Load Ground
   {
+#ifdef USE_3DTERRAIN
+    btCollisionShape *groundShape = world.CreateGroundPlane(20, 20, &height_terrain,40);//20 by 20 long plane
+#else
     btCollisionShape *groundShape = world.CreateGroundPlane(50, 50);//20 by 20 long plane
+#endif
     btTransform tr;
     tr.setOrigin(btVector3(0, 0, 0));
     tr.setRotation(btQuaternion(0,0,0));
@@ -91,8 +114,8 @@ void solver_process(Viewer* viewer)
   vector<Vector2d> us(N);
 
   for (int i = 0; i < N/2; ++i) {
-    us[i] = Vector2d(.2, .0);
-    us[N/2+i] = Vector2d(-.2, .0);    
+    us[i] = Vector2d(.2, .1);
+    us[N/2+i] = Vector2d(.2, -.1);    
   }
 
   Vector2d du(.2, .1);

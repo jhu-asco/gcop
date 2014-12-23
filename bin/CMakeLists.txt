@@ -61,19 +61,19 @@ if (BUILD_TESTS)
 	target_link_libraries(gnrccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 if (USE_BULLET)
 	add_executable(ddpbulletrccartest ddpbulletrccartest.cc)
-	target_link_libraries(ddpbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems  BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
+	target_link_libraries(ddpbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
 
 	add_executable(sddpbulletrccartest sddpbulletrccartest.cc)
-	target_link_libraries(sddpbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems  BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
+	target_link_libraries(sddpbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
 
 	add_executable(bulletrccartest bulletrccartest.cc)
-	target_link_libraries(bulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems  BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
+	target_link_libraries(bulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
 
 	add_executable(gnbulletrccartest gnbulletrccartest.cc)
-	target_link_libraries(gnbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems  BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
+	target_link_libraries(gnbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
 
 	add_executable(cebulletcartest cebulletcartest.cc)
-	target_link_libraries(cebulletcartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems BulletDynamics BulletCollision LinearMath ${ALL_LIBS})
+	target_link_libraries(cebulletcartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
 endif (USE_BULLET)
 
 	add_executable(gnrccarestimation gnrccarestimation.cc)
@@ -107,8 +107,8 @@ endif (USE_BULLET)
 	add_executable(airmopttest airmopttest.cc)
 	target_link_libraries(airmopttest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-	add_executable(chainopttest chainopttest.cc)
-	target_link_libraries(chainopttest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+	#add_executable(chainopttest chainopttest.cc)
+	#target_link_libraries(chainopttest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 
 

@@ -1,7 +1,6 @@
 #ifndef HELPER_HEADER_H
 #define HELPER_HEADER_H
-//#include "heightfield1.h"//Replace whichever heightfield u want to include
-#include "heightfield_random.h"
+#include "car_terrain.h"
 static char *MyHeightfield;
 void inline creategreyscaledata()
 {

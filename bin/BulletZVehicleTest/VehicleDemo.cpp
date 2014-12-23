@@ -19,14 +19,8 @@ subject to the following restrictions:
 /// A function that maps user input (throttle) into torque/force applied on the wheels
 /// with gears etc.
 #include "BulletDynamics/btBulletDynamicsCommon.h"
-#include "BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h"
 #include "helper_header.h"
-//extern char MyHeightfield[];
-//
-// By default, Bullet Vehicle uses Y as up axis.
-// You can override the up axis, for example Z-axis up. Enable this define to see how to:
-#define FORCE_ZAXIS_UP 1
-//
+
 #include "GLDebugDrawer.h"
 #include <stdio.h> //printf debugging
 
@@ -59,8 +53,6 @@ steeringIncrement(0.04),velocityIncrement(0.1),
 tf(5)
 {
   m_cameraPosition = btVector3(10,5,10);
-  //Create heightField:
-  creategreyscaledata();
 }
 
 VehicleDemo::~VehicleDemo()
@@ -75,11 +67,11 @@ void VehicleDemo::initPhysics()
   world = new BulletWorld(true);
   this->m_dynamicsWorld = world->m_dynamicsWorld;
 
-  //btCollisionShape *groundShape = world->CreateGroundPlane(50, 50);
   {
-    btCollisionShape *groundShape = world->CreateGroundPlane(20, 20, 0, 20);
+    btCollisionShape *groundShape = world->CreateGroundPlane(50, 50);
+    //btCollisionShape *groundShape = world->CreateMeshFromSTL("../../../bin/BulletZVehicleTest/car_terrain.stl",btVector3(0.05,0.05,0.05));
     btTransform tr;
-    tr.setOrigin(btVector3(0, 0, 0));
+    tr.setOrigin(btVector3(0,0,0));
     tr.setRotation(btQuaternion(0,0,0));
     world->LocalCreateRigidBody(0,tr, groundShape);
   }
@@ -250,7 +242,7 @@ void VehicleDemo::renderme()
   DemoApplication::renderme();
 
 }
-/*void VehicleDemo::clientMoveAndDisplay()
+void VehicleDemo::clientMoveAndDisplay()
 {
 	float dt = getDeltaTimeMicroseconds() * 0.000001f;
   if(m_idle)
@@ -258,7 +250,6 @@ void VehicleDemo::renderme()
   MoveAndDisplay(dt);
 
 }
-*/
 
 void VehicleDemo::MoveAndDisplay(double h)
 {
@@ -521,11 +512,7 @@ void	VehicleDemo::updateCamera()
   }
 
 	//interpolate the camera height
-#ifdef FORCE_ZAXIS_UP
 	m_cameraPosition[2] = (15.0*m_cameraPosition[2] + m_cameraTargetPosition[2] + m_cameraHeight)/16.0;
-#else
-	m_cameraPosition[1] = (15.0*m_cameraPosition[1] + m_cameraTargetPosition[1] + m_cameraHeight)/16.0;
-#endif 
 
 	btVector3 camToObject = m_cameraTargetPosition - m_cameraPosition;
 

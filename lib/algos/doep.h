@@ -166,12 +166,16 @@ namespace gcop {
 
     sys.reset(xs[0],ts[0]);//Reset
     int sensor_index = 0;
+    assert(ts1[0]>= ts[0]);//Sensor measurements are after the control started
+    assert(ts1.back() <= ts.back());//Sensor measurements are before control ended
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
       sys.Step3(xs[k+1], us[k], ws[k], h, &p);
-      if((ts1[sensor_index] - ts[k])>= 0 && (ts1[sensor_index] - ts[k+1]) < 0)//Nearest state to find the sensor measurement
+      //cout<<"ts1["<<sensor_index<<"]: "<<ts1[sensor_index]<<"\t"<<ts[k]<<"\t"<<ts[k+1]<<endl;//#DEBUG
+      while((ts1[sensor_index] - ts[k])>= 0 && (ts1[sensor_index] - ts[k+1]) < 0)//Nearest state to find the sensor measurement
       {
+        //#TODO Add Linear Interpolation if necessary 
         int near_index = (ts1[sensor_index] - ts[k]) > -(ts1[sensor_index] - ts[k+1])?(k+1):k;
         //Project the state
         if(std::is_same<T, T1>::value)
@@ -184,11 +188,15 @@ namespace gcop {
           assert(project != NULL);// Can be removed
           project(xs[near_index],x1);
           sensor(zs[sensor_index], ts[near_index], x1, us[near_index], &p);
-          //cout<<"Zs["<<k<<"]: "<<zs[k].transpose()<<endl;//#DEBUG
+          //cout<<"UPDATE: "<<"Zs["<<sensor_index<<"]: "<<zs[sensor_index].transpose()<<endl;//#DEBUG
         }
         sensor_index = sensor_index < (ts1.size()-1)?sensor_index+1:sensor_index;
+        if(sensor_index == (ts1.size()-1))
+          break;
       }
+      //getchar();//#DEBUG
     }
+    assert(sensor_index == (ts1.size()-1));//Assert that we collected all the sensor data
   }  
 
   template <typename T, int nx, int nu, int np, typename Tz, int nz, typename T1, int nx1> 
