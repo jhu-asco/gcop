@@ -39,6 +39,8 @@ void solver_process(Viewer* viewer)
 
   Rccar sys;
 
+  cout<<"sys.U.n: "<<sys.U.n<<endl;
+
   //  sys.U.lb[1] = tan(-M_PI/5);
   //  sys.U.ub[1] = tan(M_PI/5);
 
@@ -95,7 +97,9 @@ void solver_process(Viewer* viewer)
   int Nk = 5;
   vector<double> tks(Nk+1);
   for (int k = 0; k <=Nk; ++k)
+  {
     tks[k] = k*(tf/Nk);
+  }
   
   ControlTparam<Vector4d, 4, 2> ctp(sys, tks);
 

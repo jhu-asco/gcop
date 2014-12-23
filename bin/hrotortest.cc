@@ -1,16 +1,28 @@
 #include <iomanip>
 #include <iostream>
-#include "ddp.h"
 #include "viewer.h"
 #include "hrotorview.h"
 #include "utils.h"
 #include "body3dcost.h"
 
+//#define USE_SDDP
+
+#ifdef USE_SDDP
+#include "sddp.h"
+#else
+#include "ddp.h"
+#endif
+
+
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
+#ifdef USE_SDDP
+typedef SDdp<Body3dState, 12, 4> HrotorDdp;
+#else
 typedef Ddp<Body3dState, 12, 4> HrotorDdp;
+#endif
 
 void solver_process(Viewer* viewer)
 {

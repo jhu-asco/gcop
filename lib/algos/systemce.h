@@ -33,6 +33,8 @@ namespace gcop {
 
     typedef Matrix<double, ntp, 1> Vectortpd;  
     
+    //External render Function for trajectories:
+    typedef void(RenderFunc)(int, vector<T>&);
   public:
     /**
      * Create an optimal control problem using a system, a cost, and 
@@ -138,6 +140,8 @@ namespace gcop {
     
     bool debug;  ///< whether to display debugging info    
 
+    RenderFunc *external_render;///<RenderFunction for rendering samples
+
   };
 
   using namespace std;
@@ -155,7 +159,7 @@ namespace gcop {
                                      bool update) : 
     sys(sys), cost(cost), tp(0),
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
-    ce(N*sys.U.n, 1), Ns(1000), debug(true)
+    ce(N*sys.U.n, 1), Ns(1000), debug(true), external_render(0)
     {
       // do not use an external tparam, just assume discrete controls are the params
       
@@ -326,6 +330,11 @@ namespace gcop {
         else
           z2us(uss, z);
         ce.AddSample(z, Update(xss, uss));
+        //Render trajectory samples if external rendering function is provided:
+        if(external_render)
+        {
+          external_render(j,xss);//ID for the sample trajectory
+        }
       }
     }
 

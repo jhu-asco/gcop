@@ -18,6 +18,7 @@ SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSIO
 
 ## Options for building this Project:
 option(BUILD_TESTS "BUILD_TESTS" ON)
+option(USE_BULLET "USE_BULLET" OFF)
 # Will add more like disabling est if not needed etc
 #option(USE_VIEWER "USE_VIEWER" ON)
 #option(DISABLE_EST "DISABLE_ESTIMATION" OFF)
@@ -45,6 +46,13 @@ find_package(PkgConfig REQUIRED)
 find_package( PkgConfig )
 pkg_check_modules( EIGEN3 REQUIRED eigen3 )
 include_directories( ${EIGEN3_INCLUDE_DIRS} )
+
+find_package(OpenMP)
+
+if (OPENMP_FOUND)
+  set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
 
 #find_package(Eigen REQUIRED)
 #include_directories(${Eigen_INCLUDE_DIRS})
@@ -97,6 +105,21 @@ IF (PQP_FOUND)
   set(UTIL_LIBS ${UTIL_LIBS} ${PQP_LIBRARY})
 ENDIF (PQP_FOUND)
 
+if (USE_BULLET)
+  find_package(Bullet REQUIRED)
+  set(BULLET_PHYSICS_SOURCE_DIR ${PROJECT_SOURCE_DIR}/bullet3)
+  set(BULLET_INCLUDE_DIR ${BULLET_INCLUDE_DIR})
+  #set(BULLET_LIBRARIES "${BULLET_PHYSICS_SOURCE_DIR}/build3/src/BulletDynamics/libBulletDynamics.so.2.83;${BULLET_PHYSICS_SOURCE_DIR}/build3/src/BulletCollision/libBulletCollision.so.2.83;${BULLET_PHYSICS_SOURCE_DIR}/build3/src/LinearMath/libLinearMath.so.2.83") 
+  include_directories(${BULLET_INCLUDE_DIR})
+  link_directories( ${BULLET_PHYSICS_SOURCE_DIR}/build3/btgui/OpenGLWindow
+                    ${BULLET_PHYSICS_SOURCE_DIR}/build3/btgui/Gwen
+                    ${BULLET_PHYSICS_SOURCE_DIR}/build3/btgui/Bullet3AppSupport
+                    ${BULLET_PHYSICS_SOURCE_DIR}/build3/btgui/lua-5.2.3
+                    ${BULLET_PHYSICS_SOURCE_DIR}/build3/Demos/OpenGL
+                   )
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DBT_USE_DOUBLE_PRECISION")#Compiling Bullet with double precision
+  message("Bullet Flags: ${BULLET_C_FLAGS}; ${BULLET_CXX_FLAGS};")
+endif (USE_BULLET)
 
 #FIND_PACKAGE(Ceres)
 #INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
@@ -110,6 +133,7 @@ include_directories(
   lib/algos
   lib/est
   lib/systems
+  lib/bulletsystems
   lib/systems/manifolds
   lib/systems/sensors
   lib/systems/parametrization

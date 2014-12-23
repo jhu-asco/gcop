@@ -2,3 +2,5 @@
 
 2.) See docs/html/index.html
 
+3.) If using Bullet make sure you compile bullet with Double Precision (USE_BULLET) on since optimization loses precision if used with float
+

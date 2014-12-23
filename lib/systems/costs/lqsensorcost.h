@@ -62,7 +62,7 @@ namespace gcop {
     void UpdateGains(); 
 
     double L(double t, const Tz &z, const Vectornd &w,
-                   const Vectormd &p, double h, 
+                   const Vectormd &p, double h, int sensor_index, 
                    Vectornd *Lw = 0, Matrixnd* Lww = 0,
                    Vectormd *Lp = 0, Matrixmd* Lpp = 0,
                    Vectorrd *Lz = 0, Matrixrd* Lzz = 0,
@@ -73,7 +73,8 @@ namespace gcop {
 
     bool Res(Vectorgd &g, 
                      double t, const Tz &z,
-                     const Vectornd &w, const Vectormd &p, double h,
+                     const Vectornd &w, const Vectormd &p, 
+                     double h, int sensor_index,
                      Matrixgxd *dgdw = 0, Matrixgpd *dgdp = 0,
                      Matrixgzd *dgdz = 0);    
 
@@ -85,7 +86,7 @@ namespace gcop {
      * @param zs observed measurements
      * @param mup mean parameters (Prior for parameters)
      */
-    void SetReference(const vector<Tz> *zs, const Vectormd *mup = 0);        
+    void SetReference(const vector<Tz> *zs, Vectormd *mup = 0);        
     
     //const Tz &zf; ///< reference to a desired final state
     
@@ -100,7 +101,7 @@ namespace gcop {
     Matrixmd Psqrt;       ///< P sqrt
 
     const vector<Tz> *zs;         ///< measured sensor data
-    const Vectormd *mup;          ///< Prior for parameter data
+    Vectormd *mup;          ///< Prior for parameter data
 
     protected:
 
@@ -146,16 +147,22 @@ namespace gcop {
 
 
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz>
-    void LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>::SetReference(const vector<Tz> *zs, const Vectormd *mup) {
+    void LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>::SetReference(const vector<Tz> *zs, Vectormd *mup) {
     this->zs = zs;
-    this->mup = mup;
+    //this->mup = mup;
+    if(mup)
+    {
+      this->mup = new VectorXd(mup->size());
+      *(this->mup) = *mup;//Copy the vector over
+    }
     //Add assert statments to make sure there are enough measurements and parameters#TODO
   }
 
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz>
     bool LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>::Res(Vectorgd &g, 
                      double t, const Tz &z,
-                     const Vectornd &w, const Vectormd &p, double h,
+                     const Vectornd &w, const Vectormd &p, 
+                     double h,int sensor_index,
                      Matrixgxd *dgdw, Matrixgpd *dgdp,
                      Matrixgzd *dgdz)
     {
@@ -166,26 +173,28 @@ namespace gcop {
       int &np = this->sys.P.n;
 
       assert(h > 0);
-      int k = round(t/h);
+      //int k = round(t/h);
       if (zs) {
-        assert(k < zs->size());
-        this->Z.Lift(dz, (*zs)[k], z); // difference (on a vector space we have dx = x - xf)
+        assert(sensor_index < zs->size());
+        this->Z.Lift(dz, (*zs)[sensor_index], z); // difference (on a vector space we have dx = x - xf)
         //std::cout<<"dz: "<<dz.transpose()<<"\t"<<t<<"\t"<<h<<endl;
         //std::cout<<"zs["<<k<<"]: "<<(*zs)[k].transpose()<<endl;
         //std::cout<<"z["<<k<<"]: "<<z.transpose()<<endl;
       } 
+      //cout<<"zs["<<sensor_index<<"]: "<<(*zs)[sensor_index].transpose()<<"\t"<<z.transpose()<<endl;
+      //getchar();
       assert(!std::isnan(dz[0]));
 
       if (diag)
       {
-        g.head(nz) = Rsqrt.diagonal().cwiseProduct(sqrt(h)*dz);
-        g.segment(nz, nw) = Ssqrt.diagonal().cwiseProduct(sqrt(h)*w);
+        g.head(nw) = Ssqrt.diagonal().cwiseProduct(sqrt(h)*w);
+        g.segment(nw, nz) = Rsqrt.diagonal().cwiseProduct(sqrt(h)*dz);
   //     cout<<"w: "<<w.transpose()<<endl;
       }
       else
       {
-        g.head(nz) = Rsqrt*(sqrt(h)*dz);
-        g.segment(nz, nw) = Ssqrt*(sqrt(h)*w);
+        g.head(nw) = Ssqrt*(sqrt(h)*w);
+        g.segment(nw, nz) = Rsqrt*(sqrt(h)*dz);
       }
       g.tail(np).setZero();
       //cout<<"g: "<<g.transpose()<<endl;
@@ -216,7 +225,7 @@ namespace gcop {
 
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz>
     double LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz>::L(double t, const Tz &z, const Vectornd &w,
-                                                           const Vectormd &p, double h, 
+                                                           const Vectormd &p, double h, int sensor_index,
                                                            Vectornd *Lw, Matrixnd* Lww,
                                                            Vectormd *Lp, Matrixmd* Lpp,
                                                            Vectorrd *Lz, Matrixrd* Lzz,
@@ -225,8 +234,8 @@ namespace gcop {
       int k = (int)(t/h);
 
       if (zs) {
-        assert(k < zs->size());
-        this->Z.Lift(dz, (*zs)[k], z); // difference (on a vector space we have dx = x - xf)
+        assert(sensor_index < zs->size());
+        this->Z.Lift(dz, (*zs)[sensor_index], z); // difference (on a vector space we have dx = x - xf)
       } 
       assert(!std::isnan(dz[0]));
 

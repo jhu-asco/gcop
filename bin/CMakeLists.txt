@@ -78,6 +78,22 @@ ENDIF (PQP_FOUND)
 
 	add_executable(gnrccartest gnrccartest.cc)
 	target_link_libraries(gnrccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+if (USE_BULLET)
+	add_executable(ddpbulletrccartest ddpbulletrccartest.cc)
+	target_link_libraries(ddpbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
+
+	add_executable(sddpbulletrccartest sddpbulletrccartest.cc)
+	target_link_libraries(sddpbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
+
+	add_executable(bulletrccartest bulletrccartest.cc)
+	target_link_libraries(bulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
+
+	add_executable(gnbulletrccartest gnbulletrccartest.cc)
+	target_link_libraries(gnbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
+
+	add_executable(cebulletcartest cebulletcartest.cc)
+	target_link_libraries(cebulletcartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
+endif (USE_BULLET)
 
 	add_executable(gnrccarestimation gnrccarestimation.cc)
 	target_link_libraries(gnrccarestimation  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
@@ -184,3 +200,13 @@ endif(OPENCV_FOUND)
 #        RUNTIME
 #        DESTINATION bin)
 endif (BUILD_TESTS)
+
+if (USE_BULLET)
+  if (BULLET_FOUND)
+    add_subdirectory (SimpleOpenGL3)
+    add_subdirectory (BulletVehicleEstimation)
+    add_subdirectory (BulletVehicleEstimation1)
+    add_subdirectory (BulletSTLDemo)
+    add_subdirectory (BulletZVehicleTest)
+  endif (BULLET_FOUND)
+endif (USE_BULLET)

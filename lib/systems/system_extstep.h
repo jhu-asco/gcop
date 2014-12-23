@@ -51,7 +51,7 @@ namespace gcop {
           return 0;
         }
 
-        double System<T, _nx, _nu, _np>::Step(const Vectorcd &u, double h,
+        double Step2(const Vectorcd &u, double h,
             const Vectormd *p,
             Matrixnd *A, Matrix<double, _nx, _nu> *B, 
             Matrix<double, _nx, _np> *C) 
@@ -65,7 +65,7 @@ namespace gcop {
           return 0;
         }
 
-        double System<T, _nx, _nu, _np>::Step(T& xb,
+        double Step1(T& xb,
             const Vectorcd &u, double h,
             const Vectormd *p,
             Matrixnd *A, Matrix<double, _nx, _nu> *B, 
@@ -77,7 +77,7 @@ namespace gcop {
           return 0;
         }
 
-        bool reset(const T& x, double t)
+        bool reset(const T& x, double t = 0)
         {
           extreset(x);
           this->x = x;

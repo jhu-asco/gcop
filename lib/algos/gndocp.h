@@ -155,6 +155,12 @@ struct Functor
    {
      assert(docp);
      docp->tparam.From(docp->ts, docp->xs, docp->us, s, docp->p);
+     //cout<<"Docp->Xsback: "<<(docp->xs).back().transpose()<<endl;//what is this back doing?
+     if(docp->p)
+     {
+       cout<<"docp->p: "<<(docp->p)->transpose()<<endl;
+     }
+     //cout<<"Xf: "<<docp->xs[(docp->xs).size()-1].transpose()<<endl;
      /*
        for (int i = 0, k = 0; k < docp.us.size(); ++k) {
        memcpy(docp.us[k].data(), s.data() + i, docp.sys.U.n*sizeof(double));
@@ -175,6 +181,7 @@ struct Functor
         ((LqCost<T, _nx, _nu, _np, _ng>&)docp->cost).Res(g, t, x, u, h, docp->p);
         memcpy(fvec.data() + i, g.data(), g.size()*sizeof(double));
         i += g.size();
+        //cout<<"g["<<i<<"]: "<<g.transpose()<<endl;
         
         /*
         ((LqCost<T, _nx, _nu>&)docp->cost).ResX(rx, t, x, h);
@@ -191,7 +198,12 @@ struct Functor
                                                        docp->ts.back(), 
                                                        docp->xs.back(), 
                                                        docp->us.back(), 0);
+      //cout<<"g[end]: "<<g.transpose()<<endl;
       memcpy(fvec.data() + i, g.data(), g.size()*sizeof(double));
+      //cout<<"s: "<<s.transpose()<<endl;
+      //cout<<"fvec: "<<fvec.transpose()<<endl;
+      cout<<"Cost: "<<0.5*(fvec.transpose()*fvec)<<endl;
+      //getchar(); // #DEBUG
       return 0;
     }
   };
@@ -260,11 +272,13 @@ struct Functor
                                                 vector<Matrix<double, _nu, 1> > &us,
                                                 Matrix<double, _np, 1> *p,
                                                 bool update) : 
-    Docp<T, _nx, _nu, _np>(sys, cost, ts, xs, us, p, update), tparam(tparam),
+    Docp<T, _nx, _nu, _np>(sys, cost, ts, xs, us, p, false), tparam(tparam),
     inputs(tparam.ntp),
     values(cost.ng*xs.size()), s(inputs), 
     functor(0), numDiff(0), lm(0)
     {
+      if(update)
+        this->Update(false);//No need of derivatives
       cout <<"ntp=" <<tparam.ntp << endl;
     }
   
@@ -282,9 +296,10 @@ struct Functor
     if (!lm) {
       functor = new GnCost<T, _nx, _nu, _np, _ng, _ntp>(inputs, values);
       functor->docp = this;
-      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor);
+      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor, 1e-10);
       lm = new LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > >(*numDiff);
       tparam.To(s, this->ts, this->xs, this->us, this->p);
+      getchar();
     }
 
     /*
