@@ -179,11 +179,14 @@ struct Functor
         const Vectorcd& u = docp->us[k];
         
         ((LqCost<T, _nx, _nu, _np, _ng>&)docp->cost).Res(g, t, x, u, h, docp->p);
+        double cost_debug = ((LqCost<T, _nx, _nu, _np, _ng>&)docp->cost).L(t, x, u, h, docp->p);
         memcpy(fvec.data() + i, g.data(), g.size()*sizeof(double));
         i += g.size();
-        //cout<<"g["<<i<<"]: "<<g.transpose()<<endl;
-        
-        /*
+        /*cout<<"docp->us["<<k<<"]: "<<(docp->us[k].transpose())<<endl;
+        cout<<"g["<<k<<"]: "<<g.transpose()<<endl;
+        cout<<"gcost["<<k<<"]: "<<0.5*(g.transpose()*g)<<endl;
+        cout<<"Lcost["<<k<<"]: "<<cost_debug<<endl;
+        // 
         ((LqCost<T, _nx, _nu>&)docp->cost).ResX(rx, t, x, h);
         memcpy(fvec.data() + i, rx.data(), rx.size()*sizeof(double));
         i += rx.size();
@@ -279,6 +282,9 @@ struct Functor
     {
       if(update)
         this->Update(false);//No need of derivatives
+
+      tparam.To(s, this->ts, this->xs, this->us, this->p);
+
       cout <<"ntp=" <<tparam.ntp << endl;
     }
   
@@ -298,8 +304,6 @@ struct Functor
       functor->docp = this;
       numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor, 1e-10);
       lm = new LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > >(*numDiff);
-      tparam.To(s, this->ts, this->xs, this->us, this->p);
-      getchar();
     }
 
     /*
