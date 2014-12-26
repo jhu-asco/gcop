@@ -209,7 +209,7 @@ namespace gcop {
                                          bool update) : 
     sys(sys), cost(cost), tp(&tp), 
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
-    ce(tp.ntp, 1), Ns(1000), debug(true)
+    ce(tp.ntp, 1), Ns(1000), debug(true), external_render(0)
     {
       /*
       if (ntp != Dynamic) {

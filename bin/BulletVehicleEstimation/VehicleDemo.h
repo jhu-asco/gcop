@@ -40,8 +40,8 @@ using namespace Eigen;
 ///VehicleDemo shows how to setup and use the built-in raycast vehicle
 class VehicleDemo : public GlutDemoApplication
 {
-  typedef LqSensorCost<Vector4d, 4, 2, Dynamic, 10, Vector3d, 3> RccarCost;
-  typedef GnDoep1<Vector4d, 4, 2, Dynamic, 10, Vector3d, 3, Point3dState, 6> RccarDoep;
+  typedef LqSensorCost<Vector4d, 4, 2, Dynamic, Dynamic, Vector3d, 3> RccarCost;
+  typedef GnDoep1<Vector4d, 4, 2, Dynamic, Dynamic, Vector3d, 3, Point3dState, 6> RccarDoep;
 
   protected:
     int iters; //Number of iterations

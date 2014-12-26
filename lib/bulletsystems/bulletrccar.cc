@@ -230,6 +230,7 @@ double Bulletrccar::Step1(Vector4d& xb, const Vector2d& u,
       gEngineForce = kp_torque*(gain_cmdvelocity*u[0] - vel);
       //cout<<"More DEBUG: "<<gain_cmdvelocity<<"\t"<<u[0]<<"this_vel: "<<vel<<"\t"<<kp_torque<<"\t"<<gEngineForce<<endl;//#DEBUG
       gVehicleSteering = (1-kp_steer)*gVehicleSteering + kp_steer*u[1];
+      gVehicleSteering = gVehicleSteering>steeringClamp?steeringClamp:(gVehicleSteering<-steeringClamp)?(-steeringClamp):gVehicleSteering;//Clamp Vehicle Steering based on bound
       //std::cout<<"Engine Force: "<<gEngineForce<<"\tgVehicleSteering: "<<gVehicleSteering<<std::endl;
       if(!m_vehicle)
       {
@@ -298,7 +299,7 @@ double Bulletrccar::Step3(Vector4d &xb, const Vector2d &u,
     const Vector4d &w, double h,
     const VectorXd *p,Matrix4d *A, Matrix42d *B, Matrix4pd *C, Matrix4d *D)
 {
-  //Convert w into forces that can be applied:
+  //Convert w into forces that can be applied[NOT WORKING]:
   m_carChassis->applyCentralForce(btVector3(w[0], w[1], w[2]));
   m_carChassis->applyTorque(btVector3(0, w[3], 0));//Can be all dims too or change this acc to needs
   double result = this->Step1(xb, u, h, p, A, B, C);
