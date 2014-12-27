@@ -101,7 +101,7 @@ namespace gcop {
     //%K = inv(inv(P) + H'*inv(S.R)*H)*H'*inv(S.R);
     //%P = (eye(length(x)) - K*H)*P*(eye(length(x)) - K*H)' + K*S.R*K';
 
-    this->Z.Lift(dz, y, z);
+    this->sensor.Z.Lift(dz, y, z);
     dx = K*dz;
     this->X.Retract(xb, xa, dx);
   }
