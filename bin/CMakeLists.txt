@@ -93,6 +93,9 @@ if (USE_BULLET)
 
 	add_executable(cebulletcartest cebulletcartest.cc)
 	target_link_libraries(cebulletcartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
+
+	add_executable(spsabulletcartest spsabulletcartest.cc)
+	target_link_libraries(spsabulletcartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
 endif (USE_BULLET)
 
 	add_executable(gnrccarestimation gnrccarestimation.cc)
