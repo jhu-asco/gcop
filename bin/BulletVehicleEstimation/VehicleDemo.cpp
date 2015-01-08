@@ -53,8 +53,8 @@ const int maxOverlap = 65535;
 VehicleDemo::VehicleDemo()
 :
 m_cameraHeight(2.7f),
-m_minCameraDistance(0.1f),
-m_maxCameraDistance(5.f),
+m_minCameraDistance(2.f),
+m_maxCameraDistance(10.f),
 gVehicleSteering(0),gVehicleVelocity(0),
 steeringIncrement(0.04),velocityIncrement(0.1),
 tf(5)
@@ -153,8 +153,13 @@ void VehicleDemo::initPhysics()
           break;
         read_result = ifs1>>us_temp[count1];
       }
+
+      if(abs(us_temp(0)) < 0.35)//Hacky way of implementing static friction
+        us_temp(0) = 0;
+
       ts.push_back(timeu_temp);
       us.push_back(us_temp);
+
       cout<<"us["<<(us.size()-1)<<"]: "<<us.back().transpose()<<"\t"<<ts.back()<<endl;
       if(N > 1)
         assert((ts[N] - ts[N-1])>0);

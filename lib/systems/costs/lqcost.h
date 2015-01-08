@@ -271,7 +271,7 @@ namespace gcop {
         Lxu->setZero();
       
       if (diag)
-        return h*(dx.dot(Q.diagonal().cwiseProduct(dx))/2 + du.dot(R.diagonal().cwiseProduct(du)))/2;
+        return h*(dx.dot(Q.diagonal().cwiseProduct(dx)) + du.dot(R.diagonal().cwiseProduct(du)))/2;
       else
         return h*(dx.dot(Q*dx) + du.dot(R*du))/2;
     }

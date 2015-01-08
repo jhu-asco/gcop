@@ -190,9 +190,9 @@ namespace gcop {
           sensor(zs[sensor_index], ts[near_index], x1, us[near_index], &p);
           //cout<<"UPDATE: "<<"Zs["<<sensor_index<<"]: "<<zs[sensor_index].transpose()<<endl;//#DEBUG
         }
-        sensor_index = sensor_index < (ts1.size()-1)?sensor_index+1:sensor_index;
         if(sensor_index == (ts1.size()-1))
           break;
+        sensor_index = sensor_index < (ts1.size()-1)?sensor_index+1:sensor_index;
       }
       //getchar();//#DEBUG
     }

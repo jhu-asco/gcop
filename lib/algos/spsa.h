@@ -134,14 +134,14 @@ namespace gcop {
                              vector<Matrix<double, c, 1> > &us,
                              Matrix<double, _np, 1> *p,
                              bool update) : 
-    sys(sys), cost(cost), ts(ts), xs(xs), us(us), dus(dus), N(us.size()), xss(xs), uss(us)
+    sys(sys), cost(cost), ts(ts), xs(xs), us(us), N(us.size()), xss(xs), uss(us)
     ,Nit(200), debug(true), prevcount(0)//Choosing a, A can be done adaptively TODO
 		{
 			assert(N > 0);
 			assert(ts.size() == N+1);
 			assert(xs.size() == N+1);
 			assert(us.size() == N);
-			dus.resize(us.size());//Resizing the control variations to be same size as us
+			dus.resize(N);//Resizing the control variations to be same size as us
 
 			stepc.a = 0.01;
 			stepc.A = 0.1*Nit;

@@ -78,6 +78,9 @@ void VehicleDemo::initPhysics()
 
   /////////////Loading Car:
   brccar = new Bulletrccar(*world);//Creating a brand new bullet car system
+  brccar->kp_torque = 100;
+  brccar->kp_steer = 0.2;
+  brccar->gain_cmdvelocity = 1.04;
   //brccar->initialz = 0.15;//Initial height of the car
 
   //////////// Setup the Optimization Problem:
@@ -135,7 +138,6 @@ void VehicleDemo::initPhysics()
     ts_sensor[i] = subdivide*i*h;
   }
   ts[0] = 0;
-  /*
   for(int i = 0;i < N; i++)
   {
     ts[i+1] = (i+1)*h;
@@ -143,16 +145,16 @@ void VehicleDemo::initPhysics()
     {
       double temp = (double(2*i)/double(N));
       //us[i] = Vector2d(2*temp, 0.2+0.1*temp);
-      us[i] = Vector2d(0.5,0);
+      us[i] = Vector2d(0.5,0.5);
     }
     else
     {
       double temp = (double(2*i - N)/double(N));
      // us[i] = Vector2d(2 - 2*temp, 0.3 - 0.3*temp);
-      us[i] = Vector2d(0.5,0);
+      us[i] = Vector2d(1,-0.5);
     }
   }
-  */
+  /*
   for(int i = 0;i < N; i++)
   {
     ts[i+1] = (i+1)*h;
@@ -172,6 +174,7 @@ void VehicleDemo::initPhysics()
       us[i] = Vector2d(1 - 1 *temp, 0.1 - 0.1*temp);
     }
   }
+  */
 
   ////////////Record the sensor data with the true params
   //Testing:
@@ -194,11 +197,13 @@ void VehicleDemo::initPhysics()
         int near_index = (ts_sensor[sensor_index] - ts[i]) > -(ts_sensor[sensor_index] - ts[i+1])?(i+1):i;
         //Set zsi:
         zs[sensor_index]<<xs[near_index][0],xs[near_index][1],0.2;
-        cout<<"Zs ["<<(sensor_index)<<"]: "<<zs[sensor_index].transpose()<<"ts_sensor: "<<ts_sensor[sensor_index]<<endl;
+        //cout<<"Zs ["<<(sensor_index)<<"]: "<<zs[sensor_index].transpose()<<"ts_sensor: "<<ts_sensor[sensor_index]<<endl;
         sensor_index = sensor_index < (ts_sensor.size()-1)?sensor_index+1:sensor_index;
       }
+      cout<<i<<" "<<us[i].transpose()<<" "<<xs[i].transpose()<<" "<<(brccar->gVehicleSteering)<<endl;
       //printf("Zs:[%d]: %f\t%f\n",i, zs[i](0), zs[i](2));
     }
+    getchar();
     cost->SetReference(&zs, &this->p0);//Set reference for zs
   }
 

@@ -231,7 +231,7 @@ namespace gcop {
                                                            Vectorrd *Lz, Matrixrd* Lzz,
                                                            Matrixmnd *Lpw, Matrixrnd* Lzw, Matrixrmd* Lzp)
     {
-      int k = (int)(t/h);
+      //int k = (int)(t/h);
 
       if (zs) {
         assert(sensor_index < zs->size());

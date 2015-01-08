@@ -44,6 +44,7 @@ namespace gcop {
 
   Tz y;             ///< expected measurement
   Vectornd dx;      ///< innovation
+  Vectorrd dz;      ///< sensor innovation
 
   Matrixrnd H;      ///< measurement Jacobian
   Matrixnrd K;      ///< correction gain matrix
@@ -58,6 +59,7 @@ namespace gcop {
 
     if (_nz == Dynamic) {
       y.resize(sensor.Z.n);
+      dz.resize(sensor.Z.n);       
     }
     if (_nx == Dynamic) {
       dx.resize(X.n);
@@ -99,7 +101,8 @@ namespace gcop {
     //%K = inv(inv(P) + H'*inv(S.R)*H)*H'*inv(S.R);
     //%P = (eye(length(x)) - K*H)*P*(eye(length(x)) - K*H)' + K*S.R*K';
 
-    dx = K*(z - y);
+    this->sensor.Z.Lift(dz, y, z);
+    dx = K*dz;
     this->X.Retract(xb, xa, dx);
   }
 }
