@@ -21,10 +21,12 @@ namespace gcop {
   public:
     
     /**
-     * Pose-landmark track 
+     * Pose graph (using simulated features around a circular track)
      * @param sys body2d system
-     * @param N number of trajectory segments
      * @param nf number of features (landmarks)
+     * @param t0 start time
+     * @param tf end time
+     * @param r radius
      * @param odometry is odometry available
      * @param extforce treat constant external force in x-y as a parameter
      * @param forces use uncertain forces in the cost function
@@ -49,7 +51,7 @@ namespace gcop {
     void Add(const Vector3d &u, const M3V3d &x, double h);
 
     /**
-     * Ass a new state/control to estimation vector
+     * Add a new state/control to estimation vector
      * @param u commanded control 
      * @param x true state (to generate measurements)
      * @param h time-step 

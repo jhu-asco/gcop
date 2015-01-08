@@ -79,7 +79,7 @@ namespace gcop {
     bool KalmanCorrector<T, _nx, _nu, _np, Tz, _nz>::Correct(T& xb, double t, const T &xa, 
                                                              const Vectorcd &u, const Tz &z, 
                                                              const Vectormd *p, bool cov) {
-    sensor(y, t, xa, u, p, &H);
+    this->sensor(y, t, xa, u, p, &H);
     
     //    std::cout << "y=" << y << std::endl;
     //    std::cout << "Pa=" << xa.P << std::endl;    
