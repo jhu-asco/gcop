@@ -54,8 +54,8 @@ ENDIF (PQP_FOUND)
 	add_executable(helicartest helicartest.cc)
 	target_link_libraries(helicartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-	#add_executable(batest batest.cc)
-	#target_link_libraries(batest gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+#	add_executable(batest batest.cc)
+#	target_link_libraries(batest gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 	#add_executable(body2dslamtest body2dslamtest.cc)
 	#target_link_libraries(body2dslamtest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
@@ -64,7 +64,7 @@ ENDIF (PQP_FOUND)
 	#target_link_libraries(body2dtracktest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 	add_executable(body2dtracktest2 body2dtracktest2.cc)
-	target_link_libraries(body2dtracktest2  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+	target_link_libraries(body2dtracktest2 gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 
 	#add_executable(extforceslamtest extforceslamtest.cc)

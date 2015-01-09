@@ -199,7 +199,8 @@ int main(int argc, char** argv)
 
 
 #ifdef DISP
-  viewer->SetColor((float[3]){1,1,1});
+  float rgb[3] = {1,1,1};
+  viewer->SetColor(rgb);
   viewer->Start();
 #endif
 

@@ -6,7 +6,7 @@
 #include "rnlqcost.h"
 #include "params.h"
 
-//#define USE_SDDP
+#define USE_SDDP
 
 #ifdef USE_SDDP
 #include "sddp.h"
