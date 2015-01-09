@@ -494,6 +494,7 @@ namespace gcop {
       if (this->debug)
         cout << "[I] Ddp::Forward: step-size a=" << a << endl;    
     }
+    this->J = V + dVm;//Set the optimal cost after one iteration
   }
 
   template <typename T, int nx, int nu, int np> 
