@@ -91,8 +91,14 @@ if (USE_BULLET)
 	add_executable(gnbulletrccartest gnbulletrccartest.cc)
 	target_link_libraries(gnbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
 
+	add_executable(gnbulletrccartest1 gnbulletrccartest1.cc)
+	target_link_libraries(gnbulletrccartest1  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
+
 	add_executable(cebulletcartest cebulletcartest.cc)
 	target_link_libraries(cebulletcartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
+
+	add_executable(cebulletcartest1 cebulletcartest1.cc)
+	target_link_libraries(cebulletcartest1  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
 
 	add_executable(spsabulletcartest spsabulletcartest.cc)
 	target_link_libraries(spsabulletcartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})

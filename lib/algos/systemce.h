@@ -137,6 +137,8 @@ namespace gcop {
     int Ns;      ///< number of cross-entropy samples
 
     double J;    ///< optimal cost
+
+    int nofevaluations;///< Number of evaluations at any point of time
     
     bool debug;  ///< whether to display debugging info    
 
@@ -159,7 +161,7 @@ namespace gcop {
                                      bool update) : 
     sys(sys), cost(cost), tp(0),
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
-    ce(N*sys.U.n, 1), Ns(1000), debug(true), external_render(0)
+    ce(N*sys.U.n, 1), Ns(1000), debug(true), external_render(0), nofevaluations(0)
     {
       // do not use an external tparam, just assume discrete controls are the params
       
@@ -209,7 +211,7 @@ namespace gcop {
                                          bool update) : 
     sys(sys), cost(cost), tp(&tp), 
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
-    ce(tp.ntp, 1), Ns(1000), debug(true), external_render(0)
+    ce(tp.ntp, 1), Ns(1000), debug(true), external_render(0), nofevaluations(0)
     {
       /*
       if (ntp != Dynamic) {
@@ -298,45 +300,76 @@ namespace gcop {
   template <typename T, int n, int c, int np, int ntp> 
     void SystemCe<T, n, c, np, ntp>::Iterate() {
 
-    if (ce.inc) {
-      Vectortpd z;
-      if (ntp == Dynamic)
-        if (tp)
-          z.resize(tp->ntp);
-        else 
-          z.resize(us.size()*this->N);        
-      
-      ce.Sample(z);
-      if (tp)
-        tp->From(ts, xss, uss, z, p);
-      else
-        z2us(uss, z);
-      ce.AddSample(z, Update(xss, uss));
-      
-    } else {
-      ce.Reset();
-      
-      Vectortpd z;
-      if (ntp == Dynamic)
-        if (tp)
-          z.resize(tp->ntp);
-        else 
-          z.resize(us.size()*this->N);        
-      
-      for (int j = 0; j < Ns; ++j) {
+      if (ce.inc) 
+      {
+        Vectortpd z;
+        if (ntp == Dynamic)
+          if (tp)
+            z.resize(tp->ntp);
+          else 
+            z.resize(us.size()*this->N);        
+
         ce.Sample(z);
         if (tp)
-          tp->From(ts, xss, uss, z, p);
-        else
-          z2us(uss, z);
-        ce.AddSample(z, Update(xss, uss));
-        //Render trajectory samples if external rendering function is provided:
-        if(external_render)
         {
-          external_render(j,xss);//ID for the sample trajectory
+          tp->From(ts, xss, uss, z, p);
+          double cost_trajectory = 0;
+          int N = uss.size();
+          for(int k = 0;k < N; k++)
+          { 
+            cost_trajectory += cost.L(ts[k], xss[k], uss[k], ts[k+1]-ts[k], p);
+          }
+          cost_trajectory += cost.L(ts[N], xss[N], uss[N-1], 0, p);
+          ce.AddSample(z, cost_trajectory);
+        }
+        else
+        {
+          z2us(uss, z);
+          ce.AddSample(z, Update(xss, uss));
+        }
+      } 
+      else 
+      {
+        ce.Reset();
+
+        Vectortpd z;
+        if (ntp == Dynamic)
+          if (tp)
+            z.resize(tp->ntp);
+          else 
+            z.resize(us.size()*this->N);        
+
+        for (int j = 0; j < Ns; ++j) {
+          ce.Sample(z);
+          if (tp)
+          {
+            tp->From(ts, xss, uss, z, p);
+            double cost_trajectory = 0;
+            int N = uss.size();
+            for(int k = 0;k < N; k++)
+            { 
+              cost_trajectory += cost.L(ts[k], xss[k], uss[k], ts[k+1]-ts[k], p);
+            }
+            cost_trajectory += cost.L(ts[N], xss[N], uss[N-1], 0, p);
+            ce.AddSample(z, cost_trajectory);
+          }
+          else
+          {
+            z2us(uss, z);
+            ce.AddSample(z, Update(xss, uss));
+          }
+
+          //#DEBUG Number of function evaluations:
+          //cout<<++nofevaluations<<endl;
+          ++nofevaluations;
+
+          //Render trajectory samples if external rendering function is provided:
+          if(external_render)
+          {
+            external_render(j,xss);//ID for the sample trajectory
+          }
         }
       }
-    }
 
     // estimate distribution
     ce.Select();    

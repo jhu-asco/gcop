@@ -101,7 +101,7 @@ using ceres::Solve;
 
     int inputs;
     int values;
-    
+     
     VectorXd s;  ///< optimization vector 
     
     GnCost<T, _nx, _nu, _np, _ng, _ntp> *functor;
@@ -143,9 +143,10 @@ struct Functor
    int _ng = Dynamic,
    int _ntp = Dynamic>
    struct GnCost : Functor<double> {  
-   GnCost<T, _nx, _nu, _np, _ng, _ntp>(int inputs, int values) : Functor<double>(inputs, values) {};
-   
+
    GnDocp<T, _nx, _nu, _np, _ng, _ntp> *docp;
+
+   GnCost<T, _nx, _nu, _np, _ng, _ntp>(int inputs, int values) : Functor<double>(inputs, values), docp(0) {};
    
    typedef Matrix<double, _nx, 1> Vectornd;
    typedef Matrix<double, _nu, 1> Vectorcd;
@@ -155,6 +156,11 @@ struct Functor
    {
      assert(docp);
      docp->tparam.From(docp->ts, docp->xs, docp->us, s, docp->p);
+
+     //#DEBUG Number of function evaluations:
+     //cout<<++(docp->nofevaluations)<<endl;
+     ++(docp->nofevaluations);
+
      //cout<<"Docp->Xsback: "<<(docp->xs).back().transpose()<<endl;//what is this back doing?
      if(docp->p)
      {
@@ -179,7 +185,7 @@ struct Functor
         const Vectorcd& u = docp->us[k];
         
         ((LqCost<T, _nx, _nu, _np, _ng>&)docp->cost).Res(g, t, x, u, h, docp->p);
-        double cost_debug = ((LqCost<T, _nx, _nu, _np, _ng>&)docp->cost).L(t, x, u, h, docp->p);
+        //double cost_debug = ((LqCost<T, _nx, _nu, _np, _ng>&)docp->cost).L(t, x, u, h, docp->p);
         memcpy(fvec.data() + i, g.data(), g.size()*sizeof(double));
         i += g.size();
         /*cout<<"docp->us["<<k<<"]: "<<(docp->us[k].transpose())<<endl;
@@ -203,9 +209,10 @@ struct Functor
                                                        docp->us.back(), 0);
       //cout<<"g[end]: "<<g.transpose()<<endl;
       memcpy(fvec.data() + i, g.data(), g.size()*sizeof(double));
+      docp->J = 0.5*(fvec.transpose()*fvec)(0);
       //cout<<"s: "<<s.transpose()<<endl;
       //cout<<"fvec: "<<fvec.transpose()<<endl;
-      cout<<"Cost: "<<0.5*(fvec.transpose()*fvec)<<endl;
+      //cout<<"Cost: "<<(docp->J)<<endl;
       //getchar(); // #DEBUG
       return 0;
     }
@@ -302,8 +309,11 @@ struct Functor
     if (!lm) {
       functor = new GnCost<T, _nx, _nu, _np, _ng, _ntp>(inputs, values);
       functor->docp = this;
-      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor, 1e-10);
+      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor,1e-10);
       lm = new LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > >(*numDiff);
+      lm->parameters.maxfev = 1e6;//Maximum nof evaluations is very high
+      info = lm->minimizeInit(s);
+      cout <<"info="<<info <<endl;
     }
 
     /*
@@ -314,7 +324,7 @@ struct Functor
     */
 
     //    lm.parameters.maxfev=10000;
-    info = lm->minimize(s);
+    info = lm->minimizeOneStep(s);
     
     cout <<"info="<<info <<endl;
     // check return values

@@ -105,6 +105,7 @@ void solver_process(Viewer* viewer)
     gn.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
+    cout<<"Optimal Cost: "<<gn.J<<endl;
     getchar();
   }
 

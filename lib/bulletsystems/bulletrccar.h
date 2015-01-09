@@ -17,6 +17,12 @@ namespace gcop {
   typedef Matrix<double, 4, Dynamic> Matrix4pd;
   //typedef Matrix<double, 6, 1> Vector6d;
 
+  struct CarState{
+    btTransform cartransform;
+    btVector3 carlinearvel;
+    btVector3 carangularvel;
+  };
+
    /**
    * A simple rear-drive Rccar model with 2nd order dynamics. 
    *
@@ -57,6 +63,8 @@ namespace gcop {
                       const VectorXd *p = 0,Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0, Matrix4d *D = 0);
 
     bool reset(const Vector4d &x, double t = 0);
+
+    void setinitialstate(Vector4d &x);///< Set the car initial state as the current state
 
     bool NoiseMatrix(Matrix4d &Q, double t, const Vector4d &x, const Vector2d &u, double dt, const VectorXd *p);
 
@@ -113,6 +121,7 @@ namespace gcop {
     btVehicleRaycaster*	m_vehicleRayCaster;
     BulletWorld &m_world;
     //btDynamicsWorld*		m_dynamicsWorld;
+    CarState *initialstate;
   };
 }
 

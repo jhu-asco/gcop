@@ -7,12 +7,12 @@ Bulletrccar::Bulletrccar(BulletWorld&		m_world_, vector<double> *zs_) :
   Rccar(3),m_carChassis(0), m_vehicle(0), m_wheelShape(0)
   ,gEngineForce(0),gBreakingForce(0.f),maxEngineForce(100.f),maxBreakingForce(10.f)
   ,gVehicleSteering(0.f),steeringClamp(0.5f), velocityClamp(5.f)
-  ,carmass(20.0f), wheelRadius(0.07f), wheelWidth(0.06f),wheelFriction(BT_LARGE_FLOAT)
+  ,carmass(20.0f), wheelRadius(0.07f), wheelWidth(0.06f),wheelFriction(1e10)
   ,suspensionStiffness(1000.f),suspensionDamping(100.f),suspensionCompression(0.02f)
   ,rollInfluence(0.1f),suspensionRestLength(0.122)
-  ,m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
+  ,m_defaultContactProcessingThreshold(1e10)
   , gain_cmdvelocity(1), kp_torque(25), kp_steer(0.1), initialz(0.15)
-  ,m_world(m_world_), zs(zs_), reset_drivevel(false)
+  ,m_world(m_world_), zs(zs_), reset_drivevel(false), initialstate(0)
 {
 //,rightIndex(0),upIndex(1),forwardIndex(2)
   if(!m_world.IsZupAxis())
@@ -306,6 +306,44 @@ double Bulletrccar::Step3(Vector4d &xb, const Vector2d &u,
   return result;
 }
 
+void Bulletrccar::setinitialstate(Vector4d &x)
+{
+  if(!initialstate)
+    initialstate = new CarState;
+  initialstate->cartransform = m_carChassis->getWorldTransform();
+  initialstate->carlinearvel = m_carChassis->getLinearVelocity();
+  initialstate->carangularvel = m_carChassis->getAngularVelocity();
+
+  btTransform chassistr = initialstate->cartransform;
+  if(m_world.IsZupAxis())
+  {
+    chassistr = offsettransinv*chassistr*offsettrans;
+  }
+  btVector3 &chassisorig = chassistr.getOrigin();
+  btMatrix3x3 &chbasis = chassistr.getBasis();
+  btVector3 rpybasis;
+  chbasis.getEulerZYX(rpybasis[2],rpybasis[1],rpybasis[0]);
+  //Set the state
+  if(!m_world.IsZupAxis())
+  {
+    x<<chassisorig.x(), chassisorig.z(), rpybasis[1], initialstate->carlinearvel.length();
+  }
+  else
+  {
+    x<<chassisorig.x(), chassisorig.y(), rpybasis[2], initialstate->carlinearvel.length();
+  }
+  //set internal zs[0]:
+  if(zs)
+    (*zs)[0] = chassisorig.z();
+  
+  //#DEBUG:
+  {
+    cout<<"carlinearvel: "<<(initialstate->carlinearvel).x()<<"\t"<<(initialstate->carlinearvel).y()<<"\t"<<(initialstate->carlinearvel).z()<<"\t"<<endl;
+    cout<<"carangularvel: "<<(initialstate->carangularvel).x()<<"\t"<<(initialstate->carangularvel).y()<<"\t"<<(initialstate->carangularvel).z()<<"\t"<<endl;
+    cout<<"State: "<<x.transpose()<<endl;
+  }
+}
+
 bool Bulletrccar::reset(const Vector4d &x, double t)
 {
   if(m_world.m_dynamicsWorld)
@@ -314,28 +352,37 @@ bool Bulletrccar::reset(const Vector4d &x, double t)
     gEngineForce = 0;
     gBreakingForce = 0;
 
-    //Set to the specified state:
-    if(!m_world.IsZupAxis())
+    if(initialstate)
     {
-      btTransform cartransform(btQuaternion(x[2],0,0),btVector3(x[0], initialz,x[1]));
-      m_carChassis->setCenterOfMassTransform(cartransform);
-      double v = x[3];
-      //double v = x[3];
-      btVector3 carvel(-v*sin(x[2]),0,v*cos(x[2]));
-      m_carChassis->setLinearVelocity(carvel);
+      m_carChassis->setCenterOfMassTransform(initialstate->cartransform);
+      m_carChassis->setLinearVelocity(initialstate->carlinearvel);
+      m_carChassis->setAngularVelocity(initialstate->carangularvel);
     }
     else
     {
-      btTransform cartransform(btQuaternion(0,0,x[2]),btVector3(x[0], x[1], initialz));
-      cartransform = offsettrans*cartransform*offsettransinv;
-      m_carChassis->setCenterOfMassTransform(cartransform);
-      double v = x[3];
-      //double v = x[3];
-      btVector3 carvel(-v*sin(x[2]),v*cos(x[2]),0);
-      m_carChassis->setLinearVelocity(carvel);
-//      cout<<"Car Vel: "<<carvel.x()<<"\t"<<carvel.y()<<"\t"<<carvel.z()<<endl;
+      //Set to the specified state:
+      if(!m_world.IsZupAxis())
+      {
+        btTransform cartransform(btQuaternion(x[2],0,0),btVector3(x[0], initialz,x[1]));
+        m_carChassis->setCenterOfMassTransform(cartransform);
+        double v = x[3];
+        //double v = x[3];
+        btVector3 carvel(-v*sin(x[2]),0,v*cos(x[2]));
+        m_carChassis->setLinearVelocity(carvel);
+      }
+      else
+      {
+        btTransform cartransform(btQuaternion(0,0,x[2]),btVector3(x[0], x[1], initialz));
+        cartransform = offsettrans*cartransform*offsettransinv;
+        m_carChassis->setCenterOfMassTransform(cartransform);
+        double v = x[3];
+        //double v = x[3];
+        btVector3 carvel(-v*sin(x[2]),v*cos(x[2]),0);
+        m_carChassis->setLinearVelocity(carvel);
+        //      cout<<"Car Vel: "<<carvel.x()<<"\t"<<carvel.y()<<"\t"<<carvel.z()<<endl;
+      }
+      m_carChassis->setAngularVelocity(btVector3(0,0,0));
     }
-    m_carChassis->setAngularVelocity(btVector3(0,0,0));
 
     (m_world.m_dynamicsWorld)->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(m_carChassis->getBroadphaseHandle(),(m_world.m_dynamicsWorld)->getDispatcher());
     m_vehicle->resetSuspension();
@@ -348,7 +395,8 @@ bool Bulletrccar::reset(const Vector4d &x, double t)
   //Set internal zs also:
   if(zs)
   {
-    (*zs)[0] = initialz;
+    if(!initialstate)
+      (*zs)[0] = initialz;
     count_zs = 0;
   }
 }
