@@ -61,7 +61,7 @@ void Run(Viewer* viewer)
   double r = 25;
   params.GetDouble("r", r);
 
-  double vd = 0;
+  double vd = 5;
   params.GetDouble("vd", vd);
 
   // options: odometry, paramForce, forces
@@ -184,7 +184,7 @@ void Run(Viewer* viewer)
     pg.Get(xf, vd, t+Tc);
     cost.tf = t + Tc;
 
-    bool oc = false;
+    bool oc = true;
 
     xs[0] = pg.xs.back();    
     for (int j=0; j < N; ++j) {
@@ -205,12 +205,11 @@ void Run(Viewer* viewer)
                           sqrt(pg.cw[1])*random_normal(), 
                           sqrt(pg.cw[2])*random_normal()); 
 
-    //w << 0, sqrt(pg.cw[1]), 0;
+    w << 0, sqrt(pg.cw[1]), 0;
     
     // simulate true state
     pair<Matrix3d, Vector3d> xt;
     sys.Step(xt, t, xps.back(), us[0] + w, h);
-    std::cout << "true u: " << us[0] << std::endl;
 
     // add assumed control and true state to estimator
     pg.Add2(us[0], xt, h);
