@@ -19,7 +19,9 @@ set(headers
       aspsa.h
       spsa.h
       body2dtrack.h
+      body3dtrack.h
       body2dtrackcost.h
+      body3dtrackcost.h
 )
 
 set(sources
@@ -31,5 +33,7 @@ set(sources
       posegraph2d.cc
       mbscontroller.cc
       body2dtrack.cc
+      body3dtrack.cc
       body2dtrackcost.cc
+      body3dtrackcost.cc
 )

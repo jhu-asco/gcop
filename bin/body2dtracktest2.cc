@@ -245,7 +245,7 @@ void Run(Viewer* viewer)
     cout << "FEATURES:" << pg.p.size() << endl;
     
     getchar(); 
-    viewer->saveSnapshot=true;
+    //viewer->saveSnapshot=true;
   }
 
 
