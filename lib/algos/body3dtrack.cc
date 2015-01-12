@@ -13,7 +13,7 @@ Body3dTrack::Body3dTrack(Body3d<> &sys, int nf, double t0, double tf,
                          bool odometry,
                          bool extforce,
                          bool forces) : 
-  sys(sys), t0(t0), tf(tf), r(r), w(4), dmax(10),
+  sys(sys), t0(t0), tf(tf), r(r), w(4), h(4), dmax(20),
   odometry(odometry), extforce(extforce), forces(forces),
   ts(1,t0), ls(nf), observed(nf, false), p(extforce*3), pr(.75),
   Is(1), Js(nf), cis(nf), cp(.01)
@@ -232,8 +232,8 @@ void Body3dTrack::MakeTrue()
     double a = RND*2*M_PI;
     if (a>M_PI && a<1.5*M_PI || a>0 && a<M_PI/2)
       continue;
-    double z = RND*0.5;
-    double r_rand = 1.5*r*RND; 
+    double z = (RND-0.5)*1.5*this->h;
+    double r_rand = 2*w*(RND-0.5) + r; 
     ls[l] = Vector3d(r_rand*cos(a), r_rand*sin(a), z);
     ++l;
   }
@@ -262,8 +262,10 @@ void Body3dTrack::Optp(VectorXd &p, const vector<Body3dState> &xs)
 // TODO: What does this do??
 void Body3dTrack::Get(Body3dState &x, double vd, double t) const
 {
-  //double a = 1.3*t/tf*2*M_PI;
-  //x.first.setIdentity();
-  //SE2::Instance().q2g(x.first, Vector3d(a + M_PI/2, r*cos(a), r*sin(a)));
-  //x.second << vd/r, vd, 0;
+  double a = 1.3*t/tf*2*M_PI;
+  x.first.setIdentity();
+  x.first(0,0) = cos(a); x.first(0,1) = -sin(a);
+  x.first(1,0) = sin(a); x.first(1,1) = cos(a);
+  
+  x.second <<  r*cos(a), r*sin(a), 0, vd/r, vd, 0, 0, 0, 0;
 }
