@@ -259,13 +259,17 @@ void Body3dTrack::Optp(VectorXd &p, const vector<Body3dState> &xs)
   }
 }
 
-// TODO: What does this do??
+// Get the desired state on the track for some time t
 void Body3dTrack::Get(Body3dState &x, double vd, double t) const
 {
   double a = 1.3*t/tf*2*M_PI;
   x.first.setIdentity();
-  x.first(0,0) = cos(a); x.first(0,1) = -sin(a);
-  x.first(1,0) = sin(a); x.first(1,1) = cos(a);
-  
-  x.second <<  r*cos(a), r*sin(a), 0, vd/r, vd, 0, 0, 0, 0;
+  x.first(0,0) = cos(a+M_PI/2.); x.first(0,1) = -sin(a+M_PI/2.);
+  x.first(1,0) = sin(a+M_PI/2.); x.first(1,1) = cos(a+M_PI/2.);
+ 
+  Vector3d v(0,1,0);
+  v = x.first*v;
+ 
+  x.second <<  r*cos(a), r*sin(a), 0, 0, 0, 0, v(0), v(1), 0;
+  //x.second <<  r*cos(a), r*sin(a), 0, 0, 0, 0, vd/r, vd, 0;
 }
