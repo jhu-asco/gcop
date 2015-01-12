@@ -306,6 +306,73 @@ double Bulletrccar::Step3(Vector4d &xb, const Vector2d &u,
   return result;
 }
 
+//Finds the closest car pose corresponding to the given pose
+void Bulletrccar::setinitialstate(const CarState &inputstate, Vector4d &x)
+{
+  if(!initialstate)
+    initialstate = new CarState;
+  //Copy initialstate to inputstate:
+  (*initialstate) = inputstate;
+  btMatrix3x3 chbasis = inputstate.cartransform.getBasis();
+  const btVector3 &source = inputstate.cartransform.getOrigin() + (-0.2)*chbasis[2];
+  btVector3 &carorigin = initialstate->cartransform.getOrigin();
+  //const btVector3 &target = source + (-1.0)*chbasis[2];//-ve z dirxn
+  const btVector3 &target = source + (-1.0)*btVector3(0,0,1);//-ve z dirxn
+  btVector3 rpybasis;
+  chbasis.getEulerZYX(rpybasis[2],rpybasis[1],rpybasis[0]);
+  //#DEBUG:
+  {
+    cout<<"source: "<<source.x()<<"\t"<<source.y()<<"\t"<<source.z()<<"\t"<<endl;
+    cout<<"target: "<<target.x()<<"\t"<<target.y()<<"\t"<<target.z()<<"\t"<<endl;
+  }
+  //do a ray test:
+  btCollisionWorld::ClosestRayResultCallback rayCallback(source,target);
+  (m_world.m_dynamicsWorld)->rayTest(source, target, rayCallback);
+  if(rayCallback.hasHit())
+  {
+    cout<<"Distance to terrain: "<<(rayCallback.m_closestHitFraction)<<endl;
+    //carorigin = carorigin + (suspensionRestLength + wheelRadius - 0.05 - 0.5*rayCallback.m_closestHitFraction)*chbasis[2];//Move the  car to intersection betn car and terrain + suspensionRestLength+wheelRadius - some nominal height
+    carorigin = rayCallback.m_hitPointWorld + (suspensionRestLength + wheelRadius - 0.05 )*chbasis[2];//Move the  car to intersection betn car and terrain + suspensionRestLength+wheelRadius - some nominal height
+    cout<<"hitPoint: "<<(rayCallback.m_hitPointWorld).x()<<"\t"<<(rayCallback.m_hitPointWorld).y()<<"\t"<<(rayCallback.m_hitPointWorld).z()<<"\t"<<endl;
+    cout<<"chbasis: "<<(chbasis[2]).x()<<"\t"<<(chbasis[2]).y()<<"\t"<<(chbasis[2]).z()<<"\t"<<endl;
+    cout<<"new origin: "<<carorigin[0]<<"\t"<<carorigin[1]<<"\t"<<carorigin[2]<<"\t"<<endl;
+  }
+  //verify all wheels are in contact:
+  m_carChassis->setCenterOfMassTransform(initialstate->cartransform);
+  bool allwheels_incontact = false;
+  for(int count_wheels = 0;count_wheels < 4; count_wheels++)
+  {
+    btWheelInfo &wheelinfo = m_vehicle->m_wheelInfo[count_wheels];
+    m_vehicle->rayCast(wheelinfo);
+    cout<<count_wheels<<" wheel contact test: "<<wheelinfo.m_raycastInfo.m_isInContact<<endl;
+    if(!wheelinfo.m_raycastInfo.m_isInContact)
+    {
+      allwheels_incontact = false;
+      break;
+    }
+    //m_vehicle->updateWheelTransform(count_wheels, false);
+  }
+
+  //set the state:
+  if(!m_world.IsZupAxis())
+  {
+    x<<carorigin.x(), carorigin.z(), rpybasis[1], initialstate->carlinearvel.length();
+  }
+  else
+  {
+    x<<carorigin.x(), carorigin.y(), rpybasis[2], initialstate->carlinearvel.length();
+  }
+  //set internal zs[0]:
+  if(zs)
+    (*zs)[0] = carorigin.z();
+  
+  //#DEBUG:
+  {
+  //  cout<<"carlinearvel: "<<(initialstate->carlinearvel).x()<<"\t"<<(initialstate->carlinearvel).y()<<"\t"<<(initialstate->carlinearvel).z()<<"\t"<<endl;
+    //cout<<"carangularvel: "<<(initialstate->carangularvel).x()<<"\t"<<(initialstate->carangularvel).y()<<"\t"<<(initialstate->carangularvel).z()<<"\t"<<endl;
+    cout<<"State: "<<x.transpose()<<endl;
+  }
+}
 void Bulletrccar::setinitialstate(Vector4d &x)
 {
   if(!initialstate)
@@ -385,6 +452,7 @@ bool Bulletrccar::reset(const Vector4d &x, double t)
     }
 
     (m_world.m_dynamicsWorld)->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(m_carChassis->getBroadphaseHandle(),(m_world.m_dynamicsWorld)->getDispatcher());
+    //m_world.Reset();
     m_vehicle->resetSuspension();
     //Can synchronize wheels with the new transform or ignore
     //set reset_drivevel to true:

@@ -64,6 +64,7 @@ namespace gcop {
 
     bool reset(const Vector4d &x, double t = 0);
 
+    void setinitialstate(const CarState &inputstate, Vector4d &x);
     void setinitialstate(Vector4d &x);///< Set the car initial state as the current state
 
     bool NoiseMatrix(Matrix4d &Q, double t, const Vector4d &x, const Vector2d &u, double dt, const VectorXd *p);
