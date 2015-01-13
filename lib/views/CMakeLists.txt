@@ -15,6 +15,7 @@ set(sources
   posegraph2dview.cc
   body2dgraphview.cc
   body2dtrackview.cc
+  body3dtrackview.cc
   chainview.cc  
   geom3dview.cc
   boxview.cc
@@ -47,6 +48,7 @@ set(headers
   posegraph2dview.h
   body2dgraphview.h
   body2dtrackview.h
+  body3dtrackview.h
   mbsview.h
   chainview.h
   geom3dview.h

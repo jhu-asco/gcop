@@ -64,6 +64,7 @@ namespace gcop {
     double tf;       ///< final time around track
     double r;       ///< track radius
     double w;      ///< track width
+    double h;      ///< track height
     double dmax;    ///< sensor radius
 
     bool odometry;         ///< is there odometry available (this means that the velocity part of the state will be regarded as available measurements)

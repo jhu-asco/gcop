@@ -66,6 +66,8 @@ ENDIF (PQP_FOUND)
 	add_executable(body2dtracktest2 body2dtracktest2.cc)
 	target_link_libraries(body2dtracktest2 gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(body3dtracktest body3dtracktest.cc)
+	target_link_libraries(body3dtracktest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 	#add_executable(extforceslamtest extforceslamtest.cc)
 	#target_link_libraries(extforceslamtest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
