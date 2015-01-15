@@ -307,10 +307,10 @@ double Bulletrccar::Step3(Vector4d &xb, const Vector2d &u,
 }
 
 //Finds the closest car pose corresponding to the given pose
-void Bulletrccar::setinitialstate(const CarState &inputstate, Vector4d &x)
+void Bulletrccar::setinitialstate(const Bulletrccar::CarState &inputstate, Vector4d &x)
 {
   if(!initialstate)
-    initialstate = new CarState;
+    initialstate = new Bulletrccar::CarState;
   //Copy initialstate to inputstate:
   (*initialstate) = inputstate;
   btMatrix3x3 chbasis = inputstate.cartransform.getBasis();
@@ -376,7 +376,7 @@ void Bulletrccar::setinitialstate(const CarState &inputstate, Vector4d &x)
 void Bulletrccar::setinitialstate(Vector4d &x)
 {
   if(!initialstate)
-    initialstate = new CarState;
+    initialstate = new Bulletrccar::CarState;
   initialstate->cartransform = m_carChassis->getWorldTransform();
   initialstate->carlinearvel = m_carChassis->getLinearVelocity();
   initialstate->carangularvel = m_carChassis->getAngularVelocity();

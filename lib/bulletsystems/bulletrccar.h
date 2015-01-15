@@ -17,11 +17,7 @@ namespace gcop {
   typedef Matrix<double, 4, Dynamic> Matrix4pd;
   //typedef Matrix<double, 6, 1> Vector6d;
 
-  struct CarState{
-    btTransform cartransform;
-    btVector3 carlinearvel;
-    btVector3 carangularvel;
-  };
+  
 
    /**
    * A simple rear-drive Rccar model with 2nd order dynamics. 
@@ -38,7 +34,14 @@ namespace gcop {
    */
   class Bulletrccar : public Rccar 
   {
-  public:
+    public:
+
+    struct CarState{
+      btTransform cartransform;
+      btVector3 carlinearvel;
+      btVector3 carangularvel;
+    };
+
     Bulletrccar(BulletWorld& m_world, vector<double> *zs_ = 0);
 
     ~Bulletrccar()
