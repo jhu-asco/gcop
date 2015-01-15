@@ -177,6 +177,11 @@ void Body2dTrack::Add2(const Vector3d &u, const M3V3d &x, double h)
     
     double d = (px - pf).norm();
     if (d < dmax) {
+
+      Vector2d z = R.transpose()*(pf - px);
+      z(0) += sqrt(cp)*random_normal();
+      z(1) += sqrt(cp)*random_normal();
+      
       // add to feature vector if not observed
       if (!observed[l]) {
         if (!init) {
@@ -185,17 +190,17 @@ void Body2dTrack::Add2(const Vector3d &u, const M3V3d &x, double h)
         } else {
           p.conservativeResize(p.size() + 2);
         }
-        p.tail<2>() = pf;
+        
+        const Matrix2d &Rn = xs.back().first.topLeftCorner<2,2>();
+        const Vector2d &pxn = xs.back().first.block<2,1>(0,2);
+       
+        // Initialize feature location from estimated position
+        p.tail<2>() = Rn*z + pxn;
+        //p.tail<2>() = pf;
         pis.push_back(l);
         observed[l] = true;
         cis[l] = p.size()/2-1;
       }
-
-      Vector2d z = R.transpose()*(pf - px);
-      z(0) += sqrt(cp)*random_normal();
-      z(1) += sqrt(cp)*random_normal();
-      
-      //        zs[k].push_back();      // add feature l to pose k
       
       Is[k].push_back(make_pair(l, z)); // add feature l to pose k      
       Js[l].push_back(make_pair(k, z)); // add pose k to feature l
