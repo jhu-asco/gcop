@@ -8,7 +8,7 @@ using namespace gcop;
 using namespace Eigen;
 using namespace std;
 
-Body3dTrack::Body3dTrack(Body3d<> &sys, int nf, double t0, double tf,
+Body3dTrack::Body3dTrack(Body3d<> &sys, int nf, double vd0, double t0, double tf,
                          double r,
                          bool odometry,
                          bool extforce,
@@ -19,7 +19,7 @@ Body3dTrack::Body3dTrack(Body3d<> &sys, int nf, double t0, double tf,
   Is(1), Js(nf), cis(nf), cp(.01)
 {
   Body3dState x;
-  Get(x, 5, t0);
+  Get(x, vd0, t0);
   xs.push_back(x);
   xos.push_back(x);
   vs.push_back(x.second.segment<6>(3));
@@ -181,7 +181,7 @@ void Body3dTrack::Add2(const Vector6d &u, const Body3dState &x, double h)
   //  srand (time(NULL));
   
   const Matrix3d &R = x.first;
-  const Vector3d &px = x.second.segment<3>(0);
+  const Vector3d &px = x.second.head<3>();
   
   Is.resize(Is.size()+1);
   assert(k == Is.size()-1);
@@ -192,6 +192,12 @@ void Body3dTrack::Add2(const Vector6d &u, const Body3dState &x, double h)
     
     double d = (px - pf).norm();
     if (d < dmax) {
+
+      Vector3d z = R.transpose()*(pf - px);
+      z(0) += sqrt(cp)*random_normal();
+      z(1) += sqrt(cp)*random_normal();
+      z(2) += sqrt(cp)*random_normal();
+      
       // add to feature vector if not observed
       if (!observed[l]) {
         if (!init) {
@@ -200,18 +206,21 @@ void Body3dTrack::Add2(const Vector6d &u, const Body3dState &x, double h)
         } else {
           p.conservativeResize(p.size() + 3);
         }
-        p.tail<3>() = pf;
+        const Matrix3d &Rn = xs.back().first;
+        const Vector3d &pxn = xs.back().second.segment<3>(0);
+         
+        //cout << "feature z:" << endl << z << endl;
+        //cout << "est x:" << endl << pxn << endl << Rn << endl;
+        //cout << "true x:" << endl << px << endl << R;
+
+        // Initialize landmark position from estimated state
+        p.tail<3>() = Rn*z + pxn;
+        // Initialize landmark position with its true position
+        //p.tail<3>() = pf;
         pis.push_back(l);
         observed[l] = true;
         cis[l] = p.size()/3-1;
       }
-
-      Vector3d z = R.transpose()*(pf - px);
-      z(0) += sqrt(cp)*random_normal();
-      z(1) += sqrt(cp)*random_normal();
-      z(2) += sqrt(cp)*random_normal();
-      
-      //        zs[k].push_back();      // add feature l to pose k
       
       Is[k].push_back(make_pair(l, z)); // add feature l to pose k      
       Js[l].push_back(make_pair(k, z)); // add pose k to feature l
@@ -233,7 +242,7 @@ void Body3dTrack::MakeTrue()
     if (a>M_PI && a<1.5*M_PI || a>0 && a<M_PI/2)
       continue;
     double z = (RND-0.5)*1.5*this->h;
-    double r_rand = 2*w*(RND-0.5) + r; 
+    double r_rand = 3*w*(RND-0.5) + r; 
     ls[l] = Vector3d(r_rand*cos(a), r_rand*sin(a), z);
     ++l;
   }
@@ -267,7 +276,7 @@ void Body3dTrack::Get(Body3dState &x, double vd, double t) const
   x.first(0,0) = cos(a+M_PI/2.); x.first(0,1) = -sin(a+M_PI/2.);
   x.first(1,0) = sin(a+M_PI/2.); x.first(1,1) = cos(a+M_PI/2.);
  
-  Vector3d v(0,1,0);
+  Vector3d v(vd,0,0);
   v = x.first*v;
  
   x.second <<  r*cos(a), r*sin(a), 0, 0, 0, 0, v(0), v(1), 0;

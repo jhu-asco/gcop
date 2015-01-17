@@ -94,15 +94,19 @@ double Body3dTrackCost::L(double t, const Body3dState &x, const Vector6d &u,
 
     L += r.dot(y - z)/2;         // feature cost
 
+    //cout << "feature cost " << i << "=" << r.dot(y - z)/2 << endl;
+
     if (Lx) {
-      Lx->segment<3>(0) = Lx->segment<3>(0) - cross3(y, r);
+      //Lx->segment<3>(0) = Lx->segment<3>(0) - cross3(y, r);
+      Lx->segment<3>(0) = Lx->segment<3>(0) - r3hat(y)*r;
       Lx->segment<3>(3) = Lx->segment<3>(3) - r;
     }
 
     if (Lxx) {
       Lxx->block<3,3>(0,0) += (r3hat(y).transpose()*r3hat(y))/pg.cp;
       Lxx->block<3,3>(0,3) += (-r3hat(r) + r3hat(y)/pg.cp);
-      Lxx->block<3,3>(0,3) += (-r3hat(r) + r3hat(y)/pg.cp).transpose();      
+      //cout << "block:" << endl << (-r3hat(r) + r3hat(y)/pg.cp) << endl;
+      Lxx->block<3,3>(3,0) += (-r3hat(r) + r3hat(y)/pg.cp).transpose();      
       Lxx->block<3,3>(3,3) += Matrix3d::Identity()/pg.cp;
     }
 
@@ -113,10 +117,14 @@ double Body3dTrackCost::L(double t, const Body3dState &x, const Vector6d &u,
       Lpp->block<3,3>(i0 + 3*l, i0 + 3*l) = Matrix3d::Identity()/pg.cp;
 
     if (Lpx) {
-      Lpx->block<3,3>(i0 + 3*l, 0) = -R*r3hat(z).transpose()/pg.cp;
+      //Lpx->block<3,3>(i0 + 3*l, 0) = -R*r3hat(z)/pg.cp;
+      //Lpx->block<3,3>(i0 + 3*l, 0) = -R*r3hat(z).transpose()/pg.cp;
+      Lpx->block<3,3>(i0 + 3*l, 0) = R*((r3hat(y)/pg.cp) - r3hat(r));
       Lpx->block<3,3>(i0 + 3*l, 3) = -R/pg.cp;
     }
   }
+
+  //cout << "t=" << t << " feature L=" << L << endl;
 
   if (pg.odometry) {           // odometry/gyro cost
     Vector6d Cdv;
@@ -141,6 +149,19 @@ double Body3dTrackCost::L(double t, const Body3dState &x, const Vector6d &u,
     if (Luu)
       *Luu = Vector6d::Ones().cwiseQuotient(pg.cw).asDiagonal();
   }
+
+  /*
+  if(Lp)
+    cout << "Lp: " << endl << *Lp << endl;
+  if(Lpp)
+    cout << "Lpp: " << endl << *Lpp << endl;
+  if(Lpx)
+    cout << "Lpx: " << endl << *Lpx << endl;
+  if(Lx)
+    cout << "Lx: " << endl << *Lx << endl;
+  if(Lxx)
+    cout << "Lxx: " << endl << *Lxx << endl;
+  */
 
   return L;
 }

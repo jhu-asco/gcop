@@ -64,7 +64,7 @@ void Run(Viewer* viewer)
   params.GetDouble("vd", vd);
 
   // options: odometry, paramForce, forces
-  Body3dTrack pg(sys, nf, 0, tf, r, true, false, true);   ///< ground truth
+  Body3dTrack pg(sys, nf, vd, 0, tf, r, true, false, true);   ///< ground truth
 
   params.GetDouble("w", pg.w);
   params.GetVector6d("cw", pg.cw);
@@ -159,6 +159,7 @@ void Run(Viewer* viewer)
 
   Body3dDdp ddp(sys, cost, ts, xs, us);
   ddp.mu = .01;
+  ddp.debug = false;
   params.GetDouble("mu", ddp.mu);
 
   Body3dView<> cview(sys, &ddp.xs);
@@ -210,7 +211,10 @@ void Run(Viewer* viewer)
                           sqrt(pg.cw[3])*random_normal(), 
                           sqrt(pg.cw[4])*random_normal(), 
                           sqrt(pg.cw[5])*random_normal(); 
-
+    w << 0,  0, 0, sqrt(pg.cw[3]), 0, 0; 
+    //w << 0,  0, 0, sqrt(pg.cw[3]), 0, 0; 
+    std::cout << "w: " << w << std::endl;
+    std::cout << "us[0]: " << us[0] << std::endl;
     //w << 0, sqrt(pg.cw[1]), 0, 0, 0, 0;
     
     // simulate true state
@@ -220,6 +224,7 @@ void Run(Viewer* viewer)
     // add assumed control and true state to estimator
     pg.Add2(us[0], xt, h);
 
+
     // shift control trajectory forward
     for (int k = 0; k < N; ++k) {
       ts[k] = ts[k+1];
@@ -227,6 +232,7 @@ void Run(Viewer* viewer)
         us[k] = us[k+1];
     }
     ts[N] = ts[N] + h;
+
 
     tcost.tf = t+h;
     
@@ -237,12 +243,21 @@ void Run(Viewer* viewer)
       cout << "p " << pg.p.size() << endl;
 
       pddp = new PDdp<Body3dState, 12, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
+      //pddp->debug = false;
       for (int b=0; b < 20;++b)
+      {
+        //getchar(); 
+        timer_start(timer);
         pddp->Iterate();     
-
+        long te = timer_us(timer);      
+        cout << "Iteration #" << b << " took: " << te << " us." << endl;    
+      }
+      //cout << "est x:" << pg.xs.back().first << endl;
+      //cout << "true x:" << xt.first << endl << xt.second.head<3>() << endl;
       delete pddp;
     }
 
+    // add true control and true state to list
     tps.push_back(ts[0]);
     xps.push_back(xt);
     ups.push_back(us[0] + w);
@@ -250,7 +265,7 @@ void Run(Viewer* viewer)
 
     cout << "FEATURES:" << pg.p.size() << endl;
     
-    //getchar(); 
+    getchar(); 
     //viewer->saveSnapshot=true;
   }
 

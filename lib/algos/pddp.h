@@ -518,12 +518,14 @@ namespace gcop {
         if (a < 1e-12)
           break;
         if (this->debug)
-          cout << "[I] PDdp::Forward: step-size reduced a=" << this->a << endl;
+          cout << "[I] PDdp::Forward: step-size reduced a=" << a << endl;
+          //cout << "[I] PDdp::Forward: step-size reduced a=" << this->a << endl;
         
         continue;
       }
       
-      double r = dVm/(this->a*this->dV[0] + this->a*this->a*this->dV[1]);
+      //double r = dVm/(this->a*this->dV[0] + this->a*this->a*this->dV[1]);
+      double r = dVm/(a*this->dV[0] + a*a*this->dV[1]);
       if (r < this->s1)
         a *= this->b1;
       else 

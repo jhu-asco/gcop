@@ -31,7 +31,7 @@ namespace gcop {
      * @param extforce treat constant external force in x-y as a parameter
      * @param forces use uncertain forces in the cost function
      */
-    Body3dTrack(Body3d<> &sys, int nf, double t0, double tf,
+    Body3dTrack(Body3d<> &sys, int nf, double vd0, double t0, double tf,
                 double r = 25,
                 bool odometry = true,
                 bool extforce = false,
