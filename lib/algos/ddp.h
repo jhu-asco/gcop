@@ -351,7 +351,7 @@ namespace gcop {
     cout << "[I] Ddp::Backward: current V=" << V << endl;    
   }
 
-	template <typename T, int nx, int nu, int np> 
+  template <typename T, int nx, int nu, int np> 
     void Ddp<T, nx, nu, np>::Forward() {
 
     typedef Matrix<double, nx, 1> Vectornd;
@@ -369,7 +369,7 @@ namespace gcop {
     while (dVm > 0) {
 
       Vectornd dx = VectorXd::Zero(this->sys.X.n);
-			dx.setZero();//Redundancy
+      dx.setZero();//Redundancy
       T xn = this->xs[0];
       this->sys.reset(xn,this->ts[0]);//Reset to initial state
       Vectorcd un;
@@ -394,9 +394,10 @@ namespace gcop {
         
         Rn<nu> &U = (Rn<nu>&)this->sys.U;
         if (U.bnd) {
+          U.Bound(un, du, u);
+          /*
           for (int j = 0; j < u.size(); ++j) 
             if (un[j] < U.lb[j]) {
-							//cout<<"I hit bound"<<endl;//[DEBUG]
               un[j] = U.lb[j];
               du[j] = un[j] - u[j];
             } else
@@ -404,6 +405,7 @@ namespace gcop {
                 un[j] = U.ub[j];
                 du[j] = un[j] - u[j];
               }
+          */
         }
         
         const double &t = this->ts[k];
