@@ -313,11 +313,16 @@ void Bulletrccar::setinitialstate(const Bulletrccar::CarState &inputstate, Vecto
     initialstate = new Bulletrccar::CarState;
   //Copy initialstate to inputstate:
   (*initialstate) = inputstate;
+  {
+    btTransform temp;
+    temp.setIdentity();
+    m_carChassis->setCenterOfMassTransform(temp);
+  }
   btMatrix3x3 chbasis = inputstate.cartransform.getBasis();
-  const btVector3 &source = inputstate.cartransform.getOrigin() + (-0.2)*chbasis[2];
+  const btVector3 &source = inputstate.cartransform.getOrigin();// + (-0.2)*chbasis[2];
   btVector3 &carorigin = initialstate->cartransform.getOrigin();
   //const btVector3 &target = source + (-1.0)*chbasis[2];//-ve z dirxn
-  const btVector3 &target = source + (-1.0)*btVector3(0,0,1);//-ve z dirxn
+  const btVector3 &target = source + (-1.0)*btVector3(0,0,2.0);//-ve z dirxn
   btVector3 rpybasis;
   chbasis.getEulerZYX(rpybasis[2],rpybasis[1],rpybasis[0]);
   //#DEBUG:
@@ -332,7 +337,7 @@ void Bulletrccar::setinitialstate(const Bulletrccar::CarState &inputstate, Vecto
   {
     cout<<"Distance to terrain: "<<(rayCallback.m_closestHitFraction)<<endl;
     //carorigin = carorigin + (suspensionRestLength + wheelRadius - 0.05 - 0.5*rayCallback.m_closestHitFraction)*chbasis[2];//Move the  car to intersection betn car and terrain + suspensionRestLength+wheelRadius - some nominal height
-    carorigin = rayCallback.m_hitPointWorld + (suspensionRestLength + wheelRadius - 0.05 )*chbasis[2];//Move the  car to intersection betn car and terrain + suspensionRestLength+wheelRadius - some nominal height
+    carorigin = rayCallback.m_hitPointWorld + (suspensionRestLength + wheelRadius)*chbasis[2];//Move the  car to intersection betn car and terrain + suspensionRestLength+wheelRadius - some nominal height
     cout<<"hitPoint: "<<(rayCallback.m_hitPointWorld).x()<<"\t"<<(rayCallback.m_hitPointWorld).y()<<"\t"<<(rayCallback.m_hitPointWorld).z()<<"\t"<<endl;
     cout<<"chbasis: "<<(chbasis[2]).x()<<"\t"<<(chbasis[2]).y()<<"\t"<<(chbasis[2]).z()<<"\t"<<endl;
     cout<<"new origin: "<<carorigin[0]<<"\t"<<carorigin[1]<<"\t"<<carorigin[2]<<"\t"<<endl;
