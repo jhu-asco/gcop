@@ -131,7 +131,8 @@ while(1)
     gn.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
-    cout<<"xN"<<xs[N].transpose()<<endl;
+    cout<<"Optimal Cost: "<<gn.J<<endl;
+    //cout<<"xN"<<xs[N].transpose()<<endl;
   }
 
   for(int j =0;j < N;j++)

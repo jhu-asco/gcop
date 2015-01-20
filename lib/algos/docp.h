@@ -85,6 +85,10 @@ namespace gcop {
     
     double eps;  ///< epsilon used for finite differences
 
+    double J;    ///< Optimal cost at any point of time
+
+    int nofevaluations;///< Number of Function evaluations at any point of time
+
   };
 
   using namespace std;
@@ -99,8 +103,8 @@ namespace gcop {
                               Matrix<double, np, 1> *p,
                               bool update) : 
     sys(sys), cost(cost), ts(ts), xs(xs), us(us), p(p),
-    As(us.size()), Bs(us.size()), 
-    debug(true), eps(1e-3)
+    As(us.size()), Bs(us.size()), J(std::numeric_limits<double>::max()), 
+    debug(true), eps(1e-3), nofevaluations(0)
     {
       int N = us.size();
       assert(N > 0);

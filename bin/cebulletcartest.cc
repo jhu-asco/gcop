@@ -128,7 +128,7 @@ void solver_process(Viewer* viewer)
   vector<Vector2d> es(N, e);
   
 #ifdef USE_TPARAM
-  int Nk = 5;
+  int Nk = 10;
   vector<double> tks(Nk+1);
   for (int k = 0; k <=Nk; ++k)
     tks[k] = k*(tf/Nk);

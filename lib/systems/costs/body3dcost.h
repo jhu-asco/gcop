@@ -2,6 +2,7 @@
 #define GCOP_BODY3DCOST_H
 
 #include "body3d.h"
+#include "body3dtrack.h"
 #include "lqcost.h"
 
 namespace gcop {
@@ -25,6 +26,8 @@ namespace gcop {
              Vectorcd *Lu = 0, Matrixcd *Luu = 0,
              Matrix12xcd *Lxu = 0);
     */
+    Body3dTrack *track;
+    double ko;
   };  
   
   template <int c> Body3dCost<c>::Body3dCost(Body3d<c> &sys, double tf, const Body3dState &xf, bool diag) : 

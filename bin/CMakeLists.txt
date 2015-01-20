@@ -69,6 +69,8 @@ ENDIF (PQP_FOUND)
 	add_executable(body2dtracktest2 body2dtracktest2.cc)
 	target_link_libraries(body2dtracktest2 gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(body3dtracktest body3dtracktest.cc)
+	target_link_libraries(body3dtracktest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 	#add_executable(extforceslamtest extforceslamtest.cc)
 	#target_link_libraries(extforceslamtest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
@@ -94,8 +96,14 @@ if (USE_BULLET)
 	add_executable(gnbulletrccartest gnbulletrccartest.cc)
 	target_link_libraries(gnbulletrccartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
 
+	add_executable(gnbulletrccartest1 gnbulletrccartest1.cc)
+	target_link_libraries(gnbulletrccartest1  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
+
 	add_executable(cebulletcartest cebulletcartest.cc)
 	target_link_libraries(cebulletcartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
+
+	add_executable(cebulletcartest1 cebulletcartest1.cc)
+	target_link_libraries(cebulletcartest1  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
 
 	add_executable(spsabulletcartest spsabulletcartest.cc)
 	target_link_libraries(spsabulletcartest  gcop_algos gcop_views gcop_bulletsystems gcop_systems ${BULLET_LIBRARIES} ${ALL_LIBS})
