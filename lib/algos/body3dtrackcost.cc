@@ -2,6 +2,7 @@
 #include "body3dtrackcost.h"
 #include "body3dmanifold.h"
 #include "rn.h"
+#include "so3.h"
 
 using namespace std;
 using namespace gcop;
@@ -16,10 +17,13 @@ Body3dTrackCost::Body3dTrackCost(double tf, const Body3dTrack &pg) :
 
 static Matrix3d r3hat(const Vector3d &a)
 {
+  SO3& so3 = SO3::Instance();
   Matrix3d a_hat;
-  a_hat << 0,  -a(2),  a(1),
-         a(2),    0,  -a(0),
-        -a(1),  a(0),    0;
+
+  so3.hat(a_hat, a);
+  //a_hat << 0,  -a(2),  a(1),
+  //       a(2),    0,  -a(0),
+  //      -a(1),  a(0),    0;
   return a_hat;
 }
 

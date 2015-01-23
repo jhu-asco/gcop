@@ -251,5 +251,7 @@ void Body2dTrack::Get(M3V3d &x, double vd, double t) const
   double a = 1.3*t/tf*2*M_PI;
   x.first.setIdentity();
   SE2::Instance().q2g(x.first, Vector3d(a + M_PI/2, r*cos(a), r*sin(a)));
-  x.second << vd/r, vd, 0;
+  //Vector2d v(0,vd);
+  //v = x.first.block<2,2>(0,0)*v;
+  x.second << 0, vd, 0;
 }
