@@ -7,6 +7,7 @@ set(sources
 set(headers
     body2dcost.h
     body3dcost.h
+    kinbody3dcost.h
     cost.h
     gunicyclecost.h
     lqcost.h

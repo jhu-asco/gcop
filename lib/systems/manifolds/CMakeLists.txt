@@ -5,6 +5,7 @@ set(sources
     imumanifold.cc
     insmanifold.cc
     kinbody2dmanifold.cc
+    kinbody3dmanifold.cc
     mbscspace.cc
     mbsmanifold.cc
     mbstspace.cc
@@ -21,6 +22,7 @@ set(headers
     imumanifold.h
     insmanifold.h
     kinbody2dmanifold.h
+    kinbody3dmanifold.h
     manifold.h
     mbscspace.h
     mbsmanifold.h
