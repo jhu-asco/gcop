@@ -20,8 +20,10 @@ set(headers
       spsa.h
       body2dtrack.h
       body3dtrack.h
+      kinbody3dtrack.h
       body2dtrackcost.h
       body3dtrackcost.h
+      kinbody3dtrackcost.h
 )
 
 set(sources
@@ -34,6 +36,8 @@ set(sources
       mbscontroller.cc
       body2dtrack.cc
       body3dtrack.cc
+      kinbody3dtrack.cc
       body2dtrackcost.cc
       body3dtrackcost.cc
+      kinbody3dtrackcost.cc
 )

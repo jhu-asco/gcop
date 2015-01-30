@@ -1,21 +1,21 @@
 #include <iomanip>
 #include <iostream>
-#include "body3dtrackcost.h"
+#include "kinbody3dtrackcost.h"
 #include "pddp.h"
 #include "utils.h"
 #include "se2.h"
 #include "viewer.h"
-#include "body3dview.h"
-#include "body3dcost.h"
+#include "kinbody3dview.h"
+#include "kinbody3dcost.h"
 #include "params.h"
-#include "body3dtrackview.h"
+#include "kinbody3dtrackview.h"
 
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
 
-typedef Ddp<Body3dState, 12, 6> Body3dDdp;
+typedef Ddp<Matrix4d, 6, 6> Kinbody3dDdp;
 
 Params params;
 
@@ -55,7 +55,7 @@ void Run(Viewer* viewer)
   params.GetInt("N", N);
   double h = Tc/N;
 
-  Body3d<> sys;
+  Kinbody3d sys;
 
   double r = 25;
   params.GetDouble("r", r);
@@ -63,24 +63,23 @@ void Run(Viewer* viewer)
   double vd = 5;
   params.GetDouble("vd", vd);
 
-  // options: odometry, paramForce, forces
-  Body3dTrack pg(sys, nf, vd, 0, tf, r, true, false, true);   ///< ground truth
+  // options: paramForce, forces
+  Kinbody3dTrack pg(sys, nf, vd, 0, tf, r, false, true);   ///< ground truth
 
   params.GetDouble("w", pg.w);
   params.GetVector6d("cw", pg.cw);
-  params.GetVector6d("cv", pg.cv);
   params.GetDouble("cp", pg.cp);
   params.GetDouble("dmax", pg.dmax);
 
   pg.MakeTrue();
 
-  Body3dState x0;
+  Matrix4d x0;
   pg.Get(x0, vd, 0);
 
   //  Body2dTrack pg(sys, N, nf, 0, tf, false, false, true);    ///< noisy pose track
   //  Body2dTrack::Synthesize3(pgt, pg, tf);
 
-  Body3dView<> tview(sys, &pg.xs, &pg.us);   // estimated path
+  Kinbody3dView tview(sys, &pg.xs, &pg.us);   // estimated path
   tview.lineWidth = 5;
   tview.rgba[0] = 0;
   tview.rgba[1] = 1;
@@ -88,14 +87,14 @@ void Run(Viewer* viewer)
   tview.renderSystem = false;
   tview.renderForces = renderForces;
 
-  Body3dView<> oview(sys, &pg.xos);   // odometry
+  Kinbody3dView oview(sys, &pg.xos);   // odometry
   oview.lineWidth = 5;
   oview.renderSystem = false;
   oview.rgba[0] = 1;
   oview.rgba[1] = 0;
   oview.rgba[2] = 0;
 
-  Body3dTrackView pgv(pg);               // optimized pose-track
+  Kinbody3dTrackView pgv(pg);               // optimized pose-track
   pgv.rgba[0] = 1; pgv.rgba[1] = 1; pgv.rgba[2] = 1; 
 
   pgv.drawLandmarks = true;
@@ -117,21 +116,21 @@ void Run(Viewer* viewer)
   
 
   SE2 &se2 = SE2::Instance();  
-  Body3dState xf;
+  Matrix4d xf;
   pg.Get(xf, vd, Tc);
 
   // cost
-  Body3dCost<> cost(sys, Tc, xf);
+  Kinbody3dCost cost(sys, Tc, xf);
   //params.GetDouble("ko", cost.ko);
   //if (cost.ko > 1e-10)
   //  cost.track = &pg;
 
 
-  VectorXd Q(12);
+  VectorXd Q(6);
   if (params.GetVectorXd("Q", Q))
     cost.Q = Q.asDiagonal();
   
-  VectorXd Qf(12);
+  VectorXd Qf(6);
   if (params.GetVectorXd("Qf", Qf))
     cost.Qf = Qf.asDiagonal();
   
@@ -145,7 +144,7 @@ void Run(Viewer* viewer)
     ts[k] = k*h;
 
   // states
-  vector<Body3dState > xs(N+1, pg.xs[0]);
+  vector<Matrix4d > xs(N+1, pg.xs[0]);
 
   // controls
   Vector6d u;
@@ -154,15 +153,15 @@ void Run(Viewer* viewer)
 
   // past true trajectory  
   vector<double> tps(1,0);
-  vector<Body3dState > xps(1, x0);
+  vector<Matrix4d > xps(1, x0);
   vector<Vector6d> ups;
 
-  Body3dDdp ddp(sys, cost, ts, xs, us);
+  Kinbody3dDdp ddp(sys, cost, ts, xs, us);
   ddp.mu = .01;
   ddp.debug = false;
   params.GetDouble("mu", ddp.mu);
 
-  Body3dView<> cview(sys, &ddp.xs);
+  Kinbody3dView cview(sys, &ddp.xs);
   cview.rgba[0] = 0;  cview.rgba[1] = 1;  cview.rgba[2] = 1;
   viewer->Add(cview);
   cview.renderSystem = false;
@@ -170,15 +169,15 @@ void Run(Viewer* viewer)
 
   // cview.renderForces = true;
 
-  Body3dView<> pview(sys, &xps, &ups);
+  Kinbody3dView pview(sys, &xps, &ups);
   if (!hideTrue)
       viewer->Add(pview);
   pview.rgba[0] = 1;  pview.rgba[1] = 1;  pview.rgba[2] = 0;
   pview.renderSystem = false;
   pview.renderForces = renderForces;
 
-  Body3dTrackCost tcost(0, pg);  ///< cost function
-  PDdp<Body3dState, 12, 6> *pddp = 0;
+  Kinbody3dTrackCost tcost(0, pg);  ///< cost function
+  PDdp<Matrix4d, 6, 6> *pddp = 0;
 
 
   for (double t=0; t < tf; t+=h) {
@@ -218,7 +217,7 @@ void Run(Viewer* viewer)
     //w << 0, sqrt(pg.cw[1]), 0, 0, 0, 0;
     
     // simulate true state
-    Body3dState xt;
+    Matrix4d xt;
     sys.Step(xt, t, xps.back(), us[0] + w, h);
 
     // add assumed control and true state to estimator
@@ -242,9 +241,9 @@ void Run(Viewer* viewer)
       cout << "us " << pg.us.size() << endl;
       cout << "p " << pg.p.size() << endl;
 
-      pddp = new PDdp<Body3dState, 12, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
+      pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
       //pddp->debug = false;
-      for (int b=0; b < 20;++b)
+      for (int b=0; b < 10;++b)
       {
         //getchar(); 
         timer_start(timer);
@@ -305,13 +304,13 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("../../bin/body3dtrack.cfg");
+    params.Load("../../bin/kinbody3dtrack.cfg");
 
 #ifdef DISP
   Viewer *viewer = new Viewer;
   viewer->Init(&argc, argv);
-  viewer->frameName = "../../logs/body3dtrack/frames/body3d";
-  viewer->displayName = "../../logs/body3dtrack/display/body3d";
+  viewer->frameName = "../../logs/body3dtrack/frames/kinbody3d";
+  viewer->displayName = "../../logs/body3dtrack/display/kinbody3d";
 
   pthread_t dummy;
   pthread_create( &dummy, NULL, (void *(*) (void *)) Run, viewer);

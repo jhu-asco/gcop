@@ -4,12 +4,12 @@
 #include <iostream>
 #include "viewer.h"
 #include "utils.h"
-#include "body3dtrackview.h"
+#include "kinbody3dtrackview.h"
 
 using namespace gcop;
 
-Body3dTrackView::Body3dTrackView(const Body3dTrack &pg) : 
-  View("Body3dtrack View"), pg(pg)
+Kinbody3dTrackView::Kinbody3dTrackView(const Kinbody3dTrack &pg) : 
+  View("Kinbody3dtrack View"), pg(pg)
 {
   rgba[0] = 1;
   rgba[0] = 0;
@@ -22,19 +22,19 @@ Body3dTrackView::Body3dTrackView(const Body3dTrack &pg) :
 }
 
 
-Body3dTrackView::~Body3dTrackView()
+Kinbody3dTrackView::~Kinbody3dTrackView()
 {
   free(qobj);
 }
 
 
-void Body3dTrackView::Render()
+void Kinbody3dTrackView::Render()
 {
   RenderFrame(0);
 }
 
 
-bool Body3dTrackView::RenderFrame(int i)
+bool Kinbody3dTrackView::RenderFrame(int i)
 {  
 
   Viewer::SetColor(.5, .5, .5, 1);  
@@ -51,9 +51,9 @@ bool Body3dTrackView::RenderFrame(int i)
     glDisable(GL_LIGHTING);
     Vector3d f;
     for (int k =0; k < pg.us.size(); ++k) {
-      f.head<3>() = forceScale*pg.xs[k].first*(pg.us[k]).tail<3>();
+      f.head<3>() = forceScale*pg.xs[k].block<3,3>(0,0)*(pg.us[k]).tail<3>();
       glPushMatrix();
-      glTranslated(pg.xs[k].second(0), pg.xs[k].second(1), pg.xs[k].second(2)); 
+      glTranslated(pg.xs[k](0,3), pg.xs[k](1,3), pg.xs[k](2,3)); 
       Viewer::DrawArrow(f.data(),qobj);
       glPopMatrix();
     }
@@ -120,7 +120,7 @@ bool Body3dTrackView::RenderFrame(int i)
       const vector< pair<int,Vector3d> > &J = pg.Js[pg.pis[l]];
       for (int j = 0; j < J.size(); ++j) {
         int k = J[j].first;
-        const Vector3d &x = pg.xs[k].second.segment<3>(0);
+        const Vector3d &x = pg.xs[k].block<3,1>(0,3);
         glVertex3d(pg.p(3*l + i0), pg.p(3*l + i0 + 1), pg.p(3*l + i0 + 2));
         glVertex3d(x[0], x[1], x[2]);
       }

@@ -1,6 +1,6 @@
 #include <assert.h>
-#include "body3dtrackcost.h"
-#include "body3dmanifold.h"
+#include "kinbody3dtrackcost.h"
+#include "kinbody3dmanifold.h"
 #include "rn.h"
 #include "so3.h"
 
@@ -8,7 +8,7 @@ using namespace std;
 using namespace gcop;
 using namespace Eigen;
 
-Body3dTrackCost::Body3dTrackCost(double tf, const Body3dTrack &pg) :
+Kinbody3dTrackCost::Kinbody3dTrackCost(double tf, const Kinbody3dTrack &pg) :
   Cost(pg.sys, tf), pg(pg)
 {
   
@@ -34,13 +34,13 @@ static Vector3d cross3(Vector3d a, Vector3d b)
 }
 
 
-double Body3dTrackCost::L(double t, const Body3dState &x, const Vector6d &u, 
+double Kinbody3dTrackCost::L(double t, const Matrix4d &x, const Vector6d &u, 
                           double h,
                           const VectorXd *p,
-                          Vector12d *Lx, Matrix12d *Lxx,
+                          Vector6d *Lx, Matrix6d *Lxx,
                           Vector6d *Lu, Matrix6d *Luu,
-                          Matrix<double, 12, 6> *Lxu,
-                          VectorXd *Lp, MatrixXd *Lpp, MatrixX12d *Lpx)
+                          Matrix<double, 6, 6> *Lxu,
+                          VectorXd *Lp, MatrixXd *Lpp, MatrixX6d *Lpx)
 {
   double L = 0;
 
@@ -70,10 +70,8 @@ double Body3dTrackCost::L(double t, const Body3dState &x, const Vector6d &u,
   
   //const Matrix3d &g = x.first;
 
-  const Matrix3d &R = x.first; // orientation
-  const Vector3d &xp = x.second.segment<3>(0);     // position
-
-  const Vector6d &v = x.second.segment<6>(3);               // velocity
+  const Matrix3d &R = x.block<3,3>(0,0); // orientation
+  const Vector3d &xp = x.block<3,1>(0,3);     // position
   
   int N = pg.Is.size() - 1;
   
@@ -129,19 +127,6 @@ double Body3dTrackCost::L(double t, const Body3dState &x, const Vector6d &u,
   }
 
   //cout << "t=" << t << " feature L=" << L << endl;
-
-  if (pg.odometry) {           // odometry/gyro cost
-    Vector6d Cdv;
-    Vector6d dv = v - pg.vs[k];
-    Cdv = dv.cwiseQuotient(pg.cv);
-    L += Cdv.dot(dv)/2;
-    
-    if (Lx)
-      Lx->segment<6>(6) += Cdv;
-
-    if (Lxx)
-      Lxx->block<6,6>(6,6) += Vector6d::Ones().cwiseQuotient(pg.cv).asDiagonal();    
-  }
 
   if (pg.forces && k < N) {
     Vector6d du = u - pg.uos[k];

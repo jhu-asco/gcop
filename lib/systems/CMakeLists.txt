@@ -9,6 +9,7 @@ set(sources
     hrotor.cc
     heli.cc
     kinbody2d.cc
+    kinbody3d.cc
     body2d.cc
     chain.cc
     chain1.cc
@@ -45,6 +46,7 @@ set(headers
     hrotor.h
     heli.h
     kinbody2d.h
+    kinbody3d.h
     wrench.h
     mbs.h
     chain.h

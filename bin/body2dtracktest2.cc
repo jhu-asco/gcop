@@ -205,7 +205,7 @@ void Run(Viewer* viewer)
                           sqrt(pg.cw[1])*random_normal(), 
                           sqrt(pg.cw[2])*random_normal()); 
 
-    w << 0, sqrt(pg.cw[1]), 0;
+    w <<  0,0,sqrt(pg.cw[2]);
     
     // simulate true state
     pair<Matrix3d, Vector3d> xt;

@@ -90,24 +90,17 @@ namespace gcop {
   
     std::vector<Matrixnmd> Cs;
 
-    std::vector<Vectornd> Lxs;
-    std::vector<Matrixnd> Lxxs;
-    std::vector<Vectorcd> Lus;
-    std::vector<Matrixcd> Luus;
-    std::vector<Matrixncd> Lxus;
-    std::vector<Vectormd> Lps;
-    std::vector<Matrixmd> Lpps;
-    std::vector<Matrixmnd> Lpxs;
-    
-    std::vector<Matrixcmd> Kups;
+    std::vector<MatrixXd> Kuxs;
 
-    std::vector<Matrixnmd> Hxs;
-    std::vector<Vectornd> hxs;
-    
-    Vectormd Lp;
-    Matrixmd Lpp;
-    Matrixmnd Lpx;    
+    VectorXd Lxa;
+    MatrixXd Lxxa;
+    Vectorcd Lu;
+    Matrixcd Luu;
+    MatrixXd Lxua;
 
+    VectorXd v;
+    MatrixXd P;
+    
     double nu;    ///< current regularization factor nu
     double nu0;   ///< minimum regularization factor nu
     double dnu0;  ///< regularization factor modification step-size
@@ -127,41 +120,26 @@ namespace gcop {
                               Matrix<double, np, 1> &p, int dynParams, bool update) : 
     Ddp<T, n, c, np>(sys, cost, ts, xs, us, &p, false),
     m(p.size()), dynParams(dynParams), p(p), dp(m), Cs(this->N), 
-    Lxs(this->N+1), Lxxs(this->N+1), 
-    Lus(this->N), Luus(this->N), Lxus(this->N),    
-    Lps(this->N+1), Lpps(this->N+1), Lpxs(this->N+1),
-    Kups(this->N),
-    Hxs(this->N+1), hxs(this->N+1),
     nu(1e-3), nu0(1e-3), dnu0(2) {
     
-    for (int k = 0; k <= this->N; ++k) {
-      if (k < this->N) {
-        if (dynParams)
-          Cs[k].resize(sys.X.n, dynParams);
-        Kups[k].resize(sys.U.n, m);
-      }
-      Hxs[k].resize(sys.X.n, m);
-      
-      Lps[k].resize(m, 1);
-      Lpps[k].resize(m, m);
-      Lpxs[k].resize(m, sys.X.n);
+    Lxa.resize(sys.X.n + m);
+    Lxxa.resize(sys.X.n + m, sys.X.n + m);
+    Lxua.resize(sys.X.n + m, sys.U.n);
+    Kuxs.resize(this->N);   
+ 
+    if (n == Dynamic || c == Dynamic || np == Dynamic) {
+
+      Lu.resize(sys.U.n);
+      Luu.resize(sys.U.n, sys.U.n);
+
     }
 
-
-    if (n == Dynamic || c == Dynamic) {      
-      for (int i = 0; i <= this->N; ++i) {
-        Lxs[i].resize(sys.X.n);
-        Lxxs[i].resize(sys.X.n, sys.X.n);
-
-        if (i < this->N) {
-          Lus[i].resize(sys.U.n);
-          Luus[i].resize(sys.U.n, sys.U.n);
-          Lxus[i].resize(sys.X.n, sys.U.n);
-        }
-
-        hxs[i].resize(sys.X.n);
-      }
+    for (int i = 0; i < this->N; ++i) {
+      Kuxs[i] = MatrixXd::Zero(sys.U.n, sys.X.n + m);
+      if (dynParams)
+        Cs[i].resize(sys.X.n, dynParams);
     }
+
 
     if (update)
       Update();
@@ -195,7 +173,7 @@ namespace gcop {
     typedef Matrix<double, c, 1> Vectorcd;
     typedef Matrix<double, n, n> Matrixnd;
     typedef Matrix<double, n, c> Matrixncd;
-    typedef Matrix<double, c, n> Matrixcnd;
+    typedef Matrix<double, c, n> Matrixcnd; 
     typedef Matrix<double, c, c> Matrixcd;  
     typedef Matrix<double, Dynamic, 1> Vectormd;
     typedef Matrix<double, Dynamic, Dynamic> Matrixmd;
@@ -206,32 +184,69 @@ namespace gcop {
     const T &x = this->xs.back();
     const Vectorcd &u = this->us.back();
 
+
+    Vectornd Lx;
+    Matrixnd Lxx;
+    Vectormd Lp;
+    Matrixmd Lpp;
+    Matrixmnd Lpx;
+    Vectorcd Lu;
+    Matrixcd Luu;
+    Matrixncd Lxu;
+   
+    Lp.resize(m);
+    Lpp.resize(m,m);
+    Lpx.resize(m,n);
+
     double L = this->cost.L(t, x, u, 0, &p, 
-                            &Lxs[N], &Lxxs[N], 0, 0, 0, 
-                            &Lps[N], &Lpps[N], &Lpxs[N]);
+                            &Lx, &Lxx, 0, 0, 0, 
+                            &Lp, &Lpp, &Lpx);
     
     this->V = L;
     this->dV.setZero();
+
+    /*
+    cout << "Lxa: " << Lxa.rows() << "x" << Lxa.cols() << endl;
+    cout << "Lx: " << Lx.rows() << "x" << Lx.cols() << endl;
+    cout << "Lp: " << Lp.rows() << "x" << Lp.cols() << endl;
+    cout << "Lxxa: " << Lxxa.rows() << "x" << Lxxa.cols() << endl;
+    cout << "Lxx: " << Lxx.rows() << "x" << Lxx.cols() << endl;
+    cout << "Lpp: " << Lpp.rows() << "x" << Lpp.cols() << endl;
+    cout << "Lpx: " << Lpx.rows() << "x" << Lpx.cols() << endl;
+    */
+
+  
+    Lxa.head(n) = Lx;
+    Lxa.tail(m) = Lp;    
+    Lxxa.block(0,0,n,n) = Lxx;
+    Lxxa.block(n,n,m,m) = Lpp;
+    Lxxa.block(n,0,m,n) = Lpx;
+    Lxxa.block(0,n,n,m) = Lpx.transpose();
+
+    /* 
+    cout << "Lxa:" << endl << Lxa << endl;
+    cout << "Lx:" << endl << Lx << endl;
+    cout << "Lp:" << endl << Lp << endl;
+    cout << "Lxxa:" << endl << Lxxa << endl;
+    cout << "Lxx:" << endl << Lxx << endl;
+    cout << "Lpp:" << endl << Lpp << endl;
+    cout << "Lpx:" << endl << Lpx << endl;
+    */
+
+    v = Lxa;
+    P = Lxxa;
     
-    Vectornd v = Lxs[N];
-    Matrixnd P = Lxxs[N];
-    Matrixmnd D = Lpxs[N];
-    
-    Vectornd Qx;
+    VectorXd Qx = VectorXd::Zero(this->sys.X.n + m);
     Vectorcd Qu;  
-    Vectormd Qp;
     
-    Matrixnd Qxx;
+    MatrixXd Qxx = MatrixXd::Zero(this->sys.X.n + m, this->sys.X.n+m);
     Matrixcd Quu;
     Matrixcd Quum;
-    Matrixcnd Qux;
-    Matrixmcd Qpu;
+    MatrixXd Qux = MatrixXd::Zero(this->sys.U.n, this->sys.X.n+m);
 
-    Matrixmnd Qpx;
-    
-    Matrixnd At;
-    Matrixcnd Bt;
-    Matrixmnd Ct;
+    MatrixXd Aat = MatrixXd::Zero(this->sys.X.n + m, this->sys.X.n+m);
+    MatrixXd At = MatrixXd::Zero(this->sys.X.n, this->sys.X.n);
+    MatrixXd Bt = MatrixXd::Zero(this->sys.U.n, this->sys.X.n);
     
     Matrixcd Ic = MatrixXd::Identity(this->sys.U.n, this->sys.U.n);
 
@@ -239,71 +254,50 @@ namespace gcop {
       t = this->ts[k];
       const T &x = this->xs[k];
       const Vectorcd &u = this->us[k];
-      
-      Vectornd  &Lx = Lxs[k];
-      Matrixnd &Lxx = Lxxs[k];
-      Vectorcd  &Lu = Lus[k];
-      Matrixcd &Luu = Luus[k];
-      Matrixncd &Lxu = Lxus[k];
-      Vectormd &Lp = Lps[k];
-      Matrixmd &Lpp = Lpps[k];
-      Matrixmnd &Lpx = Lpxs[k];
-
       double h = this->ts[k+1] - this->ts[k];
       assert(h >0);
+
       double L = this->cost.L(t, x, u, h, &p, &Lx, &Lxx, &Lu, &Luu, &Lxu, &Lp, &Lpp, &Lpx);
+      Lxa.head(n) = Lx;
+      Lxa.tail(m) = Lp;    
+      Lxxa.block(0,0,n,n) = Lxx;
+      Lxxa.block(n,n,m,m) = Lpp;
+      Lxxa.block(n,0,m,n) = Lpx;
+      Lxxa.block(0,n,n,m) = Lpx.transpose();
+      Lxua.setZero();
+      Lxua.block(0,0,n,c) = Lxu;
 
       //      cout << "L=" << L << endl;
       
-      /*
-      cout << "Lx=" << Lx << endl;
-      cout << "Lxx=" << Lxx << endl;
-      cout << "Lu=" << Lu << endl;
-      cout << "Luu=" << Luu << endl;
-      cout << "Lxu=" << Lxu << endl;
-      cout << "Lp=" << Lp << endl;
-      cout << "Lpp=" << Lpp << endl;
-      cout << "Lpx=" << Lpx << endl;
-      */
       
       this->V += L;
       
-      const Matrixnd &A = this->As[k];
-      const Matrixncd &B = this->Bs[k];
-      const Matrixnmd &C = Cs[k];
+      MatrixXd A = this->As[k];
+      MatrixXd Aa = MatrixXd::Identity(this->sys.X.n + m, this->sys.X.n + m);
+      Aa.block(0,0,n,n) = A;
+      if(dynParams)
+        Aa.block(0,n,n,dynParams) = this->Cs[k];
+
+      MatrixXd B = this->Bs[k];//MatrixXd::Zero(this->sys.X.n + m, this->sys.U.n);
+      //B.block(0,0,n,c) = this->Bs[k];
 
       Vectorcd &ku = this->kus[k];
-      Matrixcnd &Kux = this->Kuxs[k];
-      Matrixcmd &Kup = Kups[k];
+      MatrixXd &Kux = Kuxs[k];
       
+      Aat = Aa.transpose();
       At = A.transpose();
       Bt = B.transpose();
-      Ct = C.transpose();
       
-      Qx = Lx + At*v;
-      Qu = Lu + Bt*v;
-      Qp = Lp;
-      if (dynParams)
-        Qp.head(dynParams) += Ct*v;
+      Qx = Lxa + Aat*v;
+      Qu = Lu + Bt*v.head(n);
 
-      Qxx = Lxx + At*P*A;
-      Quu = Luu + Bt*P*B;
-      Qux = Bt*P*A;     // assume Lux = 0
-      Qpx = Lpx + D*A;
-      if (dynParams)
-        Qpx.topRows(dynParams) += Ct*P*A;
+      Qxx = Lxxa + Aat*P*Aa;
+      Quu = Luu + Bt*P.block(0,0,n,n)*B;
+      Qux.block(0,0,c,n) =  Bt*P.block(0,0,n,n)*A;     // assume Lux = 0
+      Qux.block(0,n,c,m) =  Bt*P.block(0,n,n,m);     
+      if(dynParams)
+        Qux.block(0,n,c,dynParams) +=  Bt*P.block(0,0,n,n)*this->Cs[k];     
 
-      Qpu = D*B;  //assume Lpu=0
-      if (dynParams)
-        Qpu.topRows(dynParams) += Ct*P*B;
-
-      /*
-      Qpx = Lpx;
-      if (dynParams)
-        Qpx.topRows<dynParams>() += Ct*P*A;
-      */
-
-      double mu = this->mu;
       double dmu = 1;
       
       LLT<Matrixcd> llt;
@@ -328,20 +322,17 @@ namespace gcop {
         this->mu = max(this->mu0, this->mu*dmu);   
         
         if (this->debug)
-          cout << "[I] PDdp::Backward: increased mu=" << mu << " at k=" << k << endl;
+          cout << "[I] PDdp::Backward: increased mu=" << this->mu << " at k=" << k << endl;
       }
       
       ku = -llt.solve(Qu);
       Kux = -llt.solve(Qux);
-      Kup = -llt.solve(Qpu.transpose());
 
       
-      v = Qx + Kux.transpose()*Qu;//% + Kup.transpose()*Qp;
-      P = Qxx + Kux.transpose()*Qux;// + Kup.transpose()*Qpx;
-      
-      D = Qpx + Qpu*Kux;
-      //      dV[0] += ku.dot(Qu);
-      //      dV[1] += ku.dot(Quu*ku/2);
+      v = Qx + Kux.transpose()*Qu;
+      P = Qxx + Kux.transpose()*Qux;
+      this->dV[0] += ku.dot(Qu);
+      this->dV[1] += ku.dot(Quu*ku/2);
     }
     
     if (this->debug)
@@ -369,49 +360,13 @@ namespace gcop {
     // find dp
     int N = this->us.size();
 
-    hxs[0].setZero();
-    Hxs[0].setZero();
-
-    Matrixmd Ap = Lpps[0] + Kups[0].transpose()*this->Luus[0]*Kups[0];
-    Vectormd bp = Lps[0] + Kups[0].transpose()*(this->Lus[0] + this->Luus[0]*this->kus[0]);
-
-    Matrixnd E;
-    for (int k = 1; k <= N; ++k) {
-      E = this->As[k-1] + this->Bs[k-1]*this->Kuxs[k-1];
-
-      Hxs[k] = E*Hxs[k-1] + this->Bs[k-1]*Kups[k-1];
-      if (dynParams)
-        Hxs[k].leftCols(dynParams) += Cs[k-1];
-      hxs[k] = E*hxs[k-1] + this->Bs[k-1]*this->kus[k-1];
-
-      // assume Lup = 0
-
-      Ap = Ap + Hxs[k].transpose()*this->Lxxs[k]*Hxs[k] + Lpxs[k]*Hxs[k] + (Lpxs[k]*Hxs[k]).transpose() + Lpps[k]; 
-
-      if (k < N)
-        Ap = Ap + (this->Kuxs[k]*Hxs[k] + Kups[k]).transpose()*this->Luus[k]*(this->Kuxs[k]*Hxs[k] + Kups[k]);
-      
- 
-      bp = bp + Hxs[k].transpose()*(this->Lxs[k] + this->Lxxs[k]*hxs[k]) + Lpxs[k]*hxs[k] + Lps[k]; 
-
-      if (k<N)
-        bp = bp + (this->Kuxs[k]*Hxs[k] + Kups[k]).transpose()*(this->Lus[k] + this->Luus[k]*(this->Kuxs[k]*hxs[k] + this->kus[k])); 
- 
-    }
-
-    //    cout << "Ap=" << Ap << endl;
-    //    cout << "bp=" << bp << endl;
-
-    //    bool pd = true;
-
-    //    if (pd) {
-    
     LLT<Matrixmd> llt;
     double nu = this->nu;
     double dnu = 1;
-    
+    Vectormd bp = v.tail(m);
+
     while (1) {
-      Matrixmd Apm = Ap;
+      Matrixmd Apm = P.block(n,n,m,m);
       Apm.diagonal() = Apm.diagonal().array() + nu;
       
       llt.compute(Apm);
@@ -430,32 +385,12 @@ namespace gcop {
       nu = max(this->nu0, nu*dnu);   
       
       if (this->debug)
-        cout << "[I] PDdp::Backward: increased nu=" << nu << endl;
-    }
-    
-    dp = -llt.solve(bp);
-
-    //    dp = -dp./diag(Ap);
-
-    //      cout << "[W] Pddp::Backward: Ap not positive definite!" << endl;
-    //      ColPivHouseholderQR<Matrixmd> dec(Ap);
-    //      dp = -dec.solve(bp);    
-
-    this->dV.setZero();
-
-    // compute expected cost
-    for (int k = 0; k <= N; ++k) {
-      Vectornd dx = Hxs[k]*dp + hxs[k];
-      
-      this->dV[0] += Lps[k].dot(dp) + Lxs[k].dot(dx);
-      this->dV[1] += dp.dot(Lpps[k]*dp)/2 + dp.dot(Lpxs[k]*dx) + dx.dot(Lxxs[k]*dx)/2;
-      
-      if (k < N) {
-        Vectorcd du = this->Kuxs[k]*dx + Kups[k]*dp + this->kus[k];
-        this->dV[0] += Lus[k].dot(du);
-        this->dV[1] += du.dot(Luus[k]*du)/2;
+      {
+        cout << "[I] PDdp::Forward: increased nu=" << nu << endl;
       }
     }
+    dp = -llt.solve(bp);
+
 
     // measured change in V
     double dVm = 1;
@@ -465,35 +400,37 @@ namespace gcop {
     Vectormd dp1 = dp;
 
     while (dVm > 0) {
+      VectorXd dxa = VectorXd::Zero(this->sys.X.n + m);
       Vectornd dx = VectorXd::Zero(this->sys.X.n);
-			dx.setZero();//Redundancy
+
+      dp = a*dp1;
+      dxa.tail(m) = dp;
       //      Vectornd dx = Vectornd::Zero();
       T xn = this->xs[0];
       Vectorcd un;
-      
-      double Vc = 0;
-      
-      dp = a*dp1;
       Vectormd pn = p + dp;
+      
       VectorXd pdyn;
       if (dynParams)
         pdyn = pn.head(dynParams);
-
+  
+      double Vm = 0;
+      
       for (int k = 0; k < N; ++k) {
         const Vectorcd &u = this->us[k];
         Vectorcd &du = this->dus[k];
         
-        du = a*this->kus[k] + this->Kuxs[k]*dx + Kups[k]*dp;
+        du = a*this->kus[k] + Kuxs[k]*dxa;
         un = u + du;
         
         const double &t = this->ts[k];
         double L = this->cost.L(t, xn, un, 0, &pn);
-        Vc += L;
+        Vm += L;
         
         // update dx
         if (this->type == this->PURE) {
           dx = this->As[k]*dx + this->Bs[k]*du;
-          if (dynParams)
+          if(dynParams)
             dx += Cs[k]*dp.head(dynParams);
           this->sys.X.Retract(xn, xn, dx);
         } else {
@@ -503,15 +440,16 @@ namespace gcop {
           xn = xn_;
           this->sys.X.Lift(dx, this->xs[k+1], xn);
         }
+        dxa.head(n) = dx;
       }
       
       double L = this->cost.L(this->ts[N], xn, un, 0, &pn);
-      Vc += L;
+      Vm += L;
       
       if (this->debug)
-        cout << "[I] PDdp::Forward: computed V=" << Vc << endl;
+        cout << "[I] PDdp::Forward: computed V=" << Vm << endl;
       
-      dVm = Vc - this->V;
+      dVm = Vm - this->V;
       
       if (dVm > 0) {
         a *= this->b1;
@@ -521,7 +459,7 @@ namespace gcop {
           cout << "[I] PDdp::Forward: step-size reduced a=" << a << endl;
           //cout << "[I] PDdp::Forward: step-size reduced a=" << this->a << endl;
         
-        continue;
+        
       }
       
       //double r = dVm/(this->a*this->dV[0] + this->a*this->a*this->dV[1]);
