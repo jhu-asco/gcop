@@ -48,9 +48,17 @@ namespace gcop {
     {
       delete m_vehicleRayCaster;
 
+      m_world.m_dynamicsWorld->removeVehicle(m_vehicle);
       delete m_vehicle;
 
       delete m_wheelShape;
+      
+      delete initialstate;
+      
+      m_world.m_dynamicsWorld->removeRigidBody(m_carChassis);
+      m_world.Reset();
+
+      delete m_carChassis;
     }
     
     double Step(Vector4d &xb, double t, const Vector4d &xa,
@@ -119,6 +127,7 @@ namespace gcop {
 
     //Bullet classes for holding car
     btRigidBody* m_carChassis;
+    btCollisionShape* chassisShape;
     btRaycastVehicle*	m_vehicle;
     btCollisionShape*	m_wheelShape;
     btRaycastVehicle::btVehicleTuning	m_tuning;

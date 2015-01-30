@@ -4,7 +4,7 @@ using namespace gcop;
 using namespace Eigen;
 
 Bulletrccar::Bulletrccar(BulletWorld&		m_world_, vector<double> *zs_) : 
-  Rccar(3),m_carChassis(0), m_vehicle(0), m_wheelShape(0)
+  Rccar(3),m_carChassis(0), chassisShape(0), m_vehicle(0), m_wheelShape(0)
   ,gEngineForce(0),gBreakingForce(0.f),maxEngineForce(100.f),maxBreakingForce(10.f)
   ,gVehicleSteering(0.f),steeringClamp(0.5f), velocityClamp(5.f)
   ,carmass(20.0f), wheelRadius(0.07f), wheelWidth(0.06f),wheelFriction(1e10)
@@ -48,18 +48,19 @@ Bulletrccar::Bulletrccar(BulletWorld&		m_world_, vector<double> *zs_) :
     //Set offset transform between car in GCOP coordsys and bullet
     offsettrans.setOrigin(btVector3(0,0,0));
     offsettrans.setRotation(btQuaternion(0,0,M_PI/2));
+    //offsettrans.setRotation(btQuaternion(0,0,0));
     //Print Offset Trans:
     btMatrix3x3 basis = offsettrans.getBasis();
     offsettransinv = offsettrans.inverse();
   }
   //Load Car chassis and ray caster vehicle:
   {
-    btCollisionShape* chassisShape = new btBoxShape(btVector3(car_halfdims[0],car_halfdims[1],car_halfdims[2]));//Need to use half extents of the box to create the chassis shape  in BULLET !!	
-    m_world.m_collisionShapes.push_back(chassisShape);
+    chassisShape = new btBoxShape(btVector3(car_halfdims[0],car_halfdims[1],car_halfdims[2]));//Need to use half extents of the box to create the chassis shape  in BULLET !!	
+    //m_world.m_collisionShapes.push_back(chassisShape);
 
     btTransform initialtr;//temporary transform
     initialtr.setIdentity();
-
+    assert(chassisShape);
     m_carChassis = m_world.LocalCreateRigidBody(carmass,initialtr,chassisShape);//(chassis Rigid Body)
 
     //Loading Wheel Shapes:
@@ -424,6 +425,109 @@ bool Bulletrccar::reset(const Vector4d &x, double t)
     gEngineForce = 0;
     gBreakingForce = 0;
 
+    // Delete the Vehicle and re initialize:
+    {
+      m_world.m_dynamicsWorld->removeVehicle(m_vehicle);
+      delete m_vehicle;
+      m_world.m_dynamicsWorld->removeRigidBody(m_carChassis);
+      delete m_carChassis;
+
+
+      btTransform initialtr;//temporary transform
+      initialtr.setIdentity();
+
+      m_carChassis = m_world.LocalCreateRigidBody(carmass,initialtr,chassisShape);//(chassis Rigid Body)
+
+      // Ray casting helper class for the vehicle
+      //m_vehicleRayCaster = new btDefaultVehicleRaycaster(m_world.m_dynamicsWorld);
+
+      m_vehicle = new btRaycastVehicle(m_tuning,m_carChassis,m_vehicleRayCaster);
+
+      ///never deactivate the vehicle from computing collisions etc. Usually the bodies are deactivated after some time if they are not moving
+      m_carChassis->setActivationState(DISABLE_DEACTIVATION);
+
+      (m_world.m_dynamicsWorld)->addVehicle(m_vehicle);
+
+      /// create wheel connections
+      if(!m_world.IsZupAxis())
+      {
+        double connectionHeight = 0.17 - 0.03 - car_halfdims[1];// Suspension tip connection height - ground clearance - half the height of car
+
+
+        bool isFrontWheel=true;
+        //choose coordinate system
+        m_vehicle->setCoordinateSystem(rightIndex,upIndex,forwardIndex);
+
+        //Front Right Wheel
+        btVector3 connectionPointCS0(0.19,connectionHeight,car_halfdims[2]-wheelRadius);
+
+        m_vehicle->addWheel(connectionPointCS0,wheelDirectionCS0,wheelAxleCS,suspensionRestLength,wheelRadius,m_tuning,isFrontWheel);
+
+        //Front Left Wheel
+        connectionPointCS0 = btVector3(-0.19,connectionHeight,car_halfdims[2]-wheelRadius);
+        m_vehicle->addWheel(connectionPointCS0,wheelDirectionCS0,wheelAxleCS,suspensionRestLength,wheelRadius,m_tuning,isFrontWheel);
+
+        //Back Right Wheel
+        connectionPointCS0 = btVector3(-0.19,connectionHeight,-car_halfdims[2]+wheelRadius);
+
+        isFrontWheel = false;
+        m_vehicle->addWheel(connectionPointCS0,wheelDirectionCS0,wheelAxleCS,suspensionRestLength,wheelRadius,m_tuning,isFrontWheel);
+
+        //Back Left Wheel
+        connectionPointCS0 = btVector3(0.19,connectionHeight,-car_halfdims[2]+wheelRadius);
+        m_vehicle->addWheel(connectionPointCS0,wheelDirectionCS0,wheelAxleCS,suspensionRestLength,wheelRadius,m_tuning,isFrontWheel);
+
+        for (int i=0;i<m_vehicle->getNumWheels();i++)
+        {
+          btWheelInfo& wheel = m_vehicle->getWheelInfo(i);
+          wheel.m_suspensionStiffness = suspensionStiffness;
+          wheel.m_wheelsDampingRelaxation = suspensionDamping;
+          wheel.m_wheelsDampingCompression = suspensionCompression;
+          wheel.m_frictionSlip = wheelFriction;
+          wheel.m_rollInfluence = rollInfluence;
+        }
+
+      }
+      else
+      {
+        double connectionHeight = 0.17 - 0.03 - car_halfdims[2];// Suspension tip connection height - ground clearance - half the height of car
+
+
+        bool isFrontWheel=true;
+        //choose coordinate system
+        m_vehicle->setCoordinateSystem(rightIndex,upIndex,forwardIndex);
+
+        //Front Right Wheel
+        btVector3 connectionPointCS0(0.19,car_halfdims[1]-wheelRadius,connectionHeight);
+
+        m_vehicle->addWheel(connectionPointCS0,wheelDirectionCS0,wheelAxleCS,suspensionRestLength,wheelRadius,m_tuning,isFrontWheel);
+
+        //Front Left Wheel
+        connectionPointCS0 = btVector3(-0.19,car_halfdims[1]-wheelRadius,connectionHeight);
+        m_vehicle->addWheel(connectionPointCS0,wheelDirectionCS0,wheelAxleCS,suspensionRestLength,wheelRadius,m_tuning,isFrontWheel);
+
+        //Back Right Wheel
+        connectionPointCS0 = btVector3(0.19,-car_halfdims[1]+wheelRadius,connectionHeight);
+
+        isFrontWheel = false;
+        m_vehicle->addWheel(connectionPointCS0,wheelDirectionCS0,wheelAxleCS,suspensionRestLength,wheelRadius,m_tuning,isFrontWheel);
+
+        //Back Left Wheel
+        connectionPointCS0 = btVector3(-0.19,-car_halfdims[1]+wheelRadius,connectionHeight);
+        m_vehicle->addWheel(connectionPointCS0,wheelDirectionCS0,wheelAxleCS,suspensionRestLength,wheelRadius,m_tuning,isFrontWheel);
+
+        for (int i=0;i<m_vehicle->getNumWheels();i++)
+        {
+          btWheelInfo& wheel = m_vehicle->getWheelInfo(i);
+          wheel.m_suspensionStiffness = suspensionStiffness;
+          wheel.m_wheelsDampingRelaxation = suspensionDamping;
+          wheel.m_wheelsDampingCompression = suspensionCompression;
+          wheel.m_frictionSlip = wheelFriction;
+          wheel.m_rollInfluence = rollInfluence;
+        }
+      }
+    }
+
     if(initialstate)
     {
       m_carChassis->setCenterOfMassTransform(initialstate->cartransform);
@@ -445,21 +549,32 @@ bool Bulletrccar::reset(const Vector4d &x, double t)
       else
       {
         btTransform cartransform(btQuaternion(0,0,x[2]),btVector3(x[0], x[1], initialz));
-        cartransform = offsettrans*cartransform*offsettransinv;
+        //cartransform = offsettrans*cartransform*offsettransinv;
         m_carChassis->setCenterOfMassTransform(cartransform);
         double v = x[3];
         //double v = x[3];
-        btVector3 carvel(-v*sin(x[2]),v*cos(x[2]),0);
+        //btVector3 carvel(-v*sin(x[2]),v*cos(x[2]),0);
+        btVector3 carvel(0,0,0);
         m_carChassis->setLinearVelocity(carvel);
         //      cout<<"Car Vel: "<<carvel.x()<<"\t"<<carvel.y()<<"\t"<<carvel.z()<<endl;
       }
       m_carChassis->setAngularVelocity(btVector3(0,0,0));
     }
 
-    (m_world.m_dynamicsWorld)->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(m_carChassis->getBroadphaseHandle(),(m_world.m_dynamicsWorld)->getDispatcher());
-    //m_world.Reset();
-    m_vehicle->resetSuspension();
-    //Can synchronize wheels with the new transform or ignore
+    m_world.Reset();
+    //(m_world.m_dynamicsWorld)->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(m_carChassis->getBroadphaseHandle(),(m_world.m_dynamicsWorld)->getDispatcher());
+    //if(m_vehicle)
+    //{
+    // m_vehicle->resetSuspension();
+    //Can synchronize wheels with the new transform
+    /*for (int i=0;i<m_vehicle->getNumWheels();i++)
+      {
+    //synchronize the wheels with the (interpolated) chassis worldtransform
+    m_vehicle->updateWheelTransform(i,true);
+    }
+     */
+    //m_vehicle->updateVehicle(0);
+    //}
     //set reset_drivevel to true:
     reset_drivevel = true;
   }
