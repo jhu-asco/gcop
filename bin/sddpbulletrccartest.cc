@@ -88,12 +88,14 @@ void solver_process(Viewer* viewer)
   // initial controls
   vector<Vector2d> us(N);
   for (int i = 0; i < N/2; ++i) {
-    us[i] = Vector2d(.2, .0);
-    us[N/2+i] = Vector2d(.2, .0);
+    us[i] = Vector2d(.1, .05);
+    us[N/2+i] = Vector2d(.1, -.05);
   }
+  us[N-1] = Vector2d(0,0);
   
   RccarDdp ddp(sys, cost, ts, xs, us);  
   ddp.mu = .01;
+  params.GetVector2d("scale_du",(ddp.duscale));
   params.GetDouble("mu", ddp.mu);
 
   RccarView view(sys, &ddp.xs);

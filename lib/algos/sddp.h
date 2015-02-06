@@ -24,6 +24,9 @@ namespace gcop {
     typedef Matrix<double, nx, nu> Matrixncd;
     typedef Matrix<double, nu, nx> Matrixcnd;
     typedef Matrix<double, nu, nu> Matrixcd;
+
+    //External render Function for trajectories:
+    typedef void(RenderFunc)(int, vector<T>&);
     
   public:
     /**
@@ -83,13 +86,15 @@ namespace gcop {
     double a;     ///< step-size
     
     std::vector<Vectorcd> dus;  ///< computed control change
+    std::vector<T> xss;             ///< Sample states (N+1) vector
     
     std::vector<Vectorcd> kus;
     std::vector<Matrixcnd> Kuxs;
 
 		std::default_random_engine randgenerator; ///< Default random engine
 
-    std::normal_distribution<double> normal_dist;///< Creates a normal distribution
+    //std::normal_distribution<double> normal_dist;///< Creates a normal distribution
+    std::uniform_real_distribution<double> uniform_dist;///< Creates a normal distribution
 
     Vectornd Lx;
     Matrixnd Lxx;
@@ -98,6 +103,10 @@ namespace gcop {
     
     Matrixnd P;
     Vectornd v;
+
+    Vectorcd duscale;///<Scales sampled du according to this vector
+    Vectornd dxscale;///<Scales sampled dx0 according to this vector
+    RenderFunc *external_render;///<RenderFunction for rendering samples
     
     double V;
     Vector2d dV;
@@ -108,6 +117,7 @@ namespace gcop {
     double b2;   ///< Armijo/Bertsekas step-size control factor b2
     
     char type;   ///< type of algorithm (choices are PURE, DDP, LQS), LQS is default. In the current implementation second-order expansion of the dynamics is ignored, so DDP and LQS are identical. Both LQS and DDP are implemented using the true nonlinear dynamics integration in the Forward step, while PURE uses the linearized version in order to match exactly the true Newton step. 
+    int Ns; ///< Number of samples for linearizing
     
     static const char PURE = 0;     ///< PURE version of algorithm (i.e. stage-wise Newton)
     static const char DDP = 1;      ///< DDP version of algorithm
@@ -188,8 +198,12 @@ namespace gcop {
     dus(N), kus(N), Kuxs(N), 
     s1(0.1), s2(0.5), b1(0.25), b2(2),
     type(LQS),
-    normal_dist(0,0.001)
-    //normal_dist(0,0.2)
+    uniform_dist(-1,1),
+    external_render(0),
+    xss(xs),
+    Ns(30)
+   // normal_dist(0,0.02)
+    //normal_dist(0,0.001)
     {
       assert(N > 0);
       assert(sys.X.n > 0);
@@ -197,6 +211,7 @@ namespace gcop {
 
       assert(ts.size() == N+1);
       assert(xs.size() == N+1);
+      assert(xss.size() == N+1);
       assert(us.size() == N);
 
       if (nx == Dynamic || nu == Dynamic) {
@@ -216,9 +231,12 @@ namespace gcop {
         P.resize(sys.X.n, sys.X.n);
         v.resize(sys.X.n);       
       }
-
+      duscale = Vectorcd::Constant(0.02);//Default initialization of scale
+      dxscale = Vectornd::Constant(0.02);//Default initialization of scale
+      cout<<"duscale: "<<duscale<<endl;
       if (update) {
         this->Update(false);
+        //this->Update(true);//#DEBUG
         this->Linearize();
       }
     }
@@ -513,19 +531,19 @@ namespace gcop {
   template <typename T, int nx, int nu, int np> 
     void SDdp<T, nx, nu, np>::Iterate() {
     
+    Linearize();//Linearize with the current us
     Backward();
     Forward();
     for (int k = 0; k < N; ++k)
       this->us[k] += dus[k];
     this->Update(false);
-    Linearize();//Linearize after Update
+    //this->Update(true);//#DEBUG
   }
  template <typename T, int nx, int nu, int np>
     void SDdp<T, nx, nu, np>::Linearize(){
 			randgenerator.seed(370212);
-      int nofsamples = 300;
-      MatrixXd dusmatrix(nu*N,nofsamples);
-      MatrixXd dxsmatrix(nx*(N+1),nofsamples);
+      MatrixXd dusmatrix(nu*N,Ns);
+      MatrixXd dxsmatrix(nx*(N+1),Ns);
 
       Vectorcd du;
       Vectorcd us1;
@@ -534,44 +552,65 @@ namespace gcop {
 
       //Create dus random matrix:
 //#pragma omp parallel for private(count)
-      for(count = 0;count < nofsamples;count++)
+      for(count = 0;count < Ns;count++)
       {
         for(int count1 = 0;count1 < N*nu;count1++)
         {
-          dusmatrix(count1,count)  = normal_dist(randgenerator);
+          //dusmatrix(count1,count)  = normal_dist(randgenerator);
+          int count_u = count1%nu;//find the index corresponding to du_scale
+          dusmatrix(count1,count)  = duscale(count_u)*uniform_dist(randgenerator);
         }
       }
       //cout<<dusmatrix<<endl;//#DEBUG
       //getchar();
 
-      dxsmatrix.block(0,0,nx,nofsamples).setZero();//Set zero first block
+      //dxsmatrix.block(0,0,nx,Ns).setZero();//Set zero first block
       Vectornd dx;
+      T x0_sample;
       //NonParallelizable code for now
-      for(count = 0;count < nofsamples;count++)
+      for(count = 0;count < Ns;count++)
       {
-        this->sys.reset(this->xs[0],this->ts[0]);
+        //Set to initial state perturbed by small amount:
+        for(int count1 = 0; count1 < nx; count1++)
+        {
+          dx(count1) = dxscale(count1)*uniform_dist(randgenerator);//Adjust dx_scale 
+        }
+        dxsmatrix.block<nx,1>(0,count) = dx; 
+        this->sys.X.Retract(x0_sample, this->xs[0], dx);
+        xss[0] = x0_sample;
+        this->sys.reset(x0_sample,this->ts[0]);
         for(int count1 = 0;count1 < N;count1++)
         {
           du = dusmatrix.block<nu,1>(count1*nu,count);
+          //cout<<"du, u: "<<du.transpose()<<"\t"<<(this->us[count1]).transpose()<<endl;
           us1 = this->us[count1] + du;
-          this->sys.Step2(us1,(this->ts[count1+1])-(this->ts[count1]), this->p);
+          this->sys.Step1(xss[count1+1],us1,(this->ts[count1+1])-(this->ts[count1]), this->p);
           this->sys.X.Lift(dx, this->xs[count1+1], this->sys.x);
-          dxsmatrix.block<nx,1>((count1+1)*nx,count) = dx;
+          dxsmatrix.block<nx,1>((count1+1)*nx,count) = dx; 
 //          cout<<"xs["<<(count1+1)<<"]: "<<this->xs[count1+1].transpose()<<endl;
+        }
+
+        //Render trajectory samples if external rendering function is provided:
+        if(external_render)
+        {
+          external_render(count,xss);//ID for the sample trajectory
         }
         //cout<<dxsmatrix<<endl;//#DEBUG
         //getchar();
       }
       MatrixXd Abs(nx+nu,nx);
       //Matrix<double, nx, nx+nu>Abs;
-      MatrixXd XUMatrix(nx+nu,nofsamples);
+      MatrixXd XUMatrix(nx+nu,Ns);
+
+      MatrixXd Xverifymatrix(nx,Ns);//Verify 
+
       //Compute As and Bs for every k:
       for(count = 0;count < N;count++)
       {
-        XUMatrix<<dxsmatrix.block(count*nx,0,nx,nofsamples), dusmatrix.block(count*nu,0,nu,nofsamples);
-        Abs = (XUMatrix*XUMatrix.transpose()).ldlt().solve(XUMatrix*dxsmatrix.block((count+1)*nx,0,nx,nofsamples).transpose());
+        XUMatrix<<dxsmatrix.block(count*nx,0,nx,Ns), dusmatrix.block(count*nu,0,nu,Ns);
+        Abs = (XUMatrix*XUMatrix.transpose()).ldlt().solve(XUMatrix*dxsmatrix.block((count+1)*nx,0,nx,Ns).transpose());
         // Compare As with true As #DEBUG: 
-/*        cout<<"Computed: As, Bs: "<<endl;
+        /*cout<<"Computed: As, Bs: "<<endl;
         cout<<endl<<Abs.block<nx,nx>(0,0).transpose()<<endl;
         cout<<endl<<Abs.block<nu,nx>(nx,0).transpose()<<endl;
         cout<<"True As, bs: "<<endl;
@@ -580,11 +619,20 @@ namespace gcop {
         cout<<"Diff As, bs: "<<endl;
         cout<<endl<<(Abs.block<nx,nx>(0,0).transpose() - this->As[count])<<endl;
         cout<<endl<<(Abs.block<nu,nx>(nx,0).transpose() - this->Bs[count])<<endl;
-        getchar(); 
         */
+//        getchar(); 
 
         this->As[count] = Abs.block<nx,nx>(0,0).transpose();
         this->Bs[count] = Abs.block<nu,nx>(nx,0).transpose();
+
+        /******VERIFY**********/
+        Xverifymatrix = Abs.transpose()*XUMatrix;
+        //cout<<endl<<"dXpredicted: "<<endl<<Xverifymatrix<<endl;
+        //cout<<endl<<"True_dX: "<<dxsmatrix.block((count+1)*nx,0,nx,Ns)<<endl;
+        cout<<endl<<"Error_predicted: "<<(Xverifymatrix - dxsmatrix.block((count+1)*nx,0,nx,Ns)).squaredNorm()<<endl;
+        //cout<<endl<<Abs<<endl;
+        //getchar();
+
         //Debug: Print:
 /*        cout<<"As, Bs, Abs: "<<endl;
         cout<<endl<<Abs<<endl;
@@ -592,7 +640,7 @@ namespace gcop {
         cout<<endl<<this->Bs[count]<<endl;
         cout<<"Comparing dxs[count+1] with As*dxs[count] + Bs[count]*du forall samples "<<endl;
         cout<<"Prediction - Actual: "<<endl;
-        cout<<endl<<(Abs.transpose()*XUMatrix - dxsmatrix.block((count+1)*nx,0,nx,nofsamples))<<endl;
+        cout<<endl<<(Abs.transpose()*XUMatrix - dxsmatrix.block((count+1)*nx,0,nx,Ns))<<endl;
         getchar();
         */
       }

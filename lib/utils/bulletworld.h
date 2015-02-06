@@ -383,6 +383,8 @@ namespace gcop{
 
 			~BulletWorld()//Destructor for Bullet Physics Engine
 			{
+				delete m_dynamicsWorld;
+
 				//remove the rigidbodies from the dynamics world and delete them
 				int i;
 				for (i=m_dynamicsWorld->getNumCollisionObjects()-1; i>=0 ;i--)
@@ -403,7 +405,6 @@ namespace gcop{
 					delete shape;
 				}
 
-				delete m_dynamicsWorld;
 
 				//delete solver
 				delete m_constraintSolver;
@@ -415,6 +416,7 @@ namespace gcop{
 				delete m_dispatcher;
 
 				delete m_collisionConfiguration;
+
 			}
 	};
 };
