@@ -84,9 +84,11 @@ namespace gcop {
     double dmu0;  ///< regularization factor modification step-size
     double mumax; ///< maximum regularization factor mu
     double a;     ///< step-size
+    double current_a; ///< current step-size
     
     std::vector<Vectorcd> dus;  ///< computed control change
     std::vector<T> xss;             ///< Sample states (N+1) vector
+    std::vector<T> xsprev;          ///< Mean of Sample states (N+1) vector
     
     std::vector<Vectorcd> kus;
     std::vector<Matrixcnd> Kuxs;
@@ -194,13 +196,14 @@ namespace gcop {
                             Matrix<double, np, 1> *p,
                             bool update) : Docp<T, nx, nu, np>(sys, cost, ts, xs, us, p, false),
     N(us.size()), 
-    mu(1e-3), mu0(1e-3), dmu0(2), mumax(1e6), a(1), 
+    mu(1e-3), mu0(1e-3), dmu0(2), mumax(1e6), a(1), current_a(1),
     dus(N), kus(N), Kuxs(N), 
     s1(0.1), s2(0.5), b1(0.25), b2(2),
     type(LQS),
     uniform_dist(-1,1),
     external_render(0),
     xss(xs),
+    xsprev(xs),
     Ns(30)
    // normal_dist(0,0.02)
     //normal_dist(0,0.001)
@@ -212,6 +215,7 @@ namespace gcop {
       assert(ts.size() == N+1);
       assert(xs.size() == N+1);
       assert(xss.size() == N+1);
+      assert(xsprev.size() == N+1);
       assert(us.size() == N);
 
       if (nx == Dynamic || nu == Dynamic) {
@@ -231,11 +235,20 @@ namespace gcop {
         P.resize(sys.X.n, sys.X.n);
         v.resize(sys.X.n);       
       }
+      for(int i =0; i<N; ++i)
+      {
+        dus[i].setZero();
+        Kuxs[i].setZero();//Set initial feedback matrices to zero
+        kus[i].setZero();
+      }
       duscale = Vectorcd::Constant(0.02);//Default initialization of scale
-      dxscale = Vectornd::Constant(0.02);//Default initialization of scale
+      //dxscale = Vectornd::Constant(0.02);//Default initialization of scale
+      //duscale.setZero();
+      dxscale.setZero();//Default Initialization of scale
       cout<<"duscale: "<<duscale<<endl;
       if (update) {
         this->Update(false);
+        xss = xs;//Copy xs to xss in the beginning
         //this->Update(true);//#DEBUG
         this->Linearize();
       }
@@ -385,6 +398,8 @@ namespace gcop {
 
 	template <typename T, int nx, int nu, int np> 
     void SDdp<T, nx, nu, np>::Forward() {
+    static int count_iterate = 0;
+    count_iterate++;
 
     typedef Matrix<double, nx, 1> Vectornd;
     typedef Matrix<double, nu, 1> Vectorcd;
@@ -396,7 +411,8 @@ namespace gcop {
     // measured change in V
     double dVm = 1;
     
-    double a = this->a;
+    //double a = this->a;
+    this->current_a = this->a;//Start with big step size
     
     while (dVm > 0) {
 
@@ -415,14 +431,8 @@ namespace gcop {
         const Vectorcd &ku = kus[k];
         const Matrixcnd &Kux = Kuxs[k];
         
-        du = a*ku + Kux*dx;
-        un = u + du;
-				//[DEBUG]:
-				/*cout<<"du[ "<<k<<"]:\t"<<du.transpose()<<endl;
-				cout<<"dx[ "<<k<<"]:\t"<<dx.transpose()<<endl;
-				cout<<"ku[ "<<k<<"]:\t"<<ku.transpose()<<endl;
-				cout<<"Kux[ "<<k<<"]:"<<endl<<Kux<<endl;
-				*/
+        du = current_a*ku + Kux*dx;
+        un = u + du; 
         
         Rn<nu> &U = (Rn<nu>&)this->sys.U;
         if (U.bnd) {
@@ -437,6 +447,16 @@ namespace gcop {
                 du[j] = un[j] - u[j];
               }
         }
+
+        /*if(count_iterate == 1)
+        {
+          //[DEBUG]:
+          cout<<"du[ "<<k<<"]:\t"<<du.transpose()<<endl;
+          cout<<"dx[ "<<k<<"]:\t"<<dx.transpose()<<endl;
+          cout<<"ku[ "<<k<<"]:\t"<<ku.transpose()<<endl;
+          cout<<"Kux[ "<<k<<"]:"<<endl<<Kux<<endl;
+        }
+        */
         
         const double &t = this->ts[k];
         double h = this->ts[k+1] - t;
@@ -507,24 +527,25 @@ namespace gcop {
       dVm = Vm - V;
       
       if (dVm > 0) {
-        a *= b1;
-        if (a < 1e-12)
+       current_a *= b1;
+        if (current_a < 1e-12)
           break;
         if (this->debug)
-          cout << "[I] SDdp::Forward: step-size reduced a=" << a << endl;
+          cout << "[I] SDdp::Forward: step-size reduced a=" << current_a << endl;
         
         continue;
       }
       
-      double r = dVm/(a*dV[0] + a*a*dV[1]);
+      /*double r = dVm/(current_a*dV[0] + current_a*current_a*dV[1]);
       if (r < s1)
-        a = b1*a;
+       current_a = b1*current_a;
       else 
         if (r >= s2) 
-          a = b2*a;    
+         current_a = b2*current_a;    
     
       if (this->debug)
-        cout << "[I] SDdp::Forward: step-size a=" << a << endl;    
+        cout << "[I] SDdp::Forward: step-size a=" << current_a << endl;    
+        */
     }
   }
 
@@ -541,18 +562,19 @@ namespace gcop {
   }
  template <typename T, int nx, int nu, int np>
     void SDdp<T, nx, nu, np>::Linearize(){
+      static int count_iterate = 0;
 			randgenerator.seed(370212);
       MatrixXd dusmatrix(nu*N,Ns);
       MatrixXd dxsmatrix(nx*(N+1),Ns);
 
-      Vectorcd du;
+      //Vectorcd du;
       Vectorcd us1;
 
       int count = 0;
 
       //Create dus random matrix:
 //#pragma omp parallel for private(count)
-      for(count = 0;count < Ns;count++)
+      /*for(count = 0;count < Ns;count++)
       {
         for(int count1 = 0;count1 < N*nu;count1++)
         {
@@ -561,12 +583,22 @@ namespace gcop {
           dusmatrix(count1,count)  = duscale(count_u)*uniform_dist(randgenerator);
         }
       }
+      */
       //cout<<dusmatrix<<endl;//#DEBUG
       //getchar();
+
+      //Find xsprev based on dus and us:
+      this->sys.reset(this->xs[0],this->ts[0]);
+      for(int count_traj = 0; count_traj< N;count_traj++)
+      {
+        us1 = this->us[count_traj] - this->dus[count_traj];
+        this->sys.Step1(xsprev[count_traj+1],us1,(this->ts[count_traj+1])-(this->ts[count_traj]), this->p);
+      }
 
       //dxsmatrix.block(0,0,nx,Ns).setZero();//Set zero first block
       Vectornd dx;
       T x0_sample;
+      Rn<nu> &U = (Rn<nu>&)this->sys.U;
       //NonParallelizable code for now
       for(count = 0;count < Ns;count++)
       {
@@ -576,30 +608,77 @@ namespace gcop {
           dx(count1) = dxscale(count1)*uniform_dist(randgenerator);//Adjust dx_scale 
         }
         dxsmatrix.block<nx,1>(0,count) = dx; 
+        //cout<<"dx0: "<<dx.transpose()<<endl;
+        //cout<<dx.norm();
+
         this->sys.X.Retract(x0_sample, this->xs[0], dx);
         xss[0] = x0_sample;
         this->sys.reset(x0_sample,this->ts[0]);
         for(int count1 = 0;count1 < N;count1++)
         {
-          du = dusmatrix.block<nu,1>(count1*nu,count);
+          this->sys.X.Lift(dx, xsprev[count1], xss[count1]);//This is for feedback
+          us1 = this->us[count1] - this->dus[count1] + (this->current_a)*this->kus[count1] + this->Kuxs[count1]*dx;//Before Update
+         // if(count_iterate != 2)
+          {
+            for(int count_u = 0;count_u < nu; count_u++)
+            {
+              //dusmatrix(count1,count)  = duscale(count_u)*uniform_dist(randgenerator);
+              us1[count_u] = us1[count_u] + duscale(count_u)*uniform_dist(randgenerator);
+            }
+          }
+          //The sampled control should be within the control bounds of the system !!!
+          if (U.bnd) {
+            for (int count_u = 0; count_u < nu; ++count_u)
+              if (us1[count_u] < U.lb[count_u]) {
+                //cout<<"I hit bound"<<endl;//[DEBUG]
+                us1[count_u] = U.lb[count_u];
+             //   du[j] = un[j] - u[j];
+              } else
+                if (us1[count_u] > U.ub[count_u]) {
+                  us1[count_u] = U.ub[count_u];
+                  //du[j] = un[j] - u[j];
+                }
+          }
+
+          dusmatrix.block<nu,1>(count1*nu, count) = us1 - this->us[count1];//Verify that this is zero without randomness #DEBUG
+          //dumatrix.block<nu,1>(count1*nu,count) = us1;
+          /*if(count_iterate == 2)
+          {
+            cout<<"us1, us: "<<us1.transpose()<<"\t , "<<(this->us[count1]).transpose()<<endl;
+            //cout<<"dus: "<<(this->dus[count1]).transpose()<<"\t"<<.transpose()<<endl;
+            cout<<"dx[ "<<count1<<"]:\t"<<dx.transpose()<<endl;
+            cout<<"ku[ "<<count1<<"]:\t"<<this->kus[count1].transpose()<<endl;
+            cout<<"Kux[ "<<count1<<"]:"<<endl<<this->Kuxs[count1]<<endl;
+            cout<<"current_a"<<current_a<<endl;
+            //cout<<"ku, Kxu: "<<endl<<(this->kus[count1])<<endl<<(this->Kuxs[count1])<<endl;
+          }
+          */
           //cout<<"du, u: "<<du.transpose()<<"\t"<<(this->us[count1]).transpose()<<endl;
-          us1 = this->us[count1] + du;
           this->sys.Step1(xss[count1+1],us1,(this->ts[count1+1])-(this->ts[count1]), this->p);
-          this->sys.X.Lift(dx, this->xs[count1+1], this->sys.x);
+          this->sys.X.Lift(dx, this->xs[count1+1], xss[count1+1]);//This is for fitting Linear Model
           dxsmatrix.block<nx,1>((count1+1)*nx,count) = dx; 
-//          cout<<"xs["<<(count1+1)<<"]: "<<this->xs[count1+1].transpose()<<endl;
+          //cout<<" "<<dx.norm();
+          if(count_iterate == 2)
+          {
+            cout<<"dx: "<<count1<<"\t"<<dx.transpose()<<endl; 
+            //getchar();
+          }
         }
+        //cout<<endl;
 
         //Render trajectory samples if external rendering function is provided:
         if(external_render)
         {
           external_render(count,xss);//ID for the sample trajectory
         }
-        //cout<<dxsmatrix<<endl;//#DEBUG
-        //getchar();
+        if(count_iterate == 2)
+          getchar();
       }
-      MatrixXd Abs(nx+nu,nx);
+
       //Matrix<double, nx, nx+nu>Abs;
+      //cout<<dxsmatrix<<endl;//#DEBUG
+      //getchar();
+      MatrixXd Abs(nx+nu,nx);
       MatrixXd XUMatrix(nx+nu,Ns);
 
       MatrixXd Xverifymatrix(nx,Ns);//Verify 
@@ -644,6 +723,7 @@ namespace gcop {
         getchar();
         */
       }
+      count_iterate++;
     }
 }
 

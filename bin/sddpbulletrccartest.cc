@@ -95,6 +95,7 @@ void solver_process(Viewer* viewer)
   
   RccarDdp ddp(sys, cost, ts, xs, us);  
   ddp.mu = .01;
+  //ddp.dxscale<<0.01,0.01,0.005,0.05;
   params.GetVector2d("scale_du",(ddp.duscale));
   params.GetDouble("mu", ddp.mu);
 
@@ -109,6 +110,7 @@ void solver_process(Viewer* viewer)
     timer_start(timer);
   for (int i = 0; i < iters; ++i) {
     ddp.Iterate();
+    getchar();
   }
 
   long te = timer_us(timer);
