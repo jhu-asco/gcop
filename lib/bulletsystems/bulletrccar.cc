@@ -7,10 +7,10 @@ Bulletrccar::Bulletrccar(BulletWorld&		m_world_, vector<double> *zs_) :
   Rccar(3),m_carChassis(0), chassisShape(0), m_vehicle(0), m_wheelShape(0)
   ,gEngineForce(0),gBreakingForce(0.f),maxEngineForce(100.f),maxBreakingForce(10.f)
   ,gVehicleSteering(0.f),steeringClamp(0.5f), velocityClamp(5.f)
-  ,carmass(20.0f), wheelRadius(0.07f), wheelWidth(0.06f),wheelFriction(1e10)
+  ,carmass(20.0f), wheelRadius(0.07f), wheelWidth(0.06f),wheelFriction(1e16)
   ,suspensionStiffness(1000.f),suspensionDamping(100.f),suspensionCompression(0.02f)
   ,rollInfluence(0.1f),suspensionRestLength(0.122)
-  ,m_defaultContactProcessingThreshold(1e10)
+  ,m_defaultContactProcessingThreshold(1e16)
   , gain_cmdvelocity(1), kp_torque(25), kp_steer(0.1), initialz(0.15)
   ,m_world(m_world_), zs(zs_), reset_drivevel(false), initialstate(0)
 {

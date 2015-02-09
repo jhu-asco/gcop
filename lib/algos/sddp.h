@@ -95,8 +95,8 @@ namespace gcop {
 
 		std::default_random_engine randgenerator; ///< Default random engine
 
-    //std::normal_distribution<double> normal_dist;///< Creates a normal distribution
-    std::uniform_real_distribution<double> uniform_dist;///< Creates a normal distribution
+    std::normal_distribution<double> normal_dist;///< Creates a normal distribution
+    //std::uniform_real_distribution<double> uniform_dist;///< Creates a normal distribution
 
     Vectornd Lx;
     Matrixnd Lxx;
@@ -200,7 +200,8 @@ namespace gcop {
     dus(N), kus(N), Kuxs(N), 
     s1(0.1), s2(0.5), b1(0.25), b2(2),
     type(LQS),
-    uniform_dist(-1,1),
+    normal_dist(0,1),
+    //uniform_dist(-1,1),
     external_render(0),
     xss(xs),
     xsprev(xs),
@@ -398,8 +399,8 @@ namespace gcop {
 
 	template <typename T, int nx, int nu, int np> 
     void SDdp<T, nx, nu, np>::Forward() {
-    static int count_iterate = 0;
-    count_iterate++;
+    //static int count_iterate = 0;
+    //count_iterate++;
 
     typedef Matrix<double, nx, 1> Vectornd;
     typedef Matrix<double, nu, 1> Vectorcd;
@@ -528,8 +529,12 @@ namespace gcop {
       
       if (dVm > 0) {
        current_a *= b1;
+       if(current_a == 0)
+         break;
         if (current_a < 1e-12)
-          break;
+        {
+          current_a = 0;
+        }
         if (this->debug)
           cout << "[I] SDdp::Forward: step-size reduced a=" << current_a << endl;
         
@@ -562,7 +567,7 @@ namespace gcop {
   }
  template <typename T, int nx, int nu, int np>
     void SDdp<T, nx, nu, np>::Linearize(){
-      static int count_iterate = 0;
+      //static int count_iterate = 0;
 			randgenerator.seed(370212);
       MatrixXd dusmatrix(nu*N,Ns);
       MatrixXd dxsmatrix(nx*(N+1),Ns);
@@ -605,7 +610,7 @@ namespace gcop {
         //Set to initial state perturbed by small amount:
         for(int count1 = 0; count1 < nx; count1++)
         {
-          dx(count1) = dxscale(count1)*uniform_dist(randgenerator);//Adjust dx_scale 
+          dx(count1) = dxscale(count1)*normal_dist(randgenerator);//Adjust dx_scale 
         }
         dxsmatrix.block<nx,1>(0,count) = dx; 
         //cout<<"dx0: "<<dx.transpose()<<endl;
@@ -623,7 +628,7 @@ namespace gcop {
             for(int count_u = 0;count_u < nu; count_u++)
             {
               //dusmatrix(count1,count)  = duscale(count_u)*uniform_dist(randgenerator);
-              us1[count_u] = us1[count_u] + duscale(count_u)*uniform_dist(randgenerator);
+              us1[count_u] = us1[count_u] + duscale(count_u)*normal_dist(randgenerator);
             }
           }
           //The sampled control should be within the control bounds of the system !!!
@@ -658,11 +663,12 @@ namespace gcop {
           this->sys.X.Lift(dx, this->xs[count1+1], xss[count1+1]);//This is for fitting Linear Model
           dxsmatrix.block<nx,1>((count1+1)*nx,count) = dx; 
           //cout<<" "<<dx.norm();
-          if(count_iterate == 2)
+          /*if(count_iterate == 2)
           {
             cout<<"dx: "<<count1<<"\t"<<dx.transpose()<<endl; 
             //getchar();
           }
+          */
         }
         //cout<<endl;
 
@@ -671,8 +677,8 @@ namespace gcop {
         {
           external_render(count,xss);//ID for the sample trajectory
         }
-        if(count_iterate == 2)
-          getchar();
+        //if(count_iterate == 2)
+          //getchar();
       }
 
       //Matrix<double, nx, nx+nu>Abs;
@@ -723,7 +729,7 @@ namespace gcop {
         getchar();
         */
       }
-      count_iterate++;
+      //count_iterate++;
     }
 }
 

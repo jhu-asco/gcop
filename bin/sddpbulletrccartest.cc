@@ -95,7 +95,7 @@ void solver_process(Viewer* viewer)
   
   RccarDdp ddp(sys, cost, ts, xs, us);  
   ddp.mu = .01;
-  //ddp.dxscale<<0.01,0.01,0.005,0.05;
+  ddp.dxscale<<0.01,0.01,0.005,0.05;
   params.GetVector2d("scale_du",(ddp.duscale));
   params.GetDouble("mu", ddp.mu);
 
