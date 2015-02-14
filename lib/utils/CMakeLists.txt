@@ -24,4 +24,5 @@ set(headers
   params.h
   normal.h
   bulletworld.h
+  samplenumericaldiff.h
   )

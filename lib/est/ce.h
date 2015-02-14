@@ -190,7 +190,7 @@ namespace gcop {
   
       if (Ne < N) {
         std::sort(zps.begin(), zps.end(), zpSort<_n>);
-        //    std::sort(cs.begin(), cs.end());   // this is redundant but is kept for consistency
+        std::sort(cs.begin(), cs.end());   // this is redundant but is kept for consistency
         zps.resize(Ne);
         cs.resize(Ne);
       }
