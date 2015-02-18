@@ -4,7 +4,6 @@
 #include "docp.h"
 #include "lqcost.h"
 #include "tparam.h"
-#include "samplenumericaldiff.h"
 
 #include <unsupported/Eigen/NonLinearOptimization>
 
@@ -14,6 +13,9 @@
 #endif
 
 //#define USE_SAMPLE_NUMERICAL_DIFF
+#ifdef USE_SAMPLE_NUMERICAL_DIFF
+#include "samplenumericaldiff.h"
+#endif
 
 namespace gcop {
 
@@ -297,7 +299,7 @@ struct Functor
     values(cost.ng*xs.size()), s(inputs), 
     functor(0), numDiff(0), lm(0), 
 #ifndef USE_SAMPLE_NUMERICAL_DIFF
-    numdiff_stepsize(1e-10)
+    numdiff_stepsize(1e-8)
 #else
     numdiff_stepsize(1e-4)
 #endif
