@@ -183,6 +183,23 @@ namespace gcop {
       return llt.info() == Eigen::Success;
     }  
 
+    void Reset()
+    {
+      this->current_a = 1.0;
+      this->mu = (1e-3);
+      this-> mu0 = (1e-3); 
+      this->dmu0 = (2); 
+      this->a = (1); 
+      this->s1 = (0.1); 
+      this->s2 = (0.5); 
+      this->b1 = (0.25); 
+      this->b2 = (2);
+      for(int count = 0; count < N; count++)
+      {
+        Kuxs[count].setZero();
+        kus[count].setZero();
+      }
+    }
 
   };
 
@@ -559,6 +576,7 @@ namespace gcop {
         cout << "[I] SDdp::Forward: step-size a=" << current_a << endl;    
         */
     }
+    this->J = V + dVm;//Set the optimal cost after one iteration
   }
 
   template <typename T, int nx, int nu, int np> 
