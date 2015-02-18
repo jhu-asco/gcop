@@ -91,7 +91,9 @@ namespace gcop {
     std::vector<T> xsprev;          ///< Mean of Sample states (N+1) vector
     
     std::vector<Vectorcd> kus;
+    std::vector<Vectorcd> du_sigma;///< Stores the stdeviation at each segment
     std::vector<Matrixcnd> Kuxs;
+    std::vector<Vectorcd> Qud; ///< Inverse Variance for sampling du
 
 		std::default_random_engine randgenerator; ///< Default random engine
 
@@ -197,7 +199,7 @@ namespace gcop {
                             bool update) : Docp<T, nx, nu, np>(sys, cost, ts, xs, us, p, false),
     N(us.size()), 
     mu(1e-3), mu0(1e-3), dmu0(2), mumax(1e6), a(1), current_a(1),
-    dus(N), kus(N), Kuxs(N), 
+    dus(N), kus(N), Kuxs(N), Qud(N), du_sigma(N),
     s1(0.1), s2(0.5), b1(0.25), b2(2),
     type(LQS),
     normal_dist(0,1),
@@ -236,22 +238,23 @@ namespace gcop {
         P.resize(sys.X.n, sys.X.n);
         v.resize(sys.X.n);       
       }
+      duscale = Vectorcd::Constant(0.02);//Default initialization of scale
       for(int i =0; i<N; ++i)
       {
         dus[i].setZero();
         Kuxs[i].setZero();//Set initial feedback matrices to zero
         kus[i].setZero();
+        Qud[i] = Vectorcd::Constant(1.0/0.0004);//Set the inverse variance to the given value in the beginning
+        du_sigma[i] = duscale;// Set the sigma to small value to begin with
       }
-      duscale = Vectorcd::Constant(0.02);//Default initialization of scale
-      //dxscale = Vectornd::Constant(0.02);//Default initialization of scale
+      dxscale = Vectornd::Constant(0.02);//Default initialization of scale
       //duscale.setZero();
-      dxscale.setZero();//Default Initialization of scale
       cout<<"duscale: "<<duscale<<endl;
       if (update) {
         this->Update(false);
         xss = xs;//Copy xs to xss in the beginning
         //this->Update(true);//#DEBUG
-        this->Linearize();
+        //this->Linearize();
       }
     }
   
@@ -355,6 +358,10 @@ namespace gcop {
           
         if (this->debug) 
           cout << "[I] SDdp::Backward: reduced mu=" << mu << " at k=" << k << endl;
+
+        //Store Diag value for inverse Variance:
+        Qud[k] = Quum.diagonal();
+        cout<<"Qud: "<<Qud[k].transpose()<<endl;
 
 
           break;
@@ -592,44 +599,155 @@ namespace gcop {
       //cout<<dusmatrix<<endl;//#DEBUG
       //getchar();
 
-      //Find xsprev based on dus and us:
+      /*Find xsprev based on dus and us:
       this->sys.reset(this->xs[0],this->ts[0]);
       for(int count_traj = 0; count_traj< N;count_traj++)
       {
         us1 = this->us[count_traj] - this->dus[count_traj];
         this->sys.Step1(xsprev[count_traj+1],us1,(this->ts[count_traj+1])-(this->ts[count_traj]), this->p);
       }
+      */
 
       //dxsmatrix.block(0,0,nx,Ns).setZero();//Set zero first block
       Vectornd dx;
       T x0_sample;
       Rn<nu> &U = (Rn<nu>&)this->sys.U;
       //NonParallelizable code for now
+      // First do some iterations to adjust the dus_scale(stdeviation of du) so that dx_stdeviation lies close to dx_scale (target stdeviation) across trajectory
+      //Set all du_sigma to given default values:
+      for(count = 0; count < N; count++)
+      {
+        du_sigma[count] = duscale;//Set to given default value
+      }
+      //double kp = 0.005;
+      /*
+      double kp = 0.002;
+      int Ns1 = 15;
+      vector<double> dxsquare(N+1, 0);//0 to N
+      Vectornd dxscale1 = dxscale;
+      for(int count_it = 0;count_it < 2;count_it++)
+      {
+        for(count = 0;count < Ns1; count++)
+        {
+          //Adding Variance to duscale to ensure common variance over the trajectory///////////////////:
+          // First Sample:
+          for(int count1 = 0; count1 < nx; count1++)
+          {
+            dx(count1) = dxscale1(count1)*normal_dist(randgenerator);//Adjust dx_scale 
+          }
+          //dxsmatrix.block<nx,1>(0,count) = dx; 
+          this->sys.X.Retract(x0_sample, this->xs[0], dx);
+          xss[0] = x0_sample;
+          this->sys.reset(x0_sample,this->ts[0]);
+          for(int count_traj = 0; count_traj< N;count_traj++)
+          {
+            this->sys.X.Lift(dx, this->xs[count_traj], xss[count_traj]);//This is for feedback 
+            dxsquare[count_traj] += dx.squaredNorm();
+            //cout<<"dx: "<<dx.transpose()<<endl;
+            //if(du_sigma[count_traj].maxCoeff() > 0.00011)//Only Use Feedback if variance is atleast 0.002
+            {
+              us1 = this->us[count_traj] + this->Kuxs[count_traj]*dx;//Before Update
+            }
+            */
+            /*else
+            {
+              us1 = this->us[count_traj];//No Feedback
+            }
+            */
+            /*for(int count_u = 0;count_u < nu; count_u++)
+            {
+              */
+              /*if(du_sigma[count_traj][count_u] < 0.002)
+                du_sigma[count_traj][count_u] = 0.002;
+              else if(du_sigma[count_traj][count_u] > 0.2)
+                du_sigma[count_traj][count_u] = 0.2;//Bounds ond du_sigma
+                */
+                /*
+              us1[count_u] = us1[count_u] + du_sigma[count_traj][count_u]*normal_dist(randgenerator);
+            }
+            //cout<<"du_sigma: "<<du_sigma[count_traj].transpose()<<endl;
+            //getchar();
+            this->sys.Step1(xss[count_traj+1],us1,(this->ts[count_traj+1])-(this->ts[count_traj]), this->p);
+          }
+          this->sys.X.Lift(dx, this->xs[N], xss[N]);//This is for feedback
+          dxsquare[N] += dx.squaredNorm();
+          //cout<<(dx.squaredNorm()/dxscale.squaredNorm()-1)<<endl;
+        }
+        cout<<(dxsquare[0]/(Ns1*dxscale1.squaredNorm()) - 1)<<endl;
+        for(count = 1;count <= N; count++)
+        {
+          for(int count_sigma = 0;count_sigma < count; count_sigma++)
+          {
+            du_sigma[count_sigma] -= (kp*(count_sigma+1)/double(count))*Vectorcd::Constant(dxsquare[count]/(Ns1*dxscale.squaredNorm()) - 1);
+            //cout<<"du_sigma, dx-dxscale["<<count_sigma<<"]: "<<du_sigma[count_sigma].transpose()<<endl;
+            for(int count_u = 0;count_u < nu; count_u++)
+            {
+              if(du_sigma[count_sigma][count_u] < 0.005)
+                du_sigma[count_sigma][count_u] = 0.005;
+              else if(du_sigma[count_sigma][count_u] > 0.2)
+                du_sigma[count_sigma][count_u] = 0.2;//Bounds ond du_sigma
+            }
+          }
+          //dxscale1 -= (kp/double(count))*Vectornd::Constant(dxsquare[count]/(Ns1*dxscale.squaredNorm()) - 1);
+          cout<<(dxsquare[count]/(Ns1*dxscale.squaredNorm()) - 1)<<endl;
+          //set dxsquare back to zero:
+          dxsquare[count] = 0;
+        }
+        dxsquare[0] = 0;
+        for(count = 0; count< N; count++)
+        {
+          cout<<"du_sigma["<<count<<"]: "<<du_sigma[count].transpose()<<endl;
+        }
+        //cout<<(dx.squaredNorm()/dxscale.squaredNorm() - 1)<<endl;
+        cout<<"------Iteration done----"<<endl;
+      }
+        */
+      //getchar();
       for(count = 0;count < Ns;count++)
       {
         //Set to initial state perturbed by small amount:
         for(int count1 = 0; count1 < nx; count1++)
         {
-          dx(count1) = dxscale(count1)*normal_dist(randgenerator);//Adjust dx_scale 
+          dx(count1) = this->dxscale(count1)*normal_dist(randgenerator);//Adjust dx_scale 
         }
         dxsmatrix.block<nx,1>(0,count) = dx; 
         //cout<<"dx0: "<<dx.transpose()<<endl;
         //cout<<dx.norm();
 
         this->sys.X.Retract(x0_sample, this->xs[0], dx);
+
         xss[0] = x0_sample;
         this->sys.reset(x0_sample,this->ts[0]);
         for(int count1 = 0;count1 < N;count1++)
         {
-          this->sys.X.Lift(dx, xsprev[count1], xss[count1]);//This is for feedback
-          us1 = this->us[count1] - this->dus[count1] + (this->current_a)*this->kus[count1] + this->Kuxs[count1]*dx;//Before Update
+          //this->sys.X.Lift(dx, xsprev[count1], xss[count1]);//This is for feedback
+          //us1 = this->us[count1] - this->dus[count1] + (this->current_a)*this->kus[count1] + this->Kuxs[count1]*dx;//Before Update
+          this->sys.X.Lift(dx, this->xs[count1], xss[count1]);//This is for feedback
+          dxsmatrix.block<nx,1>((count1)*nx,count) = dx; 
+          //if(du_sigma[count1].maxCoeff() > 0.00011)//Only Use Feedback if variance is greater than 0.0001(min)
+          {
+            us1 = this->us[count1] + this->Kuxs[count1]*dx;//Before Update
+            //us1 = this->us[count1];//No Feedback
+            //cout<<"Feedback: "<< (this->Kuxs[count1]*dx).transpose()<<endl;
+          }
+          /*else
+          {
+            us1 = this->us[count1];//No Feedback
+          }
+          */
          // if(count_iterate != 2)
           {
             for(int count_u = 0;count_u < nu; count_u++)
             {
+              //Make sure Qud is not smaller than some threshold:
               //dusmatrix(count1,count)  = duscale(count_u)*uniform_dist(randgenerator);
-              us1[count_u] = us1[count_u] + duscale(count_u)*normal_dist(randgenerator);
+              //if(Qud[count1][count_u]<(1.0/(duscale[count_u]*duscale[count_u])))
+              assert((du_sigma[count1][count_u] < 0.21)&&(du_sigma[count1][count_u]>0.00009));
+              us1[count_u] = us1[count_u] + du_sigma[count1][count_u]*normal_dist(randgenerator);
+              //else
+                //us1[count_u] = us1[count_u] + (1.0/sqrt(Qud[count1][count_u]))*normal_dist(randgenerator);
             }
+            //getchar();
           }
           //The sampled control should be within the control bounds of the system !!!
           if (U.bnd) {
@@ -660,8 +778,7 @@ namespace gcop {
           */
           //cout<<"du, u: "<<du.transpose()<<"\t"<<(this->us[count1]).transpose()<<endl;
           this->sys.Step1(xss[count1+1],us1,(this->ts[count1+1])-(this->ts[count1]), this->p);
-          this->sys.X.Lift(dx, this->xs[count1+1], xss[count1+1]);//This is for fitting Linear Model
-          dxsmatrix.block<nx,1>((count1+1)*nx,count) = dx; 
+          //this->sys.X.Lift(dx, this->xs[count1+1], xss[count1+1]);//This is for fitting Linear Model
           //cout<<" "<<dx.norm();
           /*if(count_iterate == 2)
           {
@@ -670,7 +787,10 @@ namespace gcop {
           }
           */
         }
-        //cout<<endl;
+        //Final step:
+        this->sys.X.Lift(dx, this->xs[N], xss[N]);//This is for feedback
+        dxsmatrix.block<nx,1>((N)*nx,count) = dx; 
+        //cout<<endl; 
 
         //Render trajectory samples if external rendering function is provided:
         if(external_render)
