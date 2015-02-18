@@ -9,7 +9,13 @@
 #include "bulletrccar.h"
 #include "bulletworld.h"
 
+#define USE_SPLINEPARAM
+
+#ifdef USE_SPLINEPARAM
+#include "splinetparam.h"
+#else
 #include "controltparam.h"
+#endif
 
 using namespace std;
 using namespace Eigen;
@@ -92,21 +98,29 @@ void solver_process(Viewer* viewer)
 
   vector<Vector2d> us(N);
   for (int i = 0; i < N/2; ++i) {
-    us[i] = Vector2d(0.1, 0);
-    us[N/2+i] = Vector2d(0.1, -0);
+    us[i] = Vector2d(0.1, 0.1);
+    us[N/2+i] = Vector2d(0.1, -0.1);
   }
 
   
   //  Tparam<Vector4d, 4, 2> tp(sys, us.size()*sys.U.n);
 
   int Nk = 10;
-  vector<double> tks(Nk+1);
+  VectorXd tks(Nk+1);
+  //vector<double> tks(Nk+1);
   for (int k = 0; k <=Nk; ++k)
     tks[k] = k*(tf/Nk);
-  
+
+#ifdef USE_SPLINEPARAM
+  SplineTparam<Vector4d, 4, 2> ctp(sys, tks);
+#else
   ControlTparam<Vector4d, 4, 2> ctp(sys, tks);
+#endif
 
   RccarGn gn(sys, cost, ctp, ts, xs, us);  
+#ifdef USE_SPLINEPARAM
+  gn.numdiff_stepsize = 1e-5;
+#endif
 
   RccarView view((Rccar)sys, &gn.xs);
   

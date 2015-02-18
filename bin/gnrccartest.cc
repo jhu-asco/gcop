@@ -96,13 +96,15 @@ void solver_process(Viewer* viewer)
     tks[k] = k*(tf/Nk);
   
 #ifdef USE_SPLINEPARAM
-  SplineTparam<Vector4d, 4, 2> ctp(sys, tks, 3);
+  SplineTparam<Vector4d, 4, 2> ctp(sys, tks);
 #else
   ControlTparam<Vector4d, 4, 2> ctp(sys, tks);
 #endif
 
   RccarGn gn(sys, cost, ctp, ts, xs, us);  
+#ifdef USE_SPLINEPARAM
   gn.numdiff_stepsize = 1e-5;
+#endif
 
   RccarView view(sys, &gn.xs);
   
