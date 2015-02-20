@@ -12,6 +12,11 @@
 #include "glog/logging.h"
 #endif
 
+//#define USE_SAMPLE_NUMERICAL_DIFF
+#ifdef USE_SAMPLE_NUMERICAL_DIFF
+#include "samplenumericaldiff.h"
+#endif
+
 namespace gcop {
 
 #ifdef GCOP_GNDOCP_CERES
@@ -101,12 +106,19 @@ using ceres::Solve;
 
     int inputs;
     int values;
+
+    double numdiff_stepsize;   ///< The step size for perturbations
      
     VectorXd s;  ///< optimization vector 
     
     GnCost<T, _nx, _nu, _np, _ng, _ntp> *functor;
+#ifndef USE_SAMPLE_NUMERICAL_DIFF
     NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > *numDiff;
     LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > > *lm;
+#else 
+    SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > *numDiff;
+    LevenbergMarquardt<SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > > *lm;
+#endif
   };
 
   
@@ -285,7 +297,12 @@ struct Functor
     Docp<T, _nx, _nu, _np>(sys, cost, ts, xs, us, p, false), tparam(tparam),
     inputs(tparam.ntp),
     values(cost.ng*xs.size()), s(inputs), 
-    functor(0), numDiff(0), lm(0)
+    functor(0), numDiff(0), lm(0), 
+#ifndef USE_SAMPLE_NUMERICAL_DIFF
+    numdiff_stepsize(1e-8)
+#else
+    numdiff_stepsize(1e-4)
+#endif
     {
       if(update)
         this->Update(false);//No need of derivatives
@@ -309,8 +326,13 @@ struct Functor
     if (!lm) {
       functor = new GnCost<T, _nx, _nu, _np, _ng, _ntp>(inputs, values);
       functor->docp = this;
-      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor,1e-10);
+#ifndef USE_SAMPLE_NUMERICAL_DIFF
+      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor,numdiff_stepsize);
       lm = new LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > >(*numDiff);
+#else 
+      numDiff = new SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor,numdiff_stepsize);
+      lm = new LevenbergMarquardt<SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > >(*numDiff);
+#endif
       lm->parameters.maxfev = 1e6;//Maximum nof evaluations is very high
       info = lm->minimizeInit(s);
       cout <<"info="<<info <<endl;

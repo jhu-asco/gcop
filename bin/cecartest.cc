@@ -6,7 +6,14 @@
 #include "utils.h"
 #include "rnlqcost.h"
 #include "params.h"
+
+#define USE_SPLINEPARAM
+
+#ifdef USE_SPLINEPARAM
+#include "splinetparam.h"
+#else
 #include "controltparam.h"
+#endif
 
 using namespace std;
 using namespace Eigen;
@@ -95,13 +102,19 @@ void solver_process(Viewer* viewer)
   
 #ifdef USE_TPARAM
   int Nk = 5;
-  vector<double> tks(Nk+1);
+  //vector<double> tks(Nk+1);
+  VectorXd tks(Nk+1);
   for (int k = 0; k <=Nk; ++k)
   {
     tks[k] = k*(tf/Nk);
   }
   
+
+#ifdef USE_SPLINEPARAM
+  SplineTparam<Vector4d, 4, 2> ctp(sys, tks);
+#else
   ControlTparam<Vector4d, 4, 2> ctp(sys, tks);
+#endif
 
   RccarCe ce(sys, cost, ctp, ts, xs, us, 0, dus, es);
 #else

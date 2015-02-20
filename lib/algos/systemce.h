@@ -138,6 +138,8 @@ namespace gcop {
 
     double J;    ///< optimal cost
 
+    Vectortpd zmin; ///< Current best z corresponding to J
+
     int nofevaluations;///< Number of evaluations at any point of time
     
     bool debug;  ///< whether to display debugging info    
@@ -386,6 +388,7 @@ namespace gcop {
 
       Update(xs, us, false);
       J = ce.Jmin;
+      zmin = ce.zmin;//Store the parameters also
     }
 
     // construct trajectory using the first sample (this is the one with lowest cost)

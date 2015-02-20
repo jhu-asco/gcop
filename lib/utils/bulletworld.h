@@ -49,7 +49,7 @@ namespace gcop{
 
 		public:
       BulletWorld(bool usezupaxis_ = false, btVector3 worldMin_ = btVector3(-1000,-1000,-1000), btVector3 worldMax_ = btVector3(1000,1000,1000)):
-        m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
+        m_defaultContactProcessingThreshold(1e10)
         ,worldMin(worldMin_), worldMax(worldMax_), usezupaxis(usezupaxis_)
       {
         m_collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -309,20 +309,82 @@ namespace gcop{
 			}
 
 			//Reset Bullet Physics Engine and clear collision info and reset constraint solver
-			void Reset()
+      void Reset()
       {
+        //cout<<"Resetting Pool and constraint solver"<<endl;
+        m_overlappingPairCache->resetPool(m_dispatcher);
+				m_constraintSolver->reset();
+      }
+			/*void Reset()
+      {
+        int numObjects = 0;
+        int i;
         if(!m_dynamicsWorld)
 				{
 					cerr<<"m_dynamicsWorld not defined"<<endl;
 					return;
 				}
-        m_overlappingPairCache->resetPool(m_dispatcher);
-				m_constraintSolver->reset();
+        else
+        {
+          int numConstraints = m_dynamicsWorld->getNumConstraints();
+          for (i=0;i<numConstraints;i++)
+          {
+            m_dynamicsWorld->getConstraint(0)->setEnabled(true);
+          }
+          numObjects = m_dynamicsWorld->getNumCollisionObjects();
+
+          ///create a copy of the array, not a reference!
+          btCollisionObjectArray copyArray = m_dynamicsWorld->getCollisionObjectArray();
+
+
+
+
+          for (i=0;i<numObjects;i++)
+          {
+            btCollisionObject* colObj = copyArray[i];
+            btRigidBody* body = btRigidBody::upcast(colObj);
+            if (body)
+            {
+              if (body->getMotionState())
+              {
+                btDefaultMotionState* myMotionState = (btDefaultMotionState*)body->getMotionState();
+                myMotionState->m_graphicsWorldTrans = myMotionState->m_startWorldTrans;
+                body->setCenterOfMassTransform( myMotionState->m_graphicsWorldTrans );
+                colObj->setInterpolationWorldTransform( myMotionState->m_startWorldTrans );
+                colObj->forceActivationState(ACTIVE_TAG);
+                colObj->activate();
+                colObj->setDeactivationTime(0);
+                //colObj->setActivationState(WANTS_DEACTIVATION);
+              }
+              //removed cached contact points (this is not necessary if all objects have been removed from the dynamics world)
+              if (m_dynamicsWorld->getBroadphase()->getOverlappingPairCache())
+                m_dynamicsWorld->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(colObj->getBroadphaseHandle(),m_dynamicsWorld->getDispatcher());
+
+              btRigidBody* body = btRigidBody::upcast(colObj);
+              if (body && !body->isStaticObject())
+              {
+                btRigidBody::upcast(colObj)->setLinearVelocity(btVector3(0,0,0));
+                btRigidBody::upcast(colObj)->setAngularVelocity(btVector3(0,0,0));
+              }
+            }
+
+          }
+
+          ///reset some internal cached data in the broadphase
+          m_dynamicsWorld->getBroadphase()->resetPool(m_dynamicsWorld->getDispatcher());
+          m_dynamicsWorld->getConstraintSolver()->reset();
+        }
+
+        //m_overlappingPairCache->resetPool(m_dispatcher);
+				//m_constraintSolver->reset();
       }
+      */
 
 
 			~BulletWorld()//Destructor for Bullet Physics Engine
 			{
+				delete m_dynamicsWorld;
+
 				//remove the rigidbodies from the dynamics world and delete them
 				int i;
 				for (i=m_dynamicsWorld->getNumCollisionObjects()-1; i>=0 ;i--)
@@ -343,7 +405,6 @@ namespace gcop{
 					delete shape;
 				}
 
-				delete m_dynamicsWorld;
 
 				//delete solver
 				delete m_constraintSolver;
@@ -355,6 +416,7 @@ namespace gcop{
 				delete m_dispatcher;
 
 				delete m_collisionConfiguration;
+
 			}
 	};
 };
