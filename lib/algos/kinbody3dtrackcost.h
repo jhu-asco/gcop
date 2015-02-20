@@ -26,7 +26,13 @@ namespace gcop {
              Matrix<double, 6, 6> *Lxu = 0, 
              VectorXd *Lp = 0, MatrixXd *Lpp = 0, MatrixX6d *Lpx = 0);
 
+    double obsCost(double t, double h, const Matrix4d &x, const VectorXd *p);
+    void pokeX(Matrix4d &xb, const Matrix4d &xa, const int i, const double eps);
+    void pokeX2(Matrix4d &xb, const Matrix4d &xa, const int i, const int j, const double epsi, const double epsj);
+    Matrix6d fdLxx(double t, double h, const Matrix4d &x,  const VectorXd *p);
+
     const Kinbody3dTrack &pg;
+    bool useFdHess;
   };  
 }
 

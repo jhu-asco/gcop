@@ -107,10 +107,9 @@ double Body3dTrackCost::L(double t, const Body3dState &x, const Vector6d &u,
     }
 
     if (Lxx) {
-      Lxx->block<3,3>(0,0) += (r3hat(y).transpose()*r3hat(y))/pg.cp;
-      Lxx->block<3,3>(0,3) += (-r3hat(r) + r3hat(y)/pg.cp);
-      //cout << "block:" << endl << (-r3hat(r) + r3hat(y)/pg.cp) << endl;
-      Lxx->block<3,3>(3,0) += (-r3hat(r) + r3hat(y)/pg.cp).transpose();      
+      Lxx->block<3,3>(0,0) += (r3hat(y).transpose()*r3hat(y))/pg.cp + r3hat(r)*r3hat(y)/2. + (r3hat(r)*r3hat(y)).transpose()/2.;
+      Lxx->block<3,3>(0,3) += (-r3hat(r)/2. + r3hat(y)/pg.cp);
+      Lxx->block<3,3>(3,0) += (-r3hat(r)/2. + r3hat(y)/pg.cp).transpose();      
       Lxx->block<3,3>(3,3) += Matrix3d::Identity()/pg.cp;
     }
 
