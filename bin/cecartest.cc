@@ -10,7 +10,7 @@
 #define USE_SPLINEPARAM
 
 #ifdef USE_SPLINEPARAM
-#include "splinetparam.h"
+#include "uniformsplinetparam.h"
 #else
 #include "controltparam.h"
 #endif
@@ -106,12 +106,14 @@ void solver_process(Viewer* viewer)
   VectorXd tks(Nk+1);
   for (int k = 0; k <=Nk; ++k)
   {
-    tks[k] = k*(tf/Nk);
+    double u = double(k)/Nk;
+    //tks[k] = tf*u*u;
+    tks[k] = tf*u;
   }
   
 
 #ifdef USE_SPLINEPARAM
-  SplineTparam<Vector4d, 4, 2> ctp(sys, tks);
+  UniformSplineTparam<Vector4d, 4, 2> ctp(sys, tks);
 #else
   ControlTparam<Vector4d, 4, 2> ctp(sys, tks);
 #endif

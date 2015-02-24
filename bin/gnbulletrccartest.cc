@@ -12,7 +12,7 @@
 #define USE_SPLINEPARAM
 
 #ifdef USE_SPLINEPARAM
-#include "splinetparam.h"
+#include "uniformsplinetparam.h"
 #else
 #include "controltparam.h"
 #endif
@@ -112,15 +112,15 @@ void solver_process(Viewer* viewer)
     tks[k] = k*(tf/Nk);
 
 #ifdef USE_SPLINEPARAM
-  SplineTparam<Vector4d, 4, 2> ctp(sys, tks);
+  UniformSplineTparam<Vector4d, 4, 2> ctp(sys, tks,3);
 #else
   ControlTparam<Vector4d, 4, 2> ctp(sys, tks);
 #endif
 
   RccarGn gn(sys, cost, ctp, ts, xs, us);  
-#ifdef USE_SPLINEPARAM
-  gn.numdiff_stepsize = 1e-5;
-#endif
+//#ifdef USE_SPLINEPARAM
+  //gn.numdiff_stepsize = 1e-5;
+//#endif
 
   RccarView view((Rccar)sys, &gn.xs);
   

@@ -13,9 +13,10 @@
 #endif
 
 //#define USE_SAMPLE_NUMERICAL_DIFF
-#ifdef USE_SAMPLE_NUMERICAL_DIFF
+/*#ifdef USE_SAMPLE_NUMERICAL_DIFF
 #include "samplenumericaldiff.h"
 #endif
+*/
 
 namespace gcop {
 
@@ -112,13 +113,14 @@ using ceres::Solve;
     VectorXd s;  ///< optimization vector 
     
     GnCost<T, _nx, _nu, _np, _ng, _ntp> *functor;
-#ifndef USE_SAMPLE_NUMERICAL_DIFF
+//#ifndef USE_SAMPLE_NUMERICAL_DIFF
     NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > *numDiff;
     LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > > *lm;
-#else 
+/*#else 
     SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > *numDiff;
     LevenbergMarquardt<SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > > *lm;
 #endif
+    */
   };
 
   
@@ -326,13 +328,14 @@ struct Functor
     if (!lm) {
       functor = new GnCost<T, _nx, _nu, _np, _ng, _ntp>(inputs, values);
       functor->docp = this;
-#ifndef USE_SAMPLE_NUMERICAL_DIFF
+//#ifndef USE_SAMPLE_NUMERICAL_DIFF
       numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor,numdiff_stepsize);
       lm = new LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > >(*numDiff);
-#else 
+/*#else 
       numDiff = new SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor,numdiff_stepsize);
       lm = new LevenbergMarquardt<SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > >(*numDiff);
 #endif
+      */
       lm->parameters.maxfev = 1e6;//Maximum nof evaluations is very high
       info = lm->minimizeInit(s);
       cout <<"info="<<info <<endl;
