@@ -239,8 +239,8 @@ void Body3dTrack::MakeTrue()
   int i = 0;  
   for (int l =0; l < ls.size();) {
     double a = RND*2*M_PI;
-    if (a>M_PI && a<1.5*M_PI || a>0 && a<M_PI/2)
-      continue;
+//    if (a>M_PI && a<1.5*M_PI || a>0 && a<M_PI/2)
+//      continue;
     double z = (RND-0.5)*1.5*this->h;
     double r_rand = 3*w*(RND-0.5) + r; 
     ls[l] = Vector3d(r_rand*cos(a), r_rand*sin(a), z);
@@ -280,5 +280,5 @@ void Body3dTrack::Get(Body3dState &x, double vd, double t) const
   v = x.first*v;
  
   x.second <<  r*cos(a), r*sin(a), 0, 0, 0, 0, v(0), v(1), 0;
-  //x.second <<  r*cos(a), r*sin(a), 0, 0, 0, 0, vd/r, vd, 0;
+  //x.second <<  r*cos(a), r*sin(a), 0, 0, 0, 0, vd, 0, 0;
 }

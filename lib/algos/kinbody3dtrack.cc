@@ -40,6 +40,7 @@ void Kinbody3dTrack::Add(const Vector6d &u, const Matrix4d &x, double h)
               u[4] + sqrt(cw[4])*random_normal(),
               u[5] + sqrt(cw[5])*random_normal();
 
+
   sys.Step(xn, t, xs.back(), un, h);
   us.push_back(un);
   xs.push_back(xn);
@@ -121,6 +122,7 @@ void Kinbody3dTrack::Add2(const Vector6d &u, const Matrix4d &x, double h)
   Eigen::Matrix4d xn;
   double t = ts.back();
   
+
   sys.Step(xn, t, xs.back(), u, h);
   us.push_back(u);
   xs.push_back(xn);

@@ -244,7 +244,7 @@ void Run(Viewer* viewer)
 
       pddp = new PDdp<Body3dState, 12, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
       //pddp->debug = false;
-      for (int b=0; b < 20;++b)
+      for (int b=0; b < 1;++b)
       {
         //getchar(); 
         timer_start(timer);

@@ -104,6 +104,14 @@ namespace gcop {
     double nu;    ///< current regularization factor nu
     double nu0;   ///< minimum regularization factor nu
     double dnu0;  ///< regularization factor modification step-size
+    bool printDebug;
+
+
+    bool pdX(const MatrixXd &P) {
+      LLT<MatrixXd> llt;
+      llt.compute(P);
+      return llt.info() == Eigen::Success;
+    }
 
   };
   
@@ -127,13 +135,6 @@ namespace gcop {
     Lxua.resize(sys.X.n + m, sys.U.n);
     Kuxs.resize(this->N);   
  
-    if (n == Dynamic || c == Dynamic || np == Dynamic) {
-
-      Lu.resize(sys.U.n);
-      Luu.resize(sys.U.n, sys.U.n);
-
-    }
-
     for (int i = 0; i < this->N; ++i) {
       Kuxs[i] = MatrixXd::Zero(sys.U.n, sys.X.n + m);
       if (dynParams)
@@ -143,6 +144,7 @@ namespace gcop {
 
     if (update)
       Update();
+    printDebug = false;
   }
   
 
@@ -235,6 +237,9 @@ namespace gcop {
 
     v = Lxa;
     P = Lxxa;
+
+    //cout << "v start: " << endl << v << endl;
+    //cout << "P start: " << endl << P << endl;
     
     VectorXd Qx = VectorXd::Zero(this->sys.X.n + m);
     Vectorcd Qu;  
@@ -242,6 +247,7 @@ namespace gcop {
     MatrixXd Qxx = MatrixXd::Zero(this->sys.X.n + m, this->sys.X.n+m);
     Matrixcd Quu;
     Matrixcd Quum;
+    MatrixXd Quxm =  MatrixXd::Zero(this->sys.U.n, this->sys.X.n+m);
     MatrixXd Qux = MatrixXd::Zero(this->sys.U.n, this->sys.X.n+m);
 
     MatrixXd Aat = MatrixXd::Zero(this->sys.X.n + m, this->sys.X.n+m);
@@ -302,37 +308,113 @@ namespace gcop {
       
       LLT<Matrixcd> llt;
       
+      printDebug = false;
+     
+      double mu = this->mu;
+      if (this->debug) {
+        if (!pdX(P)) {
+        //  cout << "P[" << k << "] is not pd =" << endl << P << endl;
+        //  cout << "Luu=" << endl << Luu << endl;
+        }
+
+        Matrixcd Pp = Bt*P.block(0,0,n,n)*B;
+        if (!pdX(Pp)) {
+        //  cout << "B'PB is not positive definite:" << endl << Pp << endl;
+        }
+      }
+
+      if(false)
+      {
+        cout << "k=" << endl << k << endl;
+        //cout << "x:" << endl << x << endl;
+        cout << "u:" << endl << u << endl;
+        cout << "p:" << endl << p << endl;
+        cout << "Qxx:" << endl << Qxx << endl;
+        cout << "Quu:" << endl << Quu << endl;
+        cout << "Qux:" << endl << Qux << endl;
+        cout << "P:" << endl << P << endl;
+        cout << "v:" << endl << v << endl;
+        cout << "Lxxa: " << endl << Lxxa << endl;
+        cout << "Lxx: " << endl << Lxx << endl;
+        cout << "Lpp: " << endl << Lpp << endl;
+        cout << "Lpx: " << endl << Lpx << endl;
+        cout << "Lxa: " << endl << Lxa << endl;
+        cout << "Luu: " << endl << Luu << endl;
+        cout << "Lu: " << endl << Lu << endl;
+        cout << "Aa: " << endl << Aa << endl;
+        cout << "B: " << endl << B << endl;
+      }
+
+
       while (1) {
-        Quum = Quu + this->mu*Ic;
+        Quum = Quu + mu*Ic;
+        
+        // From https://homes.cs.washington.edu/~todorov/papers/TassaIROS12.pdf
+        //MatrixXd Pm = P+mu*MatrixXd::Identity(n+m,n+m);
+        //Quum = Luu + Bt*Pm.block(0,0,n,n)*B;
         llt.compute(Quum);
         
         // if OK, then reduce mu and break
         if (llt.info() == Eigen::Success) {
+          
+          //Quxm.block(0,0,c,n) =  Bt*Pm.block(0,0,n,n)*A;     // assume Lux = 0
+          //Quxm.block(0,n,c,m) =  Bt*Pm.block(0,n,n,m);     
+          //if(dynParams)
+          //  Quxm.block(0,n,c,dynParams) +=  Bt*Pm.block(0,0,n,n)*this->Cs[k];     
+
           // Tassa and Todorov recently proposed this quadratic rule, seems pretty good
           dmu = min(1/this->dmu0, dmu/this->dmu0);
-          if (this->mu*dmu > this->mu0)
-            this->mu *= dmu;
+          if (mu*dmu > this->mu0)
+          { 
+             mu = mu*dmu;
+          }
           else
-            this->mu = this->mu0;
+          {
+             mu = this->mu0;
+          }
           break;
         }
-        
-        // if negative then increase mu
-        dmu = max(this->dmu0, dmu*this->dmu0);
-        this->mu = max(this->mu0, this->mu*dmu);   
-        
+        else
+        {
+          // if negative then increase mu
+          dmu = max(this->dmu0, dmu*this->dmu0);
+          mu = max(this->mu0, mu*dmu);   
+        }
+
         if (this->debug)
-          cout << "[I] PDdp::Backward: increased mu=" << this->mu << " at k=" << k << endl;
+          cout << "[I] PDdp::Backward: increased mu=" << mu << " at k=" << k << endl;
+        printDebug = true;
+
+        if (mu > this->mumax) {
+          cout << "[W] PDdp::Backward: mu= " << mu << " exceeded maximum !" << endl;
+          if (this->debug)
+            getchar();
+          break;
+        }
+
       }
-      
-      ku = -llt.solve(Qu);
-      Kux = -llt.solve(Qux);
 
       
+      if(mu > this->mumax)
+        break;
+
+
+      ku = -llt.solve(Qu);
+      Kux = -llt.solve(Qux);
+      //Kux = -llt.solve(Quxm);
+
+      assert(!std::isnan(ku[0]));
+      assert(!std::isnan(Kux(0,0)));
+
+      // Update used in https://homes.cs.washington.edu/~todorov/papers/TassaIROS12.pdf
+      //v = Qx + Kux.transpose()*Quu*ku + Kux.transpose()*Qu + Qux.transpose()*ku;
+      //P = Qxx + Kux.transpose()*Quu*Kux + Kux.transpose()*Qux + Qux.transpose()*Kux;
+ 
       v = Qx + Kux.transpose()*Qu;
       P = Qxx + Kux.transpose()*Qux;
       this->dV[0] += ku.dot(Qu);
       this->dV[1] += ku.dot(Quu*ku/2);
+
     }
     
     if (this->debug)
@@ -383,18 +465,17 @@ namespace gcop {
       // if negative then increase mu
       dnu = max(this->dnu0, dnu*this->dnu0);
       nu = max(this->nu0, nu*dnu);   
-      
       if (this->debug)
       {
         cout << "[I] PDdp::Forward: increased nu=" << nu << endl;
       }
     }
+
     dp = -llt.solve(bp);
 
-
     // measured change in V
-    double dVm = 1;
-    
+    double dVm = 1;      
+
     double a = this->a;
 
     Vectormd dp1 = dp;
@@ -423,6 +504,10 @@ namespace gcop {
         du = a*this->kus[k] + Kuxs[k]*dxa;
         un = u + du;
         
+        //cout << "k=" << k << endl;
+        //cout << "kus:" << endl << this->kus[k] << endl;
+        //cout << "Kuxs:" << endl << Kuxs[k] << endl;
+
         const double &t = this->ts[k];
         double L = this->cost.L(t, xn, un, 0, &pn);
         Vm += L;
@@ -440,6 +525,7 @@ namespace gcop {
           xn = xn_;
           this->sys.X.Lift(dx, this->xs[k+1], xn);
         }
+
         dxa.head(n) = dx;
       }
       

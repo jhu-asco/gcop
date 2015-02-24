@@ -3,7 +3,6 @@
 #include "kinbody3dtrackcost.h"
 #include "pddp.h"
 #include "utils.h"
-#include "se2.h"
 #include "viewer.h"
 #include "kinbody3dview.h"
 #include "kinbody3dcost.h"
@@ -113,9 +112,7 @@ void Run(Viewer* viewer)
 
   struct timeval timer;
   getchar();
-  
 
-  SE2 &se2 = SE2::Instance();  
   Matrix4d xf;
   pg.Get(xf, vd, Tc);
 
@@ -180,13 +177,14 @@ void Run(Viewer* viewer)
   PDdp<Matrix4d, 6, 6> *pddp = 0;
 
 
+  bool oc = false;
+  params.GetBool("oc", oc);
+  
   for (double t=0; t < tf; t+=h) {
 
     pg.Get(xf, vd, t+Tc);
     cost.tf = t + Tc;
 
-    bool oc = false;
-    params.GetBool("oc", oc);
 
     xs[0] = pg.xs.back();    
     for (int j=0; j < N; ++j) {
@@ -210,7 +208,6 @@ void Run(Viewer* viewer)
                           sqrt(pg.cw[3])*random_normal(), 
                           sqrt(pg.cw[4])*random_normal(), 
                           sqrt(pg.cw[5])*random_normal(); 
-    w << 0,  0, 0, sqrt(pg.cw[3]), 0, 0; 
     //w << 0,  0, 0, sqrt(pg.cw[3]), 0, 0; 
     std::cout << "w: " << w << std::endl;
     std::cout << "us[0]: " << us[0] << std::endl;
@@ -242,7 +239,7 @@ void Run(Viewer* viewer)
       cout << "p " << pg.p.size() << endl;
 
       pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
-      //pddp->debug = false;
+      pddp->debug = false;
       for (int b=0; b < 10;++b)
       {
         //getchar(); 
