@@ -114,8 +114,8 @@ using ceres::Solve;
     
     GnCost<T, _nx, _nu, _np, _ng, _ntp> *functor;
 //#ifndef USE_SAMPLE_NUMERICAL_DIFF
-    NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > *numDiff;
-    LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > > *lm;
+    NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp>, NumericalDiffMode::Central> *numDiff;
+    LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp>, NumericalDiffMode::Central> > *lm;
 /*#else 
     SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > *numDiff;
     LevenbergMarquardt<SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > > *lm;
@@ -309,6 +309,8 @@ struct Functor
       if(update)
         this->Update(false);//No need of derivatives
 
+      ++(this->nofevaluations);
+
       tparam.To(s, this->ts, this->xs, this->us, this->p);
 
       cout <<"ntp=" <<tparam.ntp << endl;
@@ -329,8 +331,8 @@ struct Functor
       functor = new GnCost<T, _nx, _nu, _np, _ng, _ntp>(inputs, values);
       functor->docp = this;
 //#ifndef USE_SAMPLE_NUMERICAL_DIFF
-      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor,numdiff_stepsize);
-      lm = new LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > >(*numDiff);
+      numDiff = new NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp>, NumericalDiffMode::Central>(*functor,numdiff_stepsize);
+      lm = new LevenbergMarquardt<NumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp>, NumericalDiffMode::Central> >(*numDiff);
 /*#else 
       numDiff = new SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> >(*functor,numdiff_stepsize);
       lm = new LevenbergMarquardt<SampleNumericalDiff<GnCost<T, _nx, _nu, _np, _ng, _ntp> > >(*numDiff);

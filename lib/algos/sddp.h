@@ -269,6 +269,8 @@ namespace gcop {
       cout<<"duscale: "<<duscale<<endl;
       if (update) {
         this->Update(false);
+
+     ++(this->nofevaluations);
         xss = xs;//Copy xs to xss in the beginning
         //this->Update(true);//#DEBUG
         //this->Linearize();
@@ -542,6 +544,7 @@ namespace gcop {
           assert(!std::isnan(dx[0]));
         }
       }
+      ++(this->nofevaluations);
       
       double L = this->cost.L(this->ts[N], xn, un, 0);
       Vm += L;
@@ -588,6 +591,7 @@ namespace gcop {
     for (int k = 0; k < N; ++k)
       this->us[k] += dus[k];
     this->Update(false);
+    ++(this->nofevaluations);
     //this->Update(true);//#DEBUG
   }
  template <typename T, int nx, int nu, int np>
@@ -805,6 +809,7 @@ namespace gcop {
           }
           */
         }
+        ++(this->nofevaluations);
         //Final step:
         this->sys.X.Lift(dx, this->xs[N], xss[N]);//This is for feedback
         dxsmatrix.block<nx,1>((N)*nx,count) = dx; 
