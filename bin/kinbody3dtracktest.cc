@@ -44,6 +44,8 @@ void Run(Viewer* viewer)
   bool hideOdom = false;
   params.GetBool("hideOdom", hideOdom);
 
+  int slidingWindow = -1;
+  params.GetInt("slidingWindow", slidingWindow);
 
   // control horizon params
   int iters = 30;
@@ -238,7 +240,25 @@ void Run(Viewer* viewer)
       cout << "us " << pg.us.size() << endl;
       cout << "p " << pg.p.size() << endl;
 
-      pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
+      std::vector<double> ts_pddp;
+      std::vector<Matrix4d> xs_pddp;
+      std::vector<Vector6d> us_pddp;
+  
+      if(slidingWindow < 0 || pg.us.size() < slidingWindow)
+      {
+        ts_pddp = pg.ts;
+        xs_pddp = pg.xs;
+        us_pddp = pg.us;
+      }
+      else
+      {
+        ts_pddp = std::vector<double>(pg.ts.end()-slidingWindow-1, pg.ts.end());
+        xs_pddp = std::vector<Matrix4d>(pg.xs.end()-slidingWindow-1, pg.xs.end());
+        us_pddp = std::vector<Vector6d>(pg.us.end()-slidingWindow, pg.us.end());
+      }
+
+      pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, ts_pddp, xs_pddp, us_pddp, pg.p, 3*pg.extforce);
+      //pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
       pddp->debug = false;
       for (int b=0; b < 10;++b)
       {
@@ -247,6 +267,18 @@ void Run(Viewer* viewer)
         pddp->Iterate();     
         long te = timer_us(timer);      
         cout << "Iteration #" << b << " took: " << te << " us." << endl;    
+      }
+      
+
+      int j = 0;
+      for(int i = pg.us.size() - slidingWindow, j = 0; i < pg.us.size(); i++, j++)
+      { 
+        pg.us[i] = us_pddp.at(j);
+      }
+      for(int i = pg.xs.size() - slidingWindow - 1, j = 0; i < pg.xs.size(); i++, j++)
+      { 
+        pg.ts[i] = ts_pddp.at(j);
+        pg.xs[i] = xs_pddp.at(j);
       }
       //cout << "est x:" << pg.xs.back().first << endl;
       //cout << "true x:" << xt.first << endl << xt.second.head<3>() << endl;
