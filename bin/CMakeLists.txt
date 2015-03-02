@@ -72,7 +72,10 @@ ENDIF (PQP_FOUND)
 	add_executable(kinbody3dtracktest kinbody3dtracktest.cc)
 	target_link_libraries(kinbody3dtracktest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-	#add_executable(extforceslamtest extforceslamtest.cc)
+	add_executable(kinbodyprojtracktest kinbodyprojtracktest.cc)
+	target_link_libraries(kinbodyprojtracktest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+	
+        #add_executable(extforceslamtest extforceslamtest.cc)
 	#target_link_libraries(extforceslamtest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 	add_executable(cartest cartest.cc)

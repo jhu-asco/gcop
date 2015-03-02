@@ -27,6 +27,10 @@ set(sources
     ins.cc
     point3d.cc
     imu.cc
+    body2dtrack.cc
+    body3dtrack.cc
+    kinbody3dtrack.cc
+    kinbodyprojtrack.cc
 )
 
 set(headers
@@ -64,6 +68,10 @@ set(headers
     ins.h
     point3d.h
     imu.h
+    body2dtrack.h
+    body3dtrack.h
+    kinbody3dtrack.h
+    kinbodyprojtrack.h
 )
 
 add_subdirectory (manifolds)

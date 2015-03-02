@@ -4,6 +4,7 @@
 #include "system.h"
 #include "body3dmanifold.h"
 #include "so3.h"
+#include "se3.h"
 #include <limits>
 #include <iostream>
 #include <utility>
@@ -26,6 +27,7 @@ namespace gcop {
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
   template <int c = 6> class Body3d : public System<Body3dState, 12, c> {
+  protected:
     
     typedef Matrix<double, c, 1> Vectorcd;
     typedef Matrix<double, c, c> Matrixcd;
@@ -43,7 +45,7 @@ namespace gcop {
 
     virtual ~Body3d();
     
-    double Step(Body3dState &xb, double t, const Body3dState &xa, 
+    virtual double Step(Body3dState &xb, double t, const Body3dState &xa, 
                 const Vectorcd &u, double h, const VectorXd *p = 0,
                 Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
 
@@ -324,9 +326,6 @@ template<int c>  Body3d<c>::~Body3d()
     return 1;
   }
 
-
-  /////////////////////////////////////////////////
-
   template <int c>
     double Body3d<c>::EulerStep(double t, Body3dState &xb, const Body3dState &xa, 
                                 const Matrix<double, c, 1> &u, double h, const VectorXd *p,
@@ -416,6 +415,9 @@ template<int c>  Body3d<c>::~Body3d()
     }
     return 1;
   }
+
+
+
 
   template <int c>   
     void Body3d<c>::ID(Vector6d &f,
