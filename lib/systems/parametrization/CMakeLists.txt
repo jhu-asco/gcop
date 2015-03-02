@@ -1,6 +1,7 @@
 set(headers
   controltparam.h
   splinetparam.h
+  uniformsplinetparam.h
   tparam.h
   trajectory.h
 )

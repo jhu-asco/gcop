@@ -39,7 +39,7 @@ namespace gcop {
     typedef Spline<double, nu> ControlSpline;
  
   public:
-    SplineTparam(System<T, nx, nu, np> &sys, const VectorXd tks, int degree = 2);//By default use cubic spline
+    SplineTparam(System<T, nx, nu, np> &sys, const VectorXd tks, int degree = 2);//By default use quadratic spline
     
     void To(Vectorntpd &s, 
             const vector<double> &ts, 
@@ -114,6 +114,7 @@ namespace gcop {
           c(uind) = us[uind](ind);
         }
         VectorXd b = Asquare.ldlt().solve(A.transpose()*c);
+        cout<<"Error: "<<(A*b - c).squaredNorm()<<endl;
       //  cout<<"c: "<<c.transpose()<<endl;
         //cout<<"b: "<<b.transpose()<<endl;
         //Copy the elements back into vector s:
