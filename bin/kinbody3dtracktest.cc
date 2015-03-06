@@ -269,15 +269,29 @@ void Run(Viewer* viewer)
         cout << "Iteration #" << b << " took: " << te << " us." << endl;    
       }
       
-      int j = 0;
-      for(int i = pg.us.size() - slidingWindow, j = 0; i < pg.us.size(); i++, j++)
-      { 
-        pg.us[i] = us_pddp.at(j);
+      if(slidingWindow < 0 || pg.us.size() < slidingWindow)
+      {
+        for(int i = 0; i < pg.us.size(); i++)
+        { 
+          pg.us[i] = us_pddp.at(i);
+        }
+        for(int i = 0; i < pg.xs.size(); i++)
+        { 
+          pg.xs[i] = xs_pddp.at(i);
+        }
       }
-      for(int i = pg.xs.size() - slidingWindow - 1, j = 0; i < pg.xs.size(); i++, j++)
-      { 
-        pg.ts[i] = ts_pddp.at(j);
-        pg.xs[i] = xs_pddp.at(j);
+      else
+      {
+        int j = 0;
+        for(int i = pg.us.size() - slidingWindow, j = 0; i < pg.us.size(); i++, j++)
+        { 
+          pg.us[i] = us_pddp.at(j);
+        }
+        for(int i = pg.xs.size() - slidingWindow - 1, j = 0; i < pg.xs.size(); i++, j++)
+        { 
+          pg.xs[i] = xs_pddp.at(j);
+        }
+
       }
       //cout << "est x:" << pg.xs.back().first << endl;
       //cout << "true x:" << xt.first << endl << xt.second.head<3>() << endl;

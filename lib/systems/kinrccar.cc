@@ -41,7 +41,6 @@ double KinRccar::Step(Matrix4d &xb, double t, const Matrix4d &xa,
            0, 0;
     se3.dcay(mb, -h*u_kin);
     *B = h*mb*jac;
-    cout << "B:" << endl << *B << endl;
   }
 
   if (C)

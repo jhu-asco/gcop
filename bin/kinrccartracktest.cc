@@ -206,7 +206,8 @@ void Run(Viewer* viewer)
     // apply actual control (puluated with noise)
     Vector2d w;
     w << sqrt(pg.cw[0])*random_normal(), 
-                          sqrt(pg.cw[1])*random_normal(), 
+                          sqrt(pg.cw[1]); 
+                          //sqrt(pg.cw[1])*random_normal(); 
     //w << 0,  0, 0, sqrt(pg.cw[3]), 0, 0; 
     std::cout << "w: " << w << std::endl;
     std::cout << "us[0]: " << us[0] << std::endl;
@@ -255,7 +256,7 @@ void Run(Viewer* viewer)
       }
 
       pddp = new PDdp<Matrix4d, 6, 2>(pg.sys, tcost, ts_pddp, xs_pddp, us_pddp, pg.p, 3*pg.extforce);
-      //pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
+      //pddp = new PDdp<Matrix4d, 6, 2>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
       pddp->debug = false;
       for (int b=0; b < 10;++b)
       {
@@ -266,16 +267,31 @@ void Run(Viewer* viewer)
         cout << "Iteration #" << b << " took: " << te << " us." << endl;    
       }
       
-      int j = 0;
-      for(int i = pg.us.size() - slidingWindow, j = 0; i < pg.us.size(); i++, j++)
-      { 
-        pg.us[i] = us_pddp.at(j);
+      if(slidingWindow < 0 || pg.us.size() < slidingWindow)
+      {
+        for(int i = 0; i < pg.us.size(); i++)
+        { 
+          pg.us[i] = us_pddp.at(i);
+        }
+        for(int i = 0; i < pg.xs.size(); i++)
+        { 
+          pg.xs[i] = xs_pddp.at(i);
+        }
       }
-      for(int i = pg.xs.size() - slidingWindow - 1, j = 0; i < pg.xs.size(); i++, j++)
-      { 
-        pg.ts[i] = ts_pddp.at(j);
-        pg.xs[i] = xs_pddp.at(j);
+      else
+      {
+        int j = 0;
+        for(int i = pg.us.size() - slidingWindow, j = 0; i < pg.us.size(); i++, j++)
+        { 
+          pg.us[i] = us_pddp.at(j);
+        }
+        for(int i = pg.xs.size() - slidingWindow - 1, j = 0; i < pg.xs.size(); i++, j++)
+        { 
+          pg.xs[i] = xs_pddp.at(j);
+        }
+
       }
+      
       //cout << "est x:" << pg.xs.back().first << endl;
       //cout << "true x:" << xt.first << endl << xt.second.head<3>() << endl;
       delete pddp;
