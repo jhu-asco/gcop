@@ -18,10 +18,11 @@ namespace gcop {
 
   using namespace Eigen;
   
-  
-    class Kinbody3dView : public SystemView<Matrix4d, Matrix<double, 6, 1> > {
+    template <int _nu = 6>
+    class Kinbody3dView : public SystemView<Matrix4d, Matrix<double, _nu, 1> > {
 
     typedef Matrix<double, 6, 1> Vector6d;
+    typedef Matrix<double, _nu, 1> Vectorud;
 
   public:
     
@@ -30,7 +31,7 @@ namespace gcop {
      * @param sys particle
      */
     
-    Kinbody3dView(const Kinbody3d &sys);
+    Kinbody3dView(const Kinbody3d<_nu> &sys);
     
     
     /**
@@ -38,24 +39,24 @@ namespace gcop {
      * @param sys particle
      * @param xs trajectory
      */
-    Kinbody3dView(const Kinbody3d &sys,
+    Kinbody3dView(const Kinbody3d<_nu> &sys,
                vector<Matrix4d > *xs,
-               vector<Vector6d> *us = 0);
+               vector<Vectorud> *us = 0);
     
     virtual ~Kinbody3dView();
     
   
     virtual void Render(const Matrix4d *x,
-                        const Vector6d *u = 0);
+                        const Vectorud *u = 0);
     
     void Render(const vector<Matrix4d > *xs, 
-                const vector<Vector6d> *us = 0, 
+                const vector<Vectorud> *us = 0, 
                 bool rs = true,
                 int is = -1, int ie = -1,
                 int dis = 1, int dit = 1,
                 bool dl = false);
     
-    const Kinbody3d &sys;
+    const Kinbody3d<_nu> &sys;
     GLUquadricObj *qobj;
     double dirSize;
     
@@ -67,9 +68,9 @@ namespace gcop {
 using namespace gcop;
 using namespace Eigen;
 
-
-Kinbody3dView::Kinbody3dView(const Kinbody3d &sys) : 
-  SystemView<Matrix4d, Matrix<double, 6, 1> >("Kinbody3d"), sys(sys)
+template <int _nu>
+Kinbody3dView<_nu>::Kinbody3dView(const Kinbody3d<_nu> &sys) : 
+  SystemView<Matrix4d, Matrix<double, _nu, 1> >("Kinbody3d"), sys(sys)
 {
   this->rgba[0] = .5;
   this->rgba[1] = .5;
@@ -80,10 +81,11 @@ Kinbody3dView::Kinbody3dView(const Kinbody3d &sys) :
   dirSize = -1;
 }
 
-Kinbody3dView::Kinbody3dView(const Kinbody3d &sys,
+template <int _nu>
+Kinbody3dView<_nu>::Kinbody3dView(const Kinbody3d<_nu> &sys,
                           vector< Matrix4d > *xs,
-                          vector<Vector6d> *us) : 
-SystemView<Matrix4d, Matrix<double, 6, 1> >("Kinbody3d", xs, us), sys(sys)
+                          vector<Vectorud> *us) : 
+SystemView<Matrix4d, Matrix<double, _nu, 1> >("Kinbody3d", xs, us), sys(sys)
 {
   this->rgba[0] = 0.5;
   this->rgba[1] = 0.5;
@@ -94,13 +96,15 @@ SystemView<Matrix4d, Matrix<double, 6, 1> >("Kinbody3d", xs, us), sys(sys)
 }
 
 
-Kinbody3dView::~Kinbody3dView()
+template <int _nu>
+Kinbody3dView<_nu>::~Kinbody3dView()
 {
   free(qobj);
 }
 
-void Kinbody3dView::Render(const Matrix4d *x,
-                           const Vector6d *u)
+template <int _nu>
+void Kinbody3dView<_nu>::Render(const Matrix4d *x,
+                           const Vectorud *u)
 {
   //   glColor4f(1,0.5,0.5,0.5);
   
@@ -112,8 +116,9 @@ void Kinbody3dView::Render(const Matrix4d *x,
 }
 
 
-void Kinbody3dView::Render(const vector<Matrix4d > *xs, 
-                           const vector<Vector6d > *us, 
+template <int _nu>
+void Kinbody3dView<_nu>::Render(const vector<Matrix4d > *xs, 
+                           const vector<Vectorud > *us, 
                            bool rs, 
                            int is, int ie,
                            int dis, int dit,
@@ -152,7 +157,8 @@ void Kinbody3dView::Render(const vector<Matrix4d > *xs,
     Render(&xs->back());
 }
 
-void Kinbody3dView::Transform(const Matrix3d &R, const Vector3d &p)
+template <int _nu>
+void Kinbody3dView<_nu>::Transform(const Matrix3d &R, const Vector3d &p)
 {
   const SO3 &so3 = SO3::Instance();
   glTranslated(p[0], p[1], p[2]);

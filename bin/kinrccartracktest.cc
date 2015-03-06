@@ -8,13 +8,14 @@
 #include "kinbody3dcost.h"
 #include "params.h"
 #include "kinbody3dtrackview.h"
+#include "kinrccar.h"
 
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
 typedef Matrix<double, 6, 1> Vector6d;
-typedef Ddp<Matrix4d, 6, 6> Kinbody3dDdp;
+typedef Ddp<Matrix4d, 6, 2> KinRccarDdp;
 
 Params params;
 
@@ -56,7 +57,7 @@ void Run(Viewer* viewer)
   params.GetInt("N", N);
   double h = Tc/N;
 
-  Kinbody3d<> sys;
+  KinRccar sys;
 
   double r = 25;
   params.GetDouble("r", r);
@@ -65,10 +66,10 @@ void Run(Viewer* viewer)
   params.GetDouble("vd", vd);
 
   // options: paramForce, forces
-  Kinbody3dTrack<> pg(sys, nf, vd, 0, tf, r, false, true);   ///< ground truth
+  Kinbody3dTrack<2> pg(sys, nf, vd, 0, tf, r, false, true);   ///< ground truth
 
   params.GetDouble("w", pg.w);
-  params.GetVector6d("cw", pg.cw);
+  params.GetVector2d("cw", pg.cw);
   params.GetDouble("cp", pg.cp);
   params.GetDouble("dmax", pg.dmax);
 
@@ -80,7 +81,7 @@ void Run(Viewer* viewer)
   //  Body2dTrack pg(sys, N, nf, 0, tf, false, false, true);    ///< noisy pose track
   //  Body2dTrack::Synthesize3(pgt, pg, tf);
 
-  Kinbody3dView<> tview(sys, &pg.xs, &pg.us);   // estimated path
+  Kinbody3dView<2> tview(sys, &pg.xs, &pg.us);   // estimated path
   tview.lineWidth = 5;
   tview.rgba[0] = 0;
   tview.rgba[1] = 1;
@@ -88,14 +89,14 @@ void Run(Viewer* viewer)
   tview.renderSystem = false;
   tview.renderForces = renderForces;
 
-  Kinbody3dView<> oview(sys, &pg.xos);   // odometry
+  Kinbody3dView<2> oview(sys, &pg.xos);   // odometry
   oview.lineWidth = 5;
   oview.renderSystem = false;
   oview.rgba[0] = 1;
   oview.rgba[1] = 0;
   oview.rgba[2] = 0;
 
-  Kinbody3dTrackView<> pgv(pg);               // optimized pose-track
+  Kinbody3dTrackView<2> pgv(pg);               // optimized pose-track
   pgv.rgba[0] = 1; pgv.rgba[1] = 1; pgv.rgba[2] = 1; 
 
   pgv.drawLandmarks = true;
@@ -119,7 +120,7 @@ void Run(Viewer* viewer)
   pg.Get(xf, vd, Tc);
 
   // cost
-  Kinbody3dCost<> cost(sys, Tc, xf);
+  Kinbody3dCost<2> cost(sys, Tc, xf);
   //params.GetDouble("ko", cost.ko);
   //if (cost.ko > 1e-10)
   //  cost.track = &pg;
@@ -133,7 +134,7 @@ void Run(Viewer* viewer)
   if (params.GetVectorXd("Qf", Qf))
     cost.Qf = Qf.asDiagonal();
   
-  VectorXd R(6);
+  VectorXd R(2);
   if (params.GetVectorXd("R", R)) 
     cost.R = R.asDiagonal();
 
@@ -146,21 +147,21 @@ void Run(Viewer* viewer)
   vector<Matrix4d > xs(N+1, pg.xs[0]);
 
   // controls
-  Vector6d u;
-  u << 0,0,0,0,0,0;
-  vector<Vector6d> us(N, u);
+  Vector2d u;
+  u << 0,0;
+  vector<Vector2d> us(N, u);
 
   // past true trajectory  
   vector<double> tps(1,0);
   vector<Matrix4d > xps(1, x0);
-  vector<Vector6d> ups;
+  vector<Vector2d> ups;
 
-  Kinbody3dDdp ddp(sys, cost, ts, xs, us);
+  KinRccarDdp ddp(sys, cost, ts, xs, us);
   ddp.mu = .01;
   ddp.debug = false;
   params.GetDouble("mu", ddp.mu);
 
-  Kinbody3dView<> cview(sys, &ddp.xs);
+  Kinbody3dView<2> cview(sys, &ddp.xs);
   cview.rgba[0] = 0;  cview.rgba[1] = 1;  cview.rgba[2] = 1;
   viewer->Add(cview);
   cview.renderSystem = false;
@@ -168,15 +169,15 @@ void Run(Viewer* viewer)
 
   // cview.renderForces = true;
 
-  Kinbody3dView<> pview(sys, &xps, &ups);
+  Kinbody3dView<2> pview(sys, &xps, &ups);
   if (!hideTrue)
       viewer->Add(pview);
   pview.rgba[0] = 1;  pview.rgba[1] = 1;  pview.rgba[2] = 0;
   pview.renderSystem = false;
   pview.renderForces = renderForces;
 
-  Kinbody3dTrackCost<> tcost(0, pg);  ///< cost function
-  PDdp<Matrix4d, 6, 6> *pddp = 0;
+  Kinbody3dTrackCost<2> tcost(0, pg);  ///< cost function
+  PDdp<Matrix4d, 6, 2> *pddp = 0;
 
 
   bool oc = false;
@@ -203,13 +204,9 @@ void Run(Viewer* viewer)
     }
 
     // apply actual control (puluated with noise)
-    Vector6d w;
+    Vector2d w;
     w << sqrt(pg.cw[0])*random_normal(), 
                           sqrt(pg.cw[1])*random_normal(), 
-                          sqrt(pg.cw[2])*random_normal(), 
-                          sqrt(pg.cw[3])*random_normal(), 
-                          sqrt(pg.cw[4])*random_normal(), 
-                          sqrt(pg.cw[5])*random_normal(); 
     //w << 0,  0, 0, sqrt(pg.cw[3]), 0, 0; 
     std::cout << "w: " << w << std::endl;
     std::cout << "us[0]: " << us[0] << std::endl;
@@ -242,7 +239,7 @@ void Run(Viewer* viewer)
 
       std::vector<double> ts_pddp;
       std::vector<Matrix4d> xs_pddp;
-      std::vector<Vector6d> us_pddp;
+      std::vector<Vector2d> us_pddp;
   
       if(slidingWindow < 0 || pg.us.size() < slidingWindow)
       {
@@ -254,10 +251,10 @@ void Run(Viewer* viewer)
       {
         ts_pddp = std::vector<double>(pg.ts.end()-slidingWindow-1, pg.ts.end());
         xs_pddp = std::vector<Matrix4d>(pg.xs.end()-slidingWindow-1, pg.xs.end());
-        us_pddp = std::vector<Vector6d>(pg.us.end()-slidingWindow, pg.us.end());
+        us_pddp = std::vector<Vector2d>(pg.us.end()-slidingWindow, pg.us.end());
       }
 
-      pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, ts_pddp, xs_pddp, us_pddp, pg.p, 3*pg.extforce);
+      pddp = new PDdp<Matrix4d, 6, 2>(pg.sys, tcost, ts_pddp, xs_pddp, us_pddp, pg.p, 3*pg.extforce);
       //pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
       pddp->debug = false;
       for (int b=0; b < 10;++b)
@@ -297,28 +294,6 @@ void Run(Viewer* viewer)
   }
 
 
-  /*
-  Body2dSlam ba(pg);
-  ba.pddp->debug = true; // turn off debug for speed
-  ba.pddp->mu = .01;
-  ba.pddp->nu = .01;
-
-  for (int i = 0; i < 1000; ++i) {
-
-    cout << "Press Enter to continue" << endl;
-    getchar();    
-    
-    timer_start(timer);
-    ba.pddp->Iterate();
-    long te = timer_us(timer);
-    cout << ba.pddp->dus[0] << endl;
-    cout << "Iteration #" << i << " took: " << te << " us." << endl;    
-    cout << "p=" << ba.pddp->p.head<2>().transpose() << endl;    
-    cout << "ut=" << pgt.us[2] << endl;    
-    cout << "u=" << pg.us[2] << endl;    
-
-  }
-  */
   cout << "done!" << endl;
   while(1)
     usleep(10);    
@@ -332,7 +307,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("../../bin/kinbody3dtrack.cfg");
+    params.Load("../../bin/kinrccartracktest.cfg");
 
 #ifdef DISP
   Viewer *viewer = new Viewer;

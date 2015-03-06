@@ -3,8 +3,6 @@ set(sources
     gunicyclecost.cc
     body2dtrackcost.cc
     body3dtrackcost.cc
-    kinbody3dtrackcost.cc
-    kinbodyprojtrackcost.cc
 #airplanecost.cc
    )
 

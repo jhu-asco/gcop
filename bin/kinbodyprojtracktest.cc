@@ -44,6 +44,8 @@ void Run(Viewer* viewer)
   bool hideOdom = false;
   params.GetBool("hideOdom", hideOdom);
 
+  int slidingWindow = -1;
+  params.GetInt("slidingWindow", slidingWindow);
 
   // control horizon params
   int iters = 30;
@@ -54,7 +56,7 @@ void Run(Viewer* viewer)
   params.GetInt("N", N);
   double h = Tc/N;
 
-  Kinbody3d sys;
+  Kinbody3d<> sys;
 
   double r = 25;
   params.GetDouble("r", r);
@@ -63,7 +65,7 @@ void Run(Viewer* viewer)
   params.GetDouble("vd", vd);
 
   // options: paramForce, forces
-  KinbodyProjTrack pg(sys, nf, vd, 0, tf, r, false, true);   ///< ground truth
+  KinbodyProjTrack<> pg(sys, nf, vd, 0, tf, r, false, true);   ///< ground truth
 
   params.GetDouble("w", pg.w);
   params.GetVector6d("cw", pg.cw);
@@ -75,7 +77,7 @@ void Run(Viewer* viewer)
   Matrix4d x0;
   pg.Get(x0, vd, 0);
 
-  Kinbody3dView tview(sys, &pg.xs, &pg.us);   // estimated path
+  Kinbody3dView<> tview(sys, &pg.xs, &pg.us);   // estimated path
   tview.lineWidth = 5;
   tview.rgba[0] = 0;
   tview.rgba[1] = 1;
@@ -83,14 +85,14 @@ void Run(Viewer* viewer)
   tview.renderSystem = false;
   tview.renderForces = renderForces;
 
-  Kinbody3dView oview(sys, &pg.xos);   // odometry
+  Kinbody3dView<> oview(sys, &pg.xos);   // odometry
   oview.lineWidth = 5;
   oview.renderSystem = false;
   oview.rgba[0] = 1;
   oview.rgba[1] = 0;
   oview.rgba[2] = 0;
 
-  Kinbody3dTrackView pgv(pg);               // optimized pose-track
+  Kinbody3dTrackView<> pgv(pg);               // optimized pose-track
   pgv.rgba[0] = 1; pgv.rgba[1] = 1; pgv.rgba[2] = 1; 
 
   pgv.drawLandmarks = true;
@@ -114,7 +116,7 @@ void Run(Viewer* viewer)
   pg.Get(xf, vd, Tc);
 
   // cost
-  Kinbody3dCost cost(sys, Tc, xf);
+  Kinbody3dCost<> cost(sys, Tc, xf);
   //params.GetDouble("ko", cost.ko);
   //if (cost.ko > 1e-10)
   //  cost.track = &pg;
@@ -155,7 +157,7 @@ void Run(Viewer* viewer)
   ddp.debug = false;
   params.GetDouble("mu", ddp.mu);
 
-  Kinbody3dView cview(sys, &ddp.xs);
+  Kinbody3dView<> cview(sys, &ddp.xs);
   cview.rgba[0] = 0;  cview.rgba[1] = 1;  cview.rgba[2] = 1;
   viewer->Add(cview);
   cview.renderSystem = false;
@@ -163,14 +165,14 @@ void Run(Viewer* viewer)
 
   // cview.renderForces = true;
 
-  Kinbody3dView pview(sys, &xps, &ups);
+  Kinbody3dView<> pview(sys, &xps, &ups);
   if (!hideTrue)
       viewer->Add(pview);
   pview.rgba[0] = 1;  pview.rgba[1] = 1;  pview.rgba[2] = 0;
   pview.renderSystem = false;
   pview.renderForces = renderForces;
 
-  KinbodyProjTrackCost tcost(0, pg);  ///< cost function
+  KinbodyProjTrackCost<> tcost(0, pg);  ///< cost function
   //tcost.test_kron();
   //tcost.test_d_xxt();
   //tcost.test_grads();
@@ -238,6 +240,26 @@ void Run(Viewer* viewer)
       cout << "us " << pg.us.size() << endl;
       cout << "p " << pg.p.size() << endl;
 
+      /*
+      std::vector<double> ts_pddp;
+      std::vector<Matrix4d> xs_pddp;
+      std::vector<Vector6d> us_pddp;
+  
+      if(slidingWindow < 0 || pg.us.size() < slidingWindow)
+      {
+        ts_pddp = pg.ts;
+        xs_pddp = pg.xs;
+        us_pddp = pg.us;
+      }
+      else
+      {
+        ts_pddp = std::vector<double>(pg.ts.end()-slidingWindow-1, pg.ts.end());
+        xs_pddp = std::vector<Matrix4d>(pg.xs.end()-slidingWindow-1, pg.xs.end());
+        us_pddp = std::vector<Vector6d>(pg.us.end()-slidingWindow, pg.us.end());
+      }
+      */
+
+      //pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, ts_pddp, xs_pddp, us_pddp, pg.p, 3*pg.extforce);
       pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
       pddp->debug = false;
       for (int b=0; b < 10;++b)
@@ -248,6 +270,19 @@ void Run(Viewer* viewer)
         long te = timer_us(timer);      
         cout << "Iteration #" << b << " took: " << te << " us." << endl;    
       }
+
+      /*
+      int j = 0;
+      for(int i = pg.us.size() - slidingWindow, j = 0; i < pg.us.size(); i++, j++)
+      { 
+        pg.us[i] = us_pddp.at(j);
+      }
+      for(int i = pg.xs.size() - slidingWindow - 1, j = 0; i < pg.xs.size(); i++, j++)
+      { 
+        pg.ts[i] = ts_pddp.at(j);
+        pg.xs[i] = xs_pddp.at(j);
+      }
+      */
       //cout << "est x:" << pg.xs.back().first << endl;
       //cout << "true x:" << xt.first << endl << xt.second.head<3>() << endl;
       delete pddp;
