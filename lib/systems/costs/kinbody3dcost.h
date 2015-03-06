@@ -10,26 +10,29 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
   
-  class Kinbody3dCost : public LqCost<Matrix4d, 6, 6> {
+  template <int _nu = 6>
+  class Kinbody3dCost : public LqCost<Matrix4d, 6, _nu> {
     
     typedef Matrix<double, 6, 1> Vector6d;
     typedef Matrix<double, 6, 6> Matrix6d;
+    typedef Matrix<double, _nu, 1> Vectorud;
     
   public:
     
-    Kinbody3dCost(Kinbody3d &sys, double tf, const Matrix4d &xf, bool diag = true);
+    Kinbody3dCost(Kinbody3d<_nu> &sys, double tf, const Matrix4d &xf, bool diag = true);
     
     /*    double L(double t, const Body3dState &x, const Vectorcd &u,
              Vector12d *Lx = 0, Matrix12d *Lxx = 0,
              Vectorcd *Lu = 0, Matrixcd *Luu = 0,
              Matrix12xcd *Lxu = 0);
     */
-    Kinbody3dTrack *track;
+    Kinbody3dTrack<_nu> *track;
     double ko;
   };  
   
-  Kinbody3dCost::Kinbody3dCost(Kinbody3d &sys, double tf, const Matrix4d &xf, bool diag) : 
-    LqCost<Matrix4d, 6, 6>(sys, tf, xf, diag) {
+  template <int _nu>
+  Kinbody3dCost<_nu>::Kinbody3dCost(Kinbody3d<_nu> &sys, double tf, const Matrix4d &xf, bool diag) : 
+    LqCost<Matrix4d, 6, _nu>(sys, tf, xf, diag) {
 
     /*
       Q(0,0) = .05;
@@ -53,7 +56,7 @@ namespace gcop {
     this->Qf(4,4) = 5;
     this->Qf(5,5) = 5;
     
-    this->R.diagonal() = Matrix<double, 6, 1>::Constant(.1);
+    this->R.diagonal() = Matrix<double, _nu, 1>::Constant(.1);
   }
   /*  
 template <int c>

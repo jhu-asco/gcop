@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <iostream>
-#include "kinbody3dtrackcost.h"
+#include "kinbodyprojtrackcost.h"
 #include "pddp.h"
 #include "utils.h"
 #include "viewer.h"
@@ -13,7 +13,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Matrix<double, 6, 1> Vector6d;
+
 typedef Ddp<Matrix4d, 6, 6> Kinbody3dDdp;
 
 Params params;
@@ -65,7 +65,7 @@ void Run(Viewer* viewer)
   params.GetDouble("vd", vd);
 
   // options: paramForce, forces
-  Kinbody3dTrack<> pg(sys, nf, vd, 0, tf, r, false, true);   ///< ground truth
+  KinbodyProjTrack<> pg(sys, nf, vd, 0, tf, r, false, true);   ///< ground truth
 
   params.GetDouble("w", pg.w);
   params.GetVector6d("cw", pg.cw);
@@ -76,9 +76,6 @@ void Run(Viewer* viewer)
 
   Matrix4d x0;
   pg.Get(x0, vd, 0);
-
-  //  Body2dTrack pg(sys, N, nf, 0, tf, false, false, true);    ///< noisy pose track
-  //  Body2dTrack::Synthesize3(pgt, pg, tf);
 
   Kinbody3dView<> tview(sys, &pg.xs, &pg.us);   // estimated path
   tview.lineWidth = 5;
@@ -175,7 +172,10 @@ void Run(Viewer* viewer)
   pview.renderSystem = false;
   pview.renderForces = renderForces;
 
-  Kinbody3dTrackCost<> tcost(0, pg);  ///< cost function
+  KinbodyProjTrackCost<> tcost(0, pg);  ///< cost function
+  //tcost.test_kron();
+  //tcost.test_d_xxt();
+  //tcost.test_grads();
   PDdp<Matrix4d, 6, 6> *pddp = 0;
 
 
@@ -240,6 +240,7 @@ void Run(Viewer* viewer)
       cout << "us " << pg.us.size() << endl;
       cout << "p " << pg.p.size() << endl;
 
+      
       std::vector<double> ts_pddp;
       std::vector<Matrix4d> xs_pddp;
       std::vector<Vector6d> us_pddp;
@@ -256,6 +257,7 @@ void Run(Viewer* viewer)
         xs_pddp = std::vector<Matrix4d>(pg.xs.end()-slidingWindow-1, pg.xs.end());
         us_pddp = std::vector<Vector6d>(pg.us.end()-slidingWindow, pg.us.end());
       }
+      
 
       pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, ts_pddp, xs_pddp, us_pddp, pg.p, 3*pg.extforce);
       //pddp = new PDdp<Matrix4d, 6, 6>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 3*pg.extforce);
@@ -268,6 +270,7 @@ void Run(Viewer* viewer)
         long te = timer_us(timer);      
         cout << "Iteration #" << b << " took: " << te << " us." << endl;    
       }
+
       
       if(slidingWindow < 0 || pg.us.size() < slidingWindow)
       {
@@ -293,6 +296,7 @@ void Run(Viewer* viewer)
         }
 
       }
+      
       //cout << "est x:" << pg.xs.back().first << endl;
       //cout << "true x:" << xt.first << endl << xt.second.head<3>() << endl;
       delete pddp;
@@ -346,7 +350,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("../../bin/kinbody3dtrack.cfg");
+    params.Load("../../bin/kinbodyprojtrack.cfg");
 
 #ifdef DISP
   Viewer *viewer = new Viewer;

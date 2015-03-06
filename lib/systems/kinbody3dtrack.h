@@ -1,14 +1,106 @@
-#include "kinbody3dtrack.h"
+#ifndef GCOP_KINBODY3DTRACK_H
+#define GCOP_KINBODY3DTRACK_H
+
+#include <Eigen/Dense>
+#include <vector>
+#include <type_traits>
 #include "se3.h"
 #include <iostream>
 #include "utils.h"
-#include <time.h>
+#include "kinbody3d.h"
 
-using namespace gcop;
-using namespace Eigen;
-using namespace std;
+namespace gcop {
+  
+  using namespace std;
+  using namespace Eigen;
 
-Kinbody3dTrack::Kinbody3dTrack(Kinbody3d &sys, int nf, double vd0, double t0, double tf,
+  
+  /**
+   * Pose-track in 2D. This is the simplese possible definition assuming point (unprojected) features
+   * e.g. from stereo/laser scans with uniform spherical covariance. The framework can
+   * be easily extended to any general 2d/3d non-uniform or projected features as well.
+   */
+  template <int _nu = 6>
+  class Kinbody3dTrack {
+  public:
+    typedef Matrix<double, _nu, 1> Vectorud;
+    typedef Matrix<double, 6, 1> Vector6d;
+    /**
+     * Pose graph (using simulated features around a circular track)
+     * @param sys body3d system
+     * @param nf number of features (landmarks)
+     * @param t0 start time
+     * @param tf end time
+     * @param r radius
+     * @param odometry is odometry available
+     * @param extforce treat constant external force in x-y as a parameter
+     * @param forces use uncertain forces in the cost function
+     */
+    Kinbody3dTrack(Kinbody3d<_nu> &sys, int nf, double vd0, double t0, double tf,
+                double r = 25,
+                bool extforce = false,
+                bool forces = false);
+
+    virtual void Get(Matrix4d &x, double vd, double t) const;
+
+    virtual void MakeTrue();
+
+    virtual void Add(const Vectorud &u, const Matrix4d &x, double h);
+
+    /**
+     * Add a new state/control to estimation vector
+     * @param u commanded control 
+     * @param x true state (to generate measurements)
+     * @param h time-step 
+     */
+    virtual void Add2(const Vectorud &u, const Matrix4d &x, double h);
+
+    Kinbody3d<_nu> &sys;     ///< system
+
+    double t0;       ///< initial time around track
+    double tf;       ///< final time around track
+    double r;       ///< track radius
+    double w;      ///< track width
+    double h;      ///< track height
+    double dmax;    ///< sensor radius
+
+    bool extforce;         ///< is there a constant external force that need to be estimated
+
+    bool forces;           ///< is there a constant external force that need to be estimated
+    
+    vector<double> ts;     ///< sequence of times (N+1 vector)
+
+    vector<Matrix4d> xs;      ///< sequence of states x=(g,v) (N+1 vector)
+
+    vector<Vectorud> us;   ///< sequence of inputs (N vector)
+    
+    vector<Vector3d> ls;   ///< landmark positions
+    vector<bool> observed; ///< was it observed
+
+    vector<Matrix4d> xos;     ///< unoptimized trajectory
+    vector<Vectorud> uos;     ///< unoptimized trajectory
+
+    bool init; 
+    VectorXd p;            ///< observed landmark positions (2*m vector) and external force parameters (2 vector)    
+    vector<int> pis;       ///< observed landmark indices (m vector)
+
+    double pr;     ///< feature radius
+
+    vector< vector<pair<int, Vector3d> > > Is;  ///< N+1-vector of vectors of visible pose-to-feature indices
+
+    vector< vector<pair<int, Vector3d> > > Js;  ///< nf-vector of vectors of feature-to-pose indices indices
+    vector<int> cis;       ///< if observed then this should map into the corresponding value in p
+
+    double cp;             ///< noise covariance of poses (assume spherical)
+
+    Vector6d cv;           ///< noise covariance of odometry/gyro (assume diagonal)
+
+    Vectorud cw;           ///< noise covariance of control forces (assume diagonal)
+
+  };
+
+template <int _nu>
+Kinbody3dTrack<_nu>::Kinbody3dTrack(Kinbody3d<_nu> &sys, int nf, double vd0, double t0, double tf,
                          double r,
                          bool extforce,
                          bool forces) : 
@@ -21,25 +113,23 @@ Kinbody3dTrack::Kinbody3dTrack(Kinbody3d &sys, int nf, double vd0, double t0, do
   Get(x, vd0, t0);
   xs.push_back(x);
   xos.push_back(x);
-  cw << .5, .5, .5, 2, 2, 2;
+  cw = MatrixXd::Constant(_nu, 1, 0.1);
 }
 
 
-void Kinbody3dTrack::Add(const Vector6d &u, const Matrix4d &x, double h)
+template <int _nu>
+void Kinbody3dTrack<_nu>::Add(const Vectorud &u, const Matrix4d &x, double h)
 {
   // add noisy controls/state to list, but use true controls/state for generating measurements
   Eigen::Matrix4d xn;
   double t = ts.back();
   
   // noisy controls
-  Vector6d un;
-  un << u[0] + sqrt(cw[0])*random_normal(),
-              u[1] + sqrt(cw[1])*random_normal(),
-              u[2] + sqrt(cw[2])*random_normal(),
-              u[3] + sqrt(cw[3])*random_normal(),
-              u[4] + sqrt(cw[4])*random_normal(),
-              u[5] + sqrt(cw[5])*random_normal();
-
+  Vectorud un;
+  for(int i = 0; i < un.size(); i++)
+  {
+    un[i] = u[i] + sqrt(cw[i])*random_normal();
+  }
 
   sys.Step(xn, t, xs.back(), un, h);
   us.push_back(un);
@@ -86,6 +176,11 @@ void Kinbody3dTrack::Add(const Vector6d &u, const Matrix4d &x, double h)
     double d = (px - pf).norm();
     if (d < dmax) {
       // add to feature vector if not observed
+      Vector3d z = R.transpose()*(pf - px);
+      z(0) += sqrt(cp)*random_normal();
+      z(1) += sqrt(cp)*random_normal();
+      z(2) += sqrt(cp)*random_normal();
+
       if (!observed[l]) {
         if (!init) {
           p.resize(3);
@@ -93,17 +188,16 @@ void Kinbody3dTrack::Add(const Vector6d &u, const Matrix4d &x, double h)
         } else {
           p.conservativeResize(p.size() + 3);
         }
-        p.tail<3>() = pf;
+        const Matrix3d &Rn = xs.back().block<3,3>(0,0);
+        const Vector3d &pxn = xs.back().block<3,1>(0,3);
+         
+        // Initialize landmark position from estimated state
+        p.tail<3>() = Rn*z + pxn;
         pis.push_back(l);
         observed[l] = true;
         cis[l] = p.size()/3-1;
       }
 
-      Vector3d z = R.transpose()*(pf - px);
-      z(0) += sqrt(cp)*random_normal();
-      z(1) += sqrt(cp)*random_normal();
-      z(2) += sqrt(cp)*random_normal();
-      
       //        zs[k].push_back();      // add feature l to pose k
       
       Is[k].push_back(make_pair(l, z)); // add feature l to pose k      
@@ -116,7 +210,8 @@ void Kinbody3dTrack::Add(const Vector6d &u, const Matrix4d &x, double h)
 
 
 // add commanded control u, after which true noisy state x occured
-void Kinbody3dTrack::Add2(const Vector6d &u, const Matrix4d &x, double h)
+template <int _nu>
+void Kinbody3dTrack<_nu>::Add2(const Vectorud &u, const Matrix4d &x, double h)
 {
   // add noisy controls/state to list, but use true controls/state for generating measurements
   Eigen::Matrix4d xn;
@@ -184,10 +279,6 @@ void Kinbody3dTrack::Add2(const Vector6d &u, const Matrix4d &x, double h)
         const Matrix3d &Rn = xs.back().block<3,3>(0,0);
         const Vector3d &pxn = xs.back().block<3,1>(0,3);
          
-        //cout << "feature z:" << endl << z << endl;
-        //cout << "est x:" << endl << pxn << endl << Rn << endl;
-        //cout << "true x:" << endl << px << endl << R;
-
         // Initialize landmark position from estimated state
         p.tail<3>() = Rn*z + pxn;
         // Initialize landmark position with its true position
@@ -207,7 +298,8 @@ void Kinbody3dTrack::Add2(const Vector6d &u, const Matrix4d &x, double h)
 
 
 // Makes the ground truth features to be observed
-void Kinbody3dTrack::MakeTrue()
+template <int _nu>
+void Kinbody3dTrack<_nu>::MakeTrue()
 {
   //  srand (time(NULL));
   //  int nf = (p.size() - extforce*2)/2;
@@ -224,27 +316,9 @@ void Kinbody3dTrack::MakeTrue()
 }
 
 
-void Kinbody3dTrack::Optp(VectorXd &p, const vector<Matrix4d> &xs)
-{
-  int nf = (p.size() - extforce*3)/3;
-  for (int l = 0; l < nf; ++l) {
-    const vector< pair<int,Vector3d> > &J = Js[l];
-    assert(J.size());
-    Vector3d pf;// = Vector3d::Zero();
-		pf.setZero();
-    for (int j = 0; j < J.size(); ++j) {
-      int k = J[j].first;
-      const Vector3d &z = J[j].second;
-      const Matrix3d &R = xs[k].block<3,3>(0,0);
-      const Vector3d &x = xs[k].block<3,1>(0,3);
-      pf = pf + x + R*z;
-    }
-    p.segment<3>(3*extforce + 3*l) = pf/J.size();
-  }
-}
-
 // Get the desired state on the track for some time t
-void Kinbody3dTrack::Get(Matrix4d &x, double vd, double t) const
+template <int _nu>
+void Kinbody3dTrack<_nu>::Get(Matrix4d &x, double vd, double t) const
 {
   double a = 1.3*t/tf*2*M_PI;
   x.setIdentity();
@@ -253,3 +327,6 @@ void Kinbody3dTrack::Get(Matrix4d &x, double vd, double t) const
  
   x(0,3) = r*cos(a); x(1,3) = r*sin(a); x(2,3) = 0;
 }
+}
+
+#endif

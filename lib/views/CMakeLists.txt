@@ -16,7 +16,6 @@ set(sources
   body2dgraphview.cc
   body2dtrackview.cc
   body3dtrackview.cc
-  kinbody3dtrackview.cc
   chainview.cc  
   geom3dview.cc
   boxview.cc

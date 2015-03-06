@@ -231,7 +231,8 @@ void Run(Viewer* viewer)
       cout << "p " << pg.p.size() << endl;
 
       pddp = new PDdp<M3V3d, 6, 3>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 2*pg.extforce);
-      for (int b=0; b < 20;++b)
+      pddp->debug = false;
+      for (int b=0; b < 4;++b)
         pddp->Iterate();     
 
       delete pddp;
