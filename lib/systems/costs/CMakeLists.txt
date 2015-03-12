@@ -25,6 +25,7 @@ set(headers
     body2dtrackcost.h
     body3dtrackcost.h
     kinbody3dtrackcost.h
+    kinrccarpathcost.h
     kinbodyprojtrackcost.h
 #airplanecost.h
 )

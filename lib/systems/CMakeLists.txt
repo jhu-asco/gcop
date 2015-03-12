@@ -71,6 +71,7 @@ set(headers
     kinbody3dtrack.h
     kinbodyprojtrack.h
     kinrccar.h
+    kinrccarpath.h
 )
 
 add_subdirectory (manifolds)

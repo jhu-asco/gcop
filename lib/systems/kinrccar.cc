@@ -9,7 +9,7 @@ using namespace Eigen;
 
 KinRccar::KinRccar() : Kinbody3d<2>()
 {
-  d << 0.4, 0.2, 0.1;
+  d << 0.3, 0.25, 0.2;
 }
 
 double KinRccar::Step(Matrix4d &xb, double t, const Matrix4d &xa,
@@ -26,11 +26,13 @@ double KinRccar::Step(Matrix4d &xb, double t, const Matrix4d &xa,
   xb = xa*m;
   
   if (A) {
+    A->setZero();
     se3.cay(m, -h*u_kin);
     se3.Ad(*A, m);
   }
   
   if (B) {
+    B->setZero();
     Matrix6d mb;
     Matrix62d jac;
     jac << 0, 0,
