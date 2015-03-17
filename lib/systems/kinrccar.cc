@@ -20,7 +20,7 @@ double KinRccar::Step(Matrix4d &xb, double t, const Matrix4d &xa,
   Matrix4d m;
   
   Vector6d u_kin;
-  u_kin << 0, 0, tan(u(1))/d(0), u(0), 0, 0; 
+  u_kin << 0, 0, u(0)*tan(u(1))/d(0), u(0), 0, 0; 
 
   se3.cay(m, h*u_kin);
   xb = xa*m;
@@ -37,7 +37,7 @@ double KinRccar::Step(Matrix4d &xb, double t, const Matrix4d &xa,
     Matrix62d jac;
     jac << 0, 0,
            0, 0,
-           0, 1./(d(0)*cos(u(1))*cos(u(1))), 
+           tan(u(1))/d(0), 1./(d(0)*cos(u(1))*cos(u(1))), 
            1, 0,
            0, 0,
            0, 0;

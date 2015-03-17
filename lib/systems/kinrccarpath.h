@@ -26,14 +26,15 @@ namespace gcop {
      * @param odometry is odometry available
      * @param forces use uncertain forces in the cost function
      */
-    KinRccarPath(KinRccar &sys, bool odometry = false, bool forces = false);
+    KinRccarPath(KinRccar &sys, bool wheel_odometry = false, bool yaw_odometry = false, bool forces = false);
 
-    virtual void AddControl(const Vector2d &u, const double& v, double h);
-    virtual void AddObservation(const vector< pair<int, Vector3d> > &z);
+    virtual void AddControl(const Vector2d &u, const Vector2d& v, double h);
+    virtual void AddObservation(const vector< pair<int, Vector3d> > &z, Matrix3d cam_transform = MatrixXd::Identity(3,3));
 
     KinRccar &sys;     ///< system
 
-    bool odometry;
+    bool wheel_odometry;
+    bool yaw_odometry;
     bool extforce;         ///< is there a constant external force that need to be estimated
     bool forces;           ///< is there a constant external force that need to be estimated
     
@@ -41,7 +42,7 @@ namespace gcop {
 
     vector<Matrix4d> xs;      ///< sequence of states x=(g,v) (N+1 vector)
     vector<Vector2d> us;   ///< sequence of inputs (N vector)
-    vector<double> vs;   ///< sequence of odometry (N vector)
+    vector<Vector2d> vs;   ///< sequence of odometry (N vector)
     
     vector<Matrix4d> xos;     ///< unoptimized trajectory
     vector<Vector2d> uos;     ///< unoptimized trajectory
@@ -51,13 +52,13 @@ namespace gcop {
     vector< vector<pair<int, Vector3d> > > zs;  ///< vector of vectors of landmark observations
 
     double cp;             ///< noise covariance of poses (assume spherical)
-    double cv;           ///< noise covariance of odometry/gyro (assume diagonal)
+    Vector2d cv;           ///< noise covariance of odometry/gyro (assume diagonal)
     Vector2d cw;           ///< noise covariance of control forces (assume diagonal)
 
   };
 
-KinRccarPath::KinRccarPath(KinRccar &sys, bool odometry, bool forces) : 
-  sys(sys), odometry(odometry), forces(forces), extforce(false),
+KinRccarPath::KinRccarPath(KinRccar &sys, bool wheel_odometry, bool yaw_odometry, bool forces) : 
+  sys(sys), wheel_odometry(wheel_odometry), yaw_odometry(yaw_odometry), forces(forces), extforce(false),
   p(extforce*3)
 {
   Matrix4d x = MatrixXd::Identity(4,4);
@@ -65,12 +66,12 @@ KinRccarPath::KinRccarPath(KinRccar &sys, bool odometry, bool forces) :
   xos.push_back(x);
   ts.push_back(0);
 
-  cw = Vector2d(.05, pow(1.5*M_PI/180.,2));
-  cv = .05;
+  cw = Vector2d(.01, pow(1.5*M_PI/180.,2));
+  cv = Vector2d(.01, pow(1.5*M_PI/180.,2));
   cp = .01;
 }
 
-void KinRccarPath::AddControl(const Vector2d &u, const double& v, double h)
+void KinRccarPath::AddControl(const Vector2d &u, const Vector2d& v, double h)
 {
   Eigen::Matrix4d xn;
   double t = ts.back();
@@ -88,10 +89,21 @@ void KinRccarPath::AddControl(const Vector2d &u, const double& v, double h)
   zs.push_back(vector<pair<int, Vector3d> >());
 }
 
-void KinRccarPath::AddObservation(const vector< pair<int, Vector3d> > &z)
+void KinRccarPath::AddObservation(const vector< pair<int, Vector3d> > &z, Matrix3d cam_transform)
 {
-  zs.back() = z;
-  // TODO: initialize p based on z from new lm
+  for(int i = 0; i < z.size(); i++)
+  {
+    pair<int, Vector3d> zi(z[i].first, cam_transform*z[i].second);
+    if(3*z[i].first >= p.size()-extforce*3)
+    {
+        p.conservativeResize(p.size() + 3);
+        const Matrix3d &Rn = xs.back().block<3,3>(0,0);
+        const Vector3d &pxn = xs.back().block<3,1>(0,3);
+        // Initialize landmark position from estimated state
+        p.tail<3>() = Rn*zi.second + pxn;
+    } 
+    zs.back().push_back(zi);
+  }
 }
 
 } // namespace gcop

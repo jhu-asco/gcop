@@ -160,17 +160,35 @@ double KinRccarPathCost::L(double t, const Matrix4d &x, const Vector2d &u,
       *Luu = Vector2d::Ones().cwiseQuotient(pg.cw).asDiagonal();
   }
 
-  if (pg.odometry && k < N) {
-    Vector2d cv(pg.cv, 0);
+  if (pg.wheel_odometry && k < N) {
+    double du =  u(0) - pg.vs[k](0);
+    double wdu = du/pg.cv(0);
 
-    Vector2d du = Vector2d(0, u(0) - pg.vs[k]);
-    Vector2d wdu = du.cwiseQuotient(cv);
-
-    L += du.dot(wdu)/2;
+    L += du*wdu/2;
     if (Lu)
-      *Lu += wdu;
+      (*Lu)(0) += wdu;
     if (Luu)
-      *Luu += Vector2d::Ones().cwiseQuotient(cv).asDiagonal();
+      (*Luu)(0,0) += 1.0/pg.cv(0);
+  }
+
+  if (pg.yaw_odometry && k < N) {
+    double l = pg.sys.d(0);
+    double du =  u(0)*tan(u(1))/l - pg.vs[k](1);
+    double wdu = du/pg.cv(1);
+
+    L += du*wdu/2;
+    if (Lu)
+    {
+      (*Lu)(0) += wdu*tan(u(1))/l;
+      (*Lu)(1) += wdu*u(0)/(l*pow(cos(u(1)),2));
+    }
+    if (Luu)
+    {
+      (*Luu)(0,0) += pow(tan(u(1))/l,2)/pg.cv(1);
+      (*Luu)(1,0) += ((tan(u(1))/l)*(u(0)/(l*pow(cos(u(1)),2))) + (u(0)*tan(u(1))/l - pg.vs[k](1))*(1./(l*pow(cos(u(1)),2))))/pg.cv(1);
+      (*Luu)(0,1) += (*Luu)(1,0);
+      (*Luu)(1,1) += (pow(u(0)/(l*pow(cos(u(1)),2)),2) + (u(0)*tan(u(1))/l - pg.vs[k](1))*(2*u(0)*tan(u(1))/(l*pow(cos(u(1)),2))))/pg.cv(1);
+   }
   }
   /*
   if(Lp)
