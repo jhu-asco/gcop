@@ -37,17 +37,23 @@ namespace gcop{
 			class btDefaultCollisionConfiguration* m_collisionConfiguration;///<Default Collision configuration used from bullet demos
 
 
-      btVector3 worldMin;
+      btVector3 worldMin;///<Minimum and maximum for world
       btVector3 worldMax;
-      bool usezupaxis;
+			//#TODO Provide custom coordinate sysem
+      bool usezupaxis;///< Used to define the coordinate system for world. Two options available (z up y forward x right OR y up z forward x to left) 
 
     public: 
 			btDynamicsWorld*		m_dynamicsWorld;///<this is the most important class It represents the Discrete Dynamics World 
-      btScalar m_defaultContactProcessingThreshold;
-			btAlignedObjectArray<btCollisionShape*> m_collisionShapes;///<Stores all the collision shapes in a world for drawing and other purposes
+      btScalar m_defaultContactProcessingThreshold;///<Collisions between objects are not processed until this threshold. Avoids jittering behaviour
+			btAlignedObjectArray<btCollisionShape*> m_collisionShapes;///<Stores all the collision shapes in a world for drawing and cleaning
 
 
 		public:
+			/** Constructor. Gravity is always acting downwards (9.81) in whatever coordinate system
+			 * @param usezupaxis_		Set the coordinate system
+			 * @param worldMin_			Bound on the world dimensions
+			 * @param worldMax_			Bound on the world dimensions
+			 */
       BulletWorld(bool usezupaxis_ = false, btVector3 worldMin_ = btVector3(-1000,-1000,-1000), btVector3 worldMax_ = btVector3(1000,1000,1000)):
         m_defaultContactProcessingThreshold(1e10)
         ,worldMin(worldMin_), worldMax(worldMax_), usezupaxis(usezupaxis_)
@@ -67,18 +73,27 @@ namespace gcop{
           m_dynamicsWorld->setGravity(btVector3(0,-9.81,0));//Sets Gravity Vector
         }
       }
-
+			/** Returns the type of coordinate system used
+			 */
       bool IsZupAxis()
       {
         return usezupaxis;
       }
-
+			/** Set the gravity vector in the world
+			 * @param gravity_	gravity vector to be set
+			 */
       void SetGravity(btVector3 gravity_)
       {
 				m_dynamicsWorld->setGravity(gravity_);//Sets Gravity Vector
       }
 
-			btRigidBody*  LocalCreateRigidBody(float mass, const btTransform& startTransform,btCollisionShape* shape, bool use_motion_state = false)
+			/** Create a rigidbody in the world file
+			  * @param mass 						Mass of the rigidbody. Static objects have 0 mass
+				* @param startTransform   Initial transform of the rigidbody
+				* @param shape						Each rigid body has a shape of its own which can be a mesh/cube/combination of different shapes etc
+				* @param use_motion_state	Using a motion state allows bullet to interpolate between transforms when polling for rigidbody transformation for display or computation
+			*/
+			btRigidBody*  LocalCreateRigidBody(float mass, const btTransform& startTransform, btCollisionShape* shape, bool use_motion_state = false)
 			{
 				btAssert((!shape || shape->getShapeType() != INVALID_SHAPE_PROXYTYPE));
 
@@ -112,9 +127,13 @@ namespace gcop{
 				return body;
 			}
 
-      //Creates a triangular mesh from vertex data. The number of indices should be equal to 3 times the number of triangles
-      // The vertex data can be smaller than 3*noftriangles since different triangles can share vertices
-      // By default assumes each index corresponds to a vertex
+			/**Creates a triangular mesh from vertex data. The number of indices should be equal to 3 times the number of triangles
+			 * The vertex data can be smaller than 3*noftriangles since different triangles can share vertices
+			 * By default assumes each index corresponds to a vertex
+			 * @param verts  pointer to vertices
+			 * @param inds	 indices of the verts which form a triangle
+			 * @param nofverts	Number of vertices sent by the pointer verts
+			 */
       btCollisionShape *CreateMeshFromData(btScalar *verts, int *inds, int noftriangles, int nofverts)
       {
         if(!inds || !verts)
@@ -133,7 +152,10 @@ namespace gcop{
         return collshape;
       }
 
-      //Loads a mesh from Binary STL Files. Modified from LoadMeshFromSTL used by Bullet3 Demo
+			/** Loads a mesh from Binary STL Files. Modified from LoadMeshFromSTL used by Bullet3 Demo
+			 * @param filename		Stl File name.
+			 * @param scale				Multiplies all the vertices with the scale thereby scaling the mesh
+			 */
 			btCollisionShape *CreateMeshFromSTL(const char *filename, btVector3 scale = btVector3(1,1,1))
       {
         FILE* file = fopen(filename,"rb");
@@ -218,6 +240,12 @@ namespace gcop{
         return 0;
       }
 
+			/** Creates a DEM Height map from height data. The local origin is at the center of the image with height = average of the max and min heights. Here minheight is 0m
+			 * @param length		length of the image grid
+			 * @param widhth		width of the image grid
+			 * @param data			Image intensities unsigned 8 bit should be valid throughout the life time of the collision shape
+			 * @param maxHeight	Uses the maximum height in meters to scale the image intensities accordingly
+			 */
 			btCollisionShape *CreateHeightMap(btScalar length, btScalar width, const char *data, btScalar maxHeight = 100)
       {
         btHeightfieldTerrainShape* heightFieldShape;
@@ -232,6 +260,12 @@ namespace gcop{
         return (btCollisionShape*)heightFieldShape;
       }
 
+			/** Create a ground plane with custom height function if provided. This can also be used to create custom 3D terrains with known height at each grid point
+			 * @param length 					length of the plane
+			 * @param width 					width of the plane
+			 * @param heightfunc		  Height function which provides height given the grid coordinates. The origin of the plane for height function is situated at the left end of the plane(x: 0->length; y:0->width);
+			 * @param subdivisions		Number of divisions of the grid for plane. The finer the grid the more the mesh represents the true height function
+			 */
 			btCollisionShape *CreateGroundPlane(btScalar length, btScalar width, btScalar(*heightfunc)(btScalar, btScalar)=0,int subdivisions = 1)
       {
         cout<<"Subdivisions: "<<subdivisions<<endl;
@@ -296,7 +330,10 @@ namespace gcop{
         return CreateMeshFromData(m_vertices, gIndices, totalTriangles, totalVerts);
       }
 
-			//Simulates the time dt in seconds with the specified number of substeps
+			/** Simulates the world along with all the physical objects in it. No interpolation is used for simulation.
+			 * @param dt	Time in seconds to simulate for
+			 * @param substeps	Number of steps the time should be broken into for physics engine.
+			 */
 			void Step(double dt, int substeps)
 			{
 				if(!m_dynamicsWorld)
@@ -308,80 +345,18 @@ namespace gcop{
 				int numSimSteps = m_dynamicsWorld->stepSimulation(dt,substeps,fixedstepsize);//No interpolation used
 			}
 
-			//Reset Bullet Physics Engine and clear collision info and reset constraint solver
+			/** Reset Bullet Physics Engine and clear collision info and reset constraint solver
+			*/
       void Reset()
       {
         //cout<<"Resetting Pool and constraint solver"<<endl;
         m_overlappingPairCache->resetPool(m_dispatcher);
 				m_constraintSolver->reset();
       }
-			/*void Reset()
-      {
-        int numObjects = 0;
-        int i;
-        if(!m_dynamicsWorld)
-				{
-					cerr<<"m_dynamicsWorld not defined"<<endl;
-					return;
-				}
-        else
-        {
-          int numConstraints = m_dynamicsWorld->getNumConstraints();
-          for (i=0;i<numConstraints;i++)
-          {
-            m_dynamicsWorld->getConstraint(0)->setEnabled(true);
-          }
-          numObjects = m_dynamicsWorld->getNumCollisionObjects();
 
-          ///create a copy of the array, not a reference!
-          btCollisionObjectArray copyArray = m_dynamicsWorld->getCollisionObjectArray();
-
-
-
-
-          for (i=0;i<numObjects;i++)
-          {
-            btCollisionObject* colObj = copyArray[i];
-            btRigidBody* body = btRigidBody::upcast(colObj);
-            if (body)
-            {
-              if (body->getMotionState())
-              {
-                btDefaultMotionState* myMotionState = (btDefaultMotionState*)body->getMotionState();
-                myMotionState->m_graphicsWorldTrans = myMotionState->m_startWorldTrans;
-                body->setCenterOfMassTransform( myMotionState->m_graphicsWorldTrans );
-                colObj->setInterpolationWorldTransform( myMotionState->m_startWorldTrans );
-                colObj->forceActivationState(ACTIVE_TAG);
-                colObj->activate();
-                colObj->setDeactivationTime(0);
-                //colObj->setActivationState(WANTS_DEACTIVATION);
-              }
-              //removed cached contact points (this is not necessary if all objects have been removed from the dynamics world)
-              if (m_dynamicsWorld->getBroadphase()->getOverlappingPairCache())
-                m_dynamicsWorld->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(colObj->getBroadphaseHandle(),m_dynamicsWorld->getDispatcher());
-
-              btRigidBody* body = btRigidBody::upcast(colObj);
-              if (body && !body->isStaticObject())
-              {
-                btRigidBody::upcast(colObj)->setLinearVelocity(btVector3(0,0,0));
-                btRigidBody::upcast(colObj)->setAngularVelocity(btVector3(0,0,0));
-              }
-            }
-
-          }
-
-          ///reset some internal cached data in the broadphase
-          m_dynamicsWorld->getBroadphase()->resetPool(m_dynamicsWorld->getDispatcher());
-          m_dynamicsWorld->getConstraintSolver()->reset();
-        }
-
-        //m_overlappingPairCache->resetPool(m_dispatcher);
-				//m_constraintSolver->reset();
-      }
-      */
-
-
-			~BulletWorld()//Destructor for Bullet Physics Engine
+			/** Destructor for Bullet Physics Engine cleansup all the objects created by various functions above
+			*/
+			~BulletWorld()			
 			{
 				delete m_dynamicsWorld;
 
