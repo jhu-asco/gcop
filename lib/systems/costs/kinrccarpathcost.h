@@ -106,7 +106,7 @@ double KinRccarPathCost::L(double t, const Matrix4d &x, const Vector2d &u,
 
   //cout << "Kinbody3dtrackCost: k=" << k << " " << I.size() << endl;
 
-  int i0 = 3*pg.extforce;
+  int i0 = pg.estimate_length + 3*pg.extforce;
   for (int i = 0; i < I.size(); ++i) {
     int l = I[i].first;  // feature index
     const Vector3d &z = I[i].second;
@@ -172,9 +172,30 @@ double KinRccarPathCost::L(double t, const Matrix4d &x, const Vector2d &u,
   }
 
   if (pg.yaw_odometry && k < N) {
-    double l = pg.sys.d(0);
+    double l;
+    if(pg.estimate_length && k < N)
+    {
+      l = (*p)(0);
+    }
+    else
+    {
+      l = pg.sys.d(0);
+    }
+
     double du =  u(0)*tan(u(1))/l - pg.vs[k](1);
     double wdu = du/pg.cv(1);
+
+    if(pg.estimate_length && k < N)
+    {
+      if(Lp)
+      {
+        (*Lp)(0) = wdu*(-u(0)*tan(u(1))/(l*l));
+      }
+      if(Lpp)
+      {
+        (*Lp)(0,0) = wdu*(2*u(0)*tan(u(1))/(l*l*l)) + (-u(0)*tan(u(1))/(l*l))*(-u(0)*tan(u(1))/(l*l))/pg.cv(1);
+      }
+    }
 
     L += du*wdu/2;
     if (Lu)
@@ -188,7 +209,8 @@ double KinRccarPathCost::L(double t, const Matrix4d &x, const Vector2d &u,
       (*Luu)(1,0) += ((tan(u(1))/l)*(u(0)/(l*pow(cos(u(1)),2))) + (u(0)*tan(u(1))/l - pg.vs[k](1))*(1./(l*pow(cos(u(1)),2))))/pg.cv(1);
       (*Luu)(0,1) += (*Luu)(1,0);
       (*Luu)(1,1) += (pow(u(0)/(l*pow(cos(u(1)),2)),2) + (u(0)*tan(u(1))/l - pg.vs[k](1))*(2*u(0)*tan(u(1))/(l*pow(cos(u(1)),2))))/pg.cv(1);
-   }
+    }
+    
   }
   /*
   if(Lp)

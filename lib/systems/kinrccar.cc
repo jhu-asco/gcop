@@ -18,9 +18,19 @@ double KinRccar::Step(Matrix4d &xb, double t, const Matrix4d &xa,
 {
   SE3 &se3 = SE3::Instance();
   Matrix4d m;
+ 
+  double l;
+  if(p && p->size() >= 1)
+  {
+    l = (*p)(0);
+  }
+  else
+  {
+    l = d(0);
+  }
   
   Vector6d u_kin;
-  u_kin << 0, 0, u(0)*tan(u(1))/d(0), u(0), 0, 0; 
+  u_kin << 0, 0, u(0)*tan(u(1))/l, u(0), 0, 0; 
 
   se3.cay(m, h*u_kin);
   xb = xa*m;
@@ -37,7 +47,7 @@ double KinRccar::Step(Matrix4d &xb, double t, const Matrix4d &xa,
     Matrix62d jac;
     jac << 0, 0,
            0, 0,
-           tan(u(1))/d(0), 1./(d(0)*cos(u(1))*cos(u(1))), 
+           tan(u(1))/l, 1./(l*cos(u(1))*cos(u(1))), 
            1, 0,
            0, 0,
            0, 0;
@@ -48,5 +58,18 @@ double KinRccar::Step(Matrix4d &xb, double t, const Matrix4d &xa,
   if (C)
   {
     C->setZero();
+    if(p && p->size() >= 1)
+    {
+      Matrix6d mc;
+      Matrix<double, 6, 1> jac;
+      jac << 0, 
+             0, 
+             -u(0)*tan(u(1))/(l*l), 
+             0, 
+             0, 
+             0;
+      se3.dcay(mc, -h*u_kin);
+      *C = h*mc*jac;
+    }
   }
 }

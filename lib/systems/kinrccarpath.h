@@ -26,10 +26,10 @@ namespace gcop {
      * @param odometry is odometry available
      * @param forces use uncertain forces in the cost function
      */
-    KinRccarPath(KinRccar &sys, bool wheel_odometry = false, bool yaw_odometry = false, bool forces = false);
+    KinRccarPath(KinRccar &sys, bool wheel_odometry = false, bool yaw_odometry = false, bool forces = false, bool estimate_length = false);
 
     virtual void AddControl(const Vector2d &u, const Vector2d& v, double h);
-    virtual void AddObservation(const vector< pair<int, Vector3d> > &z, Matrix3d cam_transform = MatrixXd::Identity(3,3));
+    virtual void AddObservation(const vector< pair<int, Vector3d> > &z, Matrix4d cam_transform = MatrixXd::Identity(4,4));
 
     KinRccar &sys;     ///< system
 
@@ -37,6 +37,7 @@ namespace gcop {
     bool yaw_odometry;
     bool extforce;         ///< is there a constant external force that need to be estimated
     bool forces;           ///< is there a constant external force that need to be estimated
+    bool estimate_length;  ///< should the length of the car be tracked as a parameter
     
     vector<double> ts;     ///< sequence of times (N+1 vector)
 
@@ -57,9 +58,8 @@ namespace gcop {
 
   };
 
-KinRccarPath::KinRccarPath(KinRccar &sys, bool wheel_odometry, bool yaw_odometry, bool forces) : 
-  sys(sys), wheel_odometry(wheel_odometry), yaw_odometry(yaw_odometry), forces(forces), extforce(false),
-  p(extforce*3)
+KinRccarPath::KinRccarPath(KinRccar &sys, bool wheel_odometry, bool yaw_odometry, bool forces, bool estimate_length) : 
+  sys(sys), wheel_odometry(wheel_odometry), yaw_odometry(yaw_odometry), forces(forces), extforce(false), estimate_length(estimate_length),  p(estimate_length + extforce*3)
 {
   Matrix4d x = MatrixXd::Identity(4,4);
   xs.push_back(x);
@@ -67,8 +67,13 @@ KinRccarPath::KinRccarPath(KinRccar &sys, bool wheel_odometry, bool yaw_odometry
   ts.push_back(0);
 
   cw = Vector2d(.01, pow(1.5*M_PI/180.,2));
-  cv = Vector2d(.01, pow(1.5*M_PI/180.,2));
+  cv = Vector2d(.01, pow(2.5*M_PI/180.,2));
   cp = .01;
+
+  if(estimate_length)
+  {
+    p(0) = .25;    
+  }
 }
 
 void KinRccarPath::AddControl(const Vector2d &u, const Vector2d& v, double h)
@@ -89,12 +94,14 @@ void KinRccarPath::AddControl(const Vector2d &u, const Vector2d& v, double h)
   zs.push_back(vector<pair<int, Vector3d> >());
 }
 
-void KinRccarPath::AddObservation(const vector< pair<int, Vector3d> > &z, Matrix3d cam_transform)
+void KinRccarPath::AddObservation(const vector< pair<int, Vector3d> > &z, Matrix4d cam_transform)
 {
   for(int i = 0; i < z.size(); i++)
   {
-    pair<int, Vector3d> zi(z[i].first, cam_transform*z[i].second);
-    if(3*z[i].first >= p.size()-extforce*3)
+    Vector4d z_h(z[i].second(0), z[i].second(1), z[i].second(2), 1);
+    z_h = cam_transform*z_h;
+    pair<int, Vector3d> zi(z[i].first, Vector3d(z_h(0), z_h(1), z_h(2)));
+    if(3*z[i].first >= p.size()-estimate_length-extforce*3)
     {
         p.conservativeResize(p.size() + 3);
         const Matrix3d &Rn = xs.back().block<3,3>(0,0);
