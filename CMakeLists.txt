@@ -106,10 +106,10 @@ IF (PQP_FOUND)
 ENDIF (PQP_FOUND)
 
 if (USE_BULLET)
-  find_package(Bullet REQUIRED)
+  #find_package(Bullet REQUIRED)
   set(BULLET_PHYSICS_SOURCE_DIR ${PROJECT_SOURCE_DIR}/bullet3)
-  set(BULLET_INCLUDE_DIR ${BULLET_INCLUDE_DIR})
-  #set(BULLET_LIBRARIES "${BULLET_PHYSICS_SOURCE_DIR}/build3/src/BulletDynamics/libBulletDynamics.so.2.83;${BULLET_PHYSICS_SOURCE_DIR}/build3/src/BulletCollision/libBulletCollision.so.2.83;${BULLET_PHYSICS_SOURCE_DIR}/build3/src/LinearMath/libLinearMath.so.2.83") 
+  set(BULLET_INCLUDE_DIR ${BULLET_PHYSICS_SOURCE_DIR}/src)
+  set(BULLET_LIBRARIES "${BULLET_PHYSICS_SOURCE_DIR}/build3/src/BulletDynamics/libBulletDynamics.so;${BULLET_PHYSICS_SOURCE_DIR}/build3/src/BulletCollision/libBulletCollision.so;${BULLET_PHYSICS_SOURCE_DIR}/build3/src/LinearMath/libLinearMath.so") 
   include_directories(${BULLET_INCLUDE_DIR})
   link_directories( ${BULLET_PHYSICS_SOURCE_DIR}/build3/btgui/OpenGLWindow
                     ${BULLET_PHYSICS_SOURCE_DIR}/build3/btgui/Gwen
@@ -118,7 +118,7 @@ if (USE_BULLET)
                     ${BULLET_PHYSICS_SOURCE_DIR}/build3/Demos/OpenGL
                    )
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DBT_USE_DOUBLE_PRECISION")#Compiling Bullet with double precision
-  message("Bullet Flags: ${BULLET_C_FLAGS}; ${BULLET_CXX_FLAGS};")
+  #message("Bullet Flags: ${BULLET_C_FLAGS}; ${BULLET_CXX_FLAGS};")
 endif (USE_BULLET)
 
 #FIND_PACKAGE(Ceres)
