@@ -136,10 +136,10 @@ void solver_process(Viewer* viewer)
 
   struct timeval timer;
   // Gn.debug = false; // turn off debug for speed
-  getchar();
+  //getchar();
 
-while(1)
-{
+//while(1)
+//{
   for (int i = 0; i < iters; ++i) {
     timer_start(timer);
     gn.Iterate();
@@ -155,8 +155,8 @@ while(1)
     cout<<"xs["<<j<<"]"<<xs[j].transpose()<<endl;
   }
   cout<<"xN"<<xs[N].transpose()<<endl;
-  getchar();
-}
+  //getchar();
+//}
   //  xs[1][3]  velocity
   //atan(us[0][1]) steering angle
  

@@ -105,12 +105,12 @@ void solver_process(Viewer* viewer)
 
   struct timeval timer;
   // ddp.debug = false; // turn off debug for speed
-  getchar();
+  //getchar();
 
     timer_start(timer);
   for (int i = 0; i < iters; ++i) {
     ddp.Iterate();
-    getchar();
+    //getchar();
   }
 
   long te = timer_us(timer);

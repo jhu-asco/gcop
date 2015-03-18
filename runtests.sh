@@ -18,6 +18,8 @@ cd build/bin
 
 ./rccartest
 
+./sddpbulletrccartest
+
 ./airmopttest
 
 ./fixedchaintest ../../bin/fixedchain1.cfg
