@@ -155,12 +155,12 @@ void solver_process(Viewer* viewer)
     cout<<"xs["<<j<<"]"<<xs[j].transpose()<<endl;
   }
   cout<<"xN"<<xs[N].transpose()<<endl;
-  //getchar();
 //}
   //  xs[1][3]  velocity
   //atan(us[0][1]) steering angle
  
   cout << "done!" << endl;
+  getchar();
 }
 
 
