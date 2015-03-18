@@ -441,6 +441,18 @@ void Params::SetDoubleArray(const char *name, int n, const double *v)
   valueMap[name] = s.str();
 }
 
+void Params::SetFloatArray(const char *name, int n, const float *v)
+{
+  stringstream s;
+  for (int i = 0; i < n; ++i) {
+    s << v[i];
+    if (i < n - 1)
+      s << ",";
+  }
+  valueMap[name] = s.str();
+}
+
+
 
 void Params::SetBool(const char *name, bool value)
 {
@@ -524,6 +536,26 @@ bool Params::GetDoubleVec(const char *name, vector<double> &v) const
 
 
 bool Params::GetDoubleArray(const char *name, int n, double *v) const
+{
+  std::map<string, string>::const_iterator mi = valueMap.find(name);
+  if (mi == valueMap.end()) {
+    // cerr << "Error:\tParams::Get:\tparameter <" << name << "> not found!" << endl;
+    return false;
+  }
+
+  vector<string> tokens;
+  Tokenize(mi->second, tokens, ",");
+  vector<string>::iterator it;
+  int i = 0;
+  for (it = tokens.begin(); it != tokens.end(), i < n; ++it, ++i) {    
+    string str = *it;
+    replace(str, string("pi"), string("3.141592"));
+    v[i] = atof(str.c_str());
+  }
+  return true;
+}
+
+bool Params::GetFloatArray(const char *name, int n, float *v) const
 {
   std::map<string, string>::const_iterator mi = valueMap.find(name);
   if (mi == valueMap.end()) {

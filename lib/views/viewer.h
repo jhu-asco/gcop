@@ -177,6 +177,9 @@ class Viewer {
   void SetCamera(float sphi, float stheta,
                  float sx, float sy, float sz);
 
+  void SetCamera(const float params[5]);
+
+
   static void SetColor (float r, float g, float b, float alpha = 0);  
 
   static void SetMaterial( GLfloat ambientR, GLfloat ambientG, GLfloat ambientB, 

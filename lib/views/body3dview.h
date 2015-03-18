@@ -123,8 +123,8 @@ void Body3dView<c>::Render(const vector<pair<Matrix3d, Vector9d> > *xs,
                            int dis, int dit,
                            bool dl)
 {
-  Viewer::SetColor(this->rgba[0], this->rgba[1], this->rgba[2], this->rgba[3]);
-  //  glColor4f(
+  // Viewer::SetColor(this->rgba[0], this->rgba[1], this->rgba[2], this->rgba[3]);
+  glColor3f(this->rgba[0], this->rgba[1], this->rgba[2]);
 
   // set defaults
   if (is == -1)

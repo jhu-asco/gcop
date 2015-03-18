@@ -29,3 +29,7 @@ cd build/bin
 ./uuvtest ../../bin/jhurov.cfg
 
 ./cecartest ../../bin/cecar.cfg
+
+cd ../..
+build/bin/body3drhc bin/body3drhc.cfg
+

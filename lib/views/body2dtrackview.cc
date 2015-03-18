@@ -44,7 +44,8 @@ bool Body2dTrackView::RenderFrame(int i)
   gluCylinder(qobj, pg.r - pg.w/2, pg.r - pg.w/2, .1, 20, 10);
 
   // red: noisy/estimated
-  Viewer::SetColor(rgba[0], rgba[1], rgba[2], rgba[3]);
+  //  Viewer::SetColor(rgba[0], rgba[1], rgba[2], rgba[3]);
+  glColor4fv(rgba);
 
   if (drawForces) {
 
@@ -62,21 +63,22 @@ bool Body2dTrackView::RenderFrame(int i)
   }
 
   if (drawLandmarks) {
-
-    
     for (int l = 0; l < pg.ls.size(); ++l) {    
 
-      if (pg.observed[l])
-        Viewer::SetColor(0, 1, 0, 1);  
-      else
-        Viewer::SetColor(.5, .5, .5, 1);  
+      if (pg.observed[l]) {
+        //        Viewer::SetColor(0, 1, 0, 1);  
+        glColor3f(0,1,0);
+      } else {
+        //        Viewer::SetColor(.5, .5, .5, 1);  
+        glColor3f(.5,.5,.5);
+      }
 
       glPushMatrix();
       glTranslated( pg.ls[l][0], pg.ls[l][1], 0);
 
-      gluCylinder(qobj, pg.pr, pg.pr, 1, 20, 10);
+      //      gluCylinder(qobj, pg.pr, pg.pr, 1, 20, 10);
 
-      //      glutSolidSphere(pg.pr, 10, 10);
+      glutSolidSphere(pg.pr, 10, 10);
       
       /*
       glPushMatrix();
@@ -93,7 +95,9 @@ bool Body2dTrackView::RenderFrame(int i)
     int nvf = (pg.p.size() - 2*pg.extforce)/2;
     int i0 = 2*pg.extforce;
         
-    Viewer::SetColor(0, 0, 1, 1);  
+    //    Viewer::SetColor(0, 0, 1, 1);  
+    glColor3f(0,0,1);
+
     //    cout << "ALL" << endl;
     for (int l = 0; l < nvf; ++l) {    
       //      cout << pg.p[i0 + 2*l] << " " << pg.p[i0 + 2*l + 1] << endl;

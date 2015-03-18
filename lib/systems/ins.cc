@@ -15,7 +15,7 @@ Ins::Ins() : System<InsState, 15, 6>(InsManifold::Instance())
   sa = 3*1e-12;
   sra = 0.01;
 
-  g0 << 0, 0, -9.81;
+  g0 << 0, 0, 9.81;
 }
 
 

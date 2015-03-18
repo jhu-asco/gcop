@@ -31,17 +31,25 @@ if (BUILD_TESTS)
 
 
 IF (PQP_FOUND)
-	add_executable(hrotordem hrotordem.cc)
-	target_link_libraries(hrotordem  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+#	add_executable(hrotordem hrotordem.cc)
+#	target_link_libraries(hrotordem  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-	add_executable(body3ddem body3ddem.cc)
-	target_link_libraries(body3ddem  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+#	add_executable(body3ddem body3ddem.cc)
+#	target_link_libraries(body3ddem  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 	add_executable(body3drhc body3drhc.cc)
 	target_link_libraries(body3drhc  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+#	add_executable(body3dstops body3dstops.cc)
+#	target_link_libraries(body3dstops  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+
 	add_executable(body3dunc body3dunc.cc)
 	target_link_libraries(body3dunc  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+#	add_executable(body3davoids body3davoids.cc)
+#	target_link_libraries(body3davoids  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
 ENDIF (PQP_FOUND)
 
 

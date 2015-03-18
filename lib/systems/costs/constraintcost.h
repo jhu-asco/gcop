@@ -148,7 +148,7 @@ namespace gcop {
     if (Lx)
       *Lx = b*dgdx.transpose()*this->g;
     if (Lxx) {
-      *Lxx = b*dgdx.transpose()*dgdx;
+      *Lxx = b*dgdx.transpose()*dgdx;  // use a GN approximation to the Hessian
       
       /*
       if (this->g[0] > 0) {
@@ -163,12 +163,6 @@ namespace gcop {
       *Lxx = .01**Lxx;
       }
     */
-    cout <<"t=" <<t << " g="<<this->g << endl;
-    if (Lx) {
-      cout << "dgdx=" << dgdx << " Lx=" << Lx->transpose() << endl;
-
-      }
-
 
     return b/2*this->g.squaredNorm();
     //return b/2*this->g.squaredNorm();

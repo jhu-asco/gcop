@@ -157,8 +157,8 @@ bool DemView::RenderFrame(int i)
   // glDrawElements(GL_TRIANGLES, mesh_ind_count, GL_UNSIGNED_INT, mesh_inds);
   */
 
-  //  glColor3fv(color);
-
+  glColor3fv(color);
+  //  glColor4f(1,1,1,0.1);  
   
   if (texture) {
     glColor4f(1,1,1,1);  
@@ -166,11 +166,11 @@ bool DemView::RenderFrame(int i)
   } else {
     glEnable(GL_LIGHTING);
   }
-  Viewer::SetColor(color[0], color[1], color[2], 0);
+  //  Viewer::SetColor(color[0], color[1], color[2], 0);
 
   // double c = .5;
   // Viewer::SetMaterial(c,c,c, c,c,c, c,c,c,5);
-  //  glColor3f(.5,.5,.5);
+  // glColor3f(.5,.5,.5);
 
   if (wire) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -184,8 +184,8 @@ bool DemView::RenderFrame(int i)
     for (int j = 0; j < dem.nj; ++j) {
       dem.Get(p, i, j);
       
-      //glNormal3fv(normals + 3*(i*dem.nj+j));
-      glNormal3dv(dem.normals + 3*(i*dem.nj+j));
+      // glNormal3fv(normals + 3*(i*dem.nj+j));
+      // glNormal3dv(dem.normals + 3*(i*dem.nj+j));
 
       glVertex3f(p[0], p[1], p[2]);
       if (texture)
@@ -197,14 +197,31 @@ bool DemView::RenderFrame(int i)
       glNormal3dv(dem.normals + 3*((i+1)*dem.nj+j));
       
       glVertex3f(p[0], p[1], p[2]);
+
       if (texture)
-        glTexCoord2d( (p[0]-dem.o[0])/dem.w, (dem.h - (p[1]-dem.o[1]) )/dem.h);      
+        glTexCoord2d( (p[0]-dem.o[0])/dem.w, (dem.h - (p[1]-dem.o[1]) )/dem.h);     
     }
     glEnd();
   }
 
   if (wire)
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+      // enable blending
+    glEnable(GL_BLEND);
+
+    // enable read-only depth buffer
+    glDepthMask(GL_FALSE);
+
+    // set the blend function
+    // to what we use for transparency
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+    // set back to normal depth buffer mode (writable)
+    glDepthMask(GL_TRUE);
+
+    // disable blending
+    glDisable(GL_BLEND);
 
 
   if (texture)

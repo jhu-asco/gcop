@@ -108,7 +108,7 @@ namespace gcop {
   template <int c> 
     Body3d<c>::Body3d() : 
     System<Body3dState, 12, c>(Body3dManifold::Instance()),
-    ds(1, .5, .5), m(1),
+    ds(.6, .6, .2), m(1),
     Dw(0,0,0),
     Dv(0,0,0),
     fp(0,0,0),

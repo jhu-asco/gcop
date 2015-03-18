@@ -79,6 +79,9 @@ class Params
   void SetDoubleVec(const char *name, const std::vector<double> &v);
   bool GetDoubleVec(const char *name, std::vector<double> &v) const;
 
+  void SetFloatArray(const char *name, int n, const float *v);
+  bool GetFloatArray(const char *name, int n, float *v) const;
+
   void SetDoubleArray(const char *name, int n, const double *v);
   bool GetDoubleArray(const char *name, int n, double *v) const;
   

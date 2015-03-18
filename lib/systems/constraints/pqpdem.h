@@ -136,15 +136,20 @@ template <typename T, int _nx, int _nu, int _np>
   assert(res == PQP_OK);
 
   double d = dres.Distance();
+  assert(d>=0);
 
   // subtract safety distance
-  d -= sd;
+  d = MAX(0, d - sd);
 
-  //  assert(d>=0);
 
   //  if (dem.Inside(dres.P1()[0], dres.P1()[1], dres.P1()[2]))
 
-  bool in = dem.Inside(p[0], p[1], p[2]);
+  bool in = 
+    dem.Inside(p[0] + cr, p[1], p[2]) ||
+    dem.Inside(p[0], p[1] + cr, p[2]) ||
+    dem.Inside(p[0], p[1] - cr, p[2]);
+
+
   if (in)
     d = -d;
   

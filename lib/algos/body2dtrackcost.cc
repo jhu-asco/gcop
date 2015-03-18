@@ -85,28 +85,31 @@ double Body2dTrackCost::L(double t, const M3V3d &x, const Vector3d &u,
     const Vector2d &z = I[i].second;
 
     const Vector2d &pf = p->segment<2>(i0 + 2*l);
-    Vector2d y = R.transpose()*(pf - xp);
-    Vector2d r = (y - z)/pg.cp;
+    Vector2d r = R.transpose()*(pf - xp);
+    Vector2d y = (r - z)/pg.cp;
 
-    L += r.dot(y - z)/2;         // feature cost
+    L += y.dot(r - z)/2;         // feature cost
 
     if (Lx) {
-      (*Lx)[0] = (*Lx)[0] - cross2(y, r);
-      Lx->segment<2>(1) = Lx->segment<2>(1) - r;
+      (*Lx)[0] = (*Lx)[0] - cross2(r, y);
+      Lx->segment<2>(1) = Lx->segment<2>(1) - y;
     }
 
     if (Lxx) {
-      (*Lxx)(0,0) += y.dot(y)/pg.cp;
-      Lxx->block<1,2>(0,1) += (-r2hat(r) + r2hat(y)/pg.cp);
-      //      Lxx->topRightCorner<1,2>() += (-r2hat(r) + r2hat(y)/pg.cp);
-      Lxx->block<2,1>(1,0) += (-r2hat(r) + r2hat(y)/pg.cp).transpose();      
+      //      (*Lxx)(0,0) += y.dot(y)/pg.cp;
+      (*Lxx)(0,0) += r.dot(r)/pg.cp + r2hat(r)*r2hat(y).transpose();
+
+      //      Lxx->block<2,1>(1,0) += (-r2hat(r) + r2hat(y)/pg.cp); 
+      Lxx->block<1,2>(0,1) += r2hat(r)/pg.cp - r2hat(y)/2;
+      //      Lxx->block<2,1>(1,0) += (-r2hat(r) + r2hat(y)/pg.cp).transpose();              
+      Lxx->block<2,1>(1,0) += (r2hat(r)/pg.cp - r2hat(y)/2).transpose(); 
       //      Lxx->bottomLeftCorner<2,1>() += (-r2hat(r) + r2hat(y)/pg.cp).transpose();      
       Lxx->block<2,2>(1,1) += Matrix2d::Identity()/pg.cp;
       //      Lxx->bottomRightCorner<2,2>() += Matrix2d::Identity()/pg.cp;
     }
 
     if (Lp)
-      Lp->segment<2>(i0 + 2*l) = R*r;
+      Lp->segment<2>(i0 + 2*l) = R*y;
 
     if (Lpp)
       Lpp->block<2,2>(i0 + 2*l, i0 + 2*l) = Matrix2d::Identity()/pg.cp;
