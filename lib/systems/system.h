@@ -123,7 +123,7 @@ namespace gcop {
                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
 
   /**
-   * Discrete Dynamics Update. This function computes the next state xb using the internal
+   * Discrete Dynamics Update. This function computes the next state xb using the internal input
    * state x_int and applied forces u
    * @param xb resulting state
    * @param t current time
@@ -134,7 +134,7 @@ namespace gcop {
    * @param B jacobian w.r.t. u   (optional)
    * @param C jacobian w.r.t. p   (optional)
    */
-  virtual double Step1(T &xb, const Vectorcd &u,
+  virtual double Step_internalinput(T &xb, const Vectorcd &u,
                        double h, const Vectormd *p = 0,
                        Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
 
@@ -149,7 +149,7 @@ namespace gcop {
    * @param C jacobian w.r.t. p   (optional)
 
    */
-  virtual double Step2(const Vectorcd &u,
+  virtual double Step_internaloutput(const Vectorcd &u,
       double h,const Vectormd *p = 0,
       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
 
@@ -167,7 +167,7 @@ namespace gcop {
    * @param C jacobian w.r.t. p   (optional)
    * @param D jacobian w.r.t  w   (optional)
    */
-  virtual double Step3(T &xb, const Vectorcd &u,
+  virtual double Step_noise(T &xb, const Vectorcd &u,
                       const Vectornd &w, double h,
                       const Vectormd *p = 0,Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0, Matrixnd *D = 0);
 
@@ -264,7 +264,7 @@ namespace gcop {
     return 0;
   }
   template <typename T, int _nx, int _nu, int _np> 
-    double System<T, _nx, _nu, _np>::Step1(T& xb, const Vectorcd &u, double h, const Vectormd *p,
+    double System<T, _nx, _nu, _np>::Step_internalinput(T& xb, const Vectorcd &u, double h, const Vectormd *p,
                                           Matrixnd *A, Matrix<double, _nx, _nu> *B, 
                                           Matrix<double, _nx, _np> *C) {
     double result = this->Step(xb, this->t, this->x, u, h, p, A, B, C);
@@ -273,21 +273,21 @@ namespace gcop {
     return result;
   }
   template <typename T, int _nx, int _nu, int _np> 
-    double System<T, _nx, _nu, _np>::Step2(const Vectorcd &u, double h, const Vectormd *p,
+    double System<T, _nx, _nu, _np>::Step_internaloutput(const Vectorcd &u, double h, const Vectormd *p,
                                           Matrixnd *A, Matrix<double, _nx, _nu> *B, 
                                           Matrix<double, _nx, _np> *C) {
       T xb;
-      double result = this->Step1(xb, u, h, p, A, B, C);
+      double result = this->Step_internalinput(xb, u, h, p, A, B, C);
       return result;
   }
 
   template <typename T, int _nx, int _nu, int _np>
-  double System<T, _nx, _nu, _np>::Step3(T &xb, const Vectorcd &u,
+  double System<T, _nx, _nu, _np>::Step_noise(T &xb, const Vectorcd &u,
                       const Vectornd &w, double h, const Vectormd *p,
                       Matrixnd *A, Matrixncd *B, Matrixnmd *C, Matrixnd *D)
   {
     //double result = this->Step(xb, this->t, this->x, u, h, p, A, B, C);
-    double result = this->Step1(xb, u, h, p, A, B, C);
+    double result = this->Step_internalinput(xb, u, h, p, A, B, C);
     Matrixnd noise_matrix;
     this->NoiseMatrix(noise_matrix, this->t, this->x, u, h, p);
     this->X.Retract(xb, xb, (noise_matrix*w));

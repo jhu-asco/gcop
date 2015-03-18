@@ -141,7 +141,7 @@ void solver_process(Viewer* viewer)
       us[i] = Vector2d(-.5, -.2);
 
     //Forward Step:
-    sys.Step1(xs[i+1],us[i], h);
+    sys.Step_internalinput(xs[i+1],us[i], h);
 
     cout<<"Xs["<<(i+1)<<"]: "<<xs[i+1].transpose()<<endl;
     if((ts_sensor[sensor_index] - ts[i])>= 0 && (ts_sensor[sensor_index] - ts[i+1]) < 0)

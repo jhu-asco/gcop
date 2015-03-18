@@ -500,7 +500,7 @@ namespace gcop {
 					//Adding nan catching :
 					try
 					{
-						this->sys.Step1(xn, un, h, this->p);
+						this->sys.Step_internalinput(xn, un, h, this->p);
 					}
 					catch(std::exception &e)
 					{
@@ -626,7 +626,7 @@ namespace gcop {
       for(int count_traj = 0; count_traj< N;count_traj++)
       {
         us1 = this->us[count_traj] - this->dus[count_traj];
-        this->sys.Step1(xsprev[count_traj+1],us1,(this->ts[count_traj+1])-(this->ts[count_traj]), this->p);
+        this->sys.Step_internalinput(xsprev[count_traj+1],us1,(this->ts[count_traj+1])-(this->ts[count_traj]), this->p);
       }
       */
 
@@ -689,7 +689,7 @@ namespace gcop {
             }
             //cout<<"du_sigma: "<<du_sigma[count_traj].transpose()<<endl;
             //getchar();
-            this->sys.Step1(xss[count_traj+1],us1,(this->ts[count_traj+1])-(this->ts[count_traj]), this->p);
+            this->sys.Step_internalinput(xss[count_traj+1],us1,(this->ts[count_traj+1])-(this->ts[count_traj]), this->p);
           }
           this->sys.X.Lift(dx, this->xs[N], xss[N]);//This is for feedback
           dxsquare[N] += dx.squaredNorm();
@@ -799,7 +799,7 @@ namespace gcop {
           }
           */
           //cout<<"du, u: "<<du.transpose()<<"\t"<<(this->us[count1]).transpose()<<endl;
-          this->sys.Step1(xss[count1+1],us1,(this->ts[count1+1])-(this->ts[count1]), this->p);
+          this->sys.Step_internalinput(xss[count1+1],us1,(this->ts[count1+1])-(this->ts[count1]), this->p);
           //this->sys.X.Lift(dx, this->xs[count1+1], xss[count1+1]);//This is for fitting Linear Model
           //cout<<" "<<dx.norm();
           /*if(count_iterate == 2)

@@ -250,7 +250,7 @@ namespace gcop {
 
     //  cout<<"ts["<<i<<"]: "<<ts[i]<<endl;
       //cout<<"us["<<i<<"]: "<<us[i].transpose()<<"ts: "<<ts[i]<<endl;
-      this->sys.Step1(xs[i+1], us[i], ts[i+1] - ts[i], p);
+      this->sys.Step_internalinput(xs[i+1], us[i], ts[i+1] - ts[i], p);
       //cout<<"Xs["<<(i+1)<<"]"<<xs[i+1].transpose()<<endl;//#DEBUG
       //cout<<"us["<<i<<"]"<<us[i].transpose()<<endl;
     }

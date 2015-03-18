@@ -190,7 +190,7 @@ void VehicleDemo::initPhysics()
       if (brccar)
       {
         //cout<<"u: "<<us[i].transpose()<<endl;
-        brccar->Step1(xs[i+1], us[i], h);//Move
+        brccar->Step_internalinput(xs[i+1], us[i], h);//Move
       }
       if((ts_sensor[sensor_index] - ts[i])>= 0 && (ts_sensor[sensor_index] - ts[i+1]) < 0)
       {

@@ -65,11 +65,11 @@ namespace gcop {
                 const Vector2d &u, double h, const VectorXd *p,
                 Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
 
-    double Step1(Vector4d &xb, const Vector2d &u, 
+    double Step_internalinput(Vector4d &xb, const Vector2d &u, 
                 double h, const VectorXd *p = 0,
                 Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
 
-    double Step3(Vector4d &xb, const Vector2d &u,
+    double Step_noise(Vector4d &xb, const Vector2d &u,
                       const Vector4d &w, double h,
                       const VectorXd *p = 0,Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0, Matrix4d *D = 0);
 

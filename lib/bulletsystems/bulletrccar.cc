@@ -172,10 +172,10 @@ double Bulletrccar::Step(Vector4d &xb, double t, const Vector4d &xa,
 {
 //  cout<<"Step Called: "<<endl;
   this->reset(xa,t);
-  return this->Step1(xb,u,h,p,A,B,C);
+  return this->Step_internalinput(xb,u,h,p,A,B,C);
 }
 
-double Bulletrccar::Step1(Vector4d& xb, const Vector2d& u, 
+double Bulletrccar::Step_internalinput(Vector4d& xb, const Vector2d& u, 
                    double h, const VectorXd *p,
                    Matrix4d *A, Matrix42d *B, Matrix4pd *C) {
   //Set Parameters
@@ -298,14 +298,14 @@ double Bulletrccar::Step1(Vector4d& xb, const Vector2d& u,
   return 1;
 }
 
-double Bulletrccar::Step3(Vector4d &xb, const Vector2d &u,
+double Bulletrccar::Step_noise(Vector4d &xb, const Vector2d &u,
     const Vector4d &w, double h,
     const VectorXd *p,Matrix4d *A, Matrix42d *B, Matrix4pd *C, Matrix4d *D)
 {
   //Convert w into forces that can be applied[NOT WORKING]:
   m_carChassis->applyCentralForce(btVector3(w[0], w[1], w[2]));
   m_carChassis->applyTorque(btVector3(0, w[3], 0));//Can be all dims too or change this acc to needs
-  double result = this->Step1(xb, u, h, p, A, B, C);
+  double result = this->Step_internalinput(xb, u, h, p, A, B, C);
   return result;
 }
 
