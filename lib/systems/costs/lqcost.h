@@ -208,16 +208,17 @@ namespace gcop {
     
     int k = round(t/h);
     
-    if (xds) {
-      assert(k < xds->size());
-      this->sys.X.Lift(dx, (*xds)[k], x); // difference (on a vector space we have dx = x - xf)
-    } else {
-      this->sys.X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)      
-    }
-    assert(!std::isnan(dx[0]));
-    
-    // check if final state
+        // check if final state
     if (t > this->tf - 1e-10) {
+
+      if (xds) {
+        this->sys.X.Lift(dx, xds->back(), x); // difference (on a vector space we have dx = x - xf)
+      } else {
+        this->sys.X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)      
+      }
+      assert(!std::isnan(dx[0]));
+    
+
       if (Lx)
         if (diag)
           *Lx = Qf.diagonal().cwiseProduct(dx);
@@ -240,7 +241,16 @@ namespace gcop {
         return dx.dot(Qf*dx)/2;
       
     } else {
-      
+
+      if (xds) {
+        assert(k < xds->size());
+        this->sys.X.Lift(dx, (*xds)[k], x); // difference (on a vector space we have dx = x - xf)
+      } else {
+        this->sys.X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)      
+      }
+      assert(!std::isnan(dx[0]));
+
+     
       
       if (uds) {
         assert(k < uds->size());

@@ -205,7 +205,7 @@ void Run(Viewer* viewer)
                           sqrt(pg.cw[1])*random_normal(), 
                           sqrt(pg.cw[2])*random_normal()); 
 
-    w << 0, sqrt(pg.cw[1]), 0;
+    w <<  0,0,sqrt(pg.cw[2]);
     
     // simulate true state
     pair<Matrix3d, Vector3d> xt;
@@ -231,7 +231,8 @@ void Run(Viewer* viewer)
       cout << "p " << pg.p.size() << endl;
 
       pddp = new PDdp<M3V3d, 6, 3>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 2*pg.extforce);
-      for (int b=0; b < 20;++b)
+      pddp->debug = false;
+      for (int b=0; b < 4;++b)
         pddp->Iterate();     
 
       delete pddp;

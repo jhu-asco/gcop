@@ -1,15 +1,50 @@
-#include <assert.h>
-#include <stdlib.h>
-#include <string.h>
-#include <iostream>
-#include "viewer.h"
-#include "utils.h"
-#include "body3dtrackview.h"
+#ifndef GCOP_KINBODY3DTRACKVIEW_H
+#define GCOP_KINBODY3DTRACKVIEW_H
 
-using namespace gcop;
+#include "GL/glu.h"
+#include "GL/glut.h"
+#include "kinbody3dtrack.h"
+#include "view.h"
 
-Body3dTrackView::Body3dTrackView(const Body3dTrack &pg) : 
-  View("Body3dtrack View"), pg(pg)
+
+namespace gcop {
+
+  /**
+   * Rigid body view. Supports rendering either a single state
+   * or a whole trajectory of states.
+   */
+  template <int _nu = 6>
+  class Kinbody3dTrackView : public View {
+  public:
+    
+    /**
+     * Create a view for a single state s
+     * @param name name
+     * @param s rigid body state
+     */
+    Kinbody3dTrackView(const Kinbody3dTrack<_nu> &pg);
+
+    virtual ~Kinbody3dTrackView();
+
+    virtual void Render();
+    
+    virtual bool RenderFrame(int i);
+  
+    const Kinbody3dTrack<_nu> &pg;
+
+    float rgba[4];
+
+    bool drawLandmarks;
+    bool drawForces;
+    double forceScale;
+
+
+    GLUquadricObj *qobj;   
+  };
+
+template <int _nu>
+Kinbody3dTrackView<_nu>::Kinbody3dTrackView(const Kinbody3dTrack<_nu> &pg) : 
+  View("Kinbody3dtrack View"), pg(pg)
 {
   rgba[0] = 1;
   rgba[0] = 0;
@@ -21,20 +56,22 @@ Body3dTrackView::Body3dTrackView(const Body3dTrack &pg) :
   qobj = gluNewQuadric();
 }
 
-
-Body3dTrackView::~Body3dTrackView()
+template <int _nu>
+Kinbody3dTrackView<_nu>::~Kinbody3dTrackView()
 {
   free(qobj);
 }
 
 
-void Body3dTrackView::Render()
+template <int _nu>
+void Kinbody3dTrackView<_nu>::Render()
 {
   RenderFrame(0);
 }
 
 
-bool Body3dTrackView::RenderFrame(int i)
+template <int _nu>
+bool Kinbody3dTrackView<_nu>::RenderFrame(int i)
 {  
 
   Viewer::SetColor(.5, .5, .5, 1);  
@@ -51,9 +88,9 @@ bool Body3dTrackView::RenderFrame(int i)
     glDisable(GL_LIGHTING);
     Vector3d f;
     for (int k =0; k < pg.us.size(); ++k) {
-      f.head<3>() = forceScale*pg.xs[k].first*(pg.us[k]).tail<3>();
+      f.head<3>() = forceScale*pg.xs[k].block(0,0,3,3)*(pg.sys.Bu*pg.us[k]).tail(3);
       glPushMatrix();
-      glTranslated(pg.xs[k].second(0), pg.xs[k].second(1), pg.xs[k].second(2)); 
+      glTranslated(pg.xs[k](0,3), pg.xs[k](1,3), pg.xs[k](2,3)); 
       Viewer::DrawArrow(f.data(),qobj);
       glPopMatrix();
     }
@@ -120,7 +157,7 @@ bool Body3dTrackView::RenderFrame(int i)
       const vector< pair<int,Vector3d> > &J = pg.Js[pg.pis[l]];
       for (int j = 0; j < J.size(); ++j) {
         int k = J[j].first;
-        const Vector3d &x = pg.xs[k].second.segment<3>(0);
+        const Vector3d &x = pg.xs[k].block(0,3,3,1);
         glVertex3d(pg.p(3*l + i0), pg.p(3*l + i0 + 1), pg.p(3*l + i0 + 2));
         glVertex3d(x[0], x[1], x[2]);
       }
@@ -134,3 +171,6 @@ bool Body3dTrackView::RenderFrame(int i)
   return false;
 }
 
+}
+
+#endif

@@ -26,6 +26,9 @@ set(sources
     ins.cc
     point3d.cc
     imu.cc
+    body2dtrack.cc
+    body3dtrack.cc
+    kinrccar.cc
 )
 
 set(headers
@@ -45,6 +48,7 @@ set(headers
     hrotor.h
     heli.h
     kinbody2d.h
+    kinbody3d.h
     wrench.h
     mbs.h
     chain.h
@@ -62,6 +66,12 @@ set(headers
     ins.h
     point3d.h
     imu.h
+    body2dtrack.h
+    body3dtrack.h
+    kinbody3dtrack.h
+    kinbodyprojtrack.h
+    kinrccar.h
+    kinrccarpath.h
 )
 
 add_subdirectory (manifolds)

@@ -7,7 +7,13 @@
 #include "rnlqcost.h"
 #include "params.h"
 
+#define USE_SPLINEPARAM
+
+#ifdef USE_SPLINEPARAM
+#include "uniformsplinetparam.h"
+#else
 #include "controltparam.h"
+#endif
 
 using namespace std;
 using namespace Eigen;
@@ -83,12 +89,17 @@ void solver_process(Viewer* viewer)
   
   //  Tparam<Vector4d, 4, 2> tp(sys, us.size()*sys.U.n);
 
-  int Nk = 10;
-  vector<double> tks(Nk+1);
+  int Nk = 10;//Number of segments
+  VectorXd tks(Nk+1);
+  //vector<double> tks(Nk+1);
   for (int k = 0; k <=Nk; ++k)
     tks[k] = k*(tf/Nk);
   
+#ifdef USE_SPLINEPARAM
+  UniformSplineTparam<Vector4d, 4, 2> ctp(sys, tks,2);
+#else
   ControlTparam<Vector4d, 4, 2> ctp(sys, tks);
+#endif
 
   RccarGn gn(sys, cost, ctp, ts, xs, us);  
 

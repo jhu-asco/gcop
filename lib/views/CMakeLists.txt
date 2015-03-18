@@ -39,6 +39,7 @@ set(headers
   rccarview.h
   gunicycleview.h
   body3dview.h
+  kinbody3dview.h
   qrotorview.h
   hrotorview.h
   hrotorgeom3dview.h
@@ -49,6 +50,7 @@ set(headers
   body2dgraphview.h
   body2dtrackview.h
   body3dtrackview.h
+  kinbody3dtrackview.h
   mbsview.h
   chainview.h
   geom3dview.h
