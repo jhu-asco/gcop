@@ -122,102 +122,77 @@ namespace gcop {
       MatrixXd A(us.size(), nofcontrolpoints);//Basis Matrix
       MatrixXd Asquare(nofcontrolpoints, nofcontrolpoints);//Basis Matrix
       VectorXd c(us.size());//RHS 
-      MatrixXd weights(us.size(),nu);//weighted Least_squares
       A.setZero();//Initialize A
       VectorXd basis(degree+1);
 
       //Find Basis Matrix to find the control points:
       for(int ind = 0;ind < us.size(); ind++)
-      {
-        //Find the region in which ts[i] lies:
-        if(tks_index < (tks.size()-1))
-          while((ts[ind] - tks[tks_index+1])>1e-17)
-            tks_index +=1;
-          //tks_index = (ts[ind] - tks[tks_index+1])<-1e-17?tks_index:(tks_index+1);//1e-17 so that it considers numerical accuracy
-        //Find the Basis for the normalized coordinate:
-        //cout<<"index: "<<tks_index<<endl;
-        double u = (ts[ind] - tks[tks_index])/(tks[tks_index+1] - tks[tks_index]);
-        //cout<<"tks["<<(tks_index)<<"]: "<<tks[tks_index]<<"\t"<<tks[tks_index+1]<<endl;
-        //cout<<"ts: "<<ts[ind]<<endl;
-        //cout<<"u: "<<u<<endl;
-        FindBasis(basis, u);
-        A.block(ind, tks_index, 1, degree+1) = basis.transpose();//Create Basis Matrix
-        if(ind == 0)
-        {
-          //weights.row(ind) = (us[1] - us[0]).transpose().array().square() + Vectorcd::Constant(0.1).transpose().array();
-          weights.row(ind) = 0.1*(us[1] - us[0]).transpose().array().square();
-        }
-        else if(ind == us.size()-1)
-          weights.row(ind) = 0.1*(us[ind] - us[ind-1]).transpose().array().square();
-        else
-          weights.row(ind) = 0.1*((us[ind] - us[ind-1]).transpose().array().square() + (us[ind] - us[ind+1]).transpose().array().square());
-      }
-      for(int ind = 0; ind < nu; ind++)
-      {
-        double min_weight = weights.col(ind).minCoeff();
-        double max_weight = weights.col(ind).maxCoeff();
-        if(max_weight < 1e-4)
-        {
-          weights.col(ind) = weights.col(ind).array() + 1.0;
-          continue;
-        }
-        if(min_weight< 1e-4)
-        {
-          weights.col(ind) = (1.0/max_weight)*weights.col(ind).array() + 1.0;
-        }
-      }
-      //Asquare = (A.transpose()*A);
-      //cout<<"A: "<<endl<<A<<endl;
-      //cout<<"Asquare: "<<endl<<Asquare<<endl;
-      cout<<"weights: "<<weights<<endl;
-      //getchar();
-      for(int ind = 0; ind < nu; ind++)
-      {
-        for(int uind = 0; uind < us.size(); uind++)
-        {
-          c(uind) = us[uind](ind);
-        }
-        Asquare = A.transpose()*weights.col(ind).asDiagonal()*A;//Weighted matrix
-        VectorXd b = Asquare.ldlt().solve(A.transpose()*weights.col(ind).cwiseProduct(c));
-        cout<<"Error: "<<(A*b - c).squaredNorm()<<endl;
-      //  cout<<"c: "<<c.transpose()<<endl;
-        //cout<<"b: "<<b.transpose()<<endl;
-        //Copy the elements back into vector s:
-        for(int sind = 0; sind < nofcontrolpoints; sind++)
-        {
-          s(sind*nu + ind) = b(sind);
-        }
-      }
-      cout<<"s: "<<s.transpose()<<endl;
-      //getchar();
-      //Verify if this s is good:
-      /*
-      {
-        tks_index = 0;
-        Vectorcd usi;
-        for (int i = 0; i < us.size(); ++i) {
-          //Find the region in which ts[i] lies:
-          if(tks_index < (tks.size()-1))
-            tks_index = (ts[i] - tks[tks_index+1])<-1e-17?tks_index:(tks_index+1);
-          //Find the Basis for the normalized coordinate:
-          double u = (ts[i] - tks[tks_index])/(tks[tks_index+1] - tks[tks_index]);
-          FindBasis(basis, u);
-          usi.setZero();
-          //Weight the spline using the basis:
-          for(int degree_count = 0; degree_count <= degree; degree_count++)
-          {
-            usi += basis[degree_count]*s.segment((tks_index+degree_count)*nu,nu);
-          }
-          cout<<"Basis: "<<basis.transpose()<<endl;
+			{
+				//Find the region in which ts[i] lies:
+				if(tks_index < (tks.size()-1))
+					while((ts[ind] - tks[tks_index+1])>1e-17)
+						tks_index +=1;
+				//tks_index = (ts[ind] - tks[tks_index+1])<-1e-17?tks_index:(tks_index+1);//1e-17 so that it considers numerical accuracy
+				//Find the Basis for the normalized coordinate:
+				//cout<<"index: "<<tks_index<<endl;
+				double u = (ts[ind] - tks[tks_index])/(tks[tks_index+1] - tks[tks_index]);
+				//cout<<"tks["<<(tks_index)<<"]: "<<tks[tks_index]<<"\t"<<tks[tks_index+1]<<endl;
+				//cout<<"ts: "<<ts[ind]<<endl;
+				//cout<<"u: "<<u<<endl;
+				FindBasis(basis, u);
+				A.block(ind, tks_index, 1, degree+1) = basis.transpose();//Create Basis Matrix
 
-          cout<<"us_pred["<<i<<"]: "<<usi.transpose()<<"us_act: "<<us[i].transpose()<<endl;
-        }
-      }
-      getchar();
-      */
+				//Asquare = (A.transpose()*A);
+				//cout<<"A: "<<endl<<A<<endl;
+				//cout<<"Asquare: "<<endl<<Asquare<<endl;
+				//getchar();
+				for(int ind = 0; ind < nu; ind++)
+				{
+					for(int uind = 0; uind < us.size(); uind++)
+					{
+						c(uind) = us[uind](ind);
+					}
+					Asquare = A.transpose()*A;//Weighted matrix
+					VectorXd b = Asquare.ldlt().solve(A.transpose().cwiseProduct(c));
+					cout<<"Error: "<<(A*b - c).squaredNorm()<<endl;
+					//  cout<<"c: "<<c.transpose()<<endl;
+					//cout<<"b: "<<b.transpose()<<endl;
+					//Copy the elements back into vector s:
+					for(int sind = 0; sind < nofcontrolpoints; sind++)
+					{
+						s(sind*nu + ind) = b(sind);
+					}
+				}
+				cout<<"s: "<<s.transpose()<<endl;
+				//getchar();
+				//Verify if this s is good:
+				/*
+					 {
+					 tks_index = 0;
+					 Vectorcd usi;
+					 for (int i = 0; i < us.size(); ++i) {
+				//Find the region in which ts[i] lies:
+				if(tks_index < (tks.size()-1))
+				tks_index = (ts[i] - tks[tks_index+1])<-1e-17?tks_index:(tks_index+1);
+				//Find the Basis for the normalized coordinate:
+				double u = (ts[i] - tks[tks_index])/(tks[tks_index+1] - tks[tks_index]);
+				FindBasis(basis, u);
+				usi.setZero();
+				//Weight the spline using the basis:
+				for(int degree_count = 0; degree_count <= degree; degree_count++)
+				{
+				usi += basis[degree_count]*s.segment((tks_index+degree_count)*nu,nu);
+				}
+				cout<<"Basis: "<<basis.transpose()<<endl;
 
-      //s.setZero();
-    }
+				cout<<"us_pred["<<i<<"]: "<<usi.transpose()<<"us_act: "<<us[i].transpose()<<endl;
+				}
+				}
+				getchar();
+				 */
+
+				//s.setZero();
+			}
   
   template <typename T, int nx, int nu, int np> 
     void UniformSplineTparam<T, nx, nu, np>::From(vector<double> &ts, 

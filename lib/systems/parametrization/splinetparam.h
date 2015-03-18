@@ -10,10 +10,6 @@ namespace gcop {
   using namespace Eigen;
 
   /**
-   * General trajectory parametrization functionality. A trajectory can be parametrizes using
-   * a set of discrete controls, a continuous control paramertization, a set of discrete states, 
-   * a set of discrete flat outputs, etc...
-   *
    * This version implements the non uniform spline interpolation of the data. It also implements least square fitting of the given control data using spline
    *
    * Author: Marin Kobilarov (c) 2005--2013
@@ -39,6 +35,11 @@ namespace gcop {
     typedef Spline<double, nu> ControlSpline;
  
   public:
+		/** Constructor
+		 * @param sys			System used for manifold
+		 * @param tks			Knot times for spline
+		 * @param degree	Spline degree
+		 */
     SplineTparam(System<T, nx, nu, np> &sys, const VectorXd tks, int degree = 2);//By default use quadratic spline
     
     void To(Vectorntpd &s, 
@@ -54,8 +55,8 @@ namespace gcop {
               Vectormd *p = 0);
     
     VectorXd tks;  ///< control times
-    double tf;
-    int degree; //Degree of the spline // p = (m - n - 1) where m is knot vector size; n is the control vector size (tks size)
+    double tf;///< Final time for spline
+    int degree; ///< Degree of the spline p = (m - n - 1) where m is knot vector size(used by bspline to find the basis etc); n is the control vector size (tks size)
   };
   
   template <typename T, int nx, int nu, int np, int _ntp> 
