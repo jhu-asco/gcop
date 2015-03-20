@@ -95,14 +95,14 @@ void solver_process(Viewer* viewer)
   struct timeval timer;
   //  ddp.debug = false; // turn off debug for speed
 
-  getchar();
+  //  getchar();
 
   for (int i = 0; i < 100; ++i) {    
     timer_start(timer);
     ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
-    getchar();
+    //    getchar();
   }
 
   cout << "done!" << endl;
