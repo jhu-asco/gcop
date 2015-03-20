@@ -14,6 +14,9 @@ typedef Ddp<Vector5d, 5, 2> UnicycleDdp;
 
 void solver_process(Viewer* viewer)
 {
+
+  viewer->SetCamera(39, 45, 1.7, 2.25, -7.95);
+
   int N = 32;
   double tf = 10;
   double h = tf/N;
@@ -55,7 +58,7 @@ void solver_process(Viewer* viewer)
 
   struct timeval timer;
   // ddp.debug = false; // turn off debug for speed
-  getchar();
+  //getchar();
 
   for (int i = 0; i < 20; ++i) {
 
@@ -63,7 +66,7 @@ void solver_process(Viewer* viewer)
     ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
-    getchar();
+    //getchar();
   }
 
   //  for (int k = 0; k <= N; ++k)

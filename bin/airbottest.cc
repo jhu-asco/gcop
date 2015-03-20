@@ -18,7 +18,7 @@ Params params;
 void solver_process(Viewer* viewer)
 {
   if (viewer) {
-    viewer->SetCamera(45.25, 37, -0.14, 0.05, -1.75);
+    viewer->SetCamera(-54, 54, 0.3, -0.1, -1.35);
   }
 
   int N = 128;      // discrete trajectory segments
@@ -109,7 +109,7 @@ void solver_process(Viewer* viewer)
   AirbotView view(sys, &xs);
   if (viewer)
     viewer->Add(view);
-  getchar();
+  //  getchar();
 
   AirbotDdp ddp(sys, cost, ts, xs, us);
   params.GetDouble("mu", ddp.mu);
@@ -150,12 +150,12 @@ void solver_process(Viewer* viewer)
 	cout<<"Cost.R"<<endl<<cost.R<<endl;
 
 
-  for (int i = 0; i < 50; ++i) {    
+  for (int i = 0; i < 20; ++i) {    
     timer_start(timer);
     ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
-        getchar();
+    // getchar();
   }
 
   int Nd;

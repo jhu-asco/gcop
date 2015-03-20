@@ -31,7 +31,8 @@ Params params;
 void solver_process(Viewer* viewer)
 {
   if (viewer)
-    viewer->SetCamera(3.25, 48, -1.15, -1.35, -2.25);
+    viewer->SetCamera(43.25, 94, -1.15, -0.9, -3.75);
+
 
   int N = 32;      // discrete trajectory segments
   double tf = 2;   // time-horizon
@@ -89,7 +90,7 @@ void solver_process(Viewer* viewer)
   }
     
   QrotorDdp ddp(sys, cost, ts, xs, us);
-  ddp.mu = 1;
+  ddp.mu = .01;
 
   QrotorView view(sys, &ddp.xs);
   if (viewer)
@@ -98,11 +99,12 @@ void solver_process(Viewer* viewer)
   struct timeval timer;
   //  ddp.debug = false; // turn off debug for speed
 
-  for (int i = 0; i < 10; ++i) {    
+  for (int i = 0; i < 100; ++i) {    
     timer_start(timer);
     ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
+    //    getchar();
   }
 
   cout << "done!" << endl;

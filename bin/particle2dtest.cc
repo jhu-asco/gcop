@@ -20,6 +20,8 @@ typedef ConstraintCost<Vector4d, 4, 2, Dynamic, 1> DiskCost;
 
 void solver_process(Viewer* viewer)
 {
+  viewer->SetCamera(22.625, 45, 1.25, 3.15, -10);
+
   int N = 32;
   double tf = 10;
   double h = tf/N;
@@ -77,7 +79,7 @@ void solver_process(Viewer* viewer)
     dcost.b = 2*dcost.b;
 
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
-    getchar();
+    //    getchar();
   }
   //  for (int k = 0; k <= N; ++k)
   //cout << "xf=" << endl;

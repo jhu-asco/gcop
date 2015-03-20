@@ -6,15 +6,13 @@
 #include "utils.h"
 #include "so3.h"
 
-#define USE_SDDP
+//#define USE_SDDP
 
 #ifdef USE_SDDP
 #include "sddp.h"
 #else
 #include "ddp.h"
 #endif
-
-
 
 using namespace std;
 using namespace Eigen;
@@ -29,7 +27,7 @@ typedef Ddp<Body3dState, 12, 6> Body3dDdp;
 void solver_process(Viewer* viewer)
 {
   if (viewer)
-    viewer->SetCamera(3, 60, -2.55, -3.9, -5.05);
+    viewer->SetCamera(-2.5, 81, -1.8, -2.15, -6.3);
 
   int N = 32;
   double tf = 10;
@@ -85,7 +83,7 @@ void solver_process(Viewer* viewer)
     ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;    
-    getchar();
+    //    getchar();
   }
 
   //  for (int k = 0; k <= N; ++k)

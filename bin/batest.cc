@@ -60,7 +60,7 @@ void Run(Viewer* viewer)
   struct timeval timer;
 
   //  ba.pddp.debug = false; // turn off debug for speed
-  ba.pddp.nu = .1;
+  //  ba.pddp.nu = .1;
 
   for (int i = 0; i < 1000; ++i) {
 

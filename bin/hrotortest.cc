@@ -27,7 +27,7 @@ typedef Ddp<Body3dState, 12, 4> HrotorDdp;
 void solver_process(Viewer* viewer)
 {
   if (viewer)
-    viewer->SetCamera(3.25, 48, -1.15, -1.35, -2.25);
+    viewer->SetCamera(2.75, 60.75, -1.7, -1.4, -5.3);
 
   int N = 64;      // discrete trajectory segments
   double tf = 5;   // time-horizon

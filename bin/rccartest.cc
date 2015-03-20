@@ -32,7 +32,7 @@ Params params;
 void solver_process(Viewer* viewer)
 {
   if (viewer)
-    viewer->SetCamera(-5, 51, -0.2, -0.15, -2.3);
+    viewer->SetCamera(32, 47, -0.3, 0.4, -1.6);
 
   int N = 64;        // number of segments
   double tf = 5;    // time horizon
@@ -103,17 +103,17 @@ void solver_process(Viewer* viewer)
 
   struct timeval timer;
   // ddp.debug = false; // turn off debug for speed
-  getchar();
+  //  getchar();
 
     timer_start(timer);
   for (int i = 0; i < iters; ++i) {
     ddp.Iterate();
-    getchar();
+    //    getchar();
   }
 
   long te = timer_us(timer);
   cout << "Iterations" << iters << " took: " << te << " us." << endl;
-  getchar();
+  //  getchar();
   
   cout << xs[N] << endl;
 

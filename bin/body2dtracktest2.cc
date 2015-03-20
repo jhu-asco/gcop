@@ -24,8 +24,8 @@ void Run(Viewer* viewer)
   srand(1);
   
   if (viewer)
-    viewer->SetCamera(18.875, 1.625, -.15, -.6, -35.5);
-  
+    viewer->SetCamera(18.875, 1.625, -.15, -.6, -77.5);
+
   double tf = 30;
   int nf = 100;
   params.GetDouble("tf", tf);
@@ -113,7 +113,7 @@ void Run(Viewer* viewer)
   }
 
   struct timeval timer;
-  getchar();
+  //  getchar();
   
 
   SE2 &se2 = SE2::Instance();  
@@ -245,33 +245,10 @@ void Run(Viewer* viewer)
 
     cout << "FEATURES:" << pg.p.size() << endl;
     
-    getchar(); 
+    //    getchar(); 
     //viewer->saveSnapshot=true;
   }
 
-
-  /*
-  Body2dSlam ba(pg);
-  ba.pddp->debug = true; // turn off debug for speed
-  ba.pddp->mu = .01;
-  ba.pddp->nu = .01;
-
-  for (int i = 0; i < 1000; ++i) {
-
-    cout << "Press Enter to continue" << endl;
-    getchar();    
-    
-    timer_start(timer);
-    ba.pddp->Iterate();
-    long te = timer_us(timer);
-    cout << ba.pddp->dus[0] << endl;
-    cout << "Iteration #" << i << " took: " << te << " us." << endl;    
-    cout << "p=" << ba.pddp->p.head<2>().transpose() << endl;    
-    cout << "ut=" << pgt.us[2] << endl;    
-    cout << "u=" << pg.us[2] << endl;    
-
-  }
-  */
   cout << "done!" << endl;
   while(1)
     usleep(10);    

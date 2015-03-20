@@ -26,8 +26,8 @@ double h = tf/N; // time-step
 
 void car_process(Viewer* viewer)
 {
-  //  if (viewer)
-  // viewer->SetCamera(4.875, 33.875, 0.24999, -0.550001, -6);
+  if (viewer)
+    viewer->SetCamera(-46, 71, 0.85, -0.75, -5.0);
 
   SE2 &se2 = SE2::Instance();  
   Car sys;
@@ -82,8 +82,6 @@ void car_process(Viewer* viewer)
 
 void heli_process(Viewer* viewer)
 {
-  if (viewer)
-    viewer->SetCamera(6.75, 81, 2.7, -.9, -5.05);
 
   // system
   Heli sys;
@@ -129,7 +127,9 @@ void heli_process(Viewer* viewer)
     viewer->Add(view);  
 
 
-  while(1) {    
+  // replace if with while for RHC control
+  //while(1) {    
+  if(1) {    
     struct timeval timer;
     //  ddp.debug = false; // turn off debug for speed
     
@@ -139,7 +139,7 @@ void heli_process(Viewer* viewer)
     }
     long te = timer_us(timer);
     cout << "Took " << te << " us." << endl;        
-    getchar();
+    // getchar();
     xs[0] = xs[1];
 
     std::rotate(us.begin(), us.begin() + 1, us.end());
@@ -148,7 +148,7 @@ void heli_process(Viewer* viewer)
     ddp.Update();
     cout << xs[0].first << " " << xs[0].second  << endl;
     cout << "Moved forward" << endl;
-    getchar();
+    //    getchar();
   }
 
 

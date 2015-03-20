@@ -14,6 +14,9 @@ typedef Ddp<Vector5d, 5, 2> CarDdp;
 
 void solver_process(Viewer* viewer)
 {
+  if (viewer)
+    viewer->SetCamera(36, 34, 1.3, 2.2, -9.1);
+
   int N = 64;        // number of segments
   double tf = 20;    // time horizon
   double h = tf/N;   // time step
@@ -59,7 +62,7 @@ void solver_process(Viewer* viewer)
 
   struct timeval timer;
   // ddp.debug = false; // turn off debug for speed
-  getchar();
+  //  getchar();
 
   for (int i = 0; i < 30; ++i) {
 
@@ -67,7 +70,7 @@ void solver_process(Viewer* viewer)
     ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
-    getchar();
+    //    getchar();
   }
 
   cout << "done!" << endl;

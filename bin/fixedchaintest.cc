@@ -21,7 +21,7 @@ void solver_process(Viewer* viewer)
 {
 
   if (viewer) {
-    viewer->SetCamera(11.25, 40, -0.14, 0.05, -0.03);
+    viewer->SetCamera(-25.8, 56, -0.14, 0, -0.63);
   }
 
   int N = 128;      // discrete trajectory segments
@@ -114,7 +114,7 @@ void solver_process(Viewer* viewer)
   }
 
   // see the result before running optimization
-  getchar();
+  //  getchar();
 
   ChainDdp ddp(sys, cost, ts, xs, us);
   params.GetDouble("mu", ddp.mu);
@@ -129,7 +129,7 @@ void solver_process(Viewer* viewer)
     ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;
-    getchar();
+    //    getchar();
   }
 
   int Nd;

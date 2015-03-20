@@ -19,15 +19,15 @@ Params params;
 void solver_process(Viewer* viewer)
 {
   if (viewer)
-    viewer->SetCamera(13, 67, -2.55, -2.45, -4);
-  
+    viewer->SetCamera(42, 65, -1.55, -2.45, -9);
+
   int N = 64;        // number of segments
-  double tf = 5;    // time horizon
+  double tf = 10;    // time horizon
   int iters = 30;
 
   Uuv<> sys;
 
-
+  // create underactuation
   //  sys.U.lb[5] = -.0001;
   //  sys.U.ub[5] = .0001;
   //  sys.U.bnd = true;
@@ -105,7 +105,7 @@ void solver_process(Viewer* viewer)
   viewer->Add(view);  
 
   struct timeval timer;
-  getchar();
+  //getchar();
 
   //  ddp.debug = false; // turn off debug for speed
 
@@ -114,7 +114,6 @@ void solver_process(Viewer* viewer)
     ddp.Iterate();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;    
-    getchar();
   }
 
   //  for (int k = 0; k <= N; ++k)
