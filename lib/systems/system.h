@@ -219,6 +219,23 @@ namespace gcop {
   virtual bool NoiseMatrix(Matrixnd &Q, double t, const T &x, const Vectorcd &u, 
                      double h, const Vectormd *p = 0);
 
+
+  /**
+   * Convert a system state and controls to flat outputs for the system.
+   * @param y the generated flat outputs
+   * @param x given state
+   * @param u given controls
+   */
+  virtual void StateAndControlsToFlat(VectorXd &y, const T &x, const Vectorcd &u);
+
+  /**
+   * Convert flat outputs and derivatives of flat outputs to the state and controls of the system.
+   * @param y given flat outputs and derivatives of flat outputs
+   * @param x generated state
+   * @param u generated controls
+   */
+  virtual void FlatToStateAndControls(T &x, Vectorcd &u, const std::vector<VectorXd> &y);
+
   Manifold<T, _nx> &X;   ///< state manifold 
   Rn<_nu> U;             ///< control Euclidean manifold
   Rn<_np> P;             ///< parameter Euclidean manifold  
@@ -317,6 +334,20 @@ namespace gcop {
                double dt, const Vectormd *p) {
       Q.setIdentity();
     return true;
+  }
+
+  template <typename T, int _nx, int _nu, int _np> 
+    void System<T, _nx, _nu, _np>::StateAndControlsToFlat(VectorXd &y, const T &x, 
+               const Vectorcd &u) {
+    y.resize(0);
+    std::cout << "[W] System::StateAndControlsToFlat: unimplemented! Subclasses should override." << std::endl;
+  }
+
+  template <typename T, int _nx, int _nu, int _np> 
+    void System<T, _nx, _nu, _np>::FlatToStateAndControls(T &x, Vectorcd &u, 
+               const std::vector<VectorXd> &y) {
+
+    std::cout << "[W] System::FlatToStateAndControls: unimplemented! Subclasses should override." << std::endl;
   }
 }
 
