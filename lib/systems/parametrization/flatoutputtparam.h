@@ -12,6 +12,7 @@ namespace gcop {
   /**
    *
 	 * This is a flat output parametrization class. The template vector ny gives the size of flat output
+	 * TODO If ny Dynamic somehow resize all the knotvector sizes
 	 *
    * Author: Marin Kobilarov (c) 2005--2013
    * Author2: Gowtham Garimella
@@ -19,7 +20,7 @@ namespace gcop {
   template <typename T, 
     int nx, 
     int nu,
-		int ny = Dynamic,
+		int ny,
     int np = Dynamic,
     int _ntp = Dynamic> class FlatOutputTparam : public Tparam<T, nx, nu, np, _ntp> {
     
@@ -82,6 +83,7 @@ namespace gcop {
 		/** Constructor
 		 * @param sys			System used for manifold
 		 * @param numberofknots The number of knots used for bezier curve. This also determines the degree of the curve
+		 * @param numberofderivatives_ The number of derivatives needed by the system for evaluating flat outputs
 		 */
     FlatOutputTparam(System<T, nx, nu, np> &sys, int numberofknots_, int numberofderivatives_ = 0);
     
@@ -97,7 +99,6 @@ namespace gcop {
               const Vectorntpd &s,
               Vectormd *p = 0);
     
-    //VectorXd tks;  ///< control times
 		int numberofderivatives;///< Number of derivatives of flat outputs needed
 		int numberofknots;///< Number of knots for bezier curve
 		vector<vector<Vectoryd> > knotsforallderivatives;///<Knots for each derivative are computed on the fly
@@ -120,125 +121,85 @@ namespace gcop {
                                              const vector<double> &ts, 
                                              const vector<T> &xs, 
                                              const vector<Vectorcd> &us,
-                                             const Vectormd *p) {
-      //Find control points(uks) given us
-      int m = degree + 1 + tks.size();//Number of knots
-      int nofsegments = m - 2*(degree+1)+1;
-      assert(nofsegments > 0);
-      //Create knot vector:
-      VectorXd knotVector(m);
-      KnotAveraging(tks, degree, knotVector);
-      //cout<<"knotvector: "<<knotVector.transpose()<<endl;
-      //cout<<"tks: "<<tks.transpose()<<endl;
+																						 const Vectormd *p) {
+			//Evaluate the basis matrix at all the points ts:
+			int N = us.size();
+			double tf = ts.back();
+			MatrixXd basis(ny*(N+1), numberofknots);
+			//Can do inversion separate for each ny. But have to copy back to s separately. #Not very efficient
+			VectorXd flatoutputs((N+1)*ny);
+			vector<Vectoryd> knotvector(knotsize);
+			//Set knotvector to zeros to begin with:
+			for(int count_knots = 0;count_knots < knotsize; count_knots++)
+				knotvector[count_knots].setZero();
 
-      //Initialize variables for least square fit; Fitting each control dimension separately
-      MatrixXd A(us.size(), tks.size());//Basis Matrix
-      MatrixXd Asquare(tks.size(), tks.size());//Basis Matrix
-      VectorXd c(us.size());//RHS 
-      A.setZero();//Initialize A
-      //VectorXd b(tks.size());//control points
+			for(int count_samples =0; count_samples < N; count_samples++)
+			{
+				//Evaluate the flat outputs at the given states and controls:
+				(this->sys).StateAndControlsToFlat(flatoutputs.segment<ny,1>(count_samples*ny), xs[count_samples], us[count_samples]);
+			}
+			//Tail or final state:
+			(this->sys).StateAndControlsToFlat(flatoutputs.tail<ny,1>(), xs[N], us[N-1]);//Copying us[N-1] for us[N] since us[N] does not exist
 
-      //Find Basis Matrix to find the control points:
-      double tdiff = ts.back() - ts.front();
-      for(int ind = 0;ind < us.size(); ind++)
-      {
-        double ts_normalized = (ts[ind] - ts[0])/tdiff;
-        int index = ControlSpline::Span(ts_normalized, degree, knotVector);
-        VectorXd basisFcns = ControlSpline::BasisFunctions(ts_normalized, degree, knotVector);
-       // cout<<"Index: "<<index<<endl;
-        //cout<<"BasisFcns: "<<basisFcns.transpose()<<endl;
-        A.block(ind, index-degree, 1, degree+1) = basisFcns.transpose();//Create Basis Matrix
-      }
-      Asquare = (A.transpose()*A);
-      //cout<<"A: "<<endl<<A<<endl;
-      //cout<<"Asquare: "<<endl<<Asquare<<endl;
-      //getchar();
-      for(int ind = 0; ind < nu; ind++)
-      {
-        for(int uind = 0; uind < us.size(); uind++)
-        {
-          c(uind) = us[uind](ind);
-        }
-        VectorXd b = Asquare.ldlt().solve(A.transpose()*c);
-        cout<<"Error: "<<(A*b - c).squaredNorm()<<endl;
-      //  cout<<"c: "<<c.transpose()<<endl;
-        //cout<<"b: "<<b.transpose()<<endl;
-        //Copy the elements back into vector s:
-        for(int sind = 0; sind < tks.size(); sind++)
-        {
-          s(sind*nu + ind) = b(sind);
-        }
-      }
-      cout<<"s: "<<s.transpose()<<endl;
-      //Verify if this s is good:
-      /*{
-        MatrixXd controlMatrix(this->sys.U.n, tks.size());
-        for(int cs = 0; cs < tks.size(); cs++)
-        {
-          controlMatrix.col(cs) = s.segment(cs*nu, nu);//Fill Control Matrix
-        }
-        ControlSpline cspline = SplineFitting<ControlSpline>::Interpolate(controlMatrix, degree, tks);
-        for (int i = 0; i < us.size(); ++i) {
-          Vectorcd usbar = cspline((ts[i] - ts[0])/tdiff);
-          cout<<"us_pred["<<i<<"]: "<<usbar.transpose()<<"ts: "<<ts[i]<<endl;
-          cout<<"us_actual["<<i<<"]: "<<us[i].transpose()<<"ts: "<<ts[i]<<endl;
-        }
-        getchar();
-      }
-      */
+			for(int count_knots =0; count_knots < knotsize; count_knots++)
+			{
+				//Set the Knots to be e_i and evaluate across all the samples to find the basis matrix
+				if(count_knots > 0)
+				{
+					knotvector[count_knots-1].setZero();
+				}
+				knotvector[count_knots].setConstant(1.0);
 
-      //s.setZero();
-    }
+				for(int count_samples =0; count_samples <= N; count_samples++)
+				{
+					//Evaluate the Bezier curve at given ts using the above knot vector:
+					basis.block<ny,1>(count_samples*ny, count_knots) = DeCasteljau(knotvector, (ts[count_samples]/tf), 0,numberofknots-1);//The evaluation using P = e_i will be B_n,i(u_i)
+				}
+			}
+			//Set the output knot vector(s) as basis.pseudoinverse()*flatoutputsevaluatedatallsamples
+			s = (basis.transpose()*basis).ldlt().solve(basis.transpose()*flatoutputs);
+			cout<<"Error: "<<(basis*s - flatoutputs).squaredNorm()<<endl;
+
+			cout<<"s: "<<s.transpose()<<endl;
+			//s.setZero();
+		}
   
   template <typename T, int nx, int nu, int np, int _ntp> 
     void FlatOutputTparam<T, nx, nu, np, _ntp>::From(vector<double> &ts, 
                                                   vector<T> &xs, 
                                                   vector<Vectorcd> &us,
                                                   const Vectorntpd &s,
-                                                  Vectormd *p) {
- 
-    assert(this->ntp == numberofknots*ny);
-		//Evaluate Flat outputs from the knot inputs (s) at all the input times ts
-		int N = us.size();
-		vector<Vectoryd> flatoutputsandderivatives(numberofderivatives+1);
-		Createknotsforallderivatives(s);//Create all the knots before starting evaluation
-		for(int count_ts = 0; count_ts <= N; count_ts++)
-		{
-			for(int count_derivatives =0; count_derivatives <= numberofderivatives ; count_derivatives++)
+																									Vectormd *p) {
+
+			assert(this->ntp == numberofknots*ny);
+			//Evaluate Flat outputs from the knot inputs (s) at all the input times ts
+			int N = us.size();
+			double tf = ts.back();
+			vector<Vectoryd> flatoutputsandderivatives(numberofderivatives+1);
+			Createknotsforallderivatives(s);//Create all the knots before starting evaluation
+			for(int count_ts = 0; count_ts <= N; count_ts++)
 			{
-				if(numberofknots-count_derivatives>0)
+				for(int count_derivatives =0; count_derivatives <= numberofderivatives ; count_derivatives++)
 				{
-					flatoutputsandderivatives(count_derivatives) = DeCasteljau(knotsforallderivatives(count_derivatives), 0, numberofknots-1);
+					if(numberofknots-count_derivatives>0)//If there are any derivatives to be evaluated then only go further
+					{
+						flatoutputsandderivatives(count_derivatives) = DeCasteljau(knotsforallderivatives(count_derivatives), (ts[count_ts]/tf), 0, numberofknots-1);
+					}
+					else
+					{
+						flatoutputsandderivatives(count_derivatives).setZero();
+					}
 				}
+				//Evaluate system states and controls using the flat outputs and derivatives
+				if(count_ts < N)
+					(this->sys).FlatToStateAndControls( xs[count_ts], u[count_ts], flatoutputsandderivatives);
 				else
 				{
-					flatoutputsandderivatives(count_derivatives).setZero();
+					Vectorcd utemp;//For last point we do not care abt control
+					(this->sys).FlatToStateAndControls( xs[count_ts], utemp, flatoutputsandderivatives);
 				}
 			}
-			//Evaluate system states and controls using the flat outputs and derivatives
 		}
-
-
-    for(int cs = 0; cs < tks.size(); cs++)
-    {
-      controlMatrix.col(cs) = s.segment(cs*nu, nu);//Fill Control Matrix
-    }
-    //cout<<"s: "<<s.transpose()<<endl;//Input control points
-    //cout<<"Control Matrix: "<<endl<<controlMatrix<<endl;
-    ControlSpline cspline = SplineFitting<ControlSpline>::Interpolate(controlMatrix, degree, tks);
-    double tdiff = ts.back() - ts.front();
-    
-    this->sys.reset(xs[0],ts[0]);
-    for (int i = 0; i < us.size(); ++i) {
-      us[i] = cspline((ts[i] - ts[0])/tdiff);
-      //cout<<"ts["<<i<<"]: "<<ts[i]<<endl;
-      //cout<<"us["<<i<<"]: "<<us[i].transpose()<<"ts: "<<ts[i]<<endl;
-      this->sys.Step_internalinput(xs[i+1], us[i], ts[i+1] - ts[i], p);
-      //cout<<"Xs["<<(i+1)<<"]"<<xs[i+1].transpose()<<endl; #DEBUG
-      //cout<<"us["<<i<<"]"<<us[i].transpose()<<endl;
-    }
-    //getchar();
-  }
 }
 
 #endif
