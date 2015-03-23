@@ -32,6 +32,10 @@ namespace gcop {
                     const Vector2d &u, double h, const VectorXd *p,
                     Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
 
+		virtual void StateAndControlsToFlat(VectorXd &y, const Vector4d &x, const Vector2d &u);
+
+		virtual void FlatToStateAndControls(Vector4d &x, Vector2d &u, const std::vector<VectorXd> &y);
+
     double l; ///< distance between axles    
     double r; ///< Gain on the car acc vs wheel torque
     double h; ///< Internal step size
