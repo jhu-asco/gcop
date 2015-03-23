@@ -178,11 +178,11 @@ endif (USE_BULLET)
 	#add_executable(imuukftest imuukftest.cc)
 	#target_link_libraries(imuukftest gcop_est gcop_systems ${ALL_LIBS})
 
-#add_executable(gptest gptest.cc)
-#target_link_libraries(gptest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+add_executable(gptest gptest.cc)
+target_link_libraries(gptest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
-#add_executable(gpadd gpadd.cc)
-#target_link_libraries(gpadd gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+add_executable(gpadd gpadd.cc)
+target_link_libraries(gpadd gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 add_executable(imuekftest imuekftest.cc)
 target_link_libraries(imuekftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
