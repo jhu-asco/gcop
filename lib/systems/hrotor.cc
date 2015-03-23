@@ -1,4 +1,5 @@
 #include "hrotor.h"
+#include "so3.h"
 
 using namespace gcop;
 using namespace Eigen;
@@ -18,5 +19,40 @@ Hrotor::Hrotor() :
 
   //  double ulb[4] = {1200, 1200, 1200, 1200};
   //  double uub[4] = {7800, 7800, 7800, 7800};
+}
+
+void Hrotor::StateAndControlsToFlat(VectorXd &y, const Body3dState &x,
+               const Vector4d &u) {
+  SO3& so3 = SO3::Instance();
+
+  // Flat outputs are x,y,z, and yaw
+  y.resize(4);
+  y.head<3>() = x.second.head<3>();
+  y(3) = so3.yaw(x.first);
+}
+void Hrotor::FlatToStateAndControls(Body3dState &x, Vector4d &u,
+               const std::vector<VectorXd> &y) {
+  assert(y.size() >= 3);
+
+  VectorXd y0 = y[0];
+  VectorXd y1 = y[1];
+  VectorXd y2 = y[2];
+
+  x.first.setZero();
+  x.second.setZero();
+
+  Vector3d f_thrust = m*y2.head<3>() - m*Vector3d(0,0,-9.81);
+  Vector3d z_rot = f_thrust/f_thrust.norm();  
+  Vector3d x_yaw(cos(y0(3)), sin(y0(3)), 0);
+  Vector3d x_rot = x_yaw - x_yaw.dot(z_rot)*z_rot;
+  Vector3d y_rot = z_rot.cross(x_rot);
+
+  x.first.block<3,1>(0,0) = x_rot;
+  x.first.block<3,1>(0,1) = y_rot;
+  x.first.block<3,1>(0,2) = z_rot;
+
+  x.second.head<3>() = y0.head<3>();
+  x.second.tail<3>() = y1.head<3>();
+  // TODO: fill in angular velocity and controls
 }
 
