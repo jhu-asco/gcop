@@ -43,15 +43,38 @@ namespace gcop {
 		 * @param start Starting point for recursionP_0
 		 * @param end ending point for recursion P_n
 		 */
-		Vectoryd DeCasteljau(VectorXd &s, double u, int start, int end)
+		Vectoryd DeCasteljau(vector<Vectoryd> &s, double u, int start, int end)
 		{
 			if(start == end)
 			{
-				return s.segment<ny>(start);
+				return s(start);
 			}
 			else
 			{
 				return ((1-u)*DeCasteljau(s, u, start, end-1) + u*Decasteljau(s,u,start+1,end));
+			}
+		}
+
+		/** This function evaluates all the knots Dk_i for all the derivatives needed
+		 * This is dont recursively as noted in  	http://www.cs.mtu.edu/~shene/COURSES/cs3621/NOTES/spline/Bezier/bezier-der.html
+		 * @param s The input knots
+		 */
+		void Createknotsforallderivatives(const Vectorntpd &s)
+		{
+			for(int count_derivatives = 0; count_derivatives <= numberofderivatives; count_derivatives++)
+			{
+				int knotsize = (numberofknots-count_derivatives)>0?(numberofknots-count_derivatives):0;
+				for(int count_knots = 0;count_knots < knotsize; count_knots++)
+				{
+					if(count_derivatives == 0)
+					{
+						knotsforallderivatives[count_derivatives][count_knots] = s.segment<ny>(count_knots*ny);
+					}
+					else
+					{
+						knotsforallderivatives[count_derivatives][count_knots] =knotsforallderivatives[count_derivatives-1][count_knots+1] - knotsforallderivatives[count_derivatives-1][count_knots];
+					}
+				}
 			}
 		}
  
@@ -77,12 +100,19 @@ namespace gcop {
     //VectorXd tks;  ///< control times
 		int numberofderivatives;///< Number of derivatives of flat outputs needed
 		int numberofknots;///< Number of knots for bezier curve
-		vector<Vectoryd> flatoutputs;///< Flat outputs internally computed by the from function
+		vector<vector<Vectoryd> > knotsforallderivatives;///<Knots for each derivative are computed on the fly
   };
   
   template <typename T, int nx, int nu, int np, int _ntp> 
     FlatOutputTparam<T, nx, nu, ny, np, _ntp>::FlatOutputTparam(System<T, nx, nu, np> &sys, int numberofknots_, int numberofderivatives_) :  Tparam<T, nx, nu, np, _ntp>(sys, numberofknots_*ny), tks(tks), degree(degree), numberofderivatives(numberofderivatives_), numberofknots(numberofknots_)  {
 			assert(numberofknots > 0);
+			knotsforallderivatives.resize(numberofderivatives+1);
+			for(int count = 0;count < numberofderivatives+1; count++)
+			{
+				int knotsize = numberofknots-count;
+				knotsize = knotsize>0?knotsize:0;
+				knotsforallderivatives.resize(knotsize);
+			}
   }
 
   template <typename T, int nx, int nu, int np, int _ntp> 
@@ -170,17 +200,22 @@ namespace gcop {
     assert(this->ntp == numberofknots*ny);
 		//Evaluate Flat outputs from the knot inputs (s) at all the input times ts
 		int N = us.size();
-		vector<Vectoryd> flatoutputsanderivatives(numberofderivatives+1);
-		vector<Vectoryd> knots;//Knots for each derivative are computed on the fly
-		for(int count_derivatives =0; count_derivatives < numberofderivatives ; count_derivatives++)
+		vector<Vectoryd> flatoutputsandderivatives(numberofderivatives+1);
+		Createknotsforallderivatives(s);//Create all the knots before starting evaluation
+		for(int count_ts = 0; count_ts <= N; count_ts++)
 		{
-			for(int count_ts = 0; count_ts <= N; count_ts++)
+			for(int count_derivatives =0; count_derivatives <= numberofderivatives ; count_derivatives++)
 			{
-				Vectoryd flat_output = DeCasteljau(s, 0, numberofknots-1);
-				//Compute knots for specific derivative
-				//Evaluate Derivative 
-				Vectoryd flat_derivative = De
+				if(numberofknots-count_derivatives>0)
+				{
+					flatoutputsandderivatives(count_derivatives) = DeCasteljau(knotsforallderivatives(count_derivatives), 0, numberofknots-1);
+				}
+				else
+				{
+					flatoutputsandderivatives(count_derivatives).setZero();
+				}
 			}
+			//Evaluate system states and controls using the flat outputs and derivatives
 		}
 
 
