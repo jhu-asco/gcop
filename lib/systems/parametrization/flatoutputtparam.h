@@ -63,9 +63,13 @@ namespace gcop {
 				int knotsize = (numberofknots-count_derivatives)>0?(numberofknots-count_derivatives):0;
 				for(int count_knots = 0;count_knots < knotsize; count_knots++)
 				{
+          
 					if(count_derivatives == 0)
 					{
-						knotsforallderivatives[count_derivatives][count_knots] = s.segment(count_knots*ny,ny);
+            if(count_knots > 0)
+            {
+						  knotsforallderivatives[count_derivatives][count_knots] = s.segment((count_knots-1)*ny,ny);
+            }
 					}
 					else
 					{
@@ -104,7 +108,7 @@ namespace gcop {
   };
   
   template <typename T, int nx, int nu, int np, int _ntp> 
-    FlatOutputTparam<T, nx, nu, np, _ntp>::FlatOutputTparam(System<T, nx, nu, np> &sys, int ny_, int numberofknots_, int numberofderivatives_) :  Tparam<T, nx, nu, np, _ntp>(sys, numberofknots_*ny_),ny(ny_), numberofderivatives(numberofderivatives_), numberofknots(numberofknots_)  {
+    FlatOutputTparam<T, nx, nu, np, _ntp>::FlatOutputTparam(System<T, nx, nu, np> &sys, int ny_, int numberofknots_, int numberofderivatives_) :  Tparam<T, nx, nu, np, _ntp>(sys, (numberofknots_-1)*ny_),ny(ny_), numberofderivatives(numberofderivatives_), numberofknots(numberofknots_)  {
 			assert(numberofknots > 0);
 			assert(ny >0);
 			knotsforallderivatives.resize(numberofderivatives+1);
@@ -114,6 +118,7 @@ namespace gcop {
 				knotsize = knotsize>0?knotsize:0;
 				knotsforallderivatives[count].resize(knotsize);
 			}
+      knotsforallderivatives[0][0] = VectorXd::Zero(ny,1);
   }
 
   template <typename T, int nx, int nu, int np, int _ntp> 
@@ -126,7 +131,7 @@ namespace gcop {
 			int N = us.size();
 			double tf = ts.back();
 			assert(N+1 > numberofknots);//Assert there are enough points for given number of knots
-			MatrixXd basis(ny*(N+1), numberofknots*ny);
+			MatrixXd basis(ny*(N+1), (numberofknots)*ny);
 			basis.setZero();//Initialize to zero
 			//Can do inversion separate for each ny. But have to copy back to s separately. #Not very efficient
 			VectorXd flatoutputs((N+1)*ny);
@@ -138,12 +143,29 @@ namespace gcop {
 				knotvector[count_knots].setZero();
 			}
 
+
+			for(int count_knots =0; count_knots < numberofknots; count_knots++)
+			{
+				//Set the Knots to be e_i and evaluate across all the samples to find the basis matrix
+        if(count_knots > 0)
+        {
+				  knotvector[count_knots-1].setZero();
+        }
+        knotvector[count_knots].setConstant(1.0);
+        
+				for(int count_samples =0; count_samples <= N; count_samples++)
+				{
+					//Evaluate the Bezier curve at given ts using the above knot vector:
+					basis.block((count_samples)*ny, (count_knots)*ny,ny,ny) = (DeCasteljau(knotvector, (ts[count_samples]/tf), 0,numberofknots-1)).asDiagonal();//The evaluation using P = e_i will be B_n,i(u_i)
+				}
+			}
+
 			//Evaluate the flat outputs at the given states and controls:
-			for(int count_samples =0; count_samples < N; count_samples++)
+			for(int count_samples = 0; count_samples < N; count_samples++)
 			{
 				VectorXd flatoutput;
 				(this->sys).StateAndControlsToFlat(flatoutput, xs[count_samples], us[count_samples]);
-				flatoutputs.segment(count_samples*ny,ny) = flatoutput;
+				flatoutputs.segment((count_samples)*ny,ny) = flatoutput;
 				cout<<"Flat output["<<count_samples<<"]: "<<flatoutput.transpose()<<endl;
 			}
 			//Tail or final state:
@@ -154,26 +176,15 @@ namespace gcop {
 				cout<<"Flat output["<<N<<"]: "<<flatoutput.transpose()<<endl;
 			}
 			//getchar();//#DEBUG
-
-			for(int count_knots =0; count_knots < numberofknots; count_knots++)
-			{
-				//Set the Knots to be e_i and evaluate across all the samples to find the basis matrix
-				if(count_knots > 0)
-				{
-					knotvector[count_knots-1].setZero();
-				}
-				knotvector[count_knots].setConstant(1.0);
-
-				for(int count_samples =0; count_samples <= N; count_samples++)
-				{
-					//Evaluate the Bezier curve at given ts using the above knot vector:
-					basis.block(count_samples*ny, count_knots*ny,ny,ny) = (DeCasteljau(knotvector, (ts[count_samples]/tf), 0,numberofknots-1)).asDiagonal();//The evaluation using P = e_i will be B_n,i(u_i)
-				}
-			}
 			//cout<<"Basis: "<<endl<<basis<<endl;
 			//Set the output knot vector(s) as basis.pseudoinverse()*flatoutputsevaluatedatallsamples
-			s = (basis.transpose()*basis).ldlt().solve(basis.transpose()*flatoutputs);
-			cout<<"Error: "<<(basis*s - flatoutputs).squaredNorm()<<endl;
+			VectorXd s_temp = ((basis.transpose()*basis).ldlt().solve(basis.transpose()*flatoutputs));
+      s = s_temp.tail((numberofknots-1)*ny);
+			cout<<"Error: "<<(basis*s_temp - flatoutputs).squaredNorm()<<endl;
+
+      knotsforallderivatives[0][0] = flatoutputs.head(ny);
+      cout<<"flatoutputs.head(ny) " << flatoutputs.head(ny).transpose() << endl; 
+      //(this->sys).StateAndControlsToFlat(knotsforallderivatives[0][0], xs[0], us[0]);
 
 			cout<<"s: "<<s.transpose()<<endl;
 			//s.setZero();
@@ -186,7 +197,7 @@ namespace gcop {
                                                   const Vectorntpd &s,
 																									Vectormd *p) {
 
-			assert(this->ntp == numberofknots*ny);
+			assert(this->ntp == (numberofknots-1)*ny);
 			//Evaluate Flat outputs from the knot inputs (s) at all the input times ts
 			int N = us.size();
 			double tf = ts.back();//Replace this with deltat version #TODO
@@ -211,6 +222,7 @@ namespace gcop {
 				}
 				//getchar();
 				//Evaluate system states and controls using the flat outputs and derivatives
+        //cout << "flatoutputs::From: " << flatoutputsandderivatives[0].transpose() << endl;
 				if(count_ts == 0)
 				{
 					T xtemp;
@@ -227,6 +239,8 @@ namespace gcop {
 				}
 				//cout<<"us["<<count_ts<<"]: "<<us[count_ts]<<endl;
 			}
+
+			//cout<<"s: "<<s.transpose()<<endl;
 		}
 		
 }

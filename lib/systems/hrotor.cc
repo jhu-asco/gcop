@@ -57,8 +57,10 @@ void Hrotor::FlatToStateAndControls(Body3dState &x, Vector4d &u,
   x.first.block<3,1>(0,2) = z_rot;
 
   x.second.head<3>() = y0.head<3>();
+  //std::cout << "x: " << x.second.head<3>().transpose() << " y: " << y0.transpose() << endl;
   x.second.tail<3>() = y1.head<3>();
   // TODO: fill in angular velocity and controls
   u(3) = f_thrust.norm();
+  x.second(5) = y1(3);
 }
 
