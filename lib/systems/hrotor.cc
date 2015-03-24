@@ -40,11 +40,13 @@ void Hrotor::FlatToStateAndControls(Body3dState &x, Vector4d &u,
 
   x.first.setZero();
   x.second.setZero();
+  u.setZero();
 
   Vector3d f_thrust = m*y2.head<3>() - m*Vector3d(0,0,-9.81);
   Vector3d z_rot = f_thrust/f_thrust.norm();  
   Vector3d x_yaw(cos(y0(3)), sin(y0(3)), 0);
   Vector3d x_rot = x_yaw - x_yaw.dot(z_rot)*z_rot;
+  x_rot = x_rot/x_rot.norm();
   Vector3d y_rot = z_rot.cross(x_rot);
 
   x.first.block<3,1>(0,0) = x_rot;
