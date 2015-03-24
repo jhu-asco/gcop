@@ -3,6 +3,8 @@
 #include "rn.h"
 #include "point3dmanifold.h"
 
+#define sgn(x) x>=0?1:-1
+
 using namespace gcop;
 using namespace Eigen;
 
@@ -65,4 +67,30 @@ double Rccar::Step(Vector4d& xb, double t, const Vector4d& xa,
     (*B)(3,0) = h*r;
   }
   return 1;
+}
+
+void Rccar::StateAndControlsToFlat(VectorXd &y, const Vector4d &x, const Vector2d &u)
+{
+	y = x.head(2);//the first two elements (x,y) are the flat outputs
+}
+
+void Rccar::FlatToStateAndControls(Vector4d &x, Vector2d &u, const std::vector<VectorXd> &y)
+{
+	assert(y.size() >= 3);//The flat output and derivatives upto second order should be provided
+	x.head(2) = y[0];//Xand y are copied
+	x(3) = y[1].norm();//yelocity is sqrt(xdot^2 + ydot^2)
+	if(x(3) < 1e-6)//Very small velocity numerical error while finding u_1
+	{
+		u(1) = 0;
+		u(2) = 0;
+		x(2) = 0;
+	}
+	else
+	{
+		int signofv = sgn(x[3]);
+		x(2) = atan2(signofv*y[1][1], signofv*y[1][0]);//thetadot = atan2(ydot,xdot)
+		u(1) = (y[1][0]*y[2][0] + y[1][1]*y[2][1])/((this->r)*x(3));
+		u(2) = (this->l/x(3))*(y[1][0]*y[2][1]-y[1][1]*y[2][0]);
+	}
+	//Can print x and u for debugging:
 }

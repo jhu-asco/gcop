@@ -98,6 +98,9 @@ ENDIF (PQP_FOUND)
 	add_executable(rccartest rccartest.cc)
 	target_link_libraries(rccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(rccar_flatparamverify rccar_flatparamverify.cc)
+	target_link_libraries(rccar_flatparamverify gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
 	add_executable(gnrccartest gnrccartest.cc)
 	target_link_libraries(gnrccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 if (USE_BULLET)
