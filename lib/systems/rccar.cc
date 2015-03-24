@@ -79,18 +79,17 @@ void Rccar::FlatToStateAndControls(Vector4d &x, Vector2d &u, const std::vector<V
 	assert(y.size() >= 3);//The flat output and derivatives upto second order should be provided
 	x.head(2) = y[0];//Xand y are copied
 	x(3) = y[1].norm();//yelocity is sqrt(xdot^2 + ydot^2)
-	if(x(3) < 1e-6)//Very small velocity numerical error while finding u_1
+	if(x(3) < 1e-3)//Very small velocity numerical error while finding u_1
 	{
+		u(0) = 0;//Should find the right formula which is stable for small velocities
 		u(1) = 0;
-		u(2) = 0;
 		x(2) = 0;
 	}
 	else
 	{
 		int signofv = sgn(x[3]);
 		x(2) = atan2(signofv*y[1][1], signofv*y[1][0]);//thetadot = atan2(ydot,xdot)
-		u(1) = (y[1][0]*y[2][0] + y[1][1]*y[2][1])/((this->r)*x(3));
-		u(2) = (this->l/x(3))*(y[1][0]*y[2][1]-y[1][1]*y[2][0]);
+		u(0) = (y[1][0]*y[2][0] + y[1][1]*y[2][1])/((this->r)*x(3));
+		u(1) = (this->l/x(3))*(y[1][0]*y[2][1]-y[1][1]*y[2][0]);
 	}
-	//Can print x and u for debugging:
 }
