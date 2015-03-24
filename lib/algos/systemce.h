@@ -89,6 +89,32 @@ namespace gcop {
              vector<Vectorcd> &dus, vector<Vectorcd> &es, 
              bool update = true);
 
+    /**
+     * Create an optimal control problem using a system, a cost, and 
+     * a trajectory given by a sequence of times, states, and controls. 
+     * The times ts must be given, the initial state xs[0] must be set, and
+     * the controls us will be used as an initial guess for the optimization.
+     *
+     * After initialization, every call to Iterate() will optimize the 
+     * controls us and states xs and modify them accordingly. Problems involving
+     * time-optimization will also modify the sequence of times ts.
+     * 
+     * @param sys system
+     * @param cost cost
+     * @param tp trajectory parametrization
+     * @param ts (N+1) sequence of discrete times
+     * @param xs (N+1) sequence of discrete states
+     * @param us (N) sequence of control inputs
+     * @param p (np-size) system parameters (set to 0 if none)
+     * @param dss (N) initial control parameter variations (determines how widespread the initial distro is)
+     * @param dess (N) zero-mean regularization/local-exploration noise variances
+     * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
+     *               This is necessary only if xs was not already generated from us.
+     */
+    SystemCe(System<T, n, c, np> &sys, Cost<T, n, c, np> &cost, Tparam<T, n, c, np, ntp> &tp,
+             vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, Vectormd *p,
+             VectorXd &dss, VectorXd &dess, 
+             bool update = true);
     
     virtual ~SystemCe();
     
@@ -200,6 +226,44 @@ namespace gcop {
       ce.S = z.asDiagonal();
     }
 
+  template <typename T, int n, int c, int np, int ntp> 
+    SystemCe<T, n, c, np, ntp>::SystemCe(System<T, n, c, np> &sys, 
+                                         Cost<T, n, c, np> &cost, 
+                                         Tparam<T, n, c, np, ntp> &tp,
+                                         vector<double> &ts, 
+                                         vector<T> &xs, 
+                                         vector<Vectorcd> &us, 
+                                         Vectormd *p,
+                                         VectorXd &dss, 
+                                         VectorXd &dess, 
+                                         bool update) :
+    sys(sys), cost(cost), tp(&tp), 
+    ts(ts), xs(xs), us(us), dus(us), p(p), xss(xs), uss(us), N(us.size()), 
+    ce(tp.ntp, 1), Ns(1000), debug(true), external_render(0), nofevaluations(0)
+    {
+
+      assert(N > 0);
+      assert(ts.size() == N+1);
+      assert(xs.size() == N+1);
+      assert(us.size() == N);
+      assert(xss.size() == N+1);
+      assert(uss.size() == N);
+      assert(dss.size() == tp.ntp);
+      assert(dess.size() == tp.ntp);
+
+      if (update) {
+        J = Update(xs, us);
+      } else {
+        J = numeric_limits<double>::max();
+      }
+    
+      tp.To(ce.gmm.ns[0].mu, ts, xs, us, p);
+
+      ce.gmm.ns[0].P = dss.asDiagonal();
+      ce.gmm.Update();
+
+      ce.S = dess.asDiagonal();
+    }
   template <typename T, int n, int c, int np, int ntp> 
     SystemCe<T, n, c, np, ntp>::SystemCe(System<T, n, c, np> &sys, 
                                          Cost<T, n, c, np> &cost,                              
