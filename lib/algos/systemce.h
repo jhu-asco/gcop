@@ -122,7 +122,7 @@ namespace gcop {
     /**
      * Perform one SYSTEMCE iteration. 
      */
-    void Iterate();
+    void Iterate(bool updatexsfromus = true);
 
     /**
      * Generate a full trajectory (xs and us) from a parameter z and (optionally) return its cost
@@ -364,7 +364,7 @@ namespace gcop {
   }
 
   template <typename T, int n, int c, int np, int ntp> 
-    void SystemCe<T, n, c, np, ntp>::Iterate() {
+    void SystemCe<T, n, c, np, ntp>::Iterate(bool updatexsfromus) {
 
       if (ce.inc) 
       {
@@ -450,7 +450,8 @@ namespace gcop {
       else
         z2us(us, ce.zmin);
 
-      Update(xs, us, false);
+      if(updatexsfromus)
+        Update(xs, us, false);
       J = ce.Jmin;
       zmin = ce.zmin;//Store the parameters also
     }
