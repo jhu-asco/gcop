@@ -60,7 +60,11 @@ namespace gcop {
     void ID(Vector6d &f,
             double t, const Body3dState &xb, const Body3dState &xa,
             const Vectorcd &u, double h);
+
+    void StateAndControlsToFlat(VectorXd &y, const Body3dState &x, const Vectorcd &u);
     
+    void FlatToStateAndControls(Body3dState &x, Vectorcd &u, const std::vector<VectorXd> &y);
+
     /**
      * Compute moments of inertia J given mass m and dimensions ds
      * @param J moments of inertia (3x1 vector)
@@ -425,6 +429,39 @@ template<int c>  Body3d<c>::~Body3d()
                        const Vectorcd &u, double h) {
   }
 
+  template <int c>
+    void Body3d<c>::StateAndControlsToFlat(VectorXd &y, const Body3dState &x,
+               const Vectorcd &u) {
+    SO3& so3 = SO3::Instance();
+
+    // Flat outputs are x,y,z, and rpy
+    y.resize(6);
+    y.head<3>() = x.second.head<3>();
+    y(3) = so3.roll(x.first);
+    y(4) = so3.pitch(x.first);
+    y(5) = so3.yaw(x.first);
+  }
+
+  template <int c>
+    void Body3d<c>::FlatToStateAndControls(Body3dState &x, Vectorcd &u,
+               const std::vector<VectorXd> &y) {
+    assert(y.size() >= 2);
+
+    SO3& so3 = SO3::Instance();
+
+    VectorXd y0 = y[0];
+    VectorXd y1 = y[1];
+
+    x.first.setZero();
+    x.second.setZero();
+    u.setZero();
+
+    so3.q2g(x.first, y0.tail<3>());
+
+    x.second.head<3>() = y0.head<3>();
+    x.second.tail<3>() = y1.head<3>();
+    // TODO: fill in angular velocity and controls
+  }
 }
 #endif
 
