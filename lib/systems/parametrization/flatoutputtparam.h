@@ -66,9 +66,9 @@ namespace gcop {
           
 					if(count_derivatives == 0)
 					{
-            if(count_knots > 0)
+            if(count_knots >= (1 + numberofderivatives))
             {
-						  knotsforallderivatives[count_derivatives][count_knots] = s.segment((count_knots-1)*ny,ny);
+						  knotsforallderivatives[count_derivatives][count_knots] = s.segment((count_knots-(1+numberofderivatives))*ny,ny);
             }
 					}
 					else
@@ -108,7 +108,7 @@ namespace gcop {
   };
   
   template <typename T, int nx, int nu, int np, int _ntp> 
-    FlatOutputTparam<T, nx, nu, np, _ntp>::FlatOutputTparam(System<T, nx, nu, np> &sys, int ny_, int numberofknots_, int numberofderivatives_) :  Tparam<T, nx, nu, np, _ntp>(sys, (numberofknots_-1)*ny_),ny(ny_), numberofderivatives(numberofderivatives_), numberofknots(numberofknots_)  {
+    FlatOutputTparam<T, nx, nu, np, _ntp>::FlatOutputTparam(System<T, nx, nu, np> &sys, int ny_, int numberofknots_, int numberofderivatives_) :  Tparam<T, nx, nu, np, _ntp>(sys, (numberofknots_-(numberofderivatives_+1))*ny_),ny(ny_), numberofderivatives(numberofderivatives_), numberofknots(numberofknots_)  {
 			assert(numberofknots > 0);
 			assert(ny >0);
 			knotsforallderivatives.resize(numberofderivatives+1);
@@ -179,10 +179,13 @@ namespace gcop {
 			//cout<<"Basis: "<<endl<<basis<<endl;
 			//Set the output knot vector(s) as basis.pseudoinverse()*flatoutputsevaluatedatallsamples
 			VectorXd s_temp = ((basis.transpose()*basis).ldlt().solve(basis.transpose()*flatoutputs));
-      s = s_temp.tail((numberofknots-1)*ny);
+      s = s_temp.tail((numberofknots-(1+numberofderivatives))*ny);
 			cout<<"Error: "<<(basis*s_temp - flatoutputs).squaredNorm()<<endl;
 
-      knotsforallderivatives[0][0] = flatoutputs.head(ny);
+      for(int i = 0; i < 1+numberofderivatives; i++)
+      {
+        knotsforallderivatives[0][i] = flatoutputs.segment(ny*i, ny);
+      }
       cout<<"flatoutputs.head(ny) " << flatoutputs.head(ny).transpose() << endl; 
       //(this->sys).StateAndControlsToFlat(knotsforallderivatives[0][0], xs[0], us[0]);
 
@@ -196,8 +199,7 @@ namespace gcop {
                                                   vector<Vectorcd> &us,
                                                   const Vectorntpd &s,
 																									Vectormd *p) {
-
-			assert(this->ntp == (numberofknots-1)*ny);
+			assert(this->ntp == (numberofknots-(numberofderivatives+1))*ny);
 			//Evaluate Flat outputs from the knot inputs (s) at all the input times ts
 			int N = us.size();
 			double tf = ts.back();//Replace this with deltat version #TODO
