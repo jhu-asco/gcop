@@ -461,6 +461,7 @@ template<int c>  Body3d<c>::~Body3d()
     x.second.head<3>() = y0.head<3>();
     x.second.tail<3>() = y1.head<3>();
     // TODO: fill in angular velocity and controls
+    x.second(5) = y1(5);
   }
 }
 #endif
