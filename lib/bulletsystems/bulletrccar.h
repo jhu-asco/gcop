@@ -54,6 +54,13 @@ namespace gcop {
 		*/
     ~Bulletrccar()
     {
+      if(m_carChassis) 
+      {
+        //m_world.m_dynamicsWorld->removeRigidBody(m_carChassis);
+
+        delete m_carChassis;
+      }
+
       delete m_vehicleRayCaster;
 
       m_world.m_dynamicsWorld->removeVehicle(m_vehicle);
@@ -62,11 +69,9 @@ namespace gcop {
       delete m_wheelShape;
       
       delete initialstate;
-      
-      m_world.m_dynamicsWorld->removeRigidBody(m_carChassis);
-      m_world.Reset();
 
-      delete m_carChassis;
+      
+      //m_world.Reset();
     }
     
 		/** Reimplementation of the step function specific to bullet rccar
