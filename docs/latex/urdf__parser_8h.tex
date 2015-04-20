@@ -1,0 +1,48 @@
+\section{lib/systems/urdf\-\_\-parser.h \-File \-Reference}
+\label{urdf__parser_8h}\index{lib/systems/urdf\-\_\-parser.\-h@{lib/systems/urdf\-\_\-parser.\-h}}
+{\ttfamily \#include $<$string$>$}\*
+{\ttfamily \#include $<$map$>$}\*
+{\ttfamily \#include $<$tinyxml.\-h$>$}\*
+{\ttfamily \#include $<$boost/function.\-hpp$>$}\*
+{\ttfamily \#include \char`\"{}urdfmodel.\-h\char`\"{}}\*
+{\ttfamily \#include \char`\"{}mbs.\-h\char`\"{}}\*
+{\ttfamily \#include \char`\"{}airbase.\-h\char`\"{}}\*
+\-Include dependency graph for urdf\-\_\-parser.\-h\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{urdf__parser_8h__incl}
+\end{center}
+\end{figure}
+\-This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{urdf__parser_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{\-Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf gcop\-\_\-urdf}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+boost\-::shared\-\_\-ptr$<$ \-Model\-Interface $>$ {\bf gcop\-\_\-urdf\-::parse\-U\-R\-D\-F} (const std\-::string \&xml\-\_\-string)
+\item 
+void {\bf gcop\-\_\-urdf\-::transformtoprincipal} (boost\-::shared\-\_\-ptr$<$ \-Link $>$ link)
+\item 
+void {\bf gcop\-\_\-urdf\-::combineinertia} (boost\-::shared\-\_\-ptr$<$ \-Link $>$ clink, boost\-::shared\-\_\-ptr$<$ \-Link $>$ plink, \-Pose posec\-\_\-p)
+\item 
+void {\bf gcop\-\_\-urdf\-::assign} (boost\-::shared\-\_\-ptr$<$ const \-Link $>$ link, boost\-::shared\-\_\-ptr$<$ \-Link $>$ parentlink, \-Pose cumpose)
+\item 
+void {\bf gcop\-\_\-urdf\-::aggregate} (boost\-::shared\-\_\-ptr$<$ const \-Link $>$ link, boost\-::shared\-\_\-ptr$<$ \-Link $>$ parentlink, \-Pose cumpose)
+\item 
+{\bf gcop\-::\-Matrix4d} {\bf gcop\-\_\-urdf\-::diffpose} (\-Pose \&posej\-\_\-p, \-Pose \&posei\-\_\-p)
+\item 
+void {\bf gcop\-\_\-urdf\-::walk\-Tree} (boost\-::shared\-\_\-ptr$<$ \-Link $>$ link, int level, int \&index, boost\-::shared\-\_\-ptr$<$ {\bf gcop\-::\-Mbs} $>$ mbs)
+\item 
+{\bf gcop\-\_\-urdf\-::mbsgenerator} (const std\-::string \&xml\-\_\-string, {\bf gcop\-::\-Matrix4d} \&gposei\-\_\-root, std\-::string type=\char`\"{}\-F\-L\-O\-A\-T\-B\-A\-S\-E\char`\"{})
+\end{DoxyCompactItemize}

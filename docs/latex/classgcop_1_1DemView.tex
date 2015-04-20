@@ -1,0 +1,246 @@
+\section{gcop\-:\-:\-Dem\-View \-Class \-Reference}
+\label{classgcop_1_1DemView}\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}}
+
+
+{\ttfamily \#include $<$demview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Dem\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=130pt]{classgcop_1_1DemView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Dem\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classgcop_1_1DemView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Dem\-View} (const {\bf \-Dem} \&{\bf dem})
+\item 
+virtual {\bf $\sim$\-Dem\-View} ()
+\item 
+void {\bf \-Reset} ()
+\item 
+void {\bf \-Render} ()
+\item 
+bool {\bf \-Render\-Frame} (int i)
+\item 
+void {\bf \-Set\-Texture} (const char $\ast$fname)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float {\bf color} [3]
+\item 
+bool {\bf wire}
+\begin{DoxyCompactList}\small\item\em draw as wire mesh (false by default) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf \-Init} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Dem} \& {\bf dem}
+\item 
+float $\ast$ {\bf vertices}
+\item 
+int {\bf mesh\-\_\-ind\-\_\-count}
+\item 
+\-G\-Luint $\ast$ {\bf mesh\-\_\-inds}
+\item 
+float $\ast$ {\bf normals}
+\item 
+\-G\-Luint {\bf texture}
+\begin{DoxyCompactList}\small\item\em texture \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!\-Dem\-View@{\-Dem\-View}}
+\index{\-Dem\-View@{\-Dem\-View}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{\-Dem\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Dem\-View\-::\-Dem\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Dem} \&}]{dem}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1DemView_a8ccd9036e3ed2fe4c13f0fc0122d2adb}
+
+
+\-References color, \-Init(), mesh\-\_\-inds, normals, texture, vertices, and wire.
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!$\sim$\-Dem\-View@{$\sim$\-Dem\-View}}
+\index{$\sim$\-Dem\-View@{$\sim$\-Dem\-View}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{$\sim$\-Dem\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Dem\-View\-::$\sim$\-Dem\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1DemView_a1a02ba647caeaf51c4ee467bc2581606}
+
+
+\-References mesh\-\_\-inds, normals, texture, and vertices.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!\-Init@{\-Init}}
+\index{\-Init@{\-Init}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{\-Init}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Dem\-View\-::\-Init} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1DemView_a566f3a72228187b2ac2cfb54c1695feb}
+
+
+\-References color, \-C\-R\-O\-S\-S, gcop\-::\-Dem\-::cs, dem, \-D\-I\-V3, gcop\-::\-Dem\-::\-Get(), mesh\-\_\-ind\-\_\-count, mesh\-\_\-inds, \-M\-I\-N\-U\-S3, gcop\-::\-Dem\-::ni, gcop\-::\-Dem\-::nj, \-N\-O\-R\-M3, normals, and vertices.
+
+
+
+\-Referenced by \-Dem\-View(), and \-Reset().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Dem\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1DemView_a36da31967a7aad3210e9d722abadfe2e}
+\-Render a view\-: all subclasses should provide this method 
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63}.
+
+
+
+\-References \-Render\-Frame().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!\-Render\-Frame@{\-Render\-Frame}}
+\index{\-Render\-Frame@{\-Render\-Frame}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{\-Render\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Dem\-View\-::\-Render\-Frame} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1DemView_a669be87c5a60e28817152cee94d98c42}
+\-Render a view\-: all subclasses should provide this method 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & frame \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+return true if more frames should be rendered 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_ad6c3f17a59725948f68817398296f835}.
+
+
+
+\-References color, dem, gcop\-::\-Dem\-::\-Get(), gcop\-::\-Dem\-::h, gcop\-::\-Dem\-::ni, gcop\-::\-Dem\-::nj, gcop\-::\-Dem\-::normals, gcop\-::\-Dem\-::o, texture, gcop\-::\-Dem\-::w, and wire.
+
+
+
+\-Referenced by \-Render().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!\-Reset@{\-Reset}}
+\index{\-Reset@{\-Reset}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{\-Reset}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Dem\-View\-::\-Reset} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1DemView_a51909745d69b7ffc9f92bffeb2013b6f}
+
+
+\-References \-Init().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!\-Set\-Texture@{\-Set\-Texture}}
+\index{\-Set\-Texture@{\-Set\-Texture}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{\-Set\-Texture}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Dem\-View\-::\-Set\-Texture} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1DemView_a05ee4dc7da46d1272068970023844d61}
+
+
+\-References gcop\-::\-Viewer\-::\-Load\-Texture(), and texture.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!color@{color}}
+\index{color@{color}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{color}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Dem\-View\-::color}[3]}\label{classgcop_1_1DemView_ad09788407502b9af7f833d79d67d7d7d}
+
+
+\-Referenced by \-Dem\-View(), \-Init(), and \-Render\-Frame().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!dem@{dem}}
+\index{dem@{dem}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{dem}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Dem}\& {\bf gcop\-::\-Dem\-View\-::dem}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1DemView_ad70e7c9d7c6d2ac9dc5555d84d5b2698}
+
+
+\-Referenced by \-Init(), and \-Render\-Frame().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!mesh\-\_\-ind\-\_\-count@{mesh\-\_\-ind\-\_\-count}}
+\index{mesh\-\_\-ind\-\_\-count@{mesh\-\_\-ind\-\_\-count}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{mesh\-\_\-ind\-\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Dem\-View\-::mesh\-\_\-ind\-\_\-count}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1DemView_af6c61dbaafb11fd2eb6868a59baeaace}
+
+
+\-Referenced by \-Init().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!mesh\-\_\-inds@{mesh\-\_\-inds}}
+\index{mesh\-\_\-inds@{mesh\-\_\-inds}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{mesh\-\_\-inds}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-Luint$\ast$ {\bf gcop\-::\-Dem\-View\-::mesh\-\_\-inds}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1DemView_a49e114c64d19a1c08d425cb9ef5f8554}
+
+
+\-Referenced by \-Dem\-View(), \-Init(), and $\sim$\-Dem\-View().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!normals@{normals}}
+\index{normals@{normals}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{normals}]{\setlength{\rightskip}{0pt plus 5cm}float$\ast$ {\bf gcop\-::\-Dem\-View\-::normals}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1DemView_a11e72260c8a7bd76b2750345ce3899f8}
+
+
+\-Referenced by \-Dem\-View(), \-Init(), and $\sim$\-Dem\-View().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!texture@{texture}}
+\index{texture@{texture}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{texture}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-Luint {\bf gcop\-::\-Dem\-View\-::texture}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1DemView_a7d188a9f91a611f556288f01c48700bd}
+
+
+texture 
+
+
+
+\-Referenced by \-Dem\-View(), \-Render\-Frame(), \-Set\-Texture(), and $\sim$\-Dem\-View().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!vertices@{vertices}}
+\index{vertices@{vertices}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{vertices}]{\setlength{\rightskip}{0pt plus 5cm}float$\ast$ {\bf gcop\-::\-Dem\-View\-::vertices}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1DemView_ab70b3529a5c1efdfe4af45215fa1048d}
+
+
+\-Referenced by \-Dem\-View(), \-Init(), and $\sim$\-Dem\-View().
+
+\index{gcop\-::\-Dem\-View@{gcop\-::\-Dem\-View}!wire@{wire}}
+\index{wire@{wire}!gcop::DemView@{gcop\-::\-Dem\-View}}
+\subsubsection[{wire}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Dem\-View\-::wire}}\label{classgcop_1_1DemView_a4dab0ee3202408ddb785a1cbfb49d67d}
+
+
+draw as wire mesh (false by default) 
+
+
+
+\-Referenced by \-Dem\-View(), and \-Render\-Frame().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf demview.\-h}\item 
+lib/views/{\bf demview.\-cc}\end{DoxyCompactItemize}

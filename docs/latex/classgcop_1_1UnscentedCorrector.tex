@@ -1,0 +1,269 @@
+\section{gcop\-:\-:\-Unscented\-Corrector$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1UnscentedCorrector}\index{gcop\-::\-Unscented\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$@{gcop\-::\-Unscented\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$}}
+
+
+{\ttfamily \#include $<$unscentedcorrector.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Unscented\-Corrector$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1UnscentedCorrector__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Unscented\-Corrector$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1UnscentedCorrector__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nx $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nz $>$ {\bf \-Matrixnrd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nx $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nu $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-np $>$ {\bf \-Matrixmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ {\bf \-Matrixnmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, 1 $>$ {\bf \-Vectorrd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nz $>$ {\bf \-Matrixrd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nx $>$ {\bf \-Matrixrnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nu $>$ {\bf \-Matrixrcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-np $>$ {\bf \-Matrixrmd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Unscented\-Corrector} ({\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&sys, {\bf \-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \&{\bf sensor})
+\item 
+virtual {\bf $\sim$\-Unscented\-Corrector} ()
+\item 
+virtual bool {\bf \-Correct} (\-T \&xb, double t, const \-T \&xa, const {\bf \-Vectorcd} \&u, const \-Tz \&z, const {\bf \-Vectormd} $\ast$p=0, bool cov=true)
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \-Tz $>$ {\bf \-Zs}
+\begin{DoxyCompactList}\small\item\em measurement sigma points \end{DoxyCompactList}\item 
+{\bf \-Matrixrd} {\bf \-Pzz}
+\begin{DoxyCompactList}\small\item\em internally used covariances \end{DoxyCompactList}\item 
+{\bf \-Matrixnrd} {\bf \-Pxz}
+\begin{DoxyCompactList}\small\item\em internally used covariances \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ class gcop\-::\-Unscented\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nu$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1UnscentedCorrector_aa27a4f6d8e4bc241345cc155683ecf24}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a6e92c879394bc36629e6646851b00c30}.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nx$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1UnscentedCorrector_a89bb49cb7b38442e55170ee7af7acdae}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a55d67e6bd10492ed8026d10c00005b91}.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixmd@{\-Matrixmd}}
+\index{\-Matrixmd@{\-Matrixmd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-np$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixmd}}\label{classgcop_1_1UnscentedCorrector_a87c58030d320890c01a1dbf98d78da5e}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a7a30cf000d15f44ff5660a3629280f2e}.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-nx$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1UnscentedCorrector_a8ec9fbd91b220d918ddaa8fd2912c9a1}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_adb8b4104bc5211ea29ecbd1e8c722751}.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nu$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1UnscentedCorrector_a0ea0b0c18d95f815cf3788ff8ba7db85}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_aea01f45708dfdbc019d6e86ea41582ef}.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nx$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1UnscentedCorrector_a1fdadbbb03fd320899adf40a5e048985}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a139403c111406d789d1e9a804a56cdac}.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixnmd@{\-Matrixnmd}}
+\index{\-Matrixnmd@{\-Matrixnmd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixnmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-np$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnmd}}\label{classgcop_1_1UnscentedCorrector_a0b8247ddd64f2e790f19d46e1caf04bf}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_abcf78f1778b912cd9f01bfc2a4d1fba9}.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixnrd@{\-Matrixnrd}}
+\index{\-Matrixnrd@{\-Matrixnrd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixnrd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nz$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnrd}}\label{classgcop_1_1UnscentedCorrector_a08650bba20aa2d8f901a470e4fb624d6}
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixrcd@{\-Matrixrcd}}
+\index{\-Matrixrcd@{\-Matrixrcd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixrcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nu$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrcd}}\label{classgcop_1_1UnscentedCorrector_ae1d6aaa1ca2da443ac53729902c33d7a}
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixrd@{\-Matrixrd}}
+\index{\-Matrixrd@{\-Matrixrd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixrd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nz$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrd}}\label{classgcop_1_1UnscentedCorrector_aa4681993d21a4a602845944c5f9dfbc9}
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixrmd@{\-Matrixrmd}}
+\index{\-Matrixrmd@{\-Matrixrmd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixrmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-np$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrmd}}\label{classgcop_1_1UnscentedCorrector_ad35a91e53121958f146df792102ac573}
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Matrixrnd@{\-Matrixrnd}}
+\index{\-Matrixrnd@{\-Matrixrnd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Matrixrnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nx$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrnd}}\label{classgcop_1_1UnscentedCorrector_acefff69b26c4ddd6d8c500fd07855302}
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1UnscentedCorrector_a578b58bec7e905f5bf5da189a76b0ba0}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_ad881c23e05c72ab0a6b94fdfae96ca88}.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1UnscentedCorrector_aeb3c88b1678bcb10f14b3cf01b1f1c5d}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a6b152626759d7cfb6a45ab1c58a939f5}.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1UnscentedCorrector_a102fe99e878c7cc5cfe962fc784d8073}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a7c9f25136bdaead14e8f125413ba1514}.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Vectorrd@{\-Vectorrd}}
+\index{\-Vectorrd@{\-Vectorrd}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Vectorrd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, 1$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectorrd}}\label{classgcop_1_1UnscentedCorrector_a7f34fdbdd839ffb29fadc2736d3cbb82}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Unscented\-Corrector@{\-Unscented\-Corrector}}
+\index{\-Unscented\-Corrector@{\-Unscented\-Corrector}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Unscented\-Corrector}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, typename Tz , int \-\_\-nz$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Unscented\-Corrector} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&}]{sys, }
+\item[{{\bf \-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \&}]{sensor}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UnscentedCorrector_a975c87d8d08cd10ba8346e52285038d2}
+
+
+\-References gcop\-::\-Unscented\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Pxz, gcop\-::\-Unscented\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Pzz, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-X, and gcop\-::\-Sensor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Z.
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!$\sim$\-Unscented\-Corrector@{$\sim$\-Unscented\-Corrector}}
+\index{$\sim$\-Unscented\-Corrector@{$\sim$\-Unscented\-Corrector}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{$\sim$\-Unscented\-Corrector}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, typename Tz , int \-\_\-nz$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::$\sim${\bf \-Unscented\-Corrector} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UnscentedCorrector_a11cbf853136aa4c55bc9e35a611bfc59}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Correct@{\-Correct}}
+\index{\-Correct@{\-Correct}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Correct}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, typename Tz , int \-\_\-nz$>$ bool {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Correct} (
+\begin{DoxyParamCaption}
+\item[{\-T \&}]{xb, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const \-Tz \&}]{z, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{bool}]{cov = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UnscentedCorrector_abe60b5ab13bd83ce9d4c22cd4709980d}
+\-Correction step. 
+\begin{DoxyParams}{\-Parameters}
+{\em xb} & new belief state \\
+\hline
+{\em t} & time \\
+\hline
+{\em xa} & previous belief state \\
+\hline
+{\em u} & control inputs \\
+\hline
+{\em z} & measurement \\
+\hline
+{\em p} & parameters (optional) \\
+\hline
+{\em cov} & whether to update the covariance as well (true by default) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if success 
+\end{DoxyReturn}
+
+
+\-Implements {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_abf38f846a9266db92036d9b4ef7f5891}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Pxz@{\-Pxz}}
+\index{\-Pxz@{\-Pxz}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Pxz}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixnrd} {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Pxz}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedCorrector_a56f78a1cc1490dba6d958d734e15d88f}
+
+
+internally used covariances 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Unscented\-Corrector().
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Pzz@{\-Pzz}}
+\index{\-Pzz@{\-Pzz}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Pzz}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixrd} {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Pzz}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedCorrector_aede11b38fbb90d42b49c91ad522ac2ad}
+
+
+internally used covariances 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Unscented\-Corrector().
+
+\index{gcop\-::\-Unscented\-Corrector@{gcop\-::\-Unscented\-Corrector}!\-Zs@{\-Zs}}
+\index{\-Zs@{\-Zs}!gcop::UnscentedCorrector@{gcop\-::\-Unscented\-Corrector}}
+\subsubsection[{\-Zs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ vector$<$\-Tz$>$ {\bf gcop\-::\-Unscented\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Zs}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedCorrector_a3fced02f4e7be6dbc18d1c609d19011a}
+
+
+measurement sigma points 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/est/{\bf unscentedcorrector.\-h}\end{DoxyCompactItemize}

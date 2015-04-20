@@ -1,0 +1,521 @@
+\section{gcop\-:\-:\-S\-Ddp$<$ \-T, nx, nu, np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1SDdp}\index{gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$@{gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$}}
+
+
+{\ttfamily \#include $<$sddp.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-S\-Ddp$<$ \-T, nx, nu, np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{classgcop_1_1SDdp__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-S\-Ddp$<$ \-T, nx, nu, np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1SDdp__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-S\-Ddp} ({\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, nx, nu, {\bf np} $>$ \&{\bf cost}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectorpd $\ast${\bf p}=0, bool update=true)
+\item 
+virtual {\bf $\sim$\-S\-Ddp} ()
+\item 
+void {\bf \-Iterate} ()
+\item 
+void {\bf \-Forward} ()
+\item 
+void {\bf \-Backward} ()
+\item 
+void {\bf \-Linearize} ()
+\item 
+bool {\bf pd} (const \-Matrixnd \&{\bf \-P})
+\item 
+bool {\bf pd\-X} (const \-Matrix\-Xd \&{\bf \-P})
+\item 
+void {\bf \-Reset} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf \-N}
+\begin{DoxyCompactList}\small\item\em number of discrete trajectory segments \end{DoxyCompactList}\item 
+double {\bf mu}
+\begin{DoxyCompactList}\small\item\em current regularization factor mu \end{DoxyCompactList}\item 
+double {\bf mu0}
+\begin{DoxyCompactList}\small\item\em minimum regularization factor mu \end{DoxyCompactList}\item 
+double {\bf dmu0}
+\begin{DoxyCompactList}\small\item\em regularization factor modification step-\/size \end{DoxyCompactList}\item 
+double {\bf mumax}
+\begin{DoxyCompactList}\small\item\em maximum regularization factor mu \end{DoxyCompactList}\item 
+double {\bf a}
+\begin{DoxyCompactList}\small\item\em step-\/size \end{DoxyCompactList}\item 
+double {\bf current\-\_\-a}
+\begin{DoxyCompactList}\small\item\em current step-\/size \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf dus}
+\begin{DoxyCompactList}\small\item\em computed control change \end{DoxyCompactList}\item 
+std\-::vector$<$ \-T $>$ {\bf xss}
+\begin{DoxyCompactList}\small\item\em \-Sample states (\-N+1) vector. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-T $>$ {\bf xsprev}
+\begin{DoxyCompactList}\small\item\em \-Mean of \-Sample states (\-N+1) vector. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf kus}
+\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf du\-\_\-sigma}
+\begin{DoxyCompactList}\small\item\em \-Stores the stdeviation at each segment. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Matrixcnd $>$ {\bf \-Kuxs}
+\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf \-Qud}
+\begin{DoxyCompactList}\small\item\em \-Inverse \-Variance for sampling du. \end{DoxyCompactList}\item 
+std\-::default\-\_\-random\-\_\-engine {\bf randgenerator}
+\begin{DoxyCompactList}\small\item\em \-Default random engine. \end{DoxyCompactList}\item 
+std\-::normal\-\_\-distribution$<$ double $>$ {\bf normal\-\_\-dist}
+\begin{DoxyCompactList}\small\item\em \-Creates a normal distribution. \end{DoxyCompactList}\item 
+\-Vectornd {\bf \-Lx}
+\item 
+\-Matrixnd {\bf \-Lxx}
+\item 
+\-Vectorcd {\bf \-Lu}
+\item 
+\-Matrixcd {\bf \-Luu}
+\item 
+\-Matrixnd {\bf \-P}
+\item 
+\-Vectornd {\bf v}
+\item 
+\-Vectorcd {\bf duscale}
+\begin{DoxyCompactList}\small\item\em \-Scales sampled du according to this vector. \end{DoxyCompactList}\item 
+\-Vectornd {\bf dxscale}
+\begin{DoxyCompactList}\small\item\em \-Scales sampled dx0 according to this vector. \end{DoxyCompactList}\item 
+\-Render\-Func $\ast$ {\bf external\-\_\-render}
+\begin{DoxyCompactList}\small\item\em \-Render\-Function for rendering samples. \end{DoxyCompactList}\item 
+double {\bf \-V}
+\item 
+\-Vector2d {\bf d\-V}
+\item 
+double {\bf s1}
+\begin{DoxyCompactList}\small\item\em \-Armijo/\-Bertsekas step-\/size control factor s1. \end{DoxyCompactList}\item 
+double {\bf s2}
+\begin{DoxyCompactList}\small\item\em \-Armijo/\-Bertsekas step-\/size control factor s2. \end{DoxyCompactList}\item 
+double {\bf b1}
+\begin{DoxyCompactList}\small\item\em \-Armijo/\-Bertsekas step-\/size control factor b1. \end{DoxyCompactList}\item 
+double {\bf b2}
+\begin{DoxyCompactList}\small\item\em \-Armijo/\-Bertsekas step-\/size control factor b2. \end{DoxyCompactList}\item 
+char {\bf type}
+\begin{DoxyCompactList}\small\item\em type of algorithm (choices are \-P\-U\-R\-E, \-D\-D\-P, \-L\-Q\-S), \-L\-Q\-S is default. \-In the current implementation second-\/order expansion of the dynamics is ignored, so \-D\-D\-P and \-L\-Q\-S are identical. \-Both \-L\-Q\-S and \-D\-D\-P are implemented using the true nonlinear dynamics integration in the \-Forward step, while \-P\-U\-R\-E uses the linearized version in order to match exactly the true \-Newton step. \end{DoxyCompactList}\item 
+int {\bf \-Ns}
+\begin{DoxyCompactList}\small\item\em \-Number of samples for linearizing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const char {\bf \-P\-U\-R\-E} = 0
+\begin{DoxyCompactList}\small\item\em \-P\-U\-R\-E version of algorithm (i.\-e. stage-\/wise \-Newton) \end{DoxyCompactList}\item 
+static const char {\bf \-D\-D\-P} = 1
+\begin{DoxyCompactList}\small\item\em \-D\-D\-P version of algorithm. \end{DoxyCompactList}\item 
+static const char {\bf \-L\-Q\-S} = 2
+\begin{DoxyCompactList}\small\item\em \-Linear-\/\-Quadratic \-Subproblem version of algorithm due to \-Dreyfus / \-Dunn\&\-Bertsekas / \-Pantoja. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ class gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-S\-Ddp@{\-S\-Ddp}}
+\index{\-S\-Ddp@{\-S\-Ddp}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-S\-Ddp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-S\-Ddp} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&}]{sys, }
+\item[{{\bf \-Cost}$<$ \-T, nx, nu, {\bf np} $>$ \&}]{cost, }
+\item[{vector$<$ double $>$ \&}]{ts, }
+\item[{vector$<$ \-T $>$ \&}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{\-Vectorpd $\ast$}]{p = {\ttfamily 0}, }
+\item[{bool}]{update = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1SDdp_ac2a58ba91e86d83a204eb54049f659f4}
+\-Create an optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. \-The times ts must be given, the initial state xs[0] must be set, and the controls us will be used as an initial guess for the optimization.
+
+\-After initialization, every call to \doxyref{\-Iterate()}{p.}{classgcop_1_1SDdp_a0cb2fcbfbd573829e05caea1afe8c4ad} will optimize the controls us and states xs and modify them accordingly. \-Problems involving time-\/optimization will also modify the sequence of times ts.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & system \\
+\hline
+{\em cost} & cost \\
+\hline
+{\em ts} & (\-N+1) sequence of discrete times \\
+\hline
+{\em xs} & (\-N+1) sequence of discrete states \\
+\hline
+{\em us} & (\-N) sequence of control inputs \\
+\hline
+{\em update} & whether to update trajectory xs using initial state xs[0] and inputs us. \-This is necessary only if xs was not already generated from us. \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::du\-\_\-sigma, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::dus, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::duscale, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::dxscale, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::kus, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-Kuxs, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-Lu, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-Luu, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-Lx, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-Lxx, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-N, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::nofevaluations, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-P, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-Qud, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-U, gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::\-Update(), gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::us, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::v, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-X, gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::xs, gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::xsprev, and gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::xss.
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!$\sim$\-S\-Ddp@{$\sim$\-S\-Ddp}}
+\index{$\sim$\-S\-Ddp@{$\sim$\-S\-Ddp}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{$\sim$\-S\-Ddp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::$\sim${\bf \-S\-Ddp} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1SDdp_a7ddc93b1eb9d98abcb63a355e451d839}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Backward@{\-Backward}}
+\index{\-Backward@{\-Backward}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Backward}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ void {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Backward} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1SDdp_a7531a7d2be4eb998c3d623ff1fa1144c}
+\-Backward pass \index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Forward@{\-Forward}}
+\index{\-Forward@{\-Forward}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Forward}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ void {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Forward} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1SDdp_ae9ce79efb3a8e6ad664f97467628c75f}
+\-Forward pass 
+
+\-References gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$\-::bnd, gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$\-::lb, and gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$\-::ub.
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Iterate@{\-Iterate}}
+\index{\-Iterate@{\-Iterate}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Iterate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ void {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Iterate} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1SDdp_a0cb2fcbfbd573829e05caea1afe8c4ad}
+\-Perform one \-D\-D\-P iteration. \-Internally calls\-:
+
+\-Backward -\/$>$ \-Forward -\/$>$ \-Update. \-The controls us and trajectory xs are updated. 
+
+\-Reimplemented from {\bf gcop\-::\-Docp$<$ T, nx, nu, np $>$} \doxyref{}{p.}{classgcop_1_1Docp_a37958d1614b2b54ac457cc7ee55302e6}.
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Linearize@{\-Linearize}}
+\index{\-Linearize@{\-Linearize}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Linearize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ void {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Linearize} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1SDdp_a21a646274d8150c0d5bcfabb51a69eef}
+\-Linearize around existing us and xs by collecting samples 
+
+\-References gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$\-::bnd, gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$\-::lb, gcop\-::normal\-\_\-dist(), and gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$\-::ub.
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!pd@{pd}}
+\index{pd@{pd}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{pd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ bool {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf pd} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrixnd \&}]{\-P}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1SDdp_ae3d721e5aa1dce9de975f8a28314767b}
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!pd\-X@{pd\-X}}
+\index{pd\-X@{pd\-X}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{pd\-X}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ bool {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf pd\-X} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrix\-Xd \&}]{\-P}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1SDdp_aea61219d9fa470eb061c0218fe9d1f7a}
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Reset@{\-Reset}}
+\index{\-Reset@{\-Reset}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Reset}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ void {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Reset} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1SDdp_a92c9ef717f9a03738ab97f930634ba40}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!a@{a}}
+\index{a@{a}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{a}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf a}}\label{classgcop_1_1SDdp_a76aac6852cc901b9db98484f12054066}
+
+
+step-\/size 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!b1@{b1}}
+\index{b1@{b1}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{b1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf b1}}\label{classgcop_1_1SDdp_ab5a459029bb598f6e63196825e7c3d0b}
+
+
+\-Armijo/\-Bertsekas step-\/size control factor b1. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!b2@{b2}}
+\index{b2@{b2}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{b2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf b2}}\label{classgcop_1_1SDdp_a4c85af6d105c90bdf09e8c3c69a930c6}
+
+
+\-Armijo/\-Bertsekas step-\/size control factor b2. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!current\-\_\-a@{current\-\_\-a}}
+\index{current\-\_\-a@{current\-\_\-a}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{current\-\_\-a}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf current\-\_\-a}}\label{classgcop_1_1SDdp_a3ad6c2a86621cd4ae17bf5ae7fbf4876}
+
+
+current step-\/size 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-D\-D\-P@{\-D\-D\-P}}
+\index{\-D\-D\-P@{\-D\-D\-P}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-D\-D\-P}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ const char {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-D\-D\-P} = 1\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1SDdp_a01d0b0bb6ac2a1138308689df1f812a9}
+
+
+\-D\-D\-P version of algorithm. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!dmu0@{dmu0}}
+\index{dmu0@{dmu0}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{dmu0}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf dmu0}}\label{classgcop_1_1SDdp_a0ab9c4f15ceaf137888e8fa7d6ef169b}
+
+
+regularization factor modification step-\/size 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!du\-\_\-sigma@{du\-\_\-sigma}}
+\index{du\-\_\-sigma@{du\-\_\-sigma}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{du\-\_\-sigma}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf du\-\_\-sigma}}\label{classgcop_1_1SDdp_a0af6312d16044cc24f9ee2577e4ddc8c}
+
+
+\-Stores the stdeviation at each segment. 
+
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!dus@{dus}}
+\index{dus@{dus}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{dus}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf dus}}\label{classgcop_1_1SDdp_a335c8116a165ba400c3c8ee5c392d347}
+
+
+computed control change 
+
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!duscale@{duscale}}
+\index{duscale@{duscale}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{duscale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Vectorcd {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf duscale}}\label{classgcop_1_1SDdp_a0d45d2e264f04ea2b17156743f3188fe}
+
+
+\-Scales sampled du according to this vector. 
+
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!d\-V@{d\-V}}
+\index{d\-V@{d\-V}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{d\-V}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Vector2d {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf d\-V}}\label{classgcop_1_1SDdp_ac1e5cb4d8af88f02689e815b58ac7236}
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!dxscale@{dxscale}}
+\index{dxscale@{dxscale}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{dxscale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Vectornd {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf dxscale}}\label{classgcop_1_1SDdp_aa37d5ba038d4a684e18158a13abf7a78}
+
+
+\-Scales sampled dx0 according to this vector. 
+
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!external\-\_\-render@{external\-\_\-render}}
+\index{external\-\_\-render@{external\-\_\-render}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{external\-\_\-render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Render\-Func$\ast$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf external\-\_\-render}}\label{classgcop_1_1SDdp_a2c062d54462d64977672268d363bcba7}
+
+
+\-Render\-Function for rendering samples. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!kus@{kus}}
+\index{kus@{kus}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{kus}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf kus}}\label{classgcop_1_1SDdp_a973dd8fa18361466b5ddc6544b3a5333}
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Kuxs@{\-Kuxs}}
+\index{\-Kuxs@{\-Kuxs}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Kuxs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-Matrixcnd$>$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Kuxs}}\label{classgcop_1_1SDdp_a3fd05b932af12c5d14eafe7c49bfe0d0}
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-L\-Q\-S@{\-L\-Q\-S}}
+\index{\-L\-Q\-S@{\-L\-Q\-S}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-L\-Q\-S}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ const char {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-L\-Q\-S} = 2\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1SDdp_abde510a7b12e974209c50fa47691281b}
+
+
+\-Linear-\/\-Quadratic \-Subproblem version of algorithm due to \-Dreyfus / \-Dunn\&\-Bertsekas / \-Pantoja. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Lu@{\-Lu}}
+\index{\-Lu@{\-Lu}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Lu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Vectorcd {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Lu}}\label{classgcop_1_1SDdp_ad1badf7ed32c368331570623711c0144}
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Luu@{\-Luu}}
+\index{\-Luu@{\-Luu}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Luu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Matrixcd {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Luu}}\label{classgcop_1_1SDdp_adb3e5f8bb76ae2fdc4ef0e2415e838c7}
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Lx@{\-Lx}}
+\index{\-Lx@{\-Lx}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Lx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Vectornd {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Lx}}\label{classgcop_1_1SDdp_aca87abc01d8017189bb84504481ac3c3}
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Lxx@{\-Lxx}}
+\index{\-Lxx@{\-Lxx}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Lxx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Matrixnd {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Lxx}}\label{classgcop_1_1SDdp_a787e038bcb7aad1055d0e7eb7b891180}
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!mu@{mu}}
+\index{mu@{mu}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{mu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf mu}}\label{classgcop_1_1SDdp_aadb1ba8d8c937976fd9b7d39c026c314}
+
+
+current regularization factor mu 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!mu0@{mu0}}
+\index{mu0@{mu0}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{mu0}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf mu0}}\label{classgcop_1_1SDdp_aa4e790edbd7f491ec4099396fee87df3}
+
+
+minimum regularization factor mu 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!mumax@{mumax}}
+\index{mumax@{mumax}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{mumax}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf mumax}}\label{classgcop_1_1SDdp_afc4f9af11bd563dff1f02857250a8738}
+
+
+maximum regularization factor mu 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-N@{\-N}}
+\index{\-N@{\-N}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-N}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ int {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-N}}\label{classgcop_1_1SDdp_ad0cb8b9ded1e040d6171e730a99f8914}
+
+
+number of discrete trajectory segments 
+
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!normal\-\_\-dist@{normal\-\_\-dist}}
+\index{normal\-\_\-dist@{normal\-\_\-dist}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{normal\-\_\-dist}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::normal\-\_\-distribution$<$double$>$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf normal\-\_\-dist}}\label{classgcop_1_1SDdp_a639b46d323c13eba28d065bd7925894b}
+
+
+\-Creates a normal distribution. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Ns@{\-Ns}}
+\index{\-Ns@{\-Ns}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Ns}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ int {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Ns}}\label{classgcop_1_1SDdp_ad1db9d224910599f62a1fc514bcc324d}
+
+
+\-Number of samples for linearizing. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-P@{\-P}}
+\index{\-P@{\-P}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-P}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Matrixnd {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-P}}\label{classgcop_1_1SDdp_a5d766858144fe0e5b7d6dfd284b58b52}
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-P\-U\-R\-E@{\-P\-U\-R\-E}}
+\index{\-P\-U\-R\-E@{\-P\-U\-R\-E}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-P\-U\-R\-E}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ const char {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-P\-U\-R\-E} = 0\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1SDdp_ae2765c01642a28a00e88884dfe455d17}
+
+
+\-P\-U\-R\-E version of algorithm (i.\-e. stage-\/wise \-Newton) 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-Qud@{\-Qud}}
+\index{\-Qud@{\-Qud}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-Qud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Qud}}\label{classgcop_1_1SDdp_a76d8095993b39c59bdcbca0433029d5a}
+
+
+\-Inverse \-Variance for sampling du. 
+
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!randgenerator@{randgenerator}}
+\index{randgenerator@{randgenerator}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{randgenerator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::default\-\_\-random\-\_\-engine {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf randgenerator}}\label{classgcop_1_1SDdp_a6a7a566d7087aacaee0004c2d749bd57}
+
+
+\-Default random engine. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!s1@{s1}}
+\index{s1@{s1}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{s1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf s1}}\label{classgcop_1_1SDdp_ab453029380b96bea4a40e7f9a6b9789e}
+
+
+\-Armijo/\-Bertsekas step-\/size control factor s1. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!s2@{s2}}
+\index{s2@{s2}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{s2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf s2}}\label{classgcop_1_1SDdp_ac7b2d3bec2ffdb44e04c807c64e249c4}
+
+
+\-Armijo/\-Bertsekas step-\/size control factor s2. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!type@{type}}
+\index{type@{type}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ char {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf type}}\label{classgcop_1_1SDdp_a3a87ef709658ca104ed400b58154bfb3}
+
+
+type of algorithm (choices are \-P\-U\-R\-E, \-D\-D\-P, \-L\-Q\-S), \-L\-Q\-S is default. \-In the current implementation second-\/order expansion of the dynamics is ignored, so \-D\-D\-P and \-L\-Q\-S are identical. \-Both \-L\-Q\-S and \-D\-D\-P are implemented using the true nonlinear dynamics integration in the \-Forward step, while \-P\-U\-R\-E uses the linearized version in order to match exactly the true \-Newton step. 
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!v@{v}}
+\index{v@{v}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{v}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Vectornd {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf v}}\label{classgcop_1_1SDdp_a81697150b124e375ee6b95aef3f102ed}
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!\-V@{\-V}}
+\index{\-V@{\-V}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{\-V}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-V}}\label{classgcop_1_1SDdp_a2293deddbc304ca0467e93b7340a126d}
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!xsprev@{xsprev}}
+\index{xsprev@{xsprev}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{xsprev}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-T$>$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf xsprev}}\label{classgcop_1_1SDdp_abd3d484ed9ad9f80b7bee4053af4898a}
+
+
+\-Mean of \-Sample states (\-N+1) vector. 
+
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-S\-Ddp@{gcop\-::\-S\-Ddp}!xss@{xss}}
+\index{xss@{xss}!gcop::SDdp@{gcop\-::\-S\-Ddp}}
+\subsubsection[{xss}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-T$>$ {\bf gcop\-::\-S\-Ddp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf xss}}\label{classgcop_1_1SDdp_a1f2af7dfc8bf812ed8c5525abcdd13b2}
+
+
+\-Sample states (\-N+1) vector. 
+
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf sddp.\-h}\end{DoxyCompactItemize}

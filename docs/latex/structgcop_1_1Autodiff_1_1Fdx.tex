@@ -1,0 +1,107 @@
+\section{gcop\-:\-:\-Autodiff$<$ \-T, \-\_\-n, \-\_\-c $>$\-:\-:\-Fdx \-Struct \-Reference}
+\label{structgcop_1_1Autodiff_1_1Fdx}\index{gcop\-::\-Autodiff$<$ T, \-\_\-n, \-\_\-c $>$\-::\-Fdx@{gcop\-::\-Autodiff$<$ T, \-\_\-n, \-\_\-c $>$\-::\-Fdx}}
+
+
+{\ttfamily \#include $<$autodiff.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Autodiff$<$ \-T, \-\_\-n, \-\_\-c $>$\-:\-:\-Fdx\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structgcop_1_1Autodiff_1_1Fdx__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef {\bf \-Vectornd} {\bf \-Input\-Type}
+\item 
+typedef {\bf \-Vectornd} {\bf \-Value\-Type}
+\item 
+typedef {\bf \-Matrixnd} {\bf \-Jacobian\-Type}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Fdx} ({\bf \-System}$<$ \-T, {\bf \-Vectorcd}, \-\_\-n, \-\_\-c $>$ \&{\bf sys})
+\item 
+void {\bf operator()} (const {\bf \-Vectornd} \&e, {\bf \-Vectornd} $\ast$v) const 
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-System}$<$ \-T, {\bf \-Vectorcd}, \-\_\-n, \-\_\-c $>$ \& {\bf sys}
+\item 
+double {\bf t}
+\item 
+\-T {\bf xe}
+\item 
+const \-T $\ast$ {\bf x}
+\item 
+const {\bf \-Vectorcd} $\ast$ {\bf u}
+\item 
+double {\bf h}
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T, int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ struct gcop\-::\-Autodiff$<$ T, \-\_\-n, \-\_\-c $>$\-::\-Fdx}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!\-Input\-Type@{\-Input\-Type}}
+\index{\-Input\-Type@{\-Input\-Type}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{\-Input\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef {\bf \-Vectornd} {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fdx\-::\-Input\-Type}}\label{structgcop_1_1Autodiff_1_1Fdx_a670506b176026ae7f9fed57e80e712e8}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!\-Jacobian\-Type@{\-Jacobian\-Type}}
+\index{\-Jacobian\-Type@{\-Jacobian\-Type}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{\-Jacobian\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef {\bf \-Matrixnd} {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fdx\-::\-Jacobian\-Type}}\label{structgcop_1_1Autodiff_1_1Fdx_a729fc4130837b874f973335e0a3d3a10}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!\-Value\-Type@{\-Value\-Type}}
+\index{\-Value\-Type@{\-Value\-Type}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{\-Value\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef {\bf \-Vectornd} {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fdx\-::\-Value\-Type}}\label{structgcop_1_1Autodiff_1_1Fdx_a1ad13c18062216b3de7c0004906a1625}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!\-Fdx@{\-Fdx}}
+\index{\-Fdx@{\-Fdx}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{\-Fdx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fdx\-::\-Fdx} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, {\bf \-Vectorcd}, \-\_\-n, \-\_\-c $>$ \&}]{sys}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{structgcop_1_1Autodiff_1_1Fdx_aa4238fb8af6165b29e34fddf60809710}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ void {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::\-Fdx\-::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectornd} \&}]{e, }
+\item[{{\bf \-Vectornd} $\ast$}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{structgcop_1_1Autodiff_1_1Fdx_ab39be5733955547384b7091f41542624}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!h@{h}}
+\index{h@{h}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{h}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ double {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fdx\-::h}}\label{structgcop_1_1Autodiff_1_1Fdx_a93d276664f9a45f3dbff7bd092cf44d2}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!sys@{sys}}
+\index{sys@{sys}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ {\bf \-System}$<$\-T, {\bf \-Vectorcd}, \-\_\-n, \-\_\-c$>$\& {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fdx\-::sys}}\label{structgcop_1_1Autodiff_1_1Fdx_adbb342c539003ddbd4cd0acee3427fa4}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!t@{t}}
+\index{t@{t}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ double {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fdx\-::t}}\label{structgcop_1_1Autodiff_1_1Fdx_a6352da98893423b98b6c9493c6b92264}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!u@{u}}
+\index{u@{u}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{u}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ const {\bf \-Vectorcd}$\ast$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fdx\-::u}}\label{structgcop_1_1Autodiff_1_1Fdx_a44bd420b87be15d29592045415783ae0}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!x@{x}}
+\index{x@{x}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ const \-T$\ast$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fdx\-::x}}\label{structgcop_1_1Autodiff_1_1Fdx_aab0f3b6070c578550d05531e5993ba91}
+\index{gcop\-::\-Autodiff\-::\-Fdx@{gcop\-::\-Autodiff\-::\-Fdx}!xe@{xe}}
+\index{xe@{xe}!gcop::Autodiff::Fdx@{gcop\-::\-Autodiff\-::\-Fdx}}
+\subsubsection[{xe}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ \-T {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fdx\-::xe}}\label{structgcop_1_1Autodiff_1_1Fdx_ad77beb7e27418f1cf726a104bb60ae5d}
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf autodiff.\-h}\end{DoxyCompactItemize}

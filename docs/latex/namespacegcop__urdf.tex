@@ -1,0 +1,172 @@
+\section{gcop\-\_\-urdf \-Namespace \-Reference}
+\label{namespacegcop__urdf}\index{gcop\-\_\-urdf@{gcop\-\_\-urdf}}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf \-Color}
+\item 
+class {\bf \-Vector3}
+\item 
+class {\bf \-Rotation}
+\item 
+class {\bf \-Pose}
+\item 
+class {\bf \-Joint\-Dynamics}
+\item 
+class {\bf \-Joint\-Limits}
+\item 
+class {\bf \-Joint\-Safety}
+\begin{DoxyCompactList}\small\item\em \-Parameters for \doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint} \-Safety \-Controllers. \end{DoxyCompactList}\item 
+class {\bf \-Joint\-Calibration}
+\item 
+class {\bf \-Joint\-Mimic}
+\item 
+class {\bf \-Joint}
+\item 
+class {\bf \-Geometry}
+\item 
+class {\bf \-Sphere}
+\item 
+class {\bf \-Box}
+\item 
+class {\bf \-Cylinder}
+\item 
+class {\bf \-Mesh}
+\item 
+class {\bf \-Material}
+\item 
+class {\bf \-Inertial}
+\item 
+class {\bf \-Visual}
+\item 
+class {\bf \-Collision}
+\item 
+class {\bf \-Link}
+\item 
+class {\bf \-Model\-Interface}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf bulletmbsgenerator} (const string \&xml\-\_\-string, {\bf gcop\-::\-Matrix4d} \&gposei\-\_\-root, string type,)
+\item 
+{\bf mbsgenerator} (const std\-::string \&xml\-\_\-string, {\bf gcop\-::\-Matrix4d} \&gposei\-\_\-root, std\-::string type=\char`\"{}\-F\-L\-O\-A\-T\-B\-A\-S\-E\char`\"{})
+\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Model\-Interface} $>$ {\bf parse\-U\-R\-D\-F} (const std\-::string \&xml\-\_\-string)
+\item 
+void {\bf transformtoprincipal} (boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ link)
+\item 
+void {\bf combineinertia} (boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ clink, boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ plink, {\bf \-Pose} posec\-\_\-p)
+\item 
+void {\bf assign} (boost\-::shared\-\_\-ptr$<$ const {\bf \-Link} $>$ link, boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ parentlink, {\bf \-Pose} cumpose)
+\item 
+void {\bf aggregate} (boost\-::shared\-\_\-ptr$<$ const {\bf \-Link} $>$ link, boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ parentlink, {\bf \-Pose} cumpose)
+\item 
+{\bf gcop\-::\-Matrix4d} {\bf diffpose} ({\bf \-Pose} \&posej\-\_\-p, {\bf \-Pose} \&posei\-\_\-p)
+\item 
+void {\bf walk\-Tree} (boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ link, int level, int \&index, boost\-::shared\-\_\-ptr$<$ {\bf gcop\-::\-Mbs} $>$ mbs)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Function \-Documentation}
+\index{gcop\-\_\-urdf@{gcop\-\_\-urdf}!aggregate@{aggregate}}
+\index{aggregate@{aggregate}!gcop_urdf@{gcop\-\_\-urdf}}
+\subsubsection[{aggregate}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::aggregate} (
+\begin{DoxyParamCaption}
+\item[{boost\-::shared\-\_\-ptr$<$ const \-Link $>$}]{link, }
+\item[{boost\-::shared\-\_\-ptr$<$ \-Link $>$}]{parentlink, }
+\item[{\-Pose}]{cumpose}
+\end{DoxyParamCaption}
+)}\label{namespacegcop__urdf_ae643449136c1e50b95bde084f2cca563}
+
+
+\-Referenced by bulletmbsgenerator().
+
+\index{gcop\-\_\-urdf@{gcop\-\_\-urdf}!assign@{assign}}
+\index{assign@{assign}!gcop_urdf@{gcop\-\_\-urdf}}
+\subsubsection[{assign}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::assign} (
+\begin{DoxyParamCaption}
+\item[{boost\-::shared\-\_\-ptr$<$ const \-Link $>$}]{link, }
+\item[{boost\-::shared\-\_\-ptr$<$ \-Link $>$}]{parentlink, }
+\item[{\-Pose}]{cumpose}
+\end{DoxyParamCaption}
+)}\label{namespacegcop__urdf_a582168055a0dcb0c429bba2803ff3641}
+
+
+\-Referenced by bulletmbsgenerator().
+
+\index{gcop\-\_\-urdf@{gcop\-\_\-urdf}!bulletmbsgenerator@{bulletmbsgenerator}}
+\index{bulletmbsgenerator@{bulletmbsgenerator}!gcop_urdf@{gcop\-\_\-urdf}}
+\subsubsection[{bulletmbsgenerator}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-\_\-urdf\-::bulletmbsgenerator} (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{xml\-\_\-string, }
+\item[{{\bf gcop\-::\-Matrix4d} \&}]{gposei\-\_\-root, }
+\item[{string}]{type}
+\end{DoxyParamCaption}
+)}\label{namespacegcop__urdf_a340c7a6b5e527dc3e5c7ff039bfd001a}
+
+
+\-References aggregate(), assign(), gcop\-\_\-urdf\-::\-Pose\-::clear(), gcop\-::\-S\-E3\-::\-Instance(), parse\-U\-R\-D\-F(), gcop\-::\-S\-E3\-::quatxyz2g(), transformtoprincipal(), and walk\-Tree().
+
+\index{gcop\-\_\-urdf@{gcop\-\_\-urdf}!combineinertia@{combineinertia}}
+\index{combineinertia@{combineinertia}!gcop_urdf@{gcop\-\_\-urdf}}
+\subsubsection[{combineinertia}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::combineinertia} (
+\begin{DoxyParamCaption}
+\item[{boost\-::shared\-\_\-ptr$<$ \-Link $>$}]{clink, }
+\item[{boost\-::shared\-\_\-ptr$<$ \-Link $>$}]{plink, }
+\item[{\-Pose}]{posec\-\_\-p}
+\end{DoxyParamCaption}
+)}\label{namespacegcop__urdf_a86d48323ed7fdf356f1f7cace7f0b957}
+\index{gcop\-\_\-urdf@{gcop\-\_\-urdf}!diffpose@{diffpose}}
+\index{diffpose@{diffpose}!gcop_urdf@{gcop\-\_\-urdf}}
+\subsubsection[{diffpose}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-::\-Matrix4d} {\bf gcop\-\_\-urdf\-::diffpose} (
+\begin{DoxyParamCaption}
+\item[{\-Pose \&}]{posej\-\_\-p, }
+\item[{\-Pose \&}]{posei\-\_\-p}
+\end{DoxyParamCaption}
+)}\label{namespacegcop__urdf_a43f9e0683d3c8dbe808b52692f5bd190}
+\index{gcop\-\_\-urdf@{gcop\-\_\-urdf}!mbsgenerator@{mbsgenerator}}
+\index{mbsgenerator@{mbsgenerator}!gcop_urdf@{gcop\-\_\-urdf}}
+\subsubsection[{mbsgenerator}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<$ {\bf gcop\-::\-Mbs} $>$ {\bf gcop\-\_\-urdf\-::mbsgenerator} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{xml\-\_\-string, }
+\item[{{\bf gcop\-::\-Matrix4d} \&}]{gposei\-\_\-root, }
+\item[{std\-::string}]{type = {\ttfamily \char`\"{}\-F\-L\-O\-A\-T\-B\-A\-S\-E\char`\"{}}}
+\end{DoxyParamCaption}
+)}\label{namespacegcop__urdf_af961e416102ea7b4cca626cf53214fbf}
+\index{gcop\-\_\-urdf@{gcop\-\_\-urdf}!parse\-U\-R\-D\-F@{parse\-U\-R\-D\-F}}
+\index{parse\-U\-R\-D\-F@{parse\-U\-R\-D\-F}!gcop_urdf@{gcop\-\_\-urdf}}
+\subsubsection[{parse\-U\-R\-D\-F}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Model\-Interface}$>$ {\bf gcop\-\_\-urdf\-::parse\-U\-R\-D\-F} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{xml\-\_\-string}
+\end{DoxyParamCaption}
+)}\label{namespacegcop__urdf_a4b453ab97bbc41d8af6b73c8ecfb6176}
+
+
+\-Referenced by bulletmbsgenerator().
+
+\index{gcop\-\_\-urdf@{gcop\-\_\-urdf}!transformtoprincipal@{transformtoprincipal}}
+\index{transformtoprincipal@{transformtoprincipal}!gcop_urdf@{gcop\-\_\-urdf}}
+\subsubsection[{transformtoprincipal}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::transformtoprincipal} (
+\begin{DoxyParamCaption}
+\item[{boost\-::shared\-\_\-ptr$<$ \-Link $>$}]{link}
+\end{DoxyParamCaption}
+)}\label{namespacegcop__urdf_a279b483d20c8af7a30b7dcec980d875e}
+
+
+\-Referenced by bulletmbsgenerator().
+
+\index{gcop\-\_\-urdf@{gcop\-\_\-urdf}!walk\-Tree@{walk\-Tree}}
+\index{walk\-Tree@{walk\-Tree}!gcop_urdf@{gcop\-\_\-urdf}}
+\subsubsection[{walk\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::walk\-Tree} (
+\begin{DoxyParamCaption}
+\item[{boost\-::shared\-\_\-ptr$<$ \-Link $>$}]{link, }
+\item[{int}]{level, }
+\item[{int \&}]{index, }
+\item[{boost\-::shared\-\_\-ptr$<$ {\bf gcop\-::\-Mbs} $>$}]{mbs}
+\end{DoxyParamCaption}
+)}\label{namespacegcop__urdf_ad6f6b950abeaffe262f5fc68d6d2da04}
+
+
+\-Referenced by bulletmbsgenerator().
+

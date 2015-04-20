@@ -1,0 +1,92 @@
+\section{gcop\-:\-:\-Snake \-Class \-Reference}
+\label{classgcop_1_1Snake}\index{gcop\-::\-Snake@{gcop\-::\-Snake}}
+
+
+{\ttfamily \#include $<$snake.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Snake\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{classgcop_1_1Snake__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Snake\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Snake__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Snake} ()
+\item 
+void {\bf \-Force} (\-Vector\-Xd \&f, double {\bf t}, const {\bf \-Mbs\-State} \&{\bf x}, const \-Vector\-Xd \&u, \-Matrix\-Xd $\ast$\-A=0, \-Matrix\-Xd $\ast$\-B=0)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A quadrotor dynamical model.
+
+\-The state is $ \bf x = (R, x, \omega, v) $ where $ (R,x)\in SO(3)\times\mathbb{R}^3$ is the pose, and the controls are $ \bm u = (u_1,u_2,u_3,u_4)$ correspond to torques around the body and a vertical lift force.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Snake@{gcop\-::\-Snake}!\-Snake@{\-Snake}}
+\index{\-Snake@{\-Snake}!gcop::Snake@{gcop\-::\-Snake}}
+\subsubsection[{\-Snake}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Snake\-::\-Snake} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Snake_aa9cbcdb4b25d84cbf83509039cac8d01}
+
+
+\-References gcop\-::\-Mbs\-::\-Init(), gcop\-::\-Mbs\-::joints, gcop\-::\-Mbs\-::links, gcop\-::\-Mbs\-::pis, gcop\-::\-S\-E3\-::rpyxyz2g(), and gcop\-::\-Mbs\-::se3.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Snake@{gcop\-::\-Snake}!\-Force@{\-Force}}
+\index{\-Force@{\-Force}!gcop::Snake@{gcop\-::\-Snake}}
+\subsubsection[{\-Force}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Snake\-::\-Force} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{f, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{x, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{\-Matrix\-Xd $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-B = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Snake_ab8c449447df3899fef4c6b4a839aa993}
+\-Total resulting force on the system from external (e.\-g. gravity) and internal (control) inputs 
+\begin{DoxyParams}{\-Parameters}
+{\em f} & total force f(x,u,t) \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+{\em u} & controls \\
+\hline
+{\em \-A} & jacobian \-Dxf \\
+\hline
+{\em \-B} & jacobian \-Duf \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Mbs} \doxyref{}{p.}{classgcop_1_1Mbs_aa18ed20df059e7953d68c8f44eaf3c22}.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf snake.\-h}\item 
+lib/systems/{\bf snake.\-cc}\end{DoxyCompactItemize}

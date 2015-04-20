@@ -1,0 +1,155 @@
+\section{lib/views/viewer.cc \-File \-Reference}
+\label{viewer_8cc}\index{lib/views/viewer.\-cc@{lib/views/viewer.\-cc}}
+{\ttfamily \#include $<$stdio.\-h$>$}\*
+{\ttfamily \#include $<$string.\-h$>$}\*
+{\ttfamily \#include $<$assert.\-h$>$}\*
+{\ttfamily \#include $<$iostream$>$}\*
+{\ttfamily \#include $<$cmath$>$}\*
+{\ttfamily \#include $<$unistd.\-h$>$}\*
+{\ttfamily \#include \char`\"{}utils.\-h\char`\"{}}\*
+{\ttfamily \#include \char`\"{}viewer.\-h\char`\"{}}\*
+\-Include dependency graph for viewer.\-cc\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{viewer_8cc__incl}
+\end{center}
+\end{figure}
+\subsection*{\-Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf \-L\-I\-G\-H\-T\-X}~(1.\-0f)
+\item 
+\#define {\bf \-L\-I\-G\-H\-T\-Y}~(0.\-4f)
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf g\-\_\-viewer\-\_\-reshape} (int w, int h)
+\item 
+void {\bf g\-\_\-viewer\-\_\-render} ()
+\item 
+void {\bf g\-\_\-viewer\-\_\-keyboard} (unsigned char ch, int x, int y)
+\item 
+void {\bf g\-\_\-viewer\-\_\-mouse} (int button, int state, int x, int y)
+\item 
+void {\bf g\-\_\-viewer\-\_\-motion} (int x, int y)
+\item 
+void {\bf g\-\_\-viewer\-\_\-idle} (void)
+\item 
+void {\bf g\-\_\-timer\-\_\-func} (int)
+\item 
+void {\bf g\-\_\-save\-\_\-frames} (int)
+\item 
+void {\bf \-Init\-Viewer\-Window} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Define \-Documentation}
+\index{viewer.\-cc@{viewer.\-cc}!\-L\-I\-G\-H\-T\-X@{\-L\-I\-G\-H\-T\-X}}
+\index{\-L\-I\-G\-H\-T\-X@{\-L\-I\-G\-H\-T\-X}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{\-L\-I\-G\-H\-T\-X}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-L\-I\-G\-H\-T\-X}~(1.\-0f)}\label{viewer_8cc_a01e5fda80df97f817da8bea1f85bb695}
+\index{viewer.\-cc@{viewer.\-cc}!\-L\-I\-G\-H\-T\-Y@{\-L\-I\-G\-H\-T\-Y}}
+\index{\-L\-I\-G\-H\-T\-Y@{\-L\-I\-G\-H\-T\-Y}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{\-L\-I\-G\-H\-T\-Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-L\-I\-G\-H\-T\-Y}~(0.\-4f)}\label{viewer_8cc_ad03762d228f3298734ae8209b57bbbc0}
+
+
+\subsection{\-Function \-Documentation}
+\index{viewer.\-cc@{viewer.\-cc}!g\-\_\-save\-\_\-frames@{g\-\_\-save\-\_\-frames}}
+\index{g\-\_\-save\-\_\-frames@{g\-\_\-save\-\_\-frames}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{g\-\_\-save\-\_\-frames}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf g\-\_\-save\-\_\-frames} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}\label{viewer_8cc_a36643a060671f1709aec3ece266f44f1}
+\index{viewer.\-cc@{viewer.\-cc}!g\-\_\-timer\-\_\-func@{g\-\_\-timer\-\_\-func}}
+\index{g\-\_\-timer\-\_\-func@{g\-\_\-timer\-\_\-func}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{g\-\_\-timer\-\_\-func}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf g\-\_\-timer\-\_\-func} (
+\begin{DoxyParamCaption}
+\item[{int}]{ms}
+\end{DoxyParamCaption}
+)}\label{viewer_8cc_ad36a967ca364d07750753d967ec651d0}
+\index{viewer.\-cc@{viewer.\-cc}!g\-\_\-viewer\-\_\-idle@{g\-\_\-viewer\-\_\-idle}}
+\index{g\-\_\-viewer\-\_\-idle@{g\-\_\-viewer\-\_\-idle}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{g\-\_\-viewer\-\_\-idle}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf g\-\_\-viewer\-\_\-idle} (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{viewer_8cc_a5d75b8b3433c41235d9da646a0b4ad29}
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Init().
+
+\index{viewer.\-cc@{viewer.\-cc}!g\-\_\-viewer\-\_\-keyboard@{g\-\_\-viewer\-\_\-keyboard}}
+\index{g\-\_\-viewer\-\_\-keyboard@{g\-\_\-viewer\-\_\-keyboard}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{g\-\_\-viewer\-\_\-keyboard}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf g\-\_\-viewer\-\_\-keyboard} (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{ch, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\label{viewer_8cc_a790c08dcadb30f44ffb819d4b789d45b}
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Init().
+
+\index{viewer.\-cc@{viewer.\-cc}!g\-\_\-viewer\-\_\-motion@{g\-\_\-viewer\-\_\-motion}}
+\index{g\-\_\-viewer\-\_\-motion@{g\-\_\-viewer\-\_\-motion}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{g\-\_\-viewer\-\_\-motion}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf g\-\_\-viewer\-\_\-motion} (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\label{viewer_8cc_afbdb9d6faa6827cc88cf9bd55570fff5}
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Init().
+
+\index{viewer.\-cc@{viewer.\-cc}!g\-\_\-viewer\-\_\-mouse@{g\-\_\-viewer\-\_\-mouse}}
+\index{g\-\_\-viewer\-\_\-mouse@{g\-\_\-viewer\-\_\-mouse}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{g\-\_\-viewer\-\_\-mouse}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf g\-\_\-viewer\-\_\-mouse} (
+\begin{DoxyParamCaption}
+\item[{int}]{button, }
+\item[{int}]{state, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\label{viewer_8cc_a4372edb3aa223febd14fd100985b50c7}
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Init().
+
+\index{viewer.\-cc@{viewer.\-cc}!g\-\_\-viewer\-\_\-render@{g\-\_\-viewer\-\_\-render}}
+\index{g\-\_\-viewer\-\_\-render@{g\-\_\-viewer\-\_\-render}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{g\-\_\-viewer\-\_\-render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf g\-\_\-viewer\-\_\-render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{viewer_8cc_abd69abb9c9c8967b65f045d0ca59282f}
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Init().
+
+\index{viewer.\-cc@{viewer.\-cc}!g\-\_\-viewer\-\_\-reshape@{g\-\_\-viewer\-\_\-reshape}}
+\index{g\-\_\-viewer\-\_\-reshape@{g\-\_\-viewer\-\_\-reshape}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{g\-\_\-viewer\-\_\-reshape}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf g\-\_\-viewer\-\_\-reshape} (
+\begin{DoxyParamCaption}
+\item[{int}]{w, }
+\item[{int}]{h}
+\end{DoxyParamCaption}
+)}\label{viewer_8cc_a0c64a7af1e7ab6f86906b00d78398332}
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Init().
+
+\index{viewer.\-cc@{viewer.\-cc}!\-Init\-Viewer\-Window@{\-Init\-Viewer\-Window}}
+\index{\-Init\-Viewer\-Window@{\-Init\-Viewer\-Window}!viewer.cc@{viewer.\-cc}}
+\subsubsection[{\-Init\-Viewer\-Window}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Init\-Viewer\-Window} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{viewer_8cc_aec3921a165e1998b08a785df447510f6}
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Init().
+

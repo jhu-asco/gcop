@@ -1,0 +1,57 @@
+\section{gcop\-:\-:\-Chain \-Class \-Reference}
+\label{classgcop_1_1Chain}\index{gcop\-::\-Chain@{gcop\-::\-Chain}}
+
+
+{\ttfamily \#include $<$chain.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Chain\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{classgcop_1_1Chain__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Chain\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Chain__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Chain} (int {\bf nb}=4, bool {\bf fixed}=false)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A quadrotor dynamical model.
+
+\-The state is $ \bf x = (R, x, \omega, v) $ where $ (R,x)\in SO(3)\times\mathbb{R}^3$ is the pose, and the controls are $ \bm u = (u_1,u_2,u_3,u_4)$ correspond to torques around the body and a vertical lift force.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Chain@{gcop\-::\-Chain}!\-Chain@{\-Chain}}
+\index{\-Chain@{\-Chain}!gcop::Chain@{gcop\-::\-Chain}}
+\subsubsection[{\-Chain}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Chain\-::\-Chain} (
+\begin{DoxyParamCaption}
+\item[{int}]{nb = {\ttfamily 4}, }
+\item[{bool}]{fixed = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Chain_a774ae245f0b1b1f2ea818bf39f3d89a7}
+
+
+\-References gcop\-::\-Mbs\-::basetype, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::bnd, gcop\-::\-Mbs\-State\-::dr, gcop\-::\-Mbs\-::\-F\-I\-X\-E\-D\-B\-A\-S\-E, gcop\-::\-Mbs\-::joints, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::lb, gcop\-::\-Mbs\-::links, gcop\-::\-Mbs\-::pis, gcop\-::\-Mbs\-State\-::r, gcop\-::\-S\-E3\-::rpyxyz2g(), gcop\-::\-Mbs\-::se3, gcop\-::\-System$<$ Mbs\-State $>$\-::\-U, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::ub, and gcop\-::\-System$<$ Mbs\-State $>$\-::\-X.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf chain.\-h}\item 
+lib/systems/{\bf chain.\-cc}\end{DoxyCompactItemize}

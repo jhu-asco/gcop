@@ -1,0 +1,109 @@
+\section{gcop\-:\-:\-Plot\-View \-Class \-Reference}
+\label{classgcop_1_1PlotView}\index{gcop\-::\-Plot\-View@{gcop\-::\-Plot\-View}}
+
+
+{\ttfamily \#include $<$plotview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Plot\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=126pt]{classgcop_1_1PlotView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Plot\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=126pt]{classgcop_1_1PlotView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Plot\-View} (const char $\ast${\bf name}=0, {\bf \-Matrix4d} $\ast$g=0)
+\item 
+virtual {\bf $\sim$\-Plot\-View} ()
+\item 
+virtual void {\bf \-Render} ()
+\item 
+void {\bf \-Set\-Color} (const double {\bf rgba}[4])
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf rgba} [4]
+\begin{DoxyCompactList}\small\item\em color \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Discrete \-Dynamical plot view. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Plot\-View@{gcop\-::\-Plot\-View}!\-Plot\-View@{\-Plot\-View}}
+\index{\-Plot\-View@{\-Plot\-View}!gcop::PlotView@{gcop\-::\-Plot\-View}}
+\subsubsection[{\-Plot\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-::\-Plot\-View\-::\-Plot\-View} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name = {\ttfamily 0}, }
+\item[{{\bf \-Matrix4d} $\ast$}]{g = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1PlotView_aac5e0a1f4c46df07de0d0db78a6dda2b}
+\-Create a view for a single state s 
+\begin{DoxyParams}{\-Parameters}
+{\em name} & name \\
+\hline
+{\em s} & rigid body state \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Plot\-View@{gcop\-::\-Plot\-View}!$\sim$\-Plot\-View@{$\sim$\-Plot\-View}}
+\index{$\sim$\-Plot\-View@{$\sim$\-Plot\-View}!gcop::PlotView@{gcop\-::\-Plot\-View}}
+\subsubsection[{$\sim$\-Plot\-View}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf gcop\-::\-Plot\-View\-::$\sim$\-Plot\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1PlotView_a02b4455be9677aa23b779651b7b33840}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Plot\-View@{gcop\-::\-Plot\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::PlotView@{gcop\-::\-Plot\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf gcop\-::\-Plot\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1PlotView_a0de763ec2addc2b9f78a2cc9fb763a00}
+\-Render a view\-: all subclasses should provide this method 
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63}.
+
+\index{gcop\-::\-Plot\-View@{gcop\-::\-Plot\-View}!\-Set\-Color@{\-Set\-Color}}
+\index{\-Set\-Color@{\-Set\-Color}!gcop::PlotView@{gcop\-::\-Plot\-View}}
+\subsubsection[{\-Set\-Color}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-::\-Plot\-View\-::\-Set\-Color} (
+\begin{DoxyParamCaption}
+\item[{const double}]{rgba[4]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1PlotView_a0d29087cd41db3294227e8cbd8346ed7}
+\-Set the rgb color of the trajectory 
+\begin{DoxyParams}{\-Parameters}
+{\em rgb} & rgb vector \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Plot\-View@{gcop\-::\-Plot\-View}!rgba@{rgba}}
+\index{rgba@{rgba}!gcop::PlotView@{gcop\-::\-Plot\-View}}
+\subsubsection[{rgba}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Plot\-View\-::rgba}[4]}\label{classgcop_1_1PlotView_a842271273659c394c958b1f3e82cb1d4}
+
+
+color 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf plotview.\-h}\end{DoxyCompactItemize}

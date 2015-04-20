@@ -1,0 +1,181 @@
+\section{gcop\-:\-:\-Body3d\-Track\-View \-Class \-Reference}
+\label{classgcop_1_1Body3dTrackView}\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}}
+
+
+{\ttfamily \#include $<$body3dtrackview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Body3d\-Track\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classgcop_1_1Body3dTrackView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body3d\-Track\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Body3dTrackView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body3d\-Track\-View} (const {\bf \-Body3d\-Track} \&{\bf pg})
+\item 
+virtual {\bf $\sim$\-Body3d\-Track\-View} ()
+\item 
+virtual void {\bf \-Render} ()
+\item 
+virtual bool {\bf \-Render\-Frame} (int i)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Body3d\-Track} \& {\bf pg}
+\item 
+float {\bf rgba} [4]
+\item 
+bool {\bf draw\-Landmarks}
+\item 
+bool {\bf draw\-Forces}
+\item 
+double {\bf force\-Scale}
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf qobj}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Rigid body view. \-Supports rendering either a single state or a whole trajectory of states. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}!\-Body3d\-Track\-View@{\-Body3d\-Track\-View}}
+\index{\-Body3d\-Track\-View@{\-Body3d\-Track\-View}!gcop::Body3dTrackView@{gcop\-::\-Body3d\-Track\-View}}
+\subsubsection[{\-Body3d\-Track\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body3d\-Track\-View\-::\-Body3d\-Track\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Body3d\-Track} \&}]{pg}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3dTrackView_a4f8004cf13011ae9652bbe18955edf7f}
+\-Create a view for a single state s 
+\begin{DoxyParams}{\-Parameters}
+{\em name} & name \\
+\hline
+{\em s} & rigid body state \\
+\hline
+\end{DoxyParams}
+
+
+\-References draw\-Forces, draw\-Landmarks, force\-Scale, qobj, and rgba.
+
+\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}!$\sim$\-Body3d\-Track\-View@{$\sim$\-Body3d\-Track\-View}}
+\index{$\sim$\-Body3d\-Track\-View@{$\sim$\-Body3d\-Track\-View}!gcop::Body3dTrackView@{gcop\-::\-Body3d\-Track\-View}}
+\subsubsection[{$\sim$\-Body3d\-Track\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body3d\-Track\-View\-::$\sim$\-Body3d\-Track\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3dTrackView_a3953f2515fb5de4d0a3590b698df1be2}
+
+
+\-References qobj.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::Body3dTrackView@{gcop\-::\-Body3d\-Track\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body3d\-Track\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3dTrackView_afa875c9e7c1907c8d3088e6b3e6364d8}
+\-Render a view\-: all subclasses should provide this method 
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63}.
+
+
+
+\-References \-Render\-Frame().
+
+\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}!\-Render\-Frame@{\-Render\-Frame}}
+\index{\-Render\-Frame@{\-Render\-Frame}!gcop::Body3dTrackView@{gcop\-::\-Body3d\-Track\-View}}
+\subsubsection[{\-Render\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Body3d\-Track\-View\-::\-Render\-Frame} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3dTrackView_ab7fd0accbbefb89b971cae1fed1c6545}
+\-Render a view\-: all subclasses should provide this method 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & frame \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+return true if more frames should be rendered 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_ad6c3f17a59725948f68817398296f835}.
+
+
+
+\-References gcop\-::\-Viewer\-::\-Draw\-Arrow(), draw\-Forces, draw\-Landmarks, gcop\-::\-Body3d\-Track\-::extforce, force\-Scale, gcop\-::\-Body3d\-Track\-::\-Js, gcop\-::\-Body3d\-Track\-::ls, gcop\-::\-Body3d\-Track\-::observed, gcop\-::\-Body3d\-Track\-::p, pg, gcop\-::\-Body3d\-Track\-::pis, gcop\-::\-Body3d\-Track\-::pr, qobj, gcop\-::\-Body3d\-Track\-::r, rgba, gcop\-::\-Viewer\-::\-Set\-Color(), gcop\-::\-Body3d\-Track\-::us, gcop\-::\-Body3d\-Track\-::w, and gcop\-::\-Body3d\-Track\-::xs.
+
+
+
+\-Referenced by \-Render().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}!draw\-Forces@{draw\-Forces}}
+\index{draw\-Forces@{draw\-Forces}!gcop::Body3dTrackView@{gcop\-::\-Body3d\-Track\-View}}
+\subsubsection[{draw\-Forces}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body3d\-Track\-View\-::draw\-Forces}}\label{classgcop_1_1Body3dTrackView_a44c58e25d301ef2212fba1823fc8fbbb}
+
+
+\-Referenced by \-Body3d\-Track\-View(), and \-Render\-Frame().
+
+\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}!draw\-Landmarks@{draw\-Landmarks}}
+\index{draw\-Landmarks@{draw\-Landmarks}!gcop::Body3dTrackView@{gcop\-::\-Body3d\-Track\-View}}
+\subsubsection[{draw\-Landmarks}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body3d\-Track\-View\-::draw\-Landmarks}}\label{classgcop_1_1Body3dTrackView_a636ff98c2ac42d2e889449d9dde819c6}
+
+
+\-Referenced by \-Body3d\-Track\-View(), and \-Render\-Frame().
+
+\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}!force\-Scale@{force\-Scale}}
+\index{force\-Scale@{force\-Scale}!gcop::Body3dTrackView@{gcop\-::\-Body3d\-Track\-View}}
+\subsubsection[{force\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Body3d\-Track\-View\-::force\-Scale}}\label{classgcop_1_1Body3dTrackView_a8bb5c6bb644a42dfe3a6832376d271ef}
+
+
+\-Referenced by \-Body3d\-Track\-View(), and \-Render\-Frame().
+
+\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}!pg@{pg}}
+\index{pg@{pg}!gcop::Body3dTrackView@{gcop\-::\-Body3d\-Track\-View}}
+\subsubsection[{pg}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Body3d\-Track}\& {\bf gcop\-::\-Body3d\-Track\-View\-::pg}}\label{classgcop_1_1Body3dTrackView_a78f0e948a5715faf8c1728968b8c5dde}
+
+
+\-Referenced by \-Render\-Frame().
+
+\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}!qobj@{qobj}}
+\index{qobj@{qobj}!gcop::Body3dTrackView@{gcop\-::\-Body3d\-Track\-View}}
+\subsubsection[{qobj}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Body3d\-Track\-View\-::qobj}}\label{classgcop_1_1Body3dTrackView_a068a6a91fde2c69b5a003be9bcc71673}
+
+
+\-Referenced by \-Body3d\-Track\-View(), \-Render\-Frame(), and $\sim$\-Body3d\-Track\-View().
+
+\index{gcop\-::\-Body3d\-Track\-View@{gcop\-::\-Body3d\-Track\-View}!rgba@{rgba}}
+\index{rgba@{rgba}!gcop::Body3dTrackView@{gcop\-::\-Body3d\-Track\-View}}
+\subsubsection[{rgba}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Body3d\-Track\-View\-::rgba}[4]}\label{classgcop_1_1Body3dTrackView_a980d3f2a3f269a7a763b72e74c4655e9}
+
+
+\-Referenced by \-Body3d\-Track\-View(), and \-Render\-Frame().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf body3dtrackview.\-h}\item 
+lib/views/{\bf body3dtrackview.\-cc}\end{DoxyCompactItemize}

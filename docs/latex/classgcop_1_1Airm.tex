@@ -1,0 +1,117 @@
+\section{gcop\-:\-:\-Airm \-Class \-Reference}
+\label{classgcop_1_1Airm}\index{gcop\-::\-Airm@{gcop\-::\-Airm}}
+
+
+{\ttfamily \#include $<$airm.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Airm\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{classgcop_1_1Airm__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Airm\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Airm__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Airm} ()
+\item 
+void {\bf \-Force} (\-Vector\-Xd \&f, double {\bf t}, const {\bf \-Mbs\-State} \&{\bf x}, const \-Vector\-Xd \&u, \-Matrix\-Xd $\ast$\-A=0, \-Matrix\-Xd $\ast$\-B=0)
+\item 
+{\bf \-Airm} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Hrotor} {\bf hrotor}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A quadrotor dynamical model.
+
+\-The state is $ \bf x = (R, x, \omega, v) $ where $ (R,x)\in SO(3)\times\mathbb{R}^3$ is the pose, and the controls are $ \bm u = (u_1,u_2,u_3,u_4)$ correspond to torques around the body and a vertical lift force.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Airm@{gcop\-::\-Airm}!\-Airm@{\-Airm}}
+\index{\-Airm@{\-Airm}!gcop::Airm@{gcop\-::\-Airm}}
+\subsubsection[{\-Airm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Airm\-::\-Airm} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Airm_a8cc058cc9fb7131ae7333d7a5e2eebf2}
+
+
+\-References gcop\-::\-Mbs\-::\-Init(), gcop\-::\-Mbs\-::joints, gcop\-::\-Mbs\-::links, gcop\-::\-Mbs\-::pis, gcop\-::\-S\-E3\-::rpyxyz2g(), and gcop\-::\-Mbs\-::se3.
+
+\index{gcop\-::\-Airm@{gcop\-::\-Airm}!\-Airm@{\-Airm}}
+\index{\-Airm@{\-Airm}!gcop::Airm@{gcop\-::\-Airm}}
+\subsubsection[{\-Airm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-::\-Airm\-::\-Airm} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Airm_a287b94f85a3f4c3c0cf19cabbb42e1a2}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Airm@{gcop\-::\-Airm}!\-Force@{\-Force}}
+\index{\-Force@{\-Force}!gcop::Airm@{gcop\-::\-Airm}}
+\subsubsection[{\-Force}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Airm\-::\-Force} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{f, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{x, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{\-Matrix\-Xd $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-B = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Airm_ae0fdf451144300d1c55bd4e5aa642bfe}
+\-Total resulting force on the system from external (e.\-g. gravity) and internal (control) inputs 
+\begin{DoxyParams}{\-Parameters}
+{\em f} & total force f(x,u,t) \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+{\em u} & controls \\
+\hline
+{\em \-A} & jacobian \-Dxf \\
+\hline
+{\em \-B} & jacobian \-Duf \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Mbs} \doxyref{}{p.}{classgcop_1_1Mbs_aa18ed20df059e7953d68c8f44eaf3c22}.
+
+
+
+\-References gcop\-::\-Mbs\-State\-::dr.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Airm@{gcop\-::\-Airm}!hrotor@{hrotor}}
+\index{hrotor@{hrotor}!gcop::Airm@{gcop\-::\-Airm}}
+\subsubsection[{hrotor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Hrotor} {\bf gcop\-::\-Airm\-::hrotor}}\label{classgcop_1_1Airm_aafc7edd9039287bbbdaa4a77118d3be1}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf airm.\-h}\item 
+lib/systems/{\bf qrotorarm.\-h}\item 
+lib/systems/{\bf airm.\-cc}\end{DoxyCompactItemize}

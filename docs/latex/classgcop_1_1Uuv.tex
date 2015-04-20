@@ -1,0 +1,226 @@
+\section{gcop\-:\-:\-Uuv$<$ c $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Uuv}\index{gcop\-::\-Uuv$<$ c $>$@{gcop\-::\-Uuv$<$ c $>$}}
+
+
+{\ttfamily \#include $<$uuv.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Uuv$<$ c $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classgcop_1_1Uuv__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Uuv$<$ c $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Uuv__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Uuv} ()
+\item 
+virtual {\bf $\sim$\-Uuv} ()
+\item 
+double {\bf \-Step} ({\bf \-Uuv\-State} \&xb, double {\bf t}, const {\bf \-Uuv\-State} \&xa, const \-Vectorcd \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix12d} $\ast$\-A=0, \-Matrix12xcd $\ast${\bf \-B}=0, \-Matrix12\-Xd $\ast$\-C=0)
+\item 
+double {\bf \-Symp\-Step} (double {\bf t}, {\bf \-Uuv\-State} \&xb, const {\bf \-Uuv\-State} \&xa, const \-Vectorcd \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix12d} $\ast$\-A=0, \-Matrix12xcd $\ast${\bf \-B}=0, \-Matrix12\-Xd $\ast$\-C=0)
+\item 
+double {\bf \-Euler\-Step} (double {\bf t}, {\bf \-Uuv\-State} \&xb, const {\bf \-Uuv\-State} \&xa, const \-Vectorcd \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix12d} $\ast$\-A=0, \-Matrix12xcd $\ast${\bf \-B}=0, \-Matrix12\-Xd $\ast$\-C=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf \-Compute} ({\bf \-Matrix6d} \&{\bf \-I}, double m, const \-Vector3d \&{\bf ds})
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Matrix6d} {\bf \-I}
+\begin{DoxyCompactList}\small\item\em 6x6 inertia matrix \end{DoxyCompactList}\item 
+{\bf \-Vector6d} {\bf d}
+\begin{DoxyCompactList}\small\item\em 6x1 decoupled quadratic drag terms \end{DoxyCompactList}\item 
+\-Vector3d {\bf b}
+\begin{DoxyCompactList}\small\item\em center of boyancy \end{DoxyCompactList}\item 
+\-Vector3d {\bf fp}
+\begin{DoxyCompactList}\small\item\em constant position force in spatial frame (e.\-g. due to gravity) \end{DoxyCompactList}\item 
+\-Matrix6xcd {\bf \-B}
+\begin{DoxyCompactList}\small\item\em control input transformation \end{DoxyCompactList}\item 
+bool {\bf symp}
+\begin{DoxyCompactList}\small\item\em symplectic? \end{DoxyCompactList}\item 
+string {\bf name}
+\begin{DoxyCompactList}\small\item\em \-Unique name of the body. \end{DoxyCompactList}\item 
+\-Vector3d {\bf ds}
+\begin{DoxyCompactList}\small\item\em body dimensions (currently used only for visualization) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int c = 6$>$class gcop\-::\-Uuv$<$ c $>$}
+
+\-An underwater/sufrace vehicle system modeled as a single rigid body on \-S\-E(3)
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!\-Uuv@{\-Uuv}}
+\index{\-Uuv@{\-Uuv}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{\-Uuv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf \-Uuv} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Uuv_ad0500ddef6b7de5ab53479e9fa808ccd}
+
+
+\-References gcop\-::\-Uuv$<$ c $>$\-::\-Compute(), gcop\-::\-Uuv$<$ c $>$\-::ds, and gcop\-::\-Uuv$<$ c $>$\-::\-I.
+
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!$\sim$\-Uuv@{$\sim$\-Uuv}}
+\index{$\sim$\-Uuv@{$\sim$\-Uuv}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{$\sim$\-Uuv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Uuv}$<$ c $>$\-::$\sim${\bf \-Uuv} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Uuv_aaba9afa718b3e7dca129d0e3acdf9b63}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!\-Compute@{\-Compute}}
+\index{\-Compute@{\-Compute}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{\-Compute}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf \-Compute} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-I, }
+\item[{double}]{m, }
+\item[{const \-Vector3d \&}]{ds}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Uuv_a106b378f7ef1096914a1eb72948ba6e3}
+
+
+\-Referenced by gcop\-::\-Uuv$<$ c $>$\-::\-Uuv().
+
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!\-Euler\-Step@{\-Euler\-Step}}
+\index{\-Euler\-Step@{\-Euler\-Step}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{\-Euler\-Step}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ double {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf \-Euler\-Step} (
+\begin{DoxyParamCaption}
+\item[{double}]{t, }
+\item[{{\bf \-Uuv\-State} \&}]{xb, }
+\item[{const {\bf \-Uuv\-State} \&}]{xa, }
+\item[{const \-Vectorcd \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix12xcd $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{\-Matrix12\-Xd $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Uuv_a62e640d95310914631940719dd47aca6}
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ double {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf \-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Uuv\-State} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Uuv\-State} \&}]{xa, }
+\item[{const \-Vectorcd \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix12xcd $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{\-Matrix12\-Xd $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Uuv_a803a7863500af817dd5465cbf7e55bb5}
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!\-Symp\-Step@{\-Symp\-Step}}
+\index{\-Symp\-Step@{\-Symp\-Step}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{\-Symp\-Step}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ double {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf \-Symp\-Step} (
+\begin{DoxyParamCaption}
+\item[{double}]{t, }
+\item[{{\bf \-Uuv\-State} \&}]{xb, }
+\item[{const {\bf \-Uuv\-State} \&}]{xa, }
+\item[{const \-Vectorcd \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix12xcd $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{\-Matrix12\-Xd $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Uuv_ad4ea40955098a071734a82a9f8e7b66c}
+
+
+\-References gcop\-::\-S\-E3\-::ad(), gcop\-::\-S\-E3\-::adt(), gcop\-::\-S\-E3\-::cay(), gcop\-::\-Uuv\-State\-::g, gcop\-::\-S\-E3\-::\-Instance(), gcop\-::\-S\-E3\-::tln(), and gcop\-::\-Uuv\-State\-::v.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!b@{b}}
+\index{b@{b}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{b}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Vector3d {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf b}}\label{classgcop_1_1Uuv_a161cadad929d10420e2ff78334680e5a}
+
+
+center of boyancy 
+
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!\-B@{\-B}}
+\index{\-B@{\-B}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{\-B}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Matrix6xcd {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf \-B}}\label{classgcop_1_1Uuv_a9dad8c4c602ac3d4ea03839446859f4c}
+
+
+control input transformation 
+
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!d@{d}}
+\index{d@{d}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ {\bf \-Vector6d} {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf d}}\label{classgcop_1_1Uuv_a9b17c2a7df9783c498e41d249866c384}
+
+
+6x1 decoupled quadratic drag terms 
+
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!ds@{ds}}
+\index{ds@{ds}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{ds}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Vector3d {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf ds}}\label{classgcop_1_1Uuv_ab86e766a32432302c8aab3ba3b18f1e9}
+
+
+body dimensions (currently used only for visualization) 
+
+
+
+\-Referenced by gcop\-::\-Uuv$<$ c $>$\-::\-Uuv().
+
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!fp@{fp}}
+\index{fp@{fp}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{fp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Vector3d {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf fp}}\label{classgcop_1_1Uuv_a6a9263aa6c216de91d055604ca0f4a09}
+
+
+constant position force in spatial frame (e.\-g. due to gravity) 
+
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!\-I@{\-I}}
+\index{\-I@{\-I}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{\-I}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ {\bf \-Matrix6d} {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf \-I}}\label{classgcop_1_1Uuv_a06da227c23aa28ec321ae81a232845c2}
+
+
+6x6 inertia matrix 
+
+
+
+\-Referenced by gcop\-::\-Uuv$<$ c $>$\-::\-Uuv().
+
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!name@{name}}
+\index{name@{name}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ string {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf name}}\label{classgcop_1_1Uuv_a5743bda149baa33d51d35c0ac0571e63}
+
+
+\-Unique name of the body. 
+
+\index{gcop\-::\-Uuv@{gcop\-::\-Uuv}!symp@{symp}}
+\index{symp@{symp}!gcop::Uuv@{gcop\-::\-Uuv}}
+\subsubsection[{symp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ bool {\bf gcop\-::\-Uuv}$<$ c $>$\-::{\bf symp}}\label{classgcop_1_1Uuv_a76e39a8f66aa5a9fa3020be199e31910}
+
+
+symplectic? 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf uuv.\-h}\end{DoxyCompactItemize}

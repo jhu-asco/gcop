@@ -1,0 +1,173 @@
+\section{gcop\-:\-:\-Mbs\-Controller \-Class \-Reference}
+\label{classgcop_1_1MbsController}\index{gcop\-::\-Mbs\-Controller@{gcop\-::\-Mbs\-Controller}}
+
+
+{\ttfamily \#include $<$mbscontroller.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Mbs\-Controller\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{classgcop_1_1MbsController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Mbs\-Controller\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1MbsController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Mbs\-Controller} (const {\bf \-Mbs} \&{\bf sys}, {\bf \-Mbs\-State} $\ast${\bf xd}=0, \-Vector\-Xd $\ast${\bf ad}=0)
+\item 
+virtual void {\bf \-Set} (\-Vector\-Xd \&u, double t, const {\bf \-Mbs\-State} \&x)
+\item 
+virtual {\bf $\sim$\-Mbs\-Controller} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Mbs} \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em multi-\/body system \end{DoxyCompactList}\item 
+{\bf \-Mbs\-State} $\ast$ {\bf xd}
+\begin{DoxyCompactList}\small\item\em desired state (origin by default) \end{DoxyCompactList}\item 
+\-Vector\-Xd $\ast$ {\bf ad}
+\begin{DoxyCompactList}\small\item\em desired acceleration (zero by default) \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf \-Kp}
+\begin{DoxyCompactList}\small\item\em proportional terms (ones by default) \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf \-Kd}
+\begin{DoxyCompactList}\small\item\em derivative terms (ones by default) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Mbs\-Controller@{gcop\-::\-Mbs\-Controller}!\-Mbs\-Controller@{\-Mbs\-Controller}}
+\index{\-Mbs\-Controller@{\-Mbs\-Controller}!gcop::MbsController@{gcop\-::\-Mbs\-Controller}}
+\subsubsection[{\-Mbs\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mbs\-Controller\-::\-Mbs\-Controller} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Mbs} \&}]{sys, }
+\item[{{\bf \-Mbs\-State} $\ast$}]{xd = {\ttfamily 0}, }
+\item[{\-Vector\-Xd $\ast$}]{ad = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1MbsController_aecef764add31c277c2888180b3c03edb}
+\-M\-B\-S \-P\-D controller
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & multi-\/body system \\
+\hline
+{\em xd} & desired state (optional, set to origin by default) \\
+\hline
+{\em ad} & desired acceleration (optional, set to zero by default) \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Kd, and \-Kp.
+
+\index{gcop\-::\-Mbs\-Controller@{gcop\-::\-Mbs\-Controller}!$\sim$\-Mbs\-Controller@{$\sim$\-Mbs\-Controller}}
+\index{$\sim$\-Mbs\-Controller@{$\sim$\-Mbs\-Controller}!gcop::MbsController@{gcop\-::\-Mbs\-Controller}}
+\subsubsection[{$\sim$\-Mbs\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mbs\-Controller\-::$\sim$\-Mbs\-Controller} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1MbsController_aa7ddbc176182f56ea4c72c003c005c08}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Mbs\-Controller@{gcop\-::\-Mbs\-Controller}!\-Set@{\-Set}}
+\index{\-Set@{\-Set}!gcop::MbsController@{gcop\-::\-Mbs\-Controller}}
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-Controller\-::\-Set} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{u, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1MbsController_a0065ff60bcfaa6f378e97809d6491a4b}
+\-Feedback controller of the form u = k(t, x) 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & controls \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf gcop\-::\-Controller$<$ Mbs\-State, Vector\-Xd $>$} \doxyref{}{p.}{classgcop_1_1Controller_a306fbf6d65ab78e13537bb92b330fc35}.
+
+
+
+\-References ad, gcop\-::\-Mbs\-::\-Bias(), gcop\-::\-Mbs\-State\-::dr, gcop\-::\-Mbs\-::fixed, gcop\-::\-Mbs\-State\-::gs, gcop\-::\-S\-E3\-::\-Instance(), gcop\-::\-S\-E3\-::inv(), \-Kd, \-Kp, gcop\-::\-S\-E3\-::log(), gcop\-::\-Mbs\-::\-Mass(), gcop\-::\-Mbs\-::nb, gcop\-::\-Mbs\-State\-::r, sys, gcop\-::\-Mbs\-State\-::vs, and xd.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Mbs\-Controller@{gcop\-::\-Mbs\-Controller}!ad@{ad}}
+\index{ad@{ad}!gcop::MbsController@{gcop\-::\-Mbs\-Controller}}
+\subsubsection[{ad}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd$\ast$ {\bf gcop\-::\-Mbs\-Controller\-::ad}}\label{classgcop_1_1MbsController_a2810a87e10dcc0e61cb8bb5634bb0fc6}
+
+
+desired acceleration (zero by default) 
+
+
+
+\-Referenced by \-Set().
+
+\index{gcop\-::\-Mbs\-Controller@{gcop\-::\-Mbs\-Controller}!\-Kd@{\-Kd}}
+\index{\-Kd@{\-Kd}!gcop::MbsController@{gcop\-::\-Mbs\-Controller}}
+\subsubsection[{\-Kd}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-Controller\-::\-Kd}}\label{classgcop_1_1MbsController_a275f84c635f0c0b817d851ff71261422}
+
+
+derivative terms (ones by default) 
+
+
+
+\-Referenced by \-Mbs\-Controller(), and \-Set().
+
+\index{gcop\-::\-Mbs\-Controller@{gcop\-::\-Mbs\-Controller}!\-Kp@{\-Kp}}
+\index{\-Kp@{\-Kp}!gcop::MbsController@{gcop\-::\-Mbs\-Controller}}
+\subsubsection[{\-Kp}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-Controller\-::\-Kp}}\label{classgcop_1_1MbsController_a0840b2c2f715ed8a1010b54271a2f158}
+
+
+proportional terms (ones by default) 
+
+
+
+\-Referenced by \-Mbs\-Controller(), and \-Set().
+
+\index{gcop\-::\-Mbs\-Controller@{gcop\-::\-Mbs\-Controller}!sys@{sys}}
+\index{sys@{sys}!gcop::MbsController@{gcop\-::\-Mbs\-Controller}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Mbs}\& {\bf gcop\-::\-Mbs\-Controller\-::sys}}\label{classgcop_1_1MbsController_a4e450061d50f8f3aac134405b2992f76}
+
+
+multi-\/body system 
+
+
+
+\-Referenced by \-Set().
+
+\index{gcop\-::\-Mbs\-Controller@{gcop\-::\-Mbs\-Controller}!xd@{xd}}
+\index{xd@{xd}!gcop::MbsController@{gcop\-::\-Mbs\-Controller}}
+\subsubsection[{xd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mbs\-State}$\ast$ {\bf gcop\-::\-Mbs\-Controller\-::xd}}\label{classgcop_1_1MbsController_a08fa0e9c51995877e70ee49ac52dcfc6}
+
+
+desired state (origin by default) 
+
+
+
+\-Referenced by \-Set().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf mbscontroller.\-h}\item 
+lib/algos/{\bf mbscontroller.\-cc}\end{DoxyCompactItemize}

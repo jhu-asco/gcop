@@ -1,0 +1,147 @@
+\section{gcop\-:\-:\-Point3d\-Gps$<$ \-\_\-nu, \-\_\-np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Point3dGps}\index{gcop\-::\-Point3d\-Gps$<$ \-\_\-nu, \-\_\-np $>$@{gcop\-::\-Point3d\-Gps$<$ \-\_\-nu, \-\_\-np $>$}}
+
+
+{\ttfamily \#include $<$point3dgps.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Point3d\-Gps$<$ \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{classgcop_1_1Point3dGps__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Point3d\-Gps$<$ \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{classgcop_1_1Point3dGps__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, 3, 6 $>$ {\bf \-Matrix36d}
+\item 
+typedef \-Matrix$<$ double, 3, \-\_\-nu $>$ {\bf \-Matrixrcd}
+\item 
+typedef \-Matrix$<$ double, 3, \-\_\-np $>$ {\bf \-Matrixrmd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Point3d\-Gps} ()
+\item 
+bool {\bf operator()} (\-Vector3d \&y, double t, const {\bf \-Point3d\-State} \&x, const {\bf \-Vectorcd} \&u, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrix36d} $\ast$dydx=0, {\bf \-Matrixrcd} $\ast$dydu=0, {\bf \-Matrixrmd} $\ast$dydp=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf sxy}
+\begin{DoxyCompactList}\small\item\em x-\/y position standard deviation \end{DoxyCompactList}\item 
+double {\bf sz}
+\begin{DoxyCompactList}\small\item\em altitute stdev \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int \-\_\-nu = 3, int \-\_\-np = \-Dynamic$>$class gcop\-::\-Point3d\-Gps$<$ \-\_\-nu, \-\_\-np $>$}
+
+\-General sensor model
+
+\-Subclasses should provide implementation for the sensor function ()
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Point3d\-Gps@{gcop\-::\-Point3d\-Gps}!\-Matrix36d@{\-Matrix36d}}
+\index{\-Matrix36d@{\-Matrix36d}!gcop::Point3dGps@{gcop\-::\-Point3d\-Gps}}
+\subsubsection[{\-Matrix36d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 3, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 3, 6$>$ {\bf gcop\-::\-Point3d\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrix36d}}\label{classgcop_1_1Point3dGps_a6767fe73529022e1d1e6d33c6214d1c7}
+\index{gcop\-::\-Point3d\-Gps@{gcop\-::\-Point3d\-Gps}!\-Matrixrcd@{\-Matrixrcd}}
+\index{\-Matrixrcd@{\-Matrixrcd}!gcop::Point3dGps@{gcop\-::\-Point3d\-Gps}}
+\subsubsection[{\-Matrixrcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 3, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 3, \-\_\-nu$>$ {\bf gcop\-::\-Point3d\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixrcd}}\label{classgcop_1_1Point3dGps_a04d0c6cc0810a448fb205a47ca6c5ead}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor$<$ Point3d\-State, 6, \-\_\-nu, \-\_\-np, Vector3d, 3 $>$} \doxyref{}{p.}{classgcop_1_1Sensor_ac9ec9eae9de85f0374aaf053a9327d46}.
+
+\index{gcop\-::\-Point3d\-Gps@{gcop\-::\-Point3d\-Gps}!\-Matrixrmd@{\-Matrixrmd}}
+\index{\-Matrixrmd@{\-Matrixrmd}!gcop::Point3dGps@{gcop\-::\-Point3d\-Gps}}
+\subsubsection[{\-Matrixrmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 3, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 3, \-\_\-np$>$ {\bf gcop\-::\-Point3d\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixrmd}}\label{classgcop_1_1Point3dGps_a286e13ba2887d222d88f7a6bb5c13a12}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor$<$ Point3d\-State, 6, \-\_\-nu, \-\_\-np, Vector3d, 3 $>$} \doxyref{}{p.}{classgcop_1_1Sensor_a312f65bff49beb267bde7792a5a51447}.
+
+\index{gcop\-::\-Point3d\-Gps@{gcop\-::\-Point3d\-Gps}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Point3dGps@{gcop\-::\-Point3d\-Gps}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 3, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Point3d\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Point3dGps_a5884c003361bc4828ffdea5b734d912c}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor$<$ Point3d\-State, 6, \-\_\-nu, \-\_\-np, Vector3d, 3 $>$} \doxyref{}{p.}{classgcop_1_1Sensor_aa6020c9508c5c144f02b31bac29423b0}.
+
+\index{gcop\-::\-Point3d\-Gps@{gcop\-::\-Point3d\-Gps}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::Point3dGps@{gcop\-::\-Point3d\-Gps}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 3, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Point3d\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1Point3dGps_ab97f50421af901ca2c3c879f36b99835}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor$<$ Point3d\-State, 6, \-\_\-nu, \-\_\-np, Vector3d, 3 $>$} \doxyref{}{p.}{classgcop_1_1Sensor_aaf2d4e9cc932ef866953ae710e2f8b7a}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Point3d\-Gps@{gcop\-::\-Point3d\-Gps}!\-Point3d\-Gps@{\-Point3d\-Gps}}
+\index{\-Point3d\-Gps@{\-Point3d\-Gps}!gcop::Point3dGps@{gcop\-::\-Point3d\-Gps}}
+\subsubsection[{\-Point3d\-Gps}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 3, int \-\_\-np = \-Dynamic$>$ {\bf gcop\-::\-Point3d\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Point3d\-Gps} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1Point3dGps_af940572f9a1e3fe9a613378dfd1d12c2}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Point3d\-Gps@{gcop\-::\-Point3d\-Gps}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::Point3dGps@{gcop\-::\-Point3d\-Gps}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 3, int \-\_\-np = \-Dynamic$>$ bool {\bf gcop\-::\-Point3d\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{\-Vector3d \&}]{y, }
+\item[{double}]{t, }
+\item[{const {\bf \-Point3d\-State} \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix36d} $\ast$}]{dydx = {\ttfamily 0}, }
+\item[{{\bf \-Matrixrcd} $\ast$}]{dydu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixrmd} $\ast$}]{dydp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1Point3dGps_a1bac8f52afa96f1abd02f8a80bc3fa5f}
+
+
+\-References gcop\-::\-Point3d\-State\-::q.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Point3d\-Gps@{gcop\-::\-Point3d\-Gps}!sxy@{sxy}}
+\index{sxy@{sxy}!gcop::Point3dGps@{gcop\-::\-Point3d\-Gps}}
+\subsubsection[{sxy}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 3, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Point3d\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf sxy}}\label{classgcop_1_1Point3dGps_a4b311a176e351e7b6bebb60e01703834}
+
+
+x-\/y position standard deviation 
+
+\index{gcop\-::\-Point3d\-Gps@{gcop\-::\-Point3d\-Gps}!sz@{sz}}
+\index{sz@{sz}!gcop::Point3dGps@{gcop\-::\-Point3d\-Gps}}
+\subsubsection[{sz}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 3, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Point3d\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf sz}}\label{classgcop_1_1Point3dGps_a59ce7e5bbffdd41097f07d427e942a0b}
+
+
+altitute stdev 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/sensors/{\bf point3dgps.\-h}\end{DoxyCompactItemize}

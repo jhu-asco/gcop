@@ -1,0 +1,217 @@
+\section{gcop\-:\-:\-Gmm$<$ \-\_\-n $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Gmm}\index{gcop\-::\-Gmm$<$ \-\_\-n $>$@{gcop\-::\-Gmm$<$ \-\_\-n $>$}}
+
+
+{\ttfamily \#include $<$gmm.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, \-\_\-n $>$ {\bf \-Matrixnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Gmm} (int n, int {\bf k}=1)
+\item 
+virtual {\bf $\sim$\-Gmm} ()
+\item 
+bool {\bf \-Update} ()
+\item 
+double {\bf \-L} (const {\bf \-Vectornd} \&x) const 
+\item 
+double {\bf \-Sample} ({\bf \-Vectornd} \&x)
+\item 
+void {\bf \-Init} (const {\bf \-Vectornd} \&xlb, const {\bf \-Vectornd} \&xub)
+\item 
+void {\bf \-Fit} (const vector$<$ pair$<$ {\bf \-Vectornd}, double $>$ $>$ \&xps, double a=1, int iter=50, const {\bf \-Matrixnd} $\ast$\-S=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf k}
+\begin{DoxyCompactList}\small\item\em number of mixture components \end{DoxyCompactList}\item 
+vector$<$ {\bf \-Normal}$<$ \-\_\-n $>$ $>$ {\bf ns}
+\begin{DoxyCompactList}\small\item\em normal distribution for each component \end{DoxyCompactList}\item 
+vector$<$ double $>$ {\bf ws}
+\begin{DoxyCompactList}\small\item\em component weights \end{DoxyCompactList}\item 
+vector$<$ double $>$ {\bf cdf}
+\begin{DoxyCompactList}\small\item\em \-C\-D\-F. \end{DoxyCompactList}\item 
+double {\bf tol}
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Vectornd} {\bf t2}
+\item 
+{\bf \-Matrixnd} {\bf t3}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int \-\_\-n = \-Dynamic$>$class gcop\-::\-Gmm$<$ \-\_\-n $>$}
+
+\-Gaussian mixture model 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, \-\_\-n$>$ {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1Gmm_a51292e2b47641b2b2d4ebd9f1e47296f}
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, 1$>$ {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Gmm_ac4251d57ea7947e0374381afbdc5939f}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!\-Gmm@{\-Gmm}}
+\index{\-Gmm@{\-Gmm}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{\-Gmm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf \-Gmm} (
+\begin{DoxyParamCaption}
+\item[{int}]{n, }
+\item[{int}]{k = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Gmm_a3b8b408e38b9bff2779f82dc367ce2b0}
+\-Construct a \-G\-M\-M with dimension n and k clusters 
+\begin{DoxyParams}{\-Parameters}
+{\em n} & dimension  k number of modes \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Gmm$<$ \-\_\-n $>$\-::cdf, gcop\-::\-Gmm$<$ \-\_\-n $>$\-::k, gcop\-::\-Gmm$<$ \-\_\-n $>$\-::ns, gcop\-::\-Gmm$<$ \-\_\-n $>$\-::t2, gcop\-::\-Gmm$<$ \-\_\-n $>$\-::t3, gcop\-::\-Gmm$<$ \-\_\-n $>$\-::tol, and gcop\-::\-Gmm$<$ \-\_\-n $>$\-::ws.
+
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!$\sim$\-Gmm@{$\sim$\-Gmm}}
+\index{$\sim$\-Gmm@{$\sim$\-Gmm}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{$\sim$\-Gmm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::$\sim${\bf \-Gmm} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Gmm_a5c32916292faa93384cad8146bc2c4dd}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!\-Fit@{\-Fit}}
+\index{\-Fit@{\-Fit}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{\-Fit}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf \-Fit} (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ pair$<$ {\bf \-Vectornd}, double $>$ $>$ \&}]{xps, }
+\item[{double}]{a = {\ttfamily 1}, }
+\item[{int}]{iter = {\ttfamily 50}, }
+\item[{const {\bf \-Matrixnd} $\ast$}]{\-S = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Gmm_a8d55041be2cf0cf566e4555cafad612b}
+\-Fit a \-G\-M\-M to data 
+\begin{DoxyParams}{\-Parameters}
+{\em xps} & data (pairs of vectors and weights), weights should add to one \\
+\hline
+{\em a} & smoothing factor for updating the parameter v according to [ v\-\_\-new = a$\ast$v\-\_\-est + (1-\/a)$\ast$v\-\_\-old ]; it set to 1 by default \\
+\hline
+{\em iter} & maximum number of \-E\-M iterations (only applies for multiple mixtures) \\
+\hline
+{\em \-S} & use additional noise matrix during \-E\-M for stability \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!\-Init@{\-Init}}
+\index{\-Init@{\-Init}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{\-Init}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf \-Init} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectornd} \&}]{xlb, }
+\item[{const {\bf \-Vectornd} \&}]{xub}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Gmm_ae422f11b35dd6e3a11997d518e6ddba8}
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!\-L@{\-L}}
+\index{\-L@{\-L}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{\-L}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ double {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf \-L} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectornd} \&}]{x}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Gmm_afd7cd7ffbc93281897cd7bad5ca49c7a}
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!\-Sample@{\-Sample}}
+\index{\-Sample@{\-Sample}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ double {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf \-Sample} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectornd} \&}]{x}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Gmm_ae4072d424398a573cd05b267d1441537}
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!\-Update@{\-Update}}
+\index{\-Update@{\-Update}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ bool {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf \-Update} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Gmm_a26773f0169d771e4c44e21af5ba012e0}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!cdf@{cdf}}
+\index{cdf@{cdf}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{cdf}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ vector$<$double$>$ {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf cdf}}\label{classgcop_1_1Gmm_ae7c0387be73debebf4bce5f0ec84a25a}
+
+
+\-C\-D\-F. 
+
+
+
+\-Referenced by gcop\-::\-Gmm$<$ \-\_\-n $>$\-::\-Gmm().
+
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!k@{k}}
+\index{k@{k}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{k}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ int {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf k}}\label{classgcop_1_1Gmm_a1c05ac8fc2e2c5f089d71eed8ce223fe}
+
+
+number of mixture components 
+
+
+
+\-Referenced by gcop\-::\-Gmm$<$ \-\_\-n $>$\-::\-Gmm().
+
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!ns@{ns}}
+\index{ns@{ns}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{ns}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ vector$<${\bf \-Normal}$<$\-\_\-n$>$ $>$ {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf ns}}\label{classgcop_1_1Gmm_aabef3f893e4e37d5955f83ba0dee1402}
+
+
+normal distribution for each component 
+
+
+
+\-Referenced by gcop\-::\-Gmm$<$ \-\_\-n $>$\-::\-Gmm().
+
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!t2@{t2}}
+\index{t2@{t2}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{t2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Vectornd} {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf t2}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Gmm_a5b7f8e55fbd5d071e24f235aa93bc023}
+
+
+\-Referenced by gcop\-::\-Gmm$<$ \-\_\-n $>$\-::\-Gmm().
+
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!t3@{t3}}
+\index{t3@{t3}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{t3}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf t3}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Gmm_ae36a5ca59d23e781bcc0e66110fbb53e}
+
+
+\-Referenced by gcop\-::\-Gmm$<$ \-\_\-n $>$\-::\-Gmm().
+
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!tol@{tol}}
+\index{tol@{tol}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{tol}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ double {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf tol}}\label{classgcop_1_1Gmm_ac141354e9389e078574cfb11b52e4e6d}
+
+
+\-Referenced by gcop\-::\-Gmm$<$ \-\_\-n $>$\-::\-Gmm().
+
+\index{gcop\-::\-Gmm@{gcop\-::\-Gmm}!ws@{ws}}
+\index{ws@{ws}!gcop::Gmm@{gcop\-::\-Gmm}}
+\subsubsection[{ws}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ vector$<$double$>$ {\bf gcop\-::\-Gmm}$<$ \-\_\-n $>$\-::{\bf ws}}\label{classgcop_1_1Gmm_aba03bddba16d5f8a61148ede9c3409df}
+
+
+component weights 
+
+
+
+\-Referenced by gcop\-::\-Gmm$<$ \-\_\-n $>$\-::\-Gmm().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/est/{\bf gmm.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,98 @@
+\section{gcop\-:\-:\-Gunicycle\-Manifold \-Class \-Reference}
+\label{classgcop_1_1GunicycleManifold}\index{gcop\-::\-Gunicycle\-Manifold@{gcop\-::\-Gunicycle\-Manifold}}
+
+
+{\ttfamily \#include $<$gunicyclemanifold.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Gunicycle\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{classgcop_1_1GunicycleManifold__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Gunicycle\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{classgcop_1_1GunicycleManifold__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf \-Lift} ({\bf \-Vector5d} \&dx, const {\bf \-M3\-V2d} \&xa, const {\bf \-M3\-V2d} \&xb)
+\item 
+void {\bf \-Retract} ({\bf \-M3\-V2d} \&xb, const {\bf \-M3\-V2d} \&xa, const {\bf \-Vector5d} \&dx)
+\item 
+void {\bf dtau} ({\bf \-Matrix5d} \&\-M, const {\bf \-Vector5d} \&v)
+\item 
+void {\bf \-Adtau} ({\bf \-Matrix5d} \&\-M, const {\bf \-Vector5d} \&v)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf \-Gunicycle\-Manifold} \& {\bf \-Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Gunicycle\-Manifold@{gcop\-::\-Gunicycle\-Manifold}!\-Adtau@{\-Adtau}}
+\index{\-Adtau@{\-Adtau}!gcop::GunicycleManifold@{gcop\-::\-Gunicycle\-Manifold}}
+\subsubsection[{\-Adtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Gunicycle\-Manifold\-::\-Adtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix5d} \&}]{\-M, }
+\item[{const {\bf \-Vector5d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GunicycleManifold_aeba6b8f3cf12fb14784245b97a41bbe1}
+\index{gcop\-::\-Gunicycle\-Manifold@{gcop\-::\-Gunicycle\-Manifold}!dtau@{dtau}}
+\index{dtau@{dtau}!gcop::GunicycleManifold@{gcop\-::\-Gunicycle\-Manifold}}
+\subsubsection[{dtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Gunicycle\-Manifold\-::dtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix5d} \&}]{\-M, }
+\item[{const {\bf \-Vector5d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GunicycleManifold_a2167b26ee8f4a96c3c307a305faecb22}
+\index{gcop\-::\-Gunicycle\-Manifold@{gcop\-::\-Gunicycle\-Manifold}!\-Instance@{\-Instance}}
+\index{\-Instance@{\-Instance}!gcop::GunicycleManifold@{gcop\-::\-Gunicycle\-Manifold}}
+\subsubsection[{\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Gunicycle\-Manifold} \& {\bf \-Gunicycle\-Manifold\-::\-Instance} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1GunicycleManifold_ac44a6ca911eabff2a13c9bc3e34161d7}
+\index{gcop\-::\-Gunicycle\-Manifold@{gcop\-::\-Gunicycle\-Manifold}!\-Lift@{\-Lift}}
+\index{\-Lift@{\-Lift}!gcop::GunicycleManifold@{gcop\-::\-Gunicycle\-Manifold}}
+\subsubsection[{\-Lift}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Gunicycle\-Manifold\-::\-Lift} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector5d} \&}]{dx, }
+\item[{const {\bf \-M3\-V2d} \&}]{xa, }
+\item[{const {\bf \-M3\-V2d} \&}]{xb}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GunicycleManifold_a116d2987aee9bb3b7b8a5fae2009c67e}
+
+
+\-References gcop\-::\-Group$<$ n, m $>$\-::diff(), gcop\-::\-S\-E2\-::g2q(), and gcop\-::\-S\-E2\-::\-Instance().
+
+\index{gcop\-::\-Gunicycle\-Manifold@{gcop\-::\-Gunicycle\-Manifold}!\-Retract@{\-Retract}}
+\index{\-Retract@{\-Retract}!gcop::GunicycleManifold@{gcop\-::\-Gunicycle\-Manifold}}
+\subsubsection[{\-Retract}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Gunicycle\-Manifold\-::\-Retract} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-M3\-V2d} \&}]{xb, }
+\item[{const {\bf \-M3\-V2d} \&}]{xa, }
+\item[{const {\bf \-Vector5d} \&}]{dx}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GunicycleManifold_abab8d4e2cfe579bc72683d20cf8f4d8b}
+
+
+\-References gcop\-::\-S\-E2\-::\-Instance(), and gcop\-::\-S\-E2\-::q2g().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/{\bf gunicyclemanifold.\-h}\item 
+lib/systems/manifolds/{\bf gunicyclemanifold.\-cc}\end{DoxyCompactItemize}

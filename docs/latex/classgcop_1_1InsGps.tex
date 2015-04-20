@@ -1,0 +1,159 @@
+\section{gcop\-:\-:\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1InsGps}\index{gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$@{gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$}}
+
+
+{\ttfamily \#include $<$insgps.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{classgcop_1_1InsGps__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{classgcop_1_1InsGps__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, 3, 15 $>$ {\bf \-Matrix3x15d}
+\item 
+typedef \-Matrix$<$ double, 3, \-\_\-nu $>$ {\bf \-Matrixrcd}
+\item 
+typedef \-Matrix$<$ double, 3, \-\_\-np $>$ {\bf \-Matrixrmd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Ins\-Gps} ()
+\item 
+bool {\bf operator()} (\-Vector3d \&y, double t, const {\bf \-Ins\-State} \&x, const {\bf \-Vectorcd} \&u, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrix3x15d} $\ast$dydx=0, {\bf \-Matrixrcd} $\ast$dydu=0, {\bf \-Matrixrmd} $\ast$dydp=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf sxy}
+\begin{DoxyCompactList}\small\item\em x-\/y position standard deviation \end{DoxyCompactList}\item 
+double {\bf sz}
+\begin{DoxyCompactList}\small\item\em altitute stdev \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$class gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$}
+
+\-General sensor model
+
+\-Subclasses should provide implementation for the sensor function ()
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Ins\-Gps@{gcop\-::\-Ins\-Gps}!\-Matrix3x15d@{\-Matrix3x15d}}
+\index{\-Matrix3x15d@{\-Matrix3x15d}!gcop::InsGps@{gcop\-::\-Ins\-Gps}}
+\subsubsection[{\-Matrix3x15d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 3, 15$>$ {\bf gcop\-::\-Ins\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrix3x15d}}\label{classgcop_1_1InsGps_a5517b946a8617253fe7236669d744c0d}
+\index{gcop\-::\-Ins\-Gps@{gcop\-::\-Ins\-Gps}!\-Matrixrcd@{\-Matrixrcd}}
+\index{\-Matrixrcd@{\-Matrixrcd}!gcop::InsGps@{gcop\-::\-Ins\-Gps}}
+\subsubsection[{\-Matrixrcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 3, \-\_\-nu$>$ {\bf gcop\-::\-Ins\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixrcd}}\label{classgcop_1_1InsGps_a20d37e8579a40abccad89b7c91cb4411}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor$<$ Ins\-State, 15, \-\_\-nu, \-\_\-np, Vector3d, 3 $>$} \doxyref{}{p.}{classgcop_1_1Sensor_ac9ec9eae9de85f0374aaf053a9327d46}.
+
+\index{gcop\-::\-Ins\-Gps@{gcop\-::\-Ins\-Gps}!\-Matrixrmd@{\-Matrixrmd}}
+\index{\-Matrixrmd@{\-Matrixrmd}!gcop::InsGps@{gcop\-::\-Ins\-Gps}}
+\subsubsection[{\-Matrixrmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 3, \-\_\-np$>$ {\bf gcop\-::\-Ins\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixrmd}}\label{classgcop_1_1InsGps_a645d69dcff5553b97b63f5d3115dfbe6}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor$<$ Ins\-State, 15, \-\_\-nu, \-\_\-np, Vector3d, 3 $>$} \doxyref{}{p.}{classgcop_1_1Sensor_a312f65bff49beb267bde7792a5a51447}.
+
+\index{gcop\-::\-Ins\-Gps@{gcop\-::\-Ins\-Gps}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::InsGps@{gcop\-::\-Ins\-Gps}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Ins\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1InsGps_a026f4786f1294bea536b7e8b372c8353}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor$<$ Ins\-State, 15, \-\_\-nu, \-\_\-np, Vector3d, 3 $>$} \doxyref{}{p.}{classgcop_1_1Sensor_aa6020c9508c5c144f02b31bac29423b0}.
+
+\index{gcop\-::\-Ins\-Gps@{gcop\-::\-Ins\-Gps}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::InsGps@{gcop\-::\-Ins\-Gps}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Ins\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1InsGps_afbbae6719dd8365c70568fc260e06095}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor$<$ Ins\-State, 15, \-\_\-nu, \-\_\-np, Vector3d, 3 $>$} \doxyref{}{p.}{classgcop_1_1Sensor_aaf2d4e9cc932ef866953ae710e2f8b7a}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Ins\-Gps@{gcop\-::\-Ins\-Gps}!\-Ins\-Gps@{\-Ins\-Gps}}
+\index{\-Ins\-Gps@{\-Ins\-Gps}!gcop::InsGps@{gcop\-::\-Ins\-Gps}}
+\subsubsection[{\-Ins\-Gps}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Ins\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf \-Ins\-Gps} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1InsGps_a8fe6653bc9ffaaffcb01a89c6bb1e48e}
+
+
+\-References gcop\-::\-Sensor$<$ Ins\-State, 15, \-\_\-nu, \-\_\-np, Vector3d, 3 $>$\-::\-R, gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$\-::sxy, and gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$\-::sz.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Ins\-Gps@{gcop\-::\-Ins\-Gps}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::InsGps@{gcop\-::\-Ins\-Gps}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ bool {\bf gcop\-::\-Ins\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{\-Vector3d \&}]{y, }
+\item[{double}]{t, }
+\item[{const {\bf \-Ins\-State} \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix3x15d} $\ast$}]{dydx = {\ttfamily 0}, }
+\item[{{\bf \-Matrixrcd} $\ast$}]{dydu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixrmd} $\ast$}]{dydp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1InsGps_a78ccd0099bdd1c979fd4c45c7ab2be31}
+
+
+\-References gcop\-::\-Ins\-State\-::p.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Ins\-Gps@{gcop\-::\-Ins\-Gps}!sxy@{sxy}}
+\index{sxy@{sxy}!gcop::InsGps@{gcop\-::\-Ins\-Gps}}
+\subsubsection[{sxy}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Ins\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf sxy}}\label{classgcop_1_1InsGps_a8dceef88f27bb694d114c81aca90c8f3}
+
+
+x-\/y position standard deviation 
+
+
+
+\-Referenced by gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$\-::\-Ins\-Gps().
+
+\index{gcop\-::\-Ins\-Gps@{gcop\-::\-Ins\-Gps}!sz@{sz}}
+\index{sz@{sz}!gcop::InsGps@{gcop\-::\-Ins\-Gps}}
+\subsubsection[{sz}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Ins\-Gps}$<$ \-\_\-nu, \-\_\-np $>$\-::{\bf sz}}\label{classgcop_1_1InsGps_a7197fbb9debbd67c4d6e3c64026026a6}
+
+
+altitute stdev 
+
+
+
+\-Referenced by gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$\-::\-Ins\-Gps().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/sensors/{\bf insgps.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,73 @@
+\section{lib/utils/quat.cc \-File \-Reference}
+\label{quat_8cc}\index{lib/utils/quat.\-cc@{lib/utils/quat.\-cc}}
+{\ttfamily \#include $<$stdlib.\-h$>$}\*
+{\ttfamily \#include $<$cmath$>$}\*
+{\ttfamily \#include $<$cstring$>$}\*
+{\ttfamily \#include $<$stdio.\-h$>$}\*
+{\ttfamily \#include \char`\"{}quat.\-h\char`\"{}}\*
+{\ttfamily \#include $<$limits$>$}\*
+\-Include dependency graph for quat.\-cc\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quat_8cc__incl}
+\end{center}
+\end{figure}
+\subsection*{\-Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf gcop}
+\end{DoxyCompactItemize}
+\subsection*{\-Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf \-E\-P\-S}~1e-\/16
+\item 
+\#define {\bf mat}(a, b)~(m[4$\ast$a+b])
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Quat} {\bf gcop\-::operator$\ast$} (const {\bf \-Quat} \&q0, const {\bf \-Quat} \&q1)
+\item 
+std\-::ostream \& {\bf gcop\-::operator$<$$<$} (std\-::ostream \&os, const {\bf \-Quat} \&q)
+\item 
+std\-::istream \& {\bf gcop\-::operator$>$$>$} (std\-::istream \&is, {\bf \-Quat} \&q)
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+static int {\bf perm} [3] = \{1,2,0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Define \-Documentation}
+\index{quat.\-cc@{quat.\-cc}!\-E\-P\-S@{\-E\-P\-S}}
+\index{\-E\-P\-S@{\-E\-P\-S}!quat.cc@{quat.\-cc}}
+\subsubsection[{\-E\-P\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-E\-P\-S}~1e-\/16}\label{quat_8cc_a6ebf6899d6c1c8b7b9d09be872c05aae}
+
+
+\-Referenced by gcop\-::\-Quat\-::\-Quat().
+
+\index{quat.\-cc@{quat.\-cc}!mat@{mat}}
+\index{mat@{mat}!quat.cc@{quat.\-cc}}
+\subsubsection[{mat}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf mat}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(m[4$\ast$a+b])}\label{quat_8cc_aa1906241c0a6870e78b20a3d7388a869}
+
+
+\-Referenced by gcop\-::\-Quat\-::\-From\-S\-E3().
+
+
+
+\subsection{\-Variable \-Documentation}
+\index{quat.\-cc@{quat.\-cc}!perm@{perm}}
+\index{perm@{perm}!quat.cc@{quat.\-cc}}
+\subsubsection[{perm}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf perm}[3] = \{1,2,0\}\hspace{0.3cm}{\ttfamily  [static]}}\label{quat_8cc_af732f8b3a3345a23ebd09437a8bff03e}
+
+
+\-Referenced by gcop\-::\-Quat\-::\-From\-S\-E3().
+

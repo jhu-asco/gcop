@@ -1,0 +1,167 @@
+\section{gcop\-:\-:\-Cylinder$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Cylinder}\index{gcop\-::\-Cylinder$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$@{gcop\-::\-Cylinder$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}}
+
+
+{\ttfamily \#include $<$cylinder.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Cylinder$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classgcop_1_1Cylinder__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Cylinder$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classgcop_1_1Cylinder__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, 1, 1 $>$ {\bf \-Vectorgd}
+\item 
+typedef \-Matrix$<$ double, 1, \-\_\-nx $>$ {\bf \-Matrixgxd}
+\item 
+typedef \-Matrix$<$ double, 1, \-\_\-nu $>$ {\bf \-Matrixgud}
+\item 
+typedef \-Matrix$<$ double, 1, \-\_\-np $>$ {\bf \-Matrixgpd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Cylinder} (const \-Vector3d \&{\bf o}, double {\bf r}, double {\bf h}, double {\bf cr}=.\-5)
+\item 
+bool {\bf operator()} ({\bf \-Vectorgd} \&g, double t, const \-T \&x, const {\bf \-Vectorcd} \&u, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrixgxd} $\ast$dgdx=0, {\bf \-Matrixgud} $\ast$dgdu=0, {\bf \-Matrixgpd} $\ast$dgdp=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Vector3d {\bf o}
+\begin{DoxyCompactList}\small\item\em origin of base \end{DoxyCompactList}\item 
+double {\bf r}
+\begin{DoxyCompactList}\small\item\em radius \end{DoxyCompactList}\item 
+double {\bf h}
+\begin{DoxyCompactList}\small\item\em height \end{DoxyCompactList}\item 
+double {\bf cr}
+\begin{DoxyCompactList}\small\item\em collision radius \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ class gcop\-::\-Cylinder$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!\-Matrixgpd@{\-Matrixgpd}}
+\index{\-Matrixgpd@{\-Matrixgpd}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{\-Matrixgpd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, \-\_\-np$>$ {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixgpd}}\label{classgcop_1_1Cylinder_ada316014bf7a7825fc9d1ffcd13ab1a0}
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!\-Matrixgud@{\-Matrixgud}}
+\index{\-Matrixgud@{\-Matrixgud}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{\-Matrixgud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, \-\_\-nu$>$ {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixgud}}\label{classgcop_1_1Cylinder_ac864247e1d75cb19c2eaeacd9813ba5b}
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!\-Matrixgxd@{\-Matrixgxd}}
+\index{\-Matrixgxd@{\-Matrixgxd}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{\-Matrixgxd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, \-\_\-nx$>$ {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixgxd}}\label{classgcop_1_1Cylinder_a9c62a3f1647fd4e381b90a4b096b3bc0}
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Cylinder_a85786bab03e6aa03c6a9b768bac5c2f9}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_a0055c4a104dbf9ffa1f1f118982506a7}.
+
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!\-Vectorgd@{\-Vectorgd}}
+\index{\-Vectorgd@{\-Vectorgd}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{\-Vectorgd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, 1$>$ {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorgd}}\label{classgcop_1_1Cylinder_a62585c6a013d3f7418d8a09ceff59050}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_a8b9bd00ce111e6b7a149257e16bc8f56}.
+
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1Cylinder_a20662b25a8f13d1f8b5b32bbf7dcaa02}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_aa4c4302af089a4343a932e429e0856ea}.
+
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Cylinder_a0c7eded5e439837081502c6f37c5ae1c}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_a3a69c40b18721b68a707b4f763fb1a50}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!\-Cylinder@{\-Cylinder}}
+\index{\-Cylinder@{\-Cylinder}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{\-Cylinder}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Cylinder} (
+\begin{DoxyParamCaption}
+\item[{const \-Vector3d \&}]{o, }
+\item[{double}]{r, }
+\item[{double}]{h, }
+\item[{double}]{cr = {\ttfamily .5}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Cylinder_a83c61391d32142604906cba06759ff93}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ bool {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorgd} \&}]{g, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgxd} $\ast$}]{dgdx = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgud} $\ast$}]{dgdu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgpd} $\ast$}]{dgdp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Cylinder_a3daeb67c474073c57c605fef3196c520}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!cr@{cr}}
+\index{cr@{cr}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{cr}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf cr}}\label{classgcop_1_1Cylinder_a49108dff99f04a50d19cbaee5d3e10ba}
+
+
+collision radius 
+
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!h@{h}}
+\index{h@{h}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{h}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf h}}\label{classgcop_1_1Cylinder_ae560300ee60ad0cb7909d93058124a48}
+
+
+height 
+
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!o@{o}}
+\index{o@{o}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{o}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-Vector3d {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf o}}\label{classgcop_1_1Cylinder_ae64323a26e18a979ad83ac36f1e9b12a}
+
+
+origin of base 
+
+\index{gcop\-::\-Cylinder@{gcop\-::\-Cylinder}!r@{r}}
+\index{r@{r}!gcop::Cylinder@{gcop\-::\-Cylinder}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Cylinder}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf r}}\label{classgcop_1_1Cylinder_aaf889390b5910e8298a88e623d115758}
+
+
+radius 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/constraints/{\bf cylinder.\-h}\end{DoxyCompactItemize}

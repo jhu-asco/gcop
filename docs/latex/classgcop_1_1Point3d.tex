@@ -1,0 +1,124 @@
+\section{gcop\-:\-:\-Point3d \-Class \-Reference}
+\label{classgcop_1_1Point3d}\index{gcop\-::\-Point3d@{gcop\-::\-Point3d}}
+
+
+{\ttfamily \#include $<$point3d.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Point3d\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classgcop_1_1Point3d__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Point3d\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Point3d__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Point3d} ()
+\item 
+virtual {\bf $\sim$\-Point3d} ()
+\item 
+double {\bf \-Step} ({\bf \-Point3d\-State} \&xb, double {\bf t}, const {\bf \-Point3d\-State} \&xa, const \-Vector3d \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix6d} $\ast$\-A=0, {\bf \-Matrix63d} $\ast$\-B=0, {\bf \-Matrix6\-Xd} $\ast$\-C=0)
+\item 
+bool {\bf \-Noise} ({\bf \-Matrix6d} \&\-Q, double {\bf t}, const {\bf \-Point3d\-State} \&{\bf x}, const \-Vector3d \&u, double dt, const \-Vector\-Xd $\ast$p=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf sa}
+\begin{DoxyCompactList}\small\item\em white-\/noise acceleration stdev \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-An \-P\-O\-I\-N\-T3\-D system
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Point3d@{gcop\-::\-Point3d}!\-Point3d@{\-Point3d}}
+\index{\-Point3d@{\-Point3d}!gcop::Point3d@{gcop\-::\-Point3d}}
+\subsubsection[{\-Point3d}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Point3d\-::\-Point3d} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Point3d_a228c1c7fe8c7a25f88df0f58de506292}
+
+
+\-References sa.
+
+\index{gcop\-::\-Point3d@{gcop\-::\-Point3d}!$\sim$\-Point3d@{$\sim$\-Point3d}}
+\index{$\sim$\-Point3d@{$\sim$\-Point3d}!gcop::Point3d@{gcop\-::\-Point3d}}
+\subsubsection[{$\sim$\-Point3d}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Point3d\-::$\sim$\-Point3d} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Point3d_ad5a6976682491dc8c0ef23c41205a791}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Point3d@{gcop\-::\-Point3d}!\-Noise@{\-Noise}}
+\index{\-Noise@{\-Noise}!gcop::Point3d@{gcop\-::\-Point3d}}
+\subsubsection[{\-Noise}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Point3d\-::\-Noise} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-Q, }
+\item[{double}]{t, }
+\item[{const {\bf \-Point3d\-State} \&}]{x, }
+\item[{const \-Vector3d \&}]{u, }
+\item[{double}]{dt, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Point3d_a0160697bf143cd86437a979591b3f5d8}
+
+
+\-References sa.
+
+\index{gcop\-::\-Point3d@{gcop\-::\-Point3d}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Point3d@{gcop\-::\-Point3d}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Point3d\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Point3d\-State} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Point3d\-State} \&}]{xa, }
+\item[{const \-Vector3d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix6d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix63d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix6\-Xd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Point3d_ab9d0043e5bd57721da46268d07a7d8c8}
+
+
+\-References gcop\-::\-Point3d\-State\-::q, and gcop\-::\-Point3d\-State\-::v.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Point3d@{gcop\-::\-Point3d}!sa@{sa}}
+\index{sa@{sa}!gcop::Point3d@{gcop\-::\-Point3d}}
+\subsubsection[{sa}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Point3d\-::sa}}\label{classgcop_1_1Point3d_a5004631e9feecffc1882b02cdfe98a26}
+
+
+white-\/noise acceleration stdev 
+
+
+
+\-Referenced by \-Noise(), and \-Point3d().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf point3d.\-h}\item 
+lib/systems/{\bf point3d.\-cc}\end{DoxyCompactItemize}

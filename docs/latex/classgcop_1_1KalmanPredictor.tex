@@ -1,0 +1,229 @@
+\section{gcop\-:\-:\-Kalman\-Predictor$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1KalmanPredictor}\index{gcop\-::\-Kalman\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$@{gcop\-::\-Kalman\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}}
+
+
+{\ttfamily \#include $<$kalmanpredictor.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Kalman\-Predictor$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{classgcop_1_1KalmanPredictor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kalman\-Predictor$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{classgcop_1_1KalmanPredictor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nx $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nx $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nu $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-np $>$ {\bf \-Matrixmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ {\bf \-Matrixnmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kalman\-Predictor} ({\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&{\bf sys})
+\item 
+virtual {\bf $\sim$\-Kalman\-Predictor} ()
+\item 
+virtual bool {\bf \-Predict} (\-T \&xb, double t, const \-T \&xa, const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} $\ast$p=0, bool cov=true)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Matrixnd} {\bf \-A}
+\begin{DoxyCompactList}\small\item\em process \-Jacobian \end{DoxyCompactList}\item 
+{\bf \-Matrixnd} {\bf \-Q}
+\begin{DoxyCompactList}\small\item\em discrete-\/time process noise covariance \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ class gcop\-::\-Kalman\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nu$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1KalmanPredictor_a3f49a1d68399f9dc32d79d9150215a01}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_af0add0182d75e3c7eff4506c136e43a9}.
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nx$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1KalmanPredictor_addc3c29e23fc32b3cc2c528b22064bd7}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_afb2656aa3c1b45aacd5fedf69cc0068c}.
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Matrixmd@{\-Matrixmd}}
+\index{\-Matrixmd@{\-Matrixmd}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Matrixmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-np$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixmd}}\label{classgcop_1_1KalmanPredictor_a7ebaf284b2d3f633d31151d43cd8c992}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_ab506dd3d56a577d0228add46370d6643}.
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-nx$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1KalmanPredictor_a9e6e4ad768daf21fe840e9298ab152f3}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_ab88e90924d7eb7eb6fd1be70069b4aef}.
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nu$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1KalmanPredictor_a1ac9207d1c5956419b2ae27c9a158599}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_a72dfa9fc8e457a1b2ad32f688e702886}.
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nx$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1KalmanPredictor_ae4e51605394abe9a3deddfe1709eacc4}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_a4108d0338647a6fda605c29433e18f03}.
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Matrixnmd@{\-Matrixnmd}}
+\index{\-Matrixnmd@{\-Matrixnmd}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Matrixnmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-np$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixnmd}}\label{classgcop_1_1KalmanPredictor_a2c16789096f3ee4468a46a820a615f63}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_a0df2108a2b44183d19ce0baf26a4bc9c}.
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1KalmanPredictor_a81c845d31918eb5140ee9511c39c255b}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_afba0e6c39ba7d87b9ccf40a0baa7824b}.
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1KalmanPredictor_a5c4b127e58b51156c629fab2253af5bc}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_a85197179feacef27c9e2cf470685d7d0}.
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1KalmanPredictor_a358c14ff48b1d6311b98a100280f70e2}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_a4a245d0aaa4926515eef192a3386753b}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Kalman\-Predictor@{\-Kalman\-Predictor}}
+\index{\-Kalman\-Predictor@{\-Kalman\-Predictor}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Kalman\-Predictor}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Kalman\-Predictor} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&}]{sys}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KalmanPredictor_a88ab66ae9ecf93000c0eba1757989e3f}
+
+
+\-References gcop\-::\-Kalman\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-A, gcop\-::\-Kalman\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Q, and gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-X.
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!$\sim$\-Kalman\-Predictor@{$\sim$\-Kalman\-Predictor}}
+\index{$\sim$\-Kalman\-Predictor@{$\sim$\-Kalman\-Predictor}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{$\sim$\-Kalman\-Predictor}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::$\sim${\bf \-Kalman\-Predictor} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1KalmanPredictor_a1805a2ed249bda2eac0a78dde020be64}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Predict@{\-Predict}}
+\index{\-Predict@{\-Predict}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Predict}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ bool {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Predict} (
+\begin{DoxyParamCaption}
+\item[{\-T \&}]{xb, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{bool}]{cov = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1KalmanPredictor_aae6826aabf3b9b5e3039055f36d91ac9}
+\-Prediction step. 
+\begin{DoxyParams}{\-Parameters}
+{\em xb} & new belief state \\
+\hline
+{\em t} & time \\
+\hline
+{\em xa} & previous belief state \\
+\hline
+{\em u} & control inputs \\
+\hline
+{\em h} & time-\/step \\
+\hline
+{\em p} & parameters (optional) \\
+\hline
+{\em cov} & whether to update the covariance as well (true by default) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if success 
+\end{DoxyReturn}
+
+
+\-Implements {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_af9552e6f3a861130bae9f5857edfb113}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-A@{\-A}}
+\index{\-A@{\-A}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-A}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-A}}\label{classgcop_1_1KalmanPredictor_a7562f72b8f4f6ae12ba1319e11d71fd8}
+
+
+process \-Jacobian 
+
+
+
+\-Referenced by gcop\-::\-Kalman\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Kalman\-Predictor().
+
+\index{gcop\-::\-Kalman\-Predictor@{gcop\-::\-Kalman\-Predictor}!\-Q@{\-Q}}
+\index{\-Q@{\-Q}!gcop::KalmanPredictor@{gcop\-::\-Kalman\-Predictor}}
+\subsubsection[{\-Q}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Kalman\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Q}}\label{classgcop_1_1KalmanPredictor_a83546e8882f47048e526c8e1ef4092a6}
+
+
+discrete-\/time process noise covariance 
+
+
+
+\-Referenced by gcop\-::\-Kalman\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Kalman\-Predictor().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/est/{\bf kalmanpredictor.\-h}\end{DoxyCompactItemize}

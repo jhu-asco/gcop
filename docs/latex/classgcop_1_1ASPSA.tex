@@ -1,0 +1,416 @@
+\section{gcop\-:\-:\-A\-S\-P\-S\-A$<$ \-T, n, c, \-\_\-np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1ASPSA}\index{gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$@{gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$}}
+
+
+{\ttfamily \#include $<$aspsa.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-A\-S\-P\-S\-A$<$ \-T, n, c, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1ASPSA__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf \-Stepcoeffs}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-A\-S\-P\-S\-A} ({\bf \-System}$<$ \-T, n, c, \-\_\-np $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, n, c, \-\_\-np $>$ \&{\bf cost}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd $\ast$p=0, bool update=true)
+\item 
+virtual {\bf $\sim$\-A\-S\-P\-S\-A} ()
+\item 
+void {\bf \-Iterate} ()
+\item 
+double {\bf \-Update} (std\-::vector$<$ \-T $>$ \&{\bf xs}, const std\-::vector$<$ \-Vectorcd $>$ \&{\bf us}, bool eval\-Cost=true)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-System}$<$ \-T, n, c, \-\_\-np $>$ \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em dynamical system \end{DoxyCompactList}\item 
+{\bf \-Cost}$<$ \-T, n, c, \-\_\-np $>$ \& {\bf cost}
+\begin{DoxyCompactList}\small\item\em given cost function \end{DoxyCompactList}\item 
+std\-::vector$<$ double $>$ \& {\bf ts}
+\begin{DoxyCompactList}\small\item\em times (\-N+1) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-T $>$ \& {\bf xs}
+\begin{DoxyCompactList}\small\item\em states (\-N+1) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ \& {\bf us}
+\begin{DoxyCompactList}\small\item\em controls (\-N) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf dus1}
+\begin{DoxyCompactList}\small\item\em control variation (\-N) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf ustemp}
+\begin{DoxyCompactList}\small\item\em control variation (\-N) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf dus2}
+\begin{DoxyCompactList}\small\item\em control variation (\-N) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-T $>$ {\bf xss}
+\begin{DoxyCompactList}\small\item\em states (\-N+1) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf uss1}
+\begin{DoxyCompactList}\small\item\em controls (\-N) vector perturb1 \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf uss2}
+\begin{DoxyCompactList}\small\item\em controls (\-N) vector perturb2 \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf ghat}
+\begin{DoxyCompactList}\small\item\em \-Estimated gradient. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf ghatavg}
+\begin{DoxyCompactList}\small\item\em \-Estimated avg gradient. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf hessian\-\_\-currest}
+\begin{DoxyCompactList}\small\item\em \-Current iterate hessian estimate. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf hessian\-\_\-currestavg}
+\begin{DoxyCompactList}\small\item\em \-Current iterate hessian estimate after averaging. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf hessian\-\_\-est}
+\begin{DoxyCompactList}\small\item\em \-Estimating \-Hessian. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf hessian\-\_\-estreg}
+\begin{DoxyCompactList}\small\item\em \-Adding \-Regularizing term. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ {\bf delta\-G}
+\begin{DoxyCompactList}\small\item\em \-Difference in \-Gradient. \end{DoxyCompactList}\item 
+std\-::default\-\_\-random\-\_\-engine {\bf randgenerator}
+\item 
+std\-::bernoulli\-\_\-distribution {\bf bernoulli\-\_\-dist}
+\begin{DoxyCompactList}\small\item\em \-Default random engine. \end{DoxyCompactList}\item 
+int {\bf \-N}
+\begin{DoxyCompactList}\small\item\em number of discrete trajectory segments \end{DoxyCompactList}\item 
+int {\bf \-Nit}
+\begin{DoxyCompactList}\small\item\em \-Number of steps of \doxyref{\-A\-S\-P\-S\-A}{p.}{classgcop_1_1ASPSA} to complete in one \-Iterate function. \end{DoxyCompactList}\item 
+float {\bf tolerance\-J}
+\begin{DoxyCompactList}\small\item\em \-Tolerance for how high \-J can go from the current value to reject some. \end{DoxyCompactList}\item 
+float {\bf tolerance\-Hessianmag}
+\begin{DoxyCompactList}\small\item\em \-Tolerance for how high \-J can go from the current value to reject some. \end{DoxyCompactList}\item 
+struct {\bf gcop\-::\-A\-S\-P\-S\-A\-::\-Stepcoeffs} {\bf stepc}
+\item 
+double {\bf \-J}
+\begin{DoxyCompactList}\small\item\em optimal cost \end{DoxyCompactList}\item 
+bool {\bf debug}
+\begin{DoxyCompactList}\small\item\em whether to display debugging info \end{DoxyCompactList}\item 
+int {\bf prevcount}
+\begin{DoxyCompactList}\small\item\em for now use this to propagate the count forward for every iteration \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T, int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ class gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!\-A\-S\-P\-S\-A@{\-A\-S\-P\-S\-A}}
+\index{\-A\-S\-P\-S\-A@{\-A\-S\-P\-S\-A}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{\-A\-S\-P\-S\-A}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int \-\_\-np$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf \-A\-S\-P\-S\-A} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, n, c, \-\_\-np $>$ \&}]{sys, }
+\item[{{\bf \-Cost}$<$ \-T, n, c, \-\_\-np $>$ \&}]{cost, }
+\item[{vector$<$ double $>$ \&}]{ts, }
+\item[{vector$<$ \-T $>$ \&}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{\-Vectormd $\ast$}]{p = {\ttfamily 0}, }
+\item[{bool}]{update = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1ASPSA_afe2145afabb1e9491be790757f7e3c51}
+\-Implementing \-Adaptive \-Simultaneous \-Perturbation and \-Stochastic \-Approximation algorithm in \-G\-C\-O\-P library. \-The gains needed for the algorithms should be chosen wisely using \-Section 7.\-5.\-2 of \-Introduction to \-Stochastic \-Search and \-Optimization (\-I\-S\-S\-O) book.
+
+\-This method minimizes the cost of a trajectory using the input parameters as us \-The times ts must be given, the initial state xs[0] must be set, and the controls us will be used as an initial guess for the optimization.
+
+\-After initialization, every call to \doxyref{\-Iterate()}{p.}{classgcop_1_1ASPSA_a9535cc95ac393a09c4704ac658476e2f} will optimize the controls us and states xs and modify them accordingly. \-Problems involving time-\/optimization will also modify the sequence of times ts.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & system \\
+\hline
+{\em cost} & cost \\
+\hline
+{\em ts} & (\-N+1) sequence of discrete times \\
+\hline
+{\em xs} & (\-N+1) sequence of discrete states \\
+\hline
+{\em us} & (\-N) sequence of control inputs \\
+\hline
+{\em update} & whether to update trajectory xs using initial state xs[0] and inputs us. \-This is necessary only if xs was not already generated from us. \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::a, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::\-A, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::a1, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::\-A1, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::alpha, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::alpha1, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::c1, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::c11, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::c2, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::delta\-G, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::gamma, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::gamma1, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::ghat, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::ghatavg, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::hessian\-\_\-currest, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::hessian\-\_\-currestavg, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::hessian\-\_\-est, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::hessian\-\_\-estreg, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-J, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-N, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Stepcoeffs\-::\-Navg, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Nit, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::stepc, gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-Update(), and gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::us.
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!$\sim$\-A\-S\-P\-S\-A@{$\sim$\-A\-S\-P\-S\-A}}
+\index{$\sim$\-A\-S\-P\-S\-A@{$\sim$\-A\-S\-P\-S\-A}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{$\sim$\-A\-S\-P\-S\-A}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int \-\_\-np$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::$\sim${\bf \-A\-S\-P\-S\-A} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1ASPSA_a1876e3348ec4f812020fe1dbc95e8162}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!\-Iterate@{\-Iterate}}
+\index{\-Iterate@{\-Iterate}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{\-Iterate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int \-\_\-np$>$ void {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf \-Iterate} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1ASPSA_a9535cc95ac393a09c4704ac658476e2f}
+\-Perform one \-S\-Y\-S\-T\-E\-M\-C\-E iteration. \index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!\-Update@{\-Update}}
+\index{\-Update@{\-Update}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf \-Update} (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ \-T $>$ \&}]{xs, }
+\item[{const std\-::vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{bool}]{eval\-Cost = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1ASPSA_a16e4c5633334026eded4f3ef8efa0345}
+\-Generate a full trajectory (xs and us) from a parameter z and (optionally) return its cost 
+\begin{DoxyParams}{\-Parameters}
+{\em xs} & trajectory \\
+\hline
+{\em us} & controls \\
+\hline
+{\em eval\-Cost} & whether to compute and return the trajectory cost \\
+\hline
+\end{DoxyParams}
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!bernoulli\-\_\-dist@{bernoulli\-\_\-dist}}
+\index{bernoulli\-\_\-dist@{bernoulli\-\_\-dist}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{bernoulli\-\_\-dist}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::bernoulli\-\_\-distribution {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf bernoulli\-\_\-dist}}\label{classgcop_1_1ASPSA_a55633fc63d121c749d3f520a3b9678cc}
+
+
+\-Default random engine. 
+
+\-Bernoulli generator for getting perturbations \index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!cost@{cost}}
+\index{cost@{cost}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{cost}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Cost}$<$\-T, n, c, \-\_\-np$>$\& {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf cost}}\label{classgcop_1_1ASPSA_a03a64137a474533aeb68cf46a0b00a71}
+
+
+given cost function 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!debug@{debug}}
+\index{debug@{debug}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{debug}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ bool {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf debug}}\label{classgcop_1_1ASPSA_a235e8d2e84000a2bbbc91290fd59fece}
+
+
+whether to display debugging info 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!delta\-G@{delta\-G}}
+\index{delta\-G@{delta\-G}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{delta\-G}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf delta\-G}}\label{classgcop_1_1ASPSA_a105293f175a06d5b3ffc5e1391c3af07}
+
+
+\-Difference in \-Gradient. 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!dus1@{dus1}}
+\index{dus1@{dus1}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{dus1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf dus1}}\label{classgcop_1_1ASPSA_a6a74d541909f978cca125dff06b67b48}
+
+
+control variation (\-N) vector 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!dus2@{dus2}}
+\index{dus2@{dus2}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{dus2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf dus2}}\label{classgcop_1_1ASPSA_aed54c8f5cb1ca6cfe882cc237c9181fc}
+
+
+control variation (\-N) vector 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!ghat@{ghat}}
+\index{ghat@{ghat}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{ghat}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf ghat}}\label{classgcop_1_1ASPSA_a8a0047622b14c2ed74c710bb305ed1ab}
+
+
+\-Estimated gradient. 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!ghatavg@{ghatavg}}
+\index{ghatavg@{ghatavg}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{ghatavg}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf ghatavg}}\label{classgcop_1_1ASPSA_a3c1bb23441db9a705c3fcf55b0603452}
+
+
+\-Estimated avg gradient. 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!hessian\-\_\-currest@{hessian\-\_\-currest}}
+\index{hessian\-\_\-currest@{hessian\-\_\-currest}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{hessian\-\_\-currest}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf hessian\-\_\-currest}}\label{classgcop_1_1ASPSA_a898ed126933a69dfeab0386583058482}
+
+
+\-Current iterate hessian estimate. 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!hessian\-\_\-currestavg@{hessian\-\_\-currestavg}}
+\index{hessian\-\_\-currestavg@{hessian\-\_\-currestavg}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{hessian\-\_\-currestavg}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf hessian\-\_\-currestavg}}\label{classgcop_1_1ASPSA_a0f4a943f7caf82543f7a0c285924b4ef}
+
+
+\-Current iterate hessian estimate after averaging. 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!hessian\-\_\-est@{hessian\-\_\-est}}
+\index{hessian\-\_\-est@{hessian\-\_\-est}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{hessian\-\_\-est}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf hessian\-\_\-est}}\label{classgcop_1_1ASPSA_ae07f615fd9c8c2c18df7816e97075835}
+
+
+\-Estimating \-Hessian. 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!hessian\-\_\-estreg@{hessian\-\_\-estreg}}
+\index{hessian\-\_\-estreg@{hessian\-\_\-estreg}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{hessian\-\_\-estreg}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf hessian\-\_\-estreg}}\label{classgcop_1_1ASPSA_a20a02b92c90e2531c5ac515b54941d9b}
+
+
+\-Adding \-Regularizing term. 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!\-J@{\-J}}
+\index{\-J@{\-J}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{\-J}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf \-J}}\label{classgcop_1_1ASPSA_a0ec7fcbde11260141fce98421fb27b1c}
+
+
+optimal cost 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!\-N@{\-N}}
+\index{\-N@{\-N}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{\-N}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ int {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf \-N}}\label{classgcop_1_1ASPSA_a308e88cca75c51a39d1cfb9d1ab63681}
+
+
+number of discrete trajectory segments 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!\-Nit@{\-Nit}}
+\index{\-Nit@{\-Nit}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{\-Nit}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ int {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf \-Nit}}\label{classgcop_1_1ASPSA_a3cc1e43f68ccdf76b54a1224f01a665c}
+
+
+\-Number of steps of \doxyref{\-A\-S\-P\-S\-A}{p.}{classgcop_1_1ASPSA} to complete in one \-Iterate function. 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!prevcount@{prevcount}}
+\index{prevcount@{prevcount}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{prevcount}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ int {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf prevcount}}\label{classgcop_1_1ASPSA_ab666b6963a0d4abf769c580567ab2738}
+
+
+for now use this to propagate the count forward for every iteration 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!randgenerator@{randgenerator}}
+\index{randgenerator@{randgenerator}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{randgenerator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::default\-\_\-random\-\_\-engine {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf randgenerator}}\label{classgcop_1_1ASPSA_a707dd18188d65e8914a41b2d6c93a4cc}
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!stepc@{stepc}}
+\index{stepc@{stepc}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{stepc}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ struct {\bf gcop\-::\-A\-S\-P\-S\-A\-::\-Stepcoeffs}  {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf stepc}}\label{classgcop_1_1ASPSA_a842f98aeb69e3d247d35d90e0414c1e7}
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!sys@{sys}}
+\index{sys@{sys}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-System}$<$\-T, n, c, \-\_\-np$>$\& {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf sys}}\label{classgcop_1_1ASPSA_ac10de6f0256f258188a804e555681e47}
+
+
+dynamical system 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!tolerance\-Hessianmag@{tolerance\-Hessianmag}}
+\index{tolerance\-Hessianmag@{tolerance\-Hessianmag}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{tolerance\-Hessianmag}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ float {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf tolerance\-Hessianmag}}\label{classgcop_1_1ASPSA_a354023b6e3b82894a009c9305f80ae50}
+
+
+\-Tolerance for how high \-J can go from the current value to reject some. 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!tolerance\-J@{tolerance\-J}}
+\index{tolerance\-J@{tolerance\-J}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{tolerance\-J}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ float {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf tolerance\-J}}\label{classgcop_1_1ASPSA_a7d463a9828efd2df09fcafa395f55e6f}
+
+
+\-Tolerance for how high \-J can go from the current value to reject some. 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!ts@{ts}}
+\index{ts@{ts}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$double$>$\& {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf ts}}\label{classgcop_1_1ASPSA_a7ac709a204d8173f012415b6f420867d}
+
+
+times (\-N+1) vector 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!us@{us}}
+\index{us@{us}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$\& {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf us}}\label{classgcop_1_1ASPSA_ae2403eb6f10833d9576d4b85beaec7d0}
+
+
+controls (\-N) vector 
+
+
+
+\-Referenced by gcop\-::\-A\-S\-P\-S\-A$<$ T, n, c, \-\_\-np $>$\-::\-A\-S\-P\-S\-A().
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!uss1@{uss1}}
+\index{uss1@{uss1}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{uss1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf uss1}}\label{classgcop_1_1ASPSA_aa55916f76d00ece0878a08276036a69a}
+
+
+controls (\-N) vector perturb1 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!uss2@{uss2}}
+\index{uss2@{uss2}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{uss2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf uss2}}\label{classgcop_1_1ASPSA_a84d35fbbcda44880b8c4b93e0917c833}
+
+
+controls (\-N) vector perturb2 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!ustemp@{ustemp}}
+\index{ustemp@{ustemp}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{ustemp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf ustemp}}\label{classgcop_1_1ASPSA_a836baef7a5f1f74eaf9b20158bc7b413}
+
+
+control variation (\-N) vector 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!xs@{xs}}
+\index{xs@{xs}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-T$>$\& {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf xs}}\label{classgcop_1_1ASPSA_abe7ae5142b21de8f83f808175921714f}
+
+
+states (\-N+1) vector 
+
+\index{gcop\-::\-A\-S\-P\-S\-A@{gcop\-::\-A\-S\-P\-S\-A}!xss@{xss}}
+\index{xss@{xss}!gcop::ASPSA@{gcop\-::\-A\-S\-P\-S\-A}}
+\subsubsection[{xss}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int \-\_\-np = \-Dynamic$>$ std\-::vector$<$\-T$>$ {\bf gcop\-::\-A\-S\-P\-S\-A}$<$ \-T, n, c, \-\_\-np $>$\-::{\bf xss}}\label{classgcop_1_1ASPSA_a361befd8a789cf018bcd176f14701d0c}
+
+
+states (\-N+1) vector 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf aspsa.\-h}\end{DoxyCompactItemize}

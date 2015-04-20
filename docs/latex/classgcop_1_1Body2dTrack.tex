@@ -1,0 +1,515 @@
+\section{gcop\-:\-:\-Body2d\-Track \-Class \-Reference}
+\label{classgcop_1_1Body2dTrack}\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}}
+
+
+{\ttfamily \#include $<$body2dtrack.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-Track\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Body2dTrack__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body2d\-Track} ({\bf \-Body2d} \&{\bf sys}, int nf, double {\bf t0}, double {\bf tf}, double {\bf r}=25, bool {\bf odometry}=true, bool {\bf extforce}=false, bool {\bf forces}=false)
+\item 
+void {\bf \-Optp} (\-Vector\-Xd \&{\bf p}, const vector$<$ {\bf \-M3\-V3d} $>$ \&{\bf xs})
+\item 
+void {\bf \-Get} ({\bf \-M3\-V3d} \&x, double vd, double t) const 
+\item 
+void {\bf \-Make\-True} ()
+\item 
+void {\bf \-Add} (const \-Vector3d \&u, const {\bf \-M3\-V3d} \&x, double h)
+\item 
+void {\bf \-Add2} (const \-Vector3d \&u, const {\bf \-M3\-V3d} \&x, double h)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body2d} \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em system \end{DoxyCompactList}\item 
+double {\bf t0}
+\begin{DoxyCompactList}\small\item\em initial time around track \end{DoxyCompactList}\item 
+double {\bf tf}
+\begin{DoxyCompactList}\small\item\em final time around track \end{DoxyCompactList}\item 
+double {\bf r}
+\begin{DoxyCompactList}\small\item\em track radius \end{DoxyCompactList}\item 
+double {\bf w}
+\begin{DoxyCompactList}\small\item\em track width \end{DoxyCompactList}\item 
+double {\bf dmax}
+\begin{DoxyCompactList}\small\item\em sensor radius \end{DoxyCompactList}\item 
+bool {\bf odometry}
+\begin{DoxyCompactList}\small\item\em is there odometry available (this means that the velocity part of the state will be regarded as available measurements) \end{DoxyCompactList}\item 
+bool {\bf extforce}
+\begin{DoxyCompactList}\small\item\em is there a constant external force that need to be estimated \end{DoxyCompactList}\item 
+bool {\bf forces}
+\begin{DoxyCompactList}\small\item\em is there a constant external force that need to be estimated \end{DoxyCompactList}\item 
+vector$<$ double $>$ {\bf ts}
+\begin{DoxyCompactList}\small\item\em sequence of times (\-N+1 vector) \end{DoxyCompactList}\item 
+vector$<$ {\bf \-M3\-V3d} $>$ {\bf xs}
+\begin{DoxyCompactList}\small\item\em sequence of states x=(g,v) (\-N+1 vector) \end{DoxyCompactList}\item 
+vector$<$ \-Vector3d $>$ {\bf us}
+\begin{DoxyCompactList}\small\item\em sequence of inputs (\-N vector) \end{DoxyCompactList}\item 
+vector$<$ \-Vector2d $>$ {\bf ls}
+\begin{DoxyCompactList}\small\item\em landmark positions \end{DoxyCompactList}\item 
+vector$<$ bool $>$ {\bf observed}
+\begin{DoxyCompactList}\small\item\em was it observed \end{DoxyCompactList}\item 
+vector$<$ {\bf \-M3\-V3d} $>$ {\bf xos}
+\begin{DoxyCompactList}\small\item\em unoptimized trajectory \end{DoxyCompactList}\item 
+vector$<$ \-Vector3d $>$ {\bf uos}
+\begin{DoxyCompactList}\small\item\em unoptimized trajectory \end{DoxyCompactList}\item 
+bool {\bf init}
+\item 
+\-Vector\-Xd {\bf p}
+\begin{DoxyCompactList}\small\item\em observed landmark positions (2$\ast$m vector) and external force parameters (2 vector) \end{DoxyCompactList}\item 
+vector$<$ int $>$ {\bf pis}
+\begin{DoxyCompactList}\small\item\em observed landmark indices (m vector) \end{DoxyCompactList}\item 
+double {\bf pr}
+\begin{DoxyCompactList}\small\item\em feature radius \end{DoxyCompactList}\item 
+vector$<$ vector$<$ pair$<$ int, \*
+\-Vector2d $>$ $>$ $>$ {\bf \-Is}
+\begin{DoxyCompactList}\small\item\em \-N+1-\/vector of vectors of visible pose-\/to-\/feature indices. \end{DoxyCompactList}\item 
+vector$<$ vector$<$ pair$<$ int, \*
+\-Vector2d $>$ $>$ $>$ {\bf \-Js}
+\begin{DoxyCompactList}\small\item\em nf-\/vector of vectors of feature-\/to-\/pose indices indices \end{DoxyCompactList}\item 
+vector$<$ int $>$ {\bf cis}
+\begin{DoxyCompactList}\small\item\em if observed then this should map into the corresponding value in p \end{DoxyCompactList}\item 
+vector$<$ \-Vector3d $>$ {\bf vs}
+\begin{DoxyCompactList}\small\item\em odometry/gyro velocity measurements \end{DoxyCompactList}\item 
+double {\bf cp}
+\begin{DoxyCompactList}\small\item\em noise covariance of poses (assume spherical) \end{DoxyCompactList}\item 
+\-Vector3d {\bf cv}
+\begin{DoxyCompactList}\small\item\em noise covariance of odometry/gyro (assume diagonal) \end{DoxyCompactList}\item 
+\-Vector3d {\bf cw}
+\begin{DoxyCompactList}\small\item\em noise covariance of control forces (assume diagonal) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Pose-\/track in 2\-D. \-This is the simplese possible definition assuming point (unprojected) features e.\-g. from stereo/laser scans with uniform spherical covariance. \-The framework can be easily extended to any general 2d/3d non-\/uniform or projected features as well. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!\-Body2d\-Track@{\-Body2d\-Track}}
+\index{\-Body2d\-Track@{\-Body2d\-Track}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{\-Body2d\-Track}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Track\-::\-Body2d\-Track} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body2d} \&}]{sys, }
+\item[{int}]{nf, }
+\item[{double}]{t0, }
+\item[{double}]{tf, }
+\item[{double}]{r = {\ttfamily 25}, }
+\item[{bool}]{odometry = {\ttfamily true}, }
+\item[{bool}]{extforce = {\ttfamily false}, }
+\item[{bool}]{forces = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dTrack_a323b168157fbb9ff50c2661c7ff1521b}
+\-Pose graph (using simulated features around a circular track) 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & body2d system \\
+\hline
+{\em nf} & number of features (landmarks) \\
+\hline
+{\em t0} & start time \\
+\hline
+{\em tf} & end time \\
+\hline
+{\em r} & radius \\
+\hline
+{\em odometry} & is odometry available \\
+\hline
+{\em extforce} & treat constant external force in x-\/y as a parameter \\
+\hline
+{\em forces} & use uncertain forces in the cost function \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Get(), vs, xos, and xs.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!\-Add@{\-Add}}
+\index{\-Add@{\-Add}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{\-Add}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Track\-::\-Add} (
+\begin{DoxyParamCaption}
+\item[{const \-Vector3d \&}]{u, }
+\item[{const {\bf \-M3\-V3d} \&}]{x, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dTrack_abee6d8fd672fb130251b8886a838c1f8}
+
+
+\-References cis, cp, cv, cw, dmax, init, \-Is, \-Js, ls, observed, odometry, p, pis, gcop\-::random\-\_\-normal(), gcop\-::\-Body2d\-::\-Step(), sys, ts, uos, us, vs, xos, and xs.
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!\-Add2@{\-Add2}}
+\index{\-Add2@{\-Add2}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{\-Add2}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Track\-::\-Add2} (
+\begin{DoxyParamCaption}
+\item[{const \-Vector3d \&}]{u, }
+\item[{const {\bf \-M3\-V3d} \&}]{x, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dTrack_a3992f6bbebd414eab993be4a16d0977d}
+\-Add a new state/control to estimation vector 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & commanded control \\
+\hline
+{\em x} & true state (to generate measurements) \\
+\hline
+{\em h} & time-\/step \\
+\hline
+\end{DoxyParams}
+
+
+\-References cis, cp, cv, dmax, init, \-Is, \-Js, ls, observed, odometry, p, pis, gcop\-::random\-\_\-normal(), gcop\-::\-Body2d\-::\-Step(), sys, ts, uos, us, vs, xos, and xs.
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!\-Get@{\-Get}}
+\index{\-Get@{\-Get}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{\-Get}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Track\-::\-Get} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-M3\-V3d} \&}]{x, }
+\item[{double}]{vd, }
+\item[{double}]{t}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Body2dTrack_a92a36516c73ec71210b09d32f0ff3fb9}
+
+
+\-References gcop\-::\-S\-E2\-::\-Instance(), gcop\-::\-S\-E2\-::q2g(), r, and tf.
+
+
+
+\-Referenced by \-Body2d\-Track().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!\-Make\-True@{\-Make\-True}}
+\index{\-Make\-True@{\-Make\-True}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{\-Make\-True}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Track\-::\-Make\-True} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dTrack_ac5efab0998514876dc1dc423f2976d71}
+
+
+\-References ls, and r.
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!\-Optp@{\-Optp}}
+\index{\-Optp@{\-Optp}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{\-Optp}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Track\-::\-Optp} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{p, }
+\item[{const vector$<$ {\bf \-M3\-V3d} $>$ \&}]{xs}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dTrack_ada8bce6fec8cc407c1053b7cac2887cb}
+\-Given a sequence of poses gs, compute the optimal feature locations p 
+\begin{DoxyParams}{\-Parameters}
+{\em p} & a vector of feature locations \\
+\hline
+{\em gs} & a given vector of poses in \-S\-E(2) \\
+\hline
+\end{DoxyParams}
+
+
+\-References extforce, and \-Js.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!cis@{cis}}
+\index{cis@{cis}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{cis}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$int$>$ {\bf gcop\-::\-Body2d\-Track\-::cis}}\label{classgcop_1_1Body2dTrack_a9cdde1029ee9f63f340ebf0e35907dc0}
+
+
+if observed then this should map into the corresponding value in p 
+
+
+
+\-Referenced by \-Add(), \-Add2(), and gcop\-::\-Body2d\-Track\-Cost\-::\-L().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!cp@{cp}}
+\index{cp@{cp}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{cp}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Body2d\-Track\-::cp}}\label{classgcop_1_1Body2dTrack_a8c8f7cf1e09dd36a48590c6815fc3f57}
+
+
+noise covariance of poses (assume spherical) 
+
+
+
+\-Referenced by \-Add(), \-Add2(), and gcop\-::\-Body2d\-Track\-Cost\-::\-L().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!cv@{cv}}
+\index{cv@{cv}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{cv}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Body2d\-Track\-::cv}}\label{classgcop_1_1Body2dTrack_a04e3bdffda0bb805482f12a2330d7568}
+
+
+noise covariance of odometry/gyro (assume diagonal) 
+
+
+
+\-Referenced by \-Add(), \-Add2(), and gcop\-::\-Body2d\-Track\-Cost\-::\-L().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!cw@{cw}}
+\index{cw@{cw}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{cw}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Body2d\-Track\-::cw}}\label{classgcop_1_1Body2dTrack_ab69c2a98e90e33d77b0fb48c23eceb18}
+
+
+noise covariance of control forces (assume diagonal) 
+
+
+
+\-Referenced by \-Add(), and gcop\-::\-Body2d\-Track\-Cost\-::\-L().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!dmax@{dmax}}
+\index{dmax@{dmax}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{dmax}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Body2d\-Track\-::dmax}}\label{classgcop_1_1Body2dTrack_a467349a41cb5d3c7cc5b23031ce073b5}
+
+
+sensor radius 
+
+
+
+\-Referenced by \-Add(), and \-Add2().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!extforce@{extforce}}
+\index{extforce@{extforce}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{extforce}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body2d\-Track\-::extforce}}\label{classgcop_1_1Body2dTrack_a89d77c33b2dda951af91c6e058a0bce4}
+
+
+is there a constant external force that need to be estimated 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Track\-Cost\-::\-L(), \-Optp(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!forces@{forces}}
+\index{forces@{forces}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{forces}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body2d\-Track\-::forces}}\label{classgcop_1_1Body2dTrack_a0b1f5501e565688c314ebe3d72818263}
+
+
+is there a constant external force that need to be estimated 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Track\-Cost\-::\-L().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!init@{init}}
+\index{init@{init}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body2d\-Track\-::init}}\label{classgcop_1_1Body2dTrack_ac79196b2b9ba7f1a1869c51f475dabd5}
+
+
+\-Referenced by \-Add(), and \-Add2().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!\-Is@{\-Is}}
+\index{\-Is@{\-Is}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{\-Is}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$pair$<$int, \-Vector2d$>$ $>$ $>$ {\bf gcop\-::\-Body2d\-Track\-::\-Is}}\label{classgcop_1_1Body2dTrack_a5d55c274c019aaae6639286675fbecce}
+
+
+\-N+1-\/vector of vectors of visible pose-\/to-\/feature indices. 
+
+
+
+\-Referenced by \-Add(), \-Add2(), and gcop\-::\-Body2d\-Track\-Cost\-::\-L().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!\-Js@{\-Js}}
+\index{\-Js@{\-Js}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{\-Js}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$pair$<$int, \-Vector2d$>$ $>$ $>$ {\bf gcop\-::\-Body2d\-Track\-::\-Js}}\label{classgcop_1_1Body2dTrack_a91423be930f19b4ba67f70020462c5ad}
+
+
+nf-\/vector of vectors of feature-\/to-\/pose indices indices 
+
+
+
+\-Referenced by \-Add(), \-Add2(), \-Optp(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!ls@{ls}}
+\index{ls@{ls}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{ls}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Vector2d$>$ {\bf gcop\-::\-Body2d\-Track\-::ls}}\label{classgcop_1_1Body2dTrack_af7c669c1e15354a24234059c3a056040}
+
+
+landmark positions 
+
+
+
+\-Referenced by \-Add(), \-Add2(), gcop\-::\-Body2d\-Cost\-::\-L(), \-Make\-True(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!observed@{observed}}
+\index{observed@{observed}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{observed}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$bool$>$ {\bf gcop\-::\-Body2d\-Track\-::observed}}\label{classgcop_1_1Body2dTrack_a3f4394572fe88fa8d87b02cd94b6c412}
+
+
+was it observed 
+
+
+
+\-Referenced by \-Add(), \-Add2(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!odometry@{odometry}}
+\index{odometry@{odometry}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{odometry}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body2d\-Track\-::odometry}}\label{classgcop_1_1Body2dTrack_a0175c2fd9d3671cb9422ed04b977c238}
+
+
+is there odometry available (this means that the velocity part of the state will be regarded as available measurements) 
+
+
+
+\-Referenced by \-Add(), \-Add2(), and gcop\-::\-Body2d\-Track\-Cost\-::\-L().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!p@{p}}
+\index{p@{p}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{p}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Body2d\-Track\-::p}}\label{classgcop_1_1Body2dTrack_ae21aa03396bed0cecba10dfd9437c770}
+
+
+observed landmark positions (2$\ast$m vector) and external force parameters (2 vector) 
+
+
+
+\-Referenced by \-Add(), \-Add2(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!pis@{pis}}
+\index{pis@{pis}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{pis}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$int$>$ {\bf gcop\-::\-Body2d\-Track\-::pis}}\label{classgcop_1_1Body2dTrack_a2dcf980820f857fe8fadc9d6b472c226}
+
+
+observed landmark indices (m vector) 
+
+
+
+\-Referenced by \-Add(), \-Add2(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!pr@{pr}}
+\index{pr@{pr}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{pr}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Body2d\-Track\-::pr}}\label{classgcop_1_1Body2dTrack_a44ea2f0bab92d35a1f5b201473d9fa22}
+
+
+feature radius 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!r@{r}}
+\index{r@{r}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Body2d\-Track\-::r}}\label{classgcop_1_1Body2dTrack_aee6ef7bc1c2edea9eb98d819453ee27f}
+
+
+track radius 
+
+
+
+\-Referenced by \-Get(), \-Make\-True(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!sys@{sys}}
+\index{sys@{sys}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d}\& {\bf gcop\-::\-Body2d\-Track\-::sys}}\label{classgcop_1_1Body2dTrack_aef8b2e0d3511afd10197d57be65aa749}
+
+
+system 
+
+
+
+\-Referenced by \-Add(), and \-Add2().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!t0@{t0}}
+\index{t0@{t0}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{t0}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Body2d\-Track\-::t0}}\label{classgcop_1_1Body2dTrack_a769a9f5dd668c0672ca3df8e97a7939d}
+
+
+initial time around track 
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!tf@{tf}}
+\index{tf@{tf}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{tf}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Body2d\-Track\-::tf}}\label{classgcop_1_1Body2dTrack_a6465d82716194683bc5fcb95e7c0220b}
+
+
+final time around track 
+
+
+
+\-Referenced by \-Get().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!ts@{ts}}
+\index{ts@{ts}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf gcop\-::\-Body2d\-Track\-::ts}}\label{classgcop_1_1Body2dTrack_a851a8e990305a8b06c1d21ef457f699c}
+
+
+sequence of times (\-N+1 vector) 
+
+
+
+\-Referenced by \-Add(), and \-Add2().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!uos@{uos}}
+\index{uos@{uos}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{uos}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Vector3d$>$ {\bf gcop\-::\-Body2d\-Track\-::uos}}\label{classgcop_1_1Body2dTrack_a4098647c1bb6150ab0ac560871eabbbf}
+
+
+unoptimized trajectory 
+
+
+
+\-Referenced by \-Add(), \-Add2(), gcop\-::\-Body2d\-Track\-Cost\-::\-L(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!us@{us}}
+\index{us@{us}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Vector3d$>$ {\bf gcop\-::\-Body2d\-Track\-::us}}\label{classgcop_1_1Body2dTrack_aea1b855c00a56729b6895287f6d22a35}
+
+
+sequence of inputs (\-N vector) 
+
+
+
+\-Referenced by \-Add(), \-Add2(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!vs@{vs}}
+\index{vs@{vs}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{vs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Vector3d$>$ {\bf gcop\-::\-Body2d\-Track\-::vs}}\label{classgcop_1_1Body2dTrack_af0e7d5251579442de064418c5a2ae593}
+
+
+odometry/gyro velocity measurements 
+
+
+
+\-Referenced by \-Add(), \-Add2(), \-Body2d\-Track(), and gcop\-::\-Body2d\-Track\-Cost\-::\-L().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!w@{w}}
+\index{w@{w}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Body2d\-Track\-::w}}\label{classgcop_1_1Body2dTrack_a4dc202c7ad3ee5e459230bd809966b69}
+
+
+track width 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Cost\-::\-L(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!xos@{xos}}
+\index{xos@{xos}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{xos}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-M3\-V3d}$>$ {\bf gcop\-::\-Body2d\-Track\-::xos}}\label{classgcop_1_1Body2dTrack_a037e27565b3c35c4585052b0e8de26ab}
+
+
+unoptimized trajectory 
+
+
+
+\-Referenced by \-Add(), \-Add2(), and \-Body2d\-Track().
+
+\index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!xs@{xs}}
+\index{xs@{xs}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-M3\-V3d}$>$ {\bf gcop\-::\-Body2d\-Track\-::xs}}\label{classgcop_1_1Body2dTrack_a33335be53322b6aab899874f66e2a10d}
+
+
+sequence of states x=(g,v) (\-N+1 vector) 
+
+
+
+\-Referenced by \-Add(), \-Add2(), \-Body2d\-Track(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf body2dtrack.\-h}\item 
+lib/systems/{\bf body2dtrack.\-cc}\end{DoxyCompactItemize}

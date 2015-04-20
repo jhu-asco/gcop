@@ -1,0 +1,189 @@
+\section{gcop\-:\-:\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1InsImu}\index{gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$@{gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$}}
+
+
+{\ttfamily \#include $<$insimu.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1InsImu__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1InsImu__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, 1 $>$ {\bf \-Vectorzd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, 3 $>$ {\bf \-Matrixz3d}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nu $>$ {\bf \-Matrixzcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, 15 $>$ {\bf \-Matrixz15d}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-np $>$ {\bf \-Matrixzmd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Ins\-Imu} ()
+\item 
+bool {\bf operator()} ({\bf \-Vectorzd} \&y, double t, const {\bf \-Ins\-State} \&x, const {\bf \-Vectorcd} \&u, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrixz15d} $\ast$dydx=0, {\bf \-Matrixzcd} $\ast$dydu=0, {\bf \-Matrixzmd} $\ast$dydp=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Vector3d {\bf a0}
+\begin{DoxyCompactList}\small\item\em acceleration reference \end{DoxyCompactList}\item 
+\-Vector3d {\bf m0}
+\begin{DoxyCompactList}\small\item\em magnetometer reference \end{DoxyCompactList}\item 
+double {\bf sra}
+\begin{DoxyCompactList}\small\item\em acceleration measurement stdev \end{DoxyCompactList}\item 
+double {\bf srm}
+\begin{DoxyCompactList}\small\item\em magnetometer measurement stdev \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$class gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$}
+
+\-General sensor model
+
+\-Subclasses should provide implementation for the sensor function ()
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!\-Matrixz15d@{\-Matrixz15d}}
+\index{\-Matrixz15d@{\-Matrixz15d}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{\-Matrixz15d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, 15$>$ {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixz15d}}\label{classgcop_1_1InsImu_add45c95b116376b03b242415606fa043}
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!\-Matrixz3d@{\-Matrixz3d}}
+\index{\-Matrixz3d@{\-Matrixz3d}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{\-Matrixz3d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, 3$>$ {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixz3d}}\label{classgcop_1_1InsImu_ae169899cdc6ea19791979056ea0a3772}
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!\-Matrixzcd@{\-Matrixzcd}}
+\index{\-Matrixzcd@{\-Matrixzcd}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{\-Matrixzcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nu$>$ {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixzcd}}\label{classgcop_1_1InsImu_a0f17cdb1e21a210dbd726b5be83ec2fb}
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!\-Matrixzmd@{\-Matrixzmd}}
+\index{\-Matrixzmd@{\-Matrixzmd}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{\-Matrixzmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-np$>$ {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixzmd}}\label{classgcop_1_1InsImu_adaaa154e1e518ba11b154c7713d06714}
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1InsImu_aaba89d32e8dc8bf228948b32e9edd926}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor$<$ Ins\-State, 15, \-\_\-nu, \-\_\-np, Matrix$<$ double, \-\_\-nz, 1 $>$, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Sensor_aa6020c9508c5c144f02b31bac29423b0}.
+
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1InsImu_a8722e126a8b96e47d44e09a7f4be6119}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor$<$ Ins\-State, 15, \-\_\-nu, \-\_\-np, Matrix$<$ double, \-\_\-nz, 1 $>$, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Sensor_aaf2d4e9cc932ef866953ae710e2f8b7a}.
+
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!\-Vectorzd@{\-Vectorzd}}
+\index{\-Vectorzd@{\-Vectorzd}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{\-Vectorzd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, 1$>$ {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorzd}}\label{classgcop_1_1InsImu_aae804490e118729ecef440f078be5dcb}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!\-Ins\-Imu@{\-Ins\-Imu}}
+\index{\-Ins\-Imu@{\-Ins\-Imu}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{\-Ins\-Imu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz, int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Ins\-Imu} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1InsImu_ab8b8c9364d2592de2b443f6135b4c8a3}
+$<$ acceleration measurement stdev
+
+$<$ magnetometer measurement stdev 
+
+\-References gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::a0, gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::m0, gcop\-::\-Sensor$<$ Ins\-State, 15, \-\_\-nu, \-\_\-np, Matrix$<$ double, \-\_\-nz, 1 $>$, \-\_\-nz $>$\-::\-R, gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::sra, and gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::srm.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ bool {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorzd} \&}]{y, }
+\item[{double}]{t, }
+\item[{const {\bf \-Ins\-State} \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrixz15d} $\ast$}]{dydx = {\ttfamily 0}, }
+\item[{{\bf \-Matrixzcd} $\ast$}]{dydu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixzmd} $\ast$}]{dydp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1InsImu_a2d194e8eabe598bd31cec5bc1750a5e3}
+
+
+\-References gcop\-::\-Ins\-State\-::ba, gcop\-::\-S\-O3\-::hat(), gcop\-::\-S\-O3\-::\-Instance(), and gcop\-::\-Ins\-State\-::\-R.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!a0@{a0}}
+\index{a0@{a0}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{a0}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ \-Vector3d {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf a0}}\label{classgcop_1_1InsImu_a42cdf3a0317c253d6a85203077a77179}
+
+
+acceleration reference 
+
+
+
+\-Referenced by gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::\-Ins\-Imu().
+
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!m0@{m0}}
+\index{m0@{m0}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{m0}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ \-Vector3d {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf m0}}\label{classgcop_1_1InsImu_aa6dd98eacf455edd66c95078490c1232}
+
+
+magnetometer reference 
+
+
+
+\-Referenced by gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::\-Ins\-Imu().
+
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!sra@{sra}}
+\index{sra@{sra}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{sra}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf sra}}\label{classgcop_1_1InsImu_a1c3afc1b31683cf79fe3ab57c001f36b}
+
+
+acceleration measurement stdev 
+
+
+
+\-Referenced by gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::\-Ins\-Imu().
+
+\index{gcop\-::\-Ins\-Imu@{gcop\-::\-Ins\-Imu}!srm@{srm}}
+\index{srm@{srm}!gcop::InsImu@{gcop\-::\-Ins\-Imu}}
+\subsubsection[{srm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nz = 6, int \-\_\-nu = 6, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Ins\-Imu}$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::{\bf srm}}\label{classgcop_1_1InsImu_a05cbecee59d5d39301a04f7f74548b1c}
+
+
+magnetometer measurement stdev 
+
+
+
+\-Referenced by gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$\-::\-Ins\-Imu().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/sensors/{\bf insimu.\-h}\end{DoxyCompactItemize}

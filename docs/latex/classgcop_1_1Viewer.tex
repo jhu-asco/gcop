@@ -1,0 +1,643 @@
+\section{gcop\-:\-:\-Viewer \-Class \-Reference}
+\label{classgcop_1_1Viewer}\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}}
+
+
+{\ttfamily \#include $<$viewer.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Viewer\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=176pt]{classgcop_1_1Viewer__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Viewer} ()
+\item 
+virtual {\bf $\sim$\-Viewer} ()
+\item 
+void {\bf \-Init} (int $\ast$argc, char $\ast$$\ast$argv)
+\item 
+void {\bf \-Start} ()
+\item 
+void {\bf \-Add} ({\bf \-View} \&view)
+\item 
+void {\bf \-Remove} ({\bf \-View} \&view)
+\item 
+void {\bf \-Render\-Views} ()
+\item 
+void {\bf \-Draw\-Origin} (\-G\-L\-Uquadric\-Obj $\ast$qobj=0)
+\item 
+void {\bf \-Draw\-All} ()
+\item 
+void {\bf \-Set\-Color} (const float {\bf rgb}[3])
+\item 
+void {\bf \-Reshape} (int {\bf width}, int {\bf height})
+\item 
+void {\bf \-Render} ()
+\item 
+void {\bf \-Keyboard} (unsigned char ch, int x, int y)
+\item 
+void {\bf \-Mouse} (int button, int state, int x, int y)
+\item 
+void {\bf \-Motion} (int x, int y)
+\item 
+void {\bf \-Save\-Image} (const char $\ast$name=0)
+\item 
+void {\bf \-Set\-Camera} (float {\bf sphi}, float {\bf stheta}, float {\bf sx}, float {\bf sy}, float {\bf sz})
+\item 
+void {\bf \-Set\-Camera} (const float params[5])
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf \-Draw\-Frame} (\-G\-L\-Uquadric\-Obj $\ast$qobj=0)
+\item 
+static void {\bf \-Draw\-Arrow} (double l=1.\-0, \-G\-L\-Uquadric\-Obj $\ast$qobj=0)
+\item 
+static void {\bf \-Draw\-Arrow} (const double v[3], \-G\-L\-Uquadric\-Obj $\ast$qobj=0)
+\item 
+static void {\bf \-Draw\-Text} (const char $\ast$str, float size=.\-2)
+\item 
+static \-G\-Luint {\bf \-Load\-Texture} (const char $\ast$fname, int wrap=true)
+\item 
+static void {\bf \-Draw\-Circle} (double x=0, double y=0, double r=1, int slices=20)
+\item 
+static void {\bf \-Cylinder} (const double xa[3], const double xb[3], double r, int sd)
+\item 
+static void {\bf \-Set\-Color} (float r, float g, float b, float alpha=0)
+\item 
+static void {\bf \-Set\-Material} (\-G\-Lfloat ambient\-R, \-G\-Lfloat ambient\-G, \-G\-Lfloat ambient\-B, \-G\-Lfloat diffuse\-R, \-G\-Lfloat diffuse\-G, \-G\-Lfloat diffuse\-B, \-G\-Lfloat specular\-R, \-G\-Lfloat specular\-G, \-G\-Lfloat specular\-B, \-G\-Lfloat shininess)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float {\bf sphi}
+\item 
+float {\bf stheta}
+\item 
+float {\bf sx}
+\item 
+float {\bf sy}
+\item 
+float {\bf sz}
+\item 
+float {\bf z\-Near}
+\item 
+float {\bf z\-Far}
+\item 
+float {\bf aspect}
+\item 
+float {\bf xcam}
+\item 
+float {\bf ycam}
+\item 
+int {\bf width}
+\item 
+int {\bf height}
+\item 
+float {\bf os}
+\begin{DoxyCompactList}\small\item\em origin scale (how long are the origin axes, default is 1) \end{DoxyCompactList}\item 
+float {\bf rgb} [3]
+\begin{DoxyCompactList}\small\item\em default background (clear) color \end{DoxyCompactList}\item 
+int {\bf window}
+\item 
+bool {\bf animate}
+\begin{DoxyCompactList}\small\item\em whether to animate all trajectory frames \end{DoxyCompactList}\item 
+double {\bf anim\-Delay}
+\begin{DoxyCompactList}\small\item\em animation delay (def. is 30 ms) \end{DoxyCompactList}\item 
+bool {\bf save\-Frames}
+\begin{DoxyCompactList}\small\item\em whether to save frame images \end{DoxyCompactList}\item 
+const char $\ast$ {\bf frame\-Name}
+\begin{DoxyCompactList}\small\item\em frame image filename \end{DoxyCompactList}\item 
+bool {\bf save\-Display}
+\begin{DoxyCompactList}\small\item\em whether to continuously save display images at every refresh \end{DoxyCompactList}\item 
+const char $\ast$ {\bf display\-Name}
+\begin{DoxyCompactList}\small\item\em display image filename \end{DoxyCompactList}\item 
+int {\bf display\-No}
+\begin{DoxyCompactList}\small\item\em counter for display image filenames \end{DoxyCompactList}\item 
+bool {\bf save\-Snapshot}
+\begin{DoxyCompactList}\small\item\em save a single snapshot \end{DoxyCompactList}\item 
+bool {\bf alt\-Light}
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf \-Viewer} $\ast$ {\bf instance} = 0
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf down\-X}
+\item 
+int {\bf down\-Y}
+\item 
+int {\bf left\-Button}
+\item 
+int {\bf middle\-Button}
+\item 
+int {\bf right\-Button}
+\item 
+pthread\-\_\-mutex\-\_\-t {\bf mut}
+\item 
+std\-::map$<$ int, {\bf \-View} $\ast$ $>$ {\bf views}
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf aqobj}
+\item 
+unsigned char $\ast$ {\bf rgbimg}
+\begin{DoxyCompactList}\small\item\em rgb image used internally for saving \end{DoxyCompactList}\item 
+unsigned char $\ast$ {\bf ppmimg}
+\begin{DoxyCompactList}\small\item\em ppm image used internally for saving \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Light-\/weight \-Open\-G\-L viewer \-The viewer keeps a list of \char`\"{}views\char`\"{} of different objects and displays them. \-A view is simply defined as an object that \char`\"{}knows\char`\"{} how to be rendered\-: it provides its own \doxyref{\-Render()}{p.}{classgcop_1_1Viewer_a8ae98fb45585736d0c1108a4465ab6ee} function
+
+\-Author\-: \-Marin \-Kobilarov (mkobilar(at)robotics.\-usc.\-edu) 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Viewer@{\-Viewer}}
+\index{\-Viewer@{\-Viewer}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Viewer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Viewer\-::\-Viewer} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_aaedebacb31cba87de6e7d448ed8d6586}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!$\sim$\-Viewer@{$\sim$\-Viewer}}
+\index{$\sim$\-Viewer@{$\sim$\-Viewer}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{$\sim$\-Viewer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Viewer\-::$\sim$\-Viewer} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Viewer_a324e5a6a1532fe5eac3f3b0e4792b2da}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Add@{\-Add}}
+\index{\-Add@{\-Add}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Add}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Add} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-View} \&}]{view}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_a71c88f420466bd2efde082cc3f960d5f}
+\-Add a view 
+
+\-References gcop\-::\-View\-::id.
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Cylinder@{\-Cylinder}}
+\index{\-Cylinder@{\-Cylinder}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Cylinder}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Cylinder} (
+\begin{DoxyParamCaption}
+\item[{const double}]{xa[3], }
+\item[{const double}]{xb[3], }
+\item[{double}]{r, }
+\item[{int}]{sd}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Viewer_aca1bb13130b4a8fc9c34415bb1493fc1}
+\-Draw a cylinder between two points 
+\begin{DoxyParams}{\-Parameters}
+{\em xa} & starting point \\
+\hline
+{\em xb} & end point \\
+\hline
+{\em r} & radius \\
+\hline
+{\em sd} & unused \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Draw\-All@{\-Draw\-All}}
+\index{\-Draw\-All@{\-Draw\-All}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Draw\-All}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Draw\-All} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_aa5ea54eaecb836d0cb29c5000cc67c03}
+\-Draw all views and origin \index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Draw\-Arrow@{\-Draw\-Arrow}}
+\index{\-Draw\-Arrow@{\-Draw\-Arrow}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Draw\-Arrow}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Draw\-Arrow} (
+\begin{DoxyParamCaption}
+\item[{double}]{l = {\ttfamily 1.0}, }
+\item[{\-G\-L\-Uquadric\-Obj $\ast$}]{qobj = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Viewer_a975dafdde557dd9c7978332544542ade}
+\-Draws an arrow with length l 
+\begin{DoxyParams}{\-Parameters}
+{\em l} & length of arrow \\
+\hline
+{\em qobj} & quadratic object used for drawing (leave 0 to create a new one) \\
+\hline
+\end{DoxyParams}
+
+
+\-Referenced by gcop\-::\-Body2d\-View\-::\-Render(), gcop\-::\-Body2d\-Graph\-View\-::\-Render\-Frame(), gcop\-::\-Body3d\-Track\-View\-::\-Render\-Frame(), gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame(), and gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::\-Render\-Frame().
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Draw\-Arrow@{\-Draw\-Arrow}}
+\index{\-Draw\-Arrow@{\-Draw\-Arrow}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Draw\-Arrow}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Draw\-Arrow} (
+\begin{DoxyParamCaption}
+\item[{const double}]{v[3], }
+\item[{\-G\-L\-Uquadric\-Obj $\ast$}]{qobj = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Viewer_a969983430a62cd1442b1dbc4ad2cd544}
+\-Draws an arrow aligned with vector v 
+\begin{DoxyParams}{\-Parameters}
+{\em v} & 3x1 vector \\
+\hline
+{\em qobj} & quadratic object used for drawing (leave 0 to create a new one) \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-C\-R\-O\-S\-S, \-D\-I\-V3, \-D\-O\-T3, and \-N\-O\-R\-M3.
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Draw\-Circle@{\-Draw\-Circle}}
+\index{\-Draw\-Circle@{\-Draw\-Circle}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Draw\-Circle}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Draw\-Circle} (
+\begin{DoxyParamCaption}
+\item[{double}]{x = {\ttfamily 0}, }
+\item[{double}]{y = {\ttfamily 0}, }
+\item[{double}]{r = {\ttfamily 1}, }
+\item[{int}]{slices = {\ttfamily 20}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Viewer_a0663e189b19f791320a7c3402a8d61d0}
+\-Draw a circle 
+\begin{DoxyParams}{\-Parameters}
+{\em x} & x-\/coord \\
+\hline
+{\em y} & y-\/coord \\
+\hline
+{\em r} & radius \\
+\hline
+{\em slices} & resolution in slices \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Draw\-Frame@{\-Draw\-Frame}}
+\index{\-Draw\-Frame@{\-Draw\-Frame}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Draw\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Draw\-Frame} (
+\begin{DoxyParamCaption}
+\item[{\-G\-L\-Uquadric\-Obj $\ast$}]{qobj = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Viewer_a243a0ef2c3e25e7652376195624c2818}
+\-Draw frame at the origin with unit length axes \index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Draw\-Origin@{\-Draw\-Origin}}
+\index{\-Draw\-Origin@{\-Draw\-Origin}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Draw\-Origin}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Draw\-Origin} (
+\begin{DoxyParamCaption}
+\item[{\-G\-L\-Uquadric\-Obj $\ast$}]{qobj = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_a1ceb66428ef098251753ae43cff4ae5a}
+\-Draw origin. \index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Draw\-Text@{\-Draw\-Text}}
+\index{\-Draw\-Text@{\-Draw\-Text}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Draw\-Text}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Draw\-Text} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{str, }
+\item[{float}]{size = {\ttfamily .2}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Viewer_a526d6ef4021ba608858c2528db66ade7}
+\-Draws text 
+\begin{DoxyParams}{\-Parameters}
+{\em str} & string \\
+\hline
+{\em size} & font size \\
+\hline
+\end{DoxyParams}
+
+
+\-Referenced by gcop\-::\-Body2d\-Graph\-View\-::\-Render\-Frame(), and gcop\-::\-Posegraph2d\-View\-::\-Render\-Frame().
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Init@{\-Init}}
+\index{\-Init@{\-Init}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Init}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Init} (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_a865f6dee9e49da50751518265186ed85}
+\-Initialize the viewer with the command line args 
+
+\-References g\-\_\-viewer\-\_\-idle(), g\-\_\-viewer\-\_\-keyboard(), g\-\_\-viewer\-\_\-motion(), g\-\_\-viewer\-\_\-mouse(), g\-\_\-viewer\-\_\-render(), g\-\_\-viewer\-\_\-reshape(), and \-Init\-Viewer\-Window().
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Keyboard@{\-Keyboard}}
+\index{\-Keyboard@{\-Keyboard}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Keyboard}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Keyboard} (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{ch, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_aaa9481eb607947e61cb338c5879c20db}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Load\-Texture@{\-Load\-Texture}}
+\index{\-Load\-Texture@{\-Load\-Texture}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Load\-Texture}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-Luint {\bf \-Viewer\-::\-Load\-Texture} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{fname, }
+\item[{int}]{wrap = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Viewer_ac3816cdf16f91a46f2d047f776617ea2}
+
+
+\-Referenced by gcop\-::\-Dem\-View\-::\-Set\-Texture().
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Motion@{\-Motion}}
+\index{\-Motion@{\-Motion}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Motion}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Motion} (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_aae7323381b5aaed9fb10567321e733b8}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Mouse@{\-Mouse}}
+\index{\-Mouse@{\-Mouse}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Mouse}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Mouse} (
+\begin{DoxyParamCaption}
+\item[{int}]{button, }
+\item[{int}]{state, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_a5f77797bb61844848856445ba9db147e}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Remove@{\-Remove}}
+\index{\-Remove@{\-Remove}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Remove}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Remove} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-View} \&}]{view}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_adf06dd09d3d0f0ab909ee8914e8ecd68}
+\-Remove a view 
+
+\-References gcop\-::\-View\-::id.
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_a8ae98fb45585736d0c1108a4465ab6ee}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Render\-Views@{\-Render\-Views}}
+\index{\-Render\-Views@{\-Render\-Views}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Render\-Views}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Render\-Views} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_a312b2fccf6815f6f9a26c0f07c40727c}
+\-Render all views. \-This is automatically called by graphics engine. \-You can call this method only if you want to render the views immediately 
+
+\-References gcop\-::\-View\-::\-Lock(), gcop\-::\-View\-::\-Render(), gcop\-::\-View\-::\-Render\-Frame(), and gcop\-::\-View\-::\-Unlock().
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Reshape@{\-Reshape}}
+\index{\-Reshape@{\-Reshape}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Reshape}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Reshape} (
+\begin{DoxyParamCaption}
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_a3b16dac78505c3c46b79153846d5289f}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Save\-Image@{\-Save\-Image}}
+\index{\-Save\-Image@{\-Save\-Image}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Save\-Image}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Save\-Image} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_aac6115b6ce8a4c6999ce1e85df3494df}
+\-Save an image of the current display 
+\begin{DoxyParams}{\-Parameters}
+{\em name} & file name (if omited then the name will be \char`\"{}\%s\-\_\-\%04d.\-ppm\char`\"{} where s is \doxyref{\-Viewer\-::frame\-Name}{p.}{classgcop_1_1Viewer_ac2c1a29cfbea2020ff59cebb048f358a} and i is a global index \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Set\-Camera@{\-Set\-Camera}}
+\index{\-Set\-Camera@{\-Set\-Camera}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Set\-Camera}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Set\-Camera} (
+\begin{DoxyParamCaption}
+\item[{float}]{sphi, }
+\item[{float}]{stheta, }
+\item[{float}]{sx, }
+\item[{float}]{sy, }
+\item[{float}]{sz}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_ad89f2887a6cd6a64397183a0a68d085a}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Set\-Camera@{\-Set\-Camera}}
+\index{\-Set\-Camera@{\-Set\-Camera}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Set\-Camera}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Set\-Camera} (
+\begin{DoxyParamCaption}
+\item[{const float}]{params[5]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_ad002aa6990e81c37e6baaeba5fe10048}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Set\-Color@{\-Set\-Color}}
+\index{\-Set\-Color@{\-Set\-Color}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Set\-Color}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Set\-Color} (
+\begin{DoxyParamCaption}
+\item[{const float}]{rgb[3]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_a3e841a5389de43fa684bc4fa7a0184cb}
+\-Set the default background (clear) color 
+\begin{DoxyParams}{\-Parameters}
+{\em rgb} & rgb color \\
+\hline
+\end{DoxyParams}
+
+
+\-Referenced by gcop\-::\-Uuv\-View$<$ c $>$\-::\-Render(), gcop\-::\-Kinbody3d\-View$<$ \-\_\-nu $>$\-::\-Render(), gcop\-::\-Posegraph2d\-View\-::\-Render\-Frame(), gcop\-::\-Body3d\-Track\-View\-::\-Render\-Frame(), gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame(), and gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::\-Render\-Frame().
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Set\-Color@{\-Set\-Color}}
+\index{\-Set\-Color@{\-Set\-Color}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Set\-Color}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Set\-Color} (
+\begin{DoxyParamCaption}
+\item[{float}]{r, }
+\item[{float}]{g, }
+\item[{float}]{b, }
+\item[{float}]{alpha = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Viewer_a5e628f6a1213c0e229e1cf1de7b5c45e}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Set\-Material@{\-Set\-Material}}
+\index{\-Set\-Material@{\-Set\-Material}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Set\-Material}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Set\-Material} (
+\begin{DoxyParamCaption}
+\item[{\-G\-Lfloat}]{ambient\-R, }
+\item[{\-G\-Lfloat}]{ambient\-G, }
+\item[{\-G\-Lfloat}]{ambient\-B, }
+\item[{\-G\-Lfloat}]{diffuse\-R, }
+\item[{\-G\-Lfloat}]{diffuse\-G, }
+\item[{\-G\-Lfloat}]{diffuse\-B, }
+\item[{\-G\-Lfloat}]{specular\-R, }
+\item[{\-G\-Lfloat}]{specular\-G, }
+\item[{\-G\-Lfloat}]{specular\-B, }
+\item[{\-G\-Lfloat}]{shininess}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Viewer_ab07c312815237c1dc77a3dd7788178f1}
+
+
+\-Referenced by gcop\-::\-Normal2d\-View$<$ \-\_\-n $>$\-::\-Render().
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!\-Start@{\-Start}}
+\index{\-Start@{\-Start}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{\-Start}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Viewer\-::\-Start} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Viewer_a94217c4fa59ee1dd6835f59922f4fcb9}
+\-Start the viewer and loop until the program is killed \-N\-O\-T\-E\-: \-This should be done in the main process thread and not in a seperate thread! 
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!alt\-Light@{alt\-Light}}
+\index{alt\-Light@{alt\-Light}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{alt\-Light}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Viewer\-::alt\-Light}}\label{classgcop_1_1Viewer_a25c77f8e7d0ee3c8d29eeb7539d37e21}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!animate@{animate}}
+\index{animate@{animate}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{animate}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Viewer\-::animate}}\label{classgcop_1_1Viewer_a385708d44bba1c3fd7d5f8711184fb06}
+
+
+whether to animate all trajectory frames 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!anim\-Delay@{anim\-Delay}}
+\index{anim\-Delay@{anim\-Delay}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{anim\-Delay}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Viewer\-::anim\-Delay}}\label{classgcop_1_1Viewer_ae7afcdf20700aefafc36f97c724c479c}
+
+
+animation delay (def. is 30 ms) 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!aqobj@{aqobj}}
+\index{aqobj@{aqobj}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{aqobj}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Viewer\-::aqobj}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Viewer_a336639e5cdda542ba81d6738bd7bc1dc}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!aspect@{aspect}}
+\index{aspect@{aspect}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{aspect}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::aspect}}\label{classgcop_1_1Viewer_a7f55b7ff5dbdce3c78fc552344042b90}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!display\-Name@{display\-Name}}
+\index{display\-Name@{display\-Name}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{display\-Name}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ {\bf gcop\-::\-Viewer\-::display\-Name}}\label{classgcop_1_1Viewer_a40e031ddeed87ddec63c22a86056f6ae}
+
+
+display image filename 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!display\-No@{display\-No}}
+\index{display\-No@{display\-No}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{display\-No}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Viewer\-::display\-No}}\label{classgcop_1_1Viewer_a3f26b8da8d07f5d6aecd9b1d7b104916}
+
+
+counter for display image filenames 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!down\-X@{down\-X}}
+\index{down\-X@{down\-X}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{down\-X}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Viewer\-::down\-X}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Viewer_a2eb0d26e2694f89186aadb78ad1893ac}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!down\-Y@{down\-Y}}
+\index{down\-Y@{down\-Y}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{down\-Y}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Viewer\-::down\-Y}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Viewer_a2bb2e584f706afeeb54c557189333d1b}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!frame\-Name@{frame\-Name}}
+\index{frame\-Name@{frame\-Name}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{frame\-Name}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ {\bf gcop\-::\-Viewer\-::frame\-Name}}\label{classgcop_1_1Viewer_ac2c1a29cfbea2020ff59cebb048f358a}
+
+
+frame image filename 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!height@{height}}
+\index{height@{height}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{height}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Viewer\-::height}}\label{classgcop_1_1Viewer_a1141464a8b36193ad1460fcb9b7450cd}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!instance@{instance}}
+\index{instance@{instance}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Viewer} $\ast$ {\bf \-Viewer\-::instance} = 0\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Viewer_a53c3dca921442983d13f335d0e8a7e20}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!left\-Button@{left\-Button}}
+\index{left\-Button@{left\-Button}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{left\-Button}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Viewer\-::left\-Button}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Viewer_abefba5b5921c8195ab3867e0100ac997}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!middle\-Button@{middle\-Button}}
+\index{middle\-Button@{middle\-Button}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{middle\-Button}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Viewer\-::middle\-Button}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Viewer_ab71b098f7c4ef5f69fce0b9b98bb97ce}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!mut@{mut}}
+\index{mut@{mut}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{mut}]{\setlength{\rightskip}{0pt plus 5cm}pthread\-\_\-mutex\-\_\-t {\bf gcop\-::\-Viewer\-::mut}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Viewer_a66d7997dc0974aa87c03e733c9ab030e}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!os@{os}}
+\index{os@{os}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{os}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::os}}\label{classgcop_1_1Viewer_a1de24cccff9ff2a3ec2b7ab2770aad52}
+
+
+origin scale (how long are the origin axes, default is 1) 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!ppmimg@{ppmimg}}
+\index{ppmimg@{ppmimg}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{ppmimg}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char$\ast$ {\bf gcop\-::\-Viewer\-::ppmimg}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Viewer_a18d49de1796383b709dba65f20cc46b9}
+
+
+ppm image used internally for saving 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!rgb@{rgb}}
+\index{rgb@{rgb}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{rgb}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::rgb}[3]}\label{classgcop_1_1Viewer_a49051e5f9aa22e882bba23ec77f20225}
+
+
+default background (clear) color 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!rgbimg@{rgbimg}}
+\index{rgbimg@{rgbimg}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{rgbimg}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char$\ast$ {\bf gcop\-::\-Viewer\-::rgbimg}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Viewer_a1eeb8cfdba6a05d7f697fb8399f15232}
+
+
+rgb image used internally for saving 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!right\-Button@{right\-Button}}
+\index{right\-Button@{right\-Button}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{right\-Button}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Viewer\-::right\-Button}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Viewer_aeddff3caf16065ea9a9cd01e612c3acd}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!save\-Display@{save\-Display}}
+\index{save\-Display@{save\-Display}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{save\-Display}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Viewer\-::save\-Display}}\label{classgcop_1_1Viewer_a2db31d21ea9b5569b55aeb224cae6a25}
+
+
+whether to continuously save display images at every refresh 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!save\-Frames@{save\-Frames}}
+\index{save\-Frames@{save\-Frames}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{save\-Frames}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Viewer\-::save\-Frames}}\label{classgcop_1_1Viewer_a209c7c73f4cee2683e480d5d89ff028b}
+
+
+whether to save frame images 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!save\-Snapshot@{save\-Snapshot}}
+\index{save\-Snapshot@{save\-Snapshot}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{save\-Snapshot}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Viewer\-::save\-Snapshot}}\label{classgcop_1_1Viewer_a3ade4dea9f7afe715467066a5287afd1}
+
+
+save a single snapshot 
+
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!sphi@{sphi}}
+\index{sphi@{sphi}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{sphi}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::sphi}}\label{classgcop_1_1Viewer_a8494387ec50df3d556a758dd1d75faf7}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!stheta@{stheta}}
+\index{stheta@{stheta}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{stheta}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::stheta}}\label{classgcop_1_1Viewer_a6168660ca1583ee2df65fafe68da5177}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!sx@{sx}}
+\index{sx@{sx}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{sx}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::sx}}\label{classgcop_1_1Viewer_a795115fb27e66c3dca16d471cbffa993}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!sy@{sy}}
+\index{sy@{sy}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{sy}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::sy}}\label{classgcop_1_1Viewer_ab2210024f6101243af2808bf95bcb3d9}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!sz@{sz}}
+\index{sz@{sz}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{sz}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::sz}}\label{classgcop_1_1Viewer_a5549b04b40d154de3c7be87bc0746596}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!views@{views}}
+\index{views@{views}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{views}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$int, {\bf \-View}$\ast$$>$ {\bf gcop\-::\-Viewer\-::views}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Viewer_a291a4a7b5f1c3a7f2b0c62adb990005d}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!width@{width}}
+\index{width@{width}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Viewer\-::width}}\label{classgcop_1_1Viewer_a01759b7f710835a1a57c9ccfada2c85e}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!window@{window}}
+\index{window@{window}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{window}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Viewer\-::window}}\label{classgcop_1_1Viewer_af0da00b81a88b69f9a61ce969c67379a}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!xcam@{xcam}}
+\index{xcam@{xcam}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{xcam}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::xcam}}\label{classgcop_1_1Viewer_a5c6ce38d72c61a19a9ac62ca46fc28ba}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!ycam@{ycam}}
+\index{ycam@{ycam}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{ycam}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::ycam}}\label{classgcop_1_1Viewer_a422fa5a2e0a9f926b7fee33a85bcf06b}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!z\-Far@{z\-Far}}
+\index{z\-Far@{z\-Far}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{z\-Far}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::z\-Far}}\label{classgcop_1_1Viewer_a62ad8809db19a10ca8f9413c291cd416}
+\index{gcop\-::\-Viewer@{gcop\-::\-Viewer}!z\-Near@{z\-Near}}
+\index{z\-Near@{z\-Near}!gcop::Viewer@{gcop\-::\-Viewer}}
+\subsubsection[{z\-Near}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Viewer\-::z\-Near}}\label{classgcop_1_1Viewer_ae89d7cbf64016242f0f99e360d280bdc}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf viewer.\-h}\item 
+lib/views/{\bf viewer.\-cc}\end{DoxyCompactItemize}

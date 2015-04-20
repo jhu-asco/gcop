@@ -1,0 +1,171 @@
+\section{gcop\-:\-:\-Mbs\-View \-Class \-Reference}
+\label{classgcop_1_1MbsView}\index{gcop\-::\-Mbs\-View@{gcop\-::\-Mbs\-View}}
+
+
+{\ttfamily \#include $<$mbsview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Mbs\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1MbsView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Mbs\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1MbsView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Mbs\-View} (const {\bf \-Mbs} \&{\bf sys}, vector$<$ {\bf \-Mbs\-State} $>$ $\ast${\bf xs}=0, vector$<$ \-Vector\-Xd $>$ $\ast${\bf us}=0)
+\item 
+virtual {\bf $\sim$\-Mbs\-View} ()
+\item 
+virtual void {\bf \-Render} (const {\bf \-Mbs\-State} $\ast$x, const \-Vector\-Xd $\ast$u=0)
+\item 
+void {\bf \-Render} (const vector$<$ {\bf \-Mbs\-State} $>$ $\ast${\bf xs}, const vector$<$ \-Vector\-Xd $>$ $\ast${\bf us}=0, bool rs=true, int is=-\/1, int ie=-\/1, int {\bf dis}=1, int {\bf dit}=1, bool dl=false)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Mbs} \& {\bf sys}
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf qobj}
+\item 
+double {\bf dir\-Size}
+\item 
+vector$<$ {\bf \-Geom3d\-View} $\ast$ $>$ {\bf geom\-Views}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Mbs\-View@{gcop\-::\-Mbs\-View}!\-Mbs\-View@{\-Mbs\-View}}
+\index{\-Mbs\-View@{\-Mbs\-View}!gcop::MbsView@{gcop\-::\-Mbs\-View}}
+\subsubsection[{\-Mbs\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mbs\-View\-::\-Mbs\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Mbs} \&}]{sys, }
+\item[{vector$<$ {\bf \-Mbs\-State} $>$ $\ast$}]{xs = {\ttfamily 0}, }
+\item[{vector$<$ \-Vector\-Xd $>$ $\ast$}]{us = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1MbsView_a6ae365d839bb7b9c3f80e5952f6ff4ab}
+\-Create a particle view of trajectory traj 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & particle \\
+\hline
+{\em xs} & trajectory \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$\-::line\-Width, qobj, and gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$\-::rgba.
+
+\index{gcop\-::\-Mbs\-View@{gcop\-::\-Mbs\-View}!$\sim$\-Mbs\-View@{$\sim$\-Mbs\-View}}
+\index{$\sim$\-Mbs\-View@{$\sim$\-Mbs\-View}!gcop::MbsView@{gcop\-::\-Mbs\-View}}
+\subsubsection[{$\sim$\-Mbs\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mbs\-View\-::$\sim$\-Mbs\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1MbsView_a58dcbd2e950ab7edfeb2e4b89a943c5b}
+
+
+\-References qobj.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Mbs\-View@{gcop\-::\-Mbs\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::MbsView@{gcop\-::\-Mbs\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Mbs\-State} $\ast$}]{x, }
+\item[{const \-Vector\-Xd $\ast$}]{u = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1MbsView_a2344ae8497ed20e8572eb2327f0756c0}
+
+
+\-Implements {\bf gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a5591c11e0516e2993231547ec82cd763}.
+
+
+
+\-References geom\-Views, gcop\-::\-Mbs\-State\-::gs, gcop\-::\-Mbs\-::nb, sys, and gcop\-::\-Geom3d\-View\-::\-Transform().
+
+\index{gcop\-::\-Mbs\-View@{gcop\-::\-Mbs\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::MbsView@{gcop\-::\-Mbs\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ {\bf \-Mbs\-State} $>$ $\ast$}]{xs, }
+\item[{const vector$<$ \-Vector\-Xd $>$ $\ast$}]{us = {\ttfamily 0}, }
+\item[{bool}]{rs = {\ttfamily true}, }
+\item[{int}]{is = {\ttfamily -\/1}, }
+\item[{int}]{ie = {\ttfamily -\/1}, }
+\item[{int}]{dis = {\ttfamily 1}, }
+\item[{int}]{dit = {\ttfamily 1}, }
+\item[{bool}]{dl = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1MbsView_add222d683b8e4a249fc8cc7e4f40d6e5}
+\-Render a trajectory 
+\begin{DoxyParams}{\-Parameters}
+{\em traj} & trajectory \\
+\hline
+{\em rs} & render state \\
+\hline
+{\em is} & start index \\
+\hline
+{\em ie} & end index \\
+\hline
+{\em dis} & index step for rendering bodies along trajectory \\
+\hline
+{\em dit} & index step for rendering states(points) along trajectory \\
+\hline
+{\em dl} & always draw last state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6a4cf72f0a0e380ad69397be162b3ee9}.
+
+
+
+\-References gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$\-::dis, gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$\-::dit, gcop\-::\-Mbs\-State\-::gs, gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$\-::line\-Width, gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$\-::\-Render(), gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$\-::rgba, and gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$\-::\-Set\-Color().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Mbs\-View@{gcop\-::\-Mbs\-View}!dir\-Size@{dir\-Size}}
+\index{dir\-Size@{dir\-Size}!gcop::MbsView@{gcop\-::\-Mbs\-View}}
+\subsubsection[{dir\-Size}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Mbs\-View\-::dir\-Size}}\label{classgcop_1_1MbsView_a86bea7286a91663216d700932c62963d}
+\index{gcop\-::\-Mbs\-View@{gcop\-::\-Mbs\-View}!geom\-Views@{geom\-Views}}
+\index{geom\-Views@{geom\-Views}!gcop::MbsView@{gcop\-::\-Mbs\-View}}
+\subsubsection[{geom\-Views}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Geom3d\-View}$\ast$$>$ {\bf gcop\-::\-Mbs\-View\-::geom\-Views}}\label{classgcop_1_1MbsView_a33ba3823a23339de22ea4401d5ef409a}
+
+
+\-Referenced by gcop\-::\-Airbot\-View\-::\-Airbot\-View(), gcop\-::\-Airm\-View\-::\-Airm\-View(), gcop\-::\-Chain\-View\-::\-Chain\-View(), \-Render(), and gcop\-::\-Snake\-View\-::\-Snake\-View().
+
+\index{gcop\-::\-Mbs\-View@{gcop\-::\-Mbs\-View}!qobj@{qobj}}
+\index{qobj@{qobj}!gcop::MbsView@{gcop\-::\-Mbs\-View}}
+\subsubsection[{qobj}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Mbs\-View\-::qobj}}\label{classgcop_1_1MbsView_ae422110d79b5b6487a78e637c7dcccd4}
+
+
+\-Referenced by \-Mbs\-View(), and $\sim$\-Mbs\-View().
+
+\index{gcop\-::\-Mbs\-View@{gcop\-::\-Mbs\-View}!sys@{sys}}
+\index{sys@{sys}!gcop::MbsView@{gcop\-::\-Mbs\-View}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Mbs}\& {\bf gcop\-::\-Mbs\-View\-::sys}}\label{classgcop_1_1MbsView_a4b0398406c031cba9b82693863517b67}
+
+
+\-Referenced by \-Render(), and gcop\-::\-Chain\-View\-::$\sim$\-Chain\-View().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf mbsview.\-h}\item 
+lib/views/{\bf mbsview.\-cc}\end{DoxyCompactItemize}

@@ -1,0 +1,903 @@
+\section{gcop\-:\-:\-Mbs \-Class \-Reference}
+\label{classgcop_1_1Mbs}\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}}
+
+
+{\ttfamily \#include $<$mbs.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Mbs\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Mbs__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Mbs\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Mbs__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Mbs} (int {\bf nb}, int c, bool {\bf fixed}=false)
+\item 
+virtual {\bf $\sim$\-Mbs} ()
+\item 
+void {\bf \-Init} ()
+\item 
+double {\bf \-Step} ({\bf \-Mbs\-State} \&xb, double {\bf t}, const {\bf \-Mbs\-State} \&xa, const \-Vector\-Xd \&u, double h, const \-Vector\-Xd $\ast$p=0, \-Matrix\-Xd $\ast$\-A=0, \-Matrix\-Xd $\ast$\-B=0, \-Matrix\-Xd $\ast$\-C=0)
+\item 
+double {\bf \-Euler\-Step} ({\bf \-Mbs\-State} \&xb, double {\bf t}, const {\bf \-Mbs\-State} \&xa, const \-Vector\-Xd \&u, double h, \-Matrix\-Xd $\ast$\-A=0, \-Matrix\-Xd $\ast$\-B=0)
+\item 
+double {\bf \-Heun\-Step} ({\bf \-Mbs\-State} \&xb, double {\bf t}, const {\bf \-Mbs\-State} \&xa, const \-Vector\-Xd \&u, double h, \-Matrix\-Xd $\ast$\-A=0, \-Matrix\-Xd $\ast$\-B=0)
+\item 
+double {\bf \-Trap\-Step} ({\bf \-Mbs\-State} \&xb, double {\bf t}, const {\bf \-Mbs\-State} \&xa, const \-Vector\-Xd \&u, double h, \-Matrix\-Xd $\ast$\-A, \-Matrix\-Xd $\ast$\-B)
+\item 
+void {\bf \-N\-E} (\-Vector\-Xd \&e, const \-Vector\-Xd \&vdr, {\bf \-Mbs\-State} \&xb, double {\bf t}, const {\bf \-Mbs\-State} \&xa, const \-Vector\-Xd \&u, double h)
+\item 
+void {\bf \-I\-D} (\-Vector\-Xd \&f, double {\bf t}, const {\bf \-Mbs\-State} \&{\bf x}, const \-Vector\-Xd \&u)
+\item 
+void {\bf \-Bias} (\-Vector\-Xd \&b, double {\bf t}, const {\bf \-Mbs\-State} \&{\bf x}) const 
+\item 
+void {\bf \-D\-Bias} (\-Vector\-Xd \&b, double {\bf t}, const {\bf \-Mbs\-State} \&xb, const {\bf \-Mbs\-State} \&xa, double h)
+\item 
+void {\bf \-F\-K} ({\bf \-Mbs\-State} \&{\bf x})
+\item 
+void {\bf \-K\-Step} ({\bf \-Mbs\-State} \&xb, const {\bf \-Mbs\-State} \&xa, double h, bool impl=true)
+\item 
+void {\bf \-Newton\-Euler\-Jacobian} (\-Matrix\-Xd \&\-De, const {\bf \-Mbs\-State} \&xb, const {\bf \-Mbs\-State} \&xa, double h)
+\item 
+void {\bf \-Mass} (\-Matrix\-Xd \&\-M, const {\bf \-Mbs\-State} \&{\bf x}) const 
+\item 
+void {\bf \-Acc} (\-Vector\-Xd \&a, double {\bf t}, const {\bf \-Mbs\-State} \&{\bf x}, const \-Vector\-Xd \&u, double h)
+\item 
+virtual void {\bf \-Force} (\-Vector\-Xd \&f, double {\bf t}, const {\bf \-Mbs\-State} \&{\bf x}, const \-Vector\-Xd \&u, \-Matrix\-Xd $\ast$\-A=0, \-Matrix\-Xd $\ast$\-B=0)
+\item 
+void {\bf \-Rec} ({\bf \-Mbs\-State} \&{\bf x}, double h)
+\item 
+void {\bf \-Clamp\-Pose} ({\bf \-Mbs\-State} \&{\bf x}, int i) const 
+\item 
+void {\bf \-Check\-Limits} ({\bf \-Mbs\-State} \&{\bf x}, int i, double h) const 
+\item 
+void {\bf \-Get\-Impulse} (double f, const {\bf \-Mbs\-State} \&{\bf x}, int i, double h) const 
+\item 
+void {\bf \-Clamp\-Velocity} ({\bf \-Mbs\-State} \&{\bf x}) const 
+\item 
+void {\bf print} (const {\bf \-Mbs\-State} \&{\bf x}) const 
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf nb}
+\begin{DoxyCompactList}\small\item\em number of rigid bodies (including base body) \end{DoxyCompactList}\item 
+bool {\bf fixed}
+\begin{DoxyCompactList}\small\item\em whether base body is fixed \end{DoxyCompactList}\item 
+vector$<$ {\bf \-Body3d}$<$$>$ $>$ {\bf links}
+\begin{DoxyCompactList}\small\item\em links \end{DoxyCompactList}\item 
+vector$<$ {\bf \-Joint} $>$ {\bf joints}
+\begin{DoxyCompactList}\small\item\em joints \end{DoxyCompactList}\item 
+vector$<$ {\bf \-Matrix6d} $>$ {\bf \-Ips}
+\begin{DoxyCompactList}\small\item\em \-A'$\ast$\-I$\ast$\-A (nb) vector. \end{DoxyCompactList}\item 
+vector$<$ int $>$ {\bf pis}
+\begin{DoxyCompactList}\small\item\em parent indexes \end{DoxyCompactList}\item 
+vector$<$ vector$<$ int $>$ $>$ {\bf cs}
+\begin{DoxyCompactList}\small\item\em child lists \end{DoxyCompactList}\item 
+\-Vector3d {\bf ag}
+\begin{DoxyCompactList}\small\item\em acceleration due to gravity (0, 0, -\/9.\-81) by default \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf damping}
+\begin{DoxyCompactList}\small\item\em joint damping vector \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf lb\-K}
+\begin{DoxyCompactList}\small\item\em joint lower bound \-K term \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf lb\-D}
+\begin{DoxyCompactList}\small\item\em joint lower bound \-D term \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf ub\-K}
+\begin{DoxyCompactList}\small\item\em joint upper bound \-K term \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf ub\-D}
+\begin{DoxyCompactList}\small\item\em joint upper bound \-D term \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf fsl}
+\begin{DoxyCompactList}\small\item\em spring force lower bound \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf fsu}
+\begin{DoxyCompactList}\small\item\em spring force upper bound \end{DoxyCompactList}\item 
+int {\bf basetype}
+\begin{DoxyCompactList}\small\item\em type of base (used for interpreting base-\/body forces) \end{DoxyCompactList}\item 
+{\bf \-S\-E3} \& {\bf se3}
+\begin{DoxyCompactList}\small\item\em singleton reference for performing \-S\-E(3) operations \end{DoxyCompactList}\item 
+int {\bf method}
+\begin{DoxyCompactList}\small\item\em type of integration method employed (\-Euler by default) \end{DoxyCompactList}\item 
+int {\bf iters}
+\begin{DoxyCompactList}\small\item\em max number of \-Newton iterations used in symplectic method \end{DoxyCompactList}\item 
+bool {\bf debug}
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const int {\bf \-F\-I\-X\-E\-D\-B\-A\-S\-E} = 0
+\begin{DoxyCompactList}\small\item\em fixed base \end{DoxyCompactList}\item 
+static const int {\bf \-F\-L\-O\-A\-T\-B\-A\-S\-E} = 1
+\begin{DoxyCompactList}\small\item\em fully controllable floating base \end{DoxyCompactList}\item 
+static const int {\bf \-A\-I\-R\-B\-A\-S\-E} = 2
+\begin{DoxyCompactList}\small\item\em specialized free-\/flying base with three torques and one lift force \end{DoxyCompactList}\item 
+static const int {\bf \-E\-U\-L\-E\-R} = 1
+\begin{DoxyCompactList}\small\item\em \-Euler time-\/stepping of dynamics. \end{DoxyCompactList}\item 
+static const int {\bf \-H\-E\-U\-N} = 2
+\begin{DoxyCompactList}\small\item\em \-Heun's explicit 2nd order method. \end{DoxyCompactList}\item 
+static const int {\bf \-T\-R\-A\-P} = 3
+\begin{DoxyCompactList}\small\item\em symplectic trapezoidal 2nd order method \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-General multi-\/body dynamics time-\/stepping. \-The discrete mechanics is based on an implicit symplectic variational integrator which is second-\/order accurate and momentum-\/balance preserving.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Mbs@{\-Mbs}}
+\index{\-Mbs@{\-Mbs}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Mbs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mbs\-::\-Mbs} (
+\begin{DoxyParamCaption}
+\item[{int}]{nb, }
+\item[{int}]{c, }
+\item[{bool}]{fixed = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a6ae51e3d8540f4ea2ad34e3f9c4c58d9}
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!$\sim$\-Mbs@{$\sim$\-Mbs}}
+\index{$\sim$\-Mbs@{$\sim$\-Mbs}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{$\sim$\-Mbs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mbs\-::$\sim$\-Mbs} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Mbs_a99e04f4f5063f6e22103b81e30398025}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Acc@{\-Acc}}
+\index{\-Acc@{\-Acc}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Acc}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Acc} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{a, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{x, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a46f3a0822d3f4eecc9c6f10965229457}
+\-Compute acceleration 
+\begin{DoxyParams}{\-Parameters}
+{\em a} & acceleration \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+{\em u} & control inputs \\
+\hline
+{\em h} & time-\/step \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Bias(), debug, fixed, \-Force(), \-Mass(), and nb.
+
+
+
+\-Referenced by \-Euler\-Step(), and \-Heun\-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Bias@{\-Bias}}
+\index{\-Bias@{\-Bias}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Bias}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Bias} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{b, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{x}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Mbs_af8cbe75ffb627dc7c3bca554cb4e66cb}
+\-Compute total bias b, i.\-e. such that \-M$\ast$a + b = \-B$\ast$u 
+\begin{DoxyParams}{\-Parameters}
+{\em b} & bias \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-S\-E3\-::\-Ad(), ag, cs, debug, gcop\-::\-Mbs\-State\-::dgs, fixed, gcop\-::\-Mbs\-State\-::gs, gcop\-::\-S\-E3\-::inv(), joints, links, nb, se3, and gcop\-::\-Mbs\-State\-::vs.
+
+
+
+\-Referenced by \-Acc(), \-I\-D(), and gcop\-::\-Mbs\-Controller\-::\-Set().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Check\-Limits@{\-Check\-Limits}}
+\index{\-Check\-Limits@{\-Check\-Limits}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Check\-Limits}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Check\-Limits} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{x, }
+\item[{int}]{i, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Mbs_ab7a103a315779e5d76a4a7fd761ac938}
+
+
+\-References gcop\-::\-Mbs\-State\-::dr, gcop\-::\-Mbs\-State\-::lb, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::lb, gcop\-::\-Mbs\-State\-::r, gcop\-::\-Mbs\-State\-::ub, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::ub, and gcop\-::\-System$<$ Mbs\-State $>$\-::\-X.
+
+
+
+\-Referenced by \-K\-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Clamp\-Pose@{\-Clamp\-Pose}}
+\index{\-Clamp\-Pose@{\-Clamp\-Pose}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Clamp\-Pose}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Clamp\-Pose} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{x, }
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Mbs_a23da557ad6d52d16a96e487e1e9b6014}
+
+
+\-References gcop\-::\-Mbs\-State\-::gs, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::lb, nb, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::ub, and gcop\-::\-System$<$ Mbs\-State $>$\-::\-X.
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Clamp\-Velocity@{\-Clamp\-Velocity}}
+\index{\-Clamp\-Velocity@{\-Clamp\-Velocity}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Clamp\-Velocity}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Clamp\-Velocity} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{x}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Mbs_ae5cfdbeecff94cae8c0263ca28c5fe99}
+
+
+\-References gcop\-::\-Mbs\-State\-::dr, fixed, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::lb, nb, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::ub, gcop\-::\-Mbs\-State\-::vs, and gcop\-::\-System$<$ Mbs\-State $>$\-::\-X.
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-D\-Bias@{\-D\-Bias}}
+\index{\-D\-Bias@{\-D\-Bias}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-D\-Bias}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-D\-Bias} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{b, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{xb, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a1b7a23a5c1c7d1aea5f23d86d95ac020}
+\-Discrete bias 
+\begin{DoxyParams}{\-Parameters}
+{\em b} & bias \\
+\hline
+{\em t} & time \\
+\hline
+{\em xb} & state \\
+\hline
+{\em xa} & state \\
+\hline
+{\em h} & time-\/step \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-S\-E3\-::\-Ad(), ag, cs, debug, gcop\-::\-Mbs\-State\-::dgs, gcop\-::\-Mbs\-State\-::gs, gcop\-::\-S\-E3\-::inv(), joints, links, nb, se3, gcop\-::\-S\-E3\-::tlnmu(), and gcop\-::\-Mbs\-State\-::vs.
+
+
+
+\-Referenced by \-N\-E().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Euler\-Step@{\-Euler\-Step}}
+\index{\-Euler\-Step@{\-Euler\-Step}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Euler\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Mbs\-::\-Euler\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{double}]{h, }
+\item[{\-Matrix\-Xd $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-B = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a846d854fa9859db89649b4a318658a0b}
+
+
+\-References \-Acc(), gcop\-::\-Mbs\-State\-::dr, fixed, fsl, fsu, \-K\-Step(), lb\-D, lb\-K, nb, ub\-D, ub\-K, gcop\-::\-Mbs\-State\-::vs, gcop\-::\-Mbs\-State\-::zl, and gcop\-::\-Mbs\-State\-::zu.
+
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-F\-K@{\-F\-K}}
+\index{\-F\-K@{\-F\-K}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-F\-K}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-F\-K} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{x}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a8ef1a9d1098f49bf137d114dce2b4db1}
+\-Forward kinematics\-: given base pose and joint angles, update the poses of all bodies in the graph. 
+\begin{DoxyParams}{\-Parameters}
+{\em x} & state \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Mbs\-State\-::dgs, gcop\-::\-S\-E3\-::exp(), gcop\-::\-Mbs\-State\-::gs, joints, nb, pis, gcop\-::\-Mbs\-State\-::r, and se3.
+
+
+
+\-Referenced by \-Rec().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Force@{\-Force}}
+\index{\-Force@{\-Force}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Force}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Force} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{f, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{x, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{\-Matrix\-Xd $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-B = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Mbs_aa18ed20df059e7953d68c8f44eaf3c22}
+\-Total resulting force on the system from external (e.\-g. gravity) and internal (control) inputs 
+\begin{DoxyParams}{\-Parameters}
+{\em f} & total force f(x,u,t) \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+{\em u} & controls \\
+\hline
+{\em \-A} & jacobian \-Dxf \\
+\hline
+{\em \-B} & jacobian \-Duf \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented in {\bf gcop\-::\-Airbase} \doxyref{}{p.}{classgcop_1_1Airbase_abbef1d8b14aa6d2d6e2f49f04c2be3d3}, {\bf gcop\-::\-Airbot} \doxyref{}{p.}{classgcop_1_1Airbot_a0b7da62fd0d1c188ee8f3f728ee879fc}, {\bf gcop\-::\-Airm} \doxyref{}{p.}{classgcop_1_1Airm_ae0fdf451144300d1c55bd4e5aa642bfe}, {\bf gcop\-::\-Snake} \doxyref{}{p.}{classgcop_1_1Snake_ab8c449447df3899fef4c6b4a839aa993}, and {\bf gcop\-::\-Chain1} \doxyref{}{p.}{classgcop_1_1Chain1_af74555d12d5a868bf0104b9a588fc712}.
+
+
+
+\-References \-A\-I\-R\-B\-A\-S\-E, basetype, damping, gcop\-::\-Mbs\-State\-::dr, fixed, \-F\-L\-O\-A\-T\-B\-A\-S\-E, fsl, fsu, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::lb, lb\-D, lb\-K, nb, gcop\-::\-Mbs\-State\-::r, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::ub, ub\-D, ub\-K, gcop\-::\-System$<$ Mbs\-State $>$\-::\-X, gcop\-::\-Mbs\-State\-::zl, and gcop\-::\-Mbs\-State\-::zu.
+
+
+
+\-Referenced by \-Acc(), \-I\-D(), \-N\-E(), and \-Trap\-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Get\-Impulse@{\-Get\-Impulse}}
+\index{\-Get\-Impulse@{\-Get\-Impulse}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Get\-Impulse}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Get\-Impulse} (
+\begin{DoxyParamCaption}
+\item[{double}]{f, }
+\item[{const {\bf \-Mbs\-State} \&}]{x, }
+\item[{int}]{i, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Mbs_a28d242eefdf149b4c80e298157d3a0d4}
+
+
+\-References gcop\-::\-Mbs\-State\-::lb, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::lb, gcop\-::\-Mbs\-State\-::r, gcop\-::\-Mbs\-State\-::ub, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::ub, and gcop\-::\-System$<$ Mbs\-State $>$\-::\-X.
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Heun\-Step@{\-Heun\-Step}}
+\index{\-Heun\-Step@{\-Heun\-Step}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Heun\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Mbs\-::\-Heun\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{double}]{h, }
+\item[{\-Matrix\-Xd $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-B = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_ae58cd0f77ba48c00c3a04eab792cc785}
+
+
+\-References \-Acc(), gcop\-::\-Mbs\-State\-::dr, \-K\-Step(), nb, and gcop\-::\-Mbs\-State\-::vs.
+
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-I\-D@{\-I\-D}}
+\index{\-I\-D@{\-I\-D}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-I\-D} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{f, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{x, }
+\item[{const \-Vector\-Xd \&}]{u}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a770e18ec9c40be91d264eb0805af420a}
+\-Inverse-\/dynamics function. \-Computes the residual of the dynamical update from xa to xb given controls u. \-This is regarded as the discrete-\/time equivalent of (b -\/ \-B$\ast$u) 
+\begin{DoxyParams}{\-Parameters}
+{\em f} & residual \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+{\em u} & controls \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Bias(), \-Force(), and nb.
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Init@{\-Init}}
+\index{\-Init@{\-Init}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Init}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Init} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a68df418d326ed0810d1dfd1d1ad8dab8}
+
+
+\-References cs, gcop\-::\-Joint\-::\-Init(), joints, nb, and pis.
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Airm\-::\-Airm(), gcop\-::\-Chain1\-::\-Chain1(), and gcop\-::\-Snake\-::\-Snake().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-K\-Step@{\-K\-Step}}
+\index{\-K\-Step@{\-K\-Step}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-K\-Step}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-K\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{xb, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{double}]{h, }
+\item[{bool}]{impl = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a5cd09e8775326a90c6ece892bcaeab02}
+\-Kinematic-\/step. \-Given previous state xa, the next state xb is updated by taking the joint angles from xa, and joint velocities from xb, updating the joint angles in xb, and updating the xb body poses 
+\begin{DoxyParams}{\-Parameters}
+{\em xa} & previous state \\
+\hline
+{\em xb} & next state \\
+\hline
+{\em h} & time-\/step \\
+\hline
+{\em impl} & whether to update configuration using the newly updated velocity \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Joint\-::a, \-Check\-Limits(), gcop\-::\-Mbs\-State\-::dgs, gcop\-::\-Mbs\-State\-::dr, gcop\-::\-S\-E3\-::exp(), fixed, gcop\-::\-Joint\-::gci, gcop\-::\-Joint\-::gp, gcop\-::\-Mbs\-State\-::gs, gcop\-::\-S\-E3\-::inv(), joints, gcop\-::\-S\-E3\-::log(), nb, pis, print(), gcop\-::\-Mbs\-State\-::r, se3, and gcop\-::\-Mbs\-State\-::vs.
+
+
+
+\-Referenced by \-Euler\-Step(), \-Heun\-Step(), \-N\-E(), and \-Trap\-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Mass@{\-Mass}}
+\index{\-Mass@{\-Mass}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Mass}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Mass} (
+\begin{DoxyParamCaption}
+\item[{\-Matrix\-Xd \&}]{\-M, }
+\item[{const {\bf \-Mbs\-State} \&}]{x}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Mbs_a6ab0d5860cf1be9abe3c7bd4e018ba2e}
+\-Compute the mass matrix at a given state x 
+\begin{DoxyParams}{\-Parameters}
+{\em \-M} & mass matrix \\
+\hline
+{\em x} & state \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-S\-E3\-::\-Ad(), gcop\-::\-Mbs\-State\-::dgs, fixed, gcop\-::\-S\-E3\-::inv(), joints, links, nb, pis, and se3.
+
+
+
+\-Referenced by \-Acc(), and gcop\-::\-Mbs\-Controller\-::\-Set().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-N\-E@{\-N\-E}}
+\index{\-N\-E@{\-N\-E}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-N\-E}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-N\-E} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{e, }
+\item[{const \-Vector\-Xd \&}]{vdr, }
+\item[{{\bf \-Mbs\-State} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a35707c8a5661c344eab5427251afc1aa}
+
+
+\-References \-D\-Bias(), gcop\-::\-Mbs\-State\-::dr, \-Force(), \-K\-Step(), nb, and gcop\-::\-Mbs\-State\-::vs.
+
+
+
+\-Referenced by \-Trap\-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Newton\-Euler\-Jacobian@{\-Newton\-Euler\-Jacobian}}
+\index{\-Newton\-Euler\-Jacobian@{\-Newton\-Euler\-Jacobian}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Newton\-Euler\-Jacobian}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Newton\-Euler\-Jacobian} (
+\begin{DoxyParamCaption}
+\item[{\-Matrix\-Xd \&}]{\-De, }
+\item[{const {\bf \-Mbs\-State} \&}]{xb, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_ab636492bfc6b6a571a8ae811c7ea046c}
+
+
+\-References gcop\-::\-S\-E3\-::\-Ad(), gcop\-::\-S\-E3\-::adt(), cs, gcop\-::\-Mbs\-State\-::dgs, gcop\-::\-S\-E3\-::inv(), joints, links, nb, gcop\-::\-System$<$ Mbs\-State $>$\-::\-P, pis, gcop\-::\-Joint\-::\-S, se3, gcop\-::\-S\-E3\-::tln(), and gcop\-::\-Mbs\-State\-::vs.
+
+
+
+\-Referenced by \-Trap\-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!print@{print}}
+\index{print@{print}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::print} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Mbs\-State} \&}]{x}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Mbs_af7a373e69da627addc05a95a6a309667}
+\-General print function to print the state 
+
+\-Reimplemented from {\bf gcop\-::\-System$<$ Mbs\-State $>$} \doxyref{}{p.}{classgcop_1_1System_a644e3d41ce527c1b6b12beddbb55733b}.
+
+
+
+\-References gcop\-::\-Mbs\-State\-::dgs, gcop\-::\-Mbs\-State\-::dr, gcop\-::\-Mbs\-State\-::gs, gcop\-::\-Mbs\-State\-::r, and gcop\-::\-Mbs\-State\-::vs.
+
+
+
+\-Referenced by \-K\-Step(), and \-Trap\-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Rec@{\-Rec}}
+\index{\-Rec@{\-Rec}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Rec}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-::\-Rec} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{x, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Mbs_a43488404e1246d52b5ccdf6d85be3630}
+\-Reconstruct the full state. \-Some states contain redundant parameters for efficiency and it is useful to reconstruct them to maintain a consisten state. 
+\begin{DoxyParams}{\-Parameters}
+{\em x} & state \\
+\hline
+{\em h} & time-\/step \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-System$<$ Mbs\-State $>$} \doxyref{}{p.}{classgcop_1_1System_af8b9b866dfe233c61814b016fab2b509}.
+
+
+
+\-References gcop\-::\-Mbs\-State\-::dr, gcop\-::\-S\-E3\-::exp(), \-F\-K(), gcop\-::\-Mbs\-State\-::gs, gcop\-::\-S\-E3\-::inv(), gcop\-::\-S\-E3\-::log(), nb, gcop\-::\-Mbs\-State\-::r, se3, and gcop\-::\-Mbs\-State\-::vs.
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Mbs\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a6040d13e279233c29d4dcd6f164bb588}
+
+
+\-References \-E\-U\-L\-E\-R, \-Euler\-Step(), \-H\-E\-U\-N, \-Heun\-Step(), method, \-T\-R\-A\-P, and \-Trap\-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Trap\-Step@{\-Trap\-Step}}
+\index{\-Trap\-Step@{\-Trap\-Step}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Trap\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Mbs\-::\-Trap\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{double}]{h, }
+\item[{\-Matrix\-Xd $\ast$}]{\-A, }
+\item[{\-Matrix\-Xd $\ast$}]{\-B}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Mbs_a207d0c84f0f2343ce37525078da715b8}
+
+
+\-References gcop\-::\-Mbs\-State\-::dr, \-Force(), iters, \-K\-Step(), gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, nb, \-N\-E(), \-Newton\-Euler\-Jacobian(), print(), gcop\-::\-System$<$ Mbs\-State $>$\-::\-U, and gcop\-::\-Mbs\-State\-::vs.
+
+
+
+\-Referenced by \-Step().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!ag@{ag}}
+\index{ag@{ag}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{ag}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Mbs\-::ag}}\label{classgcop_1_1Mbs_acc7da8c7d718410c4e4e35e026ace5ae}
+
+
+acceleration due to gravity (0, 0, -\/9.\-81) by default 
+
+
+
+\-Referenced by \-Bias(), gcop\-::\-Chain1\-::\-Chain1(), and \-D\-Bias().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-A\-I\-R\-B\-A\-S\-E@{\-A\-I\-R\-B\-A\-S\-E}}
+\index{\-A\-I\-R\-B\-A\-S\-E@{\-A\-I\-R\-B\-A\-S\-E}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-A\-I\-R\-B\-A\-S\-E}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf gcop\-::\-Mbs\-::\-A\-I\-R\-B\-A\-S\-E} = 2\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Mbs_aafd69781ec3f0649a1aabe9dfdf87a66}
+
+
+specialized free-\/flying base with three torques and one lift force 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), and \-Force().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!basetype@{basetype}}
+\index{basetype@{basetype}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{basetype}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Mbs\-::basetype}}\label{classgcop_1_1Mbs_ac878a00435a6e0d8c6a2691b3950975a}
+
+
+type of base (used for interpreting base-\/body forces) 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Chain\-::\-Chain(), and \-Force().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!cs@{cs}}
+\index{cs@{cs}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{cs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$vector$<$int$>$ $>$ {\bf gcop\-::\-Mbs\-::cs}}\label{classgcop_1_1Mbs_a8f094d6f602891ddb28560b5ef3710e5}
+
+
+child lists 
+
+
+
+\-Referenced by \-Bias(), \-D\-Bias(), \-Init(), and \-Newton\-Euler\-Jacobian().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!damping@{damping}}
+\index{damping@{damping}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{damping}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-::damping}}\label{classgcop_1_1Mbs_a3ee044c217747a050a00124873d623bc}
+
+
+joint damping vector 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Force(), and \-Force().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!debug@{debug}}
+\index{debug@{debug}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{debug}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Mbs\-::debug}}\label{classgcop_1_1Mbs_a0ac4fac9bef1b9733980ed7fa0e40528}
+
+
+\-Referenced by \-Acc(), \-Bias(), gcop\-::\-Chain1\-::\-Chain1(), and \-D\-Bias().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-E\-U\-L\-E\-R@{\-E\-U\-L\-E\-R}}
+\index{\-E\-U\-L\-E\-R@{\-E\-U\-L\-E\-R}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-E\-U\-L\-E\-R}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf gcop\-::\-Mbs\-::\-E\-U\-L\-E\-R} = 1\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Mbs_ac524ee70513d0263a00a982281327799}
+
+
+\-Euler time-\/stepping of dynamics. 
+
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!fixed@{fixed}}
+\index{fixed@{fixed}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{fixed}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Mbs\-::fixed}}\label{classgcop_1_1Mbs_af4fcecbd75b716821e0aec7cd7cbffd9}
+
+
+whether base body is fixed 
+
+
+
+\-Referenced by \-Acc(), \-Bias(), \-Clamp\-Velocity(), \-Euler\-Step(), \-Force(), \-K\-Step(), \-Mass(), and gcop\-::\-Mbs\-Controller\-::\-Set().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-F\-I\-X\-E\-D\-B\-A\-S\-E@{\-F\-I\-X\-E\-D\-B\-A\-S\-E}}
+\index{\-F\-I\-X\-E\-D\-B\-A\-S\-E@{\-F\-I\-X\-E\-D\-B\-A\-S\-E}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-F\-I\-X\-E\-D\-B\-A\-S\-E}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf gcop\-::\-Mbs\-::\-F\-I\-X\-E\-D\-B\-A\-S\-E} = 0\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Mbs_ae4afc52b05e26f9cc914c252469c815e}
+
+
+fixed base 
+
+
+
+\-Referenced by gcop\-::\-Chain\-::\-Chain().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-F\-L\-O\-A\-T\-B\-A\-S\-E@{\-F\-L\-O\-A\-T\-B\-A\-S\-E}}
+\index{\-F\-L\-O\-A\-T\-B\-A\-S\-E@{\-F\-L\-O\-A\-T\-B\-A\-S\-E}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-F\-L\-O\-A\-T\-B\-A\-S\-E}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf gcop\-::\-Mbs\-::\-F\-L\-O\-A\-T\-B\-A\-S\-E} = 1\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Mbs_a810275b018b98f3b592fbb333d6c0062}
+
+
+fully controllable floating base 
+
+
+
+\-Referenced by \-Force().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!fsl@{fsl}}
+\index{fsl@{fsl}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{fsl}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-::fsl}}\label{classgcop_1_1Mbs_aa559413ec9561593dfd1e8c67e2fe727}
+
+
+spring force lower bound 
+
+
+
+\-Referenced by \-Euler\-Step(), and \-Force().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!fsu@{fsu}}
+\index{fsu@{fsu}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{fsu}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-::fsu}}\label{classgcop_1_1Mbs_a2e859e43a383dea57d4a9b06a89137aa}
+
+
+spring force upper bound 
+
+
+
+\-Referenced by \-Euler\-Step(), and \-Force().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-H\-E\-U\-N@{\-H\-E\-U\-N}}
+\index{\-H\-E\-U\-N@{\-H\-E\-U\-N}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-H\-E\-U\-N}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf gcop\-::\-Mbs\-::\-H\-E\-U\-N} = 2\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Mbs_a500696680a71e66518d2f41fd6dd99e7}
+
+
+\-Heun's explicit 2nd order method. 
+
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-Ips@{\-Ips}}
+\index{\-Ips@{\-Ips}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-Ips}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Matrix6d}$>$ {\bf gcop\-::\-Mbs\-::\-Ips}}\label{classgcop_1_1Mbs_a2322ec93ddeb1dda9546d89e304667e9}
+
+
+\-A'$\ast$\-I$\ast$\-A (nb) vector. 
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!iters@{iters}}
+\index{iters@{iters}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{iters}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Mbs\-::iters}}\label{classgcop_1_1Mbs_a733721c1238952531c71341814312fcb}
+
+
+max number of \-Newton iterations used in symplectic method 
+
+
+
+\-Referenced by \-Trap\-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!joints@{joints}}
+\index{joints@{joints}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{joints}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Joint}$>$ {\bf gcop\-::\-Mbs\-::joints}}\label{classgcop_1_1Mbs_ade83057f8c8cb9d4c217bc894d0aa1f7}
+
+
+joints 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Airm\-::\-Airm(), \-Bias(), gcop\-::\-Chain\-::\-Chain(), gcop\-::\-Chain1\-::\-Chain1(), \-D\-Bias(), \-F\-K(), \-Init(), \-K\-Step(), \-Mass(), \-Newton\-Euler\-Jacobian(), and gcop\-::\-Snake\-::\-Snake().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!lb\-D@{lb\-D}}
+\index{lb\-D@{lb\-D}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{lb\-D}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-::lb\-D}}\label{classgcop_1_1Mbs_a906c08c13d0ac9125b09db2060689b3c}
+
+
+joint lower bound \-D term 
+
+
+
+\-Referenced by \-Euler\-Step(), and \-Force().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!lb\-K@{lb\-K}}
+\index{lb\-K@{lb\-K}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{lb\-K}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-::lb\-K}}\label{classgcop_1_1Mbs_a8bfc9df5778d1eb7062216378f613536}
+
+
+joint lower bound \-K term 
+
+
+
+\-Referenced by \-Euler\-Step(), and \-Force().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!links@{links}}
+\index{links@{links}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{links}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Body3d}$<$$>$ $>$ {\bf gcop\-::\-Mbs\-::links}}\label{classgcop_1_1Mbs_a1e23bc0b6341f2634b343f6c82b0d77c}
+
+
+links 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Airbot\-View\-::\-Airbot\-View(), gcop\-::\-Airm\-::\-Airm(), gcop\-::\-Airm\-View\-::\-Airm\-View(), \-Bias(), gcop\-::\-Chain\-::\-Chain(), gcop\-::\-Chain1\-::\-Chain1(), gcop\-::\-Chain\-View\-::\-Chain\-View(), \-D\-Bias(), \-Mass(), \-Newton\-Euler\-Jacobian(), gcop\-::\-Snake\-::\-Snake(), and gcop\-::\-Snake\-View\-::\-Snake\-View().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!method@{method}}
+\index{method@{method}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{method}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Mbs\-::method}}\label{classgcop_1_1Mbs_a06cdf8547a95d3fa1655cedb683c62c5}
+
+
+type of integration method employed (\-Euler by default) 
+
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!nb@{nb}}
+\index{nb@{nb}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{nb}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Mbs\-::nb}}\label{classgcop_1_1Mbs_a49aaebf00549f803f5055b67ff4a5d3c}
+
+
+number of rigid bodies (including base body) 
+
+
+
+\-Referenced by \-Acc(), gcop\-::\-Airbot\-::\-Airbot(), \-Bias(), gcop\-::\-Chain\-View\-::\-Chain\-View(), \-Clamp\-Pose(), \-Clamp\-Velocity(), \-D\-Bias(), \-Euler\-Step(), \-F\-K(), gcop\-::\-Airbot\-::\-Force(), \-Force(), \-Heun\-Step(), \-I\-D(), \-Init(), \-K\-Step(), \-Mass(), \-N\-E(), \-Newton\-Euler\-Jacobian(), \-Rec(), gcop\-::\-Mbs\-View\-::\-Render(), gcop\-::\-Mbs\-Controller\-::\-Set(), \-Trap\-Step(), and gcop\-::\-Chain\-View\-::$\sim$\-Chain\-View().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!pis@{pis}}
+\index{pis@{pis}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{pis}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$int$>$ {\bf gcop\-::\-Mbs\-::pis}}\label{classgcop_1_1Mbs_a05326a0d6977ea34d253a6feaa791332}
+
+
+parent indexes 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Airm\-::\-Airm(), gcop\-::\-Chain\-::\-Chain(), gcop\-::\-Chain1\-::\-Chain1(), \-F\-K(), \-Init(), \-K\-Step(), \-Mass(), \-Newton\-Euler\-Jacobian(), and gcop\-::\-Snake\-::\-Snake().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!se3@{se3}}
+\index{se3@{se3}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{se3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-S\-E3}\& {\bf gcop\-::\-Mbs\-::se3}}\label{classgcop_1_1Mbs_a77663582aac9f6c0c16ec1c6ba25ff6e}
+
+
+singleton reference for performing \-S\-E(3) operations 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Airm\-::\-Airm(), \-Bias(), gcop\-::\-Chain\-::\-Chain(), gcop\-::\-Chain1\-::\-Chain1(), \-D\-Bias(), \-F\-K(), \-K\-Step(), \-Mass(), \-Newton\-Euler\-Jacobian(), \-Rec(), and gcop\-::\-Snake\-::\-Snake().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!\-T\-R\-A\-P@{\-T\-R\-A\-P}}
+\index{\-T\-R\-A\-P@{\-T\-R\-A\-P}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{\-T\-R\-A\-P}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf gcop\-::\-Mbs\-::\-T\-R\-A\-P} = 3\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Mbs_aa6b9c0be70fb3d9ba91c13f618af6072}
+
+
+symplectic trapezoidal 2nd order method 
+
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!ub\-D@{ub\-D}}
+\index{ub\-D@{ub\-D}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{ub\-D}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-::ub\-D}}\label{classgcop_1_1Mbs_abbb3126fc8525acd74f1d13ae5ccf75c}
+
+
+joint upper bound \-D term 
+
+
+
+\-Referenced by \-Euler\-Step(), and \-Force().
+
+\index{gcop\-::\-Mbs@{gcop\-::\-Mbs}!ub\-K@{ub\-K}}
+\index{ub\-K@{ub\-K}!gcop::Mbs@{gcop\-::\-Mbs}}
+\subsubsection[{ub\-K}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-::ub\-K}}\label{classgcop_1_1Mbs_a6a2fb0fd671a08eb0988eae6a0780ab4}
+
+
+joint upper bound \-K term 
+
+
+
+\-Referenced by \-Euler\-Step(), and \-Force().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf mbs.\-h}\item 
+lib/systems/{\bf mbs.\-cc}\end{DoxyCompactItemize}

@@ -1,0 +1,100 @@
+\section{gcop\-:\-:\-Unicycle \-Class \-Reference}
+\label{classgcop_1_1Unicycle}\index{gcop\-::\-Unicycle@{gcop\-::\-Unicycle}}
+
+
+{\ttfamily \#include $<$unicycle.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Unicycle\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classgcop_1_1Unicycle__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Unicycle\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Unicycle__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Unicycle} ()
+\item 
+double {\bf \-Step} ({\bf \-Vector5d} \&xb, double {\bf t}, const {\bf \-Vector5d} \&xa, const \-Vector2d \&u, double h, const \-Vector\-Xd $\ast$p, {\bf \-Matrix5d} $\ast$\-A=0, {\bf \-Matrix52d} $\ast$\-B=0, {\bf \-Matrix5\-Xd} $\ast$\-C=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf dx}
+\begin{DoxyCompactList}\small\item\em distance between left and right tires \end{DoxyCompactList}\item 
+double {\bf dy}
+\begin{DoxyCompactList}\small\item\em distance between front and back axles \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A standard unicycle model with 2nd order dynamics. \-This is often used to model simple wheeled robots or fixed-\/wing aircraft.
+
+\-The state is $ \bm x = (x,y,\theta,v,\omega) \in\mathbb{R}^5$ and controls are $ \bm u = (u_1,u_2) \in\mathbb{R}^5$ correspond to forward acceleration and turn rate acceleration.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Unicycle@{gcop\-::\-Unicycle}!\-Unicycle@{\-Unicycle}}
+\index{\-Unicycle@{\-Unicycle}!gcop::Unicycle@{gcop\-::\-Unicycle}}
+\subsubsection[{\-Unicycle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Unicycle\-::\-Unicycle} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Unicycle_a4699958bb40760a27fdbbae4f8a57480}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Unicycle@{gcop\-::\-Unicycle}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Unicycle@{gcop\-::\-Unicycle}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Unicycle\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector5d} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Vector5d} \&}]{xa, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p, }
+\item[{{\bf \-Matrix5d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix52d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix5\-Xd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Unicycle_a47630c7980e57974a8046fbaa1c299c8}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Unicycle@{gcop\-::\-Unicycle}!dx@{dx}}
+\index{dx@{dx}!gcop::Unicycle@{gcop\-::\-Unicycle}}
+\subsubsection[{dx}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Unicycle\-::dx}}\label{classgcop_1_1Unicycle_a50b46cb935da9563943af3ad39e2f7f8}
+
+
+distance between left and right tires 
+
+
+
+\-Referenced by gcop\-::\-Unicycle\-View\-::\-Render().
+
+\index{gcop\-::\-Unicycle@{gcop\-::\-Unicycle}!dy@{dy}}
+\index{dy@{dy}!gcop::Unicycle@{gcop\-::\-Unicycle}}
+\subsubsection[{dy}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Unicycle\-::dy}}\label{classgcop_1_1Unicycle_a24cddbf3463347c5948ae263ed5f1fd0}
+
+
+distance between front and back axles 
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf unicycle.\-h}\item 
+lib/systems/{\bf unicycle.\-cc}\end{DoxyCompactItemize}

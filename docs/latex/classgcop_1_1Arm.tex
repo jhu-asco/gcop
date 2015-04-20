@@ -1,0 +1,129 @@
+\section{gcop\-:\-:\-Arm \-Class \-Reference}
+\label{classgcop_1_1Arm}\index{gcop\-::\-Arm@{gcop\-::\-Arm}}
+
+
+{\ttfamily \#include $<$arm.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Arm} ()
+\item 
+virtual {\bf $\sim$\-Arm} ()
+\item 
+bool {\bf \-Fk} (double p[3], const double a[3])
+\item 
+bool {\bf \-Ik} (double a[2][3], const double p[3])
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf l1}
+\begin{DoxyCompactList}\small\item\em first link length \end{DoxyCompactList}\item 
+double {\bf l2}
+\begin{DoxyCompactList}\small\item\em second link length \end{DoxyCompactList}\item 
+double {\bf x1}
+\begin{DoxyCompactList}\small\item\em relative offset to second motor in x direction \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+3-\/dof arm (rotating base, and two links). \-Model assumes first joint motor is at center of mass. \-The local frame is z-\/up, and arm is zero position means that is straightened along the x+ axis. \-To account for position offset simply change the parameter p. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Arm@{gcop\-::\-Arm}!\-Arm@{\-Arm}}
+\index{\-Arm@{\-Arm}!gcop::Arm@{gcop\-::\-Arm}}
+\subsubsection[{\-Arm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Arm\-::\-Arm} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Arm_a920d0f828c6e76188827cf0c073963de}
+\index{gcop\-::\-Arm@{gcop\-::\-Arm}!$\sim$\-Arm@{$\sim$\-Arm}}
+\index{$\sim$\-Arm@{$\sim$\-Arm}!gcop::Arm@{gcop\-::\-Arm}}
+\subsubsection[{$\sim$\-Arm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Arm\-::$\sim$\-Arm} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Arm_ae1bcf12831b42e93d431efe3b7910b5e}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Arm@{gcop\-::\-Arm}!\-Fk@{\-Fk}}
+\index{\-Fk@{\-Fk}!gcop::Arm@{gcop\-::\-Arm}}
+\subsubsection[{\-Fk}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Arm\-::\-Fk} (
+\begin{DoxyParamCaption}
+\item[{double}]{p[3], }
+\item[{const double}]{a[3]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Arm_ad3ca664c854007ddb51eab5236e33697}
+\-Forward kinematics\-: 
+\begin{DoxyParams}{\-Parameters}
+{\em p} & end-\/effector position \\
+\hline
+{\em a} & angles\-: yaw, joint1, joint2 \\
+\hline
+\end{DoxyParams}
+
+
+\-References l1, l2, and x1.
+
+\index{gcop\-::\-Arm@{gcop\-::\-Arm}!\-Ik@{\-Ik}}
+\index{\-Ik@{\-Ik}!gcop::Arm@{gcop\-::\-Arm}}
+\subsubsection[{\-Ik}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Arm\-::\-Ik} (
+\begin{DoxyParamCaption}
+\item[{double}]{a[2][3], }
+\item[{const double}]{p[3]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Arm_a2decc16173e34da2a869837ce17cefe8}
+\-Inverse kinematics 
+\begin{DoxyParams}{\-Parameters}
+{\em a} & angles\-: yaw, joint1, joint2; a[0][$\ast$] is first solution, a[1][$\ast$] is second solution \\
+\hline
+{\em p} & end-\/effector position \\
+\hline
+\end{DoxyParams}
+
+
+\-References l1, l2, and x1.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Arm@{gcop\-::\-Arm}!l1@{l1}}
+\index{l1@{l1}!gcop::Arm@{gcop\-::\-Arm}}
+\subsubsection[{l1}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Arm\-::l1}}\label{classgcop_1_1Arm_a3aa1abb13ee0eb229ef425846a846070}
+
+
+first link length 
+
+
+
+\-Referenced by \-Fk(), and \-Ik().
+
+\index{gcop\-::\-Arm@{gcop\-::\-Arm}!l2@{l2}}
+\index{l2@{l2}!gcop::Arm@{gcop\-::\-Arm}}
+\subsubsection[{l2}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Arm\-::l2}}\label{classgcop_1_1Arm_ac64905a5da293ff6a18d93a942cc3b0b}
+
+
+second link length 
+
+
+
+\-Referenced by \-Fk(), and \-Ik().
+
+\index{gcop\-::\-Arm@{gcop\-::\-Arm}!x1@{x1}}
+\index{x1@{x1}!gcop::Arm@{gcop\-::\-Arm}}
+\subsubsection[{x1}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Arm\-::x1}}\label{classgcop_1_1Arm_a0b3595f92385473924397849527473dd}
+
+
+relative offset to second motor in x direction 
+
+
+
+\-Referenced by \-Fk(), and \-Ik().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf arm.\-h}\item 
+lib/systems/{\bf arm.\-cc}\end{DoxyCompactItemize}

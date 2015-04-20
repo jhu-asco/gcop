@@ -1,0 +1,93 @@
+\section{gcop\-:\-:\-Kinbody2d \-Class \-Reference}
+\label{classgcop_1_1Kinbody2d}\index{gcop\-::\-Kinbody2d@{gcop\-::\-Kinbody2d}}
+
+
+{\ttfamily \#include $<$kinbody2d.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Kinbody2d\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{classgcop_1_1Kinbody2d__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kinbody2d\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Kinbody2d__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kinbody2d} ()
+\item 
+double {\bf \-Step} (\-Matrix3d \&xb, double {\bf t}, const \-Matrix3d \&xa, const \-Vector3d \&u, double h, const \-Vector\-Xd $\ast$p, \-Matrix3d $\ast$\-A=0, \-Matrix3d $\ast$\-B=0, \-Matrix$<$ double, 3, \-Dynamic $>$ $\ast$\-C=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Vector2d {\bf d}
+\begin{DoxyCompactList}\small\item\em body dimensions \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A simple kinematic control system modeled as a rigid body in 2d. \-It is meant for parameter estimation problems since there is no dynamics.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kinbody2d@{gcop\-::\-Kinbody2d}!\-Kinbody2d@{\-Kinbody2d}}
+\index{\-Kinbody2d@{\-Kinbody2d}!gcop::Kinbody2d@{gcop\-::\-Kinbody2d}}
+\subsubsection[{\-Kinbody2d}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Kinbody2d\-::\-Kinbody2d} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Kinbody2d_a7c35748d2368f106db73228d17933f78}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kinbody2d@{gcop\-::\-Kinbody2d}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Kinbody2d@{gcop\-::\-Kinbody2d}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Kinbody2d\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{\-Matrix3d \&}]{xb, }
+\item[{double}]{t, }
+\item[{const \-Matrix3d \&}]{xa, }
+\item[{const \-Vector3d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p, }
+\item[{\-Matrix3d $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix3d $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{\-Matrix$<$ double, 3, \-Dynamic $>$ $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Kinbody2d_a7487ef28b559a092aa216086e52ba871}
+
+
+\-References gcop\-::\-S\-E2\-::\-Ad(), gcop\-::\-S\-E2\-::cay(), gcop\-::\-S\-E2\-::dcay(), and gcop\-::\-S\-E2\-::\-Instance().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Kinbody2d@{gcop\-::\-Kinbody2d}!d@{d}}
+\index{d@{d}!gcop::Kinbody2d@{gcop\-::\-Kinbody2d}}
+\subsubsection[{d}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector2d {\bf gcop\-::\-Kinbody2d\-::d}}\label{classgcop_1_1Kinbody2d_ac9009d88757eb7d3d18a9b72011799db}
+
+
+body dimensions 
+
+
+
+\-Referenced by gcop\-::\-Kinbody2d\-View\-::\-Render().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf kinbody2d.\-h}\item 
+lib/systems/{\bf kinbody2d.\-cc}\end{DoxyCompactItemize}

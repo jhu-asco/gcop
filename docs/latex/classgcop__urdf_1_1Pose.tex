@@ -1,0 +1,134 @@
+\section{gcop\-\_\-urdf\-:\-:\-Pose \-Class \-Reference}
+\label{classgcop__urdf_1_1Pose}\index{gcop\-\_\-urdf\-::\-Pose@{gcop\-\_\-urdf\-::\-Pose}}
+
+
+{\ttfamily \#include $<$pose.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-\_\-urdf\-:\-:\-Pose\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{classgcop__urdf_1_1Pose__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Pose} ()
+\item 
+void {\bf clear} ()
+\item 
+bool {\bf init\-Xml} (\-Ti\-Xml\-Element $\ast$xml)
+\item 
+{\bf \-Pose} {\bf \-Get\-Inverse} () const 
+\item 
+{\bf \-Pose} {\bf operator$\ast$} (const {\bf \-Pose} \&p2) const 
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Vector3} {\bf position}
+\item 
+{\bf \-Rotation} {\bf rotation}
+\end{DoxyCompactItemize}
+\subsection*{\-Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\-::ostream \& {\bf operator$<$$<$} (std\-::ostream \&out, const {\bf \-Pose} \&vec)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Pose@{gcop\-\_\-urdf\-::\-Pose}!\-Pose@{\-Pose}}
+\index{\-Pose@{\-Pose}!gcop_urdf::Pose@{gcop\-\_\-urdf\-::\-Pose}}
+\subsubsection[{\-Pose}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-\_\-urdf\-::\-Pose\-::\-Pose} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Pose_ac847ac6c2a785268b0edde489e50b17a}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Pose@{gcop\-\_\-urdf\-::\-Pose}!clear@{clear}}
+\index{clear@{clear}!gcop_urdf::Pose@{gcop\-\_\-urdf\-::\-Pose}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Pose\-::clear} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Pose_ae6ff8c5c193b0b858cdbc151baa5e9d7}
+
+
+\-References gcop\-\_\-urdf\-::\-Vector3\-::clear(), gcop\-\_\-urdf\-::\-Rotation\-::clear(), position, and rotation.
+
+
+
+\-Referenced by gcop\-\_\-urdf\-::bulletmbsgenerator(), gcop\-\_\-urdf\-::\-Inertial\-::clear(), gcop\-\_\-urdf\-::\-Visual\-::clear(), gcop\-\_\-urdf\-::\-Collision\-::clear(), gcop\-\_\-urdf\-::\-Joint\-::clear(), and init\-Xml().
+
+\index{gcop\-\_\-urdf\-::\-Pose@{gcop\-\_\-urdf\-::\-Pose}!\-Get\-Inverse@{\-Get\-Inverse}}
+\index{\-Get\-Inverse@{\-Get\-Inverse}!gcop_urdf::Pose@{gcop\-\_\-urdf\-::\-Pose}}
+\subsubsection[{\-Get\-Inverse}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Pose} {\bf gcop\-\_\-urdf\-::\-Pose\-::\-Get\-Inverse} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Pose_ad47c9e12e1f84a7e8e169b32b5c848fe}
+
+
+\-References gcop\-\_\-urdf\-::\-Rotation\-::\-Get\-Inverse(), position, and rotation.
+
+\index{gcop\-\_\-urdf\-::\-Pose@{gcop\-\_\-urdf\-::\-Pose}!init\-Xml@{init\-Xml}}
+\index{init\-Xml@{init\-Xml}!gcop_urdf::Pose@{gcop\-\_\-urdf\-::\-Pose}}
+\subsubsection[{init\-Xml}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-\_\-urdf\-::\-Pose\-::init\-Xml} (
+\begin{DoxyParamCaption}
+\item[{\-Ti\-Xml\-Element $\ast$}]{xml}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Pose_ab6705626af4feba431290e658052a31a}
+
+
+\-References gcop\-\_\-urdf\-::\-Vector3\-::clear(), gcop\-\_\-urdf\-::\-Rotation\-::clear(), clear(), gcop\-\_\-urdf\-::\-Vector3\-::init(), gcop\-\_\-urdf\-::\-Rotation\-::init(), position, and rotation.
+
+\index{gcop\-\_\-urdf\-::\-Pose@{gcop\-\_\-urdf\-::\-Pose}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!gcop_urdf::Pose@{gcop\-\_\-urdf\-::\-Pose}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Pose} gcop\-\_\-urdf\-::\-Pose\-::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Pose} \&}]{p2}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Pose_a8c6530c49d4bb0ff246a542e3bc45632}
+
+
+\-References position, and rotation.
+
+
+
+\subsection{\-Friends \-And \-Related \-Function \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Pose@{gcop\-\_\-urdf\-::\-Pose}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!gcop_urdf::Pose@{gcop\-\_\-urdf\-::\-Pose}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{out, }
+\item[{const {\bf \-Pose} \&}]{vec}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [friend]}}\label{classgcop__urdf_1_1Pose_a07c20368d58d0390f7a464afaef8a3e5}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Pose@{gcop\-\_\-urdf\-::\-Pose}!position@{position}}
+\index{position@{position}!gcop_urdf::Pose@{gcop\-\_\-urdf\-::\-Pose}}
+\subsubsection[{position}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Vector3} {\bf gcop\-\_\-urdf\-::\-Pose\-::position}}\label{classgcop__urdf_1_1Pose_aa0b9447f58c4cecac158698c45077657}
+
+
+\-Referenced by clear(), \-Get\-Inverse(), init\-Xml(), and operator$\ast$().
+
+\index{gcop\-\_\-urdf\-::\-Pose@{gcop\-\_\-urdf\-::\-Pose}!rotation@{rotation}}
+\index{rotation@{rotation}!gcop_urdf::Pose@{gcop\-\_\-urdf\-::\-Pose}}
+\subsubsection[{rotation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Rotation} {\bf gcop\-\_\-urdf\-::\-Pose\-::rotation}}\label{classgcop__urdf_1_1Pose_ace2968003e92d59ad927b05133ba6cc2}
+
+
+\-Referenced by clear(), \-Get\-Inverse(), init\-Xml(), and operator$\ast$().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf pose.\-h}\end{DoxyCompactItemize}

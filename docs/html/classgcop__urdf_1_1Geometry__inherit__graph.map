@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classgcop__urdf_1_1Box.html" title="gcop_urdf::Box" alt="" coords="5,83,115,112"/>
+<area shape="rect" id="node5" href="$classgcop__urdf_1_1Cylinder.html" title="gcop_urdf::Cylinder" alt="" coords="139,83,272,112"/>
+<area shape="rect" id="node7" href="$classgcop__urdf_1_1Mesh.html" title="gcop_urdf::Mesh" alt="" coords="296,83,413,112"/>
+<area shape="rect" id="node9" href="$classgcop__urdf_1_1Sphere.html" title="gcop_urdf::Sphere" alt="" coords="437,83,565,112"/>
+</map>

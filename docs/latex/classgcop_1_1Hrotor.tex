@@ -1,0 +1,148 @@
+\section{gcop\-:\-:\-Hrotor \-Class \-Reference}
+\label{classgcop_1_1Hrotor}\index{gcop\-::\-Hrotor@{gcop\-::\-Hrotor}}
+
+
+{\ttfamily \#include $<$hrotor.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Hrotor\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classgcop_1_1Hrotor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Hrotor\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Hrotor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Hrotor} ()
+\item 
+void {\bf \-State\-And\-Controls\-To\-Flat} (\-Vector\-Xd \&y, const {\bf \-Body3d\-State} \&{\bf x}, const \-Vector4d \&u)
+\item 
+void {\bf \-Flat\-To\-State\-And\-Controls} ({\bf \-Body3d\-State} \&{\bf x}, \-Vector4d \&u, const std\-::vector$<$ \-Vector\-Xd $>$ \&y)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf l}
+\begin{DoxyCompactList}\small\item\em distance from center of mass to each rotor \end{DoxyCompactList}\item 
+double {\bf r}
+\begin{DoxyCompactList}\small\item\em propeller radius \end{DoxyCompactList}\item 
+double {\bf kt}
+\begin{DoxyCompactList}\small\item\em thrust gain \end{DoxyCompactList}\item 
+double {\bf km}
+\begin{DoxyCompactList}\small\item\em moment gain \end{DoxyCompactList}\item 
+double {\bf mm}
+\begin{DoxyCompactList}\small\item\em motor coefficient \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A hexrotor dynamical model.
+
+\-The state is $ \bf x = (R, x, \omega, v) $ where $ (R,x)\in SO(3)\times\mathbb{R}^3$ is the pose, and the controls are $ \bm u = (u_1,u_2,u_3,u_4)$ correspond to torques around the body and a vertical lift force.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Hrotor@{gcop\-::\-Hrotor}!\-Hrotor@{\-Hrotor}}
+\index{\-Hrotor@{\-Hrotor}!gcop::Hrotor@{gcop\-::\-Hrotor}}
+\subsubsection[{\-Hrotor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Hrotor\-::\-Hrotor} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Hrotor_a34af60ef12f415a98f74bcd0924653ac}
+
+
+\-References gcop\-::\-Body3d$<$ 4 $>$\-::\-Bu, gcop\-::\-Body3d$<$ 4 $>$\-::fp, and gcop\-::\-Body3d$<$ 4 $>$\-::m.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Hrotor@{gcop\-::\-Hrotor}!\-Flat\-To\-State\-And\-Controls@{\-Flat\-To\-State\-And\-Controls}}
+\index{\-Flat\-To\-State\-And\-Controls@{\-Flat\-To\-State\-And\-Controls}!gcop::Hrotor@{gcop\-::\-Hrotor}}
+\subsubsection[{\-Flat\-To\-State\-And\-Controls}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Hrotor\-::\-Flat\-To\-State\-And\-Controls} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body3d\-State} \&}]{x, }
+\item[{\-Vector4d \&}]{u, }
+\item[{const std\-::vector$<$ \-Vector\-Xd $>$ \&}]{y}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Hrotor_a460414e6849f8927bfcc91b3ef06223a}
+
+
+\-References gcop\-::\-Body3d$<$ 4 $>$\-::m.
+
+\index{gcop\-::\-Hrotor@{gcop\-::\-Hrotor}!\-State\-And\-Controls\-To\-Flat@{\-State\-And\-Controls\-To\-Flat}}
+\index{\-State\-And\-Controls\-To\-Flat@{\-State\-And\-Controls\-To\-Flat}!gcop::Hrotor@{gcop\-::\-Hrotor}}
+\subsubsection[{\-State\-And\-Controls\-To\-Flat}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Hrotor\-::\-State\-And\-Controls\-To\-Flat} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{y, }
+\item[{const {\bf \-Body3d\-State} \&}]{x, }
+\item[{const \-Vector4d \&}]{u}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Hrotor_a2f5ba060b1999c2a53a1b79bdfb55b16}
+
+
+\-References gcop\-::\-S\-O3\-::\-Instance(), and gcop\-::\-S\-O3\-::yaw().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Hrotor@{gcop\-::\-Hrotor}!km@{km}}
+\index{km@{km}!gcop::Hrotor@{gcop\-::\-Hrotor}}
+\subsubsection[{km}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Hrotor\-::km}}\label{classgcop_1_1Hrotor_a5a6f3a96099d84456cacb92141e40e9a}
+
+
+moment gain 
+
+\index{gcop\-::\-Hrotor@{gcop\-::\-Hrotor}!kt@{kt}}
+\index{kt@{kt}!gcop::Hrotor@{gcop\-::\-Hrotor}}
+\subsubsection[{kt}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Hrotor\-::kt}}\label{classgcop_1_1Hrotor_af54ec806b95aa7ca282293d81070512c}
+
+
+thrust gain 
+
+\index{gcop\-::\-Hrotor@{gcop\-::\-Hrotor}!l@{l}}
+\index{l@{l}!gcop::Hrotor@{gcop\-::\-Hrotor}}
+\subsubsection[{l}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Hrotor\-::l}}\label{classgcop_1_1Hrotor_a7a0a70a964d7988e26b767b56b294276}
+
+
+distance from center of mass to each rotor 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), and gcop\-::\-Hrotor\-Geom3d\-View\-::\-Render\-Geom().
+
+\index{gcop\-::\-Hrotor@{gcop\-::\-Hrotor}!mm@{mm}}
+\index{mm@{mm}!gcop::Hrotor@{gcop\-::\-Hrotor}}
+\subsubsection[{mm}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Hrotor\-::mm}}\label{classgcop_1_1Hrotor_aad8b780bc5d3396395d9a23577354b0d}
+
+
+motor coefficient 
+
+\index{gcop\-::\-Hrotor@{gcop\-::\-Hrotor}!r@{r}}
+\index{r@{r}!gcop::Hrotor@{gcop\-::\-Hrotor}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Hrotor\-::r}}\label{classgcop_1_1Hrotor_a75c3dc8108a54beff1f41b06d7219dc5}
+
+
+propeller radius 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), and gcop\-::\-Hrotor\-Geom3d\-View\-::\-Render\-Geom().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf hrotor.\-h}\item 
+lib/systems/{\bf hrotor.\-cc}\end{DoxyCompactItemize}

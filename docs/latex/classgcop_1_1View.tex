@@ -1,0 +1,206 @@
+\section{gcop\-:\-:\-View \-Class \-Reference}
+\label{classgcop_1_1View}\index{gcop\-::\-View@{gcop\-::\-View}}
+
+
+{\ttfamily \#include $<$view.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1View__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-View} (const char $\ast${\bf name}=0)
+\item 
+virtual {\bf $\sim$\-View} ()
+\item 
+virtual void {\bf \-Render} ()
+\item 
+virtual bool {\bf \-Render\-Frame} (int i=0)
+\item 
+void {\bf \-Lock} ()
+\item 
+void {\bf \-Unlock} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char {\bf name} [256]
+\begin{DoxyCompactList}\small\item\em name \end{DoxyCompactList}\item 
+int {\bf id}
+\begin{DoxyCompactList}\small\item\em id \end{DoxyCompactList}\item 
+pthread\-\_\-mutex\-\_\-t {\bf mut}
+\begin{DoxyCompactList}\small\item\em synchronization \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf \-Viewer}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Basic view class that all views should subclass. \doxyref{\-Render()}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63} should provide the rendering. \doxyref{\-Lock()}{p.}{classgcop_1_1View_ab25a982167583fade8867b2ba4bc05cb} and \doxyref{\-Unlock()}{p.}{classgcop_1_1View_a65b9d30254d7d4963f5f1af5a63f9afe} should be used when any data used in \doxyref{\-Render()}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63} is being updated.
+
+\-Author\-: \-Marin \-Kobilarov -\/-\/ \-Copyright (\-C) 2005 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-View@{gcop\-::\-View}!\-View@{\-View}}
+\index{\-View@{\-View}!gcop::View@{gcop\-::\-View}}
+\subsubsection[{\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-View\-::\-View} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1View_a8a4c8bd0362ece6bdccedc0fa9076313}
+\-Create a view. \-All subclasses should call the constructor 
+\begin{DoxyParams}{\-Parameters}
+{\em name} & optional name \\
+\hline
+\end{DoxyParams}
+
+
+\-References mut, and s\-\_\-view\-\_\-id.
+
+\index{gcop\-::\-View@{gcop\-::\-View}!$\sim$\-View@{$\sim$\-View}}
+\index{$\sim$\-View@{$\sim$\-View}!gcop::View@{gcop\-::\-View}}
+\subsubsection[{$\sim$\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-View\-::$\sim$\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1View_ad0dc854db9aabbea98a334dec89f785c}
+\-Destroy view 
+
+\-References mut.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-View@{gcop\-::\-View}!\-Lock@{\-Lock}}
+\index{\-Lock@{\-Lock}!gcop::View@{gcop\-::\-View}}
+\subsubsection[{\-Lock}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-View\-::\-Lock} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1View_ab25a982167583fade8867b2ba4bc05cb}
+\-Lock a view. \-This is done when updating data inside this object. \-While a view is locked \doxyref{\-Render()}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63} is not called 
+
+\-References mut.
+
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Render\-Views().
+
+\index{gcop\-::\-View@{gcop\-::\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::View@{gcop\-::\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-View\-::\-Render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63}
+\-Render a view\-: all subclasses should provide this method 
+
+\-Reimplemented in {\bf gcop\-::\-System\-View$<$ Tx, Tu $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-System\-View$<$ Matrix4d, Matrix$<$ double, \-\_\-nu, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-System\-View$<$ Normal$<$ \-\_\-n $>$, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-System\-View$<$ Uuv\-State, Matrix$<$ double, c, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector9d $>$, Matrix$<$ double, c, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector2d $>$, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}, {\bf gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Kinbody3dTrackView_a07cbd5a96672de03a36b7b1e98503b7f}, {\bf gcop\-::\-Plot\-View} \doxyref{}{p.}{classgcop_1_1PlotView_a0de763ec2addc2b9f78a2cc9fb763a00}, {\bf gcop\-::\-Body2d\-Track\-View} \doxyref{}{p.}{classgcop_1_1Body2dTrackView_a8a2e070c3b73c8d9fb9019a9018f068d}, {\bf gcop\-::\-Body3d\-Track\-View} \doxyref{}{p.}{classgcop_1_1Body3dTrackView_afa875c9e7c1907c8d3088e6b3e6364d8}, {\bf gcop\-::\-Body2d\-Graph\-View} \doxyref{}{p.}{classgcop_1_1Body2dGraphView_aca65b0b8f19b389958117d050e6931d8}, {\bf gcop\-::\-Posegraph2d\-View} \doxyref{}{p.}{classgcop_1_1Posegraph2dView_a1d5437afcf98cf1d38df2b63febbbb78}, and {\bf gcop\-::\-Dem\-View} \doxyref{}{p.}{classgcop_1_1DemView_a36da31967a7aad3210e9d722abadfe2e}.
+
+
+
+\-References \-Render\-Frame().
+
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Render\-Views().
+
+\index{gcop\-::\-View@{gcop\-::\-View}!\-Render\-Frame@{\-Render\-Frame}}
+\index{\-Render\-Frame@{\-Render\-Frame}!gcop::View@{gcop\-::\-View}}
+\subsubsection[{\-Render\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-View\-::\-Render\-Frame} (
+\begin{DoxyParamCaption}
+\item[{int}]{i = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1View_ad6c3f17a59725948f68817398296f835}
+\-Render a view\-: all subclasses should provide this method 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & frame \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+return true if more frames should be rendered 
+\end{DoxyReturn}
+
+
+\-Reimplemented in {\bf gcop\-::\-System\-View$<$ Tx, Tu $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-System\-View$<$ Matrix4d, Matrix$<$ double, \-\_\-nu, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-System\-View$<$ Normal$<$ \-\_\-n $>$, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-System\-View$<$ Uuv\-State, Matrix$<$ double, c, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector9d $>$, Matrix$<$ double, c, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-System\-View$<$ Mbs\-State, Vector\-Xd $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector2d $>$, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}, {\bf gcop\-::\-Geom3d\-View} \doxyref{}{p.}{classgcop_1_1Geom3dView_a6f85b9ba6bccb8063e894c490bd5e1e4}, {\bf gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Kinbody3dTrackView_ac2a27265e39853b48151dbbbfb12ea7f}, {\bf gcop\-::\-Body2d\-Track\-View} \doxyref{}{p.}{classgcop_1_1Body2dTrackView_ab0c6e4ed986db27e9cb4b2d6105bde64}, {\bf gcop\-::\-Body3d\-Track\-View} \doxyref{}{p.}{classgcop_1_1Body3dTrackView_ab7fd0accbbefb89b971cae1fed1c6545}, {\bf gcop\-::\-Body2d\-Graph\-View} \doxyref{}{p.}{classgcop_1_1Body2dGraphView_acc5db1b86730adce14ea06901ee46264}, {\bf gcop\-::\-Posegraph2d\-View} \doxyref{}{p.}{classgcop_1_1Posegraph2dView_ac1400e13c99e143b230f37f15dc614b4}, and {\bf gcop\-::\-Dem\-View} \doxyref{}{p.}{classgcop_1_1DemView_a669be87c5a60e28817152cee94d98c42}.
+
+
+
+\-References name.
+
+
+
+\-Referenced by \-Render(), and gcop\-::\-Viewer\-::\-Render\-Views().
+
+\index{gcop\-::\-View@{gcop\-::\-View}!\-Unlock@{\-Unlock}}
+\index{\-Unlock@{\-Unlock}!gcop::View@{gcop\-::\-View}}
+\subsubsection[{\-Unlock}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-View\-::\-Unlock} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1View_a65b9d30254d7d4963f5f1af5a63f9afe}
+\-Unlock the view and continue display 
+
+\-References mut.
+
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Render\-Views().
+
+
+
+\subsection{\-Friends \-And \-Related \-Function \-Documentation}
+\index{gcop\-::\-View@{gcop\-::\-View}!\-Viewer@{\-Viewer}}
+\index{\-Viewer@{\-Viewer}!gcop::View@{gcop\-::\-View}}
+\subsubsection[{\-Viewer}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf \-Viewer}\hspace{0.3cm}{\ttfamily  [friend]}}\label{classgcop_1_1View_a8d1f62258b0d11e43cd20938f011fc2f}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-View@{gcop\-::\-View}!id@{id}}
+\index{id@{id}!gcop::View@{gcop\-::\-View}}
+\subsubsection[{id}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-View\-::id}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1View_afde72dbecf653da069ea1348e6f081c8}
+
+
+id 
+
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Add(), and gcop\-::\-Viewer\-::\-Remove().
+
+\index{gcop\-::\-View@{gcop\-::\-View}!mut@{mut}}
+\index{mut@{mut}!gcop::View@{gcop\-::\-View}}
+\subsubsection[{mut}]{\setlength{\rightskip}{0pt plus 5cm}pthread\-\_\-mutex\-\_\-t {\bf gcop\-::\-View\-::mut}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1View_ab646b15425d65a1af608fce3a0ce20c2}
+
+
+synchronization 
+
+
+
+\-Referenced by \-Lock(), \-Unlock(), \-View(), and $\sim$\-View().
+
+\index{gcop\-::\-View@{gcop\-::\-View}!name@{name}}
+\index{name@{name}!gcop::View@{gcop\-::\-View}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf gcop\-::\-View\-::name}[256]\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1View_a0410c9a502ac51a1bc29c5729059b146}
+
+
+name 
+
+\-The view can optionally specify 
+
+\-Referenced by \-Render\-Frame().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf view.\-h}\item 
+lib/views/{\bf view.\-cc}\end{DoxyCompactItemize}

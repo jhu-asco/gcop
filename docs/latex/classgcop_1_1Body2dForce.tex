@@ -1,0 +1,118 @@
+\section{gcop\-:\-:\-Body2d\-Force \-Class \-Reference}
+\label{classgcop_1_1Body2dForce}\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}}
+
+
+{\ttfamily \#include $<$body2dforce.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Body2d\-Force\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{classgcop_1_1Body2dForce__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-Force\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{classgcop_1_1Body2dForce__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body2d\-Force} (bool {\bf fext\-Param}=false)
+\item 
+virtual void {\bf \-Set} (\-Vector3d \&f, const {\bf \-M3\-V3d} \&x, double t, const \-Vector3d \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix36d} $\ast$\-A=0, \-Matrix3d $\ast$\-B=0, \-Matrix$<$ double, 3, \-Dynamic $>$ $\ast$\-C=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Vector3d {\bf \-D}
+\begin{DoxyCompactList}\small\item\em linear damping terms \end{DoxyCompactList}\item 
+\-Vector3d {\bf fext}
+\begin{DoxyCompactList}\small\item\em constant external force \end{DoxyCompactList}\item 
+bool {\bf fext\-Param}
+\begin{DoxyCompactList}\small\item\em treat the (x,y) forces in fext as a parameter \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!\-Body2d\-Force@{\-Body2d\-Force}}
+\index{\-Body2d\-Force@{\-Body2d\-Force}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
+\subsubsection[{\-Body2d\-Force}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Force\-::\-Body2d\-Force} (
+\begin{DoxyParamCaption}
+\item[{bool}]{fext\-Param = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dForce_a3e7d7bacfba8f1bba44d6025271985a4}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!\-Set@{\-Set}}
+\index{\-Set@{\-Set}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Force\-::\-Set} (
+\begin{DoxyParamCaption}
+\item[{\-Vector3d \&}]{f, }
+\item[{const {\bf \-M3\-V3d} \&}]{x, }
+\item[{double}]{t, }
+\item[{const \-Vector3d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix36d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix3d $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{\-Matrix$<$ double, 3, \-Dynamic $>$ $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dForce_a066ab55e07727ca88992328f737812ce}
+
+
+\-References \-D, fext, and fext\-Param.
+
+
+
+\-Referenced by gcop\-::\-Body2d\-::\-Step().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!\-D@{\-D}}
+\index{\-D@{\-D}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
+\subsubsection[{\-D}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Body2d\-Force\-::\-D}}\label{classgcop_1_1Body2dForce_aec2f98f1dc4b7d6fde55130965481b57}
+
+
+linear damping terms 
+
+
+
+\-Referenced by \-Set(), gcop\-::\-Body2d\-Graph\-::\-Synthesize2(), and gcop\-::\-Body2d\-Graph\-::\-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!fext@{fext}}
+\index{fext@{fext}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
+\subsubsection[{fext}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Body2d\-Force\-::fext}}\label{classgcop_1_1Body2dForce_a7e24a55cc0450413b729a22abda0aeb4}
+
+
+constant external force 
+
+
+
+\-Referenced by \-Set().
+
+\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!fext\-Param@{fext\-Param}}
+\index{fext\-Param@{fext\-Param}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
+\subsubsection[{fext\-Param}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body2d\-Force\-::fext\-Param}}\label{classgcop_1_1Body2dForce_aa081fcc538bbaef84d345a8136721721}
+
+
+treat the (x,y) forces in fext as a parameter 
+
+
+
+\-Referenced by \-Set().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf body2dforce.\-h}\item 
+lib/systems/{\bf body2dforce.\-cc}\end{DoxyCompactItemize}

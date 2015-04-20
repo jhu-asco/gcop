@@ -1,0 +1,91 @@
+\section{gcop\-:\-:\-Car \-Class \-Reference}
+\label{classgcop_1_1Car}\index{gcop\-::\-Car@{gcop\-::\-Car}}
+
+
+{\ttfamily \#include $<$car.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Car\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classgcop_1_1Car__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Car\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Car__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Car} ()
+\item 
+double {\bf \-Step} ({\bf \-Vector5d} \&xb, double {\bf t}, const {\bf \-Vector5d} \&xa, const \-Vector2d \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix5d} $\ast$\-A=0, {\bf \-Matrix52d} $\ast$\-B=0, {\bf \-Matrix5\-Xd} $\ast$\-C=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf l}
+\begin{DoxyCompactList}\small\item\em distance between axles \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A simple rear-\/drive car model with 2nd order dynamics.
+
+\-The state is $ \bm x = (x,y,\theta, v, k) \in\mathbb{R}^5$ and controls are $ \bm u = (u_1,u_2) \in\mathbb{R}^5$ correspond to forward acceleration and curvature rate
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Car@{gcop\-::\-Car}!\-Car@{\-Car}}
+\index{\-Car@{\-Car}!gcop::Car@{gcop\-::\-Car}}
+\subsubsection[{\-Car}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Car\-::\-Car} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Car_a1c803f7c5038d3e31b368b0d0a35493c}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Car@{gcop\-::\-Car}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Car@{gcop\-::\-Car}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Car\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector5d} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Vector5d} \&}]{xa, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix5d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix52d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix5\-Xd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Car_a12320a1b17eda2e8459a25ed57cf8b94}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Car@{gcop\-::\-Car}!l@{l}}
+\index{l@{l}!gcop::Car@{gcop\-::\-Car}}
+\subsubsection[{l}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Car\-::l}}\label{classgcop_1_1Car_ab3dfb0f1ceb4129e10167fa112b9f57b}
+
+
+distance between axles 
+
+
+
+\-Referenced by gcop\-::\-Car\-View\-::\-Render().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf car.\-h}\item 
+lib/systems/{\bf car.\-cc}\end{DoxyCompactItemize}

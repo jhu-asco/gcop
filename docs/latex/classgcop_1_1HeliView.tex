@@ -1,0 +1,157 @@
+\section{gcop\-:\-:\-Heli\-View \-Class \-Reference}
+\label{classgcop_1_1HeliView}\index{gcop\-::\-Heli\-View@{gcop\-::\-Heli\-View}}
+
+
+{\ttfamily \#include $<$heliview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Heli\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1HeliView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Heli\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1HeliView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Heli\-View} (const {\bf \-Heli} \&{\bf sys})
+\item 
+virtual {\bf $\sim$\-Heli\-View} ()
+\item 
+{\bf \-Heli\-View} (const {\bf \-Heli} \&{\bf sys}, vector$<$ pair$<$ \-Matrix3d, {\bf \-Vector9d} $>$ $>$ $\ast${\bf xs}, vector$<$ \-Vector4d $>$ $\ast${\bf us}=0)
+\item 
+void {\bf \-Render} (const pair$<$ \-Matrix3d, {\bf \-Vector9d} $>$ $\ast$x, const \-Vector4d $\ast$u=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Heli} \& {\bf sys}
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf body}
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf tail}
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf tprop} [4]
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf rprop}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Heli\-View@{gcop\-::\-Heli\-View}!\-Heli\-View@{\-Heli\-View}}
+\index{\-Heli\-View@{\-Heli\-View}!gcop::HeliView@{gcop\-::\-Heli\-View}}
+\subsubsection[{\-Heli\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Heli\-View\-::\-Heli\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Heli} \&}]{sys}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1HeliView_ae23f861434ca730b3f8c0acac6ff41c0}
+\-Create a particle view of trajectory traj 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & particle \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Heli\-View@{gcop\-::\-Heli\-View}!$\sim$\-Heli\-View@{$\sim$\-Heli\-View}}
+\index{$\sim$\-Heli\-View@{$\sim$\-Heli\-View}!gcop::HeliView@{gcop\-::\-Heli\-View}}
+\subsubsection[{$\sim$\-Heli\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Heli\-View\-::$\sim$\-Heli\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1HeliView_a53d17033ec61e53beb26d1f8cd571902}
+
+
+\-References body, rprop, tail, and tprop.
+
+\index{gcop\-::\-Heli\-View@{gcop\-::\-Heli\-View}!\-Heli\-View@{\-Heli\-View}}
+\index{\-Heli\-View@{\-Heli\-View}!gcop::HeliView@{gcop\-::\-Heli\-View}}
+\subsubsection[{\-Heli\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Heli\-View\-::\-Heli\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Heli} \&}]{sys, }
+\item[{vector$<$ pair$<$ \-Matrix3d, {\bf \-Vector9d} $>$ $>$ $\ast$}]{xs, }
+\item[{vector$<$ \-Vector4d $>$ $\ast$}]{us = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1HeliView_ab407da72bde63328d7095026bd2919ec}
+\-Create a particle view of trajectory traj 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & particle \\
+\hline
+{\em xs} & trajectory \\
+\hline
+\end{DoxyParams}
+
+
+\-References body, rprop, tail, and tprop.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Heli\-View@{gcop\-::\-Heli\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::HeliView@{gcop\-::\-Heli\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Heli\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const pair$<$ \-Matrix3d, {\bf \-Vector9d} $>$ $\ast$}]{x, }
+\item[{const \-Vector4d $\ast$}]{u = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1HeliView_a2a7444908104cdcdbf833bf8773320e5}
+
+
+\-References gcop\-::\-Heli\-::rb, rprop, gcop\-::\-Heli\-::rt, gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector9d $>$, Matrix$<$ double, c, 1 $>$ $>$\-::\-Set\-Color(), sys, tail, and gcop\-::\-Body3d\-View$<$ 4 $>$\-::\-Transform().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Heli\-View@{gcop\-::\-Heli\-View}!body@{body}}
+\index{body@{body}!gcop::HeliView@{gcop\-::\-Heli\-View}}
+\subsubsection[{body}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Heli\-View\-::body}}\label{classgcop_1_1HeliView_ad7351fe8de15be87105c9eb6fcf72703}
+
+
+\-Referenced by \-Heli\-View(), and $\sim$\-Heli\-View().
+
+\index{gcop\-::\-Heli\-View@{gcop\-::\-Heli\-View}!rprop@{rprop}}
+\index{rprop@{rprop}!gcop::HeliView@{gcop\-::\-Heli\-View}}
+\subsubsection[{rprop}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Heli\-View\-::rprop}}\label{classgcop_1_1HeliView_a799f543681877072bfd33ddd9d963f15}
+
+
+\-Referenced by \-Heli\-View(), \-Render(), and $\sim$\-Heli\-View().
+
+\index{gcop\-::\-Heli\-View@{gcop\-::\-Heli\-View}!sys@{sys}}
+\index{sys@{sys}!gcop::HeliView@{gcop\-::\-Heli\-View}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Heli}\& {\bf gcop\-::\-Heli\-View\-::sys}}\label{classgcop_1_1HeliView_ac65546e5688b5fe9fb3b1c3f8055d8d0}
+
+
+\-Reimplemented from {\bf gcop\-::\-Body3d\-View$<$ 4 $>$} \doxyref{}{p.}{classgcop_1_1Body3dView_a37ec90f1baa0876e2da3c1e7b4875614}.
+
+
+
+\-Referenced by \-Render().
+
+\index{gcop\-::\-Heli\-View@{gcop\-::\-Heli\-View}!tail@{tail}}
+\index{tail@{tail}!gcop::HeliView@{gcop\-::\-Heli\-View}}
+\subsubsection[{tail}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Heli\-View\-::tail}}\label{classgcop_1_1HeliView_a5b0a55161494b3c7c3882740bdb4225f}
+
+
+\-Referenced by \-Heli\-View(), \-Render(), and $\sim$\-Heli\-View().
+
+\index{gcop\-::\-Heli\-View@{gcop\-::\-Heli\-View}!tprop@{tprop}}
+\index{tprop@{tprop}!gcop::HeliView@{gcop\-::\-Heli\-View}}
+\subsubsection[{tprop}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Heli\-View\-::tprop}[4]}\label{classgcop_1_1HeliView_a006066aee0ca2d055135ebf98ed6e072}
+
+
+\-Referenced by \-Heli\-View(), and $\sim$\-Heli\-View().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf heliview.\-h}\item 
+lib/views/{\bf heliview.\-cc}\end{DoxyCompactItemize}

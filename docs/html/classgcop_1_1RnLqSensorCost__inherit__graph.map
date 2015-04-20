@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classgcop_1_1LqSensorCost.html" title="gcop::LqSensorCost\&lt; Matrix\&lt; double, _nx, 1 \&gt;, _nx, _nu, _np, _ng, Matrix\&lt; double, _nz, 1 \&gt;, _nz \&gt;" alt="" coords="1264,5,1867,35"/>
+<area shape="rect" id="node4" href="$classgcop_1_1LsSensorCost.html" title="gcop::LsSensorCost\&lt; Matrix\&lt; double, _nx, 1 \&gt;, _nx, _nu, _np, _ng, Matrix\&lt; double, _nz, 1 \&gt;, _nz \&gt;" alt="" coords="613,5,1216,35"/>
+<area shape="rect" id="node6" href="$classgcop_1_1SensorCost.html" title="gcop::SensorCost\&lt; Matrix\&lt; double, _nx, 1 \&gt;, _nx, _nu, _np, Matrix\&lt; double, _nz, 1 \&gt;, _nz \&gt;" alt="" coords="7,5,564,35"/>
+</map>

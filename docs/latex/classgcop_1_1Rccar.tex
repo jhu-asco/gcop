@@ -1,0 +1,155 @@
+\section{gcop\-:\-:\-Rccar \-Class \-Reference}
+\label{classgcop_1_1Rccar}\index{gcop\-::\-Rccar@{gcop\-::\-Rccar}}
+
+
+{\ttfamily \#include $<$rccar.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Rccar\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{classgcop_1_1Rccar__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Rccar\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Rccar__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Rccar} (int {\bf np}=2)
+\item 
+virtual double {\bf \-Step} (\-Vector4d \&xb, double {\bf t}, const \-Vector4d \&xa, const \-Vector2d \&u, double {\bf h}, const \-Vector\-Xd $\ast$p, {\bf \-Matrix4d} $\ast$\-A=0, {\bf \-Matrix42d} $\ast$\-B=0, {\bf \-Matrix4pd} $\ast$\-C=0)
+\item 
+virtual void {\bf \-State\-And\-Controls\-To\-Flat} (\-Vector\-Xd \&y, const \-Vector4d \&{\bf x}, const \-Vector2d \&u)
+\item 
+virtual void {\bf \-Flat\-To\-State\-And\-Controls} (\-Vector4d \&{\bf x}, \-Vector2d \&u, const std\-::vector$<$ \-Vector\-Xd $>$ \&y)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf l}
+\begin{DoxyCompactList}\small\item\em distance between axles \end{DoxyCompactList}\item 
+double {\bf r}
+\begin{DoxyCompactList}\small\item\em \-Gain on the car acc vs wheel torque. \end{DoxyCompactList}\item 
+double {\bf h}
+\begin{DoxyCompactList}\small\item\em \-Internal step size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A simple rear-\/drive \doxyref{\-Rccar}{p.}{classgcop_1_1Rccar} model with 2nd order dynamics.
+
+\-The state is $ \bm x = (x,y,\theta, v) \in\mathbb{R}^4$ and controls are $ \bm u = (a, tan(phi) ) \in\mathbb{R}^5$ correspond to forward acceleration a and steering angle phi
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Rccar@{gcop\-::\-Rccar}!\-Rccar@{\-Rccar}}
+\index{\-Rccar@{\-Rccar}!gcop::Rccar@{gcop\-::\-Rccar}}
+\subsubsection[{\-Rccar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Rccar\-::\-Rccar} (
+\begin{DoxyParamCaption}
+\item[{int}]{np = {\ttfamily 2}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Rccar_af9b889296a342bed93e9814ab54be766}
+
+
+\-References gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::bnd, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::lb, gcop\-::\-System$<$ Vector4d, 4, 2 $>$\-::\-U, and gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::ub.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Rccar@{gcop\-::\-Rccar}!\-Flat\-To\-State\-And\-Controls@{\-Flat\-To\-State\-And\-Controls}}
+\index{\-Flat\-To\-State\-And\-Controls@{\-Flat\-To\-State\-And\-Controls}!gcop::Rccar@{gcop\-::\-Rccar}}
+\subsubsection[{\-Flat\-To\-State\-And\-Controls}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Rccar\-::\-Flat\-To\-State\-And\-Controls} (
+\begin{DoxyParamCaption}
+\item[{\-Vector4d \&}]{x, }
+\item[{\-Vector2d \&}]{u, }
+\item[{const std\-::vector$<$ \-Vector\-Xd $>$ \&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Rccar_a647c6687503732f092c3d232941f63d9}
+
+
+\-References l, r, sgn, and gcop\-::\-System$<$ Vector4d, 4, 2 $>$\-::x.
+
+\index{gcop\-::\-Rccar@{gcop\-::\-Rccar}!\-State\-And\-Controls\-To\-Flat@{\-State\-And\-Controls\-To\-Flat}}
+\index{\-State\-And\-Controls\-To\-Flat@{\-State\-And\-Controls\-To\-Flat}!gcop::Rccar@{gcop\-::\-Rccar}}
+\subsubsection[{\-State\-And\-Controls\-To\-Flat}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Rccar\-::\-State\-And\-Controls\-To\-Flat} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{y, }
+\item[{const \-Vector4d \&}]{x, }
+\item[{const \-Vector2d \&}]{u}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Rccar_a2237ab6e169a7e35c028bf50db4b1058}
+\index{gcop\-::\-Rccar@{gcop\-::\-Rccar}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Rccar@{gcop\-::\-Rccar}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Rccar\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{\-Vector4d \&}]{xb, }
+\item[{double}]{t, }
+\item[{const \-Vector4d \&}]{xa, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p, }
+\item[{{\bf \-Matrix4d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix42d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix4pd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Rccar_ac519b10ac362839bdd0029b21d2f0c2f}
+
+
+\-Reimplemented in {\bf gcop\-::\-Bulletrccar} \doxyref{}{p.}{classgcop_1_1Bulletrccar_aec9c59e183913cba5cadfd8d828a888c}, {\bf gcop\-::\-Bulletrccar1} \doxyref{}{p.}{classgcop_1_1Bulletrccar1_a4ebd64655b6faee9c1598680cd7de523}, and {\bf gcop\-::\-Rccar1} \doxyref{}{p.}{classgcop_1_1Rccar1_a96a96e6f8fa8a41839f26b91d05592d8}.
+
+
+
+\-References h, l, and r.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Rccar@{gcop\-::\-Rccar}!h@{h}}
+\index{h@{h}!gcop::Rccar@{gcop\-::\-Rccar}}
+\subsubsection[{h}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Rccar\-::h}}\label{classgcop_1_1Rccar_a07dc493c2f65122b7f9fdfa7f9313d31}
+
+
+\-Internal step size. 
+
+
+
+\-Referenced by \-Step(), gcop\-::\-Bulletrccar1\-::\-Step1(), and gcop\-::\-Bulletrccar\-::\-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Rccar@{gcop\-::\-Rccar}!l@{l}}
+\index{l@{l}!gcop::Rccar@{gcop\-::\-Rccar}}
+\subsubsection[{l}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Rccar\-::l}}\label{classgcop_1_1Rccar_a82d37c85113ff476cbf6594c8b8276f5}
+
+
+distance between axles 
+
+
+
+\-Referenced by gcop\-::\-Bulletrccar\-::\-Bulletrccar(), gcop\-::\-Bulletrccar1\-::\-Bulletrccar1(), \-Flat\-To\-State\-And\-Controls(), gcop\-::\-Rccar\-View\-::\-Render(), \-Step(), and gcop\-::\-Rccar1\-::\-Step().
+
+\index{gcop\-::\-Rccar@{gcop\-::\-Rccar}!r@{r}}
+\index{r@{r}!gcop::Rccar@{gcop\-::\-Rccar}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Rccar\-::r}}\label{classgcop_1_1Rccar_acb2ba192a3b95e81be6e258a86ed3fe2}
+
+
+\-Gain on the car acc vs wheel torque. 
+
+
+
+\-Referenced by \-Flat\-To\-State\-And\-Controls(), and \-Step().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf rccar.\-h}\item 
+lib/systems/{\bf rccar.\-cc}\end{DoxyCompactItemize}

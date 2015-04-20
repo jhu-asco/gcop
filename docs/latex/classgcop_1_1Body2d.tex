@@ -1,0 +1,121 @@
+\section{gcop\-:\-:\-Body2d \-Class \-Reference}
+\label{classgcop_1_1Body2d}\index{gcop\-::\-Body2d@{gcop\-::\-Body2d}}
+
+
+{\ttfamily \#include $<$body2d.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Body2d\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{classgcop_1_1Body2d__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Body2d__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body2d} ({\bf \-Body2d\-Force} $\ast$f=0)
+\item 
+double {\bf \-Step} ({\bf \-M3\-V3d} \&xb, double {\bf t}, const {\bf \-M3\-V3d} \&xa, const \-Vector3d \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix6d} $\ast$\-A=0, {\bf \-Matrix63d} $\ast$\-B=0, \-Matrix$<$ double, 6, \-Dynamic $>$ $\ast$\-C=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Vector2d {\bf d}
+\begin{DoxyCompactList}\small\item\em body dimensions \end{DoxyCompactList}\item 
+\-Vector3d {\bf \-I}
+\begin{DoxyCompactList}\small\item\em inertia components \end{DoxyCompactList}\item 
+{\bf \-Body2d\-Force} $\ast$ {\bf force}
+\begin{DoxyCompactList}\small\item\em force from controls and external disturbances \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A \char`\"{}geometric\char`\"{} planar rigid body system. \-The control system is implemented as an evolution on \-S\-E(2) as opposed to a vector space.
+
+\-The state is $ \bm x = (g, v) $ where $ g\in SE(2)$ is the pose, and $ v\in \mathbb{R}^3$ is the velocity
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Body2d@{gcop\-::\-Body2d}!\-Body2d@{\-Body2d}}
+\index{\-Body2d@{\-Body2d}!gcop::Body2d@{gcop\-::\-Body2d}}
+\subsubsection[{\-Body2d}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-::\-Body2d} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body2d\-Force} $\ast$}]{f = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2d_acecfc47629dcaf0c428ddf6f19662284}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Body2d@{gcop\-::\-Body2d}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Body2d@{gcop\-::\-Body2d}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Body2d\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-M3\-V3d} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-M3\-V3d} \&}]{xa, }
+\item[{const \-Vector3d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix6d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix63d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{\-Matrix$<$ double, 6, \-Dynamic $>$ $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2d_a3d84a4245807fc8e4aea08d1ff4dc3bf}
+
+
+\-References gcop\-::\-S\-E2\-::\-Ad(), gcop\-::\-S\-E2\-::cay(), gcop\-::\-S\-E2\-::dcay(), force, \-I, gcop\-::\-S\-E2\-::\-Instance(), and gcop\-::\-Body2d\-Force\-::\-Set().
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Track\-::\-Add(), gcop\-::\-Body2d\-Track\-::\-Add2(), and gcop\-::\-Body2d\-Graph\-::\-Synthesize3().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body2d@{gcop\-::\-Body2d}!d@{d}}
+\index{d@{d}!gcop::Body2d@{gcop\-::\-Body2d}}
+\subsubsection[{d}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector2d {\bf gcop\-::\-Body2d\-::d}}\label{classgcop_1_1Body2d_a0ed929e4aeef2a136ef47dcd92fa2447}
+
+
+body dimensions 
+
+\index{gcop\-::\-Body2d@{gcop\-::\-Body2d}!force@{force}}
+\index{force@{force}!gcop::Body2d@{gcop\-::\-Body2d}}
+\subsubsection[{force}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Force}$\ast$ {\bf gcop\-::\-Body2d\-::force}}\label{classgcop_1_1Body2d_a15d6a732852ac2b3f0a0f7509f1c2b54}
+
+
+force from controls and external disturbances 
+
+
+
+\-Referenced by \-Step(), gcop\-::\-Body2d\-Graph\-::\-Synthesize2(), and gcop\-::\-Body2d\-Graph\-::\-Synthesize3().
+
+\index{gcop\-::\-Body2d@{gcop\-::\-Body2d}!\-I@{\-I}}
+\index{\-I@{\-I}!gcop::Body2d@{gcop\-::\-Body2d}}
+\subsubsection[{\-I}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Body2d\-::\-I}}\label{classgcop_1_1Body2d_aaa88a3b7f22a545173bfc198c0776994}
+
+
+inertia components 
+
+
+
+\-Referenced by \-Step(), and gcop\-::\-Body2d\-Graph\-::\-Synthesize3().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf body2d.\-h}\item 
+lib/systems/{\bf body2d.\-cc}\end{DoxyCompactItemize}

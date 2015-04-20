@@ -1,0 +1,727 @@
+\section{gcop\-:\-:\-Bulletrccar \-Class \-Reference}
+\label{classgcop_1_1Bulletrccar}\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}}
+
+
+{\ttfamily \#include $<$bulletrccar.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Bulletrccar\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classgcop_1_1Bulletrccar__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Bulletrccar\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Bulletrccar__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf \-Car\-State}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Bulletrccar} ({\bf \-Bullet\-World} \&{\bf m\-\_\-world}, vector$<$ double $>$ $\ast$zs\-\_\-=0)
+\item 
+{\bf $\sim$\-Bulletrccar} ()
+\item 
+double {\bf \-Step} (\-Vector4d \&xb, double {\bf t}, const \-Vector4d \&xa, const \-Vector2d \&u, double {\bf h}, const \-Vector\-Xd $\ast$p, {\bf \-Matrix4d} $\ast$\-A=0, {\bf \-Matrix42d} $\ast$\-B=0, {\bf \-Matrix4pd} $\ast$\-C=0)
+\item 
+double {\bf \-Step\-\_\-internalinput} (\-Vector4d \&xb, const \-Vector2d \&u, double {\bf h}, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix4d} $\ast$\-A=0, {\bf \-Matrix42d} $\ast$\-B=0, {\bf \-Matrix4pd} $\ast$\-C=0)
+\item 
+double {\bf \-Step\-\_\-noise} (\-Vector4d \&xb, const \-Vector2d \&u, const \-Vector4d \&w, double {\bf h}, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix4d} $\ast$\-A=0, {\bf \-Matrix42d} $\ast$\-B=0, {\bf \-Matrix4pd} $\ast$\-C=0, {\bf \-Matrix4d} $\ast$\-D=0)
+\item 
+bool {\bf reset} (const \-Vector4d \&{\bf x}, double {\bf t}=0)
+\item 
+void {\bf setinitialstate} (const {\bf \-Car\-State} \&inputstate, \-Vector4d \&{\bf x})
+\item 
+void {\bf setinitialstate} (\-Vector4d \&{\bf x})
+\begin{DoxyCompactList}\small\item\em \-Set the car initial state as the current state. \end{DoxyCompactList}\item 
+bool {\bf \-Noise\-Matrix} ({\bf \-Matrix4d} \&\-Q, double {\bf t}, const \-Vector4d \&{\bf x}, const \-Vector2d \&u, double dt, const \-Vector\-Xd $\ast$p)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf right\-Index}
+\begin{DoxyCompactList}\small\item\em right of the car index in terms of x,y,z assigns the coordinate sys of car \end{DoxyCompactList}\item 
+int {\bf up\-Index}
+\item 
+int {\bf forward\-Index}
+\item 
+double {\bf carmass}
+\begin{DoxyCompactList}\small\item\em \-Mass of the car. \end{DoxyCompactList}\item 
+bt\-Vector3 {\bf car\-\_\-halfdims}
+\begin{DoxyCompactList}\small\item\em half dimensions of car width, height, length \end{DoxyCompactList}\item 
+double {\bf g\-Engine\-Force}
+\begin{DoxyCompactList}\small\item\em \-Engine \-Torque. \end{DoxyCompactList}\item 
+double {\bf g\-Breaking\-Force}
+\begin{DoxyCompactList}\small\item\em \-Breaking \doxyref{\-Force}{p.}{classgcop_1_1Force} on the vehicle. \end{DoxyCompactList}\item 
+double {\bf max\-Engine\-Force}
+\begin{DoxyCompactList}\small\item\em \-Maximum \-Engine force that can be applied. \end{DoxyCompactList}\item 
+double {\bf max\-Breaking\-Force}
+\begin{DoxyCompactList}\small\item\em \-Not \-Used. \end{DoxyCompactList}\item 
+double {\bf g\-Vehicle\-Steering}
+\begin{DoxyCompactList}\small\item\em \-Vehicle \-Steering angle. \end{DoxyCompactList}\item 
+double {\bf steering\-Clamp}
+\begin{DoxyCompactList}\small\item\em \-Clamp on \-Steering angle. \end{DoxyCompactList}\item 
+double {\bf velocity\-Clamp}
+\begin{DoxyCompactList}\small\item\em \-Clamp on velocity of car. \end{DoxyCompactList}\item 
+double {\bf wheel\-Radius}
+\begin{DoxyCompactList}\small\item\em \-Radius of wheel. \end{DoxyCompactList}\item 
+double {\bf wheel\-Width}
+\begin{DoxyCompactList}\small\item\em \-Width of wheel. \end{DoxyCompactList}\item 
+double {\bf wheel\-Friction}
+\begin{DoxyCompactList}\small\item\em wheel friction usually large value \end{DoxyCompactList}\item 
+double {\bf suspension\-Stiffness}
+\begin{DoxyCompactList}\small\item\em \-Stiffness of suspension. \-If not enough, the car will sink into ground. \end{DoxyCompactList}\item 
+double {\bf suspension\-Damping}
+\begin{DoxyCompactList}\small\item\em \-Damping on suspension. \end{DoxyCompactList}\item 
+double {\bf suspension\-Compression}
+\begin{DoxyCompactList}\small\item\em \-Compression factor decides by how much the car will compress wrto external loads. \end{DoxyCompactList}\item 
+double {\bf roll\-Influence}
+\item 
+bt\-Scalar {\bf suspension\-Rest\-Length}
+\begin{DoxyCompactList}\small\item\em \-Rest length of suspension. \end{DoxyCompactList}\item 
+bt\-Scalar {\bf m\-\_\-default\-Contact\-Processing\-Threshold}
+\begin{DoxyCompactList}\small\item\em if contact goes above this value, it will process \end{DoxyCompactList}\item 
+bt\-Vector3 {\bf wheel\-Direction\-C\-S0}
+\begin{DoxyCompactList}\small\item\em direction from the car towards the wheel contact point \end{DoxyCompactList}\item 
+bt\-Vector3 {\bf wheel\-Axle\-C\-S}
+\begin{DoxyCompactList}\small\item\em \-Wheel \-Axle \-Direction. \end{DoxyCompactList}\item 
+double {\bf gain\-\_\-cmdvelocity}
+\begin{DoxyCompactList}\small\item\em \-Gain parameter on the commanded velocity. \-Can be used to convert radio commands into true velocity commands. \end{DoxyCompactList}\item 
+double {\bf kp\-\_\-torque}
+\begin{DoxyCompactList}\small\item\em \-Proportional gain parameter for commanding torque to get to a desired velocity. \end{DoxyCompactList}\item 
+double {\bf kp\-\_\-steer}
+\begin{DoxyCompactList}\small\item\em \-Steering proportional gain. \-Should be between 0 and 1. \end{DoxyCompactList}\item 
+double {\bf initialz}
+\begin{DoxyCompactList}\small\item\em \-Initial height of the car. \end{DoxyCompactList}\item 
+bt\-Transform {\bf offsettrans}
+\begin{DoxyCompactList}\small\item\em \-To \-Account for the difference to coordinate system \-Usage\-: worldpose\-\_\-inregcoordsys = offsettrans.\-inv()$\ast$worldpose\-\_\-bullet$\ast$offsettrans. \end{DoxyCompactList}\item 
+bt\-Transform {\bf offsettransinv}
+\begin{DoxyCompactList}\small\item\em \-The inverse of the offset transformation above. \end{DoxyCompactList}\item 
+vector$<$ double $>$ $\ast$ {\bf zs}
+\begin{DoxyCompactList}\small\item\em \-Height of the rccar only used for visualization only x and y are used in optimization. \end{DoxyCompactList}\item 
+int {\bf count\-\_\-zs}
+\begin{DoxyCompactList}\small\item\em \-Internal variable to find the zs count to fill the height. \end{DoxyCompactList}\item 
+bool {\bf reset\-\_\-drivevel}
+\begin{DoxyCompactList}\small\item\em \-Used to make sure the velocity of the chassis is used just after reset instead of vehicle vel. \end{DoxyCompactList}\item 
+bt\-Rigid\-Body $\ast$ {\bf m\-\_\-car\-Chassis}
+\begin{DoxyCompactList}\small\item\em \-Pointer to the car rigidbody. \end{DoxyCompactList}\item 
+bt\-Collision\-Shape $\ast$ {\bf chassis\-Shape}
+\begin{DoxyCompactList}\small\item\em \-Pointer to the car collision shape. \end{DoxyCompactList}\item 
+bt\-Raycast\-Vehicle $\ast$ {\bf m\-\_\-vehicle}
+\begin{DoxyCompactList}\small\item\em \-Pointer to the raycast vehicle (\-Does the constraint enforcing to convert the rigidbody to a vehicle) \end{DoxyCompactList}\item 
+bt\-Collision\-Shape $\ast$ {\bf m\-\_\-wheel\-Shape}
+\begin{DoxyCompactList}\small\item\em \-Shape of the wheels used only for display purposes. \end{DoxyCompactList}\item 
+bt\-Raycast\-Vehicle\-::bt\-Vehicle\-Tuning {\bf m\-\_\-tuning}
+\begin{DoxyCompactList}\small\item\em \-Tuning parameters for the vehicle used only internally. \end{DoxyCompactList}\item 
+bt\-Vehicle\-Raycaster $\ast$ {\bf m\-\_\-vehicle\-Ray\-Caster}
+\begin{DoxyCompactList}\small\item\em \-Raycaster which gives the point of contact of the vehicle wheels. \end{DoxyCompactList}\item 
+{\bf \-Bullet\-World} \& {\bf m\-\_\-world}
+\item 
+{\bf \-Car\-State} $\ast$ {\bf initialstate}
+\begin{DoxyCompactList}\small\item\em \-Initialstate if passed is stored here. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A simple rear-\/drive \doxyref{\-Rccar}{p.}{classgcop_1_1Rccar} model derived from \-Vehicle \-Demo using \-Bullet \-Physics \-Engine
+
+\-This car model uses the full 6\-D\-O\-F state for simulation. \-To keep compatibility with existing 2\-D rccar model, this class only provides the state output as $ \bm x = (x,y,\theta, v) \in\mathbb{R}^4$. \-The controls for the car are given as desired steering angle and desired body velocity. \-These controls are converted into true controls for the bullet rccar i.\-e driving torque and actual steering angle through proportional control. \-The gains for the controller are input as parameters to the system \#\-T\-O\-D\-O \-Use full state of the car
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu \-Modified\-: \-Gowtham \-Garimella ggarime(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!\-Bulletrccar@{\-Bulletrccar}}
+\index{\-Bulletrccar@{\-Bulletrccar}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{\-Bulletrccar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Bulletrccar\-::\-Bulletrccar} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Bullet\-World} \&}]{m\-\_\-world, }
+\item[{vector$<$ double $>$ $\ast$}]{zs\-\_\- = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Bulletrccar_a6899571515fbd4d0e8f6c0cb379b0a04}
+\-Constructor. \-Each bullet system takes in a world in which it lies. 
+\begin{DoxyParams}{\-Parameters}
+{\em m\-\_\-world} & \-World class in which the current system lies. \-Only systems in one world can interact with each other \\
+\hline
+{\em zs\-\_\-} & \-Vector of car heights along the trajectory used for display purposes. \\
+\hline
+\end{DoxyParams}
+never deactivate the vehicle from computing collisions etc. \-Usually the bodies are deactivated after some time if they are not moving
+
+create wheel connections 
+
+\-References gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::bnd, car\-\_\-halfdims, carmass, chassis\-Shape, forward\-Index, gcop\-::\-Bullet\-World\-::\-Is\-Zup\-Axis(), gcop\-::\-Rccar\-::l, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::lb, gcop\-::\-Bullet\-World\-::\-Local\-Create\-Rigid\-Body(), m\-\_\-car\-Chassis, gcop\-::\-Bullet\-World\-::m\-\_\-dynamics\-World, m\-\_\-tuning, m\-\_\-vehicle, m\-\_\-vehicle\-Ray\-Caster, m\-\_\-wheel\-Shape, m\-\_\-world, offsettrans, offsettransinv, right\-Index, roll\-Influence, steering\-Clamp, suspension\-Compression, suspension\-Damping, suspension\-Rest\-Length, suspension\-Stiffness, gcop\-::\-System$<$ Vector4d, 4, 2 $>$\-::\-U, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::ub, up\-Index, velocity\-Clamp, wheel\-Axle\-C\-S, wheel\-Direction\-C\-S0, wheel\-Friction, wheel\-Radius, and wheel\-Width.
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!$\sim$\-Bulletrccar@{$\sim$\-Bulletrccar}}
+\index{$\sim$\-Bulletrccar@{$\sim$\-Bulletrccar}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{$\sim$\-Bulletrccar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-::\-Bulletrccar\-::$\sim$\-Bulletrccar} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1Bulletrccar_ab2ad4072433e007d83bc6b6171d092ec}
+\-Destructor\-: \-Removes the car and its accessories from the world and deletes them 
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!\-Noise\-Matrix@{\-Noise\-Matrix}}
+\index{\-Noise\-Matrix@{\-Noise\-Matrix}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{\-Noise\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Bulletrccar\-::\-Noise\-Matrix} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{\-Q, }
+\item[{double}]{t, }
+\item[{const \-Vector4d \&}]{x, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{double}]{dt, }
+\item[{const \-Vector\-Xd $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Bulletrccar_a96eff6bb6a9585b083e68e989c4846ad}
+\-Reimplementation of \-Noise matrix for specific system \index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!reset@{reset}}
+\index{reset@{reset}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Bulletrccar\-::reset} (
+\begin{DoxyParamCaption}
+\item[{const \-Vector4d \&}]{x, }
+\item[{double}]{t = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Bulletrccar_a1383e436d152eb5adfcf4f4b9fc2c0ef}
+\-Resets the internal state of the system to one specified 
+\begin{DoxyParams}{\-Parameters}
+{\em x} & \-State to reset to \\
+\hline
+{\em t} & time to reset to (optional) \\
+\hline
+\end{DoxyParams}
+never deactivate the vehicle from computing collisions etc. \-Usually the bodies are deactivated after some time if they are not moving
+
+create wheel connections 
+
+\-Reimplemented from {\bf gcop\-::\-System$<$ Vector4d, 4, 2 $>$} \doxyref{}{p.}{classgcop_1_1System_a3ca52c0a504bd4d4c8b689bbdc77fc4a}.
+
+
+
+\-References car\-\_\-halfdims, gcop\-::\-Bulletrccar\-::\-Car\-State\-::carangularvel, gcop\-::\-Bulletrccar\-::\-Car\-State\-::carlinearvel, carmass, gcop\-::\-Bulletrccar\-::\-Car\-State\-::cartransform, chassis\-Shape, count\-\_\-zs, forward\-Index, g\-Breaking\-Force, g\-Engine\-Force, g\-Vehicle\-Steering, initialstate, initialz, gcop\-::\-Bullet\-World\-::\-Is\-Zup\-Axis(), gcop\-::\-Bullet\-World\-::\-Local\-Create\-Rigid\-Body(), m\-\_\-car\-Chassis, gcop\-::\-Bullet\-World\-::m\-\_\-dynamics\-World, m\-\_\-tuning, m\-\_\-vehicle, m\-\_\-vehicle\-Ray\-Caster, m\-\_\-world, gcop\-::\-Bullet\-World\-::\-Reset(), reset\-\_\-drivevel, right\-Index, roll\-Influence, suspension\-Compression, suspension\-Damping, suspension\-Rest\-Length, suspension\-Stiffness, gcop\-::\-System$<$ Vector4d, 4, 2 $>$\-::t, up\-Index, wheel\-Axle\-C\-S, wheel\-Direction\-C\-S0, wheel\-Friction, wheel\-Radius, gcop\-::\-System$<$ Vector4d, 4, 2 $>$\-::x, and zs.
+
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!setinitialstate@{setinitialstate}}
+\index{setinitialstate@{setinitialstate}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{setinitialstate}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Bulletrccar\-::setinitialstate} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Car\-State} \&}]{inputstate, }
+\item[{\-Vector4d \&}]{x}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Bulletrccar_a35056ee070882c25cc1fd1b4e3a9ee9c}
+\-Set the intial state of the car to given full state. \-This overrides the reset state of the car and allows to use full state \#\-T\-O\-D\-O \-Use full stat of the car directly 
+
+\-References gcop\-::\-Bulletrccar\-::\-Car\-State\-::carlinearvel, gcop\-::\-Bulletrccar\-::\-Car\-State\-::cartransform, initialstate, gcop\-::\-Bullet\-World\-::\-Is\-Zup\-Axis(), m\-\_\-car\-Chassis, gcop\-::\-Bullet\-World\-::m\-\_\-dynamics\-World, m\-\_\-vehicle, m\-\_\-world, suspension\-Rest\-Length, wheel\-Radius, gcop\-::\-System$<$ Vector4d, 4, 2 $>$\-::x, and zs.
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!setinitialstate@{setinitialstate}}
+\index{setinitialstate@{setinitialstate}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{setinitialstate}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Bulletrccar\-::setinitialstate} (
+\begin{DoxyParamCaption}
+\item[{\-Vector4d \&}]{x}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Bulletrccar_a2159b2eb1ed38e451c0dee5d796ef76b}
+
+
+\-Set the car initial state as the current state. 
+
+
+
+\-References gcop\-::\-Bulletrccar\-::\-Car\-State\-::carangularvel, gcop\-::\-Bulletrccar\-::\-Car\-State\-::carlinearvel, gcop\-::\-Bulletrccar\-::\-Car\-State\-::cartransform, initialstate, gcop\-::\-Bullet\-World\-::\-Is\-Zup\-Axis(), m\-\_\-car\-Chassis, m\-\_\-world, offsettrans, offsettransinv, gcop\-::\-System$<$ Vector4d, 4, 2 $>$\-::x, and zs.
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Bulletrccar\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{\-Vector4d \&}]{xb, }
+\item[{double}]{t, }
+\item[{const \-Vector4d \&}]{xa, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p, }
+\item[{{\bf \-Matrix4d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix42d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix4pd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Bulletrccar_aec9c59e183913cba5cadfd8d828a888c}
+\-Reimplementation of the step function specific to bullet rccar 
+
+\-Reimplemented from {\bf gcop\-::\-Rccar} \doxyref{}{p.}{classgcop_1_1Rccar_ac519b10ac362839bdd0029b21d2f0c2f}.
+
+
+
+\-References reset(), and \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!\-Step\-\_\-internalinput@{\-Step\-\_\-internalinput}}
+\index{\-Step\-\_\-internalinput@{\-Step\-\_\-internalinput}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{\-Step\-\_\-internalinput}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Bulletrccar\-::\-Step\-\_\-internalinput} (
+\begin{DoxyParamCaption}
+\item[{\-Vector4d \&}]{xb, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix4d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix42d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix4pd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Bulletrccar_a97999496cbeba63cba21cc37982f3ab6}
+
+
+\-References count\-\_\-zs, gain\-\_\-cmdvelocity, g\-Engine\-Force, g\-Vehicle\-Steering, gcop\-::\-Rccar\-::h, gcop\-::\-Bullet\-World\-::\-Is\-Zup\-Axis(), kp\-\_\-steer, kp\-\_\-torque, m\-\_\-car\-Chassis, gcop\-::\-Bullet\-World\-::m\-\_\-dynamics\-World, m\-\_\-vehicle, m\-\_\-world, offsettrans, offsettransinv, reset\-\_\-drivevel, steering\-Clamp, gcop\-::\-System$<$ Vector4d, 4, 2 $>$\-::t, gcop\-::\-System$<$ Vector4d, 4, 2 $>$\-::x, and zs.
+
+
+
+\-Referenced by \-Step(), and \-Step\-\_\-noise().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!\-Step\-\_\-noise@{\-Step\-\_\-noise}}
+\index{\-Step\-\_\-noise@{\-Step\-\_\-noise}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{\-Step\-\_\-noise}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Bulletrccar\-::\-Step\-\_\-noise} (
+\begin{DoxyParamCaption}
+\item[{\-Vector4d \&}]{xb, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{const \-Vector4d \&}]{w, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix4d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix42d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix4pd} $\ast$}]{\-C = {\ttfamily 0}, }
+\item[{{\bf \-Matrix4d} $\ast$}]{\-D = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Bulletrccar_af3753308a1a34752522b0a1218b30d32}
+
+
+\-References m\-\_\-car\-Chassis, and \-Step\-\_\-internalinput().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!car\-\_\-halfdims@{car\-\_\-halfdims}}
+\index{car\-\_\-halfdims@{car\-\_\-halfdims}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{car\-\_\-halfdims}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Vector3 {\bf gcop\-::\-Bulletrccar\-::car\-\_\-halfdims}}\label{classgcop_1_1Bulletrccar_a4ba81c37e9c6c7f20d868f257a5f840e}
+
+
+half dimensions of car width, height, length 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!carmass@{carmass}}
+\index{carmass@{carmass}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{carmass}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::carmass}}\label{classgcop_1_1Bulletrccar_a5716cda6207d1f2796250950fcb663b4}
+
+
+\-Mass of the car. 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!chassis\-Shape@{chassis\-Shape}}
+\index{chassis\-Shape@{chassis\-Shape}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{chassis\-Shape}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Collision\-Shape$\ast$ {\bf gcop\-::\-Bulletrccar\-::chassis\-Shape}}\label{classgcop_1_1Bulletrccar_a2341bd6238d1b5f1650172eb23d3bf67}
+
+
+\-Pointer to the car collision shape. 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!count\-\_\-zs@{count\-\_\-zs}}
+\index{count\-\_\-zs@{count\-\_\-zs}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{count\-\_\-zs}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Bulletrccar\-::count\-\_\-zs}}\label{classgcop_1_1Bulletrccar_add83134a554d6214f5b1c5c670ea061e}
+
+
+\-Internal variable to find the zs count to fill the height. 
+
+
+
+\-Referenced by reset(), and \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!forward\-Index@{forward\-Index}}
+\index{forward\-Index@{forward\-Index}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{forward\-Index}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Bulletrccar\-::forward\-Index}}\label{classgcop_1_1Bulletrccar_aa8b8c71fdaa070fcfcb9b6d6faeacd32}
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!gain\-\_\-cmdvelocity@{gain\-\_\-cmdvelocity}}
+\index{gain\-\_\-cmdvelocity@{gain\-\_\-cmdvelocity}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{gain\-\_\-cmdvelocity}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::gain\-\_\-cmdvelocity}}\label{classgcop_1_1Bulletrccar_a1401c4654fb4c63f9c35414e4bf2084d}
+
+
+\-Gain parameter on the commanded velocity. \-Can be used to convert radio commands into true velocity commands. 
+
+
+
+\-Referenced by \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!g\-Breaking\-Force@{g\-Breaking\-Force}}
+\index{g\-Breaking\-Force@{g\-Breaking\-Force}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{g\-Breaking\-Force}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::g\-Breaking\-Force}}\label{classgcop_1_1Bulletrccar_a22620ab8364a3643259b64794af03eda}
+
+
+\-Breaking \doxyref{\-Force}{p.}{classgcop_1_1Force} on the vehicle. 
+
+
+
+\-Referenced by reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!g\-Engine\-Force@{g\-Engine\-Force}}
+\index{g\-Engine\-Force@{g\-Engine\-Force}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{g\-Engine\-Force}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::g\-Engine\-Force}}\label{classgcop_1_1Bulletrccar_a9d2af55be409a1344a477e4a5d6c3f37}
+
+
+\-Engine \-Torque. 
+
+
+
+\-Referenced by reset(), and \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!g\-Vehicle\-Steering@{g\-Vehicle\-Steering}}
+\index{g\-Vehicle\-Steering@{g\-Vehicle\-Steering}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{g\-Vehicle\-Steering}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::g\-Vehicle\-Steering}}\label{classgcop_1_1Bulletrccar_a278509f5167ce2b4402695a0e0f99607}
+
+
+\-Vehicle \-Steering angle. 
+
+
+
+\-Referenced by reset(), and \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!initialstate@{initialstate}}
+\index{initialstate@{initialstate}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{initialstate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Car\-State}$\ast$ {\bf gcop\-::\-Bulletrccar\-::initialstate}}\label{classgcop_1_1Bulletrccar_a965af7a08abab67fde75eacfc2f72467}
+
+
+\-Initialstate if passed is stored here. 
+
+
+
+\-Referenced by reset(), and setinitialstate().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!initialz@{initialz}}
+\index{initialz@{initialz}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{initialz}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::initialz}}\label{classgcop_1_1Bulletrccar_a0d20123fa7b26af553f88e0b08e4f11c}
+
+
+\-Initial height of the car. 
+
+
+
+\-Referenced by reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!kp\-\_\-steer@{kp\-\_\-steer}}
+\index{kp\-\_\-steer@{kp\-\_\-steer}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{kp\-\_\-steer}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::kp\-\_\-steer}}\label{classgcop_1_1Bulletrccar_a6c7b70b48a2e5561dacd12cdf0e5558a}
+
+
+\-Steering proportional gain. \-Should be between 0 and 1. 
+
+
+
+\-Referenced by \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!kp\-\_\-torque@{kp\-\_\-torque}}
+\index{kp\-\_\-torque@{kp\-\_\-torque}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{kp\-\_\-torque}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::kp\-\_\-torque}}\label{classgcop_1_1Bulletrccar_a6aeea5640ed88889f1310672d18bdf55}
+
+
+\-Proportional gain parameter for commanding torque to get to a desired velocity. 
+
+
+
+\-Referenced by \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!m\-\_\-car\-Chassis@{m\-\_\-car\-Chassis}}
+\index{m\-\_\-car\-Chassis@{m\-\_\-car\-Chassis}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{m\-\_\-car\-Chassis}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Rigid\-Body$\ast$ {\bf gcop\-::\-Bulletrccar\-::m\-\_\-car\-Chassis}}\label{classgcop_1_1Bulletrccar_a5aff7b95509c22dbad4160ffa53259df}
+
+
+\-Pointer to the car rigidbody. 
+
+
+
+\-Referenced by \-Bulletrccar(), reset(), setinitialstate(), \-Step\-\_\-internalinput(), and \-Step\-\_\-noise().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!m\-\_\-default\-Contact\-Processing\-Threshold@{m\-\_\-default\-Contact\-Processing\-Threshold}}
+\index{m\-\_\-default\-Contact\-Processing\-Threshold@{m\-\_\-default\-Contact\-Processing\-Threshold}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{m\-\_\-default\-Contact\-Processing\-Threshold}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Scalar {\bf gcop\-::\-Bulletrccar\-::m\-\_\-default\-Contact\-Processing\-Threshold}}\label{classgcop_1_1Bulletrccar_a983c98bb0c3c847b3f54ebd2be35e64d}
+
+
+if contact goes above this value, it will process 
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!m\-\_\-tuning@{m\-\_\-tuning}}
+\index{m\-\_\-tuning@{m\-\_\-tuning}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{m\-\_\-tuning}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Raycast\-Vehicle\-::bt\-Vehicle\-Tuning {\bf gcop\-::\-Bulletrccar\-::m\-\_\-tuning}}\label{classgcop_1_1Bulletrccar_afc48238765bf3bacbdb8fd846bc66f46}
+
+
+\-Tuning parameters for the vehicle used only internally. 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!m\-\_\-vehicle@{m\-\_\-vehicle}}
+\index{m\-\_\-vehicle@{m\-\_\-vehicle}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{m\-\_\-vehicle}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Raycast\-Vehicle$\ast$ {\bf gcop\-::\-Bulletrccar\-::m\-\_\-vehicle}}\label{classgcop_1_1Bulletrccar_a493a88171e72895e09ebcdd3c0a2a209}
+
+
+\-Pointer to the raycast vehicle (\-Does the constraint enforcing to convert the rigidbody to a vehicle) 
+
+
+
+\-Referenced by \-Bulletrccar(), reset(), setinitialstate(), and \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!m\-\_\-vehicle\-Ray\-Caster@{m\-\_\-vehicle\-Ray\-Caster}}
+\index{m\-\_\-vehicle\-Ray\-Caster@{m\-\_\-vehicle\-Ray\-Caster}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{m\-\_\-vehicle\-Ray\-Caster}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Vehicle\-Raycaster$\ast$ {\bf gcop\-::\-Bulletrccar\-::m\-\_\-vehicle\-Ray\-Caster}}\label{classgcop_1_1Bulletrccar_ac132afad3fb751a0c8ab417d74c5f0a5}
+
+
+\-Raycaster which gives the point of contact of the vehicle wheels. 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!m\-\_\-wheel\-Shape@{m\-\_\-wheel\-Shape}}
+\index{m\-\_\-wheel\-Shape@{m\-\_\-wheel\-Shape}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{m\-\_\-wheel\-Shape}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Collision\-Shape$\ast$ {\bf gcop\-::\-Bulletrccar\-::m\-\_\-wheel\-Shape}}\label{classgcop_1_1Bulletrccar_a25de4dfdec0cc345276fc02ad8fc9438}
+
+
+\-Shape of the wheels used only for display purposes. 
+
+
+
+\-Referenced by \-Bulletrccar().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!m\-\_\-world@{m\-\_\-world}}
+\index{m\-\_\-world@{m\-\_\-world}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{m\-\_\-world}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Bullet\-World}\& {\bf gcop\-::\-Bulletrccar\-::m\-\_\-world}}\label{classgcop_1_1Bulletrccar_a252f727f96cc33f3be8305f7a38e522c}
+
+
+\-Referenced by \-Bulletrccar(), reset(), setinitialstate(), and \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!max\-Breaking\-Force@{max\-Breaking\-Force}}
+\index{max\-Breaking\-Force@{max\-Breaking\-Force}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{max\-Breaking\-Force}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::max\-Breaking\-Force}}\label{classgcop_1_1Bulletrccar_a3e1cdba04d605abc3cf02351b63562fa}
+
+
+\-Not \-Used. 
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!max\-Engine\-Force@{max\-Engine\-Force}}
+\index{max\-Engine\-Force@{max\-Engine\-Force}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{max\-Engine\-Force}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::max\-Engine\-Force}}\label{classgcop_1_1Bulletrccar_ad6858de9c2f042a59f17261417d7db00}
+
+
+\-Maximum \-Engine force that can be applied. 
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!offsettrans@{offsettrans}}
+\index{offsettrans@{offsettrans}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{offsettrans}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Transform {\bf gcop\-::\-Bulletrccar\-::offsettrans}}\label{classgcop_1_1Bulletrccar_a8abffb9ce85ad9389a100a78a43624a0}
+
+
+\-To \-Account for the difference to coordinate system \-Usage\-: worldpose\-\_\-inregcoordsys = offsettrans.\-inv()$\ast$worldpose\-\_\-bullet$\ast$offsettrans. 
+
+
+
+\-Referenced by \-Bulletrccar(), setinitialstate(), and \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!offsettransinv@{offsettransinv}}
+\index{offsettransinv@{offsettransinv}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{offsettransinv}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Transform {\bf gcop\-::\-Bulletrccar\-::offsettransinv}}\label{classgcop_1_1Bulletrccar_a9380c4f89b2f7a3cf7f341810718fa8c}
+
+
+\-The inverse of the offset transformation above. 
+
+
+
+\-Referenced by \-Bulletrccar(), setinitialstate(), and \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!reset\-\_\-drivevel@{reset\-\_\-drivevel}}
+\index{reset\-\_\-drivevel@{reset\-\_\-drivevel}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{reset\-\_\-drivevel}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Bulletrccar\-::reset\-\_\-drivevel}}\label{classgcop_1_1Bulletrccar_ad9794a650f0e2b551da9338aec5deee5}
+
+
+\-Used to make sure the velocity of the chassis is used just after reset instead of vehicle vel. 
+
+
+
+\-Referenced by reset(), and \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!right\-Index@{right\-Index}}
+\index{right\-Index@{right\-Index}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{right\-Index}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Bulletrccar\-::right\-Index}}\label{classgcop_1_1Bulletrccar_ae4ce283e3922a4334dda5346bd0524af}
+
+
+right of the car index in terms of x,y,z assigns the coordinate sys of car 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!roll\-Influence@{roll\-Influence}}
+\index{roll\-Influence@{roll\-Influence}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{roll\-Influence}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::roll\-Influence}}\label{classgcop_1_1Bulletrccar_ab959d0cab04e9174cdfce5b094cc9291}
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!steering\-Clamp@{steering\-Clamp}}
+\index{steering\-Clamp@{steering\-Clamp}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{steering\-Clamp}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::steering\-Clamp}}\label{classgcop_1_1Bulletrccar_a16beb540fa97b72c7796d62c7a336da4}
+
+
+\-Clamp on \-Steering angle. 
+
+
+
+\-Referenced by \-Bulletrccar(), and \-Step\-\_\-internalinput().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!suspension\-Compression@{suspension\-Compression}}
+\index{suspension\-Compression@{suspension\-Compression}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{suspension\-Compression}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::suspension\-Compression}}\label{classgcop_1_1Bulletrccar_a456db98e393e6f92450eb658a83fdd90}
+
+
+\-Compression factor decides by how much the car will compress wrto external loads. 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!suspension\-Damping@{suspension\-Damping}}
+\index{suspension\-Damping@{suspension\-Damping}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{suspension\-Damping}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::suspension\-Damping}}\label{classgcop_1_1Bulletrccar_a2a916c161d0afe12ecc758ceb7597444}
+
+
+\-Damping on suspension. 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!suspension\-Rest\-Length@{suspension\-Rest\-Length}}
+\index{suspension\-Rest\-Length@{suspension\-Rest\-Length}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{suspension\-Rest\-Length}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Scalar {\bf gcop\-::\-Bulletrccar\-::suspension\-Rest\-Length}}\label{classgcop_1_1Bulletrccar_ad91148d72d28f3127d7552a7af1daee4}
+
+
+\-Rest length of suspension. 
+
+
+
+\-Referenced by \-Bulletrccar(), reset(), and setinitialstate().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!suspension\-Stiffness@{suspension\-Stiffness}}
+\index{suspension\-Stiffness@{suspension\-Stiffness}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{suspension\-Stiffness}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::suspension\-Stiffness}}\label{classgcop_1_1Bulletrccar_a16d17b74695e323926cfee93aff28dd6}
+
+
+\-Stiffness of suspension. \-If not enough, the car will sink into ground. 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!up\-Index@{up\-Index}}
+\index{up\-Index@{up\-Index}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{up\-Index}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Bulletrccar\-::up\-Index}}\label{classgcop_1_1Bulletrccar_ae00d3e6a64a625500f3ca7e6e7ba33ef}
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!velocity\-Clamp@{velocity\-Clamp}}
+\index{velocity\-Clamp@{velocity\-Clamp}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{velocity\-Clamp}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::velocity\-Clamp}}\label{classgcop_1_1Bulletrccar_a7fea55ab8ecee0c37628d850cdcc3ca7}
+
+
+\-Clamp on velocity of car. 
+
+
+
+\-Referenced by \-Bulletrccar().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!wheel\-Axle\-C\-S@{wheel\-Axle\-C\-S}}
+\index{wheel\-Axle\-C\-S@{wheel\-Axle\-C\-S}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{wheel\-Axle\-C\-S}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Vector3 {\bf gcop\-::\-Bulletrccar\-::wheel\-Axle\-C\-S}}\label{classgcop_1_1Bulletrccar_a094f61bcd609c523af4bba8c8d7d1d92}
+
+
+\-Wheel \-Axle \-Direction. 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!wheel\-Direction\-C\-S0@{wheel\-Direction\-C\-S0}}
+\index{wheel\-Direction\-C\-S0@{wheel\-Direction\-C\-S0}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{wheel\-Direction\-C\-S0}]{\setlength{\rightskip}{0pt plus 5cm}bt\-Vector3 {\bf gcop\-::\-Bulletrccar\-::wheel\-Direction\-C\-S0}}\label{classgcop_1_1Bulletrccar_a6b4c2bfa2c38a98d518c9f33bb190d39}
+
+
+direction from the car towards the wheel contact point 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!wheel\-Friction@{wheel\-Friction}}
+\index{wheel\-Friction@{wheel\-Friction}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{wheel\-Friction}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::wheel\-Friction}}\label{classgcop_1_1Bulletrccar_a612dd8834da61f09d90f11664618116f}
+
+
+wheel friction usually large value 
+
+
+
+\-Referenced by \-Bulletrccar(), and reset().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!wheel\-Radius@{wheel\-Radius}}
+\index{wheel\-Radius@{wheel\-Radius}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{wheel\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::wheel\-Radius}}\label{classgcop_1_1Bulletrccar_ac81654f31c1be5ddb986a51396216c23}
+
+
+\-Radius of wheel. 
+
+
+
+\-Referenced by \-Bulletrccar(), reset(), and setinitialstate().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!wheel\-Width@{wheel\-Width}}
+\index{wheel\-Width@{wheel\-Width}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{wheel\-Width}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Bulletrccar\-::wheel\-Width}}\label{classgcop_1_1Bulletrccar_a4099d98b34ef7fe3b4b696fad3df0c04}
+
+
+\-Width of wheel. 
+
+
+
+\-Referenced by \-Bulletrccar().
+
+\index{gcop\-::\-Bulletrccar@{gcop\-::\-Bulletrccar}!zs@{zs}}
+\index{zs@{zs}!gcop::Bulletrccar@{gcop\-::\-Bulletrccar}}
+\subsubsection[{zs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$$\ast$ {\bf gcop\-::\-Bulletrccar\-::zs}}\label{classgcop_1_1Bulletrccar_aa97adfc3e98c0cef6360ab49c2eec00b}
+
+
+\-Height of the rccar only used for visualization only x and y are used in optimization. 
+
+
+
+\-Referenced by reset(), setinitialstate(), and \-Step\-\_\-internalinput().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/bulletsystems/{\bf bulletrccar.\-h}\item 
+lib/bulletsystems/{\bf bulletrccar.\-cc}\end{DoxyCompactItemize}

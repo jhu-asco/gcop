@@ -1,0 +1,161 @@
+\section{gcop\-:\-:\-Rccar1 \-Class \-Reference}
+\label{classgcop_1_1Rccar1}\index{gcop\-::\-Rccar1@{gcop\-::\-Rccar1}}
+
+
+{\ttfamily \#include $<$rccar1.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Rccar1\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classgcop_1_1Rccar1__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Rccar1\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Rccar1__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Rccar1} ()
+\item 
+double {\bf \-Step} (\-Vector4d \&xb, double {\bf t}, const \-Vector4d \&xa, const \-Vector2d \&u, double {\bf h}, const \-Vector\-Xd $\ast$p, {\bf \-Matrix4d} $\ast$\-A=0, {\bf \-Matrix42d} $\ast$\-B=0, {\bf \-Matrix4pd} $\ast$\-C=0)
+\item 
+double {\bf bind} (const double \&input, int index)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf msteer}
+\item 
+double {\bf csteer}
+\begin{DoxyCompactList}\small\item\em \-Transform for converting input into steering angle. \end{DoxyCompactList}\item 
+double {\bf mdrive}
+\item 
+double {\bf cdrive}
+\begin{DoxyCompactList}\small\item\em \-Transform for converting input into desired velocity. \end{DoxyCompactList}\item 
+double {\bf ktorque}
+\begin{DoxyCompactList}\small\item\em \-Proportional constant for how much torque is applied for matching the current velocity with the desired velocity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A simple rear-\/drive \doxyref{\-Rccar}{p.}{classgcop_1_1Rccar} model with 2nd order dynamics.
+
+\-The state is $ \bm x = (x,y,\theta, v) \in\mathbb{R}^4$ and controls are $ \bm u = (a, tan(phi) ) \in\mathbb{R}^5$ correspond to forward acceleration a and steering angle phi
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Rccar1@{gcop\-::\-Rccar1}!\-Rccar1@{\-Rccar1}}
+\index{\-Rccar1@{\-Rccar1}!gcop::Rccar1@{gcop\-::\-Rccar1}}
+\subsubsection[{\-Rccar1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Rccar1\-::\-Rccar1} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Rccar1_a7f141a77aa030c53614ffb8d1759ad0c}
+
+
+\-References gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::bnd, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::lb, gcop\-::\-System$<$ Vector4d, 4, 2 $>$\-::\-U, and gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::ub.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Rccar1@{gcop\-::\-Rccar1}!bind@{bind}}
+\index{bind@{bind}!gcop::Rccar1@{gcop\-::\-Rccar1}}
+\subsubsection[{bind}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Rccar1\-::bind} (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{input, }
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1Rccar1_a794ffc9ce40b1d4793501956a7ae9dea}
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Rccar1@{gcop\-::\-Rccar1}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Rccar1@{gcop\-::\-Rccar1}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Rccar1\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{\-Vector4d \&}]{xb, }
+\item[{double}]{t, }
+\item[{const \-Vector4d \&}]{xa, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p, }
+\item[{{\bf \-Matrix4d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix42d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix4pd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Rccar1_a96a96e6f8fa8a41839f26b91d05592d8}
+
+
+\-Reimplemented from {\bf gcop\-::\-Rccar} \doxyref{}{p.}{classgcop_1_1Rccar_ac519b10ac362839bdd0029b21d2f0c2f}.
+
+
+
+\-References bind(), cdrive, csteer, ktorque, gcop\-::\-Rccar\-::l, mdrive, and msteer.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Rccar1@{gcop\-::\-Rccar1}!cdrive@{cdrive}}
+\index{cdrive@{cdrive}!gcop::Rccar1@{gcop\-::\-Rccar1}}
+\subsubsection[{cdrive}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Rccar1\-::cdrive}}\label{classgcop_1_1Rccar1_a07e5369d7c40b9b6ba8fb9ba9d6c91a4}
+
+
+\-Transform for converting input into desired velocity. 
+
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Rccar1@{gcop\-::\-Rccar1}!csteer@{csteer}}
+\index{csteer@{csteer}!gcop::Rccar1@{gcop\-::\-Rccar1}}
+\subsubsection[{csteer}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Rccar1\-::csteer}}\label{classgcop_1_1Rccar1_a4a6bd63149fb4d7f07e6040673874190}
+
+
+\-Transform for converting input into steering angle. 
+
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Rccar1@{gcop\-::\-Rccar1}!ktorque@{ktorque}}
+\index{ktorque@{ktorque}!gcop::Rccar1@{gcop\-::\-Rccar1}}
+\subsubsection[{ktorque}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Rccar1\-::ktorque}}\label{classgcop_1_1Rccar1_ada20bc2e62bf26f1797e52d8d2b04466}
+
+
+\-Proportional constant for how much torque is applied for matching the current velocity with the desired velocity. 
+
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Rccar1@{gcop\-::\-Rccar1}!mdrive@{mdrive}}
+\index{mdrive@{mdrive}!gcop::Rccar1@{gcop\-::\-Rccar1}}
+\subsubsection[{mdrive}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Rccar1\-::mdrive}}\label{classgcop_1_1Rccar1_ac412668d8e0f0c4f14ff889f876bab39}
+
+
+\-Referenced by \-Step().
+
+\index{gcop\-::\-Rccar1@{gcop\-::\-Rccar1}!msteer@{msteer}}
+\index{msteer@{msteer}!gcop::Rccar1@{gcop\-::\-Rccar1}}
+\subsubsection[{msteer}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Rccar1\-::msteer}}\label{classgcop_1_1Rccar1_ad8c8a743f3b70c16e0c6f45081041531}
+
+
+\-Referenced by \-Step().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf rccar1.\-h}\item 
+lib/systems/{\bf rccar1.\-cc}\end{DoxyCompactItemize}

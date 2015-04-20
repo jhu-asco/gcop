@@ -1,0 +1,178 @@
+\section{gcop\-:\-:\-Sample\-Numerical\-Diff$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1SampleNumericalDiff}\index{gcop\-::\-Sample\-Numerical\-Diff$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$@{gcop\-::\-Sample\-Numerical\-Diff$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$}}
+
+
+{\ttfamily \#include $<$gndocpv2.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ {\bf \-Inputs\-At\-Compile\-Time} =  \-Functor\-:\-:\-Inputs\-At\-Compile\-Time, 
+{\bf \-Values\-At\-Compile\-Time} =  \-Functor\-:\-:\-Values\-At\-Compile\-Time
+ \}
+\item 
+typedef \-\_\-\-Functor {\bf \-Functor}
+\item 
+typedef {\bf \-Functor\-::\-Scalar} {\bf \-Scalar}
+\item 
+typedef {\bf \-Functor\-::\-Input\-Type} {\bf \-Input\-Type}
+\item 
+typedef {\bf \-Functor\-::\-Value\-Type} {\bf \-Value\-Type}
+\item 
+typedef {\bf \-Functor\-::\-Jacobian\-Type} {\bf \-Jacobian\-Type}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ng, 1 $>$ {\bf \-Vectorgd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Sample\-Numerical\-Diff} ({\bf \-Scalar} \-\_\-epsfcn=0.)
+\item 
+{\bf \-Sample\-Numerical\-Diff} (const {\bf \-Functor} \&f, {\bf \-Scalar} \-\_\-epsfcn=0.)
+\item 
+{\footnotesize template$<$typename T0 $>$ }\\{\bf \-Sample\-Numerical\-Diff} (const \-T0 \&a0)
+\item 
+{\footnotesize template$<$typename T0 , typename T1 $>$ }\\{\bf \-Sample\-Numerical\-Diff} (const \-T0 \&a0, const \-T1 \&a1)
+\item 
+{\footnotesize template$<$typename T0 , typename T1 , typename T2 $>$ }\\{\bf \-Sample\-Numerical\-Diff} (const \-T0 \&a0, const \-T1 \&a1, const \-T2 \&a2)
+\item 
+void {\bf \-Linearize} (int \-Ns)
+\item 
+int {\bf df} (const {\bf \-Input\-Type} \&\-\_\-x, {\bf \-Jacobian\-Type} \&jac)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Vectorcd} {\bf duscale}
+\begin{DoxyCompactList}\small\item\em \-Scales sampled du according to this vector. \end{DoxyCompactList}\item 
+{\bf \-Vectornd} {\bf dxscale}
+\begin{DoxyCompactList}\small\item\em \-Scales sampled dx0 according to this vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ class gcop\-::\-Sample\-Numerical\-Diff$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Functor@{\-Functor}}
+\index{\-Functor@{\-Functor}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Functor}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ typedef \-\_\-\-Functor {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Functor}}\label{classgcop_1_1SampleNumericalDiff_a4835e32a278d63e2bee65f23ef313ec6}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Input\-Type@{\-Input\-Type}}
+\index{\-Input\-Type@{\-Input\-Type}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Input\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ typedef {\bf \-Functor\-::\-Input\-Type} {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Input\-Type}}\label{classgcop_1_1SampleNumericalDiff_abe57353239cbe7da89c147b6903b2419}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Jacobian\-Type@{\-Jacobian\-Type}}
+\index{\-Jacobian\-Type@{\-Jacobian\-Type}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Jacobian\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ typedef {\bf \-Functor\-::\-Jacobian\-Type} {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Jacobian\-Type}}\label{classgcop_1_1SampleNumericalDiff_ad6f4dee92f22c4eed176cbf356896d10}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Scalar@{\-Scalar}}
+\index{\-Scalar@{\-Scalar}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Scalar}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ typedef {\bf \-Functor\-::\-Scalar} {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Scalar}}\label{classgcop_1_1SampleNumericalDiff_aaedc74c15a916c70af49eb7a1f34ffb1}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Value\-Type@{\-Value\-Type}}
+\index{\-Value\-Type@{\-Value\-Type}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Value\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ typedef {\bf \-Functor\-::\-Value\-Type} {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Value\-Type}}\label{classgcop_1_1SampleNumericalDiff_a4507e69a28ea032a0a8f96fa98b38fe6}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1SampleNumericalDiff_a449da24b9a9cd294e15337b7473a2a0a}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Vectorgd@{\-Vectorgd}}
+\index{\-Vectorgd@{\-Vectorgd}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Vectorgd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ng, 1$>$ {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Vectorgd}}\label{classgcop_1_1SampleNumericalDiff_a2b88a60913bf645762444989a72a83f3}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1SampleNumericalDiff_ab68f5a8eadf8116c6f5f13c35f079a02}
+
+
+\subsection{\-Member \-Enumeration \-Documentation}
+\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ anonymous enum}\label{classgcop_1_1SampleNumericalDiff_a6d894abcf3f79ae03cf8b23a3360cd12}
+\begin{Desc}
+\item[\-Enumerator\-: ]\par
+\begin{description}
+\index{\-Inputs\-At\-Compile\-Time@{\-Inputs\-At\-Compile\-Time}!gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}}\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Inputs\-At\-Compile\-Time@{\-Inputs\-At\-Compile\-Time}}\item[{\em 
+\-Inputs\-At\-Compile\-Time\label{classgcop_1_1SampleNumericalDiff_a6d894abcf3f79ae03cf8b23a3360cd12a4fee146aacb81d10c6a660dca277626c}
+}]\index{\-Values\-At\-Compile\-Time@{\-Values\-At\-Compile\-Time}!gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}}\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Values\-At\-Compile\-Time@{\-Values\-At\-Compile\-Time}}\item[{\em 
+\-Values\-At\-Compile\-Time\label{classgcop_1_1SampleNumericalDiff_a6d894abcf3f79ae03cf8b23a3360cd12a4d43f1c541424f6eb7ab388abea82e7f}
+}]\end{description}
+\end{Desc}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}}
+\index{\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Sample\-Numerical\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Sample\-Numerical\-Diff} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Scalar}}]{\-\_\-epsfcn = {\ttfamily 0.}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1SampleNumericalDiff_a973df7630c6d247f7edc2936023ed2c4}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}}
+\index{\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Sample\-Numerical\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Sample\-Numerical\-Diff} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Functor} \&}]{f, }
+\item[{{\bf \-Scalar}}]{\-\_\-epsfcn = {\ttfamily 0.}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1SampleNumericalDiff_a951651f4d15341d1fde5e8af69c964a3}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}}
+\index{\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Sample\-Numerical\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ template$<$typename T0 $>$ {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Sample\-Numerical\-Diff} (
+\begin{DoxyParamCaption}
+\item[{const \-T0 \&}]{a0}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1SampleNumericalDiff_add0721bee847af72ef52695e392e61bf}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}}
+\index{\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Sample\-Numerical\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ template$<$typename T0 , typename T1 $>$ {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Sample\-Numerical\-Diff} (
+\begin{DoxyParamCaption}
+\item[{const \-T0 \&}]{a0, }
+\item[{const \-T1 \&}]{a1}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1SampleNumericalDiff_a3866df892af060381269f96fdaf9335c}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}}
+\index{\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Sample\-Numerical\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ template$<$typename T0 , typename T1 , typename T2 $>$ {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Sample\-Numerical\-Diff} (
+\begin{DoxyParamCaption}
+\item[{const \-T0 \&}]{a0, }
+\item[{const \-T1 \&}]{a1, }
+\item[{const \-T2 \&}]{a2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1SampleNumericalDiff_aeae6edcecdd235571f4b525b41c17dc1}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!df@{df}}
+\index{df@{df}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{df}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ int {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf df} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Input\-Type} \&}]{\-\_\-x, }
+\item[{{\bf \-Jacobian\-Type} \&}]{jac}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1SampleNumericalDiff_a99937cf6fa56e8b9c2c26a4276817e6a}
+\-This function finds the jacobian of the residual wrto the parameters. \-We use the state and control jacobians along the path and analytic basis function evaluations to find a better estimate of the jacobian without finite differences. return the number of evaluation of functor \index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!\-Linearize@{\-Linearize}}
+\index{\-Linearize@{\-Linearize}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Linearize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ void {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf \-Linearize} (
+\begin{DoxyParamCaption}
+\item[{int}]{\-Ns}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1SampleNumericalDiff_a882b48cc0bd96359886966bdbc2e9e21}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!duscale@{duscale}}
+\index{duscale@{duscale}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{duscale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ {\bf \-Vectorcd} {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf duscale}}\label{classgcop_1_1SampleNumericalDiff_a9ecafb874fcd92367ed0a25e21497a96}
+
+
+\-Scales sampled du according to this vector. 
+
+\index{gcop\-::\-Sample\-Numerical\-Diff@{gcop\-::\-Sample\-Numerical\-Diff}!dxscale@{dxscale}}
+\index{dxscale@{dxscale}!gcop::SampleNumericalDiff@{gcop\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{dxscale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ {\bf \-Vectornd} {\bf gcop\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::{\bf dxscale}}\label{classgcop_1_1SampleNumericalDiff_a5a3691eda065b4852fdc453a5690db07}
+
+
+\-Scales sampled dx0 according to this vector. 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf gndocpv2.\-h}\end{DoxyCompactItemize}

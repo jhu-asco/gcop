@@ -1,0 +1,308 @@
+\section{gcop\-:\-:\-Kin\-Rccar\-Path \-Class \-Reference}
+\label{classgcop_1_1KinRccarPath}\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}}
+
+
+{\ttfamily \#include $<$kinrccarpath.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kin\-Rccar\-Path\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1KinRccarPath__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kin\-Rccar\-Path} ({\bf \-Kin\-Rccar} \&{\bf sys}, bool {\bf wheel\-\_\-odometry}=false, bool {\bf yaw\-\_\-odometry}=false, bool {\bf forces}=false, bool {\bf estimate\-\_\-length}=false)
+\item 
+virtual void {\bf \-Add\-Control} (const \-Vector2d \&u, const \-Vector2d \&v, double h)
+\item 
+virtual void {\bf \-Add\-Observation} (const vector$<$ pair$<$ int, \-Vector3d $>$ $>$ \&z, {\bf \-Matrix4d} cam\-\_\-transform=\-Matrix\-Xd\-::\-Identity(4, 4))
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kin\-Rccar} \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em system \end{DoxyCompactList}\item 
+bool {\bf wheel\-\_\-odometry}
+\item 
+bool {\bf yaw\-\_\-odometry}
+\item 
+bool {\bf extforce}
+\begin{DoxyCompactList}\small\item\em is there a constant external force that need to be estimated \end{DoxyCompactList}\item 
+bool {\bf forces}
+\begin{DoxyCompactList}\small\item\em is there a constant external force that need to be estimated \end{DoxyCompactList}\item 
+bool {\bf estimate\-\_\-length}
+\begin{DoxyCompactList}\small\item\em should the length of the car be tracked as a parameter \end{DoxyCompactList}\item 
+vector$<$ double $>$ {\bf ts}
+\begin{DoxyCompactList}\small\item\em sequence of times (\-N+1 vector) \end{DoxyCompactList}\item 
+vector$<$ {\bf \-Matrix4d} $>$ {\bf xs}
+\begin{DoxyCompactList}\small\item\em sequence of states x=(g,v) (\-N+1 vector) \end{DoxyCompactList}\item 
+vector$<$ \-Vector2d $>$ {\bf us}
+\begin{DoxyCompactList}\small\item\em sequence of inputs (\-N vector) \end{DoxyCompactList}\item 
+vector$<$ \-Vector2d $>$ {\bf vs}
+\begin{DoxyCompactList}\small\item\em sequence of odometry (\-N vector) \end{DoxyCompactList}\item 
+vector$<$ {\bf \-Matrix4d} $>$ {\bf xos}
+\begin{DoxyCompactList}\small\item\em unoptimized trajectory \end{DoxyCompactList}\item 
+vector$<$ \-Vector2d $>$ {\bf uos}
+\begin{DoxyCompactList}\small\item\em unoptimized trajectory \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf p}
+\begin{DoxyCompactList}\small\item\em observed landmark positions (2$\ast$m vector) and external force parameters (2 vector) \end{DoxyCompactList}\item 
+vector$<$ vector$<$ pair$<$ int, \*
+\-Vector3d $>$ $>$ $>$ {\bf zs}
+\begin{DoxyCompactList}\small\item\em vector of vectors of landmark observations \end{DoxyCompactList}\item 
+double {\bf cp}
+\begin{DoxyCompactList}\small\item\em noise covariance of poses (assume spherical) \end{DoxyCompactList}\item 
+\-Vector2d {\bf cv}
+\begin{DoxyCompactList}\small\item\em noise covariance of odometry/gyro (assume diagonal) \end{DoxyCompactList}\item 
+\-Vector2d {\bf cw}
+\begin{DoxyCompactList}\small\item\em noise covariance of control forces (assume diagonal) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Kinematic \-R\-C \doxyref{\-Car}{p.}{classgcop_1_1Car} \-Pose-\/track in 3\-D. \-Tracks odometry, controls, and landmarks. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!\-Kin\-Rccar\-Path@{\-Kin\-Rccar\-Path}}
+\index{\-Kin\-Rccar\-Path@{\-Kin\-Rccar\-Path}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{\-Kin\-Rccar\-Path}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-::\-Kin\-Rccar\-Path\-::\-Kin\-Rccar\-Path} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Kin\-Rccar} \&}]{sys, }
+\item[{bool}]{wheel\-\_\-odometry = {\ttfamily false}, }
+\item[{bool}]{yaw\-\_\-odometry = {\ttfamily false}, }
+\item[{bool}]{forces = {\ttfamily false}, }
+\item[{bool}]{estimate\-\_\-length = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinRccarPath_ab3f2292193ae6183c46d75d28fe325f4}
+\-Pose graph (using given features) 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & body3d system \\
+\hline
+{\em odometry} & is odometry available \\
+\hline
+{\em forces} & use uncertain forces in the cost function \\
+\hline
+\end{DoxyParams}
+
+
+\-References cp, cv, cw, p, ts, xos, and xs.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!\-Add\-Control@{\-Add\-Control}}
+\index{\-Add\-Control@{\-Add\-Control}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{\-Add\-Control}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-::\-Kin\-Rccar\-Path\-::\-Add\-Control} (
+\begin{DoxyParamCaption}
+\item[{const \-Vector2d \&}]{u, }
+\item[{const \-Vector2d \&}]{v, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1KinRccarPath_ace26ef5c240d6454ed1c32123c1f2d31}
+
+
+\-References gcop\-::\-Kin\-Rccar\-::\-Step(), sys, ts, uos, us, vs, xos, xs, and zs.
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!\-Add\-Observation@{\-Add\-Observation}}
+\index{\-Add\-Observation@{\-Add\-Observation}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{\-Add\-Observation}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-::\-Kin\-Rccar\-Path\-::\-Add\-Observation} (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ pair$<$ int, \-Vector3d $>$ $>$ \&}]{z, }
+\item[{{\bf \-Matrix4d}}]{cam\-\_\-transform = {\ttfamily \-Matrix\-Xd\-:\-:\-Identity(4,4)}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1KinRccarPath_af078ea3699835754f7ba5fd629aff1e1}
+
+
+\-References estimate\-\_\-length, extforce, p, xs, and zs.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!cp@{cp}}
+\index{cp@{cp}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{cp}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Kin\-Rccar\-Path\-::cp}}\label{classgcop_1_1KinRccarPath_a5ea6fb434ecd0cd5a38b23e3e1d758a0}
+
+
+noise covariance of poses (assume spherical) 
+
+
+
+\-Referenced by \-Kin\-Rccar\-Path(), and gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!cv@{cv}}
+\index{cv@{cv}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{cv}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector2d {\bf gcop\-::\-Kin\-Rccar\-Path\-::cv}}\label{classgcop_1_1KinRccarPath_aa7980b4cdbcf6ac7ffac9bc9d67e0470}
+
+
+noise covariance of odometry/gyro (assume diagonal) 
+
+
+
+\-Referenced by \-Kin\-Rccar\-Path(), and gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!cw@{cw}}
+\index{cw@{cw}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{cw}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector2d {\bf gcop\-::\-Kin\-Rccar\-Path\-::cw}}\label{classgcop_1_1KinRccarPath_aba828071c829b7fa49932d2f7a9add34}
+
+
+noise covariance of control forces (assume diagonal) 
+
+
+
+\-Referenced by \-Kin\-Rccar\-Path(), and gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!estimate\-\_\-length@{estimate\-\_\-length}}
+\index{estimate\-\_\-length@{estimate\-\_\-length}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{estimate\-\_\-length}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Kin\-Rccar\-Path\-::estimate\-\_\-length}}\label{classgcop_1_1KinRccarPath_adff5b9e681f60682d6cb96c03b44fced}
+
+
+should the length of the car be tracked as a parameter 
+
+
+
+\-Referenced by \-Add\-Observation(), and gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!extforce@{extforce}}
+\index{extforce@{extforce}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{extforce}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Kin\-Rccar\-Path\-::extforce}}\label{classgcop_1_1KinRccarPath_a0fca686c9a6016ab924f3ad57805009b}
+
+
+is there a constant external force that need to be estimated 
+
+
+
+\-Referenced by \-Add\-Observation(), and gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!forces@{forces}}
+\index{forces@{forces}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{forces}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Kin\-Rccar\-Path\-::forces}}\label{classgcop_1_1KinRccarPath_a6f9748c781cf624e4d3f59987b98d07a}
+
+
+is there a constant external force that need to be estimated 
+
+
+
+\-Referenced by gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!p@{p}}
+\index{p@{p}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{p}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Kin\-Rccar\-Path\-::p}}\label{classgcop_1_1KinRccarPath_aa2d68c997c8f1e42782a58d7a07fa9f5}
+
+
+observed landmark positions (2$\ast$m vector) and external force parameters (2 vector) 
+
+
+
+\-Referenced by \-Add\-Observation(), and \-Kin\-Rccar\-Path().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!sys@{sys}}
+\index{sys@{sys}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Kin\-Rccar}\& {\bf gcop\-::\-Kin\-Rccar\-Path\-::sys}}\label{classgcop_1_1KinRccarPath_a39d9c7e5528d7378580d8a82a2f345f5}
+
+
+system 
+
+
+
+\-Referenced by \-Add\-Control(), and gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!ts@{ts}}
+\index{ts@{ts}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf gcop\-::\-Kin\-Rccar\-Path\-::ts}}\label{classgcop_1_1KinRccarPath_a67d05f326457a1cb9c65f82490d7c950}
+
+
+sequence of times (\-N+1 vector) 
+
+
+
+\-Referenced by \-Add\-Control(), and \-Kin\-Rccar\-Path().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!uos@{uos}}
+\index{uos@{uos}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{uos}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Vector2d$>$ {\bf gcop\-::\-Kin\-Rccar\-Path\-::uos}}\label{classgcop_1_1KinRccarPath_a4e0b866aa0b78623e7f862d93b9ef34c}
+
+
+unoptimized trajectory 
+
+
+
+\-Referenced by \-Add\-Control(), and gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!us@{us}}
+\index{us@{us}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Vector2d$>$ {\bf gcop\-::\-Kin\-Rccar\-Path\-::us}}\label{classgcop_1_1KinRccarPath_ae73e53f1ca4b36b6c7a7bc820fae6287}
+
+
+sequence of inputs (\-N vector) 
+
+
+
+\-Referenced by \-Add\-Control().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!vs@{vs}}
+\index{vs@{vs}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{vs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Vector2d$>$ {\bf gcop\-::\-Kin\-Rccar\-Path\-::vs}}\label{classgcop_1_1KinRccarPath_a72990fd59ce5f2697412368f2f664bcb}
+
+
+sequence of odometry (\-N vector) 
+
+
+
+\-Referenced by \-Add\-Control(), and gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!wheel\-\_\-odometry@{wheel\-\_\-odometry}}
+\index{wheel\-\_\-odometry@{wheel\-\_\-odometry}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{wheel\-\_\-odometry}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Kin\-Rccar\-Path\-::wheel\-\_\-odometry}}\label{classgcop_1_1KinRccarPath_a02f139ae84bf432ad554db21635bad82}
+
+
+\-Referenced by gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!xos@{xos}}
+\index{xos@{xos}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{xos}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Matrix4d}$>$ {\bf gcop\-::\-Kin\-Rccar\-Path\-::xos}}\label{classgcop_1_1KinRccarPath_a7af9d1c082811d4765c83618732017c0}
+
+
+unoptimized trajectory 
+
+
+
+\-Referenced by \-Add\-Control(), and \-Kin\-Rccar\-Path().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!xs@{xs}}
+\index{xs@{xs}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Matrix4d}$>$ {\bf gcop\-::\-Kin\-Rccar\-Path\-::xs}}\label{classgcop_1_1KinRccarPath_ab050d0f2d465424d3c55f20d49403791}
+
+
+sequence of states x=(g,v) (\-N+1 vector) 
+
+
+
+\-Referenced by \-Add\-Control(), \-Add\-Observation(), and \-Kin\-Rccar\-Path().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!yaw\-\_\-odometry@{yaw\-\_\-odometry}}
+\index{yaw\-\_\-odometry@{yaw\-\_\-odometry}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{yaw\-\_\-odometry}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Kin\-Rccar\-Path\-::yaw\-\_\-odometry}}\label{classgcop_1_1KinRccarPath_a7f668e896561a1a129ed79461435e870}
+
+
+\-Referenced by gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+\index{gcop\-::\-Kin\-Rccar\-Path@{gcop\-::\-Kin\-Rccar\-Path}!zs@{zs}}
+\index{zs@{zs}!gcop::KinRccarPath@{gcop\-::\-Kin\-Rccar\-Path}}
+\subsubsection[{zs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$pair$<$int, \-Vector3d$>$ $>$ $>$ {\bf gcop\-::\-Kin\-Rccar\-Path\-::zs}}\label{classgcop_1_1KinRccarPath_a1f218a52724866bd97cf012667a2fc53}
+
+
+vector of vectors of landmark observations 
+
+
+
+\-Referenced by \-Add\-Control(), \-Add\-Observation(), and gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf kinrccarpath.\-h}\end{DoxyCompactItemize}

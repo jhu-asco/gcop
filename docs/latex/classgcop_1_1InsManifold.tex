@@ -1,0 +1,110 @@
+\section{gcop\-:\-:\-Ins\-Manifold \-Class \-Reference}
+\label{classgcop_1_1InsManifold}\index{gcop\-::\-Ins\-Manifold@{gcop\-::\-Ins\-Manifold}}
+
+
+{\ttfamily \#include $<$insmanifold.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Ins\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classgcop_1_1InsManifold__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Ins\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classgcop_1_1InsManifold__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf \-Lift} ({\bf \-Vector15d} \&v, const {\bf \-Ins\-State} \&xa, const {\bf \-Ins\-State} \&xb)
+\item 
+void {\bf \-Retract} ({\bf \-Ins\-State} \&xb, const {\bf \-Ins\-State} \&xa, const {\bf \-Vector15d} \&v)
+\item 
+void {\bf dtau} ({\bf \-Matrix15d} \&\-M, const {\bf \-Vector15d} \&v)
+\item 
+void {\bf \-Adtau} ({\bf \-Matrix15d} \&\-M, const {\bf \-Vector15d} \&v)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf \-Ins\-Manifold} \& {\bf \-Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Ins\-Manifold@{gcop\-::\-Ins\-Manifold}!\-Adtau@{\-Adtau}}
+\index{\-Adtau@{\-Adtau}!gcop::InsManifold@{gcop\-::\-Ins\-Manifold}}
+\subsubsection[{\-Adtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Ins\-Manifold\-::\-Adtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix15d} \&}]{\-M, }
+\item[{const {\bf \-Vector15d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1InsManifold_a18530f067cd9cd8050f1d70c0cad05ee}
+
+
+\-References \-Instance().
+
+\index{gcop\-::\-Ins\-Manifold@{gcop\-::\-Ins\-Manifold}!dtau@{dtau}}
+\index{dtau@{dtau}!gcop::InsManifold@{gcop\-::\-Ins\-Manifold}}
+\subsubsection[{dtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Ins\-Manifold\-::dtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix15d} \&}]{\-M, }
+\item[{const {\bf \-Vector15d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1InsManifold_ace47f15c07554e148c2f14ef9e3d46ce}
+
+
+\-References \-Instance().
+
+\index{gcop\-::\-Ins\-Manifold@{gcop\-::\-Ins\-Manifold}!\-Instance@{\-Instance}}
+\index{\-Instance@{\-Instance}!gcop::InsManifold@{gcop\-::\-Ins\-Manifold}}
+\subsubsection[{\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Ins\-Manifold} \& {\bf \-Ins\-Manifold\-::\-Instance} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1InsManifold_a95128eab414f4c13a84c4027e875db29}
+
+
+\-Referenced by \-Adtau(), dtau(), \-Lift(), and \-Retract().
+
+\index{gcop\-::\-Ins\-Manifold@{gcop\-::\-Ins\-Manifold}!\-Lift@{\-Lift}}
+\index{\-Lift@{\-Lift}!gcop::InsManifold@{gcop\-::\-Ins\-Manifold}}
+\subsubsection[{\-Lift}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Ins\-Manifold\-::\-Lift} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector15d} \&}]{v, }
+\item[{const {\bf \-Ins\-State} \&}]{xa, }
+\item[{const {\bf \-Ins\-State} \&}]{xb}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1InsManifold_aa60387eb02e7b7491af795e5c66be4db}
+
+
+\-References gcop\-::\-Ins\-State\-::ba, gcop\-::\-Ins\-State\-::bg, \-Instance(), gcop\-::\-Ins\-State\-::p, gcop\-::\-Ins\-State\-::\-R, and gcop\-::\-Ins\-State\-::v.
+
+\index{gcop\-::\-Ins\-Manifold@{gcop\-::\-Ins\-Manifold}!\-Retract@{\-Retract}}
+\index{\-Retract@{\-Retract}!gcop::InsManifold@{gcop\-::\-Ins\-Manifold}}
+\subsubsection[{\-Retract}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Ins\-Manifold\-::\-Retract} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Ins\-State} \&}]{xb, }
+\item[{const {\bf \-Ins\-State} \&}]{xa, }
+\item[{const {\bf \-Vector15d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1InsManifold_a1d2a770f9357c7686c61baef1a6a7ae2}
+
+
+\-References gcop\-::\-Ins\-State\-::ba, gcop\-::\-Ins\-State\-::bg, \-Instance(), gcop\-::\-Ins\-State\-::p, gcop\-::\-Ins\-State\-::\-R, and gcop\-::\-Ins\-State\-::v.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/{\bf insmanifold.\-h}\item 
+lib/systems/manifolds/{\bf insmanifold.\-cc}\end{DoxyCompactItemize}

@@ -1,0 +1,48 @@
+\section{gcop\-:\-:\-Controller$<$ \-Tx, \-Tu $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Controller}\index{gcop\-::\-Controller$<$ Tx, Tu $>$@{gcop\-::\-Controller$<$ Tx, Tu $>$}}
+
+
+{\ttfamily \#include $<$controller.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf \-Set} (\-Tu \&u, double t, const \-Tx \&x)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename \-Tx, typename \-Tu$>$class gcop\-::\-Controller$<$ Tx, Tu $>$}
+
+\-Base controller. \-Its simple purpose is to take a state x and time t and produces the control u.
+
+\-Author\-: \-Marin \-Kobilarov -\/-\/ \-Copyright (\-C) 2006-\/2013 
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Controller@{gcop\-::\-Controller}!\-Set@{\-Set}}
+\index{\-Set@{\-Set}!gcop::Controller@{gcop\-::\-Controller}}
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ virtual void {\bf gcop\-::\-Controller}$<$ \-Tx, \-Tu $>$\-::{\bf \-Set} (
+\begin{DoxyParamCaption}
+\item[{\-Tu \&}]{u, }
+\item[{double}]{t, }
+\item[{const \-Tx \&}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Controller_a306fbf6d65ab78e13537bb92b330fc35}
+\-Feedback controller of the form u = k(t, x) 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & controls \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implemented in {\bf gcop\-::\-Mbs\-Controller} \doxyref{}{p.}{classgcop_1_1MbsController_a0065ff60bcfaa6f378e97809d6491a4b}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf controller.\-h}\end{DoxyCompactItemize}

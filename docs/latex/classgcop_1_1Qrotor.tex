@@ -1,0 +1,115 @@
+\section{gcop\-:\-:\-Qrotor \-Class \-Reference}
+\label{classgcop_1_1Qrotor}\index{gcop\-::\-Qrotor@{gcop\-::\-Qrotor}}
+
+
+{\ttfamily \#include $<$qrotor.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Qrotor\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classgcop_1_1Qrotor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Qrotor\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Qrotor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Qrotor} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf l}
+\begin{DoxyCompactList}\small\item\em distance from center of mass to each rotor \end{DoxyCompactList}\item 
+double {\bf r}
+\begin{DoxyCompactList}\small\item\em propeller radius \end{DoxyCompactList}\item 
+double {\bf kt}
+\begin{DoxyCompactList}\small\item\em thrust gain \end{DoxyCompactList}\item 
+double {\bf km}
+\begin{DoxyCompactList}\small\item\em moment gain \end{DoxyCompactList}\item 
+double {\bf mm}
+\begin{DoxyCompactList}\small\item\em motor coefficient \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A quadrotor dynamical model.
+
+\-The state is $ \bf x = (R, x, \omega, v) $ where $ (R,x)\in SO(3)\times\mathbb{R}^3$ is the pose, and the controls are $ \bm u = (u_1,u_2,u_3,u_4)$ correspond to torques around the body and a vertical lift force.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Qrotor@{gcop\-::\-Qrotor}!\-Qrotor@{\-Qrotor}}
+\index{\-Qrotor@{\-Qrotor}!gcop::Qrotor@{gcop\-::\-Qrotor}}
+\subsubsection[{\-Qrotor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Qrotor\-::\-Qrotor} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Qrotor_a8b27ae4b0114e6baaf00f1c76624f9a9}
+
+
+\-References gcop\-::\-Body3d$<$ 4 $>$\-::\-Bu, gcop\-::\-Body3d$<$ 4 $>$\-::fp, and gcop\-::\-Body3d$<$ 4 $>$\-::m.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Qrotor@{gcop\-::\-Qrotor}!km@{km}}
+\index{km@{km}!gcop::Qrotor@{gcop\-::\-Qrotor}}
+\subsubsection[{km}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Qrotor\-::km}}\label{classgcop_1_1Qrotor_a3c8cf31f95fcfe7cff9576afeb9fdfb2}
+
+
+moment gain 
+
+\index{gcop\-::\-Qrotor@{gcop\-::\-Qrotor}!kt@{kt}}
+\index{kt@{kt}!gcop::Qrotor@{gcop\-::\-Qrotor}}
+\subsubsection[{kt}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Qrotor\-::kt}}\label{classgcop_1_1Qrotor_a0aaa28577a65e3fd6eee99e3440b7258}
+
+
+thrust gain 
+
+\index{gcop\-::\-Qrotor@{gcop\-::\-Qrotor}!l@{l}}
+\index{l@{l}!gcop::Qrotor@{gcop\-::\-Qrotor}}
+\subsubsection[{l}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Qrotor\-::l}}\label{classgcop_1_1Qrotor_a47554a129bcfb1d58755c0bf70cd20bb}
+
+
+distance from center of mass to each rotor 
+
+
+
+\-Referenced by gcop\-::\-Qrotor\-View\-::\-Render().
+
+\index{gcop\-::\-Qrotor@{gcop\-::\-Qrotor}!mm@{mm}}
+\index{mm@{mm}!gcop::Qrotor@{gcop\-::\-Qrotor}}
+\subsubsection[{mm}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Qrotor\-::mm}}\label{classgcop_1_1Qrotor_a661587e61cc7c22739e4f72ca9671ab1}
+
+
+motor coefficient 
+
+\index{gcop\-::\-Qrotor@{gcop\-::\-Qrotor}!r@{r}}
+\index{r@{r}!gcop::Qrotor@{gcop\-::\-Qrotor}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Qrotor\-::r}}\label{classgcop_1_1Qrotor_a8a73357c400a81f3fb0a377d4a3d7d32}
+
+
+propeller radius 
+
+
+
+\-Referenced by gcop\-::\-Qrotor\-View\-::\-Render().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf qrotor.\-h}\item 
+lib/systems/{\bf qrotor.\-cc}\end{DoxyCompactItemize}

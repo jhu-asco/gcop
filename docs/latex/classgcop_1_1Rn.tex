@@ -1,0 +1,241 @@
+\section{gcop\-:\-:\-Rn$<$ \-\_\-n $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Rn}\index{gcop\-::\-Rn$<$ \-\_\-n $>$@{gcop\-::\-Rn$<$ \-\_\-n $>$}}
+
+
+{\ttfamily \#include $<$rn.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Rn$<$ \-\_\-n $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{classgcop_1_1Rn__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Rn$<$ \-\_\-n $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{classgcop_1_1Rn__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Rn} (int {\bf n}=\-\_\-n)
+\item 
+void {\bf \-Lift} (\-Vectornd \&v, const \-Vectornd \&xa, const \-Vectornd \&xb)
+\item 
+void {\bf \-Retract} (\-Vectornd \&xb, const \-Vectornd \&xa, const \-Vectornd \&v)
+\item 
+void {\bf dtau} (\-Matrixnd \&\-M, const \-Vectornd \&v)
+\item 
+void {\bf \-Adtau} (\-Matrixnd \&\-M, const \-Vectornd \&v)
+\item 
+virtual bool {\bf \-Bound} (\-Vectornd \&v, \-Vectornd \&d, const \-Vectornd \&v0)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf \-Rn}$<$ \-\_\-n $>$ \& {\bf \-Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char {\bf bnd\-Type}
+\begin{DoxyCompactList}\small\item\em type of bound \end{DoxyCompactList}\item 
+\-Vectornd {\bf w}
+\begin{DoxyCompactList}\small\item\em ellipsoidal bound weights \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const char {\bf \-B\-N\-D\-\_\-\-B\-O\-X} = 0
+\item 
+static const char {\bf \-B\-N\-D\-\_\-\-E\-L\-L\-I\-P\-S\-O\-I\-D} = 1
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int \-\_\-n = \-Dynamic$>$class gcop\-::\-Rn$<$ \-\_\-n $>$}
+
+n-\/dimension vector space, i.\-e. $ X = R^n $ 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!\-Rn@{\-Rn}}
+\index{\-Rn@{\-Rn}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{\-Rn}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf \-Rn} (
+\begin{DoxyParamCaption}
+\item[{int}]{n = {\ttfamily \-\_\-n}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Rn_a8551a02c08153634d007c013a458487b}
+
+
+\-References gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$\-::lb, gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$\-::ub, and gcop\-::\-Rn$<$ \-\_\-n $>$\-::w.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!\-Adtau@{\-Adtau}}
+\index{\-Adtau@{\-Adtau}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{\-Adtau}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf \-Adtau} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixnd \&}]{\-M, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Rn_a2c3b7c62063ce06d16ccf820d3629cbb}
+\-Adjoint map of the retraction, i.\-e. \-Ad((v))
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em \-M} & resulting matrix operator \\
+\hline
+{\em v} & \-Lie algebra element \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$} \doxyref{}{p.}{classgcop_1_1Manifold_a90fb106d2263ee0f5df4544b0333ae80}.
+
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!\-Bound@{\-Bound}}
+\index{\-Bound@{\-Bound}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{\-Bound}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ bool {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf \-Bound} (
+\begin{DoxyParamCaption}
+\item[{\-Vectornd \&}]{v, }
+\item[{\-Vectornd \&}]{d, }
+\item[{const \-Vectornd \&}]{v0}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Rn_a2fd40ebf386bfda954af0422f3820fb3}
+\-Find a vector v = v0 + d for given v0 and d such that v satisfies the bounds; this is accomplished by modifying d appropriately and returning the updated v and d. \-Default implementation is assuming the bound is a box defined by the vectors lb and ub. 
+\begin{DoxyParams}{\-Parameters}
+{\em v} & vector satisfying bounds \\
+\hline
+{\em d} & direction \\
+\hline
+{\em v0} & starting vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true on success, false if the arguments are not compatible 
+\end{DoxyReturn}
+
+
+\-Referenced by gcop\-::\-Ddp$<$ T, nx, nu, np $>$\-::\-Forward().
+
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!dtau@{dtau}}
+\index{dtau@{dtau}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{dtau}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf dtau} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixnd \&}]{\-M, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Rn_a65407b2166f20b916a3756d5b6fc866a}
+\-Right-\/trivialized derivative of the retraction map dtau(v)
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em \-M} & matrix operator \\
+\hline
+{\em v} & \-Lie algebra element \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$} \doxyref{}{p.}{classgcop_1_1Manifold_a4427d27ecfac21a3507dca4528257ff0}.
+
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!\-Instance@{\-Instance}}
+\index{\-Instance@{\-Instance}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ {\bf \-Rn}$<$ \-\_\-n $>$ \& {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf \-Instance} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Rn_a1631969f549628ae26900acbfb5a02da}
+\-Singleton to be used only for fixed-\/size \doxyref{\-Rn}{p.}{classgcop_1_1Rn}, i.\-e. \doxyref{\-Rn$<$n$>$\-::\-Instance()}{p.}{classgcop_1_1Rn_a1631969f549628ae26900acbfb5a02da} \begin{DoxyReturn}{\-Returns}
+an instance of \-Rn$<$n$>$ 
+\end{DoxyReturn}
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!\-Lift@{\-Lift}}
+\index{\-Lift@{\-Lift}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{\-Lift}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf \-Lift} (
+\begin{DoxyParamCaption}
+\item[{\-Vectornd \&}]{v, }
+\item[{const \-Vectornd \&}]{xa, }
+\item[{const \-Vectornd \&}]{xb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Rn_acb14405c69661765c002e69c8d2482c3}
+\-Compute a lie algebra element corresponding to a group action between two given states on a manifold. \-This operation geometrically means that the curve from xa to xb is \char`\"{}lifted\char`\"{} to the tangent space of the manifold to a vector represented by the lie algebra element.
+
+\-The element can also be regarded as a difference between the two states xa and xb. \-On a vector space this is v = xb -\/ xa. \-On homogeneous manifolds v is a \-Lie algebra element corresponding to an action taking xa to xb.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em v} & \-Lie algebra element (regarded as difference between xb and xa) \\
+\hline
+{\em xa} & starting state \\
+\hline
+{\em xb} & ending state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$} \doxyref{}{p.}{classgcop_1_1Manifold_acaf14615d53a97cebe2312eecc8bc12b}.
+
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!\-Retract@{\-Retract}}
+\index{\-Retract@{\-Retract}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{\-Retract}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf \-Retract} (
+\begin{DoxyParamCaption}
+\item[{\-Vectornd \&}]{xb, }
+\item[{const \-Vectornd \&}]{xa, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Rn_a20fd8e4c3f648b663a5ddcedd49aec3d}
+\-Retracts a tangent vector on a manifold at state xa to produce a new state xb. \-The vector is represented using a \-Lie algebra element.
+
+\-The operation can also be regarded as a way to perform addition on manifolds, i.\-e. to increment a given state xa by v to get a new state xb. \-On a vector space this is xb = xa + v. \-On homogeneous manifolds v is a \-Lie algebra element corresponding to an action taking xa to xb.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em xb} & ending state \\
+\hline
+{\em xa} & starting state \\
+\hline
+{\em v} & \-Lie algebra element (regarded as difference between xb and xa) \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf gcop\-::\-Manifold$<$ Matrix$<$ double, \-\_\-n, 1 $>$, \-\_\-n $>$} \doxyref{}{p.}{classgcop_1_1Manifold_af29c9fcd40a70a5adf95eef037723daa}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!\-B\-N\-D\-\_\-\-B\-O\-X@{\-B\-N\-D\-\_\-\-B\-O\-X}}
+\index{\-B\-N\-D\-\_\-\-B\-O\-X@{\-B\-N\-D\-\_\-\-B\-O\-X}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{\-B\-N\-D\-\_\-\-B\-O\-X}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ const char {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf \-B\-N\-D\-\_\-\-B\-O\-X} = 0\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Rn_a9c41efdc70f0358e45040230de5994ce}
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!\-B\-N\-D\-\_\-\-E\-L\-L\-I\-P\-S\-O\-I\-D@{\-B\-N\-D\-\_\-\-E\-L\-L\-I\-P\-S\-O\-I\-D}}
+\index{\-B\-N\-D\-\_\-\-E\-L\-L\-I\-P\-S\-O\-I\-D@{\-B\-N\-D\-\_\-\-E\-L\-L\-I\-P\-S\-O\-I\-D}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{\-B\-N\-D\-\_\-\-E\-L\-L\-I\-P\-S\-O\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ const char {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf \-B\-N\-D\-\_\-\-E\-L\-L\-I\-P\-S\-O\-I\-D} = 1\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Rn_ac762ad79cbca28880370f5852a7cd45f}
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!bnd\-Type@{bnd\-Type}}
+\index{bnd\-Type@{bnd\-Type}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{bnd\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ char {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf bnd\-Type}}\label{classgcop_1_1Rn_a01c8966bed6393e16390eeb5bdea6956}
+
+
+type of bound 
+
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!w@{w}}
+\index{w@{w}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ \-Vectornd {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf w}}\label{classgcop_1_1Rn_ae758f7602af7bb4302a8f68f0b8cbe03}
+
+
+ellipsoidal bound weights 
+
+
+
+\-Referenced by gcop\-::\-Rn$<$ \-\_\-n $>$\-::\-Rn().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/{\bf rn.\-h}\end{DoxyCompactItemize}

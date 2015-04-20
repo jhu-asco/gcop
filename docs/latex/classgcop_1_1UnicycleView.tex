@@ -1,0 +1,157 @@
+\section{gcop\-:\-:\-Unicycle\-View \-Class \-Reference}
+\label{classgcop_1_1UnicycleView}\index{gcop\-::\-Unicycle\-View@{gcop\-::\-Unicycle\-View}}
+
+
+{\ttfamily \#include $<$unicycleview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Unicycle\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classgcop_1_1UnicycleView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Unicycle\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1UnicycleView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Unicycle\-View} (const {\bf \-Unicycle} \&{\bf sys}, vector$<$ {\bf \-Vector5d} $>$ $\ast${\bf xs}=0, vector$<$ \-Vector2d $>$ $\ast${\bf us}=0)
+\item 
+virtual {\bf $\sim$\-Unicycle\-View} ()
+\item 
+void {\bf \-Render} (const {\bf \-Vector5d} $\ast$x=0, const \-Vector2d $\ast$u=0)
+\item 
+void {\bf \-Render} (const vector$<$ {\bf \-Vector5d} $>$ $\ast${\bf xs}, const vector$<$ \-Vector2d $>$ $\ast${\bf us}=0, bool rs=true, int is=-\/1, int ie=-\/1, int {\bf dis}=1, int {\bf dit}=1, bool dl=false)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Unicycle} \& {\bf sys}
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf qobj}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Unicycle\-View@{gcop\-::\-Unicycle\-View}!\-Unicycle\-View@{\-Unicycle\-View}}
+\index{\-Unicycle\-View@{\-Unicycle\-View}!gcop::UnicycleView@{gcop\-::\-Unicycle\-View}}
+\subsubsection[{\-Unicycle\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Unicycle\-View\-::\-Unicycle\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Unicycle} \&}]{sys, }
+\item[{vector$<$ {\bf \-Vector5d} $>$ $\ast$}]{xs = {\ttfamily 0}, }
+\item[{vector$<$ \-Vector2d $>$ $\ast$}]{us = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UnicycleView_a7118e9315a806f8e5b64ff7c63aae850}
+\-Create a particle view of trajectory traj 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & particle \\
+\hline
+{\em xs} & trajectory \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$\-::line\-Width, qobj, and gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$\-::rgba.
+
+\index{gcop\-::\-Unicycle\-View@{gcop\-::\-Unicycle\-View}!$\sim$\-Unicycle\-View@{$\sim$\-Unicycle\-View}}
+\index{$\sim$\-Unicycle\-View@{$\sim$\-Unicycle\-View}!gcop::UnicycleView@{gcop\-::\-Unicycle\-View}}
+\subsubsection[{$\sim$\-Unicycle\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Unicycle\-View\-::$\sim$\-Unicycle\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UnicycleView_adcdcd6c99063294a5e2b367294cb6aa6}
+
+
+\-References qobj.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Unicycle\-View@{gcop\-::\-Unicycle\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::UnicycleView@{gcop\-::\-Unicycle\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Unicycle\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vector5d} $\ast$}]{x = {\ttfamily 0}, }
+\item[{const \-Vector2d $\ast$}]{u = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UnicycleView_a79cb659d533525adfed47fea952b3a08}
+
+
+\-Implements {\bf gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a5591c11e0516e2993231547ec82cd763}.
+
+
+
+\-References gcop\-::\-Unicycle\-::dx, qobj, and sys.
+
+\index{gcop\-::\-Unicycle\-View@{gcop\-::\-Unicycle\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::UnicycleView@{gcop\-::\-Unicycle\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Unicycle\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ {\bf \-Vector5d} $>$ $\ast$}]{xs, }
+\item[{const vector$<$ \-Vector2d $>$ $\ast$}]{us = {\ttfamily 0}, }
+\item[{bool}]{rs = {\ttfamily true}, }
+\item[{int}]{is = {\ttfamily -\/1}, }
+\item[{int}]{ie = {\ttfamily -\/1}, }
+\item[{int}]{dis = {\ttfamily 1}, }
+\item[{int}]{dit = {\ttfamily 1}, }
+\item[{bool}]{dl = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UnicycleView_ab63ce557581c2fc01724b128b8f5fe0b}
+\-Render a trajectory 
+\begin{DoxyParams}{\-Parameters}
+{\em traj} & trajectory \\
+\hline
+{\em rs} & render state \\
+\hline
+{\em is} & start index \\
+\hline
+{\em ie} & end index \\
+\hline
+{\em dis} & index step for rendering bodies along trajectory \\
+\hline
+{\em dit} & index step for rendering states(points) along trajectory \\
+\hline
+{\em dl} & always draw last state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6a4cf72f0a0e380ad69397be162b3ee9}.
+
+
+
+\-References gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$\-::dis, gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$\-::dit, gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$\-::line\-Width, gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$\-::\-Render(), gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$\-::rgba, and gcop\-::\-System\-View$<$ Vector5d, Vector2d $>$\-::\-Set\-Color().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Unicycle\-View@{gcop\-::\-Unicycle\-View}!qobj@{qobj}}
+\index{qobj@{qobj}!gcop::UnicycleView@{gcop\-::\-Unicycle\-View}}
+\subsubsection[{qobj}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Unicycle\-View\-::qobj}}\label{classgcop_1_1UnicycleView_a2a31c2c90a1d3359772a0baf6d610735}
+
+
+\-Referenced by \-Render(), \-Unicycle\-View(), and $\sim$\-Unicycle\-View().
+
+\index{gcop\-::\-Unicycle\-View@{gcop\-::\-Unicycle\-View}!sys@{sys}}
+\index{sys@{sys}!gcop::UnicycleView@{gcop\-::\-Unicycle\-View}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Unicycle}\& {\bf gcop\-::\-Unicycle\-View\-::sys}}\label{classgcop_1_1UnicycleView_a7d1923552af213bbbe9bebdc0d89f597}
+
+
+\-Referenced by \-Render().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf unicycleview.\-h}\item 
+lib/views/{\bf unicycleview.\-cc}\end{DoxyCompactItemize}

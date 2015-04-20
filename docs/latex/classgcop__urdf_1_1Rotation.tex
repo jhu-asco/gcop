@@ -1,0 +1,255 @@
+\section{gcop\-\_\-urdf\-:\-:\-Rotation \-Class \-Reference}
+\label{classgcop__urdf_1_1Rotation}\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+
+
+{\ttfamily \#include $<$pose.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Rotation} (double \-\_\-x, double \-\_\-y, double \-\_\-z, double \-\_\-w)
+\item 
+{\bf \-Rotation} ()
+\item 
+void {\bf get\-Quaternion} (double \&quat\-\_\-x, double \&quat\-\_\-y, double \&quat\-\_\-z, double \&quat\-\_\-w) const 
+\item 
+void {\bf get\-R\-P\-Y} (double \&roll, double \&pitch, double \&yaw) const 
+\item 
+void {\bf set\-From\-Quaternion} (double quat\-\_\-x, double quat\-\_\-y, double quat\-\_\-z, double quat\-\_\-w)
+\item 
+void {\bf set\-From\-R\-P\-Y} (double roll, double pitch, double yaw)
+\item 
+bool {\bf init} (const std\-::string \&rotation\-\_\-str)
+\item 
+void {\bf clear} ()
+\item 
+void {\bf normalize} ()
+\item 
+{\bf \-Rotation} {\bf operator$\ast$} (const {\bf \-Rotation} \&qt) const 
+\item 
+{\bf \-Vector3} {\bf operator$\ast$} ({\bf \-Vector3} vec) const 
+\begin{DoxyCompactList}\small\item\em \-Rotate a vector using the quaternion. \end{DoxyCompactList}\item 
+{\bf \-Rotation} {\bf \-Get\-Inverse} () const 
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf x}
+\item 
+double {\bf y}
+\item 
+double {\bf z}
+\item 
+double {\bf w}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!\-Rotation@{\-Rotation}}
+\index{\-Rotation@{\-Rotation}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{\-Rotation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-\_\-urdf\-::\-Rotation\-::\-Rotation} (
+\begin{DoxyParamCaption}
+\item[{double}]{\-\_\-x, }
+\item[{double}]{\-\_\-y, }
+\item[{double}]{\-\_\-z, }
+\item[{double}]{\-\_\-w}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_a3f7a5a6bda898c21a7d94a1eb51e5e18}
+
+
+\-References w, x, y, and z.
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!\-Rotation@{\-Rotation}}
+\index{\-Rotation@{\-Rotation}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{\-Rotation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-\_\-urdf\-::\-Rotation\-::\-Rotation} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_a35171f32cf6d4f982b6ad80fb52d443e}
+
+
+\-References clear().
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!clear@{clear}}
+\index{clear@{clear}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Rotation\-::clear} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_a27dcbaee6a6dbfae5411dde4418c4238}
+
+
+\-References w, x, y, and z.
+
+
+
+\-Referenced by gcop\-\_\-urdf\-::\-Pose\-::clear(), init(), gcop\-\_\-urdf\-::\-Pose\-::init\-Xml(), and \-Rotation().
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!\-Get\-Inverse@{\-Get\-Inverse}}
+\index{\-Get\-Inverse@{\-Get\-Inverse}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{\-Get\-Inverse}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Rotation} {\bf gcop\-\_\-urdf\-::\-Rotation\-::\-Get\-Inverse} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_abc12a85a71cba5ec6d06028b752e1d13}
+
+
+\-References w, x, y, and z.
+
+
+
+\-Referenced by gcop\-\_\-urdf\-::\-Pose\-::\-Get\-Inverse(), and operator$\ast$().
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!get\-Quaternion@{get\-Quaternion}}
+\index{get\-Quaternion@{get\-Quaternion}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{get\-Quaternion}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Rotation\-::get\-Quaternion} (
+\begin{DoxyParamCaption}
+\item[{double \&}]{quat\-\_\-x, }
+\item[{double \&}]{quat\-\_\-y, }
+\item[{double \&}]{quat\-\_\-z, }
+\item[{double \&}]{quat\-\_\-w}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_ad7dbd39f9f02cb57880f8bbdad64b030}
+
+
+\-References w, x, y, and z.
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!get\-R\-P\-Y@{get\-R\-P\-Y}}
+\index{get\-R\-P\-Y@{get\-R\-P\-Y}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{get\-R\-P\-Y}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Rotation\-::get\-R\-P\-Y} (
+\begin{DoxyParamCaption}
+\item[{double \&}]{roll, }
+\item[{double \&}]{pitch, }
+\item[{double \&}]{yaw}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_a5fad49fa5f54676ef6bfe4cd607b6333}
+
+
+\-References w, x, y, and z.
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!init@{init}}
+\index{init@{init}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-\_\-urdf\-::\-Rotation\-::init} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{rotation\-\_\-str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_a8aa7473e53313d46345707cc5b2bc634}
+
+
+\-References clear(), gcop\-\_\-urdf\-::\-Vector3\-::init(), set\-From\-R\-P\-Y(), gcop\-\_\-urdf\-::\-Vector3\-::x, gcop\-\_\-urdf\-::\-Vector3\-::y, and gcop\-\_\-urdf\-::\-Vector3\-::z.
+
+
+
+\-Referenced by gcop\-\_\-urdf\-::\-Pose\-::init\-Xml().
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!normalize@{normalize}}
+\index{normalize@{normalize}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{normalize}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Rotation\-::normalize} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_a17cb7b1239dcadaa87f3b290eb2dfcfe}
+
+
+\-References w, x, y, and z.
+
+
+
+\-Referenced by set\-From\-Quaternion(), and set\-From\-R\-P\-Y().
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Rotation} gcop\-\_\-urdf\-::\-Rotation\-::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Rotation} \&}]{qt}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_a6d7322ff805071d7b15701e11fcebcc9}
+
+
+\-References w, x, y, and z.
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Vector3} gcop\-\_\-urdf\-::\-Rotation\-::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector3}}]{vec}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_a88eef60641ad6697f658a3c993a7261d}
+
+
+\-Rotate a vector using the quaternion. 
+
+
+
+\-References \-Get\-Inverse(), w, gcop\-\_\-urdf\-::\-Vector3\-::x, x, gcop\-\_\-urdf\-::\-Vector3\-::y, y, gcop\-\_\-urdf\-::\-Vector3\-::z, and z.
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!set\-From\-Quaternion@{set\-From\-Quaternion}}
+\index{set\-From\-Quaternion@{set\-From\-Quaternion}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{set\-From\-Quaternion}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Rotation\-::set\-From\-Quaternion} (
+\begin{DoxyParamCaption}
+\item[{double}]{quat\-\_\-x, }
+\item[{double}]{quat\-\_\-y, }
+\item[{double}]{quat\-\_\-z, }
+\item[{double}]{quat\-\_\-w}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_a854d0af217d79c82293d140e079e58f8}
+
+
+\-References normalize(), w, x, y, and z.
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!set\-From\-R\-P\-Y@{set\-From\-R\-P\-Y}}
+\index{set\-From\-R\-P\-Y@{set\-From\-R\-P\-Y}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{set\-From\-R\-P\-Y}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Rotation\-::set\-From\-R\-P\-Y} (
+\begin{DoxyParamCaption}
+\item[{double}]{roll, }
+\item[{double}]{pitch, }
+\item[{double}]{yaw}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Rotation_a8126a6fac9e78ff78f7f599397416e82}
+
+
+\-References normalize(), w, x, y, and z.
+
+
+
+\-Referenced by init().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!w@{w}}
+\index{w@{w}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-\_\-urdf\-::\-Rotation\-::w}}\label{classgcop__urdf_1_1Rotation_a6961eeed2d842247949dbbc2762d3ed2}
+
+
+\-Referenced by clear(), \-Get\-Inverse(), get\-Quaternion(), get\-R\-P\-Y(), normalize(), operator$\ast$(), \-Rotation(), set\-From\-Quaternion(), and set\-From\-R\-P\-Y().
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!x@{x}}
+\index{x@{x}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-\_\-urdf\-::\-Rotation\-::x}}\label{classgcop__urdf_1_1Rotation_af938927a04fcdd92dc1c143a7b387821}
+
+
+\-Referenced by clear(), \-Get\-Inverse(), get\-Quaternion(), get\-R\-P\-Y(), normalize(), operator$\ast$(), \-Rotation(), set\-From\-Quaternion(), and set\-From\-R\-P\-Y().
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!y@{y}}
+\index{y@{y}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-\_\-urdf\-::\-Rotation\-::y}}\label{classgcop__urdf_1_1Rotation_a5bdcb247780b1ced0b9e49ee441f1728}
+
+
+\-Referenced by clear(), \-Get\-Inverse(), get\-Quaternion(), get\-R\-P\-Y(), normalize(), operator$\ast$(), \-Rotation(), set\-From\-Quaternion(), and set\-From\-R\-P\-Y().
+
+\index{gcop\-\_\-urdf\-::\-Rotation@{gcop\-\_\-urdf\-::\-Rotation}!z@{z}}
+\index{z@{z}!gcop_urdf::Rotation@{gcop\-\_\-urdf\-::\-Rotation}}
+\subsubsection[{z}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-\_\-urdf\-::\-Rotation\-::z}}\label{classgcop__urdf_1_1Rotation_ab1c02ae2856ed4ffcf504104220906a2}
+
+
+\-Referenced by clear(), \-Get\-Inverse(), get\-Quaternion(), get\-R\-P\-Y(), normalize(), operator$\ast$(), \-Rotation(), set\-From\-Quaternion(), and set\-From\-R\-P\-Y().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf pose.\-h}\end{DoxyCompactItemize}

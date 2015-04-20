@@ -1,0 +1,104 @@
+\section{gcop\-:\-:\-Gunicycle \-Class \-Reference}
+\label{classgcop_1_1Gunicycle}\index{gcop\-::\-Gunicycle@{gcop\-::\-Gunicycle}}
+
+
+{\ttfamily \#include $<$gunicycle.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Gunicycle\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{classgcop_1_1Gunicycle__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Gunicycle\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Gunicycle__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Gunicycle} ()
+\item 
+double {\bf \-Step} ({\bf \-M3\-V2d} \&xb, double {\bf t}, const {\bf \-M3\-V2d} \&xa, const \-Vector2d \&u, double h, const \-Vector\-Xd $\ast$p, {\bf \-Matrix5d} $\ast$\-A=0, {\bf \-Matrix52d} $\ast$\-B=0, {\bf \-Matrix5\-Xd} $\ast$\-C=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf dx}
+\begin{DoxyCompactList}\small\item\em distance between left and right tires \end{DoxyCompactList}\item 
+double {\bf dy}
+\begin{DoxyCompactList}\small\item\em distance between front and back axles \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A \char`\"{}geometric\char`\"{} unicycle model with 2nd order dynamics. \-This is often used to model simple wheeled robots or fixed-\/wing aircraft. \-The control system is implemented as an evolution on \-S\-E(2) as opposed to a vector space.
+
+\-The state is $ \bm x = (g, \omega, v) $ where $ g\in SE(2)$ is the pose, the controls $ \bm u = (u_\omega,u_v) \in\mathbb{R}^2$ correspond to turn rate acceleration and forward acceleration.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Gunicycle@{gcop\-::\-Gunicycle}!\-Gunicycle@{\-Gunicycle}}
+\index{\-Gunicycle@{\-Gunicycle}!gcop::Gunicycle@{gcop\-::\-Gunicycle}}
+\subsubsection[{\-Gunicycle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Gunicycle\-::\-Gunicycle} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Gunicycle_abc6c2d51017927da61283f5cf263f757}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Gunicycle@{gcop\-::\-Gunicycle}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Gunicycle@{gcop\-::\-Gunicycle}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Gunicycle\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-M3\-V2d} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-M3\-V2d} \&}]{xa, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p, }
+\item[{{\bf \-Matrix5d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix52d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix5\-Xd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Gunicycle_aef3f1aa9b4e7b880e615499020ef0e11}
+
+
+\-References gcop\-::\-S\-E2\-::\-Ad(), gcop\-::\-S\-E2\-::cay(), gcop\-::\-S\-E2\-::dcay(), and gcop\-::\-S\-E2\-::\-Instance().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Gunicycle@{gcop\-::\-Gunicycle}!dx@{dx}}
+\index{dx@{dx}!gcop::Gunicycle@{gcop\-::\-Gunicycle}}
+\subsubsection[{dx}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Gunicycle\-::dx}}\label{classgcop_1_1Gunicycle_a3e996d3477d400b7345e5295f23a8744}
+
+
+distance between left and right tires 
+
+
+
+\-Referenced by gcop\-::\-Airplane\-View\-::\-Render(), and gcop\-::\-Gunicycle\-View\-::\-Render().
+
+\index{gcop\-::\-Gunicycle@{gcop\-::\-Gunicycle}!dy@{dy}}
+\index{dy@{dy}!gcop::Gunicycle@{gcop\-::\-Gunicycle}}
+\subsubsection[{dy}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Gunicycle\-::dy}}\label{classgcop_1_1Gunicycle_adcd3484b2c39f28101aba15f36aead81}
+
+
+distance between front and back axles 
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf gunicycle.\-h}\item 
+lib/systems/{\bf gunicycle.\-cc}\end{DoxyCompactItemize}

@@ -1,0 +1,299 @@
+\section{gcop\-:\-:\-Kalman\-Corrector$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1KalmanCorrector}\index{gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$@{gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$}}
+
+
+{\ttfamily \#include $<$kalmancorrector.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Kalman\-Corrector$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{classgcop_1_1KalmanCorrector__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kalman\-Corrector$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{classgcop_1_1KalmanCorrector__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nx $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nz $>$ {\bf \-Matrixnrd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nx $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nu $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-np $>$ {\bf \-Matrixmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ {\bf \-Matrixnmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, 1 $>$ {\bf \-Vectorrd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nz $>$ {\bf \-Matrixrd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nx $>$ {\bf \-Matrixrnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nu $>$ {\bf \-Matrixrcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-np $>$ {\bf \-Matrixrmd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kalman\-Corrector} ({\bf \-Manifold}$<$ \-T, \-\_\-nx $>$ \&{\bf \-X}, {\bf \-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \&{\bf sensor})
+\item 
+virtual {\bf $\sim$\-Kalman\-Corrector} ()
+\item 
+virtual bool {\bf \-Correct} (\-T \&xb, double t, const \-T \&xa, const {\bf \-Vectorcd} \&u, const \-Tz \&z, const {\bf \-Vectormd} $\ast$p=0, bool cov=true)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Tz {\bf y}
+\begin{DoxyCompactList}\small\item\em expected measurement \end{DoxyCompactList}\item 
+{\bf \-Vectornd} {\bf dx}
+\begin{DoxyCompactList}\small\item\em innovation \end{DoxyCompactList}\item 
+{\bf \-Vectorrd} {\bf dz}
+\begin{DoxyCompactList}\small\item\em sensor innovation \end{DoxyCompactList}\item 
+{\bf \-Matrixrnd} {\bf \-H}
+\begin{DoxyCompactList}\small\item\em measurement \-Jacobian \end{DoxyCompactList}\item 
+{\bf \-Matrixnrd} {\bf \-K}
+\begin{DoxyCompactList}\small\item\em correction gain matrix \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ class gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nu$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1KalmanCorrector_a7a630685b77420a70e5bfba783d625a6}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a6e92c879394bc36629e6646851b00c30}.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nx$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1KalmanCorrector_abbd3c6f266ab2e33885d7b66a02ebf28}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a55d67e6bd10492ed8026d10c00005b91}.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixmd@{\-Matrixmd}}
+\index{\-Matrixmd@{\-Matrixmd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-np$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixmd}}\label{classgcop_1_1KalmanCorrector_a6e8630217a24162a4e56624582ae0235}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a7a30cf000d15f44ff5660a3629280f2e}.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-nx$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1KalmanCorrector_a82ae9fb4fc60bd611550e36485c3e218}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_adb8b4104bc5211ea29ecbd1e8c722751}.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nu$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1KalmanCorrector_a82a0b97208f37616fb6b779b0190254c}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_aea01f45708dfdbc019d6e86ea41582ef}.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nx$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1KalmanCorrector_ac7d69feb2caefe9fef973930930d56b4}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a139403c111406d789d1e9a804a56cdac}.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixnmd@{\-Matrixnmd}}
+\index{\-Matrixnmd@{\-Matrixnmd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixnmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-np$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnmd}}\label{classgcop_1_1KalmanCorrector_a52404494aa3ef981da06f0e26bc6a38e}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_abcf78f1778b912cd9f01bfc2a4d1fba9}.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixnrd@{\-Matrixnrd}}
+\index{\-Matrixnrd@{\-Matrixnrd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixnrd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nz$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnrd}}\label{classgcop_1_1KalmanCorrector_a44af1da5590f952a04419bbf67c89096}
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixrcd@{\-Matrixrcd}}
+\index{\-Matrixrcd@{\-Matrixrcd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixrcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nu$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrcd}}\label{classgcop_1_1KalmanCorrector_a9a9d27c1e4cd97403f2e8d0478b63292}
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixrd@{\-Matrixrd}}
+\index{\-Matrixrd@{\-Matrixrd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixrd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nz$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrd}}\label{classgcop_1_1KalmanCorrector_a28a0060fe01220f7a8c2581db94cbada}
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixrmd@{\-Matrixrmd}}
+\index{\-Matrixrmd@{\-Matrixrmd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixrmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-np$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrmd}}\label{classgcop_1_1KalmanCorrector_aee98b536f8aef558853047e11382456b}
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Matrixrnd@{\-Matrixrnd}}
+\index{\-Matrixrnd@{\-Matrixrnd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Matrixrnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nx$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrnd}}\label{classgcop_1_1KalmanCorrector_a27ca83efe795197ff7c1912fc6778956}
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1KalmanCorrector_a8539cfc84b4f8f3fe8d88279fc6331c2}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_ad881c23e05c72ab0a6b94fdfae96ca88}.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1KalmanCorrector_a16c0a2b55b0306e6b0ec9170552bf421}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a6b152626759d7cfb6a45ab1c58a939f5}.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1KalmanCorrector_acb880b68e00c82d9360ec4f5e1f6fe6c}
+
+
+\-Reimplemented from {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_a7c9f25136bdaead14e8f125413ba1514}.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Vectorrd@{\-Vectorrd}}
+\index{\-Vectorrd@{\-Vectorrd}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Vectorrd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, 1$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectorrd}}\label{classgcop_1_1KalmanCorrector_a8a8d5550569196018af7ec95de8e56f2}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Kalman\-Corrector@{\-Kalman\-Corrector}}
+\index{\-Kalman\-Corrector@{\-Kalman\-Corrector}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Kalman\-Corrector}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, typename Tz , int \-\_\-nz$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Kalman\-Corrector} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Manifold}$<$ \-T, \-\_\-nx $>$ \&}]{\-X, }
+\item[{{\bf \-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \&}]{sensor}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KalmanCorrector_aea9e68409b7e847ea65f5a037a3ed567}
+
+
+\-References gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::dx, gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::dz, gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-H, gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-K, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::y, and gcop\-::\-Sensor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Z.
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!$\sim$\-Kalman\-Corrector@{$\sim$\-Kalman\-Corrector}}
+\index{$\sim$\-Kalman\-Corrector@{$\sim$\-Kalman\-Corrector}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{$\sim$\-Kalman\-Corrector}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, typename Tz , int \-\_\-nz$>$ {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::$\sim${\bf \-Kalman\-Corrector} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1KalmanCorrector_a78f1341b18101c0302e25c5e9e2a61cb}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-Correct@{\-Correct}}
+\index{\-Correct@{\-Correct}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-Correct}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, typename Tz , int \-\_\-nz$>$ bool {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Correct} (
+\begin{DoxyParamCaption}
+\item[{\-T \&}]{xb, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const \-Tz \&}]{z, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{bool}]{cov = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1KalmanCorrector_a6285e2da0de46f2782186c9bbb23184c}
+\-Correction step. 
+\begin{DoxyParams}{\-Parameters}
+{\em xb} & new belief state \\
+\hline
+{\em t} & time \\
+\hline
+{\em xa} & previous belief state \\
+\hline
+{\em u} & control inputs \\
+\hline
+{\em z} & measurement \\
+\hline
+{\em p} & parameters (optional) \\
+\hline
+{\em cov} & whether to update the covariance as well (true by default) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if success 
+\end{DoxyReturn}
+
+
+\-Implements {\bf gcop\-::\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1Corrector_abf38f846a9266db92036d9b4ef7f5891}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!dx@{dx}}
+\index{dx@{dx}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{dx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Vectornd} {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf dx}}\label{classgcop_1_1KalmanCorrector_a89a3b6d28fa1a48e70783e5e7f55a1f4}
+
+
+innovation 
+
+
+
+\-Referenced by gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Kalman\-Corrector().
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!dz@{dz}}
+\index{dz@{dz}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{dz}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Vectorrd} {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf dz}}\label{classgcop_1_1KalmanCorrector_abdc1b3e76b110a9798c61d6963c1adbb}
+
+
+sensor innovation 
+
+
+
+\-Referenced by gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Kalman\-Corrector().
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-H@{\-H}}
+\index{\-H@{\-H}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-H}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixrnd} {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-H}}\label{classgcop_1_1KalmanCorrector_ac0f599c1dbcc8857d1f3fbec9dc22407}
+
+
+measurement \-Jacobian 
+
+
+
+\-Referenced by gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Kalman\-Corrector().
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!\-K@{\-K}}
+\index{\-K@{\-K}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{\-K}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixnrd} {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-K}}\label{classgcop_1_1KalmanCorrector_a947e60a17a5931e4f4bae30f5bb340d7}
+
+
+correction gain matrix 
+
+
+
+\-Referenced by gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Kalman\-Corrector().
+
+\index{gcop\-::\-Kalman\-Corrector@{gcop\-::\-Kalman\-Corrector}!y@{y}}
+\index{y@{y}!gcop::KalmanCorrector@{gcop\-::\-Kalman\-Corrector}}
+\subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ \-Tz {\bf gcop\-::\-Kalman\-Corrector}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf y}}\label{classgcop_1_1KalmanCorrector_a2527a7e5b93b4537759222f73f285184}
+
+
+expected measurement 
+
+
+
+\-Referenced by gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Kalman\-Corrector().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/est/{\bf kalmancorrector.\-h}\end{DoxyCompactItemize}

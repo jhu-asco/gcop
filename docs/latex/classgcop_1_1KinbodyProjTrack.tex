@@ -1,0 +1,186 @@
+\section{gcop\-:\-:\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1KinbodyProjTrack}\index{gcop\-::\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$@{gcop\-::\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$}}
+
+
+{\ttfamily \#include $<$kinbodyprojtrack.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{classgcop_1_1KinbodyProjTrack__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{classgcop_1_1KinbodyProjTrack__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorud}
+\item 
+typedef \-Matrix$<$ double, 6, \-\_\-nu $>$ {\bf \-Matrix6ud}
+\item 
+typedef \-Matrix$<$ double, 6, 6 $>$ {\bf \-Matrix6d}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kinbody\-Proj\-Track} ({\bf \-Kinbody3d}$<$ \-\_\-nu $>$ \&{\bf sys}, int nf, double vd0, double {\bf t0}, double {\bf tf}, double {\bf r}=25, bool {\bf extforce}=false, bool {\bf forces}=false)
+\item 
+virtual void {\bf \-Get} ({\bf \-Matrix4d} \&x, double vd, double t) const 
+\item 
+virtual void {\bf \-Make\-True} ()
+\item 
+virtual void {\bf \-Add} (const {\bf \-Vectorud} \&u, const {\bf \-Matrix4d} \&x, double {\bf h})
+\item 
+virtual void {\bf \-Add2} (const {\bf \-Vectorud} \&u, const {\bf \-Matrix4d} \&x, double {\bf h})
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int \-\_\-nu = 6$>$class gcop\-::\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$}
+
+\-Pose-\/track in 2\-D. \-This is the simplese possible definition assuming point (unprojected) features e.\-g. from stereo/laser scans with uniform spherical covariance. \-The framework can be easily extended to any general 2d/3d non-\/uniform or projected features as well. 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Kinbody\-Proj\-Track@{gcop\-::\-Kinbody\-Proj\-Track}!\-Matrix6d@{\-Matrix6d}}
+\index{\-Matrix6d@{\-Matrix6d}!gcop::KinbodyProjTrack@{gcop\-::\-Kinbody\-Proj\-Track}}
+\subsubsection[{\-Matrix6d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ typedef \-Matrix$<$double, 6, 6$>$ {\bf gcop\-::\-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$\-::{\bf \-Matrix6d}}\label{classgcop_1_1KinbodyProjTrack_aea96d7387f7151514cf2fb0fc30f29e5}
+\index{gcop\-::\-Kinbody\-Proj\-Track@{gcop\-::\-Kinbody\-Proj\-Track}!\-Matrix6ud@{\-Matrix6ud}}
+\index{\-Matrix6ud@{\-Matrix6ud}!gcop::KinbodyProjTrack@{gcop\-::\-Kinbody\-Proj\-Track}}
+\subsubsection[{\-Matrix6ud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ typedef \-Matrix$<$double, 6, \-\_\-nu$>$ {\bf gcop\-::\-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$\-::{\bf \-Matrix6ud}}\label{classgcop_1_1KinbodyProjTrack_a39540cbdf808f9b3783bf9eee6031168}
+\index{gcop\-::\-Kinbody\-Proj\-Track@{gcop\-::\-Kinbody\-Proj\-Track}!\-Vectorud@{\-Vectorud}}
+\index{\-Vectorud@{\-Vectorud}!gcop::KinbodyProjTrack@{gcop\-::\-Kinbody\-Proj\-Track}}
+\subsubsection[{\-Vectorud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$\-::{\bf \-Vectorud}}\label{classgcop_1_1KinbodyProjTrack_ae9eb4dd875dbf0e9bb5edc87dd971963}
+
+
+\-Reimplemented from {\bf gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Kinbody3dTrack_a74072c0242d4809b78bed1b23667a465}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kinbody\-Proj\-Track@{gcop\-::\-Kinbody\-Proj\-Track}!\-Kinbody\-Proj\-Track@{\-Kinbody\-Proj\-Track}}
+\index{\-Kinbody\-Proj\-Track@{\-Kinbody\-Proj\-Track}!gcop::KinbodyProjTrack@{gcop\-::\-Kinbody\-Proj\-Track}}
+\subsubsection[{\-Kinbody\-Proj\-Track}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ {\bf gcop\-::\-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$\-::{\bf \-Kinbody\-Proj\-Track} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Kinbody3d}$<$ \-\_\-nu $>$ \&}]{sys, }
+\item[{int}]{nf, }
+\item[{double}]{vd0, }
+\item[{double}]{t0, }
+\item[{double}]{tf, }
+\item[{double}]{r = {\ttfamily 25}, }
+\item[{bool}]{extforce = {\ttfamily false}, }
+\item[{bool}]{forces = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinbodyProjTrack_ad21ef84bd71c9dabb832bbf423fa9efa}
+\-Pose graph (using simulated features around a circular track) 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & body3d system \\
+\hline
+{\em nf} & number of features (landmarks) \\
+\hline
+{\em t0} & start time \\
+\hline
+{\em tf} & end time \\
+\hline
+{\em r} & radius \\
+\hline
+{\em odometry} & is odometry available \\
+\hline
+{\em extforce} & treat constant external force in x-\/y as a parameter \\
+\hline
+{\em forces} & use uncertain forces in the cost function \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$\-::\-Get(), gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$\-::xos, and gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$\-::xs.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kinbody\-Proj\-Track@{gcop\-::\-Kinbody\-Proj\-Track}!\-Add@{\-Add}}
+\index{\-Add@{\-Add}!gcop::KinbodyProjTrack@{gcop\-::\-Kinbody\-Proj\-Track}}
+\subsubsection[{\-Add}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ void {\bf gcop\-::\-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$\-::{\bf \-Add} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectorud} \&}]{u, }
+\item[{const {\bf \-Matrix4d} \&}]{x, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1KinbodyProjTrack_aad18fdcee861094ebfe2c2191c648846}
+
+
+\-Reimplemented from {\bf gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Kinbody3dTrack_ac4ce48f0aa8d941e6a215553b1fb1743}.
+
+
+
+\-References gcop\-::random\-\_\-normal().
+
+\index{gcop\-::\-Kinbody\-Proj\-Track@{gcop\-::\-Kinbody\-Proj\-Track}!\-Add2@{\-Add2}}
+\index{\-Add2@{\-Add2}!gcop::KinbodyProjTrack@{gcop\-::\-Kinbody\-Proj\-Track}}
+\subsubsection[{\-Add2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ void {\bf gcop\-::\-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$\-::{\bf \-Add2} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectorud} \&}]{u, }
+\item[{const {\bf \-Matrix4d} \&}]{x, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1KinbodyProjTrack_afd9e6a407d77c6e1230504b52e2ba740}
+\-Add a new state/control to estimation vector 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & commanded control \\
+\hline
+{\em x} & true state (to generate measurements) \\
+\hline
+{\em h} & time-\/step \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Kinbody3dTrack_a97a4de956860aea5064f20a02db6402f}.
+
+
+
+\-References gcop\-::random\-\_\-normal().
+
+\index{gcop\-::\-Kinbody\-Proj\-Track@{gcop\-::\-Kinbody\-Proj\-Track}!\-Get@{\-Get}}
+\index{\-Get@{\-Get}!gcop::KinbodyProjTrack@{gcop\-::\-Kinbody\-Proj\-Track}}
+\subsubsection[{\-Get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ void {\bf gcop\-::\-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$\-::{\bf \-Get} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{x, }
+\item[{double}]{vd, }
+\item[{double}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1KinbodyProjTrack_a506912dbb08a091c85ee91209048298a}
+
+
+\-Reimplemented from {\bf gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Kinbody3dTrack_a5d786cf55aac7d4668e8df4636788e1d}.
+
+
+
+\-Referenced by gcop\-::\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$\-::\-Kinbody\-Proj\-Track().
+
+\index{gcop\-::\-Kinbody\-Proj\-Track@{gcop\-::\-Kinbody\-Proj\-Track}!\-Make\-True@{\-Make\-True}}
+\index{\-Make\-True@{\-Make\-True}!gcop::KinbodyProjTrack@{gcop\-::\-Kinbody\-Proj\-Track}}
+\subsubsection[{\-Make\-True}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ void {\bf gcop\-::\-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$\-::{\bf \-Make\-True} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1KinbodyProjTrack_a6026502857d0335f422996a4e447d395}
+
+
+\-Reimplemented from {\bf gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Kinbody3dTrack_a424a14ce22c4ffba29732c741efc3343}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf kinbodyprojtrack.\-h}\end{DoxyCompactItemize}

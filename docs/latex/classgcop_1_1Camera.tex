@@ -1,0 +1,193 @@
+\section{gcop\-:\-:\-Camera \-Class \-Reference}
+\label{classgcop_1_1Camera}\index{gcop\-::\-Camera@{gcop\-::\-Camera}}
+
+
+{\ttfamily \#include $<$camera.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Camera} (double {\bf bl}=1.\-75, double irows=480, double imcols=640, const double $\ast$\-K=0, const double $\ast$\-D=0)
+\item 
+virtual {\bf $\sim$\-Camera} ()
+\begin{DoxyCompactList}\small\item\em distance betn two leds;  the number of rows in the image  the number of columns in the image  the camera matrix in row major format(9elements)  the distortion coefficients (plumbob model 5 polynomial coefficients) \end{DoxyCompactList}\item 
+bool {\bf \-Pose} ({\bf \-Vector6d} \&q, const cv\-::\-Mat \&raw, cv\-::\-Mat \&cont)
+\item 
+bool {\bf \-Pose} ({\bf \-Vector6d} \&q, const cv\-::\-Mat \&raw)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float {\bf tolerance}
+\item 
+int {\bf kernel\-\_\-size}
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+cv\-::\-Mat {\bf filt}
+\item 
+cv\-::\-Mat {\bf rvec}
+\item 
+cv\-::\-Mat {\bf tvec}
+\item 
+double {\bf bl}
+\item 
+cv\-::\-Mat {\bf cam\-Matrix}
+\item 
+cv\-::\-Mat {\bf dccoeffs}
+\item 
+cv\-::\-Point2f {\bf iprs} [{\bf np}]
+\item 
+std\-::ofstream {\bf pointfile}
+\item 
+bool {\bf find\-\_\-contours}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\doxyref{\-Camera}{p.}{classgcop_1_1Camera} \-Driver
+
+\-Author\-: \-Marin \-Kobilarov -\/-\/ \-Copyright (\-C) 2012 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!\-Camera@{\-Camera}}
+\index{\-Camera@{\-Camera}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{\-Camera}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Camera\-::\-Camera} (
+\begin{DoxyParamCaption}
+\item[{double}]{bl = {\ttfamily 1.75}, }
+\item[{double}]{irows = {\ttfamily 480}, }
+\item[{double}]{imcols = {\ttfamily 640}, }
+\item[{const double $\ast$}]{\-K = {\ttfamily 0}, }
+\item[{const double $\ast$}]{\-D = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Camera_af01acab4b520c0e6d8802dfb64b13431}
+
+
+\-References bl, cam\-Matrix, dccoeffs, filt, pointfile, rvec, and tvec.
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!$\sim$\-Camera@{$\sim$\-Camera}}
+\index{$\sim$\-Camera@{$\sim$\-Camera}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{$\sim$\-Camera}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Camera\-::$\sim$\-Camera} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Camera_ad1897942d0ccf91052386388a497349f}
+
+
+distance betn two leds;  the number of rows in the image  the number of columns in the image  the camera matrix in row major format(9elements)  the distortion coefficients (plumbob model 5 polynomial coefficients) 
+
+
+
+\-References pointfile.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!\-Pose@{\-Pose}}
+\index{\-Pose@{\-Pose}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{\-Pose}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Camera\-::\-Pose} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{q, }
+\item[{const cv\-::\-Mat \&}]{raw, }
+\item[{cv\-::\-Mat \&}]{cont}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Camera_a70fbbeba5784721e8a77dc62498d2e82}
+
+
+\-References area(), bl, cam\-Matrix, dccoeffs, filt, inters(), iprs, kernel\-\_\-size, np, pointfile, rvec, swap(), tolerance, and tvec.
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!\-Pose@{\-Pose}}
+\index{\-Pose@{\-Pose}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{\-Pose}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Camera\-::\-Pose} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{q, }
+\item[{const cv\-::\-Mat \&}]{raw}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Camera_a7818f27d1956311ac210d915cade6aba}
+
+
+\-References area(), bl, cam\-Matrix, dccoeffs, filt, inters(), iprs, kernel\-\_\-size, np, pointfile, rvec, swap(), tolerance, and tvec.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!bl@{bl}}
+\index{bl@{bl}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{bl}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Camera\-::bl}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Camera_a12328c57afaffa6d236e95060598a5d9}
+
+
+\-Referenced by \-Camera(), and \-Pose().
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!cam\-Matrix@{cam\-Matrix}}
+\index{cam\-Matrix@{cam\-Matrix}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{cam\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}cv\-::\-Mat {\bf gcop\-::\-Camera\-::cam\-Matrix}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Camera_a05ebbec96b9d2dd220d365ba2aad894c}
+
+
+\-Referenced by \-Camera(), and \-Pose().
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!dccoeffs@{dccoeffs}}
+\index{dccoeffs@{dccoeffs}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{dccoeffs}]{\setlength{\rightskip}{0pt plus 5cm}cv\-::\-Mat {\bf gcop\-::\-Camera\-::dccoeffs}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Camera_a3434d418e5ab418f1c195dd346ef3c9d}
+
+
+\-Referenced by \-Camera(), and \-Pose().
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!filt@{filt}}
+\index{filt@{filt}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{filt}]{\setlength{\rightskip}{0pt plus 5cm}cv\-::\-Mat {\bf gcop\-::\-Camera\-::filt}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Camera_a21bdcd9f40ce9a245ff05ffa450b46c7}
+
+
+\-Referenced by \-Camera(), and \-Pose().
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!find\-\_\-contours@{find\-\_\-contours}}
+\index{find\-\_\-contours@{find\-\_\-contours}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{find\-\_\-contours}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Camera\-::find\-\_\-contours}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Camera_a0ce1866d461ede1a085b040ca60cc83d}
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!iprs@{iprs}}
+\index{iprs@{iprs}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{iprs}]{\setlength{\rightskip}{0pt plus 5cm}cv\-::\-Point2f {\bf gcop\-::\-Camera\-::iprs}[{\bf np}]\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Camera_a3376c938e450b6a27b43f3415e01a8f7}
+
+
+\-Referenced by \-Pose().
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!kernel\-\_\-size@{kernel\-\_\-size}}
+\index{kernel\-\_\-size@{kernel\-\_\-size}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{kernel\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-Camera\-::kernel\-\_\-size}}\label{classgcop_1_1Camera_aeeff34cc8178988d6b358ac6ea4d4a5e}
+
+
+\-Referenced by \-Pose().
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!pointfile@{pointfile}}
+\index{pointfile@{pointfile}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{pointfile}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ofstream {\bf gcop\-::\-Camera\-::pointfile}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Camera_a17f65c2b114848e51fac142465f039d9}
+
+
+\-Referenced by \-Camera(), \-Pose(), and $\sim$\-Camera().
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!rvec@{rvec}}
+\index{rvec@{rvec}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{rvec}]{\setlength{\rightskip}{0pt plus 5cm}cv\-::\-Mat {\bf gcop\-::\-Camera\-::rvec}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Camera_a23f065d4481a8e774da5fee6f7270707}
+
+
+\-Referenced by \-Camera(), and \-Pose().
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!tolerance@{tolerance}}
+\index{tolerance@{tolerance}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{tolerance}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Camera\-::tolerance}}\label{classgcop_1_1Camera_a0b7ec136ab869c9f4100d66f47fcd31d}
+
+
+\-Referenced by \-Pose().
+
+\index{gcop\-::\-Camera@{gcop\-::\-Camera}!tvec@{tvec}}
+\index{tvec@{tvec}!gcop::Camera@{gcop\-::\-Camera}}
+\subsubsection[{tvec}]{\setlength{\rightskip}{0pt plus 5cm}cv\-::\-Mat {\bf gcop\-::\-Camera\-::tvec}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Camera_a1647a7dc468b17923a77fe4c8abf592c}
+
+
+\-Referenced by \-Camera(), and \-Pose().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/est/{\bf camera.\-h}\item 
+lib/est/{\bf camera.\-cc}\end{DoxyCompactItemize}

@@ -1,0 +1,150 @@
+\section{gcop\-:\-:\-Imu \-Class \-Reference}
+\label{classgcop_1_1Imu}\index{gcop\-::\-Imu@{gcop\-::\-Imu}}
+
+
+{\ttfamily \#include $<$imu.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Imu\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{classgcop_1_1Imu__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Imu\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Imu__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Imu} ()
+\item 
+virtual {\bf $\sim$\-Imu} ()
+\item 
+double {\bf \-Step} ({\bf \-Imu\-State} \&xb, double {\bf t}, const {\bf \-Imu\-State} \&xa, const \-Vector3d \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix9d} $\ast$\-A=0, {\bf \-Matrix93d} $\ast$\-B=0, {\bf \-Matrix9\-Xd} $\ast$\-C=0)
+\item 
+bool {\bf \-Noise} ({\bf \-Matrix9d} \&\-Q, double {\bf t}, const {\bf \-Imu\-State} \&{\bf x}, const \-Vector3d \&u, double dt, const \-Vector\-Xd $\ast$p=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf sv}
+\begin{DoxyCompactList}\small\item\em gyro bias white noise stdev (spectral density) \end{DoxyCompactList}\item 
+double {\bf su}
+\begin{DoxyCompactList}\small\item\em gyro bias rate-\/of-\/change white noise stdev (spectral density) \end{DoxyCompactList}\item 
+double {\bf sa}
+\begin{DoxyCompactList}\small\item\em acceleration bias rate-\/of-\/change white noise stdev (spectral density) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-An \-I\-M\-U system
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Imu@{gcop\-::\-Imu}!\-Imu@{\-Imu}}
+\index{\-Imu@{\-Imu}!gcop::Imu@{gcop\-::\-Imu}}
+\subsubsection[{\-Imu}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Imu\-::\-Imu} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Imu_a4d39c30846a5b69218f0847178a31994}
+
+
+\-References sa, su, and sv.
+
+\index{gcop\-::\-Imu@{gcop\-::\-Imu}!$\sim$\-Imu@{$\sim$\-Imu}}
+\index{$\sim$\-Imu@{$\sim$\-Imu}!gcop::Imu@{gcop\-::\-Imu}}
+\subsubsection[{$\sim$\-Imu}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Imu\-::$\sim$\-Imu} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Imu_a0660138107b74ceb001a5691eb1db4d0}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Imu@{gcop\-::\-Imu}!\-Noise@{\-Noise}}
+\index{\-Noise@{\-Noise}!gcop::Imu@{gcop\-::\-Imu}}
+\subsubsection[{\-Noise}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Imu\-::\-Noise} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix9d} \&}]{\-Q, }
+\item[{double}]{t, }
+\item[{const {\bf \-Imu\-State} \&}]{x, }
+\item[{const \-Vector3d \&}]{u, }
+\item[{double}]{dt, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Imu_a61469138df179f4de76bf3fc148c53a0}
+
+
+\-References sa, su, and sv.
+
+\index{gcop\-::\-Imu@{gcop\-::\-Imu}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Imu@{gcop\-::\-Imu}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Imu\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Imu\-State} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Imu\-State} \&}]{xa, }
+\item[{const \-Vector3d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix9d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix93d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix9\-Xd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Imu_a6e03ff1974ad7cc5e076216b58461fea}
+
+
+\-References gcop\-::\-Imu\-State\-::ba, gcop\-::\-Imu\-State\-::bg, gcop\-::\-S\-O3\-::dexp(), gcop\-::\-S\-O3\-::exp(), gcop\-::\-S\-O3\-::\-Instance(), and gcop\-::\-Imu\-State\-::\-R.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Imu@{gcop\-::\-Imu}!sa@{sa}}
+\index{sa@{sa}!gcop::Imu@{gcop\-::\-Imu}}
+\subsubsection[{sa}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Imu\-::sa}}\label{classgcop_1_1Imu_ae11beca1cb664e4164fc3b66365672b5}
+
+
+acceleration bias rate-\/of-\/change white noise stdev (spectral density) 
+
+
+
+\-Referenced by \-Imu(), and \-Noise().
+
+\index{gcop\-::\-Imu@{gcop\-::\-Imu}!su@{su}}
+\index{su@{su}!gcop::Imu@{gcop\-::\-Imu}}
+\subsubsection[{su}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Imu\-::su}}\label{classgcop_1_1Imu_ae57e3304cbdaecdbbfcf225a3a46996d}
+
+
+gyro bias rate-\/of-\/change white noise stdev (spectral density) 
+
+
+
+\-Referenced by \-Imu(), and \-Noise().
+
+\index{gcop\-::\-Imu@{gcop\-::\-Imu}!sv@{sv}}
+\index{sv@{sv}!gcop::Imu@{gcop\-::\-Imu}}
+\subsubsection[{sv}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Imu\-::sv}}\label{classgcop_1_1Imu_ad776bf1de79f4396893f26d3efe57d86}
+
+
+gyro bias white noise stdev (spectral density) 
+
+
+
+\-Referenced by \-Imu(), and \-Noise().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf imu.\-h}\item 
+lib/systems/{\bf imu.\-cc}\end{DoxyCompactItemize}

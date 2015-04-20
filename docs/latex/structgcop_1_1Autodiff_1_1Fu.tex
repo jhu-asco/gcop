@@ -1,0 +1,97 @@
+\section{gcop\-:\-:\-Autodiff$<$ \-T, \-\_\-n, \-\_\-c $>$\-:\-:\-Fu \-Struct \-Reference}
+\label{structgcop_1_1Autodiff_1_1Fu}\index{gcop\-::\-Autodiff$<$ T, \-\_\-n, \-\_\-c $>$\-::\-Fu@{gcop\-::\-Autodiff$<$ T, \-\_\-n, \-\_\-c $>$\-::\-Fu}}
+
+
+{\ttfamily \#include $<$autodiff.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Autodiff$<$ \-T, \-\_\-n, \-\_\-c $>$\-:\-:\-Fu\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structgcop_1_1Autodiff_1_1Fu__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef {\bf \-Vectorcd} {\bf \-Input\-Type}
+\item 
+typedef {\bf \-Vectornd} {\bf \-Value\-Type}
+\item 
+typedef {\bf \-Matrixncd} {\bf \-Jacobian\-Type}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Fu} ({\bf \-System}$<$ \-T, {\bf \-Vectorcd}, \-\_\-n, \-\_\-c $>$ \&{\bf sys})
+\item 
+void {\bf operator()} (const {\bf \-Vectorcd} \&u, {\bf \-Vectornd} $\ast$v) const 
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-System}$<$ \-T, {\bf \-Vectorcd}, \-\_\-n, \-\_\-c $>$ \& {\bf sys}
+\item 
+double {\bf t}
+\item 
+const \-T $\ast$ {\bf x}
+\item 
+double {\bf h}
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T, int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ struct gcop\-::\-Autodiff$<$ T, \-\_\-n, \-\_\-c $>$\-::\-Fu}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Autodiff\-::\-Fu@{gcop\-::\-Autodiff\-::\-Fu}!\-Input\-Type@{\-Input\-Type}}
+\index{\-Input\-Type@{\-Input\-Type}!gcop::Autodiff::Fu@{gcop\-::\-Autodiff\-::\-Fu}}
+\subsubsection[{\-Input\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef {\bf \-Vectorcd} {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fu\-::\-Input\-Type}}\label{structgcop_1_1Autodiff_1_1Fu_a482cb500161e914e283b5c7f656284e6}
+\index{gcop\-::\-Autodiff\-::\-Fu@{gcop\-::\-Autodiff\-::\-Fu}!\-Jacobian\-Type@{\-Jacobian\-Type}}
+\index{\-Jacobian\-Type@{\-Jacobian\-Type}!gcop::Autodiff::Fu@{gcop\-::\-Autodiff\-::\-Fu}}
+\subsubsection[{\-Jacobian\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef {\bf \-Matrixncd} {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fu\-::\-Jacobian\-Type}}\label{structgcop_1_1Autodiff_1_1Fu_afb72e25ac417aaec70142b4f30e711c6}
+\index{gcop\-::\-Autodiff\-::\-Fu@{gcop\-::\-Autodiff\-::\-Fu}!\-Value\-Type@{\-Value\-Type}}
+\index{\-Value\-Type@{\-Value\-Type}!gcop::Autodiff::Fu@{gcop\-::\-Autodiff\-::\-Fu}}
+\subsubsection[{\-Value\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef {\bf \-Vectornd} {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fu\-::\-Value\-Type}}\label{structgcop_1_1Autodiff_1_1Fu_a62c626caf7297b6e26a7d82893633fad}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Autodiff\-::\-Fu@{gcop\-::\-Autodiff\-::\-Fu}!\-Fu@{\-Fu}}
+\index{\-Fu@{\-Fu}!gcop::Autodiff::Fu@{gcop\-::\-Autodiff\-::\-Fu}}
+\subsubsection[{\-Fu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fu\-::\-Fu} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, {\bf \-Vectorcd}, \-\_\-n, \-\_\-c $>$ \&}]{sys}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{structgcop_1_1Autodiff_1_1Fu_ac06fd19c97ff6e079fed3a3514801ec0}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Autodiff\-::\-Fu@{gcop\-::\-Autodiff\-::\-Fu}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::Autodiff::Fu@{gcop\-::\-Autodiff\-::\-Fu}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ void {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::\-Fu\-::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{{\bf \-Vectornd} $\ast$}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{structgcop_1_1Autodiff_1_1Fu_a119b70078a49ea265a252d12c69b9bbb}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Autodiff\-::\-Fu@{gcop\-::\-Autodiff\-::\-Fu}!h@{h}}
+\index{h@{h}!gcop::Autodiff::Fu@{gcop\-::\-Autodiff\-::\-Fu}}
+\subsubsection[{h}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ double {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fu\-::h}}\label{structgcop_1_1Autodiff_1_1Fu_a8b00e6e9225ef5dae119f8d63fd7927f}
+\index{gcop\-::\-Autodiff\-::\-Fu@{gcop\-::\-Autodiff\-::\-Fu}!sys@{sys}}
+\index{sys@{sys}!gcop::Autodiff::Fu@{gcop\-::\-Autodiff\-::\-Fu}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ {\bf \-System}$<$\-T, {\bf \-Vectorcd}, \-\_\-n, \-\_\-c$>$\& {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fu\-::sys}}\label{structgcop_1_1Autodiff_1_1Fu_a3530b32d9bea262ed9d915e69e50477d}
+\index{gcop\-::\-Autodiff\-::\-Fu@{gcop\-::\-Autodiff\-::\-Fu}!t@{t}}
+\index{t@{t}!gcop::Autodiff::Fu@{gcop\-::\-Autodiff\-::\-Fu}}
+\subsubsection[{t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ double {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fu\-::t}}\label{structgcop_1_1Autodiff_1_1Fu_adfa1cf35dd2ab2c95409a167c3b92f71}
+\index{gcop\-::\-Autodiff\-::\-Fu@{gcop\-::\-Autodiff\-::\-Fu}!x@{x}}
+\index{x@{x}!gcop::Autodiff::Fu@{gcop\-::\-Autodiff\-::\-Fu}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ const \-T$\ast$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Fu\-::x}}\label{structgcop_1_1Autodiff_1_1Fu_ab9defbe9b8303fc81c885120c8cd6b28}
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf autodiff.\-h}\end{DoxyCompactItemize}

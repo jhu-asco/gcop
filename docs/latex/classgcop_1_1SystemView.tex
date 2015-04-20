@@ -1,0 +1,255 @@
+\section{gcop\-:\-:\-System\-View$<$ \-Tx, \-Tu $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1SystemView}\index{gcop\-::\-System\-View$<$ Tx, Tu $>$@{gcop\-::\-System\-View$<$ Tx, Tu $>$}}
+
+
+{\ttfamily \#include $<$systemview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-System\-View$<$ \-Tx, \-Tu $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classgcop_1_1SystemView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-System\-View$<$ \-Tx, \-Tu $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classgcop_1_1SystemView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-System\-View} (const char $\ast${\bf name}=0, vector$<$ \-Tx $>$ $\ast${\bf xs}=0, vector$<$ \-Tu $>$ $\ast${\bf us}=0)
+\item 
+virtual {\bf $\sim$\-System\-View} ()
+\item 
+virtual void {\bf \-Render} (const \-Tx $\ast$x, const \-Tu $\ast$u=0)=0
+\item 
+virtual void {\bf \-Render} (const vector$<$ \-Tx $>$ $\ast${\bf xs}, const vector$<$ \-Tu $>$ $\ast${\bf us}=0, bool rs=true, int is=-\/1, int ie=-\/1, int {\bf dis}=1, int {\bf dit}=1, bool dl=true)=0
+\item 
+virtual void {\bf \-Render} ()
+\item 
+virtual bool {\bf \-Render\-Frame} (int i)
+\item 
+void {\bf \-Set\-Color} (const double {\bf rgba}[4])
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \-Tx $>$ $\ast$ {\bf xs}
+\begin{DoxyCompactList}\small\item\em trajectory to render \end{DoxyCompactList}\item 
+vector$<$ \-Tu $>$ $\ast$ {\bf us}
+\begin{DoxyCompactList}\small\item\em controls to render \end{DoxyCompactList}\item 
+int {\bf dis}
+\begin{DoxyCompactList}\small\item\em when rendering a trajectory only render a body corresponding to every di-\/th state (default is 1) \end{DoxyCompactList}\item 
+int {\bf dit}
+\begin{DoxyCompactList}\small\item\em when rendering a trajectory only put a point at every di-\/th state (default is 1) \end{DoxyCompactList}\item 
+double {\bf rgba} [4]
+\begin{DoxyCompactList}\small\item\em color \end{DoxyCompactList}\item 
+double {\bf line\-Width}
+\begin{DoxyCompactList}\small\item\em trajectory line width (default is 1) \end{DoxyCompactList}\item 
+bool {\bf render\-System}
+\begin{DoxyCompactList}\small\item\em whether to render the physical system (e.\-g. a body) \end{DoxyCompactList}\item 
+bool {\bf render\-Forces}
+\begin{DoxyCompactList}\small\item\em whether to render forces \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename \-Tx, typename \-Tu$>$class gcop\-::\-System\-View$<$ Tx, Tu $>$}
+
+\-Discrete \-Dynamical system view. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!\-System\-View@{\-System\-View}}
+\index{\-System\-View@{\-System\-View}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{\-System\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf \-System\-View} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name = {\ttfamily 0}, }
+\item[{vector$<$ \-Tx $>$ $\ast$}]{xs = {\ttfamily 0}, }
+\item[{vector$<$ \-Tu $>$ $\ast$}]{us = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1SystemView_a4c31f16f3168f9b3f79aa1184b8747a3}
+\-Create a view for a single state s 
+\begin{DoxyParams}{\-Parameters}
+{\em name} & name \\
+\hline
+{\em s} & rigid body state \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-System\-View$<$ Tx, Tu $>$\-::rgba.
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!$\sim$\-System\-View@{$\sim$\-System\-View}}
+\index{$\sim$\-System\-View@{$\sim$\-System\-View}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{$\sim$\-System\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , typename Tu $>$ {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::$\sim${\bf \-System\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1SystemView_a6109ea6e0a995b773d44ccbc3fb05061}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ virtual void {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf \-Render} (
+\begin{DoxyParamCaption}
+\item[{const \-Tx $\ast$}]{x, }
+\item[{const \-Tu $\ast$}]{u = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1SystemView_a5591c11e0516e2993231547ec82cd763}
+
+
+\-Implemented in {\bf gcop\-::\-Kinbody3d\-View$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Kinbody3dView_a50ed8717393206180a5f5191f1cb29a8}, {\bf gcop\-::\-Body3d\-View$<$ c $>$} \doxyref{}{p.}{classgcop_1_1Body3dView_adfb070ec2ed1181b85999d134f0b049a}, {\bf gcop\-::\-Body3d\-View$<$ 4 $>$} \doxyref{}{p.}{classgcop_1_1Body3dView_adfb070ec2ed1181b85999d134f0b049a}, {\bf gcop\-::\-Uuv\-View$<$ c $>$} \doxyref{}{p.}{classgcop_1_1UuvView_a8e28b69c78bf7d28827058f68a2322f6}, {\bf gcop\-::\-Mbs\-View} \doxyref{}{p.}{classgcop_1_1MbsView_a2344ae8497ed20e8572eb2327f0756c0}, {\bf gcop\-::\-Body2d\-View} \doxyref{}{p.}{classgcop_1_1Body2dView_a2911b2905771a122f71f49238be1cb75}, {\bf gcop\-::\-Kinbody2d\-View} \doxyref{}{p.}{classgcop_1_1Kinbody2dView_ab1fbc46f500414df321fec089ce272fc}, {\bf gcop\-::\-Car\-View} \doxyref{}{p.}{classgcop_1_1CarView_a8e4cc7d30f901dc030a3b3a5b6d91396}, {\bf gcop\-::\-Airplane\-View} \doxyref{}{p.}{classgcop_1_1AirplaneView_a521208254c9c2f2f88b68d2f321010bb}, {\bf gcop\-::\-Gunicycle\-View} \doxyref{}{p.}{classgcop_1_1GunicycleView_a4e5a5b2fab1a102bee11aae734abe460}, {\bf gcop\-::\-Particle2d\-View} \doxyref{}{p.}{classgcop_1_1Particle2dView_afdf361b5ecdcdb8a09f9ce2165097481}, {\bf gcop\-::\-Rccar\-View} \doxyref{}{p.}{classgcop_1_1RccarView_a7dd5df3af018ecf27be6f87f20ffdc30}, {\bf gcop\-::\-Unicycle\-View} \doxyref{}{p.}{classgcop_1_1UnicycleView_a79cb659d533525adfed47fea952b3a08}, and {\bf gcop\-::\-Normal2d\-View$<$ \-\_\-n $>$} \doxyref{}{p.}{classgcop_1_1Normal2dView_a07cbc84f1bde7a2477dac6e58d460121}.
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ virtual void {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf \-Render} (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ \-Tx $>$ $\ast$}]{xs, }
+\item[{const vector$<$ \-Tu $>$ $\ast$}]{us = {\ttfamily 0}, }
+\item[{bool}]{rs = {\ttfamily true}, }
+\item[{int}]{is = {\ttfamily -\/1}, }
+\item[{int}]{ie = {\ttfamily -\/1}, }
+\item[{int}]{dis = {\ttfamily 1}, }
+\item[{int}]{dit = {\ttfamily 1}, }
+\item[{bool}]{dl = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1SystemView_a6a4cf72f0a0e380ad69397be162b3ee9}
+\-Render a trajectory 
+\begin{DoxyParams}{\-Parameters}
+{\em traj} & trajectory \\
+\hline
+{\em rs} & render state \\
+\hline
+{\em is} & start index \\
+\hline
+{\em ie} & end index \\
+\hline
+{\em dis} & index step for rendering bodies along trajectory \\
+\hline
+{\em dit} & index step for rendering states(points) along trajectory \\
+\hline
+{\em dl} & always draw last state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implemented in {\bf gcop\-::\-Kinbody3d\-View$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Kinbody3dView_a1ead5cebe61a7119d74946ea4f778b7d}, {\bf gcop\-::\-Body3d\-View$<$ c $>$} \doxyref{}{p.}{classgcop_1_1Body3dView_aa51b25899b55249ddc7023af2a826d62}, {\bf gcop\-::\-Body3d\-View$<$ 4 $>$} \doxyref{}{p.}{classgcop_1_1Body3dView_aa51b25899b55249ddc7023af2a826d62}, {\bf gcop\-::\-Uuv\-View$<$ c $>$} \doxyref{}{p.}{classgcop_1_1UuvView_a81716813f199093b587eb2f5920eb51a}, {\bf gcop\-::\-Mbs\-View} \doxyref{}{p.}{classgcop_1_1MbsView_add222d683b8e4a249fc8cc7e4f40d6e5}, {\bf gcop\-::\-Body2d\-View} \doxyref{}{p.}{classgcop_1_1Body2dView_a5bb6d8742edba678c42e85cfb54812dc}, {\bf gcop\-::\-Kinbody2d\-View} \doxyref{}{p.}{classgcop_1_1Kinbody2dView_a7f2e20c0216701c25faae7fcaf785820}, {\bf gcop\-::\-Car\-View} \doxyref{}{p.}{classgcop_1_1CarView_a7ae8862b09fb41f1f7178320bbece572}, {\bf gcop\-::\-Airplane\-View} \doxyref{}{p.}{classgcop_1_1AirplaneView_a1c372856c9f1a7a5533d2870d60cf634}, {\bf gcop\-::\-Gunicycle\-View} \doxyref{}{p.}{classgcop_1_1GunicycleView_aca35f1628d44762061d658a36f590154}, {\bf gcop\-::\-Particle2d\-View} \doxyref{}{p.}{classgcop_1_1Particle2dView_afba4165c22a1cb244bad1977b609033e}, {\bf gcop\-::\-Rccar\-View} \doxyref{}{p.}{classgcop_1_1RccarView_a96d76028669e243d39d714b3a4cc78a8}, {\bf gcop\-::\-Unicycle\-View} \doxyref{}{p.}{classgcop_1_1UnicycleView_ab63ce557581c2fc01724b128b8f5fe0b}, and {\bf gcop\-::\-Normal2d\-View$<$ \-\_\-n $>$} \doxyref{}{p.}{classgcop_1_1Normal2dView_acc9fd0ea9b9cb766108d0eb114495f0d}.
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ void {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf \-Render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1SystemView_aef553d8155185730e8469eca14472e0b}
+\-Render a view\-: all subclasses should provide this method 
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63}.
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!\-Render\-Frame@{\-Render\-Frame}}
+\index{\-Render\-Frame@{\-Render\-Frame}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{\-Render\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , typename Tu $>$ bool {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf \-Render\-Frame} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1SystemView_a6dadd3d33ab0785d9d0f03515f9f6068}
+\-Render a view\-: all subclasses should provide this method 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & frame \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+return true if more frames should be rendered 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_ad6c3f17a59725948f68817398296f835}.
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!\-Set\-Color@{\-Set\-Color}}
+\index{\-Set\-Color@{\-Set\-Color}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{\-Set\-Color}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , typename Tu $>$ void {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf \-Set\-Color} (
+\begin{DoxyParamCaption}
+\item[{const double}]{rgba[4]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1SystemView_a7cc6e0d480687fb90c4ff5bf724f1e70}
+\-Set the rgb color of the trajectory 
+\begin{DoxyParams}{\-Parameters}
+{\em rgb} & rgb vector \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!dis@{dis}}
+\index{dis@{dis}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{dis}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ int {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf dis}}\label{classgcop_1_1SystemView_abb6f3ad537c1c8371682cca09f3fdb34}
+
+
+when rendering a trajectory only render a body corresponding to every di-\/th state (default is 1) 
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!dit@{dit}}
+\index{dit@{dit}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{dit}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ int {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf dit}}\label{classgcop_1_1SystemView_a351ccbacc5f62237d6787a6be11060e9}
+
+
+when rendering a trajectory only put a point at every di-\/th state (default is 1) 
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!line\-Width@{line\-Width}}
+\index{line\-Width@{line\-Width}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{line\-Width}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ double {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf line\-Width}}\label{classgcop_1_1SystemView_a5dab08ff286dca18402190c51400051e}
+
+
+trajectory line width (default is 1) 
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!render\-Forces@{render\-Forces}}
+\index{render\-Forces@{render\-Forces}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{render\-Forces}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ bool {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf render\-Forces}}\label{classgcop_1_1SystemView_ad06b1b9aeb1ea962bd0974a40cb06754}
+
+
+whether to render forces 
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!render\-System@{render\-System}}
+\index{render\-System@{render\-System}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{render\-System}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ bool {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf render\-System}}\label{classgcop_1_1SystemView_a6623abf19373fc5bb6d4d523c3653972}
+
+
+whether to render the physical system (e.\-g. a body) 
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!rgba@{rgba}}
+\index{rgba@{rgba}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{rgba}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ double {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf rgba}[4]}\label{classgcop_1_1SystemView_a5afad7ed1248873053207dc2bf8c790e}
+
+
+color 
+
+
+
+\-Referenced by gcop\-::\-System\-View$<$ Tx, Tu $>$\-::\-System\-View().
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!us@{us}}
+\index{us@{us}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ vector$<$\-Tu$>$$\ast$ {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf us}}\label{classgcop_1_1SystemView_a7fe3cab17d4c1417e8652dac1ca6a90f}
+
+
+controls to render 
+
+\index{gcop\-::\-System\-View@{gcop\-::\-System\-View}!xs@{xs}}
+\index{xs@{xs}!gcop::SystemView@{gcop\-::\-System\-View}}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ vector$<$\-Tx$>$$\ast$ {\bf gcop\-::\-System\-View}$<$ \-Tx, \-Tu $>$\-::{\bf xs}}\label{classgcop_1_1SystemView_a0dc7a361765eef8ae9ba2d7fbc0302f2}
+
+
+trajectory to render 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf systemview.\-h}\end{DoxyCompactItemize}

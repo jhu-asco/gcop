@@ -1,0 +1,218 @@
+\section{gcop\-:\-:\-Sensor$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Sensor}\index{gcop\-::\-Sensor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$@{gcop\-::\-Sensor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$}}
+
+
+{\ttfamily \#include $<$sensor.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Sensor$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{classgcop_1_1Sensor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nx $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nx $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nu $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-np $>$ {\bf \-Matrixmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ {\bf \-Matrixnmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, 1 $>$ {\bf \-Vectorrd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nz $>$ {\bf \-Matrixrd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nx $>$ {\bf \-Matrixrnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nu $>$ {\bf \-Matrixrcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-np $>$ {\bf \-Matrixrmd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Sensor} ({\bf \-Manifold}$<$ \-Tz, \-\_\-nz $>$ \&{\bf \-Z})
+\item 
+virtual bool {\bf operator()} (\-Tz \&y, double t, const \-T \&x, const {\bf \-Vectorcd} \&u, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrixrnd} $\ast$dydx=0, {\bf \-Matrixrcd} $\ast$dydu=0, {\bf \-Matrixrmd} $\ast$dydp=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Manifold}$<$ \-Tz, \-\_\-nz $>$ \& {\bf \-Z}
+\begin{DoxyCompactList}\small\item\em measurement manifold \end{DoxyCompactList}\item 
+{\bf \-Matrixrd} {\bf \-R}
+\begin{DoxyCompactList}\small\item\em sensor noise covariance \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$class gcop\-::\-Sensor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$}
+
+\-General sensor model
+
+\-Subclasses should provide implementation for the sensor function ()
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nu$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1Sensor_a5ef6e975f89f15c1c7d98befacc8e3c0}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nx$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1Sensor_a76ff7ff1bfe788119246003438891c3a}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixmd@{\-Matrixmd}}
+\index{\-Matrixmd@{\-Matrixmd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-np$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixmd}}\label{classgcop_1_1Sensor_ab017753650f743bad4b71aacc368a9e6}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-nx$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1Sensor_aa3bf2edfd8548b00e07043a57147d8aa}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nu$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1Sensor_a6a095c291d11b7c30d222503234bea80}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nx$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1Sensor_a80bf94684d771da2d27b6ca5c39643e1}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixnmd@{\-Matrixnmd}}
+\index{\-Matrixnmd@{\-Matrixnmd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixnmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-np$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnmd}}\label{classgcop_1_1Sensor_a1f28d7bff2a6dcf953bd89b9da581ffa}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixrcd@{\-Matrixrcd}}
+\index{\-Matrixrcd@{\-Matrixrcd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixrcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nu$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrcd}}\label{classgcop_1_1Sensor_ac9ec9eae9de85f0374aaf053a9327d46}
+
+
+\-Reimplemented in {\bf gcop\-::\-Gps$<$ Point3d\-State, 6, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4_a9be5b2770afabed639ddd70e85c31ba4}, {\bf gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1InsGps_a20d37e8579a40abccad89b7c91cb4411}, and {\bf gcop\-::\-Point3d\-Gps$<$ \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Point3dGps_a04d0c6cc0810a448fb205a47ca6c5ead}.
+
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixrd@{\-Matrixrd}}
+\index{\-Matrixrd@{\-Matrixrd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixrd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nz$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrd}}\label{classgcop_1_1Sensor_ad97b2472957ba518b8a1831a57111a76}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixrmd@{\-Matrixrmd}}
+\index{\-Matrixrmd@{\-Matrixrmd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixrmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-np$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrmd}}\label{classgcop_1_1Sensor_a312f65bff49beb267bde7792a5a51447}
+
+
+\-Reimplemented in {\bf gcop\-::\-Gps$<$ Point3d\-State, 6, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4_a7ea987e67be155c12f801133fc42f705}, {\bf gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1InsGps_a645d69dcff5553b97b63f5d3115dfbe6}, and {\bf gcop\-::\-Point3d\-Gps$<$ \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Point3dGps_a286e13ba2887d222d88f7a6bb5c13a12}.
+
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Matrixrnd@{\-Matrixrnd}}
+\index{\-Matrixrnd@{\-Matrixrnd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Matrixrnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nx$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrnd}}\label{classgcop_1_1Sensor_accc9dc24053c65f30f1e66d9eca826b2}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Sensor_aa6020c9508c5c144f02b31bac29423b0}
+
+
+\-Reimplemented in {\bf gcop\-::\-Gps$<$ Point3d\-State, 6, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4_a78ca3042a83c96a560a48e1b14668d26}, {\bf gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1InsImu_aaba89d32e8dc8bf228948b32e9edd926}, {\bf gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1InsGps_a026f4786f1294bea536b7e8b372c8353}, {\bf gcop\-::\-Point3d\-Gps$<$ \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Point3dGps_a5884c003361bc4828ffdea5b734d912c}, and {\bf gcop\-::\-Imu\-Sensor$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1ImuSensor_ac79d6099db15b9249634648c5eb24d71}.
+
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1Sensor_aaf2d4e9cc932ef866953ae710e2f8b7a}
+
+
+\-Reimplemented in {\bf gcop\-::\-Gps$<$ Point3d\-State, 6, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4_a718e17094ad98071a20f3b68758f8970}, {\bf gcop\-::\-Ins\-Imu$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1InsImu_a8722e126a8b96e47d44e09a7f4be6119}, {\bf gcop\-::\-Ins\-Gps$<$ \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1InsGps_afbbae6719dd8365c70568fc260e06095}, {\bf gcop\-::\-Point3d\-Gps$<$ \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Point3dGps_ab97f50421af901ca2c3c879f36b99835}, and {\bf gcop\-::\-Imu\-Sensor$<$ \-\_\-nz, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1ImuSensor_adb9a66e61a2e3236b793aaa18f34cdd4}.
+
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Sensor_a13455483b57b716bc95b84e0b664d075}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Vectorrd@{\-Vectorrd}}
+\index{\-Vectorrd@{\-Vectorrd}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Vectorrd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, 1$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectorrd}}\label{classgcop_1_1Sensor_a8f52f585be0dda1f72ca507688140493}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Sensor@{\-Sensor}}
+\index{\-Sensor@{\-Sensor}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Sensor}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, typename \-Tz, int \-\_\-nz$>$ {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Sensor} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Manifold}$<$ \-Tz, \-\_\-nz $>$ \&}]{\-Z}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Sensor_a16a5f215f62536d249db218c19873d44}
+
+
+\-References gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, and gcop\-::\-Sensor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-R.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-nx, int \-\_\-nu, int \-\_\-np, typename \-Tz, int \-\_\-nz$>$ bool {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{\-Tz \&}]{y, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrixrnd} $\ast$}]{dydx = {\ttfamily 0}, }
+\item[{{\bf \-Matrixrcd} $\ast$}]{dydu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixrmd} $\ast$}]{dydp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Sensor_a28523139db1a79058c0c33112beefa30}
+\-Measurement functions 
+\begin{DoxyParams}{\-Parameters}
+{\em y} & deterministic output (i.\-e. the actual random measurement is z = y + v, where the noise v is \-Normal(0,var) ) \\
+\hline
+{\em t} & current time \\
+\hline
+{\em x} & current state \\
+\hline
+{\em u} & control inputs (often not used) \\
+\hline
+{\em p} & static parameters (optional) \\
+\hline
+{\em dydx} & jacobian w.\-r.\-t. x (optional) \\
+\hline
+{\em dydu} & jacobian w.\-r.\-t. u (optional) \\
+\hline
+{\em dydp} & jacobian w.\-r.\-t. p (optional) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if all variables are feasible 
+\end{DoxyReturn}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-R@{\-R}}
+\index{\-R@{\-R}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-R}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixrd} {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-R}}\label{classgcop_1_1Sensor_a8e4133c68c911773b1783c6715b5e54c}
+
+
+sensor noise covariance 
+
+
+
+\-Referenced by gcop\-::\-Sensor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Sensor().
+
+\index{gcop\-::\-Sensor@{gcop\-::\-Sensor}!\-Z@{\-Z}}
+\index{\-Z@{\-Z}!gcop::Sensor@{gcop\-::\-Sensor}}
+\subsubsection[{\-Z}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Manifold}$<$\-Tz, \-\_\-nz$>$\& {\bf gcop\-::\-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Z}}\label{classgcop_1_1Sensor_a0e7f715e4212547b2cdcaf18d3be8449}
+
+
+measurement manifold 
+
+
+
+\-Referenced by gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$\-::\-Doep(), gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Kalman\-Corrector(), and gcop\-::\-Unscented\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Unscented\-Corrector().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/sensors/{\bf sensor.\-h}\end{DoxyCompactItemize}

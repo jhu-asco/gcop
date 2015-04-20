@@ -1,0 +1,144 @@
+\section{gcop\-:\-:\-Particle2d\-View \-Class \-Reference}
+\label{classgcop_1_1Particle2dView}\index{gcop\-::\-Particle2d\-View@{gcop\-::\-Particle2d\-View}}
+
+
+{\ttfamily \#include $<$particle2dview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Particle2d\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classgcop_1_1Particle2dView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Particle2d\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Particle2dView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Particle2d\-View} (const {\bf \-Particle2d} \&{\bf sys}, vector$<$ \-Vector4d $>$ $\ast${\bf xs}=0, vector$<$ \-Vector2d $>$ $\ast${\bf us}=0)
+\item 
+virtual {\bf $\sim$\-Particle2d\-View} ()
+\item 
+void {\bf \-Render} (const \-Vector4d $\ast$x, const \-Vector2d $\ast$u=0)
+\item 
+void {\bf \-Render} (const vector$<$ \-Vector4d $>$ $\ast${\bf xs}, const vector$<$ \-Vector2d $>$ $\ast${\bf us}=0, bool rs=true, int is=-\/1, int ie=-\/1, int {\bf dis}=1, int {\bf dit}=1, bool dl=false)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Particle2d} \& {\bf sys}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Particle2d\-View@{gcop\-::\-Particle2d\-View}!\-Particle2d\-View@{\-Particle2d\-View}}
+\index{\-Particle2d\-View@{\-Particle2d\-View}!gcop::Particle2dView@{gcop\-::\-Particle2d\-View}}
+\subsubsection[{\-Particle2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Particle2d\-View\-::\-Particle2d\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Particle2d} \&}]{sys, }
+\item[{vector$<$ \-Vector4d $>$ $\ast$}]{xs = {\ttfamily 0}, }
+\item[{vector$<$ \-Vector2d $>$ $\ast$}]{us = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Particle2dView_aacb55bcc5d25ebb33b422e347dc15896}
+\-Create a particle view of trajectory traj 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & particle \\
+\hline
+{\em xs} & trajectory \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$\-::line\-Width, and gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$\-::rgba.
+
+\index{gcop\-::\-Particle2d\-View@{gcop\-::\-Particle2d\-View}!$\sim$\-Particle2d\-View@{$\sim$\-Particle2d\-View}}
+\index{$\sim$\-Particle2d\-View@{$\sim$\-Particle2d\-View}!gcop::Particle2dView@{gcop\-::\-Particle2d\-View}}
+\subsubsection[{$\sim$\-Particle2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Particle2d\-View\-::$\sim$\-Particle2d\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Particle2dView_af3ebb8caee2b9aa5bc04e06fc53c9cef}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Particle2d\-View@{gcop\-::\-Particle2d\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::Particle2dView@{gcop\-::\-Particle2d\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Particle2d\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const \-Vector4d $\ast$}]{x, }
+\item[{const \-Vector2d $\ast$}]{u = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Particle2dView_afdf361b5ecdcdb8a09f9ce2165097481}
+
+
+\-Implements {\bf gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a5591c11e0516e2993231547ec82cd763}.
+
+
+
+\-References gcop\-::\-Particle2d\-::r, and sys.
+
+\index{gcop\-::\-Particle2d\-View@{gcop\-::\-Particle2d\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::Particle2dView@{gcop\-::\-Particle2d\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Particle2d\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ \-Vector4d $>$ $\ast$}]{xs, }
+\item[{const vector$<$ \-Vector2d $>$ $\ast$}]{us = {\ttfamily 0}, }
+\item[{bool}]{rs = {\ttfamily true}, }
+\item[{int}]{is = {\ttfamily -\/1}, }
+\item[{int}]{ie = {\ttfamily -\/1}, }
+\item[{int}]{dis = {\ttfamily 1}, }
+\item[{int}]{dit = {\ttfamily 1}, }
+\item[{bool}]{dl = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Particle2dView_afba4165c22a1cb244bad1977b609033e}
+\-Render a trajectory 
+\begin{DoxyParams}{\-Parameters}
+{\em traj} & trajectory \\
+\hline
+{\em rs} & render state \\
+\hline
+{\em is} & start index \\
+\hline
+{\em ie} & end index \\
+\hline
+{\em dis} & index step for rendering bodies along trajectory \\
+\hline
+{\em dit} & index step for rendering states(points) along trajectory \\
+\hline
+{\em dl} & always draw last state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6a4cf72f0a0e380ad69397be162b3ee9}.
+
+
+
+\-References gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$\-::dis, gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$\-::dit, gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$\-::line\-Width, gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$\-::\-Render(), gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$\-::rgba, and gcop\-::\-System\-View$<$ Vector4d, Vector2d $>$\-::\-Set\-Color().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Particle2d\-View@{gcop\-::\-Particle2d\-View}!sys@{sys}}
+\index{sys@{sys}!gcop::Particle2dView@{gcop\-::\-Particle2d\-View}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Particle2d}\& {\bf gcop\-::\-Particle2d\-View\-::sys}}\label{classgcop_1_1Particle2dView_ae94422e207fb1df0f76e8afbb4d6eb02}
+
+
+\-Referenced by \-Render().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf particle2dview.\-h}\item 
+lib/views/{\bf particle2dview.\-cc}\end{DoxyCompactItemize}

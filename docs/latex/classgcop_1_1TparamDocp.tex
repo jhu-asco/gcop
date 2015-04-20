@@ -1,0 +1,111 @@
+\section{gcop\-:\-:\-Tparam\-Docp$<$ \-T, nx, nu, np, nz, \-\_\-ntp $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1TparamDocp}\index{gcop\-::\-Tparam\-Docp$<$ T, nx, nu, np, nz, \-\_\-ntp $>$@{gcop\-::\-Tparam\-Docp$<$ T, nx, nu, np, nz, \-\_\-ntp $>$}}
+
+
+{\ttfamily \#include $<$tparamdocp.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Tparam\-Docp$<$ \-T, nx, nu, np, nz, \-\_\-ntp $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{classgcop_1_1TparamDocp__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Tparam\-Docp$<$ \-T, nx, nu, np, nz, \-\_\-ntp $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1TparamDocp__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Tparam\-Docp} ({\bf \-System}$<$ \-T, nx, nu, {\bf np}, nz $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, nx, nu $>$ \&{\bf cost}, {\bf \-Tparam}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ntp $>$ \&{\bf tp}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd $\ast${\bf p}=0)
+\item 
+virtual {\bf $\sim$\-Tparam\-Docp} ()
+\item 
+void {\bf \-Iterate} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Tparam}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ntp $>$ \& {\bf tp}
+\begin{DoxyCompactList}\small\item\em trajectory parametrization \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ class gcop\-::\-Tparam\-Docp$<$ T, nx, nu, np, nz, \-\_\-ntp $>$}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Tparam\-Docp@{gcop\-::\-Tparam\-Docp}!\-Tparam\-Docp@{\-Tparam\-Docp}}
+\index{\-Tparam\-Docp@{\-Tparam\-Docp}!gcop::TparamDocp@{gcop\-::\-Tparam\-Docp}}
+\subsubsection[{\-Tparam\-Docp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ {\bf gcop\-::\-Tparam\-Docp}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ntp $>$\-::{\bf \-Tparam\-Docp} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, nx, nu, {\bf np}, nz $>$ \&}]{sys, }
+\item[{{\bf \-Cost}$<$ \-T, nx, nu $>$ \&}]{cost, }
+\item[{{\bf \-Tparam}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ntp $>$ \&}]{tp, }
+\item[{vector$<$ double $>$ \&}]{ts, }
+\item[{vector$<$ \-T $>$ \&}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{\-Vectormd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1TparamDocp_ae829b6f842795bd76b68e4b92cc05420}
+\-Create an optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. \-The times ts must be given, the initial state xs[0] must be set, and the controls us will be used as an initial guess for the optimization.
+
+\-After initialization, every call to \doxyref{\-Iterate()}{p.}{classgcop_1_1TparamDocp_a3bdc035e8b3819dcdef4c436c197bb43} will optimize the controls us and states xs and modify them accordingly. \-Problems involving time-\/optimization will also modify the sequence of times ts.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & system \\
+\hline
+{\em cost} & cost \\
+\hline
+{\em tp} & trajectory paramtrization \\
+\hline
+{\em ts} & (\-N+1) sequence of discrete times \\
+\hline
+{\em xs} & (\-N+1) sequence of discrete states \\
+\hline
+{\em us} & (\-N) sequence of control inputs \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Tparam\-Docp@{gcop\-::\-Tparam\-Docp}!$\sim$\-Tparam\-Docp@{$\sim$\-Tparam\-Docp}}
+\index{$\sim$\-Tparam\-Docp@{$\sim$\-Tparam\-Docp}!gcop::TparamDocp@{gcop\-::\-Tparam\-Docp}}
+\subsubsection[{$\sim$\-Tparam\-Docp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int nz, int \-\_\-ntp$>$ {\bf gcop\-::\-Tparam\-Docp}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ntp $>$\-::$\sim${\bf \-Tparam\-Docp} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1TparamDocp_ae1625a977c31653f4a442b4c91853b7c}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Tparam\-Docp@{gcop\-::\-Tparam\-Docp}!\-Iterate@{\-Iterate}}
+\index{\-Iterate@{\-Iterate}!gcop::TparamDocp@{gcop\-::\-Tparam\-Docp}}
+\subsubsection[{\-Iterate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ void {\bf gcop\-::\-Tparam\-Docp}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ntp $>$\-::{\bf \-Iterate} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1TparamDocp_a3bdc035e8b3819dcdef4c436c197bb43}
+\-Perform one \-D\-O\-C\-P iteration. \-Internally calls\-: are updated. 
+
+\-Reimplemented from {\bf gcop\-::\-Docp$<$ T, nx, nu, np, nz $>$} \doxyref{}{p.}{classgcop_1_1Docp_a37958d1614b2b54ac457cc7ee55302e6}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Tparam\-Docp@{gcop\-::\-Tparam\-Docp}!tp@{tp}}
+\index{tp@{tp}!gcop::TparamDocp@{gcop\-::\-Tparam\-Docp}}
+\subsubsection[{tp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ {\bf \-Tparam}$<$\-T, nx, nu, {\bf np}, nz, \-\_\-ntp$>$\& {\bf gcop\-::\-Tparam\-Docp}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ntp $>$\-::{\bf tp}}\label{classgcop_1_1TparamDocp_a1504d261b2bbf567347a260104ca0208}
+
+
+trajectory parametrization 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf tparamdocp.\-h}\end{DoxyCompactItemize}

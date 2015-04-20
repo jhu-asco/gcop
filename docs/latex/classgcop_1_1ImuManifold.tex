@@ -1,0 +1,110 @@
+\section{gcop\-:\-:\-Imu\-Manifold \-Class \-Reference}
+\label{classgcop_1_1ImuManifold}\index{gcop\-::\-Imu\-Manifold@{gcop\-::\-Imu\-Manifold}}
+
+
+{\ttfamily \#include $<$imumanifold.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Imu\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{classgcop_1_1ImuManifold__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Imu\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{classgcop_1_1ImuManifold__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf \-Lift} ({\bf \-Vector9d} \&v, const {\bf \-Imu\-State} \&xa, const {\bf \-Imu\-State} \&xb)
+\item 
+void {\bf \-Retract} ({\bf \-Imu\-State} \&xb, const {\bf \-Imu\-State} \&xa, const {\bf \-Vector9d} \&v)
+\item 
+void {\bf dtau} ({\bf \-Matrix9d} \&\-M, const {\bf \-Vector9d} \&v)
+\item 
+void {\bf \-Adtau} ({\bf \-Matrix9d} \&\-M, const {\bf \-Vector9d} \&v)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf \-Imu\-Manifold} \& {\bf \-Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Imu\-Manifold@{gcop\-::\-Imu\-Manifold}!\-Adtau@{\-Adtau}}
+\index{\-Adtau@{\-Adtau}!gcop::ImuManifold@{gcop\-::\-Imu\-Manifold}}
+\subsubsection[{\-Adtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Imu\-Manifold\-::\-Adtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix9d} \&}]{\-M, }
+\item[{const {\bf \-Vector9d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1ImuManifold_a50ff9bdfbe5d959bfdec156fb128bda9}
+
+
+\-References \-Instance().
+
+\index{gcop\-::\-Imu\-Manifold@{gcop\-::\-Imu\-Manifold}!dtau@{dtau}}
+\index{dtau@{dtau}!gcop::ImuManifold@{gcop\-::\-Imu\-Manifold}}
+\subsubsection[{dtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Imu\-Manifold\-::dtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix9d} \&}]{\-M, }
+\item[{const {\bf \-Vector9d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1ImuManifold_ae008d2746d5ce4e9459e61989656a738}
+
+
+\-References \-Instance().
+
+\index{gcop\-::\-Imu\-Manifold@{gcop\-::\-Imu\-Manifold}!\-Instance@{\-Instance}}
+\index{\-Instance@{\-Instance}!gcop::ImuManifold@{gcop\-::\-Imu\-Manifold}}
+\subsubsection[{\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Imu\-Manifold} \& {\bf \-Imu\-Manifold\-::\-Instance} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1ImuManifold_a76ea3a4473c21c86d046ce738f44d6a0}
+
+
+\-Referenced by \-Adtau(), dtau(), \-Lift(), and \-Retract().
+
+\index{gcop\-::\-Imu\-Manifold@{gcop\-::\-Imu\-Manifold}!\-Lift@{\-Lift}}
+\index{\-Lift@{\-Lift}!gcop::ImuManifold@{gcop\-::\-Imu\-Manifold}}
+\subsubsection[{\-Lift}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Imu\-Manifold\-::\-Lift} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector9d} \&}]{v, }
+\item[{const {\bf \-Imu\-State} \&}]{xa, }
+\item[{const {\bf \-Imu\-State} \&}]{xb}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1ImuManifold_a8a4eb34c979b4eb24cb6bbeb7e310a2a}
+
+
+\-References gcop\-::\-Imu\-State\-::ba, gcop\-::\-Imu\-State\-::bg, \-Instance(), and gcop\-::\-Imu\-State\-::\-R.
+
+\index{gcop\-::\-Imu\-Manifold@{gcop\-::\-Imu\-Manifold}!\-Retract@{\-Retract}}
+\index{\-Retract@{\-Retract}!gcop::ImuManifold@{gcop\-::\-Imu\-Manifold}}
+\subsubsection[{\-Retract}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Imu\-Manifold\-::\-Retract} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Imu\-State} \&}]{xb, }
+\item[{const {\bf \-Imu\-State} \&}]{xa, }
+\item[{const {\bf \-Vector9d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1ImuManifold_afa461d259baef7bee6b6806776f388a7}
+
+
+\-References gcop\-::\-Imu\-State\-::ba, gcop\-::\-Imu\-State\-::bg, \-Instance(), and gcop\-::\-Imu\-State\-::\-R.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/{\bf imumanifold.\-h}\item 
+lib/systems/manifolds/{\bf imumanifold.\-cc}\end{DoxyCompactItemize}

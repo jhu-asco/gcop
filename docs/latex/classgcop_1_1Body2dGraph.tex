@@ -1,0 +1,365 @@
+\section{gcop\-:\-:\-Body2d\-Graph \-Class \-Reference}
+\label{classgcop_1_1Body2dGraph}\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}}
+
+
+{\ttfamily \#include $<$body2dgraph.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-Graph\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Body2dGraph__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body2d\-Graph} ({\bf \-Body2d} \&{\bf sys}, int \-N, int nf, bool {\bf odometry}=true, bool {\bf extforce}=false, bool {\bf forces}=false)
+\item 
+void {\bf \-Optp} (\-Vector\-Xd \&{\bf p}, const vector$<$ {\bf \-M3\-V3d} $>$ \&{\bf xs})
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf \-Synthesize} ({\bf \-Body2d\-Graph} \&pgt, {\bf \-Body2d\-Graph} \&pgn, double tf)
+\item 
+static void {\bf \-Synthesize2} ({\bf \-Body2d\-Graph} \&pgt, {\bf \-Body2d\-Graph} \&pgn, double tf)
+\item 
+static void {\bf \-Synthesize3} ({\bf \-Body2d\-Graph} \&pgt, {\bf \-Body2d\-Graph} \&pgn, double tf)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body2d} \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em system \end{DoxyCompactList}\item 
+bool {\bf odometry}
+\begin{DoxyCompactList}\small\item\em is there odometry available (this means that the velocity part of the state will be regarded as available measurements) \end{DoxyCompactList}\item 
+bool {\bf extforce}
+\begin{DoxyCompactList}\small\item\em is there a constant external force that need to be estimated \end{DoxyCompactList}\item 
+bool {\bf forces}
+\begin{DoxyCompactList}\small\item\em optimize over forces \end{DoxyCompactList}\item 
+\-Vector3d {\bf fext}
+\begin{DoxyCompactList}\small\item\em unknown external force \end{DoxyCompactList}\item 
+vector$<$ double $>$ {\bf ts}
+\begin{DoxyCompactList}\small\item\em sequence of times (\-N+1 vector) \end{DoxyCompactList}\item 
+vector$<$ {\bf \-M3\-V3d} $>$ {\bf xs}
+\begin{DoxyCompactList}\small\item\em sequence of states x=(g,v) (\-N+1 vector) \end{DoxyCompactList}\item 
+vector$<$ \-Vector3d $>$ {\bf us}
+\begin{DoxyCompactList}\small\item\em sequence of inputs (\-N vector) \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf p}
+\begin{DoxyCompactList}\small\item\em feature positions (2$\ast$nf vector) and external force parameters (2 vector) \end{DoxyCompactList}\item 
+vector$<$ vector$<$ pair$<$ int, \*
+\-Vector2d $>$ $>$ $>$ {\bf \-Is}
+\begin{DoxyCompactList}\small\item\em \-N+1-\/vector of vectors of visible pose-\/to-\/feature indices. \end{DoxyCompactList}\item 
+vector$<$ vector$<$ pair$<$ int, \*
+\-Vector2d $>$ $>$ $>$ {\bf \-Js}
+\begin{DoxyCompactList}\small\item\em nf-\/vector of vectors of feature-\/to-\/pose indices indices \end{DoxyCompactList}\item 
+vector$<$ \-Vector3d $>$ {\bf vs}
+\begin{DoxyCompactList}\small\item\em odometry/gyro velocity measurements \end{DoxyCompactList}\item 
+double {\bf cp}
+\begin{DoxyCompactList}\small\item\em noise covariance of poses (assume spherical) \end{DoxyCompactList}\item 
+\-Vector3d {\bf cv}
+\begin{DoxyCompactList}\small\item\em noise covariance of odometry/gyro (assume diagonal) \end{DoxyCompactList}\item 
+\-Vector3d {\bf cw}
+\begin{DoxyCompactList}\small\item\em noise covariance of control forces (assume diagonal) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Pose-\/graph in 2\-D. \-This is the simplese possible definition assuming point (unprojected) features e.\-g. from stereo/laser scans with uniform spherical covariance. \-The framework can be easily extended to any general 2d/3d non-\/uniform or projected features as well. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!\-Body2d\-Graph@{\-Body2d\-Graph}}
+\index{\-Body2d\-Graph@{\-Body2d\-Graph}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{\-Body2d\-Graph}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Graph\-::\-Body2d\-Graph} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body2d} \&}]{sys, }
+\item[{int}]{\-N, }
+\item[{int}]{nf, }
+\item[{bool}]{odometry = {\ttfamily true}, }
+\item[{bool}]{extforce = {\ttfamily false}, }
+\item[{bool}]{forces = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dGraph_a02934fc4d695a62f936d48d178e4b405}
+\-Pose-\/landmark graph 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & body2d system \\
+\hline
+{\em \-N} & number of trajectory segments \\
+\hline
+{\em nf} & number of features (landmarks) \\
+\hline
+{\em odometry} & is odometry available \\
+\hline
+{\em extforce} & treat constant external force in x-\/y as a parameter \\
+\hline
+{\em forces} & use uncertain forces in the cost function \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!\-Optp@{\-Optp}}
+\index{\-Optp@{\-Optp}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{\-Optp}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Graph\-::\-Optp} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{p, }
+\item[{const vector$<$ {\bf \-M3\-V3d} $>$ \&}]{xs}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dGraph_a78c5af31a783507c03cb72ca85192a32}
+\-Given a sequence of poses gs, compute the optimal feature locations p 
+\begin{DoxyParams}{\-Parameters}
+{\em p} & a vector of feature locations \\
+\hline
+{\em gs} & a given vector of poses in \-S\-E(2) \\
+\hline
+\end{DoxyParams}
+
+
+\-References extforce, and \-Js.
+
+
+
+\-Referenced by \-Synthesize(), \-Synthesize2(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!\-Synthesize@{\-Synthesize}}
+\index{\-Synthesize@{\-Synthesize}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{\-Synthesize}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Graph\-::\-Synthesize} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body2d\-Graph} \&}]{pgt, }
+\item[{{\bf \-Body2d\-Graph} \&}]{pgn, }
+\item[{double}]{tf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Body2dGraph_aa1a92886df2fb0ece39e2cdb8375acf3}
+\-Create true and noisy synthetic pose graphs 
+\begin{DoxyParams}{\-Parameters}
+{\em pgt} & true pose graph \\
+\hline
+{\em pgn} & noisy pose graph \\
+\hline
+{\em tf} & total trajectory time \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-S\-E2\-::cay(), cp, gcop\-::\-S\-E2\-::\-Instance(), \-Is, \-Js, \-Optp(), p, gcop\-::random\-\_\-normal(), ts, us, and xs.
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!\-Synthesize2@{\-Synthesize2}}
+\index{\-Synthesize2@{\-Synthesize2}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{\-Synthesize2}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Graph\-::\-Synthesize2} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body2d\-Graph} \&}]{pgt, }
+\item[{{\bf \-Body2d\-Graph} \&}]{pgn, }
+\item[{double}]{tf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Body2dGraph_a453dbded6121d03f918afca9680d1725}
+\-Create true and noisy synthetic pose graphs 
+\begin{DoxyParams}{\-Parameters}
+{\em pgt} & true pose graph \\
+\hline
+{\em pgn} & noisy pose graph \\
+\hline
+{\em tf} & total trajectory time \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-S\-E2\-::cay(), cp, gcop\-::\-Body2d\-Force\-::\-D, extforce, gcop\-::\-Body2d\-::force, gcop\-::\-S\-E2\-::\-Instance(), \-Is, \-Js, \-Optp(), p, gcop\-::random\-\_\-normal(), sys, ts, us, vs, and xs.
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!\-Synthesize3@{\-Synthesize3}}
+\index{\-Synthesize3@{\-Synthesize3}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{\-Synthesize3}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Graph\-::\-Synthesize3} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body2d\-Graph} \&}]{pgt, }
+\item[{{\bf \-Body2d\-Graph} \&}]{pgn, }
+\item[{double}]{tf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Body2dGraph_a95e15f2e95884eccaa022c490a71cd32}
+\-Create true and noisy synthetic pose graphs 
+\begin{DoxyParams}{\-Parameters}
+{\em pgt} & true pose graph \\
+\hline
+{\em pgn} & noisy pose graph \\
+\hline
+{\em tf} & total trajectory time \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-S\-E2\-::cay(), cp, cv, cw, gcop\-::\-Body2d\-Force\-::\-D, extforce, fext, gcop\-::\-Body2d\-::force, gcop\-::\-Body2d\-::\-I, gcop\-::\-S\-E2\-::\-Instance(), \-Is, \-Js, \-Optp(), p, gcop\-::random\-\_\-normal(), gcop\-::\-Body2d\-::\-Step(), sys, ts, us, vs, and xs.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!cp@{cp}}
+\index{cp@{cp}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{cp}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Body2d\-Graph\-::cp}}\label{classgcop_1_1Body2dGraph_a6783913ab4e95009dbf614fc8f0af9e7}
+
+
+noise covariance of poses (assume spherical) 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-Cost\-::\-Lp(), \-Synthesize(), \-Synthesize2(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!cv@{cv}}
+\index{cv@{cv}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{cv}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Body2d\-Graph\-::cv}}\label{classgcop_1_1Body2dGraph_a890f300e631cf998fc0e8f8802cc4a5a}
+
+
+noise covariance of odometry/gyro (assume diagonal) 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-Cost\-::\-Lp(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!cw@{cw}}
+\index{cw@{cw}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{cw}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Body2d\-Graph\-::cw}}\label{classgcop_1_1Body2dGraph_aab6e959bacfcb92840ebabf0aad05ed9}
+
+
+noise covariance of control forces (assume diagonal) 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-Cost\-::\-Lp(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!extforce@{extforce}}
+\index{extforce@{extforce}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{extforce}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body2d\-Graph\-::extforce}}\label{classgcop_1_1Body2dGraph_a9a49aab77a6e9cb8ea90591636ce23d2}
+
+
+is there a constant external force that need to be estimated 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-::\-Body2d\-Slam(), gcop\-::\-Body2d\-Slam\-Cost\-::\-Lp(), \-Optp(), gcop\-::\-Body2d\-Graph\-View\-::\-Render\-Frame(), \-Synthesize2(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!fext@{fext}}
+\index{fext@{fext}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{fext}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Body2d\-Graph\-::fext}}\label{classgcop_1_1Body2dGraph_a558f4776f345528ee0a90dd2d7a978d8}
+
+
+unknown external force 
+
+
+
+\-Referenced by \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!forces@{forces}}
+\index{forces@{forces}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{forces}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body2d\-Graph\-::forces}}\label{classgcop_1_1Body2dGraph_a834526a54ea432358eb29b69897c1639}
+
+
+optimize over forces 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-Cost\-::\-Lp().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!\-Is@{\-Is}}
+\index{\-Is@{\-Is}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{\-Is}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$pair$<$int, \-Vector2d$>$ $>$ $>$ {\bf gcop\-::\-Body2d\-Graph\-::\-Is}}\label{classgcop_1_1Body2dGraph_a3f5071e7dd098489d1cafe5778c079d6}
+
+
+\-N+1-\/vector of vectors of visible pose-\/to-\/feature indices. 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-Cost\-::\-Lp(), \-Synthesize(), \-Synthesize2(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!\-Js@{\-Js}}
+\index{\-Js@{\-Js}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{\-Js}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$pair$<$int, \-Vector2d$>$ $>$ $>$ {\bf gcop\-::\-Body2d\-Graph\-::\-Js}}\label{classgcop_1_1Body2dGraph_af3e2abdafdabc7ca66fc00be8bdc31a2}
+
+
+nf-\/vector of vectors of feature-\/to-\/pose indices indices 
+
+
+
+\-Referenced by \-Optp(), gcop\-::\-Body2d\-Graph\-View\-::\-Render\-Frame(), \-Synthesize(), \-Synthesize2(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!odometry@{odometry}}
+\index{odometry@{odometry}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{odometry}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body2d\-Graph\-::odometry}}\label{classgcop_1_1Body2dGraph_aa1827913d541ae7b1953f203392e9555}
+
+
+is there odometry available (this means that the velocity part of the state will be regarded as available measurements) 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-Cost\-::\-Lp().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!p@{p}}
+\index{p@{p}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{p}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Body2d\-Graph\-::p}}\label{classgcop_1_1Body2dGraph_a3ef879ec6e44250b0bdcb6183f9aeec3}
+
+
+feature positions (2$\ast$nf vector) and external force parameters (2 vector) 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-::\-Body2d\-Slam(), gcop\-::\-Body2d\-Graph\-View\-::\-Render\-Frame(), \-Synthesize(), \-Synthesize2(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!sys@{sys}}
+\index{sys@{sys}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d}\& {\bf gcop\-::\-Body2d\-Graph\-::sys}}\label{classgcop_1_1Body2dGraph_a2c5b65e489d626795ab9c652ddf6bfd1}
+
+
+system 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-::\-Body2d\-Slam(), \-Synthesize2(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!ts@{ts}}
+\index{ts@{ts}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf gcop\-::\-Body2d\-Graph\-::ts}}\label{classgcop_1_1Body2dGraph_a9cd015bda6c3fc023fa2524705067480}
+
+
+sequence of times (\-N+1 vector) 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-::\-Body2d\-Slam(), \-Synthesize(), \-Synthesize2(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!us@{us}}
+\index{us@{us}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Vector3d$>$ {\bf gcop\-::\-Body2d\-Graph\-::us}}\label{classgcop_1_1Body2dGraph_a907d1bad5b6991a3067773c8fa0e9ab6}
+
+
+sequence of inputs (\-N vector) 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-::\-Body2d\-Slam(), gcop\-::\-Body2d\-Slam\-Cost\-::\-Lp(), gcop\-::\-Body2d\-Graph\-View\-::\-Render\-Frame(), \-Synthesize(), \-Synthesize2(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!vs@{vs}}
+\index{vs@{vs}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{vs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Vector3d$>$ {\bf gcop\-::\-Body2d\-Graph\-::vs}}\label{classgcop_1_1Body2dGraph_ae0721884fc06c747df88dc74919b9551}
+
+
+odometry/gyro velocity measurements 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-Cost\-::\-Lp(), \-Synthesize2(), and \-Synthesize3().
+
+\index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!xs@{xs}}
+\index{xs@{xs}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-M3\-V3d}$>$ {\bf gcop\-::\-Body2d\-Graph\-::xs}}\label{classgcop_1_1Body2dGraph_ac4ce304f4b70282f5a66e408c3aa83a8}
+
+
+sequence of states x=(g,v) (\-N+1 vector) 
+
+
+
+\-Referenced by gcop\-::\-Body2d\-Slam\-::\-Body2d\-Slam(), gcop\-::\-Body2d\-Graph\-View\-::\-Render\-Frame(), \-Synthesize(), \-Synthesize2(), and \-Synthesize3().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf body2dgraph.\-h}\item 
+lib/algos/{\bf body2dgraph.\-cc}\end{DoxyCompactItemize}

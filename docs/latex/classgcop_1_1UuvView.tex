@@ -1,0 +1,193 @@
+\section{gcop\-:\-:\-Uuv\-View$<$ c $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1UuvView}\index{gcop\-::\-Uuv\-View$<$ c $>$@{gcop\-::\-Uuv\-View$<$ c $>$}}
+
+
+{\ttfamily \#include $<$uuvview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Uuv\-View$<$ c $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{classgcop_1_1UuvView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Uuv\-View$<$ c $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{classgcop_1_1UuvView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Uuv\-View} (const {\bf \-Uuv}$<$ c $>$ \&{\bf sys})
+\item 
+{\bf \-Uuv\-View} (const {\bf \-Uuv}$<$ c $>$ \&{\bf sys}, vector$<$ {\bf \-Uuv\-State} $>$ $\ast${\bf xs}, vector$<$ \-Vectorcd $>$ $\ast${\bf us}=0)
+\item 
+virtual {\bf $\sim$\-Uuv\-View} ()
+\item 
+virtual void {\bf \-Render} (const {\bf \-Uuv\-State} $\ast$x, const \-Vectorcd $\ast$u=0)
+\item 
+void {\bf \-Render} (const vector$<$ {\bf \-Uuv\-State} $>$ $\ast${\bf xs}, const vector$<$ \-Vectorcd $>$ $\ast${\bf us}=0, bool rs=true, int is=-\/1, int ie=-\/1, int {\bf dis}=1, int {\bf dit}=1, bool dl=false)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf \-Transform} (const {\bf \-Matrix4d} \&g)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Uuv}$<$ c $>$ \& {\bf sys}
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf qobj}
+\item 
+double {\bf dir\-Size}
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$int c = 6$>$ class gcop\-::\-Uuv\-View$<$ c $>$}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Uuv\-View@{gcop\-::\-Uuv\-View}!\-Uuv\-View@{\-Uuv\-View}}
+\index{\-Uuv\-View@{\-Uuv\-View}!gcop::UuvView@{gcop\-::\-Uuv\-View}}
+\subsubsection[{\-Uuv\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf \-Uuv\-View\-::\-Uuv\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Uuv}$<$ c $>$ \&}]{sys}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UuvView_a631be3c5f3c8c457fcfde60871aa3e73}
+\-Create a particle view of trajectory traj 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & particle \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Uuv\-View$<$ c $>$\-::dir\-Size, gcop\-::\-System\-View$<$ Uuv\-State, Matrix$<$ double, c, 1 $>$ $>$\-::line\-Width, gcop\-::\-Uuv\-View$<$ c $>$\-::qobj, and gcop\-::\-System\-View$<$ Uuv\-State, Matrix$<$ double, c, 1 $>$ $>$\-::rgba.
+
+\index{gcop\-::\-Uuv\-View@{gcop\-::\-Uuv\-View}!\-Uuv\-View@{\-Uuv\-View}}
+\index{\-Uuv\-View@{\-Uuv\-View}!gcop::UuvView@{gcop\-::\-Uuv\-View}}
+\subsubsection[{\-Uuv\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf \-Uuv\-View\-::\-Uuv\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Uuv}$<$ c $>$ \&}]{sys, }
+\item[{vector$<$ {\bf \-Uuv\-State} $>$ $\ast$}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ $\ast$}]{us = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UuvView_a5af64d1bf5bd6568f63ea3c9c50636a7}
+\-Create a particle view of trajectory traj 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & particle \\
+\hline
+{\em xs} & trajectory \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-System\-View$<$ Uuv\-State, Matrix$<$ double, c, 1 $>$ $>$\-::line\-Width, gcop\-::\-Uuv\-View$<$ c $>$\-::qobj, and gcop\-::\-System\-View$<$ Uuv\-State, Matrix$<$ double, c, 1 $>$ $>$\-::rgba.
+
+\index{gcop\-::\-Uuv\-View@{gcop\-::\-Uuv\-View}!$\sim$\-Uuv\-View@{$\sim$\-Uuv\-View}}
+\index{$\sim$\-Uuv\-View@{$\sim$\-Uuv\-View}!gcop::UuvView@{gcop\-::\-Uuv\-View}}
+\subsubsection[{$\sim$\-Uuv\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf \-Uuv\-View\-::$\sim$\-Uuv\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UuvView_a89f401a5d6ba8132cc85c49e077d5e00}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Uuv\-View@{gcop\-::\-Uuv\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::UuvView@{gcop\-::\-Uuv\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf \-Uuv\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Uuv\-State} $\ast$}]{x, }
+\item[{const \-Vectorcd $\ast$}]{u = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UuvView_a8e28b69c78bf7d28827058f68a2322f6}
+
+
+\-Implements {\bf gcop\-::\-System\-View$<$ Uuv\-State, Matrix$<$ double, c, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a5591c11e0516e2993231547ec82cd763}.
+
+
+
+\-References gcop\-::\-Uuv\-State\-::g.
+
+\index{gcop\-::\-Uuv\-View@{gcop\-::\-Uuv\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::UuvView@{gcop\-::\-Uuv\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf \-Uuv\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ {\bf \-Uuv\-State} $>$ $\ast$}]{xs, }
+\item[{const vector$<$ \-Vectorcd $>$ $\ast$}]{us = {\ttfamily 0}, }
+\item[{bool}]{rs = {\ttfamily true}, }
+\item[{int}]{is = {\ttfamily -\/1}, }
+\item[{int}]{ie = {\ttfamily -\/1}, }
+\item[{int}]{dis = {\ttfamily 1}, }
+\item[{int}]{dit = {\ttfamily 1}, }
+\item[{bool}]{dl = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UuvView_a81716813f199093b587eb2f5920eb51a}
+\-Render a trajectory 
+\begin{DoxyParams}{\-Parameters}
+{\em traj} & trajectory \\
+\hline
+{\em rs} & render state \\
+\hline
+{\em is} & start index \\
+\hline
+{\em ie} & end index \\
+\hline
+{\em dis} & index step for rendering bodies along trajectory \\
+\hline
+{\em dit} & index step for rendering states(points) along trajectory \\
+\hline
+{\em dl} & always draw last state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf gcop\-::\-System\-View$<$ Uuv\-State, Matrix$<$ double, c, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6a4cf72f0a0e380ad69397be162b3ee9}.
+
+
+
+\-References gcop\-::\-Uuv\-State\-::g, and gcop\-::\-Viewer\-::\-Set\-Color().
+
+\index{gcop\-::\-Uuv\-View@{gcop\-::\-Uuv\-View}!\-Transform@{\-Transform}}
+\index{\-Transform@{\-Transform}!gcop::UuvView@{gcop\-::\-Uuv\-View}}
+\subsubsection[{\-Transform}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf \-Uuv\-View\-::\-Transform} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Matrix4d} \&}]{g}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1UuvView_adff2a6c15b9d16e82784d80fc837eae4}
+
+
+\-References gcop\-::\-S\-O3\-::\-Instance(), gcop\-::\-S\-O3\-::log(), and gcop\-::\-S\-O3\-::tol.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Uuv\-View@{gcop\-::\-Uuv\-View}!dir\-Size@{dir\-Size}}
+\index{dir\-Size@{dir\-Size}!gcop::UuvView@{gcop\-::\-Uuv\-View}}
+\subsubsection[{dir\-Size}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ double {\bf gcop\-::\-Uuv\-View}$<$ c $>$\-::{\bf dir\-Size}}\label{classgcop_1_1UuvView_a0f88a6a1163d116a33c04ba4bd3f6e18}
+
+
+\-Referenced by gcop\-::\-Uuv\-View$<$ c $>$\-::\-Uuv\-View().
+
+\index{gcop\-::\-Uuv\-View@{gcop\-::\-Uuv\-View}!qobj@{qobj}}
+\index{qobj@{qobj}!gcop::UuvView@{gcop\-::\-Uuv\-View}}
+\subsubsection[{qobj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Uuv\-View}$<$ c $>$\-::{\bf qobj}}\label{classgcop_1_1UuvView_a3a55417ba8053b8ad1a6172d53e479c4}
+
+
+\-Referenced by gcop\-::\-Uuv\-View$<$ c $>$\-::\-Uuv\-View().
+
+\index{gcop\-::\-Uuv\-View@{gcop\-::\-Uuv\-View}!sys@{sys}}
+\index{sys@{sys}!gcop::UuvView@{gcop\-::\-Uuv\-View}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ const {\bf \-Uuv}$<$c$>$\& {\bf gcop\-::\-Uuv\-View}$<$ c $>$\-::{\bf sys}}\label{classgcop_1_1UuvView_a67016fa23affe1eae6978e7d69a961f0}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf uuvview.\-h}\end{DoxyCompactItemize}

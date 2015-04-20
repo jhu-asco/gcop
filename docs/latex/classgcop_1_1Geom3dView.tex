@@ -1,0 +1,197 @@
+\section{gcop\-:\-:\-Geom3d\-View \-Class \-Reference}
+\label{classgcop_1_1Geom3dView}\index{gcop\-::\-Geom3d\-View@{gcop\-::\-Geom3d\-View}}
+
+
+{\ttfamily \#include $<$geom3dview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Geom3d\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Geom3dView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Geom3d\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=146pt]{classgcop_1_1Geom3dView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Geom3d\-View} (const char $\ast${\bf name}=0, {\bf \-Matrix4d} $\ast${\bf g}=0)
+\item 
+virtual {\bf $\sim$\-Geom3d\-View} ()
+\item 
+virtual void {\bf \-Render\-Geom} ()=0
+\item 
+virtual bool {\bf \-Render\-Frame} (int i=0)
+\item 
+void {\bf \-Set\-Color} (const double {\bf rgba}[4])
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf \-Transform} (const {\bf \-Matrix4d} \&{\bf g})
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Matrix4d} $\ast$ {\bf g}
+\begin{DoxyCompactList}\small\item\em global pose (optional) \end{DoxyCompactList}\item 
+{\bf \-Matrix4d} {\bf g0}
+\begin{DoxyCompactList}\small\item\em origin (set to \-Id by default) \end{DoxyCompactList}\item 
+double {\bf rgba} [4]
+\begin{DoxyCompactList}\small\item\em color \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Discrete \-Dynamical geom3d view. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Geom3d\-View@{gcop\-::\-Geom3d\-View}!\-Geom3d\-View@{\-Geom3d\-View}}
+\index{\-Geom3d\-View@{\-Geom3d\-View}!gcop::Geom3dView@{gcop\-::\-Geom3d\-View}}
+\subsubsection[{\-Geom3d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Geom3d\-View\-::\-Geom3d\-View} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name = {\ttfamily 0}, }
+\item[{{\bf \-Matrix4d} $\ast$}]{g = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Geom3dView_a3b9921e79bdb5fd2231751bccd90f0ed}
+\-Create a view for a single state s 
+\begin{DoxyParams}{\-Parameters}
+{\em name} & name \\
+\hline
+{\em s} & rigid body state \\
+\hline
+\end{DoxyParams}
+
+
+\-References rgba.
+
+\index{gcop\-::\-Geom3d\-View@{gcop\-::\-Geom3d\-View}!$\sim$\-Geom3d\-View@{$\sim$\-Geom3d\-View}}
+\index{$\sim$\-Geom3d\-View@{$\sim$\-Geom3d\-View}!gcop::Geom3dView@{gcop\-::\-Geom3d\-View}}
+\subsubsection[{$\sim$\-Geom3d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Geom3d\-View\-::$\sim$\-Geom3d\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Geom3dView_aa775c4aae779e605f3a3a4e3a266d212}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Geom3d\-View@{gcop\-::\-Geom3d\-View}!\-Render\-Frame@{\-Render\-Frame}}
+\index{\-Render\-Frame@{\-Render\-Frame}!gcop::Geom3dView@{gcop\-::\-Geom3d\-View}}
+\subsubsection[{\-Render\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Geom3d\-View\-::\-Render\-Frame} (
+\begin{DoxyParamCaption}
+\item[{int}]{i = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Geom3dView_a6f85b9ba6bccb8063e894c490bd5e1e4}
+\-Render a view\-: all subclasses should provide this method 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & frame \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+return true if more frames should be rendered 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_ad6c3f17a59725948f68817398296f835}.
+
+
+
+\-References g, g0, \-Render\-Geom(), rgba, \-Set\-Color(), and \-Transform().
+
+\index{gcop\-::\-Geom3d\-View@{gcop\-::\-Geom3d\-View}!\-Render\-Geom@{\-Render\-Geom}}
+\index{\-Render\-Geom@{\-Render\-Geom}!gcop::Geom3dView@{gcop\-::\-Geom3d\-View}}
+\subsubsection[{\-Render\-Geom}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf gcop\-::\-Geom3d\-View\-::\-Render\-Geom} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Geom3dView_a325cbbf1e249057f5a2efa2347f4929b}
+
+
+\-Implemented in {\bf gcop\-::\-Hrotor\-Geom3d\-View} \doxyref{}{p.}{classgcop_1_1HrotorGeom3dView_a2d396fd599bc9d57608a2a0183aeb570}, {\bf gcop\-::\-Box\-View} \doxyref{}{p.}{classgcop_1_1BoxView_a319cf8248c7345b6f39f3afbbf43905f}, and {\bf gcop\-::\-Cylinder\-View} \doxyref{}{p.}{classgcop_1_1CylinderView_a3dd313740522083572c3307dee30f74f}.
+
+
+
+\-Referenced by \-Render\-Frame().
+
+\index{gcop\-::\-Geom3d\-View@{gcop\-::\-Geom3d\-View}!\-Set\-Color@{\-Set\-Color}}
+\index{\-Set\-Color@{\-Set\-Color}!gcop::Geom3dView@{gcop\-::\-Geom3d\-View}}
+\subsubsection[{\-Set\-Color}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Geom3d\-View\-::\-Set\-Color} (
+\begin{DoxyParamCaption}
+\item[{const double}]{rgba[4]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Geom3dView_adba53524434491748d65cfd68c27eb12}
+\-Set the rgb color of the trajectory 
+\begin{DoxyParams}{\-Parameters}
+{\em rgb} & rgb vector \\
+\hline
+\end{DoxyParams}
+
+
+\-Referenced by \-Render\-Frame(), and gcop\-::\-Hrotor\-Geom3d\-View\-::\-Render\-Geom().
+
+\index{gcop\-::\-Geom3d\-View@{gcop\-::\-Geom3d\-View}!\-Transform@{\-Transform}}
+\index{\-Transform@{\-Transform}!gcop::Geom3dView@{gcop\-::\-Geom3d\-View}}
+\subsubsection[{\-Transform}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Geom3d\-View\-::\-Transform} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Matrix4d} \&}]{g}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Geom3dView_ab2df0c8a752d2bf8312a18808b624769}
+
+
+\-References g, gcop\-::\-S\-O3\-::\-Instance(), and gcop\-::\-S\-O3\-::log().
+
+
+
+\-Referenced by gcop\-::\-Mbs\-View\-::\-Render(), and \-Render\-Frame().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Geom3d\-View@{gcop\-::\-Geom3d\-View}!g@{g}}
+\index{g@{g}!gcop::Geom3dView@{gcop\-::\-Geom3d\-View}}
+\subsubsection[{g}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Matrix4d}$\ast$ {\bf gcop\-::\-Geom3d\-View\-::g}}\label{classgcop_1_1Geom3dView_af6d1f4bb81ff1e2d76be2dc04ff1af64}
+
+
+global pose (optional) 
+
+
+
+\-Referenced by \-Render\-Frame(), and \-Transform().
+
+\index{gcop\-::\-Geom3d\-View@{gcop\-::\-Geom3d\-View}!g0@{g0}}
+\index{g0@{g0}!gcop::Geom3dView@{gcop\-::\-Geom3d\-View}}
+\subsubsection[{g0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Matrix4d} {\bf gcop\-::\-Geom3d\-View\-::g0}}\label{classgcop_1_1Geom3dView_a64ace5b74f40ee78e8710e6ff981cf64}
+
+
+origin (set to \-Id by default) 
+
+
+
+\-Referenced by \-Render\-Frame().
+
+\index{gcop\-::\-Geom3d\-View@{gcop\-::\-Geom3d\-View}!rgba@{rgba}}
+\index{rgba@{rgba}!gcop::Geom3dView@{gcop\-::\-Geom3d\-View}}
+\subsubsection[{rgba}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Geom3d\-View\-::rgba}[4]}\label{classgcop_1_1Geom3dView_af8ed14b9c7c8c1bf109c49c8e379066e}
+
+
+color 
+
+
+
+\-Referenced by \-Geom3d\-View(), and \-Render\-Frame().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf geom3dview.\-h}\item 
+lib/views/{\bf geom3dview.\-cc}\end{DoxyCompactItemize}

@@ -1,0 +1,252 @@
+\section{gcop\-:\-:\-Doep$<$ \-T, nx, nu, np, \-Tz, nz, \-T1, nx1 $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Doep}\index{gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$@{gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$}}
+
+
+{\ttfamily \#include $<$doep.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Doep$<$ \-T, nx, nu, np, \-Tz, nz, \-T1, nx1 $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Doep__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Doep} ({\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&{\bf sys}, {\bf \-Sensor}$<$ \-T1, nx1, nu, {\bf np}, \-Tz, nz $>$ \&{\bf sensor}, {\bf \-Sensor\-Cost}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz $>$ \&{\bf cost}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd \&{\bf p}, vector$<$ double $>$ \&{\bf ts1}, \-Func\-\_\-type \-\_\-project=\-N\-U\-L\-L, bool update=true)
+\item 
+virtual {\bf $\sim$\-Doep} ()
+\item 
+virtual void {\bf \-Iterate} ()
+\item 
+void {\bf \-Update} (bool der=true)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em dynamical system \end{DoxyCompactList}\item 
+{\bf \-Sensor}$<$ \-T1, nx1, nu, {\bf np}, \-Tz, nz $>$ \& {\bf sensor}
+\begin{DoxyCompactList}\small\item\em sensor \end{DoxyCompactList}\item 
+{\bf \-Sensor\-Cost}$<$ \-T, nx, nu, {\bf np}, \-Tz, \*
+nz $>$ \& {\bf cost}
+\begin{DoxyCompactList}\small\item\em given cost function \end{DoxyCompactList}\item 
+std\-::vector$<$ double $>$ \& {\bf ts}
+\begin{DoxyCompactList}\small\item\em times (\-N+1) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ double $>$ \& {\bf ts1}
+\begin{DoxyCompactList}\small\item\em times (\-N+1) vector for sensor measurements \end{DoxyCompactList}\item 
+std\-::vector$<$ \-T $>$ \& {\bf xs}
+\begin{DoxyCompactList}\small\item\em states (\-N+1) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ \& {\bf us}
+\begin{DoxyCompactList}\small\item\em controls (\-N) vector \end{DoxyCompactList}\item 
+\-Vectormd \& {\bf p}
+\begin{DoxyCompactList}\small\item\em parameter vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectornd $>$ {\bf ws}
+\begin{DoxyCompactList}\small\item\em \-Internal process noise. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorrd $>$ {\bf zs}
+\begin{DoxyCompactList}\small\item\em \-Internal sensor measurements. \end{DoxyCompactList}\item 
+bool {\bf debug}
+\begin{DoxyCompactList}\small\item\em whether to display debugging info \end{DoxyCompactList}\item 
+double {\bf eps}
+\begin{DoxyCompactList}\small\item\em epsilon used for finite differences \end{DoxyCompactList}\item 
+\-Func\-\_\-type {\bf project}
+\begin{DoxyCompactList}\small\item\em \-Project \-T to \-T1 will add jacobians later. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ class gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!\-Doep@{\-Doep}}
+\index{\-Doep@{\-Doep}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{\-Doep}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx, int nu, int np, typename \-Tz, int nz, typename \-T1, int nx1$>$ {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf \-Doep} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&}]{sys, }
+\item[{{\bf \-Sensor}$<$ \-T1, nx1, nu, {\bf np}, \-Tz, nz $>$ \&}]{sensor, }
+\item[{{\bf \-Sensor\-Cost}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz $>$ \&}]{cost, }
+\item[{vector$<$ double $>$ \&}]{ts, }
+\item[{vector$<$ \-T $>$ \&}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{\-Vectormd \&}]{p, }
+\item[{vector$<$ double $>$ \&}]{ts1, }
+\item[{\-Func\-\_\-type}]{\-\_\-project = {\ttfamily \-N\-U\-L\-L}, }
+\item[{bool}]{update = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Doep_a1d6e949435daa7c038e094065ecdcc2b}
+\-Create a discrete optimal estimation problem using a system, sensor, a cost, and a trajectory given by a sequence of times, states, and controls. \-The controls us are provided. \-The times ts must be given, the initial state xs[0] must be set.
+
+\-After initialization, every call to \doxyref{\-Iterate()}{p.}{classgcop_1_1Doep_ad6a3a22ca258bc0ce18fda03244bafe3} will optimize the parameters p and process noise wi are varied to fit the measurements in the sensorcost
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & system \\
+\hline
+{\em sensor} & sensor \\
+\hline
+{\em cost} & cost \\
+\hline
+{\em ts} & (\-N+1) sequence of discrete times \\
+\hline
+{\em ts1} & (\-N1+1) sequence of discrete times for sensor measurements \\
+\hline
+{\em xs} & (\-N+1) sequence of discrete states \\
+\hline
+{\em us} & (\-N) sequence of control inputs \\
+\hline
+{\em update} & whether to update trajectory xs using initial state xs[0] and inputs us. \-This is necessary only if xs was not already generated from us. \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$\-::\-Update(), gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$\-::us, gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$\-::ws, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-X, gcop\-::\-Sensor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Z, and gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$\-::zs.
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!$\sim$\-Doep@{$\sim$\-Doep}}
+\index{$\sim$\-Doep@{$\sim$\-Doep}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{$\sim$\-Doep}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, typename Tz , int nz, typename T1 , int nx1$>$ {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::$\sim${\bf \-Doep} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Doep_a82936a38706944a990678b0e65f82d75}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!\-Iterate@{\-Iterate}}
+\index{\-Iterate@{\-Iterate}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{\-Iterate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, typename Tz , int nz, typename T1 , int nx1$>$ void {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf \-Iterate} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Doep_ad6a3a22ca258bc0ce18fda03244bafe3}
+\-Perform one \-D\-O\-C\-P iteration. 
+
+\-Reimplemented in {\bf gcop\-::\-Gn\-Doep$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz, T1, \-\_\-nx1 $>$} \doxyref{}{p.}{classgcop_1_1GnDoep_a871ef3cfc09f78096fa12ce59a41e452}, and {\bf gcop\-::\-Gn\-Doep1$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz, T1, \-\_\-nx1 $>$} \doxyref{}{p.}{classgcop_1_1GnDoep1_a1952799fbe79ec3af0ae8648712ee113}.
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!\-Update@{\-Update}}
+\index{\-Update@{\-Update}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, typename Tz , int nz, typename T1 , int nx1$>$ void {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf \-Update} (
+\begin{DoxyParamCaption}
+\item[{bool}]{der = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Doep_a8d85b61c588e3065b404ea75b8e3b0e2}
+\-Update the trajectory and sensor measurements 
+\begin{DoxyParams}{\-Parameters}
+{\em der} & \-N\-O\-T \-U\-S\-E\-D \-R\-I\-G\-H\-T \-N\-O\-W \\
+\hline
+\end{DoxyParams}
+
+
+\-Referenced by gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$\-::\-Doep().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!cost@{cost}}
+\index{cost@{cost}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{cost}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ {\bf \-Sensor\-Cost}$<$\-T, nx, nu, {\bf np}, \-Tz, nz$>$\& {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf cost}}\label{classgcop_1_1Doep_a3858186ac5133179f45dcb4a31a92f02}
+
+
+given cost function 
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!debug@{debug}}
+\index{debug@{debug}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{debug}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ bool {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf debug}}\label{classgcop_1_1Doep_a8ee770c21e6f904c89d74c24d4e3ef82}
+
+
+whether to display debugging info 
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!eps@{eps}}
+\index{eps@{eps}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{eps}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ double {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf eps}}\label{classgcop_1_1Doep_ae64a794301d314c1b6a321b967bc18f8}
+
+
+epsilon used for finite differences 
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!p@{p}}
+\index{p@{p}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{p}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ \-Vectormd\& {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf p}}\label{classgcop_1_1Doep_a764a44cc5271e3cb06af05a2ae1f72f7}
+
+
+parameter vector 
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!project@{project}}
+\index{project@{project}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{project}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ \-Func\-\_\-type {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf project}}\label{classgcop_1_1Doep_a1ab05367db8310a99477e947238e3b82}
+
+
+\-Project \-T to \-T1 will add jacobians later. 
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!sensor@{sensor}}
+\index{sensor@{sensor}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{sensor}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ {\bf \-Sensor}$<$\-T1, nx1, nu, {\bf np}, \-Tz, nz$>$\& {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf sensor}}\label{classgcop_1_1Doep_ac1a7b5534fff3f938147db4a91f67b48}
+
+
+sensor 
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!sys@{sys}}
+\index{sys@{sys}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ {\bf \-System}$<$\-T, nx, nu, {\bf np}$>$\& {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf sys}}\label{classgcop_1_1Doep_a29afa9ab98dba3aa0ce9bd95af5e2c42}
+
+
+dynamical system 
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!ts@{ts}}
+\index{ts@{ts}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ std\-::vector$<$double$>$\& {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf ts}}\label{classgcop_1_1Doep_acabf52666bf892f002bb7bf6218b7cd1}
+
+
+times (\-N+1) vector 
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!ts1@{ts1}}
+\index{ts1@{ts1}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{ts1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ std\-::vector$<$double$>$\& {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf ts1}}\label{classgcop_1_1Doep_a0fd7381f7e3c0fa73121349c5f774e56}
+
+
+times (\-N+1) vector for sensor measurements 
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!us@{us}}
+\index{us@{us}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ std\-::vector$<$\-Vectorcd$>$\& {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf us}}\label{classgcop_1_1Doep_a979dc7667d75c91dc4ae35adc29e68ec}
+
+
+controls (\-N) vector 
+
+
+
+\-Referenced by gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$\-::\-Doep().
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!ws@{ws}}
+\index{ws@{ws}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{ws}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ std\-::vector$<$\-Vectornd$>$ {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf ws}}\label{classgcop_1_1Doep_ac9128e6dc9b4ea4118f1d50c5aa0db92}
+
+
+\-Internal process noise. 
+
+
+
+\-Referenced by gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$\-::\-Doep().
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!xs@{xs}}
+\index{xs@{xs}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ std\-::vector$<$\-T$>$\& {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf xs}}\label{classgcop_1_1Doep_ae811080a634ac7d96ac03bcfcef432a1}
+
+
+states (\-N+1) vector 
+
+\index{gcop\-::\-Doep@{gcop\-::\-Doep}!zs@{zs}}
+\index{zs@{zs}!gcop::Doep@{gcop\-::\-Doep}}
+\subsubsection[{zs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, typename \-Tz = \-Vector\-Xd, int nz = \-Dynamic, typename \-T1 = \-T, int nx1 = nx$>$ std\-::vector$<$\-Vectorrd$>$ {\bf gcop\-::\-Doep}$<$ \-T, nx, nu, {\bf np}, \-Tz, nz, \-T1, nx1 $>$\-::{\bf zs}}\label{classgcop_1_1Doep_afd2134a6adc6ebd7c05959f4e9cfb661}
+
+
+\-Internal sensor measurements. 
+
+
+
+\-Referenced by gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$\-::\-Doep().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf doep.\-h}\end{DoxyCompactItemize}

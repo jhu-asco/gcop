@@ -1,0 +1,110 @@
+\section{gcop\-:\-:\-Uuv\-Manifold \-Class \-Reference}
+\label{classgcop_1_1UuvManifold}\index{gcop\-::\-Uuv\-Manifold@{gcop\-::\-Uuv\-Manifold}}
+
+
+{\ttfamily \#include $<$uuvmanifold.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Uuv\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classgcop_1_1UuvManifold__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Uuv\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classgcop_1_1UuvManifold__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf \-Lift} ({\bf \-Vector12d} \&v, const {\bf \-Uuv\-State} \&xa, const {\bf \-Uuv\-State} \&xb)
+\item 
+void {\bf \-Retract} ({\bf \-Uuv\-State} \&xb, const {\bf \-Uuv\-State} \&xa, const {\bf \-Vector12d} \&v)
+\item 
+void {\bf dtau} ({\bf \-Matrix12d} \&\-M, const {\bf \-Vector12d} \&v)
+\item 
+void {\bf \-Adtau} ({\bf \-Matrix12d} \&\-M, const {\bf \-Vector12d} \&v)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf \-Uuv\-Manifold} \& {\bf \-Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Uuv\-Manifold@{gcop\-::\-Uuv\-Manifold}!\-Adtau@{\-Adtau}}
+\index{\-Adtau@{\-Adtau}!gcop::UuvManifold@{gcop\-::\-Uuv\-Manifold}}
+\subsubsection[{\-Adtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Uuv\-Manifold\-::\-Adtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix12d} \&}]{\-M, }
+\item[{const {\bf \-Vector12d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UuvManifold_ad70aa5d0b7c0646b3357d1c5dbe80f1a}
+
+
+\-References \-Instance().
+
+\index{gcop\-::\-Uuv\-Manifold@{gcop\-::\-Uuv\-Manifold}!dtau@{dtau}}
+\index{dtau@{dtau}!gcop::UuvManifold@{gcop\-::\-Uuv\-Manifold}}
+\subsubsection[{dtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Uuv\-Manifold\-::dtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix12d} \&}]{\-M, }
+\item[{const {\bf \-Vector12d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UuvManifold_a71430ec551908786f03b905505acfefa}
+
+
+\-References \-Instance().
+
+\index{gcop\-::\-Uuv\-Manifold@{gcop\-::\-Uuv\-Manifold}!\-Instance@{\-Instance}}
+\index{\-Instance@{\-Instance}!gcop::UuvManifold@{gcop\-::\-Uuv\-Manifold}}
+\subsubsection[{\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Uuv\-Manifold} \& {\bf \-Uuv\-Manifold\-::\-Instance} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1UuvManifold_a3941a192cbd6f2e7f72d8f0ba6ea652b}
+
+
+\-Referenced by \-Adtau(), dtau(), \-Lift(), and \-Retract().
+
+\index{gcop\-::\-Uuv\-Manifold@{gcop\-::\-Uuv\-Manifold}!\-Lift@{\-Lift}}
+\index{\-Lift@{\-Lift}!gcop::UuvManifold@{gcop\-::\-Uuv\-Manifold}}
+\subsubsection[{\-Lift}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Uuv\-Manifold\-::\-Lift} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector12d} \&}]{v, }
+\item[{const {\bf \-Uuv\-State} \&}]{xa, }
+\item[{const {\bf \-Uuv\-State} \&}]{xb}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UuvManifold_ab271c8b46f6561cfee01fee53dab4f21}
+
+
+\-References gcop\-::\-Uuv\-State\-::g, \-Instance(), and gcop\-::\-Uuv\-State\-::v.
+
+\index{gcop\-::\-Uuv\-Manifold@{gcop\-::\-Uuv\-Manifold}!\-Retract@{\-Retract}}
+\index{\-Retract@{\-Retract}!gcop::UuvManifold@{gcop\-::\-Uuv\-Manifold}}
+\subsubsection[{\-Retract}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Uuv\-Manifold\-::\-Retract} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Uuv\-State} \&}]{xb, }
+\item[{const {\bf \-Uuv\-State} \&}]{xa, }
+\item[{const {\bf \-Vector12d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UuvManifold_aebf591be463a08b6c78e5ee88a71b905}
+
+
+\-References gcop\-::\-Uuv\-State\-::g, \-Instance(), and gcop\-::\-Uuv\-State\-::v.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/{\bf uuvmanifold.\-h}\item 
+lib/systems/manifolds/{\bf uuvmanifold.\-cc}\end{DoxyCompactItemize}

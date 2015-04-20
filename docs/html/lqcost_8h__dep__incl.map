@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$gndocp_8h.html" title="lib/algos/gndocp.h" alt="" coords="5,83,131,112"/>
+<area shape="rect" id="node5" href="$gndocpv2_8h.html" title="lib/algos/gndocpv2.h" alt="" coords="155,83,296,112"/>
+<area shape="rect" id="node7" href="$airplanecost_8h.html" title="lib/systems/costs/airplanecost.h" alt="" coords="320,83,531,112"/>
+<area shape="rect" id="node11" href="$body2dcost_8h.html" title="lib/systems/costs/body2dcost.h" alt="" coords="555,83,760,112"/>
+<area shape="rect" id="node15" href="$body3dcost_8h.html" title="lib/systems/costs/body3dcost.h" alt="" coords="784,83,989,112"/>
+<area shape="rect" id="node17" href="$gunicyclecost_8h.html" title="lib/systems/costs/gunicyclecost.h" alt="" coords="1013,83,1232,112"/>
+<area shape="rect" id="node21" href="$kinbody3dcost_8h.html" title="lib/systems/costs/kinbody3dcost.h" alt="" coords="1256,83,1480,112"/>
+<area shape="rect" id="node23" href="$mbslqcost_8h.html" title="lib/systems/costs/mbslqcost.h" alt="" coords="1504,83,1704,112"/>
+<area shape="rect" id="node25" href="$rnlqcost_8h.html" title="lib/systems/costs/rnlqcost.h" alt="" coords="1728,83,1915,112"/>
+<area shape="rect" id="node9" href="$airplanecost_8cc.html" title="lib/systems/costs/airplanecost.cc" alt="" coords="313,160,529,189"/>
+<area shape="rect" id="node13" href="$body2dcost_8cc.html" title="lib/systems/costs/body2dcost.cc" alt="" coords="553,160,767,189"/>
+<area shape="rect" id="node19" href="$gunicyclecost_8cc.html" title="lib/systems/costs/gunicyclecost.cc" alt="" coords="1009,160,1236,189"/>
+</map>

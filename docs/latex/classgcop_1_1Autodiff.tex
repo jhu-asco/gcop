@@ -1,0 +1,159 @@
+\section{gcop\-:\-:\-Autodiff$<$ \-T, \-\_\-n, \-\_\-c $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Autodiff}\index{gcop\-::\-Autodiff$<$ T, \-\_\-n, \-\_\-c $>$@{gcop\-::\-Autodiff$<$ T, \-\_\-n, \-\_\-c $>$}}
+
+
+{\ttfamily \#include $<$autodiff.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Autodiff$<$ \-T, \-\_\-n, \-\_\-c $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Autodiff__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf \-Fdx}
+\item 
+struct {\bf \-Fu}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-c, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, \-\_\-n $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, \-\_\-c $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-c, \-\_\-n $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-c, \-\_\-c $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, \*
+\-Dynamic, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \*
+\-Dynamic, \-Dynamic $>$ {\bf \-Matrixmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, \*
+\-Dynamic $>$ {\bf \-Matrixnmd}
+\item 
+typedef \-Matrix$<$ double, \*
+\-Dynamic, \-\_\-n $>$ {\bf \-Matrixmnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Autodiff} ({\bf \-System}$<$ \-T, {\bf \-Vectorcd}, \-\_\-n, \-\_\-c $>$ \&sys)
+\item 
+double {\bf \-D\-F} ({\bf \-Vectornd} \&v, double t, const \-T \&xa, const {\bf \-Vectorcd} \&u, double h, {\bf \-Matrixnd} $\ast$\-A, {\bf \-Matrixncd} $\ast$\-B)
+\item 
+double {\bf \-D\-F} ({\bf \-Vectornd} \&v, double t, const \-T \&xa, const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} \&p, {\bf \-Matrixnd} $\ast$\-A, {\bf \-Matrixncd} $\ast$\-B, {\bf \-Matrixnmd} $\ast$\-C)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Fdx} {\bf fdx}
+\item 
+{\bf \-Fu} {\bf fu}
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T, int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ class gcop\-::\-Autodiff$<$ T, \-\_\-n, \-\_\-c $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-c, \-\_\-c$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1Autodiff_a92c40ee19130f9d7b283a296cd4550b0}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-c, \-\_\-n$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1Autodiff_a9c5a36f2f43334c91c03b83b19dfdd0a}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Matrixmd@{\-Matrixmd}}
+\index{\-Matrixmd@{\-Matrixmd}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Matrixmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-Dynamic, \-Dynamic$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Matrixmd}}\label{classgcop_1_1Autodiff_a53bc84ec1cb623c3db4bd6d998ae768b}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-Dynamic, \-\_\-n$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1Autodiff_a9232bc6489c99198b2dbe52d903522af}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, \-\_\-c$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1Autodiff_afce1394afb09e25cb5c48046faff5806}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, \-\_\-n$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1Autodiff_a51c944a10db9886386bf4f60ca21ba92}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Matrixnmd@{\-Matrixnmd}}
+\index{\-Matrixnmd@{\-Matrixnmd}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Matrixnmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, \-Dynamic$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Matrixnmd}}\label{classgcop_1_1Autodiff_a11f7a900564fad073f5849bf931512c9}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-c, 1$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Autodiff_a7d3bdaa3aae6770fde2ba7fde48e596f}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-Dynamic, 1$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1Autodiff_ac43ef2c804a99fb5899c63f8057145c5}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, 1$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Autodiff_afaf20813fbef640cc508206d4b605f86}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-Autodiff@{\-Autodiff}}
+\index{\-Autodiff@{\-Autodiff}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-Autodiff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n, int \-\_\-c$>$ {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-Autodiff} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, {\bf \-Vectorcd}, \-\_\-n, \-\_\-c $>$ \&}]{sys}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Autodiff_ad8a5e92d54f5475dc49652f12fc3a304}
+
+
+\-References \-N\-U\-M\-B\-E\-R\-\_\-\-D\-I\-R\-E\-C\-T\-I\-O\-N\-S.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-D\-F@{\-D\-F}}
+\index{\-D\-F@{\-D\-F}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-D\-F}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n, int \-\_\-c$>$ double {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-D\-F} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectornd} \&}]{v, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{{\bf \-Matrixnd} $\ast$}]{\-A, }
+\item[{{\bf \-Matrixncd} $\ast$}]{\-B}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Autodiff_a27af4860a55078d82df738f6a807aac2}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!\-D\-F@{\-D\-F}}
+\index{\-D\-F@{\-D\-F}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{\-D\-F}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ double {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf \-D\-F} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectornd} \&}]{v, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const {\bf \-Vectormd} \&}]{p, }
+\item[{{\bf \-Matrixnd} $\ast$}]{\-A, }
+\item[{{\bf \-Matrixncd} $\ast$}]{\-B, }
+\item[{{\bf \-Matrixnmd} $\ast$}]{\-C}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Autodiff_a8e789727b46ad7deb7e244af9957a7de}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!fdx@{fdx}}
+\index{fdx@{fdx}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{fdx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ {\bf \-Fdx} {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf fdx}}\label{classgcop_1_1Autodiff_a4dd9f4121dfda23a1de966fc7d7f120b}
+\index{gcop\-::\-Autodiff@{gcop\-::\-Autodiff}!fu@{fu}}
+\index{fu@{fu}!gcop::Autodiff@{gcop\-::\-Autodiff}}
+\subsubsection[{fu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ {\bf \-Fu} {\bf gcop\-::\-Autodiff}$<$ \-T, \-\_\-n, \-\_\-c $>$\-::{\bf fu}}\label{classgcop_1_1Autodiff_a4bb72109695d62075b21b9f8f317c6c7}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf autodiff.\-h}\end{DoxyCompactItemize}

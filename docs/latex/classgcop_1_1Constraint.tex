@@ -1,0 +1,158 @@
+\section{gcop\-:\-:\-Constraint$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Constraint}\index{gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$@{gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$}}
+
+
+{\ttfamily \#include $<$constraint.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ng, 1 $>$ {\bf \-Vectorgd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ng, \-\_\-nx $>$ {\bf \-Matrixgnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ng, \-\_\-nu $>$ {\bf \-Matrixgcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ng, \-\_\-np $>$ {\bf \-Matrixgmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nx $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nx $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nu $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-np $>$ {\bf \-Matrixmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ {\bf \-Matrixnmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Constraint} (int {\bf ng}=0)
+\item 
+virtual bool {\bf operator()} ({\bf \-Vectorgd} \&g, double t, const \-T \&x, const {\bf \-Vectorcd} \&u, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrixgnd} $\ast$dgdx=0, {\bf \-Matrixgcd} $\ast$dgdu=0, {\bf \-Matrixgmd} $\ast$dgdp=0)=0
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf ng}
+\begin{DoxyCompactList}\small\item\em constraint dimension \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ class gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nu$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1Constraint_acdb349f55a5da48daad40fb34dd804db}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nx$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1Constraint_a225bc34315919768d60bb6e5f1a2f765}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Matrixgcd@{\-Matrixgcd}}
+\index{\-Matrixgcd@{\-Matrixgcd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Matrixgcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ng, \-\_\-nu$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Matrixgcd}}\label{classgcop_1_1Constraint_af8019f7321537d7c31107b225cc5de42}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Matrixgmd@{\-Matrixgmd}}
+\index{\-Matrixgmd@{\-Matrixgmd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Matrixgmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ng, \-\_\-np$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Matrixgmd}}\label{classgcop_1_1Constraint_aebb060625e76e66c8d077bfba03bc04e}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Matrixgnd@{\-Matrixgnd}}
+\index{\-Matrixgnd@{\-Matrixgnd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Matrixgnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ng, \-\_\-nx$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Matrixgnd}}\label{classgcop_1_1Constraint_ac67403075f3d7936083c1746afeda45e}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Matrixmd@{\-Matrixmd}}
+\index{\-Matrixmd@{\-Matrixmd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Matrixmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-np$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Matrixmd}}\label{classgcop_1_1Constraint_aaf46142f04604999e10f7adaa8928305}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-nx$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1Constraint_af009967f18db9ff5b5a22f7edd053f19}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nu$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1Constraint_a2745738937f33e1d6575356bf598303f}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nx$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1Constraint_a8d0e4de8b3ddc6198b7940289d533f84}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Matrixnmd@{\-Matrixnmd}}
+\index{\-Matrixnmd@{\-Matrixnmd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Matrixnmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-np$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Matrixnmd}}\label{classgcop_1_1Constraint_a6bc4716fa44a3d976823685c8419de69}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Constraint_a0055c4a104dbf9ffa1f1f118982506a7}
+
+
+\-Reimplemented in {\bf gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1PqpDem_a5a9f5714ecd79fdfa372efb79f924176}, {\bf gcop\-::\-Cylinder$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cylinder_a85786bab03e6aa03c6a9b768bac5c2f9}, {\bf gcop\-::\-Disk$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Disk_a162f4fa91e50ad9378a4f6ba24d2c29e}, and {\bf gcop\-::\-Shell$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Shell_a3cb0a9c42c7783854cf0feac7478e06e}.
+
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Vectorgd@{\-Vectorgd}}
+\index{\-Vectorgd@{\-Vectorgd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Vectorgd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ng, 1$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Vectorgd}}\label{classgcop_1_1Constraint_a8b9bd00ce111e6b7a149257e16bc8f56}
+
+
+\-Reimplemented in {\bf gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1PqpDem_a16145cf4772eecb24ab92817bb2398ba}, {\bf gcop\-::\-Cylinder$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cylinder_a62585c6a013d3f7418d8a09ceff59050}, {\bf gcop\-::\-Disk$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Disk_a6e98b0da592342db2069c9fd2b0ed92a}, and {\bf gcop\-::\-Shell$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Shell_a7bb81cc2f4045be517472399f021f68d}.
+
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1Constraint_aa4c4302af089a4343a932e429e0856ea}
+
+
+\-Reimplemented in {\bf gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1PqpDem_a84871f1bb95ed1e0f403813a1f7e22aa}, {\bf gcop\-::\-Cylinder$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cylinder_a20662b25a8f13d1f8b5b32bbf7dcaa02}, {\bf gcop\-::\-Disk$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Disk_a8089d83d17794a6f2d6bd7a323481829}, and {\bf gcop\-::\-Shell$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Shell_a38ebe4ec17d109273d4f14d3b795b8ac}.
+
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Constraint_a3a69c40b18721b68a707b4f763fb1a50}
+
+
+\-Reimplemented in {\bf gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1PqpDem_a0742483e1817d664b57ee71b53ed29ba}, {\bf gcop\-::\-Cylinder$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cylinder_a0c7eded5e439837081502c6f37c5ae1c}, {\bf gcop\-::\-Disk$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Disk_a7da99769c48a92941d2d5f55f7894d4f}, and {\bf gcop\-::\-Shell$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Shell_aece8a5d4b8ce57539221abd1ca483344}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!\-Constraint@{\-Constraint}}
+\index{\-Constraint@{\-Constraint}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{\-Constraint}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf \-Constraint} (
+\begin{DoxyParamCaption}
+\item[{int}]{ng = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1Constraint_a9ac919883f363b399463499317361ba7}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ virtual bool {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorgd} \&}]{g, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgnd} $\ast$}]{dgdx = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgcd} $\ast$}]{dgdu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgmd} $\ast$}]{dgdp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Constraint_a8f887a0ef0cd52a797665fc90c75b0d4}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!ng@{ng}}
+\index{ng@{ng}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{ng}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ int {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::{\bf ng}}\label{classgcop_1_1Constraint_a0581a0837f91df91215c3a8862d2e190}
+
+
+constraint dimension 
+
+
+
+\-Referenced by gcop\-::\-Constraint\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::\-Constraint\-Cost().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf constraint.\-h}\end{DoxyCompactItemize}

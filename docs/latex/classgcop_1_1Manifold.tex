@@ -1,0 +1,228 @@
+\section{gcop\-:\-:\-Manifold$<$ \-T, \-\_\-n $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Manifold}\index{gcop\-::\-Manifold$<$ T, \-\_\-n $>$@{gcop\-::\-Manifold$<$ T, \-\_\-n $>$}}
+
+
+{\ttfamily \#include $<$manifold.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Manifold$<$ \-T, \-\_\-n $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{classgcop_1_1Manifold__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, \-\_\-n $>$ {\bf \-Matrixnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Manifold} (int {\bf n}=\-\_\-n)
+\item 
+virtual void {\bf \-Lift} ({\bf \-Vectornd} \&v, const \-T \&xa, const \-T \&xb)=0
+\item 
+virtual void {\bf \-Retract} (\-T \&xb, const \-T \&xa, const {\bf \-Vectornd} \&v)=0
+\item 
+virtual void {\bf dtau} ({\bf \-Matrixnd} \&\-M, const {\bf \-Vectornd} \&v)
+\item 
+virtual void {\bf \-Adtau} ({\bf \-Matrixnd} \&\-M, const {\bf \-Vectornd} \&v)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf n}
+\begin{DoxyCompactList}\small\item\em dimension \end{DoxyCompactList}\item 
+bool {\bf bnd}
+\begin{DoxyCompactList}\small\item\em is the space bounded (false by default). \-Bounds are defined below\-: these \char`\"{}box\char`\"{} bounds make sense when there is a natural ordering on the manifold, e.\-g. of the natural numbers) \end{DoxyCompactList}\item 
+\-T {\bf lb}
+\begin{DoxyCompactList}\small\item\em lower bound (-\/inf by default) \end{DoxyCompactList}\item 
+\-T {\bf ub}
+\begin{DoxyCompactList}\small\item\em upper bound (inf by default) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename \-T, int \-\_\-n = \-Dynamic$>$class gcop\-::\-Manifold$<$ T, \-\_\-n $>$}
+
+\-Homogeneous manifold
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-n = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, \-\_\-n$>$ {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1Manifold_a8001b5e837b9eefdd6014a4bea5c5c4c}
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-n = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, 1$>$ {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Manifold_adb69515a3ab5fc1bf6c3c2b91ee1a72d}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!\-Manifold@{\-Manifold}}
+\index{\-Manifold@{\-Manifold}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{\-Manifold}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n$>$ {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf \-Manifold} (
+\begin{DoxyParamCaption}
+\item[{int}]{n = {\ttfamily \-\_\-n}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Manifold_a6452aa9cc2acc90e9af8224fe7894bbe}
+\-Create a manifold of dimension n. \-For fixed-\/size use default constructor \doxyref{\-Manifold$<$\-T,n$>$()}{p.}{classgcop_1_1Manifold_a6452aa9cc2acc90e9af8224fe7894bbe} \-For dynamic-\/size use \-Manifold$<$\-T$>$(n).
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em n} & manifold dimension \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!\-Adtau@{\-Adtau}}
+\index{\-Adtau@{\-Adtau}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{\-Adtau}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-n = \-Dynamic$>$ virtual void {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf \-Adtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrixnd} \&}]{\-M, }
+\item[{const {\bf \-Vectornd} \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1Manifold_a90fb106d2263ee0f5df4544b0333ae80}
+\-Adjoint map of the retraction, i.\-e. \-Ad((v))
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em \-M} & resulting matrix operator \\
+\hline
+{\em v} & \-Lie algebra element \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented in {\bf gcop\-::\-Group$<$ 6, 4 $>$} \doxyref{}{p.}{classgcop_1_1Group_aa86f313daff3c49778aa79c6c9a7f505}, {\bf gcop\-::\-Group$<$ 3, 3 $>$} \doxyref{}{p.}{classgcop_1_1Group_aa86f313daff3c49778aa79c6c9a7f505}, {\bf gcop\-::\-Rn$<$ \-\_\-n $>$} \doxyref{}{p.}{classgcop_1_1Rn_a2c3b7c62063ce06d16ccf820d3629cbb}, {\bf gcop\-::\-Rn$<$ Dynamic $>$} \doxyref{}{p.}{classgcop_1_1Rn_a2c3b7c62063ce06d16ccf820d3629cbb}, {\bf gcop\-::\-Rn$<$ \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Rn_a2c3b7c62063ce06d16ccf820d3629cbb}, and {\bf gcop\-::\-Rn$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Rn_a2c3b7c62063ce06d16ccf820d3629cbb}.
+
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!dtau@{dtau}}
+\index{dtau@{dtau}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{dtau}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-n = \-Dynamic$>$ virtual void {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf dtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrixnd} \&}]{\-M, }
+\item[{const {\bf \-Vectornd} \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1Manifold_a4427d27ecfac21a3507dca4528257ff0}
+\-Right-\/trivialized derivative of the retraction map dtau(v)
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em \-M} & matrix operator \\
+\hline
+{\em v} & \-Lie algebra element \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented in {\bf gcop\-::\-Group$<$ 6, 4 $>$} \doxyref{}{p.}{classgcop_1_1Group_a9d2defd1e47eb07584638bef02a7d4c6}, {\bf gcop\-::\-Group$<$ 3, 3 $>$} \doxyref{}{p.}{classgcop_1_1Group_a9d2defd1e47eb07584638bef02a7d4c6}, {\bf gcop\-::\-Rn$<$ \-\_\-n $>$} \doxyref{}{p.}{classgcop_1_1Rn_a65407b2166f20b916a3756d5b6fc866a}, {\bf gcop\-::\-Rn$<$ Dynamic $>$} \doxyref{}{p.}{classgcop_1_1Rn_a65407b2166f20b916a3756d5b6fc866a}, {\bf gcop\-::\-Rn$<$ \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Rn_a65407b2166f20b916a3756d5b6fc866a}, and {\bf gcop\-::\-Rn$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Rn_a65407b2166f20b916a3756d5b6fc866a}.
+
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!\-Lift@{\-Lift}}
+\index{\-Lift@{\-Lift}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{\-Lift}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-n = \-Dynamic$>$ virtual void {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf \-Lift} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectornd} \&}]{v, }
+\item[{const \-T \&}]{xa, }
+\item[{const \-T \&}]{xb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Manifold_acaf14615d53a97cebe2312eecc8bc12b}
+\-Compute a lie algebra element corresponding to a group action between two given states on a manifold. \-This operation geometrically means that the curve from xa to xb is \char`\"{}lifted\char`\"{} to the tangent space of the manifold to a vector represented by the lie algebra element.
+
+\-The element can also be regarded as a difference between the two states xa and xb. \-On a vector space this is v = xb -\/ xa. \-On homogeneous manifolds v is a \-Lie algebra element corresponding to an action taking xa to xb.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em v} & \-Lie algebra element (regarded as difference between xb and xa) \\
+\hline
+{\em xa} & starting state \\
+\hline
+{\em xb} & ending state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implemented in {\bf gcop\-::\-Group$<$ 6, 4 $>$} \doxyref{}{p.}{classgcop_1_1Group_aa88024b210bafd20b50ade411f5d19a2}, {\bf gcop\-::\-Group$<$ 3, 3 $>$} \doxyref{}{p.}{classgcop_1_1Group_aa88024b210bafd20b50ade411f5d19a2}, {\bf gcop\-::\-Rn$<$ \-\_\-n $>$} \doxyref{}{p.}{classgcop_1_1Rn_acb14405c69661765c002e69c8d2482c3}, {\bf gcop\-::\-Rn$<$ Dynamic $>$} \doxyref{}{p.}{classgcop_1_1Rn_acb14405c69661765c002e69c8d2482c3}, {\bf gcop\-::\-Rn$<$ \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Rn_acb14405c69661765c002e69c8d2482c3}, {\bf gcop\-::\-Rn$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Rn_acb14405c69661765c002e69c8d2482c3}, and {\bf gcop\-::\-Mbs\-Cspace} \doxyref{}{p.}{classgcop_1_1MbsCspace_a7663da0fbfdc7c3ba78eadd66992b6c7}.
+
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!\-Retract@{\-Retract}}
+\index{\-Retract@{\-Retract}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{\-Retract}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-n = \-Dynamic$>$ virtual void {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf \-Retract} (
+\begin{DoxyParamCaption}
+\item[{\-T \&}]{xb, }
+\item[{const \-T \&}]{xa, }
+\item[{const {\bf \-Vectornd} \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Manifold_af29c9fcd40a70a5adf95eef037723daa}
+\-Retracts a tangent vector on a manifold at state xa to produce a new state xb. \-The vector is represented using a \-Lie algebra element.
+
+\-The operation can also be regarded as a way to perform addition on manifolds, i.\-e. to increment a given state xa by v to get a new state xb. \-On a vector space this is xb = xa + v. \-On homogeneous manifolds v is a \-Lie algebra element corresponding to an action taking xa to xb.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em xb} & ending state \\
+\hline
+{\em xa} & starting state \\
+\hline
+{\em v} & \-Lie algebra element (regarded as difference between xb and xa) \\
+\hline
+\end{DoxyParams}
+
+
+\-Implemented in {\bf gcop\-::\-Group$<$ 6, 4 $>$} \doxyref{}{p.}{classgcop_1_1Group_a7de8463852675b6726de2e377d08234b}, {\bf gcop\-::\-Group$<$ 3, 3 $>$} \doxyref{}{p.}{classgcop_1_1Group_a7de8463852675b6726de2e377d08234b}, {\bf gcop\-::\-Rn$<$ \-\_\-n $>$} \doxyref{}{p.}{classgcop_1_1Rn_a20fd8e4c3f648b663a5ddcedd49aec3d}, {\bf gcop\-::\-Rn$<$ Dynamic $>$} \doxyref{}{p.}{classgcop_1_1Rn_a20fd8e4c3f648b663a5ddcedd49aec3d}, {\bf gcop\-::\-Rn$<$ \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Rn_a20fd8e4c3f648b663a5ddcedd49aec3d}, and {\bf gcop\-::\-Rn$<$ \-\_\-nu $>$} \doxyref{}{p.}{classgcop_1_1Rn_a20fd8e4c3f648b663a5ddcedd49aec3d}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!bnd@{bnd}}
+\index{bnd@{bnd}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{bnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-n = \-Dynamic$>$ bool {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf bnd}}\label{classgcop_1_1Manifold_ac0e113c6711e857e4e669bb596540c80}
+
+
+is the space bounded (false by default). \-Bounds are defined below\-: these \char`\"{}box\char`\"{} bounds make sense when there is a natural ordering on the manifold, e.\-g. of the natural numbers) 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Bulletrccar\-::\-Bulletrccar(), gcop\-::\-Bulletrccar1\-::\-Bulletrccar1(), gcop\-::\-Chain\-::\-Chain(), gcop\-::\-Rccar\-::\-Rccar(), and gcop\-::\-Rccar1\-::\-Rccar1().
+
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!lb@{lb}}
+\index{lb@{lb}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{lb}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-n = \-Dynamic$>$ \-T {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf lb}}\label{classgcop_1_1Manifold_a5e5ffaa0921871c7b76b2b09d9cb6a36}
+
+
+lower bound (-\/inf by default) 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Bulletrccar\-::\-Bulletrccar(), gcop\-::\-Bulletrccar1\-::\-Bulletrccar1(), gcop\-::\-Chain\-::\-Chain(), gcop\-::\-Mbs\-::\-Check\-Limits(), gcop\-::\-Mbs\-::\-Clamp\-Pose(), gcop\-::\-Mbs\-::\-Clamp\-Velocity(), gcop\-::\-Mbs\-::\-Force(), gcop\-::\-Mbs\-::\-Get\-Impulse(), gcop\-::\-Rccar\-::\-Rccar(), and gcop\-::\-Rccar1\-::\-Rccar1().
+
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!n@{n}}
+\index{n@{n}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{n}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-n = \-Dynamic$>$ int {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf n}}\label{classgcop_1_1Manifold_a7f5bc8f44907e3e56e1f1780368bf5b0}
+
+
+dimension 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Ddp$<$ T, nx, nu, np $>$\-::\-Ddp(), gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::\-Docp(), gcop\-::\-Doep$<$ T, nx, nu, np, Tz, nz, T1, nx1 $>$\-::\-Doep(), gcop\-::\-Kalman\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Kalman\-Corrector(), gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost(), gcop\-::\-P\-Ddp$<$ T, n, c, np $>$\-::\-P\-Ddp(), gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp(), gcop\-::\-Sensor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Sensor(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce(), gcop\-::\-Mbs\-::\-Trap\-Step(), and gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Unscented\-Base().
+
+\index{gcop\-::\-Manifold@{gcop\-::\-Manifold}!ub@{ub}}
+\index{ub@{ub}!gcop::Manifold@{gcop\-::\-Manifold}}
+\subsubsection[{ub}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-n = \-Dynamic$>$ \-T {\bf gcop\-::\-Manifold}$<$ \-T, \-\_\-n $>$\-::{\bf ub}}\label{classgcop_1_1Manifold_afdc42d9bc5cf8d3fc964fd1b72c1bd6e}
+
+
+upper bound (inf by default) 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Bulletrccar\-::\-Bulletrccar(), gcop\-::\-Bulletrccar1\-::\-Bulletrccar1(), gcop\-::\-Chain\-::\-Chain(), gcop\-::\-Mbs\-::\-Check\-Limits(), gcop\-::\-Mbs\-::\-Clamp\-Pose(), gcop\-::\-Mbs\-::\-Clamp\-Velocity(), gcop\-::\-Mbs\-::\-Force(), gcop\-::\-Mbs\-::\-Get\-Impulse(), gcop\-::\-Rccar\-::\-Rccar(), and gcop\-::\-Rccar1\-::\-Rccar1().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/{\bf manifold.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,85 @@
+\section{gcop\-:\-:\-Chain1 \-Class \-Reference}
+\label{classgcop_1_1Chain1}\index{gcop\-::\-Chain1@{gcop\-::\-Chain1}}
+
+
+{\ttfamily \#include $<$chain1.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Chain1\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{classgcop_1_1Chain1__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Chain1\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Chain1__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Chain1} ()
+\item 
+void {\bf \-Force} (\-Vector\-Xd \&f, double {\bf t}, const {\bf \-Mbs\-State} \&{\bf x}, const \-Vector\-Xd \&u, \-Matrix\-Xd $\ast$\-A=0, \-Matrix\-Xd $\ast$\-B=0)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Chain1@{gcop\-::\-Chain1}!\-Chain1@{\-Chain1}}
+\index{\-Chain1@{\-Chain1}!gcop::Chain1@{gcop\-::\-Chain1}}
+\subsubsection[{\-Chain1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Chain1\-::\-Chain1} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Chain1_ad8cd2d9c4ca07953a2eec628a2d371d3}
+
+
+\-References gcop\-::\-Mbs\-::ag, gcop\-::\-Mbs\-::debug, gcop\-::\-Mbs\-::\-Init(), gcop\-::\-Mbs\-::joints, gcop\-::\-Mbs\-::links, gcop\-::\-Mbs\-::pis, gcop\-::\-S\-E3\-::rpyxyz2g(), and gcop\-::\-Mbs\-::se3.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Chain1@{gcop\-::\-Chain1}!\-Force@{\-Force}}
+\index{\-Force@{\-Force}!gcop::Chain1@{gcop\-::\-Chain1}}
+\subsubsection[{\-Force}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Chain1\-::\-Force} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{f, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{x, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{\-Matrix\-Xd $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-B = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Chain1_af74555d12d5a868bf0104b9a588fc712}
+\-Total resulting force on the system from external (e.\-g. gravity) and internal (control) inputs 
+\begin{DoxyParams}{\-Parameters}
+{\em f} & total force f(x,u,t) \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+{\em u} & controls \\
+\hline
+{\em \-A} & jacobian \-Dxf \\
+\hline
+{\em \-B} & jacobian \-Duf \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Mbs} \doxyref{}{p.}{classgcop_1_1Mbs_aa18ed20df059e7953d68c8f44eaf3c22}.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf chain1.\-h}\item 
+lib/systems/{\bf chain1.\-cc}\end{DoxyCompactItemize}

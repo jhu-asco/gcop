@@ -1,0 +1,421 @@
+\section{gcop\-:\-:\-S\-E3 \-Class \-Reference}
+\label{classgcop_1_1SE3}\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}}
+
+
+{\ttfamily \#include $<$se3.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-S\-E3\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classgcop_1_1SE3__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-S\-E3\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classgcop_1_1SE3__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-S\-E3} ()
+\item 
+void {\bf inv} ({\bf \-Matrix4d} \&gi, const {\bf \-Matrix4d} \&g) const 
+\item 
+void {\bf hat} ({\bf \-Matrix4d} \&vh, const {\bf \-Vector6d} \&v) const 
+\item 
+void {\bf hatinv} ({\bf \-Vector6d} \&v, const {\bf \-Matrix4d} \&vh) const 
+\item 
+void {\bf \-Tg} ({\bf \-Matrix6d} \&\-M, const {\bf \-Matrix4d} \&g) const 
+\item 
+void {\bf \-Ad} ({\bf \-Matrix6d} \&\-M, const {\bf \-Matrix4d} \&g) const 
+\item 
+void {\bf ad} ({\bf \-Matrix6d} \&\-M, const {\bf \-Vector6d} \&v) const 
+\item 
+void {\bf adt} ({\bf \-Matrix6d} \&\-M, const {\bf \-Vector6d} \&mu) const 
+\item 
+void {\bf adinv} ({\bf \-Vector6d} \&v, const {\bf \-Matrix6d} \&m) const 
+\item 
+void {\bf exp} ({\bf \-Matrix4d} \&g, const {\bf \-Vector6d} \&v) const 
+\item 
+void {\bf log} ({\bf \-Vector6d} \&v, const {\bf \-Matrix4d} \&g) const 
+\item 
+void {\bf cay} ({\bf \-Matrix4d} \&g, const {\bf \-Vector6d} \&v) const 
+\item 
+void {\bf dcay} ({\bf \-Matrix6d} \&\-M, const {\bf \-Vector6d} \&v) const 
+\item 
+void {\bf dcayinv} ({\bf \-Matrix6d} \&\-M, const {\bf \-Vector6d} \&v) const 
+\item 
+void {\bf tlnmu} ({\bf \-Vector6d} \&mup, const {\bf \-Vector6d} \&v, const {\bf \-Vector6d} \&mu) const 
+\item 
+void {\bf tln} ({\bf \-Matrix6d} \&\-M, const {\bf \-Vector6d} \&v) const 
+\item 
+void {\bf q2g} ({\bf \-Matrix4d} \&g, const {\bf \-Vector6d} \&q) const 
+\item 
+void {\bf quatxyz2g} ({\bf \-Matrix4d} \&g, const {\bf \-Vector7d} \&wquatxyz) const 
+\item 
+void {\bf g2quatxyz} ({\bf \-Vector7d} \&wquatxyz, const {\bf \-Matrix4d} \&g) const 
+\item 
+void {\bf g2q} ({\bf \-Vector6d} \&q, const {\bf \-Matrix4d} \&g) const 
+\item 
+void {\bf rpyxyz2g} ({\bf \-Matrix4d} \&g, const \-Vector3d \&rpy, const \-Vector3d \&xyz) const 
+\item 
+void {\bf g2rpyxyz} (\-Vector3d \&rpy, \-Vector3d \&xyz, const {\bf \-Matrix4d} \&g) const 
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf \-S\-E3} \& {\bf \-Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf tol}
+\begin{DoxyCompactList}\small\item\em numerical tolerance \end{DoxyCompactList}\item 
+{\bf \-S\-O3} \& {\bf so3}
+\begin{DoxyCompactList}\small\item\em convenience object for accessing \doxyref{\-S\-O3}{p.}{classgcop_1_1SO3} operations \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!\-S\-E3@{\-S\-E3}}
+\index{\-S\-E3@{\-S\-E3}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{\-S\-E3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-S\-E3\-::\-S\-E3} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1SE3_afec9fbddf024e5e78bf7507b59ae1297}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!\-Ad@{\-Ad}}
+\index{\-Ad@{\-Ad}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{\-Ad}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::\-Ad} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-M, }
+\item[{const {\bf \-Matrix4d} \&}]{g}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_ab3cf52d94657da6b53d989b822070a2c}
+
+
+\-References gcop\-::\-S\-O3\-::ad(), and so3.
+
+
+
+\-Referenced by gcop\-::\-Mbs\-Manifold\-::\-Adtau(), gcop\-::\-Mbs\-::\-Bias(), gcop\-::\-Mbs\-::\-D\-Bias(), gcop\-::\-Joint\-::\-Init(), gcop\-::\-Mbs\-::\-Mass(), gcop\-::\-Mbs\-::\-Newton\-Euler\-Jacobian(), gcop\-::\-Kin\-Rccar\-::\-Step(), and gcop\-::\-Kinbody3d$<$ \-\_\-nu $>$\-::\-Step().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!ad@{ad}}
+\index{ad@{ad}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{ad}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::ad} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-M, }
+\item[{const {\bf \-Vector6d} \&}]{v}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_ab40266ea1418d9437747d087f906346f}
+
+
+\-References gcop\-::\-S\-O3\-::ad(), and so3.
+
+
+
+\-Referenced by gcop\-::\-Uuv$<$ c $>$\-::\-Symp\-Step(), and tln().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!adinv@{adinv}}
+\index{adinv@{adinv}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{adinv}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::adinv} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{v, }
+\item[{const {\bf \-Matrix6d} \&}]{m}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_ae3d58d7035f113aa54f4b63799748e3e}
+
+
+\-References gcop\-::\-S\-O3\-::hatinv(), and so3.
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!adt@{adt}}
+\index{adt@{adt}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{adt}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::adt} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-M, }
+\item[{const {\bf \-Vector6d} \&}]{mu}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_acec99ceffee33b6bef02aaae7ee3f1f8}
+
+
+\-References gcop\-::\-S\-O3\-::ad(), and so3.
+
+
+
+\-Referenced by gcop\-::\-Mbs\-::\-Newton\-Euler\-Jacobian(), and gcop\-::\-Uuv$<$ c $>$\-::\-Symp\-Step().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!cay@{cay}}
+\index{cay@{cay}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{cay}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::cay} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{g, }
+\item[{const {\bf \-Vector6d} \&}]{v}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_aa42425c7572ed2e0649287bd63086c54}
+
+
+\-Referenced by gcop\-::\-Mbs\-Manifold\-::\-Adtau(), gcop\-::\-Mbs\-Cspace\-::\-Retract(), gcop\-::\-Mbs\-Manifold\-::\-Retract(), gcop\-::\-Kin\-Rccar\-::\-Step(), gcop\-::\-Kinbody3d$<$ \-\_\-nu $>$\-::\-Step(), and gcop\-::\-Uuv$<$ c $>$\-::\-Symp\-Step().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!dcay@{dcay}}
+\index{dcay@{dcay}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{dcay}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::dcay} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-M, }
+\item[{const {\bf \-Vector6d} \&}]{v}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a41d2b306c940c1e749dc4b24d82ed3df}
+
+
+\-References gcop\-::\-Manifold$<$ Matrix$<$ double, m, m $>$, n $>$\-::n.
+
+
+
+\-Referenced by gcop\-::\-Mbs\-Manifold\-::dtau(), gcop\-::\-Kin\-Rccar\-::\-Step(), and gcop\-::\-Kinbody3d$<$ \-\_\-nu $>$\-::\-Step().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!dcayinv@{dcayinv}}
+\index{dcayinv@{dcayinv}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{dcayinv}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::dcayinv} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-M, }
+\item[{const {\bf \-Vector6d} \&}]{v}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_ae3569d6d49ef20fccd8eda98977c071e}
+
+
+\-References gcop\-::\-S\-O3\-::ad(), gcop\-::\-S\-O3\-::dcayinv(), gcop\-::\-Group$<$ n, m $>$\-::\-Id, and so3.
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!exp@{exp}}
+\index{exp@{exp}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{exp}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::exp} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{g, }
+\item[{const {\bf \-Vector6d} \&}]{v}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a5a1803c7e890afa2710ec3bd3b5360b9}
+
+
+\-References gcop\-::\-S\-O3\-::dexp(), gcop\-::\-S\-O3\-::exp(), and so3.
+
+
+
+\-Referenced by gcop\-::\-Mbs\-Manifold\-::\-Adtau(), gcop\-::\-Mbs\-::\-F\-K(), gcop\-::\-Mbs\-::\-K\-Step(), gcop\-::\-Mbs\-::\-Rec(), and gcop\-::\-Mbs\-Manifold\-::\-Retract().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!g2q@{g2q}}
+\index{g2q@{g2q}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{g2q}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::g2q} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{q, }
+\item[{const {\bf \-Matrix4d} \&}]{g}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a9aca2b846f4824ab940247352369a700}
+
+
+\-References gcop\-::\-S\-O3\-::g2q(), and so3.
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!g2quatxyz@{g2quatxyz}}
+\index{g2quatxyz@{g2quatxyz}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{g2quatxyz}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::g2quatxyz} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector7d} \&}]{wquatxyz, }
+\item[{const {\bf \-Matrix4d} \&}]{g}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a72423bde9abf8b9d0eee2af96499d3e2}
+
+
+\-References gcop\-::\-S\-O3\-::g2quat(), and so3.
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!g2rpyxyz@{g2rpyxyz}}
+\index{g2rpyxyz@{g2rpyxyz}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{g2rpyxyz}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::g2rpyxyz} (
+\begin{DoxyParamCaption}
+\item[{\-Vector3d \&}]{rpy, }
+\item[{\-Vector3d \&}]{xyz, }
+\item[{const {\bf \-Matrix4d} \&}]{g}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a0685a8ce6f1e971c301bf1492cd88012}
+
+
+\-References gcop\-::\-S\-O3\-::g2q(), and so3.
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!hat@{hat}}
+\index{hat@{hat}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{hat}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::hat} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{vh, }
+\item[{const {\bf \-Vector6d} \&}]{v}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a22df6a72d440f7873ba1a143af367a63}
+
+
+\-References gcop\-::\-S\-O3\-::ad(), and so3.
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!hatinv@{hatinv}}
+\index{hatinv@{hatinv}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{hatinv}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::hatinv} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{v, }
+\item[{const {\bf \-Matrix4d} \&}]{vh}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a738f4d0c4dadc37e9fa9cb51bd279355}
+
+
+\-References gcop\-::\-S\-O3\-::hatinv(), and so3.
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!\-Instance@{\-Instance}}
+\index{\-Instance@{\-Instance}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-S\-E3} \& {\bf \-S\-E3\-::\-Instance} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1SE3_aa869bc14f74929defd2ae062e636bfe4}
+
+
+\-Referenced by gcop\-::\-Mbs\-Manifold\-::\-Adtau(), gcop\-::\-Airbot\-View\-::\-Airbot\-View(), gcop\-\_\-urdf\-::bulletmbsgenerator(), gcop\-::\-Mbs\-Manifold\-::dtau(), gcop\-::\-Joint\-::\-Init(), gcop\-::\-Mbs\-Cspace\-::\-Lift(), gcop\-::\-Mbs\-Manifold\-::\-Lift(), gcop\-::\-Mbs\-Cspace\-::\-Retract(), gcop\-::\-Mbs\-Manifold\-::\-Retract(), gcop\-::\-Mbs\-Controller\-::\-Set(), gcop\-::\-Kin\-Rccar\-::\-Step(), gcop\-::\-Kinbody3d$<$ \-\_\-nu $>$\-::\-Step(), and gcop\-::\-Uuv$<$ c $>$\-::\-Symp\-Step().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!inv@{inv}}
+\index{inv@{inv}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{inv}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::inv} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{gi, }
+\item[{const {\bf \-Matrix4d} \&}]{g}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a3cd9098c7a23fdff51aea0d94703ebc3}
+
+
+\-Referenced by gcop\-::\-Mbs\-::\-Bias(), gcop\-::\-Mbs\-::\-D\-Bias(), gcop\-::\-Joint\-::\-Init(), gcop\-::\-Mbs\-::\-K\-Step(), gcop\-::\-Mbs\-Cspace\-::\-Lift(), gcop\-::\-Mbs\-Manifold\-::\-Lift(), gcop\-::\-Mbs\-::\-Mass(), gcop\-::\-Mbs\-::\-Newton\-Euler\-Jacobian(), gcop\-::\-Mbs\-::\-Rec(), and gcop\-::\-Mbs\-Controller\-::\-Set().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!log@{log}}
+\index{log@{log}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{log}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::log} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{v, }
+\item[{const {\bf \-Matrix4d} \&}]{g}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a6494859f78898f2bdee0ac1a12d649f2}
+
+
+\-References gcop\-::\-S\-O3\-::dexpinv(), gcop\-::\-S\-O3\-::log(), and so3.
+
+
+
+\-Referenced by gcop\-::\-Mbs\-::\-K\-Step(), gcop\-::\-Mbs\-Manifold\-::\-Lift(), gcop\-::\-Mbs\-::\-Rec(), and gcop\-::\-Mbs\-Controller\-::\-Set().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!q2g@{q2g}}
+\index{q2g@{q2g}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{q2g}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::q2g} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{g, }
+\item[{const {\bf \-Vector6d} \&}]{q}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_aed6e9e738dbf144d9b7dda92bb2eeedc}
+
+
+\-References gcop\-::\-S\-O3\-::q2g(), and so3.
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!quatxyz2g@{quatxyz2g}}
+\index{quatxyz2g@{quatxyz2g}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{quatxyz2g}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::quatxyz2g} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{g, }
+\item[{const {\bf \-Vector7d} \&}]{wquatxyz}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a9fa49cd60b1c68a6a9930b1c11cacd1b}
+
+
+\-References gcop\-::\-S\-O3\-::quat2g(), and so3.
+
+
+
+\-Referenced by gcop\-\_\-urdf\-::bulletmbsgenerator().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!rpyxyz2g@{rpyxyz2g}}
+\index{rpyxyz2g@{rpyxyz2g}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{rpyxyz2g}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::rpyxyz2g} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{g, }
+\item[{const \-Vector3d \&}]{rpy, }
+\item[{const \-Vector3d \&}]{xyz}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_aa147a6175e338c61850e8a622021c933}
+
+
+\-References gcop\-::\-S\-O3\-::q2g(), and so3.
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Airbot\-View\-::\-Airbot\-View(), gcop\-::\-Airm\-::\-Airm(), gcop\-::\-Chain\-::\-Chain(), gcop\-::\-Chain1\-::\-Chain1(), and gcop\-::\-Snake\-::\-Snake().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!\-Tg@{\-Tg}}
+\index{\-Tg@{\-Tg}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{\-Tg}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::\-Tg} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-M, }
+\item[{const {\bf \-Matrix4d} \&}]{g}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_acdccf75549e539c7ef1d8e9717689256}
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!tln@{tln}}
+\index{tln@{tln}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{tln}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::tln} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-M, }
+\item[{const {\bf \-Vector6d} \&}]{v}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a292a45d9e84ed194faa9d882f7d8d203}
+
+
+\-References ad().
+
+
+
+\-Referenced by gcop\-::\-Mbs\-Manifold\-::dtau(), gcop\-::\-Mbs\-::\-Newton\-Euler\-Jacobian(), and gcop\-::\-Uuv$<$ c $>$\-::\-Symp\-Step().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!tlnmu@{tlnmu}}
+\index{tlnmu@{tlnmu}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{tlnmu}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-S\-E3\-::tlnmu} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{mup, }
+\item[{const {\bf \-Vector6d} \&}]{v, }
+\item[{const {\bf \-Vector6d} \&}]{mu}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1SE3_a94089aef3a310b40a002c411ad840a8d}
+
+
+\-Referenced by gcop\-::\-Mbs\-::\-D\-Bias().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!so3@{so3}}
+\index{so3@{so3}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{so3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-S\-O3}\& {\bf gcop\-::\-S\-E3\-::so3}}\label{classgcop_1_1SE3_a6d116d7ff8f29dad5667f21060bbb8e5}
+
+
+convenience object for accessing \doxyref{\-S\-O3}{p.}{classgcop_1_1SO3} operations 
+
+
+
+\-Referenced by \-Ad(), ad(), adinv(), adt(), dcayinv(), exp(), g2q(), g2quatxyz(), g2rpyxyz(), hat(), hatinv(), log(), q2g(), quatxyz2g(), and rpyxyz2g().
+
+\index{gcop\-::\-S\-E3@{gcop\-::\-S\-E3}!tol@{tol}}
+\index{tol@{tol}!gcop::SE3@{gcop\-::\-S\-E3}}
+\subsubsection[{tol}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-S\-E3\-::tol}}\label{classgcop_1_1SE3_adeb73225bbb2f76b07efac77c6b1d441}
+
+
+numerical tolerance 
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf se3.\-h}\item 
+lib/utils/{\bf se3.\-cc}\end{DoxyCompactItemize}

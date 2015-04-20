@@ -1,0 +1,609 @@
+\section{gcop\-:\-:\-Group$<$ n, m $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Group}\index{gcop\-::\-Group$<$ n, m $>$@{gcop\-::\-Group$<$ n, m $>$}}
+
+
+{\ttfamily \#include $<$group.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Group$<$ n, m $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classgcop_1_1Group__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Group$<$ n, m $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classgcop_1_1Group__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf inv} (\-Matrixmd \&gi, const \-Matrixmd \&g) const 
+\item 
+virtual \-Matrixmd {\bf inv} (const \-Matrixmd \&g) const 
+\item 
+virtual void {\bf diff} (\-Matrixmd \&dg, const \-Matrixmd \&ga, const \-Matrixmd \&gb) const 
+\item 
+virtual \-Matrixmd {\bf diff} (const \-Matrixmd \&ga, const \-Matrixmd \&gb) const 
+\item 
+virtual void {\bf hat} (\-Matrixmd \&g, const \-Vectornd \&v) const =0
+\item 
+virtual \-Matrixmd {\bf hat} (const \-Vectornd \&v) const 
+\item 
+virtual void {\bf hatinv} (\-Vectornd \&v, const \-Matrixmd \&g) const =0
+\item 
+virtual \-Vectornd {\bf hatinv} (const \-Matrixmd \&g) const 
+\item 
+virtual void {\bf \-Tg} (\-Matrixnd \&\-M, const \-Matrixmd \&g) const =0
+\item 
+virtual \-Matrixnd {\bf \-Tg} (const \-Matrixmd \&g) const 
+\item 
+virtual void {\bf \-Ad} (\-Matrixnd \&\-M, const \-Matrixmd \&g) const =0
+\item 
+virtual \-Matrixnd {\bf \-Ad} (const \-Matrixmd \&g) const 
+\item 
+virtual void {\bf ad} (\-Matrixnd \&\-M, const \-Vectornd \&v) const =0
+\item 
+virtual \-Matrixnd {\bf ad} (const \-Vectornd \&v) const 
+\item 
+virtual void {\bf adinv} (\-Vectornd \&v, const \-Matrixnd \&\-M) const =0
+\item 
+virtual \-Vectornd {\bf adinv} (const \-Matrixnd \&\-M) const 
+\item 
+virtual void {\bf exp} (\-Matrixmd \&g, const \-Vectornd \&v) const =0
+\item 
+virtual \-Matrixmd {\bf exp} (const \-Vectornd \&v) const 
+\item 
+virtual void {\bf log} (\-Vectornd \&v, const \-Matrixmd \&g) const =0
+\item 
+virtual \-Vectornd {\bf log} (const \-Matrixmd \&g) const 
+\item 
+virtual void {\bf cay} (\-Matrixmd \&g, const \-Vectornd \&v) const 
+\item 
+virtual \-Matrixmd {\bf cay} (const \-Vectornd \&v) const 
+\item 
+virtual void {\bf cayinv} (\-Vectornd \&v, const \-Matrixmd \&g) const 
+\item 
+virtual \-Vectornd {\bf cayinv} (const \-Matrixmd \&g) const 
+\item 
+virtual void {\bf dcay} (\-Matrixnd \&\-M, const \-Vectornd \&v) const =0
+\item 
+virtual \-Matrixnd {\bf dcay} (const \-Vectornd \&v) const 
+\item 
+virtual void {\bf dcayinv} (\-Matrixnd \&\-M, const \-Vectornd \&v) const =0
+\item 
+virtual \-Matrixnd {\bf dcayinv} (const \-Vectornd \&v) const 
+\item 
+virtual void {\bf \-Lift} (\-Vectornd \&v, const \-Matrixmd \&ga, const \-Matrixmd \&gb)
+\item 
+virtual void {\bf \-Retract} (\-Matrixmd \&gb, const \-Matrixmd \&ga, const \-Vectornd \&v)
+\item 
+virtual void {\bf dtau} (\-Matrixnd \&\-M, const \-Vectornd \&v)
+\item 
+virtual void {\bf \-Adtau} (\-Matrixnd \&\-M, const \-Vectornd \&v)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const \-Matrixmd {\bf \-Id} = \-Matrix$<$double, m, m$>$\-::\-Identity()
+\item 
+static const \-Vectornd {\bf e} = \-Matrix$<$double, {\bf n}, 1$>$\-::\-Zero()
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int n, int m$>$class gcop\-::\-Group$<$ n, m $>$}
+
+\-General definition of a matrix \-Lie group and its algebra. \-Defines basic operations such as identity, inverse, multiplication, maps and flows from algebra to the group using exponentiation, adjoint transform and operators. \-This should serve as a base class for implementing specific groups.
+
+\-A \-Lie group is also a homogeneous manifold, so it subclasses \doxyref{\-Manifold}{p.}{classgcop_1_1Manifold} and provides a default implementation of the operations \doxyref{\-Manifold\-::\-Lift}{p.}{classgcop_1_1Manifold_acaf14615d53a97cebe2312eecc8bc12b} and \doxyref{\-Manifold\-::\-Retract}{p.}{classgcop_1_1Manifold_af29c9fcd40a70a5adf95eef037723daa}
+
+\-Subclasses should provide all methods (inv, cay, cayinv are provided for convenience but they can be implemented more efficiently for specific groups)
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em n} & manifold dimension, i.\-e. algebra alements are vectors $ v\in R^n $ \\
+\hline
+{\em m} & matrix dimension, group elements are m-\/by-\/m matrices $ g \in G \subset GL(m) $\\
+\hline
+\end{DoxyParams}
+\-Author\-: \-Marin \-Kobilarov -\/-\/ \-Copyright (\-C) 2007 
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!\-Ad@{\-Ad}}
+\index{\-Ad@{\-Ad}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{\-Ad}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ virtual void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf \-Ad} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixnd \&}]{\-M, }
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Group_a6bbfec3fdc22c2c106447f83b7d16c1a}
+\-The operator $\operatorname{Ad}_g:\mathfrak{g}\rightarrow\mathfrak{g}$. \-One can think of this operator as a change-\/of-\/frame transformation. 
+\begin{DoxyParams}{\-Parameters}
+{\em m} & resulting transformation \\
+\hline
+{\em g} & group element corresponding to frame change \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!\-Ad@{\-Ad}}
+\index{\-Ad@{\-Ad}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{\-Ad}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, {\bf n}, {\bf n} $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf \-Ad} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a9b581efedb4dd04d2170eee2481b4e81}
+\-The operator $\operatorname{Ad}_g:\mathfrak{g}\rightarrow\mathfrak{g}$. \-One can think of this operator as a change-\/of-\/frame transformation. \begin{DoxyReturn}{\-Returns}
+resulting transformation 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em g} & group element corresponding to frame change \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!ad@{ad}}
+\index{ad@{ad}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{ad}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ virtual void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf ad} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixnd \&}]{\-M, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Group_a18e04a4c16b4c7b651b7ffc71df715f9}
+\-The operator $\operatorname{ad}_\xi:\mathfrak{g}\rightarrow\mathfrak{g}$. \-One can think of this operator as the infinitesimal of the change-\/of-\/frame transformation. \-It can also be written using brackets [$\ast$,$\ast$]. 
+\begin{DoxyParams}{\-Parameters}
+{\em m} & resulting map \\
+\hline
+{\em a} & argument \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!ad@{ad}}
+\index{ad@{ad}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{ad}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, {\bf n}, {\bf n} $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf ad} (
+\begin{DoxyParamCaption}
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a34b9a28505736ef1557531ccbf049871}
+\-The operator $\operatorname{ad}_\xi:\mathfrak{g}\rightarrow\mathfrak{g}$. \-One can think of this operator as the infinitesimal of the change-\/of-\/frame transformation. \-It can also be written using brackets [$\ast$,$\ast$]. \begin{DoxyReturn}{\-Returns}
+resulting map 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em a} & argument \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!adinv@{adinv}}
+\index{adinv@{adinv}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{adinv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ virtual void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf adinv} (
+\begin{DoxyParamCaption}
+\item[{\-Vectornd \&}]{v, }
+\item[{const \-Matrixnd \&}]{\-M}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Group_a8ba14b69402bf59b9fd751bae0c11599}
+\-Inverse of ad operator 
+\begin{DoxyParams}{\-Parameters}
+{\em v} & resulting algebra element \\
+\hline
+{\em m} & ad operator matrix \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!adinv@{adinv}}
+\index{adinv@{adinv}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{adinv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, {\bf n}, 1 $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf adinv} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrixnd \&}]{\-M}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_af50f154b9eb834e58ef049c3158d9fa6}
+\-Inverse of ad operator \begin{DoxyReturn}{\-Returns}
+resulting algebra element 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em m} & ad operator matrix \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!\-Adtau@{\-Adtau}}
+\index{\-Adtau@{\-Adtau}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{\-Adtau}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf \-Adtau} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixnd \&}]{\-M, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_aa86f313daff3c49778aa79c6c9a7f505}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!cay@{cay}}
+\index{cay@{cay}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{cay}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf cay} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixmd \&}]{g, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_ae722efca4f5a045a173bcf4e72fc532f}
+\-Cayley map of a lie algebra element a $ g=\text{cay}(a) $. \-Subclasses should implement this method 
+\begin{DoxyParams}{\-Parameters}
+{\em g} & resulting group element $ g \in G $ \\
+\hline
+{\em v} & \-Lie algebra element $ v\in\mathfrak{g} $ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!cay@{cay}}
+\index{cay@{cay}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{cay}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, m, m $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf cay} (
+\begin{DoxyParamCaption}
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_aa8f692ee6eae3d991e05475d4c029c68}
+\-Cayley map of a lie algebra element a $ g=\text{cay}(a) $. \-Subclasses should implement this method \begin{DoxyReturn}{\-Returns}
+resulting group element $ g \in G $ 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em v} & \-Lie algebra element $ v\in\mathfrak{g} $ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!cayinv@{cayinv}}
+\index{cayinv@{cayinv}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{cayinv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf cayinv} (
+\begin{DoxyParamCaption}
+\item[{\-Vectornd \&}]{v, }
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a8d45686007bb756158384378594d6340}
+\-Inverse of cayley $ v=\text{cay}^{-1}(g) $. \-Subclasses should implement this method 
+\begin{DoxyParams}{\-Parameters}
+{\em v} & \-Lie algebra element $ v\in\mathfrak{g} $ \\
+\hline
+{\em g} & group element $ g \in G $ \\
+\hline
+\end{DoxyParams}
+
+
+\-Referenced by gcop\-::\-Mbs\-Cspace\-::\-Lift(), and gcop\-::\-Mbs\-Manifold\-::\-Lift().
+
+\index{gcop\-::\-Group@{gcop\-::\-Group}!cayinv@{cayinv}}
+\index{cayinv@{cayinv}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{cayinv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, {\bf n}, 1 $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf cayinv} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a127214c7eebf49607f2cae70affe418e}
+\-Inverse of cayley $ v=\text{cay}^{-1}(g) $. \-Subclasses should implement this method \begin{DoxyReturn}{\-Returns}
+v \-Lie algebra element $ v\in\mathfrak{g} $ 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em g} & group element $ g \in G $ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!dcay@{dcay}}
+\index{dcay@{dcay}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{dcay}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ virtual void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf dcay} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixnd \&}]{\-M, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Group_a1edeb01bea1563eaff0d8816f4aaa1e1}
+\-Right-\/trivialized tangent of cayley 
+\begin{DoxyParams}{\-Parameters}
+{\em m} & resulting linear map \\
+\hline
+{\em v} & \-Lie algebra element $ v\in\mathfrak{g}$ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!dcay@{dcay}}
+\index{dcay@{dcay}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{dcay}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, {\bf n}, {\bf n} $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf dcay} (
+\begin{DoxyParamCaption}
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a16227661459c89a5084a51b75d850323}
+\-Right-\/trivialized tangent of cayley \begin{DoxyReturn}{\-Returns}
+resulting linear map 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em v} & \-Lie algebra element $ v\in\mathfrak{g}$ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!dcayinv@{dcayinv}}
+\index{dcayinv@{dcayinv}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{dcayinv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ virtual void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf dcayinv} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixnd \&}]{\-M, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Group_a23e85acf04605ea3b816c0fe83f4c9e5}
+\-Right-\/trivialized tangent inverse of cayley 
+\begin{DoxyParams}{\-Parameters}
+{\em m} & resulting linear map \\
+\hline
+{\em v} & \-Lie algebra element $ v\in\mathfrak{g}$ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!dcayinv@{dcayinv}}
+\index{dcayinv@{dcayinv}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{dcayinv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, {\bf n}, {\bf n} $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf dcayinv} (
+\begin{DoxyParamCaption}
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a1c7b68fcb0532af43d8d9310287d5bd7}
+\-Right-\/trivialized tangent inverse of cayley \begin{DoxyReturn}{\-Returns}
+resulting linear map 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em v} & \-Lie algebra element $ v\in\mathfrak{g}$ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!diff@{diff}}
+\index{diff@{diff}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf diff} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixmd \&}]{dg, }
+\item[{const \-Matrixmd \&}]{ga, }
+\item[{const \-Matrixmd \&}]{gb}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a2fb732abe1e8df7166d9319bd3d8a100}
+\-Compute the difference b/n two elements $ \Delta g=g_a^{-1}g_b $. 
+\begin{DoxyParams}{\-Parameters}
+{\em dg} & resulting group element $ \Delta g \in G $ \\
+\hline
+{\em ga} & first group element $ g_a \in G $ \\
+\hline
+{\em gb} & second group element $ g_b \in G $ \\
+\hline
+\end{DoxyParams}
+
+
+\-Referenced by gcop\-::\-Gunicycle\-Manifold\-::\-Lift().
+
+\index{gcop\-::\-Group@{gcop\-::\-Group}!diff@{diff}}
+\index{diff@{diff}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, m, m $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf diff} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrixmd \&}]{ga, }
+\item[{const \-Matrixmd \&}]{gb}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_aeec4c645470b8e9deebdb5b729abc358}
+\-Compute the difference b/n two elements $ \Delta g=g_a^{-1}g_b $. \begin{DoxyReturn}{\-Returns}
+resulting group element $ \Delta g \in G $ 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em ga} & first group element $ g_a \in G $ \\
+\hline
+{\em gb} & second group element $ g_b \in G $ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!dtau@{dtau}}
+\index{dtau@{dtau}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{dtau}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf dtau} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixnd \&}]{\-M, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a9d2defd1e47eb07584638bef02a7d4c6}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!exp@{exp}}
+\index{exp@{exp}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{exp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ virtual void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf exp} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixmd \&}]{g, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Group_a1f79a3a05dd8580603ebe8b15ea29ea5}
+\-Exponentiate lie algebra element a $ g=\exp(a) $. \-Subclasses should implement this method 
+\begin{DoxyParams}{\-Parameters}
+{\em g} & resulting group element $ g \in G $ \\
+\hline
+{\em v} & \-Lie algebra element $ v\in\mathfrak{g} $ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!exp@{exp}}
+\index{exp@{exp}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{exp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, m, m $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf exp} (
+\begin{DoxyParamCaption}
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_aa7592f3ee5030903849ab1790ed30c4b}
+\-Exponentiate lie algebra element a $ g=\exp(a) $. \-Subclasses should implement this method \begin{DoxyReturn}{\-Returns}
+resulting group element $ g \in G $ 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em v} & \-Lie algebra element $ v\in\mathfrak{g} $ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!hat@{hat}}
+\index{hat@{hat}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{hat}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ virtual void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf hat} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixmd \&}]{g, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Group_af3ab45a7aee328fb0ee3870b80e9e917}
+\-The operator $\hat v$ such that \$(v)  \-I +  v\$
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em g} & resulting map \\
+\hline
+{\em v} & given algebra element \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!hat@{hat}}
+\index{hat@{hat}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{hat}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, m, m $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf hat} (
+\begin{DoxyParamCaption}
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a18012facca8d99db1318802a44fc2875}
+\-The operator $\hat v$ such that \$(v)  \-I +  v\$
+
+\begin{DoxyReturn}{\-Returns}
+resulting map 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em v} & given algebra element \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!hatinv@{hatinv}}
+\index{hatinv@{hatinv}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{hatinv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ virtual void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf hatinv} (
+\begin{DoxyParamCaption}
+\item[{\-Vectornd \&}]{v, }
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Group_a18bd49b5dd1f7dd8f736aa5c4ab861df}
+\-Inverse of hat operator 
+\begin{DoxyParams}{\-Parameters}
+{\em v} & resulting algebra element \\
+\hline
+{\em g} & infinetisamal group element \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!hatinv@{hatinv}}
+\index{hatinv@{hatinv}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{hatinv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, {\bf n}, 1 $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf hatinv} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a99de6e7a4259e4442e5c58cba8f2ebe7}
+\-Inverse of hat operator \begin{DoxyReturn}{\-Returns}
+resulting algebra element 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em g} & infinetisamal group element \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!inv@{inv}}
+\index{inv@{inv}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{inv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf inv} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixmd \&}]{gi, }
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a0d888a2c655df42d7f56ed934621c12e}
+\-Compute the inverse of a given group element 
+\begin{DoxyParams}{\-Parameters}
+{\em gi} & inverse $ g^{-1} \in G $ \\
+\hline
+{\em g} & group element $ g \in G $ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!inv@{inv}}
+\index{inv@{inv}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{inv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, m, m $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf inv} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a28d217e4a338f88b5aa14be64d95f80d}
+\-Compute the inverse of a given group element \begin{DoxyReturn}{\-Returns}
+inverse $ g^{-1} \in G $ 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em g} & group element $ g \in G $ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!\-Lift@{\-Lift}}
+\index{\-Lift@{\-Lift}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{\-Lift}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf \-Lift} (
+\begin{DoxyParamCaption}
+\item[{\-Vectornd \&}]{v, }
+\item[{const \-Matrixmd \&}]{ga, }
+\item[{const \-Matrixmd \&}]{gb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_aa88024b210bafd20b50ade411f5d19a2}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!log@{log}}
+\index{log@{log}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{log}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ virtual void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf log} (
+\begin{DoxyParamCaption}
+\item[{\-Vectornd \&}]{v, }
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Group_a77e2d1ad3a608307fe34af99de8a54cd}
+\-Logarithm of a group element $ a = \log(g) $. \-Subclasses should implement this method 
+\begin{DoxyParams}{\-Parameters}
+{\em v} & \-Lie algebra element $ v\in\mathfrak{g} $ \\
+\hline
+{\em g} & group element $ g \in G $ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!log@{log}}
+\index{log@{log}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{log}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, {\bf n}, 1 $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf log} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a06ae5e9bcadf845dc8aeb2dc49e0e8c2}
+\-Logarithm of a group element $ a = \log(g) $. \-Subclasses should implement this method \begin{DoxyReturn}{\-Returns}
+v \-Lie algebra element $ v\in\mathfrak{g} $ 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em g} & group element $ g \in G $ \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!\-Retract@{\-Retract}}
+\index{\-Retract@{\-Retract}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{\-Retract}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf \-Retract} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixmd \&}]{gb, }
+\item[{const \-Matrixmd \&}]{ga, }
+\item[{const \-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_a7de8463852675b6726de2e377d08234b}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!\-Tg@{\-Tg}}
+\index{\-Tg@{\-Tg}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{\-Tg}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ virtual void {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf \-Tg} (
+\begin{DoxyParamCaption}
+\item[{\-Matrixnd \&}]{\-M, }
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Group_a0ee714a83dda14fd4fd9383ed1342b87}
+\-Tangent action 
+\begin{DoxyParams}{\-Parameters}
+{\em m} & resulting action as a matrix \\
+\hline
+{\em g} & infinetisamal group element \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!\-Tg@{\-Tg}}
+\index{\-Tg@{\-Tg}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{\-Tg}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, {\bf n}, {\bf n} $>$ {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf \-Tg} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrixmd \&}]{g}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Group_aa9fb3b6d039ea44c8981e426ad9ab03f}
+\-Tangent action \begin{DoxyReturn}{\-Returns}
+resulting tangent action as a matrix 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em g} & infinetisamal group element \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!e@{e}}
+\index{e@{e}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{e}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, {\bf n}, 1 $>$ const {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf e} = \-Matrix$<$double, {\bf n}, 1$>$\-::\-Zero()\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Group_ae81eb60312892ed7fcb4ce686a214dbd}
+\index{gcop\-::\-Group@{gcop\-::\-Group}!\-Id@{\-Id}}
+\index{\-Id@{\-Id}!gcop::Group@{gcop\-::\-Group}}
+\subsubsection[{\-Id}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int n, int m$>$ \-Matrix$<$ double, m, m $>$ const {\bf gcop\-::\-Group}$<$ {\bf n}, m $>$\-::{\bf \-Id} = \-Matrix$<$double, m, m$>$\-::\-Identity()\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Group_a9b5ba69e0bd452a333fb2d1f8b973d20}
+
+
+\-Referenced by gcop\-::\-S\-E3\-::dcayinv(), and gcop\-::\-Gcay().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf group.\-h}\end{DoxyCompactItemize}

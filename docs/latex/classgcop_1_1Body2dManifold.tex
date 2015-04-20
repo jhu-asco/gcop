@@ -1,0 +1,102 @@
+\section{gcop\-:\-:\-Body2d\-Manifold \-Class \-Reference}
+\label{classgcop_1_1Body2dManifold}\index{gcop\-::\-Body2d\-Manifold@{gcop\-::\-Body2d\-Manifold}}
+
+
+{\ttfamily \#include $<$body2dmanifold.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Body2d\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{classgcop_1_1Body2dManifold__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{classgcop_1_1Body2dManifold__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf \-Lift} ({\bf \-Vector6d} \&dx, const {\bf \-M3\-V3d} \&xa, const {\bf \-M3\-V3d} \&xb)
+\item 
+void {\bf \-Retract} ({\bf \-M3\-V3d} \&xb, const {\bf \-M3\-V3d} \&xa, const {\bf \-Vector6d} \&dx)
+\item 
+void {\bf dtau} ({\bf \-Matrix6d} \&\-M, const {\bf \-Vector6d} \&v)
+\item 
+void {\bf \-Adtau} ({\bf \-Matrix6d} \&\-M, const {\bf \-Vector6d} \&v)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf \-Body2d\-Manifold} \& {\bf \-Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Body2d\-Manifold@{gcop\-::\-Body2d\-Manifold}!\-Adtau@{\-Adtau}}
+\index{\-Adtau@{\-Adtau}!gcop::Body2dManifold@{gcop\-::\-Body2d\-Manifold}}
+\subsubsection[{\-Adtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Manifold\-::\-Adtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-M, }
+\item[{const {\bf \-Vector6d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dManifold_aa0b99f1d3cf1af0a407c21e73f0eaa3e}
+\index{gcop\-::\-Body2d\-Manifold@{gcop\-::\-Body2d\-Manifold}!dtau@{dtau}}
+\index{dtau@{dtau}!gcop::Body2dManifold@{gcop\-::\-Body2d\-Manifold}}
+\subsubsection[{dtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Manifold\-::dtau} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix6d} \&}]{\-M, }
+\item[{const {\bf \-Vector6d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dManifold_aad623851d280d3c78485d2a05f6b2974}
+\index{gcop\-::\-Body2d\-Manifold@{gcop\-::\-Body2d\-Manifold}!\-Instance@{\-Instance}}
+\index{\-Instance@{\-Instance}!gcop::Body2dManifold@{gcop\-::\-Body2d\-Manifold}}
+\subsubsection[{\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Manifold} \& {\bf \-Body2d\-Manifold\-::\-Instance} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Body2dManifold_a732b35063d5b90560037a027e6f8ce3c}
+
+
+\-Referenced by \-Lift(), and \-Retract().
+
+\index{gcop\-::\-Body2d\-Manifold@{gcop\-::\-Body2d\-Manifold}!\-Lift@{\-Lift}}
+\index{\-Lift@{\-Lift}!gcop::Body2dManifold@{gcop\-::\-Body2d\-Manifold}}
+\subsubsection[{\-Lift}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Manifold\-::\-Lift} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{dx, }
+\item[{const {\bf \-M3\-V3d} \&}]{xa, }
+\item[{const {\bf \-M3\-V3d} \&}]{xb}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dManifold_a1714e11500e7d2ef5f7260bfa6a079dc}
+
+
+\-References \-Instance().
+
+\index{gcop\-::\-Body2d\-Manifold@{gcop\-::\-Body2d\-Manifold}!\-Retract@{\-Retract}}
+\index{\-Retract@{\-Retract}!gcop::Body2dManifold@{gcop\-::\-Body2d\-Manifold}}
+\subsubsection[{\-Retract}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Manifold\-::\-Retract} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-M3\-V3d} \&}]{xb, }
+\item[{const {\bf \-M3\-V3d} \&}]{xa, }
+\item[{const {\bf \-Vector6d} \&}]{dx}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dManifold_ab3c4214c996bc322ef43932ab9fecb60}
+
+
+\-References \-Instance().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/{\bf body2dmanifold.\-h}\item 
+lib/systems/manifolds/{\bf body2dmanifold.\-cc}\end{DoxyCompactItemize}

@@ -1,0 +1,219 @@
+\section{gcop\-:\-:\-Joint \-Class \-Reference}
+\label{classgcop_1_1Joint}\index{gcop\-::\-Joint@{gcop\-::\-Joint}}
+
+
+{\ttfamily \#include $<$joint.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Joint} ()
+\item 
+{\bf \-Joint} (const {\bf \-Vector6d} \&{\bf a}, const {\bf \-Matrix4d} \&{\bf gp}, const {\bf \-Matrix4d} \&{\bf gc}, double {\bf damping}=0, double {\bf friction}=0)
+\item 
+virtual {\bf $\sim$\-Joint} ()
+\item 
+void {\bf \-Init} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Vector6d} {\bf a}
+\begin{DoxyCompactList}\small\item\em axis \end{DoxyCompactList}\item 
+{\bf \-Matrix4d} {\bf gp}
+\begin{DoxyCompactList}\small\item\em fixed xform from parent to joint \end{DoxyCompactList}\item 
+{\bf \-Matrix4d} {\bf gc}
+\begin{DoxyCompactList}\small\item\em fixed xfom from child to joint \end{DoxyCompactList}\item 
+double {\bf damping}
+\begin{DoxyCompactList}\small\item\em damping terms\-: \-Ns/m for trans or \-Nm s/rad for rev \end{DoxyCompactList}\item 
+double {\bf friction}
+\begin{DoxyCompactList}\small\item\em static friction\-: \-N for prismatic, \-Nm for rev \end{DoxyCompactList}\item 
+double {\bf lower}
+\begin{DoxyCompactList}\small\item\em lower limit (for revolute or prismatic joints) \end{DoxyCompactList}\item 
+double {\bf upper}
+\begin{DoxyCompactList}\small\item\em upper limit (for revolute or prismatic joints) \end{DoxyCompactList}\item 
+{\bf \-Matrix6d} {\bf \-Ac}
+\begin{DoxyCompactList}\small\item\em change of frame \-Ad(gc) \end{DoxyCompactList}\item 
+{\bf \-Matrix4d} {\bf gpi}
+\begin{DoxyCompactList}\small\item\em from parent to joint inverse \end{DoxyCompactList}\item 
+{\bf \-Matrix4d} {\bf gci}
+\begin{DoxyCompactList}\small\item\em from child to joint inverse \end{DoxyCompactList}\item 
+{\bf \-Vector6d} {\bf \-S}
+\begin{DoxyCompactList}\small\item\em \-Jacobian \-S=\-Ac$\ast$a. \end{DoxyCompactList}\item 
+string {\bf name}
+\begin{DoxyCompactList}\small\item\em \-Unique name of the joint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!\-Joint@{\-Joint}}
+\index{\-Joint@{\-Joint}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{\-Joint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Joint\-::\-Joint} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Joint_a79a7a4715b2166714e039d7c7c5ea3b4}
+
+
+\-References \-Init().
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!\-Joint@{\-Joint}}
+\index{\-Joint@{\-Joint}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{\-Joint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Joint\-::\-Joint} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vector6d} \&}]{a, }
+\item[{const {\bf \-Matrix4d} \&}]{gp, }
+\item[{const {\bf \-Matrix4d} \&}]{gc, }
+\item[{double}]{damping = {\ttfamily 0}, }
+\item[{double}]{friction = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Joint_a69137f93c644504ea0cb391a71335c90}
+
+
+\-References \-Init().
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!$\sim$\-Joint@{$\sim$\-Joint}}
+\index{$\sim$\-Joint@{$\sim$\-Joint}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{$\sim$\-Joint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Joint\-::$\sim$\-Joint} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Joint_a42aca0bd1832136984923713127c28f1}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!\-Init@{\-Init}}
+\index{\-Init@{\-Init}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{\-Init}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Joint\-::\-Init} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Joint_af7576b5b19a50ec66edcb1160dbc020f}
+
+
+\-References a, \-Ac, gcop\-::\-S\-E3\-::\-Ad(), gc, gci, gp, gpi, gcop\-::\-S\-E3\-::\-Instance(), gcop\-::\-S\-E3\-::inv(), and \-S.
+
+
+
+\-Referenced by gcop\-::\-Mbs\-::\-Init(), and \-Joint().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!a@{a}}
+\index{a@{a}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{a}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Vector6d} {\bf gcop\-::\-Joint\-::a}}\label{classgcop_1_1Joint_adb940b014ee1d589d4452aeac06a2f84}
+
+
+axis 
+
+
+
+\-Referenced by \-Init(), and gcop\-::\-Mbs\-::\-K\-Step().
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!\-Ac@{\-Ac}}
+\index{\-Ac@{\-Ac}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{\-Ac}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Matrix6d} {\bf gcop\-::\-Joint\-::\-Ac}}\label{classgcop_1_1Joint_ae41a13299ca2304e7ffd99935d1f3492}
+
+
+change of frame \-Ad(gc) 
+
+
+
+\-Referenced by \-Init().
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!damping@{damping}}
+\index{damping@{damping}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{damping}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Joint\-::damping}}\label{classgcop_1_1Joint_a5f06aeea2b1386a9b92e3191cc2ffbfd}
+
+
+damping terms\-: \-Ns/m for trans or \-Nm s/rad for rev 
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!friction@{friction}}
+\index{friction@{friction}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{friction}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Joint\-::friction}}\label{classgcop_1_1Joint_ac0ba80740559bff26a8efed067f49c0b}
+
+
+static friction\-: \-N for prismatic, \-Nm for rev 
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!gc@{gc}}
+\index{gc@{gc}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{gc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Matrix4d} {\bf gcop\-::\-Joint\-::gc}}\label{classgcop_1_1Joint_aa272c4acc42a5a662698b405674ba150}
+
+
+fixed xfom from child to joint 
+
+
+
+\-Referenced by \-Init().
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!gci@{gci}}
+\index{gci@{gci}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{gci}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Matrix4d} {\bf gcop\-::\-Joint\-::gci}}\label{classgcop_1_1Joint_a6450f6d8290e6eabe5c8155335a3da40}
+
+
+from child to joint inverse 
+
+
+
+\-Referenced by \-Init(), and gcop\-::\-Mbs\-::\-K\-Step().
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!gp@{gp}}
+\index{gp@{gp}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{gp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Matrix4d} {\bf gcop\-::\-Joint\-::gp}}\label{classgcop_1_1Joint_a49945d837def8ab298ae1005dd7c58c1}
+
+
+fixed xform from parent to joint 
+
+
+
+\-Referenced by \-Init(), and gcop\-::\-Mbs\-::\-K\-Step().
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!gpi@{gpi}}
+\index{gpi@{gpi}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{gpi}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Matrix4d} {\bf gcop\-::\-Joint\-::gpi}}\label{classgcop_1_1Joint_aef47b35befb349f6607097469711b680}
+
+
+from parent to joint inverse 
+
+
+
+\-Referenced by \-Init().
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!lower@{lower}}
+\index{lower@{lower}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{lower}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Joint\-::lower}}\label{classgcop_1_1Joint_a62dbb35aeea978593681a35ab032ed04}
+
+
+lower limit (for revolute or prismatic joints) 
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!name@{name}}
+\index{name@{name}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf gcop\-::\-Joint\-::name}}\label{classgcop_1_1Joint_a254242f36d463fce5f4cf6726d7e0eba}
+
+
+\-Unique name of the joint. 
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!\-S@{\-S}}
+\index{\-S@{\-S}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{\-S}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Vector6d} {\bf gcop\-::\-Joint\-::\-S}}\label{classgcop_1_1Joint_a63ecd2d3a30145d64c2162f8d28fa519}
+
+
+\-Jacobian \-S=\-Ac$\ast$a. 
+
+
+
+\-Referenced by \-Init(), and gcop\-::\-Mbs\-::\-Newton\-Euler\-Jacobian().
+
+\index{gcop\-::\-Joint@{gcop\-::\-Joint}!upper@{upper}}
+\index{upper@{upper}!gcop::Joint@{gcop\-::\-Joint}}
+\subsubsection[{upper}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Joint\-::upper}}\label{classgcop_1_1Joint_a28783c68c2aa56485259047a455df999}
+
+
+upper limit (for revolute or prismatic joints) 
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf joint.\-h}\item 
+lib/systems/{\bf joint.\-cc}\end{DoxyCompactItemize}

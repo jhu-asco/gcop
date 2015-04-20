@@ -1,0 +1,329 @@
+\section{gcop\-:\-:\-Trajectory$<$ \-T, nx, nu, np, \-\_\-ns $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Trajectory}\index{gcop\-::\-Trajectory$<$ T, nx, nu, np, \-\_\-ns $>$@{gcop\-::\-Trajectory$<$ T, nx, nu, np, \-\_\-ns $>$}}
+
+
+{\ttfamily \#include $<$trajectory.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Trajectory$<$ \-T, nx, nu, np, \-\_\-ns $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Trajectory__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, nx, nx $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, nx, nu $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, nu, nx $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, nu, nu $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, {\bf np}, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ns, 1 $>$ {\bf \-Vectorsd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Trajectory} (const {\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&{\bf sys}, int {\bf ns}=0, int \-N=0)
+\item 
+virtual {\bf $\sim$\-Trajectory} ()
+\item 
+virtual bool {\bf \-Update} ()
+\item 
+virtual bool {\bf \-Get} (\-T \&x, {\bf \-Vectorcd} \&u, double t) const 
+\item 
+int {\bf \-Get} (double t) const 
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em mechanical system \end{DoxyCompactList}\item 
+int {\bf ns}
+\begin{DoxyCompactList}\small\item\em trajectory parameter dimension \end{DoxyCompactList}\item 
+{\bf \-Vectorsd} {\bf s}
+\begin{DoxyCompactList}\small\item\em continuous trajectory parametrization vector (this given vector should uniqely determine the whole continuous trajectory, typically together with a given initial state x0 and initial time t0). \-Examples of what s should be include\-: 1) simply a discrete sequence of constant controls applied during each discrete time-\/segment (this is the default -\/-\/ in which case, s represents the sequence of controls us); 2) interpolating points for more general control curve parametrization using spline basis functions, 3) interpolating points for flat output parametrization using spline basis functions, 4) both control, state, and static params parametrizations often requires for direct collocation/multiple-\/shooting methods. \end{DoxyCompactList}\item 
+vector$<$ double $>$ {\bf ts}
+\begin{DoxyCompactList}\small\item\em sequence of times (length is \-N+1, and always at least 1 element, the first is the start time t0) \end{DoxyCompactList}\item 
+vector$<$ \-T $>$ {\bf xs}
+\begin{DoxyCompactList}\small\item\em sequence of states (length is \-N+1, and always at least 1, the first is the start state x0) \end{DoxyCompactList}\item 
+vector$<$ {\bf \-Vectorcd} $>$ {\bf us}
+\begin{DoxyCompactList}\small\item\em sequence of controls (length is \-N), i.\-e. i-\/th control is regarded as the average control input over i-\/th segment \end{DoxyCompactList}\item 
+{\bf \-Vectormd} {\bf p}
+\begin{DoxyCompactList}\small\item\em static parameters (could be none) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$class gcop\-::\-Trajectory$<$ T, nx, nu, np, \-\_\-ns $>$}
+
+\-Basic control system trajectory represented by a set of discrete nodes
+
+\-This should serve as a base class for implementing trajectories for a particular mechanical system described by the \doxyref{\-System}{p.}{classgcop_1_1System} class
+
+\-Author\-: \-Marin \-Kobilarov -\/-\/ \-Copyright (\-C) 2006 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ typedef \-Matrix$<$double, nu, nu$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1Trajectory_a48d7fc949d1cd2adf0505902a4fd0df1}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ typedef \-Matrix$<$double, nu, nx$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1Trajectory_a02568414518088e5e4096bdbfc11ffc6}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ typedef \-Matrix$<$double, nx, nu$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1Trajectory_a982b50e1027f096dc29fdaa5946b60e7}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ typedef \-Matrix$<$double, nx, nx$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1Trajectory_a260655a7e1aca3f9620d85babd04a29a}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ typedef \-Matrix$<$double, nu, 1$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Trajectory_ab518cf0429ef16d4a2a599e24bd8bb07}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ typedef \-Matrix$<$double, {\bf np}, 1$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1Trajectory_a113b386b2d64101c36c1e8f5af8d7b1c}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ typedef \-Matrix$<$double, nx, 1$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Trajectory_a47c96c52b77d68b84eafe200aed0add8}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Vectorsd@{\-Vectorsd}}
+\index{\-Vectorsd@{\-Vectorsd}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Vectorsd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ns, 1$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Vectorsd}}\label{classgcop_1_1Trajectory_a63607d48c1ec2fb353959141b97ccf21}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Trajectory@{\-Trajectory}}
+\index{\-Trajectory@{\-Trajectory}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Trajectory}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Trajectory} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&}]{sys, }
+\item[{int}]{ns = {\ttfamily 0}, }
+\item[{int}]{\-N = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Trajectory_a582af0b15be9cb51237a7c6f06a28d3c}
+\-Initialize a trajectory for the system sys \-Once a trajectory is initialized with this constructor one should call \-Init(sn,...) with the appropriate number of discrete points desired. \-Otherwise the trajectory would contain only one point (usually the origin) 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & mechanical system \\
+\hline
+{\em sn} & trajectory parametrization vector length \\
+\hline
+{\em \-N} & number of discrete segments (optional)\\
+\hline
+\end{DoxyParams}
+\-Output the trajectory to a stream 
+\begin{DoxyParams}{\-Parameters}
+{\em os} & output stream \\
+\hline
+{\em traj} & trajectory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+the output stream template $<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ std\-::ostream\& operator$<$$<$(std\-::ostream \&os, const gcop\-::\-Trajectory$<$\-T, nx, nu, np, \-\_\-ns$>$ \&traj); \-Input the trajectory from a stream 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em is} & input stream \\
+\hline
+{\em traj} & trajectory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+the input stream template $<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ std\-::istream\& operator$>$$>$(std\-::istream \&is, gcop\-::\-Trajectory$<$\-T, nx, nu, np, \-\_\-ns$>$ \&traj); 
+\end{DoxyReturn}
+
+
+\-References gcop\-::\-Trajectory$<$ T, nx, nu, np, \-\_\-ns $>$\-::s.
+
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!$\sim$\-Trajectory@{$\sim$\-Trajectory}}
+\index{$\sim$\-Trajectory@{$\sim$\-Trajectory}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{$\sim$\-Trajectory}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ virtual {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::$\sim${\bf \-Trajectory} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Trajectory_a6b40cf5e40793adf1be976ef0967a697}
+\-Copy constructor 
+\begin{DoxyParams}{\-Parameters}
+{\em traj} & a trajectory \-Copy assignment \\
+\hline
+{\em traj} & a trajectory \-Initialize a trajectory from a serialized stream \\
+\hline
+{\em sys} & mechanical system \\
+\hline
+{\em istr} & stream \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Get@{\-Get}}
+\index{\-Get@{\-Get}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int \-\_\-ns$>$ bool {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Get} (
+\begin{DoxyParamCaption}
+\item[{\-T \&}]{x, }
+\item[{{\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Trajectory_accb6cee6bd2793bf6fc07c8c0baea900}
+\-Resize the discrete trajectory keeping any previous states and if necessary adding empty states at the end. 
+\begin{DoxyParams}{\-Parameters}
+{\em sn} & new number of discrete segments \-Reverse the states+control alongs trajectory. keep same times \-Initialize the trajectory using sn segments and optionally (if both si and sf are povided) interpolate the states between states si and sf. \-In fact, \-Init(sn) is equivalent to \-Resize(sn). \\
+\hline
+{\em sn} & number of segments \\
+\hline
+{\em si} & start state (optional) \\
+\hline
+{\em sf} & final state (optional) \-Attach trajectory traj to this trajectory. \-This trajectory is modified and its size becomes as explained below. \-This operation is fairly efficient since it is based on raw memory manipulation. \\
+\hline
+{\em traj} & trajectory to be attached \\
+\hline
+{\em back} & if true attach to back of this trajectory, else to the front \\
+\hline
+{\em time} & if true then adjust time along the newly added states by incrementing/decrementing each state's time based on the last/first state's time in the current trajectory depending on whether attaching to back/front, respectively. \\
+\hline
+{\em js} & if true then treat the end point of this trajectory and the first point of the given trajectory traj as the same points (with same time)-\/-\/in this case the total number of segments would be this-\/$>$sn + traj.\-sn, otherwise it is this-\/$>$sn + traj.\-sn + 1 void \-Attach(const \-Trajectory$<$\-T, nx, nu, np, \-\_\-ns$>$ \&traj, bool back = true, bool time = false, bool js = true); \-Append a state to the end of this trajectory \\
+\hline
+{\em s} & state to be attached \-Clear all states along this trajectory and free associated memory. \-Set the path times starting from t0 with timestep h\\
+\hline
+{\em t0} & start time \\
+\hline
+{\em h} & time step \-Get the state at time t (t should already be set in the state s) t should be in the valid range of trajectory times. \-This uses the base interpolation define in \-System\-::\-Get. \-For now this method assumes that all segments have equal time duration.\\
+\hline
+{\em x} & state \\
+\hline
+{\em u} & control \\
+\hline
+{\em t} & time \\
+\hline
+{\em p} & static parameter (optional) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if arguments are feasible 
+\end{DoxyReturn}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Get@{\-Get}}
+\index{\-Get@{\-Get}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int \-\_\-ns$>$ int {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Get} (
+\begin{DoxyParamCaption}
+\item[{double}]{t}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Trajectory_afa2e5818e5fec593be911bb2da65b7ff}
+\-Get the index of trajectory segment in which time t falls. \-For now this method assumes that all segments have equal time duration. 
+\begin{DoxyParams}{\-Parameters}
+{\em t} & time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+discrete trajectory segment where t falls (returns -\/1 if t is out of bounds) 
+\end{DoxyReturn}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!\-Update@{\-Update}}
+\index{\-Update@{\-Update}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int \-\_\-ns$>$ void {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf \-Update} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Trajectory_acf6b5804ef43e3ba769212b007923ce1}
+\-Clone the trajectory \begin{DoxyReturn}{\-Returns}
+a copy of this trajectory \-Updates the discrete trajectory using the parameter vector s, i.\-e. \-: s -\/$>$ (ts,xs,us,p) 
+
+true if the resulting discrete trajectory is feasible 
+\end{DoxyReturn}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!ns@{ns}}
+\index{ns@{ns}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{ns}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ int {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf ns}}\label{classgcop_1_1Trajectory_a5e1c9a4e6b51cd961730aebcf4c624a5}
+
+
+trajectory parameter dimension 
+
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!p@{p}}
+\index{p@{p}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{p}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ {\bf \-Vectormd} {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf p}}\label{classgcop_1_1Trajectory_a6746124f52790efa954a031f0402502c}
+
+
+static parameters (could be none) 
+
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!s@{s}}
+\index{s@{s}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{s}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ {\bf \-Vectorsd} {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf s}}\label{classgcop_1_1Trajectory_a24dcfe9311a21200a8d69297f1349f74}
+
+
+continuous trajectory parametrization vector (this given vector should uniqely determine the whole continuous trajectory, typically together with a given initial state x0 and initial time t0). \-Examples of what s should be include\-: 1) simply a discrete sequence of constant controls applied during each discrete time-\/segment (this is the default -\/-\/ in which case, s represents the sequence of controls us); 2) interpolating points for more general control curve parametrization using spline basis functions, 3) interpolating points for flat output parametrization using spline basis functions, 4) both control, state, and static params parametrizations often requires for direct collocation/multiple-\/shooting methods. 
+
+
+
+\-Referenced by gcop\-::\-Trajectory$<$ T, nx, nu, np, \-\_\-ns $>$\-::\-Trajectory().
+
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!sys@{sys}}
+\index{sys@{sys}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ const {\bf \-System}$<$\-T, nx, nu, {\bf np}$>$\& {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf sys}}\label{classgcop_1_1Trajectory_ae04ee50fc6e4c51f7939a35656d6c6cb}
+
+
+mechanical system 
+
+\-Get a subtrajectory given two starting times. \-Utilizes the \-System\-::\-Get implementation. 
+\begin{DoxyParams}{\-Parameters}
+{\em traj} & to be filled in (the number of discrete segments traj.\-sn is used to determine the time step, so the discrete length of traj is not modified). \-Hence, one should pass traj with already existing states, and with traj-\/$>$sn $>$0. \-If traj-\/$>$sn=0 then just use \-Get\-State. \\
+\hline
+{\em ti} & initial time (must be within this trajectory) \\
+\hline
+{\em tf} & final time (must be within this trajectory) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if arguments are feasible \-Add a point interpolated at s inside every trajectory segment new trajectory has 2$\ast$sn+1 points 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em a} & number in [0,1] indicating where inside the segment to put the new point \-Resample the trajectory using sn new equaly spaced segments \\
+\hline
+{\em sn} & new number of discrete segments \-Add mn new states to the trajectory after points with indices in mi and interpolated between states at indices mi[i] and mi[i+1] using the number mu[i] in [0,1]. \\
+\hline
+{\em mn} & number of new states to insert in the trajectory \\
+\hline
+{\em mi} & (mn-\/array) indices of old states after which the new point will be inserted \\
+\hline
+{\em mu} & (mn-\/array) numbers in the range [0,1] indicating where in the mi[i]-\/th segment the new state will be interpolated \-Checks whether this trajectory contains time t \\
+\hline
+{\em t} & given time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if t is between the start and end times of the trajectory 
+\end{DoxyReturn}
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!ts@{ts}}
+\index{ts@{ts}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ vector$<$double$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf ts}}\label{classgcop_1_1Trajectory_a5b96d4187cba8f4cbc69601728e1ffb3}
+
+
+sequence of times (length is \-N+1, and always at least 1 element, the first is the start time t0) 
+
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!us@{us}}
+\index{us@{us}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ vector$<${\bf \-Vectorcd}$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf us}}\label{classgcop_1_1Trajectory_ac12d97749b65e6c9c6caba279d9e0206}
+
+
+sequence of controls (length is \-N), i.\-e. i-\/th control is regarded as the average control input over i-\/th segment 
+
+\index{gcop\-::\-Trajectory@{gcop\-::\-Trajectory}!xs@{xs}}
+\index{xs@{xs}!gcop::Trajectory@{gcop\-::\-Trajectory}}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ns = \-Dynamic$>$ vector$<$\-T$>$ {\bf gcop\-::\-Trajectory}$<$ \-T, nx, nu, {\bf np}, \-\_\-ns $>$\-::{\bf xs}}\label{classgcop_1_1Trajectory_ab9f56dcc911ead31affe25cfdc7b048c}
+
+
+sequence of states (length is \-N+1, and always at least 1, the first is the start state x0) 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/parametrization/{\bf trajectory.\-h}\end{DoxyCompactItemize}

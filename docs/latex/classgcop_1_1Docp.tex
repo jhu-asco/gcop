@@ -1,0 +1,260 @@
+\section{gcop\-:\-:\-Docp$<$ \-T, nx, nu, np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Docp}\index{gcop\-::\-Docp$<$ T, nx, nu, np $>$@{gcop\-::\-Docp$<$ T, nx, nu, np $>$}}
+
+
+{\ttfamily \#include $<$docp.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Docp$<$ \-T, nx, nu, np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Docp__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Docp$<$ \-T, nx, nu, np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Docp__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Docp} ({\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, nx, nu, {\bf np} $>$ \&{\bf cost}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd $\ast${\bf p}=0, bool update=true)
+\item 
+virtual {\bf $\sim$\-Docp} ()
+\item 
+virtual void {\bf \-Iterate} ()
+\item 
+void {\bf \-Update} (bool der=true)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em dynamical system \end{DoxyCompactList}\item 
+{\bf \-Cost}$<$ \-T, nx, nu, {\bf np} $>$ \& {\bf cost}
+\begin{DoxyCompactList}\small\item\em given cost function \end{DoxyCompactList}\item 
+std\-::vector$<$ double $>$ \& {\bf ts}
+\begin{DoxyCompactList}\small\item\em times (\-N+1) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-T $>$ \& {\bf xs}
+\begin{DoxyCompactList}\small\item\em states (\-N+1) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Vectorcd $>$ \& {\bf us}
+\begin{DoxyCompactList}\small\item\em controls (\-N) vector \end{DoxyCompactList}\item 
+\-Vectormd $\ast$ {\bf p}
+\begin{DoxyCompactList}\small\item\em parameter vector \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Matrixnd $>$ {\bf \-As}
+\begin{DoxyCompactList}\small\item\em state jacobians along the path (computed internally) \end{DoxyCompactList}\item 
+std\-::vector$<$ \-Matrixncd $>$ {\bf \-Bs}
+\begin{DoxyCompactList}\small\item\em control jacobians along the path (computed internally) \end{DoxyCompactList}\item 
+bool {\bf debug}
+\begin{DoxyCompactList}\small\item\em whether to display debugging info \end{DoxyCompactList}\item 
+double {\bf eps}
+\begin{DoxyCompactList}\small\item\em epsilon used for finite differences \end{DoxyCompactList}\item 
+double {\bf \-J}
+\begin{DoxyCompactList}\small\item\em \-Optimal cost at any point of time. \end{DoxyCompactList}\item 
+int {\bf nofevaluations}
+\begin{DoxyCompactList}\small\item\em \-Number of \doxyref{\-Function}{p.}{classgcop_1_1Function} evaluations at any point of time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ class gcop\-::\-Docp$<$ T, nx, nu, np $>$}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!\-Docp@{\-Docp}}
+\index{\-Docp@{\-Docp}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{\-Docp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx, int nu, int np$>$ {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Docp} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&}]{sys, }
+\item[{{\bf \-Cost}$<$ \-T, nx, nu, {\bf np} $>$ \&}]{cost, }
+\item[{vector$<$ double $>$ \&}]{ts, }
+\item[{vector$<$ \-T $>$ \&}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{\-Vectormd $\ast$}]{p = {\ttfamily 0}, }
+\item[{bool}]{update = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Docp_ad6f2649ceeace2480fa9a1462be84aee}
+\-Create a discrete optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. \-The times ts must be given, the initial state xs[0] must be set, and the controls us will be used as an initial guess for the optimization.
+
+\-After initialization, every call to \doxyref{\-Iterate()}{p.}{classgcop_1_1Docp_a37958d1614b2b54ac457cc7ee55302e6} will optimize the controls us and states xs and modify them accordingly. \-Problems involving time-\/optimization will also modify the sequence of times ts.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & system \\
+\hline
+{\em cost} & cost \\
+\hline
+{\em ts} & (\-N+1) sequence of discrete times \\
+\hline
+{\em xs} & (\-N+1) sequence of discrete states \\
+\hline
+{\em us} & (\-N) sequence of control inputs \\
+\hline
+{\em update} & whether to update trajectory xs using initial state xs[0] and inputs us. \-This is necessary only if xs was not already generated from us. \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::\-As, gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::\-Bs, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-U, gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::\-Update(), gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::us, and gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-X.
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!$\sim$\-Docp@{$\sim$\-Docp}}
+\index{$\sim$\-Docp@{$\sim$\-Docp}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{$\sim$\-Docp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::$\sim${\bf \-Docp} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Docp_a337b6b3448fe5708cab1a69ee8f9ab84}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!\-Iterate@{\-Iterate}}
+\index{\-Iterate@{\-Iterate}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{\-Iterate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ void {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Iterate} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Docp_a37958d1614b2b54ac457cc7ee55302e6}
+\-Perform one \-D\-O\-C\-P iteration. 
+
+\-Reimplemented in {\bf gcop\-::\-Gn\-Docp$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1GnDocp_a4dddc096ff04a60130bf6d5a9d4b8c08}, {\bf gcop\-::\-Gn\-Docp$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1GnDocp_a4dddc096ff04a60130bf6d5a9d4b8c08}, {\bf gcop\-::\-P\-Ddp$<$ T, n, c, np $>$} \doxyref{}{p.}{classgcop_1_1PDdp_a55ba4e6aadf93ace9dd347d9b3b64fb9}, {\bf gcop\-::\-P\-Ddp$<$ M3\-V3d, 6, 3 $>$} \doxyref{}{p.}{classgcop_1_1PDdp_a55ba4e6aadf93ace9dd347d9b3b64fb9}, {\bf gcop\-::\-P\-Ddp$<$ Matrix3d, 3, 3 $>$} \doxyref{}{p.}{classgcop_1_1PDdp_a55ba4e6aadf93ace9dd347d9b3b64fb9}, {\bf gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$} \doxyref{}{p.}{classgcop_1_1SDdp_a0cb2fcbfbd573829e05caea1afe8c4ad}, {\bf gcop\-::\-Tparam\-Docp$<$ T, nx, nu, np, nz, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1TparamDocp_a3bdc035e8b3819dcdef4c436c197bb43}, {\bf gcop\-::\-Ddp$<$ T, nx, nu, np $>$} \doxyref{}{p.}{classgcop_1_1Ddp_a3734cfb67cda474bb2b7a1c35d5014c1}, {\bf gcop\-::\-Ddp$<$ Matrix3d, n, c, Dynamic $>$} \doxyref{}{p.}{classgcop_1_1Ddp_a3734cfb67cda474bb2b7a1c35d5014c1}, {\bf gcop\-::\-Ddp$<$ M3\-V3d, n, c, Dynamic $>$} \doxyref{}{p.}{classgcop_1_1Ddp_a3734cfb67cda474bb2b7a1c35d5014c1}, and {\bf gcop\-::\-Ddp$<$ T, n, c, np $>$} \doxyref{}{p.}{classgcop_1_1Ddp_a3734cfb67cda474bb2b7a1c35d5014c1}.
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!\-Update@{\-Update}}
+\index{\-Update@{\-Update}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ void {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Update} (
+\begin{DoxyParamCaption}
+\item[{bool}]{der = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Docp_aa6746bb24a374c236b2d1c669dfa7f38}
+\-Update the trajectory and (optionally) its linearization 
+\begin{DoxyParams}{\-Parameters}
+{\em der} & whether to update derivatives (\-A and \-B matrices) \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented in {\bf gcop\-::\-P\-Ddp$<$ T, n, c, np $>$} \doxyref{}{p.}{classgcop_1_1PDdp_ad95aa30591f2992fe48b74cb9eba33e2}, {\bf gcop\-::\-P\-Ddp$<$ M3\-V3d, 6, 3 $>$} \doxyref{}{p.}{classgcop_1_1PDdp_ad95aa30591f2992fe48b74cb9eba33e2}, and {\bf gcop\-::\-P\-Ddp$<$ Matrix3d, 3, 3 $>$} \doxyref{}{p.}{classgcop_1_1PDdp_ad95aa30591f2992fe48b74cb9eba33e2}.
+
+
+
+\-Referenced by gcop\-::\-Ddp$<$ T, nx, nu, np $>$\-::\-Ddp(), gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::\-Docp(), and gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!\-As@{\-As}}
+\index{\-As@{\-As}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{\-As}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-Matrixnd$>$ {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-As}}\label{classgcop_1_1Docp_a01777ae0cce4bb29237a5de45b9bf017}
+
+
+state jacobians along the path (computed internally) 
+
+
+
+\-Referenced by gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::\-Docp().
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!\-Bs@{\-Bs}}
+\index{\-Bs@{\-Bs}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{\-Bs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-Matrixncd$>$ {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Bs}}\label{classgcop_1_1Docp_a7dd78da760b49c6c8db5f79e7a083cc1}
+
+
+control jacobians along the path (computed internally) 
+
+
+
+\-Referenced by gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::\-Docp().
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!cost@{cost}}
+\index{cost@{cost}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{cost}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ {\bf \-Cost}$<$\-T, nx, nu, {\bf np}$>$\& {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf cost}}\label{classgcop_1_1Docp_a2c3eb3fa35e821dad75a782514475748}
+
+
+given cost function 
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!debug@{debug}}
+\index{debug@{debug}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{debug}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ bool {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf debug}}\label{classgcop_1_1Docp_a9620fc41b6e4cb6084dea50aafe90c93}
+
+
+whether to display debugging info 
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!eps@{eps}}
+\index{eps@{eps}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{eps}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf eps}}\label{classgcop_1_1Docp_a508b06b46a1824e723583d52d8fb6536}
+
+
+epsilon used for finite differences 
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!\-J@{\-J}}
+\index{\-J@{\-J}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{\-J}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ double {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-J}}\label{classgcop_1_1Docp_a7767a0c878182cf65f7f68e953ffae94}
+
+
+\-Optimal cost at any point of time. 
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!nofevaluations@{nofevaluations}}
+\index{nofevaluations@{nofevaluations}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{nofevaluations}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ int {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf nofevaluations}}\label{classgcop_1_1Docp_a0ecbfea6348be3f3a397450cb4023705}
+
+
+\-Number of \doxyref{\-Function}{p.}{classgcop_1_1Function} evaluations at any point of time. 
+
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!p@{p}}
+\index{p@{p}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{p}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ \-Vectormd$\ast$ {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf p}}\label{classgcop_1_1Docp_a93762938f39add62c7824fbd96f4d936}
+
+
+parameter vector 
+
+
+
+\-Reimplemented in {\bf gcop\-::\-P\-Ddp$<$ T, n, c, np $>$} \doxyref{}{p.}{classgcop_1_1PDdp_a135830be9b7e018932b2e1c65a0b02de}, {\bf gcop\-::\-P\-Ddp$<$ M3\-V3d, 6, 3 $>$} \doxyref{}{p.}{classgcop_1_1PDdp_a135830be9b7e018932b2e1c65a0b02de}, and {\bf gcop\-::\-P\-Ddp$<$ Matrix3d, 3, 3 $>$} \doxyref{}{p.}{classgcop_1_1PDdp_a135830be9b7e018932b2e1c65a0b02de}.
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!sys@{sys}}
+\index{sys@{sys}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ {\bf \-System}$<$\-T, nx, nu, {\bf np}$>$\& {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf sys}}\label{classgcop_1_1Docp_a55dd27ded9defc7d6e8cf10f7a003d7c}
+
+
+dynamical system 
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!ts@{ts}}
+\index{ts@{ts}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$double$>$\& {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf ts}}\label{classgcop_1_1Docp_af343a0d2c5e2f8a9a13abe91f8767f00}
+
+
+times (\-N+1) vector 
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!us@{us}}
+\index{us@{us}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-Vectorcd$>$\& {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf us}}\label{classgcop_1_1Docp_a4cdef87c87048d43a9ede672410e58ee}
+
+
+controls (\-N) vector 
+
+
+
+\-Referenced by gcop\-::\-Ddp$<$ T, nx, nu, np $>$\-::\-Ddp(), gcop\-::\-Docp$<$ T, nx, nu, np $>$\-::\-Docp(), and gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+\index{gcop\-::\-Docp@{gcop\-::\-Docp}!xs@{xs}}
+\index{xs@{xs}!gcop::Docp@{gcop\-::\-Docp}}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic$>$ std\-::vector$<$\-T$>$\& {\bf gcop\-::\-Docp}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf xs}}\label{classgcop_1_1Docp_a0c783b8498e8f2111da9229b68e766f9}
+
+
+states (\-N+1) vector 
+
+
+
+\-Referenced by gcop\-::\-S\-Ddp$<$ T, nx, nu, np $>$\-::\-S\-Ddp().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf docp.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,95 @@
+\section{gcop\-:\-:\-Mbs\-Cspace \-Class \-Reference}
+\label{classgcop_1_1MbsCspace}\index{gcop\-::\-Mbs\-Cspace@{gcop\-::\-Mbs\-Cspace}}
+
+
+{\ttfamily \#include $<$mbscspace.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Mbs\-Cspace\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{classgcop_1_1MbsCspace__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Mbs\-Cspace\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{classgcop_1_1MbsCspace__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Mbs\-Cspace} (int nb)
+\item 
+void {\bf \-Lift} ({\bf \-Vectornd} \&v, const {\bf \-Mbs\-State} \&xa, const {\bf \-Mbs\-State} \&xb)
+\item 
+void {\bf \-Retract} ({\bf \-Mbs\-State} \&xb, const {\bf \-Mbs\-State} \&xa, const \-Vector\-Xd \&v)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Mbs\-Cspace@{gcop\-::\-Mbs\-Cspace}!\-Mbs\-Cspace@{\-Mbs\-Cspace}}
+\index{\-Mbs\-Cspace@{\-Mbs\-Cspace}!gcop::MbsCspace@{gcop\-::\-Mbs\-Cspace}}
+\subsubsection[{\-Mbs\-Cspace}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mbs\-Cspace\-::\-Mbs\-Cspace} (
+\begin{DoxyParamCaption}
+\item[{int}]{nb}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1MbsCspace_a3c808fd8657b765cd962e5eff70dd59d}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Mbs\-Cspace@{gcop\-::\-Mbs\-Cspace}!\-Lift@{\-Lift}}
+\index{\-Lift@{\-Lift}!gcop::MbsCspace@{gcop\-::\-Mbs\-Cspace}}
+\subsubsection[{\-Lift}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-Cspace\-::\-Lift} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectornd} \&}]{v, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{const {\bf \-Mbs\-State} \&}]{xb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1MbsCspace_a7663da0fbfdc7c3ba78eadd66992b6c7}
+\-Compute a lie algebra element corresponding to a group action between two given states on a manifold. \-This operation geometrically means that the curve from xa to xb is \char`\"{}lifted\char`\"{} to the tangent space of the manifold to a vector represented by the lie algebra element.
+
+\-The element can also be regarded as a difference between the two states xa and xb. \-On a vector space this is v = xb -\/ xa. \-On homogeneous manifolds v is a \-Lie algebra element corresponding to an action taking xa to xb.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em v} & \-Lie algebra element (regarded as difference between xb and xa) \\
+\hline
+{\em xa} & starting state \\
+\hline
+{\em xb} & ending state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf gcop\-::\-Manifold$<$ Mbs\-State $>$} \doxyref{}{p.}{classgcop_1_1Manifold_acaf14615d53a97cebe2312eecc8bc12b}.
+
+
+
+\-References gcop\-::\-Group$<$ n, m $>$\-::cayinv(), gcop\-::\-Mbs\-State\-::gs, gcop\-::\-S\-E3\-::\-Instance(), gcop\-::\-S\-E3\-::inv(), and gcop\-::\-Mbs\-State\-::r.
+
+\index{gcop\-::\-Mbs\-Cspace@{gcop\-::\-Mbs\-Cspace}!\-Retract@{\-Retract}}
+\index{\-Retract@{\-Retract}!gcop::MbsCspace@{gcop\-::\-Mbs\-Cspace}}
+\subsubsection[{\-Retract}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-Cspace\-::\-Retract} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{xb, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{const \-Vector\-Xd \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1MbsCspace_aba1c38e2b62f8dc262f7e12c483e6f78}
+
+
+\-References gcop\-::\-S\-E3\-::cay(), gcop\-::\-Mbs\-State\-::gs, gcop\-::\-S\-E3\-::\-Instance(), and gcop\-::\-Mbs\-State\-::r.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/{\bf mbscspace.\-h}\item 
+lib/systems/manifolds/{\bf mbscspace.\-cc}\end{DoxyCompactItemize}

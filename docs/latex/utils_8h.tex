@@ -1,0 +1,467 @@
+\section{lib/utils/utils.h \-File \-Reference}
+\label{utils_8h}\index{lib/utils/utils.\-h@{lib/utils/utils.\-h}}
+{\ttfamily \#include $<$cstdlib$>$}\*
+{\ttfamily \#include $<$cmath$>$}\*
+{\ttfamily \#include $<$sys/time.\-h$>$}\*
+{\ttfamily \#include $<$cstring$>$}\*
+{\ttfamily \#include $<$iostream$>$}\*
+{\ttfamily \#include $<$stdio.\-h$>$}\*
+\-Include dependency graph for utils.\-h\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8h__incl}
+\end{center}
+\end{figure}
+\-This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{\-Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf gcop}
+\end{DoxyCompactItemize}
+\subsection*{\-Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf \-E\-P\-S}~(1e-\/10)
+\item 
+\#define {\bf \-I\-S\-Z\-E\-R\-O}(x)~(fabs(x)$<${\bf \-E\-P\-S})
+\item 
+\#define {\bf \-T\-I\-M\-E\-\_\-\-C\-M\-P}(a, b)~(a.\-tv\-\_\-sec != b.\-tv\-\_\-sec $|$$|$ a.\-tv\-\_\-usec != b.\-tv\-\_\-usec)
+\item 
+\#define {\bf \-S\-Q\-R}(a)~((a)$\ast$(a))
+\item 
+\#define {\bf \-S\-I\-G\-N}(a)~((a) $<$ 0 ? -\/1 \-: 1)
+\item 
+\#define {\bf \-D\-I\-S\-T}(a, b)~(sqrt(((a)[0]-\/(b)[0])$\ast$((a)[0]-\/(b)[0])+((a)[1]-\/(b)[1])$\ast$((a)[1]-\/(b)[1])))
+\item 
+\#define {\bf \-N\-O\-R\-M}(a)~(sqrt((a)[0]$\ast$(a)[0]+(a)[1]$\ast$(a)[1]))
+\item 
+\#define {\bf \-M\-I\-N\-U\-S}(c, a, b)~(c)[0]=(a)[0]-\/(b)[0];(c)[1]=(a)[1]-\/(b)[1];
+\item 
+\#define {\bf \-P\-L\-U\-S}(c, a, b)~(c)[0]=(a)[0]+(b)[0];(c)[1]=(a)[1]+(b)[1];
+\item 
+\#define {\bf \-D\-O\-T}(a, b)~((a)[0]$\ast$(b)[0]+(a)[1]$\ast$(b)[1])
+\item 
+\#define {\bf \-M\-U\-L\-T}(a, b, n)~(a)[0]=(b)[0]$\ast$(n);(a)[1]=(b)[1]$\ast$(n);
+\item 
+\#define {\bf \-D\-I\-V}(a, b, n)~(a)[0]=(b)[0]/(n);(a)[1]=(b)[1]/(n);
+\item 
+\#define {\bf \-D\-E\-T}(a, b)~((a)[0]$\ast$(b)[1]-\/(a)[1]$\ast$(b)[0])
+\item 
+\#define {\bf \-N\-E\-G}(a, b)~(a)[0]=-\/(b)[0];(a)[1]=-\/(b)[1];
+\item 
+\#define {\bf \-S\-E\-T}(a, b)~(a)[0]=(b)[0];(a)[1]=(b)[1];
+\item 
+\#define {\bf \-C\-L\-E\-A\-R}(a)~(a)[0]=0;(a)[1]=0;
+\item 
+\#define {\bf \-D\-I\-S\-T3}(a, b)~(sqrt({\bf \-S\-Q\-R}((a)[0]-\/(b)[0])+{\bf \-S\-Q\-R}((a)[1]-\/(b)[1])+{\bf \-S\-Q\-R}((a)[2]-\/(b)[2])))
+\item 
+\#define {\bf \-N\-O\-R\-M3}(a)~(sqrt((a)[0]$\ast$(a)[0]+(a)[1]$\ast$(a)[1]+(a)[2]$\ast$(a)[2]))
+\item 
+\#define {\bf \-M\-I\-N\-U\-S3}(c, a, b)~(c)[0]=(a)[0]-\/(b)[0];(c)[1]=(a)[1]-\/(b)[1];(c)[2]=(a)[2]-\/(b)[2];
+\item 
+\#define {\bf \-P\-L\-U\-S3}(c, a, b)~(c)[0]=(a)[0]+(b)[0];(c)[1]=(a)[1]+(b)[1];(c)[2]=(a)[2]+(b)[2];
+\item 
+\#define {\bf \-A\-V\-E3}(c, a, b)~(c)[0]=((a)[0]+(b)[0])/2;(c)[1]=((a)[1]+(b)[1])/2;(c)[2]=((a)[2]+(b)[2])/2;
+\item 
+\#define {\bf \-D\-O\-T3}(a, b)~((a)[0]$\ast$(b)[0]+(a)[1]$\ast$(b)[1]+(a)[2]$\ast$(b)[2])
+\item 
+\#define {\bf \-M\-U\-L\-T3}(a, b, n)~(a)[0]=(b)[0]$\ast$(n);(a)[1]=(b)[1]$\ast$(n);(a)[2]=(b)[2]$\ast$(n);
+\item 
+\#define {\bf \-D\-I\-V3}(a, b, n)~(a)[0]=(b)[0]/(n);(a)[1]=(b)[1]/(n);(a)[2]=(b)[2]/(n);
+\item 
+\#define {\bf \-N\-E\-G3}(a, b)~(a)[0]=-\/(b)[0];(a)[1]=-\/(b)[1];(a)[2]=-\/(b)[2];
+\item 
+\#define {\bf \-S\-E\-T3}(a, b)~(a)[0]=(b)[0];(a)[1]=(b)[1];(a)[2]=(b)[2];
+\item 
+\#define {\bf \-C\-L\-E\-A\-R3}(a)~(a)[0]=0;(a)[1]=0;(a)[2]=0;
+\item 
+\#define {\bf \-C\-R\-O\-S\-S}(c, a, b)~(c)[0]=(a)[1]$\ast$(b)[2]-\/(a)[2]$\ast$(b)[1]; (c)[1]=-\/(a)[0]$\ast$(b)[2]+(a)[2]$\ast$(b)[0]; (c)[2]=(a)[0]$\ast$(b)[1]-\/(a)[1]$\ast$(b)[0];
+\item 
+\#define {\bf \-N\-O\-R\-M4}(a)~(sqrt((a)[0]$\ast$(a)[0]+(a)[1]$\ast$(a)[1]+(a)[2]$\ast$(a)[2]+(a)[3]$\ast$(a)[3]))
+\item 
+\#define {\bf \-M\-I\-N\-U\-S4}(c, a, b)~(c)[0]=(a)[0]-\/(b)[0];(c)[1]=(a)[1]-\/(b)[1];(c)[2]=(a)[2]-\/(b)[2];(c)[3]=(a)[3]-\/(b)[3];
+\item 
+\#define {\bf \-P\-L\-U\-S4}(c, a, b)~(c)[0]=(a)[0]+(b)[0];(c)[1]=(a)[1]+(b)[1];(c)[2]=(a)[2]+(b)[2];(c)[3]=(a)[3]+(b)[3];
+\item 
+\#define {\bf \-M\-U\-L\-T4}(a, b, n)~(a)[0]=(b)[0]$\ast$(n);(a)[1]=(b)[1]$\ast$(n);(a)[2]=(b)[2]$\ast$(n);(a)[3]=(b)[3]$\ast$(n);
+\item 
+\#define {\bf \-D\-I\-V4}(a, b, n)~(a)[0]=(b)[0]/(n);(a)[1]=(b)[1]/(n);(a)[2]=(b)[2]/(n);(a)[3]=(b)[3]/(n);
+\item 
+\#define {\bf \-S\-E\-T4}(a, b)~(a)[0]=(b)[0];(a)[1]=(b)[1];(a)[2]=(b)[2];(a)[3]=(b)[3];
+\item 
+\#define {\bf \-C\-L\-E\-A\-R4}(a)~(a)[0]=0;(a)[1]=0;(a)[2]=0;(a)[3]=0;
+\item 
+\#define {\bf \-D\-I\-S\-T4}(a, b)~(sqrt({\bf \-S\-Q\-R}((a)[0]-\/(b)[0])+{\bf \-S\-Q\-R}((a)[1]-\/(b)[1])+{\bf \-S\-Q\-R}((a)[2]-\/(b)[2])+{\bf \-S\-Q\-R}((a)[3]-\/(b)[3])))
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf gcop\-::timer\-\_\-start} (struct timeval \&timer)
+\item 
+long {\bf gcop\-::timer\-\_\-us} (struct timeval \&timer)
+\item 
+double {\bf gcop\-::normal\-\_\-dist} (double mu, double sigma, double x)
+\item 
+double {\bf gcop\-::random\-\_\-normal} ()
+\item 
+void {\bf gcop\-::mult} (double $\ast$c, const double $\ast$a, const double $\ast$b, int m, int n, int p, bool rm=true)
+\item 
+void {\bf gcop\-::mult} (double $\ast$c, const double $\ast$a, int an, const int $\ast$ai, const int $\ast$aj, const double $\ast$b, int m, int n, int p)
+\item 
+double {\bf gcop\-::dangle} (double a1, double a2)
+\item 
+void {\bf gcop\-::save\-\_\-map} (const char $\ast$map, int width, int height, const char $\ast$filename)
+\item 
+char $\ast$ {\bf gcop\-::load\-\_\-map} (int $\ast$width, int $\ast$height, const char $\ast$filename)
+\item 
+void {\bf gcop\-::rot} (double m[9], const double o[3])
+\item 
+void {\bf gcop\-::hermite2} (double c1[2], double c2[2], double c3[2], const double xi[2], const double vi[2], const double xf[2])
+\item 
+void {\bf gcop\-::hermite3} (double c1[3], double c2[3], double c3[3], const double xi[3], const double vi[3], const double xf[3])
+\item 
+double {\bf gcop\-::normal} (double mu, double sigma, double x)
+\item 
+double {\bf gcop\-::normal} (int d, const double $\ast$mu, const double $\ast$sigma, const double $\ast$x)
+\item 
+double {\bf gcop\-::normal2} (const double mu[2], const double sigma[2], const double x[2])
+\item 
+double {\bf gcop\-::randn} ()
+\item 
+double {\bf gcop\-::ncdf} (double x)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Define \-Documentation}
+\index{utils.\-h@{utils.\-h}!\-A\-V\-E3@{\-A\-V\-E3}}
+\index{\-A\-V\-E3@{\-A\-V\-E3}!utils.h@{utils.\-h}}
+\subsubsection[{\-A\-V\-E3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-A\-V\-E3}(
+\begin{DoxyParamCaption}
+\item[{}]{c, }
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(c)[0]=((a)[0]+(b)[0])/2;(c)[1]=((a)[1]+(b)[1])/2;(c)[2]=((a)[2]+(b)[2])/2;}\label{utils_8h_a196fd65cb9e18b67b3f717672f1577b8}
+\index{utils.\-h@{utils.\-h}!\-C\-L\-E\-A\-R@{\-C\-L\-E\-A\-R}}
+\index{\-C\-L\-E\-A\-R@{\-C\-L\-E\-A\-R}!utils.h@{utils.\-h}}
+\subsubsection[{\-C\-L\-E\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-C\-L\-E\-A\-R}(
+\begin{DoxyParamCaption}
+\item[{}]{a}
+\end{DoxyParamCaption}
+)~(a)[0]=0;(a)[1]=0;}\label{utils_8h_ae0fc8d435625b7287bb9444300ed8573}
+\index{utils.\-h@{utils.\-h}!\-C\-L\-E\-A\-R3@{\-C\-L\-E\-A\-R3}}
+\index{\-C\-L\-E\-A\-R3@{\-C\-L\-E\-A\-R3}!utils.h@{utils.\-h}}
+\subsubsection[{\-C\-L\-E\-A\-R3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-C\-L\-E\-A\-R3}(
+\begin{DoxyParamCaption}
+\item[{}]{a}
+\end{DoxyParamCaption}
+)~(a)[0]=0;(a)[1]=0;(a)[2]=0;}\label{utils_8h_a261143d358ae1a030df185cb3a38f330}
+\index{utils.\-h@{utils.\-h}!\-C\-L\-E\-A\-R4@{\-C\-L\-E\-A\-R4}}
+\index{\-C\-L\-E\-A\-R4@{\-C\-L\-E\-A\-R4}!utils.h@{utils.\-h}}
+\subsubsection[{\-C\-L\-E\-A\-R4}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-C\-L\-E\-A\-R4}(
+\begin{DoxyParamCaption}
+\item[{}]{a}
+\end{DoxyParamCaption}
+)~(a)[0]=0;(a)[1]=0;(a)[2]=0;(a)[3]=0;}\label{utils_8h_a2e65a741fcffdcbebacc725655b31a31}
+\index{utils.\-h@{utils.\-h}!\-C\-R\-O\-S\-S@{\-C\-R\-O\-S\-S}}
+\index{\-C\-R\-O\-S\-S@{\-C\-R\-O\-S\-S}!utils.h@{utils.\-h}}
+\subsubsection[{\-C\-R\-O\-S\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-C\-R\-O\-S\-S}(
+\begin{DoxyParamCaption}
+\item[{}]{c, }
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(c)[0]=(a)[1]$\ast$(b)[2]-\/(a)[2]$\ast$(b)[1]; (c)[1]=-\/(a)[0]$\ast$(b)[2]+(a)[2]$\ast$(b)[0]; (c)[2]=(a)[0]$\ast$(b)[1]-\/(a)[1]$\ast$(b)[0];}\label{utils_8h_a4036dd306f0eea717064eb00baecd7ec}
+
+
+\-Referenced by gcop\-::\-Dem\-::\-Compute\-Normals(), gcop\-::\-Viewer\-::\-Draw\-Arrow(), and gcop\-::\-Dem\-View\-::\-Init().
+
+\index{utils.\-h@{utils.\-h}!\-D\-E\-T@{\-D\-E\-T}}
+\index{\-D\-E\-T@{\-D\-E\-T}!utils.h@{utils.\-h}}
+\subsubsection[{\-D\-E\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-D\-E\-T}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~((a)[0]$\ast$(b)[1]-\/(a)[1]$\ast$(b)[0])}\label{utils_8h_a37b44974329c9bf2a83864efce3218d7}
+\index{utils.\-h@{utils.\-h}!\-D\-I\-S\-T@{\-D\-I\-S\-T}}
+\index{\-D\-I\-S\-T@{\-D\-I\-S\-T}!utils.h@{utils.\-h}}
+\subsubsection[{\-D\-I\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-D\-I\-S\-T}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(sqrt(((a)[0]-\/(b)[0])$\ast$((a)[0]-\/(b)[0])+((a)[1]-\/(b)[1])$\ast$((a)[1]-\/(b)[1])))}\label{utils_8h_ae733a5a3a9e9a85474da2105655a0dc4}
+\index{utils.\-h@{utils.\-h}!\-D\-I\-S\-T3@{\-D\-I\-S\-T3}}
+\index{\-D\-I\-S\-T3@{\-D\-I\-S\-T3}!utils.h@{utils.\-h}}
+\subsubsection[{\-D\-I\-S\-T3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-D\-I\-S\-T3}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(sqrt({\bf \-S\-Q\-R}((a)[0]-\/(b)[0])+{\bf \-S\-Q\-R}((a)[1]-\/(b)[1])+{\bf \-S\-Q\-R}((a)[2]-\/(b)[2])))}\label{utils_8h_a2e6d39aa658042c2d7228fc122e712ef}
+\index{utils.\-h@{utils.\-h}!\-D\-I\-S\-T4@{\-D\-I\-S\-T4}}
+\index{\-D\-I\-S\-T4@{\-D\-I\-S\-T4}!utils.h@{utils.\-h}}
+\subsubsection[{\-D\-I\-S\-T4}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-D\-I\-S\-T4}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(sqrt({\bf \-S\-Q\-R}((a)[0]-\/(b)[0])+{\bf \-S\-Q\-R}((a)[1]-\/(b)[1])+{\bf \-S\-Q\-R}((a)[2]-\/(b)[2])+{\bf \-S\-Q\-R}((a)[3]-\/(b)[3])))}\label{utils_8h_a4e617fcae5f3cd357b95e74d801fa671}
+\index{utils.\-h@{utils.\-h}!\-D\-I\-V@{\-D\-I\-V}}
+\index{\-D\-I\-V@{\-D\-I\-V}!utils.h@{utils.\-h}}
+\subsubsection[{\-D\-I\-V}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-D\-I\-V}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b, }
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~(a)[0]=(b)[0]/(n);(a)[1]=(b)[1]/(n);}\label{utils_8h_a98183b5b4b2cdef93f28eba11de7cdf0}
+\index{utils.\-h@{utils.\-h}!\-D\-I\-V3@{\-D\-I\-V3}}
+\index{\-D\-I\-V3@{\-D\-I\-V3}!utils.h@{utils.\-h}}
+\subsubsection[{\-D\-I\-V3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-D\-I\-V3}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b, }
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~(a)[0]=(b)[0]/(n);(a)[1]=(b)[1]/(n);(a)[2]=(b)[2]/(n);}\label{utils_8h_adf9d7dded7725e47d55ed066835ef8d0}
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Draw\-Arrow(), and gcop\-::\-Dem\-View\-::\-Init().
+
+\index{utils.\-h@{utils.\-h}!\-D\-I\-V4@{\-D\-I\-V4}}
+\index{\-D\-I\-V4@{\-D\-I\-V4}!utils.h@{utils.\-h}}
+\subsubsection[{\-D\-I\-V4}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-D\-I\-V4}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b, }
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~(a)[0]=(b)[0]/(n);(a)[1]=(b)[1]/(n);(a)[2]=(b)[2]/(n);(a)[3]=(b)[3]/(n);}\label{utils_8h_a77c1c3c2d72fa1356ef98e30ee85e32b}
+\index{utils.\-h@{utils.\-h}!\-D\-O\-T@{\-D\-O\-T}}
+\index{\-D\-O\-T@{\-D\-O\-T}!utils.h@{utils.\-h}}
+\subsubsection[{\-D\-O\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-D\-O\-T}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~((a)[0]$\ast$(b)[0]+(a)[1]$\ast$(b)[1])}\label{utils_8h_a3248d2fa58ce34696aed487284ba8871}
+\index{utils.\-h@{utils.\-h}!\-D\-O\-T3@{\-D\-O\-T3}}
+\index{\-D\-O\-T3@{\-D\-O\-T3}!utils.h@{utils.\-h}}
+\subsubsection[{\-D\-O\-T3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-D\-O\-T3}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~((a)[0]$\ast$(b)[0]+(a)[1]$\ast$(b)[1]+(a)[2]$\ast$(b)[2])}\label{utils_8h_aeaf9029d9b8aba8e9b0ed2303ada907d}
+
+
+\-Referenced by gcop\-::\-Viewer\-::\-Draw\-Arrow().
+
+\index{utils.\-h@{utils.\-h}!\-E\-P\-S@{\-E\-P\-S}}
+\index{\-E\-P\-S@{\-E\-P\-S}!utils.h@{utils.\-h}}
+\subsubsection[{\-E\-P\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-E\-P\-S}~(1e-\/10)}\label{utils_8h_a6ebf6899d6c1c8b7b9d09be872c05aae}
+\index{utils.\-h@{utils.\-h}!\-I\-S\-Z\-E\-R\-O@{\-I\-S\-Z\-E\-R\-O}}
+\index{\-I\-S\-Z\-E\-R\-O@{\-I\-S\-Z\-E\-R\-O}!utils.h@{utils.\-h}}
+\subsubsection[{\-I\-S\-Z\-E\-R\-O}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-I\-S\-Z\-E\-R\-O}(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~(fabs(x)$<${\bf \-E\-P\-S})}\label{utils_8h_afdcf38c055de2545a24cdd2fc5a0582a}
+\index{utils.\-h@{utils.\-h}!\-M\-I\-N\-U\-S@{\-M\-I\-N\-U\-S}}
+\index{\-M\-I\-N\-U\-S@{\-M\-I\-N\-U\-S}!utils.h@{utils.\-h}}
+\subsubsection[{\-M\-I\-N\-U\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-M\-I\-N\-U\-S}(
+\begin{DoxyParamCaption}
+\item[{}]{c, }
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(c)[0]=(a)[0]-\/(b)[0];(c)[1]=(a)[1]-\/(b)[1];}\label{utils_8h_a9318442a0624545568fd883793701b60}
+
+
+\-Referenced by gcop\-::hermite2().
+
+\index{utils.\-h@{utils.\-h}!\-M\-I\-N\-U\-S3@{\-M\-I\-N\-U\-S3}}
+\index{\-M\-I\-N\-U\-S3@{\-M\-I\-N\-U\-S3}!utils.h@{utils.\-h}}
+\subsubsection[{\-M\-I\-N\-U\-S3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-M\-I\-N\-U\-S3}(
+\begin{DoxyParamCaption}
+\item[{}]{c, }
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(c)[0]=(a)[0]-\/(b)[0];(c)[1]=(a)[1]-\/(b)[1];(c)[2]=(a)[2]-\/(b)[2];}\label{utils_8h_a7cb123c6da6e2ed80494c3c2977388c5}
+
+
+\-Referenced by gcop\-::\-Dem\-::\-Compute\-Normals(), and gcop\-::\-Dem\-View\-::\-Init().
+
+\index{utils.\-h@{utils.\-h}!\-M\-I\-N\-U\-S4@{\-M\-I\-N\-U\-S4}}
+\index{\-M\-I\-N\-U\-S4@{\-M\-I\-N\-U\-S4}!utils.h@{utils.\-h}}
+\subsubsection[{\-M\-I\-N\-U\-S4}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-M\-I\-N\-U\-S4}(
+\begin{DoxyParamCaption}
+\item[{}]{c, }
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(c)[0]=(a)[0]-\/(b)[0];(c)[1]=(a)[1]-\/(b)[1];(c)[2]=(a)[2]-\/(b)[2];(c)[3]=(a)[3]-\/(b)[3];}\label{utils_8h_a29614f27c552ad1aff53d7c9683bb895}
+\index{utils.\-h@{utils.\-h}!\-M\-U\-L\-T@{\-M\-U\-L\-T}}
+\index{\-M\-U\-L\-T@{\-M\-U\-L\-T}!utils.h@{utils.\-h}}
+\subsubsection[{\-M\-U\-L\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-M\-U\-L\-T}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b, }
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~(a)[0]=(b)[0]$\ast$(n);(a)[1]=(b)[1]$\ast$(n);}\label{utils_8h_a2dd63b69878a24783c7234d29c56f817}
+
+
+\-Referenced by gcop\-::hermite2().
+
+\index{utils.\-h@{utils.\-h}!\-M\-U\-L\-T3@{\-M\-U\-L\-T3}}
+\index{\-M\-U\-L\-T3@{\-M\-U\-L\-T3}!utils.h@{utils.\-h}}
+\subsubsection[{\-M\-U\-L\-T3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-M\-U\-L\-T3}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b, }
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~(a)[0]=(b)[0]$\ast$(n);(a)[1]=(b)[1]$\ast$(n);(a)[2]=(b)[2]$\ast$(n);}\label{utils_8h_acf06cf15a0c86e333b550a31a5ceccba}
+\index{utils.\-h@{utils.\-h}!\-M\-U\-L\-T4@{\-M\-U\-L\-T4}}
+\index{\-M\-U\-L\-T4@{\-M\-U\-L\-T4}!utils.h@{utils.\-h}}
+\subsubsection[{\-M\-U\-L\-T4}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-M\-U\-L\-T4}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b, }
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~(a)[0]=(b)[0]$\ast$(n);(a)[1]=(b)[1]$\ast$(n);(a)[2]=(b)[2]$\ast$(n);(a)[3]=(b)[3]$\ast$(n);}\label{utils_8h_a62497c8a582908f311e1ea05d2ba2f51}
+\index{utils.\-h@{utils.\-h}!\-N\-E\-G@{\-N\-E\-G}}
+\index{\-N\-E\-G@{\-N\-E\-G}!utils.h@{utils.\-h}}
+\subsubsection[{\-N\-E\-G}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-N\-E\-G}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(a)[0]=-\/(b)[0];(a)[1]=-\/(b)[1];}\label{utils_8h_a6f1bab4a9f261c84ed0f3f9ff1a277f5}
+\index{utils.\-h@{utils.\-h}!\-N\-E\-G3@{\-N\-E\-G3}}
+\index{\-N\-E\-G3@{\-N\-E\-G3}!utils.h@{utils.\-h}}
+\subsubsection[{\-N\-E\-G3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-N\-E\-G3}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(a)[0]=-\/(b)[0];(a)[1]=-\/(b)[1];(a)[2]=-\/(b)[2];}\label{utils_8h_ac330337a78dfd5d010d0209de454edc2}
+\index{utils.\-h@{utils.\-h}!\-N\-O\-R\-M@{\-N\-O\-R\-M}}
+\index{\-N\-O\-R\-M@{\-N\-O\-R\-M}!utils.h@{utils.\-h}}
+\subsubsection[{\-N\-O\-R\-M}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-N\-O\-R\-M}(
+\begin{DoxyParamCaption}
+\item[{}]{a}
+\end{DoxyParamCaption}
+)~(sqrt((a)[0]$\ast$(a)[0]+(a)[1]$\ast$(a)[1]))}\label{utils_8h_a7fa3afb5cf2625deb1e859cbb93d2943}
+
+
+\-Referenced by gcop\-::hermite2().
+
+\index{utils.\-h@{utils.\-h}!\-N\-O\-R\-M3@{\-N\-O\-R\-M3}}
+\index{\-N\-O\-R\-M3@{\-N\-O\-R\-M3}!utils.h@{utils.\-h}}
+\subsubsection[{\-N\-O\-R\-M3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-N\-O\-R\-M3}(
+\begin{DoxyParamCaption}
+\item[{}]{a}
+\end{DoxyParamCaption}
+)~(sqrt((a)[0]$\ast$(a)[0]+(a)[1]$\ast$(a)[1]+(a)[2]$\ast$(a)[2]))}\label{utils_8h_a28f15a63143f83e738af98b84a92ac20}
+
+
+\-Referenced by gcop\-::\-Dem\-::\-Compute\-Normals(), gcop\-::\-Viewer\-::\-Draw\-Arrow(), and gcop\-::\-Dem\-View\-::\-Init().
+
+\index{utils.\-h@{utils.\-h}!\-N\-O\-R\-M4@{\-N\-O\-R\-M4}}
+\index{\-N\-O\-R\-M4@{\-N\-O\-R\-M4}!utils.h@{utils.\-h}}
+\subsubsection[{\-N\-O\-R\-M4}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-N\-O\-R\-M4}(
+\begin{DoxyParamCaption}
+\item[{}]{a}
+\end{DoxyParamCaption}
+)~(sqrt((a)[0]$\ast$(a)[0]+(a)[1]$\ast$(a)[1]+(a)[2]$\ast$(a)[2]+(a)[3]$\ast$(a)[3]))}\label{utils_8h_ad88d17d0ad2a0bf4607e8633325b0e27}
+\index{utils.\-h@{utils.\-h}!\-P\-L\-U\-S@{\-P\-L\-U\-S}}
+\index{\-P\-L\-U\-S@{\-P\-L\-U\-S}!utils.h@{utils.\-h}}
+\subsubsection[{\-P\-L\-U\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-P\-L\-U\-S}(
+\begin{DoxyParamCaption}
+\item[{}]{c, }
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(c)[0]=(a)[0]+(b)[0];(c)[1]=(a)[1]+(b)[1];}\label{utils_8h_ac5b03b5ea3f656d68782b762047c8b2d}
+\index{utils.\-h@{utils.\-h}!\-P\-L\-U\-S3@{\-P\-L\-U\-S3}}
+\index{\-P\-L\-U\-S3@{\-P\-L\-U\-S3}!utils.h@{utils.\-h}}
+\subsubsection[{\-P\-L\-U\-S3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-P\-L\-U\-S3}(
+\begin{DoxyParamCaption}
+\item[{}]{c, }
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(c)[0]=(a)[0]+(b)[0];(c)[1]=(a)[1]+(b)[1];(c)[2]=(a)[2]+(b)[2];}\label{utils_8h_a4500f01f6cd9e7014c5a8f6df7ae8fac}
+\index{utils.\-h@{utils.\-h}!\-P\-L\-U\-S4@{\-P\-L\-U\-S4}}
+\index{\-P\-L\-U\-S4@{\-P\-L\-U\-S4}!utils.h@{utils.\-h}}
+\subsubsection[{\-P\-L\-U\-S4}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-P\-L\-U\-S4}(
+\begin{DoxyParamCaption}
+\item[{}]{c, }
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(c)[0]=(a)[0]+(b)[0];(c)[1]=(a)[1]+(b)[1];(c)[2]=(a)[2]+(b)[2];(c)[3]=(a)[3]+(b)[3];}\label{utils_8h_ac2c717792cc59e84ebf40bf131754999}
+\index{utils.\-h@{utils.\-h}!\-S\-E\-T@{\-S\-E\-T}}
+\index{\-S\-E\-T@{\-S\-E\-T}!utils.h@{utils.\-h}}
+\subsubsection[{\-S\-E\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-S\-E\-T}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(a)[0]=(b)[0];(a)[1]=(b)[1];}\label{utils_8h_abd01a3ff3b4b0c32db5d53c1e46e0594}
+\index{utils.\-h@{utils.\-h}!\-S\-E\-T3@{\-S\-E\-T3}}
+\index{\-S\-E\-T3@{\-S\-E\-T3}!utils.h@{utils.\-h}}
+\subsubsection[{\-S\-E\-T3}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-S\-E\-T3}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(a)[0]=(b)[0];(a)[1]=(b)[1];(a)[2]=(b)[2];}\label{utils_8h_ad6faa81e9674b56aee810482320a8b8b}
+
+
+\-Referenced by gcop\-::\-Dem\-::\-Get\-Normal().
+
+\index{utils.\-h@{utils.\-h}!\-S\-E\-T4@{\-S\-E\-T4}}
+\index{\-S\-E\-T4@{\-S\-E\-T4}!utils.h@{utils.\-h}}
+\subsubsection[{\-S\-E\-T4}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-S\-E\-T4}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(a)[0]=(b)[0];(a)[1]=(b)[1];(a)[2]=(b)[2];(a)[3]=(b)[3];}\label{utils_8h_aab8c7c242ea45d522b55677afc9b0572}
+\index{utils.\-h@{utils.\-h}!\-S\-I\-G\-N@{\-S\-I\-G\-N}}
+\index{\-S\-I\-G\-N@{\-S\-I\-G\-N}!utils.h@{utils.\-h}}
+\subsubsection[{\-S\-I\-G\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-S\-I\-G\-N}(
+\begin{DoxyParamCaption}
+\item[{}]{a}
+\end{DoxyParamCaption}
+)~((a) $<$ 0 ? -\/1 \-: 1)}\label{utils_8h_a8c4a9e5e4622948245de4ec0b5d38329}
+\index{utils.\-h@{utils.\-h}!\-S\-Q\-R@{\-S\-Q\-R}}
+\index{\-S\-Q\-R@{\-S\-Q\-R}!utils.h@{utils.\-h}}
+\subsubsection[{\-S\-Q\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-S\-Q\-R}(
+\begin{DoxyParamCaption}
+\item[{}]{a}
+\end{DoxyParamCaption}
+)~((a)$\ast$(a))}\label{utils_8h_ad41630f833e920c1ffa34722f45a8e77}
+\index{utils.\-h@{utils.\-h}!\-T\-I\-M\-E\-\_\-\-C\-M\-P@{\-T\-I\-M\-E\-\_\-\-C\-M\-P}}
+\index{\-T\-I\-M\-E\-\_\-\-C\-M\-P@{\-T\-I\-M\-E\-\_\-\-C\-M\-P}!utils.h@{utils.\-h}}
+\subsubsection[{\-T\-I\-M\-E\-\_\-\-C\-M\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-T\-I\-M\-E\-\_\-\-C\-M\-P}(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(a.\-tv\-\_\-sec != b.\-tv\-\_\-sec $|$$|$ a.\-tv\-\_\-usec != b.\-tv\-\_\-usec)}\label{utils_8h_aba2953cc0752b443a18b93f6cdd88245}

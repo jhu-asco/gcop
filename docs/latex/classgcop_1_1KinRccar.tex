@@ -1,0 +1,82 @@
+\section{gcop\-:\-:\-Kin\-Rccar \-Class \-Reference}
+\label{classgcop_1_1KinRccar}\index{gcop\-::\-Kin\-Rccar@{gcop\-::\-Kin\-Rccar}}
+
+
+{\ttfamily \#include $<$kinrccar.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Kin\-Rccar\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{classgcop_1_1KinRccar__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kin\-Rccar\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1KinRccar__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kin\-Rccar} ()
+\item 
+double {\bf \-Step} ({\bf \-Matrix4d} \&xb, double {\bf t}, const {\bf \-Matrix4d} \&xa, const \-Vector2d \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix6d} $\ast$\-A=0, {\bf \-Matrix62d} $\ast$\-B=0, \-Matrix$<$ double, 6, \-Dynamic $>$ $\ast$\-C=0)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A simple kinematic car model in \-S\-E(3).
+
+\-Author\-: \-Matt \-Sheckells mshecke1(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kin\-Rccar@{gcop\-::\-Kin\-Rccar}!\-Kin\-Rccar@{\-Kin\-Rccar}}
+\index{\-Kin\-Rccar@{\-Kin\-Rccar}!gcop::KinRccar@{gcop\-::\-Kin\-Rccar}}
+\subsubsection[{\-Kin\-Rccar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Kin\-Rccar\-::\-Kin\-Rccar} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinRccar_a97c9c8636bd93e84aeedfea2ecc83d95}
+
+
+\-References gcop\-::\-Kinbody3d$<$ 2 $>$\-::d.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kin\-Rccar@{gcop\-::\-Kin\-Rccar}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::KinRccar@{gcop\-::\-Kin\-Rccar}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Kin\-Rccar\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Matrix4d} \&}]{xa, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix6d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix62d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{\-Matrix$<$ double, 6, \-Dynamic $>$ $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinRccar_a0334cd8a271aa08e6334e9b004607444}
+
+
+\-References gcop\-::\-S\-E3\-::\-Ad(), gcop\-::\-S\-E3\-::cay(), gcop\-::\-Kinbody3d$<$ 2 $>$\-::d, gcop\-::\-S\-E3\-::dcay(), and gcop\-::\-S\-E3\-::\-Instance().
+
+
+
+\-Referenced by gcop\-::\-Kin\-Rccar\-Path\-::\-Add\-Control().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf kinrccar.\-h}\item 
+lib/systems/{\bf kinrccar.\-cc}\end{DoxyCompactItemize}

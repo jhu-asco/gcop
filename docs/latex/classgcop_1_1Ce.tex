@@ -1,0 +1,296 @@
+\section{gcop\-:\-:\-Ce$<$ \-\_\-n $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Ce}\index{gcop\-::\-Ce$<$ \-\_\-n $>$@{gcop\-::\-Ce$<$ \-\_\-n $>$}}
+
+
+{\ttfamily \#include $<$ce.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, \-\_\-n $>$ {\bf \-Matrixnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Ce} (int {\bf n}=\-\_\-n, int k=1, const {\bf \-Matrixnd} $\ast${\bf \-S}=0)
+\item 
+virtual {\bf $\sim$\-Ce} ()
+\item 
+void {\bf \-Reset} ()
+\item 
+virtual void {\bf \-Add\-Sample} (const {\bf \-Vectornd} \&z, double c)
+\item 
+void {\bf \-Select} ()
+\item 
+bool {\bf \-Fit} ()
+\item 
+virtual double {\bf \-Sample} ({\bf \-Vectornd} \&z)
+\item 
+const {\bf \-Vectornd} \& {\bf \-Best} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf n}
+\begin{DoxyCompactList}\small\item\em parameter space dimension \end{DoxyCompactList}\item 
+{\bf \-Gmm}$<$ \-\_\-n $>$ {\bf gmm}
+\begin{DoxyCompactList}\small\item\em underlying \-Gaussian-\/mixture-\/model \end{DoxyCompactList}\item 
+{\bf \-Matrixnd} {\bf \-S}
+\begin{DoxyCompactList}\small\item\em extra noise \end{DoxyCompactList}\item 
+vector$<$ pair$<$ {\bf \-Vectornd}, double $>$ $>$ {\bf zps}
+\begin{DoxyCompactList}\small\item\em samples (pair of vector and its likelihood) \end{DoxyCompactList}\item 
+vector$<$ double $>$ {\bf cs}
+\begin{DoxyCompactList}\small\item\em costs \end{DoxyCompactList}\item 
+double {\bf rho}
+\begin{DoxyCompactList}\small\item\em quantile\-: should be b/n .01 and .1 (default is .1) \end{DoxyCompactList}\item 
+double {\bf alpha}
+\begin{DoxyCompactList}\small\item\em update factor\-: parameter is updated according to v=a$\ast$v\-\_\-new + (1-\/a)$\ast$v\-\_\-old , i.\-e. alpha is used to \char`\"{}smooth\char`\"{} the update using the old value (default is .9) \end{DoxyCompactList}\item 
+bool {\bf mras}
+\begin{DoxyCompactList}\small\item\em whether to use \-M\-R\-A\-S version of algorithm, i.\-e. instead of using rare-\/event volume estimation, tilt the density optimally using the \-Gibbs density $\sim$exp(-\/b$\ast$\-J(z)) \end{DoxyCompactList}\item 
+double {\bf b}
+\begin{DoxyCompactList}\small\item\em \-Gibbs factor (only applicable if mras = true) \end{DoxyCompactList}\item 
+bool {\bf b\-Auto}
+\begin{DoxyCompactList}\small\item\em let b be determined automatically (true by default) \end{DoxyCompactList}\item 
+bool {\bf inc}
+\begin{DoxyCompactList}\small\item\em incremental version of mras \end{DoxyCompactList}\item 
+{\bf \-Vectornd} {\bf zmin}
+\begin{DoxyCompactList}\small\item\em current best \end{DoxyCompactList}\item 
+double {\bf \-Jmin}
+\begin{DoxyCompactList}\small\item\em minimum cost \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int \-\_\-n = \-Dynamic$>$class gcop\-::\-Ce$<$ \-\_\-n $>$}
+
+\-Cross-\/entropy optimization method. \-One iteration of the algorithm typically includes the following steps\-:
+
+0. \-Initialize the \-G\-M\-M distribution, select number of samples \-N, and quantile rho
+
+1. for 1\-:\-N, z = \doxyref{\-Sample()}{p.}{classgcop_1_1Ce_a3e99e0cab02afbebb4abb76c18488f0d}, c = \-Cost(z), \-Add\-Sample(z,c), end
+
+2. \doxyref{\-Select()}{p.}{classgcop_1_1Ce_a90c74ea088ea177d04c79c856176c615} selects the top rho-\/quantile by sorting the samples using their costs
+
+3. \doxyref{\-Fit()}{p.}{classgcop_1_1Ce_a9e63f28c8f3fa9e95c74939cdcb1dc15} estimates the distribution
+
+4. \doxyref{\-Best()}{p.}{classgcop_1_1Ce_a085d6afe8cc2fae1e946b9b47dffa636} gives the best sample or just take the first sample in the list of samples as the solution
+
+5. \doxyref{\-Reset()}{p.}{classgcop_1_1Ce_a1020f8a79b11780d26e0a6dcc21cdb50} and goto 1.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, \-\_\-n$>$ {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1Ce_accd7e3bf5b5b0a4e75f8d86ffbbeb51b}
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, 1$>$ {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Ce_a0c0d141a6838bafe2501ec0746a72be0}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Ce@{\-Ce}}
+\index{\-Ce@{\-Ce}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Ce} (
+\begin{DoxyParamCaption}
+\item[{int}]{n = {\ttfamily \-\_\-n}, }
+\item[{int}]{k = {\ttfamily 1}, }
+\item[{const {\bf \-Matrixnd} $\ast$}]{\-S = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Ce_a4980b98497352080857f83cbc3aab9b1}
+\-Initialize n-\/dimensional \-C\-E with k modes 
+\begin{DoxyParams}{\-Parameters}
+{\em n} & parameter space dimension \\
+\hline
+{\em k} & number of mixture components \\
+\hline
+{\em \-S} & n-\/n matrix of random noise to be added to the covariance after \-G\-M\-M estimation; acts both as regularizing factor and also for improving local exploration. \-This should typically be set to a small value, e.\-g. a diagonal matrix with entries = 0.\-01 \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-S, and gcop\-::\-Ce$<$ \-\_\-n $>$\-::zmin.
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!$\sim$\-Ce@{$\sim$\-Ce}}
+\index{$\sim$\-Ce@{$\sim$\-Ce}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{$\sim$\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::$\sim${\bf \-Ce} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Ce_a4006102c66fa94502cd71db25d9fc94f}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Add\-Sample@{\-Add\-Sample}}
+\index{\-Add\-Sample@{\-Add\-Sample}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Add\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Add\-Sample} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectornd} \&}]{z, }
+\item[{double}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Ce_a17c0c7633b7f5e29a10b97bd6aacd909}
+\-Add a sample to list of samples 
+\begin{DoxyParams}{\-Parameters}
+{\em z} & sample \\
+\hline
+{\em c} & cost \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Best@{\-Best}}
+\index{\-Best@{\-Best}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Best}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ const \-Matrix$<$ double, \-\_\-n, 1 $>$ \& {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Best} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Ce_a085d6afe8cc2fae1e946b9b47dffa636}
+\-Get the best sample. \-Equivalent to accessing zps[0].first. \-This assumes \doxyref{\-Select()}{p.}{classgcop_1_1Ce_a90c74ea088ea177d04c79c856176c615} was called to sort the samples. \begin{DoxyReturn}{\-Returns}
+the sample with lowest cost 
+\end{DoxyReturn}
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Fit@{\-Fit}}
+\index{\-Fit@{\-Fit}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Fit}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ bool {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Fit} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Ce_a9e63f28c8f3fa9e95c74939cdcb1dc15}
+\-Fit \-G\-M\-M to data \index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Reset@{\-Reset}}
+\index{\-Reset@{\-Reset}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Reset}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Reset} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Ce_a1020f8a79b11780d26e0a6dcc21cdb50}
+\-Clear samples \index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Sample@{\-Sample}}
+\index{\-Sample@{\-Sample}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ double {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Sample} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectornd} \&}]{z}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Ce_a3e99e0cab02afbebb4abb76c18488f0d}
+\-Draw a sample from the \-G\-M\-M 
+\begin{DoxyParams}{\-Parameters}
+{\em z} & vector to be sampled \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+likelihood 
+\end{DoxyReturn}
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Select@{\-Select}}
+\index{\-Select@{\-Select}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Select}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Select} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Ce_a90c74ea088ea177d04c79c856176c615}
+\-Select the top quantile. \-Resizes samples to size \-N$\ast$rho containing the best samples 
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!alpha@{alpha}}
+\index{alpha@{alpha}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{alpha}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ double {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf alpha}}\label{classgcop_1_1Ce_aefbee0c0ea1d97d5a970cb10811647c2}
+
+
+update factor\-: parameter is updated according to v=a$\ast$v\-\_\-new + (1-\/a)$\ast$v\-\_\-old , i.\-e. alpha is used to \char`\"{}smooth\char`\"{} the update using the old value (default is .9) 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!b@{b}}
+\index{b@{b}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{b}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ double {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf b}}\label{classgcop_1_1Ce_a9fa92f3d47131cc37ffe876f5428783d}
+
+
+\-Gibbs factor (only applicable if mras = true) 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!b\-Auto@{b\-Auto}}
+\index{b\-Auto@{b\-Auto}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{b\-Auto}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ bool {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf b\-Auto}}\label{classgcop_1_1Ce_ae6e76613366f80c5c44c58e6c4ef496a}
+
+
+let b be determined automatically (true by default) 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!cs@{cs}}
+\index{cs@{cs}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{cs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ vector$<$double$>$ {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf cs}}\label{classgcop_1_1Ce_a61a15b77b2fb7b96ba0cf663e82ac393}
+
+
+costs 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!gmm@{gmm}}
+\index{gmm@{gmm}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{gmm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Gmm}$<$\-\_\-n$>$ {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf gmm}}\label{classgcop_1_1Ce_a0fe5fee9619fdaa8f808d8d7ef3979d0}
+
+
+underlying \-Gaussian-\/mixture-\/model 
+
+
+
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!inc@{inc}}
+\index{inc@{inc}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{inc}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ bool {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf inc}}\label{classgcop_1_1Ce_a2ba7e97501d49ea25912cd6f4c2d9eed}
+
+
+incremental version of mras 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Jmin@{\-Jmin}}
+\index{\-Jmin@{\-Jmin}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Jmin}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ double {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Jmin}}\label{classgcop_1_1Ce_acd583cab3da7c8eb26d656b8c98b94e0}
+
+
+minimum cost 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!mras@{mras}}
+\index{mras@{mras}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{mras}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ bool {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf mras}}\label{classgcop_1_1Ce_a9640c0196ca1b016994025c63e41f64a}
+
+
+whether to use \-M\-R\-A\-S version of algorithm, i.\-e. instead of using rare-\/event volume estimation, tilt the density optimally using the \-Gibbs density $\sim$exp(-\/b$\ast$\-J(z)) 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!n@{n}}
+\index{n@{n}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{n}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ int {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf n}}\label{classgcop_1_1Ce_a1975ba3cd527561a2ed3a8ab3ce6bcbf}
+
+
+parameter space dimension 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!rho@{rho}}
+\index{rho@{rho}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{rho}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ double {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf rho}}\label{classgcop_1_1Ce_a9f4672c6f7eef127d0ed920c086b2bb3}
+
+
+quantile\-: should be b/n .01 and .1 (default is .1) 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-S@{\-S}}
+\index{\-S@{\-S}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-S}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-S}}\label{classgcop_1_1Ce_ad78d1034d53383220c54aab5509bc27f}
+
+
+extra noise 
+
+
+
+\-Referenced by gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-Ce(), and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!zmin@{zmin}}
+\index{zmin@{zmin}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{zmin}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Vectornd} {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf zmin}}\label{classgcop_1_1Ce_ae389f4fbbc9f395242adeab672630089}
+
+
+current best 
+
+
+
+\-Referenced by gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-Ce().
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!zps@{zps}}
+\index{zps@{zps}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{zps}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ vector$<$pair$<${\bf \-Vectornd}, double$>$ $>$ {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf zps}}\label{classgcop_1_1Ce_a19a05bd8e753a19d3354eed9ff351454}
+
+
+samples (pair of vector and its likelihood) 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/est/{\bf ce.\-h}\end{DoxyCompactItemize}

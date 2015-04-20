@@ -1,0 +1,120 @@
+\section{gcop\-:\-:\-Kinbody3d$<$ \-\_\-nu $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Kinbody3d}\index{gcop\-::\-Kinbody3d$<$ \-\_\-nu $>$@{gcop\-::\-Kinbody3d$<$ \-\_\-nu $>$}}
+
+
+{\ttfamily \#include $<$kinbody3d.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Kinbody3d$<$ \-\_\-nu $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{classgcop_1_1Kinbody3d__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kinbody3d$<$ \-\_\-nu $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Kinbody3d__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorud}
+\item 
+typedef \-Matrix$<$ double, 6, \-\_\-nu $>$ {\bf \-Matrix6ud}
+\item 
+typedef \-Matrix$<$ double, 6, 6 $>$ {\bf \-Matrix6d}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kinbody3d} ()
+\item 
+virtual double {\bf \-Step} ({\bf \-Matrix4d} \&xb, double {\bf t}, const {\bf \-Matrix4d} \&xa, const {\bf \-Vectorud} \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix6d} $\ast$\-A=0, {\bf \-Matrix6ud} $\ast$\-B=0, \-Matrix$<$ double, 6, \-Dynamic $>$ $\ast$\-C=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Vector3d {\bf d}
+\begin{DoxyCompactList}\small\item\em body dimensions \end{DoxyCompactList}\item 
+{\bf \-Matrix6ud} {\bf \-Bu}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int \-\_\-nu = 6$>$class gcop\-::\-Kinbody3d$<$ \-\_\-nu $>$}
+
+\-A simple kinematic control system modeled as a rigid body in 3d. \-It is meant for parameter estimation problems since there is no dynamics.
+
+\-Author\-: \-Matt \-Sheckells mshecke1(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Kinbody3d@{gcop\-::\-Kinbody3d}!\-Matrix6d@{\-Matrix6d}}
+\index{\-Matrix6d@{\-Matrix6d}!gcop::Kinbody3d@{gcop\-::\-Kinbody3d}}
+\subsubsection[{\-Matrix6d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ typedef \-Matrix$<$double, 6, 6$>$ {\bf gcop\-::\-Kinbody3d}$<$ \-\_\-nu $>$\-::{\bf \-Matrix6d}}\label{classgcop_1_1Kinbody3d_a2be7b2a1c078d4582cfa0cc8b578c4c4}
+\index{gcop\-::\-Kinbody3d@{gcop\-::\-Kinbody3d}!\-Matrix6ud@{\-Matrix6ud}}
+\index{\-Matrix6ud@{\-Matrix6ud}!gcop::Kinbody3d@{gcop\-::\-Kinbody3d}}
+\subsubsection[{\-Matrix6ud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ typedef \-Matrix$<$double, 6, \-\_\-nu$>$ {\bf gcop\-::\-Kinbody3d}$<$ \-\_\-nu $>$\-::{\bf \-Matrix6ud}}\label{classgcop_1_1Kinbody3d_ad9bf37cd5c729e5d852f82ecda7098c5}
+\index{gcop\-::\-Kinbody3d@{gcop\-::\-Kinbody3d}!\-Vectorud@{\-Vectorud}}
+\index{\-Vectorud@{\-Vectorud}!gcop::Kinbody3d@{gcop\-::\-Kinbody3d}}
+\subsubsection[{\-Vectorud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Kinbody3d}$<$ \-\_\-nu $>$\-::{\bf \-Vectorud}}\label{classgcop_1_1Kinbody3d_a3f0e57cb6f59199eef3a7847055c6108}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kinbody3d@{gcop\-::\-Kinbody3d}!\-Kinbody3d@{\-Kinbody3d}}
+\index{\-Kinbody3d@{\-Kinbody3d}!gcop::Kinbody3d@{gcop\-::\-Kinbody3d}}
+\subsubsection[{\-Kinbody3d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ {\bf gcop\-::\-Kinbody3d}$<$ \-\_\-nu $>$\-::{\bf \-Kinbody3d} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Kinbody3d_a1eed3ac38b22e498ec076d11bc077291}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kinbody3d@{gcop\-::\-Kinbody3d}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Kinbody3d@{gcop\-::\-Kinbody3d}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ double {\bf gcop\-::\-Kinbody3d}$<$ \-\_\-nu $>$\-::{\bf \-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix4d} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Matrix4d} \&}]{xa, }
+\item[{const {\bf \-Vectorud} \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix6d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix6ud} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{\-Matrix$<$ double, 6, \-Dynamic $>$ $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Kinbody3d_a1a553d3c3208f9bf69b22210c64d60da}
+
+
+\-References gcop\-::\-S\-E3\-::\-Ad(), gcop\-::\-S\-E3\-::cay(), gcop\-::\-S\-E3\-::dcay(), and gcop\-::\-S\-E3\-::\-Instance().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Kinbody3d@{gcop\-::\-Kinbody3d}!\-Bu@{\-Bu}}
+\index{\-Bu@{\-Bu}!gcop::Kinbody3d@{gcop\-::\-Kinbody3d}}
+\subsubsection[{\-Bu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ {\bf \-Matrix6ud} {\bf gcop\-::\-Kinbody3d}$<$ \-\_\-nu $>$\-::{\bf \-Bu}}\label{classgcop_1_1Kinbody3d_ab45ab9be97f0f29ffa01d7e94b9d98b4}
+\index{gcop\-::\-Kinbody3d@{gcop\-::\-Kinbody3d}!d@{d}}
+\index{d@{d}!gcop::Kinbody3d@{gcop\-::\-Kinbody3d}}
+\subsubsection[{d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ \-Vector3d {\bf gcop\-::\-Kinbody3d}$<$ \-\_\-nu $>$\-::{\bf d}}\label{classgcop_1_1Kinbody3d_adafaec7db1283f308c5bf6d8abd0e8b1}
+
+
+body dimensions 
+
+
+
+\-Referenced by gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf kinbody3d.\-h}\end{DoxyCompactItemize}

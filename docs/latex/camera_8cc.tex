@@ -1,0 +1,84 @@
+\section{lib/est/camera.cc \-File \-Reference}
+\label{camera_8cc}\index{lib/est/camera.\-cc@{lib/est/camera.\-cc}}
+{\ttfamily \#include \char`\"{}camera.\-h\char`\"{}}\*
+{\ttfamily \#include $<$stdio.\-h$>$}\*
+{\ttfamily \#include $<$string.\-h$>$}\*
+{\ttfamily \#include $<$limits$>$}\*
+\-Include dependency graph for camera.\-cc\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{camera_8cc__incl}
+\end{center}
+\end{figure}
+\subsection*{\-Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf \-F\-L\-I\-P\-\_\-\-A\-X\-I\-S}
+\item 
+\#define {\bf \-F\-L\-I\-P\-\_\-\-A\-X\-I\-S}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double {\bf area} (const \-Point \&a, const \-Point \&b, const \-Point \&c)
+\item 
+static bool {\bf inters} (const \-Point \&a, const \-Point \&b, const \-Point \&c, const \-Point \&d)
+\item 
+static void {\bf swap} (\-Point \&a, \-Point \&b)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Define \-Documentation}
+\index{camera.\-cc@{camera.\-cc}!\-F\-L\-I\-P\-\_\-\-A\-X\-I\-S@{\-F\-L\-I\-P\-\_\-\-A\-X\-I\-S}}
+\index{\-F\-L\-I\-P\-\_\-\-A\-X\-I\-S@{\-F\-L\-I\-P\-\_\-\-A\-X\-I\-S}!camera.cc@{camera.\-cc}}
+\subsubsection[{\-F\-L\-I\-P\-\_\-\-A\-X\-I\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-F\-L\-I\-P\-\_\-\-A\-X\-I\-S}}\label{camera_8cc_a1c32e3376ec6194ff556bbead3a1e11c}
+\index{camera.\-cc@{camera.\-cc}!\-F\-L\-I\-P\-\_\-\-A\-X\-I\-S@{\-F\-L\-I\-P\-\_\-\-A\-X\-I\-S}}
+\index{\-F\-L\-I\-P\-\_\-\-A\-X\-I\-S@{\-F\-L\-I\-P\-\_\-\-A\-X\-I\-S}!camera.cc@{camera.\-cc}}
+\subsubsection[{\-F\-L\-I\-P\-\_\-\-A\-X\-I\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-F\-L\-I\-P\-\_\-\-A\-X\-I\-S}}\label{camera_8cc_a1c32e3376ec6194ff556bbead3a1e11c}
+
+
+\subsection{\-Function \-Documentation}
+\index{camera.\-cc@{camera.\-cc}!area@{area}}
+\index{area@{area}!camera.cc@{camera.\-cc}}
+\subsubsection[{area}]{\setlength{\rightskip}{0pt plus 5cm}static double {\bf area} (
+\begin{DoxyParamCaption}
+\item[{const \-Point \&}]{a, }
+\item[{const \-Point \&}]{b, }
+\item[{const \-Point \&}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{camera_8cc_aa5d6c2b52d9f6e6d1d71acf97f624052}
+
+
+\-Referenced by inters(), and gcop\-::\-Camera\-::\-Pose().
+
+\index{camera.\-cc@{camera.\-cc}!inters@{inters}}
+\index{inters@{inters}!camera.cc@{camera.\-cc}}
+\subsubsection[{inters}]{\setlength{\rightskip}{0pt plus 5cm}static bool {\bf inters} (
+\begin{DoxyParamCaption}
+\item[{const \-Point \&}]{a, }
+\item[{const \-Point \&}]{b, }
+\item[{const \-Point \&}]{c, }
+\item[{const \-Point \&}]{d}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{camera_8cc_add880d313abe413dfe34ff607e0e47fd}
+
+
+\-References area().
+
+
+
+\-Referenced by gcop\-::\-Camera\-::\-Pose().
+
+\index{camera.\-cc@{camera.\-cc}!swap@{swap}}
+\index{swap@{swap}!camera.cc@{camera.\-cc}}
+\subsubsection[{swap}]{\setlength{\rightskip}{0pt plus 5cm}static void {\bf swap} (
+\begin{DoxyParamCaption}
+\item[{\-Point \&}]{a, }
+\item[{\-Point \&}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{camera_8cc_aa9bf43bbf8e92a0c1469e83bec3862d9}
+
+
+\-Referenced by gcop\-::\-Camera\-::\-Pose().
+

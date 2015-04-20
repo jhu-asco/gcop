@@ -1,0 +1,380 @@
+\section{gcop\-:\-:\-G\-P \-Class \-Reference}
+\label{classgcop_1_1GP}\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}}
+
+
+{\ttfamily \#include $<$gp.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-G\-P} (int {\bf d}, int {\bf n}=0)
+\item 
+virtual {\bf $\sim$\-G\-P} ()
+\item 
+virtual void {\bf \-Sample} ()
+\item 
+bool {\bf \-Add} (const \-Eigen\-::\-Vector\-Xd \&x, double f)
+\item 
+void {\bf \-Train} ()
+\item 
+void {\bf \-Train} (const \-Eigen\-::\-Matrix\-Xd \&{\bf \-Xs}, const \-Eigen\-::\-Vector\-Xd \&{\bf fs})
+\item 
+double {\bf \-Predict} (const \-Eigen\-::\-Vector\-Xd \&x, double $\ast${\bf s}=0) const 
+\item 
+double {\bf \-Sq\-Exp} (const \-Eigen\-::\-Vector\-Xd \&xa, const \-Eigen\-::\-Vector\-Xd \&xb) const 
+\item 
+double {\bf \-Log\-L} (double dll[2]=0)
+\item 
+double {\bf \-P\-I} (const \-Eigen\-::\-Vector\-Xd \&x, double fmin) const 
+\item 
+double {\bf \-Opt\-Params} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf d}
+\begin{DoxyCompactList}\small\item\em dimension \end{DoxyCompactList}\item 
+int {\bf n}
+\begin{DoxyCompactList}\small\item\em number of data points \end{DoxyCompactList}\item 
+\-Eigen\-::\-Matrix\-Xd {\bf \-Xs}
+\begin{DoxyCompactList}\small\item\em data points \end{DoxyCompactList}\item 
+\-Eigen\-::\-Vector\-Xd {\bf fs}
+\begin{DoxyCompactList}\small\item\em values \end{DoxyCompactList}\item 
+\-Eigen\-::\-Matrix\-Xd {\bf \-K}
+\item 
+\-Eigen\-::\-Matrix\-Xd {\bf \-Ki}
+\item 
+\-Eigen\-::\-Matrix\-Xd {\bf \-L}
+\item 
+\-Eigen\-::\-Vector\-Xd {\bf a}
+\item 
+double {\bf l}
+\item 
+double {\bf s}
+\item 
+double {\bf sigma}
+\item 
+bool {\bf cf}
+\begin{DoxyCompactList}\small\item\em propagate cholesky factor \-L rather than \-K$^\wedge$\{-\/1\} \end{DoxyCompactList}\item 
+bool {\bf eps}
+\begin{DoxyCompactList}\small\item\em prohibit adding points that are eps-\/close in \-L\-\_\-2 to existing data \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-G\-P@{\-G\-P}}
+\index{\-G\-P@{\-G\-P}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-G\-P}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-G\-P\-::\-G\-P} (
+\begin{DoxyParamCaption}
+\item[{int}]{d, }
+\item[{int}]{n = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GP_a06665a6e8b64e317b43cb8a872ef3a85}
+\-Initialize a \doxyref{\-G\-P}{p.}{classgcop_1_1GP} with dimension d and number of points n 
+\begin{DoxyParams}{\-Parameters}
+{\em d} & dimension \\
+\hline
+{\em n} & number of points (optional) \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!$\sim$\-G\-P@{$\sim$\-G\-P}}
+\index{$\sim$\-G\-P@{$\sim$\-G\-P}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{$\sim$\-G\-P}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-G\-P\-::$\sim$\-G\-P} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1GP_a8bbaccf177f315d5adffc6782fb19cfd}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-Add@{\-Add}}
+\index{\-Add@{\-Add}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-Add}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-G\-P\-::\-Add} (
+\begin{DoxyParamCaption}
+\item[{const \-Eigen\-::\-Vector\-Xd \&}]{x, }
+\item[{double}]{f}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GP_abb1dabc11738a1737c8af6a2864964b8}
+\-Add a new data point 
+\begin{DoxyParams}{\-Parameters}
+{\em x} & data vector \\
+\hline
+{\em f} & value \\
+\hline
+{\em true} & if \-O\-K \\
+\hline
+\end{DoxyParams}
+
+
+\-References a, cf, d, eps, fs, \-K, \-Ki, \-L, l, n, sigma, \-Sq\-Exp(), and \-Xs.
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-Log\-L@{\-Log\-L}}
+\index{\-Log\-L@{\-Log\-L}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-Log\-L}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-G\-P\-::\-Log\-L} (
+\begin{DoxyParamCaption}
+\item[{double}]{dll[2] = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GP_a1eb3e9452ace2347b4c9fcb8cd03a0ff}
+\-Loglikelihood 
+\begin{DoxyParams}{\-Parameters}
+{\em dll} & derivative of log-\/liklihood w.\-r. to l and s \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+log-\/likelihood 
+\end{DoxyReturn}
+
+
+\-References a, d, \-L, l, n, and s.
+
+
+
+\-Referenced by \-Opt\-Params().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-Opt\-Params@{\-Opt\-Params}}
+\index{\-Opt\-Params@{\-Opt\-Params}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-Opt\-Params}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-G\-P\-::\-Opt\-Params} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GP_a55eb5e00073f0b6c9004db39d94ab097}
+\-Optimize \doxyref{\-G\-P}{p.}{classgcop_1_1GP} parameters. \-This is currently done naively using a grid enumeration over l and s 
+
+\-References l, \-Log\-L(), and \-Train().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-P\-I@{\-P\-I}}
+\index{\-P\-I@{\-P\-I}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-P\-I}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-G\-P\-::\-P\-I} (
+\begin{DoxyParamCaption}
+\item[{const \-Eigen\-::\-Vector\-Xd \&}]{x, }
+\item[{double}]{fmin}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1GP_aa6b724660b0468ebd7a6d9a56cfda252}
+\-Probability of improvement over a given value fmin  x data vector 
+\begin{DoxyParams}{\-Parameters}
+{\em fmin} & baseline \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+probability of improvement 
+\end{DoxyReturn}
+
+
+\-References gcop\-::ncdf(), \-Predict(), and s.
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-Predict@{\-Predict}}
+\index{\-Predict@{\-Predict}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-Predict}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-G\-P\-::\-Predict} (
+\begin{DoxyParamCaption}
+\item[{const \-Eigen\-::\-Vector\-Xd \&}]{x, }
+\item[{double $\ast$}]{s = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1GP_a4b6662b5f555dd0f581aa6e04772d6fc}
+\-Predict value at point x 
+\begin{DoxyParams}{\-Parameters}
+{\em x} & point \\
+\hline
+{\em s} & pointer to predicted covariance (optional) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+predicted mean 
+\end{DoxyReturn}
+
+
+\-References a, cf, \-Ki, \-L, sigma, and \-Sq\-Exp().
+
+
+
+\-Referenced by \-P\-I().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-Sample@{\-Sample}}
+\index{\-Sample@{\-Sample}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-G\-P\-::\-Sample} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1GP_ae6640917093a3e44f6983d48077c3227}
+\-Generate random points 
+
+\-References fs, and \-Xs.
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-Sq\-Exp@{\-Sq\-Exp}}
+\index{\-Sq\-Exp@{\-Sq\-Exp}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-Sq\-Exp}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-G\-P\-::\-Sq\-Exp} (
+\begin{DoxyParamCaption}
+\item[{const \-Eigen\-::\-Vector\-Xd \&}]{xa, }
+\item[{const \-Eigen\-::\-Vector\-Xd \&}]{xb}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1GP_a6fa793399c2274d7d74bafac11a4e8cc}
+\-Square exponential kernel 
+\begin{DoxyParams}{\-Parameters}
+{\em xa} & first point \\
+\hline
+{\em xb} & second point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+correlation 
+\end{DoxyReturn}
+
+
+\-References d, l, and s.
+
+
+
+\-Referenced by \-Add(), \-Predict(), and \-Train().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-Train@{\-Train}}
+\index{\-Train@{\-Train}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-Train}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-G\-P\-::\-Train} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GP_ac219ee0e79a9a8a4809b9e15b3fbc86b}
+\-Train using current data 
+
+\-References a, cf, \-K, \-Ki, \-L, n, sigma, and \-Sq\-Exp().
+
+
+
+\-Referenced by \-Opt\-Params().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-Train@{\-Train}}
+\index{\-Train@{\-Train}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-Train}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-::\-G\-P\-::\-Train} (
+\begin{DoxyParamCaption}
+\item[{const \-Eigen\-::\-Matrix\-Xd \&}]{\-Xs, }
+\item[{const \-Eigen\-::\-Vector\-Xd \&}]{fs}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GP_a5519da4182cd7db978c57b29cbf3b1be}
+\-Train \doxyref{\-G\-P}{p.}{classgcop_1_1GP} using a given dataset (xs, fs) 
+\begin{DoxyParams}{\-Parameters}
+{\em d-\/n} & matrix of data vectors \\
+\hline
+{\em n-\/vector} & of values \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!a@{a}}
+\index{a@{a}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{a}]{\setlength{\rightskip}{0pt plus 5cm}\-Eigen\-::\-Vector\-Xd {\bf gcop\-::\-G\-P\-::a}}\label{classgcop_1_1GP_a88be08a04472c7829e1ce6dbf7f4c760}
+
+
+\-Referenced by \-Add(), \-Log\-L(), \-Predict(), and \-Train().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!cf@{cf}}
+\index{cf@{cf}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{cf}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-G\-P\-::cf}}\label{classgcop_1_1GP_ab9de36669b0dc3e0ddc10061d2af3895}
+
+
+propagate cholesky factor \-L rather than \-K$^\wedge$\{-\/1\} 
+
+
+
+\-Referenced by \-Add(), \-Predict(), and \-Train().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!d@{d}}
+\index{d@{d}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{d}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-G\-P\-::d}}\label{classgcop_1_1GP_a94e37801a73a743548915b610662cdf3}
+
+
+dimension 
+
+
+
+\-Referenced by \-Add(), \-Log\-L(), and \-Sq\-Exp().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!eps@{eps}}
+\index{eps@{eps}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{eps}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-G\-P\-::eps}}\label{classgcop_1_1GP_aae14330bfaeaef8a83c38f5d8886135d}
+
+
+prohibit adding points that are eps-\/close in \-L\-\_\-2 to existing data 
+
+
+
+\-Referenced by \-Add().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!fs@{fs}}
+\index{fs@{fs}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{fs}]{\setlength{\rightskip}{0pt plus 5cm}\-Eigen\-::\-Vector\-Xd {\bf gcop\-::\-G\-P\-::fs}}\label{classgcop_1_1GP_a403b954837d7ae0a90e0e5efc6e9e06c}
+
+
+values 
+
+
+
+\-Referenced by \-Add(), and \-Sample().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-K@{\-K}}
+\index{\-K@{\-K}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-K}]{\setlength{\rightskip}{0pt plus 5cm}\-Eigen\-::\-Matrix\-Xd {\bf gcop\-::\-G\-P\-::\-K}}\label{classgcop_1_1GP_a898ab472abf20a7ae09e37bc25e79862}
+
+
+\-Referenced by \-Add(), and \-Train().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-Ki@{\-Ki}}
+\index{\-Ki@{\-Ki}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-Ki}]{\setlength{\rightskip}{0pt plus 5cm}\-Eigen\-::\-Matrix\-Xd {\bf gcop\-::\-G\-P\-::\-Ki}}\label{classgcop_1_1GP_a5a02f06d4e7a55111eb39737d417d29a}
+
+
+\-Referenced by \-Add(), \-Predict(), and \-Train().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-L@{\-L}}
+\index{\-L@{\-L}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-L}]{\setlength{\rightskip}{0pt plus 5cm}\-Eigen\-::\-Matrix\-Xd {\bf gcop\-::\-G\-P\-::\-L}}\label{classgcop_1_1GP_a7f0fe9e00f99fafb6018770eb78b39ef}
+
+
+\-Referenced by \-Add(), \-Log\-L(), \-Predict(), and \-Train().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!l@{l}}
+\index{l@{l}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{l}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-G\-P\-::l}}\label{classgcop_1_1GP_aa101fa231aa2181d401688f644a29b4e}
+
+
+\-Referenced by \-Add(), \-Log\-L(), \-Opt\-Params(), and \-Sq\-Exp().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!n@{n}}
+\index{n@{n}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{n}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf gcop\-::\-G\-P\-::n}}\label{classgcop_1_1GP_aaf772ec89cb729f145a159b391e5b3ea}
+
+
+number of data points 
+
+
+
+\-Referenced by \-Add(), \-Log\-L(), and \-Train().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!s@{s}}
+\index{s@{s}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{s}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-G\-P\-::s}}\label{classgcop_1_1GP_af12d8e3ce66d45169c3a5ad380c220c4}
+
+
+\-Referenced by \-Log\-L(), \-P\-I(), and \-Sq\-Exp().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!sigma@{sigma}}
+\index{sigma@{sigma}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{sigma}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-G\-P\-::sigma}}\label{classgcop_1_1GP_a86ef404cb760508e810bb5eda1d6a73e}
+
+
+\-Referenced by \-Add(), \-Predict(), and \-Train().
+
+\index{gcop\-::\-G\-P@{gcop\-::\-G\-P}!\-Xs@{\-Xs}}
+\index{\-Xs@{\-Xs}!gcop::GP@{gcop\-::\-G\-P}}
+\subsubsection[{\-Xs}]{\setlength{\rightskip}{0pt plus 5cm}\-Eigen\-::\-Matrix\-Xd {\bf gcop\-::\-G\-P\-::\-Xs}}\label{classgcop_1_1GP_aa504c13f7c3aedffc4f331da196d0f9f}
+
+
+data points 
+
+
+
+\-Referenced by \-Add(), and \-Sample().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/est/{\bf gp.\-h}\item 
+lib/est/{\bf gp.\-cc}\end{DoxyCompactItemize}

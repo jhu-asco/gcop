@@ -1,0 +1,80 @@
+\section{gcop\-:\-:\-Force$<$ \-Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Force}\index{gcop\-::\-Force$<$ Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$@{gcop\-::\-Force$<$ Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$}}
+
+
+{\ttfamily \#include $<$force.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-l, 1 $>$ {\bf \-Vectorld}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-c, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-l, \-\_\-n $>$ {\bf \-Matrixlnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-l, \-\_\-c $>$ {\bf \-Matrixlcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-l, \*
+\-Dynamic $>$ {\bf \-Matrixl\-Xd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf \-Set} ({\bf \-Vectorld} \&f, double t, const \-Tx \&x, const {\bf \-Vectorcd} \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrixlnd} $\ast$\-A=0, {\bf \-Matrixlcd} $\ast$\-B=0, {\bf \-Matrixl\-Xd} $\ast$\-C=0)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename \-Tx, int \-\_\-l = \-Dynamic, int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$class gcop\-::\-Force$<$ Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$}
+
+\-Control force interface for dynamic forces on manifolds. \-Defines a force f (in \-R$^\wedge$nf) as a function of state x (of an n-\/dimensional manifold) and force u (of \-R$^\wedge$c)
+
+\-Subclasses should provide implementation of the function \-Setp
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Force@{gcop\-::\-Force}!\-Matrixlcd@{\-Matrixlcd}}
+\index{\-Matrixlcd@{\-Matrixlcd}!gcop::Force@{gcop\-::\-Force}}
+\subsubsection[{\-Matrixlcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, int \-\_\-l = \-Dynamic, int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-l, \-\_\-c$>$ {\bf gcop\-::\-Force}$<$ \-Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$\-::{\bf \-Matrixlcd}}\label{classgcop_1_1Force_a8697d670ab27677e50d5c73b774b6718}
+\index{gcop\-::\-Force@{gcop\-::\-Force}!\-Matrixlnd@{\-Matrixlnd}}
+\index{\-Matrixlnd@{\-Matrixlnd}!gcop::Force@{gcop\-::\-Force}}
+\subsubsection[{\-Matrixlnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, int \-\_\-l = \-Dynamic, int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-l, \-\_\-n$>$ {\bf gcop\-::\-Force}$<$ \-Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$\-::{\bf \-Matrixlnd}}\label{classgcop_1_1Force_a048bf1583e96796ea8834c29310ffa02}
+\index{gcop\-::\-Force@{gcop\-::\-Force}!\-Matrixl\-Xd@{\-Matrixl\-Xd}}
+\index{\-Matrixl\-Xd@{\-Matrixl\-Xd}!gcop::Force@{gcop\-::\-Force}}
+\subsubsection[{\-Matrixl\-Xd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, int \-\_\-l = \-Dynamic, int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-l, \-Dynamic$>$ {\bf gcop\-::\-Force}$<$ \-Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$\-::{\bf \-Matrixl\-Xd}}\label{classgcop_1_1Force_aae079661473fa882b059b1392140ce80}
+\index{gcop\-::\-Force@{gcop\-::\-Force}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Force@{gcop\-::\-Force}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, int \-\_\-l = \-Dynamic, int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-c, 1$>$ {\bf gcop\-::\-Force}$<$ \-Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Force_abf7f06a404be92a1d6a0139ce5f01d62}
+\index{gcop\-::\-Force@{gcop\-::\-Force}!\-Vectorld@{\-Vectorld}}
+\index{\-Vectorld@{\-Vectorld}!gcop::Force@{gcop\-::\-Force}}
+\subsubsection[{\-Vectorld}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, int \-\_\-l = \-Dynamic, int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-l, 1$>$ {\bf gcop\-::\-Force}$<$ \-Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$\-::{\bf \-Vectorld}}\label{classgcop_1_1Force_ae7435769544569d3348147ff1fbee84b}
+\index{gcop\-::\-Force@{gcop\-::\-Force}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Force@{gcop\-::\-Force}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, int \-\_\-l = \-Dynamic, int \-\_\-n = \-Dynamic, int \-\_\-c = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, 1$>$ {\bf gcop\-::\-Force}$<$ \-Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Force_af71d005e2d8e562bb0dd3b881bc58f24}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Force@{gcop\-::\-Force}!\-Set@{\-Set}}
+\index{\-Set@{\-Set}!gcop::Force@{gcop\-::\-Force}}
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, int \-\_\-l, int \-\_\-n, int \-\_\-c$>$ void {\bf gcop\-::\-Force}$<$ \-Tx, \-\_\-l, \-\_\-n, \-\_\-c $>$\-::{\bf \-Set} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorld} \&}]{f, }
+\item[{double}]{t, }
+\item[{const \-Tx \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrixlnd} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrixlcd} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrixl\-Xd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Force_aa1e462139a47dcf9bd2301e6b5cd2d02}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf force.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,166 @@
+\section{gcop\-:\-:\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Kinbody3dTrackView}\index{gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$@{gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$}}
+
+
+{\ttfamily \#include $<$kinbody3dtrackview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classgcop_1_1Kinbody3dTrackView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classgcop_1_1Kinbody3dTrackView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kinbody3d\-Track\-View} (const {\bf \-Kinbody3d\-Track}$<$ \-\_\-nu $>$ \&{\bf pg})
+\item 
+virtual {\bf $\sim$\-Kinbody3d\-Track\-View} ()
+\item 
+virtual void {\bf \-Render} ()
+\item 
+virtual bool {\bf \-Render\-Frame} (int i)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Kinbody3d\-Track}$<$ \-\_\-nu $>$ \& {\bf pg}
+\item 
+float {\bf rgba} [4]
+\item 
+bool {\bf draw\-Landmarks}
+\item 
+bool {\bf draw\-Forces}
+\item 
+double {\bf force\-Scale}
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf qobj}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int \-\_\-nu = 6$>$class gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$}
+
+\-Rigid body view. \-Supports rendering either a single state or a whole trajectory of states. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kinbody3d\-Track\-View@{gcop\-::\-Kinbody3d\-Track\-View}!\-Kinbody3d\-Track\-View@{\-Kinbody3d\-Track\-View}}
+\index{\-Kinbody3d\-Track\-View@{\-Kinbody3d\-Track\-View}!gcop::Kinbody3dTrackView@{gcop\-::\-Kinbody3d\-Track\-View}}
+\subsubsection[{\-Kinbody3d\-Track\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ {\bf gcop\-::\-Kinbody3d\-Track\-View}$<$ \-\_\-nu $>$\-::{\bf \-Kinbody3d\-Track\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Kinbody3d\-Track}$<$ \-\_\-nu $>$ \&}]{pg}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Kinbody3dTrackView_aa2d295b175111523e5c251e0ec3938ab}
+\-Create a view for a single state s 
+\begin{DoxyParams}{\-Parameters}
+{\em name} & name \\
+\hline
+{\em s} & rigid body state \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::draw\-Forces, gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::draw\-Landmarks, gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::force\-Scale, gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::qobj, and gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::rgba.
+
+\index{gcop\-::\-Kinbody3d\-Track\-View@{gcop\-::\-Kinbody3d\-Track\-View}!$\sim$\-Kinbody3d\-Track\-View@{$\sim$\-Kinbody3d\-Track\-View}}
+\index{$\sim$\-Kinbody3d\-Track\-View@{$\sim$\-Kinbody3d\-Track\-View}!gcop::Kinbody3dTrackView@{gcop\-::\-Kinbody3d\-Track\-View}}
+\subsubsection[{$\sim$\-Kinbody3d\-Track\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ {\bf gcop\-::\-Kinbody3d\-Track\-View}$<$ \-\_\-nu $>$\-::$\sim${\bf \-Kinbody3d\-Track\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Kinbody3dTrackView_a18537c4a7ac61704b16d38e107365500}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kinbody3d\-Track\-View@{gcop\-::\-Kinbody3d\-Track\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::Kinbody3dTrackView@{gcop\-::\-Kinbody3d\-Track\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ void {\bf gcop\-::\-Kinbody3d\-Track\-View}$<$ \-\_\-nu $>$\-::{\bf \-Render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Kinbody3dTrackView_a07cbd5a96672de03a36b7b1e98503b7f}
+\-Render a view\-: all subclasses should provide this method 
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63}.
+
+\index{gcop\-::\-Kinbody3d\-Track\-View@{gcop\-::\-Kinbody3d\-Track\-View}!\-Render\-Frame@{\-Render\-Frame}}
+\index{\-Render\-Frame@{\-Render\-Frame}!gcop::Kinbody3dTrackView@{gcop\-::\-Kinbody3d\-Track\-View}}
+\subsubsection[{\-Render\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ bool {\bf gcop\-::\-Kinbody3d\-Track\-View}$<$ \-\_\-nu $>$\-::{\bf \-Render\-Frame} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Kinbody3dTrackView_ac2a27265e39853b48151dbbbfb12ea7f}
+\-Render a view\-: all subclasses should provide this method 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & frame \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+return true if more frames should be rendered 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_ad6c3f17a59725948f68817398296f835}.
+
+
+
+\-References gcop\-::\-Viewer\-::\-Draw\-Arrow(), and gcop\-::\-Viewer\-::\-Set\-Color().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Kinbody3d\-Track\-View@{gcop\-::\-Kinbody3d\-Track\-View}!draw\-Forces@{draw\-Forces}}
+\index{draw\-Forces@{draw\-Forces}!gcop::Kinbody3dTrackView@{gcop\-::\-Kinbody3d\-Track\-View}}
+\subsubsection[{draw\-Forces}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ bool {\bf gcop\-::\-Kinbody3d\-Track\-View}$<$ \-\_\-nu $>$\-::{\bf draw\-Forces}}\label{classgcop_1_1Kinbody3dTrackView_a8dbeb63247effe7f2bc6425422ecd4ce}
+
+
+\-Referenced by gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::\-Kinbody3d\-Track\-View().
+
+\index{gcop\-::\-Kinbody3d\-Track\-View@{gcop\-::\-Kinbody3d\-Track\-View}!draw\-Landmarks@{draw\-Landmarks}}
+\index{draw\-Landmarks@{draw\-Landmarks}!gcop::Kinbody3dTrackView@{gcop\-::\-Kinbody3d\-Track\-View}}
+\subsubsection[{draw\-Landmarks}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ bool {\bf gcop\-::\-Kinbody3d\-Track\-View}$<$ \-\_\-nu $>$\-::{\bf draw\-Landmarks}}\label{classgcop_1_1Kinbody3dTrackView_a68ed4c242bc34b4135c9f901f9b1fbe8}
+
+
+\-Referenced by gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::\-Kinbody3d\-Track\-View().
+
+\index{gcop\-::\-Kinbody3d\-Track\-View@{gcop\-::\-Kinbody3d\-Track\-View}!force\-Scale@{force\-Scale}}
+\index{force\-Scale@{force\-Scale}!gcop::Kinbody3dTrackView@{gcop\-::\-Kinbody3d\-Track\-View}}
+\subsubsection[{force\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ double {\bf gcop\-::\-Kinbody3d\-Track\-View}$<$ \-\_\-nu $>$\-::{\bf force\-Scale}}\label{classgcop_1_1Kinbody3dTrackView_ae7ed04ce13e77bb3a8b4aa9fa21c0352}
+
+
+\-Referenced by gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::\-Kinbody3d\-Track\-View().
+
+\index{gcop\-::\-Kinbody3d\-Track\-View@{gcop\-::\-Kinbody3d\-Track\-View}!pg@{pg}}
+\index{pg@{pg}!gcop::Kinbody3dTrackView@{gcop\-::\-Kinbody3d\-Track\-View}}
+\subsubsection[{pg}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ const {\bf \-Kinbody3d\-Track}$<$\-\_\-nu$>$\& {\bf gcop\-::\-Kinbody3d\-Track\-View}$<$ \-\_\-nu $>$\-::{\bf pg}}\label{classgcop_1_1Kinbody3dTrackView_a4ded41a17e4dbd172dd036384f98dcf2}
+\index{gcop\-::\-Kinbody3d\-Track\-View@{gcop\-::\-Kinbody3d\-Track\-View}!qobj@{qobj}}
+\index{qobj@{qobj}!gcop::Kinbody3dTrackView@{gcop\-::\-Kinbody3d\-Track\-View}}
+\subsubsection[{qobj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ \-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Kinbody3d\-Track\-View}$<$ \-\_\-nu $>$\-::{\bf qobj}}\label{classgcop_1_1Kinbody3dTrackView_afafc3c097420cd19a4415619a3186662}
+
+
+\-Referenced by gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::\-Kinbody3d\-Track\-View().
+
+\index{gcop\-::\-Kinbody3d\-Track\-View@{gcop\-::\-Kinbody3d\-Track\-View}!rgba@{rgba}}
+\index{rgba@{rgba}!gcop::Kinbody3dTrackView@{gcop\-::\-Kinbody3d\-Track\-View}}
+\subsubsection[{rgba}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ float {\bf gcop\-::\-Kinbody3d\-Track\-View}$<$ \-\_\-nu $>$\-::{\bf rgba}[4]}\label{classgcop_1_1Kinbody3dTrackView_a46295f264eb2bf6588e1c47508af69bb}
+
+
+\-Referenced by gcop\-::\-Kinbody3d\-Track\-View$<$ \-\_\-nu $>$\-::\-Kinbody3d\-Track\-View().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf kinbody3dtrackview.\-h}\end{DoxyCompactItemize}

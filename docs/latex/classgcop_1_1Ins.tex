@@ -1,0 +1,176 @@
+\section{gcop\-:\-:\-Ins \-Class \-Reference}
+\label{classgcop_1_1Ins}\index{gcop\-::\-Ins@{gcop\-::\-Ins}}
+
+
+{\ttfamily \#include $<$ins.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Ins\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{classgcop_1_1Ins__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Ins\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Ins__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Ins} ()
+\item 
+virtual {\bf $\sim$\-Ins} ()
+\item 
+double {\bf \-Step} ({\bf \-Ins\-State} \&xb, double {\bf t}, const {\bf \-Ins\-State} \&xa, const {\bf \-Vector6d} \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix15d} $\ast$\-A=0, {\bf \-Matrix15x6d} $\ast$\-B=0, {\bf \-Matrix15\-Xd} $\ast$\-C=0)
+\item 
+bool {\bf \-Noise} ({\bf \-Matrix15d} \&\-Q, double {\bf t}, const {\bf \-Ins\-State} \&{\bf x}, const \-Vector3d \&u, double dt, const \-Vector\-Xd $\ast$p=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf sv}
+\begin{DoxyCompactList}\small\item\em gyro bias white noise stdev (spectral density) \end{DoxyCompactList}\item 
+double {\bf su}
+\begin{DoxyCompactList}\small\item\em gyro bias rate-\/of-\/change white noise stdev (spectral density) \end{DoxyCompactList}\item 
+double {\bf sa}
+\begin{DoxyCompactList}\small\item\em acceleration bias rate-\/of-\/change white noise stdev (spectral density) \end{DoxyCompactList}\item 
+double {\bf sra}
+\begin{DoxyCompactList}\small\item\em acceleration measurement noise \end{DoxyCompactList}\item 
+\-Vector3d {\bf g0}
+\begin{DoxyCompactList}\small\item\em gravity vector \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-An \-I\-N\-S system
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Ins@{gcop\-::\-Ins}!\-Ins@{\-Ins}}
+\index{\-Ins@{\-Ins}!gcop::Ins@{gcop\-::\-Ins}}
+\subsubsection[{\-Ins}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Ins\-::\-Ins} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Ins_a6c5bfe3cf58d45b5c917481992a2fa08}
+
+
+\-References g0, sa, sra, su, and sv.
+
+\index{gcop\-::\-Ins@{gcop\-::\-Ins}!$\sim$\-Ins@{$\sim$\-Ins}}
+\index{$\sim$\-Ins@{$\sim$\-Ins}!gcop::Ins@{gcop\-::\-Ins}}
+\subsubsection[{$\sim$\-Ins}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Ins\-::$\sim$\-Ins} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Ins_acf6455d8607a58269d5e9c38a7c02de7}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Ins@{gcop\-::\-Ins}!\-Noise@{\-Noise}}
+\index{\-Noise@{\-Noise}!gcop::Ins@{gcop\-::\-Ins}}
+\subsubsection[{\-Noise}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Ins\-::\-Noise} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix15d} \&}]{\-Q, }
+\item[{double}]{t, }
+\item[{const {\bf \-Ins\-State} \&}]{x, }
+\item[{const \-Vector3d \&}]{u, }
+\item[{double}]{dt, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Ins_a4b455bcce06024fc87017b15775d4472}
+
+
+\-References sa, sra, su, and sv.
+
+\index{gcop\-::\-Ins@{gcop\-::\-Ins}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Ins@{gcop\-::\-Ins}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Ins\-::\-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Ins\-State} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Ins\-State} \&}]{xa, }
+\item[{const {\bf \-Vector6d} \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix15d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix15x6d} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix15\-Xd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Ins_a23c01dc510184c44e148e5198463ee14}
+
+
+\-References gcop\-::\-Ins\-State\-::ba, gcop\-::\-Ins\-State\-::bg, gcop\-::\-S\-O3\-::dexp(), gcop\-::\-S\-O3\-::exp(), g0, gcop\-::\-S\-O3\-::\-Instance(), gcop\-::\-Ins\-State\-::p, gcop\-::\-Ins\-State\-::\-R, and gcop\-::\-Ins\-State\-::v.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Ins@{gcop\-::\-Ins}!g0@{g0}}
+\index{g0@{g0}!gcop::Ins@{gcop\-::\-Ins}}
+\subsubsection[{g0}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Ins\-::g0}}\label{classgcop_1_1Ins_aa43cc8ad367b36a1cc0da2a1ff0ed6b9}
+
+
+gravity vector 
+
+
+
+\-Referenced by \-Ins(), and \-Step().
+
+\index{gcop\-::\-Ins@{gcop\-::\-Ins}!sa@{sa}}
+\index{sa@{sa}!gcop::Ins@{gcop\-::\-Ins}}
+\subsubsection[{sa}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Ins\-::sa}}\label{classgcop_1_1Ins_ac7210df0bb721c96863e1175356e1a4e}
+
+
+acceleration bias rate-\/of-\/change white noise stdev (spectral density) 
+
+
+
+\-Referenced by \-Ins(), and \-Noise().
+
+\index{gcop\-::\-Ins@{gcop\-::\-Ins}!sra@{sra}}
+\index{sra@{sra}!gcop::Ins@{gcop\-::\-Ins}}
+\subsubsection[{sra}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Ins\-::sra}}\label{classgcop_1_1Ins_a6aa85ef7d93de3c2fe5a963b5f009e62}
+
+
+acceleration measurement noise 
+
+
+
+\-Referenced by \-Ins(), and \-Noise().
+
+\index{gcop\-::\-Ins@{gcop\-::\-Ins}!su@{su}}
+\index{su@{su}!gcop::Ins@{gcop\-::\-Ins}}
+\subsubsection[{su}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Ins\-::su}}\label{classgcop_1_1Ins_ac4033034f6c1ecc2028f363a6ccd7d29}
+
+
+gyro bias rate-\/of-\/change white noise stdev (spectral density) 
+
+
+
+\-Referenced by \-Ins(), and \-Noise().
+
+\index{gcop\-::\-Ins@{gcop\-::\-Ins}!sv@{sv}}
+\index{sv@{sv}!gcop::Ins@{gcop\-::\-Ins}}
+\subsubsection[{sv}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Ins\-::sv}}\label{classgcop_1_1Ins_a7a52e868dc3bb88c28b2fec419363a59}
+
+
+gyro bias white noise stdev (spectral density) 
+
+
+
+\-Referenced by \-Ins(), and \-Noise().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf ins.\-h}\item 
+lib/systems/{\bf ins.\-cc}\end{DoxyCompactItemize}

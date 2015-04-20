@@ -1,0 +1,89 @@
+\section{gcop\-:\-:\-Body2d\-Slam \-Class \-Reference}
+\label{classgcop_1_1Body2dSlam}\index{gcop\-::\-Body2d\-Slam@{gcop\-::\-Body2d\-Slam}}
+
+
+{\ttfamily \#include $<$body2dslam.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-Slam\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Body2dSlam__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body2d\-Slam} ({\bf \-Body2d\-Graph} \&{\bf pg})
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body2d\-Graph} \& {\bf pg}
+\begin{DoxyCompactList}\small\item\em pose graph \end{DoxyCompactList}\item 
+{\bf \-Body2d\-Slam\-Cost} {\bf cost}
+\begin{DoxyCompactList}\small\item\em cost function \end{DoxyCompactList}\item 
+{\bf \-P\-Ddp}$<$ {\bf \-M3\-V3d}, 6, 3 $>$ $\ast$ {\bf pddp}
+\begin{DoxyCompactList}\small\item\em parametric discrete-\/mechanics optimal control \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Bundle adjustment based on optimal-\/control. \-This is a basic version using a kinematic model in \-S\-E(2). \-It is possible to plug-\/in any dynamical model without much overhead. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Body2d\-Slam@{gcop\-::\-Body2d\-Slam}!\-Body2d\-Slam@{\-Body2d\-Slam}}
+\index{\-Body2d\-Slam@{\-Body2d\-Slam}!gcop::Body2dSlam@{gcop\-::\-Body2d\-Slam}}
+\subsubsection[{\-Body2d\-Slam}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Slam\-::\-Body2d\-Slam} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body2d\-Graph} \&}]{pg}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dSlam_a70e1809def765bcb54f411370bbef5da}
+\-S\-L\-A\-M, global map iterative optimization 
+\begin{DoxyParams}{\-Parameters}
+{\em pg} & pose-\/graph \\
+\hline
+\end{DoxyParams}
+
+
+\-References cost, gcop\-::\-Body2d\-Graph\-::extforce, gcop\-::\-Body2d\-Graph\-::p, pddp, gcop\-::\-Body2d\-Graph\-::sys, gcop\-::\-Body2d\-Graph\-::ts, gcop\-::\-Body2d\-Graph\-::us, and gcop\-::\-Body2d\-Graph\-::xs.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body2d\-Slam@{gcop\-::\-Body2d\-Slam}!cost@{cost}}
+\index{cost@{cost}!gcop::Body2dSlam@{gcop\-::\-Body2d\-Slam}}
+\subsubsection[{cost}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Slam\-Cost} {\bf gcop\-::\-Body2d\-Slam\-::cost}}\label{classgcop_1_1Body2dSlam_acab19d706b92f18ce21294389e0a95aa}
+
+
+cost function 
+
+
+
+\-Referenced by \-Body2d\-Slam().
+
+\index{gcop\-::\-Body2d\-Slam@{gcop\-::\-Body2d\-Slam}!pddp@{pddp}}
+\index{pddp@{pddp}!gcop::Body2dSlam@{gcop\-::\-Body2d\-Slam}}
+\subsubsection[{pddp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-P\-Ddp}$<${\bf \-M3\-V3d}, 6, 3$>$$\ast$ {\bf gcop\-::\-Body2d\-Slam\-::pddp}}\label{classgcop_1_1Body2dSlam_a7a141c2b7c30386fe950a22a042f02c3}
+
+
+parametric discrete-\/mechanics optimal control 
+
+
+
+\-Referenced by \-Body2d\-Slam().
+
+\index{gcop\-::\-Body2d\-Slam@{gcop\-::\-Body2d\-Slam}!pg@{pg}}
+\index{pg@{pg}!gcop::Body2dSlam@{gcop\-::\-Body2d\-Slam}}
+\subsubsection[{pg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Graph}\& {\bf gcop\-::\-Body2d\-Slam\-::pg}}\label{classgcop_1_1Body2dSlam_aa1df4210bd9e78cb39c08b42de3928e1}
+
+
+pose graph 
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf body2dslam.\-h}\item 
+lib/algos/{\bf body2dslam.\-cc}\end{DoxyCompactItemize}

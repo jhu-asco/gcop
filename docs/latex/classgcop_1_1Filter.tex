@@ -1,0 +1,254 @@
+\section{gcop\-:\-:\-Filter$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Filter}\index{gcop\-::\-Filter$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$@{gcop\-::\-Filter$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$}}
+
+
+{\ttfamily \#include $<$filter.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nx $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nx $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nu $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-np $>$ {\bf \-Matrixmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ {\bf \-Matrixnmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Filter} ({\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&{\bf sys}, {\bf \-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \&{\bf sensor})
+\item 
+virtual {\bf $\sim$\-Filter} ()
+\item 
+virtual bool {\bf \-Predict} (\-T \&xb, double t, const \-T \&xa, const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} $\ast$p=0, bool cov=true)=0
+\item 
+virtual bool {\bf \-Update} (\-T \&xb, double t, const \-T \&xa, const {\bf \-Vectorcd} \&u, const \-Tz \&z, const {\bf \-Vectormd} $\ast$p=0, bool cov=true)=0
+\item 
+void {\bf \-Set\-Chi\-Gate} (double {\bf chi\-Gate})
+\item 
+double {\bf \-Get\-Chi\-Gate} () const 
+\item 
+double {\bf \-Get\-Chi} () const 
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em system \end{DoxyCompactList}\item 
+{\bf \-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \*
+\-\_\-nz $>$ \& {\bf sensor}
+\begin{DoxyCompactList}\small\item\em sensor \end{DoxyCompactList}\item 
+double {\bf chi}
+\begin{DoxyCompactList}\small\item\em computed chi-\/estimate (computed only if chi\-Gate $>$ 0) \end{DoxyCompactList}\item 
+double {\bf chi\-Gate}
+\begin{DoxyCompactList}\small\item\em chi-\/gate (default\-: zero or negative to ignore) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ class gcop\-::\-Filter$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nu$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1Filter_ad05ee66f28cbefcab4fe323769217f98}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nx$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1Filter_aa9ac52006261a6fe7bcac75314acf409}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Matrixmd@{\-Matrixmd}}
+\index{\-Matrixmd@{\-Matrixmd}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Matrixmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-np$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixmd}}\label{classgcop_1_1Filter_a2b28a7cdee3d1514d1fe07c45247b547}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-nx$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1Filter_a1cbc13a0d83f3485bb316f98d7fa0be3}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nu$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1Filter_aea03ab0481a6bebe31a4db6305548d5b}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nx$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1Filter_a95c3694204ce572c08676855a7967ff8}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Matrixnmd@{\-Matrixnmd}}
+\index{\-Matrixnmd@{\-Matrixnmd}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Matrixnmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-np$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnmd}}\label{classgcop_1_1Filter_acda409cc20b12b710591dac6585f30f3}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Filter_a3dafc2563b71bf8402f970f5e1c8ab6d}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1Filter_a2a02cfe06ae24505a303bc7c8197207f}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Filter_a2209e4f5afc67124fce3287f09344eea}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Filter@{\-Filter}}
+\index{\-Filter@{\-Filter}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Filter}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, typename Tz , int \-\_\-nz$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Filter} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&}]{sys, }
+\item[{{\bf \-Sensor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \&}]{sensor}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Filter_a52cc19b567beeaafded19871349ba764}
+\-Basic \doxyref{\-Filter}{p.}{classgcop_1_1Filter} 
+\begin{DoxyParams}{\-Parameters}
+{\em model} & system model \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!$\sim$\-Filter@{$\sim$\-Filter}}
+\index{$\sim$\-Filter@{$\sim$\-Filter}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{$\sim$\-Filter}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, typename Tz , int \-\_\-nz$>$ {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::$\sim${\bf \-Filter} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Filter_a767821fda0340407a1d6a7693b80df75}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Get\-Chi@{\-Get\-Chi}}
+\index{\-Get\-Chi@{\-Get\-Chi}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Get\-Chi}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ double {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Get\-Chi} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1Filter_a9ff87946c7dd7fd3e02ea6ee8ec121a6}
+\-Returns the internally computed chi-\/value during the call to \-Correct \begin{DoxyReturn}{\-Returns}
+the chi-\/value of the most recent measurement 
+\end{DoxyReturn}
+
+
+\-References gcop\-::\-Filter$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::chi.
+
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Get\-Chi\-Gate@{\-Get\-Chi\-Gate}}
+\index{\-Get\-Chi\-Gate@{\-Get\-Chi\-Gate}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Get\-Chi\-Gate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ double {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Get\-Chi\-Gate} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1Filter_a9d6bfaadf7f30295c0b8637ddb34e36c}
+\-Get the preset measurement \-Chi \-Gate value \begin{DoxyReturn}{\-Returns}
+chi squared chi bound 
+\end{DoxyReturn}
+
+
+\-References gcop\-::\-Filter$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::chi\-Gate.
+
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Predict@{\-Predict}}
+\index{\-Predict@{\-Predict}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Predict}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ virtual bool {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Predict} (
+\begin{DoxyParamCaption}
+\item[{\-T \&}]{xb, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{bool}]{cov = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Filter_a590f3379d29900a286a7a4b508dfdfea}
+\-Prediction step. 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & control \\
+\hline
+{\em cov} & whether to update the covariance as well (true by default) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+predicted state 
+\end{DoxyReturn}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Set\-Chi\-Gate@{\-Set\-Chi\-Gate}}
+\index{\-Set\-Chi\-Gate@{\-Set\-Chi\-Gate}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Set\-Chi\-Gate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ void {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Set\-Chi\-Gate} (
+\begin{DoxyParamCaption}
+\item[{double}]{chi\-Gate}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1Filter_a75080eec50e281bf481e0e6376f38801}
+\-Set measurement \-Chi \-Gate 
+\begin{DoxyParams}{\-Parameters}
+{\em chi} & squared chi bound \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Filter$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::chi\-Gate.
+
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!\-Update@{\-Update}}
+\index{\-Update@{\-Update}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ virtual bool {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf \-Update} (
+\begin{DoxyParamCaption}
+\item[{\-T \&}]{xb, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const \-Tz \&}]{z, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{bool}]{cov = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Filter_a03c808f91fbbdfe92cc3b04e78856ada}
+\-Correction step. \-The base implementation does not change the state. 
+\begin{DoxyParams}{\-Parameters}
+{\em z} & measurement \\
+\hline
+{\em cov} & whether to update the covariance as well (true by default) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+corrected state 
+\end{DoxyReturn}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!chi@{chi}}
+\index{chi@{chi}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{chi}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ double {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf chi}}\label{classgcop_1_1Filter_a5e787917b822f4713e97d45b9f8df7f8}
+
+
+computed chi-\/estimate (computed only if chi\-Gate $>$ 0) 
+
+
+
+\-Referenced by gcop\-::\-Filter$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Get\-Chi().
+
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!chi\-Gate@{chi\-Gate}}
+\index{chi\-Gate@{chi\-Gate}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{chi\-Gate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ double {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf chi\-Gate}}\label{classgcop_1_1Filter_a59a1c4664d5d7f0d8384275689e8f09d}
+
+
+chi-\/gate (default\-: zero or negative to ignore) 
+
+
+
+\-Referenced by gcop\-::\-Filter$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Get\-Chi\-Gate(), and gcop\-::\-Filter$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$\-::\-Set\-Chi\-Gate().
+
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!sensor@{sensor}}
+\index{sensor@{sensor}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{sensor}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Sensor}$<$\-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz$>$\& {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf sensor}}\label{classgcop_1_1Filter_ae22ef1b8551eff708081f3d0e9a61796}
+
+
+sensor 
+
+\index{gcop\-::\-Filter@{gcop\-::\-Filter}!sys@{sys}}
+\index{sys@{sys}!gcop::Filter@{gcop\-::\-Filter}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-System}$<$\-T, \-\_\-nx, \-\_\-nu, \-\_\-np$>$\& {\bf gcop\-::\-Filter}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$\-::{\bf sys}}\label{classgcop_1_1Filter_ac6cba45a85c1788c1e0030ad2307ff8b}
+
+
+system 
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/est/{\bf filter.\-h}\item 
+lib/est/{\bf filter.\-cc}\end{DoxyCompactItemize}

@@ -1,0 +1,106 @@
+\section{gcop\-:\-:\-Kin\-Rccar\-Path\-Cost \-Class \-Reference}
+\label{classgcop_1_1KinRccarPathCost}\index{gcop\-::\-Kin\-Rccar\-Path\-Cost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}}
+
+
+{\ttfamily \#include $<$kinrccarpathcost.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Kin\-Rccar\-Path\-Cost\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{classgcop_1_1KinRccarPathCost__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kin\-Rccar\-Path\-Cost\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1KinRccarPathCost__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, 6, 1 $>$ {\bf \-Vector6d}
+\item 
+typedef \-Matrix$<$ double, 6, 6 $>$ {\bf \-Matrix6d}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kin\-Rccar\-Path\-Cost} (double {\bf tf}, const {\bf \-Kin\-Rccar\-Path} \&{\bf pg})
+\item 
+double {\bf \-L} (double t, const {\bf \-Matrix4d} \&x, const \-Vector2d \&u, double h, const \-Vector\-Xd $\ast$p, {\bf \-Vector6d} $\ast$\-Lx=0, {\bf \-Matrix6d} $\ast$\-Lxx=0, \-Vector2d $\ast$\-Lu=0, \-Matrix2d $\ast$\-Luu=0, \-Matrix$<$ double, 6, 2 $>$ $\ast$\-Lxu=0, \-Vector\-Xd $\ast$\-Lp=0, \-Matrix\-Xd $\ast$\-Lpp=0, {\bf \-Matrix\-X6d} $\ast$\-Lpx=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Kin\-Rccar\-Path} \& {\bf pg}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Kin\-Rccar\-Path\-Cost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}!\-Matrix6d@{\-Matrix6d}}
+\index{\-Matrix6d@{\-Matrix6d}!gcop::KinRccarPathCost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}}
+\subsubsection[{\-Matrix6d}]{\setlength{\rightskip}{0pt plus 5cm}typedef \-Matrix$<$double, 6, 6$>$ {\bf gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-Matrix6d}}\label{classgcop_1_1KinRccarPathCost_a3e587d227b1f4abafcad0cba4332a700}
+\index{gcop\-::\-Kin\-Rccar\-Path\-Cost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}!\-Vector6d@{\-Vector6d}}
+\index{\-Vector6d@{\-Vector6d}!gcop::KinRccarPathCost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}}
+\subsubsection[{\-Vector6d}]{\setlength{\rightskip}{0pt plus 5cm}typedef \-Matrix$<$double, 6, 1$>$ {\bf gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-Vector6d}}\label{classgcop_1_1KinRccarPathCost_ae737d9d24671ce85a189f262f8e33b2e}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kin\-Rccar\-Path\-Cost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}!\-Kin\-Rccar\-Path\-Cost@{\-Kin\-Rccar\-Path\-Cost}}
+\index{\-Kin\-Rccar\-Path\-Cost@{\-Kin\-Rccar\-Path\-Cost}!gcop::KinRccarPathCost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}}
+\subsubsection[{\-Kin\-Rccar\-Path\-Cost}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-Kin\-Rccar\-Path\-Cost} (
+\begin{DoxyParamCaption}
+\item[{double}]{tf, }
+\item[{const {\bf \-Kin\-Rccar\-Path} \&}]{pg}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinRccarPathCost_a3ca43496d52aa675e6c1057196b3a115}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kin\-Rccar\-Path\-Cost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}!\-L@{\-L}}
+\index{\-L@{\-L}!gcop::KinRccarPathCost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}}
+\subsubsection[{\-L}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Kin\-Rccar\-Path\-Cost\-::\-L} (
+\begin{DoxyParamCaption}
+\item[{double}]{t, }
+\item[{const {\bf \-Matrix4d} \&}]{x, }
+\item[{const \-Vector2d \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p, }
+\item[{{\bf \-Vector6d} $\ast$}]{\-Lx = {\ttfamily 0}, }
+\item[{{\bf \-Matrix6d} $\ast$}]{\-Lxx = {\ttfamily 0}, }
+\item[{\-Vector2d $\ast$}]{\-Lu = {\ttfamily 0}, }
+\item[{\-Matrix2d $\ast$}]{\-Luu = {\ttfamily 0}, }
+\item[{\-Matrix$<$ double, 6, 2 $>$ $\ast$}]{\-Lxu = {\ttfamily 0}, }
+\item[{\-Vector\-Xd $\ast$}]{\-Lp = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-Lpp = {\ttfamily 0}, }
+\item[{{\bf \-Matrix\-X6d} $\ast$}]{\-Lpx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinRccarPathCost_ac03b01bd6b3b913f5935d08fe0f6dfc5}
+
+
+\-References gcop\-::\-Kin\-Rccar\-Path\-::cp, gcop\-::\-Kin\-Rccar\-Path\-::cv, gcop\-::\-Kin\-Rccar\-Path\-::cw, gcop\-::\-Kinbody3d$<$ \-\_\-nu $>$\-::d, gcop\-::\-Kin\-Rccar\-Path\-::estimate\-\_\-length, gcop\-::\-Kin\-Rccar\-Path\-::extforce, gcop\-::\-Kin\-Rccar\-Path\-::forces, pg, gcop\-::r3hat(), gcop\-::\-Kin\-Rccar\-Path\-::sys, gcop\-::\-Cost$<$ Matrix4d, 6, 2 $>$\-::tf, gcop\-::\-Kin\-Rccar\-Path\-::uos, gcop\-::\-Kin\-Rccar\-Path\-::vs, gcop\-::\-Kin\-Rccar\-Path\-::wheel\-\_\-odometry, gcop\-::\-Kin\-Rccar\-Path\-::yaw\-\_\-odometry, and gcop\-::\-Kin\-Rccar\-Path\-::zs.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Kin\-Rccar\-Path\-Cost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}!pg@{pg}}
+\index{pg@{pg}!gcop::KinRccarPathCost@{gcop\-::\-Kin\-Rccar\-Path\-Cost}}
+\subsubsection[{pg}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Kin\-Rccar\-Path}\& {\bf gcop\-::\-Kin\-Rccar\-Path\-Cost\-::pg}}\label{classgcop_1_1KinRccarPathCost_a766fcba27bf4e7295b6f40ec621a2333}
+
+
+\-Referenced by \-L().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/costs/{\bf kinrccarpathcost.\-h}\end{DoxyCompactItemize}

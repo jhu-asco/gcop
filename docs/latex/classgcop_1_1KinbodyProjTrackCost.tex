@@ -1,0 +1,143 @@
+\section{gcop\-:\-:\-Kinbody\-Proj\-Track\-Cost$<$ \-\_\-nu $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1KinbodyProjTrackCost}\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost$<$ \-\_\-nu $>$@{gcop\-::\-Kinbody\-Proj\-Track\-Cost$<$ \-\_\-nu $>$}}
+
+
+{\ttfamily \#include $<$kinbodyprojtrackcost.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Kinbody\-Proj\-Track\-Cost$<$ \-\_\-nu $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classgcop_1_1KinbodyProjTrackCost__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kinbody\-Proj\-Track\-Cost$<$ \-\_\-nu $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1KinbodyProjTrackCost__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nu $>$ {\bf \-Matrixud}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorud}
+\item 
+typedef \-Matrix$<$ double, 6, 1 $>$ {\bf \-Vector6d}
+\item 
+typedef \-Matrix$<$ double, 6, 6 $>$ {\bf \-Matrix6d}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kinbody\-Proj\-Track\-Cost} (double {\bf tf}, const {\bf \-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$ \&{\bf pg})
+\item 
+double {\bf \-L} (double t, const {\bf \-Matrix4d} \&x, const {\bf \-Vectorud} \&u, double h, const \-Vector\-Xd $\ast$p, {\bf \-Vector6d} $\ast$\-Lx=0, {\bf \-Matrix6d} $\ast$\-Lxx=0, {\bf \-Vectorud} $\ast$\-Lu=0, {\bf \-Matrixud} $\ast$\-Luu=0, \-Matrix$<$ double, 6, \-\_\-nu $>$ $\ast$\-Lxu=0, \-Vector\-Xd $\ast$\-Lp=0, \-Matrix\-Xd $\ast$\-Lpp=0, {\bf \-Matrix\-X6d} $\ast$\-Lpx=0)
+\item 
+void {\bf test\-\_\-d\-\_\-xxt} ()
+\item 
+void {\bf test\-\_\-kron} ()
+\item 
+void {\bf test\-\_\-grads} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$ \& {\bf pg}
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$int \-\_\-nu = 6$>$ class gcop\-::\-Kinbody\-Proj\-Track\-Cost$<$ \-\_\-nu $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}!\-Matrix6d@{\-Matrix6d}}
+\index{\-Matrix6d@{\-Matrix6d}!gcop::KinbodyProjTrackCost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}}
+\subsubsection[{\-Matrix6d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ typedef \-Matrix$<$double, 6, 6$>$ {\bf gcop\-::\-Kinbody\-Proj\-Track\-Cost}$<$ \-\_\-nu $>$\-::{\bf \-Matrix6d}}\label{classgcop_1_1KinbodyProjTrackCost_aaf18a19f45ddc76bc4e16cf1a3e16663}
+\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}!\-Matrixud@{\-Matrixud}}
+\index{\-Matrixud@{\-Matrixud}!gcop::KinbodyProjTrackCost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}}
+\subsubsection[{\-Matrixud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nu$>$ {\bf gcop\-::\-Kinbody\-Proj\-Track\-Cost}$<$ \-\_\-nu $>$\-::{\bf \-Matrixud}}\label{classgcop_1_1KinbodyProjTrackCost_a053ce9a09f7b01ece58450ccd640e9b1}
+\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}!\-Vector6d@{\-Vector6d}}
+\index{\-Vector6d@{\-Vector6d}!gcop::KinbodyProjTrackCost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}}
+\subsubsection[{\-Vector6d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ typedef \-Matrix$<$double, 6, 1$>$ {\bf gcop\-::\-Kinbody\-Proj\-Track\-Cost}$<$ \-\_\-nu $>$\-::{\bf \-Vector6d}}\label{classgcop_1_1KinbodyProjTrackCost_a60fc7144225f8e01a4ce28739c4a1e2b}
+\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}!\-Vectorud@{\-Vectorud}}
+\index{\-Vectorud@{\-Vectorud}!gcop::KinbodyProjTrackCost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}}
+\subsubsection[{\-Vectorud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Kinbody\-Proj\-Track\-Cost}$<$ \-\_\-nu $>$\-::{\bf \-Vectorud}}\label{classgcop_1_1KinbodyProjTrackCost_ad0f3bbc112282427e0af8eba6d7e1939}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}!\-Kinbody\-Proj\-Track\-Cost@{\-Kinbody\-Proj\-Track\-Cost}}
+\index{\-Kinbody\-Proj\-Track\-Cost@{\-Kinbody\-Proj\-Track\-Cost}!gcop::KinbodyProjTrackCost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}}
+\subsubsection[{\-Kinbody\-Proj\-Track\-Cost}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ {\bf gcop\-::\-Kinbody\-Proj\-Track\-Cost}$<$ \-\_\-nu $>$\-::{\bf \-Kinbody\-Proj\-Track\-Cost} (
+\begin{DoxyParamCaption}
+\item[{double}]{tf, }
+\item[{const {\bf \-Kinbody\-Proj\-Track}$<$ \-\_\-nu $>$ \&}]{pg}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinbodyProjTrackCost_a311ba1a074620727e0911f1dd032055c}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}!\-L@{\-L}}
+\index{\-L@{\-L}!gcop::KinbodyProjTrackCost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}}
+\subsubsection[{\-L}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ double {\bf gcop\-::\-Kinbody\-Proj\-Track\-Cost}$<$ \-\_\-nu $>$\-::{\bf \-L} (
+\begin{DoxyParamCaption}
+\item[{double}]{t, }
+\item[{const {\bf \-Matrix4d} \&}]{x, }
+\item[{const {\bf \-Vectorud} \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p, }
+\item[{{\bf \-Vector6d} $\ast$}]{\-Lx = {\ttfamily 0}, }
+\item[{{\bf \-Matrix6d} $\ast$}]{\-Lxx = {\ttfamily 0}, }
+\item[{{\bf \-Vectorud} $\ast$}]{\-Lu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixud} $\ast$}]{\-Luu = {\ttfamily 0}, }
+\item[{\-Matrix$<$ double, 6, \-\_\-nu $>$ $\ast$}]{\-Lxu = {\ttfamily 0}, }
+\item[{\-Vector\-Xd $\ast$}]{\-Lp = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-Lpp = {\ttfamily 0}, }
+\item[{{\bf \-Matrix\-X6d} $\ast$}]{\-Lpx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinbodyProjTrackCost_a04b2075ddfb677a829e6e08f0514cc72}
+
+
+\-References gcop\-::r3hat().
+
+\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}!test\-\_\-d\-\_\-xxt@{test\-\_\-d\-\_\-xxt}}
+\index{test\-\_\-d\-\_\-xxt@{test\-\_\-d\-\_\-xxt}!gcop::KinbodyProjTrackCost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}}
+\subsubsection[{test\-\_\-d\-\_\-xxt}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ void {\bf gcop\-::\-Kinbody\-Proj\-Track\-Cost}$<$ \-\_\-nu $>$\-::{\bf test\-\_\-d\-\_\-xxt} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinbodyProjTrackCost_a8ca66cbc8a7182e3bdf6e8902f49be02}
+\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}!test\-\_\-grads@{test\-\_\-grads}}
+\index{test\-\_\-grads@{test\-\_\-grads}!gcop::KinbodyProjTrackCost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}}
+\subsubsection[{test\-\_\-grads}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ void {\bf gcop\-::\-Kinbody\-Proj\-Track\-Cost}$<$ \-\_\-nu $>$\-::{\bf test\-\_\-grads} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinbodyProjTrackCost_a1cfd8b887b6d9d44e843622bf977fae3}
+
+
+\-References gcop\-::r3hat().
+
+\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}!test\-\_\-kron@{test\-\_\-kron}}
+\index{test\-\_\-kron@{test\-\_\-kron}!gcop::KinbodyProjTrackCost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}}
+\subsubsection[{test\-\_\-kron}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu$>$ void {\bf gcop\-::\-Kinbody\-Proj\-Track\-Cost}$<$ \-\_\-nu $>$\-::{\bf test\-\_\-kron} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1KinbodyProjTrackCost_af1296cc2c3cb4b5d6c4429864c346183}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Kinbody\-Proj\-Track\-Cost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}!pg@{pg}}
+\index{pg@{pg}!gcop::KinbodyProjTrackCost@{gcop\-::\-Kinbody\-Proj\-Track\-Cost}}
+\subsubsection[{pg}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-nu = 6$>$ const {\bf \-Kinbody\-Proj\-Track}$<$\-\_\-nu$>$\& {\bf gcop\-::\-Kinbody\-Proj\-Track\-Cost}$<$ \-\_\-nu $>$\-::{\bf pg}}\label{classgcop_1_1KinbodyProjTrackCost_af7ba21add6616ce47e949e379f4b1d95}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/costs/{\bf kinbodyprojtrackcost.\-h}\end{DoxyCompactItemize}

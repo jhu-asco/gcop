@@ -1,0 +1,519 @@
+\section{gcop\-:\-:\-Lq\-Sensor\-Cost$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1LqSensorCost}\index{gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$@{gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$}}
+
+
+{\ttfamily \#include $<$lqsensorcost.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Lq\-Sensor\-Cost$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{classgcop_1_1LqSensorCost__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Lq\-Sensor\-Cost$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{classgcop_1_1LqSensorCost__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ng, 1 $>$ {\bf \-Vectorgd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ng, \-\_\-nx $>$ {\bf \-Matrixgxd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ng, \-\_\-nu $>$ {\bf \-Matrixgud}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ng, \-\_\-np $>$ {\bf \-Matrixgpd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-ng, \-\_\-nz $>$ {\bf \-Matrixgzd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nx $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nx $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nu $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-np $>$ {\bf \-Matrixmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ {\bf \-Matrixnmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, 1 $>$ {\bf \-Vectorrd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nz $>$ {\bf \-Matrixrd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nx $>$ {\bf \-Matrixrnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-nu $>$ {\bf \-Matrixrcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nz, \-\_\-np $>$ {\bf \-Matrixrmd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Lq\-Sensor\-Cost} ({\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&{\bf sys}, {\bf \-Manifold}$<$ \-Tz, \-\_\-nz $>$ \&{\bf \-Z}, bool {\bf diag}=true)
+\item 
+void {\bf \-Update\-Gains} ()
+\item 
+double {\bf \-L} (double t, const \-Tz \&z, const {\bf \-Vectornd} \&w, const {\bf \-Vectormd} \&p, double h, int sensor\-\_\-index, {\bf \-Vectornd} $\ast$\-Lw=0, {\bf \-Matrixnd} $\ast$\-Lww=0, {\bf \-Vectormd} $\ast${\bf \-Lp}=0, {\bf \-Matrixmd} $\ast$\-Lpp=0, {\bf \-Vectorrd} $\ast$\-Lz=0, {\bf \-Matrixrd} $\ast$\-Lzz=0, {\bf \-Matrixmnd} $\ast$\-Lpw=0, {\bf \-Matrixrnd} $\ast$\-Lzw=0, {\bf \-Matrixrmd} $\ast$\-Lzp=0)
+\item 
+double {\bf \-Lp} (const {\bf \-Vectormd} \&p, {\bf \-Vectormd} $\ast${\bf \-Lp}=0, {\bf \-Matrixmd} $\ast$\-Lpp=0)
+\item 
+bool {\bf \-Res} ({\bf \-Vectorgd} \&{\bf g}, double t, const \-Tz \&z, const {\bf \-Vectornd} \&w, const {\bf \-Vectormd} \&p, double h, int sensor\-\_\-index, {\bf \-Matrixgxd} $\ast$dgdw=0, {\bf \-Matrixgpd} $\ast$dgdp=0, {\bf \-Matrixgzd} $\ast$dgdz=0)
+\item 
+bool {\bf \-Resp} ({\bf \-Vectormd} \&{\bf gp}, const {\bf \-Vectormd} \&p, {\bf \-Matrixmd} $\ast$dgdp=0)
+\item 
+void {\bf \-Set\-Reference} (const vector$<$ \-Tz $>$ $\ast${\bf zs}, {\bf \-Vectormd} $\ast${\bf mup}=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf diag}
+\begin{DoxyCompactList}\small\item\em are the \-Q, \-Qf, and \-R matrices diagonal (true by default) \end{DoxyCompactList}\item 
+{\bf \-Matrixrd} {\bf \-R}
+\begin{DoxyCompactList}\small\item\em inverse of measurement covariance matrix \end{DoxyCompactList}\item 
+{\bf \-Matrixnd} {\bf \-S}
+\begin{DoxyCompactList}\small\item\em inverse of noise covariance matrix \end{DoxyCompactList}\item 
+{\bf \-Matrixmd} {\bf \-P}
+\begin{DoxyCompactList}\small\item\em inverse of parameter covariance matrix (set to zero if nothing is known about parameters before hand) \end{DoxyCompactList}\item 
+{\bf \-Matrixnd} {\bf \-Ssqrt}
+\begin{DoxyCompactList}\small\item\em \-S sqrt. \end{DoxyCompactList}\item 
+{\bf \-Matrixrd} {\bf \-Rsqrt}
+\begin{DoxyCompactList}\small\item\em \-R sqrt. \end{DoxyCompactList}\item 
+{\bf \-Matrixmd} {\bf \-Psqrt}
+\begin{DoxyCompactList}\small\item\em \-P sqrt. \end{DoxyCompactList}\item 
+const vector$<$ \-Tz $>$ $\ast$ {\bf zs}
+\begin{DoxyCompactList}\small\item\em measured sensor data \end{DoxyCompactList}\item 
+{\bf \-Vectormd} $\ast$ {\bf mup}
+\begin{DoxyCompactList}\small\item\em \-Prior for parameter data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Vectorrd} {\bf dz}
+\begin{DoxyCompactList}\small\item\em measurement error (as a tangent vector) \end{DoxyCompactList}\item 
+{\bf \-Vectormd} {\bf dp}
+\begin{DoxyCompactList}\small\item\em parameter error \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ class gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nu$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1LqSensorCost_ab7fc73b205a5d561f198675c6723f2d8}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_ae00995de55330913e21bcfa22041040c}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nx$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1LqSensorCost_adf769e4993e30a901de4665374b345d1}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a1b7df15cfb901d593ae4b1dcaebba56e}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixgpd@{\-Matrixgpd}}
+\index{\-Matrixgpd@{\-Matrixgpd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixgpd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ng, \-\_\-np$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixgpd}}\label{classgcop_1_1LqSensorCost_a046f84650db789164e285a3cda2c65a6}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_ac0bed1a1e94851071e61788a151de1f5}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixgud@{\-Matrixgud}}
+\index{\-Matrixgud@{\-Matrixgud}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixgud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ng, \-\_\-nu$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixgud}}\label{classgcop_1_1LqSensorCost_a2a382f2ea02c755b23a8978192d9f531}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a0bbc0367234cd3e0d6fec623ae1257f3}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixgxd@{\-Matrixgxd}}
+\index{\-Matrixgxd@{\-Matrixgxd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixgxd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ng, \-\_\-nx$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixgxd}}\label{classgcop_1_1LqSensorCost_a7a1c771ead648f34c9294d5ecab6e40c}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a2c018c3f1ebbd6c64b734d65f2fb791e}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixgzd@{\-Matrixgzd}}
+\index{\-Matrixgzd@{\-Matrixgzd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixgzd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ng, \-\_\-nz$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixgzd}}\label{classgcop_1_1LqSensorCost_aefe7e59d6db4847e894e9e4bec08d889}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a473a72dd7d16026e3ffaa63816246018}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixmd@{\-Matrixmd}}
+\index{\-Matrixmd@{\-Matrixmd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-np$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixmd}}\label{classgcop_1_1LqSensorCost_a83c9f189479594ddfa891136aca91bf0}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_ab139ce7bd9401b7adb010a0fa02211e2}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-nx$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1LqSensorCost_a0b1b320c10a6b7106c0eb332c71f6df1}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a9acea99b972e15bd343aed0c127ebf3b}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nu$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1LqSensorCost_a9e62ab993fba58cea3f7a9e4cc822d24}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a870ee6a787ed778715a2507340ea4c25}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nx$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1LqSensorCost_a647a927eb52363a70d55f80c9bc75d38}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a22e32efd90023b8c5262b4898fa1be9c}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixnmd@{\-Matrixnmd}}
+\index{\-Matrixnmd@{\-Matrixnmd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixnmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-np$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixnmd}}\label{classgcop_1_1LqSensorCost_a21c6b2e25f4f206edb31d692f3354190}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a322eb29fa639f3872f0a2f0a6f2cc107}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixrcd@{\-Matrixrcd}}
+\index{\-Matrixrcd@{\-Matrixrcd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixrcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nu$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrcd}}\label{classgcop_1_1LqSensorCost_acac810128ac3b6053ccbafc47a60a87a}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_ad7f8f0aba7088af1931047eaad4341ee}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixrd@{\-Matrixrd}}
+\index{\-Matrixrd@{\-Matrixrd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixrd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nz$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrd}}\label{classgcop_1_1LqSensorCost_a29de4b9a3ba7fee5f99d9a688f0ebabd}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a022837f6779b8b49d04d4759513c7c67}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixrmd@{\-Matrixrmd}}
+\index{\-Matrixrmd@{\-Matrixrmd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixrmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-np$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrmd}}\label{classgcop_1_1LqSensorCost_aac44a5660c6663f41f31c7303873ad97}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_ab5b27c2f03b0f957c0106ddde4b1b93e}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Matrixrnd@{\-Matrixrnd}}
+\index{\-Matrixrnd@{\-Matrixrnd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Matrixrnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, \-\_\-nx$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Matrixrnd}}\label{classgcop_1_1LqSensorCost_ac18c481007159515d25ca5e26aa52c39}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_aaa0e97bd184d80416211e8759a41853c}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1LqSensorCost_aed1f33b8783f28131375c67f7c56daa4}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_aaeb5df577e6315e52bfb078dd2d16c98}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Vectorgd@{\-Vectorgd}}
+\index{\-Vectorgd@{\-Vectorgd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Vectorgd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-ng, 1$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectorgd}}\label{classgcop_1_1LqSensorCost_ab17b8680a0520ff28212bf0e8058d114}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a3921459e886a30ad04fd170f8b4eb72d}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1LqSensorCost_a0ba93a3ce7c4cde4a28a8deac5f08754}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_aa00b906fba1c5a91806abd6203f400b8}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1LqSensorCost_a3c6ac29844b0ef8a974e4e9bac14e94a}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a3a2c3bca498ab85448d737fee2657405}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Vectorrd@{\-Vectorrd}}
+\index{\-Vectorrd@{\-Vectorrd}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Vectorrd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nz, 1$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Vectorrd}}\label{classgcop_1_1LqSensorCost_a3de9b3f07cce0167cf38c3bb54cb4469}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_a3c3fb9db140a41d5e635cf1fdc7bb623}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Lq\-Sensor\-Cost@{\-Lq\-Sensor\-Cost}}
+\index{\-Lq\-Sensor\-Cost@{\-Lq\-Sensor\-Cost}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Lq\-Sensor\-Cost}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int \-\_\-nx, int \-\_\-nu, int \-\_\-np, int \-\_\-ng, typename \-Tz, int \-\_\-nz$>$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Lq\-Sensor\-Cost} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&}]{sys, }
+\item[{{\bf \-Manifold}$<$ \-Tz, \-\_\-nz $>$ \&}]{\-Z, }
+\item[{bool}]{diag = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1LqSensorCost_ad18ffa9630c50bc0880ae5b603ced4aa}
+\-Linear-\/quadratic cost on a sensor manifold. \-Use this constructor for dynamic-\/size control problem, i.\-e. \-Lq\-Cost$<$\-T$>$(\-X, \-U, tf, xf, ...) 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & provides system manifold \\
+\hline
+{\em sensor} & provides sensor manifold \\
+\hline
+{\em tf} & final time \\
+\hline
+{\em diag} & whether the cost matrices are diagonal? \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::dp, gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::mup, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-P, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-P, gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Psqrt, gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-R, gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Rsqrt, gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-S, gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Ssqrt, gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Update\-Gains(), gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-X, and gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::zs.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-L@{\-L}}
+\index{\-L@{\-L}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-L}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, int \-\_\-ng, typename \-Tz, int \-\_\-nz$>$ double {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-L} (
+\begin{DoxyParamCaption}
+\item[{double}]{t, }
+\item[{const \-Tz \&}]{z, }
+\item[{const {\bf \-Vectornd} \&}]{w, }
+\item[{const {\bf \-Vectormd} \&}]{p, }
+\item[{double}]{h, }
+\item[{int}]{sensor\-\_\-index, }
+\item[{{\bf \-Vectornd} $\ast$}]{\-Lw = {\ttfamily 0}, }
+\item[{{\bf \-Matrixnd} $\ast$}]{\-Lww = {\ttfamily 0}, }
+\item[{{\bf \-Vectormd} $\ast$}]{\-Lp = {\ttfamily 0}, }
+\item[{{\bf \-Matrixmd} $\ast$}]{\-Lpp = {\ttfamily 0}, }
+\item[{{\bf \-Vectorrd} $\ast$}]{\-Lz = {\ttfamily 0}, }
+\item[{{\bf \-Matrixrd} $\ast$}]{\-Lzz = {\ttfamily 0}, }
+\item[{{\bf \-Matrixmnd} $\ast$}]{\-Lpw = {\ttfamily 0}, }
+\item[{{\bf \-Matrixrnd} $\ast$}]{\-Lzw = {\ttfamily 0}, }
+\item[{{\bf \-Matrixrmd} $\ast$}]{\-Lzp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1LqSensorCost_a22505a726294202e0a08dbeed89c079b}
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Lp@{\-Lp}}
+\index{\-Lp@{\-Lp}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Lp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, int \-\_\-ng, typename Tz , int \-\_\-nz$>$ double {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Lp} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectormd} \&}]{p, }
+\item[{{\bf \-Vectormd} $\ast$}]{\-Lp = {\ttfamily 0}, }
+\item[{{\bf \-Matrixmd} $\ast$}]{\-Lpp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1LqSensorCost_a6d8bfcdafd068c8fdc71d0676ed1ff73}
+\-Part of cost function which is independent of time and only dependent on parameters \-The net cost for a trajectory is sum i\-:1-\/$>$\-N [\-L\-\_\-i] + \-Lp 
+\begin{DoxyParams}{\-Parameters}
+{\em p} & parameters \\
+\hline
+{\em \-Lp} & derivative wrt p \\
+\hline
+{\em \-Lpp} & derivative wrt p,p \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1SensorCost_a0175e14552b82ea08cb3f2dbb849b0e0}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Res@{\-Res}}
+\index{\-Res@{\-Res}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Res}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, int \-\_\-ng, typename \-Tz, int \-\_\-nz$>$ bool {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Res} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorgd} \&}]{g, }
+\item[{double}]{t, }
+\item[{const \-Tz \&}]{z, }
+\item[{const {\bf \-Vectornd} \&}]{w, }
+\item[{const {\bf \-Vectormd} \&}]{p, }
+\item[{double}]{h, }
+\item[{int}]{sensor\-\_\-index, }
+\item[{{\bf \-Matrixgxd} $\ast$}]{dgdw = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgpd} $\ast$}]{dgdp = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgzd} $\ast$}]{dgdz = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1LqSensorCost_aabfdbde9977b63eda6d705ea9e504f8b}
+
+
+\-References np.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Resp@{\-Resp}}
+\index{\-Resp@{\-Resp}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Resp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, int \-\_\-ng, typename Tz , int \-\_\-nz$>$ bool {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Resp} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectormd} \&}]{gp, }
+\item[{const {\bf \-Vectormd} \&}]{p, }
+\item[{{\bf \-Matrixmd} $\ast$}]{dgdp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1LqSensorCost_a829931906d3a2e3c8d979542e088213f}
+\-Residual \doxyref{\-Cost}{p.}{classgcop_1_1Cost} independent of time and only dependent on parameters 
+\begin{DoxyParams}{\-Parameters}
+{\em g} & residual for parameters \\
+\hline
+{\em p} & parameter \\
+\hline
+{\em dgdp} & derivative wrt p \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Ls\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1LsSensorCost_abbf617556fa5f78f45f4ad7780378690}.
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Set\-Reference@{\-Set\-Reference}}
+\index{\-Set\-Reference@{\-Set\-Reference}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Set\-Reference}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, int \-\_\-ng, typename \-Tz, int \-\_\-nz$>$ void {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Set\-Reference} (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ \-Tz $>$ $\ast$}]{zs, }
+\item[{{\bf \-Vectormd} $\ast$}]{mup = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1LqSensorCost_a0ee7bcf22e6b5110543808b7fc1ae43b}
+\-Set observed measurements for the cost 
+\begin{DoxyParams}{\-Parameters}
+{\em zs} & observed measurements \\
+\hline
+{\em mup} & mean parameters (\-Prior for parameters) \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Update\-Gains@{\-Update\-Gains}}
+\index{\-Update\-Gains@{\-Update\-Gains}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Update\-Gains}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, int \-\_\-ng, typename Tz , int \-\_\-nz$>$ void {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Update\-Gains} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1LqSensorCost_a4ab668e4c5702d359d076e15af0c617b}
+\-Updates the square root gains, i.\-e. sets \-Qsqrt = \-Q.\-sqrt(), etc... 
+
+\-Referenced by gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!diag@{diag}}
+\index{diag@{diag}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{diag}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ bool {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf diag}}\label{classgcop_1_1LqSensorCost_acec83b65675aa809b4a1c14e1a11596e}
+
+
+are the \-Q, \-Qf, and \-R matrices diagonal (true by default) 
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!dp@{dp}}
+\index{dp@{dp}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{dp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Vectormd} {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf dp}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1LqSensorCost_a30e5d268de0a92b700a841322e838756}
+
+
+parameter error 
+
+
+
+\-Referenced by gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost().
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!dz@{dz}}
+\index{dz@{dz}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{dz}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Vectorrd} {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf dz}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1LqSensorCost_a9c75fa44702d77d012a6328a4f328293}
+
+
+measurement error (as a tangent vector) 
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!mup@{mup}}
+\index{mup@{mup}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{mup}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Vectormd}$\ast$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf mup}}\label{classgcop_1_1LqSensorCost_ab76e69010e78b148d1ad4c6a84246d92}
+
+
+\-Prior for parameter data. 
+
+
+
+\-Referenced by gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost().
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-P@{\-P}}
+\index{\-P@{\-P}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-P}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixmd} {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-P}}\label{classgcop_1_1LqSensorCost_aeeea209e36d87138a8d62ab6823a2498}
+
+
+inverse of parameter covariance matrix (set to zero if nothing is known about parameters before hand) 
+
+
+
+\-Referenced by gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost().
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Psqrt@{\-Psqrt}}
+\index{\-Psqrt@{\-Psqrt}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Psqrt}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixmd} {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Psqrt}}\label{classgcop_1_1LqSensorCost_a935c968b460d62555942f882228d8180}
+
+
+\-P sqrt. 
+
+
+
+\-Referenced by gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost().
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-R@{\-R}}
+\index{\-R@{\-R}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-R}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixrd} {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-R}}\label{classgcop_1_1LqSensorCost_a50302ada540ff58374b7fe60e56e1af1}
+
+
+inverse of measurement covariance matrix 
+
+
+
+\-Referenced by gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost().
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Rsqrt@{\-Rsqrt}}
+\index{\-Rsqrt@{\-Rsqrt}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Rsqrt}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixrd} {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Rsqrt}}\label{classgcop_1_1LqSensorCost_a4db6e90aa622cab619bea218d703f0ce}
+
+
+\-R sqrt. 
+
+
+
+\-Referenced by gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost().
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-S@{\-S}}
+\index{\-S@{\-S}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-S}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-S}}\label{classgcop_1_1LqSensorCost_a091762065c9acbb0d308360b576f5dcf}
+
+
+inverse of noise covariance matrix 
+
+
+
+\-Referenced by gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost().
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!\-Ssqrt@{\-Ssqrt}}
+\index{\-Ssqrt@{\-Ssqrt}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{\-Ssqrt}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf \-Ssqrt}}\label{classgcop_1_1LqSensorCost_a8b0880ab43f3e2ac8742ab99bc24d110}
+
+
+\-S sqrt. 
+
+
+
+\-Referenced by gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost().
+
+\index{gcop\-::\-Lq\-Sensor\-Cost@{gcop\-::\-Lq\-Sensor\-Cost}!zs@{zs}}
+\index{zs@{zs}!gcop::LqSensorCost@{gcop\-::\-Lq\-Sensor\-Cost}}
+\subsubsection[{zs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename \-Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic$>$ const vector$<$\-Tz$>$$\ast$ {\bf gcop\-::\-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$\-::{\bf zs}}\label{classgcop_1_1LqSensorCost_a74f9de0aea13a563e3c617a097b6a8bd}
+
+
+measured sensor data 
+
+
+
+\-Referenced by gcop\-::\-Lq\-Sensor\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz $>$\-::\-Lq\-Sensor\-Cost().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/costs/{\bf lqsensorcost.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,141 @@
+\section{gcop\-:\-:\-Flat$<$ \-T, nx, nu, np, nz, \-\_\-ny $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Flat}\index{gcop\-::\-Flat$<$ T, nx, nu, np, nz, \-\_\-ny $>$@{gcop\-::\-Flat$<$ T, nx, nu, np, nz, \-\_\-ny $>$}}
+
+
+{\ttfamily \#include $<$flat.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Flat$<$ \-T, nx, nu, np, nz, \-\_\-ny $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Flat__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Flat} ({\bf \-System}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ny $>$ \&{\bf sys}, int {\bf ny}=\-\_\-ny, int {\bf ox}=1, int {\bf ou}=2)
+\item 
+virtual bool {\bf \-State} (\-T \&x, const vector$<$ \-Vectoryd $>$ \&ys)
+\item 
+virtual bool {\bf \-Control} (\-Vectorcd \&u, const vector$<$ \-Vectormd $>$ \&ys)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-System}$<$ \-T, nx, nu, {\bf np}, nz $>$ \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em system \end{DoxyCompactList}\item 
+int {\bf ny}
+\begin{DoxyCompactList}\small\item\em flat output dimension \end{DoxyCompactList}\item 
+int {\bf ox}
+\begin{DoxyCompactList}\small\item\em state order \end{DoxyCompactList}\item 
+int {\bf ou}
+\begin{DoxyCompactList}\small\item\em control order \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename T, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ny = \-Dynamic$>$class gcop\-::\-Flat$<$ T, nx, nu, np, nz, \-\_\-ny $>$}
+
+\-General flat output definition
+
+\-Author\-: \-Marin \-Kobilarov (c) 2005-\/-\/2013 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Flat@{gcop\-::\-Flat}!\-Flat@{\-Flat}}
+\index{\-Flat@{\-Flat}!gcop::Flat@{gcop\-::\-Flat}}
+\subsubsection[{\-Flat}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ny = \-Dynamic$>$ {\bf gcop\-::\-Flat}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ny $>$\-::{\bf \-Flat} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ny $>$ \&}]{sys, }
+\item[{int}]{ny = {\ttfamily \-\_\-ny}, }
+\item[{int}]{ox = {\ttfamily 1}, }
+\item[{int}]{ou = {\ttfamily 2}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Flat_aa64e779194f6a99d6f5273f75d2b7c1a}
+\-Define flat outputs for system s with state order ox and control order ou 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & system \\
+\hline
+{\em ny} & flat output dimension \\
+\hline
+{\em ox} & state order \\
+\hline
+{\em ou} & control order \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Flat@{gcop\-::\-Flat}!\-Control@{\-Control}}
+\index{\-Control@{\-Control}!gcop::Flat@{gcop\-::\-Flat}}
+\subsubsection[{\-Control}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ny = \-Dynamic$>$ bool {\bf gcop\-::\-Flat}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ny $>$\-::{\bf \-Control} (
+\begin{DoxyParamCaption}
+\item[{\-Vectorcd \&}]{u, }
+\item[{const vector$<$ \-Vectormd $>$ \&}]{ys}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Flat_acd11b4da245b6bac89f524e6eb103477}
+\-Construct state from flat outputs 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & control \\
+\hline
+{\em ys} & a vector of y and its derivatives (y,dy,d2y,...) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if paramaters are feasible 
+\end{DoxyReturn}
+\index{gcop\-::\-Flat@{gcop\-::\-Flat}!\-State@{\-State}}
+\index{\-State@{\-State}!gcop::Flat@{gcop\-::\-Flat}}
+\subsubsection[{\-State}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int nz, int \-\_\-ny$>$ bool {\bf gcop\-::\-Flat}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ny $>$\-::{\bf \-State} (
+\begin{DoxyParamCaption}
+\item[{\-T \&}]{x, }
+\item[{const vector$<$ \-Vectoryd $>$ \&}]{ys}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Flat_a7d1f7a2559a5fedb316d8fbef682349e}
+\-Construct state from flat outputs 
+\begin{DoxyParams}{\-Parameters}
+{\em x} & state \\
+\hline
+{\em ys} & a vector of y and its derivatives (y,dy,d2y,...) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if paramaters are feasible 
+\end{DoxyReturn}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Flat@{gcop\-::\-Flat}!ny@{ny}}
+\index{ny@{ny}!gcop::Flat@{gcop\-::\-Flat}}
+\subsubsection[{ny}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ny = \-Dynamic$>$ int {\bf gcop\-::\-Flat}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ny $>$\-::{\bf ny}}\label{classgcop_1_1Flat_a4b19c4bc9597abfe274c9563a00ccb73}
+
+
+flat output dimension 
+
+\index{gcop\-::\-Flat@{gcop\-::\-Flat}!ou@{ou}}
+\index{ou@{ou}!gcop::Flat@{gcop\-::\-Flat}}
+\subsubsection[{ou}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ny = \-Dynamic$>$ int {\bf gcop\-::\-Flat}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ny $>$\-::{\bf ou}}\label{classgcop_1_1Flat_a997ea956025f9008eb06233a2543d0c4}
+
+
+control order 
+
+\index{gcop\-::\-Flat@{gcop\-::\-Flat}!ox@{ox}}
+\index{ox@{ox}!gcop::Flat@{gcop\-::\-Flat}}
+\subsubsection[{ox}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ny = \-Dynamic$>$ int {\bf gcop\-::\-Flat}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ny $>$\-::{\bf ox}}\label{classgcop_1_1Flat_a13792aedca16a7dcad77a947bc251518}
+
+
+state order 
+
+\index{gcop\-::\-Flat@{gcop\-::\-Flat}!sys@{sys}}
+\index{sys@{sys}!gcop::Flat@{gcop\-::\-Flat}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int nz = \-Dynamic, int \-\_\-ny = \-Dynamic$>$ {\bf \-System}$<$\-T, nx, nu, {\bf np}, nz$>$\& {\bf gcop\-::\-Flat}$<$ \-T, nx, nu, {\bf np}, nz, \-\_\-ny $>$\-::{\bf sys}}\label{classgcop_1_1Flat_aaa1d0ff9f7e3ff5b2687f5cb95f9883b}
+
+
+system 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf flat.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,157 @@
+\section{gcop\-:\-:\-Disk$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Disk}\index{gcop\-::\-Disk$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$@{gcop\-::\-Disk$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}}
+
+
+{\ttfamily \#include $<$disk.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Disk$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classgcop_1_1Disk__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Disk$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classgcop_1_1Disk__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, 1, 1 $>$ {\bf \-Vectorgd}
+\item 
+typedef \-Matrix$<$ double, 1, \-\_\-nx $>$ {\bf \-Matrixgxd}
+\item 
+typedef \-Matrix$<$ double, 1, \-\_\-nu $>$ {\bf \-Matrixgud}
+\item 
+typedef \-Matrix$<$ double, 1, \-\_\-np $>$ {\bf \-Matrixgpd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Disk} (const \-Vector2d \&{\bf o}, double {\bf r}, double {\bf cr}=.\-5)
+\item 
+bool {\bf operator()} ({\bf \-Vectorgd} \&g, double t, const \-T \&x, const {\bf \-Vectorcd} \&u, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrixgxd} $\ast$dgdx=0, {\bf \-Matrixgud} $\ast$dgdu=0, {\bf \-Matrixgpd} $\ast$dgdp=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Vector2d {\bf o}
+\begin{DoxyCompactList}\small\item\em origin \end{DoxyCompactList}\item 
+double {\bf r}
+\begin{DoxyCompactList}\small\item\em radius \end{DoxyCompactList}\item 
+double {\bf cr}
+\begin{DoxyCompactList}\small\item\em collision radius \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ class gcop\-::\-Disk$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!\-Matrixgpd@{\-Matrixgpd}}
+\index{\-Matrixgpd@{\-Matrixgpd}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{\-Matrixgpd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, \-\_\-np$>$ {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixgpd}}\label{classgcop_1_1Disk_a32d14b84ef7a48c5de93291f936feef8}
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!\-Matrixgud@{\-Matrixgud}}
+\index{\-Matrixgud@{\-Matrixgud}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{\-Matrixgud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, \-\_\-nu$>$ {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixgud}}\label{classgcop_1_1Disk_a4f1f425d62bf503100c1b3d5b3b27b9f}
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!\-Matrixgxd@{\-Matrixgxd}}
+\index{\-Matrixgxd@{\-Matrixgxd}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{\-Matrixgxd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, \-\_\-nx$>$ {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixgxd}}\label{classgcop_1_1Disk_ae2379a1eb8276ad7509f92ba1bf947e7}
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Disk_a162f4fa91e50ad9378a4f6ba24d2c29e}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_a0055c4a104dbf9ffa1f1f118982506a7}.
+
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!\-Vectorgd@{\-Vectorgd}}
+\index{\-Vectorgd@{\-Vectorgd}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{\-Vectorgd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, 1$>$ {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorgd}}\label{classgcop_1_1Disk_a6e98b0da592342db2069c9fd2b0ed92a}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_a8b9bd00ce111e6b7a149257e16bc8f56}.
+
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1Disk_a8089d83d17794a6f2d6bd7a323481829}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_aa4c4302af089a4343a932e429e0856ea}.
+
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Disk_a7da99769c48a92941d2d5f55f7894d4f}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_a3a69c40b18721b68a707b4f763fb1a50}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!\-Disk@{\-Disk}}
+\index{\-Disk@{\-Disk}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{\-Disk}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Disk} (
+\begin{DoxyParamCaption}
+\item[{const \-Vector2d \&}]{o, }
+\item[{double}]{r, }
+\item[{double}]{cr = {\ttfamily .5}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Disk_ad15ebab15befa12b1d0c1a31845ba4c3}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ bool {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorgd} \&}]{g, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgxd} $\ast$}]{dgdx = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgud} $\ast$}]{dgdu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgpd} $\ast$}]{dgdp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Disk_af3977c7acb2c519b0502c519f705c2c0}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!cr@{cr}}
+\index{cr@{cr}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{cr}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf cr}}\label{classgcop_1_1Disk_a01e903181c94d0b0e1b18c3f27b5b599}
+
+
+collision radius 
+
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!o@{o}}
+\index{o@{o}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{o}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-Vector2d {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf o}}\label{classgcop_1_1Disk_ae40d554b8c83e5dbf22cea8b8524dcab}
+
+
+origin 
+
+\index{gcop\-::\-Disk@{gcop\-::\-Disk}!r@{r}}
+\index{r@{r}!gcop::Disk@{gcop\-::\-Disk}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Disk}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf r}}\label{classgcop_1_1Disk_a9be811c944a048dd21cd1eb51b469602}
+
+
+radius 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/constraints/{\bf disk.\-h}\end{DoxyCompactItemize}

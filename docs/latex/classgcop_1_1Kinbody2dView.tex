@@ -1,0 +1,175 @@
+\section{gcop\-:\-:\-Kinbody2d\-View \-Class \-Reference}
+\label{classgcop_1_1Kinbody2dView}\index{gcop\-::\-Kinbody2d\-View@{gcop\-::\-Kinbody2d\-View}}
+
+
+{\ttfamily \#include $<$kinbody2dview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Kinbody2d\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classgcop_1_1Kinbody2dView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Kinbody2d\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Kinbody2dView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Kinbody2d\-View} (const {\bf \-Kinbody2d} \&{\bf sys})
+\item 
+{\bf \-Kinbody2d\-View} (const {\bf \-Kinbody2d} \&{\bf sys}, vector$<$ \-Matrix3d $>$ $\ast${\bf xs}, vector$<$ \-Vector3d $>$ $\ast${\bf us}=0)
+\item 
+virtual {\bf $\sim$\-Kinbody2d\-View} ()
+\item 
+void {\bf \-Render} (const \-Matrix3d $\ast$x, const \-Vector3d $\ast$u=0)
+\item 
+void {\bf \-Render} (const vector$<$ \-Matrix3d $>$ $\ast${\bf xs}, const vector$<$ \-Vector3d $>$ $\ast${\bf us}=0, bool rs=true, int is=-\/1, int ie=-\/1, int {\bf dis}=1, int {\bf dit}=1, bool dl=false)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Kinbody2d} \& {\bf sys}
+\item 
+\-G\-L\-Uquadric\-Obj $\ast$ {\bf qobj}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Kinbody2d\-View@{gcop\-::\-Kinbody2d\-View}!\-Kinbody2d\-View@{\-Kinbody2d\-View}}
+\index{\-Kinbody2d\-View@{\-Kinbody2d\-View}!gcop::Kinbody2dView@{gcop\-::\-Kinbody2d\-View}}
+\subsubsection[{\-Kinbody2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Kinbody2d\-View\-::\-Kinbody2d\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Kinbody2d} \&}]{sys}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Kinbody2dView_a0b3a7341ed1bb8d9265c37be501338c3}
+\-Create a particle view of trajectory traj 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & particle \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::line\-Width, qobj, and gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::rgba.
+
+\index{gcop\-::\-Kinbody2d\-View@{gcop\-::\-Kinbody2d\-View}!\-Kinbody2d\-View@{\-Kinbody2d\-View}}
+\index{\-Kinbody2d\-View@{\-Kinbody2d\-View}!gcop::Kinbody2dView@{gcop\-::\-Kinbody2d\-View}}
+\subsubsection[{\-Kinbody2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Kinbody2d\-View\-::\-Kinbody2d\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Kinbody2d} \&}]{sys, }
+\item[{vector$<$ \-Matrix3d $>$ $\ast$}]{xs, }
+\item[{vector$<$ \-Vector3d $>$ $\ast$}]{us = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Kinbody2dView_a4616856cbe8d7def18f8ea73139cf565}
+\-Create a particle view of trajectory traj 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & particle \\
+\hline
+{\em xs} & trajectory \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::line\-Width, qobj, and gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::rgba.
+
+\index{gcop\-::\-Kinbody2d\-View@{gcop\-::\-Kinbody2d\-View}!$\sim$\-Kinbody2d\-View@{$\sim$\-Kinbody2d\-View}}
+\index{$\sim$\-Kinbody2d\-View@{$\sim$\-Kinbody2d\-View}!gcop::Kinbody2dView@{gcop\-::\-Kinbody2d\-View}}
+\subsubsection[{$\sim$\-Kinbody2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Kinbody2d\-View\-::$\sim$\-Kinbody2d\-View} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Kinbody2dView_a0fc80ac7e21681fbad45068a97632307}
+
+
+\-References qobj.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Kinbody2d\-View@{gcop\-::\-Kinbody2d\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::Kinbody2dView@{gcop\-::\-Kinbody2d\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Kinbody2d\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const \-Matrix3d $\ast$}]{x, }
+\item[{const \-Vector3d $\ast$}]{u = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Kinbody2dView_ab1fbc46f500414df321fec089ce272fc}
+
+
+\-Implements {\bf gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a5591c11e0516e2993231547ec82cd763}.
+
+
+
+\-References gcop\-::\-Kinbody2d\-::d, gcop\-::\-S\-E2\-::g2q(), gcop\-::\-S\-E2\-::\-Instance(), gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::rgba, gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::\-Set\-Color(), and sys.
+
+\index{gcop\-::\-Kinbody2d\-View@{gcop\-::\-Kinbody2d\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::Kinbody2dView@{gcop\-::\-Kinbody2d\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Kinbody2d\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ \-Matrix3d $>$ $\ast$}]{xs, }
+\item[{const vector$<$ \-Vector3d $>$ $\ast$}]{us = {\ttfamily 0}, }
+\item[{bool}]{rs = {\ttfamily true}, }
+\item[{int}]{is = {\ttfamily -\/1}, }
+\item[{int}]{ie = {\ttfamily -\/1}, }
+\item[{int}]{dis = {\ttfamily 1}, }
+\item[{int}]{dit = {\ttfamily 1}, }
+\item[{bool}]{dl = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Kinbody2dView_a7f2e20c0216701c25faae7fcaf785820}
+\-Render a trajectory 
+\begin{DoxyParams}{\-Parameters}
+{\em traj} & trajectory \\
+\hline
+{\em rs} & render state \\
+\hline
+{\em is} & start index \\
+\hline
+{\em ie} & end index \\
+\hline
+{\em dis} & index step for rendering bodies along trajectory \\
+\hline
+{\em dit} & index step for rendering states(points) along trajectory \\
+\hline
+{\em dl} & always draw last state \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6a4cf72f0a0e380ad69397be162b3ee9}.
+
+
+
+\-References gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::dis, gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::dit, gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::line\-Width, gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::\-Render(), gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::rgba, and gcop\-::\-System\-View$<$ Matrix3d, Vector3d $>$\-::\-Set\-Color().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Kinbody2d\-View@{gcop\-::\-Kinbody2d\-View}!qobj@{qobj}}
+\index{qobj@{qobj}!gcop::Kinbody2dView@{gcop\-::\-Kinbody2d\-View}}
+\subsubsection[{qobj}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Kinbody2d\-View\-::qobj}}\label{classgcop_1_1Kinbody2dView_a91eb261f53653b119c247e8bbc5e7634}
+
+
+\-Referenced by \-Kinbody2d\-View(), and $\sim$\-Kinbody2d\-View().
+
+\index{gcop\-::\-Kinbody2d\-View@{gcop\-::\-Kinbody2d\-View}!sys@{sys}}
+\index{sys@{sys}!gcop::Kinbody2dView@{gcop\-::\-Kinbody2d\-View}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Kinbody2d}\& {\bf gcop\-::\-Kinbody2d\-View\-::sys}}\label{classgcop_1_1Kinbody2dView_a171a8dc7e57fe612835d7325e336b8f4}
+
+
+\-Referenced by \-Render().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf kinbody2dview.\-h}\item 
+lib/views/{\bf kinbody2dview.\-cc}\end{DoxyCompactItemize}

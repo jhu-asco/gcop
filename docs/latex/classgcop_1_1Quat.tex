@@ -1,0 +1,683 @@
+\section{gcop\-:\-:\-Quat \-Class \-Reference}
+\label{classgcop_1_1Quat}\index{gcop\-::\-Quat@{gcop\-::\-Quat}}
+
+
+{\ttfamily \#include $<$quat.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Quat} ()
+\item 
+{\bf \-Quat} (const {\bf \-Quat} \&q)
+\item 
+{\bf \-Quat} (const double q[4])
+\item 
+{\bf \-Quat} (double w, double x, double y, double z)
+\item 
+virtual {\bf $\sim$\-Quat} ()
+\item 
+double $\ast$ {\bf \-Rotate2} (double c[3], const double a[3]) const 
+\item 
+double $\ast$ {\bf \-Rotate2} (double c[3]) const 
+\item 
+double $\ast$ {\bf \-Rotate} (double c[3], const double v[3]) const 
+\item 
+double $\ast$ {\bf \-Rotate} (double v[3]) const 
+\item 
+void {\bf \-Transform} (const double e[3])
+\item 
+void {\bf \-Transform} (const double u[3], double v)
+\item 
+void {\bf \-Invert} ()
+\item 
+void {\bf \-Invert} ({\bf \-Quat} \&q) const 
+\item 
+void {\bf \-Identity} ()
+\item 
+void {\bf \-Normalize} ()
+\item 
+{\bf \-Quat} \& {\bf operator$\ast$=} (const {\bf \-Quat} \&q)
+\item 
+void {\bf \-From\-Exp} (const double e[3])
+\item 
+void {\bf \-To\-Exp} (double e[3]) const 
+\item 
+void {\bf \-From\-Axis} (const double u[3], const double v)
+\item 
+void {\bf \-To\-Axis} (double u[3], double \&v) const 
+\item 
+void {\bf \-From\-S\-E3} (const double m[16])
+\item 
+void {\bf \-To\-S\-E3} (double m[16]) const 
+\item 
+void {\bf \-From\-Rpy} (const double rpy[3])
+\item 
+void {\bf \-To\-Rpy} (double rpy[3]) const 
+\item 
+double $\ast$ {\bf \-Q} (double q[4]) const 
+\item 
+bool {\bf \-Is\-Identity} () const 
+\item 
+void {\bf \-Set\-Tol} (double {\bf tol})
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double $\ast$ {\bf \-Rotate} (double c[3], const double v[3], const double u[3], double w)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf qw}
+\item 
+double {\bf qx}
+\item 
+double {\bf qy}
+\item 
+double {\bf qz}
+\begin{DoxyCompactList}\small\item\em quaternion components \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf tol}
+\begin{DoxyCompactList}\small\item\em operations tolerance (default is 1e-\/10) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Friends}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Quat} {\bf operator$\ast$} (const {\bf \-Quat} \&q0, const {\bf \-Quat} \&q1)
+\item 
+std\-::ostream \& {\bf operator$<$$<$} (std\-::ostream \&os, const {\bf \-Quat} \&q)
+\item 
+std\-::istream \& {\bf operator$>$$>$} (std\-::istream \&is, {\bf \-Quat} \&q)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-The class defines a quaternion and its basic set of operations. \-This is a minimalistic implementation that contains only 5 doubles\-: 4 numbers describing the quaternion coordinates\-: $ q \in S^3 \subset \mathbb{R}^4 $ and a number tol that defines the numerical tolerance for quaternion operations. \-The implemented functionality is suitable for efficient quaternion algebra; for various actions on vectors in $ \mathbb{R}^3$; for transforming b/n quaternion, matrix, and exponential representations
+
+\-Author\-: \-Marin \-Kobilarov -\/-\/ (\-C) 2003 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Quat@{\-Quat}}
+\index{\-Quat@{\-Quat}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Quat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Quat\-::\-Quat} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_afe432f2aac598c876a51b16dce29aa13}
+\-Initialize identity quaternion 
+
+\-References \-E\-P\-S.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Quat@{\-Quat}}
+\index{\-Quat@{\-Quat}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Quat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Quat\-::\-Quat} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Quat} \&}]{q}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_a9f80bcbf376257e5602e0ae129035c0f}
+\-Copy contructor 
+\begin{DoxyParams}{\-Parameters}
+{\em q} & quaternion \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Quat@{\-Quat}}
+\index{\-Quat@{\-Quat}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Quat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-::\-Quat\-::\-Quat} (
+\begin{DoxyParamCaption}
+\item[{const double}]{q[4]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_a0afc988987ae29ccf4791b707c0743c0}
+\-Initialize using a double array 
+\begin{DoxyParams}{\-Parameters}
+{\em q} & quaternion vector \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Quat@{\-Quat}}
+\index{\-Quat@{\-Quat}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Quat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Quat\-::\-Quat} (
+\begin{DoxyParamCaption}
+\item[{double}]{w, }
+\item[{double}]{x, }
+\item[{double}]{y, }
+\item[{double}]{z}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_a0d6fb210513b42f8edf2c9332a44b4e4}
+\-Initialize using seperate quaternion components $ q=[w,x,y,z] $ 
+\begin{DoxyParams}{\-Parameters}
+{\em w} & w \\
+\hline
+{\em x} & x \\
+\hline
+{\em y} & y \\
+\hline
+{\em z} & z \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!$\sim$\-Quat@{$\sim$\-Quat}}
+\index{$\sim$\-Quat@{$\sim$\-Quat}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{$\sim$\-Quat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Quat\-::$\sim$\-Quat} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Quat_a944342ae3eb03be422e801073e3bfd0b}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-From\-Axis@{\-From\-Axis}}
+\index{\-From\-Axis@{\-From\-Axis}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-From\-Axis}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-From\-Axis} (
+\begin{DoxyParamCaption}
+\item[{const double}]{u[3], }
+\item[{const double}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_a8113595de78a0df4377d8edf32b83b6b}
+\-Create from angle-\/axis representation 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & axis (unit vector) \\
+\hline
+{\em v} & angle \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Normalize(), qw, qx, qy, and qz.
+
+
+
+\-Referenced by \-Rotate(), and \-Transform().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-From\-Exp@{\-From\-Exp}}
+\index{\-From\-Exp@{\-From\-Exp}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-From\-Exp}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-From\-Exp} (
+\begin{DoxyParamCaption}
+\item[{const double}]{e[3]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_af567cc1da4d3395f8f6dcb81edb16008}
+\-Create from exponential coordinates 
+\begin{DoxyParams}{\-Parameters}
+{\em e} & exponential coordinates \\
+\hline
+\end{DoxyParams}
+
+
+\-References qw, qx, qy, and qz.
+
+
+
+\-Referenced by \-Transform().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-From\-Rpy@{\-From\-Rpy}}
+\index{\-From\-Rpy@{\-From\-Rpy}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-From\-Rpy}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-From\-Rpy} (
+\begin{DoxyParamCaption}
+\item[{const double}]{rpy[3]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_a3b4187419527076de701ef1a99aafe34}
+\-From roll-\/pitch-\/yaw angles 
+\begin{DoxyParams}{\-Parameters}
+{\em rpy} & roll-\/pitch-\/yaw angles \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Normalize(), qw, qx, qy, and qz.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-From\-S\-E3@{\-From\-S\-E3}}
+\index{\-From\-S\-E3@{\-From\-S\-E3}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-From\-S\-E3}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-From\-S\-E3} (
+\begin{DoxyParamCaption}
+\item[{const double}]{m[16]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_a36c6a62c59ba99dbc843ea76969cd2e1}
+\-Extract this quaternion from an \-S\-E(3) matrix 
+\begin{DoxyParams}{\-Parameters}
+{\em m} & 4x4 matrix \\
+\hline
+\end{DoxyParams}
+
+
+\-References mat, \-Normalize(), perm, qw, qx, qy, and qz.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Identity@{\-Identity}}
+\index{\-Identity@{\-Identity}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Identity}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-Identity} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_a77851ea04a71f62ecffc863e29bb8a50}
+\-Set this quaternion to the identity 
+
+\-References qw, qx, qy, and qz.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Invert@{\-Invert}}
+\index{\-Invert@{\-Invert}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Invert}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-Invert} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_a1a9c6f02c6ee187fcbcd46f046aef472}
+\-Invert the quaternion 
+
+\-References qx, qy, and qz.
+
+
+
+\-Referenced by \-Rotate().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Invert@{\-Invert}}
+\index{\-Invert@{\-Invert}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Invert}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-Invert} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Quat} \&}]{q}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_a0ef61543b959eb69c42910be340ef074}
+\-Create an inverse of this quaternion and store it in q 
+\begin{DoxyParams}{\-Parameters}
+{\em q} & inverse of this quaternion \\
+\hline
+\end{DoxyParams}
+
+
+\-References qw, qx, qy, and qz.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Is\-Identity@{\-Is\-Identity}}
+\index{\-Is\-Identity@{\-Is\-Identity}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Is\-Identity}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Quat\-::\-Is\-Identity} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_a6b5d1751a431107477d3ec0e41334310}
+\-Check if it's identity up to defined tolerance tol 
+
+\-References qw, qx, qy, qz, and tol.
+
+
+
+\-Referenced by operator$\ast$=(), \-Rotate(), \-To\-Axis(), \-To\-Exp(), and \-To\-Rpy().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Normalize@{\-Normalize}}
+\index{\-Normalize@{\-Normalize}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Normalize}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-Normalize} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_adbc4300ab5979b439455c2158916e8d7}
+\-Normalize $ q = \frac{q}{\|q\|} $ 
+
+\-References qw, qx, qy, and qz.
+
+
+
+\-Referenced by \-From\-Axis(), \-From\-Rpy(), and \-From\-S\-E3().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{operator$\ast$=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Quat} \& \-Quat\-::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Quat} \&}]{q}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_abf62668767bcdcb8605c211bd956f101}
+\-Multiply with another quaternion 
+\begin{DoxyParams}{\-Parameters}
+{\em q} & other quaterion \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+resulting quaternion 
+\end{DoxyReturn}
+
+
+\-References \-Is\-Identity(), qw, qx, qy, and qz.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Q@{\-Q}}
+\index{\-Q@{\-Q}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Q}]{\setlength{\rightskip}{0pt plus 5cm}double $\ast$ {\bf \-Quat\-::\-Q} (
+\begin{DoxyParamCaption}
+\item[{double}]{q[4]}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_a068fa87eab4171a63acdb7ea32850530}
+\-Get a 4-\/dim array with the quaternion components 
+\begin{DoxyParams}{\-Parameters}
+{\em q} & the array to be filled \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+pointer to q 
+\end{DoxyReturn}
+
+
+\-References qw, qx, qy, and qz.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Rotate@{\-Rotate}}
+\index{\-Rotate@{\-Rotate}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Rotate}]{\setlength{\rightskip}{0pt plus 5cm}double $\ast$ {\bf \-Quat\-::\-Rotate} (
+\begin{DoxyParamCaption}
+\item[{double}]{c[3], }
+\item[{const double}]{v[3], }
+\item[{const double}]{u[3], }
+\item[{double}]{w}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Quat_ac201e42474bbb12682e4a9f795441830}
+\-Rotate a vector v using around axis u by angle w and store resulting vector in c 
+\begin{DoxyParams}{\-Parameters}
+{\em c} & resulting vector \\
+\hline
+{\em v} & initial vector \\
+\hline
+{\em u} & axis of rotation \\
+\hline
+{\em w} & angle of rotation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+a pointer to c 
+\end{DoxyReturn}
+
+
+\-References \-From\-Axis(), and \-Rotate().
+
+
+
+\-Referenced by \-Rotate().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Rotate@{\-Rotate}}
+\index{\-Rotate@{\-Rotate}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Rotate}]{\setlength{\rightskip}{0pt plus 5cm}double $\ast$ {\bf \-Quat\-::\-Rotate} (
+\begin{DoxyParamCaption}
+\item[{double}]{c[3], }
+\item[{const double}]{v[3]}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_a1bf9da9d3ad42e209ff49e0912fe8b90}
+\-Rotate a vector v and store in c 
+\begin{DoxyParams}{\-Parameters}
+{\em c} & resulting vector \\
+\hline
+{\em v} & initial vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+a pointer to c 
+\end{DoxyReturn}
+
+
+\-References \-Invert(), \-Is\-Identity(), \-To\-Exp(), and tol.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Rotate@{\-Rotate}}
+\index{\-Rotate@{\-Rotate}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Rotate}]{\setlength{\rightskip}{0pt plus 5cm}double $\ast$ {\bf \-Quat\-::\-Rotate} (
+\begin{DoxyParamCaption}
+\item[{double}]{v[3]}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_a16d5b1c8b4ee0e84b957f7bdcb9f6a11}
+\-Rotate a vector v and store the resulting vector back in v 
+\begin{DoxyParams}{\-Parameters}
+{\em v} & vector to rotate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+pointer to v 
+\end{DoxyReturn}
+
+
+\-References \-Rotate().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Rotate2@{\-Rotate2}}
+\index{\-Rotate2@{\-Rotate2}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Rotate2}]{\setlength{\rightskip}{0pt plus 5cm}double $\ast$ {\bf \-Quat\-::\-Rotate2} (
+\begin{DoxyParamCaption}
+\item[{double}]{c[3], }
+\item[{const double}]{a[3]}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_a4965cf417e784a5352ed660f1065a786}
+
+
+\-References qw, qx, qy, and qz.
+
+
+
+\-Referenced by \-Rotate2().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Rotate2@{\-Rotate2}}
+\index{\-Rotate2@{\-Rotate2}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Rotate2}]{\setlength{\rightskip}{0pt plus 5cm}double $\ast$ {\bf \-Quat\-::\-Rotate2} (
+\begin{DoxyParamCaption}
+\item[{double}]{c[3]}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_af0c13bdc2fde24495c8e630dd323893e}
+
+
+\-References \-Rotate2().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Set\-Tol@{\-Set\-Tol}}
+\index{\-Set\-Tol@{\-Set\-Tol}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Set\-Tol}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-Set\-Tol} (
+\begin{DoxyParamCaption}
+\item[{double}]{tol}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_a9498ebf7f04410bc13f889e30ffff17d}
+\-Set the operations tolerance (default is 1e-\/10) 
+\begin{DoxyParams}{\-Parameters}
+{\em tol} & tolerance \\
+\hline
+\end{DoxyParams}
+
+
+\-References tol.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-To\-Axis@{\-To\-Axis}}
+\index{\-To\-Axis@{\-To\-Axis}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-To\-Axis}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-To\-Axis} (
+\begin{DoxyParamCaption}
+\item[{double}]{u[3], }
+\item[{double \&}]{v}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_a7a93523248a087fac4b725a5a6964638}
+\-To angle-\/axis (or exponential/canonical) representation 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & resulting axis (unit vector) \\
+\hline
+{\em v} & resulting angle (optional) \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Is\-Identity(), qw, qx, qy, and qz.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-To\-Exp@{\-To\-Exp}}
+\index{\-To\-Exp@{\-To\-Exp}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-To\-Exp}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-To\-Exp} (
+\begin{DoxyParamCaption}
+\item[{double}]{e[3]}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_a887a19a5b5f867503abf98164b37afc8}
+\-To exponential coordinates 
+\begin{DoxyParams}{\-Parameters}
+{\em e} & exponential coordinates \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Is\-Identity(), qw, qx, qy, qz, and tol.
+
+
+
+\-Referenced by \-Rotate().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-To\-Rpy@{\-To\-Rpy}}
+\index{\-To\-Rpy@{\-To\-Rpy}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-To\-Rpy}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-To\-Rpy} (
+\begin{DoxyParamCaption}
+\item[{double}]{rpy[3]}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_a13041b6b57d8022a352d82d37f161cde}
+\-To roll-\/pitch-\/yaw angles 
+\begin{DoxyParams}{\-Parameters}
+{\em rpy} & roll-\/pitch-\/yaw angles \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Is\-Identity(), qw, qx, qy, and qz.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-To\-S\-E3@{\-To\-S\-E3}}
+\index{\-To\-S\-E3@{\-To\-S\-E3}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-To\-S\-E3}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-To\-S\-E3} (
+\begin{DoxyParamCaption}
+\item[{double}]{m[16]}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Quat_abd16224934b963b277263e7a0a715c51}
+\-Create a 4x4 \-S\-E(3) matrix from this quaternion 
+\begin{DoxyParams}{\-Parameters}
+{\em m} & matrix \\
+\hline
+\end{DoxyParams}
+
+
+\-References qw, qx, qy, and qz.
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Transform@{\-Transform}}
+\index{\-Transform@{\-Transform}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Transform}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-Transform} (
+\begin{DoxyParamCaption}
+\item[{const double}]{e[3]}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_aa4b1bccc9d9dfb178b8a8392adcb9dae}
+\-Transform this quaternion by exponential coordinates e. \-Note\-: norm(e)$<$pi so this is suitable for small rotations e 
+\begin{DoxyParams}{\-Parameters}
+{\em e} & exponential coordinates \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-From\-Exp().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!\-Transform@{\-Transform}}
+\index{\-Transform@{\-Transform}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{\-Transform}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Quat\-::\-Transform} (
+\begin{DoxyParamCaption}
+\item[{const double}]{u[3], }
+\item[{double}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Quat_a4ebf71cfe0bb59fb04ae7fa155c38c40}
+\-Transform this quaternion by axis u and angle v 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & axis of rotation \\
+\hline
+{\em v} & angle of rotation \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-From\-Axis().
+
+
+
+\subsection{\-Friends \-And \-Related \-Function \-Documentation}
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Quat} operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Quat} \&}]{q0, }
+\item[{const {\bf \-Quat} \&}]{q1}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [friend]}}\label{classgcop_1_1Quat_ab5e2ec33a3ca0111136fc8fc265c87d3}
+\-Multiply two quaternions and return the result $ q=q_0*q_1 $ 
+\begin{DoxyParams}{\-Parameters}
+{\em q0} & first quat \\
+\hline
+{\em q1} & second quat \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+their product 
+\end{DoxyReturn}
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os, }
+\item[{const {\bf \-Quat} \&}]{q}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [friend]}}\label{classgcop_1_1Quat_af7dc4169eef698128b48c9727a27b531}
+\-Print a quaternion 
+\begin{DoxyParams}{\-Parameters}
+{\em os} & output stream \\
+\hline
+{\em q} & quaternion \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+the output stream 
+\end{DoxyReturn}
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::istream\& operator$>$$>$ (
+\begin{DoxyParamCaption}
+\item[{std\-::istream \&}]{is, }
+\item[{{\bf \-Quat} \&}]{q}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [friend]}}\label{classgcop_1_1Quat_a40a54e653394557def4efdd20bb68d94}
+\-Load a quaternion 
+\begin{DoxyParams}{\-Parameters}
+{\em is} & input stream \\
+\hline
+{\em q} & quaternion \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+the input stream 
+\end{DoxyReturn}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!qw@{qw}}
+\index{qw@{qw}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{qw}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Quat\-::qw}}\label{classgcop_1_1Quat_a2779d3464b8751bc19ea1e128de84c8b}
+
+
+\-Referenced by \-From\-Axis(), \-From\-Exp(), \-From\-Rpy(), \-From\-S\-E3(), \-Identity(), \-Invert(), \-Is\-Identity(), \-Normalize(), operator$\ast$=(), gcop\-::operator$<$$<$(), gcop\-::operator$>$$>$(), \-Q(), \-Rotate2(), \-To\-Axis(), \-To\-Exp(), \-To\-Rpy(), and \-To\-S\-E3().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!qx@{qx}}
+\index{qx@{qx}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{qx}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Quat\-::qx}}\label{classgcop_1_1Quat_a340a4bc1cc59ef85cfe9cc4fef9f5331}
+
+
+\-Referenced by \-From\-Axis(), \-From\-Exp(), \-From\-Rpy(), \-From\-S\-E3(), \-Identity(), \-Invert(), \-Is\-Identity(), \-Normalize(), operator$\ast$=(), gcop\-::operator$<$$<$(), gcop\-::operator$>$$>$(), \-Q(), \-Rotate2(), \-To\-Axis(), \-To\-Exp(), \-To\-Rpy(), and \-To\-S\-E3().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!qy@{qy}}
+\index{qy@{qy}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{qy}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Quat\-::qy}}\label{classgcop_1_1Quat_a2fa854ee54fa7f7fb1e6dcf21326e428}
+
+
+\-Referenced by \-From\-Axis(), \-From\-Exp(), \-From\-Rpy(), \-From\-S\-E3(), \-Identity(), \-Invert(), \-Is\-Identity(), \-Normalize(), operator$\ast$=(), gcop\-::operator$<$$<$(), gcop\-::operator$>$$>$(), \-Q(), \-Rotate2(), \-To\-Axis(), \-To\-Exp(), \-To\-Rpy(), and \-To\-S\-E3().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!qz@{qz}}
+\index{qz@{qz}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{qz}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Quat\-::qz}}\label{classgcop_1_1Quat_a2231737de2e049ecf9d22b442e00629b}
+
+
+quaternion components 
+
+
+
+\-Referenced by \-From\-Axis(), \-From\-Exp(), \-From\-Rpy(), \-From\-S\-E3(), \-Identity(), \-Invert(), \-Is\-Identity(), \-Normalize(), operator$\ast$=(), gcop\-::operator$<$$<$(), gcop\-::operator$>$$>$(), \-Q(), \-Rotate2(), \-To\-Axis(), \-To\-Exp(), \-To\-Rpy(), and \-To\-S\-E3().
+
+\index{gcop\-::\-Quat@{gcop\-::\-Quat}!tol@{tol}}
+\index{tol@{tol}!gcop::Quat@{gcop\-::\-Quat}}
+\subsubsection[{tol}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Quat\-::tol}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Quat_afb65f904ad3238a34fddda59d706a571}
+
+
+operations tolerance (default is 1e-\/10) 
+
+
+
+\-Referenced by \-Is\-Identity(), \-Rotate(), \-Set\-Tol(), and \-To\-Exp().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf quat.\-h}\item 
+lib/utils/{\bf quat.\-cc}\end{DoxyCompactItemize}

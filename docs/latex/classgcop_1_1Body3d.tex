@@ -1,0 +1,400 @@
+\section{gcop\-:\-:\-Body3d$<$ c $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Body3d}\index{gcop\-::\-Body3d$<$ c $>$@{gcop\-::\-Body3d$<$ c $>$}}
+
+
+{\ttfamily \#include $<$body3d.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Body3d$<$ c $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classgcop_1_1Body3d__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body3d$<$ c $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Body3d__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body3d} ()
+\item 
+{\bf \-Body3d} (const \-Vector3d \&{\bf ds}, double {\bf m})
+\item 
+{\bf \-Body3d} (const \-Vector3d \&{\bf ds}, double {\bf m}, const \-Vector3d \&{\bf \-J})
+\item 
+virtual {\bf $\sim$\-Body3d} ()
+\item 
+virtual double {\bf \-Step} ({\bf \-Body3d\-State} \&xb, double {\bf t}, const {\bf \-Body3d\-State} \&xa, const {\bf \-Vectorcd} \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix12d} $\ast$\-A=0, {\bf \-Matrix12xcd} $\ast$\-B=0, {\bf \-Matrix12\-Xd} $\ast$\-C=0)
+\item 
+double {\bf \-Symp\-Step} (double {\bf t}, {\bf \-Body3d\-State} \&xb, const {\bf \-Body3d\-State} \&xa, const {\bf \-Vectorcd} \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix12d} $\ast$\-A=0, {\bf \-Matrix12xcd} $\ast$\-B=0, {\bf \-Matrix12\-Xd} $\ast$\-C=0)
+\item 
+double {\bf \-Euler\-Step} (double {\bf t}, {\bf \-Body3d\-State} \&xb, const {\bf \-Body3d\-State} \&xa, const {\bf \-Vectorcd} \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix12d} $\ast$\-A=0, {\bf \-Matrix12xcd} $\ast$\-B=0, {\bf \-Matrix12\-Xd} $\ast$\-C=0)
+\item 
+void {\bf \-I\-D} ({\bf \-Vector6d} \&f, double {\bf t}, const {\bf \-Body3d\-State} \&xb, const {\bf \-Body3d\-State} \&xa, const {\bf \-Vectorcd} \&u, double h)
+\item 
+void {\bf \-State\-And\-Controls\-To\-Flat} (\-Vector\-Xd \&y, const {\bf \-Body3d\-State} \&{\bf x}, const {\bf \-Vectorcd} \&u)
+\item 
+void {\bf \-Flat\-To\-State\-And\-Controls} ({\bf \-Body3d\-State} \&{\bf x}, {\bf \-Vectorcd} \&u, const std\-::vector$<$ \-Vector\-Xd $>$ \&y)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf \-Compute} (\-Vector3d \&{\bf \-J}, double {\bf m}, const \-Vector3d \&{\bf ds})
+\item 
+static void {\bf \-Compute} ({\bf \-Vector6d} \&{\bf \-I}, double {\bf m}, const \-Vector3d \&{\bf ds})
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Vector3d {\bf ds}
+\begin{DoxyCompactList}\small\item\em \-T\-O\-D\-O\-: visual element. \end{DoxyCompactList}\item 
+double {\bf m}
+\begin{DoxyCompactList}\small\item\em mass \end{DoxyCompactList}\item 
+\-Vector3d {\bf \-J}
+\begin{DoxyCompactList}\small\item\em 3x1 principal moments of inertia \end{DoxyCompactList}\item 
+{\bf \-Vector6d} {\bf \-I}
+\begin{DoxyCompactList}\small\item\em 6x1 spatial inertia matrix \end{DoxyCompactList}\item 
+\-Vector3d {\bf \-Dw}
+\begin{DoxyCompactList}\small\item\em linear rotational damping terms \end{DoxyCompactList}\item 
+\-Vector3d {\bf \-Dv}
+\begin{DoxyCompactList}\small\item\em linear translational damping terms \end{DoxyCompactList}\item 
+\-Vector3d {\bf fp}
+\begin{DoxyCompactList}\small\item\em constant position force in spatial frame (e.\-g. due to gravity) \end{DoxyCompactList}\item 
+{\bf \-Matrix6xcd} {\bf \-Bu}
+\begin{DoxyCompactList}\small\item\em control input transformation \end{DoxyCompactList}\item 
+bool {\bf symp}
+\begin{DoxyCompactList}\small\item\em symplectic? \end{DoxyCompactList}\item 
+string {\bf name}
+\begin{DoxyCompactList}\small\item\em \-Unique name of the body. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, c, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, c, c $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, 6, c $>$ {\bf \-Matrix6xcd}
+\item 
+typedef \-Matrix$<$ double, 12, c $>$ {\bf \-Matrix12xcd}
+\item 
+typedef \-Matrix$<$ double, \*
+12, \-Dynamic $>$ {\bf \-Matrix12\-Xd}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int c = 6$>$class gcop\-::\-Body3d$<$ c $>$}
+
+\-A single rigid body system
+
+\-Note\-: damping is currently supported only by \-Euler's method
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Matrix12xcd@{\-Matrix12xcd}}
+\index{\-Matrix12xcd@{\-Matrix12xcd}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Matrix12xcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ typedef \-Matrix$<$double, 12, c$>$ {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Matrix12xcd}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Body3d_a957f1b383c834ff61ce9cc5391197754}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Matrix12\-Xd@{\-Matrix12\-Xd}}
+\index{\-Matrix12\-Xd@{\-Matrix12\-Xd}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Matrix12\-Xd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ typedef \-Matrix$<$double, 12, \-Dynamic$>$ {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Matrix12\-Xd}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Body3d_a3aa621f0f787b01ca8b4ec359da33cc1}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Matrix6xcd@{\-Matrix6xcd}}
+\index{\-Matrix6xcd@{\-Matrix6xcd}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Matrix6xcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ typedef \-Matrix$<$double, 6, c$>$ {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Matrix6xcd}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Body3d_a184ffdf78f3265bc2acc1f5d08d87289}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ typedef \-Matrix$<$double, c, c$>$ {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Matrixcd}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Body3d_a9ce53b1cb4384ab0b1b9e69e86a0bdb6}
+
+
+\-Reimplemented from {\bf gcop\-::\-System$<$ Body3d\-State, 12, c $>$} \doxyref{}{p.}{classgcop_1_1System_aad907d3930faf073b0a705bb11c1916f}.
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ typedef \-Matrix$<$double, c, 1$>$ {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Vectorcd}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1Body3d_a9babbb234388f000d9dbe86daebb0dc7}
+
+
+\-Reimplemented from {\bf gcop\-::\-System$<$ Body3d\-State, 12, c $>$} \doxyref{}{p.}{classgcop_1_1System_a66a7faf5eec2de07e4d9d97540e1e095}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Body3d@{\-Body3d}}
+\index{\-Body3d@{\-Body3d}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Body3d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Body3d} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3d_afccefe59ec17a71b0f7aca178e1a9cbc}
+
+
+\-References gcop\-::\-Body3d$<$ c $>$\-::\-Compute(), gcop\-::\-Body3d$<$ c $>$\-::ds, gcop\-::\-Body3d$<$ c $>$\-::\-I, gcop\-::\-Body3d$<$ c $>$\-::\-J, and gcop\-::\-Body3d$<$ c $>$\-::m.
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Body3d@{\-Body3d}}
+\index{\-Body3d@{\-Body3d}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Body3d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Body3d} (
+\begin{DoxyParamCaption}
+\item[{const \-Vector3d \&}]{ds, }
+\item[{double}]{m}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3d_aa97dee6669ca7d9d3e95d713910ac5a8}
+
+
+\-References gcop\-::\-Body3d$<$ c $>$\-::\-Compute(), gcop\-::\-Body3d$<$ c $>$\-::\-I, and gcop\-::\-Body3d$<$ c $>$\-::\-J.
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Body3d@{\-Body3d}}
+\index{\-Body3d@{\-Body3d}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Body3d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Body3d} (
+\begin{DoxyParamCaption}
+\item[{const \-Vector3d \&}]{ds, }
+\item[{double}]{m, }
+\item[{const \-Vector3d \&}]{\-J}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3d_a51313deb6b0a5901d4edf1490932efff}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!$\sim$\-Body3d@{$\sim$\-Body3d}}
+\index{$\sim$\-Body3d@{$\sim$\-Body3d}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{$\sim$\-Body3d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Body3d}$<$ c $>$\-::$\sim${\bf \-Body3d} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3d_aac3b6796d477b4a05ddeb8307367adf6}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Compute@{\-Compute}}
+\index{\-Compute@{\-Compute}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Compute}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Compute} (
+\begin{DoxyParamCaption}
+\item[{\-Vector3d \&}]{\-J, }
+\item[{double}]{m, }
+\item[{const \-Vector3d \&}]{ds}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Body3d_aa0d6d6b474ea9582473be769840da529}
+\-Compute moments of inertia \-J given mass m and dimensions ds 
+\begin{DoxyParams}{\-Parameters}
+{\em \-J} & moments of inertia (3x1 vector) \\
+\hline
+{\em m} & mass \\
+\hline
+{\em ds} & dimensions (assume a rectangular body) \\
+\hline
+\end{DoxyParams}
+
+
+\-Referenced by gcop\-::\-Body3d$<$ c $>$\-::\-Body3d().
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Compute@{\-Compute}}
+\index{\-Compute@{\-Compute}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Compute}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Compute} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{\-I, }
+\item[{double}]{m, }
+\item[{const \-Vector3d \&}]{ds}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Body3d_a97831063ef6e451bca22fb1dd6341e4b}
+\-Compute moments of inertia tensor \-I given mass m and dimensions ds 
+\begin{DoxyParams}{\-Parameters}
+{\em \-J} & moments of inertia (6x1 vector) \\
+\hline
+{\em m} & mass \\
+\hline
+{\em ds} & dimensions (assume a rectangular body) \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Euler\-Step@{\-Euler\-Step}}
+\index{\-Euler\-Step@{\-Euler\-Step}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Euler\-Step}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ double {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Euler\-Step} (
+\begin{DoxyParamCaption}
+\item[{double}]{t, }
+\item[{{\bf \-Body3d\-State} \&}]{xb, }
+\item[{const {\bf \-Body3d\-State} \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12xcd} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12\-Xd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3d_a3c5c8c7c564134ad4db942cd7c81dbc2}
+
+
+\-References gcop\-::\-S\-O3\-::\-Ad(), gcop\-::\-S\-O3\-::cay(), gcop\-::\-S\-O3\-::dcay(), gcop\-::\-S\-O3\-::hat(), and gcop\-::\-S\-O3\-::\-Instance().
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Flat\-To\-State\-And\-Controls@{\-Flat\-To\-State\-And\-Controls}}
+\index{\-Flat\-To\-State\-And\-Controls@{\-Flat\-To\-State\-And\-Controls}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Flat\-To\-State\-And\-Controls}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Flat\-To\-State\-And\-Controls} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body3d\-State} \&}]{x, }
+\item[{{\bf \-Vectorcd} \&}]{u, }
+\item[{const std\-::vector$<$ \-Vector\-Xd $>$ \&}]{y}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3d_a2aca8d4892ed3977b8653a1e9da83cbb}
+
+
+\-References gcop\-::\-S\-O3\-::\-Instance().
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-I\-D@{\-I\-D}}
+\index{\-I\-D@{\-I\-D}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-I\-D} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{f, }
+\item[{double}]{t, }
+\item[{const {\bf \-Body3d\-State} \&}]{xb, }
+\item[{const {\bf \-Body3d\-State} \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3d_aad169d2f5d6011efbf877b39edaccd35}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-State\-And\-Controls\-To\-Flat@{\-State\-And\-Controls\-To\-Flat}}
+\index{\-State\-And\-Controls\-To\-Flat@{\-State\-And\-Controls\-To\-Flat}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-State\-And\-Controls\-To\-Flat}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-State\-And\-Controls\-To\-Flat} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{y, }
+\item[{const {\bf \-Body3d\-State} \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3d_a0f5203c5c4b5995741c6ee7fd81babfb}
+
+
+\-References gcop\-::\-S\-O3\-::\-Instance(), gcop\-::\-S\-O3\-::pitch(), gcop\-::\-S\-O3\-::roll(), and gcop\-::\-S\-O3\-::yaw().
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ double {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Step} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body3d\-State} \&}]{xb, }
+\item[{double}]{t, }
+\item[{const {\bf \-Body3d\-State} \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12xcd} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12\-Xd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3d_a20082c26e614aff7ccf32150ffe6f6b3}
+
+
+\-Referenced by gcop\-::\-Body3d\-Track\-::\-Add(), and gcop\-::\-Body3d\-Track\-::\-Add2().
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Symp\-Step@{\-Symp\-Step}}
+\index{\-Symp\-Step@{\-Symp\-Step}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Symp\-Step}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ double {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Symp\-Step} (
+\begin{DoxyParamCaption}
+\item[{double}]{t, }
+\item[{{\bf \-Body3d\-State} \&}]{xb, }
+\item[{const {\bf \-Body3d\-State} \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12d} $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12xcd} $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix12\-Xd} $\ast$}]{\-C = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3d_a867ce4d80452a3e74d52f55665c8561d}
+
+
+\-References gcop\-::\-S\-O3\-::\-Ad(), gcop\-::\-S\-O3\-::cay(), gcop\-::\-S\-O3\-::dcay(), gcop\-::\-S\-O3\-::dcayinv(), gcop\-::\-Gcay(), gcop\-::\-S\-O3\-::hat(), and gcop\-::\-S\-O3\-::\-Instance().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Bu@{\-Bu}}
+\index{\-Bu@{\-Bu}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Bu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ {\bf \-Matrix6xcd} {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Bu}}\label{classgcop_1_1Body3d_a8838e563dce325338ea8e3a1391d887b}
+
+
+control input transformation 
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!ds@{ds}}
+\index{ds@{ds}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{ds}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Vector3d {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf ds}}\label{classgcop_1_1Body3d_ac2199d7bea5a5e7133da9069af14e59d}
+
+
+\-T\-O\-D\-O\-: visual element. 
+
+\-T\-O\-D\-O\-: collision element body dimensions 
+
+\-Referenced by gcop\-::\-Body3d$<$ c $>$\-::\-Body3d().
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Dv@{\-Dv}}
+\index{\-Dv@{\-Dv}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Dv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Vector3d {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Dv}}\label{classgcop_1_1Body3d_a2916a5454819c290263170c72d789a73}
+
+
+linear translational damping terms 
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Dw@{\-Dw}}
+\index{\-Dw@{\-Dw}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Dw}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Vector3d {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Dw}}\label{classgcop_1_1Body3d_aa6d5655f446158dde5462fa8c514d0a5}
+
+
+linear rotational damping terms 
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!fp@{fp}}
+\index{fp@{fp}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{fp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Vector3d {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf fp}}\label{classgcop_1_1Body3d_a045c515d2c90d139bcf56b0e7b0f361e}
+
+
+constant position force in spatial frame (e.\-g. due to gravity) 
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-I@{\-I}}
+\index{\-I@{\-I}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-I}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ {\bf \-Vector6d} {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-I}}\label{classgcop_1_1Body3d_ad8880ca728eec8374ee8cb97d3bea29f}
+
+
+6x1 spatial inertia matrix 
+
+
+
+\-Referenced by gcop\-::\-Body3d$<$ c $>$\-::\-Body3d().
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-J@{\-J}}
+\index{\-J@{\-J}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-J}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Vector3d {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-J}}\label{classgcop_1_1Body3d_a53d4f85cbe9e49d00af7723e43f19028}
+
+
+3x1 principal moments of inertia 
+
+
+
+\-Referenced by gcop\-::\-Body3d$<$ c $>$\-::\-Body3d().
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!m@{m}}
+\index{m@{m}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{m}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ double {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf m}}\label{classgcop_1_1Body3d_aca724ed46903c952e111746f3feeaf56}
+
+
+mass 
+
+
+
+\-Referenced by gcop\-::\-Body3d$<$ c $>$\-::\-Body3d().
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!name@{name}}
+\index{name@{name}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ string {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf name}}\label{classgcop_1_1Body3d_a3899a230649107ecef9435e69f83fe87}
+
+
+\-Unique name of the body. 
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!symp@{symp}}
+\index{symp@{symp}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{symp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ bool {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf symp}}\label{classgcop_1_1Body3d_acf21656066d507f0c426b30142043db9}
+
+
+symplectic? 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf body3d.\-h}\end{DoxyCompactItemize}

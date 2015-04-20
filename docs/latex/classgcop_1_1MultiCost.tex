@@ -1,0 +1,293 @@
+\section{gcop\-:\-:\-Multi\-Cost$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1MultiCost}\index{gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$@{gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}}
+
+
+{\ttfamily \#include $<$multicost.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Multi\-Cost$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classgcop_1_1MultiCost__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Multi\-Cost$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classgcop_1_1MultiCost__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nx $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nx $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nu $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-np $>$ {\bf \-Matrixmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ {\bf \-Matrixnmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Multi\-Cost} ({\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&{\bf sys}, double {\bf tf})
+\item 
+virtual double {\bf \-L} (double t, const \-T \&x, const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Vectornd} $\ast${\bf \-Lx}=0, {\bf \-Matrixnd} $\ast${\bf \-Lxx}=0, {\bf \-Vectorcd} $\ast${\bf \-Lu}=0, {\bf \-Matrixcd} $\ast${\bf \-Luu}=0, {\bf \-Matrixncd} $\ast${\bf \-Lxu}=0, {\bf \-Vectormd} $\ast${\bf \-Lp}=0, {\bf \-Matrixmd} $\ast${\bf \-Lpp}=0, {\bf \-Matrixmnd} $\ast${\bf \-Lpx}=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Vectornd} {\bf \-Lx}
+\item 
+{\bf \-Matrixnd} {\bf \-Lxx}
+\item 
+{\bf \-Vectorcd} {\bf \-Lu}
+\item 
+{\bf \-Matrixcd} {\bf \-Luu}
+\item 
+{\bf \-Matrixncd} {\bf \-Lxu}
+\item 
+{\bf \-Vectormd} {\bf \-Lp}
+\item 
+{\bf \-Matrixmd} {\bf \-Lpp}
+\item 
+{\bf \-Matrixmnd} {\bf \-Lpx}
+\item 
+vector$<$ {\bf \-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ $\ast$ $>$ {\bf costs}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename T, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$class gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}
+
+\doxyref{\-Cost}{p.}{classgcop_1_1Cost} interface for optimal control on manifolds. \-Defines a cost function and means to compute difference between two states on a manifold.
+
+\-Subclasses should provide implementation of either a regular const function \-L or a parameter-\/dependent cost function \-Lp (e.\-g. for sys id / adaptive control / optimal design problems)
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nu$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1MultiCost_aa2fa1ebe22cb12773cf226d11e777be6}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_a9d3773e65bef07fe27ba8d3a87df8860}.
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nx$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1MultiCost_a608cd7ca78729af74066d051b5996db3}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_a78c4621db26fe3ef52ea534436b78bee}.
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Matrixmd@{\-Matrixmd}}
+\index{\-Matrixmd@{\-Matrixmd}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Matrixmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-np$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixmd}}\label{classgcop_1_1MultiCost_affa0a222f0bbeb1712f4c85a2c727d12}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_aca9e6d630a74a571559e9b68733bba38}.
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-nx$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1MultiCost_a4df6d9f6d8fdf7847c44da069a5f46cf}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_a78a0b557bb5c26895471e99e8bff566b}.
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nu$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1MultiCost_a938ba3c8c1f4b2a89802d23d82f03438}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_a3adaa3c27b960011a9053f30bee83179}.
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nx$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1MultiCost_ad9a490034a8ecfd3b10963307306f605}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_a62c04e5c44342fb82e79ca41f8f29a7c}.
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Matrixnmd@{\-Matrixnmd}}
+\index{\-Matrixnmd@{\-Matrixnmd}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Matrixnmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-np$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixnmd}}\label{classgcop_1_1MultiCost_ae28046c3be84d61002a7cbd4aaa16084}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_ac01445481fc7fcf3d12302e9797595b1}.
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1MultiCost_a5daa5864e5d8b77ce1a4229a2b211139}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_a99e8a404912f59398fac15c0702ab747}.
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1MultiCost_ab573e38b1e1e763bb2475c8f1bdbd1ce}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_a427254352fc2f6c029fdc18299fbfead}.
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1MultiCost_a881732629f016fec7b15bf86c9d29820}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_ab4e65fb21a7e6d70303fde51ce28e549}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Multi\-Cost@{\-Multi\-Cost}}
+\index{\-Multi\-Cost@{\-Multi\-Cost}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Multi\-Cost}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Multi\-Cost} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&}]{sys, }
+\item[{double}]{tf}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1MultiCost_a6ca1de019b312c62a78455dee67245a8}
+create a cost interface 
+\begin{DoxyParams}{\-Parameters}
+{\em \-X} & the state manifold which is used to perform addition/subtraction of states \\
+\hline
+{\em tf} & time horizon\-: when the cost function \-L is called it will internally check whether its argument t is equation to tf and return the terminal cost \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Lp, gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Lpp, gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Lpx, gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Lu, gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Luu, gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Lx, gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Lxu, gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Lxx, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-P, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-U, and gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-X.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-L@{\-L}}
+\index{\-L@{\-L}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-L}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ double {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-L} (
+\begin{DoxyParamCaption}
+\item[{double}]{t, }
+\item[{const \-T \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Vectornd} $\ast$}]{\-Lx = {\ttfamily 0}, }
+\item[{{\bf \-Matrixnd} $\ast$}]{\-Lxx = {\ttfamily 0}, }
+\item[{{\bf \-Vectorcd} $\ast$}]{\-Lu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixcd} $\ast$}]{\-Luu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixncd} $\ast$}]{\-Lxu = {\ttfamily 0}, }
+\item[{{\bf \-Vectormd} $\ast$}]{\-Lp = {\ttfamily 0}, }
+\item[{{\bf \-Matrixmd} $\ast$}]{\-Lpp = {\ttfamily 0}, }
+\item[{{\bf \-Matrixmnd} $\ast$}]{\-Lpx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1MultiCost_a9b76dfe651c31265e4ac52e1dda5b851}
+\doxyref{\-Cost}{p.}{classgcop_1_1Cost} function \-L 
+\begin{DoxyParams}{\-Parameters}
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+{\em u} & control \\
+\hline
+{\em h} & time-\/step \\
+\hline
+{\em \-Lx} & derivative wrt x \\
+\hline
+{\em \-Lxx} & derivative wrt x,x \\
+\hline
+{\em \-Lu} & derivative wrt u \\
+\hline
+{\em \-Luu} & derivative wrt u,u \\
+\hline
+{\em \-Lxu} & derivative wrt x,u \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Cost_aee08e8fb34b61d6af233611d04403d9a}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!costs@{costs}}
+\index{costs@{costs}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{costs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ vector$<${\bf \-Cost}$<$\-T, \-\_\-nx, \-\_\-nu, \-\_\-np$>$$\ast$ $>$ {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf costs}}\label{classgcop_1_1MultiCost_a5bd14b193787c6ec9281409f119c57f3}
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Lp@{\-Lp}}
+\index{\-Lp@{\-Lp}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Lp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Vectormd} {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Lp}}\label{classgcop_1_1MultiCost_a5a1adf5c103641bac3ee333dc632e232}
+
+
+\-Referenced by gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Multi\-Cost().
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Lpp@{\-Lpp}}
+\index{\-Lpp@{\-Lpp}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Lpp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Matrixmd} {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Lpp}}\label{classgcop_1_1MultiCost_a5a05a491774cf0881b6b348597f266a4}
+
+
+\-Referenced by gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Multi\-Cost().
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Lpx@{\-Lpx}}
+\index{\-Lpx@{\-Lpx}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Lpx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Matrixmnd} {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Lpx}}\label{classgcop_1_1MultiCost_ab284ebd849fc94098641b147bfe619fd}
+
+
+\-Referenced by gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Multi\-Cost().
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Lu@{\-Lu}}
+\index{\-Lu@{\-Lu}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Lu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Vectorcd} {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Lu}}\label{classgcop_1_1MultiCost_a3e3190ef89e3fdc4d83beddc4b575817}
+
+
+\-Referenced by gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Multi\-Cost().
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Luu@{\-Luu}}
+\index{\-Luu@{\-Luu}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Luu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Matrixcd} {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Luu}}\label{classgcop_1_1MultiCost_abb933ba08f54d7883befdf09740ac77c}
+
+
+\-Referenced by gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Multi\-Cost().
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Lx@{\-Lx}}
+\index{\-Lx@{\-Lx}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Lx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Vectornd} {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Lx}}\label{classgcop_1_1MultiCost_ab2a472355c0854b7f5f4a942094f1683}
+
+
+\-Referenced by gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Multi\-Cost().
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Lxu@{\-Lxu}}
+\index{\-Lxu@{\-Lxu}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Lxu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Matrixncd} {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Lxu}}\label{classgcop_1_1MultiCost_abc9087e17cb1e40c7d125b01b2c3e525}
+
+
+\-Referenced by gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Multi\-Cost().
+
+\index{gcop\-::\-Multi\-Cost@{gcop\-::\-Multi\-Cost}!\-Lxx@{\-Lxx}}
+\index{\-Lxx@{\-Lxx}!gcop::MultiCost@{gcop\-::\-Multi\-Cost}}
+\subsubsection[{\-Lxx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Multi\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Lxx}}\label{classgcop_1_1MultiCost_ab6c7a047f9a9dcacf9095cef3339abd0}
+
+
+\-Referenced by gcop\-::\-Multi\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Multi\-Cost().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/costs/{\bf multicost.\-h}\end{DoxyCompactItemize}

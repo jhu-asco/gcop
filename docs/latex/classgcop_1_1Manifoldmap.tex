@@ -1,0 +1,104 @@
+\section{gcop\-:\-:\-Manifoldmap$<$ \-T1, \-T2, \-\_\-n1, \-\_\-n2 $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Manifoldmap}\index{gcop\-::\-Manifoldmap$<$ T1, T2, \-\_\-n1, \-\_\-n2 $>$@{gcop\-::\-Manifoldmap$<$ T1, T2, \-\_\-n1, \-\_\-n2 $>$}}
+
+
+{\ttfamily \#include $<$map.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n1, 1 $>$ {\bf \-Vectorn1d}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n1, \-\_\-n $>$ {\bf \-Matrixn1d}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n2, 1 $>$ {\bf \-Vectorn2d}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n2, \-\_\-n $>$ {\bf \-Matrixn2d}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n1, \-\_\-n2 $>$ {\bf \-Matrixn1n2d}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Manifoldmap} (int {\bf n1}, int {\bf n2})
+\item 
+virtual void {\bf map} (const \-T1 \&m1, \-T2 \&m2, {\bf \-Matrixn1n2d} $\ast$\-J=0)=0
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf n1}
+\item 
+int {\bf n2}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename T1, typename T2, int \-\_\-n1 = \-Dynamic, int \-\_\-n2 = \-Dynamic$>$class gcop\-::\-Manifoldmap$<$ T1, T2, \-\_\-n1, \-\_\-n2 $>$}
+
+\doxyref{\-Manifold}{p.}{classgcop_1_1Manifold} map for mapping systems to sensors
+
+\-Author\-: \-Gowtham \-Garimella ggarime(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Manifoldmap@{gcop\-::\-Manifoldmap}!\-Matrixn1d@{\-Matrixn1d}}
+\index{\-Matrixn1d@{\-Matrixn1d}!gcop::Manifoldmap@{gcop\-::\-Manifoldmap}}
+\subsubsection[{\-Matrixn1d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , int \-\_\-n1 = \-Dynamic, int \-\_\-n2 = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n1, \-\_\-n$>$ {\bf gcop\-::\-Manifoldmap}$<$ \-T1, \-T2, \-\_\-n1, \-\_\-n2 $>$\-::{\bf \-Matrixn1d}}\label{classgcop_1_1Manifoldmap_abf9520ad3b29e21088eb6e911dd17a94}
+\index{gcop\-::\-Manifoldmap@{gcop\-::\-Manifoldmap}!\-Matrixn1n2d@{\-Matrixn1n2d}}
+\index{\-Matrixn1n2d@{\-Matrixn1n2d}!gcop::Manifoldmap@{gcop\-::\-Manifoldmap}}
+\subsubsection[{\-Matrixn1n2d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , int \-\_\-n1 = \-Dynamic, int \-\_\-n2 = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n1, \-\_\-n2$>$ {\bf gcop\-::\-Manifoldmap}$<$ \-T1, \-T2, \-\_\-n1, \-\_\-n2 $>$\-::{\bf \-Matrixn1n2d}}\label{classgcop_1_1Manifoldmap_ac8145eab049acd0ced472c114a3f25a4}
+\index{gcop\-::\-Manifoldmap@{gcop\-::\-Manifoldmap}!\-Matrixn2d@{\-Matrixn2d}}
+\index{\-Matrixn2d@{\-Matrixn2d}!gcop::Manifoldmap@{gcop\-::\-Manifoldmap}}
+\subsubsection[{\-Matrixn2d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , int \-\_\-n1 = \-Dynamic, int \-\_\-n2 = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n2, \-\_\-n$>$ {\bf gcop\-::\-Manifoldmap}$<$ \-T1, \-T2, \-\_\-n1, \-\_\-n2 $>$\-::{\bf \-Matrixn2d}}\label{classgcop_1_1Manifoldmap_a040b786be52b172404f9ef9242a3d4f1}
+\index{gcop\-::\-Manifoldmap@{gcop\-::\-Manifoldmap}!\-Vectorn1d@{\-Vectorn1d}}
+\index{\-Vectorn1d@{\-Vectorn1d}!gcop::Manifoldmap@{gcop\-::\-Manifoldmap}}
+\subsubsection[{\-Vectorn1d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , int \-\_\-n1 = \-Dynamic, int \-\_\-n2 = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n1, 1$>$ {\bf gcop\-::\-Manifoldmap}$<$ \-T1, \-T2, \-\_\-n1, \-\_\-n2 $>$\-::{\bf \-Vectorn1d}}\label{classgcop_1_1Manifoldmap_a6bfd63e4f2075f45bff2f2c14d568fa2}
+\index{gcop\-::\-Manifoldmap@{gcop\-::\-Manifoldmap}!\-Vectorn2d@{\-Vectorn2d}}
+\index{\-Vectorn2d@{\-Vectorn2d}!gcop::Manifoldmap@{gcop\-::\-Manifoldmap}}
+\subsubsection[{\-Vectorn2d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , int \-\_\-n1 = \-Dynamic, int \-\_\-n2 = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n2, 1$>$ {\bf gcop\-::\-Manifoldmap}$<$ \-T1, \-T2, \-\_\-n1, \-\_\-n2 $>$\-::{\bf \-Vectorn2d}}\label{classgcop_1_1Manifoldmap_ab363d801daea1fc4baafbd7346c54667}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Manifoldmap@{gcop\-::\-Manifoldmap}!\-Manifoldmap@{\-Manifoldmap}}
+\index{\-Manifoldmap@{\-Manifoldmap}!gcop::Manifoldmap@{gcop\-::\-Manifoldmap}}
+\subsubsection[{\-Manifoldmap}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , int \-\_\-n1 = \-Dynamic, int \-\_\-n2 = \-Dynamic$>$ {\bf gcop\-::\-Manifoldmap}$<$ \-T1, \-T2, \-\_\-n1, \-\_\-n2 $>$\-::{\bf \-Manifoldmap} (
+\begin{DoxyParamCaption}
+\item[{int}]{n1, }
+\item[{int}]{n2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1Manifoldmap_a355d4064a1f3a5a13ba69f88777ff18a}
+\-Constructor 
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Manifoldmap@{gcop\-::\-Manifoldmap}!map@{map}}
+\index{map@{map}!gcop::Manifoldmap@{gcop\-::\-Manifoldmap}}
+\subsubsection[{map}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , int \-\_\-n1 = \-Dynamic, int \-\_\-n2 = \-Dynamic$>$ virtual void {\bf gcop\-::\-Manifoldmap}$<$ \-T1, \-T2, \-\_\-n1, \-\_\-n2 $>$\-::{\bf map} (
+\begin{DoxyParamCaption}
+\item[{const \-T1 \&}]{m1, }
+\item[{\-T2 \&}]{m2, }
+\item[{{\bf \-Matrixn1n2d} $\ast$}]{\-J = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Manifoldmap_afec3b66afc5b64efcc02547fa5a1a3df}
+\-Map function 
+\begin{DoxyParams}{\-Parameters}
+{\em m1} & \-Input manifold instance \\
+\hline
+{\em m2} & output manifold instance \\
+\hline
+{\em \-J} & jacobian of the mapping \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Manifoldmap@{gcop\-::\-Manifoldmap}!n1@{n1}}
+\index{n1@{n1}!gcop::Manifoldmap@{gcop\-::\-Manifoldmap}}
+\subsubsection[{n1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , int \-\_\-n1 = \-Dynamic, int \-\_\-n2 = \-Dynamic$>$ int {\bf gcop\-::\-Manifoldmap}$<$ \-T1, \-T2, \-\_\-n1, \-\_\-n2 $>$\-::{\bf n1}}\label{classgcop_1_1Manifoldmap_a22e939de1f732faf8cc2a5a43a5437ef}
+\index{gcop\-::\-Manifoldmap@{gcop\-::\-Manifoldmap}!n2@{n2}}
+\index{n2@{n2}!gcop::Manifoldmap@{gcop\-::\-Manifoldmap}}
+\subsubsection[{n2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , int \-\_\-n1 = \-Dynamic, int \-\_\-n2 = \-Dynamic$>$ int {\bf gcop\-::\-Manifoldmap}$<$ \-T1, \-T2, \-\_\-n1, \-\_\-n2 $>$\-::{\bf n2}}\label{classgcop_1_1Manifoldmap_aceccc65a3524140a8d187204b6bce744}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/maps/{\bf map.\-h}\end{DoxyCompactItemize}

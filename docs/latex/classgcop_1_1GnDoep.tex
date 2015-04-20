@@ -1,0 +1,188 @@
+\section{gcop\-:\-:\-Gn\-Doep$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1GnDoep}\index{gcop\-::\-Gn\-Doep$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz, T1, \-\_\-nx1 $>$@{gcop\-::\-Gn\-Doep$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz, T1, \-\_\-nx1 $>$}}
+
+
+{\ttfamily \#include $<$gndoep.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Gn\-Doep$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{classgcop_1_1GnDoep__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Gn\-Doep$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1GnDoep__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Gn\-Doep} ({\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&{\bf sys}, {\bf \-Sensor}$<$ \-T1, \-\_\-nx1, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \&{\bf sensor}, {\bf \-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$ \&{\bf cost}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd \&{\bf p}, vector$<$ double $>$ \&{\bf ts1}, \-Func\-\_\-type \-\_\-project=\-N\-U\-L\-L, bool update=true)
+\item 
+virtual {\bf $\sim$\-Gn\-Doep} ()
+\item 
+void {\bf \-Iterate} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf info}
+\item 
+double {\bf fnorm}
+\item 
+double {\bf covfac}
+\item 
+int {\bf inputs}
+\item 
+int {\bf values}
+\item 
+\-Vector\-Xd {\bf s}
+\begin{DoxyCompactList}\small\item\em optimization vector \end{DoxyCompactList}\item 
+{\bf \-Gn\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \*
+\-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$ $\ast$ {\bf functor}
+\item 
+\-Numerical\-Diff$<$ {\bf \-Gn\-Cost}$<$ \-T, \-\_\-nx, \*
+\-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \*
+\-\_\-nx1 $>$ $>$ $\ast$ {\bf num\-Diff}
+\item 
+\-Levenberg\-Marquardt\*
+$<$ \-Numerical\-Diff$<$ {\bf \-Gn\-Cost}$<$ \-T, \*
+\-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \*
+\-T1, \-\_\-nx1 $>$ $>$ $>$ $\ast$ {\bf lm}
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename Tz = \-Vector\-Xd, int \-\_\-nz = \-Dynamic, typename T1 = \-T, int \-\_\-nx1 = \-\_\-nx$>$ class gcop\-::\-Gn\-Doep$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz, T1, \-\_\-nx1 $>$}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!\-Gn\-Doep@{\-Gn\-Doep}}
+\index{\-Gn\-Doep@{\-Gn\-Doep}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{\-Gn\-Doep}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, int \-\_\-ng, typename Tz , int \-\_\-nz, typename T1 , int \-\_\-nx1$>$ {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf \-Gn\-Doep} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&}]{sys, }
+\item[{{\bf \-Sensor}$<$ \-T1, \-\_\-nx1, \-\_\-nu, \-\_\-np, \-Tz, \-\_\-nz $>$ \&}]{sensor, }
+\item[{{\bf \-Lq\-Sensor\-Cost}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz $>$ \&}]{cost, }
+\item[{vector$<$ double $>$ \&}]{ts, }
+\item[{vector$<$ \-T $>$ \&}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{\-Vectormd \&}]{p, }
+\item[{vector$<$ double $>$ \&}]{ts1, }
+\item[{\-Func\-\_\-type}]{\-\_\-project = {\ttfamily \-N\-U\-L\-L}, }
+\item[{bool}]{update = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GnDoep_aa95b99f8bee0fe6efbb302c7f9652e38}
+\-Create an optimal estimation problem using a system, sensor, a cost, and sensor measurements and parameters of the system.
+
+\-The optimal estimation is done over selecting the right parameters for the system and also process noise to ensure the estimation cost on sensor measurements and noise is minimized \-Parameters can also have a prior which is added into the cost function. \-The parameters passed in here are used as initial guess to the system
+
+\-You should set the ts[1\-:\-N+1], xs[0]; \-Known controls us
+
+\-After initialization, every call to \doxyref{\-Iterate()}{p.}{classgcop_1_1GnDoep_a871ef3cfc09f78096fa12ce59a41e452} will optimize the parameters of the system, process noise and modify them accordingly.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & system \\
+\hline
+{\em cost} & cost \\
+\hline
+{\em tparam} & trajectory parametrization \\
+\hline
+{\em ts} & (\-N+1) sequence of discrete times \\
+\hline
+{\em xs} & (\-N+1) sequence of discrete states \\
+\hline
+{\em us} & (\-N) sequence of control inputs \\
+\hline
+{\em p} & static parameter vector initial guess of it \\
+\hline
+{\em ng} & \\
+\hline
+{\em \-\_\-project} & \-Optional function to project \-T into \-T1. \-Not needed if \-T == \-T1 \\
+\hline
+{\em update} & whether to update trajectory xs using initial state xs[0] and inputs us. \-This is necessary only if xs was not already generated from us. \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Gn\-Doep$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz, T1, \-\_\-nx1 $>$\-::inputs, and gcop\-::\-Gn\-Doep$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz, T1, \-\_\-nx1 $>$\-::values.
+
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!$\sim$\-Gn\-Doep@{$\sim$\-Gn\-Doep}}
+\index{$\sim$\-Gn\-Doep@{$\sim$\-Gn\-Doep}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{$\sim$\-Gn\-Doep}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, int \-\_\-ng, typename Tz , int \-\_\-nz, typename T1 , int \-\_\-nx1$>$ {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::$\sim${\bf \-Gn\-Doep} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1GnDoep_a888f797d65b5bc4f07e4fe29584a3757}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!\-Iterate@{\-Iterate}}
+\index{\-Iterate@{\-Iterate}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{\-Iterate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np, int \-\_\-ng, typename Tz , int \-\_\-nz, typename T1 , int \-\_\-nx1$>$ void {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf \-Iterate} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1GnDoep_a871ef3cfc09f78096fa12ce59a41e452}
+\-Perform one \-D\-O\-C\-P iteration. \-Internally calls\-: are updated. 
+
+\-Reimplemented from {\bf gcop\-::\-Doep$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz, T1, \-\_\-nx1 $>$} \doxyref{}{p.}{classgcop_1_1Doep_ad6a3a22ca258bc0ce18fda03244bafe3}.
+
+
+
+\-References gcop\-::\-Gn\-Cost$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-\_\-ntp $>$\-::doep, and np.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!covfac@{covfac}}
+\index{covfac@{covfac}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{covfac}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic, typename T1  = \-T, int \-\_\-nx1 = \-\_\-nx$>$ double {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf covfac}}\label{classgcop_1_1GnDoep_ac0eba31cda3eb20626a8aea1d95f89e0}
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!fnorm@{fnorm}}
+\index{fnorm@{fnorm}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{fnorm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic, typename T1  = \-T, int \-\_\-nx1 = \-\_\-nx$>$ double {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf fnorm}}\label{classgcop_1_1GnDoep_aa87f4ef774a05d005e3b4cea9f31bf7e}
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!functor@{functor}}
+\index{functor@{functor}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{functor}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic, typename T1  = \-T, int \-\_\-nx1 = \-\_\-nx$>$ {\bf \-Gn\-Cost}$<$\-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1$>$$\ast$ {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf functor}}\label{classgcop_1_1GnDoep_ad0a94dd6aba1ab05c3fba20640a1e4ec}
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!info@{info}}
+\index{info@{info}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{info}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic, typename T1  = \-T, int \-\_\-nx1 = \-\_\-nx$>$ int {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf info}}\label{classgcop_1_1GnDoep_aed0b5034fbb26b032baa9e6c27f059e4}
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!inputs@{inputs}}
+\index{inputs@{inputs}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{inputs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic, typename T1  = \-T, int \-\_\-nx1 = \-\_\-nx$>$ int {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf inputs}}\label{classgcop_1_1GnDoep_ade1a21d7d04774d077b082e08c4c4919}
+
+
+\-Referenced by gcop\-::\-Gn\-Doep$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz, T1, \-\_\-nx1 $>$\-::\-Gn\-Doep().
+
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!lm@{lm}}
+\index{lm@{lm}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{lm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic, typename T1  = \-T, int \-\_\-nx1 = \-\_\-nx$>$ \-Levenberg\-Marquardt$<$\-Numerical\-Diff$<${\bf \-Gn\-Cost}$<$\-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1$>$ $>$ $>$$\ast$ {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf lm}}\label{classgcop_1_1GnDoep_a1d99da8e1c57a61bec7e34088cdc2971}
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!num\-Diff@{num\-Diff}}
+\index{num\-Diff@{num\-Diff}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{num\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic, typename T1  = \-T, int \-\_\-nx1 = \-\_\-nx$>$ \-Numerical\-Diff$<${\bf \-Gn\-Cost}$<$\-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1$>$ $>$$\ast$ {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf num\-Diff}}\label{classgcop_1_1GnDoep_afd30207a063a740fe40d6c80be8aaf92}
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!s@{s}}
+\index{s@{s}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{s}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic, typename T1  = \-T, int \-\_\-nx1 = \-\_\-nx$>$ \-Vector\-Xd {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf s}}\label{classgcop_1_1GnDoep_a7d1d441e65be519f489d7eaeddc71683}
+
+
+optimization vector 
+
+\index{gcop\-::\-Gn\-Doep@{gcop\-::\-Gn\-Doep}!values@{values}}
+\index{values@{values}!gcop::GnDoep@{gcop\-::\-Gn\-Doep}}
+\subsubsection[{values}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic, typename Tz  = \-Vector\-Xd, int \-\_\-nz = \-Dynamic, typename T1  = \-T, int \-\_\-nx1 = \-\_\-nx$>$ int {\bf gcop\-::\-Gn\-Doep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, \-Tz, \-\_\-nz, \-T1, \-\_\-nx1 $>$\-::{\bf values}}\label{classgcop_1_1GnDoep_adbe6cd8d5a8f1072eb8ee6bf0dfed22b}
+
+
+\-Referenced by gcop\-::\-Gn\-Doep$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng, Tz, \-\_\-nz, T1, \-\_\-nx1 $>$\-::\-Gn\-Doep().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf gndoep.\-h}\end{DoxyCompactItemize}

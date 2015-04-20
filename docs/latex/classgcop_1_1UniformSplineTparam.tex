@@ -1,0 +1,110 @@
+\section{gcop\-:\-:\-Uniform\-Spline\-Tparam$<$ \-T, nx, nu, np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1UniformSplineTparam}\index{gcop\-::\-Uniform\-Spline\-Tparam$<$ T, nx, nu, np $>$@{gcop\-::\-Uniform\-Spline\-Tparam$<$ T, nx, nu, np $>$}}
+
+
+{\ttfamily \#include $<$uniformsplinetparam.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Uniform\-Spline\-Tparam$<$ \-T, nx, nu, np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classgcop_1_1UniformSplineTparam__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Uniform\-Spline\-Tparam$<$ \-T, nx, nu, np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1UniformSplineTparam__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Uniform\-Spline\-Tparam} ({\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&{\bf sys}, const \-Vector\-Xd \&{\bf tks}, int {\bf degree}=2)
+\item 
+void {\bf \-To} (\-Vector\-Xd \&s, const vector$<$ double $>$ \&ts, const vector$<$ \-T $>$ \&xs, const vector$<$ \-Vectorcd $>$ \&us, const \-Vectormd $\ast$p=0)
+\item 
+void {\bf \-From} (vector$<$ double $>$ \&ts, vector$<$ \-T $>$ \&xs, vector$<$ \-Vectorcd $>$ \&us, const \-Vector\-Xd \&s, \-Vectormd $\ast$p=0)
+\item 
+void {\bf \-Find\-Basis} (\-Vector\-Xd \&basis, double u)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \-Vector\-Xd \& {\bf tks}
+\item 
+int {\bf degree}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename T, int nx, int nu, int np = \-Dynamic$>$class gcop\-::\-Uniform\-Spline\-Tparam$<$ T, nx, nu, np $>$}
+
+\-General trajectory parametrization functionality. \-A trajectory can be parametrizes using a set of discrete controls, a continuous control paramertization, a set of discrete states, a set of discrete flat outputs, etc...
+
+\-This version implements the \-Uniform spline interpolation of the data. \-It also implements least square fitting of the given control data using spline \-This is indigenous support which supports only upto degree = 4. \-Also it assumes tks has atleast 3 points i.\-e minimum of 2 segments
+
+\-Author\-: \-Marin \-Kobilarov (c) 2005-\/-\/2013 \-Author2\-: \-Gowtham \-Garimella 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Uniform\-Spline\-Tparam@{gcop\-::\-Uniform\-Spline\-Tparam}!\-Uniform\-Spline\-Tparam@{\-Uniform\-Spline\-Tparam}}
+\index{\-Uniform\-Spline\-Tparam@{\-Uniform\-Spline\-Tparam}!gcop::UniformSplineTparam@{gcop\-::\-Uniform\-Spline\-Tparam}}
+\subsubsection[{\-Uniform\-Spline\-Tparam}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ {\bf gcop\-::\-Uniform\-Spline\-Tparam}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Uniform\-Spline\-Tparam} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&}]{sys, }
+\item[{const \-Vector\-Xd \&}]{tks, }
+\item[{int}]{degree = {\ttfamily 2}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UniformSplineTparam_a42e38d8fff42047b847b7b43756f3320}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Uniform\-Spline\-Tparam@{gcop\-::\-Uniform\-Spline\-Tparam}!\-Find\-Basis@{\-Find\-Basis}}
+\index{\-Find\-Basis@{\-Find\-Basis}!gcop::UniformSplineTparam@{gcop\-::\-Uniform\-Spline\-Tparam}}
+\subsubsection[{\-Find\-Basis}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic$>$ void {\bf gcop\-::\-Uniform\-Spline\-Tparam}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-Find\-Basis} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{basis, }
+\item[{double}]{u}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1UniformSplineTparam_a360176f9d806aebc86b79a6839e32902}
+\index{gcop\-::\-Uniform\-Spline\-Tparam@{gcop\-::\-Uniform\-Spline\-Tparam}!\-From@{\-From}}
+\index{\-From@{\-From}!gcop::UniformSplineTparam@{gcop\-::\-Uniform\-Spline\-Tparam}}
+\subsubsection[{\-From}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ void {\bf gcop\-::\-Uniform\-Spline\-Tparam}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-From} (
+\begin{DoxyParamCaption}
+\item[{vector$<$ double $>$ \&}]{ts, }
+\item[{vector$<$ \-T $>$ \&}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{const \-Vector\-Xd \&}]{s, }
+\item[{\-Vectormd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UniformSplineTparam_a8d8798eb54ba5eb0af2c95ec715ab294}
+\index{gcop\-::\-Uniform\-Spline\-Tparam@{gcop\-::\-Uniform\-Spline\-Tparam}!\-To@{\-To}}
+\index{\-To@{\-To}!gcop::UniformSplineTparam@{gcop\-::\-Uniform\-Spline\-Tparam}}
+\subsubsection[{\-To}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np$>$ void {\bf gcop\-::\-Uniform\-Spline\-Tparam}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf \-To} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{s, }
+\item[{const vector$<$ double $>$ \&}]{ts, }
+\item[{const vector$<$ \-T $>$ \&}]{xs, }
+\item[{const vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{const \-Vectormd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UniformSplineTparam_a5f3b55df21c1d5b6a82d0bf163726fdf}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Uniform\-Spline\-Tparam@{gcop\-::\-Uniform\-Spline\-Tparam}!degree@{degree}}
+\index{degree@{degree}!gcop::UniformSplineTparam@{gcop\-::\-Uniform\-Spline\-Tparam}}
+\subsubsection[{degree}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic$>$ int {\bf gcop\-::\-Uniform\-Spline\-Tparam}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf degree}}\label{classgcop_1_1UniformSplineTparam_ab1ddced03be8babc98ba8e195411cfbe}
+\index{gcop\-::\-Uniform\-Spline\-Tparam@{gcop\-::\-Uniform\-Spline\-Tparam}!tks@{tks}}
+\index{tks@{tks}!gcop::UniformSplineTparam@{gcop\-::\-Uniform\-Spline\-Tparam}}
+\subsubsection[{tks}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic$>$ const \-Vector\-Xd\& {\bf gcop\-::\-Uniform\-Spline\-Tparam}$<$ \-T, nx, nu, {\bf np} $>$\-::{\bf tks}}\label{classgcop_1_1UniformSplineTparam_a3eef37b4f31943573df42a8721d6b269}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/parametrization/{\bf uniformsplinetparam.\-h}\end{DoxyCompactItemize}

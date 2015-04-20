@@ -1,0 +1,109 @@
+\section{gcop\-:\-:\-Airbot \-Class \-Reference}
+\label{classgcop_1_1Airbot}\index{gcop\-::\-Airbot@{gcop\-::\-Airbot}}
+
+
+{\ttfamily \#include $<$airbot.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Airbot\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{classgcop_1_1Airbot__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Airbot\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Airbot__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Airbot} ()
+\item 
+void {\bf \-Force} (\-Vector\-Xd \&f, double {\bf t}, const {\bf \-Mbs\-State} \&{\bf x}, const \-Vector\-Xd \&u, \-Matrix\-Xd $\ast$\-A=0, \-Matrix\-Xd $\ast$\-B=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Hrotor} {\bf hrotor}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A hexrotor with two manipulators
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Airbot@{gcop\-::\-Airbot}!\-Airbot@{\-Airbot}}
+\index{\-Airbot@{\-Airbot}!gcop::Airbot@{gcop\-::\-Airbot}}
+\subsubsection[{\-Airbot}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Airbot\-::\-Airbot} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Airbot_a6956636f148b18318e14c7c96202d1a9}
+
+
+\-References gcop\-::\-Mbs\-::\-A\-I\-R\-B\-A\-S\-E, gcop\-::\-Mbs\-::basetype, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::bnd, gcop\-::\-Mbs\-State\-::dr, gcop\-::\-Mbs\-State\-::gs, hrotor, gcop\-::\-Mbs\-::\-Init(), gcop\-::\-Mbs\-::joints, gcop\-::\-Hrotor\-::l, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::lb, gcop\-::\-Mbs\-::links, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-Mbs\-::nb, gcop\-::\-Mbs\-::pis, gcop\-::\-Hrotor\-::r, gcop\-::\-Mbs\-State\-::r, gcop\-::\-S\-E3\-::rpyxyz2g(), gcop\-::\-Mbs\-::se3, gcop\-::\-System$<$ Mbs\-State $>$\-::\-U, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::ub, gcop\-::\-Mbs\-State\-::vs, and gcop\-::\-System$<$ Mbs\-State $>$\-::\-X.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Airbot@{gcop\-::\-Airbot}!\-Force@{\-Force}}
+\index{\-Force@{\-Force}!gcop::Airbot@{gcop\-::\-Airbot}}
+\subsubsection[{\-Force}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Airbot\-::\-Force} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{f, }
+\item[{double}]{t, }
+\item[{const {\bf \-Mbs\-State} \&}]{x, }
+\item[{const \-Vector\-Xd \&}]{u, }
+\item[{\-Matrix\-Xd $\ast$}]{\-A = {\ttfamily 0}, }
+\item[{\-Matrix\-Xd $\ast$}]{\-B = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Airbot_a0b7da62fd0d1c188ee8f3f728ee879fc}
+\-Total resulting force on the system from external (e.\-g. gravity) and internal (control) inputs 
+\begin{DoxyParams}{\-Parameters}
+{\em f} & total force f(x,u,t) \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+{\em u} & controls \\
+\hline
+{\em \-A} & jacobian \-Dxf \\
+\hline
+{\em \-B} & jacobian \-Duf \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Mbs} \doxyref{}{p.}{classgcop_1_1Mbs_aa18ed20df059e7953d68c8f44eaf3c22}.
+
+
+
+\-References gcop\-::\-Mbs\-::damping, gcop\-::\-Mbs\-State\-::dr, and gcop\-::\-Mbs\-::nb.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Airbot@{gcop\-::\-Airbot}!hrotor@{hrotor}}
+\index{hrotor@{hrotor}!gcop::Airbot@{gcop\-::\-Airbot}}
+\subsubsection[{hrotor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Hrotor} {\bf gcop\-::\-Airbot\-::hrotor}}\label{classgcop_1_1Airbot_a9e91f5902e2b5bb979d61ef2525695ee}
+
+
+\-Referenced by \-Airbot().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf airbot.\-h}\item 
+lib/systems/{\bf airbot.\-cc}\end{DoxyCompactItemize}

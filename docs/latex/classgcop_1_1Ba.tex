@@ -1,0 +1,86 @@
+\section{gcop\-:\-:\-Ba \-Class \-Reference}
+\label{classgcop_1_1Ba}\index{gcop\-::\-Ba@{gcop\-::\-Ba}}
+
+
+{\ttfamily \#include $<$ba.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-:\-:\-Ba\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Ba__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Ba} ({\bf \-Posegraph2d} \&{\bf pg})
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Posegraph2d} \& {\bf pg}
+\begin{DoxyCompactList}\small\item\em pose graph \end{DoxyCompactList}\item 
+{\bf \-Kinbody2d} {\bf sys}
+\begin{DoxyCompactList}\small\item\em system \end{DoxyCompactList}\item 
+{\bf \-Ba\-Cost} {\bf cost}
+\begin{DoxyCompactList}\small\item\em cost function \end{DoxyCompactList}\item 
+{\bf \-P\-Ddp}$<$ \-Matrix3d, 3, 3 $>$ {\bf pddp}
+\begin{DoxyCompactList}\small\item\em parametric discrete-\/mechanics optimal control \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Bundle adjustment based on optimal-\/control. \-This is a basic version using a kinematic model in \-S\-E(2). \-It is possible to plug-\/in any dynamical model without much overhead. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Ba@{gcop\-::\-Ba}!\-Ba@{\-Ba}}
+\index{\-Ba@{\-Ba}!gcop::Ba@{gcop\-::\-Ba}}
+\subsubsection[{\-Ba}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Ba\-::\-Ba} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Posegraph2d} \&}]{pg}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Ba_a452780122d47229cecd4ebf482328eed}
+\-Bundle adjustment of pose-\/graph pg 
+\begin{DoxyParams}{\-Parameters}
+{\em pg} & pose-\/graph \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Ba@{gcop\-::\-Ba}!cost@{cost}}
+\index{cost@{cost}!gcop::Ba@{gcop\-::\-Ba}}
+\subsubsection[{cost}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Ba\-Cost} {\bf gcop\-::\-Ba\-::cost}}\label{classgcop_1_1Ba_a445643b4df9b0d6f71f4e370a1e2ee1a}
+
+
+cost function 
+
+\index{gcop\-::\-Ba@{gcop\-::\-Ba}!pddp@{pddp}}
+\index{pddp@{pddp}!gcop::Ba@{gcop\-::\-Ba}}
+\subsubsection[{pddp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-P\-Ddp}$<$\-Matrix3d, 3, 3$>$ {\bf gcop\-::\-Ba\-::pddp}}\label{classgcop_1_1Ba_a4095d9ad19ec8571532430546bb61723}
+
+
+parametric discrete-\/mechanics optimal control 
+
+\index{gcop\-::\-Ba@{gcop\-::\-Ba}!pg@{pg}}
+\index{pg@{pg}!gcop::Ba@{gcop\-::\-Ba}}
+\subsubsection[{pg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Posegraph2d}\& {\bf gcop\-::\-Ba\-::pg}}\label{classgcop_1_1Ba_a5f47a3b433dc2110e8a0e069088858c3}
+
+
+pose graph 
+
+\index{gcop\-::\-Ba@{gcop\-::\-Ba}!sys@{sys}}
+\index{sys@{sys}!gcop::Ba@{gcop\-::\-Ba}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Kinbody2d} {\bf gcop\-::\-Ba\-::sys}}\label{classgcop_1_1Ba_a13187961c03f8d0988d38cb88ed2722d}
+
+
+system 
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf ba.\-h}\item 
+lib/algos/{\bf ba.\-cc}\end{DoxyCompactItemize}

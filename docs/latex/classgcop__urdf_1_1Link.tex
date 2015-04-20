@@ -1,0 +1,258 @@
+\section{gcop\-\_\-urdf\-:\-:\-Link \-Class \-Reference}
+\label{classgcop__urdf_1_1Link}\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}}
+
+
+{\ttfamily \#include $<$urdflink.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Link} ()
+\item 
+bool {\bf init\-Xml} (\-Ti\-Xml\-Element $\ast$config)
+\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ {\bf get\-Parent} () const 
+\item 
+void {\bf set\-Parent} (boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ parent)
+\item 
+void {\bf clear} ()
+\item 
+void {\bf set\-Parent\-Joint} (boost\-::shared\-\_\-ptr$<$ {\bf \-Joint} $>$ child)
+\item 
+void {\bf add\-Child} (boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ child)
+\item 
+void {\bf add\-Child\-Joint} (boost\-::shared\-\_\-ptr$<$ {\bf \-Joint} $>$ child)
+\item 
+void {\bf add\-Visual} (std\-::string group\-\_\-name, boost\-::shared\-\_\-ptr$<$ {\bf \-Visual} $>$ {\bf visual})
+\item 
+boost\-::shared\-\_\-ptr$<$ std\-::vector\*
+$<$ boost\-::shared\-\_\-ptr$<$ {\bf \-Visual} $>$ $>$ $>$ {\bf get\-Visuals} (const std\-::string \&group\-\_\-name) const 
+\item 
+void {\bf add\-Collision} (std\-::string group\-\_\-name, boost\-::shared\-\_\-ptr$<$ {\bf \-Collision} $>$ {\bf collision})
+\item 
+boost\-::shared\-\_\-ptr$<$ std\-::vector\*
+$<$ boost\-::shared\-\_\-ptr$<$ {\bf \-Collision} $>$ $>$ $>$ {\bf get\-Collisions} (const std\-::string \&group\-\_\-name) const 
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::string {\bf name}
+\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Inertial} $>$ {\bf inertial}
+\begin{DoxyCompactList}\small\item\em inertial element \end{DoxyCompactList}\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Visual} $>$ {\bf visual}
+\begin{DoxyCompactList}\small\item\em visual element \end{DoxyCompactList}\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Collision} $>$ {\bf collision}
+\begin{DoxyCompactList}\small\item\em collision element \end{DoxyCompactList}\item 
+std\-::map$<$ std\-::string, \*
+boost\-::shared\-\_\-ptr$<$ std\-::vector\*
+$<$ boost\-::shared\-\_\-ptr$<$ {\bf \-Visual} $>$ $>$ $>$ $>$ {\bf visual\-\_\-groups}
+\begin{DoxyCompactList}\small\item\em a collection of visual elements, keyed by a string tag called \char`\"{}group\char`\"{} \end{DoxyCompactList}\item 
+std\-::map$<$ std\-::string, \*
+boost\-::shared\-\_\-ptr$<$ std\-::vector\*
+$<$ boost\-::shared\-\_\-ptr$<$ {\bf \-Collision} $>$ $>$ $>$ $>$ {\bf collision\-\_\-groups}
+\begin{DoxyCompactList}\small\item\em a collection of collision elements, keyed by a string tag called \char`\"{}group\char`\"{} \end{DoxyCompactList}\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Joint} $>$ {\bf parent\-\_\-joint}
+\item 
+bool {\bf visited}
+\begin{DoxyCompactList}\small\item\em \-Tag for combining\-: \end{DoxyCompactList}\item 
+std\-::vector$<$ boost\-::shared\-\_\-ptr\*
+$<$ {\bf \-Joint} $>$ $>$ {\bf child\-\_\-joints}
+\item 
+std\-::vector$<$ boost\-::shared\-\_\-ptr\*
+$<$ {\bf \-Link} $>$ $>$ {\bf child\-\_\-links}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!\-Link@{\-Link}}
+\index{\-Link@{\-Link}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{\-Link}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-\_\-urdf\-::\-Link\-::\-Link} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Link_acd88ea42593b365fbc3259a12d395dc8}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!add\-Child@{add\-Child}}
+\index{add\-Child@{add\-Child}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{add\-Child}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Link\-::add\-Child} (
+\begin{DoxyParamCaption}
+\item[{boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$}]{child}
+\end{DoxyParamCaption}
+)}\label{classgcop__urdf_1_1Link_a83a0899e5cd8aaeaa72d5ba9c1adbb3b}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!add\-Child\-Joint@{add\-Child\-Joint}}
+\index{add\-Child\-Joint@{add\-Child\-Joint}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{add\-Child\-Joint}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Link\-::add\-Child\-Joint} (
+\begin{DoxyParamCaption}
+\item[{boost\-::shared\-\_\-ptr$<$ {\bf \-Joint} $>$}]{child}
+\end{DoxyParamCaption}
+)}\label{classgcop__urdf_1_1Link_abb591da373325553a3a9bda395a31f23}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!add\-Collision@{add\-Collision}}
+\index{add\-Collision@{add\-Collision}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{add\-Collision}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Link\-::add\-Collision} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{group\-\_\-name, }
+\item[{boost\-::shared\-\_\-ptr$<$ {\bf \-Collision} $>$}]{collision}
+\end{DoxyParamCaption}
+)}\label{classgcop__urdf_1_1Link_a24af7330dbf6f35457649ff7f47b6e33}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!add\-Visual@{add\-Visual}}
+\index{add\-Visual@{add\-Visual}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{add\-Visual}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Link\-::add\-Visual} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{group\-\_\-name, }
+\item[{boost\-::shared\-\_\-ptr$<$ {\bf \-Visual} $>$}]{visual}
+\end{DoxyParamCaption}
+)}\label{classgcop__urdf_1_1Link_a4cff59da4255e960247bd1bcd0da9dfb}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!clear@{clear}}
+\index{clear@{clear}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Link\-::clear} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Link_a0bd0b1668cf7e2bc485cdab10839566b}
+
+
+\-References child\-\_\-joints, child\-\_\-links, collision, collision\-\_\-groups, inertial, name, parent\-\_\-joint, visited, and visual.
+
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!get\-Collisions@{get\-Collisions}}
+\index{get\-Collisions@{get\-Collisions}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{get\-Collisions}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<$std\-::vector$<$boost\-::shared\-\_\-ptr$<${\bf \-Collision} $>$ $>$ $>$ {\bf gcop\-\_\-urdf\-::\-Link\-::get\-Collisions} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{group\-\_\-name}
+\end{DoxyParamCaption}
+) const}\label{classgcop__urdf_1_1Link_a86d39668bce1d9a99312c583f3cfb71e}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!get\-Parent@{get\-Parent}}
+\index{get\-Parent@{get\-Parent}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{get\-Parent}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Link}$>$ {\bf gcop\-\_\-urdf\-::\-Link\-::get\-Parent} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Link_a529b14db3402cb825dccac54d6e70b18}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!get\-Visuals@{get\-Visuals}}
+\index{get\-Visuals@{get\-Visuals}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{get\-Visuals}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<$std\-::vector$<$boost\-::shared\-\_\-ptr$<${\bf \-Visual} $>$ $>$ $>$ {\bf gcop\-\_\-urdf\-::\-Link\-::get\-Visuals} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{group\-\_\-name}
+\end{DoxyParamCaption}
+) const}\label{classgcop__urdf_1_1Link_a03aa3632aea35b0873919c32e4e230cf}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!init\-Xml@{init\-Xml}}
+\index{init\-Xml@{init\-Xml}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{init\-Xml}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-\_\-urdf\-::\-Link\-::init\-Xml} (
+\begin{DoxyParamCaption}
+\item[{\-Ti\-Xml\-Element $\ast$}]{config}
+\end{DoxyParamCaption}
+)}\label{classgcop__urdf_1_1Link_a8934151b882d2c38065f23420a738d67}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!set\-Parent@{set\-Parent}}
+\index{set\-Parent@{set\-Parent}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{set\-Parent}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Link\-::set\-Parent} (
+\begin{DoxyParamCaption}
+\item[{boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$}]{parent}
+\end{DoxyParamCaption}
+)}\label{classgcop__urdf_1_1Link_adec396d13cb820adbcec84adfdd469f8}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!set\-Parent\-Joint@{set\-Parent\-Joint}}
+\index{set\-Parent\-Joint@{set\-Parent\-Joint}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{set\-Parent\-Joint}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Link\-::set\-Parent\-Joint} (
+\begin{DoxyParamCaption}
+\item[{boost\-::shared\-\_\-ptr$<$ {\bf \-Joint} $>$}]{child}
+\end{DoxyParamCaption}
+)}\label{classgcop__urdf_1_1Link_a19242e197b3fbb747a8bdf5c2d4225cd}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!child\-\_\-joints@{child\-\_\-joints}}
+\index{child\-\_\-joints@{child\-\_\-joints}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{child\-\_\-joints}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$boost\-::shared\-\_\-ptr$<${\bf \-Joint}$>$ $>$ {\bf gcop\-\_\-urdf\-::\-Link\-::child\-\_\-joints}}\label{classgcop__urdf_1_1Link_a679a74680de68433a062d229174ac81a}
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!child\-\_\-links@{child\-\_\-links}}
+\index{child\-\_\-links@{child\-\_\-links}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{child\-\_\-links}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$boost\-::shared\-\_\-ptr$<${\bf \-Link}$>$ $>$ {\bf gcop\-\_\-urdf\-::\-Link\-::child\-\_\-links}}\label{classgcop__urdf_1_1Link_a6afe3e9a1ad6e6f5b2e77b0c9481a8fa}
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!collision@{collision}}
+\index{collision@{collision}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{collision}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Collision}$>$ {\bf gcop\-\_\-urdf\-::\-Link\-::collision}}\label{classgcop__urdf_1_1Link_aa4ac1f2ec7e1913a6f9725d6434b5e58}
+
+
+collision element 
+
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!collision\-\_\-groups@{collision\-\_\-groups}}
+\index{collision\-\_\-groups@{collision\-\_\-groups}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{collision\-\_\-groups}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$std\-::string, boost\-::shared\-\_\-ptr$<$std\-::vector$<$boost\-::shared\-\_\-ptr$<${\bf \-Collision}$>$ $>$ $>$ $>$ {\bf gcop\-\_\-urdf\-::\-Link\-::collision\-\_\-groups}}\label{classgcop__urdf_1_1Link_a7123845f1e44eb9cd30843cb445d826f}
+
+
+a collection of collision elements, keyed by a string tag called \char`\"{}group\char`\"{} 
+
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!inertial@{inertial}}
+\index{inertial@{inertial}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{inertial}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Inertial}$>$ {\bf gcop\-\_\-urdf\-::\-Link\-::inertial}}\label{classgcop__urdf_1_1Link_a06e0acdbc60f464d8190abd887168b0f}
+
+
+inertial element 
+
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!name@{name}}
+\index{name@{name}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string {\bf gcop\-\_\-urdf\-::\-Link\-::name}}\label{classgcop__urdf_1_1Link_a111f6ed5e1f16756cf151ce6725612cf}
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!parent\-\_\-joint@{parent\-\_\-joint}}
+\index{parent\-\_\-joint@{parent\-\_\-joint}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{parent\-\_\-joint}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Joint}$>$ {\bf gcop\-\_\-urdf\-::\-Link\-::parent\-\_\-joint}}\label{classgcop__urdf_1_1Link_a86286b98ce218ef009fe87a32a911611}
+\-Parent \doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint} element explicitly stating \char`\"{}parent\char`\"{} because we want directional-\/ness for tree structure every link can have one parent 
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!visited@{visited}}
+\index{visited@{visited}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{visited}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-\_\-urdf\-::\-Link\-::visited}}\label{classgcop__urdf_1_1Link_ace24c5c8cfaf7f27d384e960af8cf487}
+
+
+\-Tag for combining\-: 
+
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!visual@{visual}}
+\index{visual@{visual}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{visual}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Visual}$>$ {\bf gcop\-\_\-urdf\-::\-Link\-::visual}}\label{classgcop__urdf_1_1Link_a68428132288f1573f585a7a733b92aa6}
+
+
+visual element 
+
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Link@{gcop\-\_\-urdf\-::\-Link}!visual\-\_\-groups@{visual\-\_\-groups}}
+\index{visual\-\_\-groups@{visual\-\_\-groups}!gcop_urdf::Link@{gcop\-\_\-urdf\-::\-Link}}
+\subsubsection[{visual\-\_\-groups}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$std\-::string, boost\-::shared\-\_\-ptr$<$std\-::vector$<$boost\-::shared\-\_\-ptr$<${\bf \-Visual}$>$ $>$ $>$ $>$ {\bf gcop\-\_\-urdf\-::\-Link\-::visual\-\_\-groups}}\label{classgcop__urdf_1_1Link_a299af3d406ffcf06aa18a00ccdb7291c}
+
+
+a collection of visual elements, keyed by a string tag called \char`\"{}group\char`\"{} 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf urdflink.\-h}\end{DoxyCompactItemize}

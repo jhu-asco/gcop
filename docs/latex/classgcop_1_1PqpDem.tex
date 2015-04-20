@@ -1,0 +1,238 @@
+\section{gcop\-:\-:\-Pqp\-Dem$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1PqpDem}\index{gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$@{gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}}
+
+
+{\ttfamily \#include $<$pqpdem.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Pqp\-Dem$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classgcop_1_1PqpDem__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Pqp\-Dem$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{classgcop_1_1PqpDem__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, 1, 1 $>$ {\bf \-Vectorgd}
+\item 
+typedef \-Matrix$<$ double, 1, \-\_\-nx $>$ {\bf \-Matrixgxd}
+\item 
+typedef \-Matrix$<$ double, 1, \-\_\-nu $>$ {\bf \-Matrixgud}
+\item 
+typedef \-Matrix$<$ double, 1, \-\_\-np $>$ {\bf \-Matrixgpd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Pqp\-Dem} (const {\bf \-Dem} \&{\bf dem}, double {\bf cr}=0.\-1, double {\bf sd}=0.\-0)
+\item 
+virtual {\bf $\sim$\-Pqp\-Dem} ()
+\item 
+bool {\bf operator()} ({\bf \-Vectorgd} \&g, double t, const \-T \&x, const {\bf \-Vectorcd} \&u, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrixgxd} $\ast$dgdx=0, {\bf \-Matrixgud} $\ast$dgdu=0, {\bf \-Matrixgpd} $\ast$dgdp=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Dem} \& {\bf dem}
+\begin{DoxyCompactList}\small\item\em digital elevation map \end{DoxyCompactList}\item 
+\-P\-Q\-P\-\_\-\-Model $\ast$ {\bf pm}
+\item 
+\-P\-Q\-P\-\_\-\-R\-E\-A\-L {\bf pt} [3]
+\item 
+\-P\-Q\-P\-\_\-\-R\-E\-A\-L {\bf p\-R} [3][3]
+\item 
+\-P\-Q\-P\-\_\-\-Model $\ast$ {\bf dm}
+\item 
+\-P\-Q\-P\-\_\-\-R\-E\-A\-L {\bf dt} [3]
+\item 
+\-P\-Q\-P\-\_\-\-R\-E\-A\-L {\bf d\-R} [3][3]
+\item 
+\-P\-Q\-P\-\_\-\-Distance\-Result {\bf dres}
+\item 
+\-P\-Q\-P\-\_\-\-Tolerance\-Result {\bf tres}
+\item 
+double {\bf cr}
+\begin{DoxyCompactList}\small\item\em collision radius \end{DoxyCompactList}\item 
+double {\bf sd}
+\begin{DoxyCompactList}\small\item\em additional safety distance \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ class gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!\-Matrixgpd@{\-Matrixgpd}}
+\index{\-Matrixgpd@{\-Matrixgpd}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{\-Matrixgpd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, \-\_\-np$>$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixgpd}}\label{classgcop_1_1PqpDem_aae7f61a0b0fa1c340222bd3f80b33e90}
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!\-Matrixgud@{\-Matrixgud}}
+\index{\-Matrixgud@{\-Matrixgud}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{\-Matrixgud}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, \-\_\-nu$>$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixgud}}\label{classgcop_1_1PqpDem_a144ccdcf88a07d58263755fdf684f834}
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!\-Matrixgxd@{\-Matrixgxd}}
+\index{\-Matrixgxd@{\-Matrixgxd}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{\-Matrixgxd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, \-\_\-nx$>$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixgxd}}\label{classgcop_1_1PqpDem_aab3ea9b842d22c3e36804e2158a9063a}
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1PqpDem_a5a9f5714ecd79fdfa372efb79f924176}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_a0055c4a104dbf9ffa1f1f118982506a7}.
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!\-Vectorgd@{\-Vectorgd}}
+\index{\-Vectorgd@{\-Vectorgd}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{\-Vectorgd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, 1, 1$>$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorgd}}\label{classgcop_1_1PqpDem_a16145cf4772eecb24ab92817bb2398ba}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_a8b9bd00ce111e6b7a149257e16bc8f56}.
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1PqpDem_a84871f1bb95ed1e0f403813a1f7e22aa}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_aa4c4302af089a4343a932e429e0856ea}.
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1PqpDem_a0742483e1817d664b57ee71b53ed29ba}
+
+
+\-Reimplemented from {\bf gcop\-::\-Constraint$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, 1 $>$} \doxyref{}{p.}{classgcop_1_1Constraint_a3a69c40b18721b68a707b4f763fb1a50}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!\-Pqp\-Dem@{\-Pqp\-Dem}}
+\index{\-Pqp\-Dem@{\-Pqp\-Dem}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{\-Pqp\-Dem}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Pqp\-Dem} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Dem} \&}]{dem, }
+\item[{double}]{cr = {\ttfamily 0.1}, }
+\item[{double}]{sd = {\ttfamily 0.0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1PqpDem_a099f72c73ffcb833825bf572899c7782}
+
+
+\-References gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::cr, gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::dm, gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::d\-R, gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::dt, gcop\-::\-Dem\-::\-Get(), gcop\-::\-Dem\-::ni, gcop\-::\-Dem\-::nj, gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::pm, gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::p\-R, and gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::pt.
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!$\sim$\-Pqp\-Dem@{$\sim$\-Pqp\-Dem}}
+\index{$\sim$\-Pqp\-Dem@{$\sim$\-Pqp\-Dem}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{$\sim$\-Pqp\-Dem}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::$\sim${\bf \-Pqp\-Dem} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1PqpDem_a5922f422e37cc79143e98623efaf0c96}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ bool {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorgd} \&}]{g, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgxd} $\ast$}]{dgdx = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgud} $\ast$}]{dgdu = {\ttfamily 0}, }
+\item[{{\bf \-Matrixgpd} $\ast$}]{dgdp = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1PqpDem_a09cf68b8534d25f1d04206636a370adc}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!cr@{cr}}
+\index{cr@{cr}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{cr}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf cr}}\label{classgcop_1_1PqpDem_aad2936334515f6b1f987ab5f14e13afc}
+
+
+collision radius 
+
+
+
+\-Referenced by gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Pqp\-Dem().
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!dem@{dem}}
+\index{dem@{dem}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{dem}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ const {\bf \-Dem}\& {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf dem}}\label{classgcop_1_1PqpDem_a0da6eedb549ee396841d3148748c3920}
+
+
+digital elevation map 
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!dm@{dm}}
+\index{dm@{dm}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{dm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-P\-Q\-P\-\_\-\-Model$\ast$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf dm}}\label{classgcop_1_1PqpDem_abb2e2dabe7af20bafcae9e3a4489dc14}
+
+
+\-Referenced by gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Pqp\-Dem().
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!d\-R@{d\-R}}
+\index{d\-R@{d\-R}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{d\-R}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-P\-Q\-P\-\_\-\-R\-E\-A\-L {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf d\-R}[3][3]}\label{classgcop_1_1PqpDem_a2ee6c9f49c12cd62b7e2706500fcca32}
+
+
+\-Referenced by gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Pqp\-Dem().
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!dres@{dres}}
+\index{dres@{dres}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{dres}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-P\-Q\-P\-\_\-\-Distance\-Result {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf dres}}\label{classgcop_1_1PqpDem_a696fbd9bcb64b47756c39ef508d23818}
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!dt@{dt}}
+\index{dt@{dt}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{dt}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-P\-Q\-P\-\_\-\-R\-E\-A\-L {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf dt}[3]}\label{classgcop_1_1PqpDem_a146e224b2a98acbd024822daa5b1d6f8}
+
+
+\-Referenced by gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Pqp\-Dem().
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!pm@{pm}}
+\index{pm@{pm}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{pm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-P\-Q\-P\-\_\-\-Model$\ast$ {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf pm}}\label{classgcop_1_1PqpDem_a583850e01e3350b5936fff6eb6ac3f8f}
+
+
+\-Referenced by gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Pqp\-Dem().
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!p\-R@{p\-R}}
+\index{p\-R@{p\-R}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{p\-R}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-P\-Q\-P\-\_\-\-R\-E\-A\-L {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf p\-R}[3][3]}\label{classgcop_1_1PqpDem_abc3eb03b69aceb5a63a867af22edd8a5}
+
+
+\-Referenced by gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Pqp\-Dem().
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!pt@{pt}}
+\index{pt@{pt}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{pt}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-P\-Q\-P\-\_\-\-R\-E\-A\-L {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf pt}[3]}\label{classgcop_1_1PqpDem_a870277268b4af6cc84c5818d82b528cc}
+
+
+\-Referenced by gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Pqp\-Dem().
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!sd@{sd}}
+\index{sd@{sd}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{sd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf sd}}\label{classgcop_1_1PqpDem_a8de56fc4fc1216ffc73a336bf8d3e7eb}
+
+
+additional safety distance 
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!tres@{tres}}
+\index{tres@{tres}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{tres}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-P\-Q\-P\-\_\-\-Tolerance\-Result {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf tres}}\label{classgcop_1_1PqpDem_af4dc4f24cca294beeea4e1862f2ca6d6}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/constraints/{\bf pqpdem.\-h}\end{DoxyCompactItemize}

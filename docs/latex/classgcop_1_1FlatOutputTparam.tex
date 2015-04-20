@@ -1,0 +1,228 @@
+\section{gcop\-:\-:\-Flat\-Output\-Tparam$<$ \-T, nx, nu, np, \-\_\-ntp $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1FlatOutputTparam}\index{gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$@{gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$}}
+
+
+{\ttfamily \#include $<$flatoutputtparam.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Flat\-Output\-Tparam$<$ \-T, nx, nu, np, \-\_\-ntp $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classgcop_1_1FlatOutputTparam__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Flat\-Output\-Tparam$<$ \-T, nx, nu, np, \-\_\-ntp $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1FlatOutputTparam__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Flat\-Output\-Tparam} ({\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&{\bf sys}, int ny\-\_\-, int numberofknots\-\_\-, int numberofderivatives\-\_\-=0)
+\item 
+void {\bf \-To} (\-Vectorntpd \&s, const vector$<$ double $>$ \&ts, const vector$<$ \-T $>$ \&xs, const vector$<$ \-Vectorcd $>$ \&us, const \-Vectormd $\ast$p=0)
+\item 
+void {\bf \-From} (vector$<$ double $>$ \&ts, vector$<$ \-T $>$ \&xs, vector$<$ \-Vectorcd $>$ \&us, const \-Vectorntpd \&s, \-Vectormd $\ast$p=0)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf numberofderivatives}
+\begin{DoxyCompactList}\small\item\em \-Number of derivatives of flat outputs needed. \end{DoxyCompactList}\item 
+int {\bf numberofknots}
+\begin{DoxyCompactList}\small\item\em \-Number of knots for bezier curve. \end{DoxyCompactList}\item 
+int {\bf ny}
+\begin{DoxyCompactList}\small\item\em \-Number of flat outputs. \end{DoxyCompactList}\item 
+vector$<$ vector$<$ \-Vector\-Xd $>$ $>$ {\bf knotsforallderivatives}
+\begin{DoxyCompactList}\small\item\em \-Knots for each derivative are computed on the fly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\-Vector\-Xd {\bf \-De\-Casteljau} (vector$<$ \-Vector\-Xd $>$ \&s, double u, int start, int end)
+\item 
+void {\bf \-Createknotsforallderivatives} (const \-Vectorntpd \&s)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename T, int nx, int nu, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$class gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$}
+
+\-This is a flat output parametrization class. \-The template vector ny gives the size of flat output \-T\-O\-D\-O \-If ny \-Dynamic somehow resize all the knotvector sizes
+
+\-Author\-: \-Marin \-Kobilarov (c) 2005-\/-\/2013 \-Author2\-: \-Gowtham \-Garimella 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!\-Flat\-Output\-Tparam@{\-Flat\-Output\-Tparam}}
+\index{\-Flat\-Output\-Tparam@{\-Flat\-Output\-Tparam}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
+\subsubsection[{\-Flat\-Output\-Tparam}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int \-\_\-ntp$>$ {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf \-Flat\-Output\-Tparam} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&}]{sys, }
+\item[{int}]{ny\-\_\-, }
+\item[{int}]{numberofknots\-\_\-, }
+\item[{int}]{numberofderivatives\-\_\- = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1FlatOutputTparam_a03ab7cc01ec724557c329bf065a2ba4c}
+\-Constructor 
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & \doxyref{\-System}{p.}{classgcop_1_1System} used for manifold \\
+\hline
+{\em numberofknots} & \-The number of knots used for bezier curve. \-This also determines the degree of the curve \\
+\hline
+{\em numberofderivatives\-\_\-} & \-The number of derivatives needed by the system for evaluating flat outputs \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::knotsforallderivatives, gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::numberofderivatives, gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::numberofknots, and gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::ny.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!\-Createknotsforallderivatives@{\-Createknotsforallderivatives}}
+\index{\-Createknotsforallderivatives@{\-Createknotsforallderivatives}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
+\subsubsection[{\-Createknotsforallderivatives}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ void {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf \-Createknotsforallderivatives} (
+\begin{DoxyParamCaption}
+\item[{const \-Vectorntpd \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classgcop_1_1FlatOutputTparam_a0ce0e5d4f0f884f7a370d0de9d973341}
+\-This function evaluates all the knots \-Dk\-\_\-i for all the derivatives needed \-This is dont recursively as noted in {\tt http\-://www.\-cs.\-mtu.\-edu/$\sim$shene/\-C\-O\-U\-R\-S\-E\-S/cs3621/\-N\-O\-T\-E\-S/spline/\-Bezier/bezier-\/der.\-html} 
+\begin{DoxyParams}{\-Parameters}
+{\em s} & \-The input knots \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!\-De\-Casteljau@{\-De\-Casteljau}}
+\index{\-De\-Casteljau@{\-De\-Casteljau}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
+\subsubsection[{\-De\-Casteljau}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ \-Vector\-Xd {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf \-De\-Casteljau} (
+\begin{DoxyParamCaption}
+\item[{vector$<$ \-Vector\-Xd $>$ \&}]{s, }
+\item[{double}]{u, }
+\item[{int}]{start, }
+\item[{int}]{end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classgcop_1_1FlatOutputTparam_ae268e0b5a5c783aaf256237d04d5dc24}
+\-Evaluate \-Bezier curve using knots in s using \-De\-Casteljau algorithm 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & input point where bezier curve is evaluated  (0,1) \\
+\hline
+{\em start} & \-Starting point for recursion\-P\-\_\-0 \\
+\hline
+{\em end} & ending point for recursion \-P\-\_\-n \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!\-From@{\-From}}
+\index{\-From@{\-From}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
+\subsubsection[{\-From}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int \-\_\-ntp$>$ void {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf \-From} (
+\begin{DoxyParamCaption}
+\item[{vector$<$ double $>$ \&}]{ts, }
+\item[{vector$<$ \-T $>$ \&}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{const \-Vectorntpd \&}]{s, }
+\item[{\-Vectormd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1FlatOutputTparam_ad48859a3d749cadd52ba338fa43fb6ee}
+\-Convert from trajectory (ts,xs,us,p) to parameters s 
+\begin{DoxyParams}{\-Parameters}
+{\em ts} & times \\
+\hline
+{\em xs} & states \\
+\hline
+{\em us} & controls \\
+\hline
+{\em s} & trajectory parametrization vector \\
+\hline
+{\em p} & system parameters (optional) \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1Tparam_a4365bd4b1f7bb59a23dd25838c0a9db4}.
+
+\index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!\-To@{\-To}}
+\index{\-To@{\-To}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
+\subsubsection[{\-To}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int \-\_\-ntp$>$ void {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf \-To} (
+\begin{DoxyParamCaption}
+\item[{\-Vectorntpd \&}]{s, }
+\item[{const vector$<$ double $>$ \&}]{ts, }
+\item[{const vector$<$ \-T $>$ \&}]{xs, }
+\item[{const vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{const \-Vectormd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1FlatOutputTparam_a094a6a69c159160b0012ba1d88b04e87}
+\-Convert from paramer s to trajectory (ts,xs,us,p) 
+\begin{DoxyParams}{\-Parameters}
+{\em s} & trajectory parametrization vector \\
+\hline
+{\em ts} & times \\
+\hline
+{\em xs} & states \\
+\hline
+{\em us} & controls \\
+\hline
+{\em p} & system parameters (optional) \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1Tparam_a92de5e8167d3cbec5fa498e0d7b5fd2f}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!knotsforallderivatives@{knotsforallderivatives}}
+\index{knotsforallderivatives@{knotsforallderivatives}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
+\subsubsection[{knotsforallderivatives}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ vector$<$vector$<$\-Vector\-Xd$>$ $>$ {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf knotsforallderivatives}}\label{classgcop_1_1FlatOutputTparam_a87eeb3fdd2f1490d2b7d21444242b650}
+
+
+\-Knots for each derivative are computed on the fly. 
+
+
+
+\-Referenced by gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::\-Flat\-Output\-Tparam().
+
+\index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!numberofderivatives@{numberofderivatives}}
+\index{numberofderivatives@{numberofderivatives}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
+\subsubsection[{numberofderivatives}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ int {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf numberofderivatives}}\label{classgcop_1_1FlatOutputTparam_ac36fea6cd2a6298240a827dbeaaf0858}
+
+
+\-Number of derivatives of flat outputs needed. 
+
+
+
+\-Referenced by gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::\-Flat\-Output\-Tparam().
+
+\index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!numberofknots@{numberofknots}}
+\index{numberofknots@{numberofknots}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
+\subsubsection[{numberofknots}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ int {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf numberofknots}}\label{classgcop_1_1FlatOutputTparam_ac60af6b0e95fc4c41d100563406b62f4}
+
+
+\-Number of knots for bezier curve. 
+
+
+
+\-Referenced by gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::\-Flat\-Output\-Tparam().
+
+\index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!ny@{ny}}
+\index{ny@{ny}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
+\subsubsection[{ny}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ int {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf ny}}\label{classgcop_1_1FlatOutputTparam_a0f6f9db22e9d4cb4b64490e0ae5c6192}
+
+
+\-Number of flat outputs. 
+
+
+
+\-Referenced by gcop\-::\-Flat\-Output\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::\-Flat\-Output\-Tparam().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/parametrization/{\bf flatoutputtparam.\-h}\end{DoxyCompactItemize}

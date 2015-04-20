@@ -1,0 +1,141 @@
+\section{gcop\-:\-:\-Body2d\-Graph\-View \-Class \-Reference}
+\label{classgcop_1_1Body2dGraphView}\index{gcop\-::\-Body2d\-Graph\-View@{gcop\-::\-Body2d\-Graph\-View}}
+
+
+{\ttfamily \#include $<$body2dgraphview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Body2d\-Graph\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{classgcop_1_1Body2dGraphView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-Graph\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Body2dGraphView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body2d\-Graph\-View} (const {\bf \-Body2d\-Graph} \&{\bf pg})
+\item 
+virtual void {\bf \-Render} ()
+\item 
+virtual bool {\bf \-Render\-Frame} (int i)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Body2d\-Graph} \& {\bf pg}
+\item 
+float {\bf rgba} [4]
+\item 
+bool {\bf draw\-Landmarks}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Rigid body view. \-Supports rendering either a single state or a whole trajectory of states. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Body2d\-Graph\-View@{gcop\-::\-Body2d\-Graph\-View}!\-Body2d\-Graph\-View@{\-Body2d\-Graph\-View}}
+\index{\-Body2d\-Graph\-View@{\-Body2d\-Graph\-View}!gcop::Body2dGraphView@{gcop\-::\-Body2d\-Graph\-View}}
+\subsubsection[{\-Body2d\-Graph\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Graph\-View\-::\-Body2d\-Graph\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Body2d\-Graph} \&}]{pg}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body2dGraphView_ada9ac0c98fed1f2f13eb84f9f91a6e51}
+\-Create a view for a single state s 
+\begin{DoxyParams}{\-Parameters}
+{\em name} & name \\
+\hline
+{\em s} & rigid body state \\
+\hline
+\end{DoxyParams}
+
+
+\-References draw\-Landmarks, and rgba.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Body2d\-Graph\-View@{gcop\-::\-Body2d\-Graph\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::Body2dGraphView@{gcop\-::\-Body2d\-Graph\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Graph\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dGraphView_aca65b0b8f19b389958117d050e6931d8}
+\-Render a view\-: all subclasses should provide this method 
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63}.
+
+
+
+\-References \-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Graph\-View@{gcop\-::\-Body2d\-Graph\-View}!\-Render\-Frame@{\-Render\-Frame}}
+\index{\-Render\-Frame@{\-Render\-Frame}!gcop::Body2dGraphView@{gcop\-::\-Body2d\-Graph\-View}}
+\subsubsection[{\-Render\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Body2d\-Graph\-View\-::\-Render\-Frame} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dGraphView_acc5db1b86730adce14ea06901ee46264}
+\-Render a view\-: all subclasses should provide this method 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & frame \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+return true if more frames should be rendered 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_ad6c3f17a59725948f68817398296f835}.
+
+
+
+\-References gcop\-::\-Viewer\-::\-Draw\-Arrow(), draw\-Landmarks, gcop\-::\-Viewer\-::\-Draw\-Text(), gcop\-::\-Body2d\-Graph\-::extforce, gcop\-::\-Body2d\-Graph\-::\-Js, gcop\-::\-Body2d\-Graph\-::p, pg, rgba, gcop\-::\-Body2d\-Graph\-::us, and gcop\-::\-Body2d\-Graph\-::xs.
+
+
+
+\-Referenced by \-Render().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body2d\-Graph\-View@{gcop\-::\-Body2d\-Graph\-View}!draw\-Landmarks@{draw\-Landmarks}}
+\index{draw\-Landmarks@{draw\-Landmarks}!gcop::Body2dGraphView@{gcop\-::\-Body2d\-Graph\-View}}
+\subsubsection[{draw\-Landmarks}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body2d\-Graph\-View\-::draw\-Landmarks}}\label{classgcop_1_1Body2dGraphView_ae376da7aa36b3516bf02d39d78c12173}
+
+
+\-Referenced by \-Body2d\-Graph\-View(), and \-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Graph\-View@{gcop\-::\-Body2d\-Graph\-View}!pg@{pg}}
+\index{pg@{pg}!gcop::Body2dGraphView@{gcop\-::\-Body2d\-Graph\-View}}
+\subsubsection[{pg}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Body2d\-Graph}\& {\bf gcop\-::\-Body2d\-Graph\-View\-::pg}}\label{classgcop_1_1Body2dGraphView_a7b07ca1965474a08976a9c0f7f707f4a}
+
+
+\-Referenced by \-Render\-Frame().
+
+\index{gcop\-::\-Body2d\-Graph\-View@{gcop\-::\-Body2d\-Graph\-View}!rgba@{rgba}}
+\index{rgba@{rgba}!gcop::Body2dGraphView@{gcop\-::\-Body2d\-Graph\-View}}
+\subsubsection[{rgba}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Body2d\-Graph\-View\-::rgba}[4]}\label{classgcop_1_1Body2dGraphView_ab773eb80f6e1d6ce133dd2ec1bd10559}
+
+
+\-Referenced by \-Body2d\-Graph\-View(), and \-Render\-Frame().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf body2dgraphview.\-h}\item 
+lib/views/{\bf body2dgraphview.\-cc}\end{DoxyCompactItemize}

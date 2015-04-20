@@ -1,0 +1,98 @@
+\section{gcop\-:\-:\-Function$<$ \-T, \-\_\-n, \-\_\-m $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Function}\index{gcop\-::\-Function$<$ T, \-\_\-n, \-\_\-m $>$@{gcop\-::\-Function$<$ T, \-\_\-n, \-\_\-m $>$}}
+
+
+{\ttfamily \#include $<$function.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-m, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-m, \-\_\-n $>$ {\bf \-Matrixmnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Function} ({\bf \-Manifold}$<$ \-T, \-\_\-n $>$ \&{\bf \-X}, double {\bf eps}=1e-\/12)
+\item 
+virtual void {\bf \-F} ({\bf \-Vectormd} \&f, const \-T \&x)=0
+\item 
+void {\bf \-D\-F} ({\bf \-Matrixmnd} \&\-Df, const \-T \&x)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Manifold}$<$ \-T, \-\_\-n $>$ \& {\bf \-X}
+\item 
+double {\bf eps}
+\begin{DoxyCompactList}\small\item\em ste-\/size of finite differences \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename T, int \-\_\-n = \-Dynamic, int \-\_\-m = \-Dynamic$>$class gcop\-::\-Function$<$ T, \-\_\-n, \-\_\-m $>$}
+
+m-\/dimensional vector-\/valued function on an n-\/dimensional manifold \-X
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Function@{gcop\-::\-Function}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::Function@{gcop\-::\-Function}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-m = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-m, \-\_\-n$>$ {\bf gcop\-::\-Function}$<$ \-T, \-\_\-n, \-\_\-m $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1Function_ae2d725545d47c845b3a5029243d09256}
+\index{gcop\-::\-Function@{gcop\-::\-Function}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::Function@{gcop\-::\-Function}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-m = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-m, 1$>$ {\bf gcop\-::\-Function}$<$ \-T, \-\_\-n, \-\_\-m $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1Function_a6a33c3b2a95b0b898bb135f4f35e41c0}
+\index{gcop\-::\-Function@{gcop\-::\-Function}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Function@{gcop\-::\-Function}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-m = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, 1$>$ {\bf gcop\-::\-Function}$<$ \-T, \-\_\-n, \-\_\-m $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Function_a56129e22e69e3cf920cac1729b797475}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Function@{gcop\-::\-Function}!\-Function@{\-Function}}
+\index{\-Function@{\-Function}!gcop::Function@{gcop\-::\-Function}}
+\subsubsection[{\-Function}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n, int \-\_\-m$>$ {\bf gcop\-::\-Function}$<$ \-T, \-\_\-n, \-\_\-m $>$\-::{\bf \-Function} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Manifold}$<$ \-T, \-\_\-n $>$ \&}]{\-X, }
+\item[{double}]{eps = {\ttfamily 1e-\/12}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Function_a0c7c57545e902f7789530f9aebae8c16}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Function@{gcop\-::\-Function}!\-D\-F@{\-D\-F}}
+\index{\-D\-F@{\-D\-F}!gcop::Function@{gcop\-::\-Function}}
+\subsubsection[{\-D\-F}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n, int \-\_\-m$>$ void {\bf gcop\-::\-Function}$<$ \-T, \-\_\-n, \-\_\-m $>$\-::{\bf \-D\-F} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrixmnd} \&}]{\-Df, }
+\item[{const \-T \&}]{x}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Function_a4f3408170c61915af141b8d35643c5b3}
+\index{gcop\-::\-Function@{gcop\-::\-Function}!\-F@{\-F}}
+\index{\-F@{\-F}!gcop::Function@{gcop\-::\-Function}}
+\subsubsection[{\-F}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-m = \-Dynamic$>$ virtual void {\bf gcop\-::\-Function}$<$ \-T, \-\_\-n, \-\_\-m $>$\-::{\bf \-F} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectormd} \&}]{f, }
+\item[{const \-T \&}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Function_afc4b855f5245947cec870b15e0639e8d}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Function@{gcop\-::\-Function}!eps@{eps}}
+\index{eps@{eps}!gcop::Function@{gcop\-::\-Function}}
+\subsubsection[{eps}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-m = \-Dynamic$>$ double {\bf gcop\-::\-Function}$<$ \-T, \-\_\-n, \-\_\-m $>$\-::{\bf eps}}\label{classgcop_1_1Function_a29493bbb5a796ed7ba726e19d2c77a85}
+
+
+ste-\/size of finite differences 
+
+\index{gcop\-::\-Function@{gcop\-::\-Function}!\-X@{\-X}}
+\index{\-X@{\-X}!gcop::Function@{gcop\-::\-Function}}
+\subsubsection[{\-X}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-n = \-Dynamic, int \-\_\-m = \-Dynamic$>$ {\bf \-Manifold}$<$\-T, \-\_\-n$>$\& {\bf gcop\-::\-Function}$<$ \-T, \-\_\-n, \-\_\-m $>$\-::{\bf \-X}}\label{classgcop_1_1Function_a0f9c09abb915a0c40deb711f7ca7e80a}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf function.\-h}\end{DoxyCompactItemize}

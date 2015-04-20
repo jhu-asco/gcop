@@ -1,0 +1,132 @@
+\section{gcop\-:\-:\-Posegraph2d\-View \-Class \-Reference}
+\label{classgcop_1_1Posegraph2dView}\index{gcop\-::\-Posegraph2d\-View@{gcop\-::\-Posegraph2d\-View}}
+
+
+{\ttfamily \#include $<$posegraph2dview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Posegraph2d\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classgcop_1_1Posegraph2dView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Posegraph2d\-View\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classgcop_1_1Posegraph2dView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Posegraph2d\-View} (const {\bf \-Posegraph2d} \&{\bf pg})
+\item 
+virtual void {\bf \-Render} ()
+\item 
+virtual bool {\bf \-Render\-Frame} (int i)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Posegraph2d} \& {\bf pg}
+\item 
+float {\bf rgba} [4]
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Rigid body view. \-Supports rendering either a single state or a whole trajectory of states. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Posegraph2d\-View@{gcop\-::\-Posegraph2d\-View}!\-Posegraph2d\-View@{\-Posegraph2d\-View}}
+\index{\-Posegraph2d\-View@{\-Posegraph2d\-View}!gcop::Posegraph2dView@{gcop\-::\-Posegraph2d\-View}}
+\subsubsection[{\-Posegraph2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Posegraph2d\-View\-::\-Posegraph2d\-View} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Posegraph2d} \&}]{pg}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Posegraph2dView_a913fd9690894191dc563e941176ba395}
+\-Create a view for a single state s 
+\begin{DoxyParams}{\-Parameters}
+{\em name} & name \\
+\hline
+{\em s} & rigid body state \\
+\hline
+\end{DoxyParams}
+
+
+\-References rgba.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Posegraph2d\-View@{gcop\-::\-Posegraph2d\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::Posegraph2dView@{gcop\-::\-Posegraph2d\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Posegraph2d\-View\-::\-Render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Posegraph2dView_a1d5437afcf98cf1d38df2b63febbbb78}
+\-Render a view\-: all subclasses should provide this method 
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63}.
+
+
+
+\-References \-Render\-Frame().
+
+\index{gcop\-::\-Posegraph2d\-View@{gcop\-::\-Posegraph2d\-View}!\-Render\-Frame@{\-Render\-Frame}}
+\index{\-Render\-Frame@{\-Render\-Frame}!gcop::Posegraph2dView@{gcop\-::\-Posegraph2d\-View}}
+\subsubsection[{\-Render\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Posegraph2d\-View\-::\-Render\-Frame} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Posegraph2dView_ac1400e13c99e143b230f37f15dc614b4}
+\-Render a view\-: all subclasses should provide this method 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & frame \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+return true if more frames should be rendered 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_ad6c3f17a59725948f68817398296f835}.
+
+
+
+\-References gcop\-::\-Viewer\-::\-Draw\-Text(), gcop\-::\-Posegraph2d\-::gs, gcop\-::\-Posegraph2d\-::\-Js, gcop\-::\-Posegraph2d\-::p, pg, rgba, and gcop\-::\-Viewer\-::\-Set\-Color().
+
+
+
+\-Referenced by \-Render().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Posegraph2d\-View@{gcop\-::\-Posegraph2d\-View}!pg@{pg}}
+\index{pg@{pg}!gcop::Posegraph2dView@{gcop\-::\-Posegraph2d\-View}}
+\subsubsection[{pg}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Posegraph2d}\& {\bf gcop\-::\-Posegraph2d\-View\-::pg}}\label{classgcop_1_1Posegraph2dView_a332907ae161182f2719cc345f9e96f1b}
+
+
+\-Referenced by \-Render\-Frame().
+
+\index{gcop\-::\-Posegraph2d\-View@{gcop\-::\-Posegraph2d\-View}!rgba@{rgba}}
+\index{rgba@{rgba}!gcop::Posegraph2dView@{gcop\-::\-Posegraph2d\-View}}
+\subsubsection[{rgba}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf gcop\-::\-Posegraph2d\-View\-::rgba}[4]}\label{classgcop_1_1Posegraph2dView_a794aff686514c318fa2acb8862cf41d8}
+
+
+\-Referenced by \-Posegraph2d\-View(), and \-Render\-Frame().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf posegraph2dview.\-h}\item 
+lib/views/{\bf posegraph2dview.\-cc}\end{DoxyCompactItemize}

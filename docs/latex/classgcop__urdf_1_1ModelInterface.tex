@@ -1,0 +1,226 @@
+\section{gcop\-\_\-urdf\-:\-:\-Model\-Interface \-Class \-Reference}
+\label{classgcop__urdf_1_1ModelInterface}\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+
+
+{\ttfamily \#include $<$urdfmodel.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+boost\-::shared\-\_\-ptr$<$ const {\bf \-Link} $>$ {\bf get\-Root} (void) const 
+\item 
+boost\-::shared\-\_\-ptr$<$ const {\bf \-Link} $>$ {\bf get\-Link} (const std\-::string \&name) const 
+\item 
+boost\-::shared\-\_\-ptr$<$ const {\bf \-Joint} $>$ {\bf get\-Joint} (const std\-::string \&name) const 
+\item 
+const std\-::string \& {\bf get\-Name} () const 
+\item 
+void {\bf get\-Links} (std\-::vector$<$ boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ $>$ \&links) const 
+\item 
+void {\bf clear} ()
+\item 
+void {\bf get\-Link} (const std\-::string \&name, boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ \&link) const 
+\begin{DoxyCompactList}\small\item\em non-\/const \doxyref{get\-Link()}{p.}{classgcop__urdf_1_1ModelInterface_a2a8cfb0d07bdafa1e2979ecd0307dce3} \end{DoxyCompactList}\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Material} $>$ {\bf get\-Material} (const std\-::string \&name) const 
+\begin{DoxyCompactList}\small\item\em non-\/const \doxyref{get\-Material()}{p.}{classgcop__urdf_1_1ModelInterface_ab87e2737bded1002846a273bfb8a2e42} \end{DoxyCompactList}\item 
+bool {\bf init\-Tree} (std\-::map$<$ std\-::string, std\-::string $>$ \&parent\-\_\-link\-\_\-tree)
+\item 
+bool {\bf init\-Root} (std\-::map$<$ std\-::string, std\-::string $>$ \&parent\-\_\-link\-\_\-tree)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::map$<$ std\-::string, \*
+boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ $>$ {\bf links\-\_\-}
+\begin{DoxyCompactList}\small\item\em complete list of \-Links \end{DoxyCompactList}\item 
+std\-::map$<$ std\-::string, \*
+boost\-::shared\-\_\-ptr$<$ {\bf \-Joint} $>$ $>$ {\bf joints\-\_\-}
+\begin{DoxyCompactList}\small\item\em complete list of \-Joints \end{DoxyCompactList}\item 
+std\-::map$<$ std\-::string, \*
+boost\-::shared\-\_\-ptr$<$ {\bf \-Material} $>$ $>$ {\bf materials\-\_\-}
+\begin{DoxyCompactList}\small\item\em complete list of \-Materials \end{DoxyCompactList}\item 
+std\-::string {\bf name\-\_\-}
+\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ {\bf root\-\_\-link\-\_\-}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!clear@{clear}}
+\index{clear@{clear}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::clear} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1ModelInterface_a9257ccde52c8034ef887d70fd8c518a5}
+
+
+\-References joints\-\_\-, links\-\_\-, materials\-\_\-, name\-\_\-, and root\-\_\-link\-\_\-.
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!get\-Joint@{get\-Joint}}
+\index{get\-Joint@{get\-Joint}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{get\-Joint}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<$const {\bf \-Joint}$>$ {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::get\-Joint} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1ModelInterface_ae75a089185807338c381046893af387b}
+
+
+\-References joints\-\_\-.
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!get\-Link@{get\-Link}}
+\index{get\-Link@{get\-Link}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{get\-Link}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<$const {\bf \-Link}$>$ {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::get\-Link} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1ModelInterface_a2a8cfb0d07bdafa1e2979ecd0307dce3}
+
+
+\-References links\-\_\-.
+
+
+
+\-Referenced by init\-Root(), and init\-Tree().
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!get\-Link@{get\-Link}}
+\index{get\-Link@{get\-Link}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{get\-Link}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::get\-Link} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{name, }
+\item[{boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ \&}]{link}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1ModelInterface_af2b794534f382946002537dc2091fbb3}
+
+
+non-\/const \doxyref{get\-Link()}{p.}{classgcop__urdf_1_1ModelInterface_a2a8cfb0d07bdafa1e2979ecd0307dce3} 
+
+
+
+\-References links\-\_\-.
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!get\-Links@{get\-Links}}
+\index{get\-Links@{get\-Links}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{get\-Links}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::get\-Links} (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ boost\-::shared\-\_\-ptr$<$ {\bf \-Link} $>$ $>$ \&}]{links}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1ModelInterface_a5121b819ba3efa53caf676c7cec158a6}
+
+
+\-References links\-\_\-.
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!get\-Material@{get\-Material}}
+\index{get\-Material@{get\-Material}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{get\-Material}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Material}$>$ {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::get\-Material} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1ModelInterface_ab87e2737bded1002846a273bfb8a2e42}
+
+
+non-\/const \doxyref{get\-Material()}{p.}{classgcop__urdf_1_1ModelInterface_ab87e2737bded1002846a273bfb8a2e42} 
+
+
+
+\-References materials\-\_\-.
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!get\-Name@{get\-Name}}
+\index{get\-Name@{get\-Name}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string\& {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::get\-Name} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1ModelInterface_a3efac393d1b538b37d6c36ff7e908b4e}
+
+
+\-References name\-\_\-.
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!get\-Root@{get\-Root}}
+\index{get\-Root@{get\-Root}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{get\-Root}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<$const {\bf \-Link}$>$ {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::get\-Root} (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1ModelInterface_a3f431c7553d34511f7b27e6a3dbc1f1e}
+
+
+\-References root\-\_\-link\-\_\-.
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!init\-Root@{init\-Root}}
+\index{init\-Root@{init\-Root}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{init\-Root}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::init\-Root} (
+\begin{DoxyParamCaption}
+\item[{std\-::map$<$ std\-::string, std\-::string $>$ \&}]{parent\-\_\-link\-\_\-tree}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1ModelInterface_a73b7b0be38b3166dc5812f69aa69bbe3}
+in init\-Xml(), onece tree is built, it's time to find the root \doxyref{\-Link}{p.}{classgcop__urdf_1_1Link} 
+
+\-References get\-Link(), links\-\_\-, and root\-\_\-link\-\_\-.
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!init\-Tree@{init\-Tree}}
+\index{init\-Tree@{init\-Tree}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{init\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::init\-Tree} (
+\begin{DoxyParamCaption}
+\item[{std\-::map$<$ std\-::string, std\-::string $>$ \&}]{parent\-\_\-link\-\_\-tree}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1ModelInterface_a78bade9bef0a1bc0f232a5f2bf4752c7}
+in init\-Xml(), onece all links are loaded, it's time to build a tree 
+
+\-References get\-Link(), and joints\-\_\-.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!joints\-\_\-@{joints\-\_\-}}
+\index{joints\-\_\-@{joints\-\_\-}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{joints\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$std\-::string, boost\-::shared\-\_\-ptr$<${\bf \-Joint}$>$ $>$ {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::joints\-\_\-}}\label{classgcop__urdf_1_1ModelInterface_a407ebfd48842585ea1a27b800dc2faf0}
+
+
+complete list of \-Joints 
+
+
+
+\-Referenced by clear(), get\-Joint(), and init\-Tree().
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!links\-\_\-@{links\-\_\-}}
+\index{links\-\_\-@{links\-\_\-}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{links\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$std\-::string, boost\-::shared\-\_\-ptr$<${\bf \-Link}$>$ $>$ {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::links\-\_\-}}\label{classgcop__urdf_1_1ModelInterface_a77964ca989c1529b3e337c8ca73706ac}
+
+
+complete list of \-Links 
+
+
+
+\-Referenced by clear(), get\-Link(), get\-Links(), and init\-Root().
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!materials\-\_\-@{materials\-\_\-}}
+\index{materials\-\_\-@{materials\-\_\-}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{materials\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$std\-::string, boost\-::shared\-\_\-ptr$<${\bf \-Material}$>$ $>$ {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::materials\-\_\-}}\label{classgcop__urdf_1_1ModelInterface_a1f8803aaa57b194196deaaf54bac343e}
+
+
+complete list of \-Materials 
+
+
+
+\-Referenced by clear(), and get\-Material().
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!name\-\_\-@{name\-\_\-}}
+\index{name\-\_\-@{name\-\_\-}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{name\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::name\-\_\-}}\label{classgcop__urdf_1_1ModelInterface_afc06ff8ae41a4ebf37aadd54bd2e52eb}
+
+
+\-Referenced by clear(), and get\-Name().
+
+\index{gcop\-\_\-urdf\-::\-Model\-Interface@{gcop\-\_\-urdf\-::\-Model\-Interface}!root\-\_\-link\-\_\-@{root\-\_\-link\-\_\-}}
+\index{root\-\_\-link\-\_\-@{root\-\_\-link\-\_\-}!gcop_urdf::ModelInterface@{gcop\-\_\-urdf\-::\-Model\-Interface}}
+\subsubsection[{root\-\_\-link\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Link}$>$ {\bf gcop\-\_\-urdf\-::\-Model\-Interface\-::root\-\_\-link\-\_\-}}\label{classgcop__urdf_1_1ModelInterface_a8a960b94b28d34e5f06a201d0d217d26}
+\doxyref{\-Model\-Interface}{p.}{classgcop__urdf_1_1ModelInterface} is restricted to a tree for now, which means there exists one root link typically, root link is the world(inertial). \-Where world is a special link or is the root\-\_\-link\-\_\- the link attached to the world by \-P\-L\-A\-N\-A\-R/\-F\-L\-O\-A\-T\-I\-N\-G joint? hmm... 
+
+\-Referenced by clear(), get\-Root(), and init\-Root().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf urdfmodel.\-h}\end{DoxyCompactItemize}

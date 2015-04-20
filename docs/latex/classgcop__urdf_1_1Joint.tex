@@ -1,0 +1,224 @@
+\section{gcop\-\_\-urdf\-:\-:\-Joint \-Class \-Reference}
+\label{classgcop__urdf_1_1Joint}\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}}
+
+
+{\ttfamily \#include $<$urdfjoint.\-h$>$}
+
+
+
+\-Collaboration diagram for gcop\-\_\-urdf\-:\-:\-Joint\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{classgcop__urdf_1_1Joint__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \*
+{\bf \-U\-N\-K\-N\-O\-W\-N}, 
+{\bf \-R\-E\-V\-O\-L\-U\-T\-E}, 
+{\bf \-C\-O\-N\-T\-I\-N\-U\-O\-U\-S}, 
+{\bf \-P\-R\-I\-S\-M\-A\-T\-I\-C}, 
+\*
+{\bf \-F\-L\-O\-A\-T\-I\-N\-G}, 
+{\bf \-P\-L\-A\-N\-A\-R}, 
+{\bf \-F\-I\-X\-E\-D}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Joint} ()
+\item 
+bool {\bf init\-Xml} (\-Ti\-Xml\-Element $\ast$xml)
+\item 
+void {\bf clear} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::string {\bf name}
+\item 
+enum gcop\-\_\-urdf\-::\-Joint\-:: \{ ... \}  {\bf type}
+\item 
+{\bf \-Vector3} {\bf axis}
+\begin{DoxyCompactList}\small\item\em type\-\_\- meaning of axis\-\_\- \end{DoxyCompactList}\item 
+std\-::string {\bf child\-\_\-link\-\_\-name}
+\item 
+std\-::string {\bf parent\-\_\-link\-\_\-name}
+\item 
+{\bf \-Pose} {\bf parent\-\_\-to\-\_\-joint\-\_\-origin\-\_\-transform}
+\begin{DoxyCompactList}\small\item\em transform from \-Parent \doxyref{\-Link}{p.}{classgcop__urdf_1_1Link} frame to \doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint} frame \end{DoxyCompactList}\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Joint\-Dynamics} $>$ {\bf dynamics}
+\begin{DoxyCompactList}\small\item\em \doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint} \-Dynamics. \end{DoxyCompactList}\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Joint\-Limits} $>$ {\bf limits}
+\begin{DoxyCompactList}\small\item\em \doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint} \-Limits. \end{DoxyCompactList}\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Joint\-Safety} $>$ {\bf safety}
+\begin{DoxyCompactList}\small\item\em \-Unsupported \-Hidden \-Feature. \end{DoxyCompactList}\item 
+boost\-::shared\-\_\-ptr\*
+$<$ {\bf \-Joint\-Calibration} $>$ {\bf calibration}
+\begin{DoxyCompactList}\small\item\em \-Unsupported \-Hidden \-Feature. \end{DoxyCompactList}\item 
+boost\-::shared\-\_\-ptr$<$ {\bf \-Joint\-Mimic} $>$ {\bf mimic}
+\begin{DoxyCompactList}\small\item\em \-Option to \-Mimic another \doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Enumeration \-Documentation}
+\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}\label{classgcop__urdf_1_1Joint_a1b5954c853aa0cbf69de63403bc69ed3}
+\begin{Desc}
+\item[\-Enumerator\-: ]\par
+\begin{description}
+\index{\-U\-N\-K\-N\-O\-W\-N@{\-U\-N\-K\-N\-O\-W\-N}!gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}}\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!\-U\-N\-K\-N\-O\-W\-N@{\-U\-N\-K\-N\-O\-W\-N}}\item[{\em 
+\-U\-N\-K\-N\-O\-W\-N\label{classgcop__urdf_1_1Joint_a1b5954c853aa0cbf69de63403bc69ed3a1c1de3831f050903c8e3db0c43057ef1}
+}]\index{\-R\-E\-V\-O\-L\-U\-T\-E@{\-R\-E\-V\-O\-L\-U\-T\-E}!gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}}\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!\-R\-E\-V\-O\-L\-U\-T\-E@{\-R\-E\-V\-O\-L\-U\-T\-E}}\item[{\em 
+\-R\-E\-V\-O\-L\-U\-T\-E\label{classgcop__urdf_1_1Joint_a1b5954c853aa0cbf69de63403bc69ed3a7bfc1611c9ae6025b04333bc09e51f35}
+}]\index{\-C\-O\-N\-T\-I\-N\-U\-O\-U\-S@{\-C\-O\-N\-T\-I\-N\-U\-O\-U\-S}!gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}}\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!\-C\-O\-N\-T\-I\-N\-U\-O\-U\-S@{\-C\-O\-N\-T\-I\-N\-U\-O\-U\-S}}\item[{\em 
+\-C\-O\-N\-T\-I\-N\-U\-O\-U\-S\label{classgcop__urdf_1_1Joint_a1b5954c853aa0cbf69de63403bc69ed3a737064ba0753e157208632201fdb5941}
+}]\index{\-P\-R\-I\-S\-M\-A\-T\-I\-C@{\-P\-R\-I\-S\-M\-A\-T\-I\-C}!gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}}\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!\-P\-R\-I\-S\-M\-A\-T\-I\-C@{\-P\-R\-I\-S\-M\-A\-T\-I\-C}}\item[{\em 
+\-P\-R\-I\-S\-M\-A\-T\-I\-C\label{classgcop__urdf_1_1Joint_a1b5954c853aa0cbf69de63403bc69ed3ace46230c2279aa0759a0ac89217294d2}
+}]\index{\-F\-L\-O\-A\-T\-I\-N\-G@{\-F\-L\-O\-A\-T\-I\-N\-G}!gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}}\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!\-F\-L\-O\-A\-T\-I\-N\-G@{\-F\-L\-O\-A\-T\-I\-N\-G}}\item[{\em 
+\-F\-L\-O\-A\-T\-I\-N\-G\label{classgcop__urdf_1_1Joint_a1b5954c853aa0cbf69de63403bc69ed3a17e0ec2769486160adb895f19aa3d819}
+}]\index{\-P\-L\-A\-N\-A\-R@{\-P\-L\-A\-N\-A\-R}!gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}}\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!\-P\-L\-A\-N\-A\-R@{\-P\-L\-A\-N\-A\-R}}\item[{\em 
+\-P\-L\-A\-N\-A\-R\label{classgcop__urdf_1_1Joint_a1b5954c853aa0cbf69de63403bc69ed3a5e5ec62e0e5f9a6d5a652e2bd639361b}
+}]\index{\-F\-I\-X\-E\-D@{\-F\-I\-X\-E\-D}!gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}}\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!\-F\-I\-X\-E\-D@{\-F\-I\-X\-E\-D}}\item[{\em 
+\-F\-I\-X\-E\-D\label{classgcop__urdf_1_1Joint_a1b5954c853aa0cbf69de63403bc69ed3a070a3941a274401278d6f7b856c89aca}
+}]\end{description}
+\end{Desc}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!\-Joint@{\-Joint}}
+\index{\-Joint@{\-Joint}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{\-Joint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-\_\-urdf\-::\-Joint\-::\-Joint} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Joint_a91b56d2c01420db3a7dd05af2e6cface}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!clear@{clear}}
+\index{clear@{clear}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf gcop\-\_\-urdf\-::\-Joint\-::clear} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop__urdf_1_1Joint_aae3417b7fdebc8508868ee5cc0f53b7e}
+
+
+\-References axis, calibration, child\-\_\-link\-\_\-name, gcop\-\_\-urdf\-::\-Vector3\-::clear(), gcop\-\_\-urdf\-::\-Pose\-::clear(), dynamics, limits, parent\-\_\-link\-\_\-name, parent\-\_\-to\-\_\-joint\-\_\-origin\-\_\-transform, safety, type, and \-U\-N\-K\-N\-O\-W\-N.
+
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!init\-Xml@{init\-Xml}}
+\index{init\-Xml@{init\-Xml}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{init\-Xml}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-\_\-urdf\-::\-Joint\-::init\-Xml} (
+\begin{DoxyParamCaption}
+\item[{\-Ti\-Xml\-Element $\ast$}]{xml}
+\end{DoxyParamCaption}
+)}\label{classgcop__urdf_1_1Joint_abc26df0d82be9171728869af62a4d7d8}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!axis@{axis}}
+\index{axis@{axis}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{axis}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Vector3} {\bf gcop\-\_\-urdf\-::\-Joint\-::axis}}\label{classgcop__urdf_1_1Joint_aa06c0035088153d42a715e962f249ed3}
+
+
+type\-\_\- meaning of axis\-\_\- 
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ \-U\-N\-K\-N\-O\-W\-N unknown type \-R\-E\-V\-O\-L\-U\-T\-E rotation axis \-P\-R\-I\-S\-M\-A\-T\-I\-C translation axis \-F\-L\-O\-A\-T\-I\-N\-G \-N/\-A \-P\-L\-A\-N\-A\-R plane normal axis \-F\-I\-X\-E\-D \-N/\-A 
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!calibration@{calibration}}
+\index{calibration@{calibration}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{calibration}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Joint\-Calibration}$>$ {\bf gcop\-\_\-urdf\-::\-Joint\-::calibration}}\label{classgcop__urdf_1_1Joint_a0b1426980acf0065c3cfd36c1973277a}
+
+
+\-Unsupported \-Hidden \-Feature. 
+
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!child\-\_\-link\-\_\-name@{child\-\_\-link\-\_\-name}}
+\index{child\-\_\-link\-\_\-name@{child\-\_\-link\-\_\-name}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{child\-\_\-link\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string {\bf gcop\-\_\-urdf\-::\-Joint\-::child\-\_\-link\-\_\-name}}\label{classgcop__urdf_1_1Joint_a5b15b5d2d1be8217bdd4645fc6b5b503}
+child \doxyref{\-Link}{p.}{classgcop__urdf_1_1Link} element child link frame is the same as the \doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint} frame 
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!dynamics@{dynamics}}
+\index{dynamics@{dynamics}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{dynamics}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Joint\-Dynamics}$>$ {\bf gcop\-\_\-urdf\-::\-Joint\-::dynamics}}\label{classgcop__urdf_1_1Joint_abae99b22266fc1b57e429c3ba3f13b82}
+
+
+\doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint} \-Dynamics. 
+
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!limits@{limits}}
+\index{limits@{limits}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{limits}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Joint\-Limits}$>$ {\bf gcop\-\_\-urdf\-::\-Joint\-::limits}}\label{classgcop__urdf_1_1Joint_aa3656c5d553e305df9b782eb51b7f3da}
+
+
+\doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint} \-Limits. 
+
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!mimic@{mimic}}
+\index{mimic@{mimic}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{mimic}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Joint\-Mimic}$>$ {\bf gcop\-\_\-urdf\-::\-Joint\-::mimic}}\label{classgcop__urdf_1_1Joint_a42d393852ed0be00f5581dafad4022eb}
+
+
+\-Option to \-Mimic another \doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint}. 
+
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!name@{name}}
+\index{name@{name}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string {\bf gcop\-\_\-urdf\-::\-Joint\-::name}}\label{classgcop__urdf_1_1Joint_aa62ec399bf95e2cefb17204d06d90305}
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!parent\-\_\-link\-\_\-name@{parent\-\_\-link\-\_\-name}}
+\index{parent\-\_\-link\-\_\-name@{parent\-\_\-link\-\_\-name}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{parent\-\_\-link\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string {\bf gcop\-\_\-urdf\-::\-Joint\-::parent\-\_\-link\-\_\-name}}\label{classgcop__urdf_1_1Joint_a5853d737c17ff218c61eb75dc6028ce8}
+parent \doxyref{\-Link}{p.}{classgcop__urdf_1_1Link} element origin specifies the transform from \-Parent \doxyref{\-Link}{p.}{classgcop__urdf_1_1Link} to \doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint} \-Frame 
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!parent\-\_\-to\-\_\-joint\-\_\-origin\-\_\-transform@{parent\-\_\-to\-\_\-joint\-\_\-origin\-\_\-transform}}
+\index{parent\-\_\-to\-\_\-joint\-\_\-origin\-\_\-transform@{parent\-\_\-to\-\_\-joint\-\_\-origin\-\_\-transform}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{parent\-\_\-to\-\_\-joint\-\_\-origin\-\_\-transform}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Pose} {\bf gcop\-\_\-urdf\-::\-Joint\-::parent\-\_\-to\-\_\-joint\-\_\-origin\-\_\-transform}}\label{classgcop__urdf_1_1Joint_aeee3bed4b6decbd83baba547d282c6d7}
+
+
+transform from \-Parent \doxyref{\-Link}{p.}{classgcop__urdf_1_1Link} frame to \doxyref{\-Joint}{p.}{classgcop__urdf_1_1Joint} frame 
+
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!safety@{safety}}
+\index{safety@{safety}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{safety}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<${\bf \-Joint\-Safety}$>$ {\bf gcop\-\_\-urdf\-::\-Joint\-::safety}}\label{classgcop__urdf_1_1Joint_a17bfa79b0110e32ed69ac223706a7a19}
+
+
+\-Unsupported \-Hidden \-Feature. 
+
+
+
+\-Referenced by clear().
+
+\index{gcop\-\_\-urdf\-::\-Joint@{gcop\-\_\-urdf\-::\-Joint}!type@{type}}
+\index{type@{type}!gcop_urdf::Joint@{gcop\-\_\-urdf\-::\-Joint}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}enum \{ ... \}   {\bf gcop\-\_\-urdf\-::\-Joint\-::type}}\label{classgcop__urdf_1_1Joint_a24e59107fc3b0cc24c9dfb26788a6d6b}
+
+
+\-Referenced by clear().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf urdfjoint.\-h}\end{DoxyCompactItemize}

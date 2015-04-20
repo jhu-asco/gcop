@@ -1,0 +1,216 @@
+\section{gcop\-:\-:\-Posegraph2d \-Class \-Reference}
+\label{classgcop_1_1Posegraph2d}\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}}
+
+
+{\ttfamily \#include $<$posegraph2d.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Posegraph2d} (int \-N, int nf)
+\item 
+void {\bf \-Optp} (\-Vector\-Xd \&{\bf p}, const vector$<$ \-Matrix3d $>$ \&{\bf gs})
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf \-Synthesize} ({\bf \-Posegraph2d} \&pgt, {\bf \-Posegraph2d} \&pgn, double tf)
+\item 
+static void {\bf \-Synthesize2} ({\bf \-Posegraph2d} \&pgt, {\bf \-Posegraph2d} \&pgn, double tf)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ double $>$ {\bf ts}
+\begin{DoxyCompactList}\small\item\em sequence of times (\-N+1 vector) \end{DoxyCompactList}\item 
+vector$<$ \-Matrix3d $>$ {\bf gs}
+\begin{DoxyCompactList}\small\item\em sequence of poses (\-N+1 vector) \end{DoxyCompactList}\item 
+vector$<$ \-Vector3d $>$ {\bf us}
+\begin{DoxyCompactList}\small\item\em sequence of inputs (\-N vector) \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf p}
+\begin{DoxyCompactList}\small\item\em feature positions (2$\ast$nf vector) \end{DoxyCompactList}\item 
+vector$<$ vector$<$ pair$<$ int, \*
+\-Vector2d $>$ $>$ $>$ {\bf \-Is}
+\begin{DoxyCompactList}\small\item\em \-N+1-\/vector of vectors of visible pose-\/to-\/feature indices. \end{DoxyCompactList}\item 
+vector$<$ vector$<$ pair$<$ int, \*
+\-Vector2d $>$ $>$ $>$ {\bf \-Js}
+\begin{DoxyCompactList}\small\item\em nf-\/vector of vectors of feature-\/to-\/pose indices indices \end{DoxyCompactList}\item 
+double {\bf cp}
+\begin{DoxyCompactList}\small\item\em noise covariance of poses (assume spherical) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Pose-\/graph in 2\-D. \-This is the simplese possible definition assuming point (unprojected) features e.\-g. from stereo/laser scans with uniform spherical covariance. \-The framework can be easily extended to any general 2d/3d non-\/uniform or projected features as well. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!\-Posegraph2d@{\-Posegraph2d}}
+\index{\-Posegraph2d@{\-Posegraph2d}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{\-Posegraph2d}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Posegraph2d\-::\-Posegraph2d} (
+\begin{DoxyParamCaption}
+\item[{int}]{\-N, }
+\item[{int}]{nf}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Posegraph2d_ac056d2cada25186b2e01a772007998f0}
+\-Pose-\/landmark graph 
+\begin{DoxyParams}{\-Parameters}
+{\em \-N} & number of trajectory segments \\
+\hline
+{\em nf} & number of features (landmarks) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!\-Optp@{\-Optp}}
+\index{\-Optp@{\-Optp}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{\-Optp}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Posegraph2d\-::\-Optp} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{p, }
+\item[{const vector$<$ \-Matrix3d $>$ \&}]{gs}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Posegraph2d_a70f514436631bd4c9bc72a40bab7ba8b}
+\-Given a sequence of poses gs, compute the optimal feature locations p 
+\begin{DoxyParams}{\-Parameters}
+{\em p} & a vector of feature locations \\
+\hline
+{\em gs} & a given vector of poses in \-S\-E(2) \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Js.
+
+
+
+\-Referenced by \-Synthesize(), and \-Synthesize2().
+
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!\-Synthesize@{\-Synthesize}}
+\index{\-Synthesize@{\-Synthesize}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{\-Synthesize}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Posegraph2d\-::\-Synthesize} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Posegraph2d} \&}]{pgt, }
+\item[{{\bf \-Posegraph2d} \&}]{pgn, }
+\item[{double}]{tf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Posegraph2d_aaa7e61ec9946df2dcb0d82f766ba6126}
+\-Create true and noisy synthetic pose graphs 
+\begin{DoxyParams}{\-Parameters}
+{\em pgt} & true pose graph \\
+\hline
+{\em pgn} & noisy pose graph \\
+\hline
+{\em tf} & total trajectory time \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-S\-E2\-::cay(), cp, gs, gcop\-::\-S\-E2\-::\-Instance(), \-Is, \-Js, \-Optp(), p, gcop\-::random\-\_\-normal(), ts, and us.
+
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!\-Synthesize2@{\-Synthesize2}}
+\index{\-Synthesize2@{\-Synthesize2}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{\-Synthesize2}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Posegraph2d\-::\-Synthesize2} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Posegraph2d} \&}]{pgt, }
+\item[{{\bf \-Posegraph2d} \&}]{pgn, }
+\item[{double}]{tf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classgcop_1_1Posegraph2d_a66af71917287c99fbdcff4b9d3b338c4}
+\-Create true and noisy synthetic pose graphs 
+\begin{DoxyParams}{\-Parameters}
+{\em pgt} & true pose graph \\
+\hline
+{\em pgn} & noisy pose graph \\
+\hline
+{\em tf} & total trajectory time \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-S\-E2\-::cay(), cp, gs, gcop\-::\-S\-E2\-::\-Instance(), \-Is, \-Js, \-Optp(), p, gcop\-::random\-\_\-normal(), ts, and us.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!cp@{cp}}
+\index{cp@{cp}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{cp}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Posegraph2d\-::cp}}\label{classgcop_1_1Posegraph2d_a91cc57e13b95fe0003af76115a3a0fed}
+
+
+noise covariance of poses (assume spherical) 
+
+
+
+\-Referenced by gcop\-::\-Ba\-Cost\-::\-L(), \-Synthesize(), and \-Synthesize2().
+
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!gs@{gs}}
+\index{gs@{gs}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{gs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Matrix3d$>$ {\bf gcop\-::\-Posegraph2d\-::gs}}\label{classgcop_1_1Posegraph2d_a1c366b6095d2faa5d3351fbac8fdf865}
+
+
+sequence of poses (\-N+1 vector) 
+
+
+
+\-Referenced by gcop\-::\-Posegraph2d\-View\-::\-Render\-Frame(), \-Synthesize(), and \-Synthesize2().
+
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!\-Is@{\-Is}}
+\index{\-Is@{\-Is}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{\-Is}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$pair$<$int, \-Vector2d$>$ $>$ $>$ {\bf gcop\-::\-Posegraph2d\-::\-Is}}\label{classgcop_1_1Posegraph2d_a6d298848116437dc095ae7fb1a06157a}
+
+
+\-N+1-\/vector of vectors of visible pose-\/to-\/feature indices. 
+
+
+
+\-Referenced by gcop\-::\-Ba\-Cost\-::\-L(), \-Synthesize(), and \-Synthesize2().
+
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!\-Js@{\-Js}}
+\index{\-Js@{\-Js}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{\-Js}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$pair$<$int, \-Vector2d$>$ $>$ $>$ {\bf gcop\-::\-Posegraph2d\-::\-Js}}\label{classgcop_1_1Posegraph2d_ac22baf33271679f56f8685ee1213fa56}
+
+
+nf-\/vector of vectors of feature-\/to-\/pose indices indices 
+
+
+
+\-Referenced by \-Optp(), gcop\-::\-Posegraph2d\-View\-::\-Render\-Frame(), \-Synthesize(), and \-Synthesize2().
+
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!p@{p}}
+\index{p@{p}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{p}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Posegraph2d\-::p}}\label{classgcop_1_1Posegraph2d_a45448dafabb4923ddfc9e74aca505421}
+
+
+feature positions (2$\ast$nf vector) 
+
+
+
+\-Referenced by gcop\-::\-Posegraph2d\-View\-::\-Render\-Frame(), \-Synthesize(), and \-Synthesize2().
+
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!ts@{ts}}
+\index{ts@{ts}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf gcop\-::\-Posegraph2d\-::ts}}\label{classgcop_1_1Posegraph2d_a3161ec9056cf2fcf7bc3dfcbd139ede4}
+
+
+sequence of times (\-N+1 vector) 
+
+
+
+\-Referenced by \-Synthesize(), and \-Synthesize2().
+
+\index{gcop\-::\-Posegraph2d@{gcop\-::\-Posegraph2d}!us@{us}}
+\index{us@{us}!gcop::Posegraph2d@{gcop\-::\-Posegraph2d}}
+\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$\-Vector3d$>$ {\bf gcop\-::\-Posegraph2d\-::us}}\label{classgcop_1_1Posegraph2d_acf06918b87b9bf108f291a2c53b45cfc}
+
+
+sequence of inputs (\-N vector) 
+
+
+
+\-Referenced by \-Synthesize(), and \-Synthesize2().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf posegraph2d.\-h}\item 
+lib/algos/{\bf posegraph2d.\-cc}\end{DoxyCompactItemize}

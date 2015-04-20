@@ -1,0 +1,277 @@
+\section{gcop\-:\-:\-Normal$<$ \-\_\-n $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Normal}\index{gcop\-::\-Normal$<$ \-\_\-n $>$@{gcop\-::\-Normal$<$ \-\_\-n $>$}}
+
+
+{\ttfamily \#include $<$normal.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-n, \-\_\-n $>$ {\bf \-Matrixnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Normal} (int n=1)
+\item 
+{\bf \-Normal} (const {\bf \-Vectornd} \&{\bf mu}, const {\bf \-Matrixnd} \&{\bf \-P})
+\item 
+virtual {\bf $\sim$\-Normal} ()
+\item 
+double {\bf \-L} (const {\bf \-Vectornd} \&x) const 
+\item 
+double {\bf \-Sample} ({\bf \-Vectornd} \&x)
+\item 
+bool {\bf \-Update} ()
+\item 
+void {\bf \-Fit} (const vector$<$ pair$<$ {\bf \-Vectornd}, double $>$ $>$ xps, double a=1)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Vectornd} {\bf mu}
+\begin{DoxyCompactList}\small\item\em mean \end{DoxyCompactList}\item 
+{\bf \-Matrixnd} {\bf \-P}
+\begin{DoxyCompactList}\small\item\em covariance \end{DoxyCompactList}\item 
+double {\bf det}
+\begin{DoxyCompactList}\small\item\em determinant \end{DoxyCompactList}\item 
+{\bf \-Matrixnd} {\bf \-Pinv}
+\begin{DoxyCompactList}\small\item\em covariance inverse \end{DoxyCompactList}\item 
+bool {\bf pd}
+\begin{DoxyCompactList}\small\item\em covariance is positive-\/definite \end{DoxyCompactList}\item 
+{\bf \-Matrixnd} {\bf \-A}
+\begin{DoxyCompactList}\small\item\em cholesky factor \end{DoxyCompactList}\item 
+{\bf \-Vectornd} {\bf rn}
+\begin{DoxyCompactList}\small\item\em normal random vector \end{DoxyCompactList}\item 
+double {\bf norm}
+\begin{DoxyCompactList}\small\item\em normalizer \end{DoxyCompactList}\item 
+int {\bf bd}
+\begin{DoxyCompactList}\small\item\em force a block-\/diagonal structure with block dimension bd (0 by default means do not enforce) \end{DoxyCompactList}\item 
+\-L\-L\-T$<$ {\bf \-Matrixnd} $>$ {\bf llt}
+\begin{DoxyCompactList}\small\item\em \-L\-L\-T object to \-Cholesky. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$int \-\_\-n = \-Dynamic$>$ class gcop\-::\-Normal$<$ \-\_\-n $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, \-\_\-n$>$ {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1Normal_a31cbf7be84f48a931e7a544274035d99}
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-n, 1$>$ {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1Normal_a112a22e65df0ccc800d10df1ecc7ffc3}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-Normal@{\-Normal}}
+\index{\-Normal@{\-Normal}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-Normal}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-Normal} (
+\begin{DoxyParamCaption}
+\item[{int}]{n = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Normal_ae7dd7ee6e6b5db2c7d3fcbfaef522508}
+n-\/dimensional normal distribution 
+\begin{DoxyParams}{\-Parameters}
+{\em n} & dimension \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-A, gcop\-::\-Normal$<$ \-\_\-n $>$\-::mu, gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-P, gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Pinv, and gcop\-::\-Normal$<$ \-\_\-n $>$\-::rn.
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-Normal@{\-Normal}}
+\index{\-Normal@{\-Normal}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-Normal}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-Normal} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectornd} \&}]{mu, }
+\item[{const {\bf \-Matrixnd} \&}]{\-P}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Normal_a7cd5ef8c4dd623ddc8bf52b7a8b2d21b}
+n-\/dimensional normal distribution with mean mu and covariance \-P 
+\begin{DoxyParams}{\-Parameters}
+{\em mu} & mean \\
+\hline
+{\em \-P} & covariance \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-A, gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Pinv, gcop\-::\-Normal$<$ \-\_\-n $>$\-::rn, and gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Update().
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!$\sim$\-Normal@{$\sim$\-Normal}}
+\index{$\sim$\-Normal@{$\sim$\-Normal}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{$\sim$\-Normal}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::$\sim${\bf \-Normal} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Normal_aeba60da3ecef4c4ab4d933e9295f11ee}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-Fit@{\-Fit}}
+\index{\-Fit@{\-Fit}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-Fit}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-Fit} (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ pair$<$ {\bf \-Vectornd}, double $>$ $>$}]{xps, }
+\item[{double}]{a = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Normal_aadc3ea2629e7dd943572594379351002}
+\-Estimate the distribution using data xs and costs cs (optional) 
+\begin{DoxyParams}{\-Parameters}
+{\em xps} & data points and corresponding probabilities (should sum up to 1) \\
+\hline
+{\em a} & smoothing parameter [ mu\-\_\-new = a$\ast$mu + (1-\/a)$\ast$mu\-\_\-old ], equation to 1 by default \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-L@{\-L}}
+\index{\-L@{\-L}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-L}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ double {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-L} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectornd} \&}]{x}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Normal_abee5dd9f4e23b1e2242a65c98a88cc28}
+\-Compute likelihood of element x 
+\begin{DoxyParams}{\-Parameters}
+{\em x} & n-\/dimensional vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+likelihood of sample 
+\end{DoxyReturn}
+
+
+\-Referenced by gcop\-::\-Normal2d\-View$<$ \-\_\-n $>$\-::\-Render().
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-Sample@{\-Sample}}
+\index{\-Sample@{\-Sample}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ double {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-Sample} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectornd} \&}]{x}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Normal_a6e0cf6783192377a774c9998d147afec}
+\-Sample from the distribution 
+\begin{DoxyParams}{\-Parameters}
+{\em x} & n-\/dimensional vector to be sampled \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+likelihood of sample 
+\end{DoxyReturn}
+
+
+\-References gcop\-::random\-\_\-normal().
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-Update@{\-Update}}
+\index{\-Update@{\-Update}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ bool {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-Update} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Normal_a4790057a751d620cef1504b375b8dd3e}
+\-Updates the \-Cholesky factor and the normalization constant \begin{DoxyReturn}{\-Returns}
+true if covariance is positive definite 
+\end{DoxyReturn}
+
+
+\-Referenced by gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Normal().
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-A@{\-A}}
+\index{\-A@{\-A}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-A}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-A}}\label{classgcop_1_1Normal_abdb1b9190569775b30fc202be40ccef3}
+
+
+cholesky factor 
+
+
+
+\-Referenced by gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Normal().
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!bd@{bd}}
+\index{bd@{bd}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{bd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ int {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf bd}}\label{classgcop_1_1Normal_a7f1a5099950d5e0fc7a71f97e4d03202}
+
+
+force a block-\/diagonal structure with block dimension bd (0 by default means do not enforce) 
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!det@{det}}
+\index{det@{det}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{det}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ double {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf det}}\label{classgcop_1_1Normal_a3002ef044ffb2b63e8d371505ea0d6e0}
+
+
+determinant 
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!llt@{llt}}
+\index{llt@{llt}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{llt}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ \-L\-L\-T$<${\bf \-Matrixnd}$>$ {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf llt}}\label{classgcop_1_1Normal_af08c704c90adabb300fc5741325ab769}
+
+
+\-L\-L\-T object to \-Cholesky. 
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!mu@{mu}}
+\index{mu@{mu}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{mu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Vectornd} {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf mu}}\label{classgcop_1_1Normal_a3cfaf2326502c8165ae90c4523bd203b}
+
+
+mean 
+
+
+
+\-Referenced by gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Normal(), and gcop\-::\-Normal2d\-View$<$ \-\_\-n $>$\-::\-Render().
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!norm@{norm}}
+\index{norm@{norm}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{norm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ double {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf norm}}\label{classgcop_1_1Normal_a51ae242f8461c027fb5f160363ffc9a9}
+
+
+normalizer 
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-P@{\-P}}
+\index{\-P@{\-P}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-P}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-P}}\label{classgcop_1_1Normal_ab06ae81a539288ac586d528f0157ee67}
+
+
+covariance 
+
+
+
+\-Referenced by gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Normal(), and gcop\-::\-Normal2d\-View$<$ \-\_\-n $>$\-::\-Render().
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!pd@{pd}}
+\index{pd@{pd}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{pd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ bool {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf pd}}\label{classgcop_1_1Normal_ab49a4a70dea751c2e48ec93260f3d797}
+
+
+covariance is positive-\/definite 
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-Pinv@{\-Pinv}}
+\index{\-Pinv@{\-Pinv}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{\-Pinv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf \-Pinv}}\label{classgcop_1_1Normal_ab96efa301b00021f92eea26b1609d176}
+
+
+covariance inverse 
+
+
+
+\-Referenced by gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Normal().
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!rn@{rn}}
+\index{rn@{rn}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{rn}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Vectornd} {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf rn}}\label{classgcop_1_1Normal_a0d14362b29d58eea8b5e9ea19d1db5a8}
+
+
+normal random vector 
+
+
+
+\-Referenced by gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Normal().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf normal.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,135 @@
+\section{\-Eigen\-:\-:\-Sample\-Numerical\-Diff$<$ \-\_\-\-Functor $>$ \-Class \-Template \-Reference}
+\label{classEigen_1_1SampleNumericalDiff}\index{\-Eigen\-::\-Sample\-Numerical\-Diff$<$ \-\_\-\-Functor $>$@{\-Eigen\-::\-Sample\-Numerical\-Diff$<$ \-\_\-\-Functor $>$}}
+
+
+{\ttfamily \#include $<$samplenumericaldiff.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ {\bf \-Inputs\-At\-Compile\-Time} =  \-Functor\-:\-:\-Inputs\-At\-Compile\-Time, 
+{\bf \-Values\-At\-Compile\-Time} =  \-Functor\-:\-:\-Values\-At\-Compile\-Time
+ \}
+\item 
+typedef \-\_\-\-Functor {\bf \-Functor}
+\item 
+typedef \-Functor\-::\-Scalar {\bf \-Scalar}
+\item 
+typedef \-Functor\-::\-Input\-Type {\bf \-Input\-Type}
+\item 
+typedef \-Functor\-::\-Value\-Type {\bf \-Value\-Type}
+\item 
+typedef \-Functor\-::\-Jacobian\-Type {\bf \-Jacobian\-Type}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Sample\-Numerical\-Diff} ({\bf \-Scalar} \-\_\-epsfcn=0.)
+\item 
+{\bf \-Sample\-Numerical\-Diff} (const {\bf \-Functor} \&f, {\bf \-Scalar} \-\_\-epsfcn=0.)
+\item 
+{\footnotesize template$<$typename T0 $>$ }\\{\bf \-Sample\-Numerical\-Diff} (const \-T0 \&a0)
+\item 
+{\footnotesize template$<$typename T0 , typename T1 $>$ }\\{\bf \-Sample\-Numerical\-Diff} (const \-T0 \&a0, const \-T1 \&a1)
+\item 
+{\footnotesize template$<$typename T0 , typename T1 , typename T2 $>$ }\\{\bf \-Sample\-Numerical\-Diff} (const \-T0 \&a0, const \-T1 \&a1, const \-T2 \&a2)
+\item 
+int {\bf df} (const {\bf \-Input\-Type} \&\-\_\-x, {\bf \-Jacobian\-Type} \&jac)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename \-\_\-\-Functor$>$class Eigen\-::\-Sample\-Numerical\-Diff$<$ \-\_\-\-Functor $>$}
+
+\-This class allows you to add a method \doxyref{df()}{p.}{classEigen_1_1SampleNumericalDiff_a399ee5f26498d2336e469ac4b4d91c7a} to your functor, which will use numerical differentiation to compute an approximate of the derivative for the functor. \-Of course, if you have an analytical form
+
+\-More information on {\tt http\-://en.\-wikipedia.\-org/wiki/\-Numerical\-\_\-differentiation} 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Functor@{\-Functor}}
+\index{\-Functor@{\-Functor}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Functor}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ typedef \-\_\-\-Functor {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf \-Functor}}\label{classEigen_1_1SampleNumericalDiff_a116407143246678cdcc7c73e0908220f}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Input\-Type@{\-Input\-Type}}
+\index{\-Input\-Type@{\-Input\-Type}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Input\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ typedef \-Functor\-::\-Input\-Type {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf \-Input\-Type}}\label{classEigen_1_1SampleNumericalDiff_acc936d0f8e02cd682361ecac094748c1}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Jacobian\-Type@{\-Jacobian\-Type}}
+\index{\-Jacobian\-Type@{\-Jacobian\-Type}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Jacobian\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ typedef \-Functor\-::\-Jacobian\-Type {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf \-Jacobian\-Type}}\label{classEigen_1_1SampleNumericalDiff_a7f78f588eac0d22d3cc8933bb1a4655c}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Scalar@{\-Scalar}}
+\index{\-Scalar@{\-Scalar}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Scalar}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ typedef \-Functor\-::\-Scalar {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf \-Scalar}}\label{classEigen_1_1SampleNumericalDiff_aa81220f6a39eba8e20a089c9ba7db45b}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Value\-Type@{\-Value\-Type}}
+\index{\-Value\-Type@{\-Value\-Type}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Value\-Type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ typedef \-Functor\-::\-Value\-Type {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf \-Value\-Type}}\label{classEigen_1_1SampleNumericalDiff_a59a47fc9343cb128adf6cc196fe9498a}
+
+
+\subsection{\-Member \-Enumeration \-Documentation}
+\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ anonymous enum}\label{classEigen_1_1SampleNumericalDiff_a8f5c28f2bed92b256a1081da1cd8f988}
+\begin{Desc}
+\item[\-Enumerator\-: ]\par
+\begin{description}
+\index{\-Inputs\-At\-Compile\-Time@{\-Inputs\-At\-Compile\-Time}!\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Inputs\-At\-Compile\-Time@{\-Inputs\-At\-Compile\-Time}}\item[{\em 
+\-Inputs\-At\-Compile\-Time\label{classEigen_1_1SampleNumericalDiff_a8f5c28f2bed92b256a1081da1cd8f988a7682366c081754aec43e2aedfebeddf7}
+}]\index{\-Values\-At\-Compile\-Time@{\-Values\-At\-Compile\-Time}!\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Values\-At\-Compile\-Time@{\-Values\-At\-Compile\-Time}}\item[{\em 
+\-Values\-At\-Compile\-Time\label{classEigen_1_1SampleNumericalDiff_a8f5c28f2bed92b256a1081da1cd8f988a2b59c3568082a2a288d63a1f84a243f8}
+}]\end{description}
+\end{Desc}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}}
+\index{\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Sample\-Numerical\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf \-Sample\-Numerical\-Diff} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Scalar}}]{\-\_\-epsfcn = {\ttfamily 0.}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classEigen_1_1SampleNumericalDiff_ad4997cef80749022aac8b784845ac444}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}}
+\index{\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Sample\-Numerical\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf \-Sample\-Numerical\-Diff} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Functor} \&}]{f, }
+\item[{{\bf \-Scalar}}]{\-\_\-epsfcn = {\ttfamily 0.}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classEigen_1_1SampleNumericalDiff_ac4fe85eaf95b82673fe6517d4abca99f}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}}
+\index{\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Sample\-Numerical\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ template$<$typename T0 $>$ {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf \-Sample\-Numerical\-Diff} (
+\begin{DoxyParamCaption}
+\item[{const \-T0 \&}]{a0}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classEigen_1_1SampleNumericalDiff_a3d65e016f49ad628c406d9a6fd0febcf}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}}
+\index{\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Sample\-Numerical\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ template$<$typename T0 , typename T1 $>$ {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf \-Sample\-Numerical\-Diff} (
+\begin{DoxyParamCaption}
+\item[{const \-T0 \&}]{a0, }
+\item[{const \-T1 \&}]{a1}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classEigen_1_1SampleNumericalDiff_ac3688fcb96f830253916f7a51be6411b}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}}
+\index{\-Sample\-Numerical\-Diff@{\-Sample\-Numerical\-Diff}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{\-Sample\-Numerical\-Diff}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ template$<$typename T0 , typename T1 , typename T2 $>$ {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf \-Sample\-Numerical\-Diff} (
+\begin{DoxyParamCaption}
+\item[{const \-T0 \&}]{a0, }
+\item[{const \-T1 \&}]{a1, }
+\item[{const \-T2 \&}]{a2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classEigen_1_1SampleNumericalDiff_a0fe5bf04df816897faa9abd071637201}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{\-Eigen\-::\-Sample\-Numerical\-Diff@{\-Eigen\-::\-Sample\-Numerical\-Diff}!df@{df}}
+\index{df@{df}!Eigen::SampleNumericalDiff@{\-Eigen\-::\-Sample\-Numerical\-Diff}}
+\subsubsection[{df}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-\_\-\-Functor$>$ int {\bf \-Eigen\-::\-Sample\-Numerical\-Diff}$<$ \-\_\-\-Functor $>$\-::{\bf df} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Input\-Type} \&}]{\-\_\-x, }
+\item[{{\bf \-Jacobian\-Type} \&}]{jac}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classEigen_1_1SampleNumericalDiff_a399ee5f26498d2336e469ac4b4d91c7a}
+return the number of evaluation of functor 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/utils/{\bf samplenumericaldiff.\-h}\end{DoxyCompactItemize}

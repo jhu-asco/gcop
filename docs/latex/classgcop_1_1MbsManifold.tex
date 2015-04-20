@@ -1,0 +1,137 @@
+\section{gcop\-:\-:\-Mbs\-Manifold \-Class \-Reference}
+\label{classgcop_1_1MbsManifold}\index{gcop\-::\-Mbs\-Manifold@{gcop\-::\-Mbs\-Manifold}}
+
+
+{\ttfamily \#include $<$mbsmanifold.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Mbs\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{classgcop_1_1MbsManifold__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Mbs\-Manifold\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{classgcop_1_1MbsManifold__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Mbs\-Manifold} (int nb, bool fixed=false)
+\item 
+void {\bf \-Lift} (\-Vector\-Xd \&v, const {\bf \-Mbs\-State} \&xa, const {\bf \-Mbs\-State} \&xb)
+\item 
+void {\bf \-Retract} ({\bf \-Mbs\-State} \&xb, const {\bf \-Mbs\-State} \&xa, const \-Vector\-Xd \&v)
+\item 
+void {\bf dtau} (\-Matrix\-Xd \&\-M, const \-Vector\-Xd \&v)
+\item 
+void {\bf \-Adtau} (\-Matrix\-Xd \&\-M, const \-Vector\-Xd \&v)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf cay}
+\begin{DoxyCompactList}\small\item\em use \-Cayley instead of \-Exponential \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Mbs\-Manifold@{gcop\-::\-Mbs\-Manifold}!\-Mbs\-Manifold@{\-Mbs\-Manifold}}
+\index{\-Mbs\-Manifold@{\-Mbs\-Manifold}!gcop::MbsManifold@{gcop\-::\-Mbs\-Manifold}}
+\subsubsection[{\-Mbs\-Manifold}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mbs\-Manifold\-::\-Mbs\-Manifold} (
+\begin{DoxyParamCaption}
+\item[{int}]{nb, }
+\item[{bool}]{fixed = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1MbsManifold_aa92aaae95afb0ab1e7b766f048879aac}
+
+\begin{DoxyParams}{\-Parameters}
+{\em nb} & number of bodies (including a base body) \\
+\hline
+{\em fixed} & is the base body fixed (if fixed then it is treated as a \char`\"{}virtual\char`\"{} fixed body) \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Manifold$<$ Mbs\-State $>$\-::lb, and gcop\-::\-Manifold$<$ Mbs\-State $>$\-::ub.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Mbs\-Manifold@{gcop\-::\-Mbs\-Manifold}!\-Adtau@{\-Adtau}}
+\index{\-Adtau@{\-Adtau}!gcop::MbsManifold@{gcop\-::\-Mbs\-Manifold}}
+\subsubsection[{\-Adtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-Manifold\-::\-Adtau} (
+\begin{DoxyParamCaption}
+\item[{\-Matrix\-Xd \&}]{\-M, }
+\item[{const \-Vector\-Xd \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1MbsManifold_aed4943f404b1c3396b932fbeabd08578}
+
+
+\-References gcop\-::\-S\-E3\-::\-Ad(), cay, gcop\-::\-S\-E3\-::cay(), gcop\-::\-S\-E3\-::exp(), gcop\-::\-Mbs\-State\-::fixed, gcop\-::\-S\-E3\-::\-Instance(), and gcop\-::\-Manifold$<$ Mbs\-State $>$\-::lb.
+
+\index{gcop\-::\-Mbs\-Manifold@{gcop\-::\-Mbs\-Manifold}!dtau@{dtau}}
+\index{dtau@{dtau}!gcop::MbsManifold@{gcop\-::\-Mbs\-Manifold}}
+\subsubsection[{dtau}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-Manifold\-::dtau} (
+\begin{DoxyParamCaption}
+\item[{\-Matrix\-Xd \&}]{\-M, }
+\item[{const \-Vector\-Xd \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1MbsManifold_a2a94c8a0b90cc138dea80f3684570aab}
+
+
+\-References cay, gcop\-::\-S\-E3\-::dcay(), gcop\-::\-Mbs\-State\-::fixed, gcop\-::\-S\-E3\-::\-Instance(), gcop\-::\-Manifold$<$ Mbs\-State $>$\-::lb, and gcop\-::\-S\-E3\-::tln().
+
+\index{gcop\-::\-Mbs\-Manifold@{gcop\-::\-Mbs\-Manifold}!\-Lift@{\-Lift}}
+\index{\-Lift@{\-Lift}!gcop::MbsManifold@{gcop\-::\-Mbs\-Manifold}}
+\subsubsection[{\-Lift}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-Manifold\-::\-Lift} (
+\begin{DoxyParamCaption}
+\item[{\-Vector\-Xd \&}]{v, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{const {\bf \-Mbs\-State} \&}]{xb}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1MbsManifold_a0f28dbf58a04050170a2b1e10be5ff60}
+
+
+\-References cay, gcop\-::\-Group$<$ n, m $>$\-::cayinv(), gcop\-::\-Mbs\-State\-::dr, gcop\-::\-Mbs\-State\-::fixed, gcop\-::\-Mbs\-State\-::gs, gcop\-::\-S\-E3\-::\-Instance(), gcop\-::\-S\-E3\-::inv(), gcop\-::\-S\-E3\-::log(), gcop\-::\-Mbs\-State\-::r, and gcop\-::\-Mbs\-State\-::vs.
+
+\index{gcop\-::\-Mbs\-Manifold@{gcop\-::\-Mbs\-Manifold}!\-Retract@{\-Retract}}
+\index{\-Retract@{\-Retract}!gcop::MbsManifold@{gcop\-::\-Mbs\-Manifold}}
+\subsubsection[{\-Retract}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-Manifold\-::\-Retract} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Mbs\-State} \&}]{xb, }
+\item[{const {\bf \-Mbs\-State} \&}]{xa, }
+\item[{const \-Vector\-Xd \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1MbsManifold_a5c767d4a2584a238365129feeeb1261f}
+
+
+\-References cay, gcop\-::\-S\-E3\-::cay(), gcop\-::\-Mbs\-State\-::dr, gcop\-::\-S\-E3\-::exp(), gcop\-::\-Mbs\-State\-::fixed, gcop\-::\-Mbs\-State\-::gs, gcop\-::\-S\-E3\-::\-Instance(), gcop\-::\-Mbs\-State\-::r, and gcop\-::\-Mbs\-State\-::vs.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Mbs\-Manifold@{gcop\-::\-Mbs\-Manifold}!cay@{cay}}
+\index{cay@{cay}!gcop::MbsManifold@{gcop\-::\-Mbs\-Manifold}}
+\subsubsection[{cay}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Mbs\-Manifold\-::cay}}\label{classgcop_1_1MbsManifold_a667ff12d13e33bdc113bba79089838a9}
+
+
+use \-Cayley instead of \-Exponential 
+
+
+
+\-Referenced by \-Adtau(), dtau(), \-Lift(), and \-Retract().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/{\bf mbsmanifold.\-h}\item 
+lib/systems/manifolds/{\bf mbsmanifold.\-cc}\end{DoxyCompactItemize}

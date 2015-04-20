@@ -1,0 +1,130 @@
+\section{gcop\-:\-:\-Wrench$<$ \-T, n, c $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Wrench}\index{gcop\-::\-Wrench$<$ T, n, c $>$@{gcop\-::\-Wrench$<$ T, n, c $>$}}
+
+
+{\ttfamily \#include $<$wrench.\-h$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, 6, 1 $>$ {\bf \-Vector6d}
+\item 
+typedef \-Matrix$<$ double, c, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, c, c $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, 6, c $>$ {\bf \-Matrix6xcd}
+\item 
+typedef \-Matrix$<$ double, 6, n $>$ {\bf \-Matrix6xnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Wrench} (bool {\bf dx}=true, bool {\bf du}=true)
+\item 
+virtual void {\bf \-F} ({\bf \-Vector6d} \&f, double t, const \-T \&x, const {\bf \-Vectorcd} \&u, {\bf \-Matrix6xnd} $\ast$fx=0, {\bf \-Matrix6xcd} $\ast$fu=0)=0
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf dx}
+\begin{DoxyCompactList}\small\item\em set to true if f depends on x \end{DoxyCompactList}\item 
+bool {\bf du}
+\begin{DoxyCompactList}\small\item\em set to true if f depends on u \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$class T, int n, int c$>$class gcop\-::\-Wrench$<$ T, n, c $>$}
+
+\-An abstract wrench force function $ f:X\times U \rightarrow \mathbb{R}^6 $ depending on the state on control inputs, i.\-e. $ f(x,u) $
+
+\-This can be regarded as 6-\/dimensional wrench applied to the body resulting from either control inputs, external forces, or both.
+
+\-Author\-: \-Marin \-Kobilarov marin(at)jhu.\-edu 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Wrench@{gcop\-::\-Wrench}!\-Matrix6xcd@{\-Matrix6xcd}}
+\index{\-Matrix6xcd@{\-Matrix6xcd}!gcop::Wrench@{gcop\-::\-Wrench}}
+\subsubsection[{\-Matrix6xcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , int n, int c$>$ typedef \-Matrix$<$double, 6, c$>$ {\bf gcop\-::\-Wrench}$<$ \-T, n, c $>$\-::{\bf \-Matrix6xcd}}\label{classgcop_1_1Wrench_a16abacf6be144b533218d938c10ba38e}
+\index{gcop\-::\-Wrench@{gcop\-::\-Wrench}!\-Matrix6xnd@{\-Matrix6xnd}}
+\index{\-Matrix6xnd@{\-Matrix6xnd}!gcop::Wrench@{gcop\-::\-Wrench}}
+\subsubsection[{\-Matrix6xnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , int n, int c$>$ typedef \-Matrix$<$double, 6, n$>$ {\bf gcop\-::\-Wrench}$<$ \-T, n, c $>$\-::{\bf \-Matrix6xnd}}\label{classgcop_1_1Wrench_a6015023a84f7520bc526779a89da146e}
+\index{gcop\-::\-Wrench@{gcop\-::\-Wrench}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::Wrench@{gcop\-::\-Wrench}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , int n, int c$>$ typedef \-Matrix$<$double, c, c$>$ {\bf gcop\-::\-Wrench}$<$ \-T, n, c $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1Wrench_a1de6e4283951bf33469a3dbd369940e3}
+\index{gcop\-::\-Wrench@{gcop\-::\-Wrench}!\-Vector6d@{\-Vector6d}}
+\index{\-Vector6d@{\-Vector6d}!gcop::Wrench@{gcop\-::\-Wrench}}
+\subsubsection[{\-Vector6d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , int n, int c$>$ typedef \-Matrix$<$double, 6, 1$>$ {\bf gcop\-::\-Wrench}$<$ \-T, n, c $>$\-::{\bf \-Vector6d}}\label{classgcop_1_1Wrench_a2de4148d7de4dac0eedde652f216527c}
+\index{gcop\-::\-Wrench@{gcop\-::\-Wrench}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Wrench@{gcop\-::\-Wrench}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , int n, int c$>$ typedef \-Matrix$<$double, c, 1$>$ {\bf gcop\-::\-Wrench}$<$ \-T, n, c $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Wrench_add3e3685c1a532603d250bce2ed0cecb}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Wrench@{gcop\-::\-Wrench}!\-Wrench@{\-Wrench}}
+\index{\-Wrench@{\-Wrench}!gcop::Wrench@{gcop\-::\-Wrench}}
+\subsubsection[{\-Wrench}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , int n, int c$>$ {\bf gcop\-::\-Wrench}$<$ \-T, n, c $>$\-::{\bf \-Wrench} (
+\begin{DoxyParamCaption}
+\item[{bool}]{dx = {\ttfamily true}, }
+\item[{bool}]{du = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Wrench_ad7c764bb089fa61874e9f519aaf27ef3}
+\doxyref{\-Wrench}{p.}{classgcop_1_1Wrench} force in 3d 
+\begin{DoxyParams}{\-Parameters}
+{\em dx} & whether it depends on the state x \\
+\hline
+{\em du} & whether it depends on the controls u \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Wrench@{gcop\-::\-Wrench}!\-F@{\-F}}
+\index{\-F@{\-F}!gcop::Wrench@{gcop\-::\-Wrench}}
+\subsubsection[{\-F}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , int n, int c$>$ virtual void {\bf gcop\-::\-Wrench}$<$ \-T, n, c $>$\-::{\bf \-F} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{f, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{{\bf \-Matrix6xnd} $\ast$}]{fx = {\ttfamily 0}, }
+\item[{{\bf \-Matrix6xcd} $\ast$}]{fu = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Wrench_adad10d2a38820cf2e62ed4256ea9978b}
+\-The force function 
+\begin{DoxyParams}{\-Parameters}
+{\em f} & the resulting force \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+{\em u} & controls \\
+\hline
+{\em fx} & derivative w.\-r.\-t. state (optional) \\
+\hline
+{\em fu} & derivative w.\-r.\-t. controls (optional) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Wrench@{gcop\-::\-Wrench}!du@{du}}
+\index{du@{du}!gcop::Wrench@{gcop\-::\-Wrench}}
+\subsubsection[{du}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , int n, int c$>$ bool {\bf gcop\-::\-Wrench}$<$ \-T, n, c $>$\-::{\bf du}}\label{classgcop_1_1Wrench_adef0f8fac93757f78fb174fc549dcd5e}
+
+
+set to true if f depends on u 
+
+\index{gcop\-::\-Wrench@{gcop\-::\-Wrench}!dx@{dx}}
+\index{dx@{dx}!gcop::Wrench@{gcop\-::\-Wrench}}
+\subsubsection[{dx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , int n, int c$>$ bool {\bf gcop\-::\-Wrench}$<$ \-T, n, c $>$\-::{\bf dx}}\label{classgcop_1_1Wrench_afe58404c4e9e33360965eba9a966b294}
+
+
+set to true if f depends on x 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/{\bf wrench.\-h}\end{DoxyCompactItemize}

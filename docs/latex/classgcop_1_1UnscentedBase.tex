@@ -1,0 +1,236 @@
+\section{gcop\-:\-:\-Unscented\-Base$<$ \-T, \-\_\-nx $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1UnscentedBase}\index{gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$@{gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$}}
+
+
+{\ttfamily \#include $<$unscentedbase.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Unscented\-Base$<$ \-T, \-\_\-nx $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1UnscentedBase__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Unscented\-Base$<$ \-T, \-\_\-nx $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{classgcop_1_1UnscentedBase__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nx $>$ {\bf \-Matrixnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Unscented\-Base} ({\bf \-Manifold}$<$ \-T, \-\_\-nx $>$ \&{\bf \-X})
+\item 
+virtual {\bf $\sim$\-Unscented\-Base} ()
+\item 
+void {\bf \-Points} (vector$<$ \-T $>$ \&xs, const \-T \&x)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Manifold}$<$ \-T, \-\_\-nx $>$ \& {\bf \-X}
+\begin{DoxyCompactList}\small\item\em manifold \end{DoxyCompactList}\item 
+double {\bf a}
+\begin{DoxyCompactList}\small\item\em \-U\-K\-F $\alpha$-\/param (a=1e-\/3 by default) \end{DoxyCompactList}\item 
+double {\bf k}
+\begin{DoxyCompactList}\small\item\em \-U\-K\-F $\kappa$-\/param (k=0 by default) \end{DoxyCompactList}\item 
+double {\bf b}
+\begin{DoxyCompactList}\small\item\em \-U\-K\-F $\beta$-\/param (b=2 by default) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf \-L}
+\begin{DoxyCompactList}\small\item\em number of sigma points (this is set internally to 2$\ast$model.nr + 1 \end{DoxyCompactList}\item 
+double {\bf l}
+\begin{DoxyCompactList}\small\item\em the variable $ l = a^2(L+k)-L $ \end{DoxyCompactList}\item 
+vector$<$ \-T $>$ {\bf \-Xs}
+\begin{DoxyCompactList}\small\item\em state sigma points \end{DoxyCompactList}\item 
+vector$<$ double $>$ {\bf \-Ws}
+\begin{DoxyCompactList}\small\item\em points weights \end{DoxyCompactList}\item 
+vector$<$ double $>$ {\bf \-Wc}
+\begin{DoxyCompactList}\small\item\em cov update weights \end{DoxyCompactList}\item 
+{\bf \-Matrixnd} {\bf \-A}
+\begin{DoxyCompactList}\small\item\em cholesky factor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ class gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nx$>$ {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1UnscentedBase_a148d8c72c83209448ec915703cc51572}
+
+
+\-Reimplemented in {\bf gcop\-::\-Unscented\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1UnscentedCorrector_a1fdadbbb03fd320899adf40a5e048985}, and {\bf gcop\-::\-Unscented\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1UnscentedPredictor_a9dcfe12c1b2435f7b3ae586702eb90ed}.
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1UnscentedBase_a46cd1a1a67f9f67bccc2866dcbedf71d}
+
+
+\-Reimplemented in {\bf gcop\-::\-Unscented\-Corrector$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np, Tz, \-\_\-nz $>$} \doxyref{}{p.}{classgcop_1_1UnscentedCorrector_a102fe99e878c7cc5cfe962fc784d8073}, and {\bf gcop\-::\-Unscented\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1UnscentedPredictor_a41b35ac5082bf69e5abcc0f9929085d1}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!\-Unscented\-Base@{\-Unscented\-Base}}
+\index{\-Unscented\-Base@{\-Unscented\-Base}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{\-Unscented\-Base}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx$>$ {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf \-Unscented\-Base} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Manifold}$<$ \-T, \-\_\-nx $>$ \&}]{\-X}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UnscentedBase_a89cd82ada2fbe93847e9761762dbf3ef}
+
+
+\-References gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::a, gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-A, gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::b, gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::k, gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-L, gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::l, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Wc, and gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Ws.
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!$\sim$\-Unscented\-Base@{$\sim$\-Unscented\-Base}}
+\index{$\sim$\-Unscented\-Base@{$\sim$\-Unscented\-Base}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{$\sim$\-Unscented\-Base}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx$>$ {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::$\sim${\bf \-Unscented\-Base} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UnscentedBase_a884bc4f8914b6383ba9d7847394d1122}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!\-Points@{\-Points}}
+\index{\-Points@{\-Points}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{\-Points}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx$>$ void {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf \-Points} (
+\begin{DoxyParamCaption}
+\item[{vector$<$ \-T $>$ \&}]{xs, }
+\item[{const \-T \&}]{x}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UnscentedBase_a2917332cd38c74195e6e2b3f35c0a918}
+\-Compute 2$\ast$\-L+1 sigma points given mean x and spread \-A 
+\begin{DoxyParams}{\-Parameters}
+{\em \-Xs} & a vector of 2$\ast$\-L+1 states \\
+\hline
+{\em x} & mean state \\
+\hline
+{\em \-A} & the square root of the covariance \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!a@{a}}
+\index{a@{a}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{a}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ double {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf a}}\label{classgcop_1_1UnscentedBase_a606dd5086aeea8a0544370d5d92c9426}
+
+
+\-U\-K\-F $\alpha$-\/param (a=1e-\/3 by default) 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Unscented\-Base().
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!\-A@{\-A}}
+\index{\-A@{\-A}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{\-A}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf \-A}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedBase_a0367f645b5ec0b09fcd7a203c8df2b19}
+
+
+cholesky factor 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Unscented\-Base().
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!b@{b}}
+\index{b@{b}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{b}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ double {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf b}}\label{classgcop_1_1UnscentedBase_aebd53e7315334604884e05c7ca9a3b78}
+
+
+\-U\-K\-F $\beta$-\/param (b=2 by default) 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Unscented\-Base().
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!k@{k}}
+\index{k@{k}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{k}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ double {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf k}}\label{classgcop_1_1UnscentedBase_a2ce3b0338106fab133c9732120c40575}
+
+
+\-U\-K\-F $\kappa$-\/param (k=0 by default) 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Unscented\-Base().
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!\-L@{\-L}}
+\index{\-L@{\-L}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{\-L}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ int {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf \-L}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedBase_a108922f8c009691f011c1bb215645413}
+
+
+number of sigma points (this is set internally to 2$\ast$model.nr + 1 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Unscented\-Base().
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!l@{l}}
+\index{l@{l}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{l}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ double {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf l}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedBase_a3cb961794610a7c097dcbdb9267feac2}
+
+
+the variable $ l = a^2(L+k)-L $ 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Unscented\-Base().
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!\-Wc@{\-Wc}}
+\index{\-Wc@{\-Wc}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{\-Wc}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ vector$<$double$>$ {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf \-Wc}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedBase_ace004dcee674d2f28929e504b58f61ed}
+
+
+cov update weights 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Unscented\-Base().
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!\-Ws@{\-Ws}}
+\index{\-Ws@{\-Ws}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{\-Ws}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ vector$<$double$>$ {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf \-Ws}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedBase_aff58ac2983d1705cad18b8bf05d8b013}
+
+
+points weights 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Base$<$ T, \-\_\-nx $>$\-::\-Unscented\-Base().
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!\-X@{\-X}}
+\index{\-X@{\-X}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{\-X}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ {\bf \-Manifold}$<$\-T, \-\_\-nx$>$\& {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf \-X}}\label{classgcop_1_1UnscentedBase_a3c3632e1642dc75eb7ee684698b57915}
+
+
+manifold 
+
+\index{gcop\-::\-Unscented\-Base@{gcop\-::\-Unscented\-Base}!\-Xs@{\-Xs}}
+\index{\-Xs@{\-Xs}!gcop::UnscentedBase@{gcop\-::\-Unscented\-Base}}
+\subsubsection[{\-Xs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic$>$ vector$<$\-T$>$ {\bf gcop\-::\-Unscented\-Base}$<$ \-T, \-\_\-nx $>$\-::{\bf \-Xs}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedBase_a18226eeb8c065a1be607f8c7e11c0178}
+
+
+state sigma points 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/est/{\bf unscentedbase.\-h}\end{DoxyCompactItemize}

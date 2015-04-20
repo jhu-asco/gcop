@@ -1,0 +1,227 @@
+\section{gcop\-:\-:\-Unscented\-Predictor$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1UnscentedPredictor}\index{gcop\-::\-Unscented\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$@{gcop\-::\-Unscented\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}}
+
+
+{\ttfamily \#include $<$unscentedpredictor.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Unscented\-Predictor$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1UnscentedPredictor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Unscented\-Predictor$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1UnscentedPredictor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, 1 $>$ {\bf \-Vectornd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nx $>$ {\bf \-Matrixnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ {\bf \-Matrixncd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nx $>$ {\bf \-Matrixcnd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nu, \-\_\-nu $>$ {\bf \-Matrixcd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-np $>$ {\bf \-Matrixmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ {\bf \-Matrixnmd}
+\item 
+typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Unscented\-Predictor} ({\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&{\bf sys})
+\item 
+virtual {\bf $\sim$\-Unscented\-Predictor} ()
+\item 
+virtual bool {\bf \-Predict} (\-T \&xb, double t, const \-T \&xa, const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} $\ast$p=0, bool cov=true)
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \-T $>$ {\bf \-Xps}
+\begin{DoxyCompactList}\small\item\em predicted state sigma points \end{DoxyCompactList}\item 
+{\bf \-Matrixnd} {\bf \-Q}
+\begin{DoxyCompactList}\small\item\em discrete-\/time process noise covariance \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ class gcop\-::\-Unscented\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Matrixcd@{\-Matrixcd}}
+\index{\-Matrixcd@{\-Matrixcd}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Matrixcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nu$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixcd}}\label{classgcop_1_1UnscentedPredictor_aced42a5d7f89c91dc43cec4454738001}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_af0add0182d75e3c7eff4506c136e43a9}.
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Matrixcnd@{\-Matrixcnd}}
+\index{\-Matrixcnd@{\-Matrixcnd}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Matrixcnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, \-\_\-nx$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixcnd}}\label{classgcop_1_1UnscentedPredictor_ae96253bf48d28e472aeeb1fdfd2b41dd}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_afb2656aa3c1b45aacd5fedf69cc0068c}.
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Matrixmd@{\-Matrixmd}}
+\index{\-Matrixmd@{\-Matrixmd}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Matrixmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-np$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixmd}}\label{classgcop_1_1UnscentedPredictor_a2329d65089619dea71426fce3236033a}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_ab506dd3d56a577d0228add46370d6643}.
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Matrixmnd@{\-Matrixmnd}}
+\index{\-Matrixmnd@{\-Matrixmnd}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Matrixmnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, \-\_\-nx$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixmnd}}\label{classgcop_1_1UnscentedPredictor_af0984b91914a5e855d66bc13044208f4}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_ab88e90924d7eb7eb6fd1be70069b4aef}.
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Matrixncd@{\-Matrixncd}}
+\index{\-Matrixncd@{\-Matrixncd}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Matrixncd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nu$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixncd}}\label{classgcop_1_1UnscentedPredictor_a7033bdfbd21dbfc5def6a12f9d294599}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_a72dfa9fc8e457a1b2ad32f688e702886}.
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Matrixnd@{\-Matrixnd}}
+\index{\-Matrixnd@{\-Matrixnd}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Matrixnd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-nx$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixnd}}\label{classgcop_1_1UnscentedPredictor_a9dcfe12c1b2435f7b3ae586702eb90ed}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_a4108d0338647a6fda605c29433e18f03}.
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Matrixnmd@{\-Matrixnmd}}
+\index{\-Matrixnmd@{\-Matrixnmd}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Matrixnmd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, \-\_\-np$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Matrixnmd}}\label{classgcop_1_1UnscentedPredictor_ad52adf27b86f76f19ae167dec119d7b1}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_a0df2108a2b44183d19ce0baf26a4bc9c}.
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nu, 1$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1UnscentedPredictor_a4c4881eab6d7cee821f81060dee6558c}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_afba0e6c39ba7d87b9ccf40a0baa7824b}.
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Vectormd@{\-Vectormd}}
+\index{\-Vectormd@{\-Vectormd}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Vectormd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-np, 1$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectormd}}\label{classgcop_1_1UnscentedPredictor_a744ea812d2a9b3e8de797e622730fa01}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_a85197179feacef27c9e2cf470685d7d0}.
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Vectornd@{\-Vectornd}}
+\index{\-Vectornd@{\-Vectornd}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Vectornd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ typedef \-Matrix$<$double, \-\_\-nx, 1$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Vectornd}}\label{classgcop_1_1UnscentedPredictor_a41b35ac5082bf69e5abcc0f9929085d1}
+
+
+\-Reimplemented from {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_a4a245d0aaa4926515eef192a3386753b}.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Unscented\-Predictor@{\-Unscented\-Predictor}}
+\index{\-Unscented\-Predictor@{\-Unscented\-Predictor}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Unscented\-Predictor}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Unscented\-Predictor} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$ \&}]{sys}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1UnscentedPredictor_aed7369894fd714f371acd798dc4c32a0}
+
+
+\-References gcop\-::\-Unscented\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Q, and gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-X.
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!$\sim$\-Unscented\-Predictor@{$\sim$\-Unscented\-Predictor}}
+\index{$\sim$\-Unscented\-Predictor@{$\sim$\-Unscented\-Predictor}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{$\sim$\-Unscented\-Predictor}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::$\sim${\bf \-Unscented\-Predictor} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UnscentedPredictor_ae4abb5c0b03342c3b783ab2de50e6860}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Predict@{\-Predict}}
+\index{\-Predict@{\-Predict}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Predict}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx, int \-\_\-nu, int \-\_\-np$>$ bool {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Predict} (
+\begin{DoxyParamCaption}
+\item[{\-T \&}]{xb, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{xa, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p = {\ttfamily 0}, }
+\item[{bool}]{cov = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1UnscentedPredictor_a06b8a90a47fcb2693824daba1dd321f2}
+\-Prediction step. 
+\begin{DoxyParams}{\-Parameters}
+{\em xb} & new belief state \\
+\hline
+{\em t} & time \\
+\hline
+{\em xa} & previous belief state \\
+\hline
+{\em u} & control inputs \\
+\hline
+{\em h} & time-\/step \\
+\hline
+{\em p} & parameters (optional) \\
+\hline
+{\em cov} & whether to update the covariance as well (true by default) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if success 
+\end{DoxyReturn}
+$<$ average in exponential coordinates
+
+$<$ variation from propagated mean 
+
+\-Implements {\bf gcop\-::\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1Predictor_af9552e6f3a861130bae9f5857edfb113}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Q@{\-Q}}
+\index{\-Q@{\-Q}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Q}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Matrixnd} {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Q}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedPredictor_aa5f3adcbc1506279668cc1c249fd29fa}
+
+
+discrete-\/time process noise covariance 
+
+
+
+\-Referenced by gcop\-::\-Unscented\-Predictor$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-Unscented\-Predictor().
+
+\index{gcop\-::\-Unscented\-Predictor@{gcop\-::\-Unscented\-Predictor}!\-Xps@{\-Xps}}
+\index{\-Xps@{\-Xps}!gcop::UnscentedPredictor@{gcop\-::\-Unscented\-Predictor}}
+\subsubsection[{\-Xps}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T  = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ vector$<$\-T$>$ {\bf gcop\-::\-Unscented\-Predictor}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Xps}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classgcop_1_1UnscentedPredictor_a8417a9f5a7687a88b19c1d3bc0eb4c1f}
+
+
+predicted state sigma points 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/est/{\bf unscentedpredictor.\-h}\end{DoxyCompactItemize}

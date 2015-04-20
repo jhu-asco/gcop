@@ -1,0 +1,172 @@
+\section{gcop\-:\-:\-Mbs\-State \-Class \-Reference}
+\label{classgcop_1_1MbsState}\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}}
+
+
+{\ttfamily \#include $<$mbsstate.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Mbs\-State} (int nb=1, bool {\bf fixed}=false)
+\item 
+{\bf \-Mbs\-State} (const {\bf \-Mbs\-State} \&x)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ {\bf \-Matrix4d} $>$ {\bf gs}
+\begin{DoxyCompactList}\small\item\em configurations \end{DoxyCompactList}\item 
+vector$<$ {\bf \-Vector6d} $>$ {\bf vs}
+\begin{DoxyCompactList}\small\item\em body-\/fixed velocities \end{DoxyCompactList}\item 
+vector$<$ {\bf \-Matrix4d} $>$ {\bf dgs}
+\begin{DoxyCompactList}\small\item\em relative xforms from b/n bodies \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf r}
+\begin{DoxyCompactList}\small\item\em joint angles \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf dr}
+\begin{DoxyCompactList}\small\item\em joint velocities \end{DoxyCompactList}\item 
+vector$<$ bool $>$ {\bf ub}
+\begin{DoxyCompactList}\small\item\em at upper bound \end{DoxyCompactList}\item 
+vector$<$ bool $>$ {\bf lb}
+\begin{DoxyCompactList}\small\item\em at lower bound \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf zl}
+\begin{DoxyCompactList}\small\item\em lower bound spring \end{DoxyCompactList}\item 
+\-Vector\-Xd {\bf zu}
+\begin{DoxyCompactList}\small\item\em upper bound spring \end{DoxyCompactList}\item 
+bool {\bf fixed}
+\begin{DoxyCompactList}\small\item\em fixed base? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!\-Mbs\-State@{\-Mbs\-State}}
+\index{\-Mbs\-State@{\-Mbs\-State}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{\-Mbs\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-::\-Mbs\-State\-::\-Mbs\-State} (
+\begin{DoxyParamCaption}
+\item[{int}]{nb = {\ttfamily 1}, }
+\item[{bool}]{fixed = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1MbsState_ae98c2c2c5029cf95ce1c4751142d9bd2}
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!\-Mbs\-State@{\-Mbs\-State}}
+\index{\-Mbs\-State@{\-Mbs\-State}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{\-Mbs\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gcop\-::\-Mbs\-State\-::\-Mbs\-State} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Mbs\-State} \&}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1MbsState_a95aab1544c8750a8209779f3a4b1cbd6}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!dgs@{dgs}}
+\index{dgs@{dgs}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{dgs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Matrix4d}$>$ {\bf gcop\-::\-Mbs\-State\-::dgs}}\label{classgcop_1_1MbsState_a9d89b9fa1347b22e049490f2907bbd7d}
+
+
+relative xforms from b/n bodies 
+
+
+
+\-Referenced by gcop\-::\-Mbs\-::\-Bias(), gcop\-::\-Mbs\-::\-D\-Bias(), gcop\-::\-Mbs\-::\-F\-K(), gcop\-::\-Mbs\-::\-K\-Step(), gcop\-::\-Mbs\-::\-Mass(), gcop\-::\-Mbs\-::\-Newton\-Euler\-Jacobian(), and gcop\-::\-Mbs\-::print().
+
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!dr@{dr}}
+\index{dr@{dr}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{dr}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-State\-::dr}}\label{classgcop_1_1MbsState_a6b5d93e8e49329a2e4bf09fcfa911552}
+
+
+joint velocities 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Chain\-::\-Chain(), gcop\-::\-Mbs\-::\-Check\-Limits(), gcop\-::\-Mbs\-::\-Clamp\-Velocity(), gcop\-::\-Mbs\-::\-Euler\-Step(), gcop\-::\-Airm\-::\-Force(), gcop\-::\-Airbot\-::\-Force(), gcop\-::\-Mbs\-::\-Force(), gcop\-::\-Mbs\-::\-Heun\-Step(), gcop\-::\-Mbs\-::\-K\-Step(), gcop\-::\-Mbs\-Tspace\-::\-Lift(), gcop\-::\-Mbs\-Manifold\-::\-Lift(), gcop\-::\-Mbs\-::\-N\-E(), gcop\-::\-Mbs\-::print(), gcop\-::\-Mbs\-::\-Rec(), gcop\-::\-Mbs\-Tspace\-::\-Retract(), gcop\-::\-Mbs\-Manifold\-::\-Retract(), gcop\-::\-Mbs\-Controller\-::\-Set(), and gcop\-::\-Mbs\-::\-Trap\-Step().
+
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!fixed@{fixed}}
+\index{fixed@{fixed}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{fixed}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Mbs\-State\-::fixed}}\label{classgcop_1_1MbsState_a4948534a96d71d828500b81fc16b7763}
+
+
+fixed base? 
+
+
+
+\-Referenced by gcop\-::\-Mbs\-Manifold\-::\-Adtau(), gcop\-::\-Mbs\-Manifold\-::dtau(), gcop\-::\-Mbs\-Manifold\-::\-Lift(), and gcop\-::\-Mbs\-Manifold\-::\-Retract().
+
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!gs@{gs}}
+\index{gs@{gs}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{gs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Matrix4d}$>$ {\bf gcop\-::\-Mbs\-State\-::gs}}\label{classgcop_1_1MbsState_ae1fc5bb244bba26d065d9f095391158c}
+
+
+configurations 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Mbs\-::\-Bias(), gcop\-::\-Mbs\-::\-Clamp\-Pose(), gcop\-::\-Mbs\-::\-D\-Bias(), gcop\-::\-Mbs\-::\-F\-K(), gcop\-::\-Mbs\-::\-K\-Step(), gcop\-::\-Mbs\-Cspace\-::\-Lift(), gcop\-::\-Mbs\-Manifold\-::\-Lift(), gcop\-::\-Mbs\-::print(), gcop\-::\-Mbs\-::\-Rec(), gcop\-::\-Mbs\-View\-::\-Render(), gcop\-::\-Mbs\-Cspace\-::\-Retract(), gcop\-::\-Mbs\-Manifold\-::\-Retract(), and gcop\-::\-Mbs\-Controller\-::\-Set().
+
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!lb@{lb}}
+\index{lb@{lb}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{lb}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$bool$>$ {\bf gcop\-::\-Mbs\-State\-::lb}}\label{classgcop_1_1MbsState_a1f07b1127294dfca68af68a093d3d73c}
+
+
+at lower bound 
+
+
+
+\-Referenced by gcop\-::\-Mbs\-::\-Check\-Limits(), and gcop\-::\-Mbs\-::\-Get\-Impulse().
+
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!r@{r}}
+\index{r@{r}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-State\-::r}}\label{classgcop_1_1MbsState_a3a47ff108dc810ec1f289c737444eaf8}
+
+
+joint angles 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Chain\-::\-Chain(), gcop\-::\-Mbs\-::\-Check\-Limits(), gcop\-::\-Mbs\-::\-F\-K(), gcop\-::\-Mbs\-::\-Force(), gcop\-::\-Mbs\-::\-Get\-Impulse(), gcop\-::\-Mbs\-::\-K\-Step(), gcop\-::\-Mbs\-Cspace\-::\-Lift(), gcop\-::\-Mbs\-Manifold\-::\-Lift(), gcop\-::\-Mbs\-::print(), gcop\-::\-Mbs\-::\-Rec(), gcop\-::\-Mbs\-Cspace\-::\-Retract(), gcop\-::\-Mbs\-Manifold\-::\-Retract(), and gcop\-::\-Mbs\-Controller\-::\-Set().
+
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!ub@{ub}}
+\index{ub@{ub}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{ub}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$bool$>$ {\bf gcop\-::\-Mbs\-State\-::ub}}\label{classgcop_1_1MbsState_a93efe0dfe5c0506ffbd78e4f25e9220f}
+
+
+at upper bound 
+
+
+
+\-Referenced by gcop\-::\-Mbs\-::\-Check\-Limits(), and gcop\-::\-Mbs\-::\-Get\-Impulse().
+
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!vs@{vs}}
+\index{vs@{vs}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{vs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Vector6d}$>$ {\bf gcop\-::\-Mbs\-State\-::vs}}\label{classgcop_1_1MbsState_afaadf53c908e2ad6e0e0fe4fec79c4ec}
+
+
+body-\/fixed velocities 
+
+
+
+\-Referenced by gcop\-::\-Airbot\-::\-Airbot(), gcop\-::\-Mbs\-::\-Bias(), gcop\-::\-Mbs\-::\-Clamp\-Velocity(), gcop\-::\-Mbs\-::\-D\-Bias(), gcop\-::\-Mbs\-::\-Euler\-Step(), gcop\-::\-Mbs\-::\-Heun\-Step(), gcop\-::\-Mbs\-::\-K\-Step(), gcop\-::\-Mbs\-Tspace\-::\-Lift(), gcop\-::\-Mbs\-Manifold\-::\-Lift(), gcop\-::\-Mbs\-::\-N\-E(), gcop\-::\-Mbs\-::\-Newton\-Euler\-Jacobian(), gcop\-::\-Mbs\-::print(), gcop\-::\-Mbs\-::\-Rec(), gcop\-::\-Mbs\-Tspace\-::\-Retract(), gcop\-::\-Mbs\-Manifold\-::\-Retract(), gcop\-::\-Mbs\-Controller\-::\-Set(), and gcop\-::\-Mbs\-::\-Trap\-Step().
+
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!zl@{zl}}
+\index{zl@{zl}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{zl}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-State\-::zl}}\label{classgcop_1_1MbsState_a04fd076bd1a11c94830e4b7ed2cd3eca}
+
+
+lower bound spring 
+
+
+
+\-Referenced by gcop\-::\-Mbs\-::\-Euler\-Step(), and gcop\-::\-Mbs\-::\-Force().
+
+\index{gcop\-::\-Mbs\-State@{gcop\-::\-Mbs\-State}!zu@{zu}}
+\index{zu@{zu}!gcop::MbsState@{gcop\-::\-Mbs\-State}}
+\subsubsection[{zu}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Xd {\bf gcop\-::\-Mbs\-State\-::zu}}\label{classgcop_1_1MbsState_a30bdc8fe0011e5a827c54ce3aa3aee66}
+
+
+upper bound spring 
+
+
+
+\-Referenced by gcop\-::\-Mbs\-::\-Euler\-Step(), and gcop\-::\-Mbs\-::\-Force().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/manifolds/{\bf mbsstate.\-h}\end{DoxyCompactItemize}
