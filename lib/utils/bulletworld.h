@@ -37,8 +37,6 @@ namespace gcop{
 			class btDefaultCollisionConfiguration* m_collisionConfiguration;///<Default Collision configuration used from bullet demos
 
 
-      btVector3 worldMin;///<Minimum and maximum for world
-      btVector3 worldMax;
 			//#TODO Provide custom coordinate sysem
       bool usezupaxis;///< Used to define the coordinate system for world. Two options available (z up y forward x right OR y up z forward x to left) 
 
@@ -46,6 +44,8 @@ namespace gcop{
 			btDynamicsWorld*		m_dynamicsWorld;///<this is the most important class It represents the Discrete Dynamics World 
       btScalar m_defaultContactProcessingThreshold;///<Collisions between objects are not processed until this threshold. Avoids jittering behaviour
 			btAlignedObjectArray<btCollisionShape*> m_collisionShapes;///<Stores all the collision shapes in a world for drawing and cleaning
+      btVector3 worldMin;///<Minimum and maximum for world
+      btVector3 worldMax;
 
 
 		public:
@@ -127,36 +127,12 @@ namespace gcop{
 				return body;
 			}
 
-			/**Creates a triangular mesh from vertex data. The number of indices should be equal to 3 times the number of triangles
-			 * The vertex data can be smaller than 3*noftriangles since different triangles can share vertices
-			 * By default assumes each index corresponds to a vertex
-			 * @param verts  pointer to vertices
-			 * @param inds	 indices of the verts which form a triangle
-			 * @param nofverts	Number of vertices sent by the pointer verts
-			 */
-      btCollisionShape *CreateMeshFromData(btScalar *verts, int *inds, int noftriangles, int nofverts)
-      {
-        if(!inds || !verts)
-          return 0;
-        int vertStride = 3*sizeof(btScalar); 
-        int indexStride = 3*sizeof(int);
-        btTriangleIndexVertexArray *m_indexVertexArrays = new btTriangleIndexVertexArray(noftriangles
-                                                                                        ,inds
-                                                                                        ,indexStride
-                                                                                        ,nofverts,verts,vertStride);
-        cout<<"2"<<endl;
-
-        bool useQuantizedAabbCompression = true;
-        btCollisionShape *collshape = new btBvhTriangleMeshShape(m_indexVertexArrays,useQuantizedAabbCompression);
-        m_collisionShapes.push_back(collshape);
-        return collshape;
-      }
-
-			/** Loads a mesh from Binary STL Files. Modified from LoadMeshFromSTL used by Bullet3 Demo
-			 * @param filename		Stl File name.
-			 * @param scale				Multiplies all the vertices with the scale thereby scaling the mesh
-			 */
-			btCollisionShape *CreateMeshFromSTL(const char *filename, btVector3 scale = btVector3(1,1,1))
+      /** Loads a mesh from Binary STL Files. Modified from LoadMeshFromSTL used by Bullet3 Demo
+       * @param filename		Stl File name.
+       * @param scale				Multiplies all the vertices with the scale thereby scaling the mesh
+       * @return Returns a vertex array which can be used to modify the STL file later
+       */
+      btTriangleIndexVertexArray *CreateVertexArrayFromSTL(const char *filename, btVector3 scale = btVector3(1,1,1))
       {
         FILE* file = fopen(filename,"rb");
         if(file)
@@ -229,7 +205,14 @@ namespace gcop{
                     }
                   }
 
-                  return CreateMeshFromData(verts, inds, numTriangles, 3*numTriangles);
+                  int vertStride = 3*sizeof(btScalar); 
+                  int indexStride = 3*sizeof(int);
+                  btTriangleIndexVertexArray *m_indexVertexArrays = new btTriangleIndexVertexArray(numTriangles
+                                                                      ,inds
+                                                                      ,indexStride
+                                                                      ,3*numTriangles,verts,vertStride);
+                  return m_indexVertexArrays;
+                  //return CreateMeshFromData(verts, inds, numTriangles, 3*numTriangles);
                 }
                 delete[] memoryBuffer;
               }
@@ -239,6 +222,47 @@ namespace gcop{
         }
         return 0;
       }
+
+			/**Creates a triangular mesh from vertex data. The number of indices should be equal to 3 times the number of triangles
+			 * The vertex data can be smaller than 3*noftriangles since different triangles can share vertices
+			 * By default assumes each index corresponds to a vertex
+			 * @param verts  pointer to vertices
+			 * @param inds	 indices of the verts which form a triangle
+			 * @param nofverts	Number of vertices sent by the pointer verts
+			 */
+      btCollisionShape *CreateMeshFromData(btScalar *verts, int *inds, int noftriangles, int nofverts)
+      {
+        if(!inds || !verts)
+          return 0;
+        int vertStride = 3*sizeof(btScalar); 
+        int indexStride = 3*sizeof(int);
+        btTriangleIndexVertexArray *m_indexVertexArrays = new btTriangleIndexVertexArray(noftriangles
+                                                                                        ,inds
+                                                                                        ,indexStride
+                                                                                        ,nofverts,verts,vertStride);
+        bool useQuantizedAabbCompression = true;
+        btCollisionShape *collshape = new btBvhTriangleMeshShape(m_indexVertexArrays,useQuantizedAabbCompression);
+        m_collisionShapes.push_back(collshape);
+        return collshape;
+      }
+
+			/** Loads a mesh from Binary STL Files. Modified from LoadMeshFromSTL used by Bullet3 Demo
+			 * @param filename		Stl File name.
+			 * @param scale				Multiplies all the vertices with the scale thereby scaling the mesh
+			 */
+			btCollisionShape *CreateMeshFromSTL(const char *filename, btVector3 scale = btVector3(1,1,1))
+      {
+        btTriangleIndexVertexArray *vertexarray = CreateVertexArrayFromSTL(filename, scale);
+        if(vertexarray != 0)
+        {
+          bool useQuantizedAabbCompression = true;
+          btCollisionShape *collshape = new btBvhTriangleMeshShape(vertexarray, useQuantizedAabbCompression);
+          m_collisionShapes.push_back(collshape);
+          return collshape;
+        }
+        return 0;
+      }
+      
 
 			/** Creates a DEM Height map from height data. The local origin is at the center of the image with height = average of the max and min heights. Here minheight is 0m
 			 * @param length		length of the image grid
