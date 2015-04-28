@@ -2,6 +2,7 @@ set(sources
   viewer.cc
   view.cc
   particle2dview.cc
+  point3dview.cc
   unicycleview.cc
   carview.cc
   rccarview.cc
@@ -34,6 +35,7 @@ set(headers
   view.h
   systemview.h
   particle2dview.h
+  point3dview.h
   unicycleview.h
   carview.h
   rccarview.h

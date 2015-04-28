@@ -22,6 +22,10 @@ if (BUILD_TESTS)
 	add_executable(body3dtest body3dtest.cc)
 	target_link_libraries(body3dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
+	add_executable(body3dstab body3dstab.cc)
+	target_link_libraries(body3dstab  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
+
 # use qrotor.cfg as input
 	add_executable(qrotortest qrotortest.cc)
 	target_link_libraries(qrotortest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
@@ -195,6 +199,9 @@ target_link_libraries(insekftest gcop_est gcop_algos gcop_views gcop_systems ${A
 
 add_executable(point3dkftest point3dkftest.cc)
 target_link_libraries(point3dkftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
+add_executable(point3dstab point3dstab.cc)
+target_link_libraries(point3dstab gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 
 add_executable(helirhc helirhc.cc)

@@ -19,7 +19,7 @@ namespace gcop {
     }
     
     Vector3d q;  ///< position
-    Vector3d v;  ///< position    
+    Vector3d v;  ///< velocity
     Matrix6d P;   ///< covariance
   };
   

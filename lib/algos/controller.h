@@ -18,6 +18,7 @@ namespace gcop {
      * @param x state
      */
     virtual void Set(Tu &u, double t, const Tx &x) = 0;
+    
   };  
 };
 

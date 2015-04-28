@@ -4,6 +4,7 @@
 #include "constraint.h"
 #include "dem.h"
 #include "PQP/PQP.h"
+#include "body3dmanifold.h"
 
 namespace gcop {
   
@@ -13,42 +14,47 @@ namespace gcop {
     int _np = Dynamic>
     class PqpDem : public Constraint<T, _nx, _nu, _np, 1> {
   public:
-
+  
   typedef Matrix<double, 1, 1> Vectorgd;
   typedef Matrix<double, 1, _nx> Matrixgxd;
   typedef Matrix<double, 1, _nu> Matrixgud;
   typedef Matrix<double, 1, _np> Matrixgpd;
-
+  
   typedef Matrix<double, _nx, 1> Vectornd;
   typedef Matrix<double, _nu, 1> Vectorcd;
   typedef Matrix<double, _np, 1> Vectormd;
-
-
-    PqpDem(const Dem& dem, double cr = 0.1, double sd = 0.0);
-    virtual ~PqpDem();
-    
-    bool operator()(Vectorgd &g,
-                    double t, const T &x, const Vectorcd &u,
-                    const Vectormd *p = 0, 
-                    Matrixgxd *dgdx = 0, Matrixgud *dgdu = 0,
-                    Matrixgpd *dgdp = 0);    
-    
-    const Dem& dem;   ///< digital elevation map
-
-    PQP_Model *pm;
-    PQP_REAL pt[3];
-    PQP_REAL pR[3][3];
-
-    PQP_Model *dm;
-    PQP_REAL dt[3];
-    PQP_REAL dR[3][3];
-
-    PQP_DistanceResult dres;
-    PQP_ToleranceResult tres;
-
-    double cr;       ///< collision radius
-    double sd;       ///< additional safety distance
-
+  
+  
+  PqpDem(const Dem& dem, double cr = 0.1, double sd = 0.0);
+  virtual ~PqpDem();
+  
+  bool operator()(Vectorgd &g,
+                  double t, const T &x, const Vectorcd &u,
+                  const Vectormd *p = 0, 
+                  Matrixgxd *dgdx = 0, Matrixgud *dgdu = 0,
+                  Matrixgpd *dgdp = 0);    
+  
+  
+  //  virtual void ToBody3dState(Body3dState &xb, const T &x) const;
+  
+  const Dem& dem;   ///< digital elevation map
+  
+  PQP_Model *pm;
+  PQP_REAL pt[3];
+  PQP_REAL pR[3][3];
+  
+  PQP_Model *dm;
+  PQP_REAL dt[3];
+  PQP_REAL dR[3][3];
+  
+  PQP_DistanceResult dres;
+  PQP_ToleranceResult tres;
+  
+  double cr;       ///< collision radius
+  double sd;       ///< additional safety distance
+  
+  Body3dState xb;  ///< body state for collision purposes
+  
   };
 
   
@@ -112,7 +118,13 @@ namespace gcop {
     delete pm;
   }
   
-  
+  /*
+  template <typename T, int _nx, int _nu, int _np> 
+    void PqpDem<T, _nx, _nu, _np>::ToBody3dState(Body3dState &xb, const T &x) const
+    {
+      xb = x;
+    }
+  */  
 
 template <typename T, int _nx, int _nu, int _np> 
     bool PqpDem<T, _nx, _nu, _np>::operator()(Vectorgd &g,
@@ -121,9 +133,10 @@ template <typename T, int _nx, int _nu, int _np>
                                               Matrixgxd *dgdx, Matrixgud *dgdu,
                                               Matrixgpd *dgdp)
 {
-  //  const double *q = s.x + oi;
-  //  SET3(pt, q);
-  Vector3d p = x.second.head(3); // position
+  //  ToBody3dState(xb, x);
+  
+  Vector3d p = x.second.head(3);
+
   pt[0] = p[0];
   pt[1] = p[1];
   pt[2] = p[2];

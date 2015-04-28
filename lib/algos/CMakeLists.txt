@@ -15,6 +15,9 @@ set(headers
       posegraph2d.h
       controller.h
       mbscontroller.h
+      point3dcontroller.h
+      body3dcontroller.h
+      gavoidcontroller.h
       systemce.h
       aspsa.h
       spsa.h
@@ -28,4 +31,5 @@ set(sources
       body2dgraph.cc
       posegraph2d.cc
       mbscontroller.cc
+      point3dcontroller.cc
 )
