@@ -44,6 +44,10 @@ IF (PQP_FOUND)
 	add_executable(body3drhc body3drhc.cc)
 	target_link_libraries(body3drhc  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(body3ddemstab body3ddemstab.cc)
+	target_link_libraries(body3ddemstab  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+
 #	add_executable(body3dstops body3dstops.cc)
 #	target_link_libraries(body3dstops  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 

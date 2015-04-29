@@ -129,8 +129,7 @@ void solver_process(Viewer* viewer)
   if (viewer)
     viewer->Add(dv);
 
-
-  Body3dCost<6> cost(sys, tf, xf);  
+  Body3dCost<6> cost(sys, tf, xf);
 
   double s = .01;
   cost.Qf(0,0) = 2; cost.Qf(1,1) = 2; cost.Qf(2,2) = 2;

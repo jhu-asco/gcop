@@ -168,7 +168,7 @@ template <typename T, int _nx, int _nu, int _np>
   
   // cout << "d=" << d << endl;
 
-  if (dgdx && 0) {
+  if (dgdx) {
     Vector3d p2(dres.P2());
     Vector3d dp = p2 - p;
     dp.normalize();

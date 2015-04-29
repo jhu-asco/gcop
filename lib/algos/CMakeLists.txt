@@ -32,4 +32,5 @@ set(sources
       posegraph2d.cc
       mbscontroller.cc
       point3dcontroller.cc
+      gavoidcontroller.cc
 )
