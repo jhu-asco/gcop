@@ -118,7 +118,7 @@ void solver_process(Viewer* viewer)
     us[N/2+i] = Vector2d(.2, -.1);    
   }
 
-  Vector2d du(.2, .1);
+  Vector2d du(.5, .33);
   params.GetVector2d("du", du);
 
   Vector2d e(.001, .001);

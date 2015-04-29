@@ -1,3 +1,11 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #ifndef GCOP_SYSTEMCE_H
 #define GCOP_SYSTEMCE_H
 
@@ -20,7 +28,15 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
  
-  template <typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic> class SystemCe {
+  /**
+   * The CE method for dynamical systems
+   * 
+   *  Note: the vector dus should denote the variances along the diagonal of the initial distribution
+   *
+   * Authors: Marin Kobilarov, Gowtham Garimella
+   */
+  template <typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic> 
+    class SystemCe {
     
     typedef Matrix<double, n, 1> Vectornd;
     typedef Matrix<double, c, 1> Vectorcd;
@@ -52,7 +68,7 @@ namespace gcop {
      * @param xs (N+1) sequence of discrete states
      * @param us (N) sequence of control inputs
      * @param p (np-size) system parameters (set to 0 if none)
-     * @param dus (N) initial control variations (determines how widespread the initial distro is)
+     * @param dus (N) initial control standard deviations (determines how widespread the initial distro is)
      * @param es (N) zero-mean regularization/local-exploration noise variances
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
@@ -79,7 +95,7 @@ namespace gcop {
      * @param xs (N+1) sequence of discrete states
      * @param us (N) sequence of control inputs
      * @param p (np-size) system parameters (set to 0 if none)
-     * @param dus (N) initial control variations (determines how widespread the initial distro is)
+     * @param dus (N) initial control standard deviations (determines how widespread the initial distro is)
      * @param es (N) zero-mean regularization/local-exploration noise variances
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
@@ -106,7 +122,7 @@ namespace gcop {
      * @param xs (N+1) sequence of discrete states
      * @param us (N) sequence of control inputs
      * @param p (np-size) system parameters (set to 0 if none)
-     * @param dss (N) initial control parameter variations (determines how widespread the initial distro is)
+     * @param dss (N) initial tparam variances (determines how widespread the initial distro is)
      * @param dess (N) zero-mean regularization/local-exploration noise variances
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
@@ -150,7 +166,7 @@ namespace gcop {
 
     Vectormd *p;      ///< controls (N) vector
 
-    std::vector<Vectorcd> &dus;      ///< control variation (N) vector
+    std::vector<Vectorcd> &dus;      ///< control standard deviations (N) vector
 
     std::vector<T> xss;             ///< states (N+1) vector
     
@@ -219,7 +235,7 @@ namespace gcop {
         z.resize(sys.U.n*N);
   
       us2z(z, dus);
-      ce.gmm.ns[0].P = z.asDiagonal();
+      ce.gmm.ns[0].P = (z.cwiseProduct()).asDiagonal();
       ce.gmm.Update();
 
       us2z(z, es);
@@ -300,21 +316,26 @@ namespace gcop {
       } else {
         J = numeric_limits<double>::max();
       }
-    
+
+      // initialize mean using the provided initial trajectory and controls
       tp.To(ce.gmm.ns[0].mu, ts, xs, us, p);
-            //      us2z(ce.gmm.ns[0].mu, us);
       Vectortpd z;
+      Vectortpd dz;
       if (ntp == Dynamic) {
         z.resize(tp.ntp);
+        dz.resize(tp.ntp);
       }  
 
+      // perturbed controls
+      vector<Matrix<double, c, 1> > ups(us.size());
+      transform(us.begin(), us.end(), dus.begin(), ups.begin(),plus< Matrix<double, c, 1> >());
 
-      tp.To(z, ts, xs, dus, p);
-      // us2z(z, dus);
-      ce.gmm.ns[0].P = z.asDiagonal();
+      // initialize the covariance using the provided variance in the initial controls
+      tp.To(z, ts, xs, ups, p);
+      dz = z - ce.gmm.ns[0].mu;
+      ce.gmm.ns[0].P = (dz.cwiseProduct(dz)).asDiagonal();
       ce.gmm.Update();
 
-      //      us2z(z, es);
       tp.To(z, ts, xs, es, p);
       ce.S = z.asDiagonal();
     }
