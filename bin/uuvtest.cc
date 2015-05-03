@@ -8,6 +8,8 @@
 #include "lqcost.h"
 #include "params.h"
 
+#define DISPA
+
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
@@ -101,10 +103,10 @@ void solver_process(Viewer* viewer)
   ddp.mu = .001;
   //  ddp.a = .5;
   
-  if (viewer)
-  {UuvView<> view(sys, &ddp.xs);
+#ifdef DISP
+  UuvView<> view(sys, &ddp.xs);
   viewer->Add(view);  
-}
+#endif
   struct timeval timer;
   //getchar();
 
@@ -128,7 +130,7 @@ void solver_process(Viewer* viewer)
 }
 
 
-#define DISP
+
 
 int main(int argc, char** argv)
 {
