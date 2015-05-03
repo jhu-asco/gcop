@@ -8,7 +8,7 @@
 #include "lqcost.h"
 #include "params.h"
 
-#define DISPA
+#define DISP
 
 using namespace std;
 using namespace Eigen;
