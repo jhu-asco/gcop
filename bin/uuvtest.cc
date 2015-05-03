@@ -100,10 +100,11 @@ void solver_process(Viewer* viewer)
   UuvDdp ddp(sys, cost, ts, xs, us);
   ddp.mu = .001;
   //  ddp.a = .5;
-
-  UuvView<> view(sys, &ddp.xs);
+  
+  if (viewer)
+  {UuvView<> view(sys, &ddp.xs);
   viewer->Add(view);  
-
+}
   struct timeval timer;
   //getchar();
 
