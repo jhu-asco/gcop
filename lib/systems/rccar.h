@@ -12,6 +12,7 @@ namespace gcop {
 
   typedef Matrix<double, 4, 2> Matrix42d;
   typedef Matrix<double, 4, Dynamic> Matrix4pd;
+  typedef System<Vector4d, 4, 2> BaseSystem;
   //typedef Matrix<double, 6, 1> Vector6d;
 
    /**
@@ -23,7 +24,7 @@ namespace gcop {
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
-  class Rccar : public System<Vector4d, 4, 2>
+  class Rccar : public BaseSystem 
   {
   public:
     Rccar(int np = 2);

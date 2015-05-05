@@ -374,7 +374,7 @@ namespace gcop {
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
-      sys.Step_internalinput(xs[k+1], us[k], h, p);
+      sys.Step(xs[k+1], us[k], h, p);
       if (evalCost) 
         J += cost.L(ts[k], xs[k], us[k], h, p);
       

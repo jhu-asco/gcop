@@ -105,7 +105,7 @@ namespace gcop {
 
     this->sys.reset(xs[0],ts[0]);
     for (int i = 0; i < us.size(); ++i) {
-      this->sys.Step_internalinput(xs[i+1], us[i], ts[i+1] - ts[i], p);
+      this->sys.Step(xs[i+1], us[i], ts[i+1] - ts[i], p);
       //cout<<"Xs["<<(i+1)<<"]"<<xs[i+1].transpose()<<endl; #DEBUG
       //cout<<"us["<<i<<"]"<<us[i].transpose()<<endl;
     }

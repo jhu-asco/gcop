@@ -72,6 +72,7 @@ void solver_process(Viewer* viewer)
 
   // initial controls
 	//Update using initial controls:
+  BaseSystem *base_system = &sys;
   vector<Vector2d> us(N);
 	sys.reset(xs[0],ts[0]);
   for (int i = 0; i < N; ++i) {
@@ -79,7 +80,7 @@ void solver_process(Viewer* viewer)
 			us[i] = Vector2d(.01, .1);
 		else
 			us[i] = Vector2d(.01, -.1);
-		sys.Step_internalinput(xs[i+1], us[i], ts[i+1]-ts[i]);
+		base_system->Step(xs[i+1], us[i], ts[i+1]-ts[i]);
 		cout<<"xs["<<i+1<<"]"<<xs[i+1].transpose()<<endl;//#DEBUG
 		cout<<"us["<<i<<"]"<<us[i].transpose()<<endl;//#DEBUG
   }

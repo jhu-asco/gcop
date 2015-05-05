@@ -80,7 +80,7 @@ namespace gcop {
                 const Vector2d &u, double h, const VectorXd *p,
                 Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
 
-    double Step_internalinput(Vector4d &xb, const Vector2d &u, 
+    double Step(Vector4d &xb, const Vector2d &u, 
                 double h, const VectorXd *p = 0,
                 Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
 
