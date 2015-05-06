@@ -114,7 +114,7 @@ namespace gcop {
    * @param t current time
    * @param xa current state
    * @param u current control
-   * @param h current time-step
+   * @param h step size
    * @param p static parameters  (optional)
    * @param A jacobian w.r.t. x   (optional)
    * @param B jacobian w.r.t. u   (optional)
@@ -136,7 +136,7 @@ namespace gcop {
    * @param t current time
    * @param xa current state
    * @param u current control
-   * @param h current time-step
+   * @param h step size
    * @param p static parameters  (optional, set to 0 to ignore)
    * @param w noise
    * @param A jacobian w.r.t. x   (optional)
@@ -145,8 +145,8 @@ namespace gcop {
    * @param D jacobian w.r.t. w   (optional)
    */
   virtual double Step(T &xb, double t, const T &xa,
-                      const Vectorcd &u, double h, const Vectormd *p,
-                      const Vectornd &w, 
+                      const Vectorcd &u, double h, 
+                      const Vectornd &w, const Vectormd *p,
                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0, Matrixnd *D = 0);
 
   /**
@@ -155,7 +155,7 @@ namespace gcop {
    * @param xb resulting state
    * @param t current time
    * @param u current control
-   * @param h current time-step
+   * @param h step size
    * @param p static parameters  (optional)
    * @param A jacobian w.r.t. x   (optional)
    * @param B jacobian w.r.t. u   (optional)
@@ -169,7 +169,7 @@ namespace gcop {
    * Discrete Dynamics update of internal state and no output
    * @param t current time
    * @param u current control
-   * @param h current time-step
+   * @param h step size
    * @param p static parameters  (optional)
    * @param A jacobian w.r.t. x   (optional)
    * @param B jacobian w.r.t. u   (optional)
@@ -180,12 +180,10 @@ namespace gcop {
                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
   
   /** 
-   * Additional step function with input noise of the same dimension as state x and propagates by one dynamic step
-   * Noise in the system is modeled as x[i+1] = f(xi,ui,ti,p) + noisematrix(xi,ui,ti,p)*wi
-   * The noise matrix is implemented as a virtual function and by default is just the identity
+   * A version of most general step function with noise and internal state
    * @param xb resulting state
    * @param u current control
-   * @param h current time-step
+   * @param h step size
    * @param w noise of same size as state
    * @param p static parameters  (optional)
    * @param A jacobian w.r.t. x   (optional)
@@ -193,9 +191,9 @@ namespace gcop {
    * @param C jacobian w.r.t. p   (optional)
    * @param D jacobian w.r.t  w   (optional)
    */
-  virtual double Step_noise(T &xb, const Vectorcd &u,
-                            const Vectornd &w, double h,
-                            const Vectormd *p = 0,Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0, Matrixnd *D = 0);
+  virtual double Step(T &xb, const Vectorcd &u, double h, 
+                            const Vectornd &w, const Vectormd *p = 0,
+                            Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0, Matrixnd *D = 0);
 
   /** Resets the internal state of the system to one specified
    * @param x State to reset to
@@ -306,8 +304,8 @@ namespace gcop {
   
   template <typename T, int _nx, int _nu, int _np> 
     double System<T, _nx, _nu, _np>::Step(T& xb, double t, const T& xa,
-                                          const Vectorcd &u, double h, const Vectormd *p,
-                                          const Vectornd &w, 
+                                          const Vectorcd &u, double h,
+                                          const Vectornd &w, const Vectormd *p, 
                                           Matrixnd *A, Matrix<double, _nx, _nu> *B, 
                                           Matrix<double, _nx, _np> *C,
                                           Matrix<double, _nx, _nx> *D) {
@@ -344,19 +342,24 @@ namespace gcop {
   }
 
   template <typename T, int _nx, int _nu, int _np>
-    double System<T, _nx, _nu, _np>::Step_noise(T &xb, const Vectorcd &u,
-                      const Vectornd &w, double h, const Vectormd *p,
+    double System<T, _nx, _nu, _np>::Step(T &xb, const Vectorcd &u,
+                      double h, const Vectornd &w, const Vectormd *p,
                       Matrixnd *A, Matrixncd *B, Matrixnmd *C, Matrixnd *D)
-  {
-    //double result = this->Step(xb, this->t, this->x, u, h, p, A, B, C);
-    double result = this->Step(xb, u, h, p, A, B, C);
-    Matrixnd noise_matrix;
-    this->NoiseMatrix(noise_matrix, this->t, this->x, u, h, p);
-    this->X.Retract(xb, xb, (noise_matrix*w));
-    this->x = xb;//Update internal state
-    this->t = (this->t + h);
-    return result;
-  }
+    {
+      if (affineNoise) {
+        double result = this->Step(xb, u, h, p, A, B, C);
+        Matrixnd H;
+        this->NoiseMatrix(H, this->t, this->x, u, h, p);
+        this->X.Retract(xb, xb, (H*w));
+        this->x = xb;//Update internal state
+        this->t = (this->t + h);
+        if (D)
+          *D = H;
+        return result;
+      } else {
+        std::cout << "[W] System::Step: unimplemented for non-affine noise!" << std::endl;
+      }
+    }
 
   template <typename T, int _nx, int _nu, int _np>
     bool System<T, _nx, _nu, _np>::reset(const T& x, double t)

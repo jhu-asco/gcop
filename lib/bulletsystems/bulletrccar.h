@@ -84,9 +84,10 @@ namespace gcop {
                 double h, const VectorXd *p = 0,
                 Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
 
-    double Step_noise(Vector4d &xb, const Vector2d &u,
-                      const Vector4d &w, double h,
-                      const VectorXd *p = 0,Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0, Matrix4d *D = 0);
+    double Step(Vector4d &xb, const Vector2d &u,
+                       double h, const VectorXd *p,
+                      const Vector4d &w, Matrix4d *A = 0, Matrix42d *B = 0, 
+                      Matrix4pd *C = 0, Matrix4d *D = 0);
 
     bool reset(const Vector4d &x, double t = 0);
 

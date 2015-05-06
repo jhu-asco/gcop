@@ -298,9 +298,10 @@ double Bulletrccar::Step(Vector4d& xb, const Vector2d& u,
   return 1;
 }
 
-double Bulletrccar::Step_noise(Vector4d &xb, const Vector2d &u,
-    const Vector4d &w, double h,
-    const VectorXd *p,Matrix4d *A, Matrix42d *B, Matrix4pd *C, Matrix4d *D)
+double Bulletrccar::Step(Vector4d &xb, const Vector2d &u,
+    double h, const VectorXd *p,
+    const Vector4d &w, Matrix4d *A, Matrix42d *B, 
+    Matrix4pd *C, Matrix4d *D)
 {
   //Convert w into forces that can be applied[NOT WORKING]:
   m_carChassis->applyCentralForce(btVector3(w[0], w[1], w[2]));

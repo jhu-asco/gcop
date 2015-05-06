@@ -171,7 +171,7 @@ namespace gcop {
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
-      sys.Step_noise(xs[k+1], us[k], ws[k], h, &p);
+      sys.Step(xs[k+1], us[k], h, ws[k], &p);
       //cout<<"ts1["<<sensor_index<<"]: "<<ts1[sensor_index]<<"\t"<<ts[k]<<"\t"<<ts[k+1]<<endl;//#DEBUG
       while((ts1[sensor_index] - ts[k])>= 0 && (ts1[sensor_index] - ts[k+1]) < 0)//Nearest state to find the sensor measurement
       {
