@@ -168,7 +168,7 @@ namespace gcop {
         const Vectorcd &u = us[k];
 
         //sys.Step(xb, ts[k], xa, u, h, p, &As[k], &Bs[k], 0);
-        sys.Step_internalinput(xs[k+1], us[k], h, p, &As[k], &Bs[k], 0);
+        sys.Step(xs[k+1], us[k], h, p, &As[k], &Bs[k], 0);
 
         //        cout << "B=" << endl << Bs[k] << endl;
         
@@ -241,7 +241,7 @@ namespace gcop {
          // cout<<"Bs["<<k<<"]: "<<endl<<Bs[k]<<endl;
         }        
       } else {
-        sys.Step_internalinput(xs[k+1], us[k], h, p);
+        sys.Step(xs[k+1], us[k], h, p);
       }
     }
   } 

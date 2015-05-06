@@ -423,7 +423,7 @@ namespace gcop {
 					//Adding nan catching :
 					try
 					{
-						this->sys.Step_internalinput(xn, un, h, this->p);
+						this->sys.Step(xn, un, h, this->p);
 					}
 					catch(std::exception &e)
 					{

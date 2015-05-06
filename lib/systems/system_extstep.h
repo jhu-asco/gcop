@@ -51,7 +51,7 @@ namespace gcop {
           return 0;
         }
 
-        double Step_internaloutput(const Vectorcd &u, double h,
+        double Step(const Vectorcd &u, double h,
             const Vectormd *p,
             Matrixnd *A, Matrix<double, _nx, _nu> *B, 
             Matrix<double, _nx, _np> *C) 
@@ -65,7 +65,7 @@ namespace gcop {
           return 0;
         }
 
-        double Step_internalinput(T& xb,
+        double Step(T& xb,
             const Vectorcd &u, double h,
             const Vectormd *p,
             Matrixnd *A, Matrix<double, _nx, _nu> *B, 

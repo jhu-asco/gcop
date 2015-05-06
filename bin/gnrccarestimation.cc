@@ -130,6 +130,7 @@ void solver_process(Viewer* viewer)
 
   //Using the controls Update the sys trajectory and find the sensor measurements:
   //Reset the system:
+  BaseSystem *base_system = &sys;
   sys.reset(xs[0], ts[0]);
   int sensor_index = 0;
   for(int i = 0; i< N; ++i)
@@ -141,7 +142,7 @@ void solver_process(Viewer* viewer)
       us[i] = Vector2d(-.5, -.2);
 
     //Forward Step:
-    sys.Step_internalinput(xs[i+1],us[i], h);
+    base_system->Step(xs[i+1],us[i], h);
 
     cout<<"Xs["<<(i+1)<<"]: "<<xs[i+1].transpose()<<endl;
     if((ts_sensor[sensor_index] - ts[i])>= 0 && (ts_sensor[sensor_index] - ts[i+1]) < 0)
