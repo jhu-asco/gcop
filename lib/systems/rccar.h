@@ -29,8 +29,14 @@ namespace gcop {
     Rccar(int np = 2);
     
     virtual double Step(Vector4d &xb, double t, const Vector4d &xa,
-                    const Vector2d &u, double h, const VectorXd *p,
-                    Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
+                        const Vector2d &u, double h, const VectorXd *p,
+                        Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0);
+
+    virtual double Step(Vector4d &xb, double t, const Vector4d &xa,
+                        const Vector2d &u, double h, const VectorXd *p,
+                        const Vector4d &w,                         
+                        Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0, Matrix4d *D = 0);
+
 
 		virtual void StateAndControlsToFlat(VectorXd &y, const Vector4d &x, const Vector2d &u);
 

@@ -74,7 +74,8 @@ namespace gcop {
    * Subclasses should provide implementation for the 
    * time-stepping Step function and optionally for process noise evolution
    *
-   * Author: Marin Kobilarov marin(at)jhu.edu
+   * Authors: Marin Kobilarov marin(at)jhu.edu
+   *          Gowtham Garimella
    */
   template <typename T = VectorXd,
     int _nx = Dynamic, 
@@ -102,6 +103,7 @@ namespace gcop {
    * @param X state manifold
    * @param nu number of control inputs
    * @param np number of parameters
+   * @param nw number of noise parameters
    */
   System(Manifold<T, _nx> &X, int nu = 0, int np = 0);
   
@@ -122,6 +124,31 @@ namespace gcop {
                       const Vectorcd &u, double h, const Vectormd *p = 0,
                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
 
+
+  /**
+   * This is the master (the most general) Step function performing a 
+   * discrete dynamics update. The function computes the next system state xb given 
+   * current state xa, time t, applied forces u, parameters p, and noise w.
+   * This function calls the deterministic Step function as well as the NoiseMatrix function
+   * and combines the output to update the state: xb = f(t, xa, u, p) + H(t, xa, u, p)*w
+   *
+   * @param xb resulting state
+   * @param t current time
+   * @param xa current state
+   * @param u current control
+   * @param h current time-step
+   * @param p static parameters  (optional, set to 0 to ignore)
+   * @param w noise
+   * @param A jacobian w.r.t. x   (optional)
+   * @param B jacobian w.r.t. u   (optional)
+   * @param C jacobian w.r.t. p   (optional)
+   * @param D jacobian w.r.t. w   (optional)
+   */
+  virtual double Step(T &xb, double t, const T &xa,
+                      const Vectorcd &u, double h, const Vectormd *p,
+                      const Vectornd &w, 
+                      Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0, Matrixnd *D = 0);
+
   /**
    * Discrete Dynamics Update. This function computes the next state xb using the internal input
    * state x_int and applied forces u
@@ -135,8 +162,8 @@ namespace gcop {
    * @param C jacobian w.r.t. p   (optional)
    */
   virtual double Step_internalinput(T &xb, const Vectorcd &u,
-                       double h, const Vectormd *p = 0,
-                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
+                                    double h, const Vectormd *p = 0,
+                                    Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
 
    /**
    * Discrete Dynamics update of internal state and no output
@@ -147,11 +174,10 @@ namespace gcop {
    * @param A jacobian w.r.t. x   (optional)
    * @param B jacobian w.r.t. u   (optional)
    * @param C jacobian w.r.t. p   (optional)
-
    */
   virtual double Step_internaloutput(const Vectorcd &u,
-      double h,const Vectormd *p = 0,
-      Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
+                                     double h,const Vectormd *p = 0,
+                                     Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
 
   /** 
    * Additional step function with input noise of the same dimension as state x and propagates by one dynamic step
@@ -168,8 +194,8 @@ namespace gcop {
    * @param D jacobian w.r.t  w   (optional)
    */
   virtual double Step_noise(T &xb, const Vectorcd &u,
-                      const Vectornd &w, double h,
-                      const Vectormd *p = 0,Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0, Matrixnd *D = 0);
+                            const Vectornd &w, double h,
+                            const Vectormd *p = 0,Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0, Matrixnd *D = 0);
 
   /** Resets the internal state of the system to one specified
    * @param x State to reset to
@@ -205,6 +231,8 @@ namespace gcop {
    */
   virtual bool Noise(Matrixnd &Q, double t, const T &x, const Vectorcd &u, 
                      double dt, const Vectormd *p = 0);
+
+
   /**
    * Noise in the system is modeled as x[i+1] = f(xi,ui,ti,p) + noisematrix(xi,ui,ti,p)*wi
    * This function provides the necessary noise coefficient matrix
@@ -217,8 +245,8 @@ namespace gcop {
    * @return true if all arguments are feasible
    */
   virtual bool NoiseMatrix(Matrixnd &Q, double t, const T &x, const Vectorcd &u, 
-                     double h, const Vectormd *p = 0);
-
+                           double h, const Vectormd *p = 0);
+  
 
   /**
    * Convert a system state and controls to flat outputs for the system.
@@ -238,17 +266,22 @@ namespace gcop {
 
   Manifold<T, _nx> &X;   ///< state manifold 
   Rn<_nu> U;             ///< control Euclidean manifold
-  Rn<_np> P;             ///< parameter Euclidean manifold  
-  T x;               ///< Internal State of the system
-  int np;            ///< Number of Parameters
-  double t;          ///< Internal time of the system
+  Rn<_np> P;             ///< parameter Euclidean manifold
+  int np;                ///< Number of Parameters
+
+  bool internalState;  ///< for some systems (in particular using Bullet) time-stepping is performed using the internal state rather than passing xa and t before each update. Thus in the Step() function xa and t are ignored and instead the internal (x, t) are used. This is false by default.
+
+  bool affineNoise;    ///< whether the noise w enters the dynamics in an affine way, i.e. as x = f(t, x, u, p) + H(t, x, u, p)*w
+
+  T x;                 ///< Internal State of the system
+  double t;            ///< Internal time of the system
   
   };
 
   
   template <typename T, int _nx, int _nu, int _np> 
     System<T, _nx, _nu, _np>::System(Manifold<T, _nx> &X, int nu, int np) : 
-    X(X), U(nu), P(np), np(np) {
+    X(X), U(nu), P(np), np(np), internalState(false), affineNoise(true) {
   }
 
   /*
@@ -267,39 +300,52 @@ namespace gcop {
     double System<T, _nx, _nu, _np>::Step(T& xb, double t, const T& xa,
                                           const Vectorcd &u, double h, const Vectormd *p,
                                           Matrixnd *A, Matrix<double, _nx, _nu> *B, 
-                                          Matrix<double, _nx, _np> *C) {
-    /*
-    Vectornd v;
-    if (_nx == Dynamic)
-      v.resize(n);
-
-    double d = F(v, t, xa, u, h, p, A, B, C);
-    X.Retract(xb, xa, v); // in R^n this is just xb = xa + v
-    Rec(xb, h);
-    return d;
-    */
+                                          Matrix<double, _nx, _np> *C) {      
     return 0;
   }
+  
+  template <typename T, int _nx, int _nu, int _np> 
+    double System<T, _nx, _nu, _np>::Step(T& xb, double t, const T& xa,
+                                          const Vectorcd &u, double h, const Vectormd *p,
+                                          const Vectornd &w, 
+                                          Matrixnd *A, Matrix<double, _nx, _nu> *B, 
+                                          Matrix<double, _nx, _np> *C,
+                                          Matrix<double, _nx, _nx> *D) {
+
+    if (affineNoise) {
+      double result = this->Step(xb, t, xa, u, h, p, A, B, C);
+      Matrixnd H;
+      this->NoiseMatrix(H, this->t, this->x, u, h, p);
+      this->X.Retract(xb, xb, (H*w));
+      if (D)
+        *D = H;
+      return result;
+    } else {
+      std::cout << "[W] System::Step: unimplemented for non-affine noise!" << std::endl;
+    }
+  }
+
   template <typename T, int _nx, int _nu, int _np> 
     double System<T, _nx, _nu, _np>::Step_internalinput(T& xb, const Vectorcd &u, double h, const Vectormd *p,
-                                          Matrixnd *A, Matrix<double, _nx, _nu> *B, 
-                                          Matrix<double, _nx, _np> *C) {
+                                                        Matrixnd *A, Matrix<double, _nx, _nu> *B, 
+                                                        Matrix<double, _nx, _np> *C) {
     double result = this->Step(xb, this->t, this->x, u, h, p, A, B, C);
     this->x = xb;
     this->t += h;
     return result;
   }
+
   template <typename T, int _nx, int _nu, int _np> 
     double System<T, _nx, _nu, _np>::Step_internaloutput(const Vectorcd &u, double h, const Vectormd *p,
-                                          Matrixnd *A, Matrix<double, _nx, _nu> *B, 
-                                          Matrix<double, _nx, _np> *C) {
-      T xb;
-      double result = this->Step_internalinput(xb, u, h, p, A, B, C);
-      return result;
+                                                         Matrixnd *A, Matrix<double, _nx, _nu> *B, 
+                                                         Matrix<double, _nx, _np> *C) {
+    T xb;
+    double result = this->Step_internalinput(xb, u, h, p, A, B, C);
+    return result;
   }
 
   template <typename T, int _nx, int _nu, int _np>
-  double System<T, _nx, _nu, _np>::Step_noise(T &xb, const Vectorcd &u,
+    double System<T, _nx, _nu, _np>::Step_noise(T &xb, const Vectorcd &u,
                       const Vectornd &w, double h, const Vectormd *p,
                       Matrixnd *A, Matrixncd *B, Matrixnmd *C, Matrixnd *D)
   {
@@ -324,29 +370,30 @@ namespace gcop {
 
   template <typename T, int _nx, int _nu, int _np> 
     bool System<T, _nx, _nu, _np>::Noise(Matrixnd &Q, double t, const T &x, const Vectorcd &u, 
-               double dt, const Vectormd *p) {
+                                         double dt, const Vectormd *p) {
     std::cout << "[W] System::Noise: unimplemented! Subclasses should override." << std::endl;
     return false;
   }
-
+  
   template <typename T, int _nx, int _nu, int _np> 
-    bool System<T, _nx, _nu, _np>::NoiseMatrix(Matrixnd &Q, double t, const T &x, const Vectorcd &u, 
-               double dt, const Vectormd *p) {
-      Q.setIdentity();
+    bool System<T, _nx, _nu, _np>::NoiseMatrix(Matrixnd &Q, 
+                                               double t, const T &x, const Vectorcd &u, 
+                                               double dt, const Vectormd *p) {
+    Q.setIdentity();
     return true;
   }
-
+  
   template <typename T, int _nx, int _nu, int _np> 
     void System<T, _nx, _nu, _np>::StateAndControlsToFlat(VectorXd &y, const T &x, 
-               const Vectorcd &u) {
+                                                          const Vectorcd &u) {
     y.resize(0);
     std::cout << "[W] System::StateAndControlsToFlat: unimplemented! Subclasses should override." << std::endl;
   }
 
   template <typename T, int _nx, int _nu, int _np> 
     void System<T, _nx, _nu, _np>::FlatToStateAndControls(T &x, Vectorcd &u, 
-               const std::vector<VectorXd> &y) {
-
+                                                          const std::vector<VectorXd> &y) {
+    
     std::cout << "[W] System::FlatToStateAndControls: unimplemented! Subclasses should override." << std::endl;
   }
 }

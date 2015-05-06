@@ -48,6 +48,7 @@ namespace gcop {
     typedef Matrix<double, c, c> Matrixcd;  
 
     typedef Matrix<double, ntp, 1> Vectortpd;  
+    typedef Matrix<double, ntp, ntp> Matrixtpd;  
     
     //External render Function for trajectories:
     typedef void(RenderFunc)(int, vector<T>&);
@@ -56,11 +57,7 @@ namespace gcop {
      * Create an optimal control problem using a system, a cost, and 
      * a trajectory given by a sequence of times, states, and controls. 
      * The times ts must be given, the initial state xs[0] must be set, and
-     * the controls us will be used as an initial guess for the optimization.
-     *
-     * After initialization, every call to Iterate() will optimize the 
-     * controls us and states xs and modify them accordingly. Problems involving
-     * time-optimization will also modify the sequence of times ts.
+     * the optimization will be performed over the controls us
      * 
      * @param sys system
      * @param cost cost
@@ -80,13 +77,12 @@ namespace gcop {
 
     /**
      * Create an optimal control problem using a system, a cost, and 
-     * a trajectory given by a sequence of times, states, and controls. 
-     * The times ts must be given, the initial state xs[0] must be set, and
-     * the controls us will be used as an initial guess for the optimization.
+     * a trajectory parametrized using a finite set of parameters of dimension ntp
+     * The parametrization Tparam defines a mapping between the parameters and a 
+     * discrete trajectory at times ts, states xs, and control us (and optionally system
+     * parameters p)
+     * Optimization occurs over the parametrization.
      *
-     * After initialization, every call to Iterate() will optimize the 
-     * controls us and states xs and modify them accordingly. Problems involving
-     * time-optimization will also modify the sequence of times ts.
      * 
      * @param sys system
      * @param cost cost
@@ -107,13 +103,12 @@ namespace gcop {
 
     /**
      * Create an optimal control problem using a system, a cost, and 
-     * a trajectory given by a sequence of times, states, and controls. 
-     * The times ts must be given, the initial state xs[0] must be set, and
-     * the controls us will be used as an initial guess for the optimization.
+     * a trajectory parametrized using a finite set of parameters of dimension ntp
+     * The parametrization Tparam defines a mapping between the parameters and a 
+     * discrete trajectory at times ts, states xs, and control us (and optionally system
+     * parameters p)
+     * Optimization occurs over the parametrization.
      *
-     * After initialization, every call to Iterate() will optimize the 
-     * controls us and states xs and modify them accordingly. Problems involving
-     * time-optimization will also modify the sequence of times ts.
      * 
      * @param sys system
      * @param cost cost
@@ -131,6 +126,35 @@ namespace gcop {
              vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, Vectormd *p,
              VectorXd &dss, VectorXd &dess, 
              bool update = true);
+
+    /**
+     * Create an optimal control problem using a system, a cost, and 
+     * a trajectory parametrized using a finite set of parameters of dimension ntp
+     * The parametrization Tparam defines a mapping between the parameters and a 
+     * discrete trajectory at times ts, states xs, and control us (and optionally system
+     * parameters p)
+     * For this cosntructor, it is not necessary to have a mapping from discrete trajectory
+     * to tparam, but only fro tparam to discrete trajectory.
+     *
+     * 
+     * @param sys system
+     * @param cost cost
+     * @param tp trajectory parametrization
+     * @param ts (N+1) sequence of discrete times
+     * @param xs (N+1) sequence of discrete states
+     * @param us (N) sequence of control inputs
+     * @param p (np-size) system parameters (set to 0 if none)
+     * @param mu0 (N) initial tparam parameters mean
+     * @param P0 (N) initial tparam parameters covaraiance
+     * @param S (N) zero-mean regularization/local-exploration noise variances
+     * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
+     *               This is necessary only if xs was not already generated from us.
+     */
+    SystemCe(System<T, n, c, np> &sys, Cost<T, n, c, np> &cost, Tparam<T, n, c, np, ntp> &tp,
+             vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, Vectormd *p,
+             Vectortpd &mu0, Matrixtpd &P0, Matrixtpd &S, bool update = true);
+
+    
     
     virtual ~SystemCe();
     
@@ -164,13 +188,18 @@ namespace gcop {
 
     std::vector<Vectorcd> &us;      ///< controls (N) vector
 
-    Vectormd *p;      ///< controls (N) vector
+    Vectormd *p;      ///< system internal parameters
 
     std::vector<Vectorcd> &dus;      ///< control standard deviations (N) vector
 
     std::vector<T> xss;             ///< states (N+1) vector
     
     std::vector<Vectorcd> uss;      ///< controls (N) vector
+
+    std::vector< std::vector<T> > xsas;    ///< all state samples
+    
+    std::vector< std::vector<Vectorcd> >usas;  ///< all control samples
+    
     
     int N;        ///< number of discrete trajectory segments
 
@@ -180,12 +209,19 @@ namespace gcop {
 
     double J;    ///< optimal cost
 
+    bool enforceUpperBound; ///< whether to discard any samples with cost > Jub (true by default)
+
+    bool updateUpperBound; ///< after every iteration Jub is updated to be the current max cost (true by default)
+
+    double Jub;  ///< allowed cost upper bound (inf by default)
+
     Vectortpd zmin; ///< Current best z corresponding to J
 
     int nofevaluations;///< Number of evaluations at any point of time
     
     bool debug;  ///< whether to display debugging info    
 
+    // TODO: fix this: call it an external callback, etc... 
     RenderFunc *external_render;///<RenderFunction for rendering samples
 
   };
@@ -195,17 +231,20 @@ namespace gcop {
   
   template <typename T, int n, int c, int np, int ntp> 
     SystemCe<T, n, c, np, ntp>::SystemCe(System<T, n, c, np> &sys, 
-                                     Cost<T, n, c, np> &cost, 
-                                     vector<double> &ts, 
-                                     vector<T> &xs, 
-                                     vector<Matrix<double, c, 1> > &us,
-                                     Matrix<double, np, 1> *p,
-                                     vector<Matrix<double, c, 1> > &dus,
-                                     vector<Matrix<double, c, 1> > &es,
-                                     bool update) : 
+                                         Cost<T, n, c, np> &cost, 
+                                         vector<double> &ts, 
+                                         vector<T> &xs, 
+                                         vector<Matrix<double, c, 1> > &us,
+                                         Matrix<double, np, 1> *p,
+                                         vector<Matrix<double, c, 1> > &dus,
+                                         vector<Matrix<double, c, 1> > &es,
+                                         bool update) : 
     sys(sys), cost(cost), tp(0),
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
-    ce(N*sys.U.n, 1), Ns(1000), debug(true), external_render(0), nofevaluations(0)
+    ce(N*sys.U.n, 1), Ns(1000), 
+    J(numeric_limits<double>::max()), 
+    enforceUpperBound(true), updateUpperBound(true), Jub(numeric_limits<double>::max()),
+    debug(true), external_render(0), nofevaluations(0)
     {
       // do not use an external tparam, just assume discrete controls are the params
       
@@ -225,8 +264,6 @@ namespace gcop {
 
       if (update) {
         J = Update(xs, us);
-      } else {
-        J = numeric_limits<double>::max();
       }
       
       us2z(ce.gmm.ns[0].mu, us);
@@ -255,7 +292,10 @@ namespace gcop {
                                          bool update) :
     sys(sys), cost(cost), tp(&tp), 
     ts(ts), xs(xs), us(us), dus(us), p(p), xss(xs), uss(us), N(us.size()), 
-    ce(tp.ntp, 1), Ns(1000), debug(true), external_render(0), nofevaluations(0)
+    ce(tp.ntp, 1), Ns(1000), 
+    J(numeric_limits<double>::max()), 
+    enforceUpperBound(true), updateUpperBound(true), Jub(numeric_limits<double>::max()),
+    debug(true), external_render(0), nofevaluations(0)
     {
 
       assert(N > 0);
@@ -269,8 +309,6 @@ namespace gcop {
 
       if (update) {
         J = Update(xs, us);
-      } else {
-        J = numeric_limits<double>::max();
       }
     
       tp.To(ce.gmm.ns[0].mu, ts, xs, us, p);
@@ -280,6 +318,54 @@ namespace gcop {
 
       ce.S = dess.asDiagonal();
     }
+
+  template <typename T, int n, int c, int np, int ntp> 
+    SystemCe<T, n, c, np, ntp>::SystemCe(System<T, n, c, np> &sys, 
+                                         Cost<T, n, c, np> &cost, 
+                                         Tparam<T, n, c, np, ntp> &tp,
+                                         vector<double> &ts, 
+                                         vector<T> &xs, 
+                                         vector<Vectorcd> &us, 
+                                         Vectormd *p,
+                                         Vectortpd &mu0,
+                                         Matrixtpd &P0,
+                                         Matrixtpd &S, 
+                                         bool update) :
+    sys(sys), cost(cost), tp(&tp), 
+    ts(ts), xs(xs), us(us), dus(us), p(p), xss(xs), uss(us), N(us.size()), 
+    ce(tp.ntp, 1), Ns(1000), 
+    J(numeric_limits<double>::max()), 
+    enforceUpperBound(true), updateUpperBound(true), Jub(numeric_limits<double>::max()),
+    debug(true), external_render(0), nofevaluations(0)
+    {
+
+      assert(N > 0);
+      assert(ts.size() == N+1);
+      assert(xs.size() == N+1);
+      assert(us.size() == N);
+      assert(xss.size() == N+1);
+      assert(uss.size() == N);
+      assert(mu0.size() == tp.ntp);
+      //      assert(tpCov.size() == tp.ntp);
+      //      assert(tpS.size() == tp.ntp);
+
+      //      if (update) {
+      //        J = Update(xs, us);
+      //      } else {
+      //      }
+      
+      ce.gmm.ns[0].mu = mu0;
+      ce.gmm.ns[0].P = P0;
+      ce.S = S;
+
+      ce.gmm.Update();
+          
+      //      tp.To(ce.gmm.ns[0].mu, ts, xs, us, p);
+
+      tp.From(ts, xs, us, mu0, p);
+    }
+
+
   template <typename T, int n, int c, int np, int ntp> 
     SystemCe<T, n, c, np, ntp>::SystemCe(System<T, n, c, np> &sys, 
                                          Cost<T, n, c, np> &cost,                              
@@ -293,7 +379,10 @@ namespace gcop {
                                          bool update) : 
     sys(sys), cost(cost), tp(&tp), 
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
-    ce(tp.ntp, 1), Ns(1000), debug(true), external_render(0), nofevaluations(0)
+    ce(tp.ntp, 1), Ns(1000), 
+    J(numeric_limits<double>::max()), 
+    enforceUpperBound(true), updateUpperBound(true), Jub(numeric_limits<double>::max()),
+    debug(true), external_render(0), nofevaluations(0)
     {
       /*
       if (ntp != Dynamic) {
@@ -313,8 +402,6 @@ namespace gcop {
 
       if (update) {
         J = Update(xs, us);
-      } else {
-        J = numeric_limits<double>::max();
       }
 
       // initialize mean using the provided initial trajectory and controls
@@ -326,7 +413,7 @@ namespace gcop {
         dz.resize(tp.ntp);
       }  
 
-      // perturbed controls
+      // perturbed controls:  ups = us + dus
       vector<Matrix<double, c, 1> > ups(us.size());
       transform(us.begin(), us.end(), dus.begin(), ups.begin(),plus< Matrix<double, c, 1> >());
 
@@ -414,37 +501,48 @@ namespace gcop {
           z2us(uss, z);
           ce.AddSample(z, Update(xss, uss));
         }
-      } 
-      else 
+
+        xsas.push_back(xss);
+        usas.push_back(uss);
+      } else 
       {
+        // Jub is used to discard any samples with cost below Jub
         ce.Reset();
+        xsas.clear();
+        usas.clear();
 
         Vectortpd z;
         if (ntp == Dynamic)
           if (tp)
             z.resize(tp->ntp);
           else 
-            z.resize(us.size()*this->N);        
+            z.resize(us.size()*this->N);
 
         for (int j = 0; j < Ns; ++j) {
-          ce.Sample(z);
-          if (tp)
-          {
-            tp->From(ts, xss, uss, z, p);
-            double cost_trajectory = 0;
-            int N = uss.size();
-            for(int k = 0;k < N; k++)
-            { 
-              cost_trajectory += cost.L(ts[k], xss[k], uss[k], ts[k+1]-ts[k], p);
+          
+          double J = 0;
+          do {
+            ce.Sample(z);       
+            if (tp) {
+              tp->From(ts, xss, uss, z, p);
+              int N = uss.size();
+              J = 0;
+              for(int k = 0;k < N; k++) { 
+                J += cost.L(ts[k], xss[k], uss[k], ts[k+1]-ts[k], p);
+              }
+              J += cost.L(ts[N], xss[N], uss[N-1], 0, p);
+            } else {
+              z2us(uss, z);
+              J = Update(xss, uss);
             }
-            cost_trajectory += cost.L(ts[N], xss[N], uss[N-1], 0, p);
-            ce.AddSample(z, cost_trajectory);
-          }
-          else
-          {
-            z2us(uss, z);
-            ce.AddSample(z, Update(xss, uss));
-          }
+          } while(enforceUpperBound && J > Jub);
+          
+          ce.AddSample(z, J);
+          
+          // add to list of all samples
+          xsas.push_back(xss);
+          usas.push_back(uss);
+      
 
           //#DEBUG Number of function evaluations:
           //cout<<++nofevaluations<<endl;
@@ -455,6 +553,13 @@ namespace gcop {
           {
             external_render(j,xss);//ID for the sample trajectory
           }
+        }
+        
+        // update Jub to the maximum of the current sample set
+        if (updateUpperBound) {
+          cout << "Jub=" << Jub << " ce.Jmax=" << ce.Jmax << endl;          
+          Jub = min(Jub, ce.Jmax);
+          cout << "Jub=" << Jub << endl;
         }
       }
 
