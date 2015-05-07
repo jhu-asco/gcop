@@ -19,7 +19,7 @@ Point3dController::~Point3dController()
 
 }
 
-void Point3dController::Set(Vector3d &u, double t, const Point3dState &x)
+bool Point3dController::Set(Vector3d &u, double t, const Point3dState &x)
 {
   // error in base body configuration
   Vector6d ge;
@@ -32,5 +32,7 @@ void Point3dController::Set(Vector3d &u, double t, const Point3dState &x)
   // add desired acceleration if provided
   if (ad)
     u = u + *ad;
+
+  return true;
 }
 

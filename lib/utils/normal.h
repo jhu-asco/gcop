@@ -16,66 +16,70 @@ namespace gcop {
   typedef Matrix<double, _n, 1> Vectornd;
   typedef Matrix<double, _n, _n> Matrixnd;
 
-    /**
-     * n-dimensional normal distribution
-     * @param n dimension
-     */
-    Normal(int n = 1);
-
-    /**
-     * n-dimensional normal distribution with mean mu and covariance P
-     * @param mu mean
-     * @param P covariance
-     */    
-    Normal(const Vectornd &mu, const Matrixnd &P);
-
-    virtual ~Normal();
-
-    /**
-     * Compute likelihood of element x
-     * @param x n-dimensional vector
-     * @return likelihood of sample
-     */
-    double L(const Vectornd &x) const;
-
-
-    /**
-     * Sample from the distribution
-     * @param x n-dimensional vector to be sampled
-     * @return likelihood of sample
-     */
-    double Sample(Vectornd &x);    
-
-    /**
-     * Updates the Cholesky factor and the normalization constant
-     * @return true if covariance is positive definite
-     */
-    bool Update();
-    
-    /**
-     * Estimate the distribution using data xs and costs cs (optional)
-     * @param xps data points and corresponding probabilities (should sum up to 1)
-     * @param a smoothing parameter [ mu_new = a*mu + (1-a)*mu_old ], equation to 1 by default
-     */
-    void Fit(const vector<pair<Vectornd, double> > xps, double a = 1);
-
-    Vectornd mu;     ///< mean
-    Matrixnd P;      ///< covariance
-    
-    double det;      ///< determinant
-    Matrixnd Pinv;   ///< covariance inverse
-    bool pd;         ///< covariance is positive-definite
-    
-    Matrixnd A;      ///< cholesky factor
-    Vectornd rn;     ///< normal random vector
-
-    double norm;     ///< normalizer
-
-    int bd;          ///< force a block-diagonal structure with block dimension bd (0 by default means do not enforce)
-
-    LLT<Matrixnd> llt; ///< LLT object to Cholesky
+  /**
+   * n-dimensional normal distribution
+   * @param n dimension
+   */
+  Normal(int n = 1);
+  
+  /**
+   * n-dimensional normal distribution with mean mu and covariance P
+   * @param mu mean
+   * @param P covariance
+   */    
+  Normal(const Vectornd &mu, const Matrixnd &P);
+  
+  virtual ~Normal();
+  
+  /**
+   * Compute likelihood of element x
+   * @param x n-dimensional vector
+   * @return likelihood of sample
+   */
+  double L(const Vectornd &x) const;
+  
+  
+  /**
+   * Sample from the distribution
+   * @param x n-dimensional vector to be sampled
+   * @return likelihood of sample
+   */
+  double Sample(Vectornd &x);    
+  
+  /**
+   * Updates the Cholesky factor and the normalization constant
+   * @return true if covariance is positive definite
+   */
+  bool Update();
+  
+  /**
+   * Estimate the distribution using data xs and costs cs (optional)
+   * @param xps data points and corresponding probabilities (should sum up to 1)
+   * @param a smoothing parameter [ mu_new = a*mu + (1-a)*mu_old ], equation to 1 by default
+   */
+  void Fit(const vector<pair<Vectornd, double> > xps, double a = 1);
+  
+  Vectornd mu;     ///< mean
+  Matrixnd P;      ///< covariance
+  
+  double det;      ///< determinant
+  Matrixnd Pinv;   ///< covariance inverse
+  bool pd;         ///< covariance is positive-definite
+  
+  Matrixnd A;      ///< cholesky factor
+  Vectornd rn;     ///< normal random vector
+  
+  double norm;     ///< normalizer
+  
+  int bd;          ///< force a block-diagonal structure with block dimension bd (0 by default means do not enforce)
+  
+  bool bounded;    ///< whether to enforce a box support (false by default)
+  Vectornd lb;     ///< lower bound
+  Vectornd ub;     ///< upper bound
+  
+  LLT<Matrixnd> llt; ///< LLT object to Cholesky
   };
-
+  
 
 
   template<int _n>
@@ -83,14 +87,17 @@ namespace gcop {
     det(0),
     pd(false),
     norm(0),
-    bd(0) {
-
+    bd(0), 
+    bounded(false) {
+    
     if (_n == Dynamic) {
       mu.resize(n);
       P.resize(n,n);
       Pinv.resize(n,n);
       A.resize(n,n);
       rn.resize(n);
+      lb.resize(n);
+      ub.resize(n);
     }
     mu.setZero();
     P.setZero();
@@ -106,7 +113,8 @@ namespace gcop {
     det(0),
     pd(false),
     norm(0),
-    bd(0) {
+    bd(0),
+    bounded(false) {
     
     int n = mu.size();
 
@@ -114,6 +122,8 @@ namespace gcop {
       Pinv.resize(n,n);
       A.resize(n,n);
       rn.resize(n);
+      lb.resize(n);
+      ub.resize(n);
     }
     Pinv.setZero();
     A.setZero();
@@ -170,6 +180,12 @@ namespace gcop {
       }
       
       x = mu + A*rn;
+      
+      if (bounded) {
+        x = x.cwiseMax(lb);
+        x = x.cwiseMin(ub);
+      }
+
       return p;
     }
   

@@ -82,7 +82,7 @@ namespace gcop {
 
   template <typename T, int _nx, int _nu, int _np> 
     Cost<T, _nx, _nu, _np>::Cost(System<T, _nx, _nu, _np> &sys, 
-                                 double tf) : sys(sys), tf(tf) {
+                                      double tf) : sys(sys), tf(tf) {
   }  
   
   template <typename T, int _nx, int _nu, int _np> 

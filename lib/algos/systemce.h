@@ -555,13 +555,11 @@ namespace gcop {
           }
         }
         
-        // update Jub to the maximum of the current sample set
-        /*if (updateUpperBound) {
+        if (updateUpperBound) {
           cout << "Jub=" << Jub << " ce.Jmax=" << ce.Jmax << endl;          
           Jub = min(Jub, ce.Jmax);
           cout << "Jub=" << Jub << endl;
         }
-        */
       }
 
     // estimate distribution

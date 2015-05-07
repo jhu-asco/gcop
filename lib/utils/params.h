@@ -21,13 +21,16 @@ namespace gcop {
   using namespace Eigen;
 
 #define GCOP_PARAMS_MBL 256
+  
+  typedef Matrix<double, 6, 6> Matrix6d;
+  typedef Matrix<double, 6, 1> Vector6d;
+  typedef Matrix<double, 5, 5> Matrix5d;
+  typedef Matrix<double, 5, 1> Vector5d;
+
 
 class Params
 {
  public:
-
-  typedef Matrix<double, 6, 6> Matrix6d;
-  typedef Matrix<double, 6, 1> Vector6d;
 
   Params();
   Params(FILE *file);
@@ -66,6 +69,9 @@ class Params
 
   void SetVector4d(const char *name, const Vector4d &v);
   bool GetVector4d(const char *name, Vector4d &v) const;
+
+  void SetVector5d(const char *name, const Vector5d &v);
+  bool GetVector5d(const char *name, Vector5d &v) const;
 
   void SetVector6d(const char *name, const Vector6d &v);
   bool GetVector6d(const char *name, Vector6d &v) const;

@@ -19,7 +19,7 @@ MbsController::~MbsController()
 
 }
 
-void MbsController::Set(VectorXd &u, double t, const MbsState &x)
+bool MbsController::Set(VectorXd &u, double t, const MbsState &x)
 {
   // error in base body configuration
   Vector6d ge;
@@ -74,5 +74,7 @@ void MbsController::Set(VectorXd &u, double t, const MbsState &x)
 
   // assume there is no control matrix transformation for now
   u = M*dv + b;
+
+  return true;
 }
 

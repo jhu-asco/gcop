@@ -23,7 +23,7 @@ namespace gcop {
                   MbsState *xd = 0, 
                   VectorXd *ad = 0);
 
-    virtual void Set(VectorXd &u, double t, const MbsState &x);
+    virtual bool Set(VectorXd &u, double t, const MbsState &x);
 
     virtual ~MbsController();
 

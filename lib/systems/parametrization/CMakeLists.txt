@@ -1,5 +1,6 @@
 set(headers
   controltparam.h
+  controllertparam.h
   splinetparam.h
   uniformsplinetparam.h
   flatoutputtparam.h

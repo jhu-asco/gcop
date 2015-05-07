@@ -17,7 +17,6 @@ Rccar::Rccar(int np) : System(Rn<4>::Instance(),2,np), l(.3), r(0.5), h(0.01)
   U.ub[1] = tan(M_PI/5);
 }
 
-
 double Rccar::Step(Vector4d& xb, double t, const Vector4d& xa,
                    const Vector2d& u, double h, const VectorXd *p,
                    Matrix4d *A, Matrix42d *B, Matrix4pd *C) {

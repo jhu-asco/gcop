@@ -52,8 +52,7 @@ namespace gcop {
     virtual ~TparamDocp();
 
     /**
-     * Perform one DOCP iteration. Internally calls:
-     * are updated. 
+     * Perform one DOCP iteration.
      */
     void Iterate();
 

@@ -1,16 +1,28 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #ifndef GCOP_BODY3DCOST_H
 #define GCOP_BODY3DCOST_H
 
 #include "body3d.h"
-#include "body3dtrack.h"
 #include "lqcost.h"
 
 namespace gcop {
   
   using namespace std;
   using namespace Eigen;
-  
-  template <int c = 6> class Body3dCost : public LqCost<Body3dState, 12, c> {
+
+  /**
+   * Linear-quadratic cost for rigid body systems
+   *
+   * Author: Marin Kobilarov
+   */
+  template <int c = 6> class Body3dCost : public LqCost<Body3dState, 12, c, Dynamic, 6> {
     
     typedef Matrix<double, c, 1> Vectorcd;
     typedef Matrix<double, c, c> Matrixcd;
@@ -20,34 +32,11 @@ namespace gcop {
   public:
     
     Body3dCost(Body3d<c> &sys, double tf, const Body3dState &xf, bool diag = true);
-    
-    /*    double L(double t, const Body3dState &x, const Vectorcd &u,
-             Vector12d *Lx = 0, Matrix12d *Lxx = 0,
-             Vectorcd *Lu = 0, Matrixcd *Luu = 0,
-             Matrix12xcd *Lxu = 0);
-    */
-    Body3dTrack *track;
-    double ko;
   };  
   
   template <int c> Body3dCost<c>::Body3dCost(Body3d<c> &sys, double tf, const Body3dState &xf, bool diag) : 
-    LqCost<Body3dState, 12, c>(sys, tf, xf, diag) {
+    LqCost<Body3dState, 12, c, Dynamic, 6>(sys, tf, xf, diag) {
 
-    /*
-      Q(0,0) = .05;
-      Q(1,1) = .05;
-      Q(2,2) = .05;
-      Q(3,3) = .1;
-      Q(4,4) = .1;
-      Q(5,5) = .1;
-      Q(6,6) = 0;
-      Q(7,7) = 0;
-      Q(8,8) = 0;
-      Q(9,9) = 0;
-      Q(10,10) = 0;
-      Q(11,11) = 0;
-    */
-    
     this->Qf(0,0) = .5;
     this->Qf(1,1) = .5;
     this->Qf(2,2) = .5;
@@ -64,76 +53,6 @@ namespace gcop {
     
     this->R.diagonal() = Matrix<double, c, 1>::Constant(.1);
   }
-  /*  
-template <int c>
-  double Body3dCost<c>::L(double t, const Body3dState &x, const Matrix<double, c, 1> &u,
-                          Vector12d *Lx, Matrix12d *Lxx,
-                          Matrix<double, c, 1> *Lu, Matrix<double, c, c> *Luu,
-                          Matrix<double, 12, c> *Lxu)
-{
-  Vector12d dx;
-  this->X.Lift(dx, this->xf, x);
-
-  
-  // check if final state
-  if (t > this->tf - 1e-10) {
-    if (Lx) {
-      if (this->diag)
-        *Lx = this->Qf.diagonal().cwiseProduct(dx);
-      else
-        *Lx = this->Qf*dx;
-      
-      // add dcayinv if this->Q(1:3,1:3) != a*Id
-      //      (*Lx).head(3) = Rt*(*Lx).head<3>();
-    }
-    if (Lxx) {
-      *Lxx = this->Qf;
-      //      (*Lxx).topLeftCorner(3,3) = Rt*(*Lxx).topLeftCorner<3,3>()*R;
-    }
-
-    if (Lu)
-      Lu->setZero();
-    if (Luu)
-      Luu->setZero();
-    if (Lxu)
-      Lxu->setZero();
-
-    if (this->diag)
-      return dx.dot(this->Qf.diagonal().cwiseProduct(dx))/2;
-    else
-      return dx.dot(this->Qf*dx)/2;
-    
-  } else {
-    if (Lx) {
-      if (this->diag)
-        *Lx = this->Q.diagonal().cwiseProduct(dx);
-      else
-        *Lx = this->Q*dx;
-      //      (*Lx).head<3>() = Rat*(*Lx).head<3>();
-    }
-    if (Lxx) {
-      *Lxx = this->Q;
-      //      (*Lxx).topLeftCorner<3,3>() = Rt*this->Q.topLeftCorner<3,3>()*R;
-    }
-    if (Lu)
-      if (this->diag)
-        *Lu = this->R.diagonal().cwiseProduct(u);
-      else
-        *Lu = this->R*u;
-
-    if (Luu)
-      *Luu = this->R;
-      
-    if (Lxu)
-      Lxu->setZero();
-
-    if (this->diag)
-      return (dx.dot(this->Q.diagonal().cwiseProduct(dx)) + u.dot(this->R.diagonal().cwiseProduct(u)))/2;
-    else
-      return (dx.dot(this->Q*dx) + u.dot(this->R*u))/2;
-  }
-}
-  */
 }
 
 
