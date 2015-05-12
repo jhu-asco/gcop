@@ -44,6 +44,7 @@ void VehicleDemo::initPhysics()
   tr.setRotation(btQuaternion(0,-M_PI/2,0));
   world->LocalCreateRigidBody(0,tr, groundShape);
   brccar = new Bulletrccar(*world);
+  base_brccar = (BaseSystem *)brccar;
 }
 
 //to be implemented by the demo
@@ -89,7 +90,7 @@ void VehicleDemo::clientMoveAndDisplay(void)
     float dt = getDeltaTimeMicroseconds() * 0.000001f;
 
     //cout<<"u: "<<u.transpose()<<"\tdt: "<<dt<<endl;
-    brccar->Step2(u, dt);//Move //can change number of substeps based on idle #TODO
+    base_brccar->Step(u, dt);//Move //can change number of substeps based on idle #TODO
   }
 
 

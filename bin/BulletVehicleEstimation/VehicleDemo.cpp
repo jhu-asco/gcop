@@ -87,6 +87,7 @@ void VehicleDemo::initPhysics()
 
   /////////////Loading Car:
   brccar = new Bulletrccar(*world);//Creating a brand new bullet car system
+  base_brccar = (Bulletrccar *)brccar;
   brccar->kp_steer = 0.5f;//Steering angle
 
   //////////// Setup the Optimization Problem:
@@ -271,7 +272,7 @@ void VehicleDemo::initPhysics()
       if (brccar)
       {
         //cout<<"u: "<<us[i].transpose()<<endl;
-        brccar->Step(xs[i+1], us[i], h);//Move
+        base_brccar->Step(xs[i+1], us[i], h);//Move
       }
       if((ts_sensor[sensor_index] - ts[i])>= 0 && (ts_sensor[sensor_index] - ts[i+1]) < 0)
       {
@@ -343,7 +344,7 @@ void VehicleDemo::MoveAndDisplay(double h)
     Vector2d u;
     u<<gVehicleVelocity, gVehicleSteering;
     //cout<<"u: "<<u.transpose()<<"\tdt: "<<dt<<endl;
-    brccar->Step2(u, h);//Move
+    base_brccar->Step(u, h);//Move
   }
 
 

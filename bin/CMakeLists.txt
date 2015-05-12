@@ -239,7 +239,7 @@ endif (BUILD_TESTS)
 
 if (USE_BULLET)
   if (BULLET_FOUND)
-    add_subdirectory (SimpleOpenGL3)
+    #add_subdirectory (SimpleOpenGL3)
     add_subdirectory (BulletVehicleEstimation)
     add_subdirectory (BulletVehicleEstimation1)
     add_subdirectory (BulletSTLDemo)
