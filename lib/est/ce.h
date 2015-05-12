@@ -114,6 +114,10 @@ namespace gcop {
 
   double Jmin;    ///< minimum cost
 
+  double Jmax;    ///< current Jmax (discard any samples with costs higher than Jmax)
+
+  double Jave;    ///< average cost over all samples
+
   };
   
   template <int _n>
@@ -128,7 +132,9 @@ namespace gcop {
     b(1),
     bAuto(true),
     inc(false),
-    Jmin(std::numeric_limits<double>::max())
+    Jmin(std::numeric_limits<double>::max()),
+    Jmax(0),
+    Jave(std::numeric_limits<double>::max())
       {
         if (_n == Dynamic) {
           this->S.resize(n, n);
@@ -136,13 +142,13 @@ namespace gcop {
         } else {
           assert(_n == n);
         }
-
+        
         if (S)
           this->S = *S;
         else
           this->S.setZero();
       }
-
+  
   template <int _n>
     Ce<_n>::~Ce()
     {
@@ -155,11 +161,19 @@ namespace gcop {
       zps.clear();
       cs.clear();
       Jmin = std::numeric_limits<double>::max();
+      Jmax = 0;
     }
 
   template <int _n>
     void Ce<_n>::AddSample(const Vectornd &z, double c) 
     { 
+      int Ns = zps.size();
+      if (!Ns) {
+        Jave = c;
+        Jmax = c;
+      } else {
+        Jave = (Jave*Ns + c)/(Ns + 1);
+      }
       zps.push_back(make_pair(z, c));
       cs.push_back(c);
 
@@ -167,6 +181,10 @@ namespace gcop {
         zmin = z;
         Jmin = c;
       }
+
+      if (Jmax < c) {
+        Jmax = c;
+      }      
     }
 
   template <int _n>

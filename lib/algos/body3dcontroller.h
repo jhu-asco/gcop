@@ -31,7 +31,7 @@ namespace gcop {
                    Body3dState *xd = 0, 
                    Vector6d *ad = 0);
 
-  virtual void Set(Vectorcd &u, double t, const Body3dState &x);
+  virtual bool Set(Vectorcd &u, double t, const Body3dState &x);
   
   virtual ~Body3dController();
   
@@ -61,7 +61,7 @@ namespace gcop {
     }
   
   template <int c>   
-    void Body3dController<c>::Body3dController::Set(Vectorcd &u, double t, const Body3dState &x)
+    bool Body3dController<c>::Body3dController::Set(Vectorcd &u, double t, const Body3dState &x)
     {
       const Matrix3d& R = x.first;  // rotation
 
@@ -84,6 +84,7 @@ namespace gcop {
             
       u.head(3) = -Kp.head<3>().cwiseProduct(eR) - Kd.head<3>().cwiseProduct(ew);
       u.tail(3) = R.transpose()*(-Kp.tail<3>().cwiseProduct(ex) - Kd.tail<3>().cwiseProduct(ev) - sys.fp);
+      return true;
     }
 };
 

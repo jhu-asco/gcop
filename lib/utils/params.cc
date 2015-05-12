@@ -284,6 +284,42 @@ bool Params::GetVector4d(const char *name, Vector4d &v) const
   return true;
 }
 
+void Params::SetVector5d(const char *name, const Vector5d &v)
+{
+  vector<double>::const_iterator it;
+  stringstream s;
+  unsigned int i = 0;
+  for (int i = 0; i < v.size(); ++i) {
+    s << v[i];
+    if (i < v.size()-1)
+      s << ",";
+  }
+  valueMap[name] = s.str();
+}
+
+
+bool Params::GetVector5d(const char *name, Vector5d &v) const
+{
+  std::map<string, string>::const_iterator i = valueMap.find(name);
+  if (i == valueMap.end()) {
+    // cerr << "Error:\tParams::Get:\tparameter <" << name << "> not found!" << endl;
+    return false;
+  }
+
+  vector<string> tokens;
+  Tokenize(i->second, tokens, ", ");
+  vector<string>::iterator it;
+  int vi = 0;
+  for (it = tokens.begin(); it != tokens.end(); ++it) {
+    string str = *it;
+    replace(str, string("pi"), string("3.141592"));  
+    v[vi] = atof(str.c_str());
+    ++vi;
+  }
+  return true;
+}
+
+
 void Params::SetVector6d(const char *name, const Vector6d &v)
 {
   vector<double>::const_iterator it;

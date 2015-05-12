@@ -44,7 +44,7 @@ namespace gcop {
   typedef Matrix<double, _np, _nx> Matrixmnd;
     
   Constraint(int ng = 0) : ng(_ng != Dynamic ? _ng : ng) {
-    assert(this->ng > 0);      
+    assert(this->ng > 0);    
   }
 
   // constraint g(t,x,u,p)<=0 
@@ -54,8 +54,17 @@ namespace gcop {
                           Matrixgnd *dgdx = 0, Matrixgcd *dgdu = 0,
                           Matrixgmd *dgdp = 0) = 0;
 
+  // constraint g(t,x)<=0 
+  virtual bool operator()(Vectorgd &g,
+                          double t, const T &x, 
+                          Matrixgnd *dgdx = 0) {
+    return (*this)(g, t, x, ub, 0, dgdx);
+  }
 
-  int ng; ///< constraint dimension
+  int ng;        ///< constraint dimension
+  
+  private:
+  Vectorcd ub;   ///< blank control 
   };
 }
 

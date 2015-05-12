@@ -10,7 +10,8 @@ namespace gcop {
 using namespace std;
 using namespace Eigen;
 
-typedef Constraint<Body3dState, 12, 3, Dynamic, 1> Body3dConstraint;
+ typedef Constraint<Body3dState, 12, 6, Dynamic, 1> Body3dConstraint;
+ typedef Matrix<double, 6, 1> Vector6d;
 
 /**
  * Gyroscopic obstacle avoidance controller, i.e. it produces forces
@@ -19,7 +20,7 @@ typedef Constraint<Body3dState, 12, 3, Dynamic, 1> Body3dConstraint;
  *
  *  Author: Marin Kobilarov, 2007 (originally in the DGC library)
  */
-class GavoidController : public Controller<Body3dState, Vector3d> {
+class GavoidController : public Controller<Body3dState, Vector6d> {
  public:
   
   /**
@@ -31,7 +32,7 @@ class GavoidController : public Controller<Body3dState, Vector3d> {
   
   virtual ~GavoidController();
   
-  virtual void Set(Vector3d &u, double t, const Body3dState &x);
+  virtual bool Set(Vector6d &u, double t, const Body3dState &x);
   
   Body3dConstraint &con; ///< obstacle constraint
   

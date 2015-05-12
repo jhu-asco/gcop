@@ -18,10 +18,10 @@ GavoidController::~GavoidController()
 
 }
 
-void GavoidController::Set(Vector3d &u, double t, const Body3dState &x)
+bool GavoidController::Set(Vector6d &u, double t, const Body3dState &x)
 {
   Matrix<double, 1, 12> dgdx;
-  Matrix<double, 1,1> d; // distance to obstacle
+  Matrix<double, 1, 1> d; // distance to obstacle
   con(d, t, x, u, 0, &dgdx);
   
   Vector3d N = dgdx.segment<3>(3); // unit vector to obstacle
@@ -41,7 +41,7 @@ void GavoidController::Set(Vector3d &u, double t, const Body3dState &x)
   if (od < this->sr) {
     double vn = v.norm();
     if (vn < tol)
-      return;
+      return true;
     
     Vector3d Sv = N.cross(v/vn);
     
@@ -65,5 +65,7 @@ void GavoidController::Set(Vector3d &u, double t, const Body3dState &x)
   }
 
   // cout << "S=" << S << " fS=" << cross(S, sys.stvel ? v : R*v) << endl;
-  u = S.cross(v) - fb;  
+  u.head<3>().setZero();
+  u.tail<3>() = S.cross(v) - fb;  
+  return true;
 }

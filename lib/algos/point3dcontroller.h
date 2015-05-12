@@ -28,7 +28,7 @@ namespace gcop {
                       Point3dState *xd = 0, 
                       Vector3d *ad = 0);
     
-    virtual void Set(Vector3d &u, double t, const Point3dState &x);
+    virtual bool Set(Vector3d &u, double t, const Point3dState &x);
 
     virtual ~Point3dController();
 

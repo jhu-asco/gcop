@@ -46,7 +46,7 @@ namespace gcop {
     Vectornd w;   ///< ellipsoidal bound weights
 
     /**
-     * Find a vector v = v0 + d for given v0 and d  
+     * Find a vector v = v0 + d for given v0 and d
      * such that v satisfies the bounds; this is accomplished by 
      * modifying d appropriately and returning the updated v and d.
      * Default implementation is assuming the bound is a box defined by
@@ -141,9 +141,6 @@ namespace gcop {
 
       double s = (- b + sqrt(b*b - 4*a*c))/(2*a);
       
-      //      assert(s >= -1e-16);
-      
-      // p
       for (int i = 0; i < d.size(); ++i) {
         if (w[i] > 1e-16) {
           d[i] = s*d[i];   

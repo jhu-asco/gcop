@@ -64,4 +64,5 @@ set(headers
   snakeview.h
   airplaneview.h
   normal2dview.h
+  systemceview.h
 )

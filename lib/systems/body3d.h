@@ -17,7 +17,9 @@ namespace gcop {
   
   typedef Matrix<double, 6, 1> Vector6d;
   typedef Matrix<double, 6, 6> Matrix6d;
+  typedef Matrix<double, 12, 1> Vector12d;
   typedef Matrix<double, 12, 12> Matrix12d;
+  typedef Matrix<double, 12, 6> Matrix12x6d;
   
   /**
    * A single rigid body system
@@ -28,85 +30,99 @@ namespace gcop {
    */
   template <int c = 6> class Body3d : public System<Body3dState, 12, c> {
   protected:
-    
-    typedef Matrix<double, c, 1> Vectorcd;
-    typedef Matrix<double, c, c> Matrixcd;
-    typedef Matrix<double, 6, c> Matrix6xcd;
-    typedef Matrix<double, 12, c> Matrix12xcd;
-    typedef Matrix<double, 12, Dynamic> Matrix12Xd;
-    
+  
+  typedef Matrix<double, c, 1> Vectorcd;
+  typedef Matrix<double, c, c> Matrixcd;
+  typedef Matrix<double, 6, c> Matrix6xcd;
+  typedef Matrix<double, 12, c> Matrix12xcd;
+  typedef Matrix<double, 12, Dynamic> Matrix12Xd;
+  
   public:
-    
-    Body3d();
-    
-    Body3d(const Vector3d &ds, double m);
-    
-    Body3d(const Vector3d &ds, double m, const Vector3d &J);
+  
+  Body3d();
+  
+  Body3d(const Vector3d &ds, double m);
+  
+  Body3d(const Vector3d &ds, double m, const Vector3d &J);
+  
+  virtual ~Body3d();
+  
+  virtual double Step(Body3dState &xb, double t, const Body3dState &xa, 
+                      const Vectorcd &u, double h, const VectorXd *p = 0,
+                      Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
 
-    virtual ~Body3d();
-    
-    virtual double Step(Body3dState &xb, double t, const Body3dState &xa, 
-                const Vectorcd &u, double h, const VectorXd *p = 0,
-                Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
+  virtual bool NoiseMatrix(Matrix12d &Q, double t, const Body3dState &x, 
+                           const Vectorcd &u, double h, const VectorXd *p = 0);
+  
+  
+  double SympStep(double t, Body3dState &xb, const Body3dState &xa, 
+                  const Vectorcd &u, double h, const VectorXd *p = 0,
+                  Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
+  
+  double EulerStep(double t, Body3dState &xb, const Body3dState &xa, 
+                   const Vectorcd &u, double h, const VectorXd *p = 0,
+                   Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);    
+  
+  
 
-    double SympStep(double t, Body3dState &xb, const Body3dState &xa, 
-                    const Vectorcd &u, double h, const VectorXd *p = 0,
-                    Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
-    
-    double EulerStep(double t, Body3dState &xb, const Body3dState &xa, 
-                     const Vectorcd &u, double h, const VectorXd *p = 0,
-                     Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);    
-    
-    void ID(Vector6d &f,
-            double t, const Body3dState &xb, const Body3dState &xa,
-            const Vectorcd &u, double h);
+  /**
+   * Inverse dynamics
+   * @param f inverse dynamics vector
+   * @param t time
+   * @param xb end state
+   * @param xa start state
+   * @param u control
+   * @param h time-step
+   */
+  void ID(Vector6d &f,
+          double t, const Body3dState &xb, const Body3dState &xa,
+          const Vectorcd &u, double h);
+  
+  void StateAndControlsToFlat(VectorXd &y, const Body3dState &x, const Vectorcd &u);
+  
+  void FlatToStateAndControls(Body3dState &x, Vectorcd &u, const std::vector<VectorXd> &y);
+  
+  /**
+   * Compute moments of inertia J given mass m and dimensions ds
+   * @param J moments of inertia (3x1 vector)
+   * @param m mass
+   * @param ds dimensions (assume a rectangular body)
+   */
+  static void Compute(Vector3d &J, double m, const Vector3d &ds);
+  
+  /**
+   * Compute moments of inertia tensor I given mass m and dimensions ds
+   * @param J moments of inertia (6x1 vector)
+   * @param m mass
+   * @param ds dimensions (assume a rectangular body)
+   */
+  static void Compute(Vector6d &I, double m, const Vector3d &ds);
 
-    void StateAndControlsToFlat(VectorXd &y, const Body3dState &x, const Vectorcd &u);
-    
-    void FlatToStateAndControls(Body3dState &x, Vectorcd &u, const std::vector<VectorXd> &y);
+  Vector3d ds;    ///< body dimensions
+  
+  double m;      ///< mass
+  
+  Vector3d J;    ///< 3x1 principal moments of inertia
+  
+  Vector6d I;    ///< 6x1 spatial inertia matrix
 
-    /**
-     * Compute moments of inertia J given mass m and dimensions ds
-     * @param J moments of inertia (3x1 vector)
-     * @param m mass
-     * @param ds dimensions (assume a rectangular body)
-     */
-    static void Compute(Vector3d &J, double m, const Vector3d &ds);
+  Vector6d Ii;   ///< 6x1 spatial inertia matrix inverse
+  
+  Vector3d Dw;   ///< linear rotational damping terms
+  
+  Vector3d Dv;   ///< linear translational damping terms
+    
+  Vector3d fp;   ///< constant position force in spatial frame (e.g. due to gravity)
+  
+  Matrix6xcd Bu; ///< control input transformation
+  
+  bool symp;     ///< symplectic?
+  
+  string name;   ///< Unique name of the body
 
-    /**
-     * Compute moments of inertia tensor I given mass m and dimensions ds
-     * @param J moments of inertia (6x1 vector)
-     * @param m mass
-     * @param ds dimensions (assume a rectangular body)
-     */
-    static void Compute(Vector6d &I, double m, const Vector3d &ds);
-
-    /// TODO: visual element
-    //    boost::shared_ptr<Visual> visual;
-    
-    /// TODO: collision element
-    //    boost::shared_ptr<Collision> collision;
-    
-    Vector3d ds;    ///< body dimensions
-    
-    double m;      ///< mass
-    
-    Vector3d J;    ///< 3x1 principal moments of inertia
-    
-    Vector6d I;    ///< 6x1 spatial inertia matrix
-    
-    Vector3d Dw;   ///< linear rotational damping terms
-    
-    Vector3d Dv;   ///< linear translational damping terms
-    
-    Vector3d fp;   ///< constant position force in spatial frame (e.g. due to gravity)
-    
-    Matrix6xcd Bu; ///< control input transformation
-
-    bool symp;     ///< symplectic?
-		
-    string name;   ///< Unique name of the body
-
+  double sw;     ///< process noise: standard deviation in torque (zero by default)
+  double sv;     ///< process noise: standard deviation in force (zero by default)
+  
   };  
   
 
@@ -119,7 +135,8 @@ namespace gcop {
     Dv(0,0,0),
     fp(0,0,0),
     Bu(Matrix<double, 6, c>::Identity()),
-    symp(true) {
+    symp(true),
+    sw(0), sv(0) {
     
     Compute(J, m, ds);
     Compute(I, m, ds);
@@ -134,7 +151,8 @@ namespace gcop {
     Dv(0,0,0),
     fp(0,0,0),
     Bu(Matrix<double, 6, c>::Identity()),
-    symp(true) {
+    symp(true),
+    sw(0), sv(0) {
 
     Compute(J, m, ds);
     Compute(I, m, ds);
@@ -148,7 +166,8 @@ namespace gcop {
     Dv(0,0,0),
     fp(0,0,0),
     Bu(Matrix<double, 6, c>::Identity()),
-    symp(true) {
+    symp(true),
+    sw(0), sv(0) {
     
   }
 
@@ -171,6 +190,30 @@ template<int c>  Body3d<c>::~Body3d()
     I[3] = m; 
     I[4] = m;
     I[5] = m;
+  }
+
+
+  template <int c> 
+    bool Body3d<c>::NoiseMatrix(Matrix12d &Q, 
+                                double t, const Body3dState &x, 
+                                const Vectorcd &u, double dt, 
+                                const VectorXd *p) {    
+    Q.setZero();
+    double dt2 = dt*dt/2;
+    Q(0,6) = sw*dt2/J(0);
+    Q(1,7) = sw*dt2/J(1);
+    Q(2,8) = sw*dt2/J(2);
+    Q(3,9) = sv*dt2/m;
+    Q(4,10) = sv*dt2/m;
+    Q(5,11) = sv*dt2/m;
+
+    Q(6,6) = sw*dt/J(0);
+    Q(7,7) = sw*dt/J(1);
+    Q(8,8) = sw*dt/J(2);
+    Q(9,9) = sv*dt/m;
+    Q(10,10) = sv*dt/m;
+    Q(11,11) = sv*dt/m;
+    return true;
   }
 
   

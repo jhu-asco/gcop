@@ -1,7 +1,8 @@
 #include <iomanip>
 #include <iostream>
-#include "body3dcontroller.h"
-#include "gavoidcontroller.h"
+//#include "body3dcontroller.h"
+#include "body3davoidcontroller.h"
+//#include "gavoidcontroller.h"
 #include "viewer.h"
 #include "body3dview.h"
 #include "utils.h"
@@ -18,7 +19,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef PqpDem<Body3dState, 12, 3> Body3dPqpDem;
+typedef PqpDem<Body3dState, 12, 6> Body3dPqpDem;
 
 Params params;
 
@@ -31,6 +32,9 @@ void solver_process(Viewer* viewer)
   int N = 500;      // discrete trajectory segments
   double tf = 10;   // time-horizon
 
+  params.GetInt("N", N);  
+  params.GetDouble("tf", tf);
+
 #ifdef MAP_SIMPLE
 
   if (viewer)
@@ -38,25 +42,15 @@ void solver_process(Viewer* viewer)
   Dem dem("maps/simple.ppm", .5, 15);
   dem.Convolve(2);
 
-  DemView dv(dem);
-  if (viewer)
-    viewer->Add(dv);
-
-  double h = tf/N; // time-step
-
-  // system
-
   // cost 
   Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
   xf.second[0] = 5;  
   xf.second[1] = 5;  
   xf.second[2] = 5;
 
-  Body3dController<> ctrl(sys, &xf);
-
-  Body3dPqpDem pqp(dem, .1);
-  GavoidController gctrl(pqp);
-  gctrl.k = 5;
+  Body3dPqpDem pqp(dem, .1);  
+  Body3dAvoidController<> ctrl(sys, &xf, 0, &pqp);
+  ctrl.avoidCtrl->k = 5; // avoidance gain
 
   // states
   vector<Body3dState> xs(N+1);
@@ -67,10 +61,6 @@ void solver_process(Viewer* viewer)
   xs[0].second[2] = 10;
   
 #else
-  params.GetInt("N", N);  
-  params.GetDouble("tf", tf);
-
-  double h = tf/N;
 
   // cost 
   Body3dState x0(Matrix3d::Identity(), Vector9d::Zero());
@@ -95,7 +85,7 @@ void solver_process(Viewer* viewer)
   params.GetVectorXd("xf", qvf);  
   SO3::Instance().q2g(xf.first, qvf.head(3));    
   xf.second = qvf.segment<9>(3);
-
+  
   float camParams[5];
   if (viewer) {
     params.GetFloatArray("camParams", 5, camParams);
@@ -111,30 +101,27 @@ void solver_process(Viewer* viewer)
   Dem dem(mapName.c_str(), mapCellSize, mapHeightScale);
   //  dem.Convolve(1);
 
-  DemView dv(dem);
-  //  dv.wire = true;
-  if (viewer)
-    viewer->Add(dv);
-
   double cr = 0;
   params.GetDouble("cr", cr);
 
-  Body3dController<> ctrl(sys, &xf);
+  Body3dPqpDem pqp(dem, cr);  
+  Body3dAvoidController<> ctrl(sys, &xf, 0, &pqp);
+  ctrl.avoidCtrl->k = 5; // avoidance gain
+  ctrl.avoidCtrl->sr = 20; // avoidance gain
 
-  Body3dPqpDem pqp(dem, cr);
-  GavoidController gctrl(pqp);
-  gctrl.k = 5;
-  gctrl.sr = 20;
-
-  params.GetVector6d("kp", ctrl.Kp);  
-  params.GetVector6d("kd", ctrl.Kd);  
-  params.GetDouble("ko", gctrl.k);  
-  params.GetDouble("kb", gctrl.kb);  
-  params.GetDouble("sr", gctrl.sr);  
-
-  
+  params.GetVector6d("kp", ctrl.stabCtrl.Kp);  
+  params.GetVector6d("kd", ctrl.stabCtrl.Kd);  
+  params.GetDouble("ko", ctrl.avoidCtrl->k); 
+  params.GetDouble("kb", ctrl.avoidCtrl->kb);  
+  params.GetDouble("sr", ctrl.avoidCtrl->sr);
 
 #endif
+
+  DemView dv(dem);
+  if (viewer)
+    viewer->Add(dv);
+
+  double h = tf/N; // time-step
 
   // trajectory view
   Body3dView<6> view(sys, &xs);
@@ -154,14 +141,9 @@ void solver_process(Viewer* viewer)
   double temp2[50000];
 
   Vector6d u; 
-  Vector3d up; 
-
   for (int i = 0; i < N; ++i) {
     double t = i*h;
     ctrl.Set(u, t, xs[i]);
-    gctrl.Set(up, t, xs[i]);
-    u.tail<3>() += up;
-
     sys.Step(xs[i+1], t, xs[i], u, h);    
   }
 

@@ -18,6 +18,7 @@ set(headers
       point3dcontroller.h
       body3dcontroller.h
       gavoidcontroller.h
+      body3davoidcontroller.h
       systemce.h
       aspsa.h
       spsa.h

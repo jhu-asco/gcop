@@ -179,7 +179,7 @@ namespace gcop {
                       double h, const Vectormd *p = 0,
                       Matrixnd *A = 0, Matrixncd *B = 0, Matrixnmd *C = 0);
   
-  /** 
+  /**
    * A version of most general step function with noise and internal state
    * @param xb resulting state
    * @param u current control
