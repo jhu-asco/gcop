@@ -21,7 +21,8 @@ namespace gcop {
     int nx = Dynamic, 
     int nu = Dynamic,
     int np = Dynamic,
-    int _ntp = Dynamic> class Tparam {
+    int _ntp = Dynamic,
+    typename Tc = T> class Tparam {
     
     typedef Matrix<double, nx, 1> Vectornd;
     typedef Matrix<double, nu, 1> Vectorcd;
@@ -44,8 +45,9 @@ namespace gcop {
      * @param xs states
      * @param us controls
      * @param p system parameters (optional)
+     * @return true if conversion was successful
      */
-    virtual void To(Vectorntpd &s, 
+    virtual bool To(Vectorntpd &s, 
                     const vector<double> &ts, 
                     const vector<T> &xs, 
                     const vector<Vectorcd> &us,
@@ -58,26 +60,29 @@ namespace gcop {
      * @param us controls
      * @param s trajectory parametrization vector
      * @param p system parameters (optional)
+     * @return true if conversion was successful
      */
-    virtual void From(vector<double> &ts, 
+    virtual bool From(vector<double> &ts, 
                       vector<T> &xs, 
                       vector<Vectorcd> &us,
                       const Vectorntpd &s,
                       Vectormd *p = 0);
+
+    virtual bool SetContext(const Tc &c) { return true; }
     
     System<T, nx, nu, np> &sys;     ///< system
     int ntp;                        ///< parameter vector dimension
   };
   
-  template <typename T, int nx, int nu, int np, int _ntp> 
-    Tparam<T, nx, nu, np, _ntp>::Tparam(System<T, nx, nu, np> &sys, int ntp) : 
+  template <typename T, int nx, int nu, int np, int _ntp, typename Tc> 
+    Tparam<T, nx, nu, np, _ntp, Tc>::Tparam(System<T, nx, nu, np> &sys, int ntp) : 
     sys(sys), ntp(_ntp != Dynamic ? _ntp : ntp) {
     assert(ntp > 0);
     std::cout<<"ntp: "<<ntp<<std::endl;//#DEBUG
   }
 
-  template <typename T, int nx, int nu, int np, int _ntp> 
-    void Tparam<T, nx, nu, np, _ntp>::To(Vectorntpd &s, 
+  template <typename T, int nx, int nu, int np, int _ntp, typename Tc> 
+    bool Tparam<T, nx, nu, np, _ntp, Tc>::To(Vectorntpd &s, 
                                          const vector<double> &ts, 
                                          const vector<T> &xs, 
                                          const vector<Vectorcd> &us,
@@ -86,11 +91,12 @@ namespace gcop {
     for (int i = 0; i < us.size(); ++i) {
       memcpy(s.data() + i*sys.U.n, us[i].data(), sys.U.n*sizeof(double));
     }
+    return true;
     // assume parameter p does not play a role
   }
   
-  template <typename T, int nx, int nu, int np, int _ntp> 
-    void Tparam<T, nx, nu, np, _ntp>::From(vector<double> &ts, 
+  template <typename T, int nx, int nu, int np, int _ntp, typename Tc> 
+    bool Tparam<T, nx, nu, np, _ntp, Tc>::From(vector<double> &ts, 
                                            vector<T> &xs, 
                                            vector<Vectorcd> &us,
                                            const Vectorntpd &s,
@@ -101,6 +107,7 @@ namespace gcop {
       memcpy(us[i].data(), s.data() + i*sys.U.n, sys.U.n*sizeof(double));
       sys.Step(xs[i+1], us[i], ts[i+1] - ts[i], p);
     }
+    return true;
   }
 }
 

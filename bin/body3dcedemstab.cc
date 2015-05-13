@@ -1,7 +1,7 @@
 #include <iostream>
 #include "viewer.h"
 #include "body3dview.h"
-#include "body3davoidcontroller.h"
+#include "body3ddemcontroller.h"
 #include "utils.h"
 #include "disk.h"
 #include "systemce.h"
@@ -11,9 +11,7 @@
 #include "demview.h"
 #include "pqpdem.h"
 #include "systemceview.h"
-#include "dsl/gridsearch.h"
-#include "dsl/distedgecost.h"
-
+#include <fstream>
 
 using namespace std;
 using namespace Eigen;
@@ -29,6 +27,7 @@ typedef SystemCeView<Body3dState, 12, 6, Dynamic, 5> Body3dCeView;
 typedef PqpDem<Body3dState, 12, 6> Body3dPqpDem;
 
 Params params;
+
 
 class Body3dSampler : public Creator<Body3dState> {
 public:
@@ -57,12 +56,14 @@ public:
   vector<Body3dState> samples;
 };
 
-
 void solver_process(Viewer* viewer)
 {
   viewer->SetCamera(-7.25, 61, -2.8, -2.55, -10);
 
   Body3d<6> sys;
+  sys.U.bnd = true;
+  sys.U.lb.setConstant(-50);
+  sys.U.ub.setConstant(50);
 
   int N = 256;
   double tf = 5;
@@ -76,12 +77,12 @@ void solver_process(Viewer* viewer)
   Body3dState x0(Matrix3d::Identity(), Vector9d::Zero());
   x0.second[0] = 46;
   x0.second[1] = 82;
-  x0.second[2] = 2;
+  x0.second[2] = 5;
 
   Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
   xf.second[0] = 160;
   xf.second[1] = 125;  
-  xf.second[2] = 2;
+  xf.second[2] = 5;
 
   VectorXd qv0(12);
   params.GetVectorXd("x0", qv0);  
@@ -116,12 +117,17 @@ void solver_process(Viewer* viewer)
 
   Body3dPqpDem pqp(dem, cr);  
 
-  Body3dAvoidController<> ctrl(sys, &xf, 0, &pqp);
-  ctrl.avoidCtrl->k = 5; // avoidance gain
-  ctrl.avoidCtrl->sr = 20; // avoidance gain
+  Body3dDemController<> ctrl(sys, x0, &xf, pqp, 20);
+  ctrl.localCtrl.avoidCtrl->k = 5; // avoidance gain
+  ctrl.localCtrl.avoidCtrl->sr = 20; // avoidance gain
 
-  params.GetDouble("kb", ctrl.avoidCtrl->kb);
-  params.GetDouble("sr", ctrl.avoidCtrl->sr);
+  params.GetDouble("kb", ctrl.localCtrl.avoidCtrl->kb);
+  params.GetDouble("odExp", ctrl.localCtrl.avoidCtrl->odExp);
+  params.GetDouble("oc", ctrl.localCtrl.avoidCtrl->oc);
+
+  params.GetDouble("sr", ctrl.localCtrl.avoidCtrl->sr);
+  params.GetDouble("vd", ctrl.vd);
+  params.GetDouble("wpRadius", ctrl.wpRadius);
 
   DemView dv(dem);
   if (viewer)
@@ -145,7 +151,6 @@ void solver_process(Viewer* viewer)
   cost.Q = Q.asDiagonal();
   cost.R = R.asDiagonal();
   cost.Qf = Qf.asDiagonal();
-
 
   // times
   double h = tf/N;  
@@ -174,21 +179,22 @@ void solver_process(Viewer* viewer)
   params.GetDouble("sv", sys.sv);
 
   int Ns;
-  params.GetInt("Ns", Ns);
+  params.GetInt("Ns", Ns);  
 
   Body3dSampler sampler(Ns, &pqp);
   ctp.stoch = true;
-
 
   Body3dCe ce(sys, cost, ctp, &sampler, ts, xs, us, 0, mu0, P0, S);
   ce.ce.gmm.ns[0].bounded = true;
   ce.ce.gmm.ns[0].lb.setZero();
   ce.ce.gmm.ns[0].ub.setConstant(1000);
   ce.Ns = Ns;
-
   
-  ce.Jub = 1000000;
+  ce.Jub = 100000;
   ce.enforceUpperBound = true;
+
+  params.GetDouble("Jub", ce.Jub);  
+  params.GetBool("enforceUpperBound", ce.enforceUpperBound);
 
   Body3dView<> view(sys, &xs);
   viewer->Add(view);  
@@ -197,22 +203,51 @@ void solver_process(Viewer* viewer)
   Body3dCeView ceview(ce, view);
   viewer->Add(ceview);
 
+  Body3dView<6> dslView(sys, &ctrl.xds);
+  dslView.lineWidth=5;
+  dslView.rgba[0] = 0;   dslView.rgba[1] = 1;   dslView.rgba[2] = 0;
+  if (viewer)
+    viewer->Add(dslView);  
+
   struct timeval timer;
 
-  getchar();
+  fstream fstr;
+  fstr.open("logs/body3dcedemstab.txt", std::ios::out | std::ios::trunc);
+  fstr.precision(20);
 
-  for (int i = 0; i < 100; ++i) {
+  for (int i = 0; i < iters; ++i) {
     timer_start(timer);
     //    rseed(0);
     srand(0);
+
+    // save current distro
+    Normal<5> ns0 = ce.ce.gmm.ns[0];
+    
     ceview.Lock();
     ce.Iterate();
     ceview.Unlock();
     long te = timer_us(timer);
     cout << "Iteration #" << i << " took: " << te << " us." << endl;
     cout << "Min Cost=" << ce.J << "\tAve Cost=" << ce.ce.Jave << endl;
-    getchar();
+    
+    //    double Pc = std::count(ce.bs.begin(), ce.bs.end(), false).size()/ce.bs.size();
+    //    cout << "Pc=" << Pc << endl;
+
+    VectorXd P = VectorXd::Map(ce.ce.gmm.ns[0].P.data(), ce.ce.gmm.ns[0].P.rows()*ce.ce.gmm.ns[0].P.cols());
+    VectorXd P0 = VectorXd::Map(ns0.P.data(), ns0.P.rows()*ns0.P.cols());
+    
+    fstr << ns0.mu.transpose() << " " << P0.transpose() << " " << ce.ce.gmm.ns[0].mu.transpose() << " " << P.transpose() << " ";
+    for (int j = 0; j < ce.Ns; ++j) // samples
+      fstr << ce.ce.zps[j].first.transpose() << " ";
+    for (int j = 0; j < ce.Ns; ++j) // weights
+      fstr << ce.ce.zps[j].second << " ";
+    for (int j = 0; j < ce.Ns; ++j) // feasibilities
+      fstr << ce.bs[j] << " ";
+    for (int j = 0; j < ce.Ns; ++j)  // costs
+      fstr << ce.ce.cs[j] << " ";    
+    fstr << endl;
   }
+  fstr.close();
 
   while(1)
     usleep(10);

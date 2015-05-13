@@ -20,8 +20,8 @@ Body2dManifold& Body2dManifold::Instance()
 
 
 void Body2dManifold::Lift(Vector6d &v, 
-                          const M3V3d &xa,
-                          const M3V3d &xb) 
+                          const Body2dState &xa,
+                          const Body2dState &xb) 
 {
   Matrix3d dg;
   SE2::Instance().diff(dg, xa.first, xb.first);
@@ -31,8 +31,8 @@ void Body2dManifold::Lift(Vector6d &v,
   v.tail(3) = xb.second - xa.second;
 }
 
-void Body2dManifold::Retract(M3V3d &xb, 
-                             const M3V3d &xa,
+void Body2dManifold::Retract(Body2dState &xb, 
+                             const Body2dState &xa,
                              const Vector6d &v) 
 {
   Matrix3d dg;

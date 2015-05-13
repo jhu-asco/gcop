@@ -12,7 +12,7 @@ set(sources
   hrotorgeom3dview.cc
   heliview.cc
   kinbody2dview.cc
-  body2dview.cc
+#  body2dview.cc
   posegraph2dview.cc
   body2dgraphview.cc
   body2dtrackview.cc

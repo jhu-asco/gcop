@@ -18,7 +18,7 @@ Body2d::Body2d(Body2dForce *force) :
 }
 
 
-double Body2d::Step(M3V3d& xb, double t, const M3V3d& xa,
+double Body2d::Step(Body2dState& xb, double t, const Body2dState& xa,
                     const Vector3d& u, double h, const VectorXd* p,
                     Matrix6d *A, Matrix63d *B, Matrix<double, 6, Dynamic> *C) {
   Matrix36d fx;  // force Jacobian with respect to x

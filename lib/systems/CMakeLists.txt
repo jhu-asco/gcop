@@ -9,7 +9,7 @@ set(sources
     hrotor.cc
     heli.cc
     kinbody2d.cc
-    body2d.cc
+#    body2d.cc
     chain.cc
     chain1.cc
     airm.cc
@@ -20,7 +20,7 @@ set(sources
     joint.cc
     dem.cc
     joint.cc
-    body2dforce.cc
+#    body2dforce.cc
     arm.cc
     urdf_parser.cpp
     ins.cc
@@ -72,6 +72,7 @@ set(headers
     kinbodyprojtrack.h
     kinrccar.h
     kinrccarpath.h
+    creator.h
 )
 
 add_subdirectory (manifolds)

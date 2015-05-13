@@ -32,7 +32,7 @@ namespace gcop {
     
     Body2dSlamCost cost;       ///< cost function
     
-    PDdp<M3V3d, 6, 3> *pddp;  ///< parametric discrete-mechanics optimal control
+    PDdp<Body2dState, 6, 3> *pddp;  ///< parametric discrete-mechanics optimal control
   };
 }
 

@@ -6,25 +6,24 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef GCOP_SAMPLER_H
-#define GCOP_SAMPLER_H
+#ifndef GCOP_CREATOR_H
+#define GCOP_CREATOR_H
 
 namespace gcop {
     
   /**
-   * Generic sampler interface, i.e. provides a function that
-   * will generate (sample) an object of type T
+   * Generic creator interface, i.e. provides a function that
+   * will generate an object of type T
    *
    * Author: Marin Kobilarov
    */
-  template <typename T> class Sampler {
+  template <typename T> class Creator {
   public:
     /**
      * Generate an object T
-     * @param o object 
-     * @return true if successful
+     * @return created object
      */
-    virtual bool operator()(T& o) = 0;
+    virtual T& operator()() = 0;
   };
 }
 

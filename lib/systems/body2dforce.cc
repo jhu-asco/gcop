@@ -12,7 +12,7 @@ Body2dForce::Body2dForce(bool fextParam) : D(0, 0, 0), fext(0, 0, 0), fextParam(
 }
 
 
-void Body2dForce::Set(Vector3d &f, const M3V3d &x, double t, 
+void Body2dForce::Set(Vector3d &f, const Body2dState &x, double t, 
                       const Vector3d &u, double h,  const VectorXd *p,
                       Matrix36d *A, Matrix3d *B, Matrix<double, 3, Dynamic> *C )
 {

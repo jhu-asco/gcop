@@ -8,7 +8,7 @@ using namespace gcop;
 using namespace Eigen;
 using namespace std;
 
-Body2dGraph::Body2dGraph(Body2d &sys, int N, int nf, 
+Body2dGraph::Body2dGraph(Body2d<> &sys, int N, int nf, 
                          bool odometry, 
                          bool extforce,
                          bool forces) : 
@@ -350,7 +350,7 @@ void Body2dGraph::Synthesize3(Body2dGraph &pgt, Body2dGraph &pgn, double tf)
 }
 
 
-void Body2dGraph::Optp(VectorXd &p, const vector<M3V3d> &xs)
+void Body2dGraph::Optp(VectorXd &p, const vector<Body2dState> &xs)
 {
   int nf = (p.size() - extforce*2)/2;
   for (int l = 0; l < nf; ++l) {

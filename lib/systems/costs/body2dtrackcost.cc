@@ -26,7 +26,7 @@ static double cross2(Vector2d a, Vector2d b)
 }
 
 
-double Body2dTrackCost::L(double t, const M3V3d &x, const Vector3d &u, 
+double Body2dTrackCost::L(double t, const Body2dState &x, const Vector3d &u, 
                           double h,
                           const VectorXd *p,
                           Vector6d *Lx, Matrix6d *Lxx,

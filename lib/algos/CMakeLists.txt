@@ -35,3 +35,10 @@ set(sources
       point3dcontroller.cc
       gavoidcontroller.cc
 )
+
+IF (DSL_FOUND AND PQP_FOUND)
+set(headers 
+  ${headers}
+  body3ddemcontroller.h
+)
+ENDIF (DSL_FOUND AND PQP_FOUND)

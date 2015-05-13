@@ -39,7 +39,9 @@ class GavoidController : public Controller<Body3dState, Vector6d> {
   double sr; ///< sensing radius
   double k;  ///< obstacle avoidance gain
   double kb; ///< breaking gain (optional, zero by default)
-  
+
+  double oc;     ///< add extra clearance to obstacles
+  double odExp;  ///< exponent affecting the power of obstacle distance (default is 1)
  };
   
 }

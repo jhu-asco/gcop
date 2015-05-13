@@ -14,7 +14,6 @@
 #include "constraint.h"
 #include <assert.h>
 #include "utils.h"
-#include "sampler.h"
 
 namespace gcop {
   
@@ -53,69 +52,70 @@ namespace gcop {
                      int ntp = _ntp,
                      Constraint<Tx, nx, nu, np, 1> *con = 0);
     
-    void To(Vectorntpd &s, 
+    bool To(Vectorntpd &s, 
             const vector<double> &ts, 
             const vector<Tx> &xs, 
             const vector<Vectorcd> &us,
             const Vectormd *p = 0);
     
-    void From(vector<double> &ts, 
+    bool From(vector<double> &ts, 
               vector<Tx> &xs, 
               vector<Vectorcd> &us,
               const Vectorntpd &s,
               Vectormd *p = 0);
+
+    virtual bool SetContext(const Tc& c);
     
     Controller<Tx, Vectorcd, Vectorntpd, Tc> &ctrl; ///< controller
     Constraint<Tx, nx, nu, np, 1> *con;         ///< scalar-valued path constraint to check feasibility
  
-    bool stoch;                                ///< whether to simulate process noise (true by default)
-    Sampler<Tc> *contextSampler;                ///< some stochastic problems might require sampling the context
+    bool stoch;       ///< whether to simulate process noise (true by default)
+    Vectornd w;       ///< for sampling noise
   };
   
   template <typename Tx, int nx, int nu, int np, int _ntp, typename Tc> 
-    ControllerTparam<Tx, nx, nu, np, _ntp, Tc>::ControllerTparam(System<Tx, nx, nu, np> &sys, Controller<Tx, Vectorcd, Vectorntpd, Tc> &ctrl, int ntp, Constraint<Tx, nx, nu, np, 1> *con) :  Tparam<Tx, nx, nu, np, _ntp>(sys, ntp), ctrl(ctrl), con(con), stoch(true), contextSampler(0) {
+    ControllerTparam<Tx, nx, nu, np, _ntp, Tc>::ControllerTparam(System<Tx, nx, nu, np> &sys, Controller<Tx, Vectorcd, Vectorntpd, Tc> &ctrl, int ntp, Constraint<Tx, nx, nu, np, 1> *con) :  Tparam<Tx, nx, nu, np, _ntp>(sys, ntp), ctrl(ctrl), con(con), stoch(true) {
     assert(ntp > 0);
+    if (nx == Dynamic)
+      w.resize(sys.X.n);
   }
 
   template <typename Tx, int nx, int nu, int np, int _ntp, typename Tc> 
-    void ControllerTparam<Tx, nx, nu, np, _ntp, Tc>::To(Vectorntpd &s,
+    bool ControllerTparam<Tx, nx, nu, np, _ntp, Tc>::To(Vectorntpd &s,
                                                         const vector<double> &ts, 
                                                         const vector<Tx> &xs, 
                                                         const vector<Vectorcd> &us,
                                                         const Vectormd *p) {
     cout << "[W] ControllerTparam::To: calling this is useless for this type of paremetrization!" << endl;    
+    return false;
   }  
   
   template <typename Tx, int nx, int nu, int np, int _ntp, typename Tc> 
-    void ControllerTparam<Tx, nx, nu, np, _ntp, Tc>::From(vector<double> &ts, 
+    bool ControllerTparam<Tx, nx, nu, np, _ntp, Tc>::SetContext(const Tc &c) {
+    return ctrl.SetContext(c);
+  }
+
+  template <typename Tx, int nx, int nu, int np, int _ntp, typename Tc> 
+    bool ControllerTparam<Tx, nx, nu, np, _ntp, Tc>::From(vector<double> &ts, 
                                                           vector<Tx> &xs, 
                                                           vector<Vectorcd> &us,
                                                           const Vectorntpd &s,
                                                           Vectormd *p) {
-
-    if (contextSampler) {
-      // sample until successful
-      do {
-        (*contextSampler)(ctrl.c); 
-      } while(!ctrl.SetContext(ctrl.c));
-    }
-
     ctrl.SetParams(s);
     Matrix<double, 1, 1> g;
-
+    
     // sample noise term, assume constant along path
-    Vectornd w;
-    if (stoch) 
-      for (int j=0; j < w.size(); ++j)
-        w[j] = random_normal();
-
     for (int i = 0; i < us.size(); ++i) {
       ctrl.Set(us[i], ts[i], xs[i]);
-
-      if (stoch)
+      
+      if (stoch) {
+        for (int j=0; j < w.size(); ++j)
+          w[j] = random_normal();
+        
         this->sys.Step(xs[i+1], ts[i], xs[i], us[i], ts[i+1] - ts[i], w, p);      
-      else 
+      } else {
         this->sys.Step(xs[i+1], ts[i], xs[i], us[i], ts[i+1] - ts[i], p);
+      }
       
       if (con) { // check for feasibility
         (*con)(g, ts[i+1], xs[i+1], us[i], p);
@@ -124,10 +124,11 @@ namespace gcop {
             xs[j] = xs[i+1];         
             us[j-1].setZero();
           }
-          break;
+          return false;
         }
       }
     }
+    return true;
   }
 }
 

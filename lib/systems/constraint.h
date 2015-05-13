@@ -53,7 +53,7 @@ namespace gcop {
                           const Vectormd *p = 0, 
                           Matrixgnd *dgdx = 0, Matrixgcd *dgdu = 0,
                           Matrixgmd *dgdp = 0) = 0;
-
+  
   // constraint g(t,x)<=0 
   virtual bool operator()(Vectorgd &g,
                           double t, const T &x, 

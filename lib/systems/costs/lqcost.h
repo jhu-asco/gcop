@@ -14,7 +14,7 @@ namespace gcop {
     int _nx = Dynamic, 
     int _nu = Dynamic,
     int _np = Dynamic,
-    int _ng = Dynamic> class LqCost : public LsCost<T, _nx, _nu, _np, _ng> {
+    int _ng = Dynamic> class LqCost : public LsCost<T, _nx, _nu, _np, _ng, T> {
     public:
 
   typedef Matrix<double, _ng, 1> Vectorgd;
@@ -74,7 +74,9 @@ namespace gcop {
      */
     void SetReference(const vector<T> *xds, const vector<Vectorcd> *uds);        
     
-    const T &xf; ///< reference to a desired final state
+    virtual bool SetContext(const T &c);
+
+    const T *xf; ///< reference to a desired final state
     
     bool diag;   ///< are the Q, Qf, and R matrices diagonal (true by default)
     
@@ -99,7 +101,7 @@ namespace gcop {
   template <typename T, int _nx, int _nu, int _np, int _ng>
     LqCost<T, _nx, _nu, _np, _ng>::LqCost(System<T, _nx, _nu, _np> &sys, 
                                           double tf, const T &xf, bool diag) : 
-    LsCost<T, _nx, _nu, _np, _ng>(sys, tf, sys.X.n + sys.U.n), xf(xf), diag(diag) {
+    LsCost<T, _nx, _nu, _np, _ng, T>(sys, tf, sys.X.n + sys.U.n), xf(&xf), diag(diag) {
     
     if (_nx == Dynamic || _nu == Dynamic) {
       Q.resize(sys.X.n, sys.X.n);
@@ -121,6 +123,11 @@ namespace gcop {
 
     xds = 0;
     uds = 0;
+  }
+
+  template <typename T, int _nx, int _nu, int _np, int _ng>
+    bool LqCost<T, _nx, _nu, _np, _ng>::SetContext(const T& c) {
+    this->xf = &c;
   }
   
   template <typename T, int _nx, int _nu, int _np, int _ng>
@@ -153,9 +160,12 @@ namespace gcop {
       if (xds) {
         this->sys.X.Lift(dx, xds->back(), x); // difference (on a vector space we have dx = x - xf)
       } else {
-        this->sys.X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)     
+        this->sys.X.Lift(dx, *xf, x); // difference (on a vector space we have dx = x - xf)     
       }
-      assert(!std::isnan(dx[0]));
+      if (std::isnan(dx[0])) {
+        cout << "[W] LqCost::Res: dx is nan" << endl;
+        return false;
+      }
 
       if (diag)
         g.head(nx) = Qfsqrt.diagonal().cwiseProduct(dx);
@@ -171,9 +181,12 @@ namespace gcop {
         assert(k < xds->size());
         this->sys.X.Lift(dx, (*xds)[k], x); // difference (on a vector space we have dx = x - xf)
       } else {
-        this->sys.X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)     
+        this->sys.X.Lift(dx, *xf, x); // difference (on a vector space we have dx = x - xf)     
       }
-      assert(!std::isnan(dx[0]));
+      if (std::isnan(dx[0])) {
+        cout << "[W] LqCost::Res: dx is nan" << endl;
+        return false;
+      }
 
       if (diag)
         g.head(nx) = Qsqrt.diagonal().cwiseProduct(sqrt(h)*dx);
@@ -214,10 +227,12 @@ namespace gcop {
       if (xds) {
         this->sys.X.Lift(dx, xds->back(), x); // difference (on a vector space we have dx = x - xf)
       } else {
-        this->sys.X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)      
+        this->sys.X.Lift(dx, *xf, x); // difference (on a vector space we have dx = x - xf)      
       }
-      assert(!std::isnan(dx[0]));
-    
+      if (std::isnan(dx[0])) {
+        cout << "[W] LqCost::L: dx is nan" << endl;
+        return std::numeric_limits<double>::max();
+      }    
 
       if (Lx)
         if (diag)
@@ -246,11 +261,12 @@ namespace gcop {
         assert(k < xds->size());
         this->sys.X.Lift(dx, (*xds)[k], x); // difference (on a vector space we have dx = x - xf)
       } else {
-        this->sys.X.Lift(dx, xf, x); // difference (on a vector space we have dx = x - xf)      
+        this->sys.X.Lift(dx, *xf, x); // difference (on a vector space we have dx = x - xf)      
       }
-      assert(!std::isnan(dx[0]));
-
-     
+      if (std::isnan(dx[0])) {
+        cout << "[W] LqCost::L: dx is nan" << endl;
+        return std::numeric_limits<double>::max();
+      }     
       
       if (uds) {
         assert(k < uds->size());

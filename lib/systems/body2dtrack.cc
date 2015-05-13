@@ -8,7 +8,7 @@ using namespace gcop;
 using namespace Eigen;
 using namespace std;
 
-Body2dTrack::Body2dTrack(Body2d &sys, int nf, double t0, double tf,
+Body2dTrack::Body2dTrack(Body2d<> &sys, int nf, double t0, double tf,
                          double r,
                          bool odometry,
                          bool extforce,
@@ -18,7 +18,7 @@ Body2dTrack::Body2dTrack(Body2d &sys, int nf, double t0, double tf,
   ts(1,t0), ls(nf), observed(nf, false), p(extforce*2), pr(.75),
   Is(1), Js(nf), cis(nf), cp(.01), cv(0.05, 0.1, 0.1), cw(.5, 2, 2)
 {
-  M3V3d x;
+  Body2dState x;
   Get(x, 5, t0);
   xs.push_back(x);
   xos.push_back(x);
@@ -26,10 +26,10 @@ Body2dTrack::Body2dTrack(Body2d &sys, int nf, double t0, double tf,
 }
 
 
-void Body2dTrack::Add(const Vector3d &u, const M3V3d &x, double h)
+void Body2dTrack::Add(const Vector3d &u, const Body2dState &x, double h)
 {
   // add noisy controls/state to list, but use true controls/state for generating measurements
-  M3V3d xn;
+  Body2dState xn;
   double t = ts.back();
   
   // noisy controls
@@ -119,10 +119,10 @@ void Body2dTrack::Add(const Vector3d &u, const M3V3d &x, double h)
 
 
 // add commanded control u, after which true noisy state x occured
-void Body2dTrack::Add2(const Vector3d &u, const M3V3d &x, double h)
+void Body2dTrack::Add2(const Vector3d &u, const Body2dState &x, double h)
 {
   // add noisy controls/state to list, but use true controls/state for generating measurements
-  M3V3d xn;
+  Body2dState xn;
   double t = ts.back();
   
   sys.Step(xn, t, xs.back(), u, h);
@@ -226,7 +226,7 @@ void Body2dTrack::MakeTrue()
 }
 
 
-void Body2dTrack::Optp(VectorXd &p, const vector<M3V3d> &xs)
+void Body2dTrack::Optp(VectorXd &p, const vector<Body2dState> &xs)
 {
   int nf = (p.size() - extforce*2)/2;
   for (int l = 0; l < nf; ++l) {
@@ -246,7 +246,7 @@ void Body2dTrack::Optp(VectorXd &p, const vector<M3V3d> &xs)
 }
 
 
-void Body2dTrack::Get(M3V3d &x, double vd, double t) const
+void Body2dTrack::Get(Body2dState &x, double vd, double t) const
 {
   double a = 1.3*t/tf*2*M_PI;
   x.first.setIdentity();

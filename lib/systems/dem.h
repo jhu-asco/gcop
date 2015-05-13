@@ -162,6 +162,10 @@ namespace gcop {
      *  @param only consider values above thresh
      */
     void Convolve(double sigma, bool cn = true, double thresh = 0);
+    
+    void Point2Index(int &i, int &j, double x, double y) const;
+
+    void Index2Point(double &x, double &y, int i, int j) const;
 
 
     double w;          ///< width

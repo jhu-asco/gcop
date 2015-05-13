@@ -32,7 +32,14 @@ namespace gcop {
                   double t, const T &x, const Vectorcd &u,
                   const Vectormd *p = 0, 
                   Matrixgxd *dgdx = 0, Matrixgud *dgdu = 0,
-                  Matrixgpd *dgdp = 0);    
+                  Matrixgpd *dgdp = 0);
+
+  bool operator()(Vectorgd &g,
+                  double t, const T &x, 
+                  Matrixgxd *dgdx = 0) {
+        Vectorcd u;
+    return this->operator ()(g, t, x, u, 0, dgdx);
+  }
   
   
   //  virtual void ToBody3dState(Body3dState &xb, const T &x) const;

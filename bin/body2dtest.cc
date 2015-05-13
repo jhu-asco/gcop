@@ -3,7 +3,8 @@
 #include "ddp.h"
 #include "viewer.h"
 #include "body2dview.h"
-#include "body2dcost.h"
+//#include "body2dcost.h"
+#include "lqcost.h"
 #include "utils.h"
 #include "se2.h"
 #include "params.h"
@@ -12,7 +13,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Ddp<pair<Matrix3d, Vector3d>, 6, 3> Body2dDdp;
+typedef Ddp< pair<Matrix3d, Vector3d>, 6, 3> Body2dDdp;
 
 Params params;
 
@@ -31,13 +32,13 @@ void solver_process(Viewer* viewer)
   params.GetInt("iters", iters);
 
   SE2 &se2 = SE2::Instance();  
-  Body2dForce force;
+  Body2dForce<> force;
   force.D(2)= 5;
   params.GetVector3d("D", force.D);
 
-  Body2d sys(&force);
+  Body2d<> sys(&force);
 
-  M3V3d x0;
+  Body2dState x0;
   VectorXd qv0(6);
   se2.q2g(x0.first, Vector3d(0, 2, 2));
   if (params.GetVectorXd("x0", qv0)) {
@@ -45,7 +46,7 @@ void solver_process(Viewer* viewer)
     x0.second = qv0.tail(3);
   }
 
-  M3V3d xf;
+  Body2dState xf;
   VectorXd qvf(6);
   if (params.GetVectorXd("xf", qvf)) {
     se2.q2g(xf.first, qvf.head(3));
@@ -53,7 +54,9 @@ void solver_process(Viewer* viewer)
   }
 
   // cost
-  Body2dCost cost(sys, tf, xf);  
+  LqCost<Body2dState, 6, 3> cost(sys, tf, xf);
+
+  //  Body2dCost cost(sys, tf, xf);  
 
   VectorXd Q(6);
   if (params.GetVectorXd("Q", Q))
@@ -87,7 +90,7 @@ void solver_process(Viewer* viewer)
   ddp.mu = .01;
   params.GetDouble("mu", ddp.mu);
 
-  Body2dView view(sys, &ddp.xs);
+  Body2dView<> view(sys, &ddp.xs);
   viewer->Add(view);
 
   struct timeval timer;

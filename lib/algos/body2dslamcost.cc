@@ -7,7 +7,7 @@ using namespace std;
 using namespace gcop;
 using namespace Eigen;
 
-Body2dSlamCost::Body2dSlamCost(Body2d &sys, double tf, const Body2dGraph &pg) : 
+Body2dSlamCost::Body2dSlamCost(Body2d<> &sys, double tf, const Body2dGraph &pg) : 
 Cost(sys, tf), pg(pg)
 {
   
@@ -26,7 +26,7 @@ static double cross2(Vector2d a, Vector2d b)
 }
 
 
-double Body2dSlamCost::Lp(double t, const M3V3d &x, const Vector3d &u, const VectorXd &p,
+double Body2dSlamCost::Lp(double t, const Body2dState &x, const Vector3d &u, const VectorXd &p,
                           Vector6d *Lx, Matrix6d *Lxx,
                           Vector3d *Lu, Matrix3d *Luu,
                           Matrix63d *Lxu,

@@ -16,8 +16,8 @@ if (BUILD_TESTS)
 	add_executable(gunicycletest gunicycletest.cc)
 	target_link_libraries(gunicycletest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-#	add_executable(body2dtest body2dtest.cc)
-#	target_link_libraries(body2dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+	add_executable(body2dtest body2dtest.cc)
+	target_link_libraries(body2dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 	add_executable(body3dtest body3dtest.cc)
 	target_link_libraries(body3dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
@@ -49,6 +49,13 @@ IF (PQP_FOUND)
 
 	add_executable(body3dcestab body3dcestab.cc)
 	target_link_libraries(body3dcestab  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
+IF (DSL_FOUND)
+
+	add_executable(body3dcedemstab body3dcedemstab.cc)
+	target_link_libraries(body3dcedemstab gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
+ENDIF (DSL_FOUND)
 
 
 #	add_executable(body3dstops body3dstops.cc)
@@ -82,8 +89,8 @@ ENDIF (PQP_FOUND)
 	#add_executable(body2dslamtest body2dslamtest.cc)
 	#target_link_libraries(body2dslamtest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-	#add_executable(body2dtracktest body2dtracktest.cc)
-	#target_link_libraries(body2dtracktest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+#	add_executable(body2dtracktest body2dtracktest.cc)
+#	target_link_libraries(body2dtracktest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 	add_executable(body2dtracktest2 body2dtracktest2.cc)
 	target_link_libraries(body2dtracktest2 gcop_algos gcop_views gcop_systems  ${ALL_LIBS})

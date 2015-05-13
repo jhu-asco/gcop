@@ -26,7 +26,8 @@ namespace gcop {
     int _nx = Dynamic,
     int _nu = Dynamic,
     int _np = Dynamic,
-    int _ng = Dynamic> class LsCost : public Cost<T, _nx, _nu, _np> {
+    int _ng = Dynamic,
+    typename Tc = T> class LsCost : public Cost<T, _nx, _nu, _np, Tc> {
     
   public:
   
@@ -73,29 +74,29 @@ namespace gcop {
                    double t, const T &x, const Vectorcd &u, double h,
                    const Vectormd *p = 0,
                    Matrixgxd *dgdx = 0, Matrixgud *dgdu = 0,
-                   Matrixgpd *dgdp = 0);    
+                   Matrixgpd *dgdp = 0);
 
   int ng;       ///< number of residuals per time-step
   Vectorgd g;   ///< residuals per time-step
   };
   
   
-  template <typename T, int _nx, int _nu, int _np, int _ng> 
-    LsCost<T, _nx, _nu, _np, _ng>::LsCost(System<T, _nx, _nu, _np> &sys, 
-                                          double tf, int ng) : 
-    Cost<T, _nx, _nu, _np>(sys, tf), ng(_ng != Dynamic ? _ng : ng)
+  template <typename T, int _nx, int _nu, int _np, int _ng, typename Tc> 
+    LsCost<T, _nx, _nu, _np, _ng, Tc>::LsCost(System<T, _nx, _nu, _np> &sys, 
+                                              double tf, int ng) : 
+    Cost<T, _nx, _nu, _np, Tc>(sys, tf), ng(_ng != Dynamic ? _ng : ng)
     {
       assert(ng > 0);
       if (_ng == Dynamic)
         g.resize(ng);
     }
   
-  template <typename T, int _nx, int _nu, int _np, int _ng> 
-    bool LsCost<T, _nx, _nu, _np, _ng>::Res(Vectorgd &g, 
-                                            double t, const T &x, const Vectorcd &u, double h,
-                                            const Vectormd *p,
-                                            Matrixgxd *dgdx, Matrixgud *dgdu,
-                                            Matrixgpd *dgdp) {
+  template <typename T, int _nx, int _nu, int _np, int _ng, typename Tc> 
+    bool LsCost<T, _nx, _nu, _np, _ng, Tc>::Res(Vectorgd &g, 
+                                                double t, const T &x, const Vectorcd &u, double h,
+                                                const Vectormd *p,
+                                                Matrixgxd *dgdx, Matrixgud *dgdu,
+                                                Matrixgpd *dgdp) {
     cout << "[W] LsCost:Res: unimplemented! Subclasses should override." << endl;
     return false;
   }

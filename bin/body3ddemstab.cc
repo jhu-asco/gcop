@@ -9,6 +9,8 @@
 #include "demview.h"
 #include "pqpdem.h"
 #include "params.h"
+#include "dsl/gridsearch.h"
+#include "dsl/distedgecost.h"
 
 /*
   Tests Gyroscopic obstacle avoidance for a rigid body in a geometric terrain
@@ -18,10 +20,47 @@
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
+using namespace dsl;
 
 typedef PqpDem<Body3dState, 12, 6> Body3dPqpDem;
 
 Params params;
+
+
+// produce a geometric trajectory b/n x0 and xf on a dem using grid D*-Lite
+void GetTraj(vector<Body3dState> &gxs, Dem &dem, GridSearch &gdsl, const Body3dState &x0, const Body3dState &xf) {
+  
+  int i0,j0,ig,jg;
+  dem.Point2Index(i0, j0, x0.second[0], x0.second[1]);
+  dem.Point2Index(ig, jg, xf.second[0], xf.second[1]);
+  gdsl.SetStart(j0, i0);
+  gdsl.SetGoal(jg, ig);
+  GridPath path, optPath;
+  gdsl.Plan(path);
+  gdsl.OptPath(path, optPath, 2);
+  for (int i = 0; i < optPath.count; ++i) {
+    Body3dState x = xf;
+    dem.Index2Point(x.second[0], x.second[1], optPath.pos[2*i+1], optPath.pos[2*i]);
+    x.second[2] = x0.second[2];
+    
+    // if not last point
+    Vector3d v(0,0,0);
+    if (i < optPath.count - 1) {
+      Vector3d pa;
+      Vector3d pb;
+      dem.Index2Point(pa[0], pa[1], optPath.pos[2*i+1], optPath.pos[2*i]);
+      dem.Index2Point(pb[0], pb[1], optPath.pos[2*i+3], optPath.pos[2*i+2]);
+      pa[2] = x0.second[2];
+      pb[2] = x0.second[2];
+      Vector3d v = pb - pa;
+      v = v/v.norm();
+      v = v*20;
+    }
+    x.second.tail<3>() = v;      
+    gxs.push_back(x);
+  }
+}
+
 
 void solver_process(Viewer* viewer)
 {
@@ -140,11 +179,33 @@ void solver_process(Viewer* viewer)
   double temp[50000];
   double temp2[50000];
 
+  vector<Body3dState> gxs;
+  GridSearch gdsl(dem.nj, dem.ni, new DistEdgeCost(), dem.data);
+  GetTraj(gxs, dem, gdsl, x0, xf);
+  
+  Body3dView<6> dslView(sys, &gxs);
+  if (viewer)
+    viewer->Add(dslView);  
+
   Vector6d u; 
+
+  sys.U.bnd = true;
+  sys.U.lb.setConstant(-50);
+  sys.U.ub.setConstant(50);
+
+  int j = 0;
   for (int i = 0; i < N; ++i) {
+
+    ctrl.stabCtrl.xd = &gxs[j];    
     double t = i*h;
     ctrl.Set(u, t, xs[i]);
-    sys.Step(xs[i+1], t, xs[i], u, h);    
+    sys.U.Clip(u);
+    sys.Step(xs[i+1], t, xs[i], u, h);  
+    
+    // if close to current waypoint, then move to next
+    Vector3d d = xs[i+1].second.head<3>() - ctrl.stabCtrl.xd->second.head<3>();
+    if (d.norm() < 20 && j < gxs.size()-1)
+      ++j;
   }
 
   cout << "done!" << endl;

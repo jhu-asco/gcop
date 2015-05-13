@@ -8,7 +8,7 @@
 using namespace gcop;
 using namespace Eigen;
 
-Body2dCost::Body2dCost(Body2d &sys, double tf, const M3V3d &xf) : 
+Body2dCost::Body2dCost(Body2d &sys, double tf, const Body2dState &xf) : 
   LqCost(sys, tf, xf), track(0), ko(.3)
 {
   Q(0,0) = .01;
@@ -31,7 +31,7 @@ Body2dCost::Body2dCost(Body2d &sys, double tf, const M3V3d &xf) :
 }
 
 
-double Body2dCost::L(double t, const M3V3d& x, const Vector3d& u, double h,
+double Body2dCost::L(double t, const Body2dState& x, const Vector3d& u, double h,
                      Vector6d *Lx, Matrix6d* Lxx,
                      Vector3d *Lu, Matrix3d* Luu,
                      Matrix63d *Lxu) 
@@ -50,14 +50,14 @@ double Body2dCost::L(double t, const M3V3d& x, const Vector3d& u, double h,
   if (track && 0) {    
     Vector2d p = x.first.topRightCorner<2,1>(); //current position
     
-    Vector2d s = track->w/2*xf.first.block<2,1>(0,1); // from center to a
-    Vector2d a(xf.first(0,2) + s(0), xf.first(1,2) + s(1));
-    Vector2d b(xf.first(0,2) - s(0), xf.first(1,2) - s(1));
+    Vector2d s = track->w/2*xf->first.block<2,1>(0,1); // from center to a
+    Vector2d a(xf->first(0,2) + s(0), xf->first(1,2) + s(1));
+    Vector2d b(xf->first(0,2) - s(0), xf->first(1,2) - s(1));
     Vector2d v = b - a;
     double vn = v.norm();
     v = v/vn;
     
-    Matrix3d gp = xf.first; // projected position
+    Matrix3d gp = xf->first; // projected position
     double r = v.transpose()*(p - a);
     if (r < 0) {
       gp.topRightCorner<2,1>() = a;
@@ -71,7 +71,7 @@ double Body2dCost::L(double t, const M3V3d& x, const Vector3d& u, double h,
           P = Matrix2d::Identity() - v*v.transpose();
         }
   } else {
-    SE2::Instance().inv(gi, xf.first);
+    SE2::Instance().inv(gi, xf->first);
   }
   
   Matrix3d dg = gi*x.first;

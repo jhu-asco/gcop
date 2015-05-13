@@ -4,5 +4,4 @@ docs*
 *.stl
 *.blend
 *.blend1
-*.cfg
 data/

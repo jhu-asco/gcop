@@ -42,13 +42,13 @@ namespace gcop {
 		 */
     SplineTparam(System<T, nx, nu, np> &sys, const VectorXd tks, int degree = 2);//By default use quadratic spline
     
-    void To(Vectorntpd &s, 
+    bool To(Vectorntpd &s, 
             const vector<double> &ts, 
             const vector<T> &xs, 
             const vector<Vectorcd> &us,
             const Vectormd *p = 0);
     
-    void From(vector<double> &ts, 
+    bool From(vector<double> &ts, 
               vector<T> &xs, 
               vector<Vectorcd> &us,
               const Vectorntpd &s,
@@ -71,7 +71,7 @@ namespace gcop {
   }
 
   template <typename T, int nx, int nu, int np, int _ntp> 
-    void SplineTparam<T, nx, nu, np, _ntp>::To(Vectorntpd &s, 
+    bool SplineTparam<T, nx, nu, np, _ntp>::To(Vectorntpd &s, 
                                              const vector<double> &ts, 
                                              const vector<T> &xs, 
                                              const vector<Vectorcd> &us,
@@ -143,10 +143,11 @@ namespace gcop {
       */
 
       //s.setZero();
+      return true;
     }
   
   template <typename T, int nx, int nu, int np, int _ntp> 
-    void SplineTparam<T, nx, nu, np, _ntp>::From(vector<double> &ts, 
+    bool SplineTparam<T, nx, nu, np, _ntp>::From(vector<double> &ts, 
                                                   vector<T> &xs, 
                                                   vector<Vectorcd> &us,
                                                   const Vectorntpd &s,
@@ -176,6 +177,7 @@ namespace gcop {
       //cout<<"us["<<i<<"]"<<us[i].transpose()<<endl;
     }
     //getchar();
+    return true;
   }
 }
 

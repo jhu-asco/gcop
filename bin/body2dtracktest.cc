@@ -38,13 +38,13 @@ void Run(Viewer* viewer)
   params.GetInt("N", N);
   double h = Tc/N;
 
-  Body2d sys(new Body2dForce(true));
+  Body2d<> sys(new Body2dForce<>(true));
   sys.force->D << .01, .01, 3; // add damping
 
   // options: odometry, paramForce, forces
   Body2dTrack pg(sys, nf, 0, tf, true, false, true);   ///< ground truth
 
-  M3V3d x0;
+  Body2dState x0;
   pg.Get(x0, 5, 0);
 
   params.GetDouble("r", pg.r);
@@ -55,14 +55,14 @@ void Run(Viewer* viewer)
   //  Body2dTrack pg(sys, N, nf, 0, tf, false, false, true);    ///< noisy pose track
   //  Body2dTrack::Synthesize3(pgt, pg, tf);
 
-  Body2dView tview(sys, &pg.xs);   // true path
+  Body2dView<> tview(sys, &pg.xs);   // true path
   tview.lineWidth = 5;
   tview.rgba[0] = 0;
   tview.rgba[1] = 1;
   tview.rgba[2] = 0;
   tview.renderSystem = false;
 
-  Body2dView oview(sys, &pg.xos);   // odometry
+  Body2dView<> oview(sys, &pg.xos);   // odometry
   oview.lineWidth = 5;
   oview.renderSystem = false;
   oview.rgba[0] = 1;
@@ -89,11 +89,11 @@ void Run(Viewer* viewer)
   
 
   SE2 &se2 = SE2::Instance();  
-  M3V3d xf;
+  Body2dState xf;
   pg.Get(xf, 5, Tc);
 
   // cost
-  Body2dCost cost(sys, Tc, xf);
+  Body2dCost<> cost(sys, Tc, xf);
   //  cost.track = &pg;
   params.GetDouble("ko", cost.ko);
 
@@ -132,18 +132,18 @@ void Run(Viewer* viewer)
   ddp.mu = .01;
   params.GetDouble("mu", ddp.mu);
 
-  Body2dView cview(sys, &ddp.xs);
+  Body2dView<> cview(sys, &ddp.xs);
   cview.rgba[0] = 0;  cview.rgba[1] = 1;  cview.rgba[2] = 1;
   viewer->Add(cview);
   cview.renderSystem = false;
 
-  Body2dView pview(sys, &xps);
+  Body2dView<> pview(sys, &xps);
   viewer->Add(pview);
   pview.rgba[0] = 1;  pview.rgba[1] = 1;  pview.rgba[2] = 0;
   pview.renderSystem = false;
 
   Body2dTrackCost tcost(0, pg);  ///< cost function
-  PDdp<M3V3d, 6, 3> *pddp = 0;
+  PDdp<Body2dState, 6, 3> *pddp = 0;
 
 
   for (double t=0; t < tf; t+=h) {
@@ -178,7 +178,7 @@ void Run(Viewer* viewer)
       cout << "p " << pg.p.size() << endl;
 
 
-      pddp = new PDdp<M3V3d, 6, 3>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 2*pg.extforce);
+      pddp = new PDdp<Body2dState, 6, 3>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 2*pg.extforce);
       for (int b=0;b<30;++b)
         pddp->Iterate();
       

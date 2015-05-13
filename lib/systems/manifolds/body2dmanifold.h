@@ -11,19 +11,19 @@ namespace gcop {
   
   typedef Matrix<double, 6, 1> Vector6d;
   typedef Matrix<double, 6, 6> Matrix6d;
-  typedef pair<Matrix3d, Vector3d> M3V3d;
+  typedef pair<Matrix3d, Vector3d> Body2dState;
   
-  class Body2dManifold : public Manifold<M3V3d, 6> {
+  class Body2dManifold : public Manifold<Body2dState, 6> {
   public:
     
     static Body2dManifold& Instance();
     
     void Lift(Vector6d &dx,
-              const M3V3d &xa,
-              const M3V3d &xb);      
+              const Body2dState &xa,
+              const Body2dState &xb);      
 
-    void Retract(M3V3d &xb,
-                 const M3V3d &xa,
+    void Retract(Body2dState &xb,
+                 const Body2dState &xa,
                  const Vector6d &dx);    
 
     void dtau(Matrix6d &M, const Vector6d &v);

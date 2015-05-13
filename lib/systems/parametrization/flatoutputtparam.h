@@ -90,13 +90,13 @@ namespace gcop {
 		 */
     FlatOutputTparam(System<T, nx, nu, np> &sys, int ny_, int numberofknots_, int numberofderivatives_ = 0, bool fixfinal_ = false);
     
-    void To(Vectorntpd &s, 
+    bool To(Vectorntpd &s, 
             const vector<double> &ts, 
             const vector<T> &xs, 
             const vector<Vectorcd> &us,
             const Vectormd *p = 0);
     
-    void From(vector<double> &ts, 
+    bool From(vector<double> &ts, 
               vector<T> &xs, 
               vector<Vectorcd> &us,
               const Vectorntpd &s,
@@ -124,7 +124,7 @@ namespace gcop {
   }
 
   template <typename T, int nx, int nu, int np, int _ntp> 
-    void FlatOutputTparam<T, nx, nu, np, _ntp>::To(Vectorntpd &s, 
+    bool FlatOutputTparam<T, nx, nu, np, _ntp>::To(Vectorntpd &s, 
                                              const vector<double> &ts, 
                                              const vector<T> &xs, 
                                              const vector<Vectorcd> &us,
@@ -213,10 +213,11 @@ namespace gcop {
 			cout<<"s: "<<s.transpose()<<endl;
 			cout<<"s_temp: "<<s_temp.transpose()<<endl;
 			//s.setZero();
+                        return true;
 		}
   
   template <typename T, int nx, int nu, int np, int _ntp> 
-    void FlatOutputTparam<T, nx, nu, np, _ntp>::From(vector<double> &ts, 
+    bool FlatOutputTparam<T, nx, nu, np, _ntp>::From(vector<double> &ts, 
                                                   vector<T> &xs, 
                                                   vector<Vectorcd> &us,
                                                   const Vectorntpd &s,
@@ -265,6 +266,7 @@ namespace gcop {
 			}
 
 			//cout<<"s: "<<s.transpose()<<endl;
+                        return true;
 		}
 		
 }

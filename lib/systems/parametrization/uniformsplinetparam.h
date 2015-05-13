@@ -37,13 +37,13 @@ namespace gcop {
   public:
     UniformSplineTparam(System<T, nx, nu, np> &sys, const VectorXd &tks, int degree = 2);//By default use quadratic spline
     
-    void To(VectorXd &s, 
+    bool To(VectorXd &s, 
             const vector<double> &ts, 
             const vector<T> &xs, 
             const vector<Vectorcd> &us,
             const Vectormd *p = 0);
     
-    void From(vector<double> &ts, 
+    bool From(vector<double> &ts, 
               vector<T> &xs, 
               vector<Vectorcd> &us,
               const VectorXd &s,
@@ -109,7 +109,7 @@ namespace gcop {
   }
 
   template <typename T, int nx, int nu, int np> 
-    void UniformSplineTparam<T, nx, nu, np>::To(VectorXd &s, 
+    bool UniformSplineTparam<T, nx, nu, np>::To(VectorXd &s, 
                                              const vector<double> &ts, 
                                              const vector<T> &xs, 
                                              const vector<Vectorcd> &us,
@@ -192,10 +192,11 @@ namespace gcop {
       */
 
       //s.setZero();
+      return true;
     }
   
   template <typename T, int nx, int nu, int np> 
-    void UniformSplineTparam<T, nx, nu, np>::From(vector<double> &ts, 
+    bool UniformSplineTparam<T, nx, nu, np>::From(vector<double> &ts, 
                                                   vector<T> &xs, 
                                                   vector<Vectorcd> &us,
                                                   const VectorXd &s,
@@ -229,6 +230,7 @@ namespace gcop {
       //cout<<"Xs["<<(i+1)<<"]"<<xs[i+1].transpose()<<endl;//#DEBUG
       //cout<<"us["<<i<<"]"<<us[i].transpose()<<endl;
     }
+    return true;
     //getchar();
   }
 }

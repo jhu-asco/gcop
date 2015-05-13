@@ -28,7 +28,7 @@ namespace gcop {
      * @param extforce treat constant external force in x-y as a parameter
      * @param forces use uncertain forces in the cost function
      */
-    Body2dGraph(Body2d &sys, int N, int nf, 
+    Body2dGraph(Body2d<> &sys, int N, int nf, 
                 bool odometry = true, 
                 bool extforce = false,
                 bool forces = false);
@@ -38,7 +38,7 @@ namespace gcop {
      * @param p a vector of feature locations
      * @param gs a given vector of poses in SE(2)
      */
-    void Optp(VectorXd &p, const vector<M3V3d> &xs);
+    void Optp(VectorXd &p, const vector<Body2dState> &xs);
 
     /**
      * Create true and noisy synthetic pose graphs
@@ -64,7 +64,7 @@ namespace gcop {
      */
     static void Synthesize3(Body2dGraph &pgt, Body2dGraph &pgn, double tf);
 
-    Body2d &sys;     ///< system
+    Body2d<> &sys;     ///< system
 
     bool odometry;         ///< is there odometry available (this means that the velocity part of the state will be regarded as available measurements)
     
@@ -76,7 +76,7 @@ namespace gcop {
     
     vector<double> ts;     ///< sequence of times (N+1 vector)
 
-    vector<M3V3d>  xs;      ///< sequence of states x=(g,v) (N+1 vector)
+    vector<Body2dState>  xs;      ///< sequence of states x=(g,v) (N+1 vector)
 
     vector<Vector3d> us;   ///< sequence of inputs (N vector)
 

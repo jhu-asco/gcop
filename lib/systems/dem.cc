@@ -310,6 +310,19 @@ double Dem::Get(double x, double y) const
   return o[2] + bilinterp(data, nj, ni, (x - o[0])/cs, (h - y - o[1])/cs);
 }
 
+void Dem::Point2Index(int &i, int &j, double x, double y) const
+{
+  j = (x - o[0])/cs;
+  i = (h - y - o[1])/cs;
+}
+
+void Dem::Index2Point(double &x, double &y, int i, int j) const
+{
+  x = j*cs + o[0];
+  y = h - o[1] - i*cs;
+}
+
+
 void Dem::Get(double *p, int i, int j) const
 {
   if (i < 0 || i >= ni ||

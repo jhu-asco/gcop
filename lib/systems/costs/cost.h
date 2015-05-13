@@ -24,7 +24,8 @@ namespace gcop {
   template <typename T, 
     int _nx = Dynamic, 
     int _nu = Dynamic,
-    int _np = Dynamic> class Cost {
+    int _np = Dynamic,
+    typename Tc = T> class Cost {
   public:
   
   typedef Matrix<double, _nx, 1> Vectornd;
@@ -51,7 +52,7 @@ namespace gcop {
   /**
    * Create a Sensor Based Cost interface
    * @param sys the system for which cost function is defined. Provides the system manifold X
-   * @param  
+   * @param 
    */
   //Cost(System<T, _nx, _nu, _np> &sys, Sensor<double tf);
   
@@ -74,25 +75,33 @@ namespace gcop {
                    Matrixncd *Lxu = 0,
                    Vectormd *Lp = 0, Matrixmd *Lpp = 0,
                    Matrixmnd *Lpx = 0);  
+
+  /**
+   * Set context for the cost
+   * @param c context
+   * @return true if successful
+   */
+  virtual bool SetContext(const Tc &c) { return true; };
   
   System<T, _nx, _nu, _np> &sys;  ///< system  
-  double tf;               ///< final time of trajectory
+  double tf;                      ///< final time of trajectory
+  
 };
 
 
-  template <typename T, int _nx, int _nu, int _np> 
-    Cost<T, _nx, _nu, _np>::Cost(System<T, _nx, _nu, _np> &sys, 
-                                      double tf) : sys(sys), tf(tf) {
-  }  
+  template <typename T, int _nx, int _nu, int _np, typename Tc> 
+    Cost<T, _nx, _nu, _np, Tc>::Cost(System<T, _nx, _nu, _np> &sys, 
+                                     double tf) : sys(sys), tf(tf) {
+  }
   
-  template <typename T, int _nx, int _nu, int _np> 
-    double Cost<T, _nx, _nu, _np>::L(double t, const T& x, const Vectorcd& u, double h,
-                                     const Vectormd *p,
-                                     Matrix<double, _nx, 1> *Lx, Matrix<double, _nx, _nx>* Lxx,
-                                     Matrix<double, _nu, 1> *Lu, Matrix<double, _nu, _nu>* Luu,
-                                     Matrix<double, _nx, _nu> *Lxu,
-                                     Vectormd *Lp, Matrixmd *Lpp,
-                                     Matrixmnd *Lpx) {
+  template <typename T, int _nx, int _nu, int _np, typename Tc> 
+    double Cost<T, _nx, _nu, _np, Tc>::L(double t, const T& x, const Vectorcd& u, double h,
+                                         const Vectormd *p,
+                                         Matrix<double, _nx, 1> *Lx, Matrix<double, _nx, _nx>* Lxx,
+                                         Matrix<double, _nu, 1> *Lu, Matrix<double, _nu, _nu>* Luu,
+                                         Matrix<double, _nx, _nu> *Lxu,
+                                         Vectormd *Lp, Matrixmd *Lpp,
+                                         Matrixmnd *Lpx) {
     cout << "[W] Cost:L: unimplemented!" << endl;
     return 0;
   }

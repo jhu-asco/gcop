@@ -58,6 +58,13 @@ namespace gcop {
      */
     virtual bool Bound(Vectornd &v, Vectornd &d, const Vectornd &v0);
 
+    /**
+     * Clips a vector to be within lb and ub
+     * @param vector v
+     * @return true if clipped
+     */
+    virtual bool Clip(Vectornd &v) const;
+
   };
 
   template <int _n> 
@@ -105,14 +112,34 @@ namespace gcop {
   }
 
   template <int _n> 
+    bool Rn<_n>::Clip(Vectornd &v) const {
+    if (!this->bnd)
+      return false;
+    
+    bool clipped = false;
+    if (bndType == BND_BOX) {
+      for (int j = 0; j < v.size(); ++j) {
+        if (v[j] < this->lb[j]) {
+          v[j] = this->lb[j];          
+          clipped = true;
+        } else
+          if (v[j] > this->ub[j]) {
+            v[j] = this->ub[j];
+            clipped = true;          
+          }        
+      }
+    }
+    return clipped;
+  }
+
+  template <int _n> 
     bool Rn<_n>::Bound(Vectornd &v, Vectornd &d, const Vectornd &v0) {
 
     if (bndType == BND_BOX) {
       for (int j = 0; j < v.size(); ++j) {
         if (v[j] < this->lb[j]) {
           v[j] = this->lb[j];
-          d[j] = this->lb[j] - v0[j];
-        } else
+          d[j] = this->lb[j] - v0[j];        } else
           if (v[j] > this->ub[j]) {
             v[j] = this->ub[j];
             d[j] = this->ub[j] - v0[j];

@@ -80,8 +80,8 @@ namespace gcop {
         ew = x.second.segment<3>(3);
         ex = x.second.head<3>();
         ev =  x.second.tail<3>(); 
-      }      
-            
+      }
+
       u.head(3) = -Kp.head<3>().cwiseProduct(eR) - Kd.head<3>().cwiseProduct(ew);
       u.tail(3) = R.transpose()*(-Kp.tail<3>().cwiseProduct(ex) - Kd.tail<3>().cwiseProduct(ev) - sys.fp);
       return true;

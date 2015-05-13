@@ -11,6 +11,8 @@ GavoidController::GavoidController(Body3dConstraint &con) :
   sr = 10;
   k = 1;
   kb = 0;
+  oc = 0;
+  odExp = 1;
 }
 
 GavoidController::~GavoidController()
@@ -59,9 +61,9 @@ bool GavoidController::Set(Vector6d &u, double t, const Body3dState &x)
     }
     //  cout << "b=" << b << endl;
     if (fabs(b) < M_PI/2) {
-      S = S + this->k/od*Sv/Sv.norm();
+      S = S + this->k/pow(od + oc, odExp)*Sv/Sv.norm();
     }
-    fb = fb + (this->kb/od)*v;
+    fb = fb + (this->kb/pow(od + oc, odExp))*v;
   }
 
   // cout << "S=" << S << " fS=" << cross(S, sys.stvel ? v : R*v) << endl;

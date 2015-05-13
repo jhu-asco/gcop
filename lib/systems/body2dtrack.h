@@ -31,7 +31,7 @@ namespace gcop {
      * @param extforce treat constant external force in x-y as a parameter
      * @param forces use uncertain forces in the cost function
      */
-    Body2dTrack(Body2d &sys, int nf, double t0, double tf,
+    Body2dTrack(Body2d<> &sys, int nf, double t0, double tf,
                 double r = 25,
                 bool odometry = true,
                 bool extforce = false,
@@ -42,13 +42,13 @@ namespace gcop {
      * @param p a vector of feature locations
      * @param gs a given vector of poses in SE(2)
      */
-    void Optp(VectorXd &p, const vector<M3V3d> &xs);
+    void Optp(VectorXd &p, const vector<Body2dState> &xs);
 
-    void Get(M3V3d &x, double vd, double t) const;
+    void Get(Body2dState &x, double vd, double t) const;
 
     void MakeTrue();
 
-    void Add(const Vector3d &u, const M3V3d &x, double h);
+    void Add(const Vector3d &u, const Body2dState &x, double h);
 
     /**
      * Add a new state/control to estimation vector
@@ -56,9 +56,9 @@ namespace gcop {
      * @param x true state (to generate measurements)
      * @param h time-step 
      */
-    void Add2(const Vector3d &u, const M3V3d &x, double h);
+    void Add2(const Vector3d &u, const Body2dState &x, double h);
 
-    Body2d &sys;     ///< system
+    Body2d<> &sys;     ///< system
 
     double t0;       ///< initial time around track
     double tf;       ///< final time around track
@@ -74,14 +74,14 @@ namespace gcop {
     
     vector<double> ts;     ///< sequence of times (N+1 vector)
 
-    vector<M3V3d> xs;      ///< sequence of states x=(g,v) (N+1 vector)
+    vector<Body2dState> xs;      ///< sequence of states x=(g,v) (N+1 vector)
 
     vector<Vector3d> us;   ///< sequence of inputs (N vector)
     
     vector<Vector2d> ls;   ///< landmark positions
     vector<bool> observed; ///< was it observed
 
-    vector<M3V3d> xos;     ///< unoptimized trajectory
+    vector<Body2dState> xos;     ///< unoptimized trajectory
     vector<Vector3d> uos;     ///< unoptimized trajectory
 
     bool init; 

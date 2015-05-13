@@ -15,11 +15,11 @@ namespace gcop {
   typedef Matrix<double, Dynamic, 6> MatrixX6d;
   typedef Matrix<double, 6, Dynamic> Matrix6Xd;
   
-  class Body2dSlamCost : public Cost<M3V3d, 6, 3> {
+  class Body2dSlamCost : public Cost<Body2dState, 6, 3> {
   public:
-    Body2dSlamCost(Body2d &sys, double tf, const Body2dGraph &pg);
+    Body2dSlamCost(Body2d<> &sys, double tf, const Body2dGraph &pg);
     
-    double Lp(double t, const M3V3d &x, const Vector3d &u, const VectorXd &p,
+    double Lp(double t, const Body2dState &x, const Vector3d &u, const VectorXd &p,
               Vector6d *Lx = 0, Matrix6d *Lxx = 0,
               Vector3d *Lu = 0, Matrix3d *Luu = 0,
               Matrix63d *Lxu = 0, 

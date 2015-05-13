@@ -22,6 +22,7 @@
 #include <limits>
 
 #include "tparam.h"
+#include "creator.h"
 
 namespace gcop {
   
@@ -35,7 +36,12 @@ namespace gcop {
    *
    * Authors: Marin Kobilarov, Gowtham Garimella
    */
-  template <typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic> 
+  template <typename T, 
+    int n = Dynamic, 
+    int c = Dynamic, 
+    int np = Dynamic, 
+    int ntp = Dynamic,
+    typename Tc = T> 
     class SystemCe {
     
     typedef Matrix<double, n, 1> Vectornd;
@@ -70,7 +76,7 @@ namespace gcop {
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
      */
-    SystemCe(System<T, n, c, np> &sys, Cost<T, n, c, np> &cost, 
+    SystemCe(System<T, n, c, np> &sys, Cost<T, n, c, np, Tc> &cost, 
              vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, Vectormd *p,
              vector<Vectorcd> &dus, vector<Vectorcd> &es, 
              bool update = true);
@@ -96,7 +102,7 @@ namespace gcop {
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
      */
-    SystemCe(System<T, n, c, np> &sys, Cost<T, n, c, np> &cost, Tparam<T, n, c, np, ntp> &tp,
+    SystemCe(System<T, n, c, np> &sys, Cost<T, n, c, np, Tc> &cost, Tparam<T, n, c, np, ntp, Tc> &tp,
              vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, Vectormd *p,
              vector<Vectorcd> &dus, vector<Vectorcd> &es, 
              bool update = true);
@@ -122,7 +128,7 @@ namespace gcop {
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
      */
-    SystemCe(System<T, n, c, np> &sys, Cost<T, n, c, np> &cost, Tparam<T, n, c, np, ntp> &tp,
+    SystemCe(System<T, n, c, np> &sys, Cost<T, n, c, np, Tc> &cost, Tparam<T, n, c, np, ntp, Tc> &tp,
              vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, Vectormd *p,
              VectorXd &dss, VectorXd &dess, 
              bool update = true);
@@ -150,7 +156,8 @@ namespace gcop {
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
      */
-    SystemCe(System<T, n, c, np> &sys, Cost<T, n, c, np> &cost, Tparam<T, n, c, np, ntp> &tp,
+    SystemCe(System<T, n, c, np> &sys, Cost<T, n, c, np, Tc> &cost, Tparam<T, n, c, np, ntp, 
+             Tc> &tp, Creator<Tc> *contextSampler,
              vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, Vectormd *p,
              Vectortpd &mu0, Matrixtpd &P0, Matrixtpd &S, bool update = true);
 
@@ -178,9 +185,11 @@ namespace gcop {
 
     System<T, n, c, np> &sys;    ///< dynamical system
 
-    Cost<T, n, c, np> &cost;     ///< given cost function
+    Cost<T, n, c, np, Tc> &cost;     ///< given cost function
 
-    Tparam<T, n, c, np, ntp> *tp;     ///< trajectory parametrization
+    Tparam<T, n, c, np, ntp, Tc> *tp;     ///< trajectory parametrization
+
+    Creator<Tc> *contextSampler;     ///< context sampler
 
     std::vector<double> &ts; ///< times (N+1) vector
 
@@ -199,7 +208,8 @@ namespace gcop {
     std::vector< std::vector<T> > xsas;    ///< all state samples
     
     std::vector< std::vector<Vectorcd> >usas;  ///< all control samples
-    
+
+    std::vector< bool >bs;        ///< all samples feasibility
     
     int N;        ///< number of discrete trajectory segments
 
@@ -229,17 +239,17 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
   
-  template <typename T, int n, int c, int np, int ntp> 
-    SystemCe<T, n, c, np, ntp>::SystemCe(System<T, n, c, np> &sys, 
-                                         Cost<T, n, c, np> &cost, 
-                                         vector<double> &ts, 
-                                         vector<T> &xs, 
-                                         vector<Matrix<double, c, 1> > &us,
-                                         Matrix<double, np, 1> *p,
-                                         vector<Matrix<double, c, 1> > &dus,
-                                         vector<Matrix<double, c, 1> > &es,
-                                         bool update) : 
-    sys(sys), cost(cost), tp(0),
+  template <typename T, int n, int c, int np, int ntp, typename Tc> 
+    SystemCe<T, n, c, np, ntp, Tc>::SystemCe(System<T, n, c, np> &sys, 
+                                             Cost<T, n, c, np, Tc> &cost, 
+                                             vector<double> &ts, 
+                                             vector<T> &xs, 
+                                             vector<Matrix<double, c, 1> > &us,
+                                             Matrix<double, np, 1> *p,
+                                             vector<Matrix<double, c, 1> > &dus,
+                                             vector<Matrix<double, c, 1> > &es,
+                                             bool update) : 
+    sys(sys), cost(cost), tp(0), contextSampler(0),
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
     ce(N*sys.U.n, 1), Ns(1000), 
     J(numeric_limits<double>::max()), 
@@ -279,18 +289,18 @@ namespace gcop {
       ce.S = z.asDiagonal();
     }
 
-  template <typename T, int n, int c, int np, int ntp> 
-    SystemCe<T, n, c, np, ntp>::SystemCe(System<T, n, c, np> &sys, 
-                                         Cost<T, n, c, np> &cost, 
-                                         Tparam<T, n, c, np, ntp> &tp,
-                                         vector<double> &ts, 
-                                         vector<T> &xs, 
-                                         vector<Vectorcd> &us, 
-                                         Vectormd *p,
-                                         VectorXd &dss, 
-                                         VectorXd &dess, 
-                                         bool update) :
-    sys(sys), cost(cost), tp(&tp), 
+  template <typename T, int n, int c, int np, int ntp, typename Tc> 
+    SystemCe<T, n, c, np, ntp, Tc>::SystemCe(System<T, n, c, np> &sys, 
+                                             Cost<T, n, c, np, Tc> &cost, 
+                                             Tparam<T, n, c, np, ntp, Tc> &tp,
+                                             vector<double> &ts, 
+                                             vector<T> &xs, 
+                                             vector<Vectorcd> &us, 
+                                             Vectormd *p,
+                                             VectorXd &dss, 
+                                             VectorXd &dess, 
+                                             bool update) :
+    sys(sys), cost(cost), tp(&tp), contextSampler(0),
     ts(ts), xs(xs), us(us), dus(us), p(p), xss(xs), uss(us), N(us.size()), 
     ce(tp.ntp, 1), Ns(1000), 
     J(numeric_limits<double>::max()), 
@@ -319,19 +329,20 @@ namespace gcop {
       ce.S = dess.asDiagonal();
     }
 
-  template <typename T, int n, int c, int np, int ntp> 
-    SystemCe<T, n, c, np, ntp>::SystemCe(System<T, n, c, np> &sys, 
-                                         Cost<T, n, c, np> &cost, 
-                                         Tparam<T, n, c, np, ntp> &tp,
-                                         vector<double> &ts, 
-                                         vector<T> &xs, 
-                                         vector<Vectorcd> &us, 
-                                         Vectormd *p,
-                                         Vectortpd &mu0,
-                                         Matrixtpd &P0,
-                                         Matrixtpd &S, 
-                                         bool update) :
-    sys(sys), cost(cost), tp(&tp), 
+  template <typename T, int n, int c, int np, int ntp, typename Tc> 
+    SystemCe<T, n, c, np, ntp, Tc>::SystemCe(System<T, n, c, np> &sys, 
+                                             Cost<T, n, c, np, Tc> &cost, 
+                                             Tparam<T, n, c, np, ntp, Tc> &tp,
+                                             Creator<Tc> *contextSampler,
+                                             vector<double> &ts, 
+                                             vector<T> &xs, 
+                                             vector<Vectorcd> &us, 
+                                             Vectormd *p,
+                                             Vectortpd &mu0,
+                                             Matrixtpd &P0,
+                                             Matrixtpd &S, 
+                                             bool update) :
+    sys(sys), cost(cost), tp(&tp), contextSampler(contextSampler),
     ts(ts), xs(xs), us(us), dus(us), p(p), xss(xs), uss(us), N(us.size()), 
     ce(tp.ntp, 1), Ns(1000), 
     J(numeric_limits<double>::max()), 
@@ -361,15 +372,17 @@ namespace gcop {
       ce.gmm.Update();
           
       //      tp.To(ce.gmm.ns[0].mu, ts, xs, us, p);
-
+      if (contextSampler) {
+        tp.SetContext( (*contextSampler)() );
+      }
       tp.From(ts, xs, us, mu0, p);
     }
 
 
-  template <typename T, int n, int c, int np, int ntp> 
-    SystemCe<T, n, c, np, ntp>::SystemCe(System<T, n, c, np> &sys, 
-                                         Cost<T, n, c, np> &cost,                              
-                                         Tparam<T, n, c, np, ntp> &tp, 
+  template <typename T, int n, int c, int np, int ntp, typename Tc> 
+    SystemCe<T, n, c, np, ntp, Tc>::SystemCe(System<T, n, c, np> &sys, 
+                                         Cost<T, n, c, np, Tc> &cost,                              
+                                         Tparam<T, n, c, np, ntp, Tc> &tp, 
                                          vector<double> &ts, 
                                          vector<T> &xs, 
                                          vector<Matrix<double, c, 1> > &us,
@@ -377,7 +390,7 @@ namespace gcop {
                                          vector<Matrix<double, c, 1> > &dus,
                                          vector<Matrix<double, c, 1> > &es,
                                          bool update) : 
-    sys(sys), cost(cost), tp(&tp), 
+    sys(sys), cost(cost), tp(&tp), contextSampler(0),
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
     ce(tp.ntp, 1), Ns(1000), 
     J(numeric_limits<double>::max()), 
@@ -428,13 +441,13 @@ namespace gcop {
     }
 
   
-  template <typename T, int n, int c, int np, int ntp> 
-    SystemCe<T, n, c, np, ntp>::~SystemCe()
+  template <typename T, int n, int c, int np, int ntp, typename Tc> 
+    SystemCe<T, n, c, np, ntp, Tc>::~SystemCe()
     {
     }
 
-  template <typename T, int n, int c, int np, int ntp> 
-    void SystemCe<T, n, c, np, ntp>::us2z(Vectortpd &z, const std::vector<Vectorcd> &us) const
+  template <typename T, int n, int c, int np, int ntp, typename Tc> 
+    void SystemCe<T, n, c, np, ntp, Tc>::us2z(Vectortpd &z, const std::vector<Vectorcd> &us) const
     {
       assert(us.size() > 0);
       assert(z.size() == us.size()*us[0].size());
@@ -443,8 +456,8 @@ namespace gcop {
       }
     }
   
-  template <typename T, int n, int c, int np, int ntp> 
-    void SystemCe<T, n, c, np, ntp>::z2us(std::vector<Vectorcd> &us, const Vectortpd &z) const
+  template <typename T, int n, int c, int np, int ntp, typename Tc> 
+    void SystemCe<T, n, c, np, ntp, Tc>::z2us(std::vector<Vectorcd> &us, const Vectortpd &z) const
     {
       assert(us.size() > 0);
       assert(z.size() == us.size()*us[0].size());
@@ -454,8 +467,8 @@ namespace gcop {
     }
 
   
-  template <typename T, int n, int c, int np, int ntp> 
-    double SystemCe<T, n, c, np, ntp>::Update(vector<T> &xs, const vector<Vectorcd> &us, bool evalCost) {    
+  template <typename T, int n, int c, int np, int ntp, typename Tc> 
+    double SystemCe<T, n, c, np, ntp, Tc>::Update(vector<T> &xs, const vector<Vectorcd> &us, bool evalCost) {    
     double J = 0;
     sys.reset(xs[0],ts[0]);//gives a chance for physics engines to reset to specific state and time.
 
@@ -471,8 +484,8 @@ namespace gcop {
     return J;
   }
 
-  template <typename T, int n, int c, int np, int ntp> 
-    void SystemCe<T, n, c, np, ntp>::Iterate(bool updatexsfromus) {
+  template <typename T, int n, int c, int np, int ntp, typename Tc> 
+    void SystemCe<T, n, c, np, ntp, Tc>::Iterate(bool updatexsfromus) {
 
       if (ce.inc) 
       {
@@ -484,8 +497,13 @@ namespace gcop {
             z.resize(us.size()*this->N);        
 
         ce.Sample(z);
-        if (tp)
-        {
+        if (tp) {
+          // set context (e.g. goal, environment, etc...) possibly using random sampling
+          if (contextSampler) {
+            Tc &context = (*contextSampler)();
+            tp->SetContext(context);            
+            cost.SetContext(context);
+          }
           tp->From(ts, xss, uss, z, p);
           double cost_trajectory = 0;
           int N = uss.size();
@@ -504,12 +522,13 @@ namespace gcop {
 
         xsas.push_back(xss);
         usas.push_back(uss);
-      } else 
+      } else   // non-incremental
       {
         // Jub is used to discard any samples with cost below Jub
         ce.Reset();
         xsas.clear();
         usas.clear();
+        bs.clear();
 
         Vectortpd z;
         if (ntp == Dynamic)
@@ -517,14 +536,23 @@ namespace gcop {
             z.resize(tp->ntp);
           else 
             z.resize(us.size()*this->N);
-
+        
         for (int j = 0; j < Ns; ++j) {
           
+          // sample context
+          if (contextSampler) {
+            Tc &context = (*contextSampler)();
+            tp->SetContext(context);            
+            cost.SetContext(context);
+          }
+          
           double J = 0;
+          bool good = true;
+
           do {
             ce.Sample(z);       
             if (tp) {
-              tp->From(ts, xss, uss, z, p);
+              good = tp->From(ts, xss, uss, z, p);
               int N = uss.size();
               J = 0;
               for(int k = 0;k < N; k++) { 
@@ -542,7 +570,7 @@ namespace gcop {
           // add to list of all samples
           xsas.push_back(xss);
           usas.push_back(uss);
-      
+          bs.push_back(good);
 
           //#DEBUG Number of function evaluations:
           //cout<<++nofevaluations<<endl;
