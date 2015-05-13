@@ -34,7 +34,7 @@
  * 
  * \subsection Installation
  * \subsubsection Build requirements
- *  g++, cmake, libeigen, opengl, glut
+ *  g++, cmake, libeigen, opengl, glut, libgsl0
  *
  * \subsubsection Download
  * 
