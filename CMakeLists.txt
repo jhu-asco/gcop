@@ -76,7 +76,7 @@ find_package(GLU REQUIRED)
 include_directories(${GLU_INCLUDE_DIRS})
 set(VIEWER_LIBS ${VIEWER_LIBS} ${GLU_LIBRARIES} ${GLU_LIBRARY})
 
-find_package(DSL REQUIRED)
+find_package(DSL)
 include_directories(${DSL_INCLUDE_DIRS})
 set(VIEWER_LIBS ${VIEWER_LIBS} ${DSL_LIBRARIES} ${DSL_LIBRARY})
 
