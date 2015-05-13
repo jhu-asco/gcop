@@ -154,7 +154,7 @@ namespace gcop {
 
     int N = us.size();
 
-    sys.reset(xs[0],ts[0]);//Reset the internal state
+    sys.Reset(xs[0],ts[0]);//Reset the internal state
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];
@@ -213,7 +213,7 @@ namespace gcop {
 
             As[k].col(i) = (dfp - dfm)/(2*eps);
           }
-          sys.reset(xs[k+1],ts[k+1]);//Reset the internal state
+          sys.Reset(xs[k+1],ts[k+1]);//Reset the internal state
           //cout<<"As["<<k<<"]: "<<endl<<As[k]<<endl;
         }
         
@@ -237,7 +237,7 @@ namespace gcop {
 
             Bs[k].col(i) = (dfp - dfm)/eps;
           }
-          sys.reset(xs[k+1],ts[k+1]);//Reset the internal state
+          sys.Reset(xs[k+1],ts[k+1]);//Reset the internal state
          // cout<<"Bs["<<k<<"]: "<<endl<<Bs[k]<<endl;
         }        
       } else {

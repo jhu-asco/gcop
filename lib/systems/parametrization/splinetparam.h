@@ -166,7 +166,7 @@ namespace gcop {
     ControlSpline cspline = SplineFitting<ControlSpline>::Interpolate(controlMatrix, degree, tks);
     double tdiff = ts.back() - ts.front();
     
-    this->sys.reset(xs[0],ts[0]);
+    this->sys.Reset(xs[0],ts[0]);
     for (int i = 0; i < us.size(); ++i) {
       us[i] = cspline((ts[i] - ts[0])/tdiff);
       //cout<<"ts["<<i<<"]: "<<ts[i]<<endl;

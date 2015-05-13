@@ -446,7 +446,7 @@ namespace gcop {
       Vectornd dx = VectorXd::Zero(this->sys.X.n);
 			dx.setZero();//Redundancy
       T xn = this->xs[0];
-      this->sys.reset(xn,this->ts[0]);//Reset to initial state
+      this->sys.Reset(xn,this->ts[0]);//Reset to initial state
       Vectorcd un;
       
       double Vm = 0;
@@ -622,7 +622,7 @@ namespace gcop {
       //getchar();
 
       /*Find xsprev based on dus and us:
-      this->sys.reset(this->xs[0],this->ts[0]);
+      this->sys.Reset(this->xs[0],this->ts[0]);
       for(int count_traj = 0; count_traj< N;count_traj++)
       {
         us1 = this->us[count_traj] - this->dus[count_traj];
@@ -660,7 +660,7 @@ namespace gcop {
           //dxsmatrix.block<nx,1>(0,count) = dx; 
           this->sys.X.Retract(x0_sample, this->xs[0], dx);
           xss[0] = x0_sample;
-          this->sys.reset(x0_sample,this->ts[0]);
+          this->sys.Reset(x0_sample,this->ts[0]);
           for(int count_traj = 0; count_traj< N;count_traj++)
           {
             this->sys.X.Lift(dx, this->xs[count_traj], xss[count_traj]);//This is for feedback 
@@ -739,7 +739,7 @@ namespace gcop {
         this->sys.X.Retract(x0_sample, this->xs[0], dx);
 
         xss[0] = x0_sample;
-        this->sys.reset(x0_sample,this->ts[0]);
+        this->sys.Reset(x0_sample,this->ts[0]);
         for(int count1 = 0;count1 < N;count1++)
         {
           //this->sys.X.Lift(dx, xsprev[count1], xss[count1]);//This is for feedback

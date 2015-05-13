@@ -457,7 +457,7 @@ namespace gcop {
   template <typename T, int n, int c, int np, int ntp> 
     double SystemCe<T, n, c, np, ntp>::Update(vector<T> &xs, const vector<Vectorcd> &us, bool evalCost) {    
     double J = 0;
-    sys.reset(xs[0],ts[0]);//gives a chance for physics engines to reset to specific state and time.
+    sys.Reset(xs[0],ts[0]);//gives a chance for physics engines to reset to specific state and time.
 
     for (int k = 0; k < N; ++k) {
       double h = ts[k+1] - ts[k];

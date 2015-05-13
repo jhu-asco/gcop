@@ -156,7 +156,7 @@ int main(int argc, char** argv)
   if (argc > 1)
     params.Load(argv[1]);
   else
-    params.Load("../../bin/fixedchain.cfg");
+    params.Load("../../bin/fixedchain1.cfg");
 
 
 #ifdef DISP

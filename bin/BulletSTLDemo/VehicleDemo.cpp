@@ -140,7 +140,7 @@ void VehicleDemo::clientResetScene()
     Vector4d x0;
     brccar->initialz = 2;
     x0<<0,0,M_PI,0;
-    brccar->reset(x0);//Reset the car to initial posn
+    brccar->Reset(x0);//Reset the car to initial posn
 		for (int i=0;i<(brccar->m_vehicle->getNumWheels());i++)
 		{
 			//synchronize the wheels with the (interpolated) chassis worldtransform

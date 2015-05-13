@@ -199,7 +199,7 @@ namespace gcop {
    * @param x State to reset to
    * @param t  time to reset to (optional)
    */
-  virtual bool reset(const T &x, double t = 0);
+  virtual bool Reset(const T &x, double t = 0);
 
   /**
    * Reconstruct the full state. Some states contain redundant parameters 
@@ -362,7 +362,7 @@ namespace gcop {
     }
 
   template <typename T, int _nx, int _nu, int _np>
-    bool System<T, _nx, _nu, _np>::reset(const T& x, double t)
+    bool System<T, _nx, _nu, _np>::Reset(const T& x, double t)
     {
       this->x = x;//Copying state and time 
       this->t = t;

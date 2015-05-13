@@ -350,7 +350,7 @@ void VehicleDemo::clientResetScene()
   gVehicleVelocity = 0.f;
   if(brccar)
   {
-    brccar->reset(xs[0]);//Reset the car to initial posn
+    brccar->Reset(xs[0]);//Reset the car to initial posn
 		for (int i=0;i<(brccar->m_vehicle->getNumWheels());i++)
 		{
 			//synchronize the wheels with the (interpolated) chassis worldtransform

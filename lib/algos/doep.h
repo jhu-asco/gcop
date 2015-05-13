@@ -164,7 +164,7 @@ namespace gcop {
     int N = us.size();
     T1 x1; //Temporary projection for finding sensor measurements
 
-    sys.reset(xs[0],ts[0]);//Reset
+    sys.Reset(xs[0],ts[0]);//Reset
     int sensor_index = 0;
     assert(ts1[0]>= ts[0]);//Sensor measurements are after the control started
     assert(ts1.back() <= ts.back());//Sensor measurements are before control ended
