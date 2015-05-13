@@ -37,13 +37,13 @@ namespace gcop {
   public:
     ControlTparam(System<T, nx, nu, np> &sys, const vector<double> &ts);
     
-    void To(Vectorntpd &s, 
+    bool To(Vectorntpd &s, 
             const vector<double> &ts, 
             const vector<T> &xs, 
             const vector<Vectorcd> &us,
             const Vectormd *p = 0);
     
-    void From(vector<double> &ts, 
+    bool From(vector<double> &ts, 
               vector<T> &xs, 
               vector<Vectorcd> &us,
               const Vectorntpd &s,
@@ -57,7 +57,7 @@ namespace gcop {
   }
 
   template <typename T, int nx, int nu, int np, int _ntp> 
-    void ControlTparam<T, nx, nu, np, _ntp>::To(Vectorntpd &s, 
+    bool ControlTparam<T, nx, nu, np, _ntp>::To(Vectorntpd &s, 
                                              const vector<double> &ts, 
                                              const vector<T> &xs, 
                                              const vector<Vectorcd> &us,
@@ -78,16 +78,18 @@ namespace gcop {
     }
     s.tail(this->sys.U.n) = us[us.size()-1];
     cout<<"s: "<<s.transpose()<<endl;
+    return true;
     //s.setConstant(.001);
   }
   
   template <typename T, int nx, int nu, int np, int _ntp> 
-    void ControlTparam<T, nx, nu, np, _ntp>::From(vector<double> &ts, 
+    bool ControlTparam<T, nx, nu, np, _ntp>::From(vector<double> &ts, 
                                                   vector<T> &xs, 
                                                   vector<Vectorcd> &us,
                                                   const Vectorntpd &s,
                                                   Vectormd *p) {
-    assert(this->ntp == tks.size()*this->sys.U.n);
+    if(this->ntp != tks.size()*this->sys.U.n)
+      return false;
     
     int ki = 0; // knot index
     for (int i = 0; i < us.size(); ++i) {
@@ -109,6 +111,7 @@ namespace gcop {
       //cout<<"Xs["<<(i+1)<<"]"<<xs[i+1].transpose()<<endl; #DEBUG
       //cout<<"us["<<i<<"]"<<us[i].transpose()<<endl;
     }
+    return true;
   }
 }
 
