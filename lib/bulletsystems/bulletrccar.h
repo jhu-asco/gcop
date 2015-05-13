@@ -89,7 +89,7 @@ namespace gcop {
                       const Vector4d &w, Matrix4d *A = 0, Matrix42d *B = 0, 
                       Matrix4pd *C = 0, Matrix4d *D = 0);
 
-    bool reset(const Vector4d &x, double t = 0);
+    bool Reset(const Vector4d &x, double t = 0);
 
 		/** Set the intial state of the car to given full state. This overrides the reset state of the car and allows to use full state
 		*  #TODO Use full stat of the car directly

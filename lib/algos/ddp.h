@@ -371,7 +371,7 @@ namespace gcop {
       Vectornd dx = VectorXd::Zero(this->sys.X.n);
       dx.setZero();//Redundancy
       T xn = this->xs[0];
-      this->sys.reset(xn,this->ts[0]);//Reset to initial state
+      this->sys.Reset(xn,this->ts[0]);//Reset to initial state
       Vectorcd un;
       
       double Vm = 0;

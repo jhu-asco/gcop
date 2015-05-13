@@ -131,7 +131,7 @@ void solver_process(Viewer* viewer)
   //Using the controls Update the sys trajectory and find the sensor measurements:
   //Reset the system:
   BaseSystem *base_system = &sys;
-  sys.reset(xs[0], ts[0]);
+  sys.Reset(xs[0], ts[0]);
   int sensor_index = 0;
   for(int i = 0; i< N; ++i)
   {
@@ -175,7 +175,7 @@ void solver_process(Viewer* viewer)
   Vector3d ztemp;
   Vector8d residual;
   residual.resize(8);
-  sys.reset(xs[0],ts[0]);
+  sys.Reset(xs[0],ts[0]);
   //Testing Cost Function
   for(int i = 0; i< N; ++i)
   {

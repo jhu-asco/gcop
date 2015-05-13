@@ -171,7 +171,7 @@ double Bulletrccar::Step(Vector4d &xb, double t, const Vector4d &xa,
     Matrix4d *A, Matrix42d *B, Matrix4pd *C)
 {
 //  cout<<"Step Called: "<<endl;
-  this->reset(xa,t);
+  this->Reset(xa,t);
   return this->Step(xb,u,h,p,A,B,C);
 }
 
@@ -420,7 +420,7 @@ void Bulletrccar::setinitialstate(Vector4d &x)
   }
 }
 
-bool Bulletrccar::reset(const Vector4d &x, double t)
+bool Bulletrccar::Reset(const Vector4d &x, double t)
 {
   if(m_world.m_dynamicsWorld)
   {

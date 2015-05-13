@@ -34,6 +34,7 @@ class VehicleDemo : public GlutDemoApplication
 {
   protected:
     Bulletrccar *brccar;
+    BaseSystem *base_brccar;
 
 	public:
 

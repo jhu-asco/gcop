@@ -81,6 +81,8 @@ void VehicleDemo::initPhysics()
   brccar->kp_torque = 100;
   brccar->kp_steer = 0.2;
   brccar->gain_cmdvelocity = 1.04;
+
+  base_brccar =  (BaseSystem *)brccar;
   //brccar->initialz = 0.15;//Initial height of the car
 
   //////////// Setup the Optimization Problem:
@@ -190,7 +192,7 @@ void VehicleDemo::initPhysics()
       if (brccar)
       {
         //cout<<"u: "<<us[i].transpose()<<endl;
-        brccar->Step(xs[i+1], us[i], h);//Move
+        base_brccar->Step(xs[i+1], us[i], h);//Move
       }
       if((ts_sensor[sensor_index] - ts[i])>= 0 && (ts_sensor[sensor_index] - ts[i+1]) < 0)
       {
@@ -271,7 +273,7 @@ void VehicleDemo::MoveAndDisplay(double h)
     Vector2d u;
     u<<gVehicleVelocity, gVehicleSteering;
     //cout<<"u: "<<u.transpose()<<"\tdt: "<<dt<<endl;
-    brccar->Step2(u, h);//Move
+    base_brccar->Step(u, h);//Move
   }
 
 
@@ -348,7 +350,7 @@ void VehicleDemo::clientResetScene()
   gVehicleVelocity = 0.f;
   if(brccar)
   {
-    brccar->reset(xs[0]);//Reset the car to initial posn
+    brccar->Reset(xs[0]);//Reset the car to initial posn
 		for (int i=0;i<(brccar->m_vehicle->getNumWheels());i++)
 		{
 			//synchronize the wheels with the (interpolated) chassis worldtransform

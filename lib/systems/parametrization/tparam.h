@@ -102,7 +102,7 @@ namespace gcop {
                                            const Vectorntpd &s,
                                            Vectormd *p) {
     assert(ntp == us.size()*sys.U.n);
-    sys.reset(xs[0],ts[0]);
+    sys.Reset(xs[0],ts[0]);
     for (int i = 0; i < us.size(); ++i) {
       memcpy(us[i].data(), s.data() + i*sys.U.n, sys.U.n*sizeof(double));
       sys.Step(xs[i+1], us[i], ts[i+1] - ts[i], p);

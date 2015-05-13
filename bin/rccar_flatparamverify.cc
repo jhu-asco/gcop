@@ -74,7 +74,7 @@ void solver_process(Viewer* viewer)
 	//Update using initial controls:
   BaseSystem *base_system = &sys;
   vector<Vector2d> us(N);
-	sys.reset(xs[0],ts[0]);
+	sys.Reset(xs[0],ts[0]);
   for (int i = 0; i < N; ++i) {
 		if(i < N/2)
 			us[i] = Vector2d(.01, .1);

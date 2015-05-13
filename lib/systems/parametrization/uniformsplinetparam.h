@@ -203,7 +203,7 @@ namespace gcop {
                                                   Vectormd *p) {
     assert(s.size() == (degree + this->tks.size() - 1)*(this->sys.U.n));
 
-    this->sys.reset(xs[0],ts[0]);
+    this->sys.Reset(xs[0],ts[0]);
     int tks_index = 0;
     VectorXd basis(degree+1);
     Vectorcd usi;

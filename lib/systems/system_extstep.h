@@ -77,7 +77,7 @@ namespace gcop {
           return 0;
         }
 
-        bool reset(const T& x, double t = 0)
+        bool Reset(const T& x, double t = 0)
         {
           extreset(x);
           this->x = x;
