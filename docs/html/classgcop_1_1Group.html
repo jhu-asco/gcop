@@ -134,8 +134,8 @@ class gcop::Group&lt; n, m &gt;</h3>
 <p>Subclasses should provide all methods (inv, cay, cayinv are provided for convenience but they can be implemented more efficiently for specific groups)</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">n</td><td>manifold dimension, i.e. algebra alements are vectors <img class="formulaInl" alt="$ v\in R^n $" src="form_64.png"/> </td></tr>
-    <tr><td class="paramname">m</td><td>matrix dimension, group elements are m-by-m matrices <img class="formulaInl" alt="$ g \in G \subset GL(m) $" src="form_65.png"/></td></tr>
+    <tr><td class="paramname">n</td><td>manifold dimension, i.e. algebra alements are vectors <img class="formulaInl" alt="$ v\in R^n $" src="form_66.png"/> </td></tr>
+    <tr><td class="paramname">m</td><td>matrix dimension, group elements are m-by-m matrices <img class="formulaInl" alt="$ g \in G \subset GL(m) $" src="form_67.png"/></td></tr>
   </table>
   </dd>
 </dl>
@@ -167,7 +167,7 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>The operator <img class="formulaInl" alt="$\operatorname{Ad}_g:\mathfrak{g}\rightarrow\mathfrak{g}$" src="form_73.png"/>. One can think of this operator as a change-of-frame transformation. </p>
+<p>The operator <img class="formulaInl" alt="$\operatorname{Ad}_g:\mathfrak{g}\rightarrow\mathfrak{g}$" src="form_75.png"/>. One can think of this operator as a change-of-frame transformation. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">m</td><td>resulting transformation </td></tr>
@@ -194,7 +194,7 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>The operator <img class="formulaInl" alt="$\operatorname{Ad}_g:\mathfrak{g}\rightarrow\mathfrak{g}$" src="form_73.png"/>. One can think of this operator as a change-of-frame transformation. </p>
+<p>The operator <img class="formulaInl" alt="$\operatorname{Ad}_g:\mathfrak{g}\rightarrow\mathfrak{g}$" src="form_75.png"/>. One can think of this operator as a change-of-frame transformation. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>resulting transformation </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -231,7 +231,7 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>The operator <img class="formulaInl" alt="$\operatorname{ad}_\xi:\mathfrak{g}\rightarrow\mathfrak{g}$" src="form_74.png"/>. One can think of this operator as the infinitesimal of the change-of-frame transformation. It can also be written using brackets [*,*]. </p>
+<p>The operator <img class="formulaInl" alt="$\operatorname{ad}_\xi:\mathfrak{g}\rightarrow\mathfrak{g}$" src="form_76.png"/>. One can think of this operator as the infinitesimal of the change-of-frame transformation. It can also be written using brackets [*,*]. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">m</td><td>resulting map </td></tr>
@@ -258,7 +258,7 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>The operator <img class="formulaInl" alt="$\operatorname{ad}_\xi:\mathfrak{g}\rightarrow\mathfrak{g}$" src="form_74.png"/>. One can think of this operator as the infinitesimal of the change-of-frame transformation. It can also be written using brackets [*,*]. </p>
+<p>The operator <img class="formulaInl" alt="$\operatorname{ad}_\xi:\mathfrak{g}\rightarrow\mathfrak{g}$" src="form_76.png"/>. One can think of this operator as the infinitesimal of the change-of-frame transformation. It can also be written using brackets [*,*]. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>resulting map </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -388,11 +388,11 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Cayley map of a lie algebra element a <img class="formulaInl" alt="$ g=\text{cay}(a) $" src="form_78.png"/>. Subclasses should implement this method </p>
+<p>Cayley map of a lie algebra element a <img class="formulaInl" alt="$ g=\text{cay}(a) $" src="form_80.png"/>. Subclasses should implement this method </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">g</td><td>resulting group element <img class="formulaInl" alt="$ g \in G $" src="form_67.png"/> </td></tr>
-    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_76.png"/> </td></tr>
+    <tr><td class="paramname">g</td><td>resulting group element <img class="formulaInl" alt="$ g \in G $" src="form_69.png"/> </td></tr>
+    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_78.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -415,11 +415,11 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Cayley map of a lie algebra element a <img class="formulaInl" alt="$ g=\text{cay}(a) $" src="form_78.png"/>. Subclasses should implement this method </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>resulting group element <img class="formulaInl" alt="$ g \in G $" src="form_67.png"/> </dd></dl>
+<p>Cayley map of a lie algebra element a <img class="formulaInl" alt="$ g=\text{cay}(a) $" src="form_80.png"/>. Subclasses should implement this method </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>resulting group element <img class="formulaInl" alt="$ g \in G $" src="form_69.png"/> </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_76.png"/> </td></tr>
+    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_78.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -452,11 +452,11 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Inverse of cayley <img class="formulaInl" alt="$ v=\text{cay}^{-1}(g) $" src="form_79.png"/>. Subclasses should implement this method </p>
+<p>Inverse of cayley <img class="formulaInl" alt="$ v=\text{cay}^{-1}(g) $" src="form_81.png"/>. Subclasses should implement this method </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_76.png"/> </td></tr>
-    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_67.png"/> </td></tr>
+    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_78.png"/> </td></tr>
+    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_69.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -481,11 +481,11 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Inverse of cayley <img class="formulaInl" alt="$ v=\text{cay}^{-1}(g) $" src="form_79.png"/>. Subclasses should implement this method </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>v Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_76.png"/> </dd></dl>
+<p>Inverse of cayley <img class="formulaInl" alt="$ v=\text{cay}^{-1}(g) $" src="form_81.png"/>. Subclasses should implement this method </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>v Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_78.png"/> </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_67.png"/> </td></tr>
+    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_69.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -522,7 +522,7 @@ template&lt;int n, int m&gt; </div>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">m</td><td>resulting linear map </td></tr>
-    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g}$" src="form_80.png"/> </td></tr>
+    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g}$" src="form_82.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -549,7 +549,7 @@ template&lt;int n, int m&gt; </div>
 <dl class="return"><dt><b>Returns:</b></dt><dd>resulting linear map </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g}$" src="form_80.png"/> </td></tr>
+    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g}$" src="form_82.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -586,7 +586,7 @@ template&lt;int n, int m&gt; </div>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">m</td><td>resulting linear map </td></tr>
-    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g}$" src="form_80.png"/> </td></tr>
+    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g}$" src="form_82.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -613,7 +613,7 @@ template&lt;int n, int m&gt; </div>
 <dl class="return"><dt><b>Returns:</b></dt><dd>resulting linear map </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g}$" src="form_80.png"/> </td></tr>
+    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g}$" src="form_82.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -652,12 +652,12 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Compute the difference b/n two elements <img class="formulaInl" alt="$ \Delta g=g_a^{-1}g_b $" src="form_68.png"/>. </p>
+<p>Compute the difference b/n two elements <img class="formulaInl" alt="$ \Delta g=g_a^{-1}g_b $" src="form_70.png"/>. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">dg</td><td>resulting group element <img class="formulaInl" alt="$ \Delta g \in G $" src="form_69.png"/> </td></tr>
-    <tr><td class="paramname">ga</td><td>first group element <img class="formulaInl" alt="$ g_a \in G $" src="form_70.png"/> </td></tr>
-    <tr><td class="paramname">gb</td><td>second group element <img class="formulaInl" alt="$ g_b \in G $" src="form_71.png"/> </td></tr>
+    <tr><td class="paramname">dg</td><td>resulting group element <img class="formulaInl" alt="$ \Delta g \in G $" src="form_71.png"/> </td></tr>
+    <tr><td class="paramname">ga</td><td>first group element <img class="formulaInl" alt="$ g_a \in G $" src="form_72.png"/> </td></tr>
+    <tr><td class="paramname">gb</td><td>second group element <img class="formulaInl" alt="$ g_b \in G $" src="form_73.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -692,12 +692,12 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Compute the difference b/n two elements <img class="formulaInl" alt="$ \Delta g=g_a^{-1}g_b $" src="form_68.png"/>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>resulting group element <img class="formulaInl" alt="$ \Delta g \in G $" src="form_69.png"/> </dd></dl>
+<p>Compute the difference b/n two elements <img class="formulaInl" alt="$ \Delta g=g_a^{-1}g_b $" src="form_70.png"/>. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>resulting group element <img class="formulaInl" alt="$ \Delta g \in G $" src="form_71.png"/> </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">ga</td><td>first group element <img class="formulaInl" alt="$ g_a \in G $" src="form_70.png"/> </td></tr>
-    <tr><td class="paramname">gb</td><td>second group element <img class="formulaInl" alt="$ g_b \in G $" src="form_71.png"/> </td></tr>
+    <tr><td class="paramname">ga</td><td>first group element <img class="formulaInl" alt="$ g_a \in G $" src="form_72.png"/> </td></tr>
+    <tr><td class="paramname">gb</td><td>second group element <img class="formulaInl" alt="$ g_b \in G $" src="form_73.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -759,11 +759,11 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Exponentiate lie algebra element a <img class="formulaInl" alt="$ g=\exp(a) $" src="form_75.png"/>. Subclasses should implement this method </p>
+<p>Exponentiate lie algebra element a <img class="formulaInl" alt="$ g=\exp(a) $" src="form_77.png"/>. Subclasses should implement this method </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">g</td><td>resulting group element <img class="formulaInl" alt="$ g \in G $" src="form_67.png"/> </td></tr>
-    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_76.png"/> </td></tr>
+    <tr><td class="paramname">g</td><td>resulting group element <img class="formulaInl" alt="$ g \in G $" src="form_69.png"/> </td></tr>
+    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_78.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -786,11 +786,11 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Exponentiate lie algebra element a <img class="formulaInl" alt="$ g=\exp(a) $" src="form_75.png"/>. Subclasses should implement this method </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>resulting group element <img class="formulaInl" alt="$ g \in G $" src="form_67.png"/> </dd></dl>
+<p>Exponentiate lie algebra element a <img class="formulaInl" alt="$ g=\exp(a) $" src="form_77.png"/>. Subclasses should implement this method </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>resulting group element <img class="formulaInl" alt="$ g \in G $" src="form_69.png"/> </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_76.png"/> </td></tr>
+    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_78.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -823,7 +823,7 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>The operator <img class="formulaInl" alt="$\hat v$" src="form_72.png"/> such that $(v)  I +  v$</p>
+<p>The operator <img class="formulaInl" alt="$\hat v$" src="form_74.png"/> such that $(v)  I +  v$</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">g</td><td>resulting map </td></tr>
@@ -850,7 +850,7 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>The operator <img class="formulaInl" alt="$\hat v$" src="form_72.png"/> such that $(v)  I +  v$</p>
+<p>The operator <img class="formulaInl" alt="$\hat v$" src="form_74.png"/> such that $(v)  I +  v$</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>resulting map </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -954,8 +954,8 @@ template&lt;int n, int m&gt; </div>
 <p>Compute the inverse of a given group element </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">gi</td><td>inverse <img class="formulaInl" alt="$ g^{-1} \in G $" src="form_66.png"/> </td></tr>
-    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_67.png"/> </td></tr>
+    <tr><td class="paramname">gi</td><td>inverse <img class="formulaInl" alt="$ g^{-1} \in G $" src="form_68.png"/> </td></tr>
+    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_69.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -979,10 +979,10 @@ template&lt;int n, int m&gt; </div>
 </div>
 <div class="memdoc">
 <p>Compute the inverse of a given group element </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>inverse <img class="formulaInl" alt="$ g^{-1} \in G $" src="form_66.png"/> </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>inverse <img class="formulaInl" alt="$ g^{-1} \in G $" src="form_68.png"/> </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_67.png"/> </td></tr>
+    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_69.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -1050,11 +1050,11 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Logarithm of a group element <img class="formulaInl" alt="$ a = \log(g) $" src="form_77.png"/>. Subclasses should implement this method </p>
+<p>Logarithm of a group element <img class="formulaInl" alt="$ a = \log(g) $" src="form_79.png"/>. Subclasses should implement this method </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_76.png"/> </td></tr>
-    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_67.png"/> </td></tr>
+    <tr><td class="paramname">v</td><td>Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_78.png"/> </td></tr>
+    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_69.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -1077,11 +1077,11 @@ template&lt;int n, int m&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Logarithm of a group element <img class="formulaInl" alt="$ a = \log(g) $" src="form_77.png"/>. Subclasses should implement this method </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>v Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_76.png"/> </dd></dl>
+<p>Logarithm of a group element <img class="formulaInl" alt="$ a = \log(g) $" src="form_79.png"/>. Subclasses should implement this method </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>v Lie algebra element <img class="formulaInl" alt="$ v\in\mathfrak{g} $" src="form_78.png"/> </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_67.png"/> </td></tr>
+    <tr><td class="paramname">g</td><td>group element <img class="formulaInl" alt="$ g \in G $" src="form_69.png"/> </td></tr>
   </table>
   </dd>
 </dl>
@@ -1227,7 +1227,7 @@ template&lt;int n, int m&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

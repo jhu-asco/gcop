@@ -87,16 +87,25 @@
 : <a class="el" href="classgcop_1_1Point3dGps.html#a6767fe73529022e1d1e6d33c6214d1c7">gcop::Point3dGps&lt; _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4.html#a47dc32732729e38fb04c11bd7635fa28">gcop::Gps&lt; Point3dState, 6, _nu, _np &gt;</a>
 </li>
+<li>Matrix3cd
+: <a class="el" href="classgcop_1_1Body2d.html#add64d880e5fd836d45c7ff1f99ee2c79">gcop::Body2d&lt; c &gt;</a>
+, <a class="el" href="classgcop_1_1Body2dForce.html#adc697194aecba6cb82809d7b7f6201f1">gcop::Body2dForce&lt; c &gt;</a>
+, <a class="el" href="classgcop_1_1Body2dCost.html#ac060508f37a395a12b11cce2b8b8bb25">gcop::Body2dCost&lt; c &gt;</a>
+</li>
 <li>Matrix3x15d
 : <a class="el" href="classgcop_1_1InsGps.html#a5517b946a8617253fe7236669d744c0d">gcop::InsGps&lt; _nu, _np &gt;</a>
 </li>
+<li>Matrix6cd
+: <a class="el" href="classgcop_1_1Body2d.html#ac3125278d972f35562eabec96c9ed9bf">gcop::Body2d&lt; c &gt;</a>
+, <a class="el" href="classgcop_1_1Body2dForce.html#a5e10432896e62d9737793c815d3f1980">gcop::Body2dForce&lt; c &gt;</a>
+, <a class="el" href="classgcop_1_1Body2dCost.html#a93c86f47f54f972b8ce5e95db0160f69">gcop::Body2dCost&lt; c &gt;</a>
+</li>
 <li>Matrix6d
-: <a class="el" href="classgcop_1_1KinRccarPathCost.html#a3e587d227b1f4abafcad0cba4332a700">gcop::KinRccarPathCost</a>
-, <a class="el" href="classgcop_1_1Kinbody3d.html#a2be7b2a1c078d4582cfa0cc8b578c4c4">gcop::Kinbody3d&lt; _nu &gt;</a>
-, <a class="el" href="classgcop_1_1KinbodyProjTrack.html#aea96d7387f7151514cf2fb0fc30f29e5">gcop::KinbodyProjTrack&lt; _nu &gt;</a>
-, <a class="el" href="classgcop_1_1Params.html#a8549ff377b97ac6bf3a2510807bad2c7">gcop::Params</a>
+: <a class="el" href="classgcop_1_1KinbodyProjTrack.html#aea96d7387f7151514cf2fb0fc30f29e5">gcop::KinbodyProjTrack&lt; _nu &gt;</a>
 , <a class="el" href="classgcop_1_1Kinbody3dTrackCost.html#a64fb988c59b92cf3502ae6d2d67e37ce">gcop::Kinbody3dTrackCost&lt; _nu &gt;</a>
 , <a class="el" href="classgcop_1_1KinbodyProjTrackCost.html#aaf18a19f45ddc76bc4e16cf1a3e16663">gcop::KinbodyProjTrackCost&lt; _nu &gt;</a>
+, <a class="el" href="classgcop_1_1KinRccarPathCost.html#a3e587d227b1f4abafcad0cba4332a700">gcop::KinRccarPathCost</a>
+, <a class="el" href="classgcop_1_1Kinbody3d.html#a2be7b2a1c078d4582cfa0cc8b578c4c4">gcop::Kinbody3d&lt; _nu &gt;</a>
 </li>
 <li>Matrix6ud
 : <a class="el" href="classgcop_1_1Kinbody3d.html#ad9bf37cd5c729e5d852f82ecda7098c5">gcop::Kinbody3d&lt; _nu &gt;</a>
@@ -110,33 +119,39 @@
 : <a class="el" href="classgcop_1_1Wrench.html#a6015023a84f7520bc526779a89da146e">gcop::Wrench&lt; T, n, c &gt;</a>
 </li>
 <li>Matrixcd
-: <a class="el" href="classgcop_1_1LsSensorCost.html#ae00995de55330913e21bcfa22041040c">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+: <a class="el" href="classgcop_1_1Body2dCost.html#a35e6b30c876c5a9272c5ac8d36ecfde3">gcop::Body2dCost&lt; c &gt;</a>
+, <a class="el" href="classgcop_1_1ConstraintCost.html#aca7d3178c4840cc54b8e1eee73661b75">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1Cost.html#a12b08a4c53143d6ad30468a45c1bdbea">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1LqCost.html#aa3604f58b49a41683c910fab4df04da2">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1LqSensorCost.html#ab7fc73b205a5d561f198675c6723f2d8">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1LsCost.html#a6c01129dab36bd09f4947b699a91e657">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1LsSensorCost.html#ae00995de55330913e21bcfa22041040c">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1MultiCost.html#aa2fa1ebe22cb12773cf226d11e777be6">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Corrector.html#a6e92c879394bc36629e6646851b00c30">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1PqpDemCost.html#a94f13966fb01b073378aba0c0ae9c0cd">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1SensorCost.html#aa6c4dcb2599b48086101c6b23400848c">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Filter.html#ad05ee66f28cbefcab4fe323769217f98">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1Trajectory.html#a48d7fc949d1cd2adf0505902a4fd0df1">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
 , <a class="el" href="classgcop_1_1Sensor.html#a5ef6e975f89f15c1c7d98befacc8e3c0">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1KalmanCorrector.html#a7a630685b77420a70e5bfba783d625a6">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Corrector.html#a6e92c879394bc36629e6646851b00c30">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1System.html#aad907d3930faf073b0a705bb11c1916f">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1System__extstep.html#ac5e65f7f719efe8e7011d4a014842152">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1KalmanPredictor.html#a3f49a1d68399f9dc32d79d9150215a01">gcop::KalmanPredictor&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Filter.html#ad05ee66f28cbefcab4fe323769217f98">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1Wrench.html#a1de6e4283951bf33469a3dbd369940e3">gcop::Wrench&lt; T, n, c &gt;</a>
+, <a class="el" href="classgcop_1_1KalmanCorrector.html#a7a630685b77420a70e5bfba783d625a6">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1KalmanPredictor.html#a3f49a1d68399f9dc32d79d9150215a01">gcop::KalmanPredictor&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1Predictor.html#af0add0182d75e3c7eff4506c136e43a9">gcop::Predictor&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1UnscentedCorrector.html#aa27a4f6d8e4bc241345cc155683ecf24">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1UnscentedPredictor.html#aced42a5d7f89c91dc43cec4454738001">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1Autodiff.html#a92c40ee19130f9d7b283a296cd4550b0">gcop::Autodiff&lt; T, _n, _c &gt;</a>
 , <a class="el" href="classgcop_1_1Body3d.html#a9ce53b1cb4384ab0b1b9e69e86a0bdb6">gcop::Body3d&lt; c &gt;</a>
 , <a class="el" href="classgcop_1_1Constraint.html#acdb349f55a5da48daad40fb34dd804db">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1ConstraintCost.html#aca7d3178c4840cc54b8e1eee73661b75">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1LqCost.html#aa3604f58b49a41683c910fab4df04da2">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1LqSensorCost.html#ab7fc73b205a5d561f198675c6723f2d8">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LsCost.html#a14d8adea012d0344ebafe52982344c8d">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
 </li>
 <li>Matrixcnd
-: <a class="el" href="classgcop_1_1Corrector.html#a55d67e6bd10492ed8026d10c00005b91">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+: <a class="el" href="classgcop_1_1SensorCost.html#a97748d44274c4de7fe1b6a51b735cc53">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Trajectory.html#a02568414518088e5e4096bdbfc11ffc6">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
+, <a class="el" href="classgcop_1_1Sensor.html#a76ff7ff1bfe788119246003438891c3a">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1System.html#a61db045acd1582d8d14567feab25cbb0">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1System__extstep.html#a7d2495593b5ca361a7e877bbbe55a73e">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Corrector.html#a55d67e6bd10492ed8026d10c00005b91">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1Filter.html#aa9ac52006261a6fe7bcac75314acf409">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1KalmanCorrector.html#abbd3c6f266ab2e33885d7b66a02ebf28">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1KalmanPredictor.html#addc3c29e23fc32b3cc2c528b22064bd7">gcop::KalmanPredictor&lt; T, _nx, _nu, _np &gt;</a>
@@ -146,22 +161,17 @@
 , <a class="el" href="classgcop_1_1Autodiff.html#a9c5a36f2f43334c91c03b83b19dfdd0a">gcop::Autodiff&lt; T, _n, _c &gt;</a>
 , <a class="el" href="classgcop_1_1Constraint.html#a225bc34315919768d60bb6e5f1a2f765">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1ConstraintCost.html#abfddd9d834114188f608ff725f6cafec">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1Cost.html#a78c4621db26fe3ef52ea534436b78bee">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Cost.html#a9ade25d1b7f6a8196cb700e976dcfc8e">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1LqCost.html#a7df332390164e769280e29cba3a659cc">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1LqSensorCost.html#adf769e4993e30a901de4665374b345d1">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LsCost.html#ac9298c7e113927484b373659dfa987dc">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1LsCost.html#add8fcf742c0cf06f8aaa6c19b69be117">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1LsSensorCost.html#a1b7df15cfb901d593ae4b1dcaebba56e">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1MultiCost.html#a608cd7ca78729af74066d051b5996db3">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1PqpDemCost.html#ad92ce6b131d1c1e71ec3c9734da0ef9b">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1SensorCost.html#a97748d44274c4de7fe1b6a51b735cc53">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Trajectory.html#a02568414518088e5e4096bdbfc11ffc6">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
-, <a class="el" href="classgcop_1_1Sensor.html#a76ff7ff1bfe788119246003438891c3a">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1System.html#a61db045acd1582d8d14567feab25cbb0">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1System__extstep.html#a7d2495593b5ca361a7e877bbbe55a73e">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
 </li>
 <li>Matrixgcd
-: <a class="el" href="classgcop_1_1ConstraintCost.html#a53f8dc0ae5a9df106e0325e29333b238">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1Constraint.html#af8019f7321537d7c31107b225cc5de42">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
+: <a class="el" href="classgcop_1_1Constraint.html#af8019f7321537d7c31107b225cc5de42">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1ConstraintCost.html#a53f8dc0ae5a9df106e0325e29333b238">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
 </li>
 <li>Matrixgmd
 : <a class="el" href="classgcop_1_1Constraint.html#aebb060625e76e66c8d077bfba03bc04e">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
@@ -178,7 +188,7 @@
 , <a class="el" href="classgcop_1_1Shell.html#a20a79b51f5cf6bbc4bea59aacb9b647b">gcop::Shell&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1LqCost.html#a371e6ede4a73ba95d8914547a897815c">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1LqSensorCost.html#a046f84650db789164e285a3cda2c65a6">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LsCost.html#a1d614c0bbd5bf4e51272f92eaf474854">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1LsCost.html#ae81015e6f7a435f3e0101a1d8cc6f242">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1LsSensorCost.html#ac0bed1a1e94851071e61788a151de1f5">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1PqpDemCost.html#a893774045607f49c5b11f62a496d7625">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
 </li>
@@ -189,7 +199,7 @@
 , <a class="el" href="classgcop_1_1Shell.html#af67ff771eba8c2a3863b00245edc690b">gcop::Shell&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1LqCost.html#aa69b1cb9710f042f52f3bfdd97110e46">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1LqSensorCost.html#a2a382f2ea02c755b23a8978192d9f531">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LsCost.html#aeaefdd6dc0193d402dfe6e34bd6d8bc8">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1LsCost.html#a0323e786e3e9eccf783f3f055d0b04d9">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1LsSensorCost.html#a0bbc0367234cd3e0d6fec623ae1257f3">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1PqpDemCost.html#ab7690204fce80ff42d46c21fc7903a9a">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
 </li>
@@ -200,7 +210,7 @@
 , <a class="el" href="classgcop_1_1Shell.html#a4dbab30a2bbc456b5c29d63ed202d2d2">gcop::Shell&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1LqCost.html#ab72ba093cf08dc05b46447f818ac28ee">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1LqSensorCost.html#a7a1c771ead648f34c9294d5ecab6e40c">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LsCost.html#ac1269adbdddde8d9c0e3ef06bebbdc03">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1LsCost.html#aa1ed725c6cd41130a703c0e3b815d236">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1LsSensorCost.html#a2c018c3f1ebbd6c64b734d65f2fb791e">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1PqpDemCost.html#acf48c8bb8f4e6338a0b25796b48bd5b4">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
 </li>
@@ -228,10 +238,10 @@
 , <a class="el" href="classgcop_1_1Autodiff.html#a53bc84ec1cb623c3db4bd6d998ae768b">gcop::Autodiff&lt; T, _n, _c &gt;</a>
 , <a class="el" href="classgcop_1_1Constraint.html#aaf46142f04604999e10f7adaa8928305">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1ConstraintCost.html#a8f22d30680dca49d6654c70c34b1815e">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Cost.html#a69eca9f9c97683f57abda309365971c3">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1LqCost.html#ad200caf408a7fae25c24f3c7e84b4cca">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1LqSensorCost.html#a83c9f189479594ddfa891136aca91bf0">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LsCost.html#a3cd1327a5fd7d457173f05fcbf9a4741">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1LsCost.html#a2d60538c57fe26a8c41a93feaa83a7ac">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1LsSensorCost.html#ab139ce7bd9401b7adb010a0fa02211e2">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1MultiCost.html#affa0a222f0bbeb1712f4c85a2c727d12">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1PqpDemCost.html#a613cde977595f2fb34754bd8f38f93da">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
@@ -241,28 +251,28 @@
 , <a class="el" href="classgcop_1_1System__extstep.html#aa94fe690d16296e5253379c786beb77e">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
 </li>
 <li>Matrixmnd
-: <a class="el" href="classgcop_1_1UnscentedPredictor.html#af0984b91914a5e855d66bc13044208f4">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Autodiff.html#a9232bc6489c99198b2dbe52d903522af">gcop::Autodiff&lt; T, _n, _c &gt;</a>
-, <a class="el" href="classgcop_1_1Constraint.html#af009967f18db9ff5b5a22f7edd053f19">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1ConstraintCost.html#a34810d1ee536844fb143c11cba02ca89">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1LqCost.html#a6493a3352590d32007b4616984777346">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1LqSensorCost.html#a0b1b320c10a6b7106c0eb332c71f6df1">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LsCost.html#a544b52d4c0c18105bf4c65c24fbc8e5d">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1LsSensorCost.html#a9acea99b972e15bd343aed0c127ebf3b">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1PqpDemCost.html#a1dcd2762981cbacd834c2e121e640031">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1UnscentedCorrector.html#a8ec9fbd91b220d918ddaa8fd2912c9a1">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Sensor.html#aa3bf2edfd8548b00e07043a57147d8aa">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1System.html#a2998e29c5d6ce88db202638bf2953e74">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1System__extstep.html#acdf474df296c82713f7e2ee245fc9607">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1SensorCost.html#acbb241f3cf5888a9a8f175be1dc499a9">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Function.html#ae2d725545d47c845b3a5029243d09256">gcop::Function&lt; T, _n, _m &gt;</a>
-, <a class="el" href="classgcop_1_1Corrector.html#adb8b4104bc5211ea29ecbd1e8c722751">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+: <a class="el" href="classgcop_1_1Corrector.html#adb8b4104bc5211ea29ecbd1e8c722751">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1Filter.html#a1cbc13a0d83f3485bb316f98d7fa0be3">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1KalmanCorrector.html#a82ae9fb4fc60bd611550e36485c3e218">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1KalmanPredictor.html#a9e6e4ad768daf21fe840e9298ab152f3">gcop::KalmanPredictor&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1Predictor.html#ab88e90924d7eb7eb6fd1be70069b4aef">gcop::Predictor&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1UnscentedCorrector.html#a8ec9fbd91b220d918ddaa8fd2912c9a1">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1UnscentedPredictor.html#af0984b91914a5e855d66bc13044208f4">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Autodiff.html#a9232bc6489c99198b2dbe52d903522af">gcop::Autodiff&lt; T, _n, _c &gt;</a>
+, <a class="el" href="classgcop_1_1Constraint.html#af009967f18db9ff5b5a22f7edd053f19">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1ConstraintCost.html#a34810d1ee536844fb143c11cba02ca89">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1Cost.html#aa8545df43a6cb92198e921aafce97204">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1LqSensorCost.html#a0b1b320c10a6b7106c0eb332c71f6df1">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1LsCost.html#ac991c77845c8e066eebe635e4837c505">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1LsSensorCost.html#a9acea99b972e15bd343aed0c127ebf3b">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1PqpDemCost.html#a1dcd2762981cbacd834c2e121e640031">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1SensorCost.html#acbb241f3cf5888a9a8f175be1dc499a9">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Sensor.html#aa3bf2edfd8548b00e07043a57147d8aa">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1System.html#a2998e29c5d6ce88db202638bf2953e74">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1System__extstep.html#acdf474df296c82713f7e2ee245fc9607">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Function.html#ae2d725545d47c845b3a5029243d09256">gcop::Function&lt; T, _n, _m &gt;</a>
+, <a class="el" href="classgcop_1_1LqCost.html#a6493a3352590d32007b4616984777346">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a>
 </li>
 <li>Matrixn1d
 : <a class="el" href="classgcop_1_1Manifoldmap.html#abf9520ad3b29e21088eb6e911dd17a94">gcop::Manifoldmap&lt; T1, T2, _n1, _n2 &gt;</a>
@@ -274,122 +284,122 @@
 : <a class="el" href="classgcop_1_1Manifoldmap.html#a040b786be52b172404f9ef9242a3d4f1">gcop::Manifoldmap&lt; T1, T2, _n1, _n2 &gt;</a>
 </li>
 <li>Matrixncd
-: <a class="el" href="classgcop_1_1Corrector.html#aea01f45708dfdbc019d6e86ea41582ef">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+: <a class="el" href="classgcop_1_1Trajectory.html#a982b50e1027f096dc29fdaa5946b60e7">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
+, <a class="el" href="classgcop_1_1Corrector.html#aea01f45708dfdbc019d6e86ea41582ef">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1Filter.html#aea03ab0481a6bebe31a4db6305548d5b">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1KalmanCorrector.html#a82a0b97208f37616fb6b779b0190254c">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1KalmanPredictor.html#a1ac9207d1c5956419b2ae27c9a158599">gcop::KalmanPredictor&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Predictor.html#a72dfa9fc8e457a1b2ad32f688e702886">gcop::Predictor&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1UnscentedCorrector.html#a0ea0b0c18d95f815cf3788ff8ba7db85">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1UnscentedPredictor.html#a7033bdfbd21dbfc5def6a12f9d294599">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1Autodiff.html#afce1394afb09e25cb5c48046faff5806">gcop::Autodiff&lt; T, _n, _c &gt;</a>
+, <a class="el" href="classgcop_1_1Constraint.html#a2745738937f33e1d6575356bf598303f">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1ConstraintCost.html#aaf7eb717c2c134d1562f5eabf355cfa4">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Cost.html#a6397802756f83e925980c4407e67c07b">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1LqCost.html#a9471e1fb85909d5cb8b75e77738da8a4">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1LsCost.html#ac4b23f8e4c38fef8a856a235016f06db">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1LsSensorCost.html#a870ee6a787ed778715a2507340ea4c25">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1LqSensorCost.html#a9e62ab993fba58cea3f7a9e4cc822d24">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1LsCost.html#a2f3d20b64d87f4e1c436addfe76c354e">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1MultiCost.html#a938ba3c8c1f4b2a89802d23d82f03438">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1PqpDemCost.html#acd6c14a63be2227ee9df027c0510e191">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1SensorCost.html#afe38ebca56d6b9d6eb5c22429d5f19f1">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Trajectory.html#a982b50e1027f096dc29fdaa5946b60e7">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
 , <a class="el" href="classgcop_1_1Sensor.html#a6a095c291d11b7c30d222503234bea80">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1System__extstep.html#a4584705a18726c9d1792df86cc816b33">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1LqSensorCost.html#a9e62ab993fba58cea3f7a9e4cc822d24">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Predictor.html#a72dfa9fc8e457a1b2ad32f688e702886">gcop::Predictor&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Constraint.html#a2745738937f33e1d6575356bf598303f">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1System__extstep.html#a4584705a18726c9d1792df86cc816b33">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1LsSensorCost.html#a870ee6a787ed778715a2507340ea4c25">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1UnscentedPredictor.html#a7033bdfbd21dbfc5def6a12f9d294599">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1KalmanCorrector.html#a82a0b97208f37616fb6b779b0190254c">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 </li>
 <li>Matrixnd
-: <a class="el" href="classgcop_1_1ConstraintCost.html#a40a895c1a7e2f5c5e0e2a3f9cce3930f">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1UnscentedPredictor.html#a9dcfe12c1b2435f7b3ae586702eb90ed">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Trajectory.html#a260655a7e1aca3f9620d85babd04a29a">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
+: <a class="el" href="classgcop_1_1LqSensorCost.html#a647a927eb52363a70d55f80c9bc75d38">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1KalmanPredictor.html#ae4e51605394abe9a3deddfe1709eacc4">gcop::KalmanPredictor&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1KalmanCorrector.html#ac7d69feb2caefe9fef973930930d56b4">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Normal.html#a31cbf7be84f48a931e7a544274035d99">gcop::Normal&lt; _n &gt;</a>
-, <a class="el" href="classgcop_1_1MultiCost.html#ad9a490034a8ecfd3b10963307306f605">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Predictor.html#a4108d0338647a6fda605c29433e18f03">gcop::Predictor&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Autodiff.html#a51c944a10db9886386bf4f60ca21ba92">gcop::Autodiff&lt; T, _n, _c &gt;</a>
-, <a class="el" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">gcop::Ce&lt; _n &gt;</a>
-, <a class="el" href="classgcop_1_1Corrector.html#a139403c111406d789d1e9a804a56cdac">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1Gmm.html#a51292e2b47641b2b2d4ebd9f1e47296f">gcop::Gmm&lt; _n &gt;</a>
-, <a class="el" href="classgcop_1_1System__extstep.html#af5f710f8884e82d88b69e2d3989794dd">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Predictor.html#a4108d0338647a6fda605c29433e18f03">gcop::Predictor&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Trajectory.html#a260655a7e1aca3f9620d85babd04a29a">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
 , <a class="el" href="classgcop_1_1UnscentedBase.html#a148d8c72c83209448ec915703cc51572">gcop::UnscentedBase&lt; T, _nx &gt;</a>
-, <a class="el" href="classgcop_1_1UnscentedCorrector.html#a1fdadbbb03fd320899adf40a5e048985">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Constraint.html#a8d0e4de8b3ddc6198b7940289d533f84">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1Filter.html#a95c3694204ce572c08676855a7967ff8">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LqSensorCost.html#a647a927eb52363a70d55f80c9bc75d38">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1PqpDemCost.html#a6819392d97598854e347df4c5ddaaef4">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1LsSensorCost.html#a22e32efd90023b8c5262b4898fa1be9c">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Manifold.html#a8001b5e837b9eefdd6014a4bea5c5c4c">gcop::Manifold&lt; T, _n &gt;</a>
 , <a class="el" href="classgcop_1_1Sensor.html#a80bf94684d771da2d27b6ca5c39643e1">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1System__extstep.html#af5f710f8884e82d88b69e2d3989794dd">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1UnscentedCorrector.html#a1fdadbbb03fd320899adf40a5e048985">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Corrector.html#a139403c111406d789d1e9a804a56cdac">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Filter.html#a95c3694204ce572c08676855a7967ff8">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1KalmanCorrector.html#ac7d69feb2caefe9fef973930930d56b4">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1UnscentedPredictor.html#a9dcfe12c1b2435f7b3ae586702eb90ed">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Constraint.html#a8d0e4de8b3ddc6198b7940289d533f84">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">gcop::Ce&lt; _n &gt;</a>
+, <a class="el" href="classgcop_1_1Cost.html#ad74bc680c916dd17d70f2272de0741dc">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1LsSensorCost.html#a22e32efd90023b8c5262b4898fa1be9c">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1MultiCost.html#ad9a490034a8ecfd3b10963307306f605">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1PqpDemCost.html#a6819392d97598854e347df4c5ddaaef4">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Manifold.html#a8001b5e837b9eefdd6014a4bea5c5c4c">gcop::Manifold&lt; T, _n &gt;</a>
+, <a class="el" href="classgcop_1_1ConstraintCost.html#a40a895c1a7e2f5c5e0e2a3f9cce3930f">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1Autodiff.html#a51c944a10db9886386bf4f60ca21ba92">gcop::Autodiff&lt; T, _n, _c &gt;</a>
+, <a class="el" href="classgcop_1_1LsCost.html#ae995d0f7a99f89a9d66d51004b79d0b2">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1LsCost.html#a6432a8b71e8e75696620fbaa528c3f1f">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1SensorCost.html#a6bb9983926725f385fe38dea5be16900">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1Normal.html#a31cbf7be84f48a931e7a544274035d99">gcop::Normal&lt; _n &gt;</a>
 </li>
 <li>Matrixnmd
-: <a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1LsSensorCost.html#a322eb29fa639f3872f0a2f0a6f2cc107">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Filter.html#acda409cc20b12b710591dac6585f30f3">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+: <a class="el" href="classgcop_1_1SensorCost.html#a1ddf1c366a00450deaaa0e413dbd96c6">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1UnscentedCorrector.html#a0b8247ddd64f2e790f19d46e1caf04bf">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1SensorCost.html#a1ddf1c366a00450deaaa0e413dbd96c6">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LqSensorCost.html#a21c6b2e25f4f206edb31d692f3354190">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1UnscentedPredictor.html#ad52adf27b86f76f19ae167dec119d7b1">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Cost.html#ac01445481fc7fcf3d12302e9797595b1">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Corrector.html#abcf78f1778b912cd9f01bfc2a4d1fba9">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LsCost.html#ae54d28f22258b061b130e1c0f8246cc8">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1Sensor.html#a1f28d7bff2a6dcf953bd89b9da581ffa">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Predictor.html#a0df2108a2b44183d19ce0baf26a4bc9c">gcop::Predictor&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Constraint.html#a6bc4716fa44a3d976823685c8419de69">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1LqCost.html#a68c6c9c37e04c02e17f5a27d654ac2a2">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1PqpDemCost.html#a21a18f234fc9501581f4da54ab44b5a7">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1System__extstep.html#a74667c5e9098aecee960c366a9f5d387">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1LqSensorCost.html#a21c6b2e25f4f206edb31d692f3354190">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Corrector.html#abcf78f1778b912cd9f01bfc2a4d1fba9">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Predictor.html#a0df2108a2b44183d19ce0baf26a4bc9c">gcop::Predictor&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Sensor.html#a1f28d7bff2a6dcf953bd89b9da581ffa">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1LqCost.html#a68c6c9c37e04c02e17f5a27d654ac2a2">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1LsCost.html#aca13380b66226d47c190bf7defe4419d">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1Constraint.html#a6bc4716fa44a3d976823685c8419de69">gcop::Constraint&lt; T, _nx, _nu, _np, _ng &gt;</a>
 , <a class="el" href="classgcop_1_1Autodiff.html#a11f7a900564fad073f5849bf931512c9">gcop::Autodiff&lt; T, _n, _c &gt;</a>
-, <a class="el" href="classgcop_1_1KalmanCorrector.html#a52404494aa3ef981da06f0e26bc6a38e">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1UnscentedPredictor.html#ad52adf27b86f76f19ae167dec119d7b1">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1ConstraintCost.html#ac65c52ae068f757db1699e86f84c7d81">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1Cost.html#aabc9e6adb9a5a9427ef4f93b1aec29bb">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1LsSensorCost.html#a322eb29fa639f3872f0a2f0a6f2cc107">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1KalmanCorrector.html#a52404494aa3ef981da06f0e26bc6a38e">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1KalmanPredictor.html#a2c16789096f3ee4468a46a820a615f63">gcop::KalmanPredictor&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Filter.html#acda409cc20b12b710591dac6585f30f3">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1System__extstep.html#a74667c5e9098aecee960c366a9f5d387">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1MultiCost.html#ae28046c3be84d61002a7cbd4aaa16084">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a>
 </li>
 <li>Matrixnrd
-: <a class="el" href="classgcop_1_1UnscentedCorrector.html#a08650bba20aa2d8f901a470e4fb624d6">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1KalmanCorrector.html#a44af1da5590f952a04419bbf67c89096">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+: <a class="el" href="classgcop_1_1KalmanCorrector.html#a44af1da5590f952a04419bbf67c89096">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1UnscentedCorrector.html#a08650bba20aa2d8f901a470e4fb624d6">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 </li>
 <li>Matrixrcd
 : <a class="el" href="classgcop_1_1Point3dGps.html#a04d0c6cc0810a448fb205a47ca6c5ead">gcop::Point3dGps&lt; _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1LqSensorCost.html#acac810128ac3b6053ccbafc47a60a87a">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1SensorCost.html#a088cfbd4650a4b5ba3b7b47768773777">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Sensor.html#ac9ec9eae9de85f0374aaf053a9327d46">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1UnscentedCorrector.html#ae1d6aaa1ca2da443ac53729902c33d7a">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1KalmanCorrector.html#a9a9d27c1e4cd97403f2e8d0478b63292">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1InsGps.html#a20d37e8579a40abccad89b7c91cb4411">gcop::InsGps&lt; _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4.html#a9be5b2770afabed639ddd70e85c31ba4">gcop::Gps&lt; Point3dState, 6, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1LsSensorCost.html#ad7f8f0aba7088af1931047eaad4341ee">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1InsGps.html#a20d37e8579a40abccad89b7c91cb4411">gcop::InsGps&lt; _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1KalmanCorrector.html#a9a9d27c1e4cd97403f2e8d0478b63292">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1LqSensorCost.html#acac810128ac3b6053ccbafc47a60a87a">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1UnscentedCorrector.html#ae1d6aaa1ca2da443ac53729902c33d7a">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4.html#a9be5b2770afabed639ddd70e85c31ba4">gcop::Gps&lt; Point3dState, 6, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Sensor.html#ac9ec9eae9de85f0374aaf053a9327d46">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1SensorCost.html#a088cfbd4650a4b5ba3b7b47768773777">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 </li>
 <li>Matrixrd
-: <a class="el" href="classgcop_1_1LqSensorCost.html#a29de4b9a3ba7fee5f99d9a688f0ebabd">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+: <a class="el" href="classgcop_1_1LsSensorCost.html#a022837f6779b8b49d04d4759513c7c67">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Sensor.html#ad97b2472957ba518b8a1831a57111a76">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1SensorCost.html#a5598e8f16d8e9c23f799a380f79602ce">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1UnscentedCorrector.html#aa4681993d21a4a602845944c5f9dfbc9">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1KalmanCorrector.html#a28a0060fe01220f7a8c2581db94cbada">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1SensorCost.html#a5598e8f16d8e9c23f799a380f79602ce">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LsSensorCost.html#a022837f6779b8b49d04d4759513c7c67">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Sensor.html#ad97b2472957ba518b8a1831a57111a76">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1LqSensorCost.html#a29de4b9a3ba7fee5f99d9a688f0ebabd">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 </li>
 <li>Matrixrmd
-: <a class="el" href="classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4.html#a7ea987e67be155c12f801133fc42f705">gcop::Gps&lt; Point3dState, 6, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Point3dGps.html#a286e13ba2887d222d88f7a6bb5c13a12">gcop::Point3dGps&lt; _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1InsGps.html#a645d69dcff5553b97b63f5d3115dfbe6">gcop::InsGps&lt; _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1KalmanCorrector.html#aee98b536f8aef558853047e11382456b">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1UnscentedCorrector.html#ad35a91e53121958f146df792102ac573">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LsSensorCost.html#ab5b27c2f03b0f957c0106ddde4b1b93e">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LqSensorCost.html#aac44a5660c6663f41f31c7303873ad97">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+: <a class="el" href="classgcop_1_1LsSensorCost.html#ab5b27c2f03b0f957c0106ddde4b1b93e">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1SensorCost.html#a2c63df2c2eeedfba594e56ec4a75bed5">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1KalmanCorrector.html#aee98b536f8aef558853047e11382456b">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4.html#a7ea987e67be155c12f801133fc42f705">gcop::Gps&lt; Point3dState, 6, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1InsGps.html#a645d69dcff5553b97b63f5d3115dfbe6">gcop::InsGps&lt; _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Point3dGps.html#a286e13ba2887d222d88f7a6bb5c13a12">gcop::Point3dGps&lt; _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1LqSensorCost.html#aac44a5660c6663f41f31c7303873ad97">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1Sensor.html#a312f65bff49beb267bde7792a5a51447">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1UnscentedCorrector.html#ad35a91e53121958f146df792102ac573">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 </li>
 <li>Matrixrnd
 : <a class="el" href="classgcop_1_1LsSensorCost.html#aaa0e97bd184d80416211e8759a41853c">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Sensor.html#accc9dc24053c65f30f1e66d9eca826b2">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1KalmanCorrector.html#a27ca83efe795197ff7c1912fc6778956">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1LqSensorCost.html#ac18c481007159515d25ca5e26aa52c39">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1UnscentedCorrector.html#acefff69b26c4ddd6d8c500fd07855302">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1SensorCost.html#abef4faf9703863448312c881c09810c4">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1KalmanCorrector.html#a27ca83efe795197ff7c1912fc6778956">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1Sensor.html#accc9dc24053c65f30f1e66d9eca826b2">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 </li>
 <li>Matrixud
 : <a class="el" href="classgcop_1_1Kinbody3dTrackCost.html#af2bde718a2b9022f9946ff9fd4e9383e">gcop::Kinbody3dTrackCost&lt; _nu &gt;</a>
@@ -420,7 +430,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:59:10 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

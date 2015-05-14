@@ -203,14 +203,14 @@
 <a name="l00164"></a>00164     <span class="keywordtype">int</span> N = us.size();
 <a name="l00165"></a>00165     T1 x1; <span class="comment">//Temporary projection for finding sensor measurements</span>
 <a name="l00166"></a>00166 
-<a name="l00167"></a>00167     sys.reset(xs[0],ts[0]);<span class="comment">//Reset</span>
+<a name="l00167"></a>00167     sys.Reset(xs[0],ts[0]);<span class="comment">//Reset</span>
 <a name="l00168"></a>00168     <span class="keywordtype">int</span> sensor_index = 0;
 <a name="l00169"></a>00169     assert(ts1[0]&gt;= ts[0]);<span class="comment">//Sensor measurements are after the control started</span>
 <a name="l00170"></a>00170     assert(ts1.back() &lt;= ts.back());<span class="comment">//Sensor measurements are before control ended</span>
 <a name="l00171"></a>00171 
 <a name="l00172"></a>00172     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; N; ++k) {
 <a name="l00173"></a>00173       <span class="keywordtype">double</span> h = ts[k+1] - ts[k];
-<a name="l00174"></a>00174       sys.Step_noise(xs[k+1], us[k], ws[k], h, &amp;p);
+<a name="l00174"></a>00174       sys.Step(xs[k+1], us[k], h, ws[k], &amp;p);
 <a name="l00175"></a>00175       <span class="comment">//cout&lt;&lt;&quot;ts1[&quot;&lt;&lt;sensor_index&lt;&lt;&quot;]: &quot;&lt;&lt;ts1[sensor_index]&lt;&lt;&quot;\t&quot;&lt;&lt;ts[k]&lt;&lt;&quot;\t&quot;&lt;&lt;ts[k+1]&lt;&lt;endl;//#DEBUG</span>
 <a name="l00176"></a>00176       <span class="keywordflow">while</span>((ts1[sensor_index] - ts[k])&gt;= 0 &amp;&amp; (ts1[sensor_index] - ts[k+1]) &lt; 0)<span class="comment">//Nearest state to find the sensor measurement</span>
 <a name="l00177"></a>00177       {
@@ -249,7 +249,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

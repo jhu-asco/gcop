@@ -1,4 +1,11 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop_1_1Tparam.html" title="gcop::Tparam\&lt; T, nx, nu, np \&gt;" alt="" coords="5,5,205,35"/>
-<area shape="rect" id="node3" href="$classgcop_1_1UniformSplineTparam.html" title="gcop::UniformSplineTparam\&lt; T, nx, nu, np \&gt;" alt="" coords="253,5,536,35"/>
+<area shape="rect" id="node1" href="$classgcop_1_1Mbs.html" title="gcop::Mbs\&lt; 3, 8 \&gt;" alt="" coords="239,5,367,35"/>
+<area shape="rect" id="node3" href="$classgcop_1_1Airm.html" title="gcop::Airm" alt="" coords="425,5,511,35"/>
+<area shape="rect" id="node4" href="$classgcop_1_1System.html" title="gcop::System\&lt; MbsState \&gt;" alt="" coords="7,139,188,168"/>
+<area shape="rect" id="node6" href="$classgcop_1_1Mbs.html" title="gcop::Mbs" alt="" coords="261,139,344,168"/>
+<area shape="rect" id="node8" href="$classgcop_1_1Airbase.html" title="gcop::Airbase" alt="" coords="417,59,519,88"/>
+<area shape="rect" id="node10" href="$classgcop_1_1Airbot.html" title="gcop::Airbot" alt="" coords="423,112,513,141"/>
+<area shape="rect" id="node13" href="$classgcop_1_1Chain.html" title="gcop::Chain" alt="" coords="423,165,513,195"/>
+<area shape="rect" id="node15" href="$classgcop_1_1Chain1.html" title="gcop::Chain1" alt="" coords="419,219,517,248"/>
+<area shape="rect" id="node17" href="$classgcop_1_1Snake.html" title="gcop::Snake" alt="" coords="421,272,515,301"/>
 </map>

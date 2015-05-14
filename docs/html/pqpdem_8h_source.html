@@ -70,188 +70,208 @@
 <a name="l00004"></a>00004 <span class="preprocessor">#include &quot;<a class="code" href="constraint_8h.html">constraint.h</a>&quot;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &quot;<a class="code" href="dem_8h.html">dem.h</a>&quot;</span>
 <a name="l00006"></a>00006 <span class="preprocessor">#include &quot;PQP/PQP.h&quot;</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="keyword">namespace </span>gcop {
-<a name="l00009"></a>00009   
-<a name="l00010"></a>00010   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = VectorXd,
-<a name="l00011"></a>00011     <span class="keywordtype">int</span> _nx = Dynamic, 
-<a name="l00012"></a>00012     <span class="keywordtype">int</span> _nu = Dynamic, 
-<a name="l00013"></a>00013     <span class="keywordtype">int</span> _np = Dynamic&gt;
-<a name="l00014"></a><a class="code" href="classgcop_1_1PqpDem.html">00014</a>     <span class="keyword">class </span><a class="code" href="classgcop_1_1PqpDem.html">PqpDem</a> : <span class="keyword">public</span> <a class="code" href="classgcop_1_1Constraint.html">Constraint</a>&lt;T, _nx, _nu, _np, 1&gt; {
-<a name="l00015"></a>00015   <span class="keyword">public</span>:
-<a name="l00016"></a>00016 
-<a name="l00017"></a><a class="code" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">00017</a>   <span class="keyword">typedef</span> Matrix&lt;double, 1, 1&gt; <a class="code" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">Vectorgd</a>;
-<a name="l00018"></a><a class="code" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">00018</a>   <span class="keyword">typedef</span> Matrix&lt;double, 1, _nx&gt; <a class="code" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">Matrixgxd</a>;
-<a name="l00019"></a><a class="code" href="classgcop_1_1PqpDem.html#a144ccdcf88a07d58263755fdf684f834">00019</a>   <span class="keyword">typedef</span> Matrix&lt;double, 1, _nu&gt; <a class="code" href="classgcop_1_1PqpDem.html#a144ccdcf88a07d58263755fdf684f834">Matrixgud</a>;
-<a name="l00020"></a><a class="code" href="classgcop_1_1PqpDem.html#aae7f61a0b0fa1c340222bd3f80b33e90">00020</a>   <span class="keyword">typedef</span> Matrix&lt;double, 1, _np&gt; <a class="code" href="classgcop_1_1PqpDem.html#aae7f61a0b0fa1c340222bd3f80b33e90">Matrixgpd</a>;
-<a name="l00021"></a>00021 
-<a name="l00022"></a><a class="code" href="classgcop_1_1PqpDem.html#a0742483e1817d664b57ee71b53ed29ba">00022</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nx, 1&gt; <a class="code" href="classgcop_1_1PqpDem.html#a0742483e1817d664b57ee71b53ed29ba">Vectornd</a>;
-<a name="l00023"></a><a class="code" href="classgcop_1_1PqpDem.html#a5a9f5714ecd79fdfa372efb79f924176">00023</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nu, 1&gt; <a class="code" href="classgcop_1_1PqpDem.html#a5a9f5714ecd79fdfa372efb79f924176">Vectorcd</a>;
-<a name="l00024"></a><a class="code" href="classgcop_1_1PqpDem.html#a84871f1bb95ed1e0f403813a1f7e22aa">00024</a>   <span class="keyword">typedef</span> Matrix&lt;double, _np, 1&gt; <a class="code" href="classgcop_1_1PqpDem.html#a84871f1bb95ed1e0f403813a1f7e22aa">Vectormd</a>;
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027     <a class="code" href="classgcop_1_1PqpDem.html#a099f72c73ffcb833825bf572899c7782">PqpDem</a>(<span class="keyword">const</span> <a class="code" href="classgcop_1_1Dem.html">Dem</a>&amp; <a class="code" href="classgcop_1_1PqpDem.html#a0da6eedb549ee396841d3148748c3920" title="digital elevation map">dem</a>, <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a> = 0.1, <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1PqpDem.html#a8de56fc4fc1216ffc73a336bf8d3e7eb" title="additional safety distance">sd</a> = 0.0);
-<a name="l00028"></a>00028     <span class="keyword">virtual</span> <a class="code" href="classgcop_1_1PqpDem.html#a5922f422e37cc79143e98623efaf0c96">~PqpDem</a>();
-<a name="l00029"></a>00029     
-<a name="l00030"></a>00030     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1PqpDem.html#a09cf68b8534d25f1d04206636a370adc">operator()</a>(<a class="code" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">Vectorgd</a> &amp;g,
-<a name="l00031"></a>00031                     <span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1PqpDem.html#a5a9f5714ecd79fdfa372efb79f924176">Vectorcd</a> &amp;u,
-<a name="l00032"></a>00032                     <span class="keyword">const</span> <a class="code" href="classgcop_1_1PqpDem.html#a84871f1bb95ed1e0f403813a1f7e22aa">Vectormd</a> *p = 0, 
-<a name="l00033"></a>00033                     <a class="code" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">Matrixgxd</a> *dgdx = 0, <a class="code" href="classgcop_1_1PqpDem.html#a144ccdcf88a07d58263755fdf684f834">Matrixgud</a> *dgdu = 0,
-<a name="l00034"></a>00034                     <a class="code" href="classgcop_1_1PqpDem.html#aae7f61a0b0fa1c340222bd3f80b33e90">Matrixgpd</a> *dgdp = 0);    
-<a name="l00035"></a>00035     
-<a name="l00036"></a><a class="code" href="classgcop_1_1PqpDem.html#a0da6eedb549ee396841d3148748c3920">00036</a>     <span class="keyword">const</span> <a class="code" href="classgcop_1_1Dem.html">Dem</a>&amp; <a class="code" href="classgcop_1_1PqpDem.html#a0da6eedb549ee396841d3148748c3920" title="digital elevation map">dem</a>;   
-<a name="l00037"></a>00037 
-<a name="l00038"></a><a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">00038</a>     PQP_Model *<a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>;
-<a name="l00039"></a><a class="code" href="classgcop_1_1PqpDem.html#a870277268b4af6cc84c5818d82b528cc">00039</a>     PQP_REAL <a class="code" href="classgcop_1_1PqpDem.html#a870277268b4af6cc84c5818d82b528cc">pt</a>[3];
-<a name="l00040"></a><a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">00040</a>     PQP_REAL <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[3][3];
-<a name="l00041"></a>00041 
-<a name="l00042"></a><a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">00042</a>     PQP_Model *<a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>;
-<a name="l00043"></a><a class="code" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">00043</a>     PQP_REAL <a class="code" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">dt</a>[3];
-<a name="l00044"></a><a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">00044</a>     PQP_REAL <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[3][3];
-<a name="l00045"></a>00045 
-<a name="l00046"></a><a class="code" href="classgcop_1_1PqpDem.html#a696fbd9bcb64b47756c39ef508d23818">00046</a>     PQP_DistanceResult <a class="code" href="classgcop_1_1PqpDem.html#a696fbd9bcb64b47756c39ef508d23818">dres</a>;
-<a name="l00047"></a><a class="code" href="classgcop_1_1PqpDem.html#af4dc4f24cca294beeea4e1862f2ca6d6">00047</a>     PQP_ToleranceResult <a class="code" href="classgcop_1_1PqpDem.html#af4dc4f24cca294beeea4e1862f2ca6d6">tres</a>;
-<a name="l00048"></a>00048 
-<a name="l00049"></a><a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc">00049</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>;       
-<a name="l00050"></a><a class="code" href="classgcop_1_1PqpDem.html#a8de56fc4fc1216ffc73a336bf8d3e7eb">00050</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1PqpDem.html#a8de56fc4fc1216ffc73a336bf8d3e7eb" title="additional safety distance">sd</a>;       
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052   };
-<a name="l00053"></a>00053 
-<a name="l00054"></a>00054   
-<a name="l00055"></a>00055   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np&gt; 
-<a name="l00056"></a><a class="code" href="classgcop_1_1PqpDem.html#a099f72c73ffcb833825bf572899c7782">00056</a>     <a class="code" href="classgcop_1_1PqpDem.html#a099f72c73ffcb833825bf572899c7782">PqpDem&lt;T, _nx, _nu, _np&gt;::PqpDem</a>(<span class="keyword">const</span> <a class="code" href="classgcop_1_1Dem.html">Dem</a>&amp; dem, <span class="keywordtype">double</span> cr, <span class="keywordtype">double</span> sd) :
-<a name="l00057"></a>00057     <a class="code" href="classgcop_1_1Constraint.html">Constraint</a>&lt;T, _nx, _nu, _np, 1&gt;(), dem(dem), cr(cr), sd(sd)
-<a name="l00058"></a>00058 {
-<a name="l00059"></a>00059   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a> = <span class="keyword">new</span> PQP_Model;
-<a name="l00060"></a>00060   <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a> = <span class="keyword">new</span> PQP_Model;
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062   PQP_REAL p1[3], p2[3], p3[3], p4[3];
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>-&gt;BeginModel();
-<a name="l00065"></a>00065   p1[0] = 0; p1[1] = <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>; p1[2] = 0;
-<a name="l00066"></a>00066   p2[0] = 0; p2[1] = -<a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>; p2[2] = 0;
-<a name="l00067"></a>00067   p3[0] = <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>; p3[1] = 0; p3[2] = 0;
-<a name="l00068"></a>00068   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>-&gt;AddTri(p1, p2, p3, 0);  
-<a name="l00069"></a>00069   p1[0] = 0; p1[1] = 0; p1[2] = <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>;
-<a name="l00070"></a>00070   p2[0] = 0; p2[1] = 0; p2[2] = -<a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>;
-<a name="l00071"></a>00071   p3[0] = <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>; p3[1] = 0; p3[2] = 0;
-<a name="l00072"></a>00072   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>-&gt;AddTri(p1, p2, p3, 1);
-<a name="l00073"></a>00073   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>-&gt;EndModel();
-<a name="l00074"></a>00074   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>-&gt;MemUsage(1);
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076   <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>-&gt;BeginModel();
-<a name="l00077"></a>00077   <span class="keywordtype">int</span> count  = 0;
-<a name="l00078"></a>00078   <span class="keywordtype">double</span> p00[3], p10[3], p11[3], p01[3];
-<a name="l00079"></a>00079   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i &lt; dem.<a class="code" href="classgcop_1_1Dem.html#ab252077bee0303deefaccb878949b155" title="number of rows">ni</a>-1; ++i) {
-<a name="l00080"></a>00080     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j &lt; dem.<a class="code" href="classgcop_1_1Dem.html#ac7381a9289beb861fbe9e35dcab85c88" title="number of columns">nj</a>-1; ++j) {
-<a name="l00081"></a>00081       dem.<a class="code" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get</a>(p00, i, j);
-<a name="l00082"></a>00082       dem.<a class="code" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get</a>(p10, i+1, j);
-<a name="l00083"></a>00083       dem.<a class="code" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get</a>(p11, i+1, j+1);
-<a name="l00084"></a>00084       dem.<a class="code" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get</a>(p01, i, j+1);
-<a name="l00085"></a>00085       p1[0] = p00[0]; p1[1] = p00[1]; p1[2] = p00[2];
-<a name="l00086"></a>00086       p2[0] = p10[0]; p2[1] = p10[1]; p2[2] = p10[2];
-<a name="l00087"></a>00087       p3[0] = p11[0]; p3[1] = p11[1]; p3[2] = p11[2];
-<a name="l00088"></a>00088       p4[0] = p01[0]; p4[1] = p01[1]; p4[2] = p01[2];
-<a name="l00089"></a>00089       <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>-&gt;AddTri(p1, p2, p3, count);
-<a name="l00090"></a>00090       <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>-&gt;AddTri(p1, p3, p4, count+1);
-<a name="l00091"></a>00091       count += 2;
-<a name="l00092"></a>00092     }
-<a name="l00093"></a>00093   }
-<a name="l00094"></a>00094   <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>-&gt;EndModel();
-<a name="l00095"></a>00095   <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>-&gt;MemUsage(1);
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097   <a class="code" href="classgcop_1_1PqpDem.html#a870277268b4af6cc84c5818d82b528cc">pt</a>[0] = <a class="code" href="classgcop_1_1PqpDem.html#a870277268b4af6cc84c5818d82b528cc">pt</a>[1] = <a class="code" href="classgcop_1_1PqpDem.html#a870277268b4af6cc84c5818d82b528cc">pt</a>[2] = 0;
-<a name="l00098"></a>00098   <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[0][0] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[1][1] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[2][2] = 1.0;
-<a name="l00099"></a>00099   <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[0][1] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[1][0] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[2][0] = 0.0;
-<a name="l00100"></a>00100   <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[0][2] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[1][2] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[2][1] = 0.0;
-<a name="l00101"></a>00101 
-<a name="l00102"></a>00102   <a class="code" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">dt</a>[0] = <a class="code" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">dt</a>[1] = <a class="code" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">dt</a>[2] = 0;
-<a name="l00103"></a>00103   <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[0][0] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[1][1] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[2][2] = 1.0;
-<a name="l00104"></a>00104   <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[0][1] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[1][0] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[2][0] = 0.0;
-<a name="l00105"></a>00105   <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[0][2] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[1][2] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[2][1] = 0.0;
-<a name="l00106"></a>00106 }
-<a name="l00107"></a>00107 
-<a name="l00108"></a>00108   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np&gt; 
-<a name="l00109"></a><a class="code" href="classgcop_1_1PqpDem.html#a5922f422e37cc79143e98623efaf0c96">00109</a>     <a class="code" href="classgcop_1_1PqpDem.html#a5922f422e37cc79143e98623efaf0c96">PqpDem&lt;T, _nx, _nu, _np&gt;::~PqpDem</a>()
-<a name="l00110"></a>00110   {
-<a name="l00111"></a>00111     <span class="keyword">delete</span> dm;
-<a name="l00112"></a>00112     <span class="keyword">delete</span> pm;
-<a name="l00113"></a>00113   }
-<a name="l00114"></a>00114   
-<a name="l00115"></a>00115   
-<a name="l00116"></a>00116 
-<a name="l00117"></a>00117 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np&gt; 
-<a name="l00118"></a><a class="code" href="classgcop_1_1PqpDem.html#a09cf68b8534d25f1d04206636a370adc">00118</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1PqpDem.html#a09cf68b8534d25f1d04206636a370adc">PqpDem&lt;T, _nx, _nu, _np&gt;::operator()</a>(<a class="code" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">Vectorgd</a> &amp;g,
-<a name="l00119"></a>00119                                               <span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1PqpDem.html#a5a9f5714ecd79fdfa372efb79f924176">Vectorcd</a> &amp;u,
-<a name="l00120"></a>00120                                               <span class="keyword">const</span> <a class="code" href="classgcop_1_1PqpDem.html#a84871f1bb95ed1e0f403813a1f7e22aa">Vectormd</a> *rho, 
-<a name="l00121"></a>00121                                               <a class="code" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">Matrixgxd</a> *dgdx, <a class="code" href="classgcop_1_1PqpDem.html#a144ccdcf88a07d58263755fdf684f834">Matrixgud</a> *dgdu,
-<a name="l00122"></a>00122                                               <a class="code" href="classgcop_1_1PqpDem.html#aae7f61a0b0fa1c340222bd3f80b33e90">Matrixgpd</a> *dgdp)
-<a name="l00123"></a>00123 {
-<a name="l00124"></a>00124   <span class="comment">//  const double *q = s.x + oi;</span>
-<a name="l00125"></a>00125   <span class="comment">//  SET3(pt, q);</span>
-<a name="l00126"></a>00126   Vector3d p = x.second.head(3); <span class="comment">// position</span>
-<a name="l00127"></a>00127   pt[0] = p[0];
-<a name="l00128"></a>00128   pt[1] = p[1];
-<a name="l00129"></a>00129   pt[2] = p[2];
-<a name="l00130"></a>00130 
-<a name="l00131"></a>00131   <span class="keywordtype">int</span> res = PQP_Distance(&amp;dres, pR, pt, pm, dR, dt, dm, 0.0, 0.0);
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133   <span class="keywordflow">if</span> (res != PQP_OK)
-<a name="l00134"></a>00134     cerr &lt;&lt; <span class="stringliteral">&quot;Warning: PqpDem:Distance: res=&quot;</span> &lt;&lt; res &lt;&lt; endl;
+<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;<a class="code" href="body3dmanifold_8h.html">body3dmanifold.h</a>&quot;</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="keyword">namespace </span>gcop {
+<a name="l00010"></a>00010   
+<a name="l00011"></a>00011   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = VectorXd,
+<a name="l00012"></a>00012     <span class="keywordtype">int</span> _nx = Dynamic, 
+<a name="l00013"></a>00013     <span class="keywordtype">int</span> _nu = Dynamic, 
+<a name="l00014"></a>00014     <span class="keywordtype">int</span> _np = Dynamic&gt;
+<a name="l00015"></a><a class="code" href="classgcop_1_1PqpDem.html">00015</a>     <span class="keyword">class </span><a class="code" href="classgcop_1_1PqpDem.html">PqpDem</a> : <span class="keyword">public</span> <a class="code" href="classgcop_1_1Constraint.html">Constraint</a>&lt;T, _nx, _nu, _np, 1&gt; {
+<a name="l00016"></a>00016   <span class="keyword">public</span>:
+<a name="l00017"></a>00017   
+<a name="l00018"></a><a class="code" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">00018</a>   <span class="keyword">typedef</span> Matrix&lt;double, 1, 1&gt; <a class="code" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">Vectorgd</a>;
+<a name="l00019"></a><a class="code" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">00019</a>   <span class="keyword">typedef</span> Matrix&lt;double, 1, _nx&gt; <a class="code" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">Matrixgxd</a>;
+<a name="l00020"></a><a class="code" href="classgcop_1_1PqpDem.html#a144ccdcf88a07d58263755fdf684f834">00020</a>   <span class="keyword">typedef</span> Matrix&lt;double, 1, _nu&gt; <a class="code" href="classgcop_1_1PqpDem.html#a144ccdcf88a07d58263755fdf684f834">Matrixgud</a>;
+<a name="l00021"></a><a class="code" href="classgcop_1_1PqpDem.html#aae7f61a0b0fa1c340222bd3f80b33e90">00021</a>   <span class="keyword">typedef</span> Matrix&lt;double, 1, _np&gt; <a class="code" href="classgcop_1_1PqpDem.html#aae7f61a0b0fa1c340222bd3f80b33e90">Matrixgpd</a>;
+<a name="l00022"></a>00022   
+<a name="l00023"></a><a class="code" href="classgcop_1_1PqpDem.html#a0742483e1817d664b57ee71b53ed29ba">00023</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nx, 1&gt; <a class="code" href="classgcop_1_1PqpDem.html#a0742483e1817d664b57ee71b53ed29ba">Vectornd</a>;
+<a name="l00024"></a><a class="code" href="classgcop_1_1PqpDem.html#a5a9f5714ecd79fdfa372efb79f924176">00024</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nu, 1&gt; <a class="code" href="classgcop_1_1PqpDem.html#a5a9f5714ecd79fdfa372efb79f924176">Vectorcd</a>;
+<a name="l00025"></a><a class="code" href="classgcop_1_1PqpDem.html#a84871f1bb95ed1e0f403813a1f7e22aa">00025</a>   <span class="keyword">typedef</span> Matrix&lt;double, _np, 1&gt; <a class="code" href="classgcop_1_1PqpDem.html#a84871f1bb95ed1e0f403813a1f7e22aa">Vectormd</a>;
+<a name="l00026"></a>00026   
+<a name="l00027"></a>00027   
+<a name="l00028"></a>00028   <a class="code" href="classgcop_1_1PqpDem.html#a099f72c73ffcb833825bf572899c7782">PqpDem</a>(<span class="keyword">const</span> <a class="code" href="classgcop_1_1Dem.html">Dem</a>&amp; <a class="code" href="classgcop_1_1PqpDem.html#a0da6eedb549ee396841d3148748c3920" title="digital elevation map">dem</a>, <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a> = 0.1, <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1PqpDem.html#a8de56fc4fc1216ffc73a336bf8d3e7eb" title="additional safety distance">sd</a> = 0.0);
+<a name="l00029"></a>00029   <span class="keyword">virtual</span> <a class="code" href="classgcop_1_1PqpDem.html#a5922f422e37cc79143e98623efaf0c96">~PqpDem</a>();
+<a name="l00030"></a>00030   
+<a name="l00031"></a>00031   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1PqpDem.html#a09cf68b8534d25f1d04206636a370adc">operator()</a>(<a class="code" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">Vectorgd</a> &amp;g,
+<a name="l00032"></a>00032                   <span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1PqpDem.html#a5a9f5714ecd79fdfa372efb79f924176">Vectorcd</a> &amp;u,
+<a name="l00033"></a>00033                   <span class="keyword">const</span> <a class="code" href="classgcop_1_1PqpDem.html#a84871f1bb95ed1e0f403813a1f7e22aa">Vectormd</a> *p = 0, 
+<a name="l00034"></a>00034                   <a class="code" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">Matrixgxd</a> *dgdx = 0, <a class="code" href="classgcop_1_1PqpDem.html#a144ccdcf88a07d58263755fdf684f834">Matrixgud</a> *dgdu = 0,
+<a name="l00035"></a>00035                   <a class="code" href="classgcop_1_1PqpDem.html#aae7f61a0b0fa1c340222bd3f80b33e90">Matrixgpd</a> *dgdp = 0);
+<a name="l00036"></a>00036 
+<a name="l00037"></a><a class="code" href="classgcop_1_1PqpDem.html#a7dd8ba1a19db9025fe4645d234077511">00037</a>   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1PqpDem.html#a09cf68b8534d25f1d04206636a370adc">operator()</a>(<a class="code" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">Vectorgd</a> &amp;g,
+<a name="l00038"></a>00038                   <span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, 
+<a name="l00039"></a>00039                   <a class="code" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">Matrixgxd</a> *dgdx = 0) {
+<a name="l00040"></a>00040         <a class="code" href="classgcop_1_1PqpDem.html#a5a9f5714ecd79fdfa372efb79f924176">Vectorcd</a> u;
+<a name="l00041"></a>00041     <span class="keywordflow">return</span> this-&gt;<a class="code" href="classgcop_1_1PqpDem.html#a09cf68b8534d25f1d04206636a370adc">operator ()</a>(g, t, x, u, 0, dgdx);
+<a name="l00042"></a>00042   }
+<a name="l00043"></a>00043   
+<a name="l00044"></a>00044   
+<a name="l00045"></a>00045   <span class="comment">//  virtual void ToBody3dState(Body3dState &amp;xb, const T &amp;x) const;</span>
+<a name="l00046"></a>00046   
+<a name="l00047"></a><a class="code" href="classgcop_1_1PqpDem.html#a0da6eedb549ee396841d3148748c3920">00047</a>   <span class="keyword">const</span> <a class="code" href="classgcop_1_1Dem.html">Dem</a>&amp; <a class="code" href="classgcop_1_1PqpDem.html#a0da6eedb549ee396841d3148748c3920" title="digital elevation map">dem</a>;   
+<a name="l00048"></a>00048   
+<a name="l00049"></a><a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">00049</a>   PQP_Model *<a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>;
+<a name="l00050"></a><a class="code" href="classgcop_1_1PqpDem.html#a870277268b4af6cc84c5818d82b528cc">00050</a>   PQP_REAL <a class="code" href="classgcop_1_1PqpDem.html#a870277268b4af6cc84c5818d82b528cc">pt</a>[3];
+<a name="l00051"></a><a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">00051</a>   PQP_REAL <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[3][3];
+<a name="l00052"></a>00052   
+<a name="l00053"></a><a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">00053</a>   PQP_Model *<a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>;
+<a name="l00054"></a><a class="code" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">00054</a>   PQP_REAL <a class="code" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">dt</a>[3];
+<a name="l00055"></a><a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">00055</a>   PQP_REAL <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[3][3];
+<a name="l00056"></a>00056   
+<a name="l00057"></a><a class="code" href="classgcop_1_1PqpDem.html#a696fbd9bcb64b47756c39ef508d23818">00057</a>   PQP_DistanceResult <a class="code" href="classgcop_1_1PqpDem.html#a696fbd9bcb64b47756c39ef508d23818">dres</a>;
+<a name="l00058"></a><a class="code" href="classgcop_1_1PqpDem.html#af4dc4f24cca294beeea4e1862f2ca6d6">00058</a>   PQP_ToleranceResult <a class="code" href="classgcop_1_1PqpDem.html#af4dc4f24cca294beeea4e1862f2ca6d6">tres</a>;
+<a name="l00059"></a>00059   
+<a name="l00060"></a><a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc">00060</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>;       
+<a name="l00061"></a><a class="code" href="classgcop_1_1PqpDem.html#a8de56fc4fc1216ffc73a336bf8d3e7eb">00061</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1PqpDem.html#a8de56fc4fc1216ffc73a336bf8d3e7eb" title="additional safety distance">sd</a>;       
+<a name="l00062"></a>00062   
+<a name="l00063"></a><a class="code" href="classgcop_1_1PqpDem.html#ae6c433da6e76143c573e5490aa8586a5">00063</a>   <a class="code" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> <a class="code" href="classgcop_1_1PqpDem.html#ae6c433da6e76143c573e5490aa8586a5" title="body state for collision purposes">xb</a>;  
+<a name="l00064"></a>00064   
+<a name="l00065"></a>00065   };
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067   
+<a name="l00068"></a>00068   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np&gt; 
+<a name="l00069"></a><a class="code" href="classgcop_1_1PqpDem.html#a099f72c73ffcb833825bf572899c7782">00069</a>     <a class="code" href="classgcop_1_1PqpDem.html#a099f72c73ffcb833825bf572899c7782">PqpDem&lt;T, _nx, _nu, _np&gt;::PqpDem</a>(<span class="keyword">const</span> <a class="code" href="classgcop_1_1Dem.html">Dem</a>&amp; dem, <span class="keywordtype">double</span> cr, <span class="keywordtype">double</span> sd) :
+<a name="l00070"></a>00070     <a class="code" href="classgcop_1_1Constraint.html">Constraint</a>&lt;T, _nx, _nu, _np, 1&gt;(), dem(dem), cr(cr), sd(sd)
+<a name="l00071"></a>00071 {
+<a name="l00072"></a>00072   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a> = <span class="keyword">new</span> PQP_Model;
+<a name="l00073"></a>00073   <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a> = <span class="keyword">new</span> PQP_Model;
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075   PQP_REAL p1[3], p2[3], p3[3], p4[3];
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>-&gt;BeginModel();
+<a name="l00078"></a>00078   p1[0] = 0; p1[1] = <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>; p1[2] = 0;
+<a name="l00079"></a>00079   p2[0] = 0; p2[1] = -<a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>; p2[2] = 0;
+<a name="l00080"></a>00080   p3[0] = <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>; p3[1] = 0; p3[2] = 0;
+<a name="l00081"></a>00081   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>-&gt;AddTri(p1, p2, p3, 0);  
+<a name="l00082"></a>00082   p1[0] = 0; p1[1] = 0; p1[2] = <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>;
+<a name="l00083"></a>00083   p2[0] = 0; p2[1] = 0; p2[2] = -<a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>;
+<a name="l00084"></a>00084   p3[0] = <a class="code" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc" title="collision radius">cr</a>; p3[1] = 0; p3[2] = 0;
+<a name="l00085"></a>00085   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>-&gt;AddTri(p1, p2, p3, 1);
+<a name="l00086"></a>00086   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>-&gt;EndModel();
+<a name="l00087"></a>00087   <a class="code" href="classgcop_1_1PqpDem.html#a583850e01e3350b5936fff6eb6ac3f8f">pm</a>-&gt;MemUsage(1);
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089   <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>-&gt;BeginModel();
+<a name="l00090"></a>00090   <span class="keywordtype">int</span> count  = 0;
+<a name="l00091"></a>00091   <span class="keywordtype">double</span> p00[3], p10[3], p11[3], p01[3];
+<a name="l00092"></a>00092   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i &lt; dem.<a class="code" href="classgcop_1_1Dem.html#ab252077bee0303deefaccb878949b155" title="number of rows">ni</a>-1; ++i) {
+<a name="l00093"></a>00093     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j &lt; dem.<a class="code" href="classgcop_1_1Dem.html#ac7381a9289beb861fbe9e35dcab85c88" title="number of columns">nj</a>-1; ++j) {
+<a name="l00094"></a>00094       dem.<a class="code" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get</a>(p00, i, j);
+<a name="l00095"></a>00095       dem.<a class="code" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get</a>(p10, i+1, j);
+<a name="l00096"></a>00096       dem.<a class="code" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get</a>(p11, i+1, j+1);
+<a name="l00097"></a>00097       dem.<a class="code" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get</a>(p01, i, j+1);
+<a name="l00098"></a>00098       p1[0] = p00[0]; p1[1] = p00[1]; p1[2] = p00[2];
+<a name="l00099"></a>00099       p2[0] = p10[0]; p2[1] = p10[1]; p2[2] = p10[2];
+<a name="l00100"></a>00100       p3[0] = p11[0]; p3[1] = p11[1]; p3[2] = p11[2];
+<a name="l00101"></a>00101       p4[0] = p01[0]; p4[1] = p01[1]; p4[2] = p01[2];
+<a name="l00102"></a>00102       <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>-&gt;AddTri(p1, p2, p3, count);
+<a name="l00103"></a>00103       <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>-&gt;AddTri(p1, p3, p4, count+1);
+<a name="l00104"></a>00104       count += 2;
+<a name="l00105"></a>00105     }
+<a name="l00106"></a>00106   }
+<a name="l00107"></a>00107   <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>-&gt;EndModel();
+<a name="l00108"></a>00108   <a class="code" href="classgcop_1_1PqpDem.html#abb2e2dabe7af20bafcae9e3a4489dc14">dm</a>-&gt;MemUsage(1);
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110   <a class="code" href="classgcop_1_1PqpDem.html#a870277268b4af6cc84c5818d82b528cc">pt</a>[0] = <a class="code" href="classgcop_1_1PqpDem.html#a870277268b4af6cc84c5818d82b528cc">pt</a>[1] = <a class="code" href="classgcop_1_1PqpDem.html#a870277268b4af6cc84c5818d82b528cc">pt</a>[2] = 0;
+<a name="l00111"></a>00111   <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[0][0] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[1][1] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[2][2] = 1.0;
+<a name="l00112"></a>00112   <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[0][1] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[1][0] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[2][0] = 0.0;
+<a name="l00113"></a>00113   <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[0][2] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[1][2] = <a class="code" href="classgcop_1_1PqpDem.html#abc3eb03b69aceb5a63a867af22edd8a5">pR</a>[2][1] = 0.0;
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115   <a class="code" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">dt</a>[0] = <a class="code" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">dt</a>[1] = <a class="code" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">dt</a>[2] = 0;
+<a name="l00116"></a>00116   <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[0][0] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[1][1] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[2][2] = 1.0;
+<a name="l00117"></a>00117   <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[0][1] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[1][0] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[2][0] = 0.0;
+<a name="l00118"></a>00118   <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[0][2] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[1][2] = <a class="code" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">dR</a>[2][1] = 0.0;
+<a name="l00119"></a>00119 }
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np&gt; 
+<a name="l00122"></a><a class="code" href="classgcop_1_1PqpDem.html#a5922f422e37cc79143e98623efaf0c96">00122</a>     <a class="code" href="classgcop_1_1PqpDem.html#a5922f422e37cc79143e98623efaf0c96">PqpDem&lt;T, _nx, _nu, _np&gt;::~PqpDem</a>()
+<a name="l00123"></a>00123   {
+<a name="l00124"></a>00124     <span class="keyword">delete</span> dm;
+<a name="l00125"></a>00125     <span class="keyword">delete</span> pm;
+<a name="l00126"></a>00126   }
+<a name="l00127"></a>00127   
+<a name="l00128"></a>00128   <span class="comment">/*</span>
+<a name="l00129"></a>00129 <span class="comment">  template &lt;typename T, int _nx, int _nu, int _np&gt; </span>
+<a name="l00130"></a>00130 <span class="comment">    void PqpDem&lt;T, _nx, _nu, _np&gt;::ToBody3dState(Body3dState &amp;xb, const T &amp;x) const</span>
+<a name="l00131"></a>00131 <span class="comment">    {</span>
+<a name="l00132"></a>00132 <span class="comment">      xb = x;</span>
+<a name="l00133"></a>00133 <span class="comment">    }</span>
+<a name="l00134"></a>00134 <span class="comment">  */</span>  
 <a name="l00135"></a>00135 
-<a name="l00136"></a>00136   assert(res == PQP_OK);
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138   <span class="keywordtype">double</span> d = dres.Distance();
-<a name="l00139"></a>00139   assert(d&gt;=0);
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141   <span class="comment">// subtract safety distance</span>
-<a name="l00142"></a>00142   d = MAX(0, d - sd);
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144 
-<a name="l00145"></a>00145   <span class="comment">//  if (dem.Inside(dres.P1()[0], dres.P1()[1], dres.P1()[2]))</span>
+<a name="l00136"></a>00136 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np&gt; 
+<a name="l00137"></a><a class="code" href="classgcop_1_1PqpDem.html#a09cf68b8534d25f1d04206636a370adc">00137</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1PqpDem.html#a09cf68b8534d25f1d04206636a370adc">PqpDem&lt;T, _nx, _nu, _np&gt;::operator()</a>(<a class="code" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">Vectorgd</a> &amp;g,
+<a name="l00138"></a>00138                                               <span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1PqpDem.html#a5a9f5714ecd79fdfa372efb79f924176">Vectorcd</a> &amp;u,
+<a name="l00139"></a>00139                                               <span class="keyword">const</span> <a class="code" href="classgcop_1_1PqpDem.html#a84871f1bb95ed1e0f403813a1f7e22aa">Vectormd</a> *rho, 
+<a name="l00140"></a>00140                                               <a class="code" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">Matrixgxd</a> *dgdx, <a class="code" href="classgcop_1_1PqpDem.html#a144ccdcf88a07d58263755fdf684f834">Matrixgud</a> *dgdu,
+<a name="l00141"></a>00141                                               <a class="code" href="classgcop_1_1PqpDem.html#aae7f61a0b0fa1c340222bd3f80b33e90">Matrixgpd</a> *dgdp)
+<a name="l00142"></a>00142 {
+<a name="l00143"></a>00143   <span class="comment">//  ToBody3dState(xb, x);</span>
+<a name="l00144"></a>00144   
+<a name="l00145"></a>00145   Vector3d p = x.second.head(3);
 <a name="l00146"></a>00146 
-<a name="l00147"></a>00147   <span class="keywordtype">bool</span> in = 
-<a name="l00148"></a>00148     dem.Inside(p[0] + cr, p[1], p[2]) ||
-<a name="l00149"></a>00149     dem.Inside(p[0], p[1] + cr, p[2]) ||
-<a name="l00150"></a>00150     dem.Inside(p[0], p[1] - cr, p[2]);
-<a name="l00151"></a>00151 
+<a name="l00147"></a>00147   pt[0] = p[0];
+<a name="l00148"></a>00148   pt[1] = p[1];
+<a name="l00149"></a>00149   pt[2] = p[2];
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151   <span class="keywordtype">int</span> res = PQP_Distance(&amp;dres, pR, pt, pm, dR, dt, dm, 0.0, 0.0);
 <a name="l00152"></a>00152 
-<a name="l00153"></a>00153   <span class="keywordflow">if</span> (in)
-<a name="l00154"></a>00154     d = -d;
-<a name="l00155"></a>00155   
-<a name="l00156"></a>00156   <span class="comment">// cout &lt;&lt; &quot;d=&quot; &lt;&lt; d &lt;&lt; endl;</span>
+<a name="l00153"></a>00153   <span class="keywordflow">if</span> (res != PQP_OK)
+<a name="l00154"></a>00154     cerr &lt;&lt; <span class="stringliteral">&quot;Warning: PqpDem:Distance: res=&quot;</span> &lt;&lt; res &lt;&lt; endl;
+<a name="l00155"></a>00155 
+<a name="l00156"></a>00156   assert(res == PQP_OK);
 <a name="l00157"></a>00157 
-<a name="l00158"></a>00158   <span class="keywordflow">if</span> (dgdx &amp;&amp; 0) {
-<a name="l00159"></a>00159     Vector3d p2(dres.P2());
-<a name="l00160"></a>00160     Vector3d dp = p2 - p;
-<a name="l00161"></a>00161     dp.normalize();
-<a name="l00162"></a>00162     dgdx-&gt;segment(3,3) = dp;
-<a name="l00163"></a>00163     <span class="comment">//    dgdx-&gt;head(3).normalize();</span>
+<a name="l00158"></a>00158   <span class="keywordtype">double</span> d = dres.Distance();
+<a name="l00159"></a>00159   assert(d&gt;=0);
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161   <span class="comment">// subtract safety distance</span>
+<a name="l00162"></a>00162   d = MAX(0, d - sd);
+<a name="l00163"></a>00163 
 <a name="l00164"></a>00164 
-<a name="l00165"></a>00165     <span class="comment">//    MINUS3(g, q, dres.P2());</span>
-<a name="l00166"></a>00166     <span class="comment">//    double gn = NORM3(g);</span>
-<a name="l00167"></a>00167     <span class="comment">//    DIV3(g,g,gn);</span>
-<a name="l00168"></a>00168     <span class="keywordflow">if</span> (in) {
-<a name="l00169"></a>00169       dgdx-&gt;segment(3,3) = -dp;
-<a name="l00170"></a>00170     }
-<a name="l00171"></a>00171   }
+<a name="l00165"></a>00165   <span class="comment">//  if (dem.Inside(dres.P1()[0], dres.P1()[1], dres.P1()[2]))</span>
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167   <span class="keywordtype">bool</span> in = 
+<a name="l00168"></a>00168     dem.Inside(p[0] + cr, p[1], p[2]) ||
+<a name="l00169"></a>00169     dem.Inside(p[0], p[1] + cr, p[2]) ||
+<a name="l00170"></a>00170     dem.Inside(p[0], p[1] - cr, p[2]);
+<a name="l00171"></a>00171 
 <a name="l00172"></a>00172 
-<a name="l00173"></a>00173   g[0] = -d;
-<a name="l00174"></a>00174   <span class="keywordflow">return</span> (d &gt; 0);
-<a name="l00175"></a>00175 }
-<a name="l00176"></a>00176 
+<a name="l00173"></a>00173   <span class="keywordflow">if</span> (in)
+<a name="l00174"></a>00174     d = -d;
+<a name="l00175"></a>00175   
+<a name="l00176"></a>00176   <span class="comment">// cout &lt;&lt; &quot;d=&quot; &lt;&lt; d &lt;&lt; endl;</span>
 <a name="l00177"></a>00177 
-<a name="l00178"></a>00178 
-<a name="l00179"></a>00179 };
-<a name="l00180"></a>00180 
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182 
-<a name="l00183"></a>00183 <span class="preprocessor">#endif</span>
+<a name="l00178"></a>00178   <span class="keywordflow">if</span> (dgdx) {
+<a name="l00179"></a>00179     Vector3d p2(dres.P2());
+<a name="l00180"></a>00180     Vector3d dp = p2 - p;
+<a name="l00181"></a>00181     dp.normalize();
+<a name="l00182"></a>00182     dgdx-&gt;segment(3,3) = dp;
+<a name="l00183"></a>00183     <span class="comment">//    dgdx-&gt;head(3).normalize();</span>
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185     <span class="comment">//    MINUS3(g, q, dres.P2());</span>
+<a name="l00186"></a>00186     <span class="comment">//    double gn = NORM3(g);</span>
+<a name="l00187"></a>00187     <span class="comment">//    DIV3(g,g,gn);</span>
+<a name="l00188"></a>00188     <span class="keywordflow">if</span> (in) {
+<a name="l00189"></a>00189       dgdx-&gt;segment(3,3) = -dp;
+<a name="l00190"></a>00190     }
+<a name="l00191"></a>00191   }
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193   g[0] = -d;
+<a name="l00194"></a>00194   <span class="keywordflow">return</span> (d &gt; 0);
+<a name="l00195"></a>00195 }
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199 };
+<a name="l00200"></a>00200 
+<a name="l00201"></a>00201 
+<a name="l00202"></a>00202 
+<a name="l00203"></a>00203 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

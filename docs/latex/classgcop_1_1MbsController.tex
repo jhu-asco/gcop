@@ -6,7 +6,8 @@
 
 
 
-\-Inheritance diagram for gcop\-:\-:\-Mbs\-Controller\-:\nopagebreak
+\-Inheritance diagram for gcop\-:\-:\-Mbs\-Controller\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -15,7 +16,8 @@
 \end{figure}
 
 
-\-Collaboration diagram for gcop\-:\-:\-Mbs\-Controller\-:\nopagebreak
+\-Collaboration diagram for gcop\-:\-:\-Mbs\-Controller\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -27,7 +29,7 @@
 \item 
 {\bf \-Mbs\-Controller} (const {\bf \-Mbs} \&{\bf sys}, {\bf \-Mbs\-State} $\ast${\bf xd}=0, \-Vector\-Xd $\ast${\bf ad}=0)
 \item 
-virtual void {\bf \-Set} (\-Vector\-Xd \&u, double t, const {\bf \-Mbs\-State} \&x)
+virtual bool {\bf \-Set} (\-Vector\-Xd \&u, double t, const {\bf \-Mbs\-State} \&x)
 \item 
 virtual {\bf $\sim$\-Mbs\-Controller} ()
 \end{DoxyCompactItemize}
@@ -83,13 +85,13 @@ const {\bf \-Mbs} \& {\bf sys}
 \subsection{\-Member \-Function \-Documentation}
 \index{gcop\-::\-Mbs\-Controller@{gcop\-::\-Mbs\-Controller}!\-Set@{\-Set}}
 \index{\-Set@{\-Set}!gcop::MbsController@{gcop\-::\-Mbs\-Controller}}
-\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mbs\-Controller\-::\-Set} (
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Mbs\-Controller\-::\-Set} (
 \begin{DoxyParamCaption}
 \item[{\-Vector\-Xd \&}]{u, }
 \item[{double}]{t, }
 \item[{const {\bf \-Mbs\-State} \&}]{x}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1MbsController_a0065ff60bcfaa6f378e97809d6491a4b}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1MbsController_a60e530bb55ab52cb0d06a4f8898cd075}
 \-Feedback controller of the form u = k(t, x) 
 \begin{DoxyParams}{\-Parameters}
 {\em u} & controls \\
@@ -99,9 +101,12 @@ const {\bf \-Mbs} \& {\bf sys}
 {\em x} & state \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if arguments are valid, false if e.\-g. x is infeasible 
+\end{DoxyReturn}
 
 
-\-Implements {\bf gcop\-::\-Controller$<$ Mbs\-State, Vector\-Xd $>$} \doxyref{}{p.}{classgcop_1_1Controller_a306fbf6d65ab78e13537bb92b330fc35}.
+\-Implements {\bf gcop\-::\-Controller$<$ Mbs\-State, Vector\-Xd $>$} \doxyref{}{p.}{classgcop_1_1Controller_a6bbf22b498272842f7894b3983d97022}.
 
 
 

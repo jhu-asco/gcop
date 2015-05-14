@@ -80,11 +80,11 @@
 <a name="l00015"></a><a class="code" href="namespacegcop.html#a868d7ca5ba6dc6bce3e990e3c85fd01a">00015</a>   <span class="keyword">typedef</span> Matrix&lt;double, Dynamic, 6&gt; <a class="code" href="namespacegcop.html#a868d7ca5ba6dc6bce3e990e3c85fd01a">MatrixX6d</a>;
 <a name="l00016"></a><a class="code" href="namespacegcop.html#aee822a03c1b7b0ccc869747a7158e33d">00016</a>   <span class="keyword">typedef</span> Matrix&lt;double, 6, Dynamic&gt; <a class="code" href="namespacegcop.html#aee822a03c1b7b0ccc869747a7158e33d">Matrix6Xd</a>;
 <a name="l00017"></a>00017   
-<a name="l00018"></a><a class="code" href="classgcop_1_1Body2dSlamCost.html">00018</a>   <span class="keyword">class </span><a class="code" href="classgcop_1_1Body2dSlamCost.html">Body2dSlamCost</a> : <span class="keyword">public</span> <a class="code" href="classgcop_1_1Cost.html">Cost</a>&lt;M3V3d, 6, 3&gt; {
+<a name="l00018"></a><a class="code" href="classgcop_1_1Body2dSlamCost.html">00018</a>   <span class="keyword">class </span><a class="code" href="classgcop_1_1Body2dSlamCost.html">Body2dSlamCost</a> : <span class="keyword">public</span> <a class="code" href="classgcop_1_1Cost.html">Cost</a>&lt;Body2dState, 6, 3&gt; {
 <a name="l00019"></a>00019   <span class="keyword">public</span>:
-<a name="l00020"></a>00020     <a class="code" href="classgcop_1_1Body2dSlamCost.html">Body2dSlamCost</a>(<a class="code" href="classgcop_1_1Body2d.html">Body2d</a> &amp;sys, <span class="keywordtype">double</span> tf, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Body2dGraph.html">Body2dGraph</a> &amp;pg);
+<a name="l00020"></a>00020     <a class="code" href="classgcop_1_1Body2dSlamCost.html">Body2dSlamCost</a>(<a class="code" href="classgcop_1_1Body2d.html">Body2d&lt;&gt;</a> &amp;sys, <span class="keywordtype">double</span> tf, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Body2dGraph.html">Body2dGraph</a> &amp;pg);
 <a name="l00021"></a>00021     
-<a name="l00022"></a>00022     <span class="keywordtype">double</span> Lp(<span class="keywordtype">double</span> t, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#a84d92b047c73e771491e45675476d08a">M3V3d</a> &amp;x, <span class="keyword">const</span> Vector3d &amp;u, <span class="keyword">const</span> VectorXd &amp;p,
+<a name="l00022"></a>00022     <span class="keywordtype">double</span> Lp(<span class="keywordtype">double</span> t, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a> &amp;x, <span class="keyword">const</span> Vector3d &amp;u, <span class="keyword">const</span> VectorXd &amp;p,
 <a name="l00023"></a>00023               <a class="code" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a> *Lx = 0, <a class="code" href="namespacegcop.html#a9a48fc301dc21867f8353f31858f9dd2">Matrix6d</a> *Lxx = 0,
 <a name="l00024"></a>00024               Vector3d *Lu = 0, Matrix3d *Luu = 0,
 <a name="l00025"></a>00025               <a class="code" href="namespacegcop.html#a96a4e467a5862486de3127b041d57d22">Matrix63d</a> *Lxu = 0, 
@@ -99,7 +99,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:46 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>GCOP: gcop::SystemCe&lt; T, n, c, np, ntp &gt; Class Template Reference</title>
+<title>GCOP: gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt; Class Template Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -64,89 +64,113 @@
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">gcop::SystemCe&lt; T, n, c, np, ntp &gt; Class Template Reference</div>  </div>
+<div class="title">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="gcop::SystemCe" -->
 <p><code>#include &lt;<a class="el" href="systemce_8h_source.html">systemce.h</a>&gt;</code></p>
 <div class="dynheader">
-Collaboration diagram for gcop::SystemCe&lt; T, n, c, np, ntp &gt;:</div>
+Collaboration diagram for gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classgcop_1_1SystemCe__coll__graph.png" border="0" usemap="#gcop_1_1SystemCe_3_01T_00_01n_00_01c_00_01np_00_01ntp_01_4_coll__map" alt="Collaboration graph"/></div>
-<map name="gcop_1_1SystemCe_3_01T_00_01n_00_01c_00_01np_00_01ntp_01_4_coll__map" id="gcop_1_1SystemCe_3_01T_00_01n_00_01c_00_01np_00_01ntp_01_4_coll__map">
-<area shape="rect" id="node2" href="classgcop_1_1System.html" title="gcop::System\&lt; T, n, c, np \&gt;" alt="" coords="597,41,784,71"/><area shape="rect" id="node4" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _np \&gt;" alt="" coords="381,59,501,88"/><area shape="rect" id="node22" href="classgcop_1_1System.html" title="gcop::System\&lt; T, nx, nu, np \&gt;" alt="" coords="591,211,791,240"/><area shape="rect" id="node6" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="5,32,293,61"/><area shape="rect" id="node8" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="381,5,501,35"/><area shape="rect" id="node11" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; T, _nx \&gt;" alt="" coords="357,221,525,251"/><area shape="rect" id="node16" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; T, n, c, np \&gt;" alt="" coords="888,104,1059,133"/><area shape="rect" id="node18" href="classgcop_1_1Ce.html" title="gcop::Ce\&lt; ntp \&gt;" alt="" coords="915,157,1032,187"/><area shape="rect" id="node20" href="classgcop_1_1Tparam.html" title="gcop::Tparam\&lt; T, n, c, np, ntp \&gt;" alt="" coords="868,211,1079,240"/></map>
+<div class="center"><img src="classgcop_1_1SystemCe__coll__graph.png" border="0" usemap="#gcop_1_1SystemCe_3_01T_00_01n_00_01c_00_01np_00_01ntp_00_01Tc_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="gcop_1_1SystemCe_3_01T_00_01n_00_01c_00_01np_00_01ntp_00_01Tc_01_4_coll__map" id="gcop_1_1SystemCe_3_01T_00_01n_00_01c_00_01np_00_01ntp_00_01Tc_01_4_coll__map">
+<area shape="rect" id="node2" href="classgcop_1_1System.html" title="gcop::System\&lt; T, n, c, np \&gt;" alt="" coords="597,97,784,127"/><area shape="rect" id="node4" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _np \&gt;" alt="" coords="381,59,501,88"/><area shape="rect" id="node18" href="classgcop_1_1System.html" title="gcop::System\&lt; T, nx, nu, np \&gt;" alt="" coords="591,205,791,235"/><area shape="rect" id="node6" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="5,32,293,61"/><area shape="rect" id="node8" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="381,5,501,35"/><area shape="rect" id="node11" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; T, _nx \&gt;" alt="" coords="357,221,525,251"/><area shape="rect" id="node16" href="classgcop_1_1Tparam.html" title="gcop::Tparam\&lt; T, n, c, np, ntp, Tc \&gt;" alt="" coords="867,373,1101,403"/><area shape="rect" id="node30" href="classgcop_1_1Tparam.html" title="gcop::Tparam\&lt; T, n, c, np, ntp \&gt;" alt="" coords="879,160,1089,189"/><area shape="rect" id="node24" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; T, n, c, np \&gt;" alt="" coords="899,213,1069,243"/><area shape="rect" id="node26" href="classgcop_1_1Ce.html" title="gcop::Ce\&lt; ntp \&gt;" alt="" coords="925,267,1043,296"/><area shape="rect" id="node28" href="classgcop_1_1Creator.html" title="gcop::Creator\&lt; Tc \&gt;" alt="" coords="915,320,1053,349"/><area shape="rect" id="node33" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; T, n, c, np, Tc \&gt;" alt="" coords="888,427,1080,456"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classgcop_1_1SystemCe-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a2b5f737f8cd668bee9cc98c909e9562e">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#af59926716da085cb46e262b519af4de6">cost</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#aba3d332a8916c04763d2e71e9fa2f1be">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#afb9337d9762f976f31d8b60c455681f1">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#a0416262fbf5b3e405b55c36c395ca8ed">p</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77">dus</a>, vector&lt; Vectorcd &gt; &amp;es, bool update=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a699e34372185e3dbaf7d81cb4aace699">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a2b5f737f8cd668bee9cc98c909e9562e">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#af59926716da085cb46e262b519af4de6">cost</a>, <a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#afe808ba636a51336ee30fb8134a3c04c">tp</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#aba3d332a8916c04763d2e71e9fa2f1be">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#afb9337d9762f976f31d8b60c455681f1">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#a0416262fbf5b3e405b55c36c395ca8ed">p</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77">dus</a>, vector&lt; Vectorcd &gt; &amp;es, bool update=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a6289c48ee62ec9b8610ac8eb4c3c31cd">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a2b5f737f8cd668bee9cc98c909e9562e">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#af59926716da085cb46e262b519af4de6">cost</a>, <a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#afe808ba636a51336ee30fb8134a3c04c">tp</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#aba3d332a8916c04763d2e71e9fa2f1be">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#afb9337d9762f976f31d8b60c455681f1">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#a0416262fbf5b3e405b55c36c395ca8ed">p</a>, VectorXd &amp;dss, VectorXd &amp;dess, bool update=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a1043c7a63b1f89bec24065fe315fb8f6">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, Tc &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a256fff64acf84e8a7797cb345e8f48a1">cost</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a0b9b2eb4392bc8a5071db2521b5252ec">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3fffeb6a50d044e0a05e8e3238c663b6">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#adec09a65283f310d61e82a5280b91592">p</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">dus</a>, vector&lt; Vectorcd &gt; &amp;es, bool update=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a5857dc1275c87443e261e5372600784d">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a1043c7a63b1f89bec24065fe315fb8f6">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, Tc &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a256fff64acf84e8a7797cb345e8f48a1">cost</a>, <a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#aa877691a149300d12bb74fd2798a5829">tp</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a0b9b2eb4392bc8a5071db2521b5252ec">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3fffeb6a50d044e0a05e8e3238c663b6">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#adec09a65283f310d61e82a5280b91592">p</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">dus</a>, vector&lt; Vectorcd &gt; &amp;es, bool update=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a391911664302608d903226771f45cff9">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a1043c7a63b1f89bec24065fe315fb8f6">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, Tc &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a256fff64acf84e8a7797cb345e8f48a1">cost</a>, <a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#aa877691a149300d12bb74fd2798a5829">tp</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a0b9b2eb4392bc8a5071db2521b5252ec">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3fffeb6a50d044e0a05e8e3238c663b6">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#adec09a65283f310d61e82a5280b91592">p</a>, VectorXd &amp;dss, VectorXd &amp;dess, bool update=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a16b57d310caf197791d97e42c97b2270">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a1043c7a63b1f89bec24065fe315fb8f6">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, Tc &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a256fff64acf84e8a7797cb345e8f48a1">cost</a>, <a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#aa877691a149300d12bb74fd2798a5829">tp</a>, <a class="el" href="classgcop_1_1Creator.html">Creator</a>&lt; Tc &gt; *<a class="el" href="classgcop_1_1SystemCe.html#a684d06146d8d719c80e1cd3c9b5e1e60">contextSampler</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a0b9b2eb4392bc8a5071db2521b5252ec">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3fffeb6a50d044e0a05e8e3238c663b6">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#adec09a65283f310d61e82a5280b91592">p</a>, Vectortpd &amp;mu0, Matrixtpd &amp;P0, Matrixtpd &amp;S, bool update=true)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ac7384dd138c369694ea0f6895be3dd6a">~SystemCe</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ae8e73c05a38507dbddd8b18afaf3a2c4">Iterate</a> (bool updatexsfromus=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">Update</a> (std::vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#afb9337d9762f976f31d8b60c455681f1">xs</a>, const std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>, bool evalCost=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">us2z</a> (Vectortpd &amp;z, const std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a4bdcf8a52d6f006d16c16aa3226ff12f">z2us</a> (std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>, const Vectortpd &amp;z) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a2b5f737f8cd668bee9cc98c909e9562e">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#af59926716da085cb46e262b519af4de6">cost</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#aba3d332a8916c04763d2e71e9fa2f1be">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#afb9337d9762f976f31d8b60c455681f1">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#a0416262fbf5b3e405b55c36c395ca8ed">p</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77">dus</a>, vector&lt; Vectorcd &gt; &amp;es, bool update=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a699e34372185e3dbaf7d81cb4aace699">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a2b5f737f8cd668bee9cc98c909e9562e">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#af59926716da085cb46e262b519af4de6">cost</a>, <a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#afe808ba636a51336ee30fb8134a3c04c">tp</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#aba3d332a8916c04763d2e71e9fa2f1be">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#afb9337d9762f976f31d8b60c455681f1">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#a0416262fbf5b3e405b55c36c395ca8ed">p</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77">dus</a>, vector&lt; Vectorcd &gt; &amp;es, bool update=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ad056b1d76cdec9494cf372fc24ada720">~SystemCe</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#acb79231ef353e0752a533e72f20bf7f6">Iterate</a> (bool updatexsfromus=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">Update</a> (std::vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3fffeb6a50d044e0a05e8e3238c663b6">xs</a>, const std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>, bool evalCost=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">us2z</a> (Vectortpd &amp;z, const std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a4bdcf8a52d6f006d16c16aa3226ff12f">z2us</a> (std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>, const Vectortpd &amp;z) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a1043c7a63b1f89bec24065fe315fb8f6">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a256fff64acf84e8a7797cb345e8f48a1">cost</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a0b9b2eb4392bc8a5071db2521b5252ec">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3fffeb6a50d044e0a05e8e3238c663b6">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#adec09a65283f310d61e82a5280b91592">p</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">dus</a>, vector&lt; Vectorcd &gt; &amp;es, bool update=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a699e34372185e3dbaf7d81cb4aace699">SystemCe</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a1043c7a63b1f89bec24065fe315fb8f6">sys</a>, <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a256fff64acf84e8a7797cb345e8f48a1">cost</a>, <a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#aa877691a149300d12bb74fd2798a5829">tp</a>, vector&lt; double &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a0b9b2eb4392bc8a5071db2521b5252ec">ts</a>, vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3fffeb6a50d044e0a05e8e3238c663b6">xs</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>, Vectormd *<a class="el" href="classgcop_1_1SystemCe.html#adec09a65283f310d61e82a5280b91592">p</a>, vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">dus</a>, vector&lt; Vectorcd &gt; &amp;es, bool update=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a9ff6a89427491e600594c59505519213">~SystemCe</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ace8af29caaa93496f6da5e278bc5c759">Iterate</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">Update</a> (std::vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#afb9337d9762f976f31d8b60c455681f1">xs</a>, const std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>, bool evalCost=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">us2z</a> (Vectortpd &amp;z, const std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a4bdcf8a52d6f006d16c16aa3226ff12f">z2us</a> (std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a>, const Vectortpd &amp;z) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">Update</a> (std::vector&lt; T &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#a3fffeb6a50d044e0a05e8e3238c663b6">xs</a>, const std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>, bool evalCost=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ae38166b22e40d8dbe5f511eb63d45091">us2z</a> (Vectortpd &amp;z, const std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ab03c15e265332db4bcd2d04d1ca1f57c">z2us</a> (std::vector&lt; Vectorcd &gt; &amp;<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a>, const Vectortpd &amp;z) const </td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a2b5f737f8cd668bee9cc98c909e9562e">sys</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">dynamical system  <a href="#a2b5f737f8cd668bee9cc98c909e9562e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#af59926716da085cb46e262b519af4de6">cost</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">given cost function  <a href="#af59926716da085cb46e262b519af4de6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#afe808ba636a51336ee30fb8134a3c04c">tp</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">trajectory parametrization  <a href="#afe808ba636a51336ee30fb8134a3c04c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#aba3d332a8916c04763d2e71e9fa2f1be">ts</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">times (N+1) vector  <a href="#aba3d332a8916c04763d2e71e9fa2f1be"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#afb9337d9762f976f31d8b60c455681f1">xs</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">states (N+1) vector  <a href="#afb9337d9762f976f31d8b60c455681f1"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; Vectorcd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">controls (N) vector  <a href="#a5c25cab5a30e37d2f46cffcd3dd5156d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">Vectormd *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a0416262fbf5b3e405b55c36c395ca8ed">p</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">controls (N) vector  <a href="#a0416262fbf5b3e405b55c36c395ca8ed"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; Vectorcd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77">dus</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">control variation (N) vector  <a href="#ad60096c80bdfec2564e3785150f66b77"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a3a9c43af28a65c4bcafbe7fc7b88f77b">xss</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">states (N+1) vector  <a href="#a3a9c43af28a65c4bcafbe7fc7b88f77b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; Vectorcd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a4458e74a8abe844dc035e13f5f079a6a">uss</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">controls (N) vector  <a href="#a4458e74a8abe844dc035e13f5f079a6a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d">N</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">number of discrete trajectory segments  <a href="#af78c031064df4b3d7d8ea039baf25f9d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Ce.html">Ce</a>&lt; ntp &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1">ce</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">GMM-based cross-entropy algorithm.  <a href="#a0ece313b2b0bcd583a2eb5f1c0c768b1"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#abc61984ad57605d3a725115919a70694">Ns</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">number of cross-entropy samples  <a href="#abc61984ad57605d3a725115919a70694"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a0168d8c2140656805abcbd0111a199fa">J</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">optimal cost  <a href="#a0168d8c2140656805abcbd0111a199fa"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">Vectortpd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ab8c61f63d377293711e62c724951c938">zmin</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Current best z corresponding to J.  <a href="#ab8c61f63d377293711e62c724951c938"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#addf6f1b2b7bc3be50cf6573c350fca6c">nofevaluations</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of evaluations at any point of time.  <a href="#addf6f1b2b7bc3be50cf6573c350fca6c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ae990b715585574bfaa29bf3d7a0d3237">debug</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">whether to display debugging info  <a href="#ae990b715585574bfaa29bf3d7a0d3237"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">RenderFunc *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a0298829ee12a88af0be4cf55fb3555cc">external_render</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">RenderFunction for rendering samples.  <a href="#a0298829ee12a88af0be4cf55fb3555cc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a1043c7a63b1f89bec24065fe315fb8f6">sys</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">dynamical system  <a href="#a1043c7a63b1f89bec24065fe315fb8f6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, Tc &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a256fff64acf84e8a7797cb345e8f48a1">cost</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">given cost function  <a href="#a256fff64acf84e8a7797cb345e8f48a1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#aa877691a149300d12bb74fd2798a5829">tp</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">trajectory parametrization  <a href="#aa877691a149300d12bb74fd2798a5829"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Creator.html">Creator</a>&lt; Tc &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a684d06146d8d719c80e1cd3c9b5e1e60">contextSampler</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">context sampler  <a href="#a684d06146d8d719c80e1cd3c9b5e1e60"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a0b9b2eb4392bc8a5071db2521b5252ec">ts</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">times (N+1) vector  <a href="#a0b9b2eb4392bc8a5071db2521b5252ec"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a3fffeb6a50d044e0a05e8e3238c663b6">xs</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">states (N+1) vector  <a href="#a3fffeb6a50d044e0a05e8e3238c663b6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; Vectorcd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">controls (N) vector  <a href="#ac8bc8f672b5cedf88225de724533c4e1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Vectormd *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#adec09a65283f310d61e82a5280b91592">p</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">system internal parameters  <a href="#adec09a65283f310d61e82a5280b91592"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; Vectorcd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">dus</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">control standard deviations (N) vector  <a href="#a3d6a4d4ae902ab4a0a057e00496b35e5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a18ddca64021bb2403a65bf72d6633a41">xss</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">states (N+1) vector  <a href="#a18ddca64021bb2403a65bf72d6633a41"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; Vectorcd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f">uss</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">controls (N) vector  <a href="#a693d2d01d1db0655559505e77619254f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a5fe2c92c21bb08a81a630ad1ca79bfd0">xsas</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">all state samples  <a href="#a5fe2c92c21bb08a81a630ad1ca79bfd0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector<br class="typebreak"/>
+&lt; Vectorcd &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a1f2b88322a077b841318a3d4d3b28bbe">usas</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">all control samples  <a href="#a1f2b88322a077b841318a3d4d3b28bbe"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a7b59ddaa10cf27bc63ed139b51c099a5">bs</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">all samples feasibility  <a href="#a7b59ddaa10cf27bc63ed139b51c099a5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88">N</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">number of discrete trajectory segments  <a href="#a9da5a0bab06198c7f2f8eb2f6c0c1b88"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Ce.html">Ce</a>&lt; ntp &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492">ce</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">GMM-based cross-entropy algorithm.  <a href="#a4ce823704048a4e50be26fc74f640492"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#af83f5453f333219934b31433c2960318">Ns</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">number of cross-entropy samples  <a href="#af83f5453f333219934b31433c2960318"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33">J</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">optimal cost  <a href="#af39e072c9299e3a28abcfcb088ff8f33"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a99b3017ffaac357046ea4490b8130541">enforceUpperBound</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">whether to discard any samples with cost &gt; Jub (true by default)  <a href="#a99b3017ffaac357046ea4490b8130541"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a2546a7ec07714afcba28b00e7d6644f4">updateUpperBound</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">after every iteration Jub is updated to be the current max cost (true by default)  <a href="#a2546a7ec07714afcba28b00e7d6644f4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a1e2b8e921a3267c845deecd46dfaf664">Jub</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">allowed cost upper bound (inf by default)  <a href="#a1e2b8e921a3267c845deecd46dfaf664"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Vectortpd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ade0b9e6dc920bd94264856e82c151c3e">zmin</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Current best z corresponding to J.  <a href="#ade0b9e6dc920bd94264856e82c151c3e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ad15e7b6425985f6543fb212c78516caf">nofevaluations</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of evaluations at any point of time.  <a href="#ad15e7b6425985f6543fb212c78516caf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a624d0210813c6f1cebae5dd52aa8fcd1">debug</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">whether to display debugging info  <a href="#a624d0210813c6f1cebae5dd52aa8fcd1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">RenderFunc *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#ace69b9088d27626375a3670ce0c0f852">external_render</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">RenderFunction for rendering samples.  <a href="#ace69b9088d27626375a3670ce0c0f852"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a79cb4ab011e21dbd951f9e3e15e13319">cost</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">given cost function  <a href="#a79cb4ab011e21dbd951f9e3e15e13319"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SystemCe.html#a0758fc802d2afd7eabdf020ebfc91297">tp</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">trajectory parametrization  <a href="#a0758fc802d2afd7eabdf020ebfc91297"></a><br/></td></tr>
 </table>
-<h3>template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt;<br/>
- class gcop::SystemCe&lt; T, n, c, np, ntp &gt;</h3>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt;<br/>
+class gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</h3>
 
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a09d6a8c0e087638bdbdc538648d19a92"></a><!-- doxytag: member="gcop::SystemCe::SystemCe" ref="a09d6a8c0e087638bdbdc538648d19a92" args="(System&lt; T, n, c, np &gt; &amp;sys, Cost&lt; T, n, c, np &gt; &amp;cost, vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, Vectormd *p, vector&lt; Vectorcd &gt; &amp;dus, vector&lt; Vectorcd &gt; &amp;es, bool update=true)" -->
+<p>The CE method for dynamical systems</p>
+<p>Note: the vector dus should denote the variances along the diagonal of the initial distribution</p>
+<p>Authors: Marin Kobilarov, Gowtham Garimella </p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aafa764902c1856179960ced90cbf2804"></a><!-- doxytag: member="gcop::SystemCe::SystemCe" ref="aafa764902c1856179960ced90cbf2804" args="(System&lt; T, n, c, np &gt; &amp;sys, Cost&lt; T, n, c, np, Tc &gt; &amp;cost, vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, Vectormd *p, vector&lt; Vectorcd &gt; &amp;dus, vector&lt; Vectorcd &gt; &amp;es, bool update=true)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
+template&lt;typename T, int n, int c, int np, int ntp, typename Tc&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
+          <td class="memname"><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>sys</em>, </td>
@@ -154,7 +178,7 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, Tc &gt; &amp;&#160;</td>
           <td class="paramname"><em>cost</em>, </td>
         </tr>
         <tr>
@@ -207,8 +231,7 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Create an optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. The times ts must be given, the initial state xs[0] must be set, and the controls us will be used as an initial guess for the optimization.</p>
-<p>After initialization, every call to <a class="el" href="classgcop_1_1SystemCe.html#ace8af29caaa93496f6da5e278bc5c759">Iterate()</a> will optimize the controls us and states xs and modify them accordingly. Problems involving time-optimization will also modify the sequence of times ts.</p>
+<p>Create an optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. The times ts must be given, the initial state xs[0] must be set, and the optimization will be performed over the controls us</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">sys</td><td>system </td></tr>
@@ -217,25 +240,25 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
     <tr><td class="paramname">xs</td><td>(N+1) sequence of discrete states </td></tr>
     <tr><td class="paramname">us</td><td>(N) sequence of control inputs </td></tr>
     <tr><td class="paramname">p</td><td>(np-size) system parameters (set to 0 if none) </td></tr>
-    <tr><td class="paramname">dus</td><td>(N) initial control variations (determines how widespread the initial distro is) </td></tr>
+    <tr><td class="paramname">dus</td><td>(N) initial control standard deviations (determines how widespread the initial distro is) </td></tr>
     <tr><td class="paramname">es</td><td>(N) zero-mean regularization/local-exploration noise variances </td></tr>
     <tr><td class="paramname">update</td><td>whether to update trajectory xs using initial state xs[0] and inputs us. This is necessary only if xs was not already generated from us. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>References <a class="el" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::ce</a>, <a class="el" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::dus</a>, <a class="el" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">gcop::Ce&lt; _n &gt;::gmm</a>, <a class="el" href="classgcop_1_1SystemCe.html#a0168d8c2140656805abcbd0111a199fa">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::J</a>, <a class="el" href="classgcop_1_1Manifold.html#a7f5bc8f44907e3e56e1f1780368bf5b0">gcop::Manifold&lt; T, _n &gt;::n</a>, <a class="el" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::N</a>, <a class="el" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">gcop::Ce&lt; _n &gt;::S</a>, <a class="el" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675">gcop::System&lt; T, _nx, _nu, _np &gt;::U</a>, <a class="el" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::Update()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::us</a>, <a class="el" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::us2z()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a4458e74a8abe844dc035e13f5f079a6a">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::uss</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a3a9c43af28a65c4bcafbe7fc7b88f77b">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::xss</a>.</p>
+<p>References <a class="el" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::ce</a>, <a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::dus</a>, <a class="el" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">gcop::Ce&lt; _n &gt;::gmm</a>, <a class="el" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::J</a>, <a class="el" href="classgcop_1_1Manifold.html#a7f5bc8f44907e3e56e1f1780368bf5b0">gcop::Manifold&lt; T, _n &gt;::n</a>, <a class="el" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::N</a>, <a class="el" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">gcop::Ce&lt; _n &gt;::S</a>, <a class="el" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675">gcop::System&lt; T, _nx, _nu, _np &gt;::U</a>, <a class="el" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::Update()</a>, <a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::us</a>, <a class="el" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::us2z()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::uss</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a18ddca64021bb2403a65bf72d6633a41">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::xss</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a699e34372185e3dbaf7d81cb4aace699"></a><!-- doxytag: member="gcop::SystemCe::SystemCe" ref="a699e34372185e3dbaf7d81cb4aace699" args="(System&lt; T, n, c, np &gt; &amp;sys, Cost&lt; T, n, c, np &gt; &amp;cost, Tparam&lt; T, n, c, np, ntp &gt; &amp;tp, vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, Vectormd *p, vector&lt; Vectorcd &gt; &amp;dus, vector&lt; Vectorcd &gt; &amp;es, bool update=true)" -->
+<a class="anchor" id="a5857dc1275c87443e261e5372600784d"></a><!-- doxytag: member="gcop::SystemCe::SystemCe" ref="a5857dc1275c87443e261e5372600784d" args="(System&lt; T, n, c, np &gt; &amp;sys, Cost&lt; T, n, c, np, Tc &gt; &amp;cost, Tparam&lt; T, n, c, np, ntp, Tc &gt; &amp;tp, vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, Vectormd *p, vector&lt; Vectorcd &gt; &amp;dus, vector&lt; Vectorcd &gt; &amp;es, bool update=true)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
+template&lt;typename T, int n, int c, int np, int ntp, typename Tc&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
+          <td class="memname"><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>sys</em>, </td>
@@ -243,13 +266,13 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, Tc &gt; &amp;&#160;</td>
           <td class="paramname"><em>cost</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt; &amp;&#160;</td>
           <td class="paramname"><em>tp</em>, </td>
         </tr>
         <tr>
@@ -302,8 +325,7 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Create an optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. The times ts must be given, the initial state xs[0] must be set, and the controls us will be used as an initial guess for the optimization.</p>
-<p>After initialization, every call to <a class="el" href="classgcop_1_1SystemCe.html#ace8af29caaa93496f6da5e278bc5c759">Iterate()</a> will optimize the controls us and states xs and modify them accordingly. Problems involving time-optimization will also modify the sequence of times ts.</p>
+<p>Create an optimal control problem using a system, a cost, and a trajectory parametrized using a finite set of parameters of dimension ntp The parametrization <a class="el" href="classgcop_1_1Tparam.html">Tparam</a> defines a mapping between the parameters and a discrete trajectory at times ts, states xs, and control us (and optionally system parameters p) Optimization occurs over the parametrization.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">sys</td><td>system </td></tr>
@@ -313,25 +335,25 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
     <tr><td class="paramname">xs</td><td>(N+1) sequence of discrete states </td></tr>
     <tr><td class="paramname">us</td><td>(N) sequence of control inputs </td></tr>
     <tr><td class="paramname">p</td><td>(np-size) system parameters (set to 0 if none) </td></tr>
-    <tr><td class="paramname">dus</td><td>(N) initial control variations (determines how widespread the initial distro is) </td></tr>
+    <tr><td class="paramname">dus</td><td>(N) initial control standard deviations (determines how widespread the initial distro is) </td></tr>
     <tr><td class="paramname">es</td><td>(N) zero-mean regularization/local-exploration noise variances </td></tr>
     <tr><td class="paramname">update</td><td>whether to update trajectory xs using initial state xs[0] and inputs us. This is necessary only if xs was not already generated from us. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>References <a class="el" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::ce</a>, <a class="el" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::dus</a>, <a class="el" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">gcop::Ce&lt; _n &gt;::gmm</a>, <a class="el" href="classgcop_1_1SystemCe.html#a0168d8c2140656805abcbd0111a199fa">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::J</a>, <a class="el" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::N</a>, <a class="el" href="classgcop_1_1Tparam.html#aecf927a644b2124f8c256188adcd6d27">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;::ntp</a>, <a class="el" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">gcop::Ce&lt; _n &gt;::S</a>, <a class="el" href="classgcop_1_1Tparam.html#a92de5e8167d3cbec5fa498e0d7b5fd2f">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;::To()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::Update()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::us</a>, <a class="el" href="classgcop_1_1SystemCe.html#a4458e74a8abe844dc035e13f5f079a6a">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::uss</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a3a9c43af28a65c4bcafbe7fc7b88f77b">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::xss</a>.</p>
+<p>References <a class="el" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::ce</a>, <a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::dus</a>, <a class="el" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">gcop::Ce&lt; _n &gt;::gmm</a>, <a class="el" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::J</a>, <a class="el" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::N</a>, <a class="el" href="classgcop_1_1Tparam.html#aba4946a1d919993acbcd588ac5b7b086">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;::ntp</a>, <a class="el" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">gcop::Ce&lt; _n &gt;::S</a>, <a class="el" href="classgcop_1_1Tparam.html#a2668afc0c6d411d2811a8e3f7b4d60b3">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;::To()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::Update()</a>, <a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::us</a>, <a class="el" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::uss</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a18ddca64021bb2403a65bf72d6633a41">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::xss</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a6289c48ee62ec9b8610ac8eb4c3c31cd"></a><!-- doxytag: member="gcop::SystemCe::SystemCe" ref="a6289c48ee62ec9b8610ac8eb4c3c31cd" args="(System&lt; T, n, c, np &gt; &amp;sys, Cost&lt; T, n, c, np &gt; &amp;cost, Tparam&lt; T, n, c, np, ntp &gt; &amp;tp, vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, Vectormd *p, VectorXd &amp;dss, VectorXd &amp;dess, bool update=true)" -->
+<a class="anchor" id="a391911664302608d903226771f45cff9"></a><!-- doxytag: member="gcop::SystemCe::SystemCe" ref="a391911664302608d903226771f45cff9" args="(System&lt; T, n, c, np &gt; &amp;sys, Cost&lt; T, n, c, np, Tc &gt; &amp;cost, Tparam&lt; T, n, c, np, ntp, Tc &gt; &amp;tp, vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, Vectormd *p, VectorXd &amp;dss, VectorXd &amp;dess, bool update=true)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
+template&lt;typename T, int n, int c, int np, int ntp, typename Tc&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
+          <td class="memname"><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>sys</em>, </td>
@@ -339,13 +361,13 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, Tc &gt; &amp;&#160;</td>
           <td class="paramname"><em>cost</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt; &amp;&#160;</td>
           <td class="paramname"><em>tp</em>, </td>
         </tr>
         <tr>
@@ -398,8 +420,7 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Create an optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. The times ts must be given, the initial state xs[0] must be set, and the controls us will be used as an initial guess for the optimization.</p>
-<p>After initialization, every call to <a class="el" href="classgcop_1_1SystemCe.html#ace8af29caaa93496f6da5e278bc5c759">Iterate()</a> will optimize the controls us and states xs and modify them accordingly. Problems involving time-optimization will also modify the sequence of times ts.</p>
+<p>Create an optimal control problem using a system, a cost, and a trajectory parametrized using a finite set of parameters of dimension ntp The parametrization <a class="el" href="classgcop_1_1Tparam.html">Tparam</a> defines a mapping between the parameters and a discrete trajectory at times ts, states xs, and control us (and optionally system parameters p) Optimization occurs over the parametrization.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">sys</td><td>system </td></tr>
@@ -409,14 +430,122 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
     <tr><td class="paramname">xs</td><td>(N+1) sequence of discrete states </td></tr>
     <tr><td class="paramname">us</td><td>(N) sequence of control inputs </td></tr>
     <tr><td class="paramname">p</td><td>(np-size) system parameters (set to 0 if none) </td></tr>
-    <tr><td class="paramname">dss</td><td>(N) initial control parameter variations (determines how widespread the initial distro is) </td></tr>
+    <tr><td class="paramname">dss</td><td>(N) initial tparam variances (determines how widespread the initial distro is) </td></tr>
     <tr><td class="paramname">dess</td><td>(N) zero-mean regularization/local-exploration noise variances </td></tr>
     <tr><td class="paramname">update</td><td>whether to update trajectory xs using initial state xs[0] and inputs us. This is necessary only if xs was not already generated from us. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>References <a class="el" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::ce</a>, <a class="el" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">gcop::Ce&lt; _n &gt;::gmm</a>, <a class="el" href="classgcop_1_1SystemCe.html#a0168d8c2140656805abcbd0111a199fa">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::J</a>, <a class="el" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::N</a>, <a class="el" href="classgcop_1_1Tparam.html#aecf927a644b2124f8c256188adcd6d27">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;::ntp</a>, <a class="el" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">gcop::Ce&lt; _n &gt;::S</a>, <a class="el" href="classgcop_1_1Tparam.html#a92de5e8167d3cbec5fa498e0d7b5fd2f">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;::To()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::Update()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a4458e74a8abe844dc035e13f5f079a6a">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::uss</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a3a9c43af28a65c4bcafbe7fc7b88f77b">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::xss</a>.</p>
+<p>References <a class="el" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::ce</a>, <a class="el" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">gcop::Ce&lt; _n &gt;::gmm</a>, <a class="el" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::J</a>, <a class="el" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::N</a>, <a class="el" href="classgcop_1_1Tparam.html#aba4946a1d919993acbcd588ac5b7b086">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;::ntp</a>, <a class="el" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">gcop::Ce&lt; _n &gt;::S</a>, <a class="el" href="classgcop_1_1Tparam.html#a2668afc0c6d411d2811a8e3f7b4d60b3">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;::To()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::Update()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::uss</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a18ddca64021bb2403a65bf72d6633a41">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::xss</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a16b57d310caf197791d97e42c97b2270"></a><!-- doxytag: member="gcop::SystemCe::SystemCe" ref="a16b57d310caf197791d97e42c97b2270" args="(System&lt; T, n, c, np &gt; &amp;sys, Cost&lt; T, n, c, np, Tc &gt; &amp;cost, Tparam&lt; T, n, c, np, ntp, Tc &gt; &amp;tp, Creator&lt; Tc &gt; *contextSampler, vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, Vectormd *p, Vectortpd &amp;mu0, Matrixtpd &amp;P0, Matrixtpd &amp;S, bool update=true)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int n, int c, int np, int ntp, typename Tc&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, Tc &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt; &amp;&#160;</td>
+          <td class="paramname"><em>tp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Creator.html">Creator</a>&lt; Tc &gt; *&#160;</td>
+          <td class="paramname"><em>contextSampler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ts</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; Vectorcd &gt; &amp;&#160;</td>
+          <td class="paramname"><em>us</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vectormd *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vectortpd &amp;&#160;</td>
+          <td class="paramname"><em>mu0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Matrixtpd &amp;&#160;</td>
+          <td class="paramname"><em>P0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Matrixtpd &amp;&#160;</td>
+          <td class="paramname"><em>S</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>update</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Create an optimal control problem using a system, a cost, and a trajectory parametrized using a finite set of parameters of dimension ntp The parametrization <a class="el" href="classgcop_1_1Tparam.html">Tparam</a> defines a mapping between the parameters and a discrete trajectory at times ts, states xs, and control us (and optionally system parameters p) For this cosntructor, it is not necessary to have a mapping from discrete trajectory to tparam, but only fro tparam to discrete trajectory.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sys</td><td>system </td></tr>
+    <tr><td class="paramname">cost</td><td>cost </td></tr>
+    <tr><td class="paramname">tp</td><td>trajectory parametrization </td></tr>
+    <tr><td class="paramname">ts</td><td>(N+1) sequence of discrete times </td></tr>
+    <tr><td class="paramname">xs</td><td>(N+1) sequence of discrete states </td></tr>
+    <tr><td class="paramname">us</td><td>(N) sequence of control inputs </td></tr>
+    <tr><td class="paramname">p</td><td>(np-size) system parameters (set to 0 if none) </td></tr>
+    <tr><td class="paramname">mu0</td><td>(N) initial tparam parameters mean </td></tr>
+    <tr><td class="paramname">P0</td><td>(N) initial tparam parameters covaraiance </td></tr>
+    <tr><td class="paramname">S</td><td>(N) zero-mean regularization/local-exploration noise variances </td></tr>
+    <tr><td class="paramname">update</td><td>whether to update trajectory xs using initial state xs[0] and inputs us. This is necessary only if xs was not already generated from us. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>References <a class="el" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::ce</a>, <a class="el" href="classgcop_1_1Tparam.html#a547cacd83055c27b7f083038d980ac3a">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;::From()</a>, <a class="el" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">gcop::Ce&lt; _n &gt;::gmm</a>, <a class="el" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::N</a>, <a class="el" href="classgcop_1_1Tparam.html#aba4946a1d919993acbcd588ac5b7b086">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;::ntp</a>, <a class="el" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">gcop::Ce&lt; _n &gt;::S</a>, <a class="el" href="classgcop_1_1Tparam.html#ab1ed014a9b06af5032a1906ce0ce5521">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;::SetContext()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::uss</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a18ddca64021bb2403a65bf72d6633a41">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::xss</a>.</p>
 
 </div>
 </div>
@@ -442,7 +571,7 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n, int c, int np, int ntp&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
@@ -523,13 +652,15 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
   </dd>
 </dl>
 
+<p>References <a class="el" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::ce</a>, <a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::dus</a>, <a class="el" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">gcop::Ce&lt; _n &gt;::gmm</a>, <a class="el" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::J</a>, <a class="el" href="classgcop_1_1Manifold.html#a7f5bc8f44907e3e56e1f1780368bf5b0">gcop::Manifold&lt; T, _n &gt;::n</a>, <a class="el" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::N</a>, <a class="el" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">gcop::Ce&lt; _n &gt;::S</a>, <a class="el" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675">gcop::System&lt; T, _nx, _nu, _np &gt;::U</a>, <a class="el" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::Update()</a>, <a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::us</a>, <a class="el" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::us2z()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::uss</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a18ddca64021bb2403a65bf72d6633a41">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::xss</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a699e34372185e3dbaf7d81cb4aace699"></a><!-- doxytag: member="gcop::SystemCe::SystemCe" ref="a699e34372185e3dbaf7d81cb4aace699" args="(System&lt; T, n, c, np &gt; &amp;sys, Cost&lt; T, n, c, np &gt; &amp;cost, Tparam&lt; T, n, c, np, ntp &gt; &amp;tp, vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, Vectormd *p, vector&lt; Vectorcd &gt; &amp;dus, vector&lt; Vectorcd &gt; &amp;es, bool update=true)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n, int c, int np, int ntp&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
@@ -617,16 +748,18 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
   </dd>
 </dl>
 
+<p>References <a class="el" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::ce</a>, <a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::dus</a>, <a class="el" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">gcop::Ce&lt; _n &gt;::gmm</a>, <a class="el" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::J</a>, <a class="el" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::N</a>, <a class="el" href="classgcop_1_1Tparam.html#aba4946a1d919993acbcd588ac5b7b086">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;::ntp</a>, <a class="el" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">gcop::Ce&lt; _n &gt;::S</a>, <a class="el" href="classgcop_1_1Tparam.html#a2668afc0c6d411d2811a8e3f7b4d60b3">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;::To()</a>, <a class="el" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::Update()</a>, <a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::us</a>, <a class="el" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::uss</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a18ddca64021bb2403a65bf72d6633a41">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::xss</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="ad056b1d76cdec9494cf372fc24ada720"></a><!-- doxytag: member="gcop::SystemCe::~SystemCe" ref="ad056b1d76cdec9494cf372fc24ada720" args="()" -->
+<a class="anchor" id="a9ff6a89427491e600594c59505519213"></a><!-- doxytag: member="gcop::SystemCe::~SystemCe" ref="a9ff6a89427491e600594c59505519213" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::~<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
+          <td class="memname">virtual <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::~<a class="el" href="classgcop_1_1SystemCe.html">SystemCe</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [virtual]</code></td>
@@ -645,7 +778,7 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#ae8e73c05a38507dbddd8b18afaf3a2c4">Iterate</a> </td>
+          <td class="memname">void <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#acb79231ef353e0752a533e72f20bf7f6">Iterate</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -657,14 +790,14 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae8e73c05a38507dbddd8b18afaf3a2c4"></a><!-- doxytag: member="gcop::SystemCe::Iterate" ref="ae8e73c05a38507dbddd8b18afaf3a2c4" args="(bool updatexsfromus=true)" -->
+<a class="anchor" id="acb79231ef353e0752a533e72f20bf7f6"></a><!-- doxytag: member="gcop::SystemCe::Iterate" ref="acb79231ef353e0752a533e72f20bf7f6" args="(bool updatexsfromus=true)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
+template&lt;typename T , int n, int c, int np, int ntp, typename Tc &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#ae8e73c05a38507dbddd8b18afaf3a2c4">Iterate</a> </td>
+          <td class="memname">void <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#acb79231ef353e0752a533e72f20bf7f6">Iterate</a> </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>updatexsfromus</em> = <code>true</code></td><td>)</td>
@@ -677,14 +810,14 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a2bba2382064c787b903b8fa59a858a62"></a><!-- doxytag: member="gcop::SystemCe::Update" ref="a2bba2382064c787b903b8fa59a858a62" args="(std::vector&lt; T &gt; &amp;xs, const std::vector&lt; Vectorcd &gt; &amp;us, bool evalCost=true)" -->
+<a class="anchor" id="a88fe1e9421534d94f8b2f46b4e046c38"></a><!-- doxytag: member="gcop::SystemCe::Update" ref="a88fe1e9421534d94f8b2f46b4e046c38" args="(std::vector&lt; T &gt; &amp;xs, const std::vector&lt; Vectorcd &gt; &amp;us, bool evalCost=true)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">Update</a> </td>
+          <td class="memname">double <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">Update</a> </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>xs</em>, </td>
@@ -721,14 +854,14 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 </div>
 </div>
-<a class="anchor" id="a2bba2382064c787b903b8fa59a858a62"></a><!-- doxytag: member="gcop::SystemCe::Update" ref="a2bba2382064c787b903b8fa59a858a62" args="(std::vector&lt; T &gt; &amp;xs, const std::vector&lt; Vectorcd &gt; &amp;us, bool evalCost=true)" -->
+<a class="anchor" id="a88fe1e9421534d94f8b2f46b4e046c38"></a><!-- doxytag: member="gcop::SystemCe::Update" ref="a88fe1e9421534d94f8b2f46b4e046c38" args="(std::vector&lt; T &gt; &amp;xs, const std::vector&lt; Vectorcd &gt; &amp;us, bool evalCost=true)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">Update</a> </td>
+          <td class="memname">double <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">Update</a> </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>xs</em>, </td>
@@ -763,18 +896,18 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
   </dd>
 </dl>
 
-<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aee65ebcc64ba37d848427f564c72d011"></a><!-- doxytag: member="gcop::SystemCe::us2z" ref="aee65ebcc64ba37d848427f564c72d011" args="(Vectortpd &amp;z, const std::vector&lt; Vectorcd &gt; &amp;us) const " -->
+<a class="anchor" id="ae38166b22e40d8dbe5f511eb63d45091"></a><!-- doxytag: member="gcop::SystemCe::us2z" ref="ae38166b22e40d8dbe5f511eb63d45091" args="(Vectortpd &amp;z, const std::vector&lt; Vectorcd &gt; &amp;us) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">us2z</a> </td>
+          <td class="memname">void <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">us2z</a> </td>
           <td>(</td>
           <td class="paramtype">Vectortpd &amp;&#160;</td>
           <td class="paramname"><em>z</em>, </td>
@@ -823,18 +956,18 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4bdcf8a52d6f006d16c16aa3226ff12f"></a><!-- doxytag: member="gcop::SystemCe::z2us" ref="a4bdcf8a52d6f006d16c16aa3226ff12f" args="(std::vector&lt; Vectorcd &gt; &amp;us, const Vectortpd &amp;z) const " -->
+<a class="anchor" id="ab03c15e265332db4bcd2d04d1ca1f57c"></a><!-- doxytag: member="gcop::SystemCe::z2us" ref="ab03c15e265332db4bcd2d04d1ca1f57c" args="(std::vector&lt; Vectorcd &gt; &amp;us, const Vectortpd &amp;z) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a4bdcf8a52d6f006d16c16aa3226ff12f">z2us</a> </td>
+          <td class="memname">void <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a4bdcf8a52d6f006d16c16aa3226ff12f">z2us</a> </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; Vectorcd &gt; &amp;&#160;</td>
           <td class="paramname"><em>us</em>, </td>
@@ -886,14 +1019,31 @@ template&lt;typename T , int n, int c, int np, int ntp&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a0ece313b2b0bcd583a2eb5f1c0c768b1"></a><!-- doxytag: member="gcop::SystemCe::ce" ref="a0ece313b2b0bcd583a2eb5f1c0c768b1" args="" -->
+<a class="anchor" id="a7b59ddaa10cf27bc63ed139b51c099a5"></a><!-- doxytag: member="gcop::SystemCe::bs" ref="a7b59ddaa10cf27bc63ed139b51c099a5" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Ce.html">Ce</a>&lt; ntp &gt; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1">ce</a></td>
+          <td class="memname">std::vector&lt; bool &gt; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a7b59ddaa10cf27bc63ed139b51c099a5">bs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>all samples feasibility </p>
+
+</div>
+</div>
+<a class="anchor" id="a4ce823704048a4e50be26fc74f640492"></a><!-- doxytag: member="gcop::SystemCe::ce" ref="a4ce823704048a4e50be26fc74f640492" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgcop_1_1Ce.html">Ce</a>&lt; ntp &gt; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492">ce</a></td>
         </tr>
       </table>
 </div>
@@ -901,18 +1051,35 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 <p>GMM-based cross-entropy algorithm. </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af59926716da085cb46e262b519af4de6"></a><!-- doxytag: member="gcop::SystemCe::cost" ref="af59926716da085cb46e262b519af4de6" args="" -->
+<a class="anchor" id="a684d06146d8d719c80e1cd3c9b5e1e60"></a><!-- doxytag: member="gcop::SystemCe::contextSampler" ref="a684d06146d8d719c80e1cd3c9b5e1e60" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#af59926716da085cb46e262b519af4de6">cost</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1Creator.html">Creator</a>&lt;Tc&gt;* <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a684d06146d8d719c80e1cd3c9b5e1e60">contextSampler</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>context sampler </p>
+
+</div>
+</div>
+<a class="anchor" id="a79cb4ab011e21dbd951f9e3e15e13319"></a><!-- doxytag: member="gcop::SystemCe::cost" ref="a79cb4ab011e21dbd951f9e3e15e13319" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt;T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>&gt;&amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a256fff64acf84e8a7797cb345e8f48a1">cost</a></td>
         </tr>
       </table>
 </div>
@@ -922,14 +1089,31 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 </div>
 </div>
-<a class="anchor" id="ae990b715585574bfaa29bf3d7a0d3237"></a><!-- doxytag: member="gcop::SystemCe::debug" ref="ae990b715585574bfaa29bf3d7a0d3237" args="" -->
+<a class="anchor" id="a256fff64acf84e8a7797cb345e8f48a1"></a><!-- doxytag: member="gcop::SystemCe::cost" ref="a256fff64acf84e8a7797cb345e8f48a1" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#ae990b715585574bfaa29bf3d7a0d3237">debug</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt;T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, Tc&gt;&amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a256fff64acf84e8a7797cb345e8f48a1">cost</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>given cost function </p>
+
+</div>
+</div>
+<a class="anchor" id="a624d0210813c6f1cebae5dd52aa8fcd1"></a><!-- doxytag: member="gcop::SystemCe::debug" ref="a624d0210813c6f1cebae5dd52aa8fcd1" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a624d0210813c6f1cebae5dd52aa8fcd1">debug</a></td>
         </tr>
       </table>
 </div>
@@ -939,33 +1123,51 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 </div>
 </div>
-<a class="anchor" id="ad60096c80bdfec2564e3785150f66b77"></a><!-- doxytag: member="gcop::SystemCe::dus" ref="ad60096c80bdfec2564e3785150f66b77" args="" -->
+<a class="anchor" id="a3d6a4d4ae902ab4a0a057e00496b35e5"></a><!-- doxytag: member="gcop::SystemCe::dus" ref="a3d6a4d4ae902ab4a0a057e00496b35e5" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; Vectorcd &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77">dus</a></td>
+          <td class="memname">std::vector&lt; Vectorcd &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">dus</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
+<p>control standard deviations (N) vector </p>
 <p>control variation (N) vector </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0298829ee12a88af0be4cf55fb3555cc"></a><!-- doxytag: member="gcop::SystemCe::external_render" ref="a0298829ee12a88af0be4cf55fb3555cc" args="" -->
+<a class="anchor" id="a99b3017ffaac357046ea4490b8130541"></a><!-- doxytag: member="gcop::SystemCe::enforceUpperBound" ref="a99b3017ffaac357046ea4490b8130541" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">RenderFunc * <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a0298829ee12a88af0be4cf55fb3555cc">external_render</a></td>
+          <td class="memname">bool <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a99b3017ffaac357046ea4490b8130541">enforceUpperBound</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>whether to discard any samples with cost &gt; Jub (true by default) </p>
+
+</div>
+</div>
+<a class="anchor" id="ace69b9088d27626375a3670ce0c0f852"></a><!-- doxytag: member="gcop::SystemCe::external_render" ref="ace69b9088d27626375a3670ce0c0f852" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">RenderFunc * <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#ace69b9088d27626375a3670ce0c0f852">external_render</a></td>
         </tr>
       </table>
 </div>
@@ -975,14 +1177,14 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 </div>
 </div>
-<a class="anchor" id="a0168d8c2140656805abcbd0111a199fa"></a><!-- doxytag: member="gcop::SystemCe::J" ref="a0168d8c2140656805abcbd0111a199fa" args="" -->
+<a class="anchor" id="af39e072c9299e3a28abcfcb088ff8f33"></a><!-- doxytag: member="gcop::SystemCe::J" ref="af39e072c9299e3a28abcfcb088ff8f33" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a0168d8c2140656805abcbd0111a199fa">J</a></td>
+          <td class="memname">double <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33">J</a></td>
         </tr>
       </table>
 </div>
@@ -990,18 +1192,35 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 <p>optimal cost </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af78c031064df4b3d7d8ea039baf25f9d"></a><!-- doxytag: member="gcop::SystemCe::N" ref="af78c031064df4b3d7d8ea039baf25f9d" args="" -->
+<a class="anchor" id="a1e2b8e921a3267c845deecd46dfaf664"></a><!-- doxytag: member="gcop::SystemCe::Jub" ref="a1e2b8e921a3267c845deecd46dfaf664" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d">N</a></td>
+          <td class="memname">double <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a1e2b8e921a3267c845deecd46dfaf664">Jub</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>allowed cost upper bound (inf by default) </p>
+
+</div>
+</div>
+<a class="anchor" id="a9da5a0bab06198c7f2f8eb2f6c0c1b88"></a><!-- doxytag: member="gcop::SystemCe::N" ref="a9da5a0bab06198c7f2f8eb2f6c0c1b88" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88">N</a></td>
         </tr>
       </table>
 </div>
@@ -1009,18 +1228,18 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 <p>number of discrete trajectory segments </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="addf6f1b2b7bc3be50cf6573c350fca6c"></a><!-- doxytag: member="gcop::SystemCe::nofevaluations" ref="addf6f1b2b7bc3be50cf6573c350fca6c" args="" -->
+<a class="anchor" id="ad15e7b6425985f6543fb212c78516caf"></a><!-- doxytag: member="gcop::SystemCe::nofevaluations" ref="ad15e7b6425985f6543fb212c78516caf" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#addf6f1b2b7bc3be50cf6573c350fca6c">nofevaluations</a></td>
+          <td class="memname">int <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#ad15e7b6425985f6543fb212c78516caf">nofevaluations</a></td>
         </tr>
       </table>
 </div>
@@ -1030,14 +1249,14 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 </div>
 </div>
-<a class="anchor" id="abc61984ad57605d3a725115919a70694"></a><!-- doxytag: member="gcop::SystemCe::Ns" ref="abc61984ad57605d3a725115919a70694" args="" -->
+<a class="anchor" id="af83f5453f333219934b31433c2960318"></a><!-- doxytag: member="gcop::SystemCe::Ns" ref="af83f5453f333219934b31433c2960318" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#abc61984ad57605d3a725115919a70694">Ns</a></td>
+          <td class="memname">int <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#af83f5453f333219934b31433c2960318">Ns</a></td>
         </tr>
       </table>
 </div>
@@ -1047,31 +1266,32 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 </div>
 </div>
-<a class="anchor" id="a0416262fbf5b3e405b55c36c395ca8ed"></a><!-- doxytag: member="gcop::SystemCe::p" ref="a0416262fbf5b3e405b55c36c395ca8ed" args="" -->
+<a class="anchor" id="adec09a65283f310d61e82a5280b91592"></a><!-- doxytag: member="gcop::SystemCe::p" ref="adec09a65283f310d61e82a5280b91592" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Vectormd * <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a0416262fbf5b3e405b55c36c395ca8ed">p</a></td>
+          <td class="memname">Vectormd * <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#adec09a65283f310d61e82a5280b91592">p</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
+<p>system internal parameters </p>
 <p>controls (N) vector </p>
 
 </div>
 </div>
-<a class="anchor" id="a2b5f737f8cd668bee9cc98c909e9562e"></a><!-- doxytag: member="gcop::SystemCe::sys" ref="a2b5f737f8cd668bee9cc98c909e9562e" args="" -->
+<a class="anchor" id="a1043c7a63b1f89bec24065fe315fb8f6"></a><!-- doxytag: member="gcop::SystemCe::sys" ref="a1043c7a63b1f89bec24065fe315fb8f6" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a2b5f737f8cd668bee9cc98c909e9562e">sys</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1System.html">System</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a1043c7a63b1f89bec24065fe315fb8f6">sys</a></td>
         </tr>
       </table>
 </div>
@@ -1081,14 +1301,14 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 </div>
 </div>
-<a class="anchor" id="afe808ba636a51336ee30fb8134a3c04c"></a><!-- doxytag: member="gcop::SystemCe::tp" ref="afe808ba636a51336ee30fb8134a3c04c" args="" -->
+<a class="anchor" id="a0758fc802d2afd7eabdf020ebfc91297"></a><!-- doxytag: member="gcop::SystemCe::tp" ref="a0758fc802d2afd7eabdf020ebfc91297" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt; * <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#afe808ba636a51336ee30fb8134a3c04c">tp</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt;T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp&gt;* <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#aa877691a149300d12bb74fd2798a5829">tp</a></td>
         </tr>
       </table>
 </div>
@@ -1098,14 +1318,31 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 </div>
 </div>
-<a class="anchor" id="aba3d332a8916c04763d2e71e9fa2f1be"></a><!-- doxytag: member="gcop::SystemCe::ts" ref="aba3d332a8916c04763d2e71e9fa2f1be" args="" -->
+<a class="anchor" id="aa877691a149300d12bb74fd2798a5829"></a><!-- doxytag: member="gcop::SystemCe::tp" ref="aa877691a149300d12bb74fd2798a5829" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; double &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#aba3d332a8916c04763d2e71e9fa2f1be">ts</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1Tparam.html">Tparam</a>&lt;T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc&gt;* <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#aa877691a149300d12bb74fd2798a5829">tp</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>trajectory parametrization </p>
+
+</div>
+</div>
+<a class="anchor" id="a0b9b2eb4392bc8a5071db2521b5252ec"></a><!-- doxytag: member="gcop::SystemCe::ts" ref="a0b9b2eb4392bc8a5071db2521b5252ec" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a0b9b2eb4392bc8a5071db2521b5252ec">ts</a></td>
         </tr>
       </table>
 </div>
@@ -1115,14 +1352,31 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 </div>
 </div>
-<a class="anchor" id="a5c25cab5a30e37d2f46cffcd3dd5156d"></a><!-- doxytag: member="gcop::SystemCe::us" ref="a5c25cab5a30e37d2f46cffcd3dd5156d" args="" -->
+<a class="anchor" id="a2546a7ec07714afcba28b00e7d6644f4"></a><!-- doxytag: member="gcop::SystemCe::updateUpperBound" ref="a2546a7ec07714afcba28b00e7d6644f4" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; Vectorcd &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">us</a></td>
+          <td class="memname">bool <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a2546a7ec07714afcba28b00e7d6644f4">updateUpperBound</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>after every iteration Jub is updated to be the current max cost (true by default) </p>
+
+</div>
+</div>
+<a class="anchor" id="ac8bc8f672b5cedf88225de724533c4e1"></a><!-- doxytag: member="gcop::SystemCe::us" ref="ac8bc8f672b5cedf88225de724533c4e1" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; Vectorcd &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">us</a></td>
         </tr>
       </table>
 </div>
@@ -1130,18 +1384,35 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 <p>controls (N) vector </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4458e74a8abe844dc035e13f5f079a6a"></a><!-- doxytag: member="gcop::SystemCe::uss" ref="a4458e74a8abe844dc035e13f5f079a6a" args="" -->
+<a class="anchor" id="a1f2b88322a077b841318a3d4d3b28bbe"></a><!-- doxytag: member="gcop::SystemCe::usas" ref="a1f2b88322a077b841318a3d4d3b28bbe" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; Vectorcd &gt; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a4458e74a8abe844dc035e13f5f079a6a">uss</a></td>
+          <td class="memname">std::vector&lt; std::vector&lt;Vectorcd&gt; &gt; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a1f2b88322a077b841318a3d4d3b28bbe">usas</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>all control samples </p>
+
+</div>
+</div>
+<a class="anchor" id="a693d2d01d1db0655559505e77619254f"></a><!-- doxytag: member="gcop::SystemCe::uss" ref="a693d2d01d1db0655559505e77619254f" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; Vectorcd &gt; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f">uss</a></td>
         </tr>
       </table>
 </div>
@@ -1149,18 +1420,18 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 <p>controls (N) vector </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="afb9337d9762f976f31d8b60c455681f1"></a><!-- doxytag: member="gcop::SystemCe::xs" ref="afb9337d9762f976f31d8b60c455681f1" args="" -->
+<a class="anchor" id="a3fffeb6a50d044e0a05e8e3238c663b6"></a><!-- doxytag: member="gcop::SystemCe::xs" ref="a3fffeb6a50d044e0a05e8e3238c663b6" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; T &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#afb9337d9762f976f31d8b60c455681f1">xs</a></td>
+          <td class="memname">std::vector&lt; T &gt; &amp; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a3fffeb6a50d044e0a05e8e3238c663b6">xs</a></td>
         </tr>
       </table>
 </div>
@@ -1170,14 +1441,31 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 </div>
 </div>
-<a class="anchor" id="a3a9c43af28a65c4bcafbe7fc7b88f77b"></a><!-- doxytag: member="gcop::SystemCe::xss" ref="a3a9c43af28a65c4bcafbe7fc7b88f77b" args="" -->
+<a class="anchor" id="a5fe2c92c21bb08a81a630ad1ca79bfd0"></a><!-- doxytag: member="gcop::SystemCe::xsas" ref="a5fe2c92c21bb08a81a630ad1ca79bfd0" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; T &gt; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a3a9c43af28a65c4bcafbe7fc7b88f77b">xss</a></td>
+          <td class="memname">std::vector&lt; std::vector&lt;T&gt; &gt; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a5fe2c92c21bb08a81a630ad1ca79bfd0">xsas</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>all state samples </p>
+
+</div>
+</div>
+<a class="anchor" id="a18ddca64021bb2403a65bf72d6633a41"></a><!-- doxytag: member="gcop::SystemCe::xss" ref="a18ddca64021bb2403a65bf72d6633a41" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; T &gt; <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#a18ddca64021bb2403a65bf72d6633a41">xss</a></td>
         </tr>
       </table>
 </div>
@@ -1185,18 +1473,18 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 <p>states (N+1) vector </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab8c61f63d377293711e62c724951c938"></a><!-- doxytag: member="gcop::SystemCe::zmin" ref="ab8c61f63d377293711e62c724951c938" args="" -->
+<a class="anchor" id="ade0b9e6dc920bd94264856e82c151c3e"></a><!-- doxytag: member="gcop::SystemCe::zmin" ref="ade0b9e6dc920bd94264856e82c151c3e" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic&gt; </div>
+template&lt;typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic, int ntp = Dynamic, typename Tc = T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Vectortpd <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp &gt;::<a class="el" href="classgcop_1_1SystemCe.html#ab8c61f63d377293711e62c724951c938">zmin</a></td>
+          <td class="memname">Vectortpd <a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe</a>&lt; T, n, c, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, ntp, Tc &gt;::<a class="el" href="classgcop_1_1SystemCe.html#ade0b9e6dc920bd94264856e82c151c3e">zmin</a></td>
         </tr>
       </table>
 </div>
@@ -1214,7 +1502,7 @@ template&lt;typename T , int n = Dynamic, int c = Dynamic, int np = Dynamic, int
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:48 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

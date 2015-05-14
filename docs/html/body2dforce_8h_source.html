@@ -74,30 +74,80 @@
 <a name="l00009"></a>00009   <span class="keyword">using namespace </span>std;
 <a name="l00010"></a>00010   <span class="keyword">using namespace </span>Eigen;
 <a name="l00011"></a>00011 
-<a name="l00012"></a>00012   <span class="keyword">typedef</span> pair&lt;Matrix3d, Vector3d&gt; <a class="code" href="namespacegcop.html#a84d92b047c73e771491e45675476d08a">M3V3d</a>;
+<a name="l00012"></a>00012   <span class="keyword">typedef</span> pair&lt;Matrix3d, Vector3d&gt; <a class="code" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a>;
 <a name="l00013"></a>00013   <span class="keyword">typedef</span> Matrix&lt;double, 3, 6&gt; <a class="code" href="namespacegcop.html#ac11aca61eca0f214adf9d2a0865faae3">Matrix36d</a>;
 <a name="l00014"></a>00014 
-<a name="l00015"></a><a class="code" href="classgcop_1_1Body2dForce.html">00015</a>   <span class="keyword">class </span><a class="code" href="classgcop_1_1Body2dForce.html">Body2dForce</a> : <span class="keyword">public</span> <a class="code" href="classgcop_1_1Force.html">Force</a>&lt;M3V3d, 3, 6, 3&gt; {
-<a name="l00016"></a>00016   <span class="keyword">public</span>:
-<a name="l00017"></a>00017     <a class="code" href="classgcop_1_1Body2dForce.html">Body2dForce</a>(<span class="keywordtype">bool</span> fextParam = <span class="keyword">false</span>);
-<a name="l00018"></a>00018     
-<a name="l00019"></a>00019     <span class="keyword">virtual</span> <span class="keywordtype">void</span> Set(Vector3d &amp;f, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#a84d92b047c73e771491e45675476d08a">M3V3d</a> &amp;x, <span class="keywordtype">double</span> t, 
-<a name="l00020"></a>00020                      <span class="keyword">const</span> Vector3d &amp;u, <span class="keywordtype">double</span> h, <span class="keyword">const</span> VectorXd *p = 0,
-<a name="l00021"></a>00021                      <a class="code" href="namespacegcop.html#ac11aca61eca0f214adf9d2a0865faae3">Matrix36d</a> *A = 0, Matrix3d *B = 0, Matrix&lt;double, 3, Dynamic&gt; *C = 0);
+<a name="l00015"></a>00015   <span class="keyword">template</span>&lt;<span class="keywordtype">int</span> c = 3&gt;
+<a name="l00016"></a><a class="code" href="classgcop_1_1Body2dForce.html">00016</a>     <span class="keyword">class </span><a class="code" href="classgcop_1_1Body2dForce.html">Body2dForce</a> : <span class="keyword">public</span> <a class="code" href="classgcop_1_1Force.html">Force</a>&lt;Body2dState, 3, 6, c&gt; {
+<a name="l00017"></a>00017   <span class="keyword">public</span>:
+<a name="l00018"></a>00018 
+<a name="l00019"></a><a class="code" href="classgcop_1_1Body2dForce.html#a0839a4e18289c31dbb5e295fde5bb288">00019</a>   <span class="keyword">typedef</span> Matrix&lt;double, c, 1&gt; <a class="code" href="classgcop_1_1Body2dForce.html#a0839a4e18289c31dbb5e295fde5bb288">Vectorcd</a>;
+<a name="l00020"></a><a class="code" href="classgcop_1_1Body2dForce.html#a5e10432896e62d9737793c815d3f1980">00020</a>   <span class="keyword">typedef</span> Matrix&lt;double, 6, c&gt; <a class="code" href="classgcop_1_1Body2dForce.html#a5e10432896e62d9737793c815d3f1980">Matrix6cd</a>;
+<a name="l00021"></a><a class="code" href="classgcop_1_1Body2dForce.html#adc697194aecba6cb82809d7b7f6201f1">00021</a>   <span class="keyword">typedef</span> Matrix&lt;double, 3, c&gt; <a class="code" href="classgcop_1_1Body2dForce.html#adc697194aecba6cb82809d7b7f6201f1">Matrix3cd</a>;
 <a name="l00022"></a>00022 
-<a name="l00023"></a><a class="code" href="classgcop_1_1Body2dForce.html#aec2f98f1dc4b7d6fde55130965481b57">00023</a>     Vector3d <a class="code" href="classgcop_1_1Body2dForce.html#aec2f98f1dc4b7d6fde55130965481b57" title="linear damping terms">D</a>;      
-<a name="l00024"></a><a class="code" href="classgcop_1_1Body2dForce.html#a7e24a55cc0450413b729a22abda0aeb4">00024</a>     Vector3d <a class="code" href="classgcop_1_1Body2dForce.html#a7e24a55cc0450413b729a22abda0aeb4" title="constant external force">fext</a>;   
-<a name="l00025"></a><a class="code" href="classgcop_1_1Body2dForce.html#aa081fcc538bbaef84d345a8136721721">00025</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Body2dForce.html#aa081fcc538bbaef84d345a8136721721" title="treat the (x,y) forces in fext as a parameter">fextParam</a>;  
-<a name="l00026"></a>00026   };
-<a name="l00027"></a>00027 }
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030 <span class="preprocessor">#endif</span>
+<a name="l00023"></a>00023   <a class="code" href="classgcop_1_1Body2dForce.html">Body2dForce</a>(<span class="keywordtype">bool</span> fextParam = <span class="keyword">false</span>);
+<a name="l00024"></a>00024   
+<a name="l00025"></a>00025   <span class="keyword">virtual</span> <span class="keywordtype">void</span> Set(Vector3d &amp;f, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a> &amp;x, <span class="keywordtype">double</span> t, 
+<a name="l00026"></a>00026                    <span class="keyword">const</span> Vector3d &amp;u, <span class="keywordtype">double</span> h, <span class="keyword">const</span> VectorXd *p = 0,
+<a name="l00027"></a>00027                    <a class="code" href="namespacegcop.html#ac11aca61eca0f214adf9d2a0865faae3">Matrix36d</a> *A = 0, <a class="code" href="classgcop_1_1Body2dForce.html#adc697194aecba6cb82809d7b7f6201f1">Matrix3cd</a> *B = 0, Matrix&lt;double, 3, Dynamic&gt; *C = 0);
+<a name="l00028"></a>00028   
+<a name="l00029"></a><a class="code" href="classgcop_1_1Body2dForce.html#af2c05c910a8a8a49587362f1beb05b49">00029</a>   Vector3d <a class="code" href="classgcop_1_1Body2dForce.html#af2c05c910a8a8a49587362f1beb05b49" title="linear damping terms">D</a>;      
+<a name="l00030"></a><a class="code" href="classgcop_1_1Body2dForce.html#a75e090637f0272cedee1491f810a4d46">00030</a>   <a class="code" href="classgcop_1_1Body2dForce.html#adc697194aecba6cb82809d7b7f6201f1">Matrix3cd</a> <a class="code" href="classgcop_1_1Body2dForce.html#a75e090637f0272cedee1491f810a4d46" title="constant control input transformation">B</a>;     
+<a name="l00031"></a><a class="code" href="classgcop_1_1Body2dForce.html#a42b02782aa753f14c8a5fbcc7c0e06a3">00031</a>   Vector3d <a class="code" href="classgcop_1_1Body2dForce.html#a42b02782aa753f14c8a5fbcc7c0e06a3" title="constant external force">fext</a>;   
+<a name="l00032"></a><a class="code" href="classgcop_1_1Body2dForce.html#a444eeaa3644c4cefdd9e990e15ff5060">00032</a>   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Body2dForce.html#a444eeaa3644c4cefdd9e990e15ff5060" title="treat the (x,y) forces in fext as a parameter">fextParam</a>;  
+<a name="l00033"></a>00033   };
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035   <span class="keyword">template</span>&lt;<span class="keywordtype">int</span> c&gt;
+<a name="l00036"></a>00036     <a class="code" href="classgcop_1_1Body2dForce.html">Body2dForce&lt;c&gt;::Body2dForce</a>(<span class="keywordtype">bool</span> fextParam) : D(0, 0, 0), fext(0, 0, 0), fextParam(fextParam)
+<a name="l00037"></a>00037     {
+<a name="l00038"></a>00038       <a class="code" href="classgcop_1_1Body2dForce.html#a75e090637f0272cedee1491f810a4d46" title="constant control input transformation">B</a>.setIdentity();
+<a name="l00039"></a>00039     }
+<a name="l00040"></a>00040   
+<a name="l00041"></a>00041   
+<a name="l00042"></a>00042   <span class="keyword">template</span>&lt;<span class="keywordtype">int</span> c&gt;
+<a name="l00043"></a>00043     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Body2dForce.html#a9a0fa4710caac15e347901a81dc36170">Body2dForce&lt;c&gt;::Set</a>(Vector3d &amp;f, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a> &amp;x, <span class="keywordtype">double</span> t, 
+<a name="l00044"></a>00044                              <span class="keyword">const</span> Vector3d &amp;u, <span class="keywordtype">double</span> h,  <span class="keyword">const</span> VectorXd *p,
+<a name="l00045"></a>00045                              <a class="code" href="namespacegcop.html#ac11aca61eca0f214adf9d2a0865faae3">Matrix36d</a> *A, Matrix3cd *B, Matrix&lt;double, 3, Dynamic&gt; *C)
+<a name="l00046"></a>00046     {
+<a name="l00047"></a>00047       <span class="keywordflow">if</span> (fextParam &amp;&amp; p) {
+<a name="l00048"></a>00048         fext.tail&lt;2&gt;() = *p;
+<a name="l00049"></a>00049         assert(p-&gt;size() == 2);
+<a name="l00050"></a>00050       }
+<a name="l00051"></a>00051       
+<a name="l00052"></a>00052       Vector3d fb; <span class="comment">// body-fixed external force</span>
+<a name="l00053"></a>00053       fb[0] = fext[0];
+<a name="l00054"></a>00054       fb.tail&lt;2&gt;() = x.first.topLeftCorner&lt;2,2&gt;().transpose()*fext.tail&lt;2&gt;();    
+<a name="l00055"></a>00055       f = this-&gt;B*u - D.cwiseProduct(x.second) + fb;
+<a name="l00056"></a>00056       
+<a name="l00057"></a>00057       <span class="keywordflow">if</span> (A) {
+<a name="l00058"></a>00058         A-&gt;leftCols&lt;3&gt;().setZero();    
+<a name="l00059"></a>00059         (*A)(1,0) = -fb[2]; (*A)(2,0)= fb[1]; <span class="comment">//SE2::r2hat(fb.tail&lt;2&gt;()).tanspose();    </span>
+<a name="l00060"></a>00060         A-&gt;rightCols&lt;3&gt;() = Matrix3d((-D).asDiagonal());
+<a name="l00061"></a>00061       }
+<a name="l00062"></a>00062       
+<a name="l00063"></a>00063       <span class="keywordflow">if</span> (B) {
+<a name="l00064"></a>00064         *B = this-&gt;B;
+<a name="l00065"></a>00065       }
+<a name="l00066"></a>00066       
+<a name="l00067"></a>00067       <span class="keywordflow">if</span> (C) {
+<a name="l00068"></a>00068         <span class="keywordflow">if</span> (fextParam &amp;&amp; p) {
+<a name="l00069"></a>00069           C-&gt;topRows&lt;1&gt;().setZero();
+<a name="l00070"></a>00070           C-&gt;bottomRows&lt;2&gt;() = x.first.topLeftCorner&lt;2, 2&gt;().transpose();
+<a name="l00071"></a>00071         } <span class="keywordflow">else</span> {
+<a name="l00072"></a>00072           C-&gt;setZero();
+<a name="l00073"></a>00073         }
+<a name="l00074"></a>00074       }
+<a name="l00075"></a>00075     }
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077 }
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

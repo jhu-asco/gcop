@@ -2,10 +2,12 @@
 <area shape="rect" id="node3" href="$gndocp_8h.html" title="lib/algos/gndocp.h" alt="" coords="5,83,131,112"/>
 <area shape="rect" id="node5" href="$gndocpv2_8h.html" title="lib/algos/gndocpv2.h" alt="" coords="155,83,296,112"/>
 <area shape="rect" id="node7" href="$systemce_8h.html" title="lib/algos/systemce.h" alt="" coords="320,83,461,112"/>
-<area shape="rect" id="node9" href="$systemcewithsddp_8h.html" title="lib/algos/systemcewithsddp.h" alt="" coords="485,83,680,112"/>
-<area shape="rect" id="node11" href="$tparamdocp_8h.html" title="lib/algos/tparamdocp.h" alt="" coords="704,83,856,112"/>
-<area shape="rect" id="node13" href="$controltparam_8h.html" title="lib/systems/parametrization/controltparam.h" alt="" coords="880,83,1155,112"/>
-<area shape="rect" id="node15" href="$flatoutputtparam_8h.html" title="lib/systems/parametrization/flatoutputtparam.h" alt="" coords="1179,83,1469,112"/>
-<area shape="rect" id="node17" href="$splinetparam_8h.html" title="lib/systems/parametrization/splinetparam.h" alt="" coords="1493,83,1763,112"/>
-<area shape="rect" id="node19" href="$uniformsplinetparam_8h.html" title="lib/systems/parametrization/uniformsplinetparam.h" alt="" coords="1787,83,2101,112"/>
+<area shape="rect" id="node11" href="$systemcewithsddp_8h.html" title="lib/algos/systemcewithsddp.h" alt="" coords="485,83,680,112"/>
+<area shape="rect" id="node13" href="$tparamdocp_8h.html" title="lib/algos/tparamdocp.h" alt="" coords="704,83,856,112"/>
+<area shape="rect" id="node15" href="$controllertparam_8h.html" title="lib/systems/parametrization/controllertparam.h" alt="" coords="880,83,1171,112"/>
+<area shape="rect" id="node17" href="$controltparam_8h.html" title="lib/systems/parametrization/controltparam.h" alt="" coords="1195,83,1469,112"/>
+<area shape="rect" id="node19" href="$flatoutputtparam_8h.html" title="lib/systems/parametrization/flatoutputtparam.h" alt="" coords="1493,83,1784,112"/>
+<area shape="rect" id="node21" href="$splinetparam_8h.html" title="lib/systems/parametrization/splinetparam.h" alt="" coords="1808,83,2077,112"/>
+<area shape="rect" id="node23" href="$uniformsplinetparam_8h.html" title="lib/systems/parametrization/uniformsplinetparam.h" alt="" coords="2101,83,2416,112"/>
+<area shape="rect" id="node9" href="$systemceview_8h.html" title="lib/views/systemceview.h" alt="" coords="305,160,476,189"/>
 </map>

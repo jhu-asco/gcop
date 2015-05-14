@@ -194,7 +194,7 @@
 <a name="l00154"></a>00154 
 <a name="l00155"></a>00155     <span class="keywordtype">int</span> N = us.size();
 <a name="l00156"></a>00156 
-<a name="l00157"></a>00157     sys.reset(xs[0],ts[0]);<span class="comment">//Reset the internal state</span>
+<a name="l00157"></a>00157     sys.Reset(xs[0],ts[0]);<span class="comment">//Reset the internal state</span>
 <a name="l00158"></a>00158 
 <a name="l00159"></a>00159     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; N; ++k) {
 <a name="l00160"></a>00160       <span class="keywordtype">double</span> h = ts[k+1] - ts[k];
@@ -208,7 +208,7 @@
 <a name="l00168"></a>00168         <span class="keyword">const</span> Vectorcd &amp;u = us[k];
 <a name="l00169"></a>00169 
 <a name="l00170"></a>00170         <span class="comment">//sys.Step(xb, ts[k], xa, u, h, p, &amp;As[k], &amp;Bs[k], 0);</span>
-<a name="l00171"></a>00171         sys.Step_internalinput(xs[k+1], us[k], h, p, &amp;As[k], &amp;Bs[k], 0);
+<a name="l00171"></a>00171         sys.Step(xs[k+1], us[k], h, p, &amp;As[k], &amp;Bs[k], 0);
 <a name="l00172"></a>00172 
 <a name="l00173"></a>00173         <span class="comment">//        cout &lt;&lt; &quot;B=&quot; &lt;&lt; endl &lt;&lt; Bs[k] &lt;&lt; endl;</span>
 <a name="l00174"></a>00174         
@@ -253,7 +253,7 @@
 <a name="l00213"></a>00213 
 <a name="l00214"></a>00214             As[k].col(i) = (dfp - dfm)/(2*eps);
 <a name="l00215"></a>00215           }
-<a name="l00216"></a>00216           sys.reset(xs[k+1],ts[k+1]);<span class="comment">//Reset the internal state</span>
+<a name="l00216"></a>00216           sys.Reset(xs[k+1],ts[k+1]);<span class="comment">//Reset the internal state</span>
 <a name="l00217"></a>00217           <span class="comment">//cout&lt;&lt;&quot;As[&quot;&lt;&lt;k&lt;&lt;&quot;]: &quot;&lt;&lt;endl&lt;&lt;As[k]&lt;&lt;endl;</span>
 <a name="l00218"></a>00218         }
 <a name="l00219"></a>00219         
@@ -277,11 +277,11 @@
 <a name="l00237"></a>00237 
 <a name="l00238"></a>00238             Bs[k].col(i) = (dfp - dfm)/eps;
 <a name="l00239"></a>00239           }
-<a name="l00240"></a>00240           sys.reset(xs[k+1],ts[k+1]);<span class="comment">//Reset the internal state</span>
+<a name="l00240"></a>00240           sys.Reset(xs[k+1],ts[k+1]);<span class="comment">//Reset the internal state</span>
 <a name="l00241"></a>00241          <span class="comment">// cout&lt;&lt;&quot;Bs[&quot;&lt;&lt;k&lt;&lt;&quot;]: &quot;&lt;&lt;endl&lt;&lt;Bs[k]&lt;&lt;endl;</span>
 <a name="l00242"></a>00242         }        
 <a name="l00243"></a>00243       } <span class="keywordflow">else</span> {
-<a name="l00244"></a>00244         sys.Step_internalinput(xs[k+1], us[k], h, p);
+<a name="l00244"></a>00244         sys.Step(xs[k+1], us[k], h, p);
 <a name="l00245"></a>00245       }
 <a name="l00246"></a>00246     }
 <a name="l00247"></a>00247   } 
@@ -297,7 +297,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -99,7 +99,7 @@
 
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
 <li>g
-: <a class="el" href="classgcop_1_1LsCost.html#a54e7b80684531ecb70735da8b3212506">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+: <a class="el" href="classgcop_1_1LsCost.html#a1cb852ce4d239faf4b3b50d32ac4d87f">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1LsSensorCost.html#aebfbb0e2cfd47d7728dc71824db12269">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop__urdf_1_1Color.html#aab6d2e93cf182d0f7fd7920f627a4c3a">gcop_urdf::Color</a>
 , <a class="el" href="classgcop_1_1Geom3dView.html#af6d1f4bb81ff1e2d76be2dc04ff1af64">gcop::Geom3dView</a>
@@ -133,6 +133,9 @@
 <li>gamma1
 : <a class="el" href="structgcop_1_1ASPSA_1_1Stepcoeffs.html#a18d8e72061456c4a7b181123249a3c0e">gcop::ASPSA&lt; T, n, c, _np &gt;::Stepcoeffs</a>
 </li>
+<li>GavoidController()
+: <a class="el" href="classgcop_1_1GavoidController.html#ae1e6fdf2681442eeb0ba455c44c0d7fd">gcop::GavoidController</a>
+</li>
 <li>gBreakingForce
 : <a class="el" href="classgcop_1_1Bulletrccar.html#a22620ab8364a3643259b64794af03eda">gcop::Bulletrccar</a>
 , <a class="el" href="classgcop_1_1Bulletrccar1.html#a024b4619584626f9d420ade8355e51d1">gcop::Bulletrccar1</a>
@@ -161,13 +164,12 @@
 : <a class="el" href="classgcop_1_1MbsView.html#a33ba3823a23339de22ea4401d5ef409a">gcop::MbsView</a>
 </li>
 <li>Get()
-: <a class="el" href="classgcop_1_1Dem.html#a98e3cba0f7a6f14148c8c88f677dc29e">gcop::Dem</a>
+: <a class="el" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">gcop::Dem</a>
 , <a class="el" href="classgcop_1_1Kinbody3dTrack.html#a5d786cf55aac7d4668e8df4636788e1d">gcop::Kinbody3dTrack&lt; _nu &gt;</a>
 , <a class="el" href="classgcop_1_1KinbodyProjTrack.html#a506912dbb08a091c85ee91209048298a">gcop::KinbodyProjTrack&lt; _nu &gt;</a>
 , <a class="el" href="classgcop_1_1Trajectory.html#accb6cee6bd2793bf6fc07c8c0baea900">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
-, <a class="el" href="classgcop_1_1Body2dTrack.html#a92a36516c73ec71210b09d32f0ff3fb9">gcop::Body2dTrack</a>
+, <a class="el" href="classgcop_1_1Body2dTrack.html#a4c1703fa0f4e851de1bb1d508101403b">gcop::Body2dTrack</a>
 , <a class="el" href="classgcop_1_1Body3dTrack.html#ae1e9fc9ab0040174defdcdc32225fc99">gcop::Body3dTrack</a>
-, <a class="el" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">gcop::Dem</a>
 </li>
 <li>GetBool()
 : <a class="el" href="classgcop_1_1Params.html#a3ee71d7fd9370f9e91d0120c1e84b075">gcop::Params</a>
@@ -248,6 +250,9 @@
 <li>GetString()
 : <a class="el" href="classgcop_1_1Params.html#acc176fe80bb0721ec15c1afe028dc937">gcop::Params</a>
 </li>
+<li>GetTraj()
+: <a class="el" href="classgcop_1_1Body3dDemController.html#a0e1bf7a4a9f83063c15c334d8164117a">gcop::Body3dDemController&lt; nu &gt;</a>
+</li>
 <li>GetVector2d()
 : <a class="el" href="classgcop_1_1Params.html#a4437997501595e0e963999d3b84a592c">gcop::Params</a>
 </li>
@@ -256,6 +261,9 @@
 </li>
 <li>GetVector4d()
 : <a class="el" href="classgcop_1_1Params.html#a4bd81275686f8590a1a7e80415c1f9a6">gcop::Params</a>
+</li>
+<li>GetVector5d()
+: <a class="el" href="classgcop_1_1Params.html#ad6e0bf50500c16f470385e633fb25892">gcop::Params</a>
 </li>
 <li>GetVector6d()
 : <a class="el" href="classgcop_1_1Params.html#ae6285b0e5d04f6bdc123c6b9c4656869">gcop::Params</a>
@@ -291,29 +299,29 @@
 : <a class="el" href="classgcop_1_1GnDoep1.html#a7ba43f259602ea8c06194b14314a69ec">gcop::GnDoep1&lt; T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1 &gt;</a>
 </li>
 <li>gp
-: <a class="el" href="classgcop_1_1ConstraintCost.html#a40be9b5cccd485b999f5669f72cbd382">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+: <a class="el" href="classgcop_1_1Joint.html#a49945d837def8ab298ae1005dd7c58c1">gcop::Joint</a>
 </li>
 <li>GP()
 : <a class="el" href="classgcop_1_1GP.html#a06665a6e8b64e317b43cb8a872ef3a85">gcop::GP</a>
 </li>
 <li>gp
-: <a class="el" href="classgcop_1_1LsSensorCost.html#a53ad40389edb0d17a9e79b7bfd6429f8">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Joint.html#a49945d837def8ab298ae1005dd7c58c1">gcop::Joint</a>
+: <a class="el" href="classgcop_1_1ConstraintCost.html#a40be9b5cccd485b999f5669f72cbd382">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1LsSensorCost.html#a53ad40389edb0d17a9e79b7bfd6429f8">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 </li>
 <li>gpi
 : <a class="el" href="classgcop_1_1Joint.html#aef47b35befb349f6607097469711b680">gcop::Joint</a>
 </li>
 <li>Gps()
-: <a class="el" href="classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4.html#a2de2b1151805a51e6d1ecbe128e67a6c">gcop::Gps&lt; Point3dState, 6, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Gps.html#ac505d1d30f17ee8ce9008bf993822a9d">gcop::Gps&lt; T, _nx, _nu, _np &gt;</a>
+: <a class="el" href="classgcop_1_1Gps.html#ac505d1d30f17ee8ce9008bf993822a9d">gcop::Gps&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4.html#a2de2b1151805a51e6d1ecbe128e67a6c">gcop::Gps&lt; Point3dState, 6, _nu, _np &gt;</a>
 </li>
 <li>group_name
 : <a class="el" href="classgcop__urdf_1_1Visual.html#a7c5767ec92a5dc7586c976b888e7196d">gcop_urdf::Visual</a>
 , <a class="el" href="classgcop__urdf_1_1Collision.html#add40b5ff122e639c4136a783815b41f5">gcop_urdf::Collision</a>
 </li>
 <li>gs
-: <a class="el" href="classgcop_1_1MbsState.html#ae1fc5bb244bba26d065d9f095391158c">gcop::MbsState</a>
-, <a class="el" href="classgcop_1_1Posegraph2d.html#a1c366b6095d2faa5d3351fbac8fdf865">gcop::Posegraph2d</a>
+: <a class="el" href="classgcop_1_1Posegraph2d.html#a1c366b6095d2faa5d3351fbac8fdf865">gcop::Posegraph2d</a>
+, <a class="el" href="classgcop_1_1MbsState.html#ae1fc5bb244bba26d065d9f095391158c">gcop::MbsState</a>
 </li>
 <li>Gunicycle()
 : <a class="el" href="classgcop_1_1Gunicycle.html#abc6c2d51017927da61283f5cf263f757">gcop::Gunicycle</a>
@@ -333,7 +341,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:59:10 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

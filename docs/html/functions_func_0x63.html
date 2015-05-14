@@ -166,6 +166,9 @@
 , <a class="el" href="classgcop__urdf_1_1Joint.html#aae3417b7fdebc8508868ee5cc0f53b7e">gcop_urdf::Joint</a>
 , <a class="el" href="classgcop__urdf_1_1Sphere.html#a8620ef8e1400b0490d7d773611190f9d">gcop_urdf::Sphere</a>
 </li>
+<li>Clip()
+: <a class="el" href="classgcop_1_1Rn.html#aa906092565109be0392b9dee1b00b77c">gcop::Rn&lt; _n &gt;</a>
+</li>
 <li>Collision()
 : <a class="el" href="classgcop__urdf_1_1Collision.html#a1f5471ddd6b04b086b345bb816afb75c">gcop_urdf::Collision</a>
 </li>
@@ -173,9 +176,9 @@
 : <a class="el" href="classgcop__urdf_1_1Color.html#ae38a97e435083ceb7d84b0bd945e5ee3">gcop_urdf::Color</a>
 </li>
 <li>Compute()
-: <a class="el" href="classgcop_1_1Body3d.html#aa0d6d6b474ea9582473be769840da529">gcop::Body3d&lt; c &gt;</a>
+: <a class="el" href="classgcop_1_1Body3d.html#a97831063ef6e451bca22fb1dd6341e4b">gcop::Body3d&lt; c &gt;</a>
 , <a class="el" href="classgcop_1_1Uuv.html#a106b378f7ef1096914a1eb72948ba6e3">gcop::Uuv&lt; c &gt;</a>
-, <a class="el" href="classgcop_1_1Body3d.html#a97831063ef6e451bca22fb1dd6341e4b">gcop::Body3d&lt; c &gt;</a>
+, <a class="el" href="classgcop_1_1Body3d.html#aa0d6d6b474ea9582473be769840da529">gcop::Body3d&lt; c &gt;</a>
 </li>
 <li>ComputeNormals()
 : <a class="el" href="classgcop_1_1Dem.html#ab91d6805d29de7c85971d9c6678d63e2">gcop::Dem</a>
@@ -189,6 +192,9 @@
 <li>Control()
 : <a class="el" href="classgcop_1_1Flat.html#acd11b4da245b6bac89f524e6eb103477">gcop::Flat&lt; T, nx, nu, np, nz, _ny &gt;</a>
 </li>
+<li>ControllerTparam()
+: <a class="el" href="classgcop_1_1ControllerTparam.html#a37900b188e468f1990761ba6338e3d87">gcop::ControllerTparam&lt; Tx, nx, nu, np, _ntp, Tc &gt;</a>
+</li>
 <li>ControlTparam()
 : <a class="el" href="classgcop_1_1ControlTparam.html#acdff84861b262e5f32c685225cd27c6a">gcop::ControlTparam&lt; T, nx, nu, np, _ntp &gt;</a>
 </li>
@@ -196,15 +202,15 @@
 : <a class="el" href="classgcop_1_1Dem.html#a3660c3291b81436bd6a061937871a92c">gcop::Dem</a>
 </li>
 <li>Correct()
-: <a class="el" href="classgcop_1_1UnscentedCorrector.html#abe60b5ab13bd83ce9d4c22cd4709980d">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1KalmanCorrector.html#a6285e2da0de46f2782186c9bbb23184c">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+: <a class="el" href="classgcop_1_1KalmanCorrector.html#a6285e2da0de46f2782186c9bbb23184c">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1Corrector.html#abf38f846a9266db92036d9b4ef7f5891">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
+, <a class="el" href="classgcop_1_1UnscentedCorrector.html#abe60b5ab13bd83ce9d4c22cd4709980d">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 </li>
 <li>Corrector()
 : <a class="el" href="classgcop_1_1Corrector.html#ae7cc12e18bfeea96b1a41f779b16c4c8">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 </li>
 <li>Cost()
-: <a class="el" href="classgcop_1_1Cost.html#ad8c43b1fece572f546586aabf5c4d6bc">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>
+: <a class="el" href="classgcop_1_1Cost.html#a5590b6abe65e79c67e8d1c004222561f">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a>
 </li>
 <li>CreateGroundPlane()
 : <a class="el" href="classgcop_1_1BulletWorld.html#af366e7e28f45e9a6cb6c61719856b849">gcop::BulletWorld</a>
@@ -228,9 +234,9 @@
 : <a class="el" href="classgcop_1_1SE2.html#a06f5eb5ff0062d4c4a59ffdcd93ba031">gcop::SE2</a>
 </li>
 <li>Cylinder()
-: <a class="el" href="classgcop_1_1Viewer.html#aca1bb13130b4a8fc9c34415bb1493fc1">gcop::Viewer</a>
+: <a class="el" href="classgcop_1_1Cylinder.html#a83c61391d32142604906cba06759ff93">gcop::Cylinder&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Viewer.html#aca1bb13130b4a8fc9c34415bb1493fc1">gcop::Viewer</a>
 , <a class="el" href="classgcop__urdf_1_1Cylinder.html#a6b66e12843c4214bd8919611887aecd6">gcop_urdf::Cylinder</a>
-, <a class="el" href="classgcop_1_1Cylinder.html#a83c61391d32142604906cba06759ff93">gcop::Cylinder&lt; T, _nx, _nu, _np &gt;</a>
 </li>
 <li>CylinderView()
 : <a class="el" href="classgcop_1_1CylinderView.html#ae8eaad66fe9340d815bf08a8e637c2e2">gcop::CylinderView</a>
@@ -240,7 +246,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:59:10 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

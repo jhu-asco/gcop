@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop__urdf_1_1JointCalibration.html" title="gcop_urdf::JointCalibration" alt="" coords="7,5,183,35"/>
+<area shape="rect" id="node1" href="$classgcop_1_1Tparam.html" title="gcop::Tparam\&lt; Tx, nx, nu, np, _ntp \&gt;" alt="" coords="5,5,245,35"/>
+<area shape="rect" id="node3" href="$classgcop_1_1ControllerTparam.html" title="gcop::ControllerTparam\&lt; Tx, nx, nu, np, _ntp, Tc \&gt;" alt="" coords="295,5,612,35"/>
 </map>

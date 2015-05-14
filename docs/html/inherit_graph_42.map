@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop_1_1Force.html" title="gcop::Force\&lt; Tx, _l, _n, _c \&gt;" alt="" coords="5,5,197,35"/>
+<area shape="rect" id="node1" href="$classgcop_1_1Docp.html" title="gcop::Docp\&lt; T, _nx, _nu, _np \&gt;" alt="" coords="5,5,213,35"/>
+<area shape="rect" id="node3" href="$classgcop_1_1GnDocp.html" title="gcop::GnDocp\&lt; T, _nx, _nu, _np, _ng, _ntp \&gt;" alt="" coords="263,5,548,35"/>
 </map>

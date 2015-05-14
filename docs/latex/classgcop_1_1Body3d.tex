@@ -6,7 +6,8 @@
 
 
 
-\-Inheritance diagram for gcop\-:\-:\-Body3d$<$ c $>$\-:\nopagebreak
+\-Inheritance diagram for gcop\-:\-:\-Body3d$<$ c $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -15,7 +16,8 @@
 \end{figure}
 
 
-\-Collaboration diagram for gcop\-:\-:\-Body3d$<$ c $>$\-:\nopagebreak
+\-Collaboration diagram for gcop\-:\-:\-Body3d$<$ c $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -34,6 +36,8 @@
 virtual {\bf $\sim$\-Body3d} ()
 \item 
 virtual double {\bf \-Step} ({\bf \-Body3d\-State} \&xb, double {\bf t}, const {\bf \-Body3d\-State} \&xa, const {\bf \-Vectorcd} \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix12d} $\ast$\-A=0, {\bf \-Matrix12xcd} $\ast$\-B=0, {\bf \-Matrix12\-Xd} $\ast$\-C=0)
+\item 
+virtual bool {\bf \-Noise\-Matrix} ({\bf \-Matrix12d} \&\-Q, double {\bf t}, const {\bf \-Body3d\-State} \&{\bf x}, const {\bf \-Vectorcd} \&u, double h, const \-Vector\-Xd $\ast$p=0)
 \item 
 double {\bf \-Symp\-Step} (double {\bf t}, {\bf \-Body3d\-State} \&xb, const {\bf \-Body3d\-State} \&xa, const {\bf \-Vectorcd} \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix12d} $\ast$\-A=0, {\bf \-Matrix12xcd} $\ast$\-B=0, {\bf \-Matrix12\-Xd} $\ast$\-C=0)
 \item 
@@ -56,13 +60,15 @@ static void {\bf \-Compute} ({\bf \-Vector6d} \&{\bf \-I}, double {\bf m}, const
 \begin{DoxyCompactItemize}
 \item 
 \-Vector3d {\bf ds}
-\begin{DoxyCompactList}\small\item\em \-T\-O\-D\-O\-: visual element. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em body dimensions \end{DoxyCompactList}\item 
 double {\bf m}
 \begin{DoxyCompactList}\small\item\em mass \end{DoxyCompactList}\item 
 \-Vector3d {\bf \-J}
 \begin{DoxyCompactList}\small\item\em 3x1 principal moments of inertia \end{DoxyCompactList}\item 
 {\bf \-Vector6d} {\bf \-I}
 \begin{DoxyCompactList}\small\item\em 6x1 spatial inertia matrix \end{DoxyCompactList}\item 
+{\bf \-Vector6d} {\bf \-Ii}
+\begin{DoxyCompactList}\small\item\em 6x1 spatial inertia matrix inverse \end{DoxyCompactList}\item 
 \-Vector3d {\bf \-Dw}
 \begin{DoxyCompactList}\small\item\em linear rotational damping terms \end{DoxyCompactList}\item 
 \-Vector3d {\bf \-Dv}
@@ -74,7 +80,11 @@ double {\bf m}
 bool {\bf symp}
 \begin{DoxyCompactList}\small\item\em symplectic? \end{DoxyCompactList}\item 
 string {\bf name}
-\begin{DoxyCompactList}\small\item\em \-Unique name of the body. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Unique name of the body. \end{DoxyCompactList}\item 
+double {\bf sw}
+\begin{DoxyCompactList}\small\item\em process noise\-: standard deviation in torque (zero by default) \end{DoxyCompactList}\item 
+double {\bf sv}
+\begin{DoxyCompactList}\small\item\em process noise\-: standard deviation in force (zero by default) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{\-Protected \-Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -253,6 +263,33 @@ typedef \-Matrix$<$ double, \*
 \item[{double}]{h}
 \end{DoxyParamCaption}
 )}\label{classgcop_1_1Body3d_aad169d2f5d6011efbf877b39edaccd35}
+\-Inverse dynamics 
+\begin{DoxyParams}{\-Parameters}
+{\em f} & inverse dynamics vector \\
+\hline
+{\em t} & time \\
+\hline
+{\em xb} & end state \\
+\hline
+{\em xa} & start state \\
+\hline
+{\em u} & control \\
+\hline
+{\em h} & time-\/step \\
+\hline
+\end{DoxyParams}
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Noise\-Matrix@{\-Noise\-Matrix}}
+\index{\-Noise\-Matrix@{\-Noise\-Matrix}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Noise\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ bool {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Noise\-Matrix} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Matrix12d} \&}]{\-Q, }
+\item[{double}]{t, }
+\item[{const {\bf \-Body3d\-State} \&}]{x, }
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3d_a0d45e2bf2895ee5c1435675992ba5b60}
 \index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-State\-And\-Controls\-To\-Flat@{\-State\-And\-Controls\-To\-Flat}}
 \index{\-State\-And\-Controls\-To\-Flat@{\-State\-And\-Controls\-To\-Flat}!gcop::Body3d@{gcop\-::\-Body3d}}
 \subsubsection[{\-State\-And\-Controls\-To\-Flat}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-State\-And\-Controls\-To\-Flat} (
@@ -319,9 +356,9 @@ control input transformation
 \subsubsection[{ds}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Vector3d {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf ds}}\label{classgcop_1_1Body3d_ac2199d7bea5a5e7133da9069af14e59d}
 
 
-\-T\-O\-D\-O\-: visual element. 
+body dimensions 
 
-\-T\-O\-D\-O\-: collision element body dimensions 
+
 
 \-Referenced by gcop\-::\-Body3d$<$ c $>$\-::\-Body3d().
 
@@ -357,6 +394,13 @@ constant position force in spatial frame (e.\-g. due to gravity)
 
 \-Referenced by gcop\-::\-Body3d$<$ c $>$\-::\-Body3d().
 
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-Ii@{\-Ii}}
+\index{\-Ii@{\-Ii}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{\-Ii}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ {\bf \-Vector6d} {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-Ii}}\label{classgcop_1_1Body3d_a16192d25613c763ffdb8f7d0d1046831}
+
+
+6x1 spatial inertia matrix inverse 
+
 \index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!\-J@{\-J}}
 \index{\-J@{\-J}!gcop::Body3d@{gcop\-::\-Body3d}}
 \subsubsection[{\-J}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ \-Vector3d {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf \-J}}\label{classgcop_1_1Body3d_a53d4f85cbe9e49d00af7723e43f19028}
@@ -385,6 +429,20 @@ mass
 
 
 \-Unique name of the body. 
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!sv@{sv}}
+\index{sv@{sv}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{sv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ double {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf sv}}\label{classgcop_1_1Body3d_abbf936162e7eef234a38b5a883eea971}
+
+
+process noise\-: standard deviation in force (zero by default) 
+
+\index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!sw@{sw}}
+\index{sw@{sw}!gcop::Body3d@{gcop\-::\-Body3d}}
+\subsubsection[{sw}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ double {\bf gcop\-::\-Body3d}$<$ c $>$\-::{\bf sw}}\label{classgcop_1_1Body3d_a5114be9e7bdf50e28cd7a8f8916ec2cd}
+
+
+process noise\-: standard deviation in torque (zero by default) 
 
 \index{gcop\-::\-Body3d@{gcop\-::\-Body3d}!symp@{symp}}
 \index{symp@{symp}!gcop::Body3d@{gcop\-::\-Body3d}}

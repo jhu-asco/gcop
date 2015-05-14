@@ -67,21 +67,21 @@
 <div class="title">gcop::Rccar Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="gcop::Rccar" --><!-- doxytag: inherits="System&lt; Vector4d, 4, 2 &gt;" -->
+<!-- doxytag: class="gcop::Rccar" --><!-- doxytag: inherits="gcop::System" -->
 <p><code>#include &lt;<a class="el" href="rccar_8h_source.html">rccar.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for gcop::Rccar:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgcop_1_1Rccar__inherit__graph.png" border="0" usemap="#gcop_1_1Rccar_inherit__map" alt="Inheritance graph"/></div>
 <map name="gcop_1_1Rccar_inherit__map" id="gcop_1_1Rccar_inherit__map">
-<area shape="rect" id="node5" href="classgcop_1_1Bulletrccar.html" title="gcop::Bulletrccar" alt="" coords="5,160,125,189"/><area shape="rect" id="node7" href="classgcop_1_1Bulletrccar1.html" title="gcop::Bulletrccar1" alt="" coords="149,160,275,189"/><area shape="rect" id="node9" href="classgcop_1_1Rccar1.html" title="gcop::Rccar1" alt="" coords="299,160,397,189"/><area shape="rect" id="node2" href="classgcop_1_1System.html" title="gcop::System\&lt; Vector4d, 4, 2 \&gt;" alt="" coords="108,5,316,35"/></map>
+<area shape="rect" id="node5" href="classgcop_1_1Bulletrccar.html" title="gcop::Bulletrccar" alt="" coords="5,160,125,189"/><area shape="rect" id="node7" href="classgcop_1_1Bulletrccar1.html" title="gcop::Bulletrccar1" alt="" coords="149,160,275,189"/><area shape="rect" id="node9" href="classgcop_1_1Rccar1.html" title="gcop::Rccar1" alt="" coords="299,160,397,189"/><area shape="rect" id="node2" href="classgcop_1_1System.html" title="BaseSystem" alt="" coords="164,5,260,35"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for gcop::Rccar:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgcop_1_1Rccar__coll__graph.png" border="0" usemap="#gcop_1_1Rccar_coll__map" alt="Collaboration graph"/></div>
 <map name="gcop_1_1Rccar_coll__map" id="gcop_1_1Rccar_coll__map">
-<area shape="rect" id="node2" href="classgcop_1_1System.html" title="gcop::System\&lt; Vector4d, 4, 2 \&gt;" alt="" coords="196,181,404,211"/><area shape="rect" id="node4" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Vector4d, _nx \&gt;" alt="" coords="5,85,216,115"/><area shape="rect" id="node6" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="240,85,360,115"/><area shape="rect" id="node8" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="251,5,539,35"/><area shape="rect" id="node10" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; Dynamic \&gt;" alt="" coords="384,85,533,115"/></map>
+<area shape="rect" id="node2" href="classgcop_1_1System.html" title="BaseSystem" alt="" coords="251,213,347,243"/><area shape="rect" id="node4" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _np \&gt;" alt="" coords="23,117,143,147"/><area shape="rect" id="node6" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="5,5,293,35"/><area shape="rect" id="node8" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="167,117,287,147"/><area shape="rect" id="node11" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; T, _nx \&gt;" alt="" coords="371,117,539,147"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classgcop_1_1Rccar-members.html">List of all members.</a></p>
@@ -103,7 +103,7 @@ Public Attributes</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>A simple rear-drive <a class="el" href="classgcop_1_1Rccar.html">Rccar</a> model with 2nd order dynamics.</p>
-<p>The state is <img class="formulaInl" alt="$ \bm x = (x,y,\theta, v) \in\mathbb{R}^4$" src="form_0.png"/> and controls are <img class="formulaInl" alt="$ \bm u = (a, tan(phi) ) \in\mathbb{R}^5$" src="form_1.png"/> correspond to forward acceleration a and steering angle phi</p>
+<p>The state is <img class="formulaInl" alt="$ \bm x = (x,y,\theta, v) \in\mathbb{R}^4$" src="form_1.png"/> and controls are <img class="formulaInl" alt="$ \bm u = (a, tan(phi) ) \in\mathbb{R}^5$" src="form_61.png"/> correspond to forward acceleration a and steering angle phi</p>
 <p>Author: Marin Kobilarov marin(at)jhu.edu </p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="af9b889296a342bed93e9814ab54be766"></a><!-- doxytag: member="gcop::Rccar::Rccar" ref="af9b889296a342bed93e9814ab54be766" args="(int np=2)" -->
@@ -121,7 +121,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>References <a class="el" href="classgcop_1_1Manifold.html#ac0e113c6711e857e4e669bb596540c80">gcop::Manifold&lt; T, _n &gt;::bnd</a>, <a class="el" href="classgcop_1_1Manifold.html#a5e5ffaa0921871c7b76b2b09d9cb6a36">gcop::Manifold&lt; T, _n &gt;::lb</a>, <a class="el" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675">gcop::System&lt; Vector4d, 4, 2 &gt;::U</a>, and <a class="el" href="classgcop_1_1Manifold.html#afdc42d9bc5cf8d3fc964fd1b72c1bd6e">gcop::Manifold&lt; T, _n &gt;::ub</a>.</p>
+<p>References <a class="el" href="classgcop_1_1Manifold.html#ac0e113c6711e857e4e669bb596540c80">gcop::Manifold&lt; T, _n &gt;::bnd</a>, <a class="el" href="classgcop_1_1Manifold.html#a5e5ffaa0921871c7b76b2b09d9cb6a36">gcop::Manifold&lt; T, _n &gt;::lb</a>, <a class="el" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675">gcop::System&lt; T, _nx, _nu, _np &gt;::U</a>, and <a class="el" href="classgcop_1_1Manifold.html#afdc42d9bc5cf8d3fc964fd1b72c1bd6e">gcop::Manifold&lt; T, _n &gt;::ub</a>.</p>
 
 </div>
 </div>
@@ -157,7 +157,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>References <a class="el" href="classgcop_1_1Rccar.html#a82d37c85113ff476cbf6594c8b8276f5">l</a>, <a class="el" href="classgcop_1_1Rccar.html#acb2ba192a3b95e81be6e258a86ed3fe2">r</a>, <a class="el" href="rccar_8cc.html#ae1b5a554c1d4d97654c06032a92f800a">sgn</a>, and <a class="el" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64">gcop::System&lt; Vector4d, 4, 2 &gt;::x</a>.</p>
+<p>References <a class="el" href="classgcop_1_1Rccar.html#a82d37c85113ff476cbf6594c8b8276f5">l</a>, <a class="el" href="classgcop_1_1Rccar.html#acb2ba192a3b95e81be6e258a86ed3fe2">r</a>, <a class="el" href="rccar_8cc.html#ae1b5a554c1d4d97654c06032a92f800a">sgn</a>, and <a class="el" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64">gcop::System&lt; T, _nx, _nu, _np &gt;::x</a>.</p>
 
 </div>
 </div>
@@ -281,7 +281,7 @@ Public Attributes</h2></td></tr>
 
 <p>Internal step size. </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Rccar.html#ac519b10ac362839bdd0029b21d2f0c2f">Step()</a>, <a class="el" href="classgcop_1_1Bulletrccar1.html#af66181dbc2e7501ae41fa9a9d7ce5bde">gcop::Bulletrccar1::Step1()</a>, and <a class="el" href="classgcop_1_1Bulletrccar.html#a97999496cbeba63cba21cc37982f3ab6">gcop::Bulletrccar::Step_internalinput()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Rccar.html#ac519b10ac362839bdd0029b21d2f0c2f">Step()</a>, <a class="el" href="classgcop_1_1Bulletrccar.html#a659dba8de437fa106c5bbfc3ca65a74e">gcop::Bulletrccar::Step()</a>, and <a class="el" href="classgcop_1_1Bulletrccar1.html#af66181dbc2e7501ae41fa9a9d7ce5bde">gcop::Bulletrccar1::Step1()</a>.</p>
 
 </div>
 </div>
@@ -298,7 +298,7 @@ Public Attributes</h2></td></tr>
 
 <p>distance between axles </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Bulletrccar.html#a6899571515fbd4d0e8f6c0cb379b0a04">gcop::Bulletrccar::Bulletrccar()</a>, <a class="el" href="classgcop_1_1Bulletrccar1.html#a102df2f8fd111af7719f54235b4b33c9">gcop::Bulletrccar1::Bulletrccar1()</a>, <a class="el" href="classgcop_1_1Rccar.html#a647c6687503732f092c3d232941f63d9">FlatToStateAndControls()</a>, <a class="el" href="classgcop_1_1RccarView.html#a7dd5df3af018ecf27be6f87f20ffdc30">gcop::RccarView::Render()</a>, <a class="el" href="classgcop_1_1Rccar.html#ac519b10ac362839bdd0029b21d2f0c2f">Step()</a>, and <a class="el" href="classgcop_1_1Rccar1.html#a96a96e6f8fa8a41839f26b91d05592d8">gcop::Rccar1::Step()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Bulletrccar.html#a6899571515fbd4d0e8f6c0cb379b0a04">gcop::Bulletrccar::Bulletrccar()</a>, <a class="el" href="classgcop_1_1Bulletrccar1.html#a102df2f8fd111af7719f54235b4b33c9">gcop::Bulletrccar1::Bulletrccar1()</a>, <a class="el" href="classgcop_1_1Rccar.html#a647c6687503732f092c3d232941f63d9">FlatToStateAndControls()</a>, <a class="el" href="classgcop_1_1RccarView.html#a7dd5df3af018ecf27be6f87f20ffdc30">gcop::RccarView::Render()</a>, <a class="el" href="classgcop_1_1Rccar1.html#a96a96e6f8fa8a41839f26b91d05592d8">gcop::Rccar1::Step()</a>, and <a class="el" href="classgcop_1_1Rccar.html#ac519b10ac362839bdd0029b21d2f0c2f">Step()</a>.</p>
 
 </div>
 </div>
@@ -327,7 +327,7 @@ Public Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

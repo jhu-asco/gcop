@@ -98,22 +98,22 @@
 <a name="l00043"></a>00043   
 <a name="l00049"></a>00049   <a class="code" href="classgcop_1_1MultiCost.html">MultiCost</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, _nx, _nu, _np&gt;</a> &amp;sys, <span class="keywordtype">double</span> tf);
 <a name="l00050"></a>00050   
-<a name="l00063"></a>00063   <span class="keyword">virtual</span> <span class="keywordtype">double</span> L(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
-<a name="l00064"></a>00064                    <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p = 0,
-<a name="l00065"></a>00065                    <a class="code" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> *Lx = 0, <a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a>* Lxx = 0,
-<a name="l00066"></a>00066                    <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> *Lu = 0, <a class="code" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a>* Luu = 0,
-<a name="l00067"></a>00067                    <a class="code" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a> *Lxu = 0,
-<a name="l00068"></a>00068                    <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *Lp = 0, <a class="code" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> *Lpp = 0,
-<a name="l00069"></a>00069                    <a class="code" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> *Lpx = 0);  
+<a name="l00063"></a>00063   <span class="keyword">virtual</span> <span class="keywordtype">double</span> L(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
+<a name="l00064"></a>00064                    <span class="keyword">const</span> <a class="code" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a> *p = 0,
+<a name="l00065"></a>00065                    <a class="code" href="classgcop_1_1MultiCost.html#a881732629f016fec7b15bf86c9d29820">Vectornd</a> *Lx = 0, <a class="code" href="classgcop_1_1MultiCost.html#ad9a490034a8ecfd3b10963307306f605">Matrixnd</a>* Lxx = 0,
+<a name="l00066"></a>00066                    <a class="code" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a> *Lu = 0, <a class="code" href="classgcop_1_1MultiCost.html#aa2fa1ebe22cb12773cf226d11e777be6">Matrixcd</a>* Luu = 0,
+<a name="l00067"></a>00067                    <a class="code" href="classgcop_1_1MultiCost.html#a938ba3c8c1f4b2a89802d23d82f03438">Matrixncd</a> *Lxu = 0,
+<a name="l00068"></a>00068                    <a class="code" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a> *Lp = 0, <a class="code" href="classgcop_1_1MultiCost.html#affa0a222f0bbeb1712f4c85a2c727d12">Matrixmd</a> *Lpp = 0,
+<a name="l00069"></a>00069                    <a class="code" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">Matrixmnd</a> *Lpx = 0);  
 <a name="l00070"></a>00070   
-<a name="l00071"></a><a class="code" href="classgcop_1_1MultiCost.html#ab2a472355c0854b7f5f4a942094f1683">00071</a>   <a class="code" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> <a class="code" href="classgcop_1_1MultiCost.html#ab2a472355c0854b7f5f4a942094f1683">Lx</a>;
-<a name="l00072"></a><a class="code" href="classgcop_1_1MultiCost.html#ab6c7a047f9a9dcacf9095cef3339abd0">00072</a>   <a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> <a class="code" href="classgcop_1_1MultiCost.html#ab6c7a047f9a9dcacf9095cef3339abd0">Lxx</a>;
-<a name="l00073"></a><a class="code" href="classgcop_1_1MultiCost.html#a3e3190ef89e3fdc4d83beddc4b575817">00073</a>   <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> <a class="code" href="classgcop_1_1MultiCost.html#a3e3190ef89e3fdc4d83beddc4b575817">Lu</a>;
-<a name="l00074"></a><a class="code" href="classgcop_1_1MultiCost.html#abb933ba08f54d7883befdf09740ac77c">00074</a>   <a class="code" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a> <a class="code" href="classgcop_1_1MultiCost.html#abb933ba08f54d7883befdf09740ac77c">Luu</a>;  
-<a name="l00075"></a><a class="code" href="classgcop_1_1MultiCost.html#abc9087e17cb1e40c7d125b01b2c3e525">00075</a>   <a class="code" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a> <a class="code" href="classgcop_1_1MultiCost.html#abc9087e17cb1e40c7d125b01b2c3e525">Lxu</a>;
-<a name="l00076"></a><a class="code" href="classgcop_1_1MultiCost.html#a5a1adf5c103641bac3ee333dc632e232">00076</a>   <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> <a class="code" href="classgcop_1_1MultiCost.html#a5a1adf5c103641bac3ee333dc632e232">Lp</a>;
-<a name="l00077"></a><a class="code" href="classgcop_1_1MultiCost.html#a5a05a491774cf0881b6b348597f266a4">00077</a>   <a class="code" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> <a class="code" href="classgcop_1_1MultiCost.html#a5a05a491774cf0881b6b348597f266a4">Lpp</a>;
-<a name="l00078"></a><a class="code" href="classgcop_1_1MultiCost.html#ab284ebd849fc94098641b147bfe619fd">00078</a>   <a class="code" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> <a class="code" href="classgcop_1_1MultiCost.html#ab284ebd849fc94098641b147bfe619fd">Lpx</a>;
+<a name="l00071"></a><a class="code" href="classgcop_1_1MultiCost.html#ab2a472355c0854b7f5f4a942094f1683">00071</a>   <a class="code" href="classgcop_1_1MultiCost.html#a881732629f016fec7b15bf86c9d29820">Vectornd</a> <a class="code" href="classgcop_1_1MultiCost.html#ab2a472355c0854b7f5f4a942094f1683">Lx</a>;
+<a name="l00072"></a><a class="code" href="classgcop_1_1MultiCost.html#ab6c7a047f9a9dcacf9095cef3339abd0">00072</a>   <a class="code" href="classgcop_1_1MultiCost.html#ad9a490034a8ecfd3b10963307306f605">Matrixnd</a> <a class="code" href="classgcop_1_1MultiCost.html#ab6c7a047f9a9dcacf9095cef3339abd0">Lxx</a>;
+<a name="l00073"></a><a class="code" href="classgcop_1_1MultiCost.html#a3e3190ef89e3fdc4d83beddc4b575817">00073</a>   <a class="code" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a> <a class="code" href="classgcop_1_1MultiCost.html#a3e3190ef89e3fdc4d83beddc4b575817">Lu</a>;
+<a name="l00074"></a><a class="code" href="classgcop_1_1MultiCost.html#abb933ba08f54d7883befdf09740ac77c">00074</a>   <a class="code" href="classgcop_1_1MultiCost.html#aa2fa1ebe22cb12773cf226d11e777be6">Matrixcd</a> <a class="code" href="classgcop_1_1MultiCost.html#abb933ba08f54d7883befdf09740ac77c">Luu</a>;  
+<a name="l00075"></a><a class="code" href="classgcop_1_1MultiCost.html#abc9087e17cb1e40c7d125b01b2c3e525">00075</a>   <a class="code" href="classgcop_1_1MultiCost.html#a938ba3c8c1f4b2a89802d23d82f03438">Matrixncd</a> <a class="code" href="classgcop_1_1MultiCost.html#abc9087e17cb1e40c7d125b01b2c3e525">Lxu</a>;
+<a name="l00076"></a><a class="code" href="classgcop_1_1MultiCost.html#a5a1adf5c103641bac3ee333dc632e232">00076</a>   <a class="code" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a> <a class="code" href="classgcop_1_1MultiCost.html#a5a1adf5c103641bac3ee333dc632e232">Lp</a>;
+<a name="l00077"></a><a class="code" href="classgcop_1_1MultiCost.html#a5a05a491774cf0881b6b348597f266a4">00077</a>   <a class="code" href="classgcop_1_1MultiCost.html#affa0a222f0bbeb1712f4c85a2c727d12">Matrixmd</a> <a class="code" href="classgcop_1_1MultiCost.html#a5a05a491774cf0881b6b348597f266a4">Lpp</a>;
+<a name="l00078"></a><a class="code" href="classgcop_1_1MultiCost.html#ab284ebd849fc94098641b147bfe619fd">00078</a>   <a class="code" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">Matrixmnd</a> <a class="code" href="classgcop_1_1MultiCost.html#ab284ebd849fc94098641b147bfe619fd">Lpx</a>;
 <a name="l00079"></a>00079 
 <a name="l00080"></a><a class="code" href="classgcop_1_1MultiCost.html#a5bd14b193787c6ec9281409f119c57f3">00080</a>   vector&lt;Cost&lt;T, _nx, _nu, _np&gt;* &gt; <a class="code" href="classgcop_1_1MultiCost.html#a5bd14b193787c6ec9281409f119c57f3">costs</a>;
 <a name="l00081"></a>00081   };
@@ -139,13 +139,13 @@
 <a name="l00101"></a>00101   }  
 <a name="l00102"></a>00102   
 <a name="l00103"></a>00103   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np&gt; 
-<a name="l00104"></a><a class="code" href="classgcop_1_1MultiCost.html#a9b76dfe651c31265e4ac52e1dda5b851">00104</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1MultiCost.html#a9b76dfe651c31265e4ac52e1dda5b851">MultiCost&lt;T, _nx, _nu, _np&gt;::L</a>(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T&amp; x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a>&amp; u, <span class="keywordtype">double</span> h,
-<a name="l00105"></a>00105                                           <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p,
+<a name="l00104"></a><a class="code" href="classgcop_1_1MultiCost.html#a9b76dfe651c31265e4ac52e1dda5b851">00104</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1MultiCost.html#a9b76dfe651c31265e4ac52e1dda5b851">MultiCost&lt;T, _nx, _nu, _np&gt;::L</a>(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T&amp; x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a>&amp; u, <span class="keywordtype">double</span> h,
+<a name="l00105"></a>00105                                           <span class="keyword">const</span> <a class="code" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a> *p,
 <a name="l00106"></a>00106                                           Matrix&lt;double, _nx, 1&gt; *Lx, Matrix&lt;double, _nx, _nx&gt;* Lxx,
 <a name="l00107"></a>00107                                           Matrix&lt;double, _nu, 1&gt; *Lu, Matrix&lt;double, _nu, _nu&gt;* Luu,
 <a name="l00108"></a>00108                                           Matrix&lt;double, _nx, _nu&gt; *Lxu,
-<a name="l00109"></a>00109                                           <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *Lp, <a class="code" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> *Lpp,
-<a name="l00110"></a>00110                                           <a class="code" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> *Lpx) {
+<a name="l00109"></a>00109                                           <a class="code" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a> *Lp, <a class="code" href="classgcop_1_1MultiCost.html#affa0a222f0bbeb1712f4c85a2c727d12">Matrixmd</a> *Lpp,
+<a name="l00110"></a>00110                                           <a class="code" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">Matrixmnd</a> *Lpx) {
 <a name="l00111"></a>00111     <span class="keywordtype">double</span> c = 0;
 <a name="l00112"></a>00112     <span class="keywordflow">if</span> (Lx)
 <a name="l00113"></a>00113       Lx-&gt;setZero();
@@ -200,7 +200,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

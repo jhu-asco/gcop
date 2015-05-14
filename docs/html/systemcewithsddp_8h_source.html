@@ -129,9 +129,9 @@
 <a name="l00116"></a>00116 
 <a name="l00117"></a>00117     System&lt;T, n, c, np&gt; &amp;sys;    
 <a name="l00118"></a>00118 
-<a name="l00119"></a>00119     Cost&lt;T, n, c, np&gt; &amp;cost;     
+<a name="l00119"></a><a class="code" href="classgcop_1_1SystemCe.html#a79cb4ab011e21dbd951f9e3e15e13319">00119</a>     <a class="code" href="classgcop_1_1Cost.html">Cost&lt;T, n, c, np&gt;</a> &amp;<a class="code" href="classgcop_1_1SystemCe.html#a79cb4ab011e21dbd951f9e3e15e13319" title="given cost function">cost</a>;     
 <a name="l00120"></a>00120 
-<a name="l00121"></a>00121     Tparam&lt;T, n, c, np, ntp&gt; *tp;     
+<a name="l00121"></a><a class="code" href="classgcop_1_1SystemCe.html#a0758fc802d2afd7eabdf020ebfc91297">00121</a>     <a class="code" href="classgcop_1_1Tparam.html">Tparam&lt;T, n, c, np, ntp&gt;</a> *<a class="code" href="classgcop_1_1SystemCe.html#a0758fc802d2afd7eabdf020ebfc91297" title="trajectory parametrization">tp</a>;     
 <a name="l00122"></a>00122 
 <a name="l00123"></a>00123     std::vector&lt;double&gt; &amp;ts; 
 <a name="l00124"></a>00124 
@@ -149,7 +149,7 @@
 <a name="l00136"></a>00136     
 <a name="l00137"></a>00137     <span class="keywordtype">int</span> N;        
 <a name="l00138"></a>00138 
-<a name="l00139"></a>00139     Ce&lt;ntp&gt; ce;       
+<a name="l00139"></a>00139     <a class="code" href="classgcop_1_1Ce.html">Ce&lt;ntp&gt;</a> ce;       
 <a name="l00140"></a>00140 
 <a name="l00141"></a>00141     <span class="keywordtype">int</span> Ns;      
 <a name="l00142"></a>00142 
@@ -167,8 +167,8 @@
 <a name="l00154"></a>00154   <span class="keyword">using namespace </span>Eigen;
 <a name="l00155"></a>00155   
 <a name="l00156"></a>00156   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> c, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> ntp&gt; 
-<a name="l00157"></a>00157     SystemCe&lt;T, n, c, np, ntp&gt;::SystemCe(System&lt;T, n, c, np&gt; &amp;sys, 
-<a name="l00158"></a>00158                                      Cost&lt;T, n, c, np&gt; &amp;cost, 
+<a name="l00157"></a><a class="code" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">00157</a>     <a class="code" href="classgcop_1_1SystemCe.html">SystemCe&lt;T, n, c, np, ntp&gt;::SystemCe</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, n, c, np&gt;</a> &amp;sys, 
+<a name="l00158"></a>00158                                      <a class="code" href="classgcop_1_1Cost.html">Cost&lt;T, n, c, np&gt;</a> &amp;cost, 
 <a name="l00159"></a>00159                                      vector&lt;double&gt; &amp;ts, 
 <a name="l00160"></a>00160                                      vector&lt;T&gt; &amp;xs, 
 <a name="l00161"></a>00161                                      vector&lt;Matrix&lt;double, c, 1&gt; &gt; &amp;us,
@@ -183,42 +183,42 @@
 <a name="l00170"></a>00170       <span class="comment">// do not use an external tparam, just assume discrete controls are the params</span>
 <a name="l00171"></a>00171       
 <a name="l00172"></a>00172       <span class="keywordflow">if</span> (ntp != Dynamic) {
-<a name="l00173"></a>00173         assert(ntp == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>*sys.U.n);
+<a name="l00173"></a>00173         assert(ntp == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>*sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.<a class="code" href="classgcop_1_1Manifold.html#a7f5bc8f44907e3e56e1f1780368bf5b0" title="dimension">n</a>);
 <a name="l00174"></a>00174         <span class="keywordflow">if</span> (ntp &gt; 16)
 <a name="l00175"></a>00175           cout &lt;&lt; <span class="stringliteral">&quot;[W] gcop::SystemCe::SystemCe: fixed Eigen size is not recommended above 16!&quot;</span> &lt;&lt; endl;
 <a name="l00176"></a>00176       }
 <a name="l00177"></a>00177 
-<a name="l00178"></a>00178       assert(<a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a> &gt; 0);
-<a name="l00179"></a>00179       assert(ts.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>+1);
-<a name="l00180"></a>00180       assert(xs.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>+1);
-<a name="l00181"></a>00181       assert(<a class="code" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d" title="controls (N) vector">us</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>);
-<a name="l00182"></a>00182       assert(<a class="code" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77" title="control variation (N) vector">dus</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>);
-<a name="l00183"></a>00183       assert(<a class="code" href="classgcop_1_1SystemCe.html#a3a9c43af28a65c4bcafbe7fc7b88f77b" title="states (N+1) vector">xss</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>+1);
-<a name="l00184"></a>00184       assert(<a class="code" href="classgcop_1_1SystemCe.html#a4458e74a8abe844dc035e13f5f079a6a" title="controls (N) vector">uss</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>);
+<a name="l00178"></a>00178       assert(<a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a> &gt; 0);
+<a name="l00179"></a>00179       assert(ts.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>+1);
+<a name="l00180"></a>00180       assert(xs.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>+1);
+<a name="l00181"></a>00181       assert(<a class="code" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1" title="controls (N) vector">us</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>);
+<a name="l00182"></a>00182       assert(<a class="code" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5" title="control standard deviations (N) vector">dus</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>);
+<a name="l00183"></a>00183       assert(<a class="code" href="classgcop_1_1SystemCe.html#a18ddca64021bb2403a65bf72d6633a41" title="states (N+1) vector">xss</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>+1);
+<a name="l00184"></a>00184       assert(<a class="code" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f" title="controls (N) vector">uss</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>);
 <a name="l00185"></a>00185 
 <a name="l00186"></a>00186       <span class="keywordflow">if</span> (update) {
-<a name="l00187"></a>00187         <a class="code" href="classgcop_1_1SystemCe.html#a0168d8c2140656805abcbd0111a199fa" title="optimal cost">J</a> = <a class="code" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">Update</a>(xs, <a class="code" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d" title="controls (N) vector">us</a>);
+<a name="l00187"></a>00187         <a class="code" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33" title="optimal cost">J</a> = <a class="code" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">Update</a>(xs, <a class="code" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1" title="controls (N) vector">us</a>);
 <a name="l00188"></a>00188       } <span class="keywordflow">else</span> {
-<a name="l00189"></a>00189         <a class="code" href="classgcop_1_1SystemCe.html#a0168d8c2140656805abcbd0111a199fa" title="optimal cost">J</a> = numeric_limits&lt;double&gt;::max();
+<a name="l00189"></a>00189         <a class="code" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33" title="optimal cost">J</a> = numeric_limits&lt;double&gt;::max();
 <a name="l00190"></a>00190       }
 <a name="l00191"></a>00191       
-<a name="l00192"></a>00192       <a class="code" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">us2z</a>(<a class="code" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.ns[0].mu, <a class="code" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d" title="controls (N) vector">us</a>);
+<a name="l00192"></a>00192       <a class="code" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">us2z</a>(<a class="code" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.ns[0].mu, <a class="code" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1" title="controls (N) vector">us</a>);
 <a name="l00193"></a>00193       Vectortpd z;
 <a name="l00194"></a>00194       <span class="keywordflow">if</span> (ntp == Dynamic)
-<a name="l00195"></a>00195         z.resize(sys.U.n*<a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>);
+<a name="l00195"></a>00195         z.resize(sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.<a class="code" href="classgcop_1_1Manifold.html#a7f5bc8f44907e3e56e1f1780368bf5b0" title="dimension">n</a>*<a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>);
 <a name="l00196"></a>00196   
-<a name="l00197"></a>00197       <a class="code" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">us2z</a>(z, <a class="code" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77" title="control variation (N) vector">dus</a>);
-<a name="l00198"></a>00198       <a class="code" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.ns[0].P = z.asDiagonal();
-<a name="l00199"></a>00199       <a class="code" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.Update();
+<a name="l00197"></a>00197       <a class="code" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">us2z</a>(z, <a class="code" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5" title="control standard deviations (N) vector">dus</a>);
+<a name="l00198"></a>00198       <a class="code" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.ns[0].P = z.asDiagonal();
+<a name="l00199"></a>00199       <a class="code" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.Update();
 <a name="l00200"></a>00200 
 <a name="l00201"></a>00201       <a class="code" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">us2z</a>(z, es);
-<a name="l00202"></a>00202       <a class="code" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f" title="extra noise">S</a> = z.asDiagonal();
+<a name="l00202"></a>00202       <a class="code" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f" title="extra noise">S</a> = z.asDiagonal();
 <a name="l00203"></a>00203     }
 <a name="l00204"></a>00204 
 <a name="l00205"></a>00205   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> c, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> ntp&gt; 
-<a name="l00206"></a>00206     <a class="code" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">SystemCe&lt;T, n, c, np, ntp&gt;::SystemCe</a>(System&lt;T, n, c, np&gt; &amp;sys, 
-<a name="l00207"></a>00207                                          Cost&lt;T, n, c, np&gt; &amp;cost,                              
-<a name="l00208"></a>00208                                          Tparam&lt;T, n, c, np, ntp&gt; &amp;tp, 
+<a name="l00206"></a><a class="code" href="classgcop_1_1SystemCe.html#a699e34372185e3dbaf7d81cb4aace699">00206</a>     <a class="code" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">SystemCe&lt;T, n, c, np, ntp&gt;::SystemCe</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, n, c, np&gt;</a> &amp;sys, 
+<a name="l00207"></a>00207                                          <a class="code" href="classgcop_1_1Cost.html">Cost&lt;T, n, c, np&gt;</a> &amp;cost,                              
+<a name="l00208"></a>00208                                          <a class="code" href="classgcop_1_1Tparam.html">Tparam&lt;T, n, c, np, ntp&gt;</a> &amp;tp, 
 <a name="l00209"></a>00209                                          vector&lt;double&gt; &amp;ts, 
 <a name="l00210"></a>00210                                          vector&lt;T&gt; &amp;xs, 
 <a name="l00211"></a>00211                                          vector&lt;Matrix&lt;double, c, 1&gt; &gt; &amp;us,
@@ -238,36 +238,36 @@
 <a name="l00225"></a>00225 <span class="comment">      }</span>
 <a name="l00226"></a>00226 <span class="comment">      */</span>
 <a name="l00227"></a>00227 
-<a name="l00228"></a>00228       assert(<a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a> &gt; 0);
-<a name="l00229"></a>00229       assert(ts.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>+1);
-<a name="l00230"></a>00230       assert(xs.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>+1);
-<a name="l00231"></a>00231       assert(<a class="code" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d" title="controls (N) vector">us</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>);
-<a name="l00232"></a>00232       assert(<a class="code" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77" title="control variation (N) vector">dus</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>);
-<a name="l00233"></a>00233       assert(<a class="code" href="classgcop_1_1SystemCe.html#a3a9c43af28a65c4bcafbe7fc7b88f77b" title="states (N+1) vector">xss</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>+1);
-<a name="l00234"></a>00234       assert(<a class="code" href="classgcop_1_1SystemCe.html#a4458e74a8abe844dc035e13f5f079a6a" title="controls (N) vector">uss</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#af78c031064df4b3d7d8ea039baf25f9d" title="number of discrete trajectory segments">N</a>);
+<a name="l00228"></a>00228       assert(<a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a> &gt; 0);
+<a name="l00229"></a>00229       assert(ts.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>+1);
+<a name="l00230"></a>00230       assert(xs.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>+1);
+<a name="l00231"></a>00231       assert(<a class="code" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1" title="controls (N) vector">us</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>);
+<a name="l00232"></a>00232       assert(<a class="code" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5" title="control standard deviations (N) vector">dus</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>);
+<a name="l00233"></a>00233       assert(<a class="code" href="classgcop_1_1SystemCe.html#a18ddca64021bb2403a65bf72d6633a41" title="states (N+1) vector">xss</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>+1);
+<a name="l00234"></a>00234       assert(<a class="code" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f" title="controls (N) vector">uss</a>.size() == <a class="code" href="classgcop_1_1SystemCe.html#a9da5a0bab06198c7f2f8eb2f6c0c1b88" title="number of discrete trajectory segments">N</a>);
 <a name="l00235"></a>00235 
 <a name="l00236"></a>00236       <span class="keywordflow">if</span> (update) {
-<a name="l00237"></a>00237         <a class="code" href="classgcop_1_1SystemCe.html#a0168d8c2140656805abcbd0111a199fa" title="optimal cost">J</a> = <a class="code" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">Update</a>(xs, <a class="code" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d" title="controls (N) vector">us</a>);
+<a name="l00237"></a>00237         <a class="code" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33" title="optimal cost">J</a> = <a class="code" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">Update</a>(xs, <a class="code" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1" title="controls (N) vector">us</a>);
 <a name="l00238"></a>00238       } <span class="keywordflow">else</span> {
-<a name="l00239"></a>00239         <a class="code" href="classgcop_1_1SystemCe.html#a0168d8c2140656805abcbd0111a199fa" title="optimal cost">J</a> = numeric_limits&lt;double&gt;::max();
+<a name="l00239"></a>00239         <a class="code" href="classgcop_1_1SystemCe.html#af39e072c9299e3a28abcfcb088ff8f33" title="optimal cost">J</a> = numeric_limits&lt;double&gt;::max();
 <a name="l00240"></a>00240       }
 <a name="l00241"></a>00241     
-<a name="l00242"></a>00242       tp.To(<a class="code" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.ns[0].mu, ts, xs, <a class="code" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d" title="controls (N) vector">us</a>, p);
+<a name="l00242"></a>00242       tp.<a class="code" href="classgcop_1_1Tparam.html#a2668afc0c6d411d2811a8e3f7b4d60b3">To</a>(<a class="code" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.ns[0].mu, ts, xs, <a class="code" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1" title="controls (N) vector">us</a>, p);
 <a name="l00243"></a>00243             <span class="comment">//      us2z(ce.gmm.ns[0].mu, us);</span>
 <a name="l00244"></a>00244       Vectortpd z;
 <a name="l00245"></a>00245       <span class="keywordflow">if</span> (ntp == Dynamic) {
-<a name="l00246"></a>00246         z.resize(tp.ntp);
+<a name="l00246"></a>00246         z.resize(tp.<a class="code" href="classgcop_1_1Tparam.html#aba4946a1d919993acbcd588ac5b7b086" title="parameter vector dimension">ntp</a>);
 <a name="l00247"></a>00247       }  
 <a name="l00248"></a>00248 
 <a name="l00249"></a>00249 
-<a name="l00250"></a>00250       tp.To(z, ts, xs, <a class="code" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77" title="control variation (N) vector">dus</a>, p);
+<a name="l00250"></a>00250       tp.<a class="code" href="classgcop_1_1Tparam.html#a2668afc0c6d411d2811a8e3f7b4d60b3">To</a>(z, ts, xs, <a class="code" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5" title="control standard deviations (N) vector">dus</a>, p);
 <a name="l00251"></a>00251       <span class="comment">// us2z(z, dus);</span>
-<a name="l00252"></a>00252       <a class="code" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.ns[0].P = z.asDiagonal();
-<a name="l00253"></a>00253       <a class="code" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.Update();
+<a name="l00252"></a>00252       <a class="code" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.ns[0].P = z.asDiagonal();
+<a name="l00253"></a>00253       <a class="code" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>.Update();
 <a name="l00254"></a>00254 
 <a name="l00255"></a>00255       <span class="comment">//      us2z(z, es);</span>
-<a name="l00256"></a>00256       tp.To(z, ts, xs, es, p);
-<a name="l00257"></a>00257       <a class="code" href="classgcop_1_1SystemCe.html#a0ece313b2b0bcd583a2eb5f1c0c768b1" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f" title="extra noise">S</a> = z.asDiagonal();
+<a name="l00256"></a>00256       tp.<a class="code" href="classgcop_1_1Tparam.html#a2668afc0c6d411d2811a8e3f7b4d60b3">To</a>(z, ts, xs, es, p);
+<a name="l00257"></a>00257       <a class="code" href="classgcop_1_1SystemCe.html#a4ce823704048a4e50be26fc74f640492" title="GMM-based cross-entropy algorithm.">ce</a>.<a class="code" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f" title="extra noise">S</a> = z.asDiagonal();
 <a name="l00258"></a>00258     }
 <a name="l00259"></a>00259 
 <a name="l00260"></a>00260   
@@ -277,7 +277,7 @@
 <a name="l00264"></a>00264     }
 <a name="l00265"></a>00265 
 <a name="l00266"></a>00266   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> c, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> ntp&gt; 
-<a name="l00267"></a>00267     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">SystemCe&lt;T, n, c, np, ntp&gt;::us2z</a>(Vectortpd &amp;z, <span class="keyword">const</span> std::vector&lt;Vectorcd&gt; &amp;us)<span class="keyword"> const</span>
+<a name="l00267"></a>00267     <span class="keywordtype">void</span> SystemCe&lt;T, n, c, np, ntp&gt;::us2z(Vectortpd &amp;z, <span class="keyword">const</span> std::vector&lt;Vectorcd&gt; &amp;us)<span class="keyword"> const</span>
 <a name="l00268"></a>00268 <span class="keyword">    </span>{
 <a name="l00269"></a>00269       assert(us.size() &gt; 0);
 <a name="l00270"></a>00270       assert(z.size() == us.size()*us[0].size());
@@ -287,7 +287,7 @@
 <a name="l00274"></a>00274     }
 <a name="l00275"></a>00275   
 <a name="l00276"></a>00276   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> c, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> ntp&gt; 
-<a name="l00277"></a>00277     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1SystemCe.html#a4bdcf8a52d6f006d16c16aa3226ff12f">SystemCe&lt;T, n, c, np, ntp&gt;::z2us</a>(std::vector&lt;Vectorcd&gt; &amp;us, <span class="keyword">const</span> Vectortpd &amp;z)<span class="keyword"> const</span>
+<a name="l00277"></a>00277     <span class="keywordtype">void</span> SystemCe&lt;T, n, c, np, ntp&gt;::z2us(std::vector&lt;Vectorcd&gt; &amp;us, <span class="keyword">const</span> Vectortpd &amp;z)<span class="keyword"> const</span>
 <a name="l00278"></a>00278 <span class="keyword">    </span>{
 <a name="l00279"></a>00279       assert(us.size() &gt; 0);
 <a name="l00280"></a>00280       assert(z.size() == us.size()*us[0].size());
@@ -298,9 +298,9 @@
 <a name="l00285"></a>00285 
 <a name="l00286"></a>00286   
 <a name="l00287"></a>00287   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> c, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> ntp&gt; 
-<a name="l00288"></a>00288     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">SystemCe&lt;T, n, c, np, ntp&gt;::Update</a>(vector&lt;T&gt; &amp;xs, <span class="keyword">const</span> vector&lt;Vectorcd&gt; &amp;us, <span class="keywordtype">bool</span> evalCost) {    
+<a name="l00288"></a>00288     <span class="keywordtype">double</span> SystemCe&lt;T, n, c, np, ntp&gt;::Update(vector&lt;T&gt; &amp;xs, <span class="keyword">const</span> vector&lt;Vectorcd&gt; &amp;us, <span class="keywordtype">bool</span> evalCost) {    
 <a name="l00289"></a>00289     <span class="keywordtype">double</span> J = 0;
-<a name="l00290"></a>00290     sys.reset(xs[0],ts[0]);<span class="comment">//gives a chance for physics engines to reset to specific state and time.</span>
+<a name="l00290"></a>00290     sys.Reset(xs[0],ts[0]);<span class="comment">//gives a chance for physics engines to reset to specific state and time.</span>
 <a name="l00291"></a>00291 
 <a name="l00292"></a>00292     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; N; ++k) {
 <a name="l00293"></a>00293       <span class="keywordtype">double</span> h = ts[k+1] - ts[k];
@@ -315,7 +315,7 @@
 <a name="l00302"></a>00302   }
 <a name="l00303"></a>00303 
 <a name="l00304"></a>00304   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> c, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> ntp&gt; 
-<a name="l00305"></a><a class="code" href="classgcop_1_1SystemCe.html#ace8af29caaa93496f6da5e278bc5c759">00305</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1SystemCe.html#ace8af29caaa93496f6da5e278bc5c759">SystemCe&lt;T, n, c, np, ntp&gt;::Iterate</a>() {
+<a name="l00305"></a><a class="code" href="classgcop_1_1SystemCe.html#ace8af29caaa93496f6da5e278bc5c759">00305</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1SystemCe.html">SystemCe&lt;T, n, c, np, ntp&gt;::Iterate</a>() {
 <a name="l00306"></a>00306 
 <a name="l00307"></a>00307       <span class="keywordflow">if</span> (ce.inc) 
 <a name="l00308"></a>00308       {
@@ -435,7 +435,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

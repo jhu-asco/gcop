@@ -106,6 +106,12 @@ Public Attributes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">normalizer  <a href="#a51ae242f8461c027fb5f160363ffc9a9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Normal.html#a7f1a5099950d5e0fc7a71f97e4d03202">bd</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">force a block-diagonal structure with block dimension bd (0 by default means do not enforce)  <a href="#a7f1a5099950d5e0fc7a71f97e4d03202"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Normal.html#a4c19211ddded224e7fc9a1e687cd4a0e">bounded</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">whether to enforce a box support (false by default)  <a href="#a4c19211ddded224e7fc9a1e687cd4a0e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Normal.html#a112a22e65df0ccc800d10df1ecc7ffc3">Vectornd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Normal.html#a0b10c65df227665c8dc99b131da00740">lb</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">lower bound  <a href="#a0b10c65df227665c8dc99b131da00740"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Normal.html#a112a22e65df0ccc800d10df1ecc7ffc3">Vectornd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Normal.html#a9fb03d0b67d8f275dd407a3eb2e2b440">ub</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">upper bound  <a href="#a9fb03d0b67d8f275dd407a3eb2e2b440"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">LLT&lt; <a class="el" href="classgcop_1_1Normal.html#a31cbf7be84f48a931e7a544274035d99">Matrixnd</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Normal.html#af08c704c90adabb300fc5741325ab769">llt</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">LLT object to Cholesky.  <a href="#af08c704c90adabb300fc5741325ab769"></a><br/></td></tr>
 </table>
@@ -168,7 +174,7 @@ template&lt;int _n&gt; </div>
   </dd>
 </dl>
 
-<p>References <a class="el" href="classgcop_1_1Normal.html#abdb1b9190569775b30fc202be40ccef3">gcop::Normal&lt; _n &gt;::A</a>, <a class="el" href="classgcop_1_1Normal.html#a3cfaf2326502c8165ae90c4523bd203b">gcop::Normal&lt; _n &gt;::mu</a>, <a class="el" href="classgcop_1_1Normal.html#ab06ae81a539288ac586d528f0157ee67">gcop::Normal&lt; _n &gt;::P</a>, <a class="el" href="classgcop_1_1Normal.html#ab96efa301b00021f92eea26b1609d176">gcop::Normal&lt; _n &gt;::Pinv</a>, and <a class="el" href="classgcop_1_1Normal.html#a0d14362b29d58eea8b5e9ea19d1db5a8">gcop::Normal&lt; _n &gt;::rn</a>.</p>
+<p>References <a class="el" href="classgcop_1_1Normal.html#abdb1b9190569775b30fc202be40ccef3">gcop::Normal&lt; _n &gt;::A</a>, <a class="el" href="classgcop_1_1Normal.html#a0b10c65df227665c8dc99b131da00740">gcop::Normal&lt; _n &gt;::lb</a>, <a class="el" href="classgcop_1_1Normal.html#a3cfaf2326502c8165ae90c4523bd203b">gcop::Normal&lt; _n &gt;::mu</a>, <a class="el" href="classgcop_1_1Normal.html#ab06ae81a539288ac586d528f0157ee67">gcop::Normal&lt; _n &gt;::P</a>, <a class="el" href="classgcop_1_1Normal.html#ab96efa301b00021f92eea26b1609d176">gcop::Normal&lt; _n &gt;::Pinv</a>, <a class="el" href="classgcop_1_1Normal.html#a0d14362b29d58eea8b5e9ea19d1db5a8">gcop::Normal&lt; _n &gt;::rn</a>, and <a class="el" href="classgcop_1_1Normal.html#a9fb03d0b67d8f275dd407a3eb2e2b440">gcop::Normal&lt; _n &gt;::ub</a>.</p>
 
 </div>
 </div>
@@ -207,7 +213,7 @@ template&lt;int _n&gt; </div>
   </dd>
 </dl>
 
-<p>References <a class="el" href="classgcop_1_1Normal.html#abdb1b9190569775b30fc202be40ccef3">gcop::Normal&lt; _n &gt;::A</a>, <a class="el" href="classgcop_1_1Normal.html#ab96efa301b00021f92eea26b1609d176">gcop::Normal&lt; _n &gt;::Pinv</a>, <a class="el" href="classgcop_1_1Normal.html#a0d14362b29d58eea8b5e9ea19d1db5a8">gcop::Normal&lt; _n &gt;::rn</a>, and <a class="el" href="classgcop_1_1Normal.html#a4790057a751d620cef1504b375b8dd3e">gcop::Normal&lt; _n &gt;::Update()</a>.</p>
+<p>References <a class="el" href="classgcop_1_1Normal.html#abdb1b9190569775b30fc202be40ccef3">gcop::Normal&lt; _n &gt;::A</a>, <a class="el" href="classgcop_1_1Normal.html#a0b10c65df227665c8dc99b131da00740">gcop::Normal&lt; _n &gt;::lb</a>, <a class="el" href="classgcop_1_1Normal.html#ab96efa301b00021f92eea26b1609d176">gcop::Normal&lt; _n &gt;::Pinv</a>, <a class="el" href="classgcop_1_1Normal.html#a0d14362b29d58eea8b5e9ea19d1db5a8">gcop::Normal&lt; _n &gt;::rn</a>, <a class="el" href="classgcop_1_1Normal.html#a9fb03d0b67d8f275dd407a3eb2e2b440">gcop::Normal&lt; _n &gt;::ub</a>, and <a class="el" href="classgcop_1_1Normal.html#a4790057a751d620cef1504b375b8dd3e">gcop::Normal&lt; _n &gt;::Update()</a>.</p>
 
 </div>
 </div>
@@ -384,6 +390,23 @@ template&lt;int _n = Dynamic&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a4c19211ddded224e7fc9a1e687cd4a0e"></a><!-- doxytag: member="gcop::Normal::bounded" ref="a4c19211ddded224e7fc9a1e687cd4a0e" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int _n = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgcop_1_1Normal.html">gcop::Normal</a>&lt; _n &gt;::<a class="el" href="classgcop_1_1Normal.html#a4c19211ddded224e7fc9a1e687cd4a0e">bounded</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>whether to enforce a box support (false by default) </p>
+
+</div>
+</div>
 <a class="anchor" id="a3002ef044ffb2b63e8d371505ea0d6e0"></a><!-- doxytag: member="gcop::Normal::det" ref="a3002ef044ffb2b63e8d371505ea0d6e0" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -398,6 +421,25 @@ template&lt;int _n = Dynamic&gt; </div>
 <div class="memdoc">
 
 <p>determinant </p>
+
+</div>
+</div>
+<a class="anchor" id="a0b10c65df227665c8dc99b131da00740"></a><!-- doxytag: member="gcop::Normal::lb" ref="a0b10c65df227665c8dc99b131da00740" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int _n = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgcop_1_1Normal.html#a112a22e65df0ccc800d10df1ecc7ffc3">Vectornd</a> <a class="el" href="classgcop_1_1Normal.html">gcop::Normal</a>&lt; _n &gt;::<a class="el" href="classgcop_1_1Normal.html#a0b10c65df227665c8dc99b131da00740">lb</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>lower bound </p>
+
+<p>Referenced by <a class="el" href="classgcop_1_1Normal.html#ae7dd7ee6e6b5db2c7d3fcbfaef522508">gcop::Normal&lt; _n &gt;::Normal()</a>.</p>
 
 </div>
 </div>
@@ -528,6 +570,25 @@ template&lt;int _n = Dynamic&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a9fb03d0b67d8f275dd407a3eb2e2b440"></a><!-- doxytag: member="gcop::Normal::ub" ref="a9fb03d0b67d8f275dd407a3eb2e2b440" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int _n = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgcop_1_1Normal.html#a112a22e65df0ccc800d10df1ecc7ffc3">Vectornd</a> <a class="el" href="classgcop_1_1Normal.html">gcop::Normal</a>&lt; _n &gt;::<a class="el" href="classgcop_1_1Normal.html#a9fb03d0b67d8f275dd407a3eb2e2b440">ub</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>upper bound </p>
+
+<p>Referenced by <a class="el" href="classgcop_1_1Normal.html#ae7dd7ee6e6b5db2c7d3fcbfaef522508">gcop::Normal&lt; _n &gt;::Normal()</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>lib/utils/<a class="el" href="normal_8h_source.html">normal.h</a></li>
 </ul>
@@ -535,7 +596,7 @@ template&lt;int _n = Dynamic&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

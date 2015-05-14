@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>GCOP: gcop::Body2dCost Class Reference</title>
+<title>GCOP: gcop::Body2dCost&lt; c &gt; Class Template Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -61,50 +61,127 @@
 </div>
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">gcop::Body2dCost Class Reference</div>  </div>
+<div class="title">gcop::Body2dCost&lt; c &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="gcop::Body2dCost" --><!-- doxytag: inherits="LqCost&lt; M3V3d, 6, 3, Dynamic, 9 &gt;" -->
+<!-- doxytag: class="gcop::Body2dCost" --><!-- doxytag: inherits="LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;" -->
 <p><code>#include &lt;<a class="el" href="body2dcost_8h_source.html">body2dcost.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for gcop::Body2dCost:</div>
+Inheritance diagram for gcop::Body2dCost&lt; c &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classgcop_1_1Body2dCost__inherit__graph.png" border="0" usemap="#gcop_1_1Body2dCost_inherit__map" alt="Inheritance graph"/></div>
-<map name="gcop_1_1Body2dCost_inherit__map" id="gcop_1_1Body2dCost_inherit__map">
-<area shape="rect" id="node2" href="classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; M3V3d, 6, 3, Dynamic, 9 \&gt;" alt="" coords="11,160,280,189"/><area shape="rect" id="node4" href="classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; M3V3d, _nx, _nu, _np, _ng \&gt;" alt="" coords="5,83,285,112"/><area shape="rect" id="node6" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; M3V3d, _nx, _nu, _np \&gt;" alt="" coords="27,5,264,35"/></map>
+<div class="center"><img src="classgcop_1_1Body2dCost__inherit__graph.png" border="0" usemap="#gcop_1_1Body2dCost_3_01c_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="gcop_1_1Body2dCost_3_01c_01_4_inherit__map" id="gcop_1_1Body2dCost_3_01c_01_4_inherit__map">
+<area shape="rect" id="node2" href="classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; Body2dState, 6, c, Dynamic, 9 \&gt;" alt="" coords="52,160,356,189"/><area shape="rect" id="node4" href="classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; Body2dState, _nx, _nu, _np, _ng, Body2dState \&gt;" alt="" coords="5,83,403,112"/><area shape="rect" id="node6" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; Body2dState, _nx, _nu, _np, Body2dState \&gt;" alt="" coords="27,5,381,35"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
-Collaboration diagram for gcop::Body2dCost:</div>
+Collaboration diagram for gcop::Body2dCost&lt; c &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classgcop_1_1Body2dCost__coll__graph.png" border="0" usemap="#gcop_1_1Body2dCost_coll__map" alt="Collaboration graph"/></div>
-<map name="gcop_1_1Body2dCost_coll__map" id="gcop_1_1Body2dCost_coll__map">
-<area shape="rect" id="node2" href="classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; M3V3d, 6, 3, Dynamic, 9 \&gt;" alt="" coords="1732,113,2001,143"/><area shape="rect" id="node4" href="classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; M3V3d, _nx, _nu, _np, _ng \&gt;" alt="" coords="1265,112,1545,141"/><area shape="rect" id="node6" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; M3V3d, _nx, _nu, _np \&gt;" alt="" coords="951,104,1188,133"/><area shape="rect" id="node8" href="classgcop_1_1System.html" title="gcop::System\&lt; M3V3d, _nx, _nu, _np \&gt;" alt="" coords="612,39,865,68"/><area shape="rect" id="node10" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _np \&gt;" alt="" coords="385,5,505,35"/><area shape="rect" id="node12" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="5,80,293,109"/><area shape="rect" id="node16" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="385,80,505,109"/><area shape="rect" id="node27" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; Dynamic \&gt;" alt="" coords="371,207,520,236"/><area shape="rect" id="node14" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; M3V3d, _nx \&gt;" alt="" coords="345,140,545,169"/><area shape="rect" id="node23" href="classgcop_1_1System.html" title="gcop::System\&lt; M3V3d, 6, 3 \&gt;" alt="" coords="640,181,837,211"/><area shape="rect" id="node19" href="classgcop_1_1Body2dTrack.html" title="gcop::Body2dTrack" alt="" coords="1572,169,1705,199"/><area shape="rect" id="node21" href="classgcop_1_1Body2d.html" title="gcop::Body2d" alt="" coords="1019,181,1120,211"/><area shape="rect" id="node30" href="classgcop_1_1Body2dForce.html" title="gcop::Body2dForce" alt="" coords="672,253,805,283"/><area shape="rect" id="node32" href="classgcop_1_1Force.html" title="gcop::Force\&lt; M3V3d, 3, 6, 3 \&gt;" alt="" coords="345,273,545,303"/></map>
+<div class="center"><img src="classgcop_1_1Body2dCost__coll__graph.png" border="0" usemap="#gcop_1_1Body2dCost_3_01c_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="gcop_1_1Body2dCost_3_01c_01_4_coll__map" id="gcop_1_1Body2dCost_3_01c_01_4_coll__map">
+<area shape="rect" id="node2" href="classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; Body2dState, 6, c, Dynamic, 9 \&gt;" alt="" coords="2021,69,2325,99"/><area shape="rect" id="node4" href="classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; Body2dState, _nx, _nu, _np, _ng, Body2dState \&gt;" alt="" coords="1439,69,1836,99"/><area shape="rect" id="node6" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; Body2dState, _nx, _nu, _np, Body2dState \&gt;" alt="" coords="1008,67,1363,96"/><area shape="rect" id="node8" href="classgcop_1_1System.html" title="gcop::System\&lt; Body2dState, _nx, _nu, _np \&gt;" alt="" coords="644,40,932,69"/><area shape="rect" id="node10" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Body2dState, _nx \&gt;" alt="" coords="344,80,579,109"/><area shape="rect" id="node23" href="classgcop_1_1System.html" title="gcop::System\&lt; Body2dState, 6, c \&gt;" alt="" coords="672,183,904,212"/><area shape="rect" id="node12" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _np \&gt;" alt="" coords="401,5,521,35"/><area shape="rect" id="node14" href="classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="5,143,293,172"/><area shape="rect" id="node16" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="401,143,521,172"/><area shape="rect" id="node27" href="classgcop_1_1Rn.html" title="gcop::Rn\&lt; Dynamic \&gt;" alt="" coords="387,215,536,244"/><area shape="rect" id="node19" href="classgcop_1_1Body2dTrack.html" title="gcop::Body2dTrack" alt="" coords="1863,125,1996,155"/><area shape="rect" id="node21" href="classgcop_1_1Body2d.html" title="gcop::Body2d\&lt; c \&gt;" alt="" coords="1119,128,1252,157"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classgcop_1_1Body2dCost-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, c, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#a535fc113fdcbc818a7aa58d0452dcf55">Vectorcd</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, 6, c &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#a93c86f47f54f972b8ce5e95db0160f69">Matrix6cd</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, 3, c &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#ac060508f37a395a12b11cce2b8b8bb25">Matrix3cd</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, c, c &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#a35e6b30c876c5a9272c5ac8d36ecfde3">Matrixcd</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#a074adc5b8e4701f53501155ffe2ef378">Body2dCost</a> (<a class="el" href="classgcop_1_1Body2d.html">Body2d</a> &amp;<a class="el" href="classgcop_1_1Cost.html#a57d004815023d9a92ead0cea1d0dbb36">sys</a>, double <a class="el" href="classgcop_1_1Cost.html#a5ff85a0123ee3bf8f1988c3cd339ac2d">tf</a>, const <a class="el" href="namespacegcop.html#a84d92b047c73e771491e45675476d08a">M3V3d</a> &amp;<a class="el" href="classgcop_1_1LqCost.html#a606611084240ba0dc6624409514cb85d">xf</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#ae9c4c8105a91c1e1d7ff06979899d7b1">L</a> (double t, const <a class="el" href="namespacegcop.html#a84d92b047c73e771491e45675476d08a">M3V3d</a> &amp;x, const Vector3d &amp;u, double h, <a class="el" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a> *Lx=0, <a class="el" href="namespacegcop.html#a9a48fc301dc21867f8353f31858f9dd2">Matrix6d</a> *Lxx=0, Vector3d *Lu=0, Matrix3d *Luu=0, <a class="el" href="namespacegcop.html#a96a4e467a5862486de3127b041d57d22">Matrix63d</a> *Lxu=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#a86da5b74c59eada11ca7e03edbe568c9">Body2dCost</a> (<a class="el" href="classgcop_1_1Body2d.html">Body2d</a>&lt; c &gt; &amp;<a class="el" href="classgcop_1_1Cost.html#a0f89708328371a69e049392b6ae7ca1e">sys</a>, double <a class="el" href="classgcop_1_1Cost.html#a774f472f719d4b9d23f5822961e258a3">tf</a>, const <a class="el" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a> &amp;<a class="el" href="classgcop_1_1LqCost.html#a124d5d664a3acb0dfb01de0fbfccde82">xf</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#a2d9777c8d9ad756728bbb5c757c2cd4e">L</a> (double t, const <a class="el" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a> &amp;x, const <a class="el" href="classgcop_1_1Body2dCost.html#a535fc113fdcbc818a7aa58d0452dcf55">Vectorcd</a> &amp;u, double h, <a class="el" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a> *Lx=0, <a class="el" href="namespacegcop.html#a9a48fc301dc21867f8353f31858f9dd2">Matrix6d</a> *Lxx=0, <a class="el" href="classgcop_1_1Body2dCost.html#a535fc113fdcbc818a7aa58d0452dcf55">Vectorcd</a> *Lu=0, <a class="el" href="classgcop_1_1Body2dCost.html#a35e6b30c876c5a9272c5ac8d36ecfde3">Matrixcd</a> *Luu=0, <a class="el" href="classgcop_1_1Body2dCost.html#a93c86f47f54f972b8ce5e95db0160f69">Matrix6cd</a> *Lxu=0)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Body2dTrack.html">Body2dTrack</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#a439eddeacc2f7e7c59293f43ac6ca8cc">track</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#af12b03b859b40b373ecd2ed7bc3b488a">ko</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">obstacle avoidance gain  <a href="#af12b03b859b40b373ecd2ed7bc3b488a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Body2dTrack.html">Body2dTrack</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#a976ecc4962c7f1960251182d173e72e7">track</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body2dCost.html#abdf2d9e54ad44d535dcc866ba2eddbfb">ko</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">obstacle avoidance gain  <a href="#abdf2d9e54ad44d535dcc866ba2eddbfb"></a><br/></td></tr>
 </table>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a074adc5b8e4701f53501155ffe2ef378"></a><!-- doxytag: member="gcop::Body2dCost::Body2dCost" ref="a074adc5b8e4701f53501155ffe2ef378" args="(Body2d &amp;sys, double tf, const M3V3d &amp;xf)" -->
+<h3>template&lt;int c = 3&gt;<br/>
+ class gcop::Body2dCost&lt; c &gt;</h3>
+
+<hr/><h2>Member Typedef Documentation</h2>
+<a class="anchor" id="ac060508f37a395a12b11cce2b8b8bb25"></a><!-- doxytag: member="gcop::Body2dCost::Matrix3cd" ref="ac060508f37a395a12b11cce2b8b8bb25" args="" -->
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;int c = 3&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Body2dCost.html#a074adc5b8e4701f53501155ffe2ef378">Body2dCost::Body2dCost</a> </td>
+          <td class="memname">typedef Matrix&lt;double, 3, c&gt; <a class="el" href="classgcop_1_1Body2dCost.html">gcop::Body2dCost</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body2dCost.html#ac060508f37a395a12b11cce2b8b8bb25">Matrix3cd</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a93c86f47f54f972b8ce5e95db0160f69"></a><!-- doxytag: member="gcop::Body2dCost::Matrix6cd" ref="a93c86f47f54f972b8ce5e95db0160f69" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int c = 3&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef Matrix&lt;double, 6, c&gt; <a class="el" href="classgcop_1_1Body2dCost.html">gcop::Body2dCost</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body2dCost.html#a93c86f47f54f972b8ce5e95db0160f69">Matrix6cd</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a35e6b30c876c5a9272c5ac8d36ecfde3"></a><!-- doxytag: member="gcop::Body2dCost::Matrixcd" ref="a35e6b30c876c5a9272c5ac8d36ecfde3" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int c = 3&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef Matrix&lt;double, c, c&gt; <a class="el" href="classgcop_1_1Body2dCost.html">gcop::Body2dCost</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body2dCost.html#a35e6b30c876c5a9272c5ac8d36ecfde3">Matrixcd</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classgcop_1_1LqCost.html#aa3604f58b49a41683c910fab4df04da2">gcop::LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a535fc113fdcbc818a7aa58d0452dcf55"></a><!-- doxytag: member="gcop::Body2dCost::Vectorcd" ref="a535fc113fdcbc818a7aa58d0452dcf55" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int c = 3&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef Matrix&lt;double, c, 1&gt; <a class="el" href="classgcop_1_1Body2dCost.html">gcop::Body2dCost</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body2dCost.html#a535fc113fdcbc818a7aa58d0452dcf55">Vectorcd</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">gcop::LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a86da5b74c59eada11ca7e03edbe568c9"></a><!-- doxytag: member="gcop::Body2dCost::Body2dCost" ref="a86da5b74c59eada11ca7e03edbe568c9" args="(Body2d&lt; c &gt; &amp;sys, double tf, const Body2dState &amp;xf)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int c&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgcop_1_1Body2dCost.html">gcop::Body2dCost</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body2dCost.html">Body2dCost</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Body2d.html">Body2d</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Body2d.html">Body2d</a>&lt; c &gt; &amp;&#160;</td>
           <td class="paramname"><em>sys</em>, </td>
         </tr>
         <tr>
@@ -116,7 +193,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespacegcop.html#a84d92b047c73e771491e45675476d08a">M3V3d</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a> &amp;&#160;</td>
           <td class="paramname"><em>xf</em>&#160;</td>
         </tr>
         <tr>
@@ -128,17 +205,19 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>References <a class="el" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e">gcop::LqCost&lt; M3V3d, 6, 3, Dynamic, 9 &gt;::Q</a>, <a class="el" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008">gcop::LqCost&lt; M3V3d, 6, 3, Dynamic, 9 &gt;::Qf</a>, and <a class="el" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987">gcop::LqCost&lt; M3V3d, 6, 3, Dynamic, 9 &gt;::R</a>.</p>
+<p>References <a class="el" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e">gcop::LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;::Q</a>, <a class="el" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008">gcop::LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;::Qf</a>, and <a class="el" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987">gcop::LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;::R</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ae9c4c8105a91c1e1d7ff06979899d7b1"></a><!-- doxytag: member="gcop::Body2dCost::L" ref="ae9c4c8105a91c1e1d7ff06979899d7b1" args="(double t, const M3V3d &amp;x, const Vector3d &amp;u, double h, Vector6d *Lx=0, Matrix6d *Lxx=0, Vector3d *Lu=0, Matrix3d *Luu=0, Matrix63d *Lxu=0)" -->
+<a class="anchor" id="a2d9777c8d9ad756728bbb5c757c2cd4e"></a><!-- doxytag: member="gcop::Body2dCost::L" ref="a2d9777c8d9ad756728bbb5c757c2cd4e" args="(double t, const Body2dState &amp;x, const Vectorcd &amp;u, double h, Vector6d *Lx=0, Matrix6d *Lxx=0, Vectorcd *Lu=0, Matrixcd *Luu=0, Matrix6cd *Lxu=0)" -->
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;int c&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classgcop_1_1Body2dCost.html#ae9c4c8105a91c1e1d7ff06979899d7b1">Body2dCost::L</a> </td>
+          <td class="memname">double <a class="el" href="classgcop_1_1Body2dCost.html">gcop::Body2dCost</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body2dCost.html#a2d9777c8d9ad756728bbb5c757c2cd4e">L</a> </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>t</em>, </td>
@@ -146,13 +225,13 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespacegcop.html#a84d92b047c73e771491e45675476d08a">M3V3d</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a> &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Vector3d &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1Body2dCost.html#a535fc113fdcbc818a7aa58d0452dcf55">Vectorcd</a> &amp;&#160;</td>
           <td class="paramname"><em>u</em>, </td>
         </tr>
         <tr>
@@ -176,19 +255,19 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Vector3d *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Body2dCost.html#a535fc113fdcbc818a7aa58d0452dcf55">Vectorcd</a> *&#160;</td>
           <td class="paramname"><em>Lu</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Matrix3d *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Body2dCost.html#a35e6b30c876c5a9272c5ac8d36ecfde3">Matrixcd</a> *&#160;</td>
           <td class="paramname"><em>Luu</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacegcop.html#a96a4e467a5862486de3127b041d57d22">Matrix63d</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Body2dCost.html#a93c86f47f54f972b8ce5e95db0160f69">Matrix6cd</a> *&#160;</td>
           <td class="paramname"><em>Lxu</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
@@ -200,17 +279,19 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>References <a class="el" href="classgcop_1_1SE2.html#ad2e4cf3fd63dad917d16a0358c5430c6">gcop::SE2::g2q()</a>, <a class="el" href="classgcop_1_1SE2.html#af8859de54f0e149efd806e9d87a6d079">gcop::SE2::Instance()</a>, <a class="el" href="classgcop_1_1SE2.html#a08fa8787083e1d4656da2df424c8aa80">gcop::SE2::inv()</a>, <a class="el" href="classgcop_1_1Body2dCost.html#af12b03b859b40b373ecd2ed7bc3b488a">ko</a>, <a class="el" href="classgcop_1_1Body2dTrack.html#af7c669c1e15354a24234059c3a056040">gcop::Body2dTrack::ls</a>, <a class="el" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e">gcop::LqCost&lt; M3V3d, 6, 3, Dynamic, 9 &gt;::Q</a>, <a class="el" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008">gcop::LqCost&lt; M3V3d, 6, 3, Dynamic, 9 &gt;::Qf</a>, <a class="el" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987">gcop::LqCost&lt; M3V3d, 6, 3, Dynamic, 9 &gt;::R</a>, <a class="el" href="classgcop_1_1Cost.html#a5ff85a0123ee3bf8f1988c3cd339ac2d">gcop::Cost&lt; M3V3d, _nx, _nu, _np &gt;::tf</a>, <a class="el" href="classgcop_1_1SE2.html#adc167bc9132e95df4d61bcc507a6d2eb">gcop::SE2::Tg()</a>, <a class="el" href="classgcop_1_1Body2dCost.html#a439eddeacc2f7e7c59293f43ac6ca8cc">track</a>, <a class="el" href="classgcop_1_1Body2dTrack.html#a4dc202c7ad3ee5e459230bd809966b69">gcop::Body2dTrack::w</a>, and <a class="el" href="classgcop_1_1LqCost.html#a606611084240ba0dc6624409514cb85d">gcop::LqCost&lt; M3V3d, 6, 3, Dynamic, 9 &gt;::xf</a>.</p>
+<p>References <a class="el" href="classgcop_1_1SE2.html#ad2e4cf3fd63dad917d16a0358c5430c6">gcop::SE2::g2q()</a>, <a class="el" href="classgcop_1_1SE2.html#af8859de54f0e149efd806e9d87a6d079">gcop::SE2::Instance()</a>, <a class="el" href="classgcop_1_1SE2.html#a08fa8787083e1d4656da2df424c8aa80">gcop::SE2::inv()</a>, <a class="el" href="classgcop_1_1Body2dCost.html#abdf2d9e54ad44d535dcc866ba2eddbfb">gcop::Body2dCost&lt; c &gt;::ko</a>, <a class="el" href="classgcop_1_1Body2dTrack.html#af7c669c1e15354a24234059c3a056040">gcop::Body2dTrack::ls</a>, <a class="el" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e">gcop::LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;::Q</a>, <a class="el" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008">gcop::LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;::Qf</a>, <a class="el" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987">gcop::LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;::R</a>, <a class="el" href="classgcop_1_1Cost.html#a774f472f719d4b9d23f5822961e258a3">gcop::Cost&lt; Body2dState, _nx, _nu, _np, Body2dState &gt;::tf</a>, <a class="el" href="classgcop_1_1SE2.html#adc167bc9132e95df4d61bcc507a6d2eb">gcop::SE2::Tg()</a>, <a class="el" href="classgcop_1_1Body2dCost.html#a976ecc4962c7f1960251182d173e72e7">gcop::Body2dCost&lt; c &gt;::track</a>, <a class="el" href="classgcop_1_1Body2dTrack.html#a4dc202c7ad3ee5e459230bd809966b69">gcop::Body2dTrack::w</a>, and <a class="el" href="classgcop_1_1LqCost.html#a124d5d664a3acb0dfb01de0fbfccde82">gcop::LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;::xf</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="af12b03b859b40b373ecd2ed7bc3b488a"></a><!-- doxytag: member="gcop::Body2dCost::ko" ref="af12b03b859b40b373ecd2ed7bc3b488a" args="" -->
+<a class="anchor" id="abdf2d9e54ad44d535dcc866ba2eddbfb"></a><!-- doxytag: member="gcop::Body2dCost::ko" ref="abdf2d9e54ad44d535dcc866ba2eddbfb" args="" -->
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;int c = 3&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classgcop_1_1Body2dCost.html#af12b03b859b40b373ecd2ed7bc3b488a">gcop::Body2dCost::ko</a></td>
+          <td class="memname">double <a class="el" href="classgcop_1_1Body2dCost.html">gcop::Body2dCost</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body2dCost.html#abdf2d9e54ad44d535dcc866ba2eddbfb">ko</a></td>
         </tr>
       </table>
 </div>
@@ -218,22 +299,24 @@ Public Attributes</h2></td></tr>
 
 <p>obstacle avoidance gain </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Body2dCost.html#ae9c4c8105a91c1e1d7ff06979899d7b1">L()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Body2dCost.html#a2d9777c8d9ad756728bbb5c757c2cd4e">gcop::Body2dCost&lt; c &gt;::L()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a439eddeacc2f7e7c59293f43ac6ca8cc"></a><!-- doxytag: member="gcop::Body2dCost::track" ref="a439eddeacc2f7e7c59293f43ac6ca8cc" args="" -->
+<a class="anchor" id="a976ecc4962c7f1960251182d173e72e7"></a><!-- doxytag: member="gcop::Body2dCost::track" ref="a976ecc4962c7f1960251182d173e72e7" args="" -->
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;int c = 3&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Body2dTrack.html">Body2dTrack</a>* <a class="el" href="classgcop_1_1Body2dCost.html#a439eddeacc2f7e7c59293f43ac6ca8cc">gcop::Body2dCost::track</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1Body2dTrack.html">Body2dTrack</a>* <a class="el" href="classgcop_1_1Body2dCost.html">gcop::Body2dCost</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body2dCost.html#a976ecc4962c7f1960251182d173e72e7">track</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Referenced by <a class="el" href="classgcop_1_1Body2dCost.html#ae9c4c8105a91c1e1d7ff06979899d7b1">L()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Body2dCost.html#a2d9777c8d9ad756728bbb5c757c2cd4e">gcop::Body2dCost&lt; c &gt;::L()</a>.</p>
 
 </div>
 </div>
@@ -245,7 +328,7 @@ Public Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

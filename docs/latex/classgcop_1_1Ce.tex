@@ -58,7 +58,11 @@ bool {\bf inc}
 {\bf \-Vectornd} {\bf zmin}
 \begin{DoxyCompactList}\small\item\em current best \end{DoxyCompactList}\item 
 double {\bf \-Jmin}
-\begin{DoxyCompactList}\small\item\em minimum cost \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em minimum cost \end{DoxyCompactList}\item 
+double {\bf \-Jmax}
+\begin{DoxyCompactList}\small\item\em current \-Jmax (discard any samples with costs higher than \-Jmax) \end{DoxyCompactList}\item 
+double {\bf \-Jave}
+\begin{DoxyCompactList}\small\item\em average cost over all samples \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
@@ -223,7 +227,7 @@ underlying \-Gaussian-\/mixture-\/model
 
 
 
-\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
 
 \index{gcop\-::\-Ce@{gcop\-::\-Ce}!inc@{inc}}
 \index{inc@{inc}!gcop::Ce@{gcop\-::\-Ce}}
@@ -231,6 +235,20 @@ underlying \-Gaussian-\/mixture-\/model
 
 
 incremental version of mras 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Jave@{\-Jave}}
+\index{\-Jave@{\-Jave}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Jave}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ double {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Jave}}\label{classgcop_1_1Ce_a4d6840d1e3ca8a531a9b9d43992a9ec3}
+
+
+average cost over all samples 
+
+\index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Jmax@{\-Jmax}}
+\index{\-Jmax@{\-Jmax}!gcop::Ce@{gcop\-::\-Ce}}
+\subsubsection[{\-Jmax}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ double {\bf gcop\-::\-Ce}$<$ \-\_\-n $>$\-::{\bf \-Jmax}}\label{classgcop_1_1Ce_af9b79263ada3c9bfd30572546b002506}
+
+
+current \-Jmax (discard any samples with costs higher than \-Jmax) 
 
 \index{gcop\-::\-Ce@{gcop\-::\-Ce}!\-Jmin@{\-Jmin}}
 \index{\-Jmin@{\-Jmin}!gcop::Ce@{gcop\-::\-Ce}}
@@ -269,7 +287,7 @@ extra noise
 
 
 
-\-Referenced by gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-Ce(), and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+\-Referenced by gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-Ce(), and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
 
 \index{gcop\-::\-Ce@{gcop\-::\-Ce}!zmin@{zmin}}
 \index{zmin@{zmin}!gcop::Ce@{gcop\-::\-Ce}}

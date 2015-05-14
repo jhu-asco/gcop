@@ -100,13 +100,13 @@
 <li>L()
 : <a class="el" href="classgcop_1_1BaCost.html#a4a818dcc027d69e9870b7832edc06755">gcop::BaCost</a>
 , <a class="el" href="classgcop_1_1Gmm.html#afd7cd7ffbc93281897cd7bad5ca49c7a">gcop::Gmm&lt; _n &gt;</a>
-, <a class="el" href="classgcop_1_1Body2dCost.html#ae9c4c8105a91c1e1d7ff06979899d7b1">gcop::Body2dCost</a>
-, <a class="el" href="classgcop_1_1Cost.html#aee08e8fb34b61d6af233611d04403d9a">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Body2dCost.html#a2d9777c8d9ad756728bbb5c757c2cd4e">gcop::Body2dCost&lt; c &gt;</a>
+, <a class="el" href="classgcop_1_1Cost.html#a56496b40d3b5d3e5ebf52fcd78aca83f">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1MultiCost.html#a9b76dfe651c31265e4ac52e1dda5b851">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1SensorCost.html#adf54d680e7b3601302327f0b20fe9af5">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1GunicycleCost.html#afdd02d72f94a936e95ea15087e01a608">gcop::GunicycleCost</a>
 , <a class="el" href="classgcop_1_1Normal.html#abee5dd9f4e23b1e2242a65c98a88cc28">gcop::Normal&lt; _n &gt;</a>
-, <a class="el" href="classgcop_1_1Body2dTrackCost.html#a771280d97f0787e5b83b3e48723d036c">gcop::Body2dTrackCost</a>
+, <a class="el" href="classgcop_1_1Body2dTrackCost.html#a6d9b2d2022614639aa5dfbd57c0fec25">gcop::Body2dTrackCost</a>
 , <a class="el" href="classgcop_1_1Kinbody3dTrackCost.html#a7f3c4902d9ad20c06af445cb61b81c77">gcop::Kinbody3dTrackCost&lt; _nu &gt;</a>
 , <a class="el" href="classgcop_1_1KinbodyProjTrackCost.html#a04b2075ddfb677a829e6e08f0514cc72">gcop::KinbodyProjTrackCost&lt; _nu &gt;</a>
 , <a class="el" href="classgcop_1_1AirplaneCost.html#a5594a19cd07f3d3cd2ead21ebfd318f5">gcop::AirplaneCost</a>
@@ -122,7 +122,7 @@
 , <a class="el" href="classgcop_1_1UuvManifold.html#ab271c8b46f6561cfee01fee53dab4f21">gcop::UuvManifold</a>
 , <a class="el" href="classgcop_1_1Group.html#aa88024b210bafd20b50ade411f5d19a2">gcop::Group&lt; n, m &gt;</a>
 , <a class="el" href="classgcop_1_1AirmManifold.html#a5d2d33af8d8dba2464a9a5a31da6d1f8">gcop::AirmManifold</a>
-, <a class="el" href="classgcop_1_1Body2dManifold.html#a1714e11500e7d2ef5f7260bfa6a079dc">gcop::Body2dManifold</a>
+, <a class="el" href="classgcop_1_1Body2dManifold.html#a8ba72274bd27a6f3a51182521017de7d">gcop::Body2dManifold</a>
 , <a class="el" href="classgcop_1_1Body3dManifold.html#a7e7469523eff31aeed77855ff8d5f714">gcop::Body3dManifold</a>
 , <a class="el" href="classgcop_1_1GunicycleManifold.html#a116d2987aee9bb3b7b8a5fae2009c67e">gcop::GunicycleManifold</a>
 , <a class="el" href="classgcop_1_1ImuManifold.html#a8a4eb34c979b4eb24cb6bbeb7e310a2a">gcop::ImuManifold</a>
@@ -166,7 +166,7 @@
 </li>
 <li>Lp()
 : <a class="el" href="classgcop_1_1LqSensorCost.html#a6d8bfcdafd068c8fdc71d0676ed1ff73">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1Body2dSlamCost.html#a822beb2dcfd3aabd91e815a8a51b7625">gcop::Body2dSlamCost</a>
+, <a class="el" href="classgcop_1_1Body2dSlamCost.html#af4812ac8e4883758fbc22b15c0aeb707">gcop::Body2dSlamCost</a>
 , <a class="el" href="classgcop_1_1SensorCost.html#a0175e14552b82ea08cb3f2dbb849b0e0">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 </li>
 <li>LqCost()
@@ -176,7 +176,7 @@
 : <a class="el" href="classgcop_1_1LqSensorCost.html#ad18ffa9630c50bc0880ae5b603ced4aa">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 </li>
 <li>LsCost()
-: <a class="el" href="classgcop_1_1LsCost.html#af5226fd502b37185eea969fb885c3ae0">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+: <a class="el" href="classgcop_1_1LsCost.html#a40cebb06e1e40dcc4a01ba1db14cc973">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a>
 </li>
 <li>LsSensorCost()
 : <a class="el" href="classgcop_1_1LsSensorCost.html#a26f467296556293c3da29c881eb6cfe9">gcop::LsSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
@@ -186,7 +186,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:59:10 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

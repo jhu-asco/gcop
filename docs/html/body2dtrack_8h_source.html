@@ -80,23 +80,23 @@
 <a name="l00020"></a><a class="code" href="classgcop_1_1Body2dTrack.html">00020</a>   <span class="keyword">class </span><a class="code" href="classgcop_1_1Body2dTrack.html">Body2dTrack</a> {
 <a name="l00021"></a>00021   <span class="keyword">public</span>:
 <a name="l00022"></a>00022     
-<a name="l00034"></a>00034     <a class="code" href="classgcop_1_1Body2dTrack.html">Body2dTrack</a>(<a class="code" href="classgcop_1_1Body2d.html">Body2d</a> &amp;sys, <span class="keywordtype">int</span> nf, <span class="keywordtype">double</span> t0, <span class="keywordtype">double</span> tf,
+<a name="l00034"></a>00034     <a class="code" href="classgcop_1_1Body2dTrack.html">Body2dTrack</a>(<a class="code" href="classgcop_1_1Body2d.html">Body2d&lt;&gt;</a> &amp;sys, <span class="keywordtype">int</span> nf, <span class="keywordtype">double</span> t0, <span class="keywordtype">double</span> tf,
 <a name="l00035"></a>00035                 <span class="keywordtype">double</span> r = 25,
 <a name="l00036"></a>00036                 <span class="keywordtype">bool</span> odometry = <span class="keyword">true</span>,
 <a name="l00037"></a>00037                 <span class="keywordtype">bool</span> extforce = <span class="keyword">false</span>,
 <a name="l00038"></a>00038                 <span class="keywordtype">bool</span> forces = <span class="keyword">false</span>);
 <a name="l00039"></a>00039 
-<a name="l00045"></a>00045     <span class="keywordtype">void</span> Optp(VectorXd &amp;p, <span class="keyword">const</span> vector&lt;M3V3d&gt; &amp;xs);
+<a name="l00045"></a>00045     <span class="keywordtype">void</span> Optp(VectorXd &amp;p, <span class="keyword">const</span> vector&lt;Body2dState&gt; &amp;xs);
 <a name="l00046"></a>00046 
-<a name="l00047"></a>00047     <span class="keywordtype">void</span> Get(<a class="code" href="namespacegcop.html#a84d92b047c73e771491e45675476d08a">M3V3d</a> &amp;x, <span class="keywordtype">double</span> vd, <span class="keywordtype">double</span> t) <span class="keyword">const</span>;
+<a name="l00047"></a>00047     <span class="keywordtype">void</span> Get(<a class="code" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a> &amp;x, <span class="keywordtype">double</span> vd, <span class="keywordtype">double</span> t) <span class="keyword">const</span>;
 <a name="l00048"></a>00048 
 <a name="l00049"></a>00049     <span class="keywordtype">void</span> MakeTrue();
 <a name="l00050"></a>00050 
-<a name="l00051"></a>00051     <span class="keywordtype">void</span> Add(<span class="keyword">const</span> Vector3d &amp;u, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#a84d92b047c73e771491e45675476d08a">M3V3d</a> &amp;x, <span class="keywordtype">double</span> h);
+<a name="l00051"></a>00051     <span class="keywordtype">void</span> Add(<span class="keyword">const</span> Vector3d &amp;u, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a> &amp;x, <span class="keywordtype">double</span> h);
 <a name="l00052"></a>00052 
-<a name="l00059"></a>00059     <span class="keywordtype">void</span> Add2(<span class="keyword">const</span> Vector3d &amp;u, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#a84d92b047c73e771491e45675476d08a">M3V3d</a> &amp;x, <span class="keywordtype">double</span> h);
+<a name="l00059"></a>00059     <span class="keywordtype">void</span> Add2(<span class="keyword">const</span> Vector3d &amp;u, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#af58e672be79723e3e653aa8858c126b6">Body2dState</a> &amp;x, <span class="keywordtype">double</span> h);
 <a name="l00060"></a>00060 
-<a name="l00061"></a><a class="code" href="classgcop_1_1Body2dTrack.html#aef8b2e0d3511afd10197d57be65aa749">00061</a>     <a class="code" href="classgcop_1_1Body2d.html">Body2d</a> &amp;<a class="code" href="classgcop_1_1Body2dTrack.html#aef8b2e0d3511afd10197d57be65aa749" title="system">sys</a>;     
+<a name="l00061"></a><a class="code" href="classgcop_1_1Body2dTrack.html#aef8b2e0d3511afd10197d57be65aa749">00061</a>     <a class="code" href="classgcop_1_1Body2d.html">Body2d&lt;&gt;</a> &amp;<a class="code" href="classgcop_1_1Body2dTrack.html#aef8b2e0d3511afd10197d57be65aa749" title="system">sys</a>;     
 <a name="l00062"></a>00062 
 <a name="l00063"></a><a class="code" href="classgcop_1_1Body2dTrack.html#a769a9f5dd668c0672ca3df8e97a7939d">00063</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Body2dTrack.html#a769a9f5dd668c0672ca3df8e97a7939d" title="initial time around track">t0</a>;       
 <a name="l00064"></a><a class="code" href="classgcop_1_1Body2dTrack.html#a6465d82716194683bc5fcb95e7c0220b">00064</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Body2dTrack.html#a6465d82716194683bc5fcb95e7c0220b" title="final time around track">tf</a>;       
@@ -112,14 +112,14 @@
 <a name="l00074"></a>00074     
 <a name="l00075"></a><a class="code" href="classgcop_1_1Body2dTrack.html#a851a8e990305a8b06c1d21ef457f699c">00075</a>     vector&lt;double&gt; <a class="code" href="classgcop_1_1Body2dTrack.html#a851a8e990305a8b06c1d21ef457f699c" title="sequence of times (N+1 vector)">ts</a>;     
 <a name="l00076"></a>00076 
-<a name="l00077"></a><a class="code" href="classgcop_1_1Body2dTrack.html#a33335be53322b6aab899874f66e2a10d">00077</a>     vector&lt;M3V3d&gt; <a class="code" href="classgcop_1_1Body2dTrack.html#a33335be53322b6aab899874f66e2a10d" title="sequence of states x=(g,v) (N+1 vector)">xs</a>;      
+<a name="l00077"></a><a class="code" href="classgcop_1_1Body2dTrack.html#a4362c78c4b8bd415addb38fc9b2fc715">00077</a>     vector&lt;Body2dState&gt; <a class="code" href="classgcop_1_1Body2dTrack.html#a4362c78c4b8bd415addb38fc9b2fc715" title="sequence of states x=(g,v) (N+1 vector)">xs</a>;      
 <a name="l00078"></a>00078 
 <a name="l00079"></a><a class="code" href="classgcop_1_1Body2dTrack.html#aea1b855c00a56729b6895287f6d22a35">00079</a>     vector&lt;Vector3d&gt; <a class="code" href="classgcop_1_1Body2dTrack.html#aea1b855c00a56729b6895287f6d22a35" title="sequence of inputs (N vector)">us</a>;   
 <a name="l00080"></a>00080     
 <a name="l00081"></a><a class="code" href="classgcop_1_1Body2dTrack.html#af7c669c1e15354a24234059c3a056040">00081</a>     vector&lt;Vector2d&gt; <a class="code" href="classgcop_1_1Body2dTrack.html#af7c669c1e15354a24234059c3a056040" title="landmark positions">ls</a>;   
 <a name="l00082"></a><a class="code" href="classgcop_1_1Body2dTrack.html#a3f4394572fe88fa8d87b02cd94b6c412">00082</a>     vector&lt;bool&gt; <a class="code" href="classgcop_1_1Body2dTrack.html#a3f4394572fe88fa8d87b02cd94b6c412" title="was it observed">observed</a>; 
 <a name="l00083"></a>00083 
-<a name="l00084"></a><a class="code" href="classgcop_1_1Body2dTrack.html#a037e27565b3c35c4585052b0e8de26ab">00084</a>     vector&lt;M3V3d&gt; <a class="code" href="classgcop_1_1Body2dTrack.html#a037e27565b3c35c4585052b0e8de26ab" title="unoptimized trajectory">xos</a>;     
+<a name="l00084"></a><a class="code" href="classgcop_1_1Body2dTrack.html#ae0b2ae1acc286c6899cc038f472e23f6">00084</a>     vector&lt;Body2dState&gt; <a class="code" href="classgcop_1_1Body2dTrack.html#ae0b2ae1acc286c6899cc038f472e23f6" title="unoptimized trajectory">xos</a>;     
 <a name="l00085"></a><a class="code" href="classgcop_1_1Body2dTrack.html#a4098647c1bb6150ab0ac560871eabbbf">00085</a>     vector&lt;Vector3d&gt; <a class="code" href="classgcop_1_1Body2dTrack.html#a4098647c1bb6150ab0ac560871eabbbf" title="unoptimized trajectory">uos</a>;     
 <a name="l00086"></a>00086 
 <a name="l00087"></a><a class="code" href="classgcop_1_1Body2dTrack.html#ac79196b2b9ba7f1a1869c51f475dabd5">00087</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Body2dTrack.html#ac79196b2b9ba7f1a1869c51f475dabd5">init</a>; 
@@ -150,7 +150,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

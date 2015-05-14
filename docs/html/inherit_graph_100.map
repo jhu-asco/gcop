@@ -1,4 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop_1_1Sensor.html" title="gcop::Sensor\&lt; T, _nx, _nu, _np, Vector3d, 3 \&gt;" alt="" coords="5,5,299,35"/>
-<area shape="rect" id="node3" href="$classgcop_1_1Gps.html" title="gcop::Gps\&lt; T, _nx, _nu, _np \&gt;" alt="" coords="348,5,548,35"/>
+<area shape="rect" id="node1" href="$structgcop_1_1Point3dState.html" title="gcop::Point3dState" alt="" coords="5,5,139,35"/>
 </map>

@@ -79,64 +79,68 @@
 <a name="l00024"></a>00024   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, 
 <a name="l00025"></a>00025     <span class="keywordtype">int</span> _nx = Dynamic, 
 <a name="l00026"></a>00026     <span class="keywordtype">int</span> _nu = Dynamic,
-<a name="l00027"></a><a class="code" href="classgcop_1_1Cost.html">00027</a>     <span class="keywordtype">int</span> _np = Dynamic&gt; <span class="keyword">class </span><a class="code" href="classgcop_1_1Cost.html">Cost</a> {
-<a name="l00028"></a>00028   <span class="keyword">public</span>:
-<a name="l00029"></a>00029   
-<a name="l00030"></a><a class="code" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">00030</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nx, 1&gt; <a class="code" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a>;
-<a name="l00031"></a><a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">00031</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nu, 1&gt; <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a>;
-<a name="l00032"></a><a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">00032</a>   <span class="keyword">typedef</span> Matrix&lt;double, _np, 1&gt; <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a>;
-<a name="l00033"></a>00033 
-<a name="l00034"></a><a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">00034</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nx, _nx&gt; <a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a>;
-<a name="l00035"></a><a class="code" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">00035</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nx, _nu&gt; <a class="code" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a>;
-<a name="l00036"></a><a class="code" href="classgcop_1_1Cost.html#a78c4621db26fe3ef52ea534436b78bee">00036</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nu, _nx&gt; <a class="code" href="classgcop_1_1Cost.html#a78c4621db26fe3ef52ea534436b78bee">Matrixcnd</a>;
-<a name="l00037"></a><a class="code" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">00037</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nu, _nu&gt; <a class="code" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a>;
-<a name="l00038"></a>00038   
-<a name="l00039"></a>00039   <span class="comment">//  typedef Matrix&lt;double, Dynamic, 1&gt; Vectormd;</span>
-<a name="l00040"></a><a class="code" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">00040</a>   <span class="keyword">typedef</span> Matrix&lt;double, _np, _np&gt; <a class="code" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a>;
-<a name="l00041"></a><a class="code" href="classgcop_1_1Cost.html#ac01445481fc7fcf3d12302e9797595b1">00041</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nx, _np&gt; <a class="code" href="classgcop_1_1Cost.html#ac01445481fc7fcf3d12302e9797595b1">Matrixnmd</a>;
-<a name="l00042"></a><a class="code" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">00042</a>   <span class="keyword">typedef</span> Matrix&lt;double, _np, _nx&gt; <a class="code" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a>;
-<a name="l00043"></a>00043   
-<a name="l00049"></a>00049   <a class="code" href="classgcop_1_1Cost.html">Cost</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, _nx, _nu, _np&gt;</a> &amp;sys, <span class="keywordtype">double</span> tf);
-<a name="l00050"></a>00050 
-<a name="l00056"></a>00056   <span class="comment">//Cost(System&lt;T, _nx, _nu, _np&gt; &amp;sys, Sensor&lt;double tf);</span>
-<a name="l00057"></a>00057   
-<a name="l00070"></a>00070   <span class="keyword">virtual</span> <span class="keywordtype">double</span> L(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
-<a name="l00071"></a>00071                    <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p = 0,
-<a name="l00072"></a>00072                    <a class="code" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> *Lx = 0, <a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a>* Lxx = 0,
-<a name="l00073"></a>00073                    <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> *Lu = 0, <a class="code" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a>* Luu = 0,
-<a name="l00074"></a>00074                    <a class="code" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a> *Lxu = 0,
-<a name="l00075"></a>00075                    <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *Lp = 0, <a class="code" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> *Lpp = 0,
-<a name="l00076"></a>00076                    <a class="code" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> *Lpx = 0);  
-<a name="l00077"></a>00077   
-<a name="l00078"></a><a class="code" href="classgcop_1_1Cost.html#a57d004815023d9a92ead0cea1d0dbb36">00078</a>   <a class="code" href="classgcop_1_1System.html">System&lt;T, _nx, _nu, _np&gt;</a> &amp;<a class="code" href="classgcop_1_1Cost.html#a57d004815023d9a92ead0cea1d0dbb36" title="system">sys</a>;  
-<a name="l00079"></a><a class="code" href="classgcop_1_1Cost.html#a5ff85a0123ee3bf8f1988c3cd339ac2d">00079</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Cost.html#a5ff85a0123ee3bf8f1988c3cd339ac2d" title="final time of trajectory">tf</a>;               
-<a name="l00080"></a>00080 };
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np&gt; 
-<a name="l00084"></a><a class="code" href="classgcop_1_1Cost.html#ad8c43b1fece572f546586aabf5c4d6bc">00084</a>     <a class="code" href="classgcop_1_1Cost.html">Cost&lt;T, _nx, _nu, _np&gt;::Cost</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, _nx, _nu, _np&gt;</a> &amp;sys, 
-<a name="l00085"></a>00085                                  <span class="keywordtype">double</span> tf) : sys(sys), tf(tf) {
-<a name="l00086"></a>00086   }  
-<a name="l00087"></a>00087   
-<a name="l00088"></a>00088   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np&gt; 
-<a name="l00089"></a><a class="code" href="classgcop_1_1Cost.html#aee08e8fb34b61d6af233611d04403d9a">00089</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Cost.html#aee08e8fb34b61d6af233611d04403d9a">Cost&lt;T, _nx, _nu, _np&gt;::L</a>(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T&amp; x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a>&amp; u, <span class="keywordtype">double</span> h,
-<a name="l00090"></a>00090                                      <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p,
-<a name="l00091"></a>00091                                      Matrix&lt;double, _nx, 1&gt; *Lx, Matrix&lt;double, _nx, _nx&gt;* Lxx,
-<a name="l00092"></a>00092                                      Matrix&lt;double, _nu, 1&gt; *Lu, Matrix&lt;double, _nu, _nu&gt;* Luu,
-<a name="l00093"></a>00093                                      Matrix&lt;double, _nx, _nu&gt; *Lxu,
-<a name="l00094"></a>00094                                      <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *Lp, <a class="code" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> *Lpp,
-<a name="l00095"></a>00095                                      <a class="code" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> *Lpx) {
-<a name="l00096"></a>00096     cout &lt;&lt; <span class="stringliteral">&quot;[W] Cost:L: unimplemented!&quot;</span> &lt;&lt; endl;
-<a name="l00097"></a>00097     <span class="keywordflow">return</span> 0;
-<a name="l00098"></a>00098   }
-<a name="l00099"></a>00099 }
-<a name="l00100"></a>00100 
-<a name="l00101"></a>00101 <span class="preprocessor">#endif</span>
+<a name="l00027"></a>00027     <span class="keywordtype">int</span> _np = Dynamic,
+<a name="l00028"></a><a class="code" href="classgcop_1_1Cost.html">00028</a>     <span class="keyword">typename</span> Tc = T&gt; <span class="keyword">class </span><a class="code" href="classgcop_1_1Cost.html">Cost</a> {
+<a name="l00029"></a>00029   <span class="keyword">public</span>:
+<a name="l00030"></a>00030   
+<a name="l00031"></a><a class="code" href="classgcop_1_1Cost.html#a908616f9085ea4d0fb4e3b6bcf479743">00031</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nx, 1&gt; <a class="code" href="classgcop_1_1Cost.html#a908616f9085ea4d0fb4e3b6bcf479743">Vectornd</a>;
+<a name="l00032"></a><a class="code" href="classgcop_1_1Cost.html#ab5cbac6ad98cdc73b6d541a909484992">00032</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nu, 1&gt; <a class="code" href="classgcop_1_1Cost.html#ab5cbac6ad98cdc73b6d541a909484992">Vectorcd</a>;
+<a name="l00033"></a><a class="code" href="classgcop_1_1Cost.html#a6d6ab24bbe55dfae824036d5cd336962">00033</a>   <span class="keyword">typedef</span> Matrix&lt;double, _np, 1&gt; <a class="code" href="classgcop_1_1Cost.html#a6d6ab24bbe55dfae824036d5cd336962">Vectormd</a>;
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="classgcop_1_1Cost.html#ad74bc680c916dd17d70f2272de0741dc">00035</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nx, _nx&gt; <a class="code" href="classgcop_1_1Cost.html#ad74bc680c916dd17d70f2272de0741dc">Matrixnd</a>;
+<a name="l00036"></a><a class="code" href="classgcop_1_1Cost.html#a6397802756f83e925980c4407e67c07b">00036</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nx, _nu&gt; <a class="code" href="classgcop_1_1Cost.html#a6397802756f83e925980c4407e67c07b">Matrixncd</a>;
+<a name="l00037"></a><a class="code" href="classgcop_1_1Cost.html#a9ade25d1b7f6a8196cb700e976dcfc8e">00037</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nu, _nx&gt; <a class="code" href="classgcop_1_1Cost.html#a9ade25d1b7f6a8196cb700e976dcfc8e">Matrixcnd</a>;
+<a name="l00038"></a><a class="code" href="classgcop_1_1Cost.html#a12b08a4c53143d6ad30468a45c1bdbea">00038</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nu, _nu&gt; <a class="code" href="classgcop_1_1Cost.html#a12b08a4c53143d6ad30468a45c1bdbea">Matrixcd</a>;
+<a name="l00039"></a>00039   
+<a name="l00040"></a>00040   <span class="comment">//  typedef Matrix&lt;double, Dynamic, 1&gt; Vectormd;</span>
+<a name="l00041"></a><a class="code" href="classgcop_1_1Cost.html#a69eca9f9c97683f57abda309365971c3">00041</a>   <span class="keyword">typedef</span> Matrix&lt;double, _np, _np&gt; <a class="code" href="classgcop_1_1Cost.html#a69eca9f9c97683f57abda309365971c3">Matrixmd</a>;
+<a name="l00042"></a><a class="code" href="classgcop_1_1Cost.html#aabc9e6adb9a5a9427ef4f93b1aec29bb">00042</a>   <span class="keyword">typedef</span> Matrix&lt;double, _nx, _np&gt; <a class="code" href="classgcop_1_1Cost.html#aabc9e6adb9a5a9427ef4f93b1aec29bb">Matrixnmd</a>;
+<a name="l00043"></a><a class="code" href="classgcop_1_1Cost.html#aa8545df43a6cb92198e921aafce97204">00043</a>   <span class="keyword">typedef</span> Matrix&lt;double, _np, _nx&gt; <a class="code" href="classgcop_1_1Cost.html#aa8545df43a6cb92198e921aafce97204">Matrixmnd</a>;
+<a name="l00044"></a>00044   
+<a name="l00050"></a>00050   <a class="code" href="classgcop_1_1Cost.html">Cost</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, _nx, _nu, _np&gt;</a> &amp;sys, <span class="keywordtype">double</span> tf);
+<a name="l00051"></a>00051 
+<a name="l00057"></a>00057   <span class="comment">//Cost(System&lt;T, _nx, _nu, _np&gt; &amp;sys, Sensor&lt;double tf);</span>
+<a name="l00058"></a>00058   
+<a name="l00071"></a>00071   <span class="keyword">virtual</span> <span class="keywordtype">double</span> L(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#ab5cbac6ad98cdc73b6d541a909484992">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
+<a name="l00072"></a>00072                    <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a6d6ab24bbe55dfae824036d5cd336962">Vectormd</a> *p = 0,
+<a name="l00073"></a>00073                    <a class="code" href="classgcop_1_1Cost.html#a908616f9085ea4d0fb4e3b6bcf479743">Vectornd</a> *Lx = 0, <a class="code" href="classgcop_1_1Cost.html#ad74bc680c916dd17d70f2272de0741dc">Matrixnd</a>* Lxx = 0,
+<a name="l00074"></a>00074                    <a class="code" href="classgcop_1_1Cost.html#ab5cbac6ad98cdc73b6d541a909484992">Vectorcd</a> *Lu = 0, <a class="code" href="classgcop_1_1Cost.html#a12b08a4c53143d6ad30468a45c1bdbea">Matrixcd</a>* Luu = 0,
+<a name="l00075"></a>00075                    <a class="code" href="classgcop_1_1Cost.html#a6397802756f83e925980c4407e67c07b">Matrixncd</a> *Lxu = 0,
+<a name="l00076"></a>00076                    <a class="code" href="classgcop_1_1Cost.html#a6d6ab24bbe55dfae824036d5cd336962">Vectormd</a> *Lp = 0, <a class="code" href="classgcop_1_1Cost.html#a69eca9f9c97683f57abda309365971c3">Matrixmd</a> *Lpp = 0,
+<a name="l00077"></a>00077                    <a class="code" href="classgcop_1_1Cost.html#aa8545df43a6cb92198e921aafce97204">Matrixmnd</a> *Lpx = 0);  
+<a name="l00078"></a>00078 
+<a name="l00084"></a><a class="code" href="classgcop_1_1Cost.html#a0f89708328371a69e049392b6ae7ca1e">00084</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> SetContext(<span class="keyword">const</span> Tc &amp;c) { <span class="keywordflow">return</span> <span class="keyword">true</span>; };
+<a name="l00085"></a>00085   
+<a name="l00086"></a>00086   <a class="code" href="classgcop_1_1System.html">System&lt;T, _nx, _nu, _np&gt;</a> &amp;sys;  
+<a name="l00087"></a><a class="code" href="classgcop_1_1Cost.html#a774f472f719d4b9d23f5822961e258a3">00087</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Cost.html#a774f472f719d4b9d23f5822961e258a3" title="final time of trajectory">tf</a>;                      
+<a name="l00088"></a>00088   
+<a name="l00089"></a>00089 };
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keyword">typename</span> Tc&gt; 
+<a name="l00093"></a><a class="code" href="classgcop_1_1Cost.html#a5590b6abe65e79c67e8d1c004222561f">00093</a>     <a class="code" href="classgcop_1_1Cost.html">Cost&lt;T, _nx, _nu, _np, Tc&gt;::Cost</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, _nx, _nu, _np&gt;</a> &amp;sys, 
+<a name="l00094"></a>00094                                      <span class="keywordtype">double</span> tf) : sys(sys), tf(tf) {
+<a name="l00095"></a>00095   }
+<a name="l00096"></a>00096   
+<a name="l00097"></a>00097   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keyword">typename</span> Tc&gt; 
+<a name="l00098"></a><a class="code" href="classgcop_1_1Cost.html#a56496b40d3b5d3e5ebf52fcd78aca83f">00098</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Cost.html#a56496b40d3b5d3e5ebf52fcd78aca83f">Cost&lt;T, _nx, _nu, _np, Tc&gt;::L</a>(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T&amp; x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#ab5cbac6ad98cdc73b6d541a909484992">Vectorcd</a>&amp; u, <span class="keywordtype">double</span> h,
+<a name="l00099"></a>00099                                          <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a6d6ab24bbe55dfae824036d5cd336962">Vectormd</a> *p,
+<a name="l00100"></a>00100                                          Matrix&lt;double, _nx, 1&gt; *Lx, Matrix&lt;double, _nx, _nx&gt;* Lxx,
+<a name="l00101"></a>00101                                          Matrix&lt;double, _nu, 1&gt; *Lu, Matrix&lt;double, _nu, _nu&gt;* Luu,
+<a name="l00102"></a>00102                                          Matrix&lt;double, _nx, _nu&gt; *Lxu,
+<a name="l00103"></a>00103                                          <a class="code" href="classgcop_1_1Cost.html#a6d6ab24bbe55dfae824036d5cd336962">Vectormd</a> *Lp, <a class="code" href="classgcop_1_1Cost.html#a69eca9f9c97683f57abda309365971c3">Matrixmd</a> *Lpp,
+<a name="l00104"></a>00104                                          <a class="code" href="classgcop_1_1Cost.html#aa8545df43a6cb92198e921aafce97204">Matrixmnd</a> *Lpx) {
+<a name="l00105"></a>00105     cout &lt;&lt; <span class="stringliteral">&quot;[W] Cost:L: unimplemented!&quot;</span> &lt;&lt; endl;
+<a name="l00106"></a>00106     <span class="keywordflow">return</span> 0;
+<a name="l00107"></a>00107   }
+<a name="l00108"></a>00108 }
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -406,7 +406,7 @@
 <a name="l00371"></a>00371       Vectornd dx = VectorXd::Zero(this-&gt;sys.X.n);
 <a name="l00372"></a>00372       dx.setZero();<span class="comment">//Redundancy</span>
 <a name="l00373"></a>00373       T xn = this-&gt;xs[0];
-<a name="l00374"></a>00374       this-&gt;sys.reset(xn,this-&gt;ts[0]);<span class="comment">//Reset to initial state</span>
+<a name="l00374"></a>00374       this-&gt;sys.Reset(xn,this-&gt;ts[0]);<span class="comment">//Reset to initial state</span>
 <a name="l00375"></a>00375       Vectorcd un;
 <a name="l00376"></a>00376       
 <a name="l00377"></a>00377       <span class="keywordtype">double</span> Vm = 0;
@@ -458,7 +458,7 @@
 <a name="l00423"></a>00423           <span class="comment">//Adding nan catching :</span>
 <a name="l00424"></a>00424           <span class="keywordflow">try</span>
 <a name="l00425"></a>00425           {
-<a name="l00426"></a>00426             this-&gt;sys.Step_internalinput(xn, un, h, this-&gt;p);
+<a name="l00426"></a>00426             this-&gt;sys.Step(xn, un, h, this-&gt;p);
 <a name="l00427"></a>00427           }
 <a name="l00428"></a>00428           <span class="keywordflow">catch</span>(std::exception &amp;e)
 <a name="l00429"></a>00429           {
@@ -550,7 +550,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

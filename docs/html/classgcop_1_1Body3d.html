@@ -95,6 +95,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a51313deb6b0a5901d4edf1490932efff">Body3d</a> (const Vector3d &amp;<a class="el" href="classgcop_1_1Body3d.html#ac2199d7bea5a5e7133da9069af14e59d">ds</a>, double <a class="el" href="classgcop_1_1Body3d.html#aca724ed46903c952e111746f3feeaf56">m</a>, const Vector3d &amp;<a class="el" href="classgcop_1_1Body3d.html#a53d4f85cbe9e49d00af7723e43f19028">J</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#aac3b6796d477b4a05ddeb8307367adf6">~Body3d</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a20082c26e614aff7ccf32150ffe6f6b3">Step</a> (<a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> &amp;xb, double <a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a>, const <a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> &amp;xa, const <a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">Vectorcd</a> &amp;u, double h, const VectorXd *p=0, <a class="el" href="namespacegcop.html#a4c4cdeaa455fb1e2d73a69ad4d88a8e2">Matrix12d</a> *A=0, <a class="el" href="classgcop_1_1Body3d.html#a957f1b383c834ff61ce9cc5391197754">Matrix12xcd</a> *B=0, <a class="el" href="classgcop_1_1Body3d.html#a3aa621f0f787b01ca8b4ec359da33cc1">Matrix12Xd</a> *C=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a0d45e2bf2895ee5c1435675992ba5b60">NoiseMatrix</a> (<a class="el" href="namespacegcop.html#a4c4cdeaa455fb1e2d73a69ad4d88a8e2">Matrix12d</a> &amp;Q, double <a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a>, const <a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> &amp;<a class="el" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64">x</a>, const <a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">Vectorcd</a> &amp;u, double h, const VectorXd *p=0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a867ce4d80452a3e74d52f55665c8561d">SympStep</a> (double <a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a>, <a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> &amp;xb, const <a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> &amp;xa, const <a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">Vectorcd</a> &amp;u, double h, const VectorXd *p=0, <a class="el" href="namespacegcop.html#a4c4cdeaa455fb1e2d73a69ad4d88a8e2">Matrix12d</a> *A=0, <a class="el" href="classgcop_1_1Body3d.html#a957f1b383c834ff61ce9cc5391197754">Matrix12xcd</a> *B=0, <a class="el" href="classgcop_1_1Body3d.html#a3aa621f0f787b01ca8b4ec359da33cc1">Matrix12Xd</a> *C=0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a3c5c8c7c564134ad4db942cd7c81dbc2">EulerStep</a> (double <a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a>, <a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> &amp;xb, const <a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> &amp;xa, const <a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">Vectorcd</a> &amp;u, double h, const VectorXd *p=0, <a class="el" href="namespacegcop.html#a4c4cdeaa455fb1e2d73a69ad4d88a8e2">Matrix12d</a> *A=0, <a class="el" href="classgcop_1_1Body3d.html#a957f1b383c834ff61ce9cc5391197754">Matrix12xcd</a> *B=0, <a class="el" href="classgcop_1_1Body3d.html#a3aa621f0f787b01ca8b4ec359da33cc1">Matrix12Xd</a> *C=0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#aad169d2f5d6011efbf877b39edaccd35">ID</a> (<a class="el" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a> &amp;f, double <a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a>, const <a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> &amp;xb, const <a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> &amp;xa, const <a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">Vectorcd</a> &amp;u, double h)</td></tr>
@@ -107,13 +108,15 @@ Static Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#ac2199d7bea5a5e7133da9069af14e59d">ds</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO: visual element.  <a href="#ac2199d7bea5a5e7133da9069af14e59d"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">body dimensions  <a href="#ac2199d7bea5a5e7133da9069af14e59d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#aca724ed46903c952e111746f3feeaf56">m</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">mass  <a href="#aca724ed46903c952e111746f3feeaf56"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a53d4f85cbe9e49d00af7723e43f19028">J</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">3x1 principal moments of inertia  <a href="#a53d4f85cbe9e49d00af7723e43f19028"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#ad8880ca728eec8374ee8cb97d3bea29f">I</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">6x1 spatial inertia matrix  <a href="#ad8880ca728eec8374ee8cb97d3bea29f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a16192d25613c763ffdb8f7d0d1046831">Ii</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">6x1 spatial inertia matrix inverse  <a href="#a16192d25613c763ffdb8f7d0d1046831"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#aa6d5655f446158dde5462fa8c514d0a5">Dw</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">linear rotational damping terms  <a href="#aa6d5655f446158dde5462fa8c514d0a5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a2916a5454819c290263170c72d789a73">Dv</a></td></tr>
@@ -126,6 +129,10 @@ Public Attributes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">symplectic?  <a href="#acf21656066d507f0c426b30142043db9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a3899a230649107ecef9435e69f83fe87">name</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique name of the body.  <a href="#a3899a230649107ecef9435e69f83fe87"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a5114be9e7bdf50e28cd7a8f8916ec2cd">sw</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">process noise: standard deviation in torque (zero by default)  <a href="#a5114be9e7bdf50e28cd7a8f8916ec2cd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#abbf936162e7eef234a38b5a883eea971">sv</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">process noise: standard deviation in force (zero by default)  <a href="#abbf936162e7eef234a38b5a883eea971"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-types"></a>
 Protected Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, c, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">Vectorcd</a></td></tr>
@@ -578,6 +585,71 @@ template&lt;int c&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+<p>Inverse dynamics </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>inverse dynamics vector </td></tr>
+    <tr><td class="paramname">t</td><td>time </td></tr>
+    <tr><td class="paramname">xb</td><td>end state </td></tr>
+    <tr><td class="paramname">xa</td><td>start state </td></tr>
+    <tr><td class="paramname">u</td><td>control </td></tr>
+    <tr><td class="paramname">h</td><td>time-step </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a0d45e2bf2895ee5c1435675992ba5b60"></a><!-- doxytag: member="gcop::Body3d::NoiseMatrix" ref="a0d45e2bf2895ee5c1435675992ba5b60" args="(Matrix12d &amp;Q, double t, const Body3dState &amp;x, const Vectorcd &amp;u, double h, const VectorXd *p=0)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int c&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgcop_1_1Body3d.html">gcop::Body3d</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body3d.html#a0d45e2bf2895ee5c1435675992ba5b60">NoiseMatrix</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegcop.html#a4c4cdeaa455fb1e2d73a69ad4d88a8e2">Matrix12d</a> &amp;&#160;</td>
+          <td class="paramname"><em>Q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">Vectorcd</a> &amp;&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const VectorXd *&#160;</td>
+          <td class="paramname"><em>p</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -795,8 +867,7 @@ template&lt;int c = 6&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>TODO: visual element. </p>
-<p>TODO: collision element body dimensions </p>
+<p>body dimensions </p>
 
 <p>Referenced by <a class="el" href="classgcop_1_1Body3d.html#afccefe59ec17a71b0f7aca178e1a9cbc">gcop::Body3d&lt; c &gt;::Body3d()</a>.</p>
 
@@ -872,6 +943,23 @@ template&lt;int c = 6&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a16192d25613c763ffdb8f7d0d1046831"></a><!-- doxytag: member="gcop::Body3d::Ii" ref="a16192d25613c763ffdb8f7d0d1046831" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int c = 6&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a> <a class="el" href="classgcop_1_1Body3d.html">gcop::Body3d</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body3d.html#a16192d25613c763ffdb8f7d0d1046831">Ii</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>6x1 spatial inertia matrix inverse </p>
+
+</div>
+</div>
 <a class="anchor" id="a53d4f85cbe9e49d00af7723e43f19028"></a><!-- doxytag: member="gcop::Body3d::J" ref="a53d4f85cbe9e49d00af7723e43f19028" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -927,6 +1015,40 @@ template&lt;int c = 6&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="abbf936162e7eef234a38b5a883eea971"></a><!-- doxytag: member="gcop::Body3d::sv" ref="abbf936162e7eef234a38b5a883eea971" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int c = 6&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classgcop_1_1Body3d.html">gcop::Body3d</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body3d.html#abbf936162e7eef234a38b5a883eea971">sv</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>process noise: standard deviation in force (zero by default) </p>
+
+</div>
+</div>
+<a class="anchor" id="a5114be9e7bdf50e28cd7a8f8916ec2cd"></a><!-- doxytag: member="gcop::Body3d::sw" ref="a5114be9e7bdf50e28cd7a8f8916ec2cd" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int c = 6&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classgcop_1_1Body3d.html">gcop::Body3d</a>&lt; c &gt;::<a class="el" href="classgcop_1_1Body3d.html#a5114be9e7bdf50e28cd7a8f8916ec2cd">sw</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>process noise: standard deviation in torque (zero by default) </p>
+
+</div>
+</div>
 <a class="anchor" id="acf21656066d507f0c426b30142043db9"></a><!-- doxytag: member="gcop::Body3d::symp" ref="acf21656066d507f0c426b30142043db9" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -951,7 +1073,7 @@ template&lt;int c = 6&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:48 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

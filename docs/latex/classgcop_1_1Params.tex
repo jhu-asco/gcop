@@ -9,13 +9,6 @@
 \item 
 struct {\bf \-Remove\-Delimiter}
 \end{DoxyCompactItemize}
-\subsection*{\-Public \-Types}
-\begin{DoxyCompactItemize}
-\item 
-typedef \-Matrix$<$ double, 6, 6 $>$ {\bf \-Matrix6d}
-\item 
-typedef \-Matrix$<$ double, 6, 1 $>$ {\bf \-Vector6d}
-\end{DoxyCompactItemize}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -71,6 +64,10 @@ void {\bf \-Set\-Vector4d} (const char $\ast$name, const \-Vector4d \&v)
 \item 
 bool {\bf \-Get\-Vector4d} (const char $\ast$name, \-Vector4d \&v) const 
 \item 
+void {\bf \-Set\-Vector5d} (const char $\ast$name, const {\bf \-Vector5d} \&v)
+\item 
+bool {\bf \-Get\-Vector5d} (const char $\ast$name, {\bf \-Vector5d} \&v) const 
+\item 
 void {\bf \-Set\-Vector6d} (const char $\ast$name, const {\bf \-Vector6d} \&v)
 \item 
 bool {\bf \-Get\-Vector6d} (const char $\ast$name, {\bf \-Vector6d} \&v) const 
@@ -124,15 +121,6 @@ std\-::string $>$ {\bf value\-Map}
 \item 
 char {\bf buf} [{\bf \-G\-C\-O\-P\-\_\-\-P\-A\-R\-A\-M\-S\-\_\-\-M\-B\-L}]
 \end{DoxyCompactItemize}
-
-
-\subsection{\-Member \-Typedef \-Documentation}
-\index{gcop\-::\-Params@{gcop\-::\-Params}!\-Matrix6d@{\-Matrix6d}}
-\index{\-Matrix6d@{\-Matrix6d}!gcop::Params@{gcop\-::\-Params}}
-\subsubsection[{\-Matrix6d}]{\setlength{\rightskip}{0pt plus 5cm}typedef \-Matrix$<$double, 6, 6$>$ {\bf gcop\-::\-Params\-::\-Matrix6d}}\label{classgcop_1_1Params_a8549ff377b97ac6bf3a2510807bad2c7}
-\index{gcop\-::\-Params@{gcop\-::\-Params}!\-Vector6d@{\-Vector6d}}
-\index{\-Vector6d@{\-Vector6d}!gcop::Params@{gcop\-::\-Params}}
-\subsubsection[{\-Vector6d}]{\setlength{\rightskip}{0pt plus 5cm}typedef \-Matrix$<$double, 6, 1$>$ {\bf gcop\-::\-Params\-::\-Vector6d}}\label{classgcop_1_1Params_a8be3f08e071e4a6213ad6980ade746ad}
 
 
 \subsection{\-Constructor \& \-Destructor \-Documentation}
@@ -327,6 +315,18 @@ char {\bf buf} [{\bf \-G\-C\-O\-P\-\_\-\-P\-A\-R\-A\-M\-S\-\_\-\-M\-B\-L}]
 \item[{\-Vector4d \&}]{v}
 \end{DoxyParamCaption}
 ) const}\label{classgcop_1_1Params_a4bd81275686f8590a1a7e80415c1f9a6}
+
+
+\-References replace(), and \-Tokenize().
+
+\index{gcop\-::\-Params@{gcop\-::\-Params}!\-Get\-Vector5d@{\-Get\-Vector5d}}
+\index{\-Get\-Vector5d@{\-Get\-Vector5d}!gcop::Params@{gcop\-::\-Params}}
+\subsubsection[{\-Get\-Vector5d}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Params\-::\-Get\-Vector5d} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{{\bf \-Vector5d} \&}]{v}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Params_ad6e0bf50500c16f470385e633fb25892}
 
 
 \-References replace(), and \-Tokenize().
@@ -552,6 +552,14 @@ char {\bf buf} [{\bf \-G\-C\-O\-P\-\_\-\-P\-A\-R\-A\-M\-S\-\_\-\-M\-B\-L}]
 \item[{const \-Vector4d \&}]{v}
 \end{DoxyParamCaption}
 )}\label{classgcop_1_1Params_a1316840f6e07b88600a0e4348b174d0a}
+\index{gcop\-::\-Params@{gcop\-::\-Params}!\-Set\-Vector5d@{\-Set\-Vector5d}}
+\index{\-Set\-Vector5d@{\-Set\-Vector5d}!gcop::Params@{gcop\-::\-Params}}
+\subsubsection[{\-Set\-Vector5d}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Params\-::\-Set\-Vector5d} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{const {\bf \-Vector5d} \&}]{v}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Params_a02e424db8cc2f61c51b5d05150285258}
 \index{gcop\-::\-Params@{gcop\-::\-Params}!\-Set\-Vector6d@{\-Set\-Vector6d}}
 \index{\-Set\-Vector6d@{\-Set\-Vector6d}!gcop::Params@{gcop\-::\-Params}}
 \subsubsection[{\-Set\-Vector6d}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Params\-::\-Set\-Vector6d} (

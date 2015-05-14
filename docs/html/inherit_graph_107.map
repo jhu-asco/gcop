@@ -1,8 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop_1_1System.html" title="gcop::System\&lt; Body3dState, 12, c \&gt;" alt="" coords="7,85,244,115"/>
-<area shape="rect" id="node3" href="$classgcop_1_1Body3d.html" title="gcop::Body3d\&lt; 4 \&gt;" alt="" coords="293,59,427,88"/>
-<area shape="rect" id="node11" href="$classgcop_1_1Body3d.html" title="gcop::Body3d\&lt; c \&gt;" alt="" coords="293,112,427,141"/>
-<area shape="rect" id="node5" href="$classgcop_1_1Heli.html" title="gcop::Heli" alt="" coords="483,5,563,35"/>
-<area shape="rect" id="node7" href="$classgcop_1_1Hrotor.html" title="gcop::Hrotor" alt="" coords="476,59,569,88"/>
-<area shape="rect" id="node9" href="$classgcop_1_1Qrotor.html" title="gcop::Qrotor" alt="" coords="476,112,569,141"/>
+<area shape="rect" id="node1" href="$classgcop_1_1Sensor.html" title="gcop::Sensor\&lt; Point3dState, 6, _nu, _np, Vector3d, 3 \&gt;" alt="" coords="5,32,352,61"/>
+<area shape="rect" id="node3" href="$classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4.html" title="gcop::Gps\&lt; Point3dState, 6, _nu, _np \&gt;" alt="" coords="401,5,655,35"/>
+<area shape="rect" id="node5" href="$classgcop_1_1Point3dGps.html" title="gcop::Point3dGps\&lt; _nu, _np \&gt;" alt="" coords="428,59,628,88"/>
 </map>

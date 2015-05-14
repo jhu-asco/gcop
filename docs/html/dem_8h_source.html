@@ -113,41 +113,45 @@
 <a name="l00154"></a>00154     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Dem.html#a8160aed97508f8502e568190fdef3d0d">AddBoundary</a>(<span class="keywordtype">double</span> h);
 <a name="l00155"></a>00155 
 <a name="l00164"></a>00164     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Dem.html#a3660c3291b81436bd6a061937871a92c">Convolve</a>(<span class="keywordtype">double</span> sigma, <span class="keywordtype">bool</span> cn = <span class="keyword">true</span>, <span class="keywordtype">double</span> thresh = 0);
-<a name="l00165"></a>00165 
-<a name="l00166"></a>00166 
-<a name="l00167"></a><a class="code" href="classgcop_1_1Dem.html#ae8e24f5d0ec671342bcb67e452e78480">00167</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#ae8e24f5d0ec671342bcb67e452e78480" title="width">w</a>;          
-<a name="l00168"></a><a class="code" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff">00168</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff" title="height">h</a>;          
-<a name="l00169"></a><a class="code" href="classgcop_1_1Dem.html#a3948ec9443042ffb01cd1df56b32bed4">00169</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#a3948ec9443042ffb01cd1df56b32bed4" title="cell size">cs</a>;         
-<a name="l00170"></a><a class="code" href="classgcop_1_1Dem.html#a7e3a927eb977af2019497ebb02dbda20">00170</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#a7e3a927eb977af2019497ebb02dbda20" title="data scale (height scale)">ds</a>;         
-<a name="l00171"></a><a class="code" href="classgcop_1_1Dem.html#a8d308c0c170457247f27c4c4291ccd61">00171</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#a8d308c0c170457247f27c4c4291ccd61" title="origin">o</a>[3];       
-<a name="l00172"></a><a class="code" href="classgcop_1_1Dem.html#ab252077bee0303deefaccb878949b155">00172</a>     <span class="keywordtype">int</span> <a class="code" href="classgcop_1_1Dem.html#ab252077bee0303deefaccb878949b155" title="number of rows">ni</a>;            
-<a name="l00173"></a><a class="code" href="classgcop_1_1Dem.html#ac7381a9289beb861fbe9e35dcab85c88">00173</a>     <span class="keywordtype">int</span> <a class="code" href="classgcop_1_1Dem.html#ac7381a9289beb861fbe9e35dcab85c88" title="number of columns">nj</a>;            
-<a name="l00174"></a><a class="code" href="classgcop_1_1Dem.html#a7d23c78d77cd08d4e917868a7ec4ba05">00174</a>     <span class="keywordtype">double</span> *<a class="code" href="classgcop_1_1Dem.html#a7d23c78d77cd08d4e917868a7ec4ba05" title="raw data (could be postprocessed)">data</a>;      
-<a name="l00175"></a><a class="code" href="classgcop_1_1Dem.html#a57c3d8f39b9334d5d35c2191d192deb8">00175</a>     <span class="keywordtype">double</span> *<a class="code" href="classgcop_1_1Dem.html#a57c3d8f39b9334d5d35c2191d192deb8" title="original raw data">odata</a>;     
-<a name="l00176"></a>00176         
-<a name="l00177"></a><a class="code" href="classgcop_1_1Dem.html#a431a93fb064b5c2a1edff870914f815e">00177</a>     <span class="keywordtype">double</span> *<a class="code" href="classgcop_1_1Dem.html#a431a93fb064b5c2a1edff870914f815e" title="normals">normals</a>;   
-<a name="l00178"></a>00178 
-<a name="l00179"></a><a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f">00179</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f" title="numerical tolerance for interpolation">eps</a>;        
-<a name="l00180"></a>00180   };
-<a name="l00181"></a>00181 
+<a name="l00165"></a>00165     
+<a name="l00166"></a>00166     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Dem.html#abf9703a27df91fdaf611335ab136d21e">Point2Index</a>(<span class="keywordtype">int</span> &amp;i, <span class="keywordtype">int</span> &amp;j, <span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y) <span class="keyword">const</span>;
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Dem.html#acfcecfc1d9cbb74f4359d13d2067bb86">Index2Point</a>(<span class="keywordtype">double</span> &amp;x, <span class="keywordtype">double</span> &amp;y, <span class="keywordtype">int</span> i, <span class="keywordtype">int</span> j) <span class="keyword">const</span>;
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170 
+<a name="l00171"></a><a class="code" href="classgcop_1_1Dem.html#ae8e24f5d0ec671342bcb67e452e78480">00171</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#ae8e24f5d0ec671342bcb67e452e78480" title="width">w</a>;          
+<a name="l00172"></a><a class="code" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff">00172</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff" title="height">h</a>;          
+<a name="l00173"></a><a class="code" href="classgcop_1_1Dem.html#a3948ec9443042ffb01cd1df56b32bed4">00173</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#a3948ec9443042ffb01cd1df56b32bed4" title="cell size">cs</a>;         
+<a name="l00174"></a><a class="code" href="classgcop_1_1Dem.html#a7e3a927eb977af2019497ebb02dbda20">00174</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#a7e3a927eb977af2019497ebb02dbda20" title="data scale (height scale)">ds</a>;         
+<a name="l00175"></a><a class="code" href="classgcop_1_1Dem.html#a8d308c0c170457247f27c4c4291ccd61">00175</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#a8d308c0c170457247f27c4c4291ccd61" title="origin">o</a>[3];       
+<a name="l00176"></a><a class="code" href="classgcop_1_1Dem.html#ab252077bee0303deefaccb878949b155">00176</a>     <span class="keywordtype">int</span> <a class="code" href="classgcop_1_1Dem.html#ab252077bee0303deefaccb878949b155" title="number of rows">ni</a>;            
+<a name="l00177"></a><a class="code" href="classgcop_1_1Dem.html#ac7381a9289beb861fbe9e35dcab85c88">00177</a>     <span class="keywordtype">int</span> <a class="code" href="classgcop_1_1Dem.html#ac7381a9289beb861fbe9e35dcab85c88" title="number of columns">nj</a>;            
+<a name="l00178"></a><a class="code" href="classgcop_1_1Dem.html#a7d23c78d77cd08d4e917868a7ec4ba05">00178</a>     <span class="keywordtype">double</span> *<a class="code" href="classgcop_1_1Dem.html#a7d23c78d77cd08d4e917868a7ec4ba05" title="raw data (could be postprocessed)">data</a>;      
+<a name="l00179"></a><a class="code" href="classgcop_1_1Dem.html#a57c3d8f39b9334d5d35c2191d192deb8">00179</a>     <span class="keywordtype">double</span> *<a class="code" href="classgcop_1_1Dem.html#a57c3d8f39b9334d5d35c2191d192deb8" title="original raw data">odata</a>;     
+<a name="l00180"></a>00180         
+<a name="l00181"></a><a class="code" href="classgcop_1_1Dem.html#a431a93fb064b5c2a1edff870914f815e">00181</a>     <span class="keywordtype">double</span> *<a class="code" href="classgcop_1_1Dem.html#a431a93fb064b5c2a1edff870914f815e" title="normals">normals</a>;   
 <a name="l00182"></a>00182 
-<a name="l00183"></a><a class="code" href="classgcop_1_1Dem.html#a101ee535ad510249b0448b1247c7ed41">00183</a>   <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Dem.html#a101ee535ad510249b0448b1247c7ed41">Dem::IsValid</a>(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y)<span class="keyword"> const</span>
-<a name="l00184"></a>00184 <span class="keyword">    </span>{
-<a name="l00185"></a>00185       <span class="keywordflow">return</span> 
-<a name="l00186"></a>00186         x - <a class="code" href="classgcop_1_1Dem.html#a8d308c0c170457247f27c4c4291ccd61" title="origin">o</a>[0] &gt;= -<a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f" title="numerical tolerance for interpolation">eps</a> &amp;&amp; x - o[0] &lt;= <a class="code" href="classgcop_1_1Dem.html#ae8e24f5d0ec671342bcb67e452e78480" title="width">w</a> + <a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f" title="numerical tolerance for interpolation">eps</a> &amp;&amp; 
-<a name="l00187"></a>00187         y - o[1] &gt;= -<a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f" title="numerical tolerance for interpolation">eps</a> &amp;&amp; y - o[1] &lt;= <a class="code" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff" title="height">h</a> + <a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f" title="numerical tolerance for interpolation">eps</a>;
-<a name="l00188"></a>00188     }
-<a name="l00189"></a>00189   
-<a name="l00190"></a>00190 };
-<a name="l00191"></a>00191 
-<a name="l00192"></a>00192 
-<a name="l00193"></a>00193 
-<a name="l00194"></a>00194 <span class="preprocessor">#endif</span>
+<a name="l00183"></a><a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f">00183</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f" title="numerical tolerance for interpolation">eps</a>;        
+<a name="l00184"></a>00184   };
+<a name="l00185"></a>00185 
+<a name="l00186"></a>00186 
+<a name="l00187"></a><a class="code" href="classgcop_1_1Dem.html#a101ee535ad510249b0448b1247c7ed41">00187</a>   <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Dem.html#a101ee535ad510249b0448b1247c7ed41">Dem::IsValid</a>(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y)<span class="keyword"> const</span>
+<a name="l00188"></a>00188 <span class="keyword">    </span>{
+<a name="l00189"></a>00189       <span class="keywordflow">return</span> 
+<a name="l00190"></a>00190         x - <a class="code" href="classgcop_1_1Dem.html#a8d308c0c170457247f27c4c4291ccd61" title="origin">o</a>[0] &gt;= -<a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f" title="numerical tolerance for interpolation">eps</a> &amp;&amp; x - o[0] &lt;= <a class="code" href="classgcop_1_1Dem.html#ae8e24f5d0ec671342bcb67e452e78480" title="width">w</a> + <a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f" title="numerical tolerance for interpolation">eps</a> &amp;&amp; 
+<a name="l00191"></a>00191         y - o[1] &gt;= -<a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f" title="numerical tolerance for interpolation">eps</a> &amp;&amp; y - o[1] &lt;= <a class="code" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff" title="height">h</a> + <a class="code" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f" title="numerical tolerance for interpolation">eps</a>;
+<a name="l00192"></a>00192     }
+<a name="l00193"></a>00193   
+<a name="l00194"></a>00194 };
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:14 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

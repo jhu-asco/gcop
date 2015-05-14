@@ -1,5 +1,5 @@
-\form#0:$ \bm x = (x,y,\theta, v) \in\mathbb{R}^4$
-\form#1:$ \bm u = (a, tan(phi) ) \in\mathbb{R}^5$
+\form#0:$ SO(3) \times R^3$
+\form#1:$ \bm x = (x,y,\theta, v) \in\mathbb{R}^4$
 \form#2:$ \bm u = (drive torque, steer_angles ) \in\mathbb{R}^5$
 \form#3:$\alpha$
 \form#4:$\kappa$
@@ -59,28 +59,30 @@
 \form#58:$ X = R^n $
 \form#59:$ \bf x = (q, v) \in \mathbb{R}^4$
 \form#60:$ \bf u \in\mathbb{R}^2 $
-\form#61:$ \bm x = (x,y,\theta,v,\omega) \in\mathbb{R}^5$
-\form#62:$ f:X\times U \rightarrow \mathbb{R}^6 $
-\form#63:$ f(x,u) $
-\form#64:$ v\in R^n $
-\form#65:$ g \in G \subset GL(m) $
-\form#66:$ g^{-1} \in G $
-\form#67:$ g \in G $
-\form#68:$ \Delta g=g_a^{-1}g_b $
-\form#69:$ \Delta g \in G $
-\form#70:$ g_a \in G $
-\form#71:$ g_b \in G $
-\form#72:$\hat v$
-\form#73:$\operatorname{Ad}_g:\mathfrak{g}\rightarrow\mathfrak{g}$
-\form#74:$\operatorname{ad}_\xi:\mathfrak{g}\rightarrow\mathfrak{g}$
-\form#75:$ g=\exp(a) $
-\form#76:$ v\in\mathfrak{g} $
-\form#77:$ a = \log(g) $
-\form#78:$ g=\text{cay}(a) $
-\form#79:$ v=\text{cay}^{-1}(g) $
-\form#80:$ v\in\mathfrak{g}$
-\form#81:$ q \in S^3 \subset \mathbb{R}^4 $
-\form#82:$ \mathbb{R}^3$
-\form#83:$ q=q_0*q_1 $
-\form#84:$ q=[w,x,y,z] $
-\form#85:$ q = \frac{q}{\|q\|} $
+\form#61:$ \bm u = (a, tan(phi) ) \in\mathbb{R}^5$
+\form#62:$[t_k,t_{k+1}]$
+\form#63:$ \bm x = (x,y,\theta,v,\omega) \in\mathbb{R}^5$
+\form#64:$ f:X\times U \rightarrow \mathbb{R}^6 $
+\form#65:$ f(x,u) $
+\form#66:$ v\in R^n $
+\form#67:$ g \in G \subset GL(m) $
+\form#68:$ g^{-1} \in G $
+\form#69:$ g \in G $
+\form#70:$ \Delta g=g_a^{-1}g_b $
+\form#71:$ \Delta g \in G $
+\form#72:$ g_a \in G $
+\form#73:$ g_b \in G $
+\form#74:$\hat v$
+\form#75:$\operatorname{Ad}_g:\mathfrak{g}\rightarrow\mathfrak{g}$
+\form#76:$\operatorname{ad}_\xi:\mathfrak{g}\rightarrow\mathfrak{g}$
+\form#77:$ g=\exp(a) $
+\form#78:$ v\in\mathfrak{g} $
+\form#79:$ a = \log(g) $
+\form#80:$ g=\text{cay}(a) $
+\form#81:$ v=\text{cay}^{-1}(g) $
+\form#82:$ v\in\mathfrak{g}$
+\form#83:$ q \in S^3 \subset \mathbb{R}^4 $
+\form#84:$ \mathbb{R}^3$
+\form#85:$ q=q_0*q_1 $
+\form#86:$ q=[w,x,y,z] $
+\form#87:$ q = \frac{q}{\|q\|} $

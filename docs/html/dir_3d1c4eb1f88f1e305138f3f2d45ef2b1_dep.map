@@ -1,17 +1,28 @@
 <map id="G" name="G">
-<area shape="rect" id="node4" href="dir_8d466be0d3e8c36514d653d27730561e.html" title="constraints" alt="" coords="304,161,389,209"/>
-<area shape="rect" id="node5" href="dir_3f7a34d4b8eb7a816ce0a2aa8dfd1908.html" title="costs" alt="" coords="267,65,339,113"/>
-<area shape="rect" id="edge16" href="dir_000006_000005.html" title="1" alt="" coords="332,132,340,149"/>
-<area shape="rect" id="node6" href="dir_e0b4743ced4f18fd8aa0b7854862c8ed.html" title="manifolds" alt="" coords="203,161,280,209"/>
-<area shape="rect" id="edge14" href="dir_000006_000007.html" title="12" alt="" coords="267,141,281,159"/>
-<area shape="rect" id="node9" href="dir_c16b506037ceb12cf53d7bcd4c07cec4.html" title="utils" alt="" coords="467,161,539,209"/>
-<area shape="rect" id="edge12" href="dir_000006_000011.html" title="7" alt="" coords="450,144,458,162"/>
-<area shape="rect" id="edge10" href="dir_000007_000011.html" title="12" alt="" coords="462,135,476,152"/>
-<area shape="rect" id="node7" href="dir_561ed80c3b26cda5d11c33cb1fa4b6e6.html" title="parametrization" alt="" coords="133,65,243,113"/>
-<area shape="rect" id="node8" href="dir_08a164b35eb94898c15c8836174b9b0f.html" title="sensors" alt="" coords="37,65,109,113"/>
-<area shape="rect" id="edge8" href="dir_000010_000007.html" title="2" alt="" coords="187,138,195,155"/>
-<area shape="rect" id="edge6" href="dir_000011_000004.html" title="3" alt="" coords="428,123,436,141"/>
-<area shape="rect" id="edge4" href="dir_000011_000007.html" title="3" alt="" coords="281,148,289,165"/>
-<area shape="rect" id="graph3" href="dir_3d1c4eb1f88f1e305138f3f2d45ef2b1.html" alt="" coords="27,55,445,220"/>
-<area shape="rect" id="graph2" href="dir_a500c0d9ec76a5160e2e420ae78a2766.html" title="lib" alt="" coords="16,16,456,231"/>
+<area shape="rect" id="node4" href="dir_8d466be0d3e8c36514d653d27730561e.html" title="constraints" alt="" coords="155,209,240,257"/>
+<area shape="rect" id="node6" href="dir_e0b4743ced4f18fd8aa0b7854862c8ed.html" title="manifolds" alt="" coords="227,305,304,353"/>
+<area shape="rect" id="edge36" href="dir_000005_000007.html" title="1" alt="" coords="240,276,248,294"/>
+<area shape="rect" id="node5" href="dir_3f7a34d4b8eb7a816ce0a2aa8dfd1908.html" title="costs" alt="" coords="59,113,131,161"/>
+<area shape="rect" id="edge34" href="dir_000006_000005.html" title="1" alt="" coords="160,182,168,199"/>
+<area shape="rect" id="edge32" href="dir_000006_000007.html" title="12" alt="" coords="272,279,286,296"/>
+<area shape="rect" id="node10" href="dir_c16b506037ceb12cf53d7bcd4c07cec4.html" title="utils" alt="" coords="392,209,464,257"/>
+<area shape="rect" id="edge30" href="dir_000006_000011.html" title="8" alt="" coords="374,192,382,209"/>
+<area shape="rect" id="edge28" href="dir_000007_000011.html" title="12" alt="" coords="364,243,379,261"/>
+<area shape="rect" id="node7" href="dir_561ed80c3b26cda5d11c33cb1fa4b6e6.html" title="parametrization" alt="" coords="155,113,264,161"/>
+<area shape="rect" id="node9" href="dir_d7f365b2b2b30b8fc51c9dd2bba94deb.html" title="algos" alt="" coords="173,5,245,53"/>
+<area shape="rect" id="edge4" href="dir_000009_000001.html" title="1" alt="" coords="188,63,196,80"/>
+<area shape="rect" id="edge6" href="dir_000009_000011.html" title="1" alt="" coords="375,193,383,210"/>
+<area shape="rect" id="node8" href="dir_08a164b35eb94898c15c8836174b9b0f.html" title="sensors" alt="" coords="59,209,131,257"/>
+<area shape="rect" id="edge26" href="dir_000010_000007.html" title="2" alt="" coords="211,282,219,300"/>
+<area shape="rect" id="edge18" href="dir_000001_000004.html" title="45" alt="" coords="303,85,318,102"/>
+<area shape="rect" id="edge20" href="dir_000001_000005.html" title="1" alt="" coords="137,190,145,208"/>
+<area shape="rect" id="edge16" href="dir_000001_000006.html" title="12" alt="" coords="115,93,130,110"/>
+<area shape="rect" id="edge14" href="dir_000001_000007.html" title="11" alt="" coords="316,317,331,335"/>
+<area shape="rect" id="edge8" href="dir_000001_000009.html" title="5" alt="" coords="223,87,231,105"/>
+<area shape="rect" id="edge12" href="dir_000001_000010.html" title="1" alt="" coords="49,182,57,200"/>
+<area shape="rect" id="edge10" href="dir_000001_000011.html" title="6" alt="" coords="431,182,439,199"/>
+<area shape="rect" id="edge24" href="dir_000011_000004.html" title="3" alt="" coords="354,171,362,189"/>
+<area shape="rect" id="edge22" href="dir_000011_000007.html" title="3" alt="" coords="320,301,328,318"/>
+<area shape="rect" id="graph3" href="dir_3d1c4eb1f88f1e305138f3f2d45ef2b1.html" alt="" coords="48,103,371,364"/>
+<area shape="rect" id="graph2" href="dir_a500c0d9ec76a5160e2e420ae78a2766.html" title="lib" alt="" coords="37,64,381,375"/>
 </map>

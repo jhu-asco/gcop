@@ -99,7 +99,7 @@
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
 <li>I
-: <a class="el" href="classgcop_1_1Body2d.html#aaa88a3b7f22a545173bfc198c0776994">gcop::Body2d</a>
+: <a class="el" href="classgcop_1_1Body2d.html#a76bb14b9409f2aa79cc09dde9cecf58e">gcop::Body2d&lt; c &gt;</a>
 , <a class="el" href="classgcop_1_1Body3d.html#ad8880ca728eec8374ee8cb97d3bea29f">gcop::Body3d&lt; c &gt;</a>
 , <a class="el" href="classgcop_1_1Uuv.html#a06da227c23aa28ec321ae81a232845c2">gcop::Uuv&lt; c &gt;</a>
 </li>
@@ -116,6 +116,9 @@
 <li>Identity()
 : <a class="el" href="classgcop_1_1Quat.html#a77851ea04a71f62ecffc863e29bb8a50">gcop::Quat</a>
 </li>
+<li>Ii
+: <a class="el" href="classgcop_1_1Body3d.html#a16192d25613c763ffdb8f7d0d1046831">gcop::Body3d&lt; c &gt;</a>
+</li>
 <li>Ik()
 : <a class="el" href="classgcop_1_1Arm.html#a2decc16173e34da2a869837ce17cefe8">gcop::Arm</a>
 </li>
@@ -130,6 +133,9 @@
 </li>
 <li>inc
 : <a class="el" href="classgcop_1_1Ce.html#a2ba7e97501d49ea25912cd6f4c2d9eed">gcop::Ce&lt; _n &gt;</a>
+</li>
+<li>Index2Point()
+: <a class="el" href="classgcop_1_1Dem.html#acfcecfc1d9cbb74f4359d13d2067bb86">gcop::Dem</a>
 </li>
 <li>Inertial()
 : <a class="el" href="classgcop__urdf_1_1Inertial.html#ad8baa2eeb3cb2386420c1e56e26bea0d">gcop_urdf::Inertial</a>
@@ -161,8 +167,8 @@
 : <a class="el" href="classgcop_1_1Bulletrccar.html#a965af7a08abab67fde75eacfc2f72467">gcop::Bulletrccar</a>
 </li>
 <li>initialz
-: <a class="el" href="classgcop_1_1Bulletrccar1.html#aff680275dfe3a8f405d772b455176418">gcop::Bulletrccar1</a>
-, <a class="el" href="classgcop_1_1Bulletrccar.html#a0d20123fa7b26af553f88e0b08e4f11c">gcop::Bulletrccar</a>
+: <a class="el" href="classgcop_1_1Bulletrccar.html#a0d20123fa7b26af553f88e0b08e4f11c">gcop::Bulletrccar</a>
+, <a class="el" href="classgcop_1_1Bulletrccar1.html#aff680275dfe3a8f405d772b455176418">gcop::Bulletrccar1</a>
 </li>
 <li>initRoot()
 : <a class="el" href="classgcop__urdf_1_1ModelInterface.html#a73b7b0be38b3166dc5812f69aa69bbe3">gcop_urdf::ModelInterface</a>
@@ -201,12 +207,12 @@
 , <a class="el" href="classEigen_1_1SampleNumericalDiff.html#a8f5c28f2bed92b256a1081da1cd8f988a7682366c081754aec43e2aedfebeddf7">Eigen::SampleNumericalDiff&lt; _Functor &gt;</a>
 </li>
 <li>InputType
-: <a class="el" href="classgcop_1_1SampleNumericalDiff.html#abe57353239cbe7da89c147b6903b2419">gcop::SampleNumericalDiff&lt; _Functor, _nx, _nu, _np, _ng, _ntp &gt;</a>
+: <a class="el" href="structgcop_1_1Functor.html#a2200de1032efa12a3febae21910fa0f3">gcop::Functor&lt; _Scalar, NX, NY &gt;</a>
+, <a class="el" href="classgcop_1_1SampleNumericalDiff.html#abe57353239cbe7da89c147b6903b2419">gcop::SampleNumericalDiff&lt; _Functor, _nx, _nu, _np, _ng, _ntp &gt;</a>
 , <a class="el" href="structgcop_1_1Functor.html#a2200de1032efa12a3febae21910fa0f3">gcop::Functor&lt; _Scalar, NX, NY &gt;</a>
 , <a class="el" href="structgcop_1_1Autodiff_1_1Fdx.html#a670506b176026ae7f9fed57e80e712e8">gcop::Autodiff&lt; T, _n, _c &gt;::Fdx</a>
 , <a class="el" href="structgcop_1_1Autodiff_1_1Fu.html#a482cb500161e914e283b5c7f656284e6">gcop::Autodiff&lt; T, _n, _c &gt;::Fu</a>
 , <a class="el" href="classEigen_1_1SampleNumericalDiff.html#acc936d0f8e02cd682361ecac094748c1">Eigen::SampleNumericalDiff&lt; _Functor &gt;</a>
-, <a class="el" href="structgcop_1_1Functor.html#a2200de1032efa12a3febae21910fa0f3">gcop::Functor&lt; _Scalar, NX, NY &gt;</a>
 </li>
 <li>Ins()
 : <a class="el" href="classgcop_1_1Ins.html#a6c5bfe3cf58d45b5c917481992a2fa08">gcop::Ins</a>
@@ -223,26 +229,27 @@
 <li>InsState()
 : <a class="el" href="structgcop_1_1InsState.html#a01dc10a4d5327c4704b172be10679599">gcop::InsState</a>
 </li>
-<li>Instance()
-: <a class="el" href="classgcop_1_1AirmManifold.html#a847c74a00ecc2a2c3b5530ebbe59a198">gcop::AirmManifold</a>
-, <a class="el" href="classgcop_1_1Body2dManifold.html#a732b35063d5b90560037a027e6f8ce3c">gcop::Body2dManifold</a>
-, <a class="el" href="classgcop_1_1Body3dManifold.html#ae15f2483493d46af3116013712fec039">gcop::Body3dManifold</a>
-, <a class="el" href="classgcop_1_1Kinbody3dManifold.html#a42c1f6f30f481da562e70cf7aaad8d61">gcop::Kinbody3dManifold</a>
-, <a class="el" href="classgcop_1_1ImuManifold.html#a76ea3a4473c21c86d046ce738f44d6a0">gcop::ImuManifold</a>
-, <a class="el" href="classgcop_1_1InsManifold.html#a95128eab414f4c13a84c4027e875db29">gcop::InsManifold</a>
-, <a class="el" href="classgcop_1_1Kinbody2dManifold.html#a5f725ad48549616eb77cf5a7de2bf2d3">gcop::Kinbody2dManifold</a>
-, <a class="el" href="classgcop_1_1SO3.html#aa9a2f1028bdda7ec4439b918d0fd192f">gcop::SO3</a>
-, <a class="el" href="classgcop_1_1Point3dManifold.html#a67064ea86ea56fdd5dd882964cf1cf04">gcop::Point3dManifold</a>
-, <a class="el" href="classgcop_1_1UuvManifold.html#a3941a192cbd6f2e7f72d8f0ba6ea652b">gcop::UuvManifold</a>
-, <a class="el" href="classgcop_1_1SE2.html#af8859de54f0e149efd806e9d87a6d079">gcop::SE2</a>
-, <a class="el" href="classgcop_1_1SE3.html#aa869bc14f74929defd2ae062e636bfe4">gcop::SE3</a>
-, <a class="el" href="classgcop_1_1Rn.html#a1631969f549628ae26900acbfb5a02da">gcop::Rn&lt; _n &gt;</a>
-</li>
 <li>instance
 : <a class="el" href="classgcop_1_1Viewer.html#a53c3dca921442983d13f335d0e8a7e20">gcop::Viewer</a>
 </li>
 <li>Instance()
-: <a class="el" href="classgcop_1_1GunicycleManifold.html#ac44a6ca911eabff2a13c9bc3e34161d7">gcop::GunicycleManifold</a>
+: <a class="el" href="classgcop_1_1AirmManifold.html#a847c74a00ecc2a2c3b5530ebbe59a198">gcop::AirmManifold</a>
+, <a class="el" href="classgcop_1_1SO3.html#aa9a2f1028bdda7ec4439b918d0fd192f">gcop::SO3</a>
+, <a class="el" href="classgcop_1_1Body3dManifold.html#ae15f2483493d46af3116013712fec039">gcop::Body3dManifold</a>
+, <a class="el" href="classgcop_1_1GunicycleManifold.html#ac44a6ca911eabff2a13c9bc3e34161d7">gcop::GunicycleManifold</a>
+, <a class="el" href="classgcop_1_1ImuManifold.html#a76ea3a4473c21c86d046ce738f44d6a0">gcop::ImuManifold</a>
+, <a class="el" href="classgcop_1_1Kinbody2dManifold.html#a5f725ad48549616eb77cf5a7de2bf2d3">gcop::Kinbody2dManifold</a>
+, <a class="el" href="classgcop_1_1Kinbody3dManifold.html#a42c1f6f30f481da562e70cf7aaad8d61">gcop::Kinbody3dManifold</a>
+, <a class="el" href="classgcop_1_1Point3dManifold.html#a67064ea86ea56fdd5dd882964cf1cf04">gcop::Point3dManifold</a>
+, <a class="el" href="classgcop_1_1Rn.html#a1631969f549628ae26900acbfb5a02da">gcop::Rn&lt; _n &gt;</a>
+, <a class="el" href="classgcop_1_1UuvManifold.html#a3941a192cbd6f2e7f72d8f0ba6ea652b">gcop::UuvManifold</a>
+, <a class="el" href="classgcop_1_1SE2.html#af8859de54f0e149efd806e9d87a6d079">gcop::SE2</a>
+, <a class="el" href="classgcop_1_1SE3.html#aa869bc14f74929defd2ae062e636bfe4">gcop::SE3</a>
+, <a class="el" href="classgcop_1_1InsManifold.html#a95128eab414f4c13a84c4027e875db29">gcop::InsManifold</a>
+, <a class="el" href="classgcop_1_1Body2dManifold.html#a732b35063d5b90560037a027e6f8ce3c">gcop::Body2dManifold</a>
+</li>
+<li>internalState
+: <a class="el" href="classgcop_1_1System.html#af31282534c31cd45d0ffadea743f7c19">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
 </li>
 <li>inv()
 : <a class="el" href="classgcop_1_1Group.html#a28d217e4a338f88b5aa14be64d95f80d">gcop::Group&lt; n, m &gt;</a>
@@ -252,7 +259,7 @@
 , <a class="el" href="classgcop_1_1SO3.html#a8dfe0bf28b6dcf353a81b4ff0d5fd362">gcop::SO3</a>
 </li>
 <li>Invert()
-: <a class="el" href="classgcop_1_1Quat.html#a1a9c6f02c6ee187fcbcd46f046aef472">gcop::Quat</a>
+: <a class="el" href="classgcop_1_1Quat.html#a0ef61543b959eb69c42910be340ef074">gcop::Quat</a>
 </li>
 <li>iprs
 : <a class="el" href="classgcop_1_1Camera.html#a3376c938e450b6a27b43f3415e01a8f7">gcop::Camera</a>
@@ -261,11 +268,11 @@
 : <a class="el" href="classgcop_1_1Mbs.html#a2322ec93ddeb1dda9546d89e304667e9">gcop::Mbs</a>
 </li>
 <li>Is
-: <a class="el" href="classgcop_1_1Kinbody3dTrack.html#a4ba8cc54981270c7d1ec9d9ecc87b664">gcop::Kinbody3dTrack&lt; _nu &gt;</a>
-, <a class="el" href="classgcop_1_1Posegraph2d.html#a6d298848116437dc095ae7fb1a06157a">gcop::Posegraph2d</a>
+: <a class="el" href="classgcop_1_1Body2dTrack.html#a5d55c274c019aaae6639286675fbecce">gcop::Body2dTrack</a>
+, <a class="el" href="classgcop_1_1Kinbody3dTrack.html#a4ba8cc54981270c7d1ec9d9ecc87b664">gcop::Kinbody3dTrack&lt; _nu &gt;</a>
 , <a class="el" href="classgcop_1_1Body2dGraph.html#a3f5071e7dd098489d1cafe5778c079d6">gcop::Body2dGraph</a>
 , <a class="el" href="classgcop_1_1Body3dTrack.html#ab911b7b90354df99f88e04bef13e356e">gcop::Body3dTrack</a>
-, <a class="el" href="classgcop_1_1Body2dTrack.html#a5d55c274c019aaae6639286675fbecce">gcop::Body2dTrack</a>
+, <a class="el" href="classgcop_1_1Posegraph2d.html#a6d298848116437dc095ae7fb1a06157a">gcop::Posegraph2d</a>
 </li>
 <li>IsIdentity()
 : <a class="el" href="classgcop_1_1Quat.html#a6b5d1751a431107477d3ec0e41334310">gcop::Quat</a>
@@ -277,19 +284,19 @@
 : <a class="el" href="classgcop_1_1BulletWorld.html#accbebb7cada1aced87c69852113b2bb9">gcop::BulletWorld</a>
 </li>
 <li>Iterate()
-: <a class="el" href="classgcop_1_1SDdp.html#a0cb2fcbfbd573829e05caea1afe8c4ad">gcop::SDdp&lt; T, nx, nu, np &gt;</a>
-, <a class="el" href="classgcop_1_1GnDocp.html#a4dddc096ff04a60130bf6d5a9d4b8c08">gcop::GnDocp&lt; T, _nx, _nu, _np, _ng, _ntp &gt;</a>
-, <a class="el" href="classgcop_1_1SystemCe.html#ae8e73c05a38507dbddd8b18afaf3a2c4">gcop::SystemCe&lt; T, n, c, np, ntp &gt;</a>
-, <a class="el" href="classgcop_1_1GnDoep1.html#a1952799fbe79ec3af0ae8648712ee113">gcop::GnDoep1&lt; T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1 &gt;</a>
-, <a class="el" href="classgcop_1_1ASPSA.html#a9535cc95ac393a09c4704ac658476e2f">gcop::ASPSA&lt; T, n, c, _np &gt;</a>
+: <a class="el" href="classgcop_1_1ASPSA.html#a9535cc95ac393a09c4704ac658476e2f">gcop::ASPSA&lt; T, n, c, _np &gt;</a>
+, <a class="el" href="classgcop_1_1SDdp.html#a0cb2fcbfbd573829e05caea1afe8c4ad">gcop::SDdp&lt; T, nx, nu, np &gt;</a>
+, <a class="el" href="classgcop_1_1SystemCe.html#acb79231ef353e0752a533e72f20bf7f6">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1PDdp.html#a55ba4e6aadf93ace9dd347d9b3b64fb9">gcop::PDdp&lt; T, n, c, np &gt;</a>
-, <a class="el" href="classgcop_1_1SPSA.html#a506e64411334c5d552e3487a2d16ee1a">gcop::SPSA&lt; T, n, c, _np &gt;</a>
 , <a class="el" href="classgcop_1_1GnDocp.html#a4dddc096ff04a60130bf6d5a9d4b8c08">gcop::GnDocp&lt; T, _nx, _nu, _np, _ng, _ntp &gt;</a>
+, <a class="el" href="classgcop_1_1SPSA.html#a506e64411334c5d552e3487a2d16ee1a">gcop::SPSA&lt; T, n, c, _np &gt;</a>
 , <a class="el" href="classgcop_1_1Docp.html#a37958d1614b2b54ac457cc7ee55302e6">gcop::Docp&lt; T, nx, nu, np &gt;</a>
-, <a class="el" href="classgcop_1_1Ddp.html#a3734cfb67cda474bb2b7a1c35d5014c1">gcop::Ddp&lt; T, nx, nu, np &gt;</a>
-, <a class="el" href="classgcop_1_1SystemCe.html#ace8af29caaa93496f6da5e278bc5c759">gcop::SystemCe&lt; T, n, c, np, ntp &gt;</a>
-, <a class="el" href="classgcop_1_1Doep.html#ad6a3a22ca258bc0ce18fda03244bafe3">gcop::Doep&lt; T, nx, nu, np, Tz, nz, T1, nx1 &gt;</a>
+, <a class="el" href="classgcop_1_1GnDocp.html#a4dddc096ff04a60130bf6d5a9d4b8c08">gcop::GnDocp&lt; T, _nx, _nu, _np, _ng, _ntp &gt;</a>
+, <a class="el" href="classgcop_1_1GnDoep1.html#a1952799fbe79ec3af0ae8648712ee113">gcop::GnDoep1&lt; T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1 &gt;</a>
+, <a class="el" href="classgcop_1_1SystemCe.html#ace8af29caaa93496f6da5e278bc5c759">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1TparamDocp.html#a3bdc035e8b3819dcdef4c436c197bb43">gcop::TparamDocp&lt; T, nx, nu, np, nz, _ntp &gt;</a>
+, <a class="el" href="classgcop_1_1Ddp.html#a3734cfb67cda474bb2b7a1c35d5014c1">gcop::Ddp&lt; T, nx, nu, np &gt;</a>
+, <a class="el" href="classgcop_1_1Doep.html#ad6a3a22ca258bc0ce18fda03244bafe3">gcop::Doep&lt; T, nx, nu, np, Tz, nz, T1, nx1 &gt;</a>
 , <a class="el" href="classgcop_1_1GnDoep.html#a871ef3cfc09f78096fa12ce59a41e452">gcop::GnDoep&lt; T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1 &gt;</a>
 </li>
 <li>iters
@@ -318,7 +325,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:59:10 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

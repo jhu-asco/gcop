@@ -15,6 +15,12 @@ class {\bf \-Body2d\-Slam}
 \item 
 class {\bf \-Body2d\-Slam\-Cost}
 \item 
+class {\bf \-Body3d\-Avoid\-Controller}
+\item 
+class {\bf \-Body3d\-Controller}
+\item 
+class {\bf \-Body3d\-Dem\-Controller}
+\item 
 class {\bf \-Controller}
 \item 
 class {\bf \-Ddp}
@@ -22,6 +28,8 @@ class {\bf \-Ddp}
 class {\bf \-Docp}
 \item 
 class {\bf \-Doep}
+\item 
+class {\bf \-Gavoid\-Controller}
 \item 
 class {\bf \-Gn\-Docp}
 \item 
@@ -38,6 +46,8 @@ class {\bf \-Gn\-Doep1}
 class {\bf \-Mbs\-Controller}
 \item 
 class {\bf \-P\-Ddp}
+\item 
+class {\bf \-Point3d\-Controller}
 \item 
 class {\bf \-Posegraph2d}
 \item 
@@ -157,6 +167,8 @@ class {\bf \-Rn\-Lq\-Sensor\-Cost}
 \item 
 class {\bf \-Sensor\-Cost}
 \item 
+class {\bf \-Creator}
+\item 
 class {\bf \-Dem}
 \item 
 class {\bf \-Flat}
@@ -230,6 +242,8 @@ struct {\bf \-Uuv\-State}
 class {\bf \-Uuv\-Manifold}
 \item 
 class {\bf \-Mbs}
+\item 
+class {\bf \-Controller\-Tparam}
 \item 
 class {\bf \-Control\-Tparam}
 \item 
@@ -347,6 +361,8 @@ class {\bf \-Particle2d\-View}
 \item 
 class {\bf \-Plot\-View}
 \item 
+class {\bf \-Point3d\-View}
+\item 
 class {\bf \-Posegraph2d\-View}
 \item 
 class {\bf \-Qrotor\-View}
@@ -354,6 +370,8 @@ class {\bf \-Qrotor\-View}
 class {\bf \-Rccar\-View}
 \item 
 class {\bf \-Snake\-View}
+\item 
+class {\bf \-System\-Ce\-View}
 \item 
 class {\bf \-System\-View}
 \item 
@@ -380,12 +398,19 @@ typedef \-Matrix$<$ double, \*
 typedef \-Matrix$<$ double, \*
 6, \-Dynamic $>$ {\bf \-Matrix6\-Xd}
 \item 
+typedef \-Matrix$<$ double, 5, 1 $>$ {\bf \-Vector5d}
+\item 
+typedef {\bf \-Pqp\-Dem}$<$ {\bf \-Body3d\-State}, 12, 6 $>$ {\bf \-Body3d\-Pqp\-Dem}
+\item 
+typedef {\bf \-Constraint}\*
+$<$ {\bf \-Body3d\-State}, 12, 6, \-Dynamic, 1 $>$ {\bf \-Body3d\-Constraint}
+\item 
+typedef \-Matrix$<$ double, 6, 1 $>$ {\bf \-Vector6d}
+\item 
 typedef \-Matrix$<$ double, 4, 2 $>$ {\bf \-Matrix42d}
 \item 
 typedef \-Matrix$<$ double, \*
 4, \-Dynamic $>$ {\bf \-Matrix4pd}
-\item 
-typedef \-Matrix$<$ double, 6, 1 $>$ {\bf \-Vector6d}
 \item 
 typedef \-Matrix$<$ double, 4, 4 $>$ {\bf \-Matrix4d}
 \item 
@@ -395,11 +420,13 @@ typedef \-Matrix$<$ double, 6, 3 $>$ {\bf \-Matrix63d}
 \item 
 typedef \-Matrix$<$ double, 3, 6 $>$ {\bf \-Matrix36d}
 \item 
-typedef pair$<$ \-Matrix3d, \-Vector3d $>$ {\bf \-M3\-V3d}
+typedef pair$<$ \-Matrix3d, \-Vector3d $>$ {\bf \-Body2d\-State}
+\item 
+typedef \-Matrix$<$ double, 12, 1 $>$ {\bf \-Vector12d}
 \item 
 typedef \-Matrix$<$ double, 12, 12 $>$ {\bf \-Matrix12d}
 \item 
-typedef \-Matrix$<$ double, 5, 1 $>$ {\bf \-Vector5d}
+typedef \-Matrix$<$ double, 12, 6 $>$ {\bf \-Matrix12x6d}
 \item 
 typedef \-Matrix$<$ double, 5, 5 $>$ {\bf \-Matrix5d}
 \item 
@@ -446,9 +473,9 @@ typedef \-Matrix$<$ double, 16, 1 $>$ {\bf \-Vector16d}
 \item 
 typedef pair$<$ \-Matrix3d, \-Vector13d $>$ {\bf \-Airm\-State}
 \item 
-typedef \-Matrix$<$ double, 12, 1 $>$ {\bf \-Vector12d}
-\item 
 typedef pair$<$ \-Matrix3d, {\bf \-Vector9d} $>$ {\bf \-Body3d\-State}
+\item 
+typedef {\bf \-System}$<$ \-Vector4d, 4, 2 $>$ {\bf \-Base\-System}
 \item 
 typedef \-Matrix$<$ double, 7, 1 $>$ {\bf \-Vector7d}
 \end{DoxyCompactItemize}
@@ -504,6 +531,8 @@ double {\bf random\-\_\-normal} ()
 void {\bf mult} (double $\ast$c, const double $\ast$a, const double $\ast$b, int m, int n, int p, bool rm=true)
 \item 
 void {\bf hermite3} (double c1[3], double c2[3], double c3[3], const double xi[3], const double vi[3], const double xf[3])
+\item 
+static void {\bf \-Render\-Uuv} (\-G\-L\-Uquadric\-Obj $\ast$qobj, double l, double c)
 \end{DoxyCompactItemize}
 
 
@@ -514,18 +543,30 @@ void {\bf hermite3} (double c1[3], double c2[3], double c3[3], const double xi[3
 \index{gcop@{gcop}!\-Airm\-State@{\-Airm\-State}}
 \index{\-Airm\-State@{\-Airm\-State}!gcop@{gcop}}
 \subsubsection[{\-Airm\-State}]{\setlength{\rightskip}{0pt plus 5cm}typedef pair$<$\-Matrix3d, \-Vector13d$>$ {\bf gcop\-::\-Airm\-State}}\label{namespacegcop_a452af086abc24f3426d1b91c797484db}
+\index{gcop@{gcop}!\-Base\-System@{\-Base\-System}}
+\index{\-Base\-System@{\-Base\-System}!gcop@{gcop}}
+\subsubsection[{\-Base\-System}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf \-System}$<$\-Vector4d, 4, 2$>$ {\bf gcop\-::\-Base\-System}}\label{namespacegcop_a9dff3bcdad75a476d7099028fd687187}
+\index{gcop@{gcop}!\-Body2d\-State@{\-Body2d\-State}}
+\index{\-Body2d\-State@{\-Body2d\-State}!gcop@{gcop}}
+\subsubsection[{\-Body2d\-State}]{\setlength{\rightskip}{0pt plus 5cm}typedef pair$<$ \-Matrix3d, \-Vector3d $>$ {\bf gcop\-::\-Body2d\-State}}\label{namespacegcop_af58e672be79723e3e653aa8858c126b6}
+\index{gcop@{gcop}!\-Body3d\-Constraint@{\-Body3d\-Constraint}}
+\index{\-Body3d\-Constraint@{\-Body3d\-Constraint}!gcop@{gcop}}
+\subsubsection[{\-Body3d\-Constraint}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf \-Constraint}$<${\bf \-Body3d\-State}, 12, 6, \-Dynamic, 1$>$ {\bf gcop\-::\-Body3d\-Constraint}}\label{namespacegcop_a30fa0bc2be04c373816a30ea597faa7c}
+\index{gcop@{gcop}!\-Body3d\-Pqp\-Dem@{\-Body3d\-Pqp\-Dem}}
+\index{\-Body3d\-Pqp\-Dem@{\-Body3d\-Pqp\-Dem}!gcop@{gcop}}
+\subsubsection[{\-Body3d\-Pqp\-Dem}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf \-Pqp\-Dem}$<${\bf \-Body3d\-State}, 12, 6$>$ {\bf gcop\-::\-Body3d\-Pqp\-Dem}}\label{namespacegcop_a4662be56d774cef6c2d6838de4852144}
 \index{gcop@{gcop}!\-Body3d\-State@{\-Body3d\-State}}
 \index{\-Body3d\-State@{\-Body3d\-State}!gcop@{gcop}}
 \subsubsection[{\-Body3d\-State}]{\setlength{\rightskip}{0pt plus 5cm}typedef pair$<$\-Matrix3d, {\bf \-Vector9d}$>$ {\bf gcop\-::\-Body3d\-State}}\label{namespacegcop_aa77130a2144134032f6101f252d7a456}
 \index{gcop@{gcop}!\-M3\-V2d@{\-M3\-V2d}}
 \index{\-M3\-V2d@{\-M3\-V2d}!gcop@{gcop}}
 \subsubsection[{\-M3\-V2d}]{\setlength{\rightskip}{0pt plus 5cm}typedef pair$<$ \-Matrix3d, \-Vector2d $>$ {\bf gcop\-::\-M3\-V2d}}\label{namespacegcop_a8669d519208b5d22e28905a39ce99030}
-\index{gcop@{gcop}!\-M3\-V3d@{\-M3\-V3d}}
-\index{\-M3\-V3d@{\-M3\-V3d}!gcop@{gcop}}
-\subsubsection[{\-M3\-V3d}]{\setlength{\rightskip}{0pt plus 5cm}typedef pair$<$ \-Matrix3d, \-Vector3d $>$ {\bf gcop\-::\-M3\-V3d}}\label{namespacegcop_a84d92b047c73e771491e45675476d08a}
 \index{gcop@{gcop}!\-Matrix12d@{\-Matrix12d}}
 \index{\-Matrix12d@{\-Matrix12d}!gcop@{gcop}}
 \subsubsection[{\-Matrix12d}]{\setlength{\rightskip}{0pt plus 5cm}typedef \-Matrix$<$ double, 12, 12 $>$ {\bf gcop\-::\-Matrix12d}}\label{namespacegcop_a4c4cdeaa455fb1e2d73a69ad4d88a8e2}
+\index{gcop@{gcop}!\-Matrix12x6d@{\-Matrix12x6d}}
+\index{\-Matrix12x6d@{\-Matrix12x6d}!gcop@{gcop}}
+\subsubsection[{\-Matrix12x6d}]{\setlength{\rightskip}{0pt plus 5cm}typedef \-Matrix$<$double, 12, 6$>$ {\bf gcop\-::\-Matrix12x6d}}\label{namespacegcop_a63b8f04955001db0dff00e29035a5401}
 \index{gcop@{gcop}!\-Matrix12\-Xd@{\-Matrix12\-Xd}}
 \index{\-Matrix12\-Xd@{\-Matrix12\-Xd}!gcop@{gcop}}
 \subsubsection[{\-Matrix12\-Xd}]{\setlength{\rightskip}{0pt plus 5cm}typedef \-Matrix$<$double, 12, \-Dynamic$>$ {\bf gcop\-::\-Matrix12\-Xd}}\label{namespacegcop_a9f70ea0c59c2e25a17259734f3eb4dd9}
@@ -1024,7 +1065,20 @@ sample
 \end{DoxyReturn}
 
 
-\-Referenced by gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$\-::\-Add(), gcop\-::\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$\-::\-Add(), gcop\-::\-Body2d\-Track\-::\-Add(), gcop\-::\-Body3d\-Track\-::\-Add(), gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$\-::\-Add2(), gcop\-::\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$\-::\-Add2(), gcop\-::\-Body3d\-Track\-::\-Add2(), gcop\-::\-Body2d\-Track\-::\-Add2(), gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Sample(), gcop\-::\-Posegraph2d\-::\-Synthesize(), gcop\-::\-Body2d\-Graph\-::\-Synthesize(), gcop\-::\-Posegraph2d\-::\-Synthesize2(), gcop\-::\-Body2d\-Graph\-::\-Synthesize2(), and gcop\-::\-Body2d\-Graph\-::\-Synthesize3().
+\-Referenced by gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$\-::\-Add(), gcop\-::\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$\-::\-Add(), gcop\-::\-Body2d\-Track\-::\-Add(), gcop\-::\-Body3d\-Track\-::\-Add(), gcop\-::\-Kinbody3d\-Track$<$ \-\_\-nu $>$\-::\-Add2(), gcop\-::\-Kinbody\-Proj\-Track$<$ \-\_\-nu $>$\-::\-Add2(), gcop\-::\-Body3d\-Track\-::\-Add2(), gcop\-::\-Body2d\-Track\-::\-Add2(), gcop\-::\-Controller\-Tparam$<$ Tx, nx, nu, np, \-\_\-ntp, Tc $>$\-::\-From(), gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Sample(), gcop\-::\-Posegraph2d\-::\-Synthesize(), gcop\-::\-Body2d\-Graph\-::\-Synthesize(), gcop\-::\-Posegraph2d\-::\-Synthesize2(), gcop\-::\-Body2d\-Graph\-::\-Synthesize2(), and gcop\-::\-Body2d\-Graph\-::\-Synthesize3().
+
+\index{gcop@{gcop}!\-Render\-Uuv@{\-Render\-Uuv}}
+\index{\-Render\-Uuv@{\-Render\-Uuv}!gcop@{gcop}}
+\subsubsection[{\-Render\-Uuv}]{\setlength{\rightskip}{0pt plus 5cm}static void {\bf gcop\-::\-Render\-Uuv} (
+\begin{DoxyParamCaption}
+\item[{\-G\-L\-Uquadric\-Obj $\ast$}]{qobj, }
+\item[{double}]{l, }
+\item[{double}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{namespacegcop_ab98287af06ccde069c05f6a0f20c391d}
+
+
+\-Referenced by gcop\-::\-Body2d\-View$<$ c $>$\-::\-Render().
 
 \index{gcop@{gcop}!rot@{rot}}
 \index{rot@{rot}!gcop@{gcop}}

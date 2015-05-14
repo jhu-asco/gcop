@@ -258,10 +258,10 @@
 <a name="l00223"></a>00223   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> c, <span class="keywordtype">int</span> _np&gt; 
 <a name="l00224"></a><a class="code" href="classgcop_1_1ASPSA.html#a16e4c5633334026eded4f3ef8efa0345">00224</a>           <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1ASPSA.html#a16e4c5633334026eded4f3ef8efa0345">ASPSA&lt;T, n, c, _np&gt;::Update</a>(vector&lt;T&gt; &amp;xs, <span class="keyword">const</span> vector&lt;Vectorcd&gt; &amp;us, <span class="keywordtype">bool</span> evalCost) {    
 <a name="l00225"></a>00225           <span class="keywordtype">double</span> J = 0;
-<a name="l00226"></a>00226           sys.reset(xs[0],ts[0]);<span class="comment">//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14</span>
+<a name="l00226"></a>00226           sys.Reset(xs[0],ts[0]);<span class="comment">//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14</span>
 <a name="l00227"></a>00227           <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; N; ++k) {
 <a name="l00228"></a>00228             <span class="keywordtype">double</span> h = ts[k+1] - ts[k];
-<a name="l00229"></a>00229             sys.Step_internalinput(xs[k+1], us[k], h);
+<a name="l00229"></a>00229             sys.Step(xs[k+1], us[k], h);
 <a name="l00230"></a>00230             <span class="keywordflow">if</span> (evalCost) 
 <a name="l00231"></a>00231               J += cost.L(ts[k], xs[k], us[k], h);
 <a name="l00232"></a>00232             
@@ -487,7 +487,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:46 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

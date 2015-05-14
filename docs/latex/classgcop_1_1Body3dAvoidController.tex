@@ -1,0 +1,171 @@
+\section{gcop\-:\-:\-Body3d\-Avoid\-Controller$<$ nu $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Body3dAvoidController}\index{gcop\-::\-Body3d\-Avoid\-Controller$<$ nu $>$@{gcop\-::\-Body3d\-Avoid\-Controller$<$ nu $>$}}
+
+
+{\ttfamily \#include $<$body3davoidcontroller.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Body3d\-Avoid\-Controller$<$ nu $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Body3dAvoidController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body3d\-Avoid\-Controller$<$ nu $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Body3dAvoidController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, nu, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, 5, 1 $>$ {\bf \-Vector5d}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body3d\-Avoid\-Controller} (const {\bf \-Body3d}$<$ nu $>$ \&sys, {\bf \-Body3d\-State} $\ast$xd=0, {\bf \-Vector6d} $\ast$ad=0, {\bf \-Body3d\-Constraint} $\ast$con=0)
+\item 
+virtual bool {\bf \-Set} ({\bf \-Vectorcd} \&u, double t, const {\bf \-Body3d\-State} \&x)
+\item 
+virtual bool {\bf \-Set\-Params} (const {\bf \-Vector5d} \&{\bf s})
+\item 
+virtual bool {\bf \-Set\-Context} (const {\bf \-Body3d\-State} \&{\bf c})
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body3d\-Controller}$<$ nu $>$ {\bf stab\-Ctrl}
+\item 
+{\bf \-Gavoid\-Controller} $\ast$ {\bf avoid\-Ctrl}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int nu = 6$>$class gcop\-::\-Body3d\-Avoid\-Controller$<$ nu $>$}
+
+\doxyref{\-Controller}{p.}{classgcop_1_1Controller} combining rigid body stablization and gyroscopic avoidance \-This basically combines two existing controller from \-D\-G\-C. \-The controller has 5 parameters s containing\-: rot\-\_\-\-Kp, rot\-\_\-\-Kd, trans\-\_\-\-Kp, trans\-\_\-\-Kd, obst\-\_\-\-K
+
+\-Author\-: \-Marin \-Kobilarov, 2015 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Body3d\-Avoid\-Controller@{gcop\-::\-Body3d\-Avoid\-Controller}!\-Vector5d@{\-Vector5d}}
+\index{\-Vector5d@{\-Vector5d}!gcop::Body3dAvoidController@{gcop\-::\-Body3d\-Avoid\-Controller}}
+\subsubsection[{\-Vector5d}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int nu = 6$>$ typedef \-Matrix$<$double, 5, 1$>$ {\bf gcop\-::\-Body3d\-Avoid\-Controller}$<$ nu $>$\-::{\bf \-Vector5d}}\label{classgcop_1_1Body3dAvoidController_a535f4d8fa7bf8d187c7c85e93e3fd478}
+\index{gcop\-::\-Body3d\-Avoid\-Controller@{gcop\-::\-Body3d\-Avoid\-Controller}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Body3dAvoidController@{gcop\-::\-Body3d\-Avoid\-Controller}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int nu = 6$>$ typedef \-Matrix$<$double, nu, 1$>$ {\bf gcop\-::\-Body3d\-Avoid\-Controller}$<$ nu $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Body3dAvoidController_a3b9737c7bf2b354e526d58cdb03f8e4b}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Body3d\-Avoid\-Controller@{gcop\-::\-Body3d\-Avoid\-Controller}!\-Body3d\-Avoid\-Controller@{\-Body3d\-Avoid\-Controller}}
+\index{\-Body3d\-Avoid\-Controller@{\-Body3d\-Avoid\-Controller}!gcop::Body3dAvoidController@{gcop\-::\-Body3d\-Avoid\-Controller}}
+\subsubsection[{\-Body3d\-Avoid\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int nu$>$ {\bf gcop\-::\-Body3d\-Avoid\-Controller}$<$ nu $>$\-::{\bf \-Body3d\-Avoid\-Controller} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Body3d}$<$ nu $>$ \&}]{sys, }
+\item[{{\bf \-Body3d\-State} $\ast$}]{xd = {\ttfamily 0}, }
+\item[{{\bf \-Vector6d} $\ast$}]{ad = {\ttfamily 0}, }
+\item[{{\bf \-Body3d\-Constraint} $\ast$}]{con = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3dAvoidController_ab376193ad2b332e68353b8f118cc97c0}
+\-B\-O\-D\-Y3\-D \-P\-D controller
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & system \\
+\hline
+{\em xd} & desired state (optional, set to origin by default) \\
+\hline
+{\em ad} & desired acceleration (optional, set to zero by default) \\
+\hline
+{\em con} & obstacle constraint (optional) \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Body3d\-Avoid\-Controller$<$ nu $>$\-::avoid\-Ctrl.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Body3d\-Avoid\-Controller@{gcop\-::\-Body3d\-Avoid\-Controller}!\-Set@{\-Set}}
+\index{\-Set@{\-Set}!gcop::Body3dAvoidController@{gcop\-::\-Body3d\-Avoid\-Controller}}
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int nu = 6$>$ virtual bool {\bf gcop\-::\-Body3d\-Avoid\-Controller}$<$ nu $>$\-::{\bf \-Set} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{t, }
+\item[{const {\bf \-Body3d\-State} \&}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3dAvoidController_a3366867a655b73e7a858b110be672c6c}
+\-Feedback controller of the form u = k(t, x) 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & controls \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if arguments are valid, false if e.\-g. x is infeasible 
+\end{DoxyReturn}
+
+
+\-Implements {\bf gcop\-::\-Controller$<$ Body3d\-State, Matrix$<$ double, nu, 1 $>$, Matrix$<$ double, 5, 1 $>$, Body3d\-State $>$} \doxyref{}{p.}{classgcop_1_1Controller_a6bbf22b498272842f7894b3983d97022}.
+
+\index{gcop\-::\-Body3d\-Avoid\-Controller@{gcop\-::\-Body3d\-Avoid\-Controller}!\-Set\-Context@{\-Set\-Context}}
+\index{\-Set\-Context@{\-Set\-Context}!gcop::Body3dAvoidController@{gcop\-::\-Body3d\-Avoid\-Controller}}
+\subsubsection[{\-Set\-Context}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int nu$>$ bool {\bf gcop\-::\-Body3d\-Avoid\-Controller}$<$ nu $>$\-::{\bf \-Set\-Context} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Body3d\-State} \&}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3dAvoidController_acc22b7238c9ad2b27ce198db8ae0209f}
+\-Set context \begin{DoxyReturn}{\-Returns}
+true if arguments are valid, false if e.\-g. s is infeasible 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-Controller$<$ Body3d\-State, Matrix$<$ double, nu, 1 $>$, Matrix$<$ double, 5, 1 $>$, Body3d\-State $>$} \doxyref{}{p.}{classgcop_1_1Controller_aa7c8c84ff5a7fde50c70c4f7524fef17}.
+
+\index{gcop\-::\-Body3d\-Avoid\-Controller@{gcop\-::\-Body3d\-Avoid\-Controller}!\-Set\-Params@{\-Set\-Params}}
+\index{\-Set\-Params@{\-Set\-Params}!gcop::Body3dAvoidController@{gcop\-::\-Body3d\-Avoid\-Controller}}
+\subsubsection[{\-Set\-Params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int nu$>$ bool {\bf gcop\-::\-Body3d\-Avoid\-Controller}$<$ nu $>$\-::{\bf \-Set\-Params} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vector5d} \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3dAvoidController_a9ca243566e3e74f441668a573660e372}
+\-Set controller parameters \begin{DoxyReturn}{\-Returns}
+true if arguments are valid, false if e.\-g. s is infeasible 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-Controller$<$ Body3d\-State, Matrix$<$ double, nu, 1 $>$, Matrix$<$ double, 5, 1 $>$, Body3d\-State $>$} \doxyref{}{p.}{classgcop_1_1Controller_a8663b606ccd50ea319d57db31f274f05}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body3d\-Avoid\-Controller@{gcop\-::\-Body3d\-Avoid\-Controller}!avoid\-Ctrl@{avoid\-Ctrl}}
+\index{avoid\-Ctrl@{avoid\-Ctrl}!gcop::Body3dAvoidController@{gcop\-::\-Body3d\-Avoid\-Controller}}
+\subsubsection[{avoid\-Ctrl}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int nu = 6$>$ {\bf \-Gavoid\-Controller}$\ast$ {\bf gcop\-::\-Body3d\-Avoid\-Controller}$<$ nu $>$\-::{\bf avoid\-Ctrl}}\label{classgcop_1_1Body3dAvoidController_a9855b8865ce5d09876dbd9c1be7493cb}
+
+
+\-Referenced by gcop\-::\-Body3d\-Avoid\-Controller$<$ nu $>$\-::\-Body3d\-Avoid\-Controller().
+
+\index{gcop\-::\-Body3d\-Avoid\-Controller@{gcop\-::\-Body3d\-Avoid\-Controller}!stab\-Ctrl@{stab\-Ctrl}}
+\index{stab\-Ctrl@{stab\-Ctrl}!gcop::Body3dAvoidController@{gcop\-::\-Body3d\-Avoid\-Controller}}
+\subsubsection[{stab\-Ctrl}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int nu = 6$>$ {\bf \-Body3d\-Controller}$<$nu$>$ {\bf gcop\-::\-Body3d\-Avoid\-Controller}$<$ nu $>$\-::{\bf stab\-Ctrl}}\label{classgcop_1_1Body3dAvoidController_a59e3b4d8cf58ac5ffdfb50e5693ff803}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf body3davoidcontroller.\-h}\end{DoxyCompactItemize}

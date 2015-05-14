@@ -1,12 +1,13 @@
-\section{gcop\-:\-:\-System\-Ce$<$ \-T, n, c, np, ntp $>$ \-Class \-Template \-Reference}
-\label{classgcop_1_1SystemCe}\index{gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$@{gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$}}
+\section{gcop\-:\-:\-System\-Ce$<$ \-T, n, c, np, ntp, \-Tc $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1SystemCe}\index{gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$@{gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$}}
 
 
 {\ttfamily \#include $<$systemce.\-h$>$}
 
 
 
-\-Collaboration diagram for gcop\-:\-:\-System\-Ce$<$ \-T, n, c, np, ntp $>$\-:\nopagebreak
+\-Collaboration diagram for gcop\-:\-:\-System\-Ce$<$ \-T, n, c, np, ntp, \-Tc $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -16,11 +17,13 @@
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-System\-Ce} ({\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \&{\bf cost}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd $\ast${\bf p}, vector$<$ \-Vectorcd $>$ \&{\bf dus}, vector$<$ \-Vectorcd $>$ \&es, bool update=true)
+{\bf \-System\-Ce} ({\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, n, c, {\bf np}, \-Tc $>$ \&{\bf cost}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd $\ast${\bf p}, vector$<$ \-Vectorcd $>$ \&{\bf dus}, vector$<$ \-Vectorcd $>$ \&es, bool update=true)
 \item 
-{\bf \-System\-Ce} ({\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \&{\bf cost}, {\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp $>$ \&{\bf tp}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd $\ast${\bf p}, vector$<$ \-Vectorcd $>$ \&{\bf dus}, vector$<$ \-Vectorcd $>$ \&es, bool update=true)
+{\bf \-System\-Ce} ({\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, n, c, {\bf np}, \-Tc $>$ \&{\bf cost}, {\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$ \&{\bf tp}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd $\ast${\bf p}, vector$<$ \-Vectorcd $>$ \&{\bf dus}, vector$<$ \-Vectorcd $>$ \&es, bool update=true)
 \item 
-{\bf \-System\-Ce} ({\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \&{\bf cost}, {\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp $>$ \&{\bf tp}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd $\ast${\bf p}, \-Vector\-Xd \&dss, \-Vector\-Xd \&dess, bool update=true)
+{\bf \-System\-Ce} ({\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, n, c, {\bf np}, \-Tc $>$ \&{\bf cost}, {\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$ \&{\bf tp}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd $\ast${\bf p}, \-Vector\-Xd \&dss, \-Vector\-Xd \&dess, bool update=true)
+\item 
+{\bf \-System\-Ce} ({\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&{\bf sys}, {\bf \-Cost}$<$ \-T, n, c, {\bf np}, \-Tc $>$ \&{\bf cost}, {\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$ \&{\bf tp}, {\bf \-Creator}$<$ \-Tc $>$ $\ast${\bf context\-Sampler}, vector$<$ double $>$ \&{\bf ts}, vector$<$ \-T $>$ \&{\bf xs}, vector$<$ \-Vectorcd $>$ \&{\bf us}, \-Vectormd $\ast${\bf p}, \-Vectortpd \&mu0, \-Matrixtpd \&\-P0, \-Matrixtpd \&\-S, bool update=true)
 \item 
 virtual {\bf $\sim$\-System\-Ce} ()
 \item 
@@ -51,10 +54,12 @@ void {\bf z2us} (std\-::vector$<$ \-Vectorcd $>$ \&{\bf us}, const \-Vectortpd \
 \item 
 {\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \& {\bf sys}
 \begin{DoxyCompactList}\small\item\em dynamical system \end{DoxyCompactList}\item 
-{\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \& {\bf cost}
+{\bf \-Cost}$<$ \-T, n, c, {\bf np}, \-Tc $>$ \& {\bf cost}
 \begin{DoxyCompactList}\small\item\em given cost function \end{DoxyCompactList}\item 
-{\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp $>$ $\ast$ {\bf tp}
+{\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$ $\ast$ {\bf tp}
 \begin{DoxyCompactList}\small\item\em trajectory parametrization \end{DoxyCompactList}\item 
+{\bf \-Creator}$<$ \-Tc $>$ $\ast$ {\bf context\-Sampler}
+\begin{DoxyCompactList}\small\item\em context sampler \end{DoxyCompactList}\item 
 std\-::vector$<$ double $>$ \& {\bf ts}
 \begin{DoxyCompactList}\small\item\em times (\-N+1) vector \end{DoxyCompactList}\item 
 std\-::vector$<$ \-T $>$ \& {\bf xs}
@@ -62,13 +67,20 @@ std\-::vector$<$ \-T $>$ \& {\bf xs}
 std\-::vector$<$ \-Vectorcd $>$ \& {\bf us}
 \begin{DoxyCompactList}\small\item\em controls (\-N) vector \end{DoxyCompactList}\item 
 \-Vectormd $\ast$ {\bf p}
-\begin{DoxyCompactList}\small\item\em controls (\-N) vector \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em system internal parameters \end{DoxyCompactList}\item 
 std\-::vector$<$ \-Vectorcd $>$ \& {\bf dus}
-\begin{DoxyCompactList}\small\item\em control variation (\-N) vector \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em control standard deviations (\-N) vector \end{DoxyCompactList}\item 
 std\-::vector$<$ \-T $>$ {\bf xss}
 \begin{DoxyCompactList}\small\item\em states (\-N+1) vector \end{DoxyCompactList}\item 
 std\-::vector$<$ \-Vectorcd $>$ {\bf uss}
 \begin{DoxyCompactList}\small\item\em controls (\-N) vector \end{DoxyCompactList}\item 
+std\-::vector$<$ std\-::vector$<$ \-T $>$ $>$ {\bf xsas}
+\begin{DoxyCompactList}\small\item\em all state samples \end{DoxyCompactList}\item 
+std\-::vector$<$ std\-::vector\*
+$<$ \-Vectorcd $>$ $>$ {\bf usas}
+\begin{DoxyCompactList}\small\item\em all control samples \end{DoxyCompactList}\item 
+std\-::vector$<$ bool $>$ {\bf bs}
+\begin{DoxyCompactList}\small\item\em all samples feasibility \end{DoxyCompactList}\item 
 int {\bf \-N}
 \begin{DoxyCompactList}\small\item\em number of discrete trajectory segments \end{DoxyCompactList}\item 
 {\bf \-Ce}$<$ ntp $>$ {\bf ce}
@@ -77,6 +89,12 @@ int {\bf \-Ns}
 \begin{DoxyCompactList}\small\item\em number of cross-\/entropy samples \end{DoxyCompactList}\item 
 double {\bf \-J}
 \begin{DoxyCompactList}\small\item\em optimal cost \end{DoxyCompactList}\item 
+bool {\bf enforce\-Upper\-Bound}
+\begin{DoxyCompactList}\small\item\em whether to discard any samples with cost $>$ \-Jub (true by default) \end{DoxyCompactList}\item 
+bool {\bf update\-Upper\-Bound}
+\begin{DoxyCompactList}\small\item\em after every iteration \-Jub is updated to be the current max cost (true by default) \end{DoxyCompactList}\item 
+double {\bf \-Jub}
+\begin{DoxyCompactList}\small\item\em allowed cost upper bound (inf by default) \end{DoxyCompactList}\item 
 \-Vectortpd {\bf zmin}
 \begin{DoxyCompactList}\small\item\em \-Current best z corresponding to \-J. \end{DoxyCompactList}\item 
 int {\bf nofevaluations}
@@ -84,18 +102,29 @@ int {\bf nofevaluations}
 bool {\bf debug}
 \begin{DoxyCompactList}\small\item\em whether to display debugging info \end{DoxyCompactList}\item 
 \-Render\-Func $\ast$ {\bf external\-\_\-render}
-\begin{DoxyCompactList}\small\item\em \-Render\-Function for rendering samples. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{template$<$typename T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ class gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$}
+\begin{DoxyCompactList}\small\item\em \-Render\-Function for rendering samples. \end{DoxyCompactList}\item 
+{\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \& {\bf cost}
+\begin{DoxyCompactList}\small\item\em given cost function \end{DoxyCompactList}\item 
+{\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp $>$ $\ast$ {\bf tp}
+\begin{DoxyCompactList}\small\item\em trajectory parametrization \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$class gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$}
+
+\-The \-C\-E method for dynamical systems
+
+\-Note\-: the vector dus should denote the variances along the diagonal of the initial distribution
+
+\-Authors\-: \-Marin \-Kobilarov, \-Gowtham \-Garimella 
 
 \subsection{\-Constructor \& \-Destructor \-Documentation}
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-System\-Ce@{\-System\-Ce}}
 \index{\-System\-Ce@{\-System\-Ce}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int np, int ntp$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-System\-Ce} (
+\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n, int c, int np, int ntp, typename \-Tc$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-System\-Ce} (
 \begin{DoxyParamCaption}
 \item[{{\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&}]{sys, }
-\item[{{\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \&}]{cost, }
+\item[{{\bf \-Cost}$<$ \-T, n, c, {\bf np}, \-Tc $>$ \&}]{cost, }
 \item[{vector$<$ double $>$ \&}]{ts, }
 \item[{vector$<$ \-T $>$ \&}]{xs, }
 \item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
@@ -104,10 +133,8 @@ bool {\bf debug}
 \item[{vector$<$ \-Vectorcd $>$ \&}]{es, }
 \item[{bool}]{update = {\ttfamily true}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1SystemCe_a09d6a8c0e087638bdbdc538648d19a92}
-\-Create an optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. \-The times ts must be given, the initial state xs[0] must be set, and the controls us will be used as an initial guess for the optimization.
-
-\-After initialization, every call to \doxyref{\-Iterate()}{p.}{classgcop_1_1SystemCe_ace8af29caaa93496f6da5e278bc5c759} will optimize the controls us and states xs and modify them accordingly. \-Problems involving time-\/optimization will also modify the sequence of times ts.
+)}\label{classgcop_1_1SystemCe_aafa764902c1856179960ced90cbf2804}
+\-Create an optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. \-The times ts must be given, the initial state xs[0] must be set, and the optimization will be performed over the controls us
 
 
 \begin{DoxyParams}{\-Parameters}
@@ -123,7 +150,7 @@ bool {\bf debug}
 \hline
 {\em p} & (np-\/size) system parameters (set to 0 if none) \\
 \hline
-{\em dus} & (\-N) initial control variations (determines how widespread the initial distro is) \\
+{\em dus} & (\-N) initial control standard deviations (determines how widespread the initial distro is) \\
 \hline
 {\em es} & (\-N) zero-\/mean regularization/local-\/exploration noise variances \\
 \hline
@@ -132,15 +159,15 @@ bool {\bf debug}
 \end{DoxyParams}
 
 
-\-References gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::ce, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::dus, gcop\-::\-Ce$<$ \-\_\-n $>$\-::gmm, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-J, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-N, gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-S, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-U, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-Update(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::us, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::us2z(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::uss, and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::xss.
+\-References gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::ce, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::dus, gcop\-::\-Ce$<$ \-\_\-n $>$\-::gmm, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-J, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-N, gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-S, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-U, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-Update(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::us, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::us2z(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::uss, and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::xss.
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-System\-Ce@{\-System\-Ce}}
 \index{\-System\-Ce@{\-System\-Ce}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int np, int ntp$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-System\-Ce} (
+\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n, int c, int np, int ntp, typename \-Tc$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-System\-Ce} (
 \begin{DoxyParamCaption}
 \item[{{\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&}]{sys, }
-\item[{{\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \&}]{cost, }
-\item[{{\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp $>$ \&}]{tp, }
+\item[{{\bf \-Cost}$<$ \-T, n, c, {\bf np}, \-Tc $>$ \&}]{cost, }
+\item[{{\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$ \&}]{tp, }
 \item[{vector$<$ double $>$ \&}]{ts, }
 \item[{vector$<$ \-T $>$ \&}]{xs, }
 \item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
@@ -149,10 +176,8 @@ bool {\bf debug}
 \item[{vector$<$ \-Vectorcd $>$ \&}]{es, }
 \item[{bool}]{update = {\ttfamily true}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1SystemCe_a699e34372185e3dbaf7d81cb4aace699}
-\-Create an optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. \-The times ts must be given, the initial state xs[0] must be set, and the controls us will be used as an initial guess for the optimization.
-
-\-After initialization, every call to \doxyref{\-Iterate()}{p.}{classgcop_1_1SystemCe_ace8af29caaa93496f6da5e278bc5c759} will optimize the controls us and states xs and modify them accordingly. \-Problems involving time-\/optimization will also modify the sequence of times ts.
+)}\label{classgcop_1_1SystemCe_a5857dc1275c87443e261e5372600784d}
+\-Create an optimal control problem using a system, a cost, and a trajectory parametrized using a finite set of parameters of dimension ntp \-The parametrization \doxyref{\-Tparam}{p.}{classgcop_1_1Tparam} defines a mapping between the parameters and a discrete trajectory at times ts, states xs, and control us (and optionally system parameters p) \-Optimization occurs over the parametrization.
 
 
 \begin{DoxyParams}{\-Parameters}
@@ -170,7 +195,7 @@ bool {\bf debug}
 \hline
 {\em p} & (np-\/size) system parameters (set to 0 if none) \\
 \hline
-{\em dus} & (\-N) initial control variations (determines how widespread the initial distro is) \\
+{\em dus} & (\-N) initial control standard deviations (determines how widespread the initial distro is) \\
 \hline
 {\em es} & (\-N) zero-\/mean regularization/local-\/exploration noise variances \\
 \hline
@@ -179,15 +204,15 @@ bool {\bf debug}
 \end{DoxyParams}
 
 
-\-References gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::ce, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::dus, gcop\-::\-Ce$<$ \-\_\-n $>$\-::gmm, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-J, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-N, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::ntp, gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-S, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::\-To(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-Update(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::us, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::uss, and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::xss.
+\-References gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::ce, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::dus, gcop\-::\-Ce$<$ \-\_\-n $>$\-::gmm, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-J, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-N, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp, Tc $>$\-::ntp, gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-S, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp, Tc $>$\-::\-To(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-Update(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::us, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::uss, and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::xss.
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-System\-Ce@{\-System\-Ce}}
 \index{\-System\-Ce@{\-System\-Ce}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int np, int ntp$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-System\-Ce} (
+\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n, int c, int np, int ntp, typename \-Tc$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-System\-Ce} (
 \begin{DoxyParamCaption}
 \item[{{\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&}]{sys, }
-\item[{{\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \&}]{cost, }
-\item[{{\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp $>$ \&}]{tp, }
+\item[{{\bf \-Cost}$<$ \-T, n, c, {\bf np}, \-Tc $>$ \&}]{cost, }
+\item[{{\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$ \&}]{tp, }
 \item[{vector$<$ double $>$ \&}]{ts, }
 \item[{vector$<$ \-T $>$ \&}]{xs, }
 \item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
@@ -196,10 +221,8 @@ bool {\bf debug}
 \item[{\-Vector\-Xd \&}]{dess, }
 \item[{bool}]{update = {\ttfamily true}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1SystemCe_a6289c48ee62ec9b8610ac8eb4c3c31cd}
-\-Create an optimal control problem using a system, a cost, and a trajectory given by a sequence of times, states, and controls. \-The times ts must be given, the initial state xs[0] must be set, and the controls us will be used as an initial guess for the optimization.
-
-\-After initialization, every call to \doxyref{\-Iterate()}{p.}{classgcop_1_1SystemCe_ace8af29caaa93496f6da5e278bc5c759} will optimize the controls us and states xs and modify them accordingly. \-Problems involving time-\/optimization will also modify the sequence of times ts.
+)}\label{classgcop_1_1SystemCe_a391911664302608d903226771f45cff9}
+\-Create an optimal control problem using a system, a cost, and a trajectory parametrized using a finite set of parameters of dimension ntp \-The parametrization \doxyref{\-Tparam}{p.}{classgcop_1_1Tparam} defines a mapping between the parameters and a discrete trajectory at times ts, states xs, and control us (and optionally system parameters p) \-Optimization occurs over the parametrization.
 
 
 \begin{DoxyParams}{\-Parameters}
@@ -217,7 +240,7 @@ bool {\bf debug}
 \hline
 {\em p} & (np-\/size) system parameters (set to 0 if none) \\
 \hline
-{\em dss} & (\-N) initial control parameter variations (determines how widespread the initial distro is) \\
+{\em dss} & (\-N) initial tparam variances (determines how widespread the initial distro is) \\
 \hline
 {\em dess} & (\-N) zero-\/mean regularization/local-\/exploration noise variances \\
 \hline
@@ -226,7 +249,56 @@ bool {\bf debug}
 \end{DoxyParams}
 
 
-\-References gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::ce, gcop\-::\-Ce$<$ \-\_\-n $>$\-::gmm, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-J, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-N, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::ntp, gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-S, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$\-::\-To(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-Update(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::uss, and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::xss.
+\-References gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::ce, gcop\-::\-Ce$<$ \-\_\-n $>$\-::gmm, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-J, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-N, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp, Tc $>$\-::ntp, gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-S, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp, Tc $>$\-::\-To(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-Update(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::uss, and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::xss.
+
+\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-System\-Ce@{\-System\-Ce}}
+\index{\-System\-Ce@{\-System\-Ce}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
+\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n, int c, int np, int ntp, typename \-Tc$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-System\-Ce} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&}]{sys, }
+\item[{{\bf \-Cost}$<$ \-T, n, c, {\bf np}, \-Tc $>$ \&}]{cost, }
+\item[{{\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$ \&}]{tp, }
+\item[{{\bf \-Creator}$<$ \-Tc $>$ $\ast$}]{context\-Sampler, }
+\item[{vector$<$ double $>$ \&}]{ts, }
+\item[{vector$<$ \-T $>$ \&}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{\-Vectormd $\ast$}]{p, }
+\item[{\-Vectortpd \&}]{mu0, }
+\item[{\-Matrixtpd \&}]{\-P0, }
+\item[{\-Matrixtpd \&}]{\-S, }
+\item[{bool}]{update = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1SystemCe_a16b57d310caf197791d97e42c97b2270}
+\-Create an optimal control problem using a system, a cost, and a trajectory parametrized using a finite set of parameters of dimension ntp \-The parametrization \doxyref{\-Tparam}{p.}{classgcop_1_1Tparam} defines a mapping between the parameters and a discrete trajectory at times ts, states xs, and control us (and optionally system parameters p) \-For this cosntructor, it is not necessary to have a mapping from discrete trajectory to tparam, but only fro tparam to discrete trajectory.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & system \\
+\hline
+{\em cost} & cost \\
+\hline
+{\em tp} & trajectory parametrization \\
+\hline
+{\em ts} & (\-N+1) sequence of discrete times \\
+\hline
+{\em xs} & (\-N+1) sequence of discrete states \\
+\hline
+{\em us} & (\-N) sequence of control inputs \\
+\hline
+{\em p} & (np-\/size) system parameters (set to 0 if none) \\
+\hline
+{\em mu0} & (\-N) initial tparam parameters mean \\
+\hline
+{\em \-P0} & (\-N) initial tparam parameters covaraiance \\
+\hline
+{\em \-S} & (\-N) zero-\/mean regularization/local-\/exploration noise variances \\
+\hline
+{\em update} & whether to update trajectory xs using initial state xs[0] and inputs us. \-This is necessary only if xs was not already generated from us. \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::ce, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp, Tc $>$\-::\-From(), gcop\-::\-Ce$<$ \-\_\-n $>$\-::gmm, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-N, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp, Tc $>$\-::ntp, gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-S, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp, Tc $>$\-::\-Set\-Context(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::uss, and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::xss.
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!$\sim$\-System\-Ce@{$\sim$\-System\-Ce}}
 \index{$\sim$\-System\-Ce@{$\sim$\-System\-Ce}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
@@ -237,7 +309,7 @@ bool {\bf debug}
 )\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1SystemCe_ac7384dd138c369694ea0f6895be3dd6a}
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-System\-Ce@{\-System\-Ce}}
 \index{\-System\-Ce@{\-System\-Ce}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-System\-Ce} (
+\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n, int c, int np, int ntp$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-System\-Ce} (
 \begin{DoxyParamCaption}
 \item[{{\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&}]{sys, }
 \item[{{\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \&}]{cost, }
@@ -275,9 +347,13 @@ bool {\bf debug}
 {\em update} & whether to update trajectory xs using initial state xs[0] and inputs us. \-This is necessary only if xs was not already generated from us. \\
 \hline
 \end{DoxyParams}
+
+
+\-References gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::ce, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::dus, gcop\-::\-Ce$<$ \-\_\-n $>$\-::gmm, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-J, gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-N, gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-S, gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-U, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-Update(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::us, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::us2z(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::uss, and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::xss.
+
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-System\-Ce@{\-System\-Ce}}
 \index{\-System\-Ce@{\-System\-Ce}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-System\-Ce} (
+\subsubsection[{\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n, int c, int np, int ntp$>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-System\-Ce} (
 \begin{DoxyParamCaption}
 \item[{{\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \&}]{sys, }
 \item[{{\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \&}]{cost, }
@@ -318,13 +394,17 @@ bool {\bf debug}
 {\em update} & whether to update trajectory xs using initial state xs[0] and inputs us. \-This is necessary only if xs was not already generated from us. \\
 \hline
 \end{DoxyParams}
+
+
+\-References gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::ce, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::dus, gcop\-::\-Ce$<$ \-\_\-n $>$\-::gmm, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-J, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-N, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp, Tc $>$\-::ntp, gcop\-::\-Ce$<$ \-\_\-n $>$\-::\-S, gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp, Tc $>$\-::\-To(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-Update(), gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::us, gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::uss, and gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::xss.
+
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!$\sim$\-System\-Ce@{$\sim$\-System\-Ce}}
 \index{$\sim$\-System\-Ce@{$\sim$\-System\-Ce}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{$\sim$\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ virtual {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::$\sim${\bf \-System\-Ce} (
+\subsubsection[{$\sim$\-System\-Ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ virtual {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::$\sim${\bf \-System\-Ce} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1SystemCe_ad056b1d76cdec9494cf372fc24ada720}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1SystemCe_a9ff6a89427491e600594c59505519213}
 
 
 \subsection{\-Member \-Function \-Documentation}
@@ -337,20 +417,20 @@ bool {\bf debug}
 )}\label{classgcop_1_1SystemCe_ace8af29caaa93496f6da5e278bc5c759}
 \-Perform one \-S\-Y\-S\-T\-E\-M\-C\-E iteration. \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-Iterate@{\-Iterate}}
 \index{\-Iterate@{\-Iterate}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-Iterate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int np, int ntp$>$ void {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-Iterate} (
+\subsubsection[{\-Iterate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int np, int ntp, typename Tc $>$ void {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-Iterate} (
 \begin{DoxyParamCaption}
 \item[{bool}]{updatexsfromus = {\ttfamily true}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1SystemCe_ae8e73c05a38507dbddd8b18afaf3a2c4}
+)}\label{classgcop_1_1SystemCe_acb79231ef353e0752a533e72f20bf7f6}
 \-Perform one \-S\-Y\-S\-T\-E\-M\-C\-E iteration. \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-Update@{\-Update}}
 \index{\-Update@{\-Update}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ double {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-Update} (
+\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ double {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-Update} (
 \begin{DoxyParamCaption}
 \item[{std\-::vector$<$ \-T $>$ \&}]{xs, }
 \item[{const std\-::vector$<$ \-Vectorcd $>$ \&}]{us, }
 \item[{bool}]{eval\-Cost = {\ttfamily true}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1SystemCe_a2bba2382064c787b903b8fa59a858a62}
+)}\label{classgcop_1_1SystemCe_a88fe1e9421534d94f8b2f46b4e046c38}
 \-Generate a full trajectory (xs and us) from a parameter z and (optionally) return its cost 
 \begin{DoxyParams}{\-Parameters}
 {\em xs} & trajectory \\
@@ -362,13 +442,13 @@ bool {\bf debug}
 \end{DoxyParams}
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-Update@{\-Update}}
 \index{\-Update@{\-Update}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ double {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-Update} (
+\subsubsection[{\-Update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ double {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-Update} (
 \begin{DoxyParamCaption}
 \item[{std\-::vector$<$ \-T $>$ \&}]{xs, }
 \item[{const std\-::vector$<$ \-Vectorcd $>$ \&}]{us, }
 \item[{bool}]{eval\-Cost = {\ttfamily true}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1SystemCe_a2bba2382064c787b903b8fa59a858a62}
+)}\label{classgcop_1_1SystemCe_a88fe1e9421534d94f8b2f46b4e046c38}
 \-Generate a full trajectory (xs and us) from a parameter z and (optionally) return its cost 
 \begin{DoxyParams}{\-Parameters}
 {\em xs} & trajectory \\
@@ -380,16 +460,16 @@ bool {\bf debug}
 \end{DoxyParams}
 
 
-\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!us2z@{us2z}}
 \index{us2z@{us2z}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{us2z}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ void {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf us2z} (
+\subsubsection[{us2z}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ void {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf us2z} (
 \begin{DoxyParamCaption}
 \item[{\-Vectortpd \&}]{z, }
 \item[{const std\-::vector$<$ \-Vectorcd $>$ \&}]{us}
 \end{DoxyParamCaption}
-) const}\label{classgcop_1_1SystemCe_aee65ebcc64ba37d848427f564c72d011}
+) const}\label{classgcop_1_1SystemCe_ae38166b22e40d8dbe5f511eb63d45091}
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!us2z@{us2z}}
 \index{us2z@{us2z}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
 \subsubsection[{us2z}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int np, int ntp$>$ void {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf us2z} (
@@ -400,16 +480,16 @@ bool {\bf debug}
 ) const}\label{classgcop_1_1SystemCe_aee65ebcc64ba37d848427f564c72d011}
 
 
-\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!z2us@{z2us}}
 \index{z2us@{z2us}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{z2us}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ void {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf z2us} (
+\subsubsection[{z2us}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ void {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf z2us} (
 \begin{DoxyParamCaption}
 \item[{std\-::vector$<$ \-Vectorcd $>$ \&}]{us, }
 \item[{const \-Vectortpd \&}]{z}
 \end{DoxyParamCaption}
-) const}\label{classgcop_1_1SystemCe_a4bdcf8a52d6f006d16c16aa3226ff12f}
+) const}\label{classgcop_1_1SystemCe_ab03c15e265332db4bcd2d04d1ca1f57c}
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!z2us@{z2us}}
 \index{z2us@{z2us}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
 \subsubsection[{z2us}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int np, int ntp$>$ void {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf z2us} (
@@ -421,156 +501,219 @@ bool {\bf debug}
 
 
 \subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!bs@{bs}}
+\index{bs@{bs}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
+\subsubsection[{bs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ std\-::vector$<$ bool $>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf bs}}\label{classgcop_1_1SystemCe_a7b59ddaa10cf27bc63ed139b51c099a5}
+
+
+all samples feasibility 
+
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!ce@{ce}}
 \index{ce@{ce}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ {\bf \-Ce}$<$ ntp $>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf ce}}\label{classgcop_1_1SystemCe_a0ece313b2b0bcd583a2eb5f1c0c768b1}
+\subsubsection[{ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ {\bf \-Ce}$<$ ntp $>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf ce}}\label{classgcop_1_1SystemCe_a4ce823704048a4e50be26fc74f640492}
 
 
 \-G\-M\-M-\/based cross-\/entropy algorithm. 
 
 
 
-\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
+
+\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!context\-Sampler@{context\-Sampler}}
+\index{context\-Sampler@{context\-Sampler}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
+\subsubsection[{context\-Sampler}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ {\bf \-Creator}$<$\-Tc$>$$\ast$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf context\-Sampler}}\label{classgcop_1_1SystemCe_a684d06146d8d719c80e1cd3c9b5e1e60}
+
+
+context sampler 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!cost@{cost}}
 \index{cost@{cost}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{cost}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ {\bf \-Cost}$<$ \-T, n, c, {\bf np} $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf cost}}\label{classgcop_1_1SystemCe_af59926716da085cb46e262b519af4de6}
+\subsubsection[{cost}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ {\bf \-Cost}$<$\-T, n, c, {\bf np}$>$\& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf cost}}\label{classgcop_1_1SystemCe_a79cb4ab011e21dbd951f9e3e15e13319}
+
+
+given cost function 
+
+\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!cost@{cost}}
+\index{cost@{cost}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
+\subsubsection[{cost}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ {\bf \-Cost}$<$\-T, n, c, {\bf np}, \-Tc$>$\& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf cost}}\label{classgcop_1_1SystemCe_a256fff64acf84e8a7797cb345e8f48a1}
 
 
 given cost function 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!debug@{debug}}
 \index{debug@{debug}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{debug}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ bool {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf debug}}\label{classgcop_1_1SystemCe_ae990b715585574bfaa29bf3d7a0d3237}
+\subsubsection[{debug}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ bool {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf debug}}\label{classgcop_1_1SystemCe_a624d0210813c6f1cebae5dd52aa8fcd1}
 
 
 whether to display debugging info 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!dus@{dus}}
 \index{dus@{dus}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{dus}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ std\-::vector$<$ \-Vectorcd $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf dus}}\label{classgcop_1_1SystemCe_ad60096c80bdfec2564e3785150f66b77}
+\subsubsection[{dus}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ std\-::vector$<$ \-Vectorcd $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf dus}}\label{classgcop_1_1SystemCe_a3d6a4d4ae902ab4a0a057e00496b35e5}
 
+
+control standard deviations (\-N) vector 
 
 control variation (\-N) vector 
 
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
+
+\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!enforce\-Upper\-Bound@{enforce\-Upper\-Bound}}
+\index{enforce\-Upper\-Bound@{enforce\-Upper\-Bound}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
+\subsubsection[{enforce\-Upper\-Bound}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ bool {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf enforce\-Upper\-Bound}}\label{classgcop_1_1SystemCe_a99b3017ffaac357046ea4490b8130541}
 
 
-\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+whether to discard any samples with cost $>$ \-Jub (true by default) 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!external\-\_\-render@{external\-\_\-render}}
 \index{external\-\_\-render@{external\-\_\-render}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{external\-\_\-render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ \-Render\-Func $\ast$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf external\-\_\-render}}\label{classgcop_1_1SystemCe_a0298829ee12a88af0be4cf55fb3555cc}
+\subsubsection[{external\-\_\-render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ \-Render\-Func $\ast$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf external\-\_\-render}}\label{classgcop_1_1SystemCe_ace69b9088d27626375a3670ce0c0f852}
 
 
 \-Render\-Function for rendering samples. 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-J@{\-J}}
 \index{\-J@{\-J}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-J}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ double {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-J}}\label{classgcop_1_1SystemCe_a0168d8c2140656805abcbd0111a199fa}
+\subsubsection[{\-J}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ double {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-J}}\label{classgcop_1_1SystemCe_af39e072c9299e3a28abcfcb088ff8f33}
 
 
 optimal cost 
 
 
 
-\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
+
+\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-Jub@{\-Jub}}
+\index{\-Jub@{\-Jub}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
+\subsubsection[{\-Jub}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ double {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-Jub}}\label{classgcop_1_1SystemCe_a1e2b8e921a3267c845deecd46dfaf664}
+
+
+allowed cost upper bound (inf by default) 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-N@{\-N}}
 \index{\-N@{\-N}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-N}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ int {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-N}}\label{classgcop_1_1SystemCe_af78c031064df4b3d7d8ea039baf25f9d}
+\subsubsection[{\-N}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ int {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-N}}\label{classgcop_1_1SystemCe_a9da5a0bab06198c7f2f8eb2f6c0c1b88}
 
 
 number of discrete trajectory segments 
 
 
 
-\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!nofevaluations@{nofevaluations}}
 \index{nofevaluations@{nofevaluations}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{nofevaluations}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ int {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf nofevaluations}}\label{classgcop_1_1SystemCe_addf6f1b2b7bc3be50cf6573c350fca6c}
+\subsubsection[{nofevaluations}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ int {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf nofevaluations}}\label{classgcop_1_1SystemCe_ad15e7b6425985f6543fb212c78516caf}
 
 
 \-Number of evaluations at any point of time. 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!\-Ns@{\-Ns}}
 \index{\-Ns@{\-Ns}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{\-Ns}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ int {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-Ns}}\label{classgcop_1_1SystemCe_abc61984ad57605d3a725115919a70694}
+\subsubsection[{\-Ns}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ int {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf \-Ns}}\label{classgcop_1_1SystemCe_af83f5453f333219934b31433c2960318}
 
 
 number of cross-\/entropy samples 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!p@{p}}
 \index{p@{p}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{p}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ \-Vectormd $\ast$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf p}}\label{classgcop_1_1SystemCe_a0416262fbf5b3e405b55c36c395ca8ed}
+\subsubsection[{p}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ \-Vectormd $\ast$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf p}}\label{classgcop_1_1SystemCe_adec09a65283f310d61e82a5280b91592}
 
 
-controls (\-N) vector 
+system internal parameters 
 
-\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!sys@{sys}}
+controls (\-N) vector \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!sys@{sys}}
 \index{sys@{sys}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ {\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf sys}}\label{classgcop_1_1SystemCe_a2b5f737f8cd668bee9cc98c909e9562e}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ {\bf \-System}$<$ \-T, n, c, {\bf np} $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf sys}}\label{classgcop_1_1SystemCe_a1043c7a63b1f89bec24065fe315fb8f6}
 
 
 dynamical system 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!tp@{tp}}
 \index{tp@{tp}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{tp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ {\bf \-Tparam}$<$ \-T, n, c, {\bf np}, ntp $>$ $\ast$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf tp}}\label{classgcop_1_1SystemCe_afe808ba636a51336ee30fb8134a3c04c}
+\subsubsection[{tp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ {\bf \-Tparam}$<$\-T, n, c, {\bf np}, ntp$>$$\ast$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf tp}}\label{classgcop_1_1SystemCe_a0758fc802d2afd7eabdf020ebfc91297}
+
+
+trajectory parametrization 
+
+\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!tp@{tp}}
+\index{tp@{tp}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
+\subsubsection[{tp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ {\bf \-Tparam}$<$\-T, n, c, {\bf np}, ntp, \-Tc$>$$\ast$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf tp}}\label{classgcop_1_1SystemCe_aa877691a149300d12bb74fd2798a5829}
 
 
 trajectory parametrization 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!ts@{ts}}
 \index{ts@{ts}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ std\-::vector$<$ double $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf ts}}\label{classgcop_1_1SystemCe_aba3d332a8916c04763d2e71e9fa2f1be}
+\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ std\-::vector$<$ double $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf ts}}\label{classgcop_1_1SystemCe_a0b9b2eb4392bc8a5071db2521b5252ec}
 
 
 times (\-N+1) vector 
 
+\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!update\-Upper\-Bound@{update\-Upper\-Bound}}
+\index{update\-Upper\-Bound@{update\-Upper\-Bound}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
+\subsubsection[{update\-Upper\-Bound}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ bool {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf update\-Upper\-Bound}}\label{classgcop_1_1SystemCe_a2546a7ec07714afcba28b00e7d6644f4}
+
+
+after every iteration \-Jub is updated to be the current max cost (true by default) 
+
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!us@{us}}
 \index{us@{us}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ std\-::vector$<$ \-Vectorcd $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf us}}\label{classgcop_1_1SystemCe_a5c25cab5a30e37d2f46cffcd3dd5156d}
+\subsubsection[{us}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ std\-::vector$<$ \-Vectorcd $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf us}}\label{classgcop_1_1SystemCe_ac8bc8f672b5cedf88225de724533c4e1}
 
 
 controls (\-N) vector 
 
 
 
-\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
+
+\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!usas@{usas}}
+\index{usas@{usas}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
+\subsubsection[{usas}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ std\-::vector$<$ std\-::vector$<$\-Vectorcd$>$ $>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf usas}}\label{classgcop_1_1SystemCe_a1f2b88322a077b841318a3d4d3b28bbe}
+
+
+all control samples 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!uss@{uss}}
 \index{uss@{uss}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{uss}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ std\-::vector$<$ \-Vectorcd $>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf uss}}\label{classgcop_1_1SystemCe_a4458e74a8abe844dc035e13f5f079a6a}
+\subsubsection[{uss}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ std\-::vector$<$ \-Vectorcd $>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf uss}}\label{classgcop_1_1SystemCe_a693d2d01d1db0655559505e77619254f}
 
 
 controls (\-N) vector 
 
 
 
-\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!xs@{xs}}
 \index{xs@{xs}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ std\-::vector$<$ \-T $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf xs}}\label{classgcop_1_1SystemCe_afb9337d9762f976f31d8b60c455681f1}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ std\-::vector$<$ \-T $>$ \& {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf xs}}\label{classgcop_1_1SystemCe_a3fffeb6a50d044e0a05e8e3238c663b6}
 
 
 states (\-N+1) vector 
+
+\index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!xsas@{xsas}}
+\index{xsas@{xsas}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
+\subsubsection[{xsas}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ std\-::vector$<$ std\-::vector$<$\-T$>$ $>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf xsas}}\label{classgcop_1_1SystemCe_a5fe2c92c21bb08a81a630ad1ca79bfd0}
+
+
+all state samples 
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!xss@{xss}}
 \index{xss@{xss}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{xss}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ std\-::vector$<$ \-T $>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf xss}}\label{classgcop_1_1SystemCe_a3a9c43af28a65c4bcafbe7fc7b88f77b}
+\subsubsection[{xss}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ std\-::vector$<$ \-T $>$ {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf xss}}\label{classgcop_1_1SystemCe_a18ddca64021bb2403a65bf72d6633a41}
 
 
 states (\-N+1) vector 
 
 
 
-\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp $>$\-::\-System\-Ce().
+\-Referenced by gcop\-::\-System\-Ce$<$ T, n, c, np, ntp, Tc $>$\-::\-System\-Ce().
 
 \index{gcop\-::\-System\-Ce@{gcop\-::\-System\-Ce}!zmin@{zmin}}
 \index{zmin@{zmin}!gcop::SystemCe@{gcop\-::\-System\-Ce}}
-\subsubsection[{zmin}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ \-Vectortpd {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf zmin}}\label{classgcop_1_1SystemCe_ab8c61f63d377293711e62c724951c938}
+\subsubsection[{zmin}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic, typename \-Tc = \-T$>$ \-Vectortpd {\bf gcop\-::\-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp, \-Tc $>$\-::{\bf zmin}}\label{classgcop_1_1SystemCe_ade0b9e6dc920bd94264856e82c151c3e}
 
 
 \-Current best z corresponding to \-J. 

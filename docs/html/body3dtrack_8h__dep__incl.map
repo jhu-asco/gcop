@@ -1,8 +1,7 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$body3dtrack_8cc.html" title="lib/systems/body3dtrack.cc" alt="" coords="5,83,187,112"/>
-<area shape="rect" id="node5" href="$body3dcost_8h.html" title="lib/systems/costs/body3dcost.h" alt="" coords="211,83,416,112"/>
-<area shape="rect" id="node7" href="$body3dtrackcost_8h.html" title="lib/systems/costs/body3dtrackcost.h" alt="" coords="440,83,675,112"/>
-<area shape="rect" id="node11" href="$body3dtrackview_8h.html" title="lib/views/body3dtrackview.h" alt="" coords="701,83,888,112"/>
-<area shape="rect" id="node9" href="$body3dtrackcost_8cc.html" title="lib/systems/costs/body3dtrackcost.cc" alt="" coords="433,160,676,189"/>
-<area shape="rect" id="node13" href="$body3dtrackview_8cc.html" title="lib/views/body3dtrackview.cc" alt="" coords="700,160,892,189"/>
+<area shape="rect" id="node5" href="$body3dtrackcost_8h.html" title="lib/systems/costs/body3dtrackcost.h" alt="" coords="211,83,445,112"/>
+<area shape="rect" id="node9" href="$body3dtrackview_8h.html" title="lib/views/body3dtrackview.h" alt="" coords="472,83,659,112"/>
+<area shape="rect" id="node7" href="$body3dtrackcost_8cc.html" title="lib/systems/costs/body3dtrackcost.cc" alt="" coords="204,160,447,189"/>
+<area shape="rect" id="node11" href="$body3dtrackview_8cc.html" title="lib/views/body3dtrackview.cc" alt="" coords="471,160,663,189"/>
 </map>

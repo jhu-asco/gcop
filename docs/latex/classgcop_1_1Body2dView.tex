@@ -1,59 +1,74 @@
-\section{gcop\-:\-:\-Body2d\-View \-Class \-Reference}
-\label{classgcop_1_1Body2dView}\index{gcop\-::\-Body2d\-View@{gcop\-::\-Body2d\-View}}
+\section{gcop\-:\-:\-Body2d\-View$<$ c $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Body2dView}\index{gcop\-::\-Body2d\-View$<$ c $>$@{gcop\-::\-Body2d\-View$<$ c $>$}}
 
 
 {\ttfamily \#include $<$body2dview.\-h$>$}
 
 
 
-\-Inheritance diagram for gcop\-:\-:\-Body2d\-View\-:\nopagebreak
+\-Inheritance diagram for gcop\-:\-:\-Body2d\-View$<$ c $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=322pt]{classgcop_1_1Body2dView__inherit__graph}
+\includegraphics[width=318pt]{classgcop_1_1Body2dView__inherit__graph}
 \end{center}
 \end{figure}
 
 
-\-Collaboration diagram for gcop\-:\-:\-Body2d\-View\-:\nopagebreak
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-View$<$ c $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classgcop_1_1Body2dView__coll__graph}
+\includegraphics[width=318pt]{classgcop_1_1Body2dView__coll__graph}
 \end{center}
 \end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, c, 1 $>$ {\bf \-Vectorcd}
+\end{DoxyCompactItemize}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Body2d\-View} (const {\bf \-Body2d} \&{\bf sys})
+{\bf \-Body2d\-View} (const {\bf \-Body2d}$<$ c $>$ \&{\bf sys})
 \item 
-{\bf \-Body2d\-View} (const {\bf \-Body2d} \&{\bf sys}, vector$<$ pair$<$ \-Matrix3d, \-Vector3d $>$ $>$ $\ast${\bf xs}=0, vector$<$ \-Vector3d $>$ $\ast${\bf us}=0)
+{\bf \-Body2d\-View} (const {\bf \-Body2d}$<$ c $>$ \&{\bf sys}, vector$<$ {\bf \-Body2d\-State} $>$ $\ast${\bf xs}=0, vector$<$ {\bf \-Vectorcd} $>$ $\ast${\bf us}=0)
 \item 
 virtual {\bf $\sim$\-Body2d\-View} ()
 \item 
-void {\bf \-Render} (const pair$<$ \-Matrix3d, \-Vector3d $>$ $\ast$x, const \-Vector3d $\ast$u=0)
+void {\bf \-Render} (const pair$<$ \-Matrix3d, \-Vector3d $>$ $\ast$x, const {\bf \-Vectorcd} $\ast$u=0)
 \item 
-void {\bf \-Render} (const vector$<$ pair$<$ \-Matrix3d, \-Vector3d $>$ $>$ $\ast${\bf xs}, const vector$<$ \-Vector3d $>$ $\ast${\bf us}=0, bool rs=true, int is=-\/1, int ie=-\/1, int {\bf dis}=1, int {\bf dit}=1, bool dl=false)
+void {\bf \-Render} (const vector$<$ pair$<$ \-Matrix3d, \-Vector3d $>$ $>$ $\ast${\bf xs}, const vector$<$ {\bf \-Vectorcd} $>$ $\ast${\bf us}=0, bool rs=true, int is=-\/1, int ie=-\/1, int {\bf dis}=1, int {\bf dit}=1, bool dl=false)
 \end{DoxyCompactItemize}
 \subsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const {\bf \-Body2d} \& {\bf sys}
+const {\bf \-Body2d}$<$ c $>$ \& {\bf sys}
 \item 
 \-G\-L\-Uquadric\-Obj $\ast$ {\bf qobj}
 \item 
 double {\bf force\-Scale}
 \begin{DoxyCompactList}\small\item\em force arrow scaling coefficient \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$int c = 3$>$ class gcop\-::\-Body2d\-View$<$ c $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Body2d\-View@{gcop\-::\-Body2d\-View}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Body2dView@{gcop\-::\-Body2d\-View}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ typedef \-Matrix$<$double, c, 1$>$ {\bf gcop\-::\-Body2d\-View}$<$ c $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Body2dView_a65f0220f10c023696b57910e0ebe4947}
 
 
 \subsection{\-Constructor \& \-Destructor \-Documentation}
 \index{gcop\-::\-Body2d\-View@{gcop\-::\-Body2d\-View}!\-Body2d\-View@{\-Body2d\-View}}
 \index{\-Body2d\-View@{\-Body2d\-View}!gcop::Body2dView@{gcop\-::\-Body2d\-View}}
-\subsubsection[{\-Body2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-View\-::\-Body2d\-View} (
+\subsubsection[{\-Body2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Body2d\-View}$<$ c $>$\-::{\bf \-Body2d\-View} (
 \begin{DoxyParamCaption}
-\item[{const {\bf \-Body2d} \&}]{sys}
+\item[{const {\bf \-Body2d}$<$ c $>$ \&}]{sys}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1Body2dView_a57a474b9a01df47c39ef3c57b3d1e620}
+)}\label{classgcop_1_1Body2dView_ad302041e95ca197a11b830968d6b0e84}
 \-Create a particle view of trajectory traj 
 \begin{DoxyParams}{\-Parameters}
 {\em sys} & particle \\
@@ -61,17 +76,17 @@ double {\bf force\-Scale}
 \end{DoxyParams}
 
 
-\-References force\-Scale, gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::line\-Width, qobj, and gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::rgba.
+\-References gcop\-::\-Body2d\-View$<$ c $>$\-::force\-Scale, gcop\-::\-System\-View$<$ Body2d\-State, Matrix$<$ double, c, 1 $>$ $>$\-::line\-Width, gcop\-::\-Body2d\-View$<$ c $>$\-::qobj, and gcop\-::\-System\-View$<$ Body2d\-State, Matrix$<$ double, c, 1 $>$ $>$\-::rgba.
 
 \index{gcop\-::\-Body2d\-View@{gcop\-::\-Body2d\-View}!\-Body2d\-View@{\-Body2d\-View}}
 \index{\-Body2d\-View@{\-Body2d\-View}!gcop::Body2dView@{gcop\-::\-Body2d\-View}}
-\subsubsection[{\-Body2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-View\-::\-Body2d\-View} (
+\subsubsection[{\-Body2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Body2d\-View}$<$ c $>$\-::{\bf \-Body2d\-View} (
 \begin{DoxyParamCaption}
-\item[{const {\bf \-Body2d} \&}]{sys, }
-\item[{vector$<$ pair$<$ \-Matrix3d, \-Vector3d $>$ $>$ $\ast$}]{xs = {\ttfamily 0}, }
-\item[{vector$<$ \-Vector3d $>$ $\ast$}]{us = {\ttfamily 0}}
+\item[{const {\bf \-Body2d}$<$ c $>$ \&}]{sys, }
+\item[{vector$<$ {\bf \-Body2d\-State} $>$ $\ast$}]{xs = {\ttfamily 0}, }
+\item[{vector$<$ {\bf \-Vectorcd} $>$ $\ast$}]{us = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1Body2dView_a52855a7e790a2de56bf71e14a43e4922}
+)}\label{classgcop_1_1Body2dView_a34d99b1149302d9868990fdd699da8d4}
 \-Create a particle view of trajectory traj 
 \begin{DoxyParams}{\-Parameters}
 {\em sys} & particle \\
@@ -81,44 +96,44 @@ double {\bf force\-Scale}
 \end{DoxyParams}
 
 
-\-References force\-Scale, gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::line\-Width, qobj, and gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::rgba.
+\-References gcop\-::\-Body2d\-View$<$ c $>$\-::force\-Scale, gcop\-::\-System\-View$<$ Body2d\-State, Matrix$<$ double, c, 1 $>$ $>$\-::line\-Width, gcop\-::\-Body2d\-View$<$ c $>$\-::qobj, and gcop\-::\-System\-View$<$ Body2d\-State, Matrix$<$ double, c, 1 $>$ $>$\-::rgba.
 
 \index{gcop\-::\-Body2d\-View@{gcop\-::\-Body2d\-View}!$\sim$\-Body2d\-View@{$\sim$\-Body2d\-View}}
 \index{$\sim$\-Body2d\-View@{$\sim$\-Body2d\-View}!gcop::Body2dView@{gcop\-::\-Body2d\-View}}
-\subsubsection[{$\sim$\-Body2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-View\-::$\sim$\-Body2d\-View} (
+\subsubsection[{$\sim$\-Body2d\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Body2d\-View}$<$ c $>$\-::$\sim${\bf \-Body2d\-View} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dView_ac0668f269c15889cc2f65c93754955ac}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dView_abaae43f7345bb379ba50aa62404b1d73}
 
 
-\-References qobj.
+\-References gcop\-::\-Body2d\-View$<$ c $>$\-::qobj.
 
 
 
 \subsection{\-Member \-Function \-Documentation}
 \index{gcop\-::\-Body2d\-View@{gcop\-::\-Body2d\-View}!\-Render@{\-Render}}
 \index{\-Render@{\-Render}!gcop::Body2dView@{gcop\-::\-Body2d\-View}}
-\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-View\-::\-Render} (
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf gcop\-::\-Body2d\-View}$<$ c $>$\-::{\bf \-Render} (
 \begin{DoxyParamCaption}
 \item[{const pair$<$ \-Matrix3d, \-Vector3d $>$ $\ast$}]{x, }
-\item[{const \-Vector3d $\ast$}]{u = {\ttfamily 0}}
+\item[{const {\bf \-Vectorcd} $\ast$}]{u = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dView_a2911b2905771a122f71f49238be1cb75}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dView_a6200a95db039c5523aa3e16c542605f3}
 
 
-\-Implements {\bf gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a5591c11e0516e2993231547ec82cd763}.
+\-Implements {\bf gcop\-::\-System\-View$<$ Body2d\-State, Matrix$<$ double, c, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a5591c11e0516e2993231547ec82cd763}.
 
 
 
-\-References gcop\-::\-Viewer\-::\-Draw\-Arrow(), force\-Scale, gcop\-::\-S\-E2\-::g2q(), gcop\-::\-S\-E2\-::\-Instance(), qobj, gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::render\-Forces, \-Render\-Uuv(), and gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::rgba.
+\-References gcop\-::\-Viewer\-::\-Draw\-Arrow(), gcop\-::\-S\-E2\-::g2q(), gcop\-::\-S\-E2\-::\-Instance(), and gcop\-::\-Render\-Uuv().
 
 \index{gcop\-::\-Body2d\-View@{gcop\-::\-Body2d\-View}!\-Render@{\-Render}}
 \index{\-Render@{\-Render}!gcop::Body2dView@{gcop\-::\-Body2d\-View}}
-\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-View\-::\-Render} (
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf gcop\-::\-Body2d\-View}$<$ c $>$\-::{\bf \-Render} (
 \begin{DoxyParamCaption}
 \item[{const vector$<$ pair$<$ \-Matrix3d, \-Vector3d $>$ $>$ $\ast$}]{xs, }
-\item[{const vector$<$ \-Vector3d $>$ $\ast$}]{us = {\ttfamily 0}, }
+\item[{const vector$<$ {\bf \-Vectorcd} $>$ $\ast$}]{us = {\ttfamily 0}, }
 \item[{bool}]{rs = {\ttfamily true}, }
 \item[{int}]{is = {\ttfamily -\/1}, }
 \item[{int}]{ie = {\ttfamily -\/1}, }
@@ -126,7 +141,7 @@ double {\bf force\-Scale}
 \item[{int}]{dit = {\ttfamily 1}, }
 \item[{bool}]{dl = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dView_a5bb6d8742edba678c42e85cfb54812dc}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dView_a35189c516da4ecd6cc3c00c292748576}
 \-Render a trajectory 
 \begin{DoxyParams}{\-Parameters}
 {\em traj} & trajectory \\
@@ -146,36 +161,32 @@ double {\bf force\-Scale}
 \end{DoxyParams}
 
 
-\-Implements {\bf gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6a4cf72f0a0e380ad69397be162b3ee9}.
-
-
-
-\-References gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::dis, gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::dit, gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::line\-Width, gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::\-Render(), gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::rgba, and gcop\-::\-System\-View$<$ pair$<$ Matrix3d, Vector3d $>$, Vector3d $>$\-::xs.
+\-Implements {\bf gcop\-::\-System\-View$<$ Body2d\-State, Matrix$<$ double, c, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1SystemView_a6a4cf72f0a0e380ad69397be162b3ee9}.
 
 
 
 \subsection{\-Member \-Data \-Documentation}
 \index{gcop\-::\-Body2d\-View@{gcop\-::\-Body2d\-View}!force\-Scale@{force\-Scale}}
 \index{force\-Scale@{force\-Scale}!gcop::Body2dView@{gcop\-::\-Body2d\-View}}
-\subsubsection[{force\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Body2d\-View\-::force\-Scale}}\label{classgcop_1_1Body2dView_a321879d9ba3bda486b2ae9f36b8e83e7}
+\subsubsection[{force\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ double {\bf gcop\-::\-Body2d\-View}$<$ c $>$\-::{\bf force\-Scale}}\label{classgcop_1_1Body2dView_a886b06801b4f32fc33aa6a53ac00db64}
 
 
 force arrow scaling coefficient 
 
 
 
-\-Referenced by \-Body2d\-View(), and \-Render().
+\-Referenced by gcop\-::\-Body2d\-View$<$ c $>$\-::\-Body2d\-View().
 
 \index{gcop\-::\-Body2d\-View@{gcop\-::\-Body2d\-View}!qobj@{qobj}}
 \index{qobj@{qobj}!gcop::Body2dView@{gcop\-::\-Body2d\-View}}
-\subsubsection[{qobj}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Body2d\-View\-::qobj}}\label{classgcop_1_1Body2dView_aa463ff5c2964e9f8abe65fbd2d8425f4}
+\subsubsection[{qobj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ \-G\-L\-Uquadric\-Obj$\ast$ {\bf gcop\-::\-Body2d\-View}$<$ c $>$\-::{\bf qobj}}\label{classgcop_1_1Body2dView_a2f5150c64f65543244af53ea60167645}
 
 
-\-Referenced by \-Body2d\-View(), \-Render(), and $\sim$\-Body2d\-View().
+\-Referenced by gcop\-::\-Body2d\-View$<$ c $>$\-::\-Body2d\-View(), and gcop\-::\-Body2d\-View$<$ c $>$\-::$\sim$\-Body2d\-View().
 
 \index{gcop\-::\-Body2d\-View@{gcop\-::\-Body2d\-View}!sys@{sys}}
 \index{sys@{sys}!gcop::Body2dView@{gcop\-::\-Body2d\-View}}
-\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Body2d}\& {\bf gcop\-::\-Body2d\-View\-::sys}}\label{classgcop_1_1Body2dView_ad08ea781d80b7178cf263acb67f65ce8}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ const {\bf \-Body2d}$<$c$>$\& {\bf gcop\-::\-Body2d\-View}$<$ c $>$\-::{\bf sys}}\label{classgcop_1_1Body2dView_a6308cd0965e9ee4d4d3fded6ee0493aa}
 
 
 \-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}

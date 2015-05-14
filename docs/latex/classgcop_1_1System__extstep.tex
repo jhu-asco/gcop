@@ -6,7 +6,8 @@
 
 
 
-\-Inheritance diagram for gcop\-:\-:\-System\-\_\-extstep$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\-Inheritance diagram for gcop\-:\-:\-System\-\_\-extstep$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -15,7 +16,8 @@
 \end{figure}
 
 
-\-Collaboration diagram for gcop\-:\-:\-System\-\_\-extstep$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\-Collaboration diagram for gcop\-:\-:\-System\-\_\-extstep$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -50,13 +52,13 @@ typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
 \item 
 {\bf \-System\-\_\-extstep} ({\bf \-Manifold}$<$ \-T, \-\_\-nx $>$ \&{\bf \-X}, int nu, \-Func\-\_\-type steparg, reset\-Func\-Type resetarg=\-N\-U\-L\-L)
 \item 
-double {\bf \-Step} (\-T \&xb, double {\bf t}, const \-T \&xa, const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrixnd} $\ast$\-A=0, {\bf \-Matrixncd} $\ast$\-B=0, {\bf \-Matrixnmd} $\ast$\-C=0, bool {\bf reset}=false)
+double {\bf \-Step} (\-T \&xb, double {\bf t}, const \-T \&xa, const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrixnd} $\ast$\-A=0, {\bf \-Matrixncd} $\ast$\-B=0, {\bf \-Matrixnmd} $\ast$\-C=0, bool reset=false)
 \item 
-double {\bf \-Step\-\_\-internaloutput} (const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} $\ast$p, {\bf \-Matrixnd} $\ast$\-A, \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ $\ast$\-B, \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ $\ast$\-C)
+double {\bf \-Step} (const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} $\ast$p, {\bf \-Matrixnd} $\ast$\-A, \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ $\ast$\-B, \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ $\ast$\-C)
 \item 
-double {\bf \-Step\-\_\-internalinput} (\-T \&xb, const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} $\ast$p, {\bf \-Matrixnd} $\ast$\-A, \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ $\ast$\-B, \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ $\ast$\-C)
+double {\bf \-Step} (\-T \&xb, const {\bf \-Vectorcd} \&u, double h, const {\bf \-Vectormd} $\ast$p, {\bf \-Matrixnd} $\ast$\-A, \-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ $\ast$\-B, \-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ $\ast$\-C)
 \item 
-bool {\bf reset} (const \-T \&{\bf x}, double {\bf t}=0)
+bool {\bf \-Reset} (const \-T \&{\bf x}, double {\bf t}=0)
 \end{DoxyCompactItemize}
 \subsubsection*{template$<$typename T, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ class gcop\-::\-System\-\_\-extstep$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}
 
@@ -149,14 +151,14 @@ bool {\bf reset} (const \-T \&{\bf x}, double {\bf t}=0)
 
 
 \subsection{\-Member \-Function \-Documentation}
-\index{gcop\-::\-System\-\_\-extstep@{gcop\-::\-System\-\_\-extstep}!reset@{reset}}
-\index{reset@{reset}!gcop::System_extstep@{gcop\-::\-System\-\_\-extstep}}
-\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ bool {\bf gcop\-::\-System\-\_\-extstep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf reset} (
+\index{gcop\-::\-System\-\_\-extstep@{gcop\-::\-System\-\_\-extstep}!\-Reset@{\-Reset}}
+\index{\-Reset@{\-Reset}!gcop::System_extstep@{gcop\-::\-System\-\_\-extstep}}
+\subsubsection[{\-Reset}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ bool {\bf gcop\-::\-System\-\_\-extstep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Reset} (
 \begin{DoxyParamCaption}
 \item[{const \-T \&}]{x, }
 \item[{double}]{t = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1System__extstep_aa59da693a1e17cdac6aad9629cbf1805}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1System__extstep_a0d6a50775d5622ce87bc5e13fc5fa460}
 \-Resets the internal state of the system to one specified 
 \begin{DoxyParams}{\-Parameters}
 {\em x} & \-State to reset to \\
@@ -166,7 +168,7 @@ bool {\bf reset} (const \-T \&{\bf x}, double {\bf t}=0)
 \end{DoxyParams}
 
 
-\-Reimplemented from {\bf gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1System_a3ca52c0a504bd4d4c8b689bbdc77fc4a}.
+\-Reimplemented from {\bf gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1System_a7030a291051817a06d8102314e17ff4a}.
 
 
 
@@ -188,9 +190,46 @@ bool {\bf reset} (const \-T \&{\bf x}, double {\bf t}=0)
 \item[{bool}]{reset = {\ttfamily false}}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1System__extstep_acc2a4e1c35371cfc4a8d92b807bbb318}
-\index{gcop\-::\-System\-\_\-extstep@{gcop\-::\-System\-\_\-extstep}!\-Step\-\_\-internalinput@{\-Step\-\_\-internalinput}}
-\index{\-Step\-\_\-internalinput@{\-Step\-\_\-internalinput}!gcop::System_extstep@{gcop\-::\-System\-\_\-extstep}}
-\subsubsection[{\-Step\-\_\-internalinput}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-System\-\_\-extstep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Step\-\_\-internalinput} (
+\index{gcop\-::\-System\-\_\-extstep@{gcop\-::\-System\-\_\-extstep}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::System_extstep@{gcop\-::\-System\-\_\-extstep}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-System\-\_\-extstep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Step} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{h, }
+\item[{const {\bf \-Vectormd} $\ast$}]{p, }
+\item[{{\bf \-Matrixnd} $\ast$}]{\-A, }
+\item[{\-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ $\ast$}]{\-B, }
+\item[{\-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ $\ast$}]{\-C}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1System__extstep_a3661545e29187a01a7d40e77e76e3eb5}
+\-Discrete \-Dynamics update of internal state and no output 
+\begin{DoxyParams}{\-Parameters}
+{\em t} & current time \\
+\hline
+{\em u} & current control \\
+\hline
+{\em h} & step size \\
+\hline
+{\em p} & static parameters (optional) \\
+\hline
+{\em \-A} & jacobian w.\-r.\-t. x (optional) \\
+\hline
+{\em \-B} & jacobian w.\-r.\-t. u (optional) \\
+\hline
+{\em \-C} & jacobian w.\-r.\-t. p (optional) \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1System_a9e463c531f4b6994bc7e4ab45947d921}.
+
+
+
+\-References gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::t, and gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::x.
+
+\index{gcop\-::\-System\-\_\-extstep@{gcop\-::\-System\-\_\-extstep}!\-Step@{\-Step}}
+\index{\-Step@{\-Step}!gcop::System_extstep@{gcop\-::\-System\-\_\-extstep}}
+\subsubsection[{\-Step}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-System\-\_\-extstep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Step} (
 \begin{DoxyParamCaption}
 \item[{\-T \&}]{xb, }
 \item[{const {\bf \-Vectorcd} \&}]{u, }
@@ -200,7 +239,7 @@ bool {\bf reset} (const \-T \&{\bf x}, double {\bf t}=0)
 \item[{\-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ $\ast$}]{\-B, }
 \item[{\-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ $\ast$}]{\-C}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1System__extstep_af72a08b633cd8be40c30c117a88bca06}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1System__extstep_a8cd438e75807976200a49770361acea1}
 \-Discrete \-Dynamics \-Update. \-This function computes the next state xb using the internal input state x\-\_\-int and applied forces u 
 \begin{DoxyParams}{\-Parameters}
 {\em xb} & resulting state \\
@@ -209,7 +248,7 @@ bool {\bf reset} (const \-T \&{\bf x}, double {\bf t}=0)
 \hline
 {\em u} & current control \\
 \hline
-{\em h} & current time-\/step \\
+{\em h} & step size \\
 \hline
 {\em p} & static parameters (optional) \\
 \hline
@@ -222,44 +261,7 @@ bool {\bf reset} (const \-T \&{\bf x}, double {\bf t}=0)
 \end{DoxyParams}
 
 
-\-Reimplemented from {\bf gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1System_a69b2bd7ced3f05871ebc14ec269f28aa}.
-
-
-
-\-References gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::t, and gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::x.
-
-\index{gcop\-::\-System\-\_\-extstep@{gcop\-::\-System\-\_\-extstep}!\-Step\-\_\-internaloutput@{\-Step\-\_\-internaloutput}}
-\index{\-Step\-\_\-internaloutput@{\-Step\-\_\-internaloutput}!gcop::System_extstep@{gcop\-::\-System\-\_\-extstep}}
-\subsubsection[{\-Step\-\_\-internaloutput}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ double {\bf gcop\-::\-System\-\_\-extstep}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf \-Step\-\_\-internaloutput} (
-\begin{DoxyParamCaption}
-\item[{const {\bf \-Vectorcd} \&}]{u, }
-\item[{double}]{h, }
-\item[{const {\bf \-Vectormd} $\ast$}]{p, }
-\item[{{\bf \-Matrixnd} $\ast$}]{\-A, }
-\item[{\-Matrix$<$ double, \-\_\-nx, \-\_\-nu $>$ $\ast$}]{\-B, }
-\item[{\-Matrix$<$ double, \-\_\-nx, \-\_\-np $>$ $\ast$}]{\-C}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1System__extstep_aac62f562920fc0ca04090904c9b4d397}
-\-Discrete \-Dynamics update of internal state and no output 
-\begin{DoxyParams}{\-Parameters}
-{\em t} & current time \\
-\hline
-{\em u} & current control \\
-\hline
-{\em h} & current time-\/step \\
-\hline
-{\em p} & static parameters (optional) \\
-\hline
-{\em \-A} & jacobian w.\-r.\-t. x (optional) \\
-\hline
-{\em \-B} & jacobian w.\-r.\-t. u (optional) \\
-\hline
-{\em \-C} & jacobian w.\-r.\-t. p (optional) \\
-\hline
-\end{DoxyParams}
-
-
-\-Reimplemented from {\bf gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1System_ae5fe65715b84acf2f57898a585882d98}.
+\-Reimplemented from {\bf gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$} \doxyref{}{p.}{classgcop_1_1System_a1512a58d7cc50e5fac561ffeac076d32}.
 
 
 

@@ -99,14 +99,14 @@
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
 <li>d
 : <a class="el" href="classgcop_1_1GP.html#a94e37801a73a743548915b610662cdf3">gcop::GP</a>
-, <a class="el" href="classgcop_1_1Body2d.html#a0ed929e4aeef2a136ef47dcd92fa2447">gcop::Body2d</a>
+, <a class="el" href="classgcop_1_1Body2d.html#ac1203a9069a6c5cafb23721ce111f137">gcop::Body2d&lt; c &gt;</a>
 , <a class="el" href="classgcop_1_1Kinbody3d.html#adafaec7db1283f308c5bf6d8abd0e8b1">gcop::Kinbody3d&lt; _nu &gt;</a>
 , <a class="el" href="classgcop_1_1Uuv.html#a9b17c2a7df9783c498e41d249866c384">gcop::Uuv&lt; c &gt;</a>
 , <a class="el" href="classgcop_1_1Kinbody2d.html#ac9009d88757eb7d3d18a9b72011799db">gcop::Kinbody2d</a>
 , <a class="el" href="classgcop_1_1BoxView.html#a5e7d6f3b395d596dfbfb927562ede8cd">gcop::BoxView</a>
 </li>
 <li>D
-: <a class="el" href="classgcop_1_1Body2dForce.html#aec2f98f1dc4b7d6fde55130965481b57">gcop::Body2dForce</a>
+: <a class="el" href="classgcop_1_1Body2dForce.html#af2c05c910a8a8a49587362f1beb05b49">gcop::Body2dForce&lt; c &gt;</a>
 </li>
 <li>damping
 : <a class="el" href="classgcop_1_1Joint.html#a5f06aeea2b1386a9b92e3191cc2ffbfd">gcop::Joint</a>
@@ -127,7 +127,7 @@
 : <a class="el" href="classgcop_1_1Docp.html#a9620fc41b6e4cb6084dea50aafe90c93">gcop::Docp&lt; T, nx, nu, np &gt;</a>
 , <a class="el" href="classgcop_1_1Doep.html#a8ee770c21e6f904c89d74c24d4e3ef82">gcop::Doep&lt; T, nx, nu, np, Tz, nz, T1, nx1 &gt;</a>
 , <a class="el" href="classgcop_1_1SPSA.html#a07c1fe2cab94f8a1a68f8350f2296b4c">gcop::SPSA&lt; T, n, c, _np &gt;</a>
-, <a class="el" href="classgcop_1_1SystemCe.html#ae990b715585574bfaa29bf3d7a0d3237">gcop::SystemCe&lt; T, n, c, np, ntp &gt;</a>
+, <a class="el" href="classgcop_1_1SystemCe.html#a624d0210813c6f1cebae5dd52aa8fcd1">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1Mbs.html#a0ac4fac9bef1b9733980ed7fa0e40528">gcop::Mbs</a>
 , <a class="el" href="classgcop_1_1ASPSA.html#a235e8d2e84000a2bbbc91290fd59fece">gcop::ASPSA&lt; T, n, c, _np &gt;</a>
 </li>
@@ -139,7 +139,8 @@
 : <a class="el" href="classgcop_1_1ASPSA.html#a105293f175a06d5b3ffc5e1391c3af07">gcop::ASPSA&lt; T, n, c, _np &gt;</a>
 </li>
 <li>dem
-: <a class="el" href="classgcop_1_1PqpDem.html#a0da6eedb549ee396841d3148748c3920">gcop::PqpDem&lt; T, _nx, _nu, _np &gt;</a>
+: <a class="el" href="classgcop_1_1Body3dDemController.html#a45eaa470feb2e1b4753769568c0330c0">gcop::Body3dDemController&lt; nu &gt;</a>
+, <a class="el" href="classgcop_1_1PqpDem.html#a0da6eedb549ee396841d3148748c3920">gcop::PqpDem&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1DemView.html#ad70e7c9d7c6d2ac9dc5555d84d5b2698">gcop::DemView</a>
 </li>
 <li>det
@@ -207,22 +208,22 @@
 : <a class="el" href="classgcop_1_1PDdp.html#aa359ba12d5e23f2115327a31a2c1cb30">gcop::PDdp&lt; T, n, c, np &gt;</a>
 , <a class="el" href="classgcop_1_1LqSensorCost.html#a30e5d268de0a92b700a841322e838756">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
 </li>
-<li>dr
-: <a class="el" href="classgcop_1_1MbsState.html#a6b5d93e8e49329a2e4bf09fcfa911552">gcop::MbsState</a>
-</li>
 <li>dR
 : <a class="el" href="classgcop_1_1PqpDem.html#a2ee6c9f49c12cd62b7e2706500fcca32">gcop::PqpDem&lt; T, _nx, _nu, _np &gt;</a>
 </li>
+<li>dr
+: <a class="el" href="classgcop_1_1MbsState.html#a6b5d93e8e49329a2e4bf09fcfa911552">gcop::MbsState</a>
+</li>
 <li>drawForces
-: <a class="el" href="classgcop_1_1Body2dTrackView.html#a3b0de61c9222e73053baae6cdffcd241">gcop::Body2dTrackView</a>
+: <a class="el" href="classgcop_1_1Kinbody3dTrackView.html#a8dbeb63247effe7f2bc6425422ecd4ce">gcop::Kinbody3dTrackView&lt; _nu &gt;</a>
+, <a class="el" href="classgcop_1_1Body2dTrackView.html#a3b0de61c9222e73053baae6cdffcd241">gcop::Body2dTrackView</a>
 , <a class="el" href="classgcop_1_1Body3dTrackView.html#a44c58e25d301ef2212fba1823fc8fbbb">gcop::Body3dTrackView</a>
-, <a class="el" href="classgcop_1_1Kinbody3dTrackView.html#a8dbeb63247effe7f2bc6425422ecd4ce">gcop::Kinbody3dTrackView&lt; _nu &gt;</a>
 </li>
 <li>drawLandmarks
-: <a class="el" href="classgcop_1_1Body2dGraphView.html#ae376da7aa36b3516bf02d39d78c12173">gcop::Body2dGraphView</a>
+: <a class="el" href="classgcop_1_1Kinbody3dTrackView.html#a68ed4c242bc34b4135c9f901f9b1fbe8">gcop::Kinbody3dTrackView&lt; _nu &gt;</a>
+, <a class="el" href="classgcop_1_1Body2dGraphView.html#ae376da7aa36b3516bf02d39d78c12173">gcop::Body2dGraphView</a>
 , <a class="el" href="classgcop_1_1Body2dTrackView.html#aedeeb82123bab31c6527b4eb46b5f001">gcop::Body2dTrackView</a>
 , <a class="el" href="classgcop_1_1Body3dTrackView.html#a636ff98c2ac42d2e889449d9dde819c6">gcop::Body3dTrackView</a>
-, <a class="el" href="classgcop_1_1Kinbody3dTrackView.html#a68ed4c242bc34b4135c9f901f9b1fbe8">gcop::Kinbody3dTrackView&lt; _nu &gt;</a>
 </li>
 <li>dres
 : <a class="el" href="classgcop_1_1PqpDem.html#a696fbd9bcb64b47756c39ef508d23818">gcop::PqpDem&lt; T, _nx, _nu, _np &gt;</a>
@@ -231,6 +232,9 @@
 : <a class="el" href="classgcop_1_1Body3d.html#ac2199d7bea5a5e7133da9069af14e59d">gcop::Body3d&lt; c &gt;</a>
 , <a class="el" href="classgcop_1_1Dem.html#a7e3a927eb977af2019497ebb02dbda20">gcop::Dem</a>
 , <a class="el" href="classgcop_1_1Uuv.html#ab86e766a32432302c8aab3ba3b18f1e9">gcop::Uuv&lt; c &gt;</a>
+</li>
+<li>dsl
+: <a class="el" href="classgcop_1_1Body3dDemController.html#a6e25eabebb30361e255489a9f5c58e6f">gcop::Body3dDemController&lt; nu &gt;</a>
 </li>
 <li>dt
 : <a class="el" href="classgcop_1_1PqpDem.html#a146e224b2a98acbd024822daa5b1d6f8">gcop::PqpDem&lt; T, _nx, _nu, _np &gt;</a>
@@ -243,10 +247,10 @@
 : <a class="el" href="classgcop_1_1SDdp.html#a0af6312d16044cc24f9ee2577e4ddc8c">gcop::SDdp&lt; T, nx, nu, np &gt;</a>
 </li>
 <li>dus
-: <a class="el" href="classgcop_1_1SDdp.html#a335c8116a165ba400c3c8ee5c392d347">gcop::SDdp&lt; T, nx, nu, np &gt;</a>
+: <a class="el" href="classgcop_1_1SystemCe.html#a3d6a4d4ae902ab4a0a057e00496b35e5">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1SPSA.html#ad2939113cb9cfd65990efcdd29776769">gcop::SPSA&lt; T, n, c, _np &gt;</a>
 , <a class="el" href="classgcop_1_1Ddp.html#aeded669259366eef2a5f424ebe4e3c99">gcop::Ddp&lt; T, nx, nu, np &gt;</a>
-, <a class="el" href="classgcop_1_1SystemCe.html#ad60096c80bdfec2564e3785150f66b77">gcop::SystemCe&lt; T, n, c, np, ntp &gt;</a>
+, <a class="el" href="classgcop_1_1SDdp.html#a335c8116a165ba400c3c8ee5c392d347">gcop::SDdp&lt; T, nx, nu, np &gt;</a>
 </li>
 <li>dus1
 : <a class="el" href="classgcop_1_1ASPSA.html#a6a74d541909f978cca125dff06b67b48">gcop::ASPSA&lt; T, n, c, _np &gt;</a>
@@ -258,22 +262,24 @@
 : <a class="el" href="classgcop_1_1SDdp.html#a0d45d2e264f04ea2b17156743f3188fe">gcop::SDdp&lt; T, nx, nu, np &gt;</a>
 , <a class="el" href="classgcop_1_1SampleNumericalDiff.html#a9ecafb874fcd92367ed0a25e21497a96">gcop::SampleNumericalDiff&lt; _Functor, _nx, _nu, _np, _ng, _ntp &gt;</a>
 </li>
+<li>dV
+: <a class="el" href="classgcop_1_1SDdp.html#ac1e5cb4d8af88f02689e815b58ac7236">gcop::SDdp&lt; T, nx, nu, np &gt;</a>
+</li>
 <li>Dv
 : <a class="el" href="classgcop_1_1Body3d.html#a2916a5454819c290263170c72d789a73">gcop::Body3d&lt; c &gt;</a>
 </li>
 <li>dV
-: <a class="el" href="classgcop_1_1SDdp.html#ac1e5cb4d8af88f02689e815b58ac7236">gcop::SDdp&lt; T, nx, nu, np &gt;</a>
-, <a class="el" href="classgcop_1_1Ddp.html#a5b0f936569024fac1430fde87640b962">gcop::Ddp&lt; T, nx, nu, np &gt;</a>
+: <a class="el" href="classgcop_1_1Ddp.html#a5b0f936569024fac1430fde87640b962">gcop::Ddp&lt; T, nx, nu, np &gt;</a>
 </li>
 <li>Dw
 : <a class="el" href="classgcop_1_1Body3d.html#aa6d5655f446158dde5462fa8c514d0a5">gcop::Body3d&lt; c &gt;</a>
 </li>
 <li>dx
 : <a class="el" href="classgcop_1_1KalmanCorrector.html#a89a3b6d28fa1a48e70783e5e7f55a1f4">gcop::KalmanCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
-, <a class="el" href="classgcop_1_1Gunicycle.html#a3e996d3477d400b7345e5295f23a8744">gcop::Gunicycle</a>
 , <a class="el" href="classgcop_1_1Unicycle.html#a50b46cb935da9563943af3ad39e2f7f8">gcop::Unicycle</a>
+, <a class="el" href="classgcop_1_1Gunicycle.html#a3e996d3477d400b7345e5295f23a8744">gcop::Gunicycle</a>
 , <a class="el" href="classgcop_1_1Wrench.html#afe58404c4e9e33360965eba9a966b294">gcop::Wrench&lt; T, n, c &gt;</a>
+, <a class="el" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
 </li>
 <li>dxscale
 : <a class="el" href="classgcop_1_1SDdp.html#aa37d5ba038d4a684e18158a13abf7a78">gcop::SDdp&lt; T, nx, nu, np &gt;</a>
@@ -298,7 +304,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:59:10 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

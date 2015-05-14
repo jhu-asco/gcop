@@ -86,108 +86,114 @@
 <a name="l00021"></a>00021   <span class="keyword">using namespace </span>Eigen;
 <a name="l00022"></a>00022 
 <a name="l00023"></a><a class="code" href="params_8h.html#a9a8958076bcdee5268b89bc717bbedb0">00023</a> <span class="preprocessor">#define GCOP_PARAMS_MBL 256</span>
-<a name="l00024"></a>00024 <span class="preprocessor"></span>
-<a name="l00025"></a><a class="code" href="classgcop_1_1Params.html">00025</a> <span class="keyword">class </span><a class="code" href="classgcop_1_1Params.html">Params</a>
-<a name="l00026"></a>00026 {
-<a name="l00027"></a>00027  <span class="keyword">public</span>:
-<a name="l00028"></a>00028 
-<a name="l00029"></a><a class="code" href="classgcop_1_1Params.html#a8549ff377b97ac6bf3a2510807bad2c7">00029</a>   <span class="keyword">typedef</span> Matrix&lt;double, 6, 6&gt; <a class="code" href="classgcop_1_1Params.html#a8549ff377b97ac6bf3a2510807bad2c7">Matrix6d</a>;
-<a name="l00030"></a><a class="code" href="classgcop_1_1Params.html#a8be3f08e071e4a6213ad6980ade746ad">00030</a>   <span class="keyword">typedef</span> Matrix&lt;double, 6, 1&gt; <a class="code" href="classgcop_1_1Params.html#a8be3f08e071e4a6213ad6980ade746ad">Vector6d</a>;
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032   <a class="code" href="classgcop_1_1Params.html">Params</a>();
-<a name="l00033"></a>00033   <a class="code" href="classgcop_1_1Params.html">Params</a>(FILE *file);
-<a name="l00034"></a>00034   <a class="code" href="classgcop_1_1Params.html">Params</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *fileName);
-<a name="l00035"></a>00035   <a class="code" href="classgcop_1_1Params.html">Params</a>(std::iostream &amp;io);
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037   <span class="keyword">virtual</span> ~<a class="code" href="classgcop_1_1Params.html">Params</a>();
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039   <span class="keywordtype">void</span> Load(<span class="keyword">const</span> <span class="keywordtype">char</span> *fileName);
-<a name="l00040"></a>00040   <span class="keywordtype">void</span> Load(FILE *file);
-<a name="l00041"></a>00041   <span class="keywordtype">void</span> Load(std::iostream &amp;io);
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043   <span class="keywordtype">void</span> Save(<span class="keyword">const</span> <span class="keywordtype">char</span> *fileName) <span class="keyword">const</span>;
-<a name="l00044"></a>00044   <span class="keywordtype">void</span> Save(FILE* file) <span class="keyword">const</span>;
-<a name="l00045"></a>00045   <span class="keywordtype">void</span> Save(std::iostream &amp;io) <span class="keyword">const</span>;
-<a name="l00046"></a>00046 
-<a name="l00047"></a><a class="code" href="classgcop_1_1Params.html#a24b74a8dd510368c917755db45e1c13e">00047</a>   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Params.html#a24b74a8dd510368c917755db45e1c13e">Exists</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> valueMap.find(std::string(name)) != valueMap.end(); }
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049   <span class="keywordtype">void</span> SetInt(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> v);
-<a name="l00050"></a>00050   <span class="keywordtype">bool</span> GetInt(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> &amp;v) <span class="keyword">const</span>;
-<a name="l00051"></a>00051   
-<a name="l00052"></a>00052   <span class="keywordtype">void</span> SetFloat(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">float</span> v);
-<a name="l00053"></a>00053   <span class="keywordtype">bool</span> GetFloat(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">float</span> &amp;v) <span class="keyword">const</span>;
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055   <span class="keywordtype">void</span> SetDouble(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">double</span> v);
-<a name="l00056"></a>00056   <span class="keywordtype">bool</span> GetDouble(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">double</span> &amp;v) <span class="keyword">const</span>;
+<a name="l00024"></a>00024 <span class="preprocessor"></span>  
+<a name="l00025"></a>00025   <span class="keyword">typedef</span> Matrix&lt;double, 6, 6&gt; <a class="code" href="namespacegcop.html#a9a48fc301dc21867f8353f31858f9dd2">Matrix6d</a>;
+<a name="l00026"></a>00026   <span class="keyword">typedef</span> Matrix&lt;double, 6, 1&gt; <a class="code" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a>;
+<a name="l00027"></a>00027   <span class="keyword">typedef</span> Matrix&lt;double, 5, 5&gt; <a class="code" href="namespacegcop.html#a4ac281f4de4f76b6b3bb255993e6eaca">Matrix5d</a>;
+<a name="l00028"></a>00028   <span class="keyword">typedef</span> Matrix&lt;double, 5, 1&gt; <a class="code" href="namespacegcop.html#af1796a1dd8672b58cbe205c7eb927910">Vector5d</a>;
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030 
+<a name="l00031"></a><a class="code" href="classgcop_1_1Params.html">00031</a> <span class="keyword">class </span><a class="code" href="classgcop_1_1Params.html">Params</a>
+<a name="l00032"></a>00032 {
+<a name="l00033"></a>00033  <span class="keyword">public</span>:
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035   <a class="code" href="classgcop_1_1Params.html">Params</a>();
+<a name="l00036"></a>00036   <a class="code" href="classgcop_1_1Params.html">Params</a>(FILE *file);
+<a name="l00037"></a>00037   <a class="code" href="classgcop_1_1Params.html">Params</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *fileName);
+<a name="l00038"></a>00038   <a class="code" href="classgcop_1_1Params.html">Params</a>(std::iostream &amp;io);
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040   <span class="keyword">virtual</span> ~<a class="code" href="classgcop_1_1Params.html">Params</a>();
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042   <span class="keywordtype">void</span> Load(<span class="keyword">const</span> <span class="keywordtype">char</span> *fileName);
+<a name="l00043"></a>00043   <span class="keywordtype">void</span> Load(FILE *file);
+<a name="l00044"></a>00044   <span class="keywordtype">void</span> Load(std::iostream &amp;io);
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046   <span class="keywordtype">void</span> Save(<span class="keyword">const</span> <span class="keywordtype">char</span> *fileName) <span class="keyword">const</span>;
+<a name="l00047"></a>00047   <span class="keywordtype">void</span> Save(FILE* file) <span class="keyword">const</span>;
+<a name="l00048"></a>00048   <span class="keywordtype">void</span> Save(std::iostream &amp;io) <span class="keyword">const</span>;
+<a name="l00049"></a>00049 
+<a name="l00050"></a><a class="code" href="classgcop_1_1Params.html#a24b74a8dd510368c917755db45e1c13e">00050</a>   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Params.html#a24b74a8dd510368c917755db45e1c13e">Exists</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> valueMap.find(std::string(name)) != valueMap.end(); }
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052   <span class="keywordtype">void</span> SetInt(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> v);
+<a name="l00053"></a>00053   <span class="keywordtype">bool</span> GetInt(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> &amp;v) <span class="keyword">const</span>;
+<a name="l00054"></a>00054   
+<a name="l00055"></a>00055   <span class="keywordtype">void</span> SetFloat(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">float</span> v);
+<a name="l00056"></a>00056   <span class="keywordtype">bool</span> GetFloat(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">float</span> &amp;v) <span class="keyword">const</span>;
 <a name="l00057"></a>00057 
-<a name="l00058"></a>00058   <span class="keywordtype">void</span> SetVectorXd(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> VectorXd &amp;v);
-<a name="l00059"></a>00059   <span class="keywordtype">bool</span> GetVectorXd(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, VectorXd &amp;v) <span class="keyword">const</span>;
+<a name="l00058"></a>00058   <span class="keywordtype">void</span> SetDouble(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">double</span> v);
+<a name="l00059"></a>00059   <span class="keywordtype">bool</span> GetDouble(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">double</span> &amp;v) <span class="keyword">const</span>;
 <a name="l00060"></a>00060 
-<a name="l00061"></a>00061   <span class="keywordtype">void</span> SetVector2d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> Vector2d &amp;v);
-<a name="l00062"></a>00062   <span class="keywordtype">bool</span> GetVector2d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, Vector2d &amp;v) <span class="keyword">const</span>;
+<a name="l00061"></a>00061   <span class="keywordtype">void</span> SetVectorXd(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> VectorXd &amp;v);
+<a name="l00062"></a>00062   <span class="keywordtype">bool</span> GetVectorXd(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, VectorXd &amp;v) <span class="keyword">const</span>;
 <a name="l00063"></a>00063 
-<a name="l00064"></a>00064   <span class="keywordtype">void</span> SetVector3d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> Vector3d &amp;v);
-<a name="l00065"></a>00065   <span class="keywordtype">bool</span> GetVector3d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, Vector3d &amp;v) <span class="keyword">const</span>;
+<a name="l00064"></a>00064   <span class="keywordtype">void</span> SetVector2d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> Vector2d &amp;v);
+<a name="l00065"></a>00065   <span class="keywordtype">bool</span> GetVector2d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, Vector2d &amp;v) <span class="keyword">const</span>;
 <a name="l00066"></a>00066 
-<a name="l00067"></a>00067   <span class="keywordtype">void</span> SetVector4d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> Vector4d &amp;v);
-<a name="l00068"></a>00068   <span class="keywordtype">bool</span> GetVector4d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, Vector4d &amp;v) <span class="keyword">const</span>;
+<a name="l00067"></a>00067   <span class="keywordtype">void</span> SetVector3d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> Vector3d &amp;v);
+<a name="l00068"></a>00068   <span class="keywordtype">bool</span> GetVector3d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, Vector3d &amp;v) <span class="keyword">const</span>;
 <a name="l00069"></a>00069 
-<a name="l00070"></a>00070   <span class="keywordtype">void</span> SetVector6d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a> &amp;v);
-<a name="l00071"></a>00071   <span class="keywordtype">bool</span> GetVector6d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <a class="code" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a> &amp;v) <span class="keyword">const</span>;
+<a name="l00070"></a>00070   <span class="keywordtype">void</span> SetVector4d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> Vector4d &amp;v);
+<a name="l00071"></a>00071   <span class="keywordtype">bool</span> GetVector4d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, Vector4d &amp;v) <span class="keyword">const</span>;
 <a name="l00072"></a>00072 
-<a name="l00073"></a>00073   <span class="keywordtype">void</span> SetMatrix3d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> Matrix3d &amp;m);
-<a name="l00074"></a>00074   <span class="keywordtype">bool</span> GetMatrix3d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, Matrix3d &amp;m) <span class="keyword">const</span>;
+<a name="l00073"></a>00073   <span class="keywordtype">void</span> SetVector5d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#af1796a1dd8672b58cbe205c7eb927910">Vector5d</a> &amp;v);
+<a name="l00074"></a>00074   <span class="keywordtype">bool</span> GetVector5d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <a class="code" href="namespacegcop.html#af1796a1dd8672b58cbe205c7eb927910">Vector5d</a> &amp;v) <span class="keyword">const</span>;
 <a name="l00075"></a>00075 
-<a name="l00076"></a>00076   <span class="keywordtype">void</span> SetMatrix6d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#a9a48fc301dc21867f8353f31858f9dd2">Matrix6d</a> &amp;m);
-<a name="l00077"></a>00077   <span class="keywordtype">bool</span> GetMatrix6d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <a class="code" href="namespacegcop.html#a9a48fc301dc21867f8353f31858f9dd2">Matrix6d</a> &amp;m) <span class="keyword">const</span>;
+<a name="l00076"></a>00076   <span class="keywordtype">void</span> SetVector6d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a> &amp;v);
+<a name="l00077"></a>00077   <span class="keywordtype">bool</span> GetVector6d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <a class="code" href="namespacegcop.html#a6f403146dbedd5277b51ead88ea62e18">Vector6d</a> &amp;v) <span class="keyword">const</span>;
 <a name="l00078"></a>00078 
-<a name="l00079"></a>00079   <span class="keywordtype">void</span> SetDoubleVec(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> std::vector&lt;double&gt; &amp;v);
-<a name="l00080"></a>00080   <span class="keywordtype">bool</span> GetDoubleVec(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, std::vector&lt;double&gt; &amp;v) <span class="keyword">const</span>;
+<a name="l00079"></a>00079   <span class="keywordtype">void</span> SetMatrix3d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> Matrix3d &amp;m);
+<a name="l00080"></a>00080   <span class="keywordtype">bool</span> GetMatrix3d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, Matrix3d &amp;m) <span class="keyword">const</span>;
 <a name="l00081"></a>00081 
-<a name="l00082"></a>00082   <span class="keywordtype">void</span> SetFloatArray(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> n, <span class="keyword">const</span> <span class="keywordtype">float</span> *v);
-<a name="l00083"></a>00083   <span class="keywordtype">bool</span> GetFloatArray(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> n, <span class="keywordtype">float</span> *v) <span class="keyword">const</span>;
+<a name="l00082"></a>00082   <span class="keywordtype">void</span> SetMatrix6d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> <a class="code" href="namespacegcop.html#a9a48fc301dc21867f8353f31858f9dd2">Matrix6d</a> &amp;m);
+<a name="l00083"></a>00083   <span class="keywordtype">bool</span> GetMatrix6d(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <a class="code" href="namespacegcop.html#a9a48fc301dc21867f8353f31858f9dd2">Matrix6d</a> &amp;m) <span class="keyword">const</span>;
 <a name="l00084"></a>00084 
-<a name="l00085"></a>00085   <span class="keywordtype">void</span> SetDoubleArray(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> n, <span class="keyword">const</span> <span class="keywordtype">double</span> *v);
-<a name="l00086"></a>00086   <span class="keywordtype">bool</span> GetDoubleArray(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> n, <span class="keywordtype">double</span> *v) <span class="keyword">const</span>;
-<a name="l00087"></a>00087   
-<a name="l00088"></a>00088   <span class="keywordtype">void</span> SetString(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> std::string &amp;v);
-<a name="l00089"></a>00089   <span class="keywordtype">bool</span> GetString(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, std::string &amp;v) <span class="keyword">const</span>;
-<a name="l00090"></a>00090   
-<a name="l00091"></a>00091   <span class="keywordtype">void</span> SetBool(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">bool</span> v);
-<a name="l00092"></a>00092   <span class="keywordtype">bool</span> GetBool(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">bool</span> &amp;v) <span class="keyword">const</span>;
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094   <span class="keywordtype">void</span> SetChar(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">char</span> v);
-<a name="l00095"></a>00095   <span class="keywordtype">char</span> GetChar(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">char</span> &amp;v) <span class="keyword">const</span>;
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097   <span class="keywordtype">void</span> Print(FILE *file = stdout) <span class="keyword">const</span>;
-<a name="l00098"></a>00098   <span class="keywordtype">void</span> Print(std::iostream &amp;io) <span class="keyword">const</span>;
+<a name="l00085"></a>00085   <span class="keywordtype">void</span> SetDoubleVec(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> std::vector&lt;double&gt; &amp;v);
+<a name="l00086"></a>00086   <span class="keywordtype">bool</span> GetDoubleVec(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, std::vector&lt;double&gt; &amp;v) <span class="keyword">const</span>;
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088   <span class="keywordtype">void</span> SetFloatArray(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> n, <span class="keyword">const</span> <span class="keywordtype">float</span> *v);
+<a name="l00089"></a>00089   <span class="keywordtype">bool</span> GetFloatArray(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> n, <span class="keywordtype">float</span> *v) <span class="keyword">const</span>;
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091   <span class="keywordtype">void</span> SetDoubleArray(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> n, <span class="keyword">const</span> <span class="keywordtype">double</span> *v);
+<a name="l00092"></a>00092   <span class="keywordtype">bool</span> GetDoubleArray(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">int</span> n, <span class="keywordtype">double</span> *v) <span class="keyword">const</span>;
+<a name="l00093"></a>00093   
+<a name="l00094"></a>00094   <span class="keywordtype">void</span> SetString(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> std::string &amp;v);
+<a name="l00095"></a>00095   <span class="keywordtype">bool</span> GetString(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, std::string &amp;v) <span class="keyword">const</span>;
+<a name="l00096"></a>00096   
+<a name="l00097"></a>00097   <span class="keywordtype">void</span> SetBool(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">bool</span> v);
+<a name="l00098"></a>00098   <span class="keywordtype">bool</span> GetBool(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">bool</span> &amp;v) <span class="keyword">const</span>;
 <a name="l00099"></a>00099 
-<a name="l00100"></a>00100  <span class="keyword">protected</span>:
-<a name="l00101"></a>00101 
+<a name="l00100"></a>00100   <span class="keywordtype">void</span> SetChar(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">char</span> v);
+<a name="l00101"></a>00101   <span class="keywordtype">char</span> GetChar(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">char</span> &amp;v) <span class="keyword">const</span>;
 <a name="l00102"></a>00102 
-<a name="l00103"></a><a class="code" href="structgcop_1_1Params_1_1RemoveDelimiter.html">00103</a>   <span class="keyword">struct </span><a class="code" href="structgcop_1_1Params_1_1RemoveDelimiter.html">RemoveDelimiter</a>
-<a name="l00104"></a>00104   {
-<a name="l00105"></a><a class="code" href="structgcop_1_1Params_1_1RemoveDelimiter.html#a41446e4440426d69b56c28bfe06c0db7">00105</a>     <span class="keywordtype">bool</span> operator()(<span class="keywordtype">char</span> c)
-<a name="l00106"></a>00106     {
-<a name="l00107"></a>00107       <span class="keywordflow">return</span> (c ==<span class="charliteral">&#39;\r&#39;</span> || c ==<span class="charliteral">&#39;\t&#39;</span> || c == <span class="charliteral">&#39; &#39;</span> || c == <span class="charliteral">&#39;\n&#39;</span>);
-<a name="l00108"></a>00108     }
-<a name="l00109"></a>00109   };
-<a name="l00110"></a>00110   
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112   <span class="keywordtype">void</span> Parse(<span class="keywordtype">char</span> *line);
-<a name="l00113"></a>00113 
-<a name="l00114"></a><a class="code" href="classgcop_1_1Params.html#a99c011f128dcaa426cd98660faa10ecb">00114</a>   std::map&lt;std::string, std::string&gt; <a class="code" href="classgcop_1_1Params.html#a99c011f128dcaa426cd98660faa10ecb">valueMap</a>;
-<a name="l00115"></a><a class="code" href="classgcop_1_1Params.html#a7227a9a2791c0507d2599cb551cf4402">00115</a>   <span class="keywordtype">char</span> buf[<a class="code" href="params_8h.html#a9a8958076bcdee5268b89bc717bbedb0">GCOP_PARAMS_MBL</a>];
-<a name="l00116"></a>00116 };
+<a name="l00103"></a>00103   <span class="keywordtype">void</span> Print(FILE *file = stdout) <span class="keyword">const</span>;
+<a name="l00104"></a>00104   <span class="keywordtype">void</span> Print(std::iostream &amp;io) <span class="keyword">const</span>;
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106  <span class="keyword">protected</span>:
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108 
+<a name="l00109"></a><a class="code" href="structgcop_1_1Params_1_1RemoveDelimiter.html">00109</a>   <span class="keyword">struct </span><a class="code" href="structgcop_1_1Params_1_1RemoveDelimiter.html">RemoveDelimiter</a>
+<a name="l00110"></a>00110   {
+<a name="l00111"></a><a class="code" href="structgcop_1_1Params_1_1RemoveDelimiter.html#a41446e4440426d69b56c28bfe06c0db7">00111</a>     <span class="keywordtype">bool</span> operator()(<span class="keywordtype">char</span> c)
+<a name="l00112"></a>00112     {
+<a name="l00113"></a>00113       <span class="keywordflow">return</span> (c ==<span class="charliteral">&#39;\r&#39;</span> || c ==<span class="charliteral">&#39;\t&#39;</span> || c == <span class="charliteral">&#39; &#39;</span> || c == <span class="charliteral">&#39;\n&#39;</span>);
+<a name="l00114"></a>00114     }
+<a name="l00115"></a>00115   };
+<a name="l00116"></a>00116   
 <a name="l00117"></a>00117 
-<a name="l00118"></a>00118 }
+<a name="l00118"></a>00118   <span class="keywordtype">void</span> Parse(<span class="keywordtype">char</span> *line);
 <a name="l00119"></a>00119 
-<a name="l00120"></a>00120 <span class="preprocessor">#endif</span>
+<a name="l00120"></a><a class="code" href="classgcop_1_1Params.html#a99c011f128dcaa426cd98660faa10ecb">00120</a>   std::map&lt;std::string, std::string&gt; <a class="code" href="classgcop_1_1Params.html#a99c011f128dcaa426cd98660faa10ecb">valueMap</a>;
+<a name="l00121"></a><a class="code" href="classgcop_1_1Params.html#a7227a9a2791c0507d2599cb551cf4402">00121</a>   <span class="keywordtype">char</span> buf[<a class="code" href="params_8h.html#a9a8958076bcdee5268b89bc717bbedb0">GCOP_PARAMS_MBL</a>];
+<a name="l00122"></a>00122 };
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124 }
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:14 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:48 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

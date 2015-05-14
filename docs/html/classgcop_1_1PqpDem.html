@@ -101,6 +101,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1PqpDem.html#a099f72c73ffcb833825bf572899c7782">PqpDem</a> (const <a class="el" href="classgcop_1_1Dem.html">Dem</a> &amp;<a class="el" href="classgcop_1_1PqpDem.html#a0da6eedb549ee396841d3148748c3920">dem</a>, double <a class="el" href="classgcop_1_1PqpDem.html#aad2936334515f6b1f987ab5f14e13afc">cr</a>=0.1, double <a class="el" href="classgcop_1_1PqpDem.html#a8de56fc4fc1216ffc73a336bf8d3e7eb">sd</a>=0.0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1PqpDem.html#a5922f422e37cc79143e98623efaf0c96">~PqpDem</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1PqpDem.html#a09cf68b8534d25f1d04206636a370adc">operator()</a> (<a class="el" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">Vectorgd</a> &amp;g, double t, const T &amp;x, const <a class="el" href="classgcop_1_1PqpDem.html#a5a9f5714ecd79fdfa372efb79f924176">Vectorcd</a> &amp;u, const <a class="el" href="classgcop_1_1PqpDem.html#a84871f1bb95ed1e0f403813a1f7e22aa">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">Matrixgxd</a> *dgdx=0, <a class="el" href="classgcop_1_1PqpDem.html#a144ccdcf88a07d58263755fdf684f834">Matrixgud</a> *dgdu=0, <a class="el" href="classgcop_1_1PqpDem.html#aae7f61a0b0fa1c340222bd3f80b33e90">Matrixgpd</a> *dgdp=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1PqpDem.html#a7dd8ba1a19db9025fe4645d234077511">operator()</a> (<a class="el" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">Vectorgd</a> &amp;g, double t, const T &amp;x, <a class="el" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">Matrixgxd</a> *dgdx=0)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classgcop_1_1Dem.html">Dem</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1PqpDem.html#a0da6eedb549ee396841d3148748c3920">dem</a></td></tr>
@@ -117,6 +118,8 @@ Public Attributes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">collision radius  <a href="#aad2936334515f6b1f987ab5f14e13afc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1PqpDem.html#a8de56fc4fc1216ffc73a336bf8d3e7eb">sd</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">additional safety distance  <a href="#a8de56fc4fc1216ffc73a336bf8d3e7eb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1PqpDem.html#ae6c433da6e76143c573e5490aa8586a5">xb</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">body state for collision purposes  <a href="#ae6c433da6e76143c573e5490aa8586a5"></a><br/></td></tr>
 </table>
 <h3>template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt;<br/>
  class gcop::PqpDem&lt; T, _nx, _nu, _np &gt;</h3>
@@ -355,6 +358,51 @@ template&lt;typename T , int _nx, int _nu, int _np&gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Referenced by <a class="el" href="classgcop_1_1PqpDem.html#a7dd8ba1a19db9025fe4645d234077511">gcop::PqpDem&lt; T, _nx, _nu, _np &gt;::operator()()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7dd8ba1a19db9025fe4645d234077511"></a><!-- doxytag: member="gcop::PqpDem::operator()" ref="a7dd8ba1a19db9025fe4645d234077511" args="(Vectorgd &amp;g, double t, const T &amp;x, Matrixgxd *dgdx=0)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgcop_1_1PqpDem.html">gcop::PqpDem</a>&lt; T, _nx, _nu, _np &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1PqpDem.html#a16145cf4772eecb24ab92817bb2398ba">Vectorgd</a> &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1PqpDem.html#aab3ea9b842d22c3e36804e2158a9063a">Matrixgxd</a> *&#160;</td>
+          <td class="paramname"><em>dgdx</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>References <a class="el" href="classgcop_1_1PqpDem.html#a09cf68b8534d25f1d04206636a370adc">gcop::PqpDem&lt; T, _nx, _nu, _np &gt;::operator()()</a>.</p>
+
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
@@ -543,6 +591,23 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 
 </div>
 </div>
+<a class="anchor" id="ae6c433da6e76143c573e5490aa8586a5"></a><!-- doxytag: member="gcop::PqpDem::xb" ref="ae6c433da6e76143c573e5490aa8586a5" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacegcop.html#aa77130a2144134032f6101f252d7a456">Body3dState</a> <a class="el" href="classgcop_1_1PqpDem.html">gcop::PqpDem</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1PqpDem.html#ae6c433da6e76143c573e5490aa8586a5">xb</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>body state for collision purposes </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>lib/systems/constraints/<a class="el" href="pqpdem_8h_source.html">pqpdem.h</a></li>
 </ul>
@@ -550,7 +615,7 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

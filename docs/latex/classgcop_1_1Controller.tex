@@ -1,18 +1,39 @@
-\section{gcop\-:\-:\-Controller$<$ \-Tx, \-Tu $>$ \-Class \-Template \-Reference}
-\label{classgcop_1_1Controller}\index{gcop\-::\-Controller$<$ Tx, Tu $>$@{gcop\-::\-Controller$<$ Tx, Tu $>$}}
+\section{gcop\-:\-:\-Controller$<$ \-Tx, \-Tu, \-Ts, \-Tc $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Controller}\index{gcop\-::\-Controller$<$ Tx, Tu, Ts, Tc $>$@{gcop\-::\-Controller$<$ Tx, Tu, Ts, Tc $>$}}
 
 
 {\ttfamily \#include $<$controller.\-h$>$}
 
+
+
+\-Collaboration diagram for gcop\-:\-:\-Controller$<$ \-Tx, \-Tu, \-Ts, \-Tc $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{classgcop_1_1Controller__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf \-Set} (\-Tu \&u, double t, const \-Tx \&x)=0
+virtual bool {\bf \-Set} (\-Tu \&u, double t, const \-Tx \&x)=0
+\item 
+virtual bool {\bf \-Set\-Params} (const \-Ts \&{\bf s})
+\item 
+virtual bool {\bf \-Set\-Context} (const \-Tc \&{\bf c})
 \end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-Ts {\bf s}
+\begin{DoxyCompactList}\small\item\em controller parameters \end{DoxyCompactList}\item 
+\-Tc {\bf c}
+\begin{DoxyCompactList}\small\item\em controller context \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
-\subsubsection*{template$<$typename \-Tx, typename \-Tu$>$class gcop\-::\-Controller$<$ Tx, Tu $>$}
+\subsubsection*{template$<$typename \-Tx, typename \-Tu, typename \-Ts = \-Vector\-Xd, typename \-Tc = \-Vector\-Xd$>$class gcop\-::\-Controller$<$ Tx, Tu, Ts, Tc $>$}
 
 \-Base controller. \-Its simple purpose is to take a state x and time t and produces the control u.
 
@@ -21,13 +42,13 @@ virtual void {\bf \-Set} (\-Tu \&u, double t, const \-Tx \&x)=0
 \subsection{\-Member \-Function \-Documentation}
 \index{gcop\-::\-Controller@{gcop\-::\-Controller}!\-Set@{\-Set}}
 \index{\-Set@{\-Set}!gcop::Controller@{gcop\-::\-Controller}}
-\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu$>$ virtual void {\bf gcop\-::\-Controller}$<$ \-Tx, \-Tu $>$\-::{\bf \-Set} (
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu, typename \-Ts = \-Vector\-Xd, typename \-Tc = \-Vector\-Xd$>$ virtual bool {\bf gcop\-::\-Controller}$<$ \-Tx, \-Tu, \-Ts, \-Tc $>$\-::{\bf \-Set} (
 \begin{DoxyParamCaption}
 \item[{\-Tu \&}]{u, }
 \item[{double}]{t, }
 \item[{const \-Tx \&}]{x}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Controller_a306fbf6d65ab78e13537bb92b330fc35}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Controller_a6bbf22b498272842f7894b3983d97022}
 \-Feedback controller of the form u = k(t, x) 
 \begin{DoxyParams}{\-Parameters}
 {\em u} & controls \\
@@ -37,9 +58,57 @@ virtual void {\bf \-Set} (\-Tu \&u, double t, const \-Tx \&x)=0
 {\em x} & state \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if arguments are valid, false if e.\-g. x is infeasible 
+\end{DoxyReturn}
 
 
-\-Implemented in {\bf gcop\-::\-Mbs\-Controller} \doxyref{}{p.}{classgcop_1_1MbsController_a0065ff60bcfaa6f378e97809d6491a4b}.
+\-Implemented in {\bf gcop\-::\-Body3d\-Dem\-Controller$<$ nu $>$} \doxyref{}{p.}{classgcop_1_1Body3dDemController_a6619b241c047122bef9894f9a1a05ca8}, {\bf gcop\-::\-Body3d\-Avoid\-Controller$<$ nu $>$} \doxyref{}{p.}{classgcop_1_1Body3dAvoidController_a3366867a655b73e7a858b110be672c6c}, {\bf gcop\-::\-Gavoid\-Controller} \doxyref{}{p.}{classgcop_1_1GavoidController_a5844309f105b871bbc5b9cf429973a6e}, {\bf gcop\-::\-Body3d\-Controller$<$ c $>$} \doxyref{}{p.}{classgcop_1_1Body3dController_aa10e4eeb274191d67644002bd3833112}, {\bf gcop\-::\-Body3d\-Controller$<$ nu $>$} \doxyref{}{p.}{classgcop_1_1Body3dController_aa10e4eeb274191d67644002bd3833112}, {\bf gcop\-::\-Point3d\-Controller} \doxyref{}{p.}{classgcop_1_1Point3dController_a02cf4f10ad5b3e6b30f36bf9eb762d73}, and {\bf gcop\-::\-Mbs\-Controller} \doxyref{}{p.}{classgcop_1_1MbsController_a60e530bb55ab52cb0d06a4f8898cd075}.
+
+\index{gcop\-::\-Controller@{gcop\-::\-Controller}!\-Set\-Context@{\-Set\-Context}}
+\index{\-Set\-Context@{\-Set\-Context}!gcop::Controller@{gcop\-::\-Controller}}
+\subsubsection[{\-Set\-Context}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu, typename \-Ts = \-Vector\-Xd, typename \-Tc = \-Vector\-Xd$>$ virtual bool {\bf gcop\-::\-Controller}$<$ \-Tx, \-Tu, \-Ts, \-Tc $>$\-::{\bf \-Set\-Context} (
+\begin{DoxyParamCaption}
+\item[{const \-Tc \&}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1Controller_aa7c8c84ff5a7fde50c70c4f7524fef17}
+\-Set context \begin{DoxyReturn}{\-Returns}
+true if arguments are valid, false if e.\-g. s is infeasible 
+\end{DoxyReturn}
+
+
+\-Reimplemented in {\bf gcop\-::\-Body3d\-Dem\-Controller$<$ nu $>$} \doxyref{}{p.}{classgcop_1_1Body3dDemController_a65583ba02854318be286206a0c982293}, and {\bf gcop\-::\-Body3d\-Avoid\-Controller$<$ nu $>$} \doxyref{}{p.}{classgcop_1_1Body3dAvoidController_acc22b7238c9ad2b27ce198db8ae0209f}.
+
+\index{gcop\-::\-Controller@{gcop\-::\-Controller}!\-Set\-Params@{\-Set\-Params}}
+\index{\-Set\-Params@{\-Set\-Params}!gcop::Controller@{gcop\-::\-Controller}}
+\subsubsection[{\-Set\-Params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu, typename \-Ts = \-Vector\-Xd, typename \-Tc = \-Vector\-Xd$>$ virtual bool {\bf gcop\-::\-Controller}$<$ \-Tx, \-Tu, \-Ts, \-Tc $>$\-::{\bf \-Set\-Params} (
+\begin{DoxyParamCaption}
+\item[{const \-Ts \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1Controller_a8663b606ccd50ea319d57db31f274f05}
+\-Set controller parameters \begin{DoxyReturn}{\-Returns}
+true if arguments are valid, false if e.\-g. s is infeasible 
+\end{DoxyReturn}
+
+
+\-Reimplemented in {\bf gcop\-::\-Body3d\-Dem\-Controller$<$ nu $>$} \doxyref{}{p.}{classgcop_1_1Body3dDemController_a0f8514b37e0c9beb29e74b6890fde5ce}, and {\bf gcop\-::\-Body3d\-Avoid\-Controller$<$ nu $>$} \doxyref{}{p.}{classgcop_1_1Body3dAvoidController_a9ca243566e3e74f441668a573660e372}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Controller@{gcop\-::\-Controller}!c@{c}}
+\index{c@{c}!gcop::Controller@{gcop\-::\-Controller}}
+\subsubsection[{c}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu, typename \-Ts = \-Vector\-Xd, typename \-Tc = \-Vector\-Xd$>$ \-Tc {\bf gcop\-::\-Controller}$<$ \-Tx, \-Tu, \-Ts, \-Tc $>$\-::{\bf c}}\label{classgcop_1_1Controller_a81a85dc188cec0c4332bc0870ec504ba}
+
+
+controller context 
+
+\index{gcop\-::\-Controller@{gcop\-::\-Controller}!s@{s}}
+\index{s@{s}!gcop::Controller@{gcop\-::\-Controller}}
+\subsubsection[{s}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Tx, typename \-Tu, typename \-Ts = \-Vector\-Xd, typename \-Tc = \-Vector\-Xd$>$ \-Ts {\bf gcop\-::\-Controller}$<$ \-Tx, \-Tu, \-Ts, \-Tc $>$\-::{\bf s}}\label{classgcop_1_1Controller_aa8f335870114dacfd11bf48f39efc8b2}
+
+
+controller parameters 
 
 
 

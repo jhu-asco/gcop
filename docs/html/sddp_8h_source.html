@@ -476,7 +476,7 @@
 <a name="l00446"></a>00446       Vectornd dx = VectorXd::Zero(this-&gt;sys.X.n);
 <a name="l00447"></a>00447       dx.setZero();<span class="comment">//Redundancy</span>
 <a name="l00448"></a>00448       T xn = this-&gt;xs[0];
-<a name="l00449"></a>00449       this-&gt;sys.reset(xn,this-&gt;ts[0]);<span class="comment">//Reset to initial state</span>
+<a name="l00449"></a>00449       this-&gt;sys.Reset(xn,this-&gt;ts[0]);<span class="comment">//Reset to initial state</span>
 <a name="l00450"></a>00450       Vectorcd un;
 <a name="l00451"></a>00451       
 <a name="l00452"></a>00452       <span class="keywordtype">double</span> Vm = 0;
@@ -530,7 +530,7 @@
 <a name="l00500"></a>00500           <span class="comment">//Adding nan catching :</span>
 <a name="l00501"></a>00501           <span class="keywordflow">try</span>
 <a name="l00502"></a>00502           {
-<a name="l00503"></a>00503             this-&gt;sys.Step_internalinput(xn, un, h, this-&gt;p);
+<a name="l00503"></a>00503             this-&gt;sys.Step(xn, un, h, this-&gt;p);
 <a name="l00504"></a>00504           }
 <a name="l00505"></a>00505           <span class="keywordflow">catch</span>(std::exception &amp;e)
 <a name="l00506"></a>00506           {
@@ -652,11 +652,11 @@
 <a name="l00622"></a>00622       <span class="comment">//getchar();</span>
 <a name="l00623"></a>00623 
 <a name="l00624"></a>00624       <span class="comment">/*Find xsprev based on dus and us:</span>
-<a name="l00625"></a>00625 <span class="comment">      this-&gt;sys.reset(this-&gt;xs[0],this-&gt;ts[0]);</span>
+<a name="l00625"></a>00625 <span class="comment">      this-&gt;sys.Reset(this-&gt;xs[0],this-&gt;ts[0]);</span>
 <a name="l00626"></a>00626 <span class="comment">      for(int count_traj = 0; count_traj&lt; N;count_traj++)</span>
 <a name="l00627"></a>00627 <span class="comment">      {</span>
 <a name="l00628"></a>00628 <span class="comment">        us1 = this-&gt;us[count_traj] - this-&gt;dus[count_traj];</span>
-<a name="l00629"></a>00629 <span class="comment">        this-&gt;sys.Step_internalinput(xsprev[count_traj+1],us1,(this-&gt;ts[count_traj+1])-(this-&gt;ts[count_traj]), this-&gt;p);</span>
+<a name="l00629"></a>00629 <span class="comment">        this-&gt;sys.Step(xsprev[count_traj+1],us1,(this-&gt;ts[count_traj+1])-(this-&gt;ts[count_traj]), this-&gt;p);</span>
 <a name="l00630"></a>00630 <span class="comment">      }</span>
 <a name="l00631"></a>00631 <span class="comment">      */</span>
 <a name="l00632"></a>00632 
@@ -690,7 +690,7 @@
 <a name="l00660"></a>00660 <span class="comment">          //dxsmatrix.block&lt;nx,1&gt;(0,count) = dx; </span>
 <a name="l00661"></a>00661 <span class="comment">          this-&gt;sys.X.Retract(x0_sample, this-&gt;xs[0], dx);</span>
 <a name="l00662"></a>00662 <span class="comment">          xss[0] = x0_sample;</span>
-<a name="l00663"></a>00663 <span class="comment">          this-&gt;sys.reset(x0_sample,this-&gt;ts[0]);</span>
+<a name="l00663"></a>00663 <span class="comment">          this-&gt;sys.Reset(x0_sample,this-&gt;ts[0]);</span>
 <a name="l00664"></a>00664 <span class="comment">          for(int count_traj = 0; count_traj&lt; N;count_traj++)</span>
 <a name="l00665"></a>00665 <span class="comment">          {</span>
 <a name="l00666"></a>00666 <span class="comment">            this-&gt;sys.X.Lift(dx, this-&gt;xs[count_traj], xss[count_traj]);//This is for feedback </span>
@@ -719,7 +719,7 @@
 <a name="l00689"></a>00689 <span class="comment">            }</span>
 <a name="l00690"></a>00690 <span class="comment">            //cout&lt;&lt;&quot;du_sigma: &quot;&lt;&lt;du_sigma[count_traj].transpose()&lt;&lt;endl;</span>
 <a name="l00691"></a>00691 <span class="comment">            //getchar();</span>
-<a name="l00692"></a>00692 <span class="comment">            this-&gt;sys.Step_internalinput(xss[count_traj+1],us1,(this-&gt;ts[count_traj+1])-(this-&gt;ts[count_traj]), this-&gt;p);</span>
+<a name="l00692"></a>00692 <span class="comment">            this-&gt;sys.Step(xss[count_traj+1],us1,(this-&gt;ts[count_traj+1])-(this-&gt;ts[count_traj]), this-&gt;p);</span>
 <a name="l00693"></a>00693 <span class="comment">          }</span>
 <a name="l00694"></a>00694 <span class="comment">          this-&gt;sys.X.Lift(dx, this-&gt;xs[N], xss[N]);//This is for feedback</span>
 <a name="l00695"></a>00695 <span class="comment">          dxsquare[N] += dx.squaredNorm();</span>
@@ -769,7 +769,7 @@
 <a name="l00739"></a>00739         this-&gt;sys.X.Retract(x0_sample, this-&gt;xs[0], dx);
 <a name="l00740"></a>00740 
 <a name="l00741"></a>00741         xss[0] = x0_sample;
-<a name="l00742"></a>00742         this-&gt;sys.reset(x0_sample,this-&gt;ts[0]);
+<a name="l00742"></a>00742         this-&gt;sys.Reset(x0_sample,this-&gt;ts[0]);
 <a name="l00743"></a>00743         <span class="keywordflow">for</span>(<span class="keywordtype">int</span> count1 = 0;count1 &lt; N;count1++)
 <a name="l00744"></a>00744         {
 <a name="l00745"></a>00745           <span class="comment">//this-&gt;sys.X.Lift(dx, xsprev[count1], xss[count1]);//This is for feedback</span>
@@ -829,7 +829,7 @@
 <a name="l00799"></a>00799 <span class="comment">          }</span>
 <a name="l00800"></a>00800 <span class="comment">          */</span>
 <a name="l00801"></a>00801           <span class="comment">//cout&lt;&lt;&quot;du, u: &quot;&lt;&lt;du.transpose()&lt;&lt;&quot;\t&quot;&lt;&lt;(this-&gt;us[count1]).transpose()&lt;&lt;endl;</span>
-<a name="l00802"></a>00802           this-&gt;sys.Step_internalinput(xss[count1+1],us1,(this-&gt;ts[count1+1])-(this-&gt;ts[count1]), this-&gt;p);
+<a name="l00802"></a>00802           this-&gt;sys.Step(xss[count1+1],us1,(this-&gt;ts[count1+1])-(this-&gt;ts[count1]), this-&gt;p);
 <a name="l00803"></a>00803           <span class="comment">//this-&gt;sys.X.Lift(dx, this-&gt;xs[count1+1], xss[count1+1]);//This is for fitting Linear Model</span>
 <a name="l00804"></a>00804           <span class="comment">//cout&lt;&lt;&quot; &quot;&lt;&lt;dx.norm();</span>
 <a name="l00805"></a>00805           <span class="comment">/*if(count_iterate == 2)</span>
@@ -911,7 +911,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -1,6 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop_1_1System.html" title="gcop::System\&lt; Matrix4d, 6, _nu \&gt;" alt="" coords="5,32,227,61"/>
-<area shape="rect" id="node3" href="$classgcop_1_1Kinbody3d.html" title="gcop::Kinbody3d\&lt; _nu \&gt;" alt="" coords="276,5,439,35"/>
-<area shape="rect" id="node5" href="$classgcop_1_1Kinbody3d.html" title="gcop::Kinbody3d\&lt; 2 \&gt;" alt="" coords="283,59,432,88"/>
-<area shape="rect" id="node7" href="$classgcop_1_1KinRccar.html" title="gcop::KinRccar" alt="" coords="488,59,600,88"/>
+<area shape="rect" id="node1" href="$classgcop_1_1System.html" title="gcop::System\&lt; Body3dState, 12, c \&gt;" alt="" coords="7,85,244,115"/>
+<area shape="rect" id="node3" href="$classgcop_1_1Body3d.html" title="gcop::Body3d\&lt; 4 \&gt;" alt="" coords="293,59,427,88"/>
+<area shape="rect" id="node11" href="$classgcop_1_1Body3d.html" title="gcop::Body3d\&lt; c \&gt;" alt="" coords="293,112,427,141"/>
+<area shape="rect" id="node5" href="$classgcop_1_1Heli.html" title="gcop::Heli" alt="" coords="483,5,563,35"/>
+<area shape="rect" id="node7" href="$classgcop_1_1Hrotor.html" title="gcop::Hrotor" alt="" coords="476,59,569,88"/>
+<area shape="rect" id="node9" href="$classgcop_1_1Qrotor.html" title="gcop::Qrotor" alt="" coords="476,112,569,141"/>
 </map>

@@ -115,6 +115,10 @@ Public Attributes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">current best  <a href="#ae389f4fbbc9f395242adeab672630089"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Ce.html#acd583cab3da7c8eb26d656b8c98b94e0">Jmin</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">minimum cost  <a href="#acd583cab3da7c8eb26d656b8c98b94e0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Ce.html#af9b79263ada3c9bfd30572546b002506">Jmax</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">current Jmax (discard any samples with costs higher than Jmax)  <a href="#af9b79263ada3c9bfd30572546b002506"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Ce.html#a4d6840d1e3ca8a531a9b9d43992a9ec3">Jave</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">average cost over all samples  <a href="#a4d6840d1e3ca8a531a9b9d43992a9ec3"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;int _n = Dynamic&gt;<br/>
@@ -450,7 +454,7 @@ template&lt;int _n = Dynamic&gt; </div>
 
 <p>underlying Gaussian-mixture-model </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
@@ -468,6 +472,40 @@ template&lt;int _n = Dynamic&gt; </div>
 <div class="memdoc">
 
 <p>incremental version of mras </p>
+
+</div>
+</div>
+<a class="anchor" id="a4d6840d1e3ca8a531a9b9d43992a9ec3"></a><!-- doxytag: member="gcop::Ce::Jave" ref="a4d6840d1e3ca8a531a9b9d43992a9ec3" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int _n = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classgcop_1_1Ce.html">gcop::Ce</a>&lt; _n &gt;::<a class="el" href="classgcop_1_1Ce.html#a4d6840d1e3ca8a531a9b9d43992a9ec3">Jave</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>average cost over all samples </p>
+
+</div>
+</div>
+<a class="anchor" id="af9b79263ada3c9bfd30572546b002506"></a><!-- doxytag: member="gcop::Ce::Jmax" ref="af9b79263ada3c9bfd30572546b002506" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int _n = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classgcop_1_1Ce.html">gcop::Ce</a>&lt; _n &gt;::<a class="el" href="classgcop_1_1Ce.html#af9b79263ada3c9bfd30572546b002506">Jmax</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>current Jmax (discard any samples with costs higher than Jmax) </p>
 
 </div>
 </div>
@@ -554,7 +592,7 @@ template&lt;int _n = Dynamic&gt; </div>
 
 <p>extra noise </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Ce.html#a4980b98497352080857f83cbc3aab9b1">gcop::Ce&lt; _n &gt;::Ce()</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Ce.html#a4980b98497352080857f83cbc3aab9b1">gcop::Ce&lt; _n &gt;::Ce()</a>, and <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
@@ -601,7 +639,7 @@ template&lt;int _n = Dynamic&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:48 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classgcop_1_1SystemView.html" title="gcop::SystemView\&lt; pair\&lt; Matrix3d, Vector3d \&gt;, Vector3d \&gt;" alt="" coords="5,83,376,112"/>
-<area shape="rect" id="node4" href="$classgcop_1_1View.html" title="gcop::View" alt="" coords="148,5,233,35"/>
+<area shape="rect" id="node2" href="$classgcop_1_1SystemView.html" title="gcop::SystemView\&lt; Body2dState, Matrix\&lt; double, c, 1 \&gt; \&gt;" alt="" coords="5,83,371,112"/>
+<area shape="rect" id="node4" href="$classgcop_1_1View.html" title="gcop::View" alt="" coords="145,5,231,35"/>
 </map>

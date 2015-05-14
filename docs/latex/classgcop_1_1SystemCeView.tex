@@ -1,0 +1,107 @@
+\section{gcop\-:\-:\-System\-Ce\-View$<$ \-T, n, c, np, ntp $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1SystemCeView}\index{gcop\-::\-System\-Ce\-View$<$ T, n, c, np, ntp $>$@{gcop\-::\-System\-Ce\-View$<$ T, n, c, np, ntp $>$}}
+
+
+{\ttfamily \#include $<$systemceview.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-System\-Ce\-View$<$ \-T, n, c, np, ntp $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{classgcop_1_1SystemCeView__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-System\-Ce\-View$<$ \-T, n, c, np, ntp $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1SystemCeView__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-System\-Ce\-View} ({\bf \-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$ \&{\bf ce}, {\bf \-System\-View}$<$ \-T, \-Vectorcd $>$ \&{\bf view})
+\item 
+virtual void {\bf \-Render} ()
+\item 
+virtual bool {\bf \-Render\-Frame} (int i)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$ \& {\bf ce}
+\item 
+{\bf \-System\-View}$<$ \-T, \-Vectorcd $>$ \& {\bf view}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename T, int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$class gcop\-::\-System\-Ce\-View$<$ T, n, c, np, ntp $>$}
+
+\doxyref{\-System\-Ce}{p.}{classgcop_1_1SystemCe} \-Veiw
+
+\-Authors\-: \-Marin \-Kobilarov 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-System\-Ce\-View@{gcop\-::\-System\-Ce\-View}!\-System\-Ce\-View@{\-System\-Ce\-View}}
+\index{\-System\-Ce\-View@{\-System\-Ce\-View}!gcop::SystemCeView@{gcop\-::\-System\-Ce\-View}}
+\subsubsection[{\-System\-Ce\-View}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int np, int ntp$>$ {\bf gcop\-::\-System\-Ce\-View}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-System\-Ce\-View} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System\-Ce}$<$ \-T, n, c, {\bf np}, ntp $>$ \&}]{ce, }
+\item[{{\bf \-System\-View}$<$ \-T, \-Vectorcd $>$ \&}]{view}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1SystemCeView_a5d439c14a7090c9fb7b248050643a807}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-System\-Ce\-View@{gcop\-::\-System\-Ce\-View}!\-Render@{\-Render}}
+\index{\-Render@{\-Render}!gcop::SystemCeView@{gcop\-::\-System\-Ce\-View}}
+\subsubsection[{\-Render}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int np, int ntp$>$ void {\bf gcop\-::\-System\-Ce\-View}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-Render} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1SystemCeView_ac2f97cfc8133f96251f1eb029e8db501}
+\-Render a view\-: all subclasses should provide this method 
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_a90d54468c0137cad7afb1c6996618d63}.
+
+\index{gcop\-::\-System\-Ce\-View@{gcop\-::\-System\-Ce\-View}!\-Render\-Frame@{\-Render\-Frame}}
+\index{\-Render\-Frame@{\-Render\-Frame}!gcop::SystemCeView@{gcop\-::\-System\-Ce\-View}}
+\subsubsection[{\-Render\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n, int c, int np, int ntp$>$ bool {\bf gcop\-::\-System\-Ce\-View}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf \-Render\-Frame} (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1SystemCeView_ae4951c32d1d4cdb1bed152cbd06b2c48}
+\-Render a view\-: all subclasses should provide this method 
+\begin{DoxyParams}{\-Parameters}
+{\em i} & frame \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+return true if more frames should be rendered 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-View} \doxyref{}{p.}{classgcop_1_1View_ad6c3f17a59725948f68817398296f835}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-System\-Ce\-View@{gcop\-::\-System\-Ce\-View}!ce@{ce}}
+\index{ce@{ce}!gcop::SystemCeView@{gcop\-::\-System\-Ce\-View}}
+\subsubsection[{ce}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ {\bf \-System\-Ce}$<$\-T, n, c, {\bf np}, ntp$>$\& {\bf gcop\-::\-System\-Ce\-View}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf ce}}\label{classgcop_1_1SystemCeView_ae6f30debce8eac8f7ab58feb36c2a5b2}
+\index{gcop\-::\-System\-Ce\-View@{gcop\-::\-System\-Ce\-View}!view@{view}}
+\index{view@{view}!gcop::SystemCeView@{gcop\-::\-System\-Ce\-View}}
+\subsubsection[{view}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int n = \-Dynamic, int c = \-Dynamic, int np = \-Dynamic, int ntp = \-Dynamic$>$ {\bf \-System\-View}$<$\-T, \-Vectorcd$>$\& {\bf gcop\-::\-System\-Ce\-View}$<$ \-T, n, c, {\bf np}, ntp $>$\-::{\bf view}}\label{classgcop_1_1SystemCeView_a8936e8cca33a2c785fb81c004a24b45c}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/views/{\bf systemceview.\-h}\end{DoxyCompactItemize}

@@ -96,6 +96,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Rn.html#a65407b2166f20b916a3756d5b6fc866a">dtau</a> (Matrixnd &amp;M, const Vectornd &amp;v)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Rn.html#a2c3b7c62063ce06d16ccf820d3629cbb">Adtau</a> (Matrixnd &amp;M, const Vectornd &amp;v)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Rn.html#a2fd40ebf386bfda954af0422f3820fb3">Bound</a> (Vectornd &amp;v, Vectornd &amp;d, const Vectornd &amp;v0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Rn.html#aa906092565109be0392b9dee1b00b77c">Clip</a> (Vectornd &amp;v) const </td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgcop_1_1Rn.html">Rn</a>&lt; _n &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Rn.html#a1631969f549628ae26900acbfb5a02da">Instance</a> ()</td></tr>
@@ -221,6 +222,33 @@ template&lt;int _n&gt; </div>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true on success, false if the arguments are not compatible </dd></dl>
 
 <p>Referenced by <a class="el" href="classgcop_1_1Ddp.html#a3be2dafdbbb92f8ae554adaf1aa45000">gcop::Ddp&lt; T, nx, nu, np &gt;::Forward()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa906092565109be0392b9dee1b00b77c"></a><!-- doxytag: member="gcop::Rn::Clip" ref="aa906092565109be0392b9dee1b00b77c" args="(Vectornd &amp;v) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int _n&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgcop_1_1Rn.html">gcop::Rn</a>&lt; _n &gt;::<a class="el" href="classgcop_1_1Rn.html#aa906092565109be0392b9dee1b00b77c">Clip</a> </td>
+          <td>(</td>
+          <td class="paramtype">Vectornd &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Clips a vector to be within lb and ub </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vector</td><td>v </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if clipped </dd></dl>
 
 </div>
 </div>
@@ -451,7 +479,7 @@ template&lt;int _n = Dynamic&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

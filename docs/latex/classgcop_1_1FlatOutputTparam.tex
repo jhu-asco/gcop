@@ -27,11 +27,11 @@
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Flat\-Output\-Tparam} ({\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&{\bf sys}, int ny\-\_\-, int numberofknots\-\_\-, int numberofderivatives\-\_\-=0)
+{\bf \-Flat\-Output\-Tparam} ({\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&{\bf sys}, int ny\-\_\-, int numberofknots\-\_\-, int numberofderivatives\-\_\-=0, bool fixfinal\-\_\-=false)
 \item 
-void {\bf \-To} (\-Vectorntpd \&s, const vector$<$ double $>$ \&ts, const vector$<$ \-T $>$ \&xs, const vector$<$ \-Vectorcd $>$ \&us, const \-Vectormd $\ast$p=0)
+bool {\bf \-To} (\-Vectorntpd \&s, const vector$<$ double $>$ \&ts, const vector$<$ \-T $>$ \&xs, const vector$<$ \-Vectorcd $>$ \&us, const \-Vectormd $\ast$p=0)
 \item 
-void {\bf \-From} (vector$<$ double $>$ \&ts, vector$<$ \-T $>$ \&xs, vector$<$ \-Vectorcd $>$ \&us, const \-Vectorntpd \&s, \-Vectormd $\ast$p=0)
+bool {\bf \-From} (vector$<$ double $>$ \&ts, vector$<$ \-T $>$ \&xs, vector$<$ \-Vectorcd $>$ \&us, const \-Vectorntpd \&s, \-Vectormd $\ast$p=0)
 \end{DoxyCompactItemize}
 \subsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
@@ -43,7 +43,9 @@ int {\bf numberofknots}
 int {\bf ny}
 \begin{DoxyCompactList}\small\item\em \-Number of flat outputs. \end{DoxyCompactList}\item 
 vector$<$ vector$<$ \-Vector\-Xd $>$ $>$ {\bf knotsforallderivatives}
-\begin{DoxyCompactList}\small\item\em \-Knots for each derivative are computed on the fly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Knots for each derivative are computed on the fly. \end{DoxyCompactList}\item 
+bool {\bf fixfinal}
+\begin{DoxyCompactList}\small\item\em should the final flat output be fixed (with necessary flatoutput time derivatives == 0) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{\-Protected \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -68,9 +70,10 @@ void {\bf \-Createknotsforallderivatives} (const \-Vectorntpd \&s)
 \item[{{\bf \-System}$<$ \-T, nx, nu, {\bf np} $>$ \&}]{sys, }
 \item[{int}]{ny\-\_\-, }
 \item[{int}]{numberofknots\-\_\-, }
-\item[{int}]{numberofderivatives\-\_\- = {\ttfamily 0}}
+\item[{int}]{numberofderivatives\-\_\- = {\ttfamily 0}, }
+\item[{bool}]{fixfinal\-\_\- = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1FlatOutputTparam_a03ab7cc01ec724557c329bf065a2ba4c}
+)}\label{classgcop_1_1FlatOutputTparam_a1c91e743d452dd8b5c194e4506b1c156}
 \-Constructor 
 \begin{DoxyParams}{\-Parameters}
 {\em sys} & \doxyref{\-System}{p.}{classgcop_1_1System} used for manifold \\
@@ -120,7 +123,7 @@ void {\bf \-Createknotsforallderivatives} (const \-Vectorntpd \&s)
 \end{DoxyParams}
 \index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!\-From@{\-From}}
 \index{\-From@{\-From}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
-\subsubsection[{\-From}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int \-\_\-ntp$>$ void {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf \-From} (
+\subsubsection[{\-From}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int \-\_\-ntp$>$ bool {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf \-From} (
 \begin{DoxyParamCaption}
 \item[{vector$<$ double $>$ \&}]{ts, }
 \item[{vector$<$ \-T $>$ \&}]{xs, }
@@ -128,7 +131,7 @@ void {\bf \-Createknotsforallderivatives} (const \-Vectorntpd \&s)
 \item[{const \-Vectorntpd \&}]{s, }
 \item[{\-Vectormd $\ast$}]{p = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1FlatOutputTparam_ad48859a3d749cadd52ba338fa43fb6ee}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1FlatOutputTparam_a43d2cce6fdb75b466f1808d1fce676b7}
 \-Convert from trajectory (ts,xs,us,p) to parameters s 
 \begin{DoxyParams}{\-Parameters}
 {\em ts} & times \\
@@ -142,13 +145,16 @@ void {\bf \-Createknotsforallderivatives} (const \-Vectorntpd \&s)
 {\em p} & system parameters (optional) \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if conversion was successful 
+\end{DoxyReturn}
 
 
-\-Reimplemented from {\bf gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1Tparam_a4365bd4b1f7bb59a23dd25838c0a9db4}.
+\-Reimplemented from {\bf gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1Tparam_a547cacd83055c27b7f083038d980ac3a}.
 
 \index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!\-To@{\-To}}
 \index{\-To@{\-To}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
-\subsubsection[{\-To}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int \-\_\-ntp$>$ void {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf \-To} (
+\subsubsection[{\-To}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np, int \-\_\-ntp$>$ bool {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf \-To} (
 \begin{DoxyParamCaption}
 \item[{\-Vectorntpd \&}]{s, }
 \item[{const vector$<$ double $>$ \&}]{ts, }
@@ -156,7 +162,7 @@ void {\bf \-Createknotsforallderivatives} (const \-Vectorntpd \&s)
 \item[{const vector$<$ \-Vectorcd $>$ \&}]{us, }
 \item[{const \-Vectormd $\ast$}]{p = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1FlatOutputTparam_a094a6a69c159160b0012ba1d88b04e87}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1FlatOutputTparam_a46db3f6632e03fbbd82cb6c66572c526}
 \-Convert from paramer s to trajectory (ts,xs,us,p) 
 \begin{DoxyParams}{\-Parameters}
 {\em s} & trajectory parametrization vector \\
@@ -170,13 +176,23 @@ void {\bf \-Createknotsforallderivatives} (const \-Vectorntpd \&s)
 {\em p} & system parameters (optional) \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if conversion was successful 
+\end{DoxyReturn}
 
 
-\-Reimplemented from {\bf gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1Tparam_a92de5e8167d3cbec5fa498e0d7b5fd2f}.
+\-Reimplemented from {\bf gcop\-::\-Tparam$<$ T, nx, nu, np, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1Tparam_a2668afc0c6d411d2811a8e3f7b4d60b3}.
 
 
 
 \subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!fixfinal@{fixfinal}}
+\index{fixfinal@{fixfinal}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
+\subsubsection[{fixfinal}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ bool {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf fixfinal}}\label{classgcop_1_1FlatOutputTparam_a421ca9124010598de517b98f005dbaeb}
+
+
+should the final flat output be fixed (with necessary flatoutput time derivatives == 0) 
+
 \index{gcop\-::\-Flat\-Output\-Tparam@{gcop\-::\-Flat\-Output\-Tparam}!knotsforallderivatives@{knotsforallderivatives}}
 \index{knotsforallderivatives@{knotsforallderivatives}!gcop::FlatOutputTparam@{gcop\-::\-Flat\-Output\-Tparam}}
 \subsubsection[{knotsforallderivatives}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int nx, int nu, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic$>$ vector$<$vector$<$\-Vector\-Xd$>$ $>$ {\bf gcop\-::\-Flat\-Output\-Tparam}$<$ \-T, nx, nu, {\bf np}, \-\_\-ntp $>$\-::{\bf knotsforallderivatives}}\label{classgcop_1_1FlatOutputTparam_a87eeb3fdd2f1490d2b7d21444242b650}

@@ -1,15 +1,14 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$body3d_8h.html" title="body3d.h" alt="" coords="545,160,620,189"/>
-<area shape="rect" id="node49" href="$body3dtrack_8h.html" title="body3dtrack.h" alt="" coords="348,83,452,112"/>
-<area shape="rect" id="node56" href="$lqcost_8h.html" title="lqcost.h" alt="" coords="144,83,211,112"/>
-<area shape="rect" id="node5" href="$system_8h.html" title="system.h" alt="" coords="501,315,576,344"/>
-<area shape="rect" id="node25" href="$body3dmanifold_8h.html" title="body3dmanifold.h" alt="" coords="600,315,723,344"/>
-<area shape="rect" id="node28" href="$so3_8h.html" title="so3.h" alt="" coords="848,315,901,344"/>
-<area shape="rect" id="node34" href="$se3_8h.html" title="se3.h" alt="" coords="848,237,901,267"/>
-<area shape="rect" id="node43" href="$function_8h.html" title="function.h" alt="" coords="747,315,824,344"/>
-<area shape="rect" id="node13" href="$manifold_8h.html" title="manifold.h" alt="" coords="613,469,696,499"/>
-<area shape="rect" id="node20" href="$rn_8h.html" title="rn.h" alt="" coords="581,392,624,421"/>
-<area shape="rect" id="node30" href="$group_8h.html" title="group.h" alt="" coords="851,392,915,421"/>
-<area shape="rect" id="node59" href="$lscost_8h.html" title="lscost.h" alt="" coords="108,160,175,189"/>
-<area shape="rect" id="node64" href="$cost_8h.html" title="cost.h" alt="" coords="112,237,171,267"/>
+<area shape="rect" id="node3" href="$body3d_8h.html" title="body3d.h" alt="" coords="360,160,435,189"/>
+<area shape="rect" id="node49" href="$lqcost_8h.html" title="lqcost.h" alt="" coords="611,83,677,112"/>
+<area shape="rect" id="node5" href="$system_8h.html" title="system.h" alt="" coords="429,315,504,344"/>
+<area shape="rect" id="node25" href="$body3dmanifold_8h.html" title="body3dmanifold.h" alt="" coords="155,315,277,344"/>
+<area shape="rect" id="node28" href="$so3_8h.html" title="so3.h" alt="" coords="301,315,355,344"/>
+<area shape="rect" id="node34" href="$se3_8h.html" title="se3.h" alt="" coords="371,237,424,267"/>
+<area shape="rect" id="node43" href="$function_8h.html" title="function.h" alt="" coords="53,315,131,344"/>
+<area shape="rect" id="node13" href="$manifold_8h.html" title="manifold.h" alt="" coords="232,469,315,499"/>
+<area shape="rect" id="node20" href="$rn_8h.html" title="rn.h" alt="" coords="128,392,171,421"/>
+<area shape="rect" id="node30" href="$group_8h.html" title="group.h" alt="" coords="296,392,360,421"/>
+<area shape="rect" id="node52" href="$lscost_8h.html" title="lscost.h" alt="" coords="657,160,724,189"/>
+<area shape="rect" id="node57" href="$cost_8h.html" title="cost.h" alt="" coords="728,237,787,267"/>
 </map>

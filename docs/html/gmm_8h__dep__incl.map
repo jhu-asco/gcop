@@ -1,5 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$ce_8h.html" title="lib/est/ce.h" alt="" coords="129,83,215,112"/>
-<area shape="rect" id="node5" href="$systemce_8h.html" title="lib/algos/systemce.h" alt="" coords="5,160,147,189"/>
-<area shape="rect" id="node7" href="$systemcewithsddp_8h.html" title="lib/algos/systemcewithsddp.h" alt="" coords="171,160,365,189"/>
+<area shape="rect" id="node3" href="$ce_8h.html" title="lib/est/ce.h" alt="" coords="144,83,229,112"/>
+<area shape="rect" id="node5" href="$systemce_8h.html" title="lib/algos/systemce.h" alt="" coords="20,160,161,189"/>
+<area shape="rect" id="node9" href="$systemcewithsddp_8h.html" title="lib/algos/systemcewithsddp.h" alt="" coords="185,160,380,189"/>
+<area shape="rect" id="node7" href="$systemceview_8h.html" title="lib/views/systemceview.h" alt="" coords="5,237,176,267"/>
 </map>

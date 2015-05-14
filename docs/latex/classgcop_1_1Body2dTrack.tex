@@ -6,7 +6,8 @@
 
 
 
-\-Collaboration diagram for gcop\-:\-:\-Body2d\-Track\-:\nopagebreak
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-Track\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -16,17 +17,17 @@
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Body2d\-Track} ({\bf \-Body2d} \&{\bf sys}, int nf, double {\bf t0}, double {\bf tf}, double {\bf r}=25, bool {\bf odometry}=true, bool {\bf extforce}=false, bool {\bf forces}=false)
+{\bf \-Body2d\-Track} ({\bf \-Body2d}$<$$>$ \&{\bf sys}, int nf, double {\bf t0}, double {\bf tf}, double {\bf r}=25, bool {\bf odometry}=true, bool {\bf extforce}=false, bool {\bf forces}=false)
 \item 
-void {\bf \-Optp} (\-Vector\-Xd \&{\bf p}, const vector$<$ {\bf \-M3\-V3d} $>$ \&{\bf xs})
+void {\bf \-Optp} (\-Vector\-Xd \&{\bf p}, const vector$<$ {\bf \-Body2d\-State} $>$ \&{\bf xs})
 \item 
-void {\bf \-Get} ({\bf \-M3\-V3d} \&x, double vd, double t) const 
+void {\bf \-Get} ({\bf \-Body2d\-State} \&x, double vd, double t) const 
 \item 
 void {\bf \-Make\-True} ()
 \item 
-void {\bf \-Add} (const \-Vector3d \&u, const {\bf \-M3\-V3d} \&x, double h)
+void {\bf \-Add} (const \-Vector3d \&u, const {\bf \-Body2d\-State} \&x, double h)
 \item 
-void {\bf \-Add2} (const \-Vector3d \&u, const {\bf \-M3\-V3d} \&x, double h)
+void {\bf \-Add2} (const \-Vector3d \&u, const {\bf \-Body2d\-State} \&x, double h)
 \end{DoxyCompactItemize}
 \subsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
@@ -51,7 +52,7 @@ bool {\bf forces}
 \begin{DoxyCompactList}\small\item\em is there a constant external force that need to be estimated \end{DoxyCompactList}\item 
 vector$<$ double $>$ {\bf ts}
 \begin{DoxyCompactList}\small\item\em sequence of times (\-N+1 vector) \end{DoxyCompactList}\item 
-vector$<$ {\bf \-M3\-V3d} $>$ {\bf xs}
+vector$<$ {\bf \-Body2d\-State} $>$ {\bf xs}
 \begin{DoxyCompactList}\small\item\em sequence of states x=(g,v) (\-N+1 vector) \end{DoxyCompactList}\item 
 vector$<$ \-Vector3d $>$ {\bf us}
 \begin{DoxyCompactList}\small\item\em sequence of inputs (\-N vector) \end{DoxyCompactList}\item 
@@ -59,7 +60,7 @@ vector$<$ \-Vector2d $>$ {\bf ls}
 \begin{DoxyCompactList}\small\item\em landmark positions \end{DoxyCompactList}\item 
 vector$<$ bool $>$ {\bf observed}
 \begin{DoxyCompactList}\small\item\em was it observed \end{DoxyCompactList}\item 
-vector$<$ {\bf \-M3\-V3d} $>$ {\bf xos}
+vector$<$ {\bf \-Body2d\-State} $>$ {\bf xos}
 \begin{DoxyCompactList}\small\item\em unoptimized trajectory \end{DoxyCompactList}\item 
 vector$<$ \-Vector3d $>$ {\bf uos}
 \begin{DoxyCompactList}\small\item\em unoptimized trajectory \end{DoxyCompactList}\item 
@@ -97,7 +98,7 @@ double {\bf cp}
 \index{\-Body2d\-Track@{\-Body2d\-Track}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
 \subsubsection[{\-Body2d\-Track}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Track\-::\-Body2d\-Track} (
 \begin{DoxyParamCaption}
-\item[{{\bf \-Body2d} \&}]{sys, }
+\item[{{\bf \-Body2d}$<$$>$ \&}]{sys, }
 \item[{int}]{nf, }
 \item[{double}]{t0, }
 \item[{double}]{tf, }
@@ -106,7 +107,7 @@ double {\bf cp}
 \item[{bool}]{extforce = {\ttfamily false}, }
 \item[{bool}]{forces = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1Body2dTrack_a323b168157fbb9ff50c2661c7ff1521b}
+)}\label{classgcop_1_1Body2dTrack_aa3336142af35ae0a24dd9c3f7276f3cd}
 \-Pose graph (using simulated features around a circular track) 
 \begin{DoxyParams}{\-Parameters}
 {\em sys} & body2d system \\
@@ -138,23 +139,23 @@ double {\bf cp}
 \subsubsection[{\-Add}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Track\-::\-Add} (
 \begin{DoxyParamCaption}
 \item[{const \-Vector3d \&}]{u, }
-\item[{const {\bf \-M3\-V3d} \&}]{x, }
+\item[{const {\bf \-Body2d\-State} \&}]{x, }
 \item[{double}]{h}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1Body2dTrack_abee6d8fd672fb130251b8886a838c1f8}
+)}\label{classgcop_1_1Body2dTrack_a80e040d06135f555e41e40d426b036c1}
 
 
-\-References cis, cp, cv, cw, dmax, init, \-Is, \-Js, ls, observed, odometry, p, pis, gcop\-::random\-\_\-normal(), gcop\-::\-Body2d\-::\-Step(), sys, ts, uos, us, vs, xos, and xs.
+\-References cis, cp, cv, cw, dmax, init, \-Is, \-Js, ls, observed, odometry, p, pis, gcop\-::random\-\_\-normal(), gcop\-::\-Body2d$<$ c $>$\-::\-Step(), sys, ts, uos, us, vs, xos, and xs.
 
 \index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!\-Add2@{\-Add2}}
 \index{\-Add2@{\-Add2}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
 \subsubsection[{\-Add2}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Track\-::\-Add2} (
 \begin{DoxyParamCaption}
 \item[{const \-Vector3d \&}]{u, }
-\item[{const {\bf \-M3\-V3d} \&}]{x, }
+\item[{const {\bf \-Body2d\-State} \&}]{x, }
 \item[{double}]{h}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1Body2dTrack_a3992f6bbebd414eab993be4a16d0977d}
+)}\label{classgcop_1_1Body2dTrack_a333acf07e1080864443a7bb510b5cf54}
 \-Add a new state/control to estimation vector 
 \begin{DoxyParams}{\-Parameters}
 {\em u} & commanded control \\
@@ -166,17 +167,17 @@ double {\bf cp}
 \end{DoxyParams}
 
 
-\-References cis, cp, cv, dmax, init, \-Is, \-Js, ls, observed, odometry, p, pis, gcop\-::random\-\_\-normal(), gcop\-::\-Body2d\-::\-Step(), sys, ts, uos, us, vs, xos, and xs.
+\-References cis, cp, cv, dmax, init, \-Is, \-Js, ls, observed, odometry, p, pis, gcop\-::random\-\_\-normal(), gcop\-::\-Body2d$<$ c $>$\-::\-Step(), sys, ts, uos, us, vs, xos, and xs.
 
 \index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!\-Get@{\-Get}}
 \index{\-Get@{\-Get}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
 \subsubsection[{\-Get}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Track\-::\-Get} (
 \begin{DoxyParamCaption}
-\item[{{\bf \-M3\-V3d} \&}]{x, }
+\item[{{\bf \-Body2d\-State} \&}]{x, }
 \item[{double}]{vd, }
 \item[{double}]{t}
 \end{DoxyParamCaption}
-) const}\label{classgcop_1_1Body2dTrack_a92a36516c73ec71210b09d32f0ff3fb9}
+) const}\label{classgcop_1_1Body2dTrack_a4c1703fa0f4e851de1bb1d508101403b}
 
 
 \-References gcop\-::\-S\-E2\-::\-Instance(), gcop\-::\-S\-E2\-::q2g(), r, and tf.
@@ -201,9 +202,9 @@ double {\bf cp}
 \subsubsection[{\-Optp}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Track\-::\-Optp} (
 \begin{DoxyParamCaption}
 \item[{\-Vector\-Xd \&}]{p, }
-\item[{const vector$<$ {\bf \-M3\-V3d} $>$ \&}]{xs}
+\item[{const vector$<$ {\bf \-Body2d\-State} $>$ \&}]{xs}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1Body2dTrack_ada8bce6fec8cc407c1053b7cac2887cb}
+)}\label{classgcop_1_1Body2dTrack_a478227cb5cd0b973bb04b18f7a688520}
 \-Given a sequence of poses gs, compute the optimal feature locations p 
 \begin{DoxyParams}{\-Parameters}
 {\em p} & a vector of feature locations \\
@@ -333,7 +334,7 @@ landmark positions
 
 
 
-\-Referenced by \-Add(), \-Add2(), gcop\-::\-Body2d\-Cost\-::\-L(), \-Make\-True(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+\-Referenced by \-Add(), \-Add2(), gcop\-::\-Body2d\-Cost$<$ c $>$\-::\-L(), \-Make\-True(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
 
 \index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!observed@{observed}}
 \index{observed@{observed}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
@@ -483,11 +484,11 @@ track width
 
 
 
-\-Referenced by gcop\-::\-Body2d\-Cost\-::\-L(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
+\-Referenced by gcop\-::\-Body2d\-Cost$<$ c $>$\-::\-L(), and gcop\-::\-Body2d\-Track\-View\-::\-Render\-Frame().
 
 \index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!xos@{xos}}
 \index{xos@{xos}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
-\subsubsection[{xos}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-M3\-V3d}$>$ {\bf gcop\-::\-Body2d\-Track\-::xos}}\label{classgcop_1_1Body2dTrack_a037e27565b3c35c4585052b0e8de26ab}
+\subsubsection[{xos}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Body2d\-State}$>$ {\bf gcop\-::\-Body2d\-Track\-::xos}}\label{classgcop_1_1Body2dTrack_ae0b2ae1acc286c6899cc038f472e23f6}
 
 
 unoptimized trajectory 
@@ -498,7 +499,7 @@ unoptimized trajectory
 
 \index{gcop\-::\-Body2d\-Track@{gcop\-::\-Body2d\-Track}!xs@{xs}}
 \index{xs@{xs}!gcop::Body2dTrack@{gcop\-::\-Body2d\-Track}}
-\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-M3\-V3d}$>$ {\bf gcop\-::\-Body2d\-Track\-::xs}}\label{classgcop_1_1Body2dTrack_a33335be53322b6aab899874f66e2a10d}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Body2d\-State}$>$ {\bf gcop\-::\-Body2d\-Track\-::xs}}\label{classgcop_1_1Body2dTrack_a4362c78c4b8bd415addb38fc9b2fc715}
 
 
 sequence of states x=(g,v) (\-N+1 vector) 

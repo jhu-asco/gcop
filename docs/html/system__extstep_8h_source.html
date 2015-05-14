@@ -103,7 +103,7 @@
 <a name="l00038"></a>00038 
 <a name="l00039"></a><a class="code" href="classgcop_1_1System__extstep.html#acc2a4e1c35371cfc4a8d92b807bbb318">00039</a>         <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1System__extstep.html#acc2a4e1c35371cfc4a8d92b807bbb318">Step</a>(T &amp;xb, <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1" title="Internal time of the system.">t</a>, <span class="keyword">const</span> T &amp;xa,
 <a name="l00040"></a>00040             <span class="keyword">const</span> <a class="code" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h, <span class="keyword">const</span> <a class="code" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p = 0, 
-<a name="l00041"></a>00041             <a class="code" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A = 0, <a class="code" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *B = 0, <a class="code" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *C = 0, <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1System__extstep.html#aa59da693a1e17cdac6aad9629cbf1805">reset</a>=<span class="keyword">false</span>)
+<a name="l00041"></a>00041             <a class="code" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A = 0, <a class="code" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *B = 0, <a class="code" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *C = 0, <span class="keywordtype">bool</span> reset=<span class="keyword">false</span>)
 <a name="l00042"></a>00042         {
 <a name="l00043"></a>00043           <span class="keywordflow">if</span>(!extstep || !extreset)
 <a name="l00044"></a>00044           {
@@ -116,7 +116,7 @@
 <a name="l00051"></a>00051           <span class="keywordflow">return</span> 0;
 <a name="l00052"></a>00052         }
 <a name="l00053"></a>00053 
-<a name="l00054"></a><a class="code" href="classgcop_1_1System__extstep.html#aac62f562920fc0ca04090904c9b4d397">00054</a>         <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1System__extstep.html#aac62f562920fc0ca04090904c9b4d397">Step_internaloutput</a>(<span class="keyword">const</span> <a class="code" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
+<a name="l00054"></a><a class="code" href="classgcop_1_1System__extstep.html#a3661545e29187a01a7d40e77e76e3eb5">00054</a>         <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1System__extstep.html#acc2a4e1c35371cfc4a8d92b807bbb318">Step</a>(<span class="keyword">const</span> <a class="code" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
 <a name="l00055"></a>00055             <span class="keyword">const</span> <a class="code" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p,
 <a name="l00056"></a>00056             <a class="code" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A, Matrix&lt;double, _nx, _nu&gt; *B, 
 <a name="l00057"></a>00057             Matrix&lt;double, _nx, _np&gt; *C) 
@@ -130,7 +130,7 @@
 <a name="l00065"></a>00065           <span class="keywordflow">return</span> 0;
 <a name="l00066"></a>00066         }
 <a name="l00067"></a>00067 
-<a name="l00068"></a><a class="code" href="classgcop_1_1System__extstep.html#af72a08b633cd8be40c30c117a88bca06">00068</a>         <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1System__extstep.html#af72a08b633cd8be40c30c117a88bca06">Step_internalinput</a>(T&amp; xb,
+<a name="l00068"></a><a class="code" href="classgcop_1_1System__extstep.html#a8cd438e75807976200a49770361acea1">00068</a>         <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1System__extstep.html#acc2a4e1c35371cfc4a8d92b807bbb318">Step</a>(T&amp; xb,
 <a name="l00069"></a>00069             <span class="keyword">const</span> <a class="code" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
 <a name="l00070"></a>00070             <span class="keyword">const</span> <a class="code" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p,
 <a name="l00071"></a>00071             <a class="code" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A, Matrix&lt;double, _nx, _nu&gt; *B, 
@@ -142,7 +142,7 @@
 <a name="l00077"></a>00077           <span class="keywordflow">return</span> 0;
 <a name="l00078"></a>00078         }
 <a name="l00079"></a>00079 
-<a name="l00080"></a><a class="code" href="classgcop_1_1System__extstep.html#aa59da693a1e17cdac6aad9629cbf1805">00080</a>         <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1System__extstep.html#aa59da693a1e17cdac6aad9629cbf1805">reset</a>(<span class="keyword">const</span> T&amp; <a class="code" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64" title="Internal State of the system.">x</a>, <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1" title="Internal time of the system.">t</a> = 0)
+<a name="l00080"></a><a class="code" href="classgcop_1_1System__extstep.html#a0d6a50775d5622ce87bc5e13fc5fa460">00080</a>         <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1System__extstep.html#a0d6a50775d5622ce87bc5e13fc5fa460">Reset</a>(<span class="keyword">const</span> T&amp; <a class="code" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64" title="Internal State of the system.">x</a>, <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1" title="Internal time of the system.">t</a> = 0)
 <a name="l00081"></a>00081         {
 <a name="l00082"></a>00082           extreset(x);
 <a name="l00083"></a>00083           this-&gt;x = <a class="code" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64" title="Internal State of the system.">x</a>;
@@ -155,7 +155,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:14 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

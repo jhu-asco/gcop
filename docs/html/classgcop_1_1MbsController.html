@@ -89,7 +89,7 @@ Collaboration diagram for gcop::MbsController:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MbsController.html#aecef764add31c277c2888180b3c03edb">MbsController</a> (const <a class="el" href="classgcop_1_1Mbs.html">Mbs</a> &amp;<a class="el" href="classgcop_1_1MbsController.html#a4e450061d50f8f3aac134405b2992f76">sys</a>, <a class="el" href="classgcop_1_1MbsState.html">MbsState</a> *<a class="el" href="classgcop_1_1MbsController.html#a08fa0e9c51995877e70ee49ac52dcfc6">xd</a>=0, VectorXd *<a class="el" href="classgcop_1_1MbsController.html#a2810a87e10dcc0e61cb8bb5634bb0fc6">ad</a>=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MbsController.html#a0065ff60bcfaa6f378e97809d6491a4b">Set</a> (VectorXd &amp;u, double t, const <a class="el" href="classgcop_1_1MbsState.html">MbsState</a> &amp;x)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MbsController.html#a60e530bb55ab52cb0d06a4f8898cd075">Set</a> (VectorXd &amp;u, double t, const <a class="el" href="classgcop_1_1MbsState.html">MbsState</a> &amp;x)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MbsController.html#aa7ddbc176182f56ea4c72c003c005c08">~MbsController</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -166,12 +166,12 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a0065ff60bcfaa6f378e97809d6491a4b"></a><!-- doxytag: member="gcop::MbsController::Set" ref="a0065ff60bcfaa6f378e97809d6491a4b" args="(VectorXd &amp;u, double t, const MbsState &amp;x)" -->
+<a class="anchor" id="a60e530bb55ab52cb0d06a4f8898cd075"></a><!-- doxytag: member="gcop::MbsController::Set" ref="a60e530bb55ab52cb0d06a4f8898cd075" args="(VectorXd &amp;u, double t, const MbsState &amp;x)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classgcop_1_1MbsController.html#a0065ff60bcfaa6f378e97809d6491a4b">MbsController::Set</a> </td>
+          <td class="memname">bool <a class="el" href="classgcop_1_1MbsController.html#a60e530bb55ab52cb0d06a4f8898cd075">MbsController::Set</a> </td>
           <td>(</td>
           <td class="paramtype">VectorXd &amp;&#160;</td>
           <td class="paramname"><em>u</em>, </td>
@@ -205,8 +205,9 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if arguments are valid, false if e.g. x is infeasible </dd></dl>
 
-<p>Implements <a class="el" href="classgcop_1_1Controller.html#a306fbf6d65ab78e13537bb92b330fc35">gcop::Controller&lt; MbsState, VectorXd &gt;</a>.</p>
+<p>Implements <a class="el" href="classgcop_1_1Controller.html#a6bbf22b498272842f7894b3983d97022">gcop::Controller&lt; MbsState, VectorXd &gt;</a>.</p>
 
 <p>References <a class="el" href="classgcop_1_1MbsController.html#a2810a87e10dcc0e61cb8bb5634bb0fc6">ad</a>, <a class="el" href="classgcop_1_1Mbs.html#af8cbe75ffb627dc7c3bca554cb4e66cb">gcop::Mbs::Bias()</a>, <a class="el" href="classgcop_1_1MbsState.html#a6b5d93e8e49329a2e4bf09fcfa911552">gcop::MbsState::dr</a>, <a class="el" href="classgcop_1_1Mbs.html#af4fcecbd75b716821e0aec7cd7cbffd9">gcop::Mbs::fixed</a>, <a class="el" href="classgcop_1_1MbsState.html#ae1fc5bb244bba26d065d9f095391158c">gcop::MbsState::gs</a>, <a class="el" href="classgcop_1_1SE3.html#aa869bc14f74929defd2ae062e636bfe4">gcop::SE3::Instance()</a>, <a class="el" href="classgcop_1_1SE3.html#a3cd9098c7a23fdff51aea0d94703ebc3">gcop::SE3::inv()</a>, <a class="el" href="classgcop_1_1MbsController.html#a275f84c635f0c0b817d851ff71261422">Kd</a>, <a class="el" href="classgcop_1_1MbsController.html#a0840b2c2f715ed8a1010b54271a2f158">Kp</a>, <a class="el" href="classgcop_1_1SE3.html#a6494859f78898f2bdee0ac1a12d649f2">gcop::SE3::log()</a>, <a class="el" href="classgcop_1_1Mbs.html#a6ab0d5860cf1be9abe3c7bd4e018ba2e">gcop::Mbs::Mass()</a>, <a class="el" href="classgcop_1_1Mbs.html#a49aaebf00549f803f5055b67ff4a5d3c">gcop::Mbs::nb</a>, <a class="el" href="classgcop_1_1MbsState.html#a3a47ff108dc810ec1f289c737444eaf8">gcop::MbsState::r</a>, <a class="el" href="classgcop_1_1MbsController.html#a4e450061d50f8f3aac134405b2992f76">sys</a>, <a class="el" href="classgcop_1_1MbsState.html#afaadf53c908e2ad6e0e0fe4fec79c4ec">gcop::MbsState::vs</a>, and <a class="el" href="classgcop_1_1MbsController.html#a08fa0e9c51995877e70ee49ac52dcfc6">xd</a>.</p>
 
@@ -226,7 +227,7 @@ Public Attributes</h2></td></tr>
 
 <p>desired acceleration (zero by default) </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1MbsController.html#a0065ff60bcfaa6f378e97809d6491a4b">Set()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1MbsController.html#a60e530bb55ab52cb0d06a4f8898cd075">Set()</a>.</p>
 
 </div>
 </div>
@@ -243,7 +244,7 @@ Public Attributes</h2></td></tr>
 
 <p>derivative terms (ones by default) </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1MbsController.html#aecef764add31c277c2888180b3c03edb">MbsController()</a>, and <a class="el" href="classgcop_1_1MbsController.html#a0065ff60bcfaa6f378e97809d6491a4b">Set()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1MbsController.html#aecef764add31c277c2888180b3c03edb">MbsController()</a>, and <a class="el" href="classgcop_1_1MbsController.html#a60e530bb55ab52cb0d06a4f8898cd075">Set()</a>.</p>
 
 </div>
 </div>
@@ -260,7 +261,7 @@ Public Attributes</h2></td></tr>
 
 <p>proportional terms (ones by default) </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1MbsController.html#aecef764add31c277c2888180b3c03edb">MbsController()</a>, and <a class="el" href="classgcop_1_1MbsController.html#a0065ff60bcfaa6f378e97809d6491a4b">Set()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1MbsController.html#aecef764add31c277c2888180b3c03edb">MbsController()</a>, and <a class="el" href="classgcop_1_1MbsController.html#a60e530bb55ab52cb0d06a4f8898cd075">Set()</a>.</p>
 
 </div>
 </div>
@@ -277,7 +278,7 @@ Public Attributes</h2></td></tr>
 
 <p>multi-body system </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1MbsController.html#a0065ff60bcfaa6f378e97809d6491a4b">Set()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1MbsController.html#a60e530bb55ab52cb0d06a4f8898cd075">Set()</a>.</p>
 
 </div>
 </div>
@@ -294,7 +295,7 @@ Public Attributes</h2></td></tr>
 
 <p>desired state (origin by default) </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1MbsController.html#a0065ff60bcfaa6f378e97809d6491a4b">Set()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1MbsController.html#a60e530bb55ab52cb0d06a4f8898cd075">Set()</a>.</p>
 
 </div>
 </div>
@@ -306,7 +307,7 @@ Public Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:48 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

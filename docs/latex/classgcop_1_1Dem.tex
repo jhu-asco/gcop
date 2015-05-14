@@ -48,6 +48,10 @@ void {\bf \-Dilate} (double r, bool cube=true)
 void {\bf \-Add\-Boundary} (double {\bf h})
 \item 
 void {\bf \-Convolve} (double sigma, bool cn=true, double thresh=0)
+\item 
+void {\bf \-Point2\-Index} (int \&i, int \&j, double x, double y) const 
+\item 
+void {\bf \-Index2\-Point} (double \&x, double \&y, int i, int j) const 
 \end{DoxyCompactItemize}
 \subsection*{\-Static \-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
@@ -401,6 +405,24 @@ pointer to 3x1 array with the normal vector
 
 \-References nj, and normals.
 
+\index{gcop\-::\-Dem@{gcop\-::\-Dem}!\-Index2\-Point@{\-Index2\-Point}}
+\index{\-Index2\-Point@{\-Index2\-Point}!gcop::Dem@{gcop\-::\-Dem}}
+\subsubsection[{\-Index2\-Point}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Dem\-::\-Index2\-Point} (
+\begin{DoxyParamCaption}
+\item[{double \&}]{x, }
+\item[{double \&}]{y, }
+\item[{int}]{i, }
+\item[{int}]{j}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Dem_acfcecfc1d9cbb74f4359d13d2067bb86}
+
+
+\-References cs, h, and o.
+
+
+
+\-Referenced by gcop\-::\-Body3d\-Dem\-Controller$<$ nu $>$\-::\-Get\-Traj().
+
 \index{gcop\-::\-Dem@{gcop\-::\-Dem}!\-Inside@{\-Inside}}
 \index{\-Inside@{\-Inside}!gcop::Dem@{gcop\-::\-Dem}}
 \subsubsection[{\-Inside}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Dem\-::\-Inside} (
@@ -472,6 +494,24 @@ true if valid
 
 \-Referenced by \-Dem().
 
+\index{gcop\-::\-Dem@{gcop\-::\-Dem}!\-Point2\-Index@{\-Point2\-Index}}
+\index{\-Point2\-Index@{\-Point2\-Index}!gcop::Dem@{gcop\-::\-Dem}}
+\subsubsection[{\-Point2\-Index}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Dem\-::\-Point2\-Index} (
+\begin{DoxyParamCaption}
+\item[{int \&}]{i, }
+\item[{int \&}]{j, }
+\item[{double}]{x, }
+\item[{double}]{y}
+\end{DoxyParamCaption}
+) const}\label{classgcop_1_1Dem_abf9703a27df91fdaf611335ab136d21e}
+
+
+\-References cs, h, and o.
+
+
+
+\-Referenced by gcop\-::\-Body3d\-Dem\-Controller$<$ nu $>$\-::\-Get\-Traj().
+
 \index{gcop\-::\-Dem@{gcop\-::\-Dem}!\-Scale@{\-Scale}}
 \index{\-Scale@{\-Scale}!gcop::Dem@{gcop\-::\-Dem}}
 \subsubsection[{\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Dem\-::\-Scale} (
@@ -542,7 +582,7 @@ cell size
 
 
 
-\-Referenced by \-Convolve(), \-Dilate(), \-Get(), \-Get\-Normal(), gcop\-::\-Dem\-View\-::\-Init(), \-Load(), and \-Set().
+\-Referenced by \-Convolve(), \-Dilate(), \-Get(), \-Get\-Normal(), \-Index2\-Point(), gcop\-::\-Dem\-View\-::\-Init(), \-Load(), \-Point2\-Index(), and \-Set().
 
 \index{gcop\-::\-Dem@{gcop\-::\-Dem}!data@{data}}
 \index{data@{data}!gcop::Dem@{gcop\-::\-Dem}}
@@ -586,7 +626,7 @@ height
 
 
 
-\-Referenced by \-Add\-Boundary(), \-Get(), \-Get\-Normal(), \-Is\-Valid(), \-Load(), gcop\-::\-Dem\-View\-::\-Render\-Frame(), and \-Set().
+\-Referenced by \-Add\-Boundary(), \-Get(), \-Get\-Normal(), \-Index2\-Point(), \-Is\-Valid(), \-Load(), \-Point2\-Index(), gcop\-::\-Dem\-View\-::\-Render\-Frame(), and \-Set().
 
 \index{gcop\-::\-Dem@{gcop\-::\-Dem}!ni@{ni}}
 \index{ni@{ni}!gcop::Dem@{gcop\-::\-Dem}}
@@ -630,7 +670,7 @@ origin
 
 
 
-\-Referenced by \-Dem(), \-Get(), \-Get\-Normal(), \-Is\-Valid(), gcop\-::\-Dem\-View\-::\-Render\-Frame(), and \-Set().
+\-Referenced by \-Dem(), \-Get(), \-Get\-Normal(), \-Index2\-Point(), \-Is\-Valid(), \-Point2\-Index(), gcop\-::\-Dem\-View\-::\-Render\-Frame(), and \-Set().
 
 \index{gcop\-::\-Dem@{gcop\-::\-Dem}!odata@{odata}}
 \index{odata@{odata}!gcop::Dem@{gcop\-::\-Dem}}

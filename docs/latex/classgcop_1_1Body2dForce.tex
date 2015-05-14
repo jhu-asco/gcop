@@ -1,114 +1,148 @@
-\section{gcop\-:\-:\-Body2d\-Force \-Class \-Reference}
-\label{classgcop_1_1Body2dForce}\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}}
+\section{gcop\-:\-:\-Body2d\-Force$<$ c $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Body2dForce}\index{gcop\-::\-Body2d\-Force$<$ c $>$@{gcop\-::\-Body2d\-Force$<$ c $>$}}
 
 
 {\ttfamily \#include $<$body2dforce.\-h$>$}
 
 
 
-\-Inheritance diagram for gcop\-:\-:\-Body2d\-Force\-:\nopagebreak
+\-Inheritance diagram for gcop\-:\-:\-Body2d\-Force$<$ c $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=194pt]{classgcop_1_1Body2dForce__inherit__graph}
+\includegraphics[width=220pt]{classgcop_1_1Body2dForce__inherit__graph}
 \end{center}
 \end{figure}
 
 
-\-Collaboration diagram for gcop\-:\-:\-Body2d\-Force\-:\nopagebreak
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-Force$<$ c $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=194pt]{classgcop_1_1Body2dForce__coll__graph}
+\includegraphics[width=220pt]{classgcop_1_1Body2dForce__coll__graph}
 \end{center}
 \end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, c, 1 $>$ {\bf \-Vectorcd}
+\item 
+typedef \-Matrix$<$ double, 6, c $>$ {\bf \-Matrix6cd}
+\item 
+typedef \-Matrix$<$ double, 3, c $>$ {\bf \-Matrix3cd}
+\end{DoxyCompactItemize}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
 {\bf \-Body2d\-Force} (bool {\bf fext\-Param}=false)
 \item 
-virtual void {\bf \-Set} (\-Vector3d \&f, const {\bf \-M3\-V3d} \&x, double t, const \-Vector3d \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix36d} $\ast$\-A=0, \-Matrix3d $\ast$\-B=0, \-Matrix$<$ double, 3, \-Dynamic $>$ $\ast$\-C=0)
+virtual void {\bf \-Set} (\-Vector3d \&f, const {\bf \-Body2d\-State} \&x, double t, const \-Vector3d \&u, double h, const \-Vector\-Xd $\ast$p=0, {\bf \-Matrix36d} $\ast$\-A=0, {\bf \-Matrix3cd} $\ast${\bf \-B}=0, \-Matrix$<$ double, 3, \-Dynamic $>$ $\ast$\-C=0)
 \end{DoxyCompactItemize}
 \subsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \-Vector3d {\bf \-D}
 \begin{DoxyCompactList}\small\item\em linear damping terms \end{DoxyCompactList}\item 
+{\bf \-Matrix3cd} {\bf \-B}
+\begin{DoxyCompactList}\small\item\em constant control input transformation \end{DoxyCompactList}\item 
 \-Vector3d {\bf fext}
 \begin{DoxyCompactList}\small\item\em constant external force \end{DoxyCompactList}\item 
 bool {\bf fext\-Param}
 \begin{DoxyCompactList}\small\item\em treat the (x,y) forces in fext as a parameter \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$int c = 3$>$ class gcop\-::\-Body2d\-Force$<$ c $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!\-Matrix3cd@{\-Matrix3cd}}
+\index{\-Matrix3cd@{\-Matrix3cd}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
+\subsubsection[{\-Matrix3cd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ typedef \-Matrix$<$double, 3, c$>$ {\bf gcop\-::\-Body2d\-Force}$<$ c $>$\-::{\bf \-Matrix3cd}}\label{classgcop_1_1Body2dForce_adc697194aecba6cb82809d7b7f6201f1}
+\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!\-Matrix6cd@{\-Matrix6cd}}
+\index{\-Matrix6cd@{\-Matrix6cd}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
+\subsubsection[{\-Matrix6cd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ typedef \-Matrix$<$double, 6, c$>$ {\bf gcop\-::\-Body2d\-Force}$<$ c $>$\-::{\bf \-Matrix6cd}}\label{classgcop_1_1Body2dForce_a5e10432896e62d9737793c815d3f1980}
+\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ typedef \-Matrix$<$double, c, 1$>$ {\bf gcop\-::\-Body2d\-Force}$<$ c $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Body2dForce_a0839a4e18289c31dbb5e295fde5bb288}
+
+
+\-Reimplemented from {\bf gcop\-::\-Force$<$ Body2d\-State, 3, 6, c $>$} \doxyref{}{p.}{classgcop_1_1Force_abf7f06a404be92a1d6a0139ce5f01d62}.
+
 
 
 \subsection{\-Constructor \& \-Destructor \-Documentation}
 \index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!\-Body2d\-Force@{\-Body2d\-Force}}
 \index{\-Body2d\-Force@{\-Body2d\-Force}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
-\subsubsection[{\-Body2d\-Force}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Force\-::\-Body2d\-Force} (
+\subsubsection[{\-Body2d\-Force}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Body2d\-Force}$<$ c $>$\-::{\bf \-Body2d\-Force} (
 \begin{DoxyParamCaption}
 \item[{bool}]{fext\-Param = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1Body2dForce_a3e7d7bacfba8f1bba44d6025271985a4}
+)}\label{classgcop_1_1Body2dForce_a97644541acf7864f0647fb2da11de419}
 
 
 \subsection{\-Member \-Function \-Documentation}
 \index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!\-Set@{\-Set}}
 \index{\-Set@{\-Set}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
-\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Force\-::\-Set} (
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ void {\bf gcop\-::\-Body2d\-Force}$<$ c $>$\-::{\bf \-Set} (
 \begin{DoxyParamCaption}
 \item[{\-Vector3d \&}]{f, }
-\item[{const {\bf \-M3\-V3d} \&}]{x, }
+\item[{const {\bf \-Body2d\-State} \&}]{x, }
 \item[{double}]{t, }
 \item[{const \-Vector3d \&}]{u, }
 \item[{double}]{h, }
 \item[{const \-Vector\-Xd $\ast$}]{p = {\ttfamily 0}, }
 \item[{{\bf \-Matrix36d} $\ast$}]{\-A = {\ttfamily 0}, }
-\item[{\-Matrix3d $\ast$}]{\-B = {\ttfamily 0}, }
+\item[{{\bf \-Matrix3cd} $\ast$}]{\-B = {\ttfamily 0}, }
 \item[{\-Matrix$<$ double, 3, \-Dynamic $>$ $\ast$}]{\-C = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dForce_a066ab55e07727ca88992328f737812ce}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body2dForce_a9a0fa4710caac15e347901a81dc36170}
 
 
-\-References \-D, fext, and fext\-Param.
-
-
-
-\-Referenced by gcop\-::\-Body2d\-::\-Step().
+\-References gcop\-::\-Body2d\-Force$<$ c $>$\-::\-D, gcop\-::\-Body2d\-Force$<$ c $>$\-::fext, and gcop\-::\-Body2d\-Force$<$ c $>$\-::fext\-Param.
 
 
 
 \subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!\-B@{\-B}}
+\index{\-B@{\-B}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
+\subsubsection[{\-B}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ {\bf \-Matrix3cd} {\bf gcop\-::\-Body2d\-Force}$<$ c $>$\-::{\bf \-B}}\label{classgcop_1_1Body2dForce_a75e090637f0272cedee1491f810a4d46}
+
+
+constant control input transformation 
+
 \index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!\-D@{\-D}}
 \index{\-D@{\-D}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
-\subsubsection[{\-D}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Body2d\-Force\-::\-D}}\label{classgcop_1_1Body2dForce_aec2f98f1dc4b7d6fde55130965481b57}
+\subsubsection[{\-D}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ \-Vector3d {\bf gcop\-::\-Body2d\-Force}$<$ c $>$\-::{\bf \-D}}\label{classgcop_1_1Body2dForce_af2c05c910a8a8a49587362f1beb05b49}
 
 
 linear damping terms 
 
 
 
-\-Referenced by \-Set(), gcop\-::\-Body2d\-Graph\-::\-Synthesize2(), and gcop\-::\-Body2d\-Graph\-::\-Synthesize3().
+\-Referenced by gcop\-::\-Body2d\-Force$<$ c $>$\-::\-Set().
 
 \index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!fext@{fext}}
 \index{fext@{fext}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
-\subsubsection[{fext}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Body2d\-Force\-::fext}}\label{classgcop_1_1Body2dForce_a7e24a55cc0450413b729a22abda0aeb4}
+\subsubsection[{fext}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ \-Vector3d {\bf gcop\-::\-Body2d\-Force}$<$ c $>$\-::{\bf fext}}\label{classgcop_1_1Body2dForce_a42b02782aa753f14c8a5fbcc7c0e06a3}
 
 
 constant external force 
 
 
 
-\-Referenced by \-Set().
+\-Referenced by gcop\-::\-Body2d\-Force$<$ c $>$\-::\-Set().
 
 \index{gcop\-::\-Body2d\-Force@{gcop\-::\-Body2d\-Force}!fext\-Param@{fext\-Param}}
 \index{fext\-Param@{fext\-Param}!gcop::Body2dForce@{gcop\-::\-Body2d\-Force}}
-\subsubsection[{fext\-Param}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf gcop\-::\-Body2d\-Force\-::fext\-Param}}\label{classgcop_1_1Body2dForce_aa081fcc538bbaef84d345a8136721721}
+\subsubsection[{fext\-Param}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 3$>$ bool {\bf gcop\-::\-Body2d\-Force}$<$ c $>$\-::{\bf fext\-Param}}\label{classgcop_1_1Body2dForce_a444eeaa3644c4cefdd9e990e15ff5060}
 
 
 treat the (x,y) forces in fext as a parameter 
 
 
 
-\-Referenced by \-Set().
+\-Referenced by gcop\-::\-Body2d\-Force$<$ c $>$\-::\-Set().
 
 
 

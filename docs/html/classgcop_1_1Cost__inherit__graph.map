@@ -1,8 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; T, _nx, _nu, _np \&gt;" alt="" coords="267,59,485,88"/>
-<area shape="rect" id="node13" href="$classgcop_1_1MultiCost.html" title="gcop::MultiCost\&lt; T, _nx, _nu, _np \&gt;" alt="" coords="260,112,492,141"/>
-<area shape="rect" id="node5" href="$classgcop_1_1ConstraintCost.html" title="ConstraintCost\&lt; T, _nx, _nu, _np, 1 \&gt;" alt="" coords="568,5,811,35"/>
-<area shape="rect" id="node9" href="$classgcop_1_1ConstraintCost.html" title="gcop::ConstraintCost\&lt; T, _nx, _nu, _np, _ng \&gt;" alt="" coords="543,59,836,88"/>
-<area shape="rect" id="node11" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; T, _nx, _nu, _np, _ng \&gt;" alt="" coords="565,112,813,141"/>
-<area shape="rect" id="node7" href="$classgcop_1_1PqpDemCost.html" title="gcop::PqpDemCost\&lt; T, _nx, _nu, _np \&gt;" alt="" coords="885,5,1141,35"/>
+<area shape="rect" id="node3" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; T, _nx, _nu, _np, Tc \&gt;" alt="" coords="5,83,248,112"/>
 </map>

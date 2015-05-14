@@ -93,6 +93,7 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Constraint.html#a9ac919883f363b399463499317361ba7">Constraint</a> (int <a class="el" href="classgcop_1_1Constraint.html#a0581a0837f91df91215c3a8862d2e190">ng</a>=0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Constraint.html#a8f887a0ef0cd52a797665fc90c75b0d4">operator()</a> (<a class="el" href="classgcop_1_1Constraint.html#a8b9bd00ce111e6b7a149257e16bc8f56">Vectorgd</a> &amp;g, double t, const T &amp;x, const <a class="el" href="classgcop_1_1Constraint.html#a0055c4a104dbf9ffa1f1f118982506a7">Vectorcd</a> &amp;u, const <a class="el" href="classgcop_1_1Constraint.html#aa4c4302af089a4343a932e429e0856ea">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1Constraint.html#ac67403075f3d7936083c1746afeda45e">Matrixgnd</a> *dgdx=0, <a class="el" href="classgcop_1_1Constraint.html#af8019f7321537d7c31107b225cc5de42">Matrixgcd</a> *dgdu=0, <a class="el" href="classgcop_1_1Constraint.html#aebb060625e76e66c8d077bfba03bc04e">Matrixgmd</a> *dgdp=0)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Constraint.html#a7a50a568ec079db03a2ede651ae3e45c">operator()</a> (<a class="el" href="classgcop_1_1Constraint.html#a8b9bd00ce111e6b7a149257e16bc8f56">Vectorgd</a> &amp;g, double t, const T &amp;x, <a class="el" href="classgcop_1_1Constraint.html#ac67403075f3d7936083c1746afeda45e">Matrixgnd</a> *dgdx=0)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Constraint.html#a0581a0837f91df91215c3a8862d2e190">ng</a></td></tr>
@@ -406,6 +407,47 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 
 </div>
 </div>
+<a class="anchor" id="a7a50a568ec079db03a2ede651ae3e45c"></a><!-- doxytag: member="gcop::Constraint::operator()" ref="a7a50a568ec079db03a2ede651ae3e45c" args="(Vectorgd &amp;g, double t, const T &amp;x, Matrixgnd *dgdx=0)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool <a class="el" href="classgcop_1_1Constraint.html">gcop::Constraint</a>&lt; T, _nx, _nu, _np, _ng &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Constraint.html#a8b9bd00ce111e6b7a149257e16bc8f56">Vectorgd</a> &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1Constraint.html#ac67403075f3d7936083c1746afeda45e">Matrixgnd</a> *&#160;</td>
+          <td class="paramname"><em>dgdx</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Data Documentation</h2>
 <a class="anchor" id="a0581a0837f91df91215c3a8862d2e190"></a><!-- doxytag: member="gcop::Constraint::ng" ref="a0581a0837f91df91215c3a8862d2e190" args="" -->
 <div class="memitem">
@@ -433,7 +475,7 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

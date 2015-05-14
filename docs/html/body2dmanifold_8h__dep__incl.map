@@ -1,7 +1,23 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$body2dslamcost_8cc.html" title="lib/algos/body2dslamcost.cc" alt="" coords="5,83,192,112"/>
-<area shape="rect" id="node5" href="$body2d_8cc.html" title="lib/systems/body2d.cc" alt="" coords="216,83,368,112"/>
-<area shape="rect" id="node7" href="$body2dcost_8cc.html" title="lib/systems/costs/body2dcost.cc" alt="" coords="392,83,605,112"/>
-<area shape="rect" id="node9" href="$body2dtrackcost_8cc.html" title="lib/systems/costs/body2dtrackcost.cc" alt="" coords="629,83,872,112"/>
-<area shape="rect" id="node11" href="$body2dmanifold_8cc.html" title="lib/systems/manifolds/body2dmanifold.cc" alt="" coords="896,83,1157,112"/>
+<area shape="rect" id="node3" href="$body2dslamcost_8cc.html" title="lib/algos/body2dslamcost.cc" alt="" coords="16,315,202,344"/>
+<area shape="rect" id="node5" href="$body2d_8h.html" title="lib/systems/body2d.h" alt="" coords="884,83,1030,112"/>
+<area shape="rect" id="node24" href="$body2d_8cc.html" title="lib/systems/body2d.cc" alt="" coords="261,160,413,189"/>
+<area shape="rect" id="node32" href="$body2dcost_8cc.html" title="lib/systems/costs/body2dcost.cc" alt="" coords="1681,315,1894,344"/>
+<area shape="rect" id="node36" href="$body2dtrackcost_8cc.html" title="lib/systems/costs/body2dtrackcost.cc" alt="" coords="1324,315,1566,344"/>
+<area shape="rect" id="node51" href="$body2dmanifold_8cc.html" title="lib/systems/manifolds/body2dmanifold.cc" alt="" coords="1872,83,2133,112"/>
+<area shape="rect" id="node7" href="$body2dgraph_8h.html" title="lib/algos/body2dgraph.h" alt="" coords="669,160,826,189"/>
+<area shape="rect" id="node11" href="$body2dslamcost_8h.html" title="lib/algos/body2dslamcost.h" alt="" coords="210,237,389,267"/>
+<area shape="rect" id="node26" href="$body2dtrack_8h.html" title="lib/systems/body2dtrack.h" alt="" coords="1081,160,1254,189"/>
+<area shape="rect" id="node30" href="$body2dcost_8h.html" title="lib/systems/costs/body2dcost.h" alt="" coords="1541,237,1746,267"/>
+<area shape="rect" id="node34" href="$body2dtrackcost_8h.html" title="lib/systems/costs/body2dtrackcost.h" alt="" coords="1282,237,1517,267"/>
+<area shape="rect" id="node44" href="$body2dview_8h.html" title="lib/views/body2dview.h" alt="" coords="437,160,594,189"/>
+<area shape="rect" id="node9" href="$body2dgraph_8cc.html" title="lib/algos/body2dgraph.cc" alt="" coords="464,237,629,267"/>
+<area shape="rect" id="node13" href="$body2dslam_8h.html" title="lib/algos/body2dslam.h" alt="" coords="285,315,440,344"/>
+<area shape="rect" id="node19" href="$body2dgraphview_8h.html" title="lib/views/body2dgraphview.h" alt="" coords="653,237,842,267"/>
+<area shape="rect" id="node15" href="$body2dslam_8cc.html" title="lib/algos/body2dslam.cc" alt="" coords="281,392,444,421"/>
+<area shape="rect" id="node21" href="$body2dgraphview_8cc.html" title="lib/views/body2dgraphview.cc" alt="" coords="648,315,842,344"/>
+<area shape="rect" id="node28" href="$body2dtrack_8cc.html" title="lib/systems/body2dtrack.cc" alt="" coords="1077,237,1258,267"/>
+<area shape="rect" id="node38" href="$body2dtrackview_8h.html" title="lib/views/body2dtrackview.h" alt="" coords="866,237,1053,267"/>
+<area shape="rect" id="node40" href="$body2dtrackview_8cc.html" title="lib/views/body2dtrackview.cc" alt="" coords="866,315,1058,344"/>
+<area shape="rect" id="node46" href="$body2dview_8cc.html" title="lib/views/body2dview.cc" alt="" coords="24,237,186,267"/>
 </map>

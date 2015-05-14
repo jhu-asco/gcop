@@ -6,7 +6,8 @@
 
 
 
-\-Inheritance diagram for gcop\-:\-:\-Pqp\-Dem$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\-Inheritance diagram for gcop\-:\-:\-Pqp\-Dem$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -15,7 +16,8 @@
 \end{figure}
 
 
-\-Collaboration diagram for gcop\-:\-:\-Pqp\-Dem$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:\nopagebreak
+\-Collaboration diagram for gcop\-:\-:\-Pqp\-Dem$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -47,6 +49,8 @@ typedef \-Matrix$<$ double, \-\_\-np, 1 $>$ {\bf \-Vectormd}
 virtual {\bf $\sim$\-Pqp\-Dem} ()
 \item 
 bool {\bf operator()} ({\bf \-Vectorgd} \&g, double t, const \-T \&x, const {\bf \-Vectorcd} \&u, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrixgxd} $\ast$dgdx=0, {\bf \-Matrixgud} $\ast$dgdu=0, {\bf \-Matrixgpd} $\ast$dgdp=0)
+\item 
+bool {\bf operator()} ({\bf \-Vectorgd} \&g, double t, const \-T \&x, {\bf \-Matrixgxd} $\ast$dgdx=0)
 \end{DoxyCompactItemize}
 \subsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
@@ -72,7 +76,9 @@ const {\bf \-Dem} \& {\bf dem}
 double {\bf cr}
 \begin{DoxyCompactList}\small\item\em collision radius \end{DoxyCompactList}\item 
 double {\bf sd}
-\begin{DoxyCompactList}\small\item\em additional safety distance \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em additional safety distance \end{DoxyCompactList}\item 
+{\bf \-Body3d\-State} {\bf xb}
+\begin{DoxyCompactList}\small\item\em body state for collision purposes \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ class gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$}
 
 
@@ -157,6 +163,24 @@ double {\bf sd}
 )}\label{classgcop_1_1PqpDem_a09cf68b8534d25f1d04206636a370adc}
 
 
+\-Referenced by gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::operator()().
+
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ bool {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorgd} \&}]{g, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{x, }
+\item[{{\bf \-Matrixgxd} $\ast$}]{dgdx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classgcop_1_1PqpDem_a7dd8ba1a19db9025fe4645d234077511}
+
+
+\-References gcop\-::\-Pqp\-Dem$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::operator()().
+
+
+
 \subsection{\-Member \-Data \-Documentation}
 \index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!cr@{cr}}
 \index{cr@{cr}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
@@ -231,6 +255,13 @@ additional safety distance
 \index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!tres@{tres}}
 \index{tres@{tres}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
 \subsubsection[{tres}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ \-P\-Q\-P\-\_\-\-Tolerance\-Result {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf tres}}\label{classgcop_1_1PqpDem_af4dc4f24cca294beeea4e1862f2ca6d6}
+\index{gcop\-::\-Pqp\-Dem@{gcop\-::\-Pqp\-Dem}!xb@{xb}}
+\index{xb@{xb}!gcop::PqpDem@{gcop\-::\-Pqp\-Dem}}
+\subsubsection[{xb}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic$>$ {\bf \-Body3d\-State} {\bf gcop\-::\-Pqp\-Dem}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::{\bf xb}}\label{classgcop_1_1PqpDem_ae6c433da6e76143c573e5490aa8586a5}
+
+
+body state for collision purposes 
+
 
 
 \-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}

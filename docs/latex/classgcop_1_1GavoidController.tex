@@ -1,0 +1,190 @@
+\section{gcop\-:\-:\-Gavoid\-Controller \-Class \-Reference}
+\label{classgcop_1_1GavoidController}\index{gcop\-::\-Gavoid\-Controller@{gcop\-::\-Gavoid\-Controller}}
+
+
+{\ttfamily \#include $<$gavoidcontroller.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Gavoid\-Controller\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{classgcop_1_1GavoidController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Gavoid\-Controller\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1GavoidController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Gavoid\-Controller} ({\bf \-Body3d\-Constraint} \&{\bf con})
+\item 
+virtual {\bf $\sim$\-Gavoid\-Controller} ()
+\item 
+virtual bool {\bf \-Set} ({\bf \-Vector6d} \&u, double t, const {\bf \-Body3d\-State} \&x)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body3d\-Constraint} \& {\bf con}
+\begin{DoxyCompactList}\small\item\em obstacle constraint \end{DoxyCompactList}\item 
+double {\bf sr}
+\begin{DoxyCompactList}\small\item\em sensing radius \end{DoxyCompactList}\item 
+double {\bf k}
+\begin{DoxyCompactList}\small\item\em obstacle avoidance gain \end{DoxyCompactList}\item 
+double {\bf kb}
+\begin{DoxyCompactList}\small\item\em breaking gain (optional, zero by default) \end{DoxyCompactList}\item 
+double {\bf oc}
+\begin{DoxyCompactList}\small\item\em add extra clearance to obstacles \end{DoxyCompactList}\item 
+double {\bf od\-Exp}
+\begin{DoxyCompactList}\small\item\em exponent affecting the power of obstacle distance (default is 1) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Gyroscopic obstacle avoidance controller, i.\-e. it produces forces that \char`\"{}rotate\char`\"{} the velocity vector, so that no kinetic energy is inserted into the system \-Stability is guaranteed for convex obstacles
+
+\-Author\-: \-Marin \-Kobilarov, 2007 (originally in the \-D\-G\-C library) 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Gavoid\-Controller@{gcop\-::\-Gavoid\-Controller}!\-Gavoid\-Controller@{\-Gavoid\-Controller}}
+\index{\-Gavoid\-Controller@{\-Gavoid\-Controller}!gcop::GavoidController@{gcop\-::\-Gavoid\-Controller}}
+\subsubsection[{\-Gavoid\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Gavoid\-Controller\-::\-Gavoid\-Controller} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Body3d\-Constraint} \&}]{con}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1GavoidController_ae1e6fdf2681442eeb0ba455c44c0d7fd}
+\-Gyroscopic forcing controller
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em con} & constraint giving the obstacle distance function \\
+\hline
+\end{DoxyParams}
+
+
+\-References k, kb, oc, od\-Exp, and sr.
+
+\index{gcop\-::\-Gavoid\-Controller@{gcop\-::\-Gavoid\-Controller}!$\sim$\-Gavoid\-Controller@{$\sim$\-Gavoid\-Controller}}
+\index{$\sim$\-Gavoid\-Controller@{$\sim$\-Gavoid\-Controller}!gcop::GavoidController@{gcop\-::\-Gavoid\-Controller}}
+\subsubsection[{$\sim$\-Gavoid\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Gavoid\-Controller\-::$\sim$\-Gavoid\-Controller} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1GavoidController_aaf0de6b469123682578d147665776972}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Gavoid\-Controller@{gcop\-::\-Gavoid\-Controller}!\-Set@{\-Set}}
+\index{\-Set@{\-Set}!gcop::GavoidController@{gcop\-::\-Gavoid\-Controller}}
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Gavoid\-Controller\-::\-Set} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vector6d} \&}]{u, }
+\item[{double}]{t, }
+\item[{const {\bf \-Body3d\-State} \&}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1GavoidController_a5844309f105b871bbc5b9cf429973a6e}
+\-Feedback controller of the form u = k(t, x) 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & controls \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if arguments are valid, false if e.\-g. x is infeasible 
+\end{DoxyReturn}
+
+
+\-Implements {\bf gcop\-::\-Controller$<$ Body3d\-State, Vector6d $>$} \doxyref{}{p.}{classgcop_1_1Controller_a6bbf22b498272842f7894b3983d97022}.
+
+
+
+\-References con, k, kb, oc, od\-Exp, \-S\-I\-G\-N, and sr.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Gavoid\-Controller@{gcop\-::\-Gavoid\-Controller}!con@{con}}
+\index{con@{con}!gcop::GavoidController@{gcop\-::\-Gavoid\-Controller}}
+\subsubsection[{con}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body3d\-Constraint}\& {\bf gcop\-::\-Gavoid\-Controller\-::con}}\label{classgcop_1_1GavoidController_ad798bc0e97d37f4fe2ef80142d0c56d7}
+
+
+obstacle constraint 
+
+
+
+\-Referenced by \-Set().
+
+\index{gcop\-::\-Gavoid\-Controller@{gcop\-::\-Gavoid\-Controller}!k@{k}}
+\index{k@{k}!gcop::GavoidController@{gcop\-::\-Gavoid\-Controller}}
+\subsubsection[{k}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Gavoid\-Controller\-::k}}\label{classgcop_1_1GavoidController_ab8aec7477c50185b803c90d5ba76ba62}
+
+
+obstacle avoidance gain 
+
+
+
+\-Referenced by \-Gavoid\-Controller(), and \-Set().
+
+\index{gcop\-::\-Gavoid\-Controller@{gcop\-::\-Gavoid\-Controller}!kb@{kb}}
+\index{kb@{kb}!gcop::GavoidController@{gcop\-::\-Gavoid\-Controller}}
+\subsubsection[{kb}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Gavoid\-Controller\-::kb}}\label{classgcop_1_1GavoidController_a32152b38876402a0eaebb00811dafc35}
+
+
+breaking gain (optional, zero by default) 
+
+
+
+\-Referenced by \-Gavoid\-Controller(), and \-Set().
+
+\index{gcop\-::\-Gavoid\-Controller@{gcop\-::\-Gavoid\-Controller}!oc@{oc}}
+\index{oc@{oc}!gcop::GavoidController@{gcop\-::\-Gavoid\-Controller}}
+\subsubsection[{oc}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Gavoid\-Controller\-::oc}}\label{classgcop_1_1GavoidController_aa79f75b892b1a39bfcd765475051d67a}
+
+
+add extra clearance to obstacles 
+
+
+
+\-Referenced by \-Gavoid\-Controller(), and \-Set().
+
+\index{gcop\-::\-Gavoid\-Controller@{gcop\-::\-Gavoid\-Controller}!od\-Exp@{od\-Exp}}
+\index{od\-Exp@{od\-Exp}!gcop::GavoidController@{gcop\-::\-Gavoid\-Controller}}
+\subsubsection[{od\-Exp}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Gavoid\-Controller\-::od\-Exp}}\label{classgcop_1_1GavoidController_ab805da832b9f323573557948532d01cb}
+
+
+exponent affecting the power of obstacle distance (default is 1) 
+
+
+
+\-Referenced by \-Gavoid\-Controller(), and \-Set().
+
+\index{gcop\-::\-Gavoid\-Controller@{gcop\-::\-Gavoid\-Controller}!sr@{sr}}
+\index{sr@{sr}!gcop::GavoidController@{gcop\-::\-Gavoid\-Controller}}
+\subsubsection[{sr}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf gcop\-::\-Gavoid\-Controller\-::sr}}\label{classgcop_1_1GavoidController_ac608383f7a7543f436adbbb9e0172165}
+
+
+sensing radius 
+
+
+
+\-Referenced by \-Gavoid\-Controller(), and \-Set().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf gavoidcontroller.\-h}\item 
+lib/algos/{\bf gavoidcontroller.\-cc}\end{DoxyCompactItemize}

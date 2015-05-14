@@ -1,7 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="5,85,293,115"/>
-<area shape="rect" id="node3" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _n \&gt;" alt="" coords="361,5,473,35"/>
-<area shape="rect" id="node5" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _np \&gt;" alt="" coords="357,59,477,88"/>
-<area shape="rect" id="node7" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="357,112,477,141"/>
-<area shape="rect" id="node9" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; Dynamic \&gt;" alt="" coords="343,165,492,195"/>
+<area shape="rect" id="node1" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; InsState, 15 \&gt;" alt="" coords="5,5,208,35"/>
+<area shape="rect" id="node3" href="$classgcop_1_1InsManifold.html" title="gcop::InsManifold" alt="" coords="256,5,381,35"/>
 </map>

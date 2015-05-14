@@ -106,6 +106,7 @@
 </li>
 <li>ub
 : <a class="el" href="classgcop_1_1MbsState.html#a93efe0dfe5c0506ffbd78e4f25e9220f">gcop::MbsState</a>
+, <a class="el" href="classgcop_1_1Normal.html#a9fb03d0b67d8f275dd407a3eb2e2b440">gcop::Normal&lt; _n &gt;</a>
 , <a class="el" href="classgcop_1_1Manifold.html#afdc42d9bc5cf8d3fc964fd1b72c1bd6e">gcop::Manifold&lt; T, _n &gt;</a>
 </li>
 <li>ubD
@@ -153,15 +154,18 @@
 , <a class="el" href="classgcop_1_1Doep.html#a8d85b61c588e3065b404ea75b8e3b0e2">gcop::Doep&lt; T, nx, nu, np, Tz, nz, T1, nx1 &gt;</a>
 , <a class="el" href="classgcop_1_1PDdp.html#ad95aa30591f2992fe48b74cb9eba33e2">gcop::PDdp&lt; T, n, c, np &gt;</a>
 , <a class="el" href="classgcop_1_1SPSA.html#a9533ad03d7a68d311c5943ef36e8ecac">gcop::SPSA&lt; T, n, c, _np &gt;</a>
-, <a class="el" href="classgcop_1_1SystemCe.html#a2bba2382064c787b903b8fa59a858a62">gcop::SystemCe&lt; T, n, c, np, ntp &gt;</a>
+, <a class="el" href="classgcop_1_1SystemCe.html#a88fe1e9421534d94f8b2f46b4e046c38">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1Filter.html#a03c808f91fbbdfe92cc3b04e78856ada">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 , <a class="el" href="classgcop_1_1Gmm.html#a26773f0169d771e4c44e21af5ba012e0">gcop::Gmm&lt; _n &gt;</a>
 , <a class="el" href="classgcop_1_1Trajectory.html#acf6b5804ef43e3ba769212b007923ce1">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
 , <a class="el" href="classgcop_1_1Normal.html#a4790057a751d620cef1504b375b8dd3e">gcop::Normal&lt; _n &gt;</a>
 </li>
 <li>UpdateGains()
-: <a class="el" href="classgcop_1_1LqSensorCost.html#a4ab668e4c5702d359d076e15af0c617b">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
-, <a class="el" href="classgcop_1_1LqCost.html#a33b9245442260cb22290b9322ec3d3ee">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+: <a class="el" href="classgcop_1_1LqCost.html#a33b9245442260cb22290b9322ec3d3ee">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1LqSensorCost.html#a4ab668e4c5702d359d076e15af0c617b">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;</a>
+</li>
+<li>updateUpperBound
+: <a class="el" href="classgcop_1_1SystemCe.html#a2546a7ec07714afcba28b00e7d6644f4">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
 </li>
 <li>upIndex
 : <a class="el" href="classgcop_1_1Bulletrccar.html#ae00d3e6a64a625500f3ca7e6e7ba33ef">gcop::Bulletrccar</a>
@@ -172,28 +176,32 @@
 , <a class="el" href="classgcop__urdf_1_1JointLimits.html#af3ede00d488301c4e3cf57687f67c8db">gcop_urdf::JointLimits</a>
 </li>
 <li>us
-: <a class="el" href="classgcop_1_1Docp.html#a4cdef87c87048d43a9ede672410e58ee">gcop::Docp&lt; T, nx, nu, np &gt;</a>
+: <a class="el" href="classgcop_1_1SystemCe.html#ac8bc8f672b5cedf88225de724533c4e1">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1Posegraph2d.html#acf06918b87b9bf108f291a2c53b45cfc">gcop::Posegraph2d</a>
+, <a class="el" href="classgcop_1_1Body2dGraph.html#a907d1bad5b6991a3067773c8fa0e9ab6">gcop::Body2dGraph</a>
+, <a class="el" href="classgcop_1_1Docp.html#a4cdef87c87048d43a9ede672410e58ee">gcop::Docp&lt; T, nx, nu, np &gt;</a>
+, <a class="el" href="classgcop_1_1Doep.html#a979dc7667d75c91dc4ae35adc29e68ec">gcop::Doep&lt; T, nx, nu, np, Tz, nz, T1, nx1 &gt;</a>
+, <a class="el" href="classgcop_1_1Body2dTrack.html#aea1b855c00a56729b6895287f6d22a35">gcop::Body2dTrack</a>
+, <a class="el" href="classgcop_1_1SPSA.html#a7fba30fe599ddad4c2938be4f2ceca4b">gcop::SPSA&lt; T, n, c, _np &gt;</a>
 , <a class="el" href="classgcop_1_1Body3dTrack.html#a68e37e21af6414f673e3cc476b0e488b">gcop::Body3dTrack</a>
 , <a class="el" href="classgcop_1_1Kinbody3dTrack.html#a448080178398cbf03110b7b68beb5cd8">gcop::Kinbody3dTrack&lt; _nu &gt;</a>
-, <a class="el" href="classgcop_1_1SystemCe.html#a5c25cab5a30e37d2f46cffcd3dd5156d">gcop::SystemCe&lt; T, n, c, np, ntp &gt;</a>
 , <a class="el" href="classgcop_1_1KinRccarPath.html#ae73e53f1ca4b36b6c7a7bc820fae6287">gcop::KinRccarPath</a>
-, <a class="el" href="classgcop_1_1Doep.html#a979dc7667d75c91dc4ae35adc29e68ec">gcop::Doep&lt; T, nx, nu, np, Tz, nz, T1, nx1 &gt;</a>
-, <a class="el" href="classgcop_1_1Posegraph2d.html#acf06918b87b9bf108f291a2c53b45cfc">gcop::Posegraph2d</a>
-, <a class="el" href="classgcop_1_1SPSA.html#a7fba30fe599ddad4c2938be4f2ceca4b">gcop::SPSA&lt; T, n, c, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Body2dTrack.html#aea1b855c00a56729b6895287f6d22a35">gcop::Body2dTrack</a>
-, <a class="el" href="classgcop_1_1ASPSA.html#ae2403eb6f10833d9576d4b85beaec7d0">gcop::ASPSA&lt; T, n, c, _np &gt;</a>
 , <a class="el" href="classgcop_1_1Trajectory.html#ac12d97749b65e6c9c6caba279d9e0206">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
-, <a class="el" href="classgcop_1_1Body2dGraph.html#a907d1bad5b6991a3067773c8fa0e9ab6">gcop::Body2dGraph</a>
 , <a class="el" href="classgcop_1_1SystemView.html#a7fe3cab17d4c1417e8652dac1ca6a90f">gcop::SystemView&lt; Tx, Tu &gt;</a>
+, <a class="el" href="classgcop_1_1Trajectory.html#a0b9d7564c31a9d577502ee11588307b6">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a>
+, <a class="el" href="classgcop_1_1ASPSA.html#ae2403eb6f10833d9576d4b85beaec7d0">gcop::ASPSA&lt; T, n, c, _np &gt;</a>
 </li>
 <li>us2z()
-: <a class="el" href="classgcop_1_1SystemCe.html#aee65ebcc64ba37d848427f564c72d011">gcop::SystemCe&lt; T, n, c, np, ntp &gt;</a>
+: <a class="el" href="classgcop_1_1SystemCe.html#ae38166b22e40d8dbe5f511eb63d45091">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
+</li>
+<li>usas
+: <a class="el" href="classgcop_1_1SystemCe.html#a1f2b88322a077b841318a3d4d3b28bbe">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
 </li>
 <li>usezupaxis
 : <a class="el" href="classgcop_1_1BulletWorld.html#a4fe113f7b90e4f04bb68490a1c5ef226">gcop::BulletWorld</a>
 </li>
 <li>uss
-: <a class="el" href="classgcop_1_1SystemCe.html#a4458e74a8abe844dc035e13f5f079a6a">gcop::SystemCe&lt; T, n, c, np, ntp &gt;</a>
+: <a class="el" href="classgcop_1_1SystemCe.html#a693d2d01d1db0655559505e77619254f">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
 , <a class="el" href="classgcop_1_1SPSA.html#ad801342429c0d73ce8107f9a544f5242">gcop::SPSA&lt; T, n, c, _np &gt;</a>
 </li>
 <li>uss1
@@ -212,14 +220,14 @@
 : <a class="el" href="structgcop_1_1UuvState.html#a8c4e1474e05c18a87a894b0347df72bf">gcop::UuvState</a>
 </li>
 <li>UuvView()
-: <a class="el" href="classgcop_1_1UuvView.html#a5af64d1bf5bd6568f63ea3c9c50636a7">gcop::UuvView&lt; c &gt;</a>
+: <a class="el" href="classgcop_1_1UuvView.html#a631be3c5f3c8c457fcfde60871aa3e73">gcop::UuvView&lt; c &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:59:10 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

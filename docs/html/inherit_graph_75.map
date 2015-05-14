@@ -1,4 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Point3dState, 6 \&gt;" alt="" coords="5,5,227,35"/>
-<area shape="rect" id="node3" href="$classgcop_1_1Point3dManifold.html" title="gcop::Point3dManifold" alt="" coords="276,5,425,35"/>
+<area shape="rect" id="node1" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix4d, _nx \&gt;" alt="" coords="5,5,216,35"/>
 </map>

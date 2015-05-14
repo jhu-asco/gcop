@@ -68,7 +68,7 @@
 <div class="title">gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="gcop::FlatOutputTparam" --><!-- doxytag: inherits="gcop::Tparam" -->
+<!-- doxytag: class="gcop::FlatOutputTparam" --><!-- doxytag: inherits="Tparam&lt; T, nx, nu, np, _ntp &gt;" -->
 <p><code>#include &lt;<a class="el" href="flatoutputtparam_8h_source.html">flatoutputtparam.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;:</div>
@@ -89,9 +89,9 @@ Collaboration diagram for gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;:</
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1FlatOutputTparam.html#a03ab7cc01ec724557c329bf065a2ba4c">FlatOutputTparam</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1Tparam.html#ac969f953f716498371761969f75c7f7a">sys</a>, int ny_, int numberofknots_, int numberofderivatives_=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1FlatOutputTparam.html#a094a6a69c159160b0012ba1d88b04e87">To</a> (Vectorntpd &amp;s, const vector&lt; double &gt; &amp;ts, const vector&lt; T &gt; &amp;xs, const vector&lt; Vectorcd &gt; &amp;us, const Vectormd *p=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1FlatOutputTparam.html#ad48859a3d749cadd52ba338fa43fb6ee">From</a> (vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, const Vectorntpd &amp;s, Vectormd *p=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1FlatOutputTparam.html#a1c91e743d452dd8b5c194e4506b1c156">FlatOutputTparam</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1Tparam.html#a3b6ca4862cb80522eeb11c729316ffee">sys</a>, int ny_, int numberofknots_, int numberofderivatives_=0, bool fixfinal_=false)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1FlatOutputTparam.html#a46db3f6632e03fbbd82cb6c66572c526">To</a> (Vectorntpd &amp;s, const vector&lt; double &gt; &amp;ts, const vector&lt; T &gt; &amp;xs, const vector&lt; Vectorcd &gt; &amp;us, const Vectormd *p=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1FlatOutputTparam.html#a43d2cce6fdb75b466f1808d1fce676b7">From</a> (vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, const Vectorntpd &amp;s, Vectormd *p=0)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1FlatOutputTparam.html#ac36fea6cd2a6298240a827dbeaaf0858">numberofderivatives</a></td></tr>
@@ -102,6 +102,8 @@ Public Attributes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of flat outputs.  <a href="#a0f6f9db22e9d4cb4b64490e0ae5c6192"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; vector&lt; VectorXd &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1FlatOutputTparam.html#a87eeb3fdd2f1490d2b7d21444242b650">knotsforallderivatives</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Knots for each derivative are computed on the fly.  <a href="#a87eeb3fdd2f1490d2b7d21444242b650"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1FlatOutputTparam.html#a421ca9124010598de517b98f005dbaeb">fixfinal</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">should the final flat output be fixed (with necessary flatoutput time derivatives == 0)  <a href="#a421ca9124010598de517b98f005dbaeb"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1FlatOutputTparam.html#ae268e0b5a5c783aaf256237d04d5dc24">DeCasteljau</a> (vector&lt; VectorXd &gt; &amp;s, double u, int start, int end)</td></tr>
@@ -114,7 +116,7 @@ class gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;</h3>
 <p>This is a flat output parametrization class. The template vector ny gives the size of flat output TODO If ny Dynamic somehow resize all the knotvector sizes</p>
 <p>Author: Marin Kobilarov (c) 2005--2013 Author2: Gowtham Garimella </p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a03ab7cc01ec724557c329bf065a2ba4c"></a><!-- doxytag: member="gcop::FlatOutputTparam::FlatOutputTparam" ref="a03ab7cc01ec724557c329bf065a2ba4c" args="(System&lt; T, nx, nu, np &gt; &amp;sys, int ny_, int numberofknots_, int numberofderivatives_=0)" -->
+<a class="anchor" id="a1c91e743d452dd8b5c194e4506b1c156"></a><!-- doxytag: member="gcop::FlatOutputTparam::FlatOutputTparam" ref="a1c91e743d452dd8b5c194e4506b1c156" args="(System&lt; T, nx, nu, np &gt; &amp;sys, int ny_, int numberofknots_, int numberofderivatives_=0, bool fixfinal_=false)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -142,7 +144,13 @@ template&lt;typename T , int nx, int nu, int np, int _ntp&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numberofderivatives_</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>numberofderivatives_</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>fixfinal_</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -243,14 +251,14 @@ template&lt;typename T , int nx, int nu, int np = Dynamic, int _ntp = Dynamic&gt
 
 </div>
 </div>
-<a class="anchor" id="ad48859a3d749cadd52ba338fa43fb6ee"></a><!-- doxytag: member="gcop::FlatOutputTparam::From" ref="ad48859a3d749cadd52ba338fa43fb6ee" args="(vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, const Vectorntpd &amp;s, Vectormd *p=0)" -->
+<a class="anchor" id="a43d2cce6fdb75b466f1808d1fce676b7"></a><!-- doxytag: member="gcop::FlatOutputTparam::From" ref="a43d2cce6fdb75b466f1808d1fce676b7" args="(vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, const Vectorntpd &amp;s, Vectormd *p=0)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , int nx, int nu, int np, int _ntp&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classgcop_1_1FlatOutputTparam.html">gcop::FlatOutputTparam</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ntp &gt;::<a class="el" href="classgcop_1_1FlatOutputTparam.html#ad48859a3d749cadd52ba338fa43fb6ee">From</a> </td>
+          <td class="memname">bool <a class="el" href="classgcop_1_1FlatOutputTparam.html">gcop::FlatOutputTparam</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ntp &gt;::<a class="el" href="classgcop_1_1FlatOutputTparam.html#a43d2cce6fdb75b466f1808d1fce676b7">From</a> </td>
           <td>(</td>
           <td class="paramtype">vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>ts</em>, </td>
@@ -298,19 +306,20 @@ template&lt;typename T , int nx, int nu, int np, int _ntp&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if conversion was successful </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Tparam.html#a4365bd4b1f7bb59a23dd25838c0a9db4">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Tparam.html#a547cacd83055c27b7f083038d980ac3a">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a094a6a69c159160b0012ba1d88b04e87"></a><!-- doxytag: member="gcop::FlatOutputTparam::To" ref="a094a6a69c159160b0012ba1d88b04e87" args="(Vectorntpd &amp;s, const vector&lt; double &gt; &amp;ts, const vector&lt; T &gt; &amp;xs, const vector&lt; Vectorcd &gt; &amp;us, const Vectormd *p=0)" -->
+<a class="anchor" id="a46db3f6632e03fbbd82cb6c66572c526"></a><!-- doxytag: member="gcop::FlatOutputTparam::To" ref="a46db3f6632e03fbbd82cb6c66572c526" args="(Vectorntpd &amp;s, const vector&lt; double &gt; &amp;ts, const vector&lt; T &gt; &amp;xs, const vector&lt; Vectorcd &gt; &amp;us, const Vectormd *p=0)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , int nx, int nu, int np, int _ntp&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classgcop_1_1FlatOutputTparam.html">gcop::FlatOutputTparam</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ntp &gt;::<a class="el" href="classgcop_1_1FlatOutputTparam.html#a094a6a69c159160b0012ba1d88b04e87">To</a> </td>
+          <td class="memname">bool <a class="el" href="classgcop_1_1FlatOutputTparam.html">gcop::FlatOutputTparam</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ntp &gt;::<a class="el" href="classgcop_1_1FlatOutputTparam.html#a46db3f6632e03fbbd82cb6c66572c526">To</a> </td>
           <td>(</td>
           <td class="paramtype">Vectorntpd &amp;&#160;</td>
           <td class="paramname"><em>s</em>, </td>
@@ -358,12 +367,30 @@ template&lt;typename T , int nx, int nu, int np, int _ntp&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if conversion was successful </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Tparam.html#a92de5e8167d3cbec5fa498e0d7b5fd2f">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Tparam.html#a2668afc0c6d411d2811a8e3f7b4d60b3">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a421ca9124010598de517b98f005dbaeb"></a><!-- doxytag: member="gcop::FlatOutputTparam::fixfinal" ref="a421ca9124010598de517b98f005dbaeb" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , int nx, int nu, int np = Dynamic, int _ntp = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgcop_1_1FlatOutputTparam.html">gcop::FlatOutputTparam</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ntp &gt;::<a class="el" href="classgcop_1_1FlatOutputTparam.html#a421ca9124010598de517b98f005dbaeb">fixfinal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>should the final flat output be fixed (with necessary flatoutput time derivatives == 0) </p>
+
+</div>
+</div>
 <a class="anchor" id="a87eeb3fdd2f1490d2b7d21444242b650"></a><!-- doxytag: member="gcop::FlatOutputTparam::knotsforallderivatives" ref="a87eeb3fdd2f1490d2b7d21444242b650" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -379,7 +406,7 @@ template&lt;typename T , int nx, int nu, int np = Dynamic, int _ntp = Dynamic&gt
 
 <p>Knots for each derivative are computed on the fly. </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1FlatOutputTparam.html#a03ab7cc01ec724557c329bf065a2ba4c">gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;::FlatOutputTparam()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1FlatOutputTparam.html#a1c91e743d452dd8b5c194e4506b1c156">gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;::FlatOutputTparam()</a>.</p>
 
 </div>
 </div>
@@ -398,7 +425,7 @@ template&lt;typename T , int nx, int nu, int np = Dynamic, int _ntp = Dynamic&gt
 
 <p>Number of derivatives of flat outputs needed. </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1FlatOutputTparam.html#a03ab7cc01ec724557c329bf065a2ba4c">gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;::FlatOutputTparam()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1FlatOutputTparam.html#a1c91e743d452dd8b5c194e4506b1c156">gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;::FlatOutputTparam()</a>.</p>
 
 </div>
 </div>
@@ -417,7 +444,7 @@ template&lt;typename T , int nx, int nu, int np = Dynamic, int _ntp = Dynamic&gt
 
 <p>Number of knots for bezier curve. </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1FlatOutputTparam.html#a03ab7cc01ec724557c329bf065a2ba4c">gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;::FlatOutputTparam()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1FlatOutputTparam.html#a1c91e743d452dd8b5c194e4506b1c156">gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;::FlatOutputTparam()</a>.</p>
 
 </div>
 </div>
@@ -436,7 +463,7 @@ template&lt;typename T , int nx, int nu, int np = Dynamic, int _ntp = Dynamic&gt
 
 <p>Number of flat outputs. </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1FlatOutputTparam.html#a03ab7cc01ec724557c329bf065a2ba4c">gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;::FlatOutputTparam()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1FlatOutputTparam.html#a1c91e743d452dd8b5c194e4506b1c156">gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;::FlatOutputTparam()</a>.</p>
 
 </div>
 </div>
@@ -447,7 +474,7 @@ template&lt;typename T , int nx, int nu, int np = Dynamic, int _ntp = Dynamic&gt
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

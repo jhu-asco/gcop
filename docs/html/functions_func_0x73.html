@@ -139,11 +139,16 @@
 : <a class="el" href="classgcop_1_1SensorCost.html#a9239f05c76cd9e3c1ecb23fe66bf68f7">gcop::SensorCost&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a>
 </li>
 <li>Set()
-: <a class="el" href="classgcop_1_1Controller.html#a306fbf6d65ab78e13537bb92b330fc35">gcop::Controller&lt; Tx, Tu &gt;</a>
-, <a class="el" href="classgcop_1_1MbsController.html#a0065ff60bcfaa6f378e97809d6491a4b">gcop::MbsController</a>
-, <a class="el" href="classgcop_1_1Body2dForce.html#a066ab55e07727ca88992328f737812ce">gcop::Body2dForce</a>
+: <a class="el" href="classgcop_1_1Point3dController.html#a02cf4f10ad5b3e6b30f36bf9eb762d73">gcop::Point3dController</a>
+, <a class="el" href="classgcop_1_1Body2dForce.html#a9a0fa4710caac15e347901a81dc36170">gcop::Body2dForce&lt; c &gt;</a>
 , <a class="el" href="classgcop_1_1Dem.html#af11894432b2d0f54238351cdbd53fe5e">gcop::Dem</a>
 , <a class="el" href="classgcop_1_1Force.html#aa1e462139a47dcf9bd2301e6b5cd2d02">gcop::Force&lt; Tx, _l, _n, _c &gt;</a>
+, <a class="el" href="classgcop_1_1Body3dAvoidController.html#a3366867a655b73e7a858b110be672c6c">gcop::Body3dAvoidController&lt; nu &gt;</a>
+, <a class="el" href="classgcop_1_1Body3dController.html#aa10e4eeb274191d67644002bd3833112">gcop::Body3dController&lt; c &gt;</a>
+, <a class="el" href="classgcop_1_1Body3dDemController.html#a6619b241c047122bef9894f9a1a05ca8">gcop::Body3dDemController&lt; nu &gt;</a>
+, <a class="el" href="classgcop_1_1Controller.html#a6bbf22b498272842f7894b3983d97022">gcop::Controller&lt; Tx, Tu, Ts, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1GavoidController.html#a5844309f105b871bbc5b9cf429973a6e">gcop::GavoidController</a>
+, <a class="el" href="classgcop_1_1MbsController.html#a60e530bb55ab52cb0d06a4f8898cd075">gcop::MbsController</a>
 </li>
 <li>SetBool()
 : <a class="el" href="classgcop_1_1Params.html#a3ad690b614a9fda84389f62b97aa674a">gcop::Params</a>
@@ -162,6 +167,15 @@
 , <a class="el" href="classgcop_1_1PlotView.html#a0d29087cd41db3294227e8cbd8346ed7">gcop::PlotView</a>
 , <a class="el" href="classgcop_1_1SystemView.html#a7cc6e0d480687fb90c4ff5bf724f1e70">gcop::SystemView&lt; Tx, Tu &gt;</a>
 , <a class="el" href="classgcop_1_1Viewer.html#a3e841a5389de43fa684bc4fa7a0184cb">gcop::Viewer</a>
+</li>
+<li>SetContext()
+: <a class="el" href="classgcop_1_1Body3dAvoidController.html#acc22b7238c9ad2b27ce198db8ae0209f">gcop::Body3dAvoidController&lt; nu &gt;</a>
+, <a class="el" href="classgcop_1_1Body3dDemController.html#a65583ba02854318be286206a0c982293">gcop::Body3dDemController&lt; nu &gt;</a>
+, <a class="el" href="classgcop_1_1Controller.html#aa7c8c84ff5a7fde50c70c4f7524fef17">gcop::Controller&lt; Tx, Tu, Ts, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1Cost.html#a58ea956b7953b5e4de849870165ceadb">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1LqCost.html#a2b21fdf93681c59ec998a1365156cf97">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a>
+, <a class="el" href="classgcop_1_1ControllerTparam.html#aad65080ef1e4109ab875770a266c7faf">gcop::ControllerTparam&lt; Tx, nx, nu, np, _ntp, Tc &gt;</a>
+, <a class="el" href="classgcop_1_1Tparam.html#ab1ed014a9b06af5032a1906ce0ce5521">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;</a>
 </li>
 <li>SetDouble()
 : <a class="el" href="classgcop_1_1Params.html#aeb7a7d79f9ae125d6bac7b81c16e2d7c">gcop::Params</a>
@@ -205,6 +219,11 @@
 <li>SetObstacle()
 : <a class="el" href="classgcop_1_1AirplaneCost.html#a2c87e085f0aa33ee5a931ad6bc020054">gcop::AirplaneCost</a>
 </li>
+<li>SetParams()
+: <a class="el" href="classgcop_1_1Body3dAvoidController.html#a9ca243566e3e74f441668a573660e372">gcop::Body3dAvoidController&lt; nu &gt;</a>
+, <a class="el" href="classgcop_1_1Body3dDemController.html#a0f8514b37e0c9beb29e74b6890fde5ce">gcop::Body3dDemController&lt; nu &gt;</a>
+, <a class="el" href="classgcop_1_1Controller.html#a8663b606ccd50ea319d57db31f274f05">gcop::Controller&lt; Tx, Tu, Ts, Tc &gt;</a>
+</li>
 <li>setParent()
 : <a class="el" href="classgcop__urdf_1_1Link.html#adec396d13cb820adbcec84adfdd469f8">gcop_urdf::Link</a>
 </li>
@@ -232,6 +251,9 @@
 </li>
 <li>SetVector4d()
 : <a class="el" href="classgcop_1_1Params.html#a1316840f6e07b88600a0e4348b174d0a">gcop::Params</a>
+</li>
+<li>SetVector5d()
+: <a class="el" href="classgcop_1_1Params.html#a02e424db8cc2f61c51b5d05150285258">gcop::Params</a>
 </li>
 <li>SetVector6d()
 : <a class="el" href="classgcop_1_1Params.html#a5465a8e79b110b9b18949a9442c7c9b6">gcop::Params</a>
@@ -279,46 +301,40 @@
 , <a class="el" href="classgcop_1_1System.html#a8795dfb9b929fd292609f87d616db43a">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
 </li>
 <li>Step()
-: <a class="el" href="classgcop_1_1Kinbody2d.html#a7487ef28b559a092aa216086e52ba871">gcop::Kinbody2d</a>
-, <a class="el" href="classgcop_1_1Body3d.html#a20082c26e614aff7ccf32150ffe6f6b3">gcop::Body3d&lt; c &gt;</a>
-, <a class="el" href="classgcop_1_1Kinbody3d.html#a1a553d3c3208f9bf69b22210c64d60da">gcop::Kinbody3d&lt; _nu &gt;</a>
-, <a class="el" href="classgcop_1_1Ins.html#a23c01dc510184c44e148e5198463ee14">gcop::Ins</a>
-, <a class="el" href="classgcop_1_1Rccar.html#ac519b10ac362839bdd0029b21d2f0c2f">gcop::Rccar</a>
-, <a class="el" href="classgcop_1_1Gunicycle.html#aef3f1aa9b4e7b880e615499020ef0e11">gcop::Gunicycle</a>
-, <a class="el" href="classgcop_1_1Bulletrccar.html#aec9c59e183913cba5cadfd8d828a888c">gcop::Bulletrccar</a>
+: <a class="el" href="classgcop_1_1Rccar.html#ac519b10ac362839bdd0029b21d2f0c2f">gcop::Rccar</a>
 , <a class="el" href="classgcop_1_1Bulletrccar1.html#a4ebd64655b6faee9c1598680cd7de523">gcop::Bulletrccar1</a>
-, <a class="el" href="classgcop_1_1Car.html#a12320a1b17eda2e8459a25ed57cf8b94">gcop::Car</a>
-, <a class="el" href="classgcop_1_1Imu.html#a6e03ff1974ad7cc5e076216b58461fea">gcop::Imu</a>
-, <a class="el" href="classgcop_1_1Body2d.html#a3d84a4245807fc8e4aea08d1ff4dc3bf">gcop::Body2d</a>
-, <a class="el" href="classgcop_1_1Rccar1.html#a96a96e6f8fa8a41839f26b91d05592d8">gcop::Rccar1</a>
-, <a class="el" href="classgcop_1_1Mbs.html#a6040d13e279233c29d4dcd6f164bb588">gcop::Mbs</a>
-, <a class="el" href="classgcop_1_1Particle2d.html#a4307eefa7ae6bda5d45afe784c226b2a">gcop::Particle2d</a>
+, <a class="el" href="classgcop_1_1Ins.html#a23c01dc510184c44e148e5198463ee14">gcop::Ins</a>
 , <a class="el" href="classgcop_1_1Point3d.html#ab9d0043e5bd57721da46268d07a7d8c8">gcop::Point3d</a>
-, <a class="el" href="classgcop_1_1Unicycle.html#a47630c7980e57974a8046fbaa1c299c8">gcop::Unicycle</a>
-, <a class="el" href="classgcop_1_1System.html#a64a842aee498b7c1ff4606b7b5697cb8">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1System.html#aa891e93dde0f82e7e24a20e61a0880c7">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
 , <a class="el" href="classgcop_1_1BulletWorld.html#aa69646da38eba5e5376eb4c36df7e107">gcop::BulletWorld</a>
-, <a class="el" href="classgcop_1_1KinRccar.html#a0334cd8a271aa08e6334e9b004607444">gcop::KinRccar</a>
+, <a class="el" href="classgcop_1_1Bulletrccar.html#a752adb4ae79827c9c91a194486708b78">gcop::Bulletrccar</a>
 , <a class="el" href="classgcop_1_1Uuv.html#a803a7863500af817dd5465cbf7e55bb5">gcop::Uuv&lt; c &gt;</a>
 , <a class="el" href="classgcop_1_1System__extstep.html#acc2a4e1c35371cfc4a8d92b807bbb318">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Unicycle.html#a47630c7980e57974a8046fbaa1c299c8">gcop::Unicycle</a>
+, <a class="el" href="classgcop_1_1System.html#a9e463c531f4b6994bc7e4ab45947d921">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Imu.html#a6e03ff1974ad7cc5e076216b58461fea">gcop::Imu</a>
+, <a class="el" href="classgcop_1_1Kinbody3d.html#a1a553d3c3208f9bf69b22210c64d60da">gcop::Kinbody3d&lt; _nu &gt;</a>
+, <a class="el" href="classgcop_1_1Gunicycle.html#aef3f1aa9b4e7b880e615499020ef0e11">gcop::Gunicycle</a>
+, <a class="el" href="classgcop_1_1Car.html#a12320a1b17eda2e8459a25ed57cf8b94">gcop::Car</a>
+, <a class="el" href="classgcop_1_1Bulletrccar.html#aec9c59e183913cba5cadfd8d828a888c">gcop::Bulletrccar</a>
+, <a class="el" href="classgcop_1_1Mbs.html#a6040d13e279233c29d4dcd6f164bb588">gcop::Mbs</a>
+, <a class="el" href="classgcop_1_1System__extstep.html#a3661545e29187a01a7d40e77e76e3eb5">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1System.html#a1512a58d7cc50e5fac561ffeac076d32">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Body3d.html#a20082c26e614aff7ccf32150ffe6f6b3">gcop::Body3d&lt; c &gt;</a>
+, <a class="el" href="classgcop_1_1Rccar1.html#a96a96e6f8fa8a41839f26b91d05592d8">gcop::Rccar1</a>
+, <a class="el" href="classgcop_1_1System__extstep.html#a8cd438e75807976200a49770361acea1">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1System.html#a64a842aee498b7c1ff4606b7b5697cb8">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
+, <a class="el" href="classgcop_1_1Bulletrccar.html#a659dba8de437fa106c5bbfc3ca65a74e">gcop::Bulletrccar</a>
+, <a class="el" href="classgcop_1_1Body2d.html#a26ee3522c49af59a3a64136aaa92093d">gcop::Body2d&lt; c &gt;</a>
+, <a class="el" href="classgcop_1_1Particle2d.html#a4307eefa7ae6bda5d45afe784c226b2a">gcop::Particle2d</a>
+, <a class="el" href="classgcop_1_1KinRccar.html#a0334cd8a271aa08e6334e9b004607444">gcop::KinRccar</a>
+, <a class="el" href="classgcop_1_1Kinbody2d.html#a7487ef28b559a092aa216086e52ba871">gcop::Kinbody2d</a>
 </li>
 <li>Step1()
 : <a class="el" href="classgcop_1_1Bulletrccar1.html#af66181dbc2e7501ae41fa9a9d7ce5bde">gcop::Bulletrccar1</a>
 </li>
 <li>Step3()
 : <a class="el" href="classgcop_1_1Bulletrccar1.html#aa60ad721ef1d0567052bc21f493d2636">gcop::Bulletrccar1</a>
-</li>
-<li>Step_internalinput()
-: <a class="el" href="classgcop_1_1Bulletrccar.html#a97999496cbeba63cba21cc37982f3ab6">gcop::Bulletrccar</a>
-, <a class="el" href="classgcop_1_1System__extstep.html#af72a08b633cd8be40c30c117a88bca06">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1System.html#a69b2bd7ced3f05871ebc14ec269f28aa">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
-</li>
-<li>Step_internaloutput()
-: <a class="el" href="classgcop_1_1System.html#ae5fe65715b84acf2f57898a585882d98">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1System__extstep.html#aac62f562920fc0ca04090904c9b4d397">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
-</li>
-<li>Step_noise()
-: <a class="el" href="classgcop_1_1System.html#aa84b4b35faa655109ab9194d65ae3031">gcop::System&lt; T, _nx, _nu, _np &gt;</a>
-, <a class="el" href="classgcop_1_1Bulletrccar.html#af3753308a1a34752522b0a1218b30d32">gcop::Bulletrccar</a>
 </li>
 <li>SympStep()
 : <a class="el" href="classgcop_1_1Uuv.html#ad4ea40955098a071734a82a9f8e7b66c">gcop::Uuv&lt; c &gt;</a>
@@ -329,8 +345,8 @@
 , <a class="el" href="classgcop_1_1Posegraph2d.html#aaa7e61ec9946df2dcb0d82f766ba6126">gcop::Posegraph2d</a>
 </li>
 <li>Synthesize2()
-: <a class="el" href="classgcop_1_1Body2dGraph.html#a453dbded6121d03f918afca9680d1725">gcop::Body2dGraph</a>
-, <a class="el" href="classgcop_1_1Posegraph2d.html#a66af71917287c99fbdcff4b9d3b338c4">gcop::Posegraph2d</a>
+: <a class="el" href="classgcop_1_1Posegraph2d.html#a66af71917287c99fbdcff4b9d3b338c4">gcop::Posegraph2d</a>
+, <a class="el" href="classgcop_1_1Body2dGraph.html#a453dbded6121d03f918afca9680d1725">gcop::Body2dGraph</a>
 </li>
 <li>Synthesize3()
 : <a class="el" href="classgcop_1_1Body2dGraph.html#a95e15f2e95884eccaa022c490a71cd32">gcop::Body2dGraph</a>
@@ -342,7 +358,10 @@
 : <a class="el" href="classgcop_1_1System__extstep.html#aac42212a20d1741d7b6ec19a6d6d6c28">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>
 </li>
 <li>SystemCe()
-: <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;</a>
+: <a class="el" href="classgcop_1_1SystemCe.html#a391911664302608d903226771f45cff9">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a>
+</li>
+<li>SystemCeView()
+: <a class="el" href="classgcop_1_1SystemCeView.html#a5d439c14a7090c9fb7b248050643a807">gcop::SystemCeView&lt; T, n, c, np, ntp &gt;</a>
 </li>
 <li>SystemView()
 : <a class="el" href="classgcop_1_1SystemView.html#a4c31f16f3168f9b3f79aa1184b8747a3">gcop::SystemView&lt; Tx, Tu &gt;</a>
@@ -352,7 +371,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:59:10 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

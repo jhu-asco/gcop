@@ -80,7 +80,7 @@ Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgcop_1_1Point3dState.html#a6277c6e634878579c6937c00156173c9">q</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">position  <a href="#a6277c6e634878579c6937c00156173c9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgcop_1_1Point3dState.html#a76a73ca0aff5d0d8298fb3a821698798">v</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">position  <a href="#a76a73ca0aff5d0d8298fb3a821698798"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">velocity  <a href="#a76a73ca0aff5d0d8298fb3a821698798"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegcop.html#a9a48fc301dc21867f8353f31858f9dd2">Matrix6d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgcop_1_1Point3dState.html#a5bebf4c2e7dba4be6cf614cda24839bc">P</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">covariance  <a href="#a5bebf4c2e7dba4be6cf614cda24839bc"></a><br/></td></tr>
 </table>
@@ -130,7 +130,7 @@ Public Attributes</h2></td></tr>
 
 <p>position </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Point3dManifold.html#aff9ce8ad02011bf7463eceb8cd3ab943">gcop::Point3dManifold::Lift()</a>, <a class="el" href="classgcop_1_1Point3dGps.html#a1bac8f52afa96f1abd02f8a80bc3fa5f">gcop::Point3dGps&lt; _nu, _np &gt;::operator()()</a>, <a class="el" href="classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4.html#a15660bcaab6ea3f4960dd38343fb1028">gcop::Gps&lt; Point3dState, 6, _nu, _np &gt;::operator()()</a>, <a class="el" href="classgcop_1_1Point3dManifold.html#a8ff6e0a539ed1ebc582f78481487d21e">gcop::Point3dManifold::Retract()</a>, and <a class="el" href="classgcop_1_1Point3d.html#ab9d0043e5bd57721da46268d07a7d8c8">gcop::Point3d::Step()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Point3dManifold.html#aff9ce8ad02011bf7463eceb8cd3ab943">gcop::Point3dManifold::Lift()</a>, <a class="el" href="classgcop_1_1Point3dGps.html#a1bac8f52afa96f1abd02f8a80bc3fa5f">gcop::Point3dGps&lt; _nu, _np &gt;::operator()()</a>, <a class="el" href="classgcop_1_1Gps_3_01Point3dState_00_016_00_01__nu_00_01__np_01_4.html#a15660bcaab6ea3f4960dd38343fb1028">gcop::Gps&lt; Point3dState, 6, _nu, _np &gt;::operator()()</a>, <a class="el" href="classgcop_1_1Point3dView.html#ade3ff43fe8192c8f1b6871b789c68084">gcop::Point3dView::Render()</a>, <a class="el" href="classgcop_1_1Point3dManifold.html#a8ff6e0a539ed1ebc582f78481487d21e">gcop::Point3dManifold::Retract()</a>, <a class="el" href="classgcop_1_1Point3dController.html#a02cf4f10ad5b3e6b30f36bf9eb762d73">gcop::Point3dController::Set()</a>, and <a class="el" href="classgcop_1_1Point3d.html#ab9d0043e5bd57721da46268d07a7d8c8">gcop::Point3d::Step()</a>.</p>
 
 </div>
 </div>
@@ -145,9 +145,9 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>position </p>
+<p>velocity </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Point3dManifold.html#aff9ce8ad02011bf7463eceb8cd3ab943">gcop::Point3dManifold::Lift()</a>, <a class="el" href="classgcop_1_1Point3dManifold.html#a8ff6e0a539ed1ebc582f78481487d21e">gcop::Point3dManifold::Retract()</a>, and <a class="el" href="classgcop_1_1Point3d.html#ab9d0043e5bd57721da46268d07a7d8c8">gcop::Point3d::Step()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Point3dManifold.html#aff9ce8ad02011bf7463eceb8cd3ab943">gcop::Point3dManifold::Lift()</a>, <a class="el" href="classgcop_1_1Point3dManifold.html#a8ff6e0a539ed1ebc582f78481487d21e">gcop::Point3dManifold::Retract()</a>, <a class="el" href="classgcop_1_1Point3dController.html#a02cf4f10ad5b3e6b30f36bf9eb762d73">gcop::Point3dController::Set()</a>, and <a class="el" href="classgcop_1_1Point3d.html#ab9d0043e5bd57721da46268d07a7d8c8">gcop::Point3d::Step()</a>.</p>
 
 </div>
 </div>
@@ -158,7 +158,7 @@ Public Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -1,9 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; M3V2d, _nx, _nu, _np \&gt;" alt="" coords="7,32,244,61"/>
-<area shape="rect" id="node3" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; M3V2d, _nx, _nu, _np, _ng \&gt;" alt="" coords="325,5,605,35"/>
-<area shape="rect" id="node9" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; M3V2d, _nx, _nu, Dynamic, Dynamic \&gt;" alt="" coords="295,59,636,88"/>
-<area shape="rect" id="node5" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; M3V2d, 5, 2, Dynamic, 7 \&gt;" alt="" coords="687,5,956,35"/>
-<area shape="rect" id="node7" href="$classgcop_1_1GunicycleCost.html" title="gcop::GunicycleCost" alt="" coords="1005,5,1149,35"/>
-<area shape="rect" id="node11" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; M3V2d, 5, 2 \&gt;" alt="" coords="724,59,919,88"/>
-<area shape="rect" id="node13" href="$classgcop_1_1AirplaneCost.html" title="gcop::AirplaneCost" alt="" coords="1011,59,1144,88"/>
+<area shape="rect" id="node1" href="$classgcop_1_1Controller.html" title="gcop::Controller\&lt; MbsState, VectorXd \&gt;" alt="" coords="5,5,261,35"/>
+<area shape="rect" id="node3" href="$classgcop_1_1MbsController.html" title="gcop::MbsController" alt="" coords="309,5,448,35"/>
 </map>

@@ -75,7 +75,7 @@ Inheritance diagram for gcop::System&lt; T, _nx, _nu, _np &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgcop_1_1System__inherit__graph.png" border="0" usemap="#gcop_1_1System_3_01T_00_01__nx_00_01__nu_00_01__np_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="gcop_1_1System_3_01T_00_01__nx_00_01__nu_00_01__np_01_4_inherit__map" id="gcop_1_1System_3_01T_00_01__nx_00_01__nu_00_01__np_01_4_inherit__map">
-<area shape="rect" id="node3" href="classgcop_1_1System__extstep.html" title="gcop::System_extstep\&lt; T, _nx, _nu, _np \&gt;" alt="" coords="5,83,277,112"/></map>
+<area shape="rect" id="node3" href="classgcop_1_1Rccar.html" title="gcop::Rccar\&lt; Vector4d, 4, 2 \&gt;" alt="" coords="113,83,311,112"/><area shape="rect" id="node11" href="classgcop_1_1System__extstep.html" title="gcop::System_extstep\&lt; T, _nx, _nu, _np \&gt;" alt="" coords="335,83,607,112"/><area shape="rect" id="node5" href="classgcop_1_1Bulletrccar.html" title="gcop::Bulletrccar" alt="" coords="5,160,125,189"/><area shape="rect" id="node7" href="classgcop_1_1Bulletrccar1.html" title="gcop::Bulletrccar1" alt="" coords="149,160,275,189"/><area shape="rect" id="node9" href="classgcop_1_1Rccar1.html" title="gcop::Rccar1" alt="" coords="299,160,397,189"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for gcop::System&lt; T, _nx, _nu, _np &gt;:</div>
@@ -103,10 +103,11 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a6aebeb8d3bbd4e435458e67ded5e96ef">System</a> (<a class="el" href="classgcop_1_1Manifold.html">Manifold</a>&lt; T, _nx &gt; &amp;<a class="el" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f">X</a>, int nu=0, int <a class="el" href="classgcop_1_1System.html#aff03c11fd37c55c2d0211f724d3a5a1d">np</a>=0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a64a842aee498b7c1ff4606b7b5697cb8">Step</a> (T &amp;xb, double <a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a>, const T &amp;xa, const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A=0, <a class="el" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *B=0, <a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *C=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a69b2bd7ced3f05871ebc14ec269f28aa">Step_internalinput</a> (T &amp;xb, const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A=0, <a class="el" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *B=0, <a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *C=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#ae5fe65715b84acf2f57898a585882d98">Step_internaloutput</a> (const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A=0, <a class="el" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *B=0, <a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *C=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#aa84b4b35faa655109ab9194d65ae3031">Step_noise</a> (T &amp;xb, const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, const <a class="el" href="classgcop_1_1System.html#aa0b302321a2cb03b8268383ca769296f">Vectornd</a> &amp;w, double h, const <a class="el" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A=0, <a class="el" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *B=0, <a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *C=0, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *D=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a3ca52c0a504bd4d4c8b689bbdc77fc4a">reset</a> (const T &amp;<a class="el" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64">x</a>, double <a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a>=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#afd3cb317fda1119a4da2ac5f90c4e23e">Step</a> (T &amp;xb, double <a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a>, const T &amp;xa, const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1System.html#aa0b302321a2cb03b8268383ca769296f">Vectornd</a> &amp;w, const <a class="el" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A=0, <a class="el" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *B=0, <a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *C=0, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *D=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a1512a58d7cc50e5fac561ffeac076d32">Step</a> (T &amp;xb, const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A=0, <a class="el" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *B=0, <a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *C=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a9e463c531f4b6994bc7e4ab45947d921">Step</a> (const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A=0, <a class="el" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *B=0, <a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *C=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#aa891e93dde0f82e7e24a20e61a0880c7">Step</a> (T &amp;xb, const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1System.html#aa0b302321a2cb03b8268383ca769296f">Vectornd</a> &amp;w, const <a class="el" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *A=0, <a class="el" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *B=0, <a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *C=0, <a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *D=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a7030a291051817a06d8102314e17ff4a">Reset</a> (const T &amp;<a class="el" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64">x</a>, double <a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a>=0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#af8b9b866dfe233c61814b016fab2b509">Rec</a> (T &amp;<a class="el" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64">x</a>, double h)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a644e3d41ce527c1b6b12beddbb55733b">print</a> (const T &amp;<a class="el" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64">x</a>) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a1e930eb79b435b07e0b46e533b88412e">Noise</a> (<a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> &amp;Q, double <a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a>, const T &amp;<a class="el" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64">x</a>, const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;u, double dt, const <a class="el" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *p=0)</td></tr>
@@ -121,10 +122,14 @@ Public Attributes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">control Euclidean manifold  <a href="#a0bfa1587c7aaaef13e0186d4c319d675"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Rn.html">Rn</a>&lt; _np &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a216e7363c7d8944556cfd69c6f29ef27">P</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">parameter Euclidean manifold  <a href="#a216e7363c7d8944556cfd69c6f29ef27"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64">x</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal State of the system.  <a href="#abc4e754bb0660213537db1d386793c64"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#aff03c11fd37c55c2d0211f724d3a5a1d">np</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Parameters.  <a href="#aff03c11fd37c55c2d0211f724d3a5a1d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#af31282534c31cd45d0ffadea743f7c19">internalState</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">for some systems (in particular using Bullet) time-stepping is performed using the internal state rather than passing xa and t before each update. Thus in the <a class="el" href="classgcop_1_1System.html#a64a842aee498b7c1ff4606b7b5697cb8">Step()</a> function xa and t are ignored and instead the internal (x, t) are used. This is false by default.  <a href="#af31282534c31cd45d0ffadea743f7c19"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#a9197d70c9b9b41d985e6ace36abcda9e">affineNoise</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">whether the noise w enters the dynamics in an affine way, i.e. as x = f(t, x, u, p) + H(t, x, u, p)*w  <a href="#a9197d70c9b9b41d985e6ace36abcda9e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#abc4e754bb0660213537db1d386793c64">x</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal State of the system.  <a href="#abc4e754bb0660213537db1d386793c64"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1System.html#ac7cfd631eaf7471f529e245b71cda6a1">t</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal time of the system.  <a href="#ac7cfd631eaf7471f529e245b71cda6a1"></a><br/></td></tr>
 </table>
@@ -134,7 +139,7 @@ class gcop::System&lt; T, _nx, _nu, _np &gt;</h3>
 
 <p>Control system interface for dynamic systems on manifolds. Defines the discrete dynamics and any structural/inertial system parameters such as body dimensions, mass matrices, etc...</p>
 <p>Subclasses should provide implementation for the time-stepping Step function and optionally for process noise evolution</p>
-<p>Author: Marin Kobilarov marin(at)jhu.edu </p>
+<p>Authors: Marin Kobilarov marin(at)jhu.edu Gowtham Garimella </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="aad907d3930faf073b0a705bb11c1916f"></a><!-- doxytag: member="gcop::System::Matrixcd" ref="aad907d3930faf073b0a705bb11c1916f" args="" -->
 <div class="memitem">
@@ -268,7 +273,7 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">gcop::Body3d&lt; c &gt;</a>, <a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">gcop::Body3d&lt; 4 &gt;</a>, and <a class="el" href="classgcop_1_1System__extstep.html#ae881ee93ca2d796268ab7e6070c2f0c6">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classgcop_1_1Body2d.html#a19d47b484170e6f41bf7716ff7223c81">gcop::Body2d&lt; c &gt;</a>, <a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">gcop::Body3d&lt; c &gt;</a>, <a class="el" href="classgcop_1_1Body3d.html#a9babbb234388f000d9dbe86daebb0dc7">gcop::Body3d&lt; 4 &gt;</a>, and <a class="el" href="classgcop_1_1System__extstep.html#ae881ee93ca2d796268ab7e6070c2f0c6">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -345,6 +350,7 @@ template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
     <tr><td class="paramname">X</td><td>state manifold </td></tr>
     <tr><td class="paramname">nu</td><td>number of control inputs </td></tr>
     <tr><td class="paramname">np</td><td>number of parameters </td></tr>
+    <tr><td class="paramname">nw</td><td>number of noise parameters </td></tr>
   </table>
   </dd>
 </dl>
@@ -589,14 +595,14 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 
 </div>
 </div>
-<a class="anchor" id="a3ca52c0a504bd4d4c8b689bbdc77fc4a"></a><!-- doxytag: member="gcop::System::reset" ref="a3ca52c0a504bd4d4c8b689bbdc77fc4a" args="(const T &amp;x, double t=0)" -->
+<a class="anchor" id="a7030a291051817a06d8102314e17ff4a"></a><!-- doxytag: member="gcop::System::Reset" ref="a7030a291051817a06d8102314e17ff4a" args="(const T &amp;x, double t=0)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#a3ca52c0a504bd4d4c8b689bbdc77fc4a">reset</a> </td>
+          <td class="memname">bool <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#a7030a291051817a06d8102314e17ff4a">Reset</a> </td>
           <td>(</td>
           <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
@@ -624,7 +630,7 @@ template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classgcop_1_1Bulletrccar.html#a1383e436d152eb5adfcf4f4b9fc2c0ef">gcop::Bulletrccar</a>, <a class="el" href="classgcop_1_1System__extstep.html#aa59da693a1e17cdac6aad9629cbf1805">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>, and <a class="el" href="classgcop_1_1Bulletrccar1.html#ad21aac8ae0163daa9e343b8331e12582">gcop::Bulletrccar1</a>.</p>
+<p>Reimplemented in <a class="el" href="classgcop_1_1System__extstep.html#a0d6a50775d5622ce87bc5e13fc5fa460">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -747,7 +753,7 @@ template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
     <tr><td class="paramname">t</td><td>current time </td></tr>
     <tr><td class="paramname">xa</td><td>current state </td></tr>
     <tr><td class="paramname">u</td><td>current control </td></tr>
-    <tr><td class="paramname">h</td><td>current time-step </td></tr>
+    <tr><td class="paramname">h</td><td>step size </td></tr>
     <tr><td class="paramname">p</td><td>static parameters (optional) </td></tr>
     <tr><td class="paramname">A</td><td>jacobian w.r.t. x (optional) </td></tr>
     <tr><td class="paramname">B</td><td>jacobian w.r.t. u (optional) </td></tr>
@@ -758,14 +764,114 @@ template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a69b2bd7ced3f05871ebc14ec269f28aa"></a><!-- doxytag: member="gcop::System::Step_internalinput" ref="a69b2bd7ced3f05871ebc14ec269f28aa" args="(T &amp;xb, const Vectorcd &amp;u, double h, const Vectormd *p=0, Matrixnd *A=0, Matrixncd *B=0, Matrixnmd *C=0)" -->
+<a class="anchor" id="afd3cb317fda1119a4da2ac5f90c4e23e"></a><!-- doxytag: member="gcop::System::Step" ref="afd3cb317fda1119a4da2ac5f90c4e23e" args="(T &amp;xb, double t, const T &amp;xa, const Vectorcd &amp;u, double h, const Vectornd &amp;w, const Vectormd *p, Matrixnd *A=0, Matrixncd *B=0, Matrixnmd *C=0, Matrixnd *D=0)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#a69b2bd7ced3f05871ebc14ec269f28aa">Step_internalinput</a> </td>
+          <td class="memname">double <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#a64a842aee498b7c1ff4606b7b5697cb8">Step</a> </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>xb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>xa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1System.html#aa0b302321a2cb03b8268383ca769296f">Vectornd</a> &amp;&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1System.html#af8e1c59f45078928d376cb9d9a4c795f">Vectormd</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *&#160;</td>
+          <td class="paramname"><em>A</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1System.html#a43728aa8a7d08fb7ad4b0f2f191776d5">Matrixncd</a> *&#160;</td>
+          <td class="paramname"><em>B</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1System.html#a059ef46b97a4e4fb1c6028693ade291e">Matrixnmd</a> *&#160;</td>
+          <td class="paramname"><em>C</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1System.html#a7aea3ecf9b96d3e973db5fa227265c94">Matrixnd</a> *&#160;</td>
+          <td class="paramname"><em>D</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>This is the master (the most general) Step function performing a discrete dynamics update. The function computes the next system state xb given current state xa, time t, applied forces u, parameters p, and noise w. This function calls the deterministic Step function as well as the NoiseMatrix function and combines the output to update the state: xb = f(t, xa, u, p) + H(t, xa, u, p)*w</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xb</td><td>resulting state </td></tr>
+    <tr><td class="paramname">t</td><td>current time </td></tr>
+    <tr><td class="paramname">xa</td><td>current state </td></tr>
+    <tr><td class="paramname">u</td><td>current control </td></tr>
+    <tr><td class="paramname">h</td><td>step size </td></tr>
+    <tr><td class="paramname">p</td><td>static parameters (optional, set to 0 to ignore) </td></tr>
+    <tr><td class="paramname">w</td><td>noise </td></tr>
+    <tr><td class="paramname">A</td><td>jacobian w.r.t. x (optional) </td></tr>
+    <tr><td class="paramname">B</td><td>jacobian w.r.t. u (optional) </td></tr>
+    <tr><td class="paramname">C</td><td>jacobian w.r.t. p (optional) </td></tr>
+    <tr><td class="paramname">D</td><td>jacobian w.r.t. w (optional) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a1512a58d7cc50e5fac561ffeac076d32"></a><!-- doxytag: member="gcop::System::Step" ref="a1512a58d7cc50e5fac561ffeac076d32" args="(T &amp;xb, const Vectorcd &amp;u, double h, const Vectormd *p=0, Matrixnd *A=0, Matrixncd *B=0, Matrixnmd *C=0)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#a64a842aee498b7c1ff4606b7b5697cb8">Step</a> </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>xb</em>, </td>
@@ -820,7 +926,7 @@ template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
     <tr><td class="paramname">xb</td><td>resulting state </td></tr>
     <tr><td class="paramname">t</td><td>current time </td></tr>
     <tr><td class="paramname">u</td><td>current control </td></tr>
-    <tr><td class="paramname">h</td><td>current time-step </td></tr>
+    <tr><td class="paramname">h</td><td>step size </td></tr>
     <tr><td class="paramname">p</td><td>static parameters (optional) </td></tr>
     <tr><td class="paramname">A</td><td>jacobian w.r.t. x (optional) </td></tr>
     <tr><td class="paramname">B</td><td>jacobian w.r.t. u (optional) </td></tr>
@@ -829,18 +935,18 @@ template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classgcop_1_1System__extstep.html#af72a08b633cd8be40c30c117a88bca06">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classgcop_1_1System__extstep.html#a8cd438e75807976200a49770361acea1">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae5fe65715b84acf2f57898a585882d98"></a><!-- doxytag: member="gcop::System::Step_internaloutput" ref="ae5fe65715b84acf2f57898a585882d98" args="(const Vectorcd &amp;u, double h, const Vectormd *p=0, Matrixnd *A=0, Matrixncd *B=0, Matrixnmd *C=0)" -->
+<a class="anchor" id="a9e463c531f4b6994bc7e4ab45947d921"></a><!-- doxytag: member="gcop::System::Step" ref="a9e463c531f4b6994bc7e4ab45947d921" args="(const Vectorcd &amp;u, double h, const Vectormd *p=0, Matrixnd *A=0, Matrixncd *B=0, Matrixnmd *C=0)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , int _nx, int _nu, int _np&gt; </div>
+template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#ae5fe65715b84acf2f57898a585882d98">Step_internaloutput</a> </td>
+          <td class="memname">double <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#a64a842aee498b7c1ff4606b7b5697cb8">Step</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classgcop_1_1System.html#a66a7faf5eec2de07e4d9d97540e1e095">Vectorcd</a> &amp;&#160;</td>
           <td class="paramname"><em>u</em>, </td>
@@ -888,7 +994,7 @@ template&lt;typename T , int _nx, int _nu, int _np&gt; </div>
   <table class="params">
     <tr><td class="paramname">t</td><td>current time </td></tr>
     <tr><td class="paramname">u</td><td>current control </td></tr>
-    <tr><td class="paramname">h</td><td>current time-step </td></tr>
+    <tr><td class="paramname">h</td><td>step size </td></tr>
     <tr><td class="paramname">p</td><td>static parameters (optional) </td></tr>
     <tr><td class="paramname">A</td><td>jacobian w.r.t. x (optional) </td></tr>
     <tr><td class="paramname">B</td><td>jacobian w.r.t. u (optional) </td></tr>
@@ -897,18 +1003,18 @@ template&lt;typename T , int _nx, int _nu, int _np&gt; </div>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classgcop_1_1System__extstep.html#aac62f562920fc0ca04090904c9b4d397">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classgcop_1_1System__extstep.html#a3661545e29187a01a7d40e77e76e3eb5">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa84b4b35faa655109ab9194d65ae3031"></a><!-- doxytag: member="gcop::System::Step_noise" ref="aa84b4b35faa655109ab9194d65ae3031" args="(T &amp;xb, const Vectorcd &amp;u, const Vectornd &amp;w, double h, const Vectormd *p=0, Matrixnd *A=0, Matrixncd *B=0, Matrixnmd *C=0, Matrixnd *D=0)" -->
+<a class="anchor" id="aa891e93dde0f82e7e24a20e61a0880c7"></a><!-- doxytag: member="gcop::System::Step" ref="aa891e93dde0f82e7e24a20e61a0880c7" args="(T &amp;xb, const Vectorcd &amp;u, double h, const Vectornd &amp;w, const Vectormd *p=0, Matrixnd *A=0, Matrixncd *B=0, Matrixnmd *C=0, Matrixnd *D=0)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#aa84b4b35faa655109ab9194d65ae3031">Step_noise</a> </td>
+          <td class="memname">double <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#a64a842aee498b7c1ff4606b7b5697cb8">Step</a> </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>xb</em>, </td>
@@ -922,14 +1028,14 @@ template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classgcop_1_1System.html#aa0b302321a2cb03b8268383ca769296f">Vectornd</a> &amp;&#160;</td>
-          <td class="paramname"><em>w</em>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>h</em>, </td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1System.html#aa0b302321a2cb03b8268383ca769296f">Vectornd</a> &amp;&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -969,12 +1075,12 @@ template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Additional step function with input noise of the same dimension as state x and propagates by one dynamic step Noise in the system is modeled as x[i+1] = f(xi,ui,ti,p) + noisematrix(xi,ui,ti,p)*wi The noise matrix is implemented as a virtual function and by default is just the identity </p>
+<p>A version of most general step function with noise and internal state </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">xb</td><td>resulting state </td></tr>
     <tr><td class="paramname">u</td><td>current control </td></tr>
-    <tr><td class="paramname">h</td><td>current time-step </td></tr>
+    <tr><td class="paramname">h</td><td>step size </td></tr>
     <tr><td class="paramname">w</td><td>noise of same size as state </td></tr>
     <tr><td class="paramname">p</td><td>static parameters (optional) </td></tr>
     <tr><td class="paramname">A</td><td>jacobian w.r.t. x (optional) </td></tr>
@@ -988,6 +1094,40 @@ template&lt;typename T, int _nx, int _nu, int _np&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a9197d70c9b9b41d985e6ace36abcda9e"></a><!-- doxytag: member="gcop::System::affineNoise" ref="a9197d70c9b9b41d985e6ace36abcda9e" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#a9197d70c9b9b41d985e6ace36abcda9e">affineNoise</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>whether the noise w enters the dynamics in an affine way, i.e. as x = f(t, x, u, p) + H(t, x, u, p)*w </p>
+
+</div>
+</div>
+<a class="anchor" id="af31282534c31cd45d0ffadea743f7c19"></a><!-- doxytag: member="gcop::System::internalState" ref="af31282534c31cd45d0ffadea743f7c19" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgcop_1_1System.html">gcop::System</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1System.html#af31282534c31cd45d0ffadea743f7c19">internalState</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>for some systems (in particular using Bullet) time-stepping is performed using the internal state rather than passing xa and t before each update. Thus in the <a class="el" href="classgcop_1_1System.html#a64a842aee498b7c1ff4606b7b5697cb8">Step()</a> function xa and t are ignored and instead the internal (x, t) are used. This is false by default. </p>
+
+</div>
+</div>
 <a class="anchor" id="aff03c11fd37c55c2d0211f724d3a5a1d"></a><!-- doxytag: member="gcop::System::np" ref="aff03c11fd37c55c2d0211f724d3a5a1d" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -1039,7 +1179,7 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 
 <p>Internal time of the system. </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1System__extstep.html#aa59da693a1e17cdac6aad9629cbf1805">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;::reset()</a>, <a class="el" href="classgcop_1_1System__extstep.html#af72a08b633cd8be40c30c117a88bca06">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;::Step_internalinput()</a>, and <a class="el" href="classgcop_1_1System__extstep.html#aac62f562920fc0ca04090904c9b4d397">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;::Step_internaloutput()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Bulletrccar1.html#ad21aac8ae0163daa9e343b8331e12582">gcop::Bulletrccar1::reset()</a>, <a class="el" href="classgcop_1_1System__extstep.html#a0d6a50775d5622ce87bc5e13fc5fa460">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;::Reset()</a>, <a class="el" href="classgcop_1_1Bulletrccar.html#a55bc36b89d04853fc7675f87bbab5d10">gcop::Bulletrccar::Reset()</a>, <a class="el" href="classgcop_1_1System__extstep.html#a3661545e29187a01a7d40e77e76e3eb5">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;::Step()</a>, <a class="el" href="classgcop_1_1Bulletrccar.html#a659dba8de437fa106c5bbfc3ca65a74e">gcop::Bulletrccar::Step()</a>, and <a class="el" href="classgcop_1_1Bulletrccar1.html#af66181dbc2e7501ae41fa9a9d7ce5bde">gcop::Bulletrccar1::Step1()</a>.</p>
 
 </div>
 </div>
@@ -1058,7 +1198,7 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 
 <p>control Euclidean manifold </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Ddp.html#a33ef7a1d15e7e9b1c83d169aadb1c3ad">gcop::Ddp&lt; T, nx, nu, np &gt;::Ddp()</a>, <a class="el" href="classgcop_1_1Docp.html#ad6f2649ceeace2480fa9a1462be84aee">gcop::Docp&lt; T, nx, nu, np &gt;::Docp()</a>, <a class="el" href="classgcop_1_1LqCost.html#aea2900eb59a0bfc0ff06bdcd13c31e96">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;::LqCost()</a>, <a class="el" href="classgcop_1_1MultiCost.html#a6ca1de019b312c62a78455dee67245a8">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;::MultiCost()</a>, <a class="el" href="classgcop_1_1PDdp.html#a6a88bae3de5b13c958562e5878ccbc9c">gcop::PDdp&lt; T, n, c, np &gt;::PDdp()</a>, <a class="el" href="classgcop_1_1SDdp.html#ac2a58ba91e86d83a204eb54049f659f4">gcop::SDdp&lt; T, nx, nu, np &gt;::SDdp()</a>, and <a class="el" href="classgcop_1_1SystemCe.html#a09d6a8c0e087638bdbdc538648d19a92">gcop::SystemCe&lt; T, n, c, np, ntp &gt;::SystemCe()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Bulletrccar.html#a6899571515fbd4d0e8f6c0cb379b0a04">gcop::Bulletrccar::Bulletrccar()</a>, <a class="el" href="classgcop_1_1Bulletrccar1.html#a102df2f8fd111af7719f54235b4b33c9">gcop::Bulletrccar1::Bulletrccar1()</a>, <a class="el" href="classgcop_1_1Ddp.html#a33ef7a1d15e7e9b1c83d169aadb1c3ad">gcop::Ddp&lt; T, nx, nu, np &gt;::Ddp()</a>, <a class="el" href="classgcop_1_1Docp.html#ad6f2649ceeace2480fa9a1462be84aee">gcop::Docp&lt; T, nx, nu, np &gt;::Docp()</a>, <a class="el" href="classgcop_1_1LqCost.html#aea2900eb59a0bfc0ff06bdcd13c31e96">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;::LqCost()</a>, <a class="el" href="classgcop_1_1MultiCost.html#a6ca1de019b312c62a78455dee67245a8">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;::MultiCost()</a>, <a class="el" href="classgcop_1_1PDdp.html#a6a88bae3de5b13c958562e5878ccbc9c">gcop::PDdp&lt; T, n, c, np &gt;::PDdp()</a>, <a class="el" href="classgcop_1_1Rccar.html#af9b889296a342bed93e9814ab54be766">gcop::Rccar::Rccar()</a>, <a class="el" href="classgcop_1_1Rccar1.html#a7f141a77aa030c53614ffb8d1759ad0c">gcop::Rccar1::Rccar1()</a>, <a class="el" href="classgcop_1_1SDdp.html#ac2a58ba91e86d83a204eb54049f659f4">gcop::SDdp&lt; T, nx, nu, np &gt;::SDdp()</a>, and <a class="el" href="classgcop_1_1SystemCe.html#aafa764902c1856179960ced90cbf2804">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;::SystemCe()</a>.</p>
 
 </div>
 </div>
@@ -1077,7 +1217,7 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 
 <p>state manifold </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1ConstraintCost.html#a673ce803b8413bcacc77e455199ec8fc">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;::ConstraintCost()</a>, <a class="el" href="classgcop_1_1Ddp.html#a33ef7a1d15e7e9b1c83d169aadb1c3ad">gcop::Ddp&lt; T, nx, nu, np &gt;::Ddp()</a>, <a class="el" href="classgcop_1_1Docp.html#ad6f2649ceeace2480fa9a1462be84aee">gcop::Docp&lt; T, nx, nu, np &gt;::Docp()</a>, <a class="el" href="classgcop_1_1Doep.html#a1d6e949435daa7c038e094065ecdcc2b">gcop::Doep&lt; T, nx, nu, np, Tz, nz, T1, nx1 &gt;::Doep()</a>, <a class="el" href="classgcop_1_1KalmanPredictor.html#a88ab66ae9ecf93000c0eba1757989e3f">gcop::KalmanPredictor&lt; T, _nx, _nu, _np &gt;::KalmanPredictor()</a>, <a class="el" href="classgcop_1_1LqCost.html#aea2900eb59a0bfc0ff06bdcd13c31e96">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;::LqCost()</a>, <a class="el" href="classgcop_1_1LqSensorCost.html#ad18ffa9630c50bc0880ae5b603ced4aa">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;::LqSensorCost()</a>, <a class="el" href="classgcop_1_1MultiCost.html#a6ca1de019b312c62a78455dee67245a8">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;::MultiCost()</a>, <a class="el" href="classgcop_1_1PDdp.html#a6a88bae3de5b13c958562e5878ccbc9c">gcop::PDdp&lt; T, n, c, np &gt;::PDdp()</a>, <a class="el" href="classgcop_1_1SDdp.html#ac2a58ba91e86d83a204eb54049f659f4">gcop::SDdp&lt; T, nx, nu, np &gt;::SDdp()</a>, <a class="el" href="classgcop_1_1UnscentedCorrector.html#a975c87d8d08cd10ba8346e52285038d2">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;::UnscentedCorrector()</a>, and <a class="el" href="classgcop_1_1UnscentedPredictor.html#aed7369894fd714f371acd798dc4c32a0">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;::UnscentedPredictor()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1ConstraintCost.html#a673ce803b8413bcacc77e455199ec8fc">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;::ConstraintCost()</a>, <a class="el" href="classgcop_1_1ControllerTparam.html#a37900b188e468f1990761ba6338e3d87">gcop::ControllerTparam&lt; Tx, nx, nu, np, _ntp, Tc &gt;::ControllerTparam()</a>, <a class="el" href="classgcop_1_1Ddp.html#a33ef7a1d15e7e9b1c83d169aadb1c3ad">gcop::Ddp&lt; T, nx, nu, np &gt;::Ddp()</a>, <a class="el" href="classgcop_1_1Docp.html#ad6f2649ceeace2480fa9a1462be84aee">gcop::Docp&lt; T, nx, nu, np &gt;::Docp()</a>, <a class="el" href="classgcop_1_1Doep.html#a1d6e949435daa7c038e094065ecdcc2b">gcop::Doep&lt; T, nx, nu, np, Tz, nz, T1, nx1 &gt;::Doep()</a>, <a class="el" href="classgcop_1_1KalmanPredictor.html#a88ab66ae9ecf93000c0eba1757989e3f">gcop::KalmanPredictor&lt; T, _nx, _nu, _np &gt;::KalmanPredictor()</a>, <a class="el" href="classgcop_1_1LqCost.html#aea2900eb59a0bfc0ff06bdcd13c31e96">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;::LqCost()</a>, <a class="el" href="classgcop_1_1LqSensorCost.html#ad18ffa9630c50bc0880ae5b603ced4aa">gcop::LqSensorCost&lt; T, _nx, _nu, _np, _ng, Tz, _nz &gt;::LqSensorCost()</a>, <a class="el" href="classgcop_1_1MultiCost.html#a6ca1de019b312c62a78455dee67245a8">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;::MultiCost()</a>, <a class="el" href="classgcop_1_1PDdp.html#a6a88bae3de5b13c958562e5878ccbc9c">gcop::PDdp&lt; T, n, c, np &gt;::PDdp()</a>, <a class="el" href="classgcop_1_1SDdp.html#ac2a58ba91e86d83a204eb54049f659f4">gcop::SDdp&lt; T, nx, nu, np &gt;::SDdp()</a>, <a class="el" href="classgcop_1_1UnscentedCorrector.html#a975c87d8d08cd10ba8346e52285038d2">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;::UnscentedCorrector()</a>, and <a class="el" href="classgcop_1_1UnscentedPredictor.html#aed7369894fd714f371acd798dc4c32a0">gcop::UnscentedPredictor&lt; T, _nx, _nu, _np &gt;::UnscentedPredictor()</a>.</p>
 
 </div>
 </div>
@@ -1096,7 +1236,7 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 
 <p>Internal State of the system. </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1System__extstep.html#aa59da693a1e17cdac6aad9629cbf1805">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;::reset()</a>, <a class="el" href="classgcop_1_1System__extstep.html#af72a08b633cd8be40c30c117a88bca06">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;::Step_internalinput()</a>, and <a class="el" href="classgcop_1_1System__extstep.html#aac62f562920fc0ca04090904c9b4d397">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;::Step_internaloutput()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Rccar.html#a647c6687503732f092c3d232941f63d9">gcop::Rccar::FlatToStateAndControls()</a>, <a class="el" href="classgcop_1_1Bulletrccar1.html#ad21aac8ae0163daa9e343b8331e12582">gcop::Bulletrccar1::reset()</a>, <a class="el" href="classgcop_1_1System__extstep.html#a0d6a50775d5622ce87bc5e13fc5fa460">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;::Reset()</a>, <a class="el" href="classgcop_1_1Bulletrccar.html#a55bc36b89d04853fc7675f87bbab5d10">gcop::Bulletrccar::Reset()</a>, <a class="el" href="classgcop_1_1Bulletrccar.html#a35056ee070882c25cc1fd1b4e3a9ee9c">gcop::Bulletrccar::setinitialstate()</a>, <a class="el" href="classgcop_1_1System__extstep.html#a3661545e29187a01a7d40e77e76e3eb5">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;::Step()</a>, <a class="el" href="classgcop_1_1Bulletrccar.html#a659dba8de437fa106c5bbfc3ca65a74e">gcop::Bulletrccar::Step()</a>, and <a class="el" href="classgcop_1_1Bulletrccar1.html#af66181dbc2e7501ae41fa9a9d7ce5bde">gcop::Bulletrccar1::Step1()</a>.</p>
 
 </div>
 </div>
@@ -1107,7 +1247,7 @@ template&lt;typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic, int _np
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -83,9 +83,29 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classgcop_1_1Shell.html">gcop::Shell&lt; T, _nx, _nu, _np &gt;</a></li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1Controller.html">gcop::Controller&lt; Tx, Tu &gt;</a></li>
+<li><a class="el" href="classgcop_1_1Controller.html">gcop::Controller&lt; Tx, Tu, Ts, Tc &gt;</a></li>
+<li><a class="el" href="classgcop_1_1Controller.html">gcop::Controller&lt; Body3dState, Matrix&lt; double, c, 1 &gt; &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Body3dController.html">gcop::Body3dController&lt; c &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="classgcop_1_1Controller.html">gcop::Controller&lt; Body3dState, Matrix&lt; double, nu, 1 &gt;, Matrix&lt; double, 5, 1 &gt;, Body3dState &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Body3dAvoidController.html">gcop::Body3dAvoidController&lt; nu &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="classgcop_1_1Controller.html">gcop::Controller&lt; Body3dState, Matrix&lt; double, nu, 1 &gt;, Vector5d, Body3dState &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Body3dDemController.html">gcop::Body3dDemController&lt; nu &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="classgcop_1_1Controller.html">gcop::Controller&lt; Body3dState, Vector6d &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1GavoidController.html">gcop::GavoidController</a></li>
+</ul>
+</li>
 <li><a class="el" href="classgcop_1_1Controller.html">gcop::Controller&lt; MbsState, VectorXd &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1MbsController.html">gcop::MbsController</a></li>
+</ul>
+</li>
+<li><a class="el" href="classgcop_1_1Controller.html">gcop::Controller&lt; Point3dState, Vector3d &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Point3dController.html">gcop::Point3dController</a></li>
 </ul>
 </li>
 <li><a class="el" href="classgcop_1_1Corrector.html">gcop::Corrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a><ul>
@@ -93,26 +113,32 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classgcop_1_1UnscentedCorrector.html">gcop::UnscentedCorrector&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a></li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1ConstraintCost.html">gcop::ConstraintCost&lt; T, _nx, _nu, _np, 1 &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1PqpDemCost.html">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a></li>
+<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; T, _nx, _nu, _np, Tc &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, Tc &gt;</a></li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1ConstraintCost.html">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a></li>
-<li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a></li>
+<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; Body2dState, 6, 3 &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Body2dSlamCost.html">gcop::Body2dSlamCost</a></li>
+<li><a class="el" href="classgcop_1_1Body2dTrackCost.html">gcop::Body2dTrackCost</a></li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a></li>
+<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; Body2dState, _nx, _nu, _np, Body2dState &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; Body2dState, _nx, _nu, _np, _ng, Body2dState &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; Body2dState, 6, c, Dynamic, 9 &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Body2dCost.html">gcop::Body2dCost&lt; c &gt;</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; Body3dState, 12, 6 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Body3dTrackCost.html">gcop::Body3dTrackCost</a></li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; Body3dState, _nx, _nu, _np &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; Body3dState, _nx, _nu, Dynamic, Dynamic &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; Body3dState, 12, c &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; Body3dState, _nx, _nu, _np, Body3dState &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; Body3dState, _nx, _nu, _np, _ng, Body3dState &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; Body3dState, 12, c, Dynamic, 6 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Body3dCost.html">gcop::Body3dCost&lt; c &gt;</a></li>
 </ul>
 </li>
@@ -120,32 +146,17 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 </li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; M3V2d, _nx, _nu, _np &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; M3V2d, _nx, _nu, _np, _ng &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; M3V2d, _nx, _nu, _np, M3V2d &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; M3V2d, _nx, _nu, _np, _ng, M3V2d &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; M3V2d, 5, 2, Dynamic, 7 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1GunicycleCost.html">gcop::GunicycleCost</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; M3V2d, _nx, _nu, Dynamic, Dynamic &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; M3V2d, _nx, _nu, Dynamic, Dynamic, M3V2d &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; M3V2d, 5, 2 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1AirplaneCost.html">gcop::AirplaneCost</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; M3V3d, 6, 3 &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1Body2dSlamCost.html">gcop::Body2dSlamCost</a></li>
-<li><a class="el" href="classgcop_1_1Body2dTrackCost.html">gcop::Body2dTrackCost</a></li>
-</ul>
-</li>
-<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; M3V3d, _nx, _nu, _np &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; M3V3d, _nx, _nu, _np, _ng &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; M3V3d, 6, 3, Dynamic, 9 &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1Body2dCost.html">gcop::Body2dCost</a></li>
 </ul>
 </li>
 </ul>
@@ -165,8 +176,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classgcop_1_1KinbodyProjTrackCost.html">gcop::KinbodyProjTrackCost&lt; _nu &gt;</a></li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; Matrix4d, _nx, _nu, _np &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; Matrix4d, _nx, _nu, Dynamic, Dynamic &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; Matrix4d, _nx, _nu, _np, Matrix4d &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; Matrix4d, _nx, _nu, Dynamic, Dynamic, Matrix4d &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; Matrix4d, 6, _nu &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Kinbody3dCost.html">gcop::Kinbody3dCost&lt; _nu &gt;</a></li>
 </ul>
@@ -175,8 +186,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 </li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; Matrix&lt; double, _nx, 1 &gt;, _nx, _nu, _np &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; Matrix&lt; double, _nx, 1 &gt;, _nx, _nu, _np, _ng &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; Matrix&lt; double, _nx, 1 &gt;, _nx, _nu, _np, Matrix&lt; double, _nx, 1 &gt; &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; Matrix&lt; double, _nx, 1 &gt;, _nx, _nu, _np, _ng, Matrix&lt; double, _nx, 1 &gt; &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; Matrix&lt; double, _nx, 1 &gt;, _nx, _nu, _np, _ng &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1RnLqCost.html">gcop::RnLqCost&lt; _nx, _nu, _np, _ng &gt;</a></li>
 </ul>
@@ -185,8 +196,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 </li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; MbsState&lt; nb &gt;, _nx, _nu, _np &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; MbsState&lt; nb &gt;, _nx, _nu, Dynamic, Dynamic &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; MbsState&lt; nb &gt;, _nx, _nu, _np, MbsState&lt; nb &gt; &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; MbsState&lt; nb &gt;, _nx, _nu, Dynamic, Dynamic, MbsState&lt; nb &gt; &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; MbsState&lt; nb &gt;, MBS_DIM(nb), c &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1MbsLqCost.html">gcop::MbsLqCost&lt; nb, c &gt;</a></li>
 </ul>
@@ -195,7 +206,27 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 </li>
 </ul>
 </li>
+<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; T, _nx, _nu, _np, T &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1ConstraintCost.html">gcop::ConstraintCost&lt; T, _nx, _nu, _np, 1 &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1PqpDemCost.html">gcop::PqpDemCost&lt; T, _nx, _nu, _np &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="classgcop_1_1ConstraintCost.html">gcop::ConstraintCost&lt; T, _nx, _nu, _np, _ng &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="classgcop_1_1LsCost.html">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="el" href="classgcop_1_1Cost.html">gcop::Cost&lt; T, nx, nu, np &gt;</a></li>
+<li><a class="el" href="classgcop_1_1Creator.html">gcop::Creator&lt; T &gt;</a></li>
 <li><a class="el" href="classgcop_1_1Dem.html">gcop::Dem</a></li>
 <li><a class="el" href="classgcop_1_1Docp.html">gcop::Docp&lt; T, nx, nu, np &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Ddp.html">gcop::Ddp&lt; T, n, c, np &gt;</a><ul>
@@ -225,8 +256,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classgcop_1_1Filter.html">gcop::Filter&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a></li>
 <li><a class="el" href="classgcop_1_1Flat.html">gcop::Flat&lt; T, nx, nu, np, nz, _ny &gt;</a></li>
 <li><a class="el" href="classgcop_1_1Force.html">gcop::Force&lt; Tx, _l, _n, _c &gt;</a></li>
-<li><a class="el" href="classgcop_1_1Force.html">gcop::Force&lt; M3V3d, 3, 6, 3 &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1Body2dForce.html">gcop::Body2dForce</a></li>
+<li><a class="el" href="classgcop_1_1Force.html">gcop::Force&lt; Body2dState, 3, 6, c &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Body2dForce.html">gcop::Body2dForce&lt; c &gt;</a></li>
 </ul>
 </li>
 <li><a class="el" href="structgcop_1_1Autodiff_1_1Fu.html">gcop::Autodiff&lt; T, _n, _c &gt;::Fu</a></li>
@@ -251,8 +282,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="structgcop_1_1ImuState.html">gcop::ImuState</a></li>
 <li><a class="el" href="classgcop__urdf_1_1Inertial.html">gcop_urdf::Inertial</a></li>
 <li><a class="el" href="structgcop_1_1InsState.html">gcop::InsState</a></li>
-<li><a class="el" href="classgcop_1_1Joint.html">gcop::Joint</a></li>
 <li><a class="el" href="classgcop__urdf_1_1Joint.html">gcop_urdf::Joint</a></li>
+<li><a class="el" href="classgcop_1_1Joint.html">gcop::Joint</a></li>
 <li><a class="el" href="classgcop__urdf_1_1JointCalibration.html">gcop_urdf::JointCalibration</a></li>
 <li><a class="el" href="classgcop__urdf_1_1JointDynamics.html">gcop_urdf::JointDynamics</a></li>
 <li><a class="el" href="classgcop__urdf_1_1JointLimits.html">gcop_urdf::JointLimits</a></li>
@@ -269,6 +300,11 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classgcop_1_1AirmManifold.html">gcop::AirmManifold</a></li>
 </ul>
 </li>
+<li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; Body2dState, 6 &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Body2dManifold.html">gcop::Body2dManifold</a></li>
+</ul>
+</li>
+<li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; Body2dState, _nx &gt;</a></li>
 <li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; Body3dState, 12 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Body3dManifold.html">gcop::Body3dManifold</a></li>
 </ul>
@@ -289,11 +325,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 </ul>
 </li>
 <li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; M3V2d, _nx &gt;</a></li>
-<li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; M3V3d, 6 &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1Body2dManifold.html">gcop::Body2dManifold</a></li>
-</ul>
-</li>
-<li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; M3V3d, _nx &gt;</a></li>
 <li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; Matrix3d, 3 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Kinbody2dManifold.html">gcop::Kinbody2dManifold</a></li>
 </ul>
@@ -340,6 +371,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 </li>
 <li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; Point3dState, _nx &gt;</a></li>
 <li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; T, _nx &gt;</a></li>
+<li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; Tx, _nx &gt;</a></li>
 <li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; Tz, _nz &gt;</a></li>
 <li><a class="el" href="classgcop_1_1Manifold.html">gcop::Manifold&lt; UuvState, 12 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1UuvManifold.html">gcop::UuvManifold</a></li>
@@ -371,8 +403,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classgcop_1_1Quat.html">gcop::Quat</a></li>
 <li><a class="el" href="structgcop_1_1Params_1_1RemoveDelimiter.html">gcop::Params::RemoveDelimiter</a></li>
 <li><a class="el" href="classgcop__urdf_1_1Rotation.html">gcop_urdf::Rotation</a></li>
-<li><a class="el" href="classgcop_1_1SampleNumericalDiff.html">gcop::SampleNumericalDiff&lt; _Functor, _nx, _nu, _np, _ng, _ntp &gt;</a></li>
 <li><a class="el" href="classEigen_1_1SampleNumericalDiff.html">Eigen::SampleNumericalDiff&lt; _Functor &gt;</a></li>
+<li><a class="el" href="classgcop_1_1SampleNumericalDiff.html">gcop::SampleNumericalDiff&lt; _Functor, _nx, _nu, _np, _ng, _ntp &gt;</a></li>
 <li><a class="el" href="classgcop_1_1Sensor.html">gcop::Sensor&lt; T, _nx, _nu, _np, Tz, _nz &gt;</a></li>
 <li><a class="el" href="classgcop_1_1Sensor.html">gcop::Sensor&lt; ImuState, 9, _nu, _np, Matrix&lt; double, _nz, 1 &gt;, _nz &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1ImuSensor.html">gcop::ImuSensor&lt; _nz, _nu, _np &gt;</a></li>
@@ -415,12 +447,24 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 </li>
 <li><a class="el" href="classgcop_1_1SensorCost.html">gcop::SensorCost&lt; T, nx, nu, np, Tz, nz &gt;</a></li>
 <li><a class="el" href="classgcop_1_1SPSA.html">gcop::SPSA&lt; T, n, c, _np &gt;</a></li>
-<li><a class="el" href="structgcop_1_1SPSA_1_1Stepcoeffs.html">gcop::SPSA&lt; T, n, c, _np &gt;::Stepcoeffs</a></li>
 <li><a class="el" href="structgcop_1_1ASPSA_1_1Stepcoeffs.html">gcop::ASPSA&lt; T, n, c, _np &gt;::Stepcoeffs</a></li>
+<li><a class="el" href="structgcop_1_1SPSA_1_1Stepcoeffs.html">gcop::SPSA&lt; T, n, c, _np &gt;::Stepcoeffs</a></li>
 <li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; T, _nx, _nu, _np &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Rccar.html">gcop::Rccar</a><ul>
+<li><a class="el" href="classgcop_1_1Bulletrccar.html">gcop::Bulletrccar</a></li>
+<li><a class="el" href="classgcop_1_1Bulletrccar1.html">gcop::Bulletrccar1</a></li>
+<li><a class="el" href="classgcop_1_1Rccar1.html">gcop::Rccar1</a></li>
+</ul>
+</li>
 <li><a class="el" href="classgcop_1_1System__extstep.html">gcop::System_extstep&lt; T, _nx, _nu, _np &gt;</a></li>
 </ul>
 </li>
+<li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; Body2dState, 6, c &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Body2d.html">gcop::Body2d&lt; c &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; Body2dState, _nx, _nu, _np &gt;</a></li>
+<li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; Body2dState, _nx, _nu, Dynamic &gt;</a></li>
 <li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; Body3dState, 12, c &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Body3d.html">gcop::Body3d&lt; 4 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Heli.html">gcop::Heli</a></li>
@@ -446,12 +490,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 </ul>
 </li>
 <li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; M3V2d, _nx, _nu, _np &gt;</a></li>
-<li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; M3V3d, 6, 3 &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1Body2d.html">gcop::Body2d</a></li>
-</ul>
-</li>
-<li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; M3V3d, _nx, _nu, _np &gt;</a></li>
-<li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; M3V3d, _nx, _nu, Dynamic &gt;</a></li>
 <li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; Matrix3d, 3, 3 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Kinbody2d.html">gcop::Kinbody2d</a></li>
 </ul>
@@ -486,18 +524,13 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 </ul>
 </li>
 <li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; T, nx, nu, np &gt;</a></li>
+<li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; Tx, nx, nu, np &gt;</a></li>
 <li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; UuvState, 12, c &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Uuv.html">gcop::Uuv&lt; c &gt;</a></li>
 </ul>
 </li>
 <li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; Vector4d, 4, 2 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Particle2d.html">gcop::Particle2d</a></li>
-<li><a class="el" href="classgcop_1_1Rccar.html">gcop::Rccar</a><ul>
-<li><a class="el" href="classgcop_1_1Bulletrccar.html">gcop::Bulletrccar</a></li>
-<li><a class="el" href="classgcop_1_1Bulletrccar1.html">gcop::Bulletrccar1</a></li>
-<li><a class="el" href="classgcop_1_1Rccar1.html">gcop::Rccar1</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a class="el" href="classgcop_1_1System.html">gcop::System&lt; Vector5d, 5, 2 &gt;</a><ul>
@@ -505,15 +538,20 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classgcop_1_1Unicycle.html">gcop::Unicycle</a></li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe&lt; T, n, c, np, ntp &gt;</a></li>
+<li><a class="el" href="classgcop_1_1SystemCe.html">gcop::SystemCe&lt; T, n, c, np, ntp, Tc &gt;</a></li>
+<li><a class="el" href="classgcop_1_1Tparam.html">gcop::Tparam&lt; T, nx, nu, np, _ntp, Tc &gt;</a></li>
+<li><a class="el" href="classgcop_1_1Tparam.html">gcop::Tparam&lt; T, nx, nu, np &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1UniformSplineTparam.html">gcop::UniformSplineTparam&lt; T, nx, nu, np &gt;</a></li>
+</ul>
+</li>
 <li><a class="el" href="classgcop_1_1Tparam.html">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1ControlTparam.html">gcop::ControlTparam&lt; T, nx, nu, np, _ntp &gt;</a></li>
 <li><a class="el" href="classgcop_1_1FlatOutputTparam.html">gcop::FlatOutputTparam&lt; T, nx, nu, np, _ntp &gt;</a></li>
 <li><a class="el" href="classgcop_1_1SplineTparam.html">gcop::SplineTparam&lt; T, nx, nu, np, _ntp &gt;</a></li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1Tparam.html">gcop::Tparam&lt; T, nx, nu, np &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1UniformSplineTparam.html">gcop::UniformSplineTparam&lt; T, nx, nu, np &gt;</a></li>
+<li><a class="el" href="classgcop_1_1Tparam.html">gcop::Tparam&lt; Tx, nx, nu, np, _ntp &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1ControllerTparam.html">gcop::ControllerTparam&lt; Tx, nx, nu, np, _ntp, Tc &gt;</a></li>
 </ul>
 </li>
 <li><a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</a></li>
@@ -538,7 +576,12 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classgcop_1_1Kinbody3dTrackView.html">gcop::Kinbody3dTrackView&lt; _nu &gt;</a></li>
 <li><a class="el" href="classgcop_1_1PlotView.html">gcop::PlotView</a></li>
 <li><a class="el" href="classgcop_1_1Posegraph2dView.html">gcop::Posegraph2dView</a></li>
+<li><a class="el" href="classgcop_1_1SystemCeView.html">gcop::SystemCeView&lt; T, n, c, np, ntp &gt;</a></li>
 <li><a class="el" href="classgcop_1_1SystemView.html">gcop::SystemView&lt; Tx, Tu &gt;</a></li>
+<li><a class="el" href="classgcop_1_1SystemView.html">gcop::SystemView&lt; Body2dState, Matrix&lt; double, c, 1 &gt; &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Body2dView.html">gcop::Body2dView&lt; c &gt;</a></li>
+</ul>
+</li>
 <li><a class="el" href="classgcop_1_1SystemView.html">gcop::SystemView&lt; Matrix3d, Vector3d &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Kinbody2dView.html">gcop::Kinbody2dView</a></li>
 </ul>
@@ -566,10 +609,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classgcop_1_1GunicycleView.html">gcop::GunicycleView</a></li>
 </ul>
 </li>
-<li><a class="el" href="classgcop_1_1SystemView.html">gcop::SystemView&lt; pair&lt; Matrix3d, Vector3d &gt;, Vector3d &gt;</a><ul>
-<li><a class="el" href="classgcop_1_1Body2dView.html">gcop::Body2dView</a></li>
-</ul>
-</li>
 <li><a class="el" href="classgcop_1_1SystemView.html">gcop::SystemView&lt; pair&lt; Matrix3d, Vector9d &gt;, Matrix&lt; double, c, 1 &gt; &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1Body3dView.html">gcop::Body3dView&lt; 4 &gt;</a><ul>
 <li><a class="el" href="classgcop_1_1HeliView.html">gcop::HeliView</a></li>
@@ -578,6 +617,10 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 </ul>
 </li>
 <li><a class="el" href="classgcop_1_1Body3dView.html">gcop::Body3dView&lt; c &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="classgcop_1_1SystemView.html">gcop::SystemView&lt; Point3dState, Vector3d &gt;</a><ul>
+<li><a class="el" href="classgcop_1_1Point3dView.html">gcop::Point3dView</a></li>
 </ul>
 </li>
 <li><a class="el" href="classgcop_1_1SystemView.html">gcop::SystemView&lt; UuvState, Matrix&lt; double, c, 1 &gt; &gt;</a><ul>
@@ -604,7 +647,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:16 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:59:10 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

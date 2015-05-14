@@ -105,13 +105,13 @@
 <a name="l00039"></a>00039       
 <a name="l00047"></a>00047     <a class="code" href="classgcop_1_1ConstraintCost.html">ConstraintCost</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, _nx, _nu, _np&gt;</a> &amp;sys, <span class="keywordtype">double</span> tf, <a class="code" href="classgcop_1_1Constraint.html">Constraint&lt;T, _nx, _nu, _np, _ng&gt;</a> &amp;con);
 <a name="l00048"></a>00048     
-<a name="l00049"></a>00049     <span class="keyword">virtual</span> <span class="keywordtype">double</span> L(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T&amp; x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a>&amp; u, <span class="keywordtype">double</span> h,
-<a name="l00050"></a>00050                      <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p = 0,
-<a name="l00051"></a>00051                      <a class="code" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> *Lx = 0, <a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a>* Lxx = 0,
-<a name="l00052"></a>00052                      <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> *Lu = 0, <a class="code" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a>* Luu = 0,
-<a name="l00053"></a>00053                      <a class="code" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a> *Lxu = 0,
-<a name="l00054"></a>00054                      <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *Lp = 0, <a class="code" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> *Lpp = 0,
-<a name="l00055"></a>00055                      <a class="code" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> *Lpx = 0);
+<a name="l00049"></a>00049     <span class="keyword">virtual</span> <span class="keywordtype">double</span> L(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T&amp; x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1ConstraintCost.html#ab0e7f2bed8d280167d92702f01eec64d">Vectorcd</a>&amp; u, <span class="keywordtype">double</span> h,
+<a name="l00050"></a>00050                      <span class="keyword">const</span> <a class="code" href="classgcop_1_1ConstraintCost.html#ae083e90ad736667045e4cdedc329be0d">Vectormd</a> *p = 0,
+<a name="l00051"></a>00051                      <a class="code" href="classgcop_1_1ConstraintCost.html#ac015fe91d9789e79446d32856fcb97d2">Vectornd</a> *Lx = 0, <a class="code" href="classgcop_1_1ConstraintCost.html#a40a895c1a7e2f5c5e0e2a3f9cce3930f">Matrixnd</a>* Lxx = 0,
+<a name="l00052"></a>00052                      <a class="code" href="classgcop_1_1ConstraintCost.html#ab0e7f2bed8d280167d92702f01eec64d">Vectorcd</a> *Lu = 0, <a class="code" href="classgcop_1_1ConstraintCost.html#aca7d3178c4840cc54b8e1eee73661b75">Matrixcd</a>* Luu = 0,
+<a name="l00053"></a>00053                      <a class="code" href="classgcop_1_1ConstraintCost.html#aaf7eb717c2c134d1562f5eabf355cfa4">Matrixncd</a> *Lxu = 0,
+<a name="l00054"></a>00054                      <a class="code" href="classgcop_1_1ConstraintCost.html#ae083e90ad736667045e4cdedc329be0d">Vectormd</a> *Lp = 0, <a class="code" href="classgcop_1_1ConstraintCost.html#a8f22d30680dca49d6654c70c34b1815e">Matrixmd</a> *Lpp = 0,
+<a name="l00055"></a>00055                      <a class="code" href="classgcop_1_1ConstraintCost.html#a34810d1ee536844fb143c11cba02ca89">Matrixmnd</a> *Lpx = 0);
 <a name="l00056"></a>00056 
 <a name="l00057"></a>00057     <span class="comment">/*</span>
 <a name="l00058"></a>00058 <span class="comment">    bool Res(Vectorgd &amp;g, </span>
@@ -126,7 +126,7 @@
 <a name="l00067"></a>00067 
 <a name="l00068"></a>00068     <span class="keyword">protected</span>:
 <a name="l00069"></a>00069 
-<a name="l00070"></a><a class="code" href="classgcop_1_1ConstraintCost.html#a40be9b5cccd485b999f5669f72cbd382">00070</a>     <a class="code" href="classgcop_1_1LsCost.html#a47ec2e13879ce1dd5623fd3ad4e236fb">Vectorgd</a> <a class="code" href="classgcop_1_1ConstraintCost.html#a40be9b5cccd485b999f5669f72cbd382" title="active residuals">gp</a>;      
+<a name="l00070"></a><a class="code" href="classgcop_1_1ConstraintCost.html#a40be9b5cccd485b999f5669f72cbd382">00070</a>     <a class="code" href="classgcop_1_1ConstraintCost.html#a910d18c3f097d79157e94205b929a403">Vectorgd</a> <a class="code" href="classgcop_1_1ConstraintCost.html#a40be9b5cccd485b999f5669f72cbd382" title="active residuals">gp</a>;      
 <a name="l00071"></a><a class="code" href="classgcop_1_1ConstraintCost.html#a60fb06406dfe4cb717c35f51d9beba58">00071</a>     <a class="code" href="classgcop_1_1ConstraintCost.html#ac5e1de628b2beef3d0efffb578d6c02e">Matrixgnd</a> <a class="code" href="classgcop_1_1ConstraintCost.html#a60fb06406dfe4cb717c35f51d9beba58" title="gradients">dgdx</a>;   
 <a name="l00072"></a>00072 
 <a name="l00073"></a>00073     };
@@ -234,7 +234,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

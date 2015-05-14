@@ -63,204 +63,230 @@
 <div class="title">ce.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="ce_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef GCOP_CE_H</span>
-<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define GCOP_CE_H</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;vector&gt;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;<a class="code" href="gmm_8h.html">gmm.h</a>&quot;</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;limits&gt;</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="keyword">namespace </span>gcop {
-<a name="l00009"></a>00009   
-<a name="l00010"></a>00010   <span class="keyword">using namespace </span>Eigen;
-<a name="l00011"></a>00011   <span class="keyword">using namespace </span>std;
-<a name="l00012"></a>00012   
-<a name="l00031"></a>00031   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n = Dynamic&gt; 
-<a name="l00032"></a><a class="code" href="classgcop_1_1Ce.html">00032</a>     <span class="keyword">class </span><a class="code" href="classgcop_1_1Ce.html">Ce</a> {
-<a name="l00033"></a>00033   <span class="keyword">public</span>:  
-<a name="l00034"></a><a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">00034</a>   <span class="keyword">typedef</span> Matrix&lt;double, _n, 1&gt; <a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a>;
-<a name="l00035"></a><a class="code" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">00035</a>   <span class="keyword">typedef</span> Matrix&lt;double, _n, _n&gt; <a class="code" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">Matrixnd</a>;
-<a name="l00036"></a>00036   
-<a name="l00043"></a>00043   <a class="code" href="classgcop_1_1Ce.html">Ce</a>(<span class="keywordtype">int</span> n = _n, <span class="keywordtype">int</span> k = 1, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">Matrixnd</a> *S = 0);
+<a href="ce_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)</span>
+<a name="l00002"></a>00002 <span class="comment">//</span>
+<a name="l00003"></a>00003 <span class="comment">// Copyright (C) 2004-2014 Marin Kobilarov &lt;marin(at)jhu.edu&gt;</span>
+<a name="l00004"></a>00004 <span class="comment">//</span>
+<a name="l00005"></a>00005 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla</span>
+<a name="l00006"></a>00006 <span class="comment">// Public License v. 2.0. If a copy of the MPL was not distributed</span>
+<a name="l00007"></a>00007 <span class="comment">// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="preprocessor">#ifndef GCOP_CE_H</span>
+<a name="l00010"></a>00010 <span class="preprocessor"></span><span class="preprocessor">#define GCOP_CE_H</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="gmm_8h.html">gmm.h</a>&quot;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;limits&gt;</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 <span class="keyword">namespace </span>gcop {
+<a name="l00017"></a>00017   
+<a name="l00018"></a>00018   <span class="keyword">using namespace </span>Eigen;
+<a name="l00019"></a>00019   <span class="keyword">using namespace </span>std;
+<a name="l00020"></a>00020   
+<a name="l00039"></a>00039   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n = Dynamic&gt; 
+<a name="l00040"></a><a class="code" href="classgcop_1_1Ce.html">00040</a>     <span class="keyword">class </span><a class="code" href="classgcop_1_1Ce.html">Ce</a> {
+<a name="l00041"></a>00041   <span class="keyword">public</span>:  
+<a name="l00042"></a><a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">00042</a>   <span class="keyword">typedef</span> Matrix&lt;double, _n, 1&gt; <a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a>;
+<a name="l00043"></a><a class="code" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">00043</a>   <span class="keyword">typedef</span> Matrix&lt;double, _n, _n&gt; <a class="code" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">Matrixnd</a>;
 <a name="l00044"></a>00044   
-<a name="l00045"></a>00045   <span class="keyword">virtual</span> ~<a class="code" href="classgcop_1_1Ce.html">Ce</a>();
-<a name="l00046"></a>00046   
-<a name="l00050"></a>00050   <span class="keywordtype">void</span> Reset();
-<a name="l00051"></a>00051   
-<a name="l00057"></a>00057   <span class="keyword">virtual</span> <span class="keywordtype">void</span> AddSample(<span class="keyword">const</span> <a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a> &amp;z, <span class="keywordtype">double</span> c);
-<a name="l00058"></a>00058   
-<a name="l00062"></a>00062   <span class="keywordtype">void</span> Select();
-<a name="l00063"></a>00063   
-<a name="l00067"></a>00067   <span class="keywordtype">bool</span> Fit();
-<a name="l00068"></a>00068   
-<a name="l00074"></a>00074   <span class="keyword">virtual</span> <span class="keywordtype">double</span> Sample(<a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a> &amp;z);
-<a name="l00075"></a>00075   
-<a name="l00081"></a>00081   <span class="keyword">const</span> <a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a>&amp; Best();
-<a name="l00082"></a>00082   
-<a name="l00083"></a><a class="code" href="classgcop_1_1Ce.html#a1975ba3cd527561a2ed3a8ab3ce6bcbf">00083</a>   <span class="keywordtype">int</span> <a class="code" href="classgcop_1_1Ce.html#a1975ba3cd527561a2ed3a8ab3ce6bcbf" title="parameter space dimension">n</a>;          
-<a name="l00084"></a>00084       
-<a name="l00085"></a><a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">00085</a>   <a class="code" href="classgcop_1_1Gmm.html">Gmm&lt;_n&gt;</a> <a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>;    
-<a name="l00086"></a>00086 
-<a name="l00087"></a><a class="code" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">00087</a>   <a class="code" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">Matrixnd</a> <a class="code" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f" title="extra noise">S</a>;     
-<a name="l00088"></a>00088 
-<a name="l00089"></a><a class="code" href="classgcop_1_1Ce.html#a19a05bd8e753a19d3354eed9ff351454">00089</a>   vector&lt;pair&lt;Vectornd, double&gt; &gt; <a class="code" href="classgcop_1_1Ce.html#a19a05bd8e753a19d3354eed9ff351454" title="samples (pair of vector and its likelihood)">zps</a>;  
-<a name="l00090"></a>00090 
-<a name="l00091"></a><a class="code" href="classgcop_1_1Ce.html#a61a15b77b2fb7b96ba0cf663e82ac393">00091</a>   vector&lt;double&gt; <a class="code" href="classgcop_1_1Ce.html#a61a15b77b2fb7b96ba0cf663e82ac393" title="costs">cs</a>;    
-<a name="l00092"></a>00092 
-<a name="l00093"></a><a class="code" href="classgcop_1_1Ce.html#a9f4672c6f7eef127d0ed920c086b2bb3">00093</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#a9f4672c6f7eef127d0ed920c086b2bb3" title="quantile: should be b/n .01 and .1 (default is .1)">rho</a>;     
+<a name="l00051"></a>00051   <a class="code" href="classgcop_1_1Ce.html">Ce</a>(<span class="keywordtype">int</span> n = _n, <span class="keywordtype">int</span> k = 1, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">Matrixnd</a> *S = 0);
+<a name="l00052"></a>00052   
+<a name="l00053"></a>00053   <span class="keyword">virtual</span> ~<a class="code" href="classgcop_1_1Ce.html">Ce</a>();
+<a name="l00054"></a>00054   
+<a name="l00058"></a>00058   <span class="keywordtype">void</span> Reset();
+<a name="l00059"></a>00059   
+<a name="l00065"></a>00065   <span class="keyword">virtual</span> <span class="keywordtype">void</span> AddSample(<span class="keyword">const</span> <a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a> &amp;z, <span class="keywordtype">double</span> c);
+<a name="l00066"></a>00066   
+<a name="l00070"></a>00070   <span class="keywordtype">void</span> Select();
+<a name="l00071"></a>00071   
+<a name="l00075"></a>00075   <span class="keywordtype">bool</span> Fit();
+<a name="l00076"></a>00076   
+<a name="l00082"></a>00082   <span class="keyword">virtual</span> <span class="keywordtype">double</span> Sample(<a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a> &amp;z);
+<a name="l00083"></a>00083   
+<a name="l00089"></a>00089   <span class="keyword">const</span> <a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a>&amp; Best();
+<a name="l00090"></a>00090   
+<a name="l00091"></a><a class="code" href="classgcop_1_1Ce.html#a1975ba3cd527561a2ed3a8ab3ce6bcbf">00091</a>   <span class="keywordtype">int</span> <a class="code" href="classgcop_1_1Ce.html#a1975ba3cd527561a2ed3a8ab3ce6bcbf" title="parameter space dimension">n</a>;          
+<a name="l00092"></a>00092       
+<a name="l00093"></a><a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0">00093</a>   <a class="code" href="classgcop_1_1Gmm.html">Gmm&lt;_n&gt;</a> <a class="code" href="classgcop_1_1Ce.html#a0fe5fee9619fdaa8f808d8d7ef3979d0" title="underlying Gaussian-mixture-model">gmm</a>;    
 <a name="l00094"></a>00094 
-<a name="l00095"></a><a class="code" href="classgcop_1_1Ce.html#aefbee0c0ea1d97d5a970cb10811647c2">00095</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#aefbee0c0ea1d97d5a970cb10811647c2" title="update factor: parameter is updated according to v=a*v_new + (1-a)*v_old , i.e. alpha is used to &quot;smo...">alpha</a>;   
+<a name="l00095"></a><a class="code" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f">00095</a>   <a class="code" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">Matrixnd</a> <a class="code" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f" title="extra noise">S</a>;     
 <a name="l00096"></a>00096 
-<a name="l00097"></a><a class="code" href="classgcop_1_1Ce.html#a9640c0196ca1b016994025c63e41f64a">00097</a>   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Ce.html#a9640c0196ca1b016994025c63e41f64a" title="whether to use MRAS version of algorithm, i.e. instead of using rare-event volume estimation...">mras</a>;      
+<a name="l00097"></a><a class="code" href="classgcop_1_1Ce.html#a19a05bd8e753a19d3354eed9ff351454">00097</a>   vector&lt;pair&lt;Vectornd, double&gt; &gt; <a class="code" href="classgcop_1_1Ce.html#a19a05bd8e753a19d3354eed9ff351454" title="samples (pair of vector and its likelihood)">zps</a>;  
 <a name="l00098"></a>00098 
-<a name="l00099"></a><a class="code" href="classgcop_1_1Ce.html#a9fa92f3d47131cc37ffe876f5428783d">00099</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#a9fa92f3d47131cc37ffe876f5428783d" title="Gibbs factor (only applicable if mras = true)">b</a>;       
+<a name="l00099"></a><a class="code" href="classgcop_1_1Ce.html#a61a15b77b2fb7b96ba0cf663e82ac393">00099</a>   vector&lt;double&gt; <a class="code" href="classgcop_1_1Ce.html#a61a15b77b2fb7b96ba0cf663e82ac393" title="costs">cs</a>;    
 <a name="l00100"></a>00100 
-<a name="l00101"></a><a class="code" href="classgcop_1_1Ce.html#ae6e76613366f80c5c44c58e6c4ef496a">00101</a>   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Ce.html#ae6e76613366f80c5c44c58e6c4ef496a" title="let b be determined automatically (true by default)">bAuto</a>;    
+<a name="l00101"></a><a class="code" href="classgcop_1_1Ce.html#a9f4672c6f7eef127d0ed920c086b2bb3">00101</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#a9f4672c6f7eef127d0ed920c086b2bb3" title="quantile: should be b/n .01 and .1 (default is .1)">rho</a>;     
 <a name="l00102"></a>00102 
-<a name="l00103"></a><a class="code" href="classgcop_1_1Ce.html#a2ba7e97501d49ea25912cd6f4c2d9eed">00103</a>   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Ce.html#a2ba7e97501d49ea25912cd6f4c2d9eed" title="incremental version of mras">inc</a>;      
+<a name="l00103"></a><a class="code" href="classgcop_1_1Ce.html#aefbee0c0ea1d97d5a970cb10811647c2">00103</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#aefbee0c0ea1d97d5a970cb10811647c2" title="update factor: parameter is updated according to v=a*v_new + (1-a)*v_old , i.e. alpha is used to &quot;smo...">alpha</a>;   
 <a name="l00104"></a>00104 
-<a name="l00105"></a><a class="code" href="classgcop_1_1Ce.html#ae389f4fbbc9f395242adeab672630089">00105</a>   <a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a> <a class="code" href="classgcop_1_1Ce.html#ae389f4fbbc9f395242adeab672630089" title="current best">zmin</a>; 
+<a name="l00105"></a><a class="code" href="classgcop_1_1Ce.html#a9640c0196ca1b016994025c63e41f64a">00105</a>   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Ce.html#a9640c0196ca1b016994025c63e41f64a" title="whether to use MRAS version of algorithm, i.e. instead of using rare-event volume estimation...">mras</a>;      
 <a name="l00106"></a>00106 
-<a name="l00107"></a><a class="code" href="classgcop_1_1Ce.html#acd583cab3da7c8eb26d656b8c98b94e0">00107</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#acd583cab3da7c8eb26d656b8c98b94e0" title="minimum cost">Jmin</a>;    
+<a name="l00107"></a><a class="code" href="classgcop_1_1Ce.html#a9fa92f3d47131cc37ffe876f5428783d">00107</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#a9fa92f3d47131cc37ffe876f5428783d" title="Gibbs factor (only applicable if mras = true)">b</a>;       
 <a name="l00108"></a>00108 
-<a name="l00109"></a>00109   };
-<a name="l00110"></a>00110   
-<a name="l00111"></a>00111   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
-<a name="l00112"></a><a class="code" href="classgcop_1_1Ce.html#a4980b98497352080857f83cbc3aab9b1">00112</a>     <a class="code" href="classgcop_1_1Ce.html">Ce&lt;_n&gt;::Ce</a>(<span class="keywordtype">int</span> n,
-<a name="l00113"></a>00113                <span class="keywordtype">int</span> k,
-<a name="l00114"></a>00114                <span class="keyword">const</span> <a class="code" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">Matrixnd</a> *S) :
-<a name="l00115"></a>00115     n(n),
-<a name="l00116"></a>00116     gmm(n, k),
-<a name="l00117"></a>00117     rho(.1),
-<a name="l00118"></a>00118     alpha(.9),
-<a name="l00119"></a>00119     mras(false),
-<a name="l00120"></a>00120     b(1),
-<a name="l00121"></a>00121     bAuto(true),
-<a name="l00122"></a>00122     inc(false),
-<a name="l00123"></a>00123     Jmin(std::numeric_limits&lt;double&gt;::max())
-<a name="l00124"></a>00124       {
-<a name="l00125"></a>00125         <span class="keywordflow">if</span> (_n == Dynamic) {
-<a name="l00126"></a>00126           this-&gt;S.resize(n, n);
-<a name="l00127"></a>00127           this-&gt;<a class="code" href="classgcop_1_1Ce.html#ae389f4fbbc9f395242adeab672630089" title="current best">zmin</a>.resize(n);
-<a name="l00128"></a>00128         } <span class="keywordflow">else</span> {
-<a name="l00129"></a>00129           assert(_n == n);
-<a name="l00130"></a>00130         }
-<a name="l00131"></a>00131 
-<a name="l00132"></a>00132         <span class="keywordflow">if</span> (S)
-<a name="l00133"></a>00133           this-&gt;S = *<a class="code" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f" title="extra noise">S</a>;
-<a name="l00134"></a>00134         <span class="keywordflow">else</span>
-<a name="l00135"></a>00135           this-&gt;S.setZero();
-<a name="l00136"></a>00136       }
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
-<a name="l00139"></a><a class="code" href="classgcop_1_1Ce.html#a4006102c66fa94502cd71db25d9fc94f">00139</a>     <a class="code" href="classgcop_1_1Ce.html#a4006102c66fa94502cd71db25d9fc94f">Ce&lt;_n&gt;::~Ce</a>()
-<a name="l00140"></a>00140     { 
-<a name="l00141"></a>00141     }
-<a name="l00142"></a>00142 
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
-<a name="l00145"></a><a class="code" href="classgcop_1_1Ce.html#a1020f8a79b11780d26e0a6dcc21cdb50">00145</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Ce.html#a1020f8a79b11780d26e0a6dcc21cdb50">Ce&lt;_n&gt;::Reset</a>()
-<a name="l00146"></a>00146     {
-<a name="l00147"></a>00147       zps.clear();
-<a name="l00148"></a>00148       cs.clear();
-<a name="l00149"></a>00149       Jmin = std::numeric_limits&lt;double&gt;::max();
-<a name="l00150"></a>00150     }
-<a name="l00151"></a>00151 
+<a name="l00109"></a><a class="code" href="classgcop_1_1Ce.html#ae6e76613366f80c5c44c58e6c4ef496a">00109</a>   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Ce.html#ae6e76613366f80c5c44c58e6c4ef496a" title="let b be determined automatically (true by default)">bAuto</a>;    
+<a name="l00110"></a>00110 
+<a name="l00111"></a><a class="code" href="classgcop_1_1Ce.html#a2ba7e97501d49ea25912cd6f4c2d9eed">00111</a>   <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Ce.html#a2ba7e97501d49ea25912cd6f4c2d9eed" title="incremental version of mras">inc</a>;      
+<a name="l00112"></a>00112 
+<a name="l00113"></a><a class="code" href="classgcop_1_1Ce.html#ae389f4fbbc9f395242adeab672630089">00113</a>   <a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a> <a class="code" href="classgcop_1_1Ce.html#ae389f4fbbc9f395242adeab672630089" title="current best">zmin</a>; 
+<a name="l00114"></a>00114 
+<a name="l00115"></a><a class="code" href="classgcop_1_1Ce.html#acd583cab3da7c8eb26d656b8c98b94e0">00115</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#acd583cab3da7c8eb26d656b8c98b94e0" title="minimum cost">Jmin</a>;    
+<a name="l00116"></a>00116 
+<a name="l00117"></a><a class="code" href="classgcop_1_1Ce.html#af9b79263ada3c9bfd30572546b002506">00117</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#af9b79263ada3c9bfd30572546b002506" title="current Jmax (discard any samples with costs higher than Jmax)">Jmax</a>;    
+<a name="l00118"></a>00118 
+<a name="l00119"></a><a class="code" href="classgcop_1_1Ce.html#a4d6840d1e3ca8a531a9b9d43992a9ec3">00119</a>   <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#a4d6840d1e3ca8a531a9b9d43992a9ec3" title="average cost over all samples">Jave</a>;    
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121   };
+<a name="l00122"></a>00122   
+<a name="l00123"></a>00123   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
+<a name="l00124"></a><a class="code" href="classgcop_1_1Ce.html#a4980b98497352080857f83cbc3aab9b1">00124</a>     <a class="code" href="classgcop_1_1Ce.html">Ce&lt;_n&gt;::Ce</a>(<span class="keywordtype">int</span> n,
+<a name="l00125"></a>00125                <span class="keywordtype">int</span> k,
+<a name="l00126"></a>00126                <span class="keyword">const</span> <a class="code" href="classgcop_1_1Ce.html#accd7e3bf5b5b0a4e75f8d86ffbbeb51b">Matrixnd</a> *S) :
+<a name="l00127"></a>00127     n(n),
+<a name="l00128"></a>00128     gmm(n, k),
+<a name="l00129"></a>00129     rho(.1),
+<a name="l00130"></a>00130     alpha(.9),
+<a name="l00131"></a>00131     mras(false),
+<a name="l00132"></a>00132     b(1),
+<a name="l00133"></a>00133     bAuto(true),
+<a name="l00134"></a>00134     inc(false),
+<a name="l00135"></a>00135     Jmin(std::numeric_limits&lt;double&gt;::max()),
+<a name="l00136"></a>00136     Jmax(0),
+<a name="l00137"></a>00137     Jave(std::numeric_limits&lt;double&gt;::max())
+<a name="l00138"></a>00138       {
+<a name="l00139"></a>00139         <span class="keywordflow">if</span> (_n == Dynamic) {
+<a name="l00140"></a>00140           this-&gt;S.resize(n, n);
+<a name="l00141"></a>00141           this-&gt;<a class="code" href="classgcop_1_1Ce.html#ae389f4fbbc9f395242adeab672630089" title="current best">zmin</a>.resize(n);
+<a name="l00142"></a>00142         } <span class="keywordflow">else</span> {
+<a name="l00143"></a>00143           assert(_n == n);
+<a name="l00144"></a>00144         }
+<a name="l00145"></a>00145         
+<a name="l00146"></a>00146         <span class="keywordflow">if</span> (S)
+<a name="l00147"></a>00147           this-&gt;S = *<a class="code" href="classgcop_1_1Ce.html#ad78d1034d53383220c54aab5509bc27f" title="extra noise">S</a>;
+<a name="l00148"></a>00148         <span class="keywordflow">else</span>
+<a name="l00149"></a>00149           this-&gt;S.setZero();
+<a name="l00150"></a>00150       }
+<a name="l00151"></a>00151   
 <a name="l00152"></a>00152   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
-<a name="l00153"></a><a class="code" href="classgcop_1_1Ce.html#a17c0c7633b7f5e29a10b97bd6aacd909">00153</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Ce.html#a17c0c7633b7f5e29a10b97bd6aacd909">Ce&lt;_n&gt;::AddSample</a>(<span class="keyword">const</span> <a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a> &amp;z, <span class="keywordtype">double</span> c) 
-<a name="l00154"></a>00154     { 
-<a name="l00155"></a>00155       zps.push_back(make_pair(z, c));
-<a name="l00156"></a>00156       cs.push_back(c);
+<a name="l00153"></a><a class="code" href="classgcop_1_1Ce.html#a4006102c66fa94502cd71db25d9fc94f">00153</a>     <a class="code" href="classgcop_1_1Ce.html#a4006102c66fa94502cd71db25d9fc94f">Ce&lt;_n&gt;::~Ce</a>()
+<a name="l00154"></a>00154     {
+<a name="l00155"></a>00155     }
+<a name="l00156"></a>00156 
 <a name="l00157"></a>00157 
-<a name="l00158"></a>00158       <span class="keywordflow">if</span> (Jmin &gt; c) {
-<a name="l00159"></a>00159         zmin = z;
-<a name="l00160"></a>00160         Jmin = c;
-<a name="l00161"></a>00161       }
-<a name="l00162"></a>00162     }
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
-<a name="l00165"></a><a class="code" href="namespacegcop.html#a99509cf7a08ef86f94dcc8f2137d8f0c">00165</a>     <span class="keywordtype">bool</span> <a class="code" href="namespacegcop.html#a99509cf7a08ef86f94dcc8f2137d8f0c">zpSort</a>(<span class="keyword">const</span> pair&lt;Matrix&lt;double, _n, 1&gt;, <span class="keywordtype">double</span>&gt; &amp;zpa, <span class="keyword">const</span> pair&lt;Matrix&lt;double, _n, 1&gt;, <span class="keywordtype">double</span>&gt; &amp;zpb)
-<a name="l00166"></a>00166     {
-<a name="l00167"></a>00167       <span class="keywordflow">return</span> zpa.second &lt; zpb.second;
-<a name="l00168"></a>00168     }
-<a name="l00169"></a>00169 
-<a name="l00170"></a>00170   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
-<a name="l00171"></a><a class="code" href="classgcop_1_1Ce.html#a90c74ea088ea177d04c79c856176c615">00171</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Ce.html#a90c74ea088ea177d04c79c856176c615">Ce&lt;_n&gt;::Select</a>()
-<a name="l00172"></a>00172     {
-<a name="l00173"></a>00173       <span class="keywordflow">if</span> (mras) {
-<a name="l00174"></a>00174         <span class="comment">// set b to minimum cost</span>
-<a name="l00175"></a>00175         <span class="keywordflow">if</span> (bAuto) {
-<a name="l00176"></a>00176           b = Jmin;
-<a name="l00177"></a>00177           <span class="comment">/*</span>
-<a name="l00178"></a>00178 <span class="comment">          b = std::numeric_limits&lt;double&gt;::max();</span>
-<a name="l00179"></a>00179 <span class="comment">          for (int j = 0; j &lt; cs.size(); ++j) {</span>
-<a name="l00180"></a>00180 <span class="comment">            if (b &gt; cs[j])</span>
-<a name="l00181"></a>00181 <span class="comment">              b = cs[j];</span>
-<a name="l00182"></a>00182 <span class="comment">          }</span>
-<a name="l00183"></a>00183 <span class="comment">          */</span>
-<a name="l00184"></a>00184         }
-<a name="l00185"></a>00185         <span class="keywordflow">return</span>;
-<a name="l00186"></a>00186       }
-<a name="l00187"></a>00187   
-<a name="l00188"></a>00188       <span class="keywordtype">int</span> N = zps.size();
-<a name="l00189"></a>00189       <span class="keywordtype">int</span> Ne = MIN((<span class="keywordtype">int</span>)ceil(N*rho), N);
-<a name="l00190"></a>00190   
-<a name="l00191"></a>00191       <span class="keywordflow">if</span> (Ne &lt; N) {
-<a name="l00192"></a>00192         std::sort(zps.begin(), zps.end(), zpSort&lt;_n&gt;);
-<a name="l00193"></a>00193         std::sort(cs.begin(), cs.end());   <span class="comment">// this is redundant but is kept for consistency</span>
-<a name="l00194"></a>00194         zps.resize(Ne);
-<a name="l00195"></a>00195         cs.resize(Ne);
-<a name="l00196"></a>00196       }
-<a name="l00197"></a>00197     }
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199 
-<a name="l00200"></a>00200   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
-<a name="l00201"></a><a class="code" href="classgcop_1_1Ce.html#a9e63f28c8f3fa9e95c74939cdcb1dc15">00201</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Ce.html#a9e63f28c8f3fa9e95c74939cdcb1dc15">Ce&lt;_n&gt;::Fit</a>()
-<a name="l00202"></a>00202     {       
-<a name="l00203"></a>00203       <span class="keywordtype">int</span> N = zps.size();
-<a name="l00204"></a>00204   
-<a name="l00205"></a>00205       <span class="keywordflow">if</span> (mras) {
-<a name="l00206"></a>00206         <span class="keywordtype">double</span> cn = 0;
-<a name="l00207"></a>00207         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; N; ++j) {
-<a name="l00208"></a>00208           pair&lt;Vectornd, double&gt; &amp;zp = zps[j];
-<a name="l00209"></a>00209           zp.second = exp(-b*cs[j]);     <span class="comment">// pdf</span>
-<a name="l00210"></a>00210           cn += zp.second;               <span class="comment">// normalizer</span>
-<a name="l00211"></a>00211         }
-<a name="l00212"></a>00212         assert(cn &gt; 0);
-<a name="l00213"></a>00213         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; N; ++j) 
-<a name="l00214"></a>00214           zps[j].second /= cn;               <span class="comment">// normalize</span>
-<a name="l00215"></a>00215     
-<a name="l00216"></a>00216         gmm.Fit(zps, alpha, 50, &amp;S);
-<a name="l00217"></a>00217       } <span class="keywordflow">else</span> {
-<a name="l00218"></a>00218         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; N; ++j) 
-<a name="l00219"></a>00219           zps[j].second = 1.0/N;             <span class="comment">// probability</span>
-<a name="l00220"></a>00220     
-<a name="l00221"></a>00221         gmm.Fit(zps, alpha, 50, &amp;S);
+<a name="l00158"></a>00158   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
+<a name="l00159"></a><a class="code" href="classgcop_1_1Ce.html#a1020f8a79b11780d26e0a6dcc21cdb50">00159</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Ce.html#a1020f8a79b11780d26e0a6dcc21cdb50">Ce&lt;_n&gt;::Reset</a>()
+<a name="l00160"></a>00160     {
+<a name="l00161"></a>00161       zps.clear();
+<a name="l00162"></a>00162       cs.clear();
+<a name="l00163"></a>00163       Jmin = std::numeric_limits&lt;double&gt;::max();
+<a name="l00164"></a>00164       Jmax = 0;
+<a name="l00165"></a>00165     }
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
+<a name="l00168"></a><a class="code" href="classgcop_1_1Ce.html#a17c0c7633b7f5e29a10b97bd6aacd909">00168</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Ce.html#a17c0c7633b7f5e29a10b97bd6aacd909">Ce&lt;_n&gt;::AddSample</a>(<span class="keyword">const</span> <a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a> &amp;z, <span class="keywordtype">double</span> c) 
+<a name="l00169"></a>00169     { 
+<a name="l00170"></a>00170       <span class="keywordtype">int</span> Ns = zps.size();
+<a name="l00171"></a>00171       <span class="keywordflow">if</span> (!Ns) {
+<a name="l00172"></a>00172         Jave = c;
+<a name="l00173"></a>00173         Jmax = c;
+<a name="l00174"></a>00174       } <span class="keywordflow">else</span> {
+<a name="l00175"></a>00175         Jave = (Jave*Ns + c)/(Ns + 1);
+<a name="l00176"></a>00176       }
+<a name="l00177"></a>00177       zps.push_back(make_pair(z, c));
+<a name="l00178"></a>00178       cs.push_back(c);
+<a name="l00179"></a>00179 
+<a name="l00180"></a>00180       <span class="keywordflow">if</span> (Jmin &gt; c) {
+<a name="l00181"></a>00181         zmin = z;
+<a name="l00182"></a>00182         Jmin = c;
+<a name="l00183"></a>00183       }
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185       <span class="keywordflow">if</span> (Jmax &lt; c) {
+<a name="l00186"></a>00186         Jmax = c;
+<a name="l00187"></a>00187       }      
+<a name="l00188"></a>00188     }
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
+<a name="l00191"></a><a class="code" href="namespacegcop.html#a99509cf7a08ef86f94dcc8f2137d8f0c">00191</a>     <span class="keywordtype">bool</span> <a class="code" href="namespacegcop.html#a99509cf7a08ef86f94dcc8f2137d8f0c">zpSort</a>(<span class="keyword">const</span> pair&lt;Matrix&lt;double, _n, 1&gt;, <span class="keywordtype">double</span>&gt; &amp;zpa, <span class="keyword">const</span> pair&lt;Matrix&lt;double, _n, 1&gt;, <span class="keywordtype">double</span>&gt; &amp;zpb)
+<a name="l00192"></a>00192     {
+<a name="l00193"></a>00193       <span class="keywordflow">return</span> zpa.second &lt; zpb.second;
+<a name="l00194"></a>00194     }
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
+<a name="l00197"></a><a class="code" href="classgcop_1_1Ce.html#a90c74ea088ea177d04c79c856176c615">00197</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Ce.html#a90c74ea088ea177d04c79c856176c615">Ce&lt;_n&gt;::Select</a>()
+<a name="l00198"></a>00198     {
+<a name="l00199"></a>00199       <span class="keywordflow">if</span> (mras) {
+<a name="l00200"></a>00200         <span class="comment">// set b to minimum cost</span>
+<a name="l00201"></a>00201         <span class="keywordflow">if</span> (bAuto) {
+<a name="l00202"></a>00202           b = Jmin;
+<a name="l00203"></a>00203           <span class="comment">/*</span>
+<a name="l00204"></a>00204 <span class="comment">          b = std::numeric_limits&lt;double&gt;::max();</span>
+<a name="l00205"></a>00205 <span class="comment">          for (int j = 0; j &lt; cs.size(); ++j) {</span>
+<a name="l00206"></a>00206 <span class="comment">            if (b &gt; cs[j])</span>
+<a name="l00207"></a>00207 <span class="comment">              b = cs[j];</span>
+<a name="l00208"></a>00208 <span class="comment">          }</span>
+<a name="l00209"></a>00209 <span class="comment">          */</span>
+<a name="l00210"></a>00210         }
+<a name="l00211"></a>00211         <span class="keywordflow">return</span>;
+<a name="l00212"></a>00212       }
+<a name="l00213"></a>00213   
+<a name="l00214"></a>00214       <span class="keywordtype">int</span> N = zps.size();
+<a name="l00215"></a>00215       <span class="keywordtype">int</span> Ne = MIN((<span class="keywordtype">int</span>)ceil(N*rho), N);
+<a name="l00216"></a>00216   
+<a name="l00217"></a>00217       <span class="keywordflow">if</span> (Ne &lt; N) {
+<a name="l00218"></a>00218         std::sort(zps.begin(), zps.end(), zpSort&lt;_n&gt;);
+<a name="l00219"></a>00219         std::sort(cs.begin(), cs.end());   <span class="comment">// this is redundant but is kept for consistency</span>
+<a name="l00220"></a>00220         zps.resize(Ne);
+<a name="l00221"></a>00221         cs.resize(Ne);
 <a name="l00222"></a>00222       }
-<a name="l00223"></a>00223 
-<a name="l00224"></a>00224       <span class="keywordflow">return</span> gmm.Update();
-<a name="l00225"></a>00225     }
-<a name="l00226"></a>00226 
-<a name="l00227"></a>00227   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
-<a name="l00228"></a><a class="code" href="classgcop_1_1Ce.html#a3e99e0cab02afbebb4abb76c18488f0d">00228</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#a3e99e0cab02afbebb4abb76c18488f0d">Ce&lt;_n&gt;::Sample</a>(<a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a> &amp;z) 
-<a name="l00229"></a>00229     {
-<a name="l00230"></a>00230       <span class="keywordflow">return</span> gmm.Sample(z);
-<a name="l00231"></a>00231     }
-<a name="l00232"></a>00232 
-<a name="l00233"></a>00233   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
-<a name="l00234"></a><a class="code" href="classgcop_1_1Ce.html#a085d6afe8cc2fae1e946b9b47dffa636">00234</a>     <span class="keyword">const</span> Matrix&lt;double, _n, 1&gt;&amp; <a class="code" href="classgcop_1_1Ce.html#a085d6afe8cc2fae1e946b9b47dffa636">Ce&lt;_n&gt;::Best</a>() 
-<a name="l00235"></a>00235     {
-<a name="l00236"></a>00236       <span class="keywordflow">return</span> zmin;
-<a name="l00237"></a>00237     }
-<a name="l00238"></a>00238 }
-<a name="l00239"></a>00239 
-<a name="l00240"></a>00240 
-<a name="l00241"></a>00241 <span class="preprocessor">#endif</span>
+<a name="l00223"></a>00223     }
+<a name="l00224"></a>00224 
+<a name="l00225"></a>00225 
+<a name="l00226"></a>00226   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
+<a name="l00227"></a><a class="code" href="classgcop_1_1Ce.html#a9e63f28c8f3fa9e95c74939cdcb1dc15">00227</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Ce.html#a9e63f28c8f3fa9e95c74939cdcb1dc15">Ce&lt;_n&gt;::Fit</a>()
+<a name="l00228"></a>00228     {       
+<a name="l00229"></a>00229       <span class="keywordtype">int</span> N = zps.size();
+<a name="l00230"></a>00230   
+<a name="l00231"></a>00231       <span class="keywordflow">if</span> (mras) {
+<a name="l00232"></a>00232         <span class="keywordtype">double</span> cn = 0;
+<a name="l00233"></a>00233         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; N; ++j) {
+<a name="l00234"></a>00234           pair&lt;Vectornd, double&gt; &amp;zp = zps[j];
+<a name="l00235"></a>00235           zp.second = exp(-b*cs[j]);     <span class="comment">// pdf</span>
+<a name="l00236"></a>00236           cn += zp.second;               <span class="comment">// normalizer</span>
+<a name="l00237"></a>00237         }
+<a name="l00238"></a>00238         assert(cn &gt; 0);
+<a name="l00239"></a>00239         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; N; ++j) 
+<a name="l00240"></a>00240           zps[j].second /= cn;               <span class="comment">// normalize</span>
+<a name="l00241"></a>00241     
+<a name="l00242"></a>00242         gmm.Fit(zps, alpha, 50, &amp;S);
+<a name="l00243"></a>00243       } <span class="keywordflow">else</span> {
+<a name="l00244"></a>00244         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; N; ++j) 
+<a name="l00245"></a>00245           zps[j].second = 1.0/N;             <span class="comment">// probability</span>
+<a name="l00246"></a>00246     
+<a name="l00247"></a>00247         gmm.Fit(zps, alpha, 50, &amp;S);
+<a name="l00248"></a>00248       }
+<a name="l00249"></a>00249 
+<a name="l00250"></a>00250       <span class="keywordflow">return</span> gmm.Update();
+<a name="l00251"></a>00251     }
+<a name="l00252"></a>00252 
+<a name="l00253"></a>00253   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
+<a name="l00254"></a><a class="code" href="classgcop_1_1Ce.html#a3e99e0cab02afbebb4abb76c18488f0d">00254</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Ce.html#a3e99e0cab02afbebb4abb76c18488f0d">Ce&lt;_n&gt;::Sample</a>(<a class="code" href="classgcop_1_1Ce.html#a0c0d141a6838bafe2501ec0746a72be0">Vectornd</a> &amp;z) 
+<a name="l00255"></a>00255     {
+<a name="l00256"></a>00256       <span class="keywordflow">return</span> gmm.Sample(z);
+<a name="l00257"></a>00257     }
+<a name="l00258"></a>00258 
+<a name="l00259"></a>00259   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> _n&gt;
+<a name="l00260"></a><a class="code" href="classgcop_1_1Ce.html#a085d6afe8cc2fae1e946b9b47dffa636">00260</a>     <span class="keyword">const</span> Matrix&lt;double, _n, 1&gt;&amp; <a class="code" href="classgcop_1_1Ce.html#a085d6afe8cc2fae1e946b9b47dffa636">Ce&lt;_n&gt;::Best</a>() 
+<a name="l00261"></a>00261     {
+<a name="l00262"></a>00262       <span class="keywordflow">return</span> zmin;
+<a name="l00263"></a>00263     }
+<a name="l00264"></a>00264 }
+<a name="l00265"></a>00265 
+<a name="l00266"></a>00266 
+<a name="l00267"></a>00267 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -67,7 +67,7 @@
 <div class="title">gcop::SplineTparam&lt; T, nx, nu, np, _ntp &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="gcop::SplineTparam" --><!-- doxytag: inherits="gcop::Tparam" -->
+<!-- doxytag: class="gcop::SplineTparam" --><!-- doxytag: inherits="Tparam&lt; T, nx, nu, np, _ntp &gt;" -->
 <p><code>#include &lt;<a class="el" href="splinetparam_8h_source.html">splinetparam.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for gcop::SplineTparam&lt; T, nx, nu, np, _ntp &gt;:</div>
@@ -88,9 +88,9 @@ Collaboration diagram for gcop::SplineTparam&lt; T, nx, nu, np, _ntp &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SplineTparam.html#aeeafdf87991255e2dee399a87d3a68dd">SplineTparam</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1Tparam.html#ac969f953f716498371761969f75c7f7a">sys</a>, const VectorXd <a class="el" href="classgcop_1_1SplineTparam.html#a75355da28517c7c1031ac566ed6343e0">tks</a>, int <a class="el" href="classgcop_1_1SplineTparam.html#a88ad2d18f0f70e9cd3924c8cf3a9ad3a">degree</a>=2)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SplineTparam.html#a28f67f0ce6b4eab2d0f6c2ea7698c665">To</a> (Vectorntpd &amp;s, const vector&lt; double &gt; &amp;ts, const vector&lt; T &gt; &amp;xs, const vector&lt; Vectorcd &gt; &amp;us, const Vectormd *p=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SplineTparam.html#a0f1ce155404988031df9e2d31c1f0bd4">From</a> (vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, const Vectorntpd &amp;s, Vectormd *p=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SplineTparam.html#aeeafdf87991255e2dee399a87d3a68dd">SplineTparam</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1Tparam.html#a3b6ca4862cb80522eeb11c729316ffee">sys</a>, const VectorXd <a class="el" href="classgcop_1_1SplineTparam.html#a75355da28517c7c1031ac566ed6343e0">tks</a>, int <a class="el" href="classgcop_1_1SplineTparam.html#a88ad2d18f0f70e9cd3924c8cf3a9ad3a">degree</a>=2)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SplineTparam.html#a1cc102eae0a7a4799e7c2f52c77d0d96">To</a> (Vectorntpd &amp;s, const vector&lt; double &gt; &amp;ts, const vector&lt; T &gt; &amp;xs, const vector&lt; Vectorcd &gt; &amp;us, const Vectormd *p=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SplineTparam.html#affeeec0e64ce38d2fb3fee3c115df9f8">From</a> (vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, const Vectorntpd &amp;s, Vectormd *p=0)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1SplineTparam.html#a75355da28517c7c1031ac566ed6343e0">tks</a></td></tr>
@@ -154,14 +154,14 @@ template&lt;typename T , int nx, int nu, int np, int _ntp&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a0f1ce155404988031df9e2d31c1f0bd4"></a><!-- doxytag: member="gcop::SplineTparam::From" ref="a0f1ce155404988031df9e2d31c1f0bd4" args="(vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, const Vectorntpd &amp;s, Vectormd *p=0)" -->
+<a class="anchor" id="affeeec0e64ce38d2fb3fee3c115df9f8"></a><!-- doxytag: member="gcop::SplineTparam::From" ref="affeeec0e64ce38d2fb3fee3c115df9f8" args="(vector&lt; double &gt; &amp;ts, vector&lt; T &gt; &amp;xs, vector&lt; Vectorcd &gt; &amp;us, const Vectorntpd &amp;s, Vectormd *p=0)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , int nx, int nu, int np, int _ntp&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classgcop_1_1SplineTparam.html">gcop::SplineTparam</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ntp &gt;::<a class="el" href="classgcop_1_1SplineTparam.html#a0f1ce155404988031df9e2d31c1f0bd4">From</a> </td>
+          <td class="memname">bool <a class="el" href="classgcop_1_1SplineTparam.html">gcop::SplineTparam</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ntp &gt;::<a class="el" href="classgcop_1_1SplineTparam.html#affeeec0e64ce38d2fb3fee3c115df9f8">From</a> </td>
           <td>(</td>
           <td class="paramtype">vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>ts</em>, </td>
@@ -209,19 +209,20 @@ template&lt;typename T , int nx, int nu, int np, int _ntp&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if conversion was successful </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Tparam.html#a4365bd4b1f7bb59a23dd25838c0a9db4">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Tparam.html#a547cacd83055c27b7f083038d980ac3a">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a28f67f0ce6b4eab2d0f6c2ea7698c665"></a><!-- doxytag: member="gcop::SplineTparam::To" ref="a28f67f0ce6b4eab2d0f6c2ea7698c665" args="(Vectorntpd &amp;s, const vector&lt; double &gt; &amp;ts, const vector&lt; T &gt; &amp;xs, const vector&lt; Vectorcd &gt; &amp;us, const Vectormd *p=0)" -->
+<a class="anchor" id="a1cc102eae0a7a4799e7c2f52c77d0d96"></a><!-- doxytag: member="gcop::SplineTparam::To" ref="a1cc102eae0a7a4799e7c2f52c77d0d96" args="(Vectorntpd &amp;s, const vector&lt; double &gt; &amp;ts, const vector&lt; T &gt; &amp;xs, const vector&lt; Vectorcd &gt; &amp;us, const Vectormd *p=0)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , int nx, int nu, int np, int _ntp&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classgcop_1_1SplineTparam.html">gcop::SplineTparam</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ntp &gt;::<a class="el" href="classgcop_1_1SplineTparam.html#a28f67f0ce6b4eab2d0f6c2ea7698c665">To</a> </td>
+          <td class="memname">bool <a class="el" href="classgcop_1_1SplineTparam.html">gcop::SplineTparam</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ntp &gt;::<a class="el" href="classgcop_1_1SplineTparam.html#a1cc102eae0a7a4799e7c2f52c77d0d96">To</a> </td>
           <td>(</td>
           <td class="paramtype">Vectorntpd &amp;&#160;</td>
           <td class="paramname"><em>s</em>, </td>
@@ -269,8 +270,9 @@ template&lt;typename T , int nx, int nu, int np, int _ntp&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if conversion was successful </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Tparam.html#a92de5e8167d3cbec5fa498e0d7b5fd2f">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Tparam.html#a2668afc0c6d411d2811a8e3f7b4d60b3">gcop::Tparam&lt; T, nx, nu, np, _ntp &gt;</a>.</p>
 
 </div>
 </div>
@@ -337,7 +339,7 @@ template&lt;typename T , int nx, int nu, int np = Dynamic, int _ntp = Dynamic&gt
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

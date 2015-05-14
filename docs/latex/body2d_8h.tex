@@ -3,14 +3,19 @@
 {\ttfamily \#include \char`\"{}system.\-h\char`\"{}}\*
 {\ttfamily \#include $<$utility$>$}\*
 {\ttfamily \#include \char`\"{}body2dforce.\-h\char`\"{}}\*
-\-Include dependency graph for body2d.\-h\-:\nopagebreak
+{\ttfamily \#include \char`\"{}body2dmanifold.\-h\char`\"{}}\*
+{\ttfamily \#include \char`\"{}se2.\-h\char`\"{}}\*
+{\ttfamily \#include \char`\"{}rn.\-h\char`\"{}}\*
+\-Include dependency graph for body2d.\-h\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{body2d_8h__incl}
 \end{center}
 \end{figure}
-\-This graph shows which files directly or indirectly include this file\-:\nopagebreak
+\-This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +25,7 @@
 \subsection*{\-Classes}
 \begin{DoxyCompactItemize}
 \item 
-class {\bf gcop\-::\-Body2d}
+class {\bf gcop\-::\-Body2d$<$ c $>$}
 \end{DoxyCompactItemize}
 \subsection*{\-Namespaces}
 \begin{DoxyCompactItemize}
@@ -36,5 +41,5 @@ typedef \-Matrix$<$ double, 6, 3 $>$ {\bf gcop\-::\-Matrix63d}
 \item 
 typedef \-Matrix$<$ double, 3, 6 $>$ {\bf gcop\-::\-Matrix36d}
 \item 
-typedef pair$<$ \-Matrix3d, \-Vector3d $>$ {\bf gcop\-::\-M3\-V3d}
+typedef pair$<$ \-Matrix3d, \-Vector3d $>$ {\bf gcop\-::\-Body2d\-State}
 \end{DoxyCompactItemize}

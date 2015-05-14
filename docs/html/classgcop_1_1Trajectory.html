@@ -69,7 +69,7 @@
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="gcop::Trajectory" -->
-<p><code>#include &lt;<a class="el" href="trajectory_8h_source.html">trajectory.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="parametrization_2trajectory_8h_source.html">trajectory.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;:</div>
 <div class="dyncontent">
@@ -90,6 +90,8 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, nu, nu &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a48d7fc949d1cd2adf0505902a4fd0df1">Matrixcd</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a113b386b2d64101c36c1e8f5af8d7b1c">Vectormd</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, _ns, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a63607d48c1ec2fb353959141b97ccf21">Vectorsd</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, _nu, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a42320f3ee0e1842e00a56d6226c24a2d">Vectorud</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, _np, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#add039b8d4539f3ae99f9a2b5d5f3a51f">Vectorpd</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a582af0b15be9cb51237a7c6f06a28d3c">Trajectory</a> (const <a class="el" href="classgcop_1_1System.html">System</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;<a class="el" href="classgcop_1_1Trajectory.html#ae04ee50fc6e4c51f7939a35656d6c6cb">sys</a>, int <a class="el" href="classgcop_1_1Trajectory.html#a5e1c9a4e6b51cd961730aebcf4c624a5">ns</a>=0, int N=0)</td></tr>
@@ -97,6 +99,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#acf6b5804ef43e3ba769212b007923ce1">Update</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#accb6cee6bd2793bf6fc07c8c0baea900">Get</a> (T &amp;x, <a class="el" href="classgcop_1_1Trajectory.html#ab518cf0429ef16d4a2a599e24bd8bb07">Vectorcd</a> &amp;u, double t) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#afa2e5818e5fec593be911bb2da65b7ff">Get</a> (double t) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a766b1d6c7ab405a7593a000d06f4c9f6">Trajectory</a> (const <a class="el" href="classgcop_1_1System.html">System</a>&lt; T, _nx, _nu, _np &gt; &amp;<a class="el" href="classgcop_1_1Trajectory.html#ae04ee50fc6e4c51f7939a35656d6c6cb">sys</a>, int N)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classgcop_1_1System.html">System</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#ae04ee50fc6e4c51f7939a35656d6c6cb">sys</a></td></tr>
@@ -105,14 +108,20 @@ Public Attributes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">trajectory parameter dimension  <a href="#a5e1c9a4e6b51cd961730aebcf4c624a5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Trajectory.html#a63607d48c1ec2fb353959141b97ccf21">Vectorsd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a24dcfe9311a21200a8d69297f1349f74">s</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">continuous trajectory parametrization vector (this given vector should uniqely determine the whole continuous trajectory, typically together with a given initial state x0 and initial time t0). Examples of what s should be include: 1) simply a discrete sequence of constant controls applied during each discrete time-segment (this is the default -- in which case, s represents the sequence of controls us); 2) interpolating points for more general control curve parametrization using spline basis functions, 3) interpolating points for flat output parametrization using spline basis functions, 4) both control, state, and static params parametrizations often requires for direct collocation/multiple-shooting methods.  <a href="#a24dcfe9311a21200a8d69297f1349f74"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a5b96d4187cba8f4cbc69601728e1ffb3">ts</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">sequence of times (length is N+1, and always at least 1 element, the first is the start time t0)  <a href="#a5b96d4187cba8f4cbc69601728e1ffb3"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#ab9f56dcc911ead31affe25cfdc7b048c">xs</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">sequence of states (length is N+1, and always at least 1, the first is the start state x0)  <a href="#ab9f56dcc911ead31affe25cfdc7b048c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#ae87b25ed4179930a7ff5ecef589ea8e1">ts</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">sequence of times (length is N+1, and always at least 1 element, the first is the start time t0)  <a href="#ae87b25ed4179930a7ff5ecef589ea8e1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#af982704a8f32afd6c47c5e063eec0550">xs</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">sequence of states (length is N+1, and always at least 1, the first is the start state x0)  <a href="#af982704a8f32afd6c47c5e063eec0550"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="classgcop_1_1Trajectory.html#ab518cf0429ef16d4a2a599e24bd8bb07">Vectorcd</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#ac12d97749b65e6c9c6caba279d9e0206">us</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">sequence of controls (length is N), i.e. i-th control is regarded as the average control input over i-th segment  <a href="#ac12d97749b65e6c9c6caba279d9e0206"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Trajectory.html#a113b386b2d64101c36c1e8f5af8d7b1c">Vectormd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a6746124f52790efa954a031f0402502c">p</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">static parameters (could be none)  <a href="#a6746124f52790efa954a031f0402502c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classgcop_1_1System.html">System</a>&lt; T, _nx, _nu, _np &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a4b51b208599cc305641fb6f73baa40be">sys</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">system  <a href="#a4b51b208599cc305641fb6f73baa40be"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="classgcop_1_1Trajectory.html#a42320f3ee0e1842e00a56d6226c24a2d">Vectorud</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a0b9d7564c31a9d577502ee11588307b6">us</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">sequence of (N) control inputs (regarded as paremetrizing the control signal along the i-th segment, for i=0,...,N-1) e.g. constant control during the interval <img class="formulaInl" alt="$[t_k,t_{k+1}]$" src="form_62.png"/>  <a href="#a0b9d7564c31a9d577502ee11588307b6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Trajectory.html#add039b8d4539f3ae99f9a2b5d5f3a51f">Vectorpd</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Trajectory.html#a8f01de1814a0be466a972091460bb464">p</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">system parameters (optional, set to zero by default)  <a href="#a8f01de1814a0be466a972091460bb464"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T, int nx = Dynamic, int nu = Dynamic, int np = Dynamic, int _ns = Dynamic&gt;<br/>
@@ -120,7 +129,9 @@ class gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;</h3>
 
 <p>Basic control system trajectory represented by a set of discrete nodes</p>
 <p>This should serve as a base class for implementing trajectories for a particular mechanical system described by the <a class="el" href="classgcop_1_1System.html">System</a> class</p>
-<p>Author: Marin Kobilarov -- Copyright (C) 2006 </p>
+<p>Author: Marin Kobilarov -- Copyright (C) 2006</p>
+<p>A container for generic trajectory (this could be discrete or continuous) but in any case we contain a discrete-time representation for computational/visualization purposes</p>
+<p>Author: Marin Kobilarov (c) marin(at)jhu.edu </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="a48d7fc949d1cd2adf0505902a4fd0df1"></a><!-- doxytag: member="gcop::Trajectory::Matrixcd" ref="a48d7fc949d1cd2adf0505902a4fd0df1" args="" -->
 <div class="memitem">
@@ -227,6 +238,21 @@ template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, i
 
 </div>
 </div>
+<a class="anchor" id="add039b8d4539f3ae99f9a2b5d5f3a51f"></a><!-- doxytag: member="gcop::Trajectory::Vectorpd" ref="add039b8d4539f3ae99f9a2b5d5f3a51f" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, int _ns = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef Matrix&lt;double, _np, 1&gt; <a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ns &gt;::<a class="el" href="classgcop_1_1Trajectory.html#add039b8d4539f3ae99f9a2b5d5f3a51f">Vectorpd</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a63607d48c1ec2fb353959141b97ccf21"></a><!-- doxytag: member="gcop::Trajectory::Vectorsd" ref="a63607d48c1ec2fb353959141b97ccf21" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -235,6 +261,21 @@ template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, i
       <table class="memname">
         <tr>
           <td class="memname">typedef Matrix&lt;double, _ns, 1&gt; <a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ns &gt;::<a class="el" href="classgcop_1_1Trajectory.html#a63607d48c1ec2fb353959141b97ccf21">Vectorsd</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a42320f3ee0e1842e00a56d6226c24a2d"></a><!-- doxytag: member="gcop::Trajectory::Vectorud" ref="a42320f3ee0e1842e00a56d6226c24a2d" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, int _ns = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef Matrix&lt;double, _nu, 1&gt; <a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ns &gt;::<a class="el" href="classgcop_1_1Trajectory.html#a42320f3ee0e1842e00a56d6226c24a2d">Vectorud</a></td>
         </tr>
       </table>
 </div>
@@ -280,29 +321,10 @@ template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, i
   <table class="params">
     <tr><td class="paramname">sys</td><td>mechanical system </td></tr>
     <tr><td class="paramname">sn</td><td>trajectory parametrization vector length </td></tr>
-    <tr><td class="paramname">N</td><td>number of discrete segments (optional)</td></tr>
+    <tr><td class="paramname">N</td><td>number of discrete segments (optional) </td></tr>
   </table>
   </dd>
 </dl>
-<p>Output the trajectory to a stream </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">os</td><td>output stream </td></tr>
-    <tr><td class="paramname">traj</td><td>trajectory </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>the output stream template &lt;typename T, int nx = Dynamic, int nu = Dynamic, int np = Dynamic, int _ns = Dynamic&gt; std::ostream&amp; operator&lt;&lt;(std::ostream &amp;os, const gcop::Trajectory&lt;T, nx, nu, np, _ns&gt; &amp;traj); Input the trajectory from a stream </dd></dl>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">is</td><td>input stream </td></tr>
-    <tr><td class="paramname">traj</td><td>trajectory </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>the input stream template &lt;typename T, int nx = Dynamic, int nu = Dynamic, int np = Dynamic, int _ns = Dynamic&gt; std::istream&amp; operator&gt;&gt;(std::istream &amp;is, gcop::Trajectory&lt;T, nx, nu, np, _ns&gt; &amp;traj); </dd></dl>
-
-<p>References <a class="el" href="classgcop_1_1Trajectory.html#a24dcfe9311a21200a8d69297f1349f74">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;::s</a>.</p>
 
 </div>
 </div>
@@ -331,6 +353,35 @@ template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, i
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="a766b1d6c7ab405a7593a000d06f4c9f6"></a><!-- doxytag: member="gcop::Trajectory::Trajectory" ref="a766b1d6c7ab405a7593a000d06f4c9f6" args="(const System&lt; T, _nx, _nu, _np &gt; &amp;sys, int N)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , int _nx, int _nu, int _np&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Trajectory.html">Trajectory</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1System.html">System</a>&lt; T, _nx, _nu, _np &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -459,6 +510,23 @@ template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, i
 
 </div>
 </div>
+<a class="anchor" id="a8f01de1814a0be466a972091460bb464"></a><!-- doxytag: member="gcop::Trajectory::p" ref="a8f01de1814a0be466a972091460bb464" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, int _ns = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgcop_1_1Trajectory.html#add039b8d4539f3ae99f9a2b5d5f3a51f">Vectorpd</a>* <a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ns &gt;::<a class="el" href="classgcop_1_1Trajectory.html#a6746124f52790efa954a031f0402502c">p</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>system parameters (optional, set to zero by default) </p>
+
+</div>
+</div>
 <a class="anchor" id="a6746124f52790efa954a031f0402502c"></a><!-- doxytag: member="gcop::Trajectory::p" ref="a6746124f52790efa954a031f0402502c" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -491,7 +559,22 @@ template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, i
 
 <p>continuous trajectory parametrization vector (this given vector should uniqely determine the whole continuous trajectory, typically together with a given initial state x0 and initial time t0). Examples of what s should be include: 1) simply a discrete sequence of constant controls applied during each discrete time-segment (this is the default -- in which case, s represents the sequence of controls us); 2) interpolating points for more general control curve parametrization using spline basis functions, 3) interpolating points for flat output parametrization using spline basis functions, 4) both control, state, and static params parametrizations often requires for direct collocation/multiple-shooting methods. </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Trajectory.html#a582af0b15be9cb51237a7c6f06a28d3c">gcop::Trajectory&lt; T, nx, nu, np, _ns &gt;::Trajectory()</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a4b51b208599cc305641fb6f73baa40be"></a><!-- doxytag: member="gcop::Trajectory::sys" ref="a4b51b208599cc305641fb6f73baa40be" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, int _ns = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classgcop_1_1System.html">System</a>&lt;T, _nx, _nu, _np&gt;&amp; <a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ns &gt;::<a class="el" href="classgcop_1_1Trajectory.html#ae04ee50fc6e4c51f7939a35656d6c6cb">sys</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>system </p>
 
 </div>
 </div>
@@ -534,20 +617,38 @@ template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, i
 
 </div>
 </div>
-<a class="anchor" id="a5b96d4187cba8f4cbc69601728e1ffb3"></a><!-- doxytag: member="gcop::Trajectory::ts" ref="a5b96d4187cba8f4cbc69601728e1ffb3" args="" -->
+<a class="anchor" id="ae87b25ed4179930a7ff5ecef589ea8e1"></a><!-- doxytag: member="gcop::Trajectory::ts" ref="ae87b25ed4179930a7ff5ecef589ea8e1" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, int _ns = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ns &gt;::<a class="el" href="classgcop_1_1Trajectory.html#a5b96d4187cba8f4cbc69601728e1ffb3">ts</a></td>
+          <td class="memname">vector&lt; double &gt; <a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ns &gt;::<a class="el" href="classgcop_1_1Trajectory.html#ae87b25ed4179930a7ff5ecef589ea8e1">ts</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>sequence of times (length is N+1, and always at least 1 element, the first is the start time t0) </p>
+<p>sequence of (N+1) times </p>
+
+</div>
+</div>
+<a class="anchor" id="a0b9d7564c31a9d577502ee11588307b6"></a><!-- doxytag: member="gcop::Trajectory::us" ref="a0b9d7564c31a9d577502ee11588307b6" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, int _ns = Dynamic&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="classgcop_1_1Trajectory.html#a42320f3ee0e1842e00a56d6226c24a2d">Vectorud</a>&gt; <a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ns &gt;::<a class="el" href="classgcop_1_1Trajectory.html#ac12d97749b65e6c9c6caba279d9e0206">us</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>sequence of (N) control inputs (regarded as paremetrizing the control signal along the i-th segment, for i=0,...,N-1) e.g. constant control during the interval <img class="formulaInl" alt="$[t_k,t_{k+1}]$" src="form_62.png"/> </p>
 
 </div>
 </div>
@@ -568,31 +669,33 @@ template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, i
 
 </div>
 </div>
-<a class="anchor" id="ab9f56dcc911ead31affe25cfdc7b048c"></a><!-- doxytag: member="gcop::Trajectory::xs" ref="ab9f56dcc911ead31affe25cfdc7b048c" args="" -->
+<a class="anchor" id="af982704a8f32afd6c47c5e063eec0550"></a><!-- doxytag: member="gcop::Trajectory::xs" ref="af982704a8f32afd6c47c5e063eec0550" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , int nx = Dynamic, int nu = Dynamic, int np = Dynamic, int _ns = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;T&gt; <a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ns &gt;::<a class="el" href="classgcop_1_1Trajectory.html#ab9f56dcc911ead31affe25cfdc7b048c">xs</a></td>
+          <td class="memname">vector&lt; T &gt; <a class="el" href="classgcop_1_1Trajectory.html">gcop::Trajectory</a>&lt; T, nx, nu, <a class="el" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a>, _ns &gt;::<a class="el" href="classgcop_1_1Trajectory.html#af982704a8f32afd6c47c5e063eec0550">xs</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>sequence of states (length is N+1, and always at least 1, the first is the start state x0) </p>
+<p>sequence of (N+1) states </p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>lib/systems/parametrization/<a class="el" href="trajectory_8h_source.html">trajectory.h</a></li>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>lib/systems/parametrization/<a class="el" href="parametrization_2trajectory_8h_source.html">trajectory.h</a></li>
+<li>lib/systems/<a class="el" href="trajectory_8h_source.html">trajectory.h</a></li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

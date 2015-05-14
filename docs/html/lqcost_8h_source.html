@@ -80,7 +80,7 @@
 <a name="l00014"></a>00014     <span class="keywordtype">int</span> _nx = Dynamic, 
 <a name="l00015"></a>00015     <span class="keywordtype">int</span> _nu = Dynamic,
 <a name="l00016"></a>00016     <span class="keywordtype">int</span> _np = Dynamic,
-<a name="l00017"></a><a class="code" href="classgcop_1_1LqCost.html">00017</a>     <span class="keywordtype">int</span> _ng = Dynamic&gt; <span class="keyword">class </span><a class="code" href="classgcop_1_1LqCost.html">LqCost</a> : <span class="keyword">public</span> <a class="code" href="classgcop_1_1LsCost.html">LsCost</a>&lt;T, _nx, _nu, _np, _ng&gt; {
+<a name="l00017"></a><a class="code" href="classgcop_1_1LqCost.html">00017</a>     <span class="keywordtype">int</span> _ng = Dynamic&gt; <span class="keyword">class </span><a class="code" href="classgcop_1_1LqCost.html">LqCost</a> : <span class="keyword">public</span> <a class="code" href="classgcop_1_1LsCost.html">LsCost</a>&lt;T, _nx, _nu, _np, _ng, T&gt; {
 <a name="l00018"></a>00018     <span class="keyword">public</span>:
 <a name="l00019"></a>00019 
 <a name="l00020"></a><a class="code" href="classgcop_1_1LqCost.html#acb0d044a737ec4786ab4370fb5f444ab">00020</a>   <span class="keyword">typedef</span> Matrix&lt;double, _ng, 1&gt; <a class="code" href="classgcop_1_1LqCost.html#acb0d044a737ec4786ab4370fb5f444ab">Vectorgd</a>;
@@ -106,244 +106,260 @@
 <a name="l00049"></a>00049 
 <a name="l00054"></a>00054     <span class="keywordtype">void</span> UpdateGains(); 
 <a name="l00055"></a>00055     
-<a name="l00056"></a>00056     <span class="keyword">virtual</span> <span class="keywordtype">double</span> L(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T&amp; x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a>&amp; u, <span class="keywordtype">double</span> h,
-<a name="l00057"></a>00057                      <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p = 0,
-<a name="l00058"></a>00058                      <a class="code" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> *Lx = 0, <a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a>* Lxx = 0,
-<a name="l00059"></a>00059                      <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> *Lu = 0, <a class="code" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a>* Luu = 0,
-<a name="l00060"></a>00060                      <a class="code" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a> *Lxu = 0,
-<a name="l00061"></a>00061                      <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *Lp = 0, <a class="code" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> *Lpp = 0,
-<a name="l00062"></a>00062                      <a class="code" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> *Lpx = 0);
+<a name="l00056"></a>00056     <span class="keyword">virtual</span> <span class="keywordtype">double</span> L(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T&amp; x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#ab5cbac6ad98cdc73b6d541a909484992">Vectorcd</a>&amp; u, <span class="keywordtype">double</span> h,
+<a name="l00057"></a>00057                      <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a6d6ab24bbe55dfae824036d5cd336962">Vectormd</a> *p = 0,
+<a name="l00058"></a>00058                      <a class="code" href="classgcop_1_1Cost.html#a908616f9085ea4d0fb4e3b6bcf479743">Vectornd</a> *Lx = 0, <a class="code" href="classgcop_1_1Cost.html#ad74bc680c916dd17d70f2272de0741dc">Matrixnd</a>* Lxx = 0,
+<a name="l00059"></a>00059                      <a class="code" href="classgcop_1_1Cost.html#ab5cbac6ad98cdc73b6d541a909484992">Vectorcd</a> *Lu = 0, <a class="code" href="classgcop_1_1Cost.html#a12b08a4c53143d6ad30468a45c1bdbea">Matrixcd</a>* Luu = 0,
+<a name="l00060"></a>00060                      <a class="code" href="classgcop_1_1Cost.html#a6397802756f83e925980c4407e67c07b">Matrixncd</a> *Lxu = 0,
+<a name="l00061"></a>00061                      <a class="code" href="classgcop_1_1Cost.html#a6d6ab24bbe55dfae824036d5cd336962">Vectormd</a> *Lp = 0, <a class="code" href="classgcop_1_1Cost.html#a69eca9f9c97683f57abda309365971c3">Matrixmd</a> *Lpp = 0,
+<a name="l00062"></a>00062                      <a class="code" href="classgcop_1_1Cost.html#aa8545df43a6cb92198e921aafce97204">Matrixmnd</a> *Lpx = 0);
 <a name="l00063"></a>00063 
 <a name="l00064"></a>00064     <span class="keywordtype">bool</span> Res(<a class="code" href="classgcop_1_1LqCost.html#acb0d044a737ec4786ab4370fb5f444ab">Vectorgd</a> &amp;g, 
-<a name="l00065"></a>00065              <span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
-<a name="l00066"></a>00066              <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p = 0,
+<a name="l00065"></a>00065              <span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#ab5cbac6ad98cdc73b6d541a909484992">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
+<a name="l00066"></a>00066              <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a6d6ab24bbe55dfae824036d5cd336962">Vectormd</a> *p = 0,
 <a name="l00067"></a>00067              <a class="code" href="classgcop_1_1LqCost.html#ab72ba093cf08dc05b46447f818ac28ee">Matrixgxd</a> *dgdx = 0, <a class="code" href="classgcop_1_1LqCost.html#aa69b1cb9710f042f52f3bfdd97110e46">Matrixgud</a> *dgdu = 0,
 <a name="l00068"></a>00068              <a class="code" href="classgcop_1_1LqCost.html#a371e6ede4a73ba95d8914547a897815c">Matrixgpd</a> *dgdp = 0);                 
 <a name="l00069"></a>00069 
 <a name="l00075"></a>00075     <span class="keywordtype">void</span> SetReference(<span class="keyword">const</span> vector&lt;T&gt; *xds, <span class="keyword">const</span> vector&lt;Vectorcd&gt; *uds);        
 <a name="l00076"></a>00076     
-<a name="l00077"></a><a class="code" href="classgcop_1_1LqCost.html#a606611084240ba0dc6624409514cb85d">00077</a>     <span class="keyword">const</span> T &amp;<a class="code" href="classgcop_1_1LqCost.html#a606611084240ba0dc6624409514cb85d" title="reference to a desired final state">xf</a>; 
-<a name="l00078"></a>00078     
-<a name="l00079"></a><a class="code" href="classgcop_1_1LqCost.html#ae25a89305d3de8024556deabe5f9cbe6">00079</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1LqCost.html#ae25a89305d3de8024556deabe5f9cbe6" title="are the Q, Qf, and R matrices diagonal (true by default)">diag</a>;   
+<a name="l00077"></a>00077     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> SetContext(<span class="keyword">const</span> T &amp;c);
+<a name="l00078"></a>00078 
+<a name="l00079"></a><a class="code" href="classgcop_1_1LqCost.html#a124d5d664a3acb0dfb01de0fbfccde82">00079</a>     <span class="keyword">const</span> T *<a class="code" href="classgcop_1_1LqCost.html#a124d5d664a3acb0dfb01de0fbfccde82" title="reference to a desired final state">xf</a>; 
 <a name="l00080"></a>00080     
-<a name="l00081"></a><a class="code" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e">00081</a>     <a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> <a class="code" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e" title="state matrix Q">Q</a>;       
-<a name="l00082"></a><a class="code" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008">00082</a>     <a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> <a class="code" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008" title="final state matrix Qf">Qf</a>;      
-<a name="l00083"></a><a class="code" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987">00083</a>     <a class="code" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a> <a class="code" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987" title="control matrix R">R</a>;       
-<a name="l00084"></a>00084 
-<a name="l00085"></a><a class="code" href="classgcop_1_1LqCost.html#a8633acbdff20c371bfb9e60b3be6a0c7">00085</a>     <a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> <a class="code" href="classgcop_1_1LqCost.html#a8633acbdff20c371bfb9e60b3be6a0c7" title="state matrix Q sqrt">Qsqrt</a>;       
-<a name="l00086"></a><a class="code" href="classgcop_1_1LqCost.html#ab75aeb1d3a6889a75043fe08ca73fb6f">00086</a>     <a class="code" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> <a class="code" href="classgcop_1_1LqCost.html#ab75aeb1d3a6889a75043fe08ca73fb6f" title="final state matrix Qf sqrt">Qfsqrt</a>;      
-<a name="l00087"></a><a class="code" href="classgcop_1_1LqCost.html#af5d798b9d50e7adcb317a114f60727b4">00087</a>     <a class="code" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a> <a class="code" href="classgcop_1_1LqCost.html#af5d798b9d50e7adcb317a114f60727b4" title="control matrix R sqrt">Rsqrt</a>;       
-<a name="l00088"></a>00088 
-<a name="l00089"></a><a class="code" href="classgcop_1_1LqCost.html#a007d1d2adaefd1486a3818ec6f4cc175">00089</a>     <span class="keyword">const</span> vector&lt;T&gt; *<a class="code" href="classgcop_1_1LqCost.html#a007d1d2adaefd1486a3818ec6f4cc175" title="optional reference trajectory">xds</a>;         
-<a name="l00090"></a><a class="code" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248">00090</a>     <span class="keyword">const</span> vector&lt;Vectorcd&gt; *<a class="code" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248" title="optional reference control">uds</a>;  
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092     <span class="keyword">protected</span>:
+<a name="l00081"></a><a class="code" href="classgcop_1_1LqCost.html#ae25a89305d3de8024556deabe5f9cbe6">00081</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1LqCost.html#ae25a89305d3de8024556deabe5f9cbe6" title="are the Q, Qf, and R matrices diagonal (true by default)">diag</a>;   
+<a name="l00082"></a>00082     
+<a name="l00083"></a><a class="code" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e">00083</a>     <a class="code" href="classgcop_1_1Cost.html#ad74bc680c916dd17d70f2272de0741dc">Matrixnd</a> <a class="code" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e" title="state matrix Q">Q</a>;       
+<a name="l00084"></a><a class="code" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008">00084</a>     <a class="code" href="classgcop_1_1Cost.html#ad74bc680c916dd17d70f2272de0741dc">Matrixnd</a> <a class="code" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008" title="final state matrix Qf">Qf</a>;      
+<a name="l00085"></a><a class="code" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987">00085</a>     <a class="code" href="classgcop_1_1Cost.html#a12b08a4c53143d6ad30468a45c1bdbea">Matrixcd</a> <a class="code" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987" title="control matrix R">R</a>;       
+<a name="l00086"></a>00086 
+<a name="l00087"></a><a class="code" href="classgcop_1_1LqCost.html#a8633acbdff20c371bfb9e60b3be6a0c7">00087</a>     <a class="code" href="classgcop_1_1Cost.html#ad74bc680c916dd17d70f2272de0741dc">Matrixnd</a> <a class="code" href="classgcop_1_1LqCost.html#a8633acbdff20c371bfb9e60b3be6a0c7" title="state matrix Q sqrt">Qsqrt</a>;       
+<a name="l00088"></a><a class="code" href="classgcop_1_1LqCost.html#ab75aeb1d3a6889a75043fe08ca73fb6f">00088</a>     <a class="code" href="classgcop_1_1Cost.html#ad74bc680c916dd17d70f2272de0741dc">Matrixnd</a> <a class="code" href="classgcop_1_1LqCost.html#ab75aeb1d3a6889a75043fe08ca73fb6f" title="final state matrix Qf sqrt">Qfsqrt</a>;      
+<a name="l00089"></a><a class="code" href="classgcop_1_1LqCost.html#af5d798b9d50e7adcb317a114f60727b4">00089</a>     <a class="code" href="classgcop_1_1Cost.html#a12b08a4c53143d6ad30468a45c1bdbea">Matrixcd</a> <a class="code" href="classgcop_1_1LqCost.html#af5d798b9d50e7adcb317a114f60727b4" title="control matrix R sqrt">Rsqrt</a>;       
+<a name="l00090"></a>00090 
+<a name="l00091"></a><a class="code" href="classgcop_1_1LqCost.html#a007d1d2adaefd1486a3818ec6f4cc175">00091</a>     <span class="keyword">const</span> vector&lt;T&gt; *<a class="code" href="classgcop_1_1LqCost.html#a007d1d2adaefd1486a3818ec6f4cc175" title="optional reference trajectory">xds</a>;         
+<a name="l00092"></a><a class="code" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248">00092</a>     <span class="keyword">const</span> vector&lt;Vectorcd&gt; *<a class="code" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248" title="optional reference control">uds</a>;  
 <a name="l00093"></a>00093 
-<a name="l00094"></a><a class="code" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24">00094</a>     <a class="code" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> <a class="code" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24" title="state error (as a tangent vector)">dx</a>;      
-<a name="l00095"></a><a class="code" href="classgcop_1_1LqCost.html#aba8800273bffa0c03221cfa58bbf7e54">00095</a>     <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> <a class="code" href="classgcop_1_1LqCost.html#aba8800273bffa0c03221cfa58bbf7e54" title="control error">du</a>;      
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097     };
-<a name="l00098"></a>00098   
-<a name="l00099"></a>00099   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt;
-<a name="l00100"></a><a class="code" href="classgcop_1_1LqCost.html#aea2900eb59a0bfc0ff06bdcd13c31e96">00100</a>     <a class="code" href="classgcop_1_1LqCost.html">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::LqCost</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, _nx, _nu, _np&gt;</a> &amp;sys, 
-<a name="l00101"></a>00101                                           <span class="keywordtype">double</span> tf, <span class="keyword">const</span> T &amp;xf, <span class="keywordtype">bool</span> diag) : 
-<a name="l00102"></a>00102     <a class="code" href="classgcop_1_1LsCost.html">LsCost</a>&lt;T, _nx, _nu, _np, _ng&gt;(sys, tf, sys.X.n + sys.U.n), xf(xf), diag(diag) {
-<a name="l00103"></a>00103     
-<a name="l00104"></a>00104     <span class="keywordflow">if</span> (_nx == Dynamic || _nu == Dynamic) {
-<a name="l00105"></a>00105       <a class="code" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e" title="state matrix Q">Q</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n);
-<a name="l00106"></a>00106       <a class="code" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008" title="final state matrix Qf">Qf</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n);
-<a name="l00107"></a>00107       <a class="code" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987" title="control matrix R">R</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.n);
-<a name="l00108"></a>00108       <a class="code" href="classgcop_1_1LqCost.html#a8633acbdff20c371bfb9e60b3be6a0c7" title="state matrix Q sqrt">Qsqrt</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n);
-<a name="l00109"></a>00109       <a class="code" href="classgcop_1_1LqCost.html#ab75aeb1d3a6889a75043fe08ca73fb6f" title="final state matrix Qf sqrt">Qfsqrt</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n);
-<a name="l00110"></a>00110       <a class="code" href="classgcop_1_1LqCost.html#af5d798b9d50e7adcb317a114f60727b4" title="control matrix R sqrt">Rsqrt</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.n);
-<a name="l00111"></a>00111       <a class="code" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24" title="state error (as a tangent vector)">dx</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n);
-<a name="l00112"></a>00112       <a class="code" href="classgcop_1_1LqCost.html#aba8800273bffa0c03221cfa58bbf7e54" title="control error">du</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.n);
-<a name="l00113"></a>00113     }
-<a name="l00114"></a>00114 
-<a name="l00115"></a>00115     <a class="code" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e" title="state matrix Q">Q</a>.setZero();
-<a name="l00116"></a>00116     <span class="comment">//    Q.setIdentity();</span>
-<a name="l00117"></a>00117     <a class="code" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008" title="final state matrix Qf">Qf</a>.setIdentity();
-<a name="l00118"></a>00118     <a class="code" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987" title="control matrix R">R</a>.setIdentity();
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120     <a class="code" href="classgcop_1_1LqCost.html#a33b9245442260cb22290b9322ec3d3ee">UpdateGains</a>();
+<a name="l00094"></a>00094     <span class="keyword">protected</span>:
+<a name="l00095"></a>00095 
+<a name="l00096"></a><a class="code" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24">00096</a>     <a class="code" href="classgcop_1_1Cost.html#a908616f9085ea4d0fb4e3b6bcf479743">Vectornd</a> <a class="code" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24" title="state error (as a tangent vector)">dx</a>;      
+<a name="l00097"></a><a class="code" href="classgcop_1_1LqCost.html#aba8800273bffa0c03221cfa58bbf7e54">00097</a>     <a class="code" href="classgcop_1_1Cost.html#ab5cbac6ad98cdc73b6d541a909484992">Vectorcd</a> <a class="code" href="classgcop_1_1LqCost.html#aba8800273bffa0c03221cfa58bbf7e54" title="control error">du</a>;      
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099     };
+<a name="l00100"></a>00100   
+<a name="l00101"></a>00101   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt;
+<a name="l00102"></a><a class="code" href="classgcop_1_1LqCost.html#aea2900eb59a0bfc0ff06bdcd13c31e96">00102</a>     <a class="code" href="classgcop_1_1LqCost.html">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::LqCost</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, _nx, _nu, _np&gt;</a> &amp;sys, 
+<a name="l00103"></a>00103                                           <span class="keywordtype">double</span> tf, <span class="keyword">const</span> T &amp;xf, <span class="keywordtype">bool</span> diag) : 
+<a name="l00104"></a>00104     <a class="code" href="classgcop_1_1LsCost.html">LsCost</a>&lt;T, _nx, _nu, _np, _ng, T&gt;(sys, tf, sys.X.n + sys.U.n), xf(&amp;xf), diag(diag) {
+<a name="l00105"></a>00105     
+<a name="l00106"></a>00106     <span class="keywordflow">if</span> (_nx == Dynamic || _nu == Dynamic) {
+<a name="l00107"></a>00107       <a class="code" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e" title="state matrix Q">Q</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n);
+<a name="l00108"></a>00108       <a class="code" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008" title="final state matrix Qf">Qf</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n);
+<a name="l00109"></a>00109       <a class="code" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987" title="control matrix R">R</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.n);
+<a name="l00110"></a>00110       <a class="code" href="classgcop_1_1LqCost.html#a8633acbdff20c371bfb9e60b3be6a0c7" title="state matrix Q sqrt">Qsqrt</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n);
+<a name="l00111"></a>00111       <a class="code" href="classgcop_1_1LqCost.html#ab75aeb1d3a6889a75043fe08ca73fb6f" title="final state matrix Qf sqrt">Qfsqrt</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n);
+<a name="l00112"></a>00112       <a class="code" href="classgcop_1_1LqCost.html#af5d798b9d50e7adcb317a114f60727b4" title="control matrix R sqrt">Rsqrt</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.n, sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.n);
+<a name="l00113"></a>00113       <a class="code" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24" title="state error (as a tangent vector)">dx</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a6593207bda11e47bef953071c5fea08f" title="state manifold">X</a>.n);
+<a name="l00114"></a>00114       <a class="code" href="classgcop_1_1LqCost.html#aba8800273bffa0c03221cfa58bbf7e54" title="control error">du</a>.resize(sys.<a class="code" href="classgcop_1_1System.html#a0bfa1587c7aaaef13e0186d4c319d675" title="control Euclidean manifold">U</a>.n);
+<a name="l00115"></a>00115     }
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117     <a class="code" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e" title="state matrix Q">Q</a>.setZero();
+<a name="l00118"></a>00118     <span class="comment">//    Q.setIdentity();</span>
+<a name="l00119"></a>00119     <a class="code" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008" title="final state matrix Qf">Qf</a>.setIdentity();
+<a name="l00120"></a>00120     <a class="code" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987" title="control matrix R">R</a>.setIdentity();
 <a name="l00121"></a>00121 
-<a name="l00122"></a>00122     <a class="code" href="classgcop_1_1LqCost.html#a007d1d2adaefd1486a3818ec6f4cc175" title="optional reference trajectory">xds</a> = 0;
-<a name="l00123"></a>00123     <a class="code" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248" title="optional reference control">uds</a> = 0;
-<a name="l00124"></a>00124   }
-<a name="l00125"></a>00125   
-<a name="l00126"></a>00126   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt;
-<a name="l00127"></a><a class="code" href="classgcop_1_1LqCost.html#a33b9245442260cb22290b9322ec3d3ee">00127</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1LqCost.html#a33b9245442260cb22290b9322ec3d3ee">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::UpdateGains</a>() {
-<a name="l00128"></a>00128     Qsqrt = Q.array().sqrt();
-<a name="l00129"></a>00129     Qfsqrt = Qf.array().sqrt();
-<a name="l00130"></a>00130     Rsqrt = R.array().sqrt();
+<a name="l00122"></a>00122     <a class="code" href="classgcop_1_1LqCost.html#a33b9245442260cb22290b9322ec3d3ee">UpdateGains</a>();
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124     <a class="code" href="classgcop_1_1LqCost.html#a007d1d2adaefd1486a3818ec6f4cc175" title="optional reference trajectory">xds</a> = 0;
+<a name="l00125"></a>00125     <a class="code" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248" title="optional reference control">uds</a> = 0;
+<a name="l00126"></a>00126   }
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt;
+<a name="l00129"></a><a class="code" href="classgcop_1_1LqCost.html#a2b21fdf93681c59ec998a1365156cf97">00129</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1LqCost.html#a2b21fdf93681c59ec998a1365156cf97">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::SetContext</a>(<span class="keyword">const</span> T&amp; c) {
+<a name="l00130"></a>00130     this-&gt;xf = &amp;c;
 <a name="l00131"></a>00131   }
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133 
-<a name="l00134"></a>00134   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt;  
-<a name="l00135"></a><a class="code" href="classgcop_1_1LqCost.html#ae7f6441857b5c436664c7431bad22210">00135</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1LqCost.html#ae7f6441857b5c436664c7431bad22210">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::SetReference</a>(<span class="keyword">const</span> vector&lt;T&gt; *xds, <span class="keyword">const</span> vector&lt;Vectorcd&gt; *uds) {
-<a name="l00136"></a>00136     this-&gt;xds = xds;
-<a name="l00137"></a>00137     this-&gt;uds = uds;
+<a name="l00132"></a>00132   
+<a name="l00133"></a>00133   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt;
+<a name="l00134"></a><a class="code" href="classgcop_1_1LqCost.html#a33b9245442260cb22290b9322ec3d3ee">00134</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1LqCost.html#a33b9245442260cb22290b9322ec3d3ee">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::UpdateGains</a>() {
+<a name="l00135"></a>00135     Qsqrt = Q.array().sqrt();
+<a name="l00136"></a>00136     Qfsqrt = Qf.array().sqrt();
+<a name="l00137"></a>00137     Rsqrt = R.array().sqrt();
 <a name="l00138"></a>00138   }
 <a name="l00139"></a>00139 
-<a name="l00140"></a>00140   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt; 
-<a name="l00141"></a><a class="code" href="classgcop_1_1LqCost.html#a0dc68e304a1cfb58ba182eb7be5404dd">00141</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1LqCost.html#a0dc68e304a1cfb58ba182eb7be5404dd">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::Res</a>(<a class="code" href="classgcop_1_1LqCost.html#acb0d044a737ec4786ab4370fb5f444ab">Vectorgd</a> &amp;g, 
-<a name="l00142"></a>00142                                             <span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
-<a name="l00143"></a>00143                                             <span class="keyword">const</span> <a class="code" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p,
-<a name="l00144"></a>00144                                             <a class="code" href="classgcop_1_1LqCost.html#ab72ba093cf08dc05b46447f818ac28ee">Matrixgxd</a> *dgdx, <a class="code" href="classgcop_1_1LqCost.html#aa69b1cb9710f042f52f3bfdd97110e46">Matrixgud</a> *dgdu,
-<a name="l00145"></a>00145                                             <a class="code" href="classgcop_1_1LqCost.html#a371e6ede4a73ba95d8914547a897815c">Matrixgpd</a> *dgdp) {
-<a name="l00146"></a>00146     assert(g.size() == this-&gt;sys.U.n + this-&gt;sys.X.n);
-<a name="l00147"></a>00147     
-<a name="l00148"></a>00148     <span class="keywordtype">int</span> &amp;nx = this-&gt;sys.X.n;
-<a name="l00149"></a>00149     <span class="keywordtype">int</span> &amp;nu = this-&gt;sys.U.n;
-<a name="l00150"></a>00150     
-<a name="l00151"></a>00151     <span class="comment">// check if final state</span>
-<a name="l00152"></a>00152     <span class="keywordflow">if</span> (t &gt; this-&gt;tf - 1e-10) {
-<a name="l00153"></a>00153       <span class="keywordflow">if</span> (xds) {
-<a name="l00154"></a>00154         this-&gt;sys.X.Lift(dx, xds-&gt;back(), x); <span class="comment">// difference (on a vector space we have dx = x - xf)</span>
-<a name="l00155"></a>00155       } <span class="keywordflow">else</span> {
-<a name="l00156"></a>00156         this-&gt;sys.X.Lift(dx, xf, x); <span class="comment">// difference (on a vector space we have dx = x - xf)     </span>
-<a name="l00157"></a>00157       }
-<a name="l00158"></a>00158       assert(!std::isnan(dx[0]));
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160       <span class="keywordflow">if</span> (diag)
-<a name="l00161"></a>00161         g.head(nx) = Qfsqrt.diagonal().cwiseProduct(dx);
-<a name="l00162"></a>00162       <span class="keywordflow">else</span>
-<a name="l00163"></a>00163         g.head(nx) = Qfsqrt*dx;      
-<a name="l00164"></a>00164 
-<a name="l00165"></a>00165       g.tail(nu).setZero();
-<a name="l00166"></a>00166 
-<a name="l00167"></a>00167     } <span class="keywordflow">else</span> {
-<a name="l00168"></a>00168       assert(h &gt; 0);
-<a name="l00169"></a>00169       <span class="keywordtype">int</span> k = round(t/h);
-<a name="l00170"></a>00170       <span class="keywordflow">if</span> (xds) {
-<a name="l00171"></a>00171         assert(k &lt; xds-&gt;size());
-<a name="l00172"></a>00172         this-&gt;sys.X.Lift(dx, (*xds)[k], x); <span class="comment">// difference (on a vector space we have dx = x - xf)</span>
-<a name="l00173"></a>00173       } <span class="keywordflow">else</span> {
-<a name="l00174"></a>00174         this-&gt;sys.X.Lift(dx, xf, x); <span class="comment">// difference (on a vector space we have dx = x - xf)     </span>
-<a name="l00175"></a>00175       }
-<a name="l00176"></a>00176       assert(!std::isnan(dx[0]));
-<a name="l00177"></a>00177 
-<a name="l00178"></a>00178       <span class="keywordflow">if</span> (diag)
-<a name="l00179"></a>00179         g.head(nx) = Qsqrt.diagonal().cwiseProduct(sqrt(h)*dx);
-<a name="l00180"></a>00180       <span class="keywordflow">else</span>
-<a name="l00181"></a>00181         g.head(nx) = Qsqrt*(sqrt(h)*dx);
-<a name="l00182"></a>00182 
-<a name="l00183"></a>00183       <span class="keywordflow">if</span> (uds) {
-<a name="l00184"></a>00184         assert(k &lt; uds-&gt;size());
-<a name="l00185"></a>00185         du = sqrt(h)*(u - (*uds)[k]);
-<a name="l00186"></a>00186       } <span class="keywordflow">else</span> {
-<a name="l00187"></a>00187         du = sqrt(h)*u;
-<a name="l00188"></a>00188       }
-<a name="l00189"></a>00189       
-<a name="l00190"></a>00190       <span class="keywordflow">if</span> (diag)
-<a name="l00191"></a>00191         g.tail(nu) = Rsqrt.diagonal().cwiseProduct(du);
-<a name="l00192"></a>00192       <span class="keywordflow">else</span>
-<a name="l00193"></a>00193         g.tail(nu) = Rsqrt*(du);
-<a name="l00194"></a>00194     }
-<a name="l00195"></a>00195     <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00196"></a>00196   }
-<a name="l00197"></a>00197   
-<a name="l00198"></a>00198   
-<a name="l00199"></a>00199   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt; 
-<a name="l00200"></a><a class="code" href="classgcop_1_1LqCost.html#a5ed101803b01988e0e027cb3212690c4">00200</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1LqCost.html#a5ed101803b01988e0e027cb3212690c4">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::L</a>(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> Matrix&lt;double, _nu, 1&gt; &amp;u,
-<a name="l00201"></a>00201                                             <span class="keywordtype">double</span> h,
-<a name="l00202"></a>00202                                             <span class="keyword">const</span> Matrix&lt;double, _np, 1&gt; *p,
-<a name="l00203"></a>00203                                             Matrix&lt;double, _nx, 1&gt; *Lx, Matrix&lt;double, _nx, _nx&gt; *Lxx,
-<a name="l00204"></a>00204                                             Matrix&lt;double, _nu, 1&gt; *Lu, Matrix&lt;double, _nu, _nu&gt; *Luu,
-<a name="l00205"></a>00205                                             Matrix&lt;double, _nx, _nu&gt; *Lxu,
-<a name="l00206"></a>00206                                             Matrix&lt;double, _np, 1&gt; *Lp, Matrix&lt;double, _np, _np&gt; *Lpp,
-<a name="l00207"></a>00207                                             Matrix&lt;double, _np, _nx&gt; *Lpx) {
-<a name="l00208"></a>00208     
-<a name="l00209"></a>00209     <span class="keywordtype">int</span> k = round(t/h);
-<a name="l00210"></a>00210     
-<a name="l00211"></a>00211         <span class="comment">// check if final state</span>
-<a name="l00212"></a>00212     <span class="keywordflow">if</span> (t &gt; this-&gt;tf - 1e-10) {
-<a name="l00213"></a>00213 
-<a name="l00214"></a>00214       <span class="keywordflow">if</span> (xds) {
-<a name="l00215"></a>00215         this-&gt;sys.X.Lift(dx, xds-&gt;back(), x); <span class="comment">// difference (on a vector space we have dx = x - xf)</span>
-<a name="l00216"></a>00216       } <span class="keywordflow">else</span> {
-<a name="l00217"></a>00217         this-&gt;sys.X.Lift(dx, xf, x); <span class="comment">// difference (on a vector space we have dx = x - xf)      </span>
-<a name="l00218"></a>00218       }
-<a name="l00219"></a>00219       assert(!std::isnan(dx[0]));
-<a name="l00220"></a>00220     
-<a name="l00221"></a>00221 
-<a name="l00222"></a>00222       <span class="keywordflow">if</span> (Lx)
-<a name="l00223"></a>00223         <span class="keywordflow">if</span> (diag)
-<a name="l00224"></a>00224           *Lx = Qf.diagonal().cwiseProduct(dx);
-<a name="l00225"></a>00225         <span class="keywordflow">else</span>
-<a name="l00226"></a>00226           *Lx = Qf*dx;
-<a name="l00227"></a>00227       
-<a name="l00228"></a>00228       <span class="keywordflow">if</span> (Lxx)
-<a name="l00229"></a>00229         *Lxx = Qf;
-<a name="l00230"></a>00230       
-<a name="l00231"></a>00231       <span class="keywordflow">if</span> (Lu)
-<a name="l00232"></a>00232         Lu-&gt;setZero();
-<a name="l00233"></a>00233       <span class="keywordflow">if</span> (Luu)
-<a name="l00234"></a>00234         Luu-&gt;setZero();
-<a name="l00235"></a>00235       <span class="keywordflow">if</span> (Lxu)
-<a name="l00236"></a>00236         Lxu-&gt;setZero();    
-<a name="l00237"></a>00237       
-<a name="l00238"></a>00238       <span class="keywordflow">if</span> (diag)
-<a name="l00239"></a>00239         <span class="keywordflow">return</span> dx.dot(Qf.diagonal().cwiseProduct(dx))/2;
-<a name="l00240"></a>00240       <span class="keywordflow">else</span>
-<a name="l00241"></a>00241         <span class="keywordflow">return</span> dx.dot(Qf*dx)/2;
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt;  
+<a name="l00142"></a><a class="code" href="classgcop_1_1LqCost.html#ae7f6441857b5c436664c7431bad22210">00142</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1LqCost.html#ae7f6441857b5c436664c7431bad22210">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::SetReference</a>(<span class="keyword">const</span> vector&lt;T&gt; *xds, <span class="keyword">const</span> vector&lt;Vectorcd&gt; *uds) {
+<a name="l00143"></a>00143     this-&gt;xds = xds;
+<a name="l00144"></a>00144     this-&gt;uds = uds;
+<a name="l00145"></a>00145   }
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt; 
+<a name="l00148"></a><a class="code" href="classgcop_1_1LqCost.html#a0dc68e304a1cfb58ba182eb7be5404dd">00148</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1LqCost.html#a0dc68e304a1cfb58ba182eb7be5404dd">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::Res</a>(<a class="code" href="classgcop_1_1LqCost.html#acb0d044a737ec4786ab4370fb5f444ab">Vectorgd</a> &amp;g, 
+<a name="l00149"></a>00149                                             <span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> <a class="code" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> &amp;u, <span class="keywordtype">double</span> h,
+<a name="l00150"></a>00150                                             <span class="keyword">const</span> <a class="code" href="classgcop_1_1LqCost.html#a2df7e2ce655a8f1ba1bdf4170e1a0f3b">Vectormd</a> *p,
+<a name="l00151"></a>00151                                             <a class="code" href="classgcop_1_1LqCost.html#ab72ba093cf08dc05b46447f818ac28ee">Matrixgxd</a> *dgdx, <a class="code" href="classgcop_1_1LqCost.html#aa69b1cb9710f042f52f3bfdd97110e46">Matrixgud</a> *dgdu,
+<a name="l00152"></a>00152                                             <a class="code" href="classgcop_1_1LqCost.html#a371e6ede4a73ba95d8914547a897815c">Matrixgpd</a> *dgdp) {
+<a name="l00153"></a>00153     assert(g.size() == this-&gt;sys.U.n + this-&gt;sys.X.n);
+<a name="l00154"></a>00154     
+<a name="l00155"></a>00155     <span class="keywordtype">int</span> &amp;nx = this-&gt;sys.X.n;
+<a name="l00156"></a>00156     <span class="keywordtype">int</span> &amp;nu = this-&gt;sys.U.n;
+<a name="l00157"></a>00157     
+<a name="l00158"></a>00158     <span class="comment">// check if final state</span>
+<a name="l00159"></a>00159     <span class="keywordflow">if</span> (t &gt; this-&gt;tf - 1e-10) {
+<a name="l00160"></a>00160       <span class="keywordflow">if</span> (xds) {
+<a name="l00161"></a>00161         this-&gt;sys.X.Lift(dx, xds-&gt;back(), x); <span class="comment">// difference (on a vector space we have dx = x - xf)</span>
+<a name="l00162"></a>00162       } <span class="keywordflow">else</span> {
+<a name="l00163"></a>00163         this-&gt;sys.X.Lift(dx, *xf, x); <span class="comment">// difference (on a vector space we have dx = x - xf)     </span>
+<a name="l00164"></a>00164       }
+<a name="l00165"></a>00165       <span class="keywordflow">if</span> (std::isnan(dx[0])) {
+<a name="l00166"></a>00166         cout &lt;&lt; <span class="stringliteral">&quot;[W] LqCost::Res: dx is nan&quot;</span> &lt;&lt; endl;
+<a name="l00167"></a>00167         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00168"></a>00168       }
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170       <span class="keywordflow">if</span> (diag)
+<a name="l00171"></a>00171         g.head(nx) = Qfsqrt.diagonal().cwiseProduct(dx);
+<a name="l00172"></a>00172       <span class="keywordflow">else</span>
+<a name="l00173"></a>00173         g.head(nx) = Qfsqrt*dx;      
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175       g.tail(nu).setZero();
+<a name="l00176"></a>00176 
+<a name="l00177"></a>00177     } <span class="keywordflow">else</span> {
+<a name="l00178"></a>00178       assert(h &gt; 0);
+<a name="l00179"></a>00179       <span class="keywordtype">int</span> k = round(t/h);
+<a name="l00180"></a>00180       <span class="keywordflow">if</span> (xds) {
+<a name="l00181"></a>00181         assert(k &lt; xds-&gt;size());
+<a name="l00182"></a>00182         this-&gt;sys.X.Lift(dx, (*xds)[k], x); <span class="comment">// difference (on a vector space we have dx = x - xf)</span>
+<a name="l00183"></a>00183       } <span class="keywordflow">else</span> {
+<a name="l00184"></a>00184         this-&gt;sys.X.Lift(dx, *xf, x); <span class="comment">// difference (on a vector space we have dx = x - xf)     </span>
+<a name="l00185"></a>00185       }
+<a name="l00186"></a>00186       <span class="keywordflow">if</span> (std::isnan(dx[0])) {
+<a name="l00187"></a>00187         cout &lt;&lt; <span class="stringliteral">&quot;[W] LqCost::Res: dx is nan&quot;</span> &lt;&lt; endl;
+<a name="l00188"></a>00188         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00189"></a>00189       }
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191       <span class="keywordflow">if</span> (diag)
+<a name="l00192"></a>00192         g.head(nx) = Qsqrt.diagonal().cwiseProduct(sqrt(h)*dx);
+<a name="l00193"></a>00193       <span class="keywordflow">else</span>
+<a name="l00194"></a>00194         g.head(nx) = Qsqrt*(sqrt(h)*dx);
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196       <span class="keywordflow">if</span> (uds) {
+<a name="l00197"></a>00197         assert(k &lt; uds-&gt;size());
+<a name="l00198"></a>00198         du = sqrt(h)*(u - (*uds)[k]);
+<a name="l00199"></a>00199       } <span class="keywordflow">else</span> {
+<a name="l00200"></a>00200         du = sqrt(h)*u;
+<a name="l00201"></a>00201       }
+<a name="l00202"></a>00202       
+<a name="l00203"></a>00203       <span class="keywordflow">if</span> (diag)
+<a name="l00204"></a>00204         g.tail(nu) = Rsqrt.diagonal().cwiseProduct(du);
+<a name="l00205"></a>00205       <span class="keywordflow">else</span>
+<a name="l00206"></a>00206         g.tail(nu) = Rsqrt*(du);
+<a name="l00207"></a>00207     }
+<a name="l00208"></a>00208     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00209"></a>00209   }
+<a name="l00210"></a>00210   
+<a name="l00211"></a>00211   
+<a name="l00212"></a>00212   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> _nx, <span class="keywordtype">int</span> _nu, <span class="keywordtype">int</span> _np, <span class="keywordtype">int</span> _ng&gt; 
+<a name="l00213"></a><a class="code" href="classgcop_1_1LqCost.html#a5ed101803b01988e0e027cb3212690c4">00213</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1LqCost.html#a5ed101803b01988e0e027cb3212690c4">LqCost&lt;T, _nx, _nu, _np, _ng&gt;::L</a>(<span class="keywordtype">double</span> t, <span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> Matrix&lt;double, _nu, 1&gt; &amp;u,
+<a name="l00214"></a>00214                                             <span class="keywordtype">double</span> h,
+<a name="l00215"></a>00215                                             <span class="keyword">const</span> Matrix&lt;double, _np, 1&gt; *p,
+<a name="l00216"></a>00216                                             Matrix&lt;double, _nx, 1&gt; *Lx, Matrix&lt;double, _nx, _nx&gt; *Lxx,
+<a name="l00217"></a>00217                                             Matrix&lt;double, _nu, 1&gt; *Lu, Matrix&lt;double, _nu, _nu&gt; *Luu,
+<a name="l00218"></a>00218                                             Matrix&lt;double, _nx, _nu&gt; *Lxu,
+<a name="l00219"></a>00219                                             Matrix&lt;double, _np, 1&gt; *Lp, Matrix&lt;double, _np, _np&gt; *Lpp,
+<a name="l00220"></a>00220                                             Matrix&lt;double, _np, _nx&gt; *Lpx) {
+<a name="l00221"></a>00221     
+<a name="l00222"></a>00222     <span class="keywordtype">int</span> k = round(t/h);
+<a name="l00223"></a>00223     
+<a name="l00224"></a>00224         <span class="comment">// check if final state</span>
+<a name="l00225"></a>00225     <span class="keywordflow">if</span> (t &gt; this-&gt;tf - 1e-10) {
+<a name="l00226"></a>00226 
+<a name="l00227"></a>00227       <span class="keywordflow">if</span> (xds) {
+<a name="l00228"></a>00228         this-&gt;sys.X.Lift(dx, xds-&gt;back(), x); <span class="comment">// difference (on a vector space we have dx = x - xf)</span>
+<a name="l00229"></a>00229       } <span class="keywordflow">else</span> {
+<a name="l00230"></a>00230         this-&gt;sys.X.Lift(dx, *xf, x); <span class="comment">// difference (on a vector space we have dx = x - xf)      </span>
+<a name="l00231"></a>00231       }
+<a name="l00232"></a>00232       <span class="keywordflow">if</span> (std::isnan(dx[0])) {
+<a name="l00233"></a>00233         cout &lt;&lt; <span class="stringliteral">&quot;[W] LqCost::L: dx is nan&quot;</span> &lt;&lt; endl;
+<a name="l00234"></a>00234         <span class="keywordflow">return</span> std::numeric_limits&lt;double&gt;::max();
+<a name="l00235"></a>00235       }    
+<a name="l00236"></a>00236 
+<a name="l00237"></a>00237       <span class="keywordflow">if</span> (Lx)
+<a name="l00238"></a>00238         <span class="keywordflow">if</span> (diag)
+<a name="l00239"></a>00239           *Lx = Qf.diagonal().cwiseProduct(dx);
+<a name="l00240"></a>00240         <span class="keywordflow">else</span>
+<a name="l00241"></a>00241           *Lx = Qf*dx;
 <a name="l00242"></a>00242       
-<a name="l00243"></a>00243     } <span class="keywordflow">else</span> {
-<a name="l00244"></a>00244 
-<a name="l00245"></a>00245       <span class="keywordflow">if</span> (xds) {
-<a name="l00246"></a>00246         assert(k &lt; xds-&gt;size());
-<a name="l00247"></a>00247         this-&gt;sys.X.Lift(dx, (*xds)[k], x); <span class="comment">// difference (on a vector space we have dx = x - xf)</span>
-<a name="l00248"></a>00248       } <span class="keywordflow">else</span> {
-<a name="l00249"></a>00249         this-&gt;sys.X.Lift(dx, xf, x); <span class="comment">// difference (on a vector space we have dx = x - xf)      </span>
-<a name="l00250"></a>00250       }
-<a name="l00251"></a>00251       assert(!std::isnan(dx[0]));
-<a name="l00252"></a>00252 
-<a name="l00253"></a>00253      
-<a name="l00254"></a>00254       
-<a name="l00255"></a>00255       <span class="keywordflow">if</span> (uds) {
-<a name="l00256"></a>00256         assert(k &lt; uds-&gt;size());
-<a name="l00257"></a>00257         du = u - (*uds)[k];
-<a name="l00258"></a>00258       } <span class="keywordflow">else</span> {
-<a name="l00259"></a>00259         du = u;
-<a name="l00260"></a>00260       }
-<a name="l00261"></a>00261 
-<a name="l00262"></a>00262       <span class="keywordflow">if</span> (Lx)
-<a name="l00263"></a>00263         <span class="keywordflow">if</span> (diag)
-<a name="l00264"></a>00264           *Lx = Q.diagonal().cwiseProduct(h*dx);
-<a name="l00265"></a>00265         <span class="keywordflow">else</span>
-<a name="l00266"></a>00266           *Lx = Q*(h*dx);
-<a name="l00267"></a>00267 
-<a name="l00268"></a>00268       <span class="keywordflow">if</span> (Lxx) 
-<a name="l00269"></a>00269         *Lxx = h*Q;
+<a name="l00243"></a>00243       <span class="keywordflow">if</span> (Lxx)
+<a name="l00244"></a>00244         *Lxx = Qf;
+<a name="l00245"></a>00245       
+<a name="l00246"></a>00246       <span class="keywordflow">if</span> (Lu)
+<a name="l00247"></a>00247         Lu-&gt;setZero();
+<a name="l00248"></a>00248       <span class="keywordflow">if</span> (Luu)
+<a name="l00249"></a>00249         Luu-&gt;setZero();
+<a name="l00250"></a>00250       <span class="keywordflow">if</span> (Lxu)
+<a name="l00251"></a>00251         Lxu-&gt;setZero();    
+<a name="l00252"></a>00252       
+<a name="l00253"></a>00253       <span class="keywordflow">if</span> (diag)
+<a name="l00254"></a>00254         <span class="keywordflow">return</span> dx.dot(Qf.diagonal().cwiseProduct(dx))/2;
+<a name="l00255"></a>00255       <span class="keywordflow">else</span>
+<a name="l00256"></a>00256         <span class="keywordflow">return</span> dx.dot(Qf*dx)/2;
+<a name="l00257"></a>00257       
+<a name="l00258"></a>00258     } <span class="keywordflow">else</span> {
+<a name="l00259"></a>00259 
+<a name="l00260"></a>00260       <span class="keywordflow">if</span> (xds) {
+<a name="l00261"></a>00261         assert(k &lt; xds-&gt;size());
+<a name="l00262"></a>00262         this-&gt;sys.X.Lift(dx, (*xds)[k], x); <span class="comment">// difference (on a vector space we have dx = x - xf)</span>
+<a name="l00263"></a>00263       } <span class="keywordflow">else</span> {
+<a name="l00264"></a>00264         this-&gt;sys.X.Lift(dx, *xf, x); <span class="comment">// difference (on a vector space we have dx = x - xf)      </span>
+<a name="l00265"></a>00265       }
+<a name="l00266"></a>00266       <span class="keywordflow">if</span> (std::isnan(dx[0])) {
+<a name="l00267"></a>00267         cout &lt;&lt; <span class="stringliteral">&quot;[W] LqCost::L: dx is nan&quot;</span> &lt;&lt; endl;
+<a name="l00268"></a>00268         <span class="keywordflow">return</span> std::numeric_limits&lt;double&gt;::max();
+<a name="l00269"></a>00269       }     
 <a name="l00270"></a>00270       
-<a name="l00271"></a>00271       <span class="keywordflow">if</span> (Lu)
-<a name="l00272"></a>00272         <span class="keywordflow">if</span> (diag)
-<a name="l00273"></a>00273           *Lu = R.diagonal().cwiseProduct(h*du);
-<a name="l00274"></a>00274         <span class="keywordflow">else</span>
-<a name="l00275"></a>00275           *Lu = R*(h*du);        
-<a name="l00276"></a>00276 
-<a name="l00277"></a>00277       <span class="keywordflow">if</span> (Luu)
-<a name="l00278"></a>00278         *Luu = h*R;
-<a name="l00279"></a>00279 
-<a name="l00280"></a>00280       <span class="keywordflow">if</span> (Lxu)
-<a name="l00281"></a>00281         Lxu-&gt;setZero();
-<a name="l00282"></a>00282       
-<a name="l00283"></a>00283       <span class="keywordflow">if</span> (diag)
-<a name="l00284"></a>00284         <span class="keywordflow">return</span> h*(dx.dot(Q.diagonal().cwiseProduct(dx)) + du.dot(R.diagonal().cwiseProduct(du)))/2;
-<a name="l00285"></a>00285       <span class="keywordflow">else</span>
-<a name="l00286"></a>00286         <span class="keywordflow">return</span> h*(dx.dot(Q*dx) + du.dot(R*du))/2;
-<a name="l00287"></a>00287     }
-<a name="l00288"></a>00288     <span class="keywordflow">return</span> 0;
-<a name="l00289"></a>00289   }  
-<a name="l00290"></a>00290 }
-<a name="l00291"></a>00291 
+<a name="l00271"></a>00271       <span class="keywordflow">if</span> (uds) {
+<a name="l00272"></a>00272         assert(k &lt; uds-&gt;size());
+<a name="l00273"></a>00273         du = u - (*uds)[k];
+<a name="l00274"></a>00274       } <span class="keywordflow">else</span> {
+<a name="l00275"></a>00275         du = u;
+<a name="l00276"></a>00276       }
+<a name="l00277"></a>00277 
+<a name="l00278"></a>00278       <span class="keywordflow">if</span> (Lx)
+<a name="l00279"></a>00279         <span class="keywordflow">if</span> (diag)
+<a name="l00280"></a>00280           *Lx = Q.diagonal().cwiseProduct(h*dx);
+<a name="l00281"></a>00281         <span class="keywordflow">else</span>
+<a name="l00282"></a>00282           *Lx = Q*(h*dx);
+<a name="l00283"></a>00283 
+<a name="l00284"></a>00284       <span class="keywordflow">if</span> (Lxx) 
+<a name="l00285"></a>00285         *Lxx = h*Q;
+<a name="l00286"></a>00286       
+<a name="l00287"></a>00287       <span class="keywordflow">if</span> (Lu)
+<a name="l00288"></a>00288         <span class="keywordflow">if</span> (diag)
+<a name="l00289"></a>00289           *Lu = R.diagonal().cwiseProduct(h*du);
+<a name="l00290"></a>00290         <span class="keywordflow">else</span>
+<a name="l00291"></a>00291           *Lu = R*(h*du);        
 <a name="l00292"></a>00292 
-<a name="l00293"></a>00293 <span class="preprocessor">#endif</span>
+<a name="l00293"></a>00293       <span class="keywordflow">if</span> (Luu)
+<a name="l00294"></a>00294         *Luu = h*R;
+<a name="l00295"></a>00295 
+<a name="l00296"></a>00296       <span class="keywordflow">if</span> (Lxu)
+<a name="l00297"></a>00297         Lxu-&gt;setZero();
+<a name="l00298"></a>00298       
+<a name="l00299"></a>00299       <span class="keywordflow">if</span> (diag)
+<a name="l00300"></a>00300         <span class="keywordflow">return</span> h*(dx.dot(Q.diagonal().cwiseProduct(dx)) + du.dot(R.diagonal().cwiseProduct(du)))/2;
+<a name="l00301"></a>00301       <span class="keywordflow">else</span>
+<a name="l00302"></a>00302         <span class="keywordflow">return</span> h*(dx.dot(Q*dx) + du.dot(R*du))/2;
+<a name="l00303"></a>00303     }
+<a name="l00304"></a>00304     <span class="keywordflow">return</span> 0;
+<a name="l00305"></a>00305   }  
+<a name="l00306"></a>00306 }
+<a name="l00307"></a>00307 
+<a name="l00308"></a>00308 
+<a name="l00309"></a>00309 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

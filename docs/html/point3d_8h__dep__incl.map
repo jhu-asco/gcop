@@ -1,5 +1,9 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$point3d_8cc.html" title="lib/systems/point3d.cc" alt="" coords="5,83,157,112"/>
-<area shape="rect" id="node5" href="$gps_8h.html" title="lib/systems/sensors/gps.h" alt="" coords="181,83,355,112"/>
-<area shape="rect" id="node7" href="$point3dgps_8h.html" title="lib/systems/sensors/point3dgps.h" alt="" coords="379,83,595,112"/>
+<area shape="rect" id="node3" href="$point3dcontroller_8h.html" title="lib/algos/point3dcontroller.h" alt="" coords="9,83,188,112"/>
+<area shape="rect" id="node7" href="$point3d_8cc.html" title="lib/systems/point3d.cc" alt="" coords="212,83,364,112"/>
+<area shape="rect" id="node9" href="$gps_8h.html" title="lib/systems/sensors/gps.h" alt="" coords="388,83,561,112"/>
+<area shape="rect" id="node11" href="$point3dgps_8h.html" title="lib/systems/sensors/point3dgps.h" alt="" coords="585,83,801,112"/>
+<area shape="rect" id="node13" href="$point3dview_8h.html" title="lib/views/point3dview.h" alt="" coords="825,83,983,112"/>
+<area shape="rect" id="node5" href="$point3dcontroller_8cc.html" title="lib/algos/point3dcontroller.cc" alt="" coords="5,160,192,189"/>
+<area shape="rect" id="node15" href="$point3dview_8cc.html" title="lib/views/point3dview.cc" alt="" coords="823,160,985,189"/>
 </map>

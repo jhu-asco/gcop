@@ -1,16 +1,14 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; M3V3d, 6, 3, Dynamic, 9 \&gt;" alt="" coords="1732,113,2001,143"/>
-<area shape="rect" id="node4" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; M3V3d, _nx, _nu, _np, _ng \&gt;" alt="" coords="1265,112,1545,141"/>
-<area shape="rect" id="node6" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; M3V3d, _nx, _nu, _np \&gt;" alt="" coords="951,104,1188,133"/>
-<area shape="rect" id="node8" href="$classgcop_1_1System.html" title="gcop::System\&lt; M3V3d, _nx, _nu, _np \&gt;" alt="" coords="612,39,865,68"/>
-<area shape="rect" id="node10" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _np \&gt;" alt="" coords="385,5,505,35"/>
-<area shape="rect" id="node12" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="5,80,293,109"/>
-<area shape="rect" id="node16" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="385,80,505,109"/>
-<area shape="rect" id="node27" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; Dynamic \&gt;" alt="" coords="371,207,520,236"/>
-<area shape="rect" id="node14" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; M3V3d, _nx \&gt;" alt="" coords="345,140,545,169"/>
-<area shape="rect" id="node23" href="$classgcop_1_1System.html" title="gcop::System\&lt; M3V3d, 6, 3 \&gt;" alt="" coords="640,181,837,211"/>
-<area shape="rect" id="node19" href="$classgcop_1_1Body2dTrack.html" title="gcop::Body2dTrack" alt="" coords="1572,169,1705,199"/>
-<area shape="rect" id="node21" href="$classgcop_1_1Body2d.html" title="gcop::Body2d" alt="" coords="1019,181,1120,211"/>
-<area shape="rect" id="node30" href="$classgcop_1_1Body2dForce.html" title="gcop::Body2dForce" alt="" coords="672,253,805,283"/>
-<area shape="rect" id="node32" href="$classgcop_1_1Force.html" title="gcop::Force\&lt; M3V3d, 3, 6, 3 \&gt;" alt="" coords="345,273,545,303"/>
+<area shape="rect" id="node2" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; Body2dState, 6, c, Dynamic, 9 \&gt;" alt="" coords="2021,69,2325,99"/>
+<area shape="rect" id="node4" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; Body2dState, _nx, _nu, _np, _ng, Body2dState \&gt;" alt="" coords="1439,69,1836,99"/>
+<area shape="rect" id="node6" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; Body2dState, _nx, _nu, _np, Body2dState \&gt;" alt="" coords="1008,67,1363,96"/>
+<area shape="rect" id="node8" href="$classgcop_1_1System.html" title="gcop::System\&lt; Body2dState, _nx, _nu, _np \&gt;" alt="" coords="644,40,932,69"/>
+<area shape="rect" id="node10" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Body2dState, _nx \&gt;" alt="" coords="344,80,579,109"/>
+<area shape="rect" id="node23" href="$classgcop_1_1System.html" title="gcop::System\&lt; Body2dState, 6, c \&gt;" alt="" coords="672,183,904,212"/>
+<area shape="rect" id="node12" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _np \&gt;" alt="" coords="401,5,521,35"/>
+<area shape="rect" id="node14" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="5,143,293,172"/>
+<area shape="rect" id="node16" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="401,143,521,172"/>
+<area shape="rect" id="node27" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; Dynamic \&gt;" alt="" coords="387,215,536,244"/>
+<area shape="rect" id="node19" href="$classgcop_1_1Body2dTrack.html" title="gcop::Body2dTrack" alt="" coords="1863,125,1996,155"/>
+<area shape="rect" id="node21" href="$classgcop_1_1Body2d.html" title="gcop::Body2d\&lt; c \&gt;" alt="" coords="1119,128,1252,157"/>
 </map>

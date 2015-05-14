@@ -1,0 +1,179 @@
+\section{gcop\-:\-:\-Body3d\-Controller$<$ c $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1Body3dController}\index{gcop\-::\-Body3d\-Controller$<$ c $>$@{gcop\-::\-Body3d\-Controller$<$ c $>$}}
+
+
+{\ttfamily \#include $<$body3dcontroller.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Body3d\-Controller$<$ c $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{classgcop_1_1Body3dController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Body3d\-Controller$<$ c $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{classgcop_1_1Body3dController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \-Matrix$<$ double, {\bf c}, 1 $>$ {\bf \-Vectorcd}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Body3d\-Controller} (const {\bf \-Body3d}$<$ {\bf c} $>$ \&{\bf sys}, {\bf \-Body3d\-State} $\ast${\bf xd}=0, {\bf \-Vector6d} $\ast${\bf ad}=0)
+\item 
+virtual bool {\bf \-Set} ({\bf \-Vectorcd} \&u, double t, const {\bf \-Body3d\-State} \&x)
+\item 
+virtual {\bf $\sim$\-Body3d\-Controller} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Body3d}$<$ {\bf c} $>$ \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em system \end{DoxyCompactList}\item 
+{\bf \-Body3d\-State} $\ast$ {\bf xd}
+\begin{DoxyCompactList}\small\item\em desired state (origin by default) \end{DoxyCompactList}\item 
+{\bf \-Vector6d} $\ast$ {\bf ad}
+\begin{DoxyCompactList}\small\item\em desired acceleration (zero by default) \end{DoxyCompactList}\item 
+{\bf \-Vector6d} {\bf \-Kp}
+\begin{DoxyCompactList}\small\item\em proportional terms (ones by default) \end{DoxyCompactList}\item 
+{\bf \-Vector6d} {\bf \-Kd}
+\begin{DoxyCompactList}\small\item\em derivative terms (twos by default) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$int c = 6$>$class gcop\-::\-Body3d\-Controller$<$ c $>$}
+
+\-Rigid body \-P\-D controller using errors on $ SO(3) \times R^3$
+
+\-Author\-: \-Marin \-Kobilarov, 2007 
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{gcop\-::\-Body3d\-Controller@{gcop\-::\-Body3d\-Controller}!\-Vectorcd@{\-Vectorcd}}
+\index{\-Vectorcd@{\-Vectorcd}!gcop::Body3dController@{gcop\-::\-Body3d\-Controller}}
+\subsubsection[{\-Vectorcd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ typedef \-Matrix$<$double, {\bf c}, 1$>$ {\bf gcop\-::\-Body3d\-Controller}$<$ {\bf c} $>$\-::{\bf \-Vectorcd}}\label{classgcop_1_1Body3dController_a3e075854955c287f29266f579ca65cec}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Body3d\-Controller@{gcop\-::\-Body3d\-Controller}!\-Body3d\-Controller@{\-Body3d\-Controller}}
+\index{\-Body3d\-Controller@{\-Body3d\-Controller}!gcop::Body3dController@{gcop\-::\-Body3d\-Controller}}
+\subsubsection[{\-Body3d\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Body3d\-Controller}$<$ {\bf c} $>$\-::{\bf \-Body3d\-Controller} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Body3d}$<$ {\bf c} $>$ \&}]{sys, }
+\item[{{\bf \-Body3d\-State} $\ast$}]{xd = {\ttfamily 0}, }
+\item[{{\bf \-Vector6d} $\ast$}]{ad = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Body3dController_ae11c0e45ef6ec005e73af6acbe91b2b7}
+\-B\-O\-D\-Y3\-D \-P\-D controller
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & multi-\/body system \\
+\hline
+{\em xd} & desired state (optional, set to origin by default) \\
+\hline
+{\em ad} & desired acceleration (optional, set to zero by default) \\
+\hline
+\end{DoxyParams}
+
+
+\-References gcop\-::\-Body3d\-Controller$<$ c $>$\-::\-Kd, and gcop\-::\-Body3d\-Controller$<$ c $>$\-::\-Kp.
+
+\index{gcop\-::\-Body3d\-Controller@{gcop\-::\-Body3d\-Controller}!$\sim$\-Body3d\-Controller@{$\sim$\-Body3d\-Controller}}
+\index{$\sim$\-Body3d\-Controller@{$\sim$\-Body3d\-Controller}!gcop::Body3dController@{gcop\-::\-Body3d\-Controller}}
+\subsubsection[{$\sim$\-Body3d\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c$>$ {\bf gcop\-::\-Body3d\-Controller}$<$ {\bf c} $>$\-::$\sim${\bf \-Body3d\-Controller} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3dController_a75edbf11917fd84df9386d361b927408}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Body3d\-Controller@{gcop\-::\-Body3d\-Controller}!\-Set@{\-Set}}
+\index{\-Set@{\-Set}!gcop::Body3dController@{gcop\-::\-Body3d\-Controller}}
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ virtual bool {\bf gcop\-::\-Body3d\-Controller}$<$ {\bf c} $>$\-::{\bf \-Set} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorcd} \&}]{u, }
+\item[{double}]{t, }
+\item[{const {\bf \-Body3d\-State} \&}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Body3dController_aa10e4eeb274191d67644002bd3833112}
+\-Feedback controller of the form u = k(t, x) 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & controls \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if arguments are valid, false if e.\-g. x is infeasible 
+\end{DoxyReturn}
+
+
+\-Implements {\bf gcop\-::\-Controller$<$ Body3d\-State, Matrix$<$ double, c, 1 $>$ $>$} \doxyref{}{p.}{classgcop_1_1Controller_a6bbf22b498272842f7894b3983d97022}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Body3d\-Controller@{gcop\-::\-Body3d\-Controller}!ad@{ad}}
+\index{ad@{ad}!gcop::Body3dController@{gcop\-::\-Body3d\-Controller}}
+\subsubsection[{ad}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ {\bf \-Vector6d}$\ast$ {\bf gcop\-::\-Body3d\-Controller}$<$ {\bf c} $>$\-::{\bf ad}}\label{classgcop_1_1Body3dController_a4b1e1be21f58d598388131e5160a34ac}
+
+
+desired acceleration (zero by default) 
+
+\index{gcop\-::\-Body3d\-Controller@{gcop\-::\-Body3d\-Controller}!\-Kd@{\-Kd}}
+\index{\-Kd@{\-Kd}!gcop::Body3dController@{gcop\-::\-Body3d\-Controller}}
+\subsubsection[{\-Kd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ {\bf \-Vector6d} {\bf gcop\-::\-Body3d\-Controller}$<$ {\bf c} $>$\-::{\bf \-Kd}}\label{classgcop_1_1Body3dController_ada0159faf38d94e1c2d2e163d560d439}
+
+
+derivative terms (twos by default) 
+
+
+
+\-Referenced by gcop\-::\-Body3d\-Controller$<$ c $>$\-::\-Body3d\-Controller().
+
+\index{gcop\-::\-Body3d\-Controller@{gcop\-::\-Body3d\-Controller}!\-Kp@{\-Kp}}
+\index{\-Kp@{\-Kp}!gcop::Body3dController@{gcop\-::\-Body3d\-Controller}}
+\subsubsection[{\-Kp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ {\bf \-Vector6d} {\bf gcop\-::\-Body3d\-Controller}$<$ {\bf c} $>$\-::{\bf \-Kp}}\label{classgcop_1_1Body3dController_a708e90074faff20c1e95385a73ab0f7a}
+
+
+proportional terms (ones by default) 
+
+
+
+\-Referenced by gcop\-::\-Body3d\-Controller$<$ c $>$\-::\-Body3d\-Controller().
+
+\index{gcop\-::\-Body3d\-Controller@{gcop\-::\-Body3d\-Controller}!sys@{sys}}
+\index{sys@{sys}!gcop::Body3dController@{gcop\-::\-Body3d\-Controller}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ const {\bf \-Body3d}$<${\bf c}$>$\& {\bf gcop\-::\-Body3d\-Controller}$<$ {\bf c} $>$\-::{\bf sys}}\label{classgcop_1_1Body3dController_a295eaf02b1a5d9c814d5e27a93dc417a}
+
+
+system 
+
+\index{gcop\-::\-Body3d\-Controller@{gcop\-::\-Body3d\-Controller}!xd@{xd}}
+\index{xd@{xd}!gcop::Body3dController@{gcop\-::\-Body3d\-Controller}}
+\subsubsection[{xd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int c = 6$>$ {\bf \-Body3d\-State}$\ast$ {\bf gcop\-::\-Body3d\-Controller}$<$ {\bf c} $>$\-::{\bf xd}}\label{classgcop_1_1Body3dController_ac6faa6de552a8973683ad52152758497}
+
+
+desired state (origin by default) 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf body3dcontroller.\-h}\end{DoxyCompactItemize}

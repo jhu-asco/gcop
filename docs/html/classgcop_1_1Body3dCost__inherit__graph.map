@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; Body3dState, 12, c \&gt;" alt="" coords="76,160,311,189"/>
-<area shape="rect" id="node4" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; Body3dState, _nx, _nu, Dynamic, Dynamic \&gt;" alt="" coords="5,83,381,112"/>
-<area shape="rect" id="node6" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; Body3dState, _nx, _nu, _np \&gt;" alt="" coords="57,5,329,35"/>
+<area shape="rect" id="node2" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; Body3dState, 12, c, Dynamic, 6 \&gt;" alt="" coords="49,160,359,189"/>
+<area shape="rect" id="node4" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; Body3dState, _nx, _nu, _np, _ng, Body3dState \&gt;" alt="" coords="5,83,403,112"/>
+<area shape="rect" id="node6" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; Body3dState, _nx, _nu, _np, Body3dState \&gt;" alt="" coords="27,5,381,35"/>
 </map>

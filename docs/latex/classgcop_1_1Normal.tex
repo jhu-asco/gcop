@@ -49,6 +49,12 @@ double {\bf norm}
 \begin{DoxyCompactList}\small\item\em normalizer \end{DoxyCompactList}\item 
 int {\bf bd}
 \begin{DoxyCompactList}\small\item\em force a block-\/diagonal structure with block dimension bd (0 by default means do not enforce) \end{DoxyCompactList}\item 
+bool {\bf bounded}
+\begin{DoxyCompactList}\small\item\em whether to enforce a box support (false by default) \end{DoxyCompactList}\item 
+{\bf \-Vectornd} {\bf lb}
+\begin{DoxyCompactList}\small\item\em lower bound \end{DoxyCompactList}\item 
+{\bf \-Vectornd} {\bf ub}
+\begin{DoxyCompactList}\small\item\em upper bound \end{DoxyCompactList}\item 
 \-L\-L\-T$<$ {\bf \-Matrixnd} $>$ {\bf llt}
 \begin{DoxyCompactList}\small\item\em \-L\-L\-T object to \-Cholesky. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{template$<$int \-\_\-n = \-Dynamic$>$ class gcop\-::\-Normal$<$ \-\_\-n $>$}
@@ -79,7 +85,7 @@ n-\/dimensional normal distribution
 \end{DoxyParams}
 
 
-\-References gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-A, gcop\-::\-Normal$<$ \-\_\-n $>$\-::mu, gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-P, gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Pinv, and gcop\-::\-Normal$<$ \-\_\-n $>$\-::rn.
+\-References gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-A, gcop\-::\-Normal$<$ \-\_\-n $>$\-::lb, gcop\-::\-Normal$<$ \-\_\-n $>$\-::mu, gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-P, gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Pinv, gcop\-::\-Normal$<$ \-\_\-n $>$\-::rn, and gcop\-::\-Normal$<$ \-\_\-n $>$\-::ub.
 
 \index{gcop\-::\-Normal@{gcop\-::\-Normal}!\-Normal@{\-Normal}}
 \index{\-Normal@{\-Normal}!gcop::Normal@{gcop\-::\-Normal}}
@@ -98,7 +104,7 @@ n-\/dimensional normal distribution with mean mu and covariance \-P
 \end{DoxyParams}
 
 
-\-References gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-A, gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Pinv, gcop\-::\-Normal$<$ \-\_\-n $>$\-::rn, and gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Update().
+\-References gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-A, gcop\-::\-Normal$<$ \-\_\-n $>$\-::lb, gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Pinv, gcop\-::\-Normal$<$ \-\_\-n $>$\-::rn, gcop\-::\-Normal$<$ \-\_\-n $>$\-::ub, and gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Update().
 
 \index{gcop\-::\-Normal@{gcop\-::\-Normal}!$\sim$\-Normal@{$\sim$\-Normal}}
 \index{$\sim$\-Normal@{$\sim$\-Normal}!gcop::Normal@{gcop\-::\-Normal}}
@@ -198,12 +204,30 @@ cholesky factor
 
 force a block-\/diagonal structure with block dimension bd (0 by default means do not enforce) 
 
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!bounded@{bounded}}
+\index{bounded@{bounded}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{bounded}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ bool {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf bounded}}\label{classgcop_1_1Normal_a4c19211ddded224e7fc9a1e687cd4a0e}
+
+
+whether to enforce a box support (false by default) 
+
 \index{gcop\-::\-Normal@{gcop\-::\-Normal}!det@{det}}
 \index{det@{det}!gcop::Normal@{gcop\-::\-Normal}}
 \subsubsection[{det}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ double {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf det}}\label{classgcop_1_1Normal_a3002ef044ffb2b63e8d371505ea0d6e0}
 
 
 determinant 
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!lb@{lb}}
+\index{lb@{lb}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{lb}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Vectornd} {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf lb}}\label{classgcop_1_1Normal_a0b10c65df227665c8dc99b131da00740}
+
+
+lower bound 
+
+
+
+\-Referenced by gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Normal().
 
 \index{gcop\-::\-Normal@{gcop\-::\-Normal}!llt@{llt}}
 \index{llt@{llt}!gcop::Normal@{gcop\-::\-Normal}}
@@ -265,6 +289,17 @@ covariance inverse
 
 
 normal random vector 
+
+
+
+\-Referenced by gcop\-::\-Normal$<$ \-\_\-n $>$\-::\-Normal().
+
+\index{gcop\-::\-Normal@{gcop\-::\-Normal}!ub@{ub}}
+\index{ub@{ub}!gcop::Normal@{gcop\-::\-Normal}}
+\subsubsection[{ub}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n = \-Dynamic$>$ {\bf \-Vectornd} {\bf gcop\-::\-Normal}$<$ \-\_\-n $>$\-::{\bf ub}}\label{classgcop_1_1Normal_a9fb03d0b67d8f275dd407a3eb2e2b440}
+
+
+upper bound 
 
 
 

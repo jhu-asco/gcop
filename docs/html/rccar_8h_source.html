@@ -77,34 +77,42 @@
 <a name="l00012"></a>00012 
 <a name="l00013"></a>00013   <span class="keyword">typedef</span> Matrix&lt;double, 4, 2&gt; <a class="code" href="namespacegcop.html#a31bfcb6fa7517a7715effae2969c1cd3">Matrix42d</a>;
 <a name="l00014"></a>00014   <span class="keyword">typedef</span> Matrix&lt;double, 4, Dynamic&gt; <a class="code" href="namespacegcop.html#a331c2bcd0cd4c5b8eb9b7e0eac0316a4">Matrix4pd</a>;
-<a name="l00015"></a>00015   <span class="comment">//typedef Matrix&lt;double, 6, 1&gt; Vector6d;</span>
-<a name="l00016"></a>00016 
-<a name="l00026"></a><a class="code" href="classgcop_1_1Rccar.html">00026</a>   <span class="keyword">class </span><a class="code" href="classgcop_1_1Rccar.html">Rccar</a> : <span class="keyword">public</span> <a class="code" href="classgcop_1_1System.html">System</a>&lt;Vector4d, 4, 2&gt;
-<a name="l00027"></a>00027   {
-<a name="l00028"></a>00028   <span class="keyword">public</span>:
-<a name="l00029"></a>00029     <a class="code" href="classgcop_1_1Rccar.html">Rccar</a>(<span class="keywordtype">int</span> <a class="code" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> = 2);
-<a name="l00030"></a>00030     
-<a name="l00031"></a>00031     <span class="keyword">virtual</span> <span class="keywordtype">double</span> Step(Vector4d &amp;xb, <span class="keywordtype">double</span> t, <span class="keyword">const</span> Vector4d &amp;xa,
-<a name="l00032"></a>00032                     <span class="keyword">const</span> Vector2d &amp;u, <span class="keywordtype">double</span> h, <span class="keyword">const</span> VectorXd *p,
-<a name="l00033"></a>00033                     <a class="code" href="namespacegcop.html#a3ae851a33082ff81f0ae88eca41d0c0f">Matrix4d</a> *A = 0, <a class="code" href="namespacegcop.html#a31bfcb6fa7517a7715effae2969c1cd3">Matrix42d</a> *B = 0, <a class="code" href="namespacegcop.html#a331c2bcd0cd4c5b8eb9b7e0eac0316a4">Matrix4pd</a> *C = 0);
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035     <span class="keyword">virtual</span> <span class="keywordtype">void</span> StateAndControlsToFlat(VectorXd &amp;y, <span class="keyword">const</span> Vector4d &amp;x, <span class="keyword">const</span> Vector2d &amp;u);
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037     <span class="keyword">virtual</span> <span class="keywordtype">void</span> FlatToStateAndControls(Vector4d &amp;x, Vector2d &amp;u, <span class="keyword">const</span> std::vector&lt;VectorXd&gt; &amp;y);
-<a name="l00038"></a>00038 
-<a name="l00039"></a><a class="code" href="classgcop_1_1Rccar.html#a82d37c85113ff476cbf6594c8b8276f5">00039</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Rccar.html#a82d37c85113ff476cbf6594c8b8276f5" title="distance between axles">l</a>; 
-<a name="l00040"></a><a class="code" href="classgcop_1_1Rccar.html#acb2ba192a3b95e81be6e258a86ed3fe2">00040</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Rccar.html#acb2ba192a3b95e81be6e258a86ed3fe2" title="Gain on the car acc vs wheel torque.">r</a>; 
-<a name="l00041"></a><a class="code" href="classgcop_1_1Rccar.html#a07dc493c2f65122b7f9fdfa7f9313d31">00041</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Rccar.html#a07dc493c2f65122b7f9fdfa7f9313d31" title="Internal step size.">h</a>; 
-<a name="l00042"></a>00042   };
-<a name="l00043"></a>00043 }
+<a name="l00015"></a><a class="code" href="namespacegcop.html#a9dff3bcdad75a476d7099028fd687187">00015</a>   <span class="keyword">typedef</span> <a class="code" href="classgcop_1_1System.html">System&lt;Vector4d, 4, 2&gt;</a> <a class="code" href="namespacegcop.html#a9dff3bcdad75a476d7099028fd687187">BaseSystem</a>;
+<a name="l00016"></a>00016   <span class="comment">//typedef Matrix&lt;double, 6, 1&gt; Vector6d;</span>
+<a name="l00017"></a>00017 
+<a name="l00027"></a><a class="code" href="classgcop_1_1Rccar.html">00027</a>   <span class="keyword">class </span><a class="code" href="classgcop_1_1Rccar.html">Rccar</a> : <span class="keyword">public</span> <a class="code" href="classgcop_1_1System.html">BaseSystem</a> 
+<a name="l00028"></a>00028   {
+<a name="l00029"></a>00029   <span class="keyword">public</span>:
+<a name="l00030"></a>00030     <a class="code" href="classgcop_1_1Rccar.html">Rccar</a>(<span class="keywordtype">int</span> <a class="code" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> = 2);
+<a name="l00031"></a>00031     
+<a name="l00032"></a>00032     <span class="keyword">virtual</span> <span class="keywordtype">double</span> Step(Vector4d &amp;xb, <span class="keywordtype">double</span> t, <span class="keyword">const</span> Vector4d &amp;xa,
+<a name="l00033"></a>00033                         <span class="keyword">const</span> Vector2d &amp;u, <span class="keywordtype">double</span> h, <span class="keyword">const</span> VectorXd *p,
+<a name="l00034"></a>00034                         <a class="code" href="namespacegcop.html#a3ae851a33082ff81f0ae88eca41d0c0f">Matrix4d</a> *A = 0, <a class="code" href="namespacegcop.html#a31bfcb6fa7517a7715effae2969c1cd3">Matrix42d</a> *B = 0, <a class="code" href="namespacegcop.html#a331c2bcd0cd4c5b8eb9b7e0eac0316a4">Matrix4pd</a> *C = 0);
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036     <span class="comment">/*virtual double Step(Vector4d &amp;xb, double t, const Vector4d &amp;xa,</span>
+<a name="l00037"></a>00037 <span class="comment">                        const Vector2d &amp;u, double h, const VectorXd *p,</span>
+<a name="l00038"></a>00038 <span class="comment">                        const Vector4d &amp;w,                         </span>
+<a name="l00039"></a>00039 <span class="comment">                        Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0, Matrix4d *D = 0);</span>
+<a name="l00040"></a>00040 <span class="comment">    */</span>
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043     <span class="keyword">virtual</span> <span class="keywordtype">void</span> StateAndControlsToFlat(VectorXd &amp;y, <span class="keyword">const</span> Vector4d &amp;x, <span class="keyword">const</span> Vector2d &amp;u);
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="preprocessor">#endif</span>
+<a name="l00045"></a>00045     <span class="keyword">virtual</span> <span class="keywordtype">void</span> FlatToStateAndControls(Vector4d &amp;x, Vector2d &amp;u, <span class="keyword">const</span> std::vector&lt;VectorXd&gt; &amp;y);
+<a name="l00046"></a>00046 
+<a name="l00047"></a><a class="code" href="classgcop_1_1Rccar.html#a82d37c85113ff476cbf6594c8b8276f5">00047</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Rccar.html#a82d37c85113ff476cbf6594c8b8276f5" title="distance between axles">l</a>; 
+<a name="l00048"></a><a class="code" href="classgcop_1_1Rccar.html#acb2ba192a3b95e81be6e258a86ed3fe2">00048</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Rccar.html#acb2ba192a3b95e81be6e258a86ed3fe2" title="Gain on the car acc vs wheel torque.">r</a>; 
+<a name="l00049"></a><a class="code" href="classgcop_1_1Rccar.html#a07dc493c2f65122b7f9fdfa7f9313d31">00049</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1Rccar.html#a07dc493c2f65122b7f9fdfa7f9313d31" title="Internal step size.">h</a>; 
+<a name="l00050"></a>00050   };
+<a name="l00051"></a>00051 }
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:14 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

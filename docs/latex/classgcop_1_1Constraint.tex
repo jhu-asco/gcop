@@ -41,6 +41,8 @@ typedef \-Matrix$<$ double, \-\_\-np, \-\_\-nx $>$ {\bf \-Matrixmnd}
 {\bf \-Constraint} (int {\bf ng}=0)
 \item 
 virtual bool {\bf operator()} ({\bf \-Vectorgd} \&g, double t, const \-T \&x, const {\bf \-Vectorcd} \&u, const {\bf \-Vectormd} $\ast$p=0, {\bf \-Matrixgnd} $\ast$dgdx=0, {\bf \-Matrixgcd} $\ast$dgdu=0, {\bf \-Matrixgmd} $\ast$dgdp=0)=0
+\item 
+virtual bool {\bf operator()} ({\bf \-Vectorgd} \&g, double t, const \-T \&x, {\bf \-Matrixgnd} $\ast$dgdx=0)
 \end{DoxyCompactItemize}
 \subsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
@@ -137,6 +139,16 @@ int {\bf ng}
 \item[{{\bf \-Matrixgmd} $\ast$}]{dgdp = {\ttfamily 0}}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classgcop_1_1Constraint_a8f887a0ef0cd52a797665fc90c75b0d4}
+\index{gcop\-::\-Constraint@{gcop\-::\-Constraint}!operator()@{operator()}}
+\index{operator()@{operator()}!gcop::Constraint@{gcop\-::\-Constraint}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-T = \-Vector\-Xd, int \-\_\-nx = \-Dynamic, int \-\_\-nu = \-Dynamic, int \-\_\-np = \-Dynamic, int \-\_\-ng = \-Dynamic$>$ virtual bool {\bf gcop\-::\-Constraint}$<$ \-T, \-\_\-nx, \-\_\-nu, \-\_\-np, \-\_\-ng $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Vectorgd} \&}]{g, }
+\item[{double}]{t, }
+\item[{const \-T \&}]{x, }
+\item[{{\bf \-Matrixgnd} $\ast$}]{dgdx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classgcop_1_1Constraint_a7a50a568ec079db03a2ede651ae3e45c}
 
 
 \subsection{\-Member \-Data \-Documentation}

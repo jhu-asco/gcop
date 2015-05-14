@@ -68,7 +68,7 @@
 <div class="title">gcop::MultiCost&lt; T, _nx, _nu, _np &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="gcop::MultiCost" --><!-- doxytag: inherits="gcop::Cost" -->
+<!-- doxytag: class="gcop::MultiCost" --><!-- doxytag: inherits="Cost&lt; T, _nx, _nu, _np &gt;" -->
 <p><code>#include &lt;<a class="el" href="multicost_8h_source.html">multicost.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for gcop::MultiCost&lt; T, _nx, _nu, _np &gt;:</div>
@@ -101,18 +101,18 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, _np, _nx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">Matrixmnd</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a6ca1de019b312c62a78455dee67245a8">MultiCost</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, _nx, _nu, _np &gt; &amp;<a class="el" href="classgcop_1_1Cost.html#a57d004815023d9a92ead0cea1d0dbb36">sys</a>, double <a class="el" href="classgcop_1_1Cost.html#a5ff85a0123ee3bf8f1988c3cd339ac2d">tf</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a9b76dfe651c31265e4ac52e1dda5b851">L</a> (double t, const T &amp;x, const <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> *<a class="el" href="classgcop_1_1MultiCost.html#ab2a472355c0854b7f5f4a942094f1683">Lx</a>=0, <a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> *<a class="el" href="classgcop_1_1MultiCost.html#ab6c7a047f9a9dcacf9095cef3339abd0">Lxx</a>=0, <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> *<a class="el" href="classgcop_1_1MultiCost.html#a3e3190ef89e3fdc4d83beddc4b575817">Lu</a>=0, <a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a> *<a class="el" href="classgcop_1_1MultiCost.html#abb933ba08f54d7883befdf09740ac77c">Luu</a>=0, <a class="el" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a> *<a class="el" href="classgcop_1_1MultiCost.html#abc9087e17cb1e40c7d125b01b2c3e525">Lxu</a>=0, <a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *<a class="el" href="classgcop_1_1MultiCost.html#a5a1adf5c103641bac3ee333dc632e232">Lp</a>=0, <a class="el" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> *<a class="el" href="classgcop_1_1MultiCost.html#a5a05a491774cf0881b6b348597f266a4">Lpp</a>=0, <a class="el" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> *<a class="el" href="classgcop_1_1MultiCost.html#ab284ebd849fc94098641b147bfe619fd">Lpx</a>=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a6ca1de019b312c62a78455dee67245a8">MultiCost</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, _nx, _nu, _np &gt; &amp;<a class="el" href="classgcop_1_1Cost.html#a0f89708328371a69e049392b6ae7ca1e">sys</a>, double <a class="el" href="classgcop_1_1Cost.html#a774f472f719d4b9d23f5822961e258a3">tf</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a9b76dfe651c31265e4ac52e1dda5b851">L</a> (double t, const T &amp;x, const <a class="el" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1MultiCost.html#a881732629f016fec7b15bf86c9d29820">Vectornd</a> *<a class="el" href="classgcop_1_1MultiCost.html#ab2a472355c0854b7f5f4a942094f1683">Lx</a>=0, <a class="el" href="classgcop_1_1MultiCost.html#ad9a490034a8ecfd3b10963307306f605">Matrixnd</a> *<a class="el" href="classgcop_1_1MultiCost.html#ab6c7a047f9a9dcacf9095cef3339abd0">Lxx</a>=0, <a class="el" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a> *<a class="el" href="classgcop_1_1MultiCost.html#a3e3190ef89e3fdc4d83beddc4b575817">Lu</a>=0, <a class="el" href="classgcop_1_1MultiCost.html#aa2fa1ebe22cb12773cf226d11e777be6">Matrixcd</a> *<a class="el" href="classgcop_1_1MultiCost.html#abb933ba08f54d7883befdf09740ac77c">Luu</a>=0, <a class="el" href="classgcop_1_1MultiCost.html#a938ba3c8c1f4b2a89802d23d82f03438">Matrixncd</a> *<a class="el" href="classgcop_1_1MultiCost.html#abc9087e17cb1e40c7d125b01b2c3e525">Lxu</a>=0, <a class="el" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a> *<a class="el" href="classgcop_1_1MultiCost.html#a5a1adf5c103641bac3ee333dc632e232">Lp</a>=0, <a class="el" href="classgcop_1_1MultiCost.html#affa0a222f0bbeb1712f4c85a2c727d12">Matrixmd</a> *<a class="el" href="classgcop_1_1MultiCost.html#a5a05a491774cf0881b6b348597f266a4">Lpp</a>=0, <a class="el" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">Matrixmnd</a> *<a class="el" href="classgcop_1_1MultiCost.html#ab284ebd849fc94098641b147bfe619fd">Lpx</a>=0)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#ab2a472355c0854b7f5f4a942094f1683">Lx</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#ab6c7a047f9a9dcacf9095cef3339abd0">Lxx</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a3e3190ef89e3fdc4d83beddc4b575817">Lu</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#abb933ba08f54d7883befdf09740ac77c">Luu</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#abc9087e17cb1e40c7d125b01b2c3e525">Lxu</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a5a1adf5c103641bac3ee333dc632e232">Lp</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a5a05a491774cf0881b6b348597f266a4">Lpp</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#ab284ebd849fc94098641b147bfe619fd">Lpx</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1MultiCost.html#a881732629f016fec7b15bf86c9d29820">Vectornd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#ab2a472355c0854b7f5f4a942094f1683">Lx</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1MultiCost.html#ad9a490034a8ecfd3b10963307306f605">Matrixnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#ab6c7a047f9a9dcacf9095cef3339abd0">Lxx</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a3e3190ef89e3fdc4d83beddc4b575817">Lu</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1MultiCost.html#aa2fa1ebe22cb12773cf226d11e777be6">Matrixcd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#abb933ba08f54d7883befdf09740ac77c">Luu</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1MultiCost.html#a938ba3c8c1f4b2a89802d23d82f03438">Matrixncd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#abc9087e17cb1e40c7d125b01b2c3e525">Lxu</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a5a1adf5c103641bac3ee333dc632e232">Lp</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1MultiCost.html#affa0a222f0bbeb1712f4c85a2c727d12">Matrixmd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a5a05a491774cf0881b6b348597f266a4">Lpp</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">Matrixmnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#ab284ebd849fc94098641b147bfe619fd">Lpx</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="classgcop_1_1Cost.html">Cost</a>&lt; T, _nx, _nu, _np &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1MultiCost.html#a5bd14b193787c6ec9281409f119c57f3">costs</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -130,13 +130,13 @@ class gcop::MultiCost&lt; T, _nx, _nu, _np &gt;</h3>
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nu, _nu&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nu, _nu&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#aa2fa1ebe22cb12773cf226d11e777be6">Matrixcd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a12b08a4c53143d6ad30468a45c1bdbea">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -147,13 +147,13 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nu, _nx&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Cost.html#a78c4621db26fe3ef52ea534436b78bee">Matrixcnd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nu, _nx&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a608cd7ca78729af74066d051b5996db3">Matrixcnd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a78c4621db26fe3ef52ea534436b78bee">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a9ade25d1b7f6a8196cb700e976dcfc8e">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -164,13 +164,13 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _np, _np&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _np, _np&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#affa0a222f0bbeb1712f4c85a2c727d12">Matrixmd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a69eca9f9c97683f57abda309365971c3">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -181,13 +181,13 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _np, _nx&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _np, _nx&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">Matrixmnd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#aa8545df43a6cb92198e921aafce97204">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -198,13 +198,13 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nx, _nu&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nx, _nu&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a938ba3c8c1f4b2a89802d23d82f03438">Matrixncd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a6397802756f83e925980c4407e67c07b">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -215,13 +215,13 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nx, _nx&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nx, _nx&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#ad9a490034a8ecfd3b10963307306f605">Matrixnd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#ad74bc680c916dd17d70f2272de0741dc">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -232,13 +232,13 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nx, _np&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Cost.html#ac01445481fc7fcf3d12302e9797595b1">Matrixnmd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nx, _np&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#ae28046c3be84d61002a7cbd4aaa16084">Matrixnmd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#ac01445481fc7fcf3d12302e9797595b1">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#aabc9e6adb9a5a9427ef4f93b1aec29bb">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -249,13 +249,13 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nu, 1&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nu, 1&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#ab5cbac6ad98cdc73b6d541a909484992">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -266,13 +266,13 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _np, 1&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _np, 1&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a6d6ab24bbe55dfae824036d5cd336962">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -283,13 +283,13 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nx, 1&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nx, 1&gt; <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a881732629f016fec7b15bf86c9d29820">Vectornd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a908616f9085ea4d0fb4e3b6bcf479743">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -355,7 +355,7 @@ template&lt;typename T , int _nx, int _nu, int _np&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a> &amp;&#160;</td>
           <td class="paramname"><em>u</em>, </td>
         </tr>
         <tr>
@@ -367,55 +367,55 @@ template&lt;typename T , int _nx, int _nu, int _np&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a> *&#160;</td>
           <td class="paramname"><em>p</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1MultiCost.html#a881732629f016fec7b15bf86c9d29820">Vectornd</a> *&#160;</td>
           <td class="paramname"><em>Lx</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1MultiCost.html#ad9a490034a8ecfd3b10963307306f605">Matrixnd</a> *&#160;</td>
           <td class="paramname"><em>Lxx</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a> *&#160;</td>
           <td class="paramname"><em>Lu</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1MultiCost.html#aa2fa1ebe22cb12773cf226d11e777be6">Matrixcd</a> *&#160;</td>
           <td class="paramname"><em>Luu</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1MultiCost.html#a938ba3c8c1f4b2a89802d23d82f03438">Matrixncd</a> *&#160;</td>
           <td class="paramname"><em>Lxu</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a> *&#160;</td>
           <td class="paramname"><em>Lp</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1MultiCost.html#affa0a222f0bbeb1712f4c85a2c727d12">Matrixmd</a> *&#160;</td>
           <td class="paramname"><em>Lpp</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">Matrixmnd</a> *&#160;</td>
           <td class="paramname"><em>Lpx</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
@@ -442,7 +442,7 @@ template&lt;typename T , int _nx, int _nu, int _np&gt; </div>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#aee08e8fb34b61d6af233611d04403d9a">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a56496b40d3b5d3e5ebf52fcd78aca83f">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
 
 </div>
 </div>
@@ -469,7 +469,7 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a5a1adf5c103641bac3ee333dc632e232">Lp</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1MultiCost.html#ab573e38b1e1e763bb2475c8f1bdbd1ce">Vectormd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a5a1adf5c103641bac3ee333dc632e232">Lp</a></td>
         </tr>
       </table>
 </div>
@@ -486,7 +486,7 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a5a05a491774cf0881b6b348597f266a4">Lpp</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1MultiCost.html#affa0a222f0bbeb1712f4c85a2c727d12">Matrixmd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a5a05a491774cf0881b6b348597f266a4">Lpp</a></td>
         </tr>
       </table>
 </div>
@@ -503,7 +503,7 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#ab284ebd849fc94098641b147bfe619fd">Lpx</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1MultiCost.html#a4df6d9f6d8fdf7847c44da069a5f46cf">Matrixmnd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#ab284ebd849fc94098641b147bfe619fd">Lpx</a></td>
         </tr>
       </table>
 </div>
@@ -520,7 +520,7 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a3e3190ef89e3fdc4d83beddc4b575817">Lu</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1MultiCost.html#a5daa5864e5d8b77ce1a4229a2b211139">Vectorcd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#a3e3190ef89e3fdc4d83beddc4b575817">Lu</a></td>
         </tr>
       </table>
 </div>
@@ -537,7 +537,7 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#abb933ba08f54d7883befdf09740ac77c">Luu</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1MultiCost.html#aa2fa1ebe22cb12773cf226d11e777be6">Matrixcd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#abb933ba08f54d7883befdf09740ac77c">Luu</a></td>
         </tr>
       </table>
 </div>
@@ -554,7 +554,7 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#ab2a472355c0854b7f5f4a942094f1683">Lx</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1MultiCost.html#a881732629f016fec7b15bf86c9d29820">Vectornd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#ab2a472355c0854b7f5f4a942094f1683">Lx</a></td>
         </tr>
       </table>
 </div>
@@ -571,7 +571,7 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#abc9087e17cb1e40c7d125b01b2c3e525">Lxu</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1MultiCost.html#a938ba3c8c1f4b2a89802d23d82f03438">Matrixncd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#abc9087e17cb1e40c7d125b01b2c3e525">Lxu</a></td>
         </tr>
       </table>
 </div>
@@ -588,7 +588,7 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#ab6c7a047f9a9dcacf9095cef3339abd0">Lxx</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1MultiCost.html#ad9a490034a8ecfd3b10963307306f605">Matrixnd</a> <a class="el" href="classgcop_1_1MultiCost.html">gcop::MultiCost</a>&lt; T, _nx, _nu, _np &gt;::<a class="el" href="classgcop_1_1MultiCost.html#ab6c7a047f9a9dcacf9095cef3339abd0">Lxx</a></td>
         </tr>
       </table>
 </div>
@@ -605,7 +605,7 @@ template&lt;typename T , int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

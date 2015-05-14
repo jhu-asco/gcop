@@ -97,13 +97,13 @@
 <a name="l00037"></a>00037   <span class="keyword">public</span>:
 <a name="l00043"></a>00043     <a class="code" href="classgcop_1_1SplineTparam.html">SplineTparam</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, nx, nu, np&gt;</a> &amp;sys, <span class="keyword">const</span> VectorXd tks, <span class="keywordtype">int</span> degree = 2);<span class="comment">//By default use quadratic spline</span>
 <a name="l00044"></a>00044     
-<a name="l00045"></a>00045     <span class="keywordtype">void</span> To(Vectorntpd &amp;s, 
+<a name="l00045"></a>00045     <span class="keywordtype">bool</span> To(Vectorntpd &amp;s, 
 <a name="l00046"></a>00046             <span class="keyword">const</span> vector&lt;double&gt; &amp;ts, 
 <a name="l00047"></a>00047             <span class="keyword">const</span> vector&lt;T&gt; &amp;xs, 
 <a name="l00048"></a>00048             <span class="keyword">const</span> vector&lt;Vectorcd&gt; &amp;us,
 <a name="l00049"></a>00049             <span class="keyword">const</span> Vectormd *p = 0);
 <a name="l00050"></a>00050     
-<a name="l00051"></a>00051     <span class="keywordtype">void</span> From(vector&lt;double&gt; &amp;ts, 
+<a name="l00051"></a>00051     <span class="keywordtype">bool</span> From(vector&lt;double&gt; &amp;ts, 
 <a name="l00052"></a>00052               vector&lt;T&gt; &amp;xs, 
 <a name="l00053"></a>00053               vector&lt;Vectorcd&gt; &amp;us,
 <a name="l00054"></a>00054               <span class="keyword">const</span> Vectorntpd &amp;s,
@@ -126,7 +126,7 @@
 <a name="l00071"></a>00071   }
 <a name="l00072"></a>00072 
 <a name="l00073"></a>00073   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> nu, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> _ntp&gt; 
-<a name="l00074"></a><a class="code" href="classgcop_1_1SplineTparam.html#a28f67f0ce6b4eab2d0f6c2ea7698c665">00074</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1SplineTparam.html#a28f67f0ce6b4eab2d0f6c2ea7698c665">SplineTparam&lt;T, nx, nu, np, _ntp&gt;::To</a>(Vectorntpd &amp;s, 
+<a name="l00074"></a><a class="code" href="classgcop_1_1SplineTparam.html#a1cc102eae0a7a4799e7c2f52c77d0d96">00074</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1SplineTparam.html#a1cc102eae0a7a4799e7c2f52c77d0d96">SplineTparam&lt;T, nx, nu, np, _ntp&gt;::To</a>(Vectorntpd &amp;s, 
 <a name="l00075"></a>00075                                              <span class="keyword">const</span> vector&lt;double&gt; &amp;ts, 
 <a name="l00076"></a>00076                                              <span class="keyword">const</span> vector&lt;T&gt; &amp;xs, 
 <a name="l00077"></a>00077                                              <span class="keyword">const</span> vector&lt;Vectorcd&gt; &amp;us,
@@ -198,48 +198,50 @@
 <a name="l00143"></a>00143 <span class="comment">      */</span>
 <a name="l00144"></a>00144 
 <a name="l00145"></a>00145       <span class="comment">//s.setZero();</span>
-<a name="l00146"></a>00146     }
-<a name="l00147"></a>00147   
-<a name="l00148"></a>00148   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> nu, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> _ntp&gt; 
-<a name="l00149"></a><a class="code" href="classgcop_1_1SplineTparam.html#a0f1ce155404988031df9e2d31c1f0bd4">00149</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1SplineTparam.html#a0f1ce155404988031df9e2d31c1f0bd4">SplineTparam&lt;T, nx, nu, np, _ntp&gt;::From</a>(vector&lt;double&gt; &amp;ts, 
-<a name="l00150"></a>00150                                                   vector&lt;T&gt; &amp;xs, 
-<a name="l00151"></a>00151                                                   vector&lt;Vectorcd&gt; &amp;us,
-<a name="l00152"></a>00152                                                   <span class="keyword">const</span> Vectorntpd &amp;s,
-<a name="l00153"></a>00153                                                   Vectormd *p) {
-<a name="l00154"></a>00154  
-<a name="l00155"></a>00155 
-<a name="l00156"></a>00156     assert(this-&gt;ntp == tks.size()*this-&gt;sys.U.n);
-<a name="l00157"></a>00157 
-<a name="l00158"></a>00158     <span class="comment">//Create knot matrix:</span>
-<a name="l00159"></a>00159     MatrixXd controlMatrix(this-&gt;sys.U.n, tks.size());
-<a name="l00160"></a>00160     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> cs = 0; cs &lt; tks.size(); cs++)
-<a name="l00161"></a>00161     {
-<a name="l00162"></a>00162       controlMatrix.col(cs) = s.segment(cs*nu, nu);<span class="comment">//Fill Control Matrix</span>
-<a name="l00163"></a>00163     }
-<a name="l00164"></a>00164     <span class="comment">//cout&lt;&lt;&quot;s: &quot;&lt;&lt;s.transpose()&lt;&lt;endl;//Input control points</span>
-<a name="l00165"></a>00165     <span class="comment">//cout&lt;&lt;&quot;Control Matrix: &quot;&lt;&lt;endl&lt;&lt;controlMatrix&lt;&lt;endl;</span>
-<a name="l00166"></a>00166     ControlSpline cspline = SplineFitting&lt;ControlSpline&gt;::Interpolate(controlMatrix, degree, tks);
-<a name="l00167"></a>00167     <span class="keywordtype">double</span> tdiff = ts.back() - ts.front();
-<a name="l00168"></a>00168     
-<a name="l00169"></a>00169     this-&gt;sys.reset(xs[0],ts[0]);
-<a name="l00170"></a>00170     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; us.size(); ++i) {
-<a name="l00171"></a>00171       us[i] = cspline((ts[i] - ts[0])/tdiff);
-<a name="l00172"></a>00172       <span class="comment">//cout&lt;&lt;&quot;ts[&quot;&lt;&lt;i&lt;&lt;&quot;]: &quot;&lt;&lt;ts[i]&lt;&lt;endl;</span>
-<a name="l00173"></a>00173       <span class="comment">//cout&lt;&lt;&quot;us[&quot;&lt;&lt;i&lt;&lt;&quot;]: &quot;&lt;&lt;us[i].transpose()&lt;&lt;&quot;ts: &quot;&lt;&lt;ts[i]&lt;&lt;endl;</span>
-<a name="l00174"></a>00174       this-&gt;sys.Step_internalinput(xs[i+1], us[i], ts[i+1] - ts[i], p);
-<a name="l00175"></a>00175       <span class="comment">//cout&lt;&lt;&quot;Xs[&quot;&lt;&lt;(i+1)&lt;&lt;&quot;]&quot;&lt;&lt;xs[i+1].transpose()&lt;&lt;endl; #DEBUG</span>
-<a name="l00176"></a>00176       <span class="comment">//cout&lt;&lt;&quot;us[&quot;&lt;&lt;i&lt;&lt;&quot;]&quot;&lt;&lt;us[i].transpose()&lt;&lt;endl;</span>
-<a name="l00177"></a>00177     }
-<a name="l00178"></a>00178     <span class="comment">//getchar();</span>
-<a name="l00179"></a>00179   }
-<a name="l00180"></a>00180 }
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182 <span class="preprocessor">#endif</span>
+<a name="l00146"></a>00146       <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00147"></a>00147     }
+<a name="l00148"></a>00148   
+<a name="l00149"></a>00149   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> nu, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> _ntp&gt; 
+<a name="l00150"></a><a class="code" href="classgcop_1_1SplineTparam.html#affeeec0e64ce38d2fb3fee3c115df9f8">00150</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1SplineTparam.html#affeeec0e64ce38d2fb3fee3c115df9f8">SplineTparam&lt;T, nx, nu, np, _ntp&gt;::From</a>(vector&lt;double&gt; &amp;ts, 
+<a name="l00151"></a>00151                                                   vector&lt;T&gt; &amp;xs, 
+<a name="l00152"></a>00152                                                   vector&lt;Vectorcd&gt; &amp;us,
+<a name="l00153"></a>00153                                                   <span class="keyword">const</span> Vectorntpd &amp;s,
+<a name="l00154"></a>00154                                                   Vectormd *p) {
+<a name="l00155"></a>00155  
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157     assert(this-&gt;ntp == tks.size()*this-&gt;sys.U.n);
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159     <span class="comment">//Create knot matrix:</span>
+<a name="l00160"></a>00160     MatrixXd controlMatrix(this-&gt;sys.U.n, tks.size());
+<a name="l00161"></a>00161     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> cs = 0; cs &lt; tks.size(); cs++)
+<a name="l00162"></a>00162     {
+<a name="l00163"></a>00163       controlMatrix.col(cs) = s.segment(cs*nu, nu);<span class="comment">//Fill Control Matrix</span>
+<a name="l00164"></a>00164     }
+<a name="l00165"></a>00165     <span class="comment">//cout&lt;&lt;&quot;s: &quot;&lt;&lt;s.transpose()&lt;&lt;endl;//Input control points</span>
+<a name="l00166"></a>00166     <span class="comment">//cout&lt;&lt;&quot;Control Matrix: &quot;&lt;&lt;endl&lt;&lt;controlMatrix&lt;&lt;endl;</span>
+<a name="l00167"></a>00167     ControlSpline cspline = SplineFitting&lt;ControlSpline&gt;::Interpolate(controlMatrix, degree, tks);
+<a name="l00168"></a>00168     <span class="keywordtype">double</span> tdiff = ts.back() - ts.front();
+<a name="l00169"></a>00169     
+<a name="l00170"></a>00170     this-&gt;sys.Reset(xs[0],ts[0]);
+<a name="l00171"></a>00171     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; us.size(); ++i) {
+<a name="l00172"></a>00172       us[i] = cspline((ts[i] - ts[0])/tdiff);
+<a name="l00173"></a>00173       <span class="comment">//cout&lt;&lt;&quot;ts[&quot;&lt;&lt;i&lt;&lt;&quot;]: &quot;&lt;&lt;ts[i]&lt;&lt;endl;</span>
+<a name="l00174"></a>00174       <span class="comment">//cout&lt;&lt;&quot;us[&quot;&lt;&lt;i&lt;&lt;&quot;]: &quot;&lt;&lt;us[i].transpose()&lt;&lt;&quot;ts: &quot;&lt;&lt;ts[i]&lt;&lt;endl;</span>
+<a name="l00175"></a>00175       this-&gt;sys.Step(xs[i+1], us[i], ts[i+1] - ts[i], p);
+<a name="l00176"></a>00176       <span class="comment">//cout&lt;&lt;&quot;Xs[&quot;&lt;&lt;(i+1)&lt;&lt;&quot;]&quot;&lt;&lt;xs[i+1].transpose()&lt;&lt;endl; #DEBUG</span>
+<a name="l00177"></a>00177       <span class="comment">//cout&lt;&lt;&quot;us[&quot;&lt;&lt;i&lt;&lt;&quot;]&quot;&lt;&lt;us[i].transpose()&lt;&lt;endl;</span>
+<a name="l00178"></a>00178     }
+<a name="l00179"></a>00179     <span class="comment">//getchar();</span>
+<a name="l00180"></a>00180     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00181"></a>00181   }
+<a name="l00182"></a>00182 }
+<a name="l00183"></a>00183 
+<a name="l00184"></a>00184 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:14 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

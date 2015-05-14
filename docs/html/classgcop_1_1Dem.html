@@ -96,6 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Dem.html#a45402b0d017c294e7d56c7086869d3e4">Dilate</a> (double r, bool cube=true)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Dem.html#a8160aed97508f8502e568190fdef3d0d">AddBoundary</a> (double <a class="el" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff">h</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Dem.html#a3660c3291b81436bd6a061937871a92c">Convolve</a> (double sigma, bool cn=true, double thresh=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Dem.html#abf9703a27df91fdaf611335ab136d21e">Point2Index</a> (int &amp;i, int &amp;j, double x, double y) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Dem.html#acfcecfc1d9cbb74f4359d13d2067bb86">Index2Point</a> (double &amp;x, double &amp;y, int i, int j) const </td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Dem.html#a50a57cac2775ac2bbf871ab3919da320">bilinterp</a> (const double *z, int <a class="el" href="classgcop_1_1Dem.html#ae8e24f5d0ec671342bcb67e452e78480">w</a>, int <a class="el" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff">h</a>, double xi, double yi, double <a class="el" href="classgcop_1_1Dem.html#a0976db954797212f90201b958def961f">eps</a>=1e-10)</td></tr>
@@ -708,6 +710,49 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="acfcecfc1d9cbb74f4359d13d2067bb86"></a><!-- doxytag: member="gcop::Dem::Index2Point" ref="acfcecfc1d9cbb74f4359d13d2067bb86" args="(double &amp;x, double &amp;y, int i, int j) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classgcop_1_1Dem.html#acfcecfc1d9cbb74f4359d13d2067bb86">Dem::Index2Point</a> </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>References <a class="el" href="classgcop_1_1Dem.html#a3948ec9443042ffb01cd1df56b32bed4">cs</a>, <a class="el" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff">h</a>, and <a class="el" href="classgcop_1_1Dem.html#a8d308c0c170457247f27c4c4291ccd61">o</a>.</p>
+
+<p>Referenced by <a class="el" href="classgcop_1_1Body3dDemController.html#a0e1bf7a4a9f83063c15c334d8164117a">gcop::Body3dDemController&lt; nu &gt;::GetTraj()</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a82e34f186bbcc6dca40280eb9b0892b0"></a><!-- doxytag: member="gcop::Dem::Inside" ref="a82e34f186bbcc6dca40280eb9b0892b0" args="(double x, double y, double z) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -818,6 +863,49 @@ Public Attributes</h2></td></tr>
 <p>References <a class="el" href="classgcop_1_1Dem.html#a3948ec9443042ffb01cd1df56b32bed4">cs</a>, <a class="el" href="classgcop_1_1Dem.html#a7d23c78d77cd08d4e917868a7ec4ba05">data</a>, <a class="el" href="classgcop_1_1Dem.html#a7e3a927eb977af2019497ebb02dbda20">ds</a>, <a class="el" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff">h</a>, <a class="el" href="classgcop_1_1Dem.html#ab252077bee0303deefaccb878949b155">ni</a>, <a class="el" href="classgcop_1_1Dem.html#ac7381a9289beb861fbe9e35dcab85c88">nj</a>, <a class="el" href="classgcop_1_1Dem.html#a431a93fb064b5c2a1edff870914f815e">normals</a>, and <a class="el" href="classgcop_1_1Dem.html#ae8e24f5d0ec671342bcb67e452e78480">w</a>.</p>
 
 <p>Referenced by <a class="el" href="classgcop_1_1Dem.html#a45d939eb4141b3df25f1fbba164db69d">Dem()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abf9703a27df91fdaf611335ab136d21e"></a><!-- doxytag: member="gcop::Dem::Point2Index" ref="abf9703a27df91fdaf611335ab136d21e" args="(int &amp;i, int &amp;j, double x, double y) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classgcop_1_1Dem.html#abf9703a27df91fdaf611335ab136d21e">Dem::Point2Index</a> </td>
+          <td>(</td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>References <a class="el" href="classgcop_1_1Dem.html#a3948ec9443042ffb01cd1df56b32bed4">cs</a>, <a class="el" href="classgcop_1_1Dem.html#a1c53f3db4a9045ccb8fd1fa42c5b35ff">h</a>, and <a class="el" href="classgcop_1_1Dem.html#a8d308c0c170457247f27c4c4291ccd61">o</a>.</p>
+
+<p>Referenced by <a class="el" href="classgcop_1_1Body3dDemController.html#a0e1bf7a4a9f83063c15c334d8164117a">gcop::Body3dDemController&lt; nu &gt;::GetTraj()</a>.</p>
 
 </div>
 </div>
@@ -949,7 +1037,7 @@ Public Attributes</h2></td></tr>
 
 <p>cell size </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Dem.html#a3660c3291b81436bd6a061937871a92c">Convolve()</a>, <a class="el" href="classgcop_1_1Dem.html#a45402b0d017c294e7d56c7086869d3e4">Dilate()</a>, <a class="el" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get()</a>, <a class="el" href="classgcop_1_1Dem.html#a40f2e078567ad299ff094cac1d5ae53a">GetNormal()</a>, <a class="el" href="classgcop_1_1DemView.html#a566f3a72228187b2ac2cfb54c1695feb">gcop::DemView::Init()</a>, <a class="el" href="classgcop_1_1Dem.html#a04f7598b537bddff52a711a9a73a766b">Load()</a>, and <a class="el" href="classgcop_1_1Dem.html#ac476b661e89c26428962732a16b498b4">Set()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Dem.html#a3660c3291b81436bd6a061937871a92c">Convolve()</a>, <a class="el" href="classgcop_1_1Dem.html#a45402b0d017c294e7d56c7086869d3e4">Dilate()</a>, <a class="el" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get()</a>, <a class="el" href="classgcop_1_1Dem.html#a40f2e078567ad299ff094cac1d5ae53a">GetNormal()</a>, <a class="el" href="classgcop_1_1Dem.html#acfcecfc1d9cbb74f4359d13d2067bb86">Index2Point()</a>, <a class="el" href="classgcop_1_1DemView.html#a566f3a72228187b2ac2cfb54c1695feb">gcop::DemView::Init()</a>, <a class="el" href="classgcop_1_1Dem.html#a04f7598b537bddff52a711a9a73a766b">Load()</a>, <a class="el" href="classgcop_1_1Dem.html#abf9703a27df91fdaf611335ab136d21e">Point2Index()</a>, and <a class="el" href="classgcop_1_1Dem.html#ac476b661e89c26428962732a16b498b4">Set()</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +1105,7 @@ Public Attributes</h2></td></tr>
 
 <p>height </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Dem.html#a8160aed97508f8502e568190fdef3d0d">AddBoundary()</a>, <a class="el" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get()</a>, <a class="el" href="classgcop_1_1Dem.html#a40f2e078567ad299ff094cac1d5ae53a">GetNormal()</a>, <a class="el" href="classgcop_1_1Dem.html#a101ee535ad510249b0448b1247c7ed41">IsValid()</a>, <a class="el" href="classgcop_1_1Dem.html#a04f7598b537bddff52a711a9a73a766b">Load()</a>, <a class="el" href="classgcop_1_1DemView.html#a669be87c5a60e28817152cee94d98c42">gcop::DemView::RenderFrame()</a>, and <a class="el" href="classgcop_1_1Dem.html#ac476b661e89c26428962732a16b498b4">Set()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Dem.html#a8160aed97508f8502e568190fdef3d0d">AddBoundary()</a>, <a class="el" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get()</a>, <a class="el" href="classgcop_1_1Dem.html#a40f2e078567ad299ff094cac1d5ae53a">GetNormal()</a>, <a class="el" href="classgcop_1_1Dem.html#acfcecfc1d9cbb74f4359d13d2067bb86">Index2Point()</a>, <a class="el" href="classgcop_1_1Dem.html#a101ee535ad510249b0448b1247c7ed41">IsValid()</a>, <a class="el" href="classgcop_1_1Dem.html#a04f7598b537bddff52a711a9a73a766b">Load()</a>, <a class="el" href="classgcop_1_1Dem.html#abf9703a27df91fdaf611335ab136d21e">Point2Index()</a>, <a class="el" href="classgcop_1_1DemView.html#a669be87c5a60e28817152cee94d98c42">gcop::DemView::RenderFrame()</a>, and <a class="el" href="classgcop_1_1Dem.html#ac476b661e89c26428962732a16b498b4">Set()</a>.</p>
 
 </div>
 </div>
@@ -1085,7 +1173,7 @@ Public Attributes</h2></td></tr>
 
 <p>origin </p>
 
-<p>Referenced by <a class="el" href="classgcop_1_1Dem.html#a8fa55a2500a5e3980085c4a2343fdaae">Dem()</a>, <a class="el" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get()</a>, <a class="el" href="classgcop_1_1Dem.html#a40f2e078567ad299ff094cac1d5ae53a">GetNormal()</a>, <a class="el" href="classgcop_1_1Dem.html#a101ee535ad510249b0448b1247c7ed41">IsValid()</a>, <a class="el" href="classgcop_1_1DemView.html#a669be87c5a60e28817152cee94d98c42">gcop::DemView::RenderFrame()</a>, and <a class="el" href="classgcop_1_1Dem.html#ac476b661e89c26428962732a16b498b4">Set()</a>.</p>
+<p>Referenced by <a class="el" href="classgcop_1_1Dem.html#a8fa55a2500a5e3980085c4a2343fdaae">Dem()</a>, <a class="el" href="classgcop_1_1Dem.html#af5f6c5c23a70e8fd11c9ff7caf8b5d6d">Get()</a>, <a class="el" href="classgcop_1_1Dem.html#a40f2e078567ad299ff094cac1d5ae53a">GetNormal()</a>, <a class="el" href="classgcop_1_1Dem.html#acfcecfc1d9cbb74f4359d13d2067bb86">Index2Point()</a>, <a class="el" href="classgcop_1_1Dem.html#a101ee535ad510249b0448b1247c7ed41">IsValid()</a>, <a class="el" href="classgcop_1_1Dem.html#abf9703a27df91fdaf611335ab136d21e">Point2Index()</a>, <a class="el" href="classgcop_1_1DemView.html#a669be87c5a60e28817152cee94d98c42">gcop::DemView::RenderFrame()</a>, and <a class="el" href="classgcop_1_1Dem.html#ac476b661e89c26428962732a16b498b4">Set()</a>.</p>
 
 </div>
 </div>
@@ -1131,7 +1219,7 @@ Public Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

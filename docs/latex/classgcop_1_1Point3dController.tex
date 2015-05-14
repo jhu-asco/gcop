@@ -1,0 +1,179 @@
+\section{gcop\-:\-:\-Point3d\-Controller \-Class \-Reference}
+\label{classgcop_1_1Point3dController}\index{gcop\-::\-Point3d\-Controller@{gcop\-::\-Point3d\-Controller}}
+
+
+{\ttfamily \#include $<$point3dcontroller.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Point3d\-Controller\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{classgcop_1_1Point3dController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Point3d\-Controller\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1Point3dController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Point3d\-Controller} (const {\bf \-Point3d} \&{\bf sys}, {\bf \-Point3d\-State} $\ast${\bf xd}=0, \-Vector3d $\ast${\bf ad}=0)
+\item 
+virtual bool {\bf \-Set} (\-Vector3d \&u, double t, const {\bf \-Point3d\-State} \&x)
+\item 
+virtual {\bf $\sim$\-Point3d\-Controller} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Point3d} \& {\bf sys}
+\begin{DoxyCompactList}\small\item\em point mass system \end{DoxyCompactList}\item 
+{\bf \-Point3d\-State} $\ast$ {\bf xd}
+\begin{DoxyCompactList}\small\item\em desired state (origin by default) \end{DoxyCompactList}\item 
+\-Vector3d $\ast$ {\bf ad}
+\begin{DoxyCompactList}\small\item\em desired acceleration (zero by default) \end{DoxyCompactList}\item 
+\-Vector3d {\bf \-Kp}
+\begin{DoxyCompactList}\small\item\em proportional terms (ones by default) \end{DoxyCompactList}\item 
+\-Vector3d {\bf \-Kd}
+\begin{DoxyCompactList}\small\item\em derivative terms (ones by default) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Basic \-P\-D controller for a point-\/mass system in 3d
+
+\-Author\-: \-Marin \-Kobilarov 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Point3d\-Controller@{gcop\-::\-Point3d\-Controller}!\-Point3d\-Controller@{\-Point3d\-Controller}}
+\index{\-Point3d\-Controller@{\-Point3d\-Controller}!gcop::Point3dController@{gcop\-::\-Point3d\-Controller}}
+\subsubsection[{\-Point3d\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Point3d\-Controller\-::\-Point3d\-Controller} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Point3d} \&}]{sys, }
+\item[{{\bf \-Point3d\-State} $\ast$}]{xd = {\ttfamily 0}, }
+\item[{\-Vector3d $\ast$}]{ad = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1Point3dController_a887ee15ece63a5d05e5cd0038f539fa6}
+\-Point3\-D \-P\-D controller
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em sys} & multi-\/body system \\
+\hline
+{\em xd} & desired state (optional, set to origin by default) \\
+\hline
+{\em ad} & desired acceleration (optional, set to zero by default) \\
+\hline
+\end{DoxyParams}
+
+
+\-References \-Kd, and \-Kp.
+
+\index{gcop\-::\-Point3d\-Controller@{gcop\-::\-Point3d\-Controller}!$\sim$\-Point3d\-Controller@{$\sim$\-Point3d\-Controller}}
+\index{$\sim$\-Point3d\-Controller@{$\sim$\-Point3d\-Controller}!gcop::Point3dController@{gcop\-::\-Point3d\-Controller}}
+\subsubsection[{$\sim$\-Point3d\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Point3d\-Controller\-::$\sim$\-Point3d\-Controller} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Point3dController_aec56f7325136515e788c0b9d253b541c}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Point3d\-Controller@{gcop\-::\-Point3d\-Controller}!\-Set@{\-Set}}
+\index{\-Set@{\-Set}!gcop::Point3dController@{gcop\-::\-Point3d\-Controller}}
+\subsubsection[{\-Set}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Point3d\-Controller\-::\-Set} (
+\begin{DoxyParamCaption}
+\item[{\-Vector3d \&}]{u, }
+\item[{double}]{t, }
+\item[{const {\bf \-Point3d\-State} \&}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Point3dController_a02cf4f10ad5b3e6b30f36bf9eb762d73}
+\-Feedback controller of the form u = k(t, x) 
+\begin{DoxyParams}{\-Parameters}
+{\em u} & controls \\
+\hline
+{\em t} & time \\
+\hline
+{\em x} & state \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if arguments are valid, false if e.\-g. x is infeasible 
+\end{DoxyReturn}
+
+
+\-Implements {\bf gcop\-::\-Controller$<$ Point3d\-State, Vector3d $>$} \doxyref{}{p.}{classgcop_1_1Controller_a6bbf22b498272842f7894b3983d97022}.
+
+
+
+\-References ad, \-Kd, \-Kp, gcop\-::\-Point3d\-State\-::q, gcop\-::\-Point3d\-State\-::v, and xd.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Point3d\-Controller@{gcop\-::\-Point3d\-Controller}!ad@{ad}}
+\index{ad@{ad}!gcop::Point3dController@{gcop\-::\-Point3d\-Controller}}
+\subsubsection[{ad}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d$\ast$ {\bf gcop\-::\-Point3d\-Controller\-::ad}}\label{classgcop_1_1Point3dController_a893a1d4b900ca364488822a27744e822}
+
+
+desired acceleration (zero by default) 
+
+
+
+\-Referenced by \-Set().
+
+\index{gcop\-::\-Point3d\-Controller@{gcop\-::\-Point3d\-Controller}!\-Kd@{\-Kd}}
+\index{\-Kd@{\-Kd}!gcop::Point3dController@{gcop\-::\-Point3d\-Controller}}
+\subsubsection[{\-Kd}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Point3d\-Controller\-::\-Kd}}\label{classgcop_1_1Point3dController_a822a70bbb0a366c90fb5aae88c4d64b4}
+
+
+derivative terms (ones by default) 
+
+
+
+\-Referenced by \-Point3d\-Controller(), and \-Set().
+
+\index{gcop\-::\-Point3d\-Controller@{gcop\-::\-Point3d\-Controller}!\-Kp@{\-Kp}}
+\index{\-Kp@{\-Kp}!gcop::Point3dController@{gcop\-::\-Point3d\-Controller}}
+\subsubsection[{\-Kp}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector3d {\bf gcop\-::\-Point3d\-Controller\-::\-Kp}}\label{classgcop_1_1Point3dController_a1fca0a6104a50238ce11a8c5f7c2d773}
+
+
+proportional terms (ones by default) 
+
+
+
+\-Referenced by \-Point3d\-Controller(), and \-Set().
+
+\index{gcop\-::\-Point3d\-Controller@{gcop\-::\-Point3d\-Controller}!sys@{sys}}
+\index{sys@{sys}!gcop::Point3dController@{gcop\-::\-Point3d\-Controller}}
+\subsubsection[{sys}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-Point3d}\& {\bf gcop\-::\-Point3d\-Controller\-::sys}}\label{classgcop_1_1Point3dController_a211c2571eaf9878bb5134ccf03a4c3b1}
+
+
+point mass system 
+
+\index{gcop\-::\-Point3d\-Controller@{gcop\-::\-Point3d\-Controller}!xd@{xd}}
+\index{xd@{xd}!gcop::Point3dController@{gcop\-::\-Point3d\-Controller}}
+\subsubsection[{xd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Point3d\-State}$\ast$ {\bf gcop\-::\-Point3d\-Controller\-::xd}}\label{classgcop_1_1Point3dController_a2d580e0f67d0c5bff04cbbe6602102b6}
+
+
+desired state (origin by default) 
+
+
+
+\-Referenced by \-Set().
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/algos/{\bf point3dcontroller.\-h}\item 
+lib/algos/{\bf point3dcontroller.\-cc}\end{DoxyCompactItemize}

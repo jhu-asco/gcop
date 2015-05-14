@@ -6,7 +6,8 @@
 
 
 
-\-Collaboration diagram for gcop\-:\-:\-Body2d\-Graph\-:\nopagebreak
+\-Collaboration diagram for gcop\-:\-:\-Body2d\-Graph\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -16,9 +17,9 @@
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Body2d\-Graph} ({\bf \-Body2d} \&{\bf sys}, int \-N, int nf, bool {\bf odometry}=true, bool {\bf extforce}=false, bool {\bf forces}=false)
+{\bf \-Body2d\-Graph} ({\bf \-Body2d}$<$$>$ \&{\bf sys}, int \-N, int nf, bool {\bf odometry}=true, bool {\bf extforce}=false, bool {\bf forces}=false)
 \item 
-void {\bf \-Optp} (\-Vector\-Xd \&{\bf p}, const vector$<$ {\bf \-M3\-V3d} $>$ \&{\bf xs})
+void {\bf \-Optp} (\-Vector\-Xd \&{\bf p}, const vector$<$ {\bf \-Body2d\-State} $>$ \&{\bf xs})
 \end{DoxyCompactItemize}
 \subsection*{\-Static \-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
@@ -44,7 +45,7 @@ bool {\bf forces}
 \begin{DoxyCompactList}\small\item\em unknown external force \end{DoxyCompactList}\item 
 vector$<$ double $>$ {\bf ts}
 \begin{DoxyCompactList}\small\item\em sequence of times (\-N+1 vector) \end{DoxyCompactList}\item 
-vector$<$ {\bf \-M3\-V3d} $>$ {\bf xs}
+vector$<$ {\bf \-Body2d\-State} $>$ {\bf xs}
 \begin{DoxyCompactList}\small\item\em sequence of states x=(g,v) (\-N+1 vector) \end{DoxyCompactList}\item 
 vector$<$ \-Vector3d $>$ {\bf us}
 \begin{DoxyCompactList}\small\item\em sequence of inputs (\-N vector) \end{DoxyCompactList}\item 
@@ -74,14 +75,14 @@ double {\bf cp}
 \index{\-Body2d\-Graph@{\-Body2d\-Graph}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
 \subsubsection[{\-Body2d\-Graph}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Body2d\-Graph\-::\-Body2d\-Graph} (
 \begin{DoxyParamCaption}
-\item[{{\bf \-Body2d} \&}]{sys, }
+\item[{{\bf \-Body2d}$<$$>$ \&}]{sys, }
 \item[{int}]{\-N, }
 \item[{int}]{nf, }
 \item[{bool}]{odometry = {\ttfamily true}, }
 \item[{bool}]{extforce = {\ttfamily false}, }
 \item[{bool}]{forces = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1Body2dGraph_a02934fc4d695a62f936d48d178e4b405}
+)}\label{classgcop_1_1Body2dGraph_ae703ca877bb6053f10565433de300d47}
 \-Pose-\/landmark graph 
 \begin{DoxyParams}{\-Parameters}
 {\em sys} & body2d system \\
@@ -105,9 +106,9 @@ double {\bf cp}
 \subsubsection[{\-Optp}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Body2d\-Graph\-::\-Optp} (
 \begin{DoxyParamCaption}
 \item[{\-Vector\-Xd \&}]{p, }
-\item[{const vector$<$ {\bf \-M3\-V3d} $>$ \&}]{xs}
+\item[{const vector$<$ {\bf \-Body2d\-State} $>$ \&}]{xs}
 \end{DoxyParamCaption}
-)}\label{classgcop_1_1Body2dGraph_a78c5af31a783507c03cb72ca85192a32}
+)}\label{classgcop_1_1Body2dGraph_ae6f5a3030961657ec5ea4800f080eac1}
 \-Given a sequence of poses gs, compute the optimal feature locations p 
 \begin{DoxyParams}{\-Parameters}
 {\em p} & a vector of feature locations \\
@@ -165,7 +166,7 @@ double {\bf cp}
 \end{DoxyParams}
 
 
-\-References gcop\-::\-S\-E2\-::cay(), cp, gcop\-::\-Body2d\-Force\-::\-D, extforce, gcop\-::\-Body2d\-::force, gcop\-::\-S\-E2\-::\-Instance(), \-Is, \-Js, \-Optp(), p, gcop\-::random\-\_\-normal(), sys, ts, us, vs, and xs.
+\-References gcop\-::\-S\-E2\-::cay(), cp, extforce, gcop\-::\-Body2d$<$ c $>$\-::force, gcop\-::\-S\-E2\-::\-Instance(), \-Is, \-Js, \-Optp(), p, gcop\-::random\-\_\-normal(), sys, ts, us, vs, and xs.
 
 \index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!\-Synthesize3@{\-Synthesize3}}
 \index{\-Synthesize3@{\-Synthesize3}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
@@ -187,7 +188,7 @@ double {\bf cp}
 \end{DoxyParams}
 
 
-\-References gcop\-::\-S\-E2\-::cay(), cp, cv, cw, gcop\-::\-Body2d\-Force\-::\-D, extforce, fext, gcop\-::\-Body2d\-::force, gcop\-::\-Body2d\-::\-I, gcop\-::\-S\-E2\-::\-Instance(), \-Is, \-Js, \-Optp(), p, gcop\-::random\-\_\-normal(), gcop\-::\-Body2d\-::\-Step(), sys, ts, us, vs, and xs.
+\-References gcop\-::\-S\-E2\-::cay(), cp, cv, cw, extforce, fext, gcop\-::\-Body2d$<$ c $>$\-::force, gcop\-::\-Body2d$<$ c $>$\-::\-I, gcop\-::\-S\-E2\-::\-Instance(), \-Is, \-Js, \-Optp(), p, gcop\-::random\-\_\-normal(), gcop\-::\-Body2d$<$ c $>$\-::\-Step(), sys, ts, us, vs, and xs.
 
 
 
@@ -348,7 +349,7 @@ odometry/gyro velocity measurements
 
 \index{gcop\-::\-Body2d\-Graph@{gcop\-::\-Body2d\-Graph}!xs@{xs}}
 \index{xs@{xs}!gcop::Body2dGraph@{gcop\-::\-Body2d\-Graph}}
-\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-M3\-V3d}$>$ {\bf gcop\-::\-Body2d\-Graph\-::xs}}\label{classgcop_1_1Body2dGraph_ac4ce304f4b70282f5a66e408c3aa83a8}
+\subsubsection[{xs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf \-Body2d\-State}$>$ {\bf gcop\-::\-Body2d\-Graph\-::xs}}\label{classgcop_1_1Body2dGraph_a6a54b350d5d56e6a6cf0ea7331785f1c}
 
 
 sequence of states x=(g,v) (\-N+1 vector) 

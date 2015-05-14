@@ -1,4 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$constraint_8h.html" title="constraint.h" alt="" coords="61,83,152,112"/>
-<area shape="rect" id="node9" href="$dem_8h.html" title="dem.h" alt="" coords="176,83,235,112"/>
+<area shape="rect" id="node3" href="$constraint_8h.html" title="constraint.h" alt="" coords="5,160,96,189"/>
+<area shape="rect" id="node9" href="$dem_8h.html" title="dem.h" alt="" coords="243,83,301,112"/>
+<area shape="rect" id="node13" href="$body3dmanifold_8h.html" title="body3dmanifold.h" alt="" coords="96,83,219,112"/>
+<area shape="rect" id="node15" href="$manifold_8h.html" title="manifold.h" alt="" coords="120,160,203,189"/>
 </map>

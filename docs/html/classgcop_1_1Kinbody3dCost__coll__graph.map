@@ -1,10 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; Matrix4d, 6, _nu \&gt;" alt="" coords="100,437,319,467"/>
-<area shape="rect" id="node4" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; Matrix4d, _nx, _nu, Dynamic, Dynamic \&gt;" alt="" coords="33,357,385,387"/>
-<area shape="rect" id="node6" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; Matrix4d, _nx, _nu, _np \&gt;" alt="" coords="87,277,332,307"/>
-<area shape="rect" id="node8" href="$classgcop_1_1System.html" title="gcop::System\&lt; Matrix4d, _nx, _nu, _np \&gt;" alt="" coords="77,181,341,211"/>
-<area shape="rect" id="node10" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _np \&gt;" alt="" coords="5,85,125,115"/>
-<area shape="rect" id="node12" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="7,5,295,35"/>
-<area shape="rect" id="node16" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="149,85,269,115"/>
-<area shape="rect" id="node14" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix4d, _nx \&gt;" alt="" coords="293,85,504,115"/>
+<area shape="rect" id="node2" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; Matrix4d, 6, _nu \&gt;" alt="" coords="101,437,320,467"/>
+<area shape="rect" id="node4" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; Matrix4d, _nx, _nu, Dynamic, Dynamic, Matrix4d \&gt;" alt="" coords="5,357,416,387"/>
+<area shape="rect" id="node6" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; Matrix4d, _nx, _nu, _np, Matrix4d \&gt;" alt="" coords="59,277,363,307"/>
+<area shape="rect" id="node8" href="$classgcop_1_1System.html" title="gcop::System\&lt; Matrix4d, _nx, _nu, _np \&gt;" alt="" coords="79,181,343,211"/>
+<area shape="rect" id="node10" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _np \&gt;" alt="" coords="7,85,127,115"/>
+<area shape="rect" id="node12" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix\&lt; double, _n, 1 \&gt;, _n \&gt;" alt="" coords="8,5,296,35"/>
+<area shape="rect" id="node16" href="$classgcop_1_1Rn.html" title="gcop::Rn\&lt; _nu \&gt;" alt="" coords="151,85,271,115"/>
+<area shape="rect" id="node14" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Matrix4d, _nx \&gt;" alt="" coords="295,85,505,115"/>
 </map>

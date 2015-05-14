@@ -6,7 +6,8 @@
 
 
 
-\-Inheritance diagram for gcop\-:\-:\-Rn$<$ \-\_\-n $>$\-:\nopagebreak
+\-Inheritance diagram for gcop\-:\-:\-Rn$<$ \-\_\-n $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -15,7 +16,8 @@
 \end{figure}
 
 
-\-Collaboration diagram for gcop\-:\-:\-Rn$<$ \-\_\-n $>$\-:\nopagebreak
+\-Collaboration diagram for gcop\-:\-:\-Rn$<$ \-\_\-n $>$\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -36,6 +38,8 @@ void {\bf dtau} (\-Matrixnd \&\-M, const \-Vectornd \&v)
 void {\bf \-Adtau} (\-Matrixnd \&\-M, const \-Vectornd \&v)
 \item 
 virtual bool {\bf \-Bound} (\-Vectornd \&v, \-Vectornd \&d, const \-Vectornd \&v0)
+\item 
+virtual bool {\bf \-Clip} (\-Vectornd \&v) const 
 \end{DoxyCompactItemize}
 \subsection*{\-Static \-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
@@ -124,6 +128,21 @@ true on success, false if the arguments are not compatible
 
 \-Referenced by gcop\-::\-Ddp$<$ T, nx, nu, np $>$\-::\-Forward().
 
+\index{gcop\-::\-Rn@{gcop\-::\-Rn}!\-Clip@{\-Clip}}
+\index{\-Clip@{\-Clip}!gcop::Rn@{gcop\-::\-Rn}}
+\subsubsection[{\-Clip}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ bool {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf \-Clip} (
+\begin{DoxyParamCaption}
+\item[{\-Vectornd \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1Rn_aa906092565109be0392b9dee1b00b77c}
+\-Clips a vector to be within lb and ub 
+\begin{DoxyParams}{\-Parameters}
+{\em vector} & v \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if clipped 
+\end{DoxyReturn}
 \index{gcop\-::\-Rn@{gcop\-::\-Rn}!dtau@{dtau}}
 \index{dtau@{dtau}!gcop::Rn@{gcop\-::\-Rn}}
 \subsubsection[{dtau}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int \-\_\-n$>$ void {\bf gcop\-::\-Rn}$<$ \-\_\-n $>$\-::{\bf dtau} (

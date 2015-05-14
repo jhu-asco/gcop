@@ -1,0 +1,189 @@
+\section{gcop\-:\-:\-Controller\-Tparam$<$ \-Tx, nx, nu, np, \-\_\-ntp, \-Tc $>$ \-Class \-Template \-Reference}
+\label{classgcop_1_1ControllerTparam}\index{gcop\-::\-Controller\-Tparam$<$ Tx, nx, nu, np, \-\_\-ntp, Tc $>$@{gcop\-::\-Controller\-Tparam$<$ Tx, nx, nu, np, \-\_\-ntp, Tc $>$}}
+
+
+{\ttfamily \#include $<$controllertparam.\-h$>$}
+
+
+
+\-Inheritance diagram for gcop\-:\-:\-Controller\-Tparam$<$ \-Tx, nx, nu, np, \-\_\-ntp, \-Tc $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{classgcop_1_1ControllerTparam__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for gcop\-:\-:\-Controller\-Tparam$<$ \-Tx, nx, nu, np, \-\_\-ntp, \-Tc $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgcop_1_1ControllerTparam__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Controller\-Tparam} ({\bf \-System}$<$ \-Tx, nx, nu, {\bf np} $>$ \&{\bf sys}, {\bf \-Controller}$<$ \-Tx, \-Vectorcd, \-Vectorntpd, \-Tc $>$ \&{\bf ctrl}, int {\bf ntp}=\-\_\-ntp, {\bf \-Constraint}$<$ \-Tx, nx, nu, {\bf np}, 1 $>$ $\ast${\bf con}=0)
+\item 
+bool {\bf \-To} (\-Vectorntpd \&s, const vector$<$ double $>$ \&ts, const vector$<$ \-Tx $>$ \&xs, const vector$<$ \-Vectorcd $>$ \&us, const \-Vectormd $\ast$p=0)
+\item 
+bool {\bf \-From} (vector$<$ double $>$ \&ts, vector$<$ \-Tx $>$ \&xs, vector$<$ \-Vectorcd $>$ \&us, const \-Vectorntpd \&s, \-Vectormd $\ast$p=0)
+\item 
+virtual bool {\bf \-Set\-Context} (const \-Tc \&c)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Controller}$<$ \-Tx, \-Vectorcd, \*
+\-Vectorntpd, \-Tc $>$ \& {\bf ctrl}
+\begin{DoxyCompactList}\small\item\em controller \end{DoxyCompactList}\item 
+{\bf \-Constraint}$<$ \-Tx, nx, nu, {\bf np}, 1 $>$ $\ast$ {\bf con}
+\begin{DoxyCompactList}\small\item\em scalar-\/valued path constraint to check feasibility \end{DoxyCompactList}\item 
+bool {\bf stoch}
+\begin{DoxyCompactList}\small\item\em whether to simulate process noise (true by default) \end{DoxyCompactList}\item 
+\-Vectornd {\bf w}
+\begin{DoxyCompactList}\small\item\em for sampling noise \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$typename Tx, int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic, typename Tc = \-Vector\-Xd$>$class gcop\-::\-Controller\-Tparam$<$ Tx, nx, nu, np, \-\_\-ntp, Tc $>$}
+
+\doxyref{\-Trajectory}{p.}{classgcop_1_1Trajectory} parametrization using a parametrized controller (a parametric policy). \-The parameters are typically the gains of the controller, but could also be any other policy parameters.
+
+\-Author\-: \-Marin \-Kobilarov (c) 2005-\/2015 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{gcop\-::\-Controller\-Tparam@{gcop\-::\-Controller\-Tparam}!\-Controller\-Tparam@{\-Controller\-Tparam}}
+\index{\-Controller\-Tparam@{\-Controller\-Tparam}!gcop::ControllerTparam@{gcop\-::\-Controller\-Tparam}}
+\subsubsection[{\-Controller\-Tparam}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , int nx, int nu, int np, int \-\_\-ntp, typename Tc $>$ {\bf gcop\-::\-Controller\-Tparam}$<$ \-Tx, nx, nu, {\bf np}, \-\_\-ntp, \-Tc $>$\-::{\bf \-Controller\-Tparam} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-System}$<$ \-Tx, nx, nu, {\bf np} $>$ \&}]{sys, }
+\item[{{\bf \-Controller}$<$ \-Tx, \-Vectorcd, \-Vectorntpd, \-Tc $>$ \&}]{ctrl, }
+\item[{int}]{ntp = {\ttfamily \-\_\-ntp}, }
+\item[{{\bf \-Constraint}$<$ \-Tx, nx, nu, {\bf np}, 1 $>$ $\ast$}]{con = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classgcop_1_1ControllerTparam_a37900b188e468f1990761ba6338e3d87}
+
+
+\-References gcop\-::\-Manifold$<$ T, \-\_\-n $>$\-::n, gcop\-::\-Controller\-Tparam$<$ Tx, nx, nu, np, \-\_\-ntp, Tc $>$\-::w, and gcop\-::\-System$<$ T, \-\_\-nx, \-\_\-nu, \-\_\-np $>$\-::\-X.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{gcop\-::\-Controller\-Tparam@{gcop\-::\-Controller\-Tparam}!\-From@{\-From}}
+\index{\-From@{\-From}!gcop::ControllerTparam@{gcop\-::\-Controller\-Tparam}}
+\subsubsection[{\-From}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , int nx, int nu, int np, int \-\_\-ntp, typename Tc $>$ bool {\bf gcop\-::\-Controller\-Tparam}$<$ \-Tx, nx, nu, {\bf np}, \-\_\-ntp, \-Tc $>$\-::{\bf \-From} (
+\begin{DoxyParamCaption}
+\item[{vector$<$ double $>$ \&}]{ts, }
+\item[{vector$<$ \-Tx $>$ \&}]{xs, }
+\item[{vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{const \-Vectorntpd \&}]{s, }
+\item[{\-Vectormd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1ControllerTparam_af08cbb7062597664d7b9b88d89ac75c0}
+\-Convert from trajectory (ts,xs,us,p) to parameters s 
+\begin{DoxyParams}{\-Parameters}
+{\em ts} & times \\
+\hline
+{\em xs} & states \\
+\hline
+{\em us} & controls \\
+\hline
+{\em s} & trajectory parametrization vector \\
+\hline
+{\em p} & system parameters (optional) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if conversion was successful 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-Tparam$<$ Tx, nx, nu, np, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1Tparam_a547cacd83055c27b7f083038d980ac3a}.
+
+
+
+\-References gcop\-::random\-\_\-normal().
+
+\index{gcop\-::\-Controller\-Tparam@{gcop\-::\-Controller\-Tparam}!\-Set\-Context@{\-Set\-Context}}
+\index{\-Set\-Context@{\-Set\-Context}!gcop::ControllerTparam@{gcop\-::\-Controller\-Tparam}}
+\subsubsection[{\-Set\-Context}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , int nx, int nu, int np, int \-\_\-ntp, typename Tc $>$ bool {\bf gcop\-::\-Controller\-Tparam}$<$ \-Tx, nx, nu, {\bf np}, \-\_\-ntp, \-Tc $>$\-::{\bf \-Set\-Context} (
+\begin{DoxyParamCaption}
+\item[{const \-Tc \&}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1ControllerTparam_aad65080ef1e4109ab875770a266c7faf}
+\index{gcop\-::\-Controller\-Tparam@{gcop\-::\-Controller\-Tparam}!\-To@{\-To}}
+\index{\-To@{\-To}!gcop::ControllerTparam@{gcop\-::\-Controller\-Tparam}}
+\subsubsection[{\-To}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , int nx, int nu, int np, int \-\_\-ntp, typename Tc $>$ bool {\bf gcop\-::\-Controller\-Tparam}$<$ \-Tx, nx, nu, {\bf np}, \-\_\-ntp, \-Tc $>$\-::{\bf \-To} (
+\begin{DoxyParamCaption}
+\item[{\-Vectorntpd \&}]{s, }
+\item[{const vector$<$ double $>$ \&}]{ts, }
+\item[{const vector$<$ \-Tx $>$ \&}]{xs, }
+\item[{const vector$<$ \-Vectorcd $>$ \&}]{us, }
+\item[{const \-Vectormd $\ast$}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classgcop_1_1ControllerTparam_a1e27c586aec8ef1b35b1d7c3d3c34394}
+\-Convert from paramer s to trajectory (ts,xs,us,p) 
+\begin{DoxyParams}{\-Parameters}
+{\em s} & trajectory parametrization vector \\
+\hline
+{\em ts} & times \\
+\hline
+{\em xs} & states \\
+\hline
+{\em us} & controls \\
+\hline
+{\em p} & system parameters (optional) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if conversion was successful 
+\end{DoxyReturn}
+
+
+\-Reimplemented from {\bf gcop\-::\-Tparam$<$ Tx, nx, nu, np, \-\_\-ntp $>$} \doxyref{}{p.}{classgcop_1_1Tparam_a2668afc0c6d411d2811a8e3f7b4d60b3}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{gcop\-::\-Controller\-Tparam@{gcop\-::\-Controller\-Tparam}!con@{con}}
+\index{con@{con}!gcop::ControllerTparam@{gcop\-::\-Controller\-Tparam}}
+\subsubsection[{con}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic, typename Tc  = \-Vector\-Xd$>$ {\bf \-Constraint}$<$\-Tx, nx, nu, {\bf np}, 1$>$$\ast$ {\bf gcop\-::\-Controller\-Tparam}$<$ \-Tx, nx, nu, {\bf np}, \-\_\-ntp, \-Tc $>$\-::{\bf con}}\label{classgcop_1_1ControllerTparam_a07ed3cf7cd6898660c8a13d4e5502248}
+
+
+scalar-\/valued path constraint to check feasibility 
+
+\index{gcop\-::\-Controller\-Tparam@{gcop\-::\-Controller\-Tparam}!ctrl@{ctrl}}
+\index{ctrl@{ctrl}!gcop::ControllerTparam@{gcop\-::\-Controller\-Tparam}}
+\subsubsection[{ctrl}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic, typename Tc  = \-Vector\-Xd$>$ {\bf \-Controller}$<$\-Tx, \-Vectorcd, \-Vectorntpd, \-Tc$>$\& {\bf gcop\-::\-Controller\-Tparam}$<$ \-Tx, nx, nu, {\bf np}, \-\_\-ntp, \-Tc $>$\-::{\bf ctrl}}\label{classgcop_1_1ControllerTparam_a6d4fc33f2faa952b47b9c3a1fd4653da}
+
+
+controller 
+
+\index{gcop\-::\-Controller\-Tparam@{gcop\-::\-Controller\-Tparam}!stoch@{stoch}}
+\index{stoch@{stoch}!gcop::ControllerTparam@{gcop\-::\-Controller\-Tparam}}
+\subsubsection[{stoch}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic, typename Tc  = \-Vector\-Xd$>$ bool {\bf gcop\-::\-Controller\-Tparam}$<$ \-Tx, nx, nu, {\bf np}, \-\_\-ntp, \-Tc $>$\-::{\bf stoch}}\label{classgcop_1_1ControllerTparam_a551294fd9f38a79cc70a6ff97ff4a6d8}
+
+
+whether to simulate process noise (true by default) 
+
+\index{gcop\-::\-Controller\-Tparam@{gcop\-::\-Controller\-Tparam}!w@{w}}
+\index{w@{w}!gcop::ControllerTparam@{gcop\-::\-Controller\-Tparam}}
+\subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Tx , int nx = \-Dynamic, int nu = \-Dynamic, int np = \-Dynamic, int \-\_\-ntp = \-Dynamic, typename Tc  = \-Vector\-Xd$>$ \-Vectornd {\bf gcop\-::\-Controller\-Tparam}$<$ \-Tx, nx, nu, {\bf np}, \-\_\-ntp, \-Tc $>$\-::{\bf w}}\label{classgcop_1_1ControllerTparam_a24661503a2caa3d09f63712006a5a707}
+
+
+for sampling noise 
+
+
+
+\-Referenced by gcop\-::\-Controller\-Tparam$<$ Tx, nx, nu, np, \-\_\-ntp, Tc $>$\-::\-Controller\-Tparam().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/systems/parametrization/{\bf controllertparam.\-h}\end{DoxyCompactItemize}

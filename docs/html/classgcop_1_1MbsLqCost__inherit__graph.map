@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; MbsState\&lt; nb \&gt;, MBS_DIM(nb), c \&gt;" alt="" coords="41,160,364,189"/>
-<area shape="rect" id="node4" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; MbsState\&lt; nb \&gt;, _nx, _nu, Dynamic, Dynamic \&gt;" alt="" coords="5,83,400,112"/>
-<area shape="rect" id="node6" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; MbsState\&lt; nb \&gt;, _nx, _nu, _np \&gt;" alt="" coords="57,5,348,35"/>
+<area shape="rect" id="node2" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; MbsState\&lt; nb \&gt;, MBS_DIM(nb), c \&gt;" alt="" coords="93,160,416,189"/>
+<area shape="rect" id="node4" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; MbsState\&lt; nb \&gt;, _nx, _nu, Dynamic, Dynamic, MbsState\&lt; nb \&gt; \&gt;" alt="" coords="5,83,504,112"/>
+<area shape="rect" id="node6" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; MbsState\&lt; nb \&gt;, _nx, _nu, _np, MbsState\&lt; nb \&gt; \&gt;" alt="" coords="59,5,451,35"/>
 </map>

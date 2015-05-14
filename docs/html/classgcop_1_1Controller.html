@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>GCOP: gcop::Controller&lt; Tx, Tu &gt; Class Template Reference</title>
+<title>GCOP: gcop::Controller&lt; Tx, Tu, Ts, Tc &gt; Class Template Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -61,35 +61,51 @@
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">gcop::Controller&lt; Tx, Tu &gt; Class Template Reference</div>  </div>
+<div class="title">gcop::Controller&lt; Tx, Tu, Ts, Tc &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="gcop::Controller" -->
 <p><code>#include &lt;<a class="el" href="controller_8h_source.html">controller.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for gcop::Controller&lt; Tx, Tu, Ts, Tc &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classgcop_1_1Controller__coll__graph.png" border="0" usemap="#gcop_1_1Controller_3_01Tx_00_01Tu_00_01Ts_00_01Tc_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="gcop_1_1Controller_3_01Tx_00_01Tu_00_01Ts_00_01Tc_01_4_coll__map" id="gcop_1_1Controller_3_01Tx_00_01Tu_00_01Ts_00_01Tc_01_4_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classgcop_1_1Controller-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Controller.html#a306fbf6d65ab78e13537bb92b330fc35">Set</a> (Tu &amp;u, double t, const Tx &amp;x)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Controller.html#a6bbf22b498272842f7894b3983d97022">Set</a> (Tu &amp;u, double t, const Tx &amp;x)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Controller.html#a8663b606ccd50ea319d57db31f274f05">SetParams</a> (const Ts &amp;<a class="el" href="classgcop_1_1Controller.html#aa8f335870114dacfd11bf48f39efc8b2">s</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Controller.html#aa7c8c84ff5a7fde50c70c4f7524fef17">SetContext</a> (const Tc &amp;<a class="el" href="classgcop_1_1Controller.html#a81a85dc188cec0c4332bc0870ec504ba">c</a>)</td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Ts&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Controller.html#aa8f335870114dacfd11bf48f39efc8b2">s</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">controller parameters  <a href="#aa8f335870114dacfd11bf48f39efc8b2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Tc&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1Controller.html#a81a85dc188cec0c4332bc0870ec504ba">c</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">controller context  <a href="#a81a85dc188cec0c4332bc0870ec504ba"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename Tx, typename Tu&gt;<br/>
-class gcop::Controller&lt; Tx, Tu &gt;</h3>
+<div class="textblock"><h3>template&lt;typename Tx, typename Tu, typename Ts = VectorXd, typename Tc = VectorXd&gt;<br/>
+class gcop::Controller&lt; Tx, Tu, Ts, Tc &gt;</h3>
 
 <p>Base controller. Its simple purpose is to take a state x and time t and produces the control u.</p>
 <p>Author: Marin Kobilarov -- Copyright (C) 2006-2013 </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a306fbf6d65ab78e13537bb92b330fc35"></a><!-- doxytag: member="gcop::Controller::Set" ref="a306fbf6d65ab78e13537bb92b330fc35" args="(Tu &amp;u, double t, const Tx &amp;x)=0" -->
+<a class="anchor" id="a6bbf22b498272842f7894b3983d97022"></a><!-- doxytag: member="gcop::Controller::Set" ref="a6bbf22b498272842f7894b3983d97022" args="(Tu &amp;u, double t, const Tx &amp;x)=0" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Tx, typename Tu&gt; </div>
+template&lt;typename Tx, typename Tu, typename Ts = VectorXd, typename Tc = VectorXd&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classgcop_1_1Controller.html">gcop::Controller</a>&lt; Tx, Tu &gt;::<a class="el" href="classgcop_1_1Controller.html#a306fbf6d65ab78e13537bb92b330fc35">Set</a> </td>
+          <td class="memname">virtual bool <a class="el" href="classgcop_1_1Controller.html">gcop::Controller</a>&lt; Tx, Tu, Ts, Tc &gt;::<a class="el" href="classgcop_1_1Controller.html#a6bbf22b498272842f7894b3983d97022">Set</a> </td>
           <td>(</td>
           <td class="paramtype">Tu &amp;&#160;</td>
           <td class="paramname"><em>u</em>, </td>
@@ -123,8 +139,90 @@ template&lt;typename Tx, typename Tu&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if arguments are valid, false if e.g. x is infeasible </dd></dl>
 
-<p>Implemented in <a class="el" href="classgcop_1_1MbsController.html#a0065ff60bcfaa6f378e97809d6491a4b">gcop::MbsController</a>.</p>
+<p>Implemented in <a class="el" href="classgcop_1_1Body3dDemController.html#a6619b241c047122bef9894f9a1a05ca8">gcop::Body3dDemController&lt; nu &gt;</a>, <a class="el" href="classgcop_1_1Body3dAvoidController.html#a3366867a655b73e7a858b110be672c6c">gcop::Body3dAvoidController&lt; nu &gt;</a>, <a class="el" href="classgcop_1_1GavoidController.html#a5844309f105b871bbc5b9cf429973a6e">gcop::GavoidController</a>, <a class="el" href="classgcop_1_1Body3dController.html#aa10e4eeb274191d67644002bd3833112">gcop::Body3dController&lt; c &gt;</a>, <a class="el" href="classgcop_1_1Body3dController.html#aa10e4eeb274191d67644002bd3833112">gcop::Body3dController&lt; nu &gt;</a>, <a class="el" href="classgcop_1_1Point3dController.html#a02cf4f10ad5b3e6b30f36bf9eb762d73">gcop::Point3dController</a>, and <a class="el" href="classgcop_1_1MbsController.html#a60e530bb55ab52cb0d06a4f8898cd075">gcop::MbsController</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa7c8c84ff5a7fde50c70c4f7524fef17"></a><!-- doxytag: member="gcop::Controller::SetContext" ref="aa7c8c84ff5a7fde50c70c4f7524fef17" args="(const Tc &amp;c)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Tx, typename Tu, typename Ts = VectorXd, typename Tc = VectorXd&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool <a class="el" href="classgcop_1_1Controller.html">gcop::Controller</a>&lt; Tx, Tu, Ts, Tc &gt;::<a class="el" href="classgcop_1_1Controller.html#aa7c8c84ff5a7fde50c70c4f7524fef17">SetContext</a> </td>
+          <td>(</td>
+          <td class="paramtype">const Tc &amp;&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Set context </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if arguments are valid, false if e.g. s is infeasible </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classgcop_1_1Body3dDemController.html#a65583ba02854318be286206a0c982293">gcop::Body3dDemController&lt; nu &gt;</a>, and <a class="el" href="classgcop_1_1Body3dAvoidController.html#acc22b7238c9ad2b27ce198db8ae0209f">gcop::Body3dAvoidController&lt; nu &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8663b606ccd50ea319d57db31f274f05"></a><!-- doxytag: member="gcop::Controller::SetParams" ref="a8663b606ccd50ea319d57db31f274f05" args="(const Ts &amp;s)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Tx, typename Tu, typename Ts = VectorXd, typename Tc = VectorXd&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool <a class="el" href="classgcop_1_1Controller.html">gcop::Controller</a>&lt; Tx, Tu, Ts, Tc &gt;::<a class="el" href="classgcop_1_1Controller.html#a8663b606ccd50ea319d57db31f274f05">SetParams</a> </td>
+          <td>(</td>
+          <td class="paramtype">const Ts &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Set controller parameters </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if arguments are valid, false if e.g. s is infeasible </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classgcop_1_1Body3dDemController.html#a0f8514b37e0c9beb29e74b6890fde5ce">gcop::Body3dDemController&lt; nu &gt;</a>, and <a class="el" href="classgcop_1_1Body3dAvoidController.html#a9ca243566e3e74f441668a573660e372">gcop::Body3dAvoidController&lt; nu &gt;</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a81a85dc188cec0c4332bc0870ec504ba"></a><!-- doxytag: member="gcop::Controller::c" ref="a81a85dc188cec0c4332bc0870ec504ba" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Tx, typename Tu, typename Ts = VectorXd, typename Tc = VectorXd&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Tc <a class="el" href="classgcop_1_1Controller.html">gcop::Controller</a>&lt; Tx, Tu, Ts, Tc &gt;::<a class="el" href="classgcop_1_1Controller.html#a81a85dc188cec0c4332bc0870ec504ba">c</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>controller context </p>
+
+</div>
+</div>
+<a class="anchor" id="aa8f335870114dacfd11bf48f39efc8b2"></a><!-- doxytag: member="gcop::Controller::s" ref="aa8f335870114dacfd11bf48f39efc8b2" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Tx, typename Tu, typename Ts = VectorXd, typename Tc = VectorXd&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Ts <a class="el" href="classgcop_1_1Controller.html">gcop::Controller</a>&lt; Tx, Tu, Ts, Tc &gt;::<a class="el" href="classgcop_1_1Controller.html#aa8f335870114dacfd11bf48f39efc8b2">s</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>controller parameters </p>
 
 </div>
 </div>
@@ -135,7 +233,7 @@ template&lt;typename Tx, typename Tu&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:48 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

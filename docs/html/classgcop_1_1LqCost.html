@@ -69,21 +69,21 @@
 <div class="title">gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="gcop::LqCost" --><!-- doxytag: inherits="gcop::LsCost" -->
+<!-- doxytag: class="gcop::LqCost" --><!-- doxytag: inherits="LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;" -->
 <p><code>#include &lt;<a class="el" href="lqcost_8h_source.html">lqcost.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgcop_1_1LqCost__inherit__graph.png" border="0" usemap="#gcop_1_1LqCost_3_01T_00_01__nx_00_01__nu_00_01__np_00_01__ng_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="gcop_1_1LqCost_3_01T_00_01__nx_00_01__nu_00_01__np_00_01__ng_01_4_inherit__map" id="gcop_1_1LqCost_3_01T_00_01__nx_00_01__nu_00_01__np_00_01__ng_01_4_inherit__map">
-<area shape="rect" id="node2" href="classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; T, _nx, _nu, _np, _ng \&gt;" alt="" coords="5,83,253,112"/><area shape="rect" id="node4" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; T, _nx, _nu, _np \&gt;" alt="" coords="27,5,232,35"/></map>
+<area shape="rect" id="node2" href="classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; T, _nx, _nu, _np, _ng, T \&gt;" alt="" coords="5,83,269,112"/><area shape="rect" id="node4" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; T, _nx, _nu, _np, T \&gt;" alt="" coords="27,5,248,35"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for gcop::LqCost&lt; T, _nx, _nu, _np, _ng &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgcop_1_1LqCost__coll__graph.png" border="0" usemap="#gcop_1_1LqCost_3_01T_00_01__nx_00_01__nu_00_01__np_00_01__ng_01_4_coll__map" alt="Collaboration graph"/></div>
 <map name="gcop_1_1LqCost_3_01T_00_01__nx_00_01__nu_00_01__np_00_01__ng_01_4_coll__map" id="gcop_1_1LqCost_3_01T_00_01__nx_00_01__nu_00_01__np_00_01__ng_01_4_coll__map">
-<area shape="rect" id="node2" href="classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; T, _nx, _nu, _np, _ng \&gt;" alt="" coords="5,85,253,115"/><area shape="rect" id="node4" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; T, _nx, _nu, _np \&gt;" alt="" coords="27,5,232,35"/></map>
+<area shape="rect" id="node2" href="classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; T, _nx, _nu, _np, _ng, T \&gt;" alt="" coords="5,85,269,115"/><area shape="rect" id="node4" href="classgcop_1_1Cost.html" title="gcop::Cost\&lt; T, _nx, _nu, _np, T \&gt;" alt="" coords="27,5,248,35"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classgcop_1_1LqCost-members.html">List of all members.</a></p>
@@ -106,38 +106,39 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef Matrix&lt; double, _np, _nx &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a6493a3352590d32007b4616984777346">Matrixmnd</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#aea2900eb59a0bfc0ff06bdcd13c31e96">LqCost</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, _nx, _nu, _np &gt; &amp;<a class="el" href="classgcop_1_1Cost.html#a57d004815023d9a92ead0cea1d0dbb36">sys</a>, double <a class="el" href="classgcop_1_1Cost.html#a5ff85a0123ee3bf8f1988c3cd339ac2d">tf</a>, const T &amp;<a class="el" href="classgcop_1_1LqCost.html#a606611084240ba0dc6624409514cb85d">xf</a>, bool <a class="el" href="classgcop_1_1LqCost.html#ae25a89305d3de8024556deabe5f9cbe6">diag</a>=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#aea2900eb59a0bfc0ff06bdcd13c31e96">LqCost</a> (<a class="el" href="classgcop_1_1System.html">System</a>&lt; T, _nx, _nu, _np &gt; &amp;<a class="el" href="classgcop_1_1Cost.html#a0f89708328371a69e049392b6ae7ca1e">sys</a>, double <a class="el" href="classgcop_1_1Cost.html#a774f472f719d4b9d23f5822961e258a3">tf</a>, const T &amp;<a class="el" href="classgcop_1_1LqCost.html#a124d5d664a3acb0dfb01de0fbfccde82">xf</a>, bool <a class="el" href="classgcop_1_1LqCost.html#ae25a89305d3de8024556deabe5f9cbe6">diag</a>=true)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a33b9245442260cb22290b9322ec3d3ee">UpdateGains</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a5ed101803b01988e0e027cb3212690c4">L</a> (double t, const T &amp;x, const <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> *Lx=0, <a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> *Lxx=0, <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> *Lu=0, <a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a> *Luu=0, <a class="el" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a> *Lxu=0, <a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *Lp=0, <a class="el" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> *Lpp=0, <a class="el" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> *Lpx=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a0dc68e304a1cfb58ba182eb7be5404dd">Res</a> (<a class="el" href="classgcop_1_1LqCost.html#acb0d044a737ec4786ab4370fb5f444ab">Vectorgd</a> &amp;<a class="el" href="classgcop_1_1LsCost.html#a54e7b80684531ecb70735da8b3212506">g</a>, double t, const T &amp;x, const <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1LqCost.html#ab72ba093cf08dc05b46447f818ac28ee">Matrixgxd</a> *dgdx=0, <a class="el" href="classgcop_1_1LqCost.html#aa69b1cb9710f042f52f3bfdd97110e46">Matrixgud</a> *dgdu=0, <a class="el" href="classgcop_1_1LqCost.html#a371e6ede4a73ba95d8914547a897815c">Matrixgpd</a> *dgdp=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#ae7f6441857b5c436664c7431bad22210">SetReference</a> (const vector&lt; T &gt; *<a class="el" href="classgcop_1_1LqCost.html#a007d1d2adaefd1486a3818ec6f4cc175">xds</a>, const vector&lt; <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &gt; *<a class="el" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248">uds</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a5ed101803b01988e0e027cb3212690c4">L</a> (double t, const T &amp;x, const <a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1LqCost.html#a2df7e2ce655a8f1ba1bdf4170e1a0f3b">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1LqCost.html#af3ed2ec1ac9ffce7e56b872a1a762fdb">Vectornd</a> *Lx=0, <a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a> *Lxx=0, <a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> *Lu=0, <a class="el" href="classgcop_1_1LqCost.html#aa3604f58b49a41683c910fab4df04da2">Matrixcd</a> *Luu=0, <a class="el" href="classgcop_1_1LqCost.html#a9471e1fb85909d5cb8b75e77738da8a4">Matrixncd</a> *Lxu=0, <a class="el" href="classgcop_1_1LqCost.html#a2df7e2ce655a8f1ba1bdf4170e1a0f3b">Vectormd</a> *Lp=0, <a class="el" href="classgcop_1_1LqCost.html#ad200caf408a7fae25c24f3c7e84b4cca">Matrixmd</a> *Lpp=0, <a class="el" href="classgcop_1_1LqCost.html#a6493a3352590d32007b4616984777346">Matrixmnd</a> *Lpx=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a0dc68e304a1cfb58ba182eb7be5404dd">Res</a> (<a class="el" href="classgcop_1_1LqCost.html#acb0d044a737ec4786ab4370fb5f444ab">Vectorgd</a> &amp;<a class="el" href="classgcop_1_1LsCost.html#a1cb852ce4d239faf4b3b50d32ac4d87f">g</a>, double t, const T &amp;x, const <a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> &amp;u, double h, const <a class="el" href="classgcop_1_1LqCost.html#a2df7e2ce655a8f1ba1bdf4170e1a0f3b">Vectormd</a> *p=0, <a class="el" href="classgcop_1_1LqCost.html#ab72ba093cf08dc05b46447f818ac28ee">Matrixgxd</a> *dgdx=0, <a class="el" href="classgcop_1_1LqCost.html#aa69b1cb9710f042f52f3bfdd97110e46">Matrixgud</a> *dgdu=0, <a class="el" href="classgcop_1_1LqCost.html#a371e6ede4a73ba95d8914547a897815c">Matrixgpd</a> *dgdp=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#ae7f6441857b5c436664c7431bad22210">SetReference</a> (const vector&lt; T &gt; *<a class="el" href="classgcop_1_1LqCost.html#a007d1d2adaefd1486a3818ec6f4cc175">xds</a>, const vector&lt; <a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> &gt; *<a class="el" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248">uds</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a2b21fdf93681c59ec998a1365156cf97">SetContext</a> (const T &amp;c)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a606611084240ba0dc6624409514cb85d">xf</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">reference to a desired final state  <a href="#a606611084240ba0dc6624409514cb85d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a124d5d664a3acb0dfb01de0fbfccde82">xf</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">reference to a desired final state  <a href="#a124d5d664a3acb0dfb01de0fbfccde82"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#ae25a89305d3de8024556deabe5f9cbe6">diag</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">are the Q, Qf, and R matrices diagonal (true by default)  <a href="#ae25a89305d3de8024556deabe5f9cbe6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e">Q</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e">Q</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">state matrix Q  <a href="#a03a5933a72967131cb3c8841cf56133e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008">Qf</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008">Qf</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">final state matrix Qf  <a href="#ab9b69b37cac83c5d47e5cf7b1edc3008"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987">R</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1LqCost.html#aa3604f58b49a41683c910fab4df04da2">Matrixcd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987">R</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">control matrix R  <a href="#af151948d630956cf81349f836c5ce987"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a8633acbdff20c371bfb9e60b3be6a0c7">Qsqrt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a8633acbdff20c371bfb9e60b3be6a0c7">Qsqrt</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">state matrix Q sqrt  <a href="#a8633acbdff20c371bfb9e60b3be6a0c7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#ab75aeb1d3a6889a75043fe08ca73fb6f">Qfsqrt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#ab75aeb1d3a6889a75043fe08ca73fb6f">Qfsqrt</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">final state matrix Qf sqrt  <a href="#ab75aeb1d3a6889a75043fe08ca73fb6f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#af5d798b9d50e7adcb317a114f60727b4">Rsqrt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1LqCost.html#aa3604f58b49a41683c910fab4df04da2">Matrixcd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#af5d798b9d50e7adcb317a114f60727b4">Rsqrt</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">control matrix R sqrt  <a href="#af5d798b9d50e7adcb317a114f60727b4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const vector&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a007d1d2adaefd1486a3818ec6f4cc175">xds</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">optional reference trajectory  <a href="#a007d1d2adaefd1486a3818ec6f4cc175"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const vector&lt; <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248">uds</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const vector&lt; <a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248">uds</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">optional reference control  <a href="#a7643f3c0f2b9e62230eff60e70ed9248"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24">dx</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1LqCost.html#af3ed2ec1ac9ffce7e56b872a1a762fdb">Vectornd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24">dx</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">state error (as a tangent vector)  <a href="#ae29c6142addc02d2bdabc0ce0ffaab24"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#aba8800273bffa0c03221cfa58bbf7e54">du</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgcop_1_1LqCost.html#aba8800273bffa0c03221cfa58bbf7e54">du</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">control error  <a href="#aba8800273bffa0c03221cfa58bbf7e54"></a><br/></td></tr>
 </table>
 <h3>template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt;<br/>
@@ -151,13 +152,15 @@ Protected Attributes</h2></td></tr>
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nu, _nu&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nu, _nu&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#aa3604f58b49a41683c910fab4df04da2">Matrixcd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a14d8adea012d0344ebafe52982344c8d">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a6c01129dab36bd09f4947b699a91e657">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classgcop_1_1Body2dCost.html#a35e6b30c876c5a9272c5ac8d36ecfde3">gcop::Body2dCost&lt; c &gt;</a>.</p>
 
 </div>
 </div>
@@ -168,13 +171,13 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nu, _nx&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1Cost.html#a78c4621db26fe3ef52ea534436b78bee">Matrixcnd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nu, _nx&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a7df332390164e769280e29cba3a659cc">Matrixcnd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#ac9298c7e113927484b373659dfa987dc">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#add8fcf742c0cf06f8aaa6c19b69be117">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -191,7 +194,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a1d614c0bbd5bf4e51272f92eaf474854">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#ae81015e6f7a435f3e0101a1d8cc6f242">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -208,7 +211,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#aeaefdd6dc0193d402dfe6e34bd6d8bc8">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a0323e786e3e9eccf783f3f055d0b04d9">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -225,7 +228,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#ac1269adbdddde8d9c0e3ef06bebbdc03">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#aa1ed725c6cd41130a703c0e3b815d236">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -236,13 +239,13 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _np, _np&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _np, _np&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#ad200caf408a7fae25c24f3c7e84b4cca">Matrixmd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a3cd1327a5fd7d457173f05fcbf9a4741">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a2d60538c57fe26a8c41a93feaa83a7ac">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -253,13 +256,13 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _np, _nx&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _np, _nx&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a6493a3352590d32007b4616984777346">Matrixmnd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a544b52d4c0c18105bf4c65c24fbc8e5d">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#ac991c77845c8e066eebe635e4837c505">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -270,13 +273,13 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nx, _nu&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nx, _nu&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a9471e1fb85909d5cb8b75e77738da8a4">Matrixncd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#ac4b23f8e4c38fef8a856a235016f06db">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a2f3d20b64d87f4e1c436addfe76c354e">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -287,13 +290,13 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nx, _nx&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nx, _nx&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a6432a8b71e8e75696620fbaa528c3f1f">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#ae995d0f7a99f89a9d66d51004b79d0b2">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -304,13 +307,13 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nx, _np&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1Cost.html#ac01445481fc7fcf3d12302e9797595b1">Matrixnmd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nx, _np&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a68c6c9c37e04c02e17f5a27d654ac2a2">Matrixnmd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#ae54d28f22258b061b130e1c0f8246cc8">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#aca13380b66226d47c190bf7defe4419d">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -321,13 +324,15 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nu, 1&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nu, 1&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a42e1679df292d4563aff116fc835dc03">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a80ca1e2e4211b55da66d5ff997465071">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classgcop_1_1Body2dCost.html#a535fc113fdcbc818a7aa58d0452dcf55">gcop::Body2dCost&lt; c &gt;</a>.</p>
 
 </div>
 </div>
@@ -344,7 +349,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a47ec2e13879ce1dd5623fd3ad4e236fb">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a8c795aee8442cad8ab32fe46416ec791">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -355,13 +360,13 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _np, 1&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _np, 1&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a2df7e2ce655a8f1ba1bdf4170e1a0f3b">Vectormd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a486cb8106b8a87d312142f2378e52de7">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a6613a3155317f4ce4fec4295d24ece18">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -372,13 +377,13 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Matrix&lt;double, _nx, 1&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a></td>
+          <td class="memname">typedef Matrix&lt;double, _nx, 1&gt; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#af3ed2ec1ac9ffce7e56b872a1a762fdb">Vectornd</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a6e0746267395626fb946d2d548e1ddcb">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a9b383daf6724a5115bd64dc8c3106f73">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -459,7 +464,7 @@ template&lt;typename T, int _nx, int _nu, int _np, int _ng&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> &amp;&#160;</td>
           <td class="paramname"><em>u</em>, </td>
         </tr>
         <tr>
@@ -471,55 +476,55 @@ template&lt;typename T, int _nx, int _nu, int _np, int _ng&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1LqCost.html#a2df7e2ce655a8f1ba1bdf4170e1a0f3b">Vectormd</a> *&#160;</td>
           <td class="paramname"><em>p</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1LqCost.html#af3ed2ec1ac9ffce7e56b872a1a762fdb">Vectornd</a> *&#160;</td>
           <td class="paramname"><em>Lx</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a> *&#160;</td>
           <td class="paramname"><em>Lxx</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> *&#160;</td>
           <td class="paramname"><em>Lu</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1LqCost.html#aa3604f58b49a41683c910fab4df04da2">Matrixcd</a> *&#160;</td>
           <td class="paramname"><em>Luu</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a3adaa3c27b960011a9053f30bee83179">Matrixncd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1LqCost.html#a9471e1fb85909d5cb8b75e77738da8a4">Matrixncd</a> *&#160;</td>
           <td class="paramname"><em>Lxu</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1LqCost.html#a2df7e2ce655a8f1ba1bdf4170e1a0f3b">Vectormd</a> *&#160;</td>
           <td class="paramname"><em>Lp</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#aca9e6d630a74a571559e9b68733bba38">Matrixmd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1LqCost.html#ad200caf408a7fae25c24f3c7e84b4cca">Matrixmd</a> *&#160;</td>
           <td class="paramname"><em>Lpp</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classgcop_1_1Cost.html#a78a0b557bb5c26895471e99e8bff566b">Matrixmnd</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="classgcop_1_1LqCost.html#a6493a3352590d32007b4616984777346">Matrixmnd</a> *&#160;</td>
           <td class="paramname"><em>Lpx</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
@@ -548,7 +553,7 @@ template&lt;typename T, int _nx, int _nu, int _np, int _ng&gt; </div>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#aee08e8fb34b61d6af233611d04403d9a">gcop::Cost&lt; T, _nx, _nu, _np &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a56496b40d3b5d3e5ebf52fcd78aca83f">gcop::Cost&lt; T, _nx, _nu, _np, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -579,7 +584,7 @@ template&lt;typename T, int _nx, int _nu, int _np, int _ng&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> &amp;&#160;</td>
           <td class="paramname"><em>u</em>, </td>
         </tr>
         <tr>
@@ -591,7 +596,7 @@ template&lt;typename T, int _nx, int _nu, int _np, int _ng&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classgcop_1_1Cost.html#a427254352fc2f6c029fdc18299fbfead">Vectormd</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classgcop_1_1LqCost.html#a2df7e2ce655a8f1ba1bdf4170e1a0f3b">Vectormd</a> *&#160;</td>
           <td class="paramname"><em>p</em> = <code>0</code>, </td>
         </tr>
         <tr>
@@ -636,7 +641,36 @@ template&lt;typename T, int _nx, int _nu, int _np, int _ng&gt; </div>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a4413b93fd231660e535501af83007e51">gcop::LsCost&lt; T, _nx, _nu, _np, _ng &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classgcop_1_1LsCost.html#a455c814e48cb8595efc65b158a3333a2">gcop::LsCost&lt; T, _nx, _nu, _np, _ng, T &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2b21fdf93681c59ec998a1365156cf97"></a><!-- doxytag: member="gcop::LqCost::SetContext" ref="a2b21fdf93681c59ec998a1365156cf97" args="(const T &amp;c)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, int _nx, int _nu, int _np, int _ng&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a2b21fdf93681c59ec998a1365156cf97">SetContext</a> </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Set context for the cost </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if successful </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgcop_1_1Cost.html#a58ea956b7953b5e4de849870165ceadb">gcop::Cost&lt; T, _nx, _nu, _np, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -655,7 +689,7 @@ template&lt;typename T, int _nx, int _nu, int _np, int _ng&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const vector&lt; <a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> &gt; *&#160;</td>
+          <td class="paramtype">const vector&lt; <a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> &gt; *&#160;</td>
           <td class="paramname"><em>uds</em>&#160;</td>
         </tr>
         <tr>
@@ -723,7 +757,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#aba8800273bffa0c03221cfa58bbf7e54">du</a><code> [protected]</code></td>
+          <td class="memname"><a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#aba8800273bffa0c03221cfa58bbf7e54">du</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -742,7 +776,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#ab4e65fb21a7e6d70303fde51ce28e549">Vectornd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24">dx</a><code> [protected]</code></td>
+          <td class="memname"><a class="el" href="classgcop_1_1LqCost.html#af3ed2ec1ac9ffce7e56b872a1a762fdb">Vectornd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#ae29c6142addc02d2bdabc0ce0ffaab24">dx</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -761,7 +795,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e">Q</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a03a5933a72967131cb3c8841cf56133e">Q</a></td>
         </tr>
       </table>
 </div>
@@ -780,7 +814,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008">Qf</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#ab9b69b37cac83c5d47e5cf7b1edc3008">Qf</a></td>
         </tr>
       </table>
 </div>
@@ -799,7 +833,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#ab75aeb1d3a6889a75043fe08ca73fb6f">Qfsqrt</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#ab75aeb1d3a6889a75043fe08ca73fb6f">Qfsqrt</a></td>
         </tr>
       </table>
 </div>
@@ -818,7 +852,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a62c04e5c44342fb82e79ca41f8f29a7c">Matrixnd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a8633acbdff20c371bfb9e60b3be6a0c7">Qsqrt</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1LqCost.html#a3350ea6f71d067f2b0ea6397f4fb9530">Matrixnd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a8633acbdff20c371bfb9e60b3be6a0c7">Qsqrt</a></td>
         </tr>
       </table>
 </div>
@@ -837,7 +871,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987">R</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1LqCost.html#aa3604f58b49a41683c910fab4df04da2">Matrixcd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#af151948d630956cf81349f836c5ce987">R</a></td>
         </tr>
       </table>
 </div>
@@ -856,7 +890,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgcop_1_1Cost.html#a9d3773e65bef07fe27ba8d3a87df8860">Matrixcd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#af5d798b9d50e7adcb317a114f60727b4">Rsqrt</a></td>
+          <td class="memname"><a class="el" href="classgcop_1_1LqCost.html#aa3604f58b49a41683c910fab4df04da2">Matrixcd</a> <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#af5d798b9d50e7adcb317a114f60727b4">Rsqrt</a></td>
         </tr>
       </table>
 </div>
@@ -875,7 +909,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const vector&lt;<a class="el" href="classgcop_1_1Cost.html#a99e8a404912f59398fac15c0702ab747">Vectorcd</a>&gt;* <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248">uds</a></td>
+          <td class="memname">const vector&lt;<a class="el" href="classgcop_1_1LqCost.html#a555a7506510ee4ab5e5db82fab028597">Vectorcd</a>&gt;* <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a7643f3c0f2b9e62230eff60e70ed9248">uds</a></td>
         </tr>
       </table>
 </div>
@@ -906,14 +940,14 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 
 </div>
 </div>
-<a class="anchor" id="a606611084240ba0dc6624409514cb85d"></a><!-- doxytag: member="gcop::LqCost::xf" ref="a606611084240ba0dc6624409514cb85d" args="" -->
+<a class="anchor" id="a124d5d664a3acb0dfb01de0fbfccde82"></a><!-- doxytag: member="gcop::LqCost::xf" ref="a124d5d664a3acb0dfb01de0fbfccde82" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic, int _ng = Dynamic&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const T&amp; <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a606611084240ba0dc6624409514cb85d">xf</a></td>
+          <td class="memname">const T* <a class="el" href="classgcop_1_1LqCost.html">gcop::LqCost</a>&lt; T, _nx, _nu, _np, _ng &gt;::<a class="el" href="classgcop_1_1LqCost.html#a124d5d664a3acb0dfb01de0fbfccde82">xf</a></td>
         </tr>
       </table>
 </div>
@@ -930,7 +964,7 @@ template&lt;typename T, int _nx = Dynamic, int _nu = Dynamic, int _np = Dynamic,
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:15 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:49 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

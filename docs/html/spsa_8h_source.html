@@ -201,10 +201,10 @@
 <a name="l00166"></a>00166   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> c, <span class="keywordtype">int</span> _np&gt; 
 <a name="l00167"></a><a class="code" href="classgcop_1_1SPSA.html#a9533ad03d7a68d311c5943ef36e8ecac">00167</a>     <span class="keywordtype">double</span> <a class="code" href="classgcop_1_1SPSA.html#a9533ad03d7a68d311c5943ef36e8ecac">SPSA&lt;T, n, c, _np&gt;::Update</a>(vector&lt;T&gt; &amp;xs, <span class="keyword">const</span> vector&lt;Vectorcd&gt; &amp;us, <span class="keywordtype">bool</span> evalCost) {    
 <a name="l00168"></a>00168     <span class="keywordtype">double</span> J = 0;
-<a name="l00169"></a>00169     sys.reset(xs[0],ts[0]);<span class="comment">//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14</span>
+<a name="l00169"></a>00169     sys.Reset(xs[0],ts[0]);<span class="comment">//gives a chance for physics engines to reset themselves. Added Gowtham 8/2/14</span>
 <a name="l00170"></a>00170     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; N; ++k) {
 <a name="l00171"></a>00171       <span class="keywordtype">double</span> h = ts[k+1] - ts[k];
-<a name="l00172"></a>00172       sys.Step_internalinput(xs[k+1], us[k], h);
+<a name="l00172"></a>00172       sys.Step(xs[k+1], us[k], h);
 <a name="l00173"></a>00173       <span class="keywordflow">if</span> (evalCost) 
 <a name="l00174"></a>00174         J += cost.L(ts[k], xs[k], us[k], h);
 <a name="l00175"></a>00175       
@@ -276,7 +276,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:13 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

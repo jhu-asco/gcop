@@ -1,7 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$system_8h.html" title="system.h" alt="" coords="182,83,256,112"/>
-<area shape="rect" id="node25" href="$body2dforce_8h.html" title="body2dforce.h" alt="" coords="398,83,502,112"/>
-<area shape="rect" id="node11" href="$manifold_8h.html" title="manifold.h" alt="" coords="99,237,182,267"/>
-<area shape="rect" id="node18" href="$rn_8h.html" title="rn.h" alt="" coords="88,160,131,189"/>
-<area shape="rect" id="node27" href="$force_8h.html" title="force.h" alt="" coords="307,237,368,267"/>
+<area shape="rect" id="node3" href="$system_8h.html" title="system.h" alt="" coords="148,83,223,112"/>
+<area shape="rect" id="node18" href="$rn_8h.html" title="rn.h" alt="" coords="345,160,388,189"/>
+<area shape="rect" id="node25" href="$body2dforce_8h.html" title="body2dforce.h" alt="" coords="247,83,351,112"/>
+<area shape="rect" id="node34" href="$body2dmanifold_8h.html" title="body2dmanifold.h" alt="" coords="476,83,599,112"/>
+<area shape="rect" id="node39" href="$se2_8h.html" title="se2.h" alt="" coords="623,83,676,112"/>
+<area shape="rect" id="node11" href="$manifold_8h.html" title="manifold.h" alt="" coords="372,237,455,267"/>
+<area shape="rect" id="node27" href="$force_8h.html" title="force.h" alt="" coords="108,237,169,267"/>
+<area shape="rect" id="node41" href="$group_8h.html" title="group.h" alt="" coords="617,160,681,189"/>
 </map>

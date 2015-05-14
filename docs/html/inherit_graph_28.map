@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; Matrix4d, _nx, _nu, _np \&gt;" alt="" coords="7,5,252,35"/>
-<area shape="rect" id="node3" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; Matrix4d, _nx, _nu, Dynamic, Dynamic \&gt;" alt="" coords="301,5,653,35"/>
-<area shape="rect" id="node5" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; Matrix4d, 6, _nu \&gt;" alt="" coords="701,5,920,35"/>
-<area shape="rect" id="node7" href="$classgcop_1_1Kinbody3dCost.html" title="gcop::Kinbody3dCost\&lt; _nu \&gt;" alt="" coords="968,5,1160,35"/>
+<area shape="rect" id="node1" href="$classgcop_1_1Cost.html" title="gcop::Cost\&lt; Body3dState, _nx, _nu, _np, Body3dState \&gt;" alt="" coords="5,5,360,35"/>
+<area shape="rect" id="node3" href="$classgcop_1_1LsCost.html" title="gcop::LsCost\&lt; Body3dState, _nx, _nu, _np, _ng, Body3dState \&gt;" alt="" coords="409,5,807,35"/>
+<area shape="rect" id="node5" href="$classgcop_1_1LqCost.html" title="gcop::LqCost\&lt; Body3dState, 12, c, Dynamic, 6 \&gt;" alt="" coords="857,5,1167,35"/>
+<area shape="rect" id="node7" href="$classgcop_1_1Body3dCost.html" title="gcop::Body3dCost\&lt; c \&gt;" alt="" coords="1217,5,1377,35"/>
 </map>

@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; M3V3d, 6 \&gt;" alt="" coords="5,5,192,35"/>
-<area shape="rect" id="node3" href="$classgcop_1_1Body2dManifold.html" title="gcop::Body2dManifold" alt="" coords="241,5,391,35"/>
+<area shape="rect" id="node1" href="$classgcop_1_1Manifold.html" title="gcop::Manifold\&lt; Body2dState, 6 \&gt;" alt="" coords="5,5,227,35"/>
+<area shape="rect" id="node3" href="$classgcop_1_1Body2dManifold.html" title="gcop::Body2dManifold" alt="" coords="276,5,425,35"/>
 </map>

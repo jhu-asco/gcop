@@ -78,79 +78,84 @@
 <a name="l00021"></a>00021     <span class="keywordtype">int</span> nx = Dynamic, 
 <a name="l00022"></a>00022     <span class="keywordtype">int</span> nu = Dynamic,
 <a name="l00023"></a>00023     <span class="keywordtype">int</span> <a class="code" href="camera_8h.html#a2bae77253fba36eb9bf93d4c45e4ff79">np</a> = Dynamic,
-<a name="l00024"></a><a class="code" href="classgcop_1_1Tparam.html">00024</a>     <span class="keywordtype">int</span> _ntp = Dynamic&gt; <span class="keyword">class </span><a class="code" href="classgcop_1_1Tparam.html">Tparam</a> {
-<a name="l00025"></a>00025     
-<a name="l00026"></a>00026     <span class="keyword">typedef</span> Matrix&lt;double, nx, 1&gt; Vectornd;
-<a name="l00027"></a>00027     <span class="keyword">typedef</span> Matrix&lt;double, nu, 1&gt; Vectorcd;
-<a name="l00028"></a>00028     <span class="keyword">typedef</span> Matrix&lt;double, nx, nx&gt; Matrixnd;
-<a name="l00029"></a>00029     <span class="keyword">typedef</span> Matrix&lt;double, nx, nu&gt; Matrixncd;
-<a name="l00030"></a>00030     <span class="keyword">typedef</span> Matrix&lt;double, nu, nx&gt; Matrixcnd;
-<a name="l00031"></a>00031     <span class="keyword">typedef</span> Matrix&lt;double, nu, nu&gt; Matrixcd;  
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033     <span class="keyword">typedef</span> Matrix&lt;double, np, 1&gt; Vectormd;
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035     <span class="keyword">typedef</span> Matrix&lt;double, _ntp, 1&gt; Vectorntpd;
-<a name="l00036"></a>00036     
-<a name="l00037"></a>00037   <span class="keyword">public</span>:
-<a name="l00038"></a>00038     <a class="code" href="classgcop_1_1Tparam.html">Tparam</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, nx, nu, np&gt;</a> &amp;sys, <span class="keywordtype">int</span> ntp = 0);
-<a name="l00039"></a>00039     
-<a name="l00048"></a>00048     <span class="keyword">virtual</span> <span class="keywordtype">void</span> To(Vectorntpd &amp;s, 
-<a name="l00049"></a>00049                     <span class="keyword">const</span> vector&lt;double&gt; &amp;ts, 
-<a name="l00050"></a>00050                     <span class="keyword">const</span> vector&lt;T&gt; &amp;xs, 
-<a name="l00051"></a>00051                     <span class="keyword">const</span> vector&lt;Vectorcd&gt; &amp;us,
-<a name="l00052"></a>00052                     <span class="keyword">const</span> Vectormd *p = 0);
-<a name="l00053"></a>00053     
-<a name="l00062"></a>00062     <span class="keyword">virtual</span> <span class="keywordtype">void</span> From(vector&lt;double&gt; &amp;ts, 
-<a name="l00063"></a>00063                       vector&lt;T&gt; &amp;xs, 
-<a name="l00064"></a>00064                       vector&lt;Vectorcd&gt; &amp;us,
-<a name="l00065"></a>00065                       <span class="keyword">const</span> Vectorntpd &amp;s,
-<a name="l00066"></a>00066                       Vectormd *p = 0);
-<a name="l00067"></a>00067     
-<a name="l00068"></a><a class="code" href="classgcop_1_1Tparam.html#ac969f953f716498371761969f75c7f7a">00068</a>     <a class="code" href="classgcop_1_1System.html">System&lt;T, nx, nu, np&gt;</a> &amp;<a class="code" href="classgcop_1_1Tparam.html#ac969f953f716498371761969f75c7f7a" title="system">sys</a>;     
-<a name="l00069"></a><a class="code" href="classgcop_1_1Tparam.html#aecf927a644b2124f8c256188adcd6d27">00069</a>     <span class="keywordtype">int</span> <a class="code" href="classgcop_1_1Tparam.html#aecf927a644b2124f8c256188adcd6d27" title="parameter vector dimension">ntp</a>;                        
-<a name="l00070"></a>00070   };
-<a name="l00071"></a>00071   
-<a name="l00072"></a>00072   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> nu, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> _ntp&gt; 
-<a name="l00073"></a><a class="code" href="classgcop_1_1Tparam.html#a4c26ff018235d95c6bcfc8537e0b0fc5">00073</a>     <a class="code" href="classgcop_1_1Tparam.html">Tparam&lt;T, nx, nu, np, _ntp&gt;::Tparam</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, nx, nu, np&gt;</a> &amp;sys, <span class="keywordtype">int</span> ntp) : 
-<a name="l00074"></a>00074     sys(sys), ntp(_ntp != Dynamic ? _ntp : ntp) {
-<a name="l00075"></a>00075     assert(ntp &gt; 0);
-<a name="l00076"></a>00076     std::cout&lt;&lt;<span class="stringliteral">&quot;ntp: &quot;</span>&lt;&lt;ntp&lt;&lt;std::endl;<span class="comment">//#DEBUG</span>
-<a name="l00077"></a>00077   }
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> nu, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> _ntp&gt; 
-<a name="l00080"></a><a class="code" href="classgcop_1_1Tparam.html#a92de5e8167d3cbec5fa498e0d7b5fd2f">00080</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Tparam.html#a92de5e8167d3cbec5fa498e0d7b5fd2f">Tparam&lt;T, nx, nu, np, _ntp&gt;::To</a>(Vectorntpd &amp;s, 
-<a name="l00081"></a>00081                                          <span class="keyword">const</span> vector&lt;double&gt; &amp;ts, 
-<a name="l00082"></a>00082                                          <span class="keyword">const</span> vector&lt;T&gt; &amp;xs, 
-<a name="l00083"></a>00083                                          <span class="keyword">const</span> vector&lt;Vectorcd&gt; &amp;us,
-<a name="l00084"></a>00084                                          <span class="keyword">const</span> Vectormd *p) {
-<a name="l00085"></a>00085     assert(ntp == us.size()*sys.U.n);
-<a name="l00086"></a>00086     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; us.size(); ++i) {
-<a name="l00087"></a>00087       memcpy(s.data() + i*sys.U.n, us[i].data(), sys.U.n*<span class="keyword">sizeof</span>(double));
-<a name="l00088"></a>00088     }
-<a name="l00089"></a>00089     <span class="comment">// assume parameter p does not play a role</span>
-<a name="l00090"></a>00090   }
-<a name="l00091"></a>00091   
-<a name="l00092"></a>00092   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> nu, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> _ntp&gt; 
-<a name="l00093"></a><a class="code" href="classgcop_1_1Tparam.html#a4365bd4b1f7bb59a23dd25838c0a9db4">00093</a>     <span class="keywordtype">void</span> <a class="code" href="classgcop_1_1Tparam.html#a4365bd4b1f7bb59a23dd25838c0a9db4">Tparam&lt;T, nx, nu, np, _ntp&gt;::From</a>(vector&lt;double&gt; &amp;ts, 
-<a name="l00094"></a>00094                                            vector&lt;T&gt; &amp;xs, 
-<a name="l00095"></a>00095                                            vector&lt;Vectorcd&gt; &amp;us,
-<a name="l00096"></a>00096                                            <span class="keyword">const</span> Vectorntpd &amp;s,
-<a name="l00097"></a>00097                                            Vectormd *p) {
-<a name="l00098"></a>00098     assert(ntp == us.size()*sys.U.n);
-<a name="l00099"></a>00099     sys.reset(xs[0],ts[0]);
-<a name="l00100"></a>00100     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; us.size(); ++i) {
-<a name="l00101"></a>00101       memcpy(us[i].data(), s.data() + i*sys.U.n, sys.U.n*<span class="keyword">sizeof</span>(double));
-<a name="l00102"></a>00102       sys.Step_internalinput(xs[i+1], us[i], ts[i+1] - ts[i], p);
-<a name="l00103"></a>00103     }
-<a name="l00104"></a>00104   }
-<a name="l00105"></a>00105 }
-<a name="l00106"></a>00106 
-<a name="l00107"></a>00107 <span class="preprocessor">#endif</span>
+<a name="l00024"></a>00024     <span class="keywordtype">int</span> _ntp = Dynamic,
+<a name="l00025"></a><a class="code" href="classgcop_1_1Tparam.html">00025</a>     <span class="keyword">typename</span> Tc = T&gt; <span class="keyword">class </span><a class="code" href="classgcop_1_1Tparam.html">Tparam</a> {
+<a name="l00026"></a>00026     
+<a name="l00027"></a>00027     <span class="keyword">typedef</span> Matrix&lt;double, nx, 1&gt; Vectornd;
+<a name="l00028"></a>00028     <span class="keyword">typedef</span> Matrix&lt;double, nu, 1&gt; Vectorcd;
+<a name="l00029"></a>00029     <span class="keyword">typedef</span> Matrix&lt;double, nx, nx&gt; Matrixnd;
+<a name="l00030"></a>00030     <span class="keyword">typedef</span> Matrix&lt;double, nx, nu&gt; Matrixncd;
+<a name="l00031"></a>00031     <span class="keyword">typedef</span> Matrix&lt;double, nu, nx&gt; Matrixcnd;
+<a name="l00032"></a>00032     <span class="keyword">typedef</span> Matrix&lt;double, nu, nu&gt; Matrixcd;  
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034     <span class="keyword">typedef</span> Matrix&lt;double, np, 1&gt; Vectormd;
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036     <span class="keyword">typedef</span> Matrix&lt;double, _ntp, 1&gt; Vectorntpd;
+<a name="l00037"></a>00037     
+<a name="l00038"></a>00038   <span class="keyword">public</span>:
+<a name="l00039"></a>00039     <a class="code" href="classgcop_1_1Tparam.html">Tparam</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, nx, nu, np&gt;</a> &amp;sys, <span class="keywordtype">int</span> ntp = 0);
+<a name="l00040"></a>00040     
+<a name="l00050"></a>00050     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> To(Vectorntpd &amp;s, 
+<a name="l00051"></a>00051                     <span class="keyword">const</span> vector&lt;double&gt; &amp;ts, 
+<a name="l00052"></a>00052                     <span class="keyword">const</span> vector&lt;T&gt; &amp;xs, 
+<a name="l00053"></a>00053                     <span class="keyword">const</span> vector&lt;Vectorcd&gt; &amp;us,
+<a name="l00054"></a>00054                     <span class="keyword">const</span> Vectormd *p = 0);
+<a name="l00055"></a>00055     
+<a name="l00065"></a>00065     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> From(vector&lt;double&gt; &amp;ts, 
+<a name="l00066"></a>00066                       vector&lt;T&gt; &amp;xs, 
+<a name="l00067"></a>00067                       vector&lt;Vectorcd&gt; &amp;us,
+<a name="l00068"></a>00068                       <span class="keyword">const</span> Vectorntpd &amp;s,
+<a name="l00069"></a>00069                       Vectormd *p = 0);
+<a name="l00070"></a>00070 
+<a name="l00071"></a><a class="code" href="classgcop_1_1Tparam.html#ab1ed014a9b06af5032a1906ce0ce5521">00071</a>     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Tparam.html#ab1ed014a9b06af5032a1906ce0ce5521">SetContext</a>(<span class="keyword">const</span> Tc &amp;c) { <span class="keywordflow">return</span> <span class="keyword">true</span>; }
+<a name="l00072"></a>00072     
+<a name="l00073"></a><a class="code" href="classgcop_1_1Tparam.html#a3b6ca4862cb80522eeb11c729316ffee">00073</a>     <a class="code" href="classgcop_1_1System.html">System&lt;T, nx, nu, np&gt;</a> &amp;<a class="code" href="classgcop_1_1Tparam.html#a3b6ca4862cb80522eeb11c729316ffee" title="system">sys</a>;     
+<a name="l00074"></a><a class="code" href="classgcop_1_1Tparam.html#aba4946a1d919993acbcd588ac5b7b086">00074</a>     <span class="keywordtype">int</span> <a class="code" href="classgcop_1_1Tparam.html#aba4946a1d919993acbcd588ac5b7b086" title="parameter vector dimension">ntp</a>;                        
+<a name="l00075"></a>00075   };
+<a name="l00076"></a>00076   
+<a name="l00077"></a>00077   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> nu, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> _ntp, <span class="keyword">typename</span> Tc&gt; 
+<a name="l00078"></a><a class="code" href="classgcop_1_1Tparam.html#a21d066de1a99339c963cbb5053028016">00078</a>     <a class="code" href="classgcop_1_1Tparam.html">Tparam&lt;T, nx, nu, np, _ntp, Tc&gt;::Tparam</a>(<a class="code" href="classgcop_1_1System.html">System&lt;T, nx, nu, np&gt;</a> &amp;sys, <span class="keywordtype">int</span> ntp) : 
+<a name="l00079"></a>00079     sys(sys), ntp(_ntp != Dynamic ? _ntp : ntp) {
+<a name="l00080"></a>00080     assert(ntp &gt; 0);
+<a name="l00081"></a>00081     std::cout&lt;&lt;<span class="stringliteral">&quot;ntp: &quot;</span>&lt;&lt;ntp&lt;&lt;std::endl;<span class="comment">//#DEBUG</span>
+<a name="l00082"></a>00082   }
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> nu, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> _ntp, <span class="keyword">typename</span> Tc&gt; 
+<a name="l00085"></a><a class="code" href="classgcop_1_1Tparam.html#a2668afc0c6d411d2811a8e3f7b4d60b3">00085</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Tparam.html#a2668afc0c6d411d2811a8e3f7b4d60b3">Tparam&lt;T, nx, nu, np, _ntp, Tc&gt;::To</a>(Vectorntpd &amp;s, 
+<a name="l00086"></a>00086                                          <span class="keyword">const</span> vector&lt;double&gt; &amp;ts, 
+<a name="l00087"></a>00087                                          <span class="keyword">const</span> vector&lt;T&gt; &amp;xs, 
+<a name="l00088"></a>00088                                          <span class="keyword">const</span> vector&lt;Vectorcd&gt; &amp;us,
+<a name="l00089"></a>00089                                          <span class="keyword">const</span> Vectormd *p) {
+<a name="l00090"></a>00090     assert(ntp == us.size()*sys.U.n);
+<a name="l00091"></a>00091     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; us.size(); ++i) {
+<a name="l00092"></a>00092       memcpy(s.data() + i*sys.U.n, us[i].data(), sys.U.n*<span class="keyword">sizeof</span>(double));
+<a name="l00093"></a>00093     }
+<a name="l00094"></a>00094     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00095"></a>00095     <span class="comment">// assume parameter p does not play a role</span>
+<a name="l00096"></a>00096   }
+<a name="l00097"></a>00097   
+<a name="l00098"></a>00098   <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> nx, <span class="keywordtype">int</span> nu, <span class="keywordtype">int</span> np, <span class="keywordtype">int</span> _ntp, <span class="keyword">typename</span> Tc&gt; 
+<a name="l00099"></a><a class="code" href="classgcop_1_1Tparam.html#a547cacd83055c27b7f083038d980ac3a">00099</a>     <span class="keywordtype">bool</span> <a class="code" href="classgcop_1_1Tparam.html#a547cacd83055c27b7f083038d980ac3a">Tparam&lt;T, nx, nu, np, _ntp, Tc&gt;::From</a>(vector&lt;double&gt; &amp;ts, 
+<a name="l00100"></a>00100                                            vector&lt;T&gt; &amp;xs, 
+<a name="l00101"></a>00101                                            vector&lt;Vectorcd&gt; &amp;us,
+<a name="l00102"></a>00102                                            <span class="keyword">const</span> Vectorntpd &amp;s,
+<a name="l00103"></a>00103                                            Vectormd *p) {
+<a name="l00104"></a>00104     assert(ntp == us.size()*sys.U.n);
+<a name="l00105"></a>00105     sys.Reset(xs[0],ts[0]);
+<a name="l00106"></a>00106     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; us.size(); ++i) {
+<a name="l00107"></a>00107       memcpy(us[i].data(), s.data() + i*sys.U.n, sys.U.n*<span class="keyword">sizeof</span>(double));
+<a name="l00108"></a>00108       sys.Step(xs[i+1], us[i], ts[i+1] - ts[i], p);
+<a name="l00109"></a>00109     }
+<a name="l00110"></a>00110     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00111"></a>00111   }
+<a name="l00112"></a>00112 }
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 20 2015 12:47:14 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 13 2015 21:58:47 for GCOP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
