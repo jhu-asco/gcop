@@ -40,7 +40,7 @@ namespace gcop {
               const Vector6d &u, double h, const VectorXd *p = 0,
               Matrix15d *A = 0, Matrix15x6d *B = 0, Matrix15Xd *C = 0);
   
-  bool Noise(Matrix15d &Q, double t, const InsState &x, const Vector3d &u, 
+  bool Noise(Matrix15d &Q, double t, const InsState &x, const Vector6d &u, 
              double dt, const VectorXd *p = 0);
   
   double sv; ///< gyro bias white noise stdev (spectral density)

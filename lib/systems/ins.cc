@@ -56,7 +56,7 @@ double Ins::Step(InsState &xb, double t, const InsState &xa,
   return 0;
 }
 
-bool Ins::Noise(Matrix15d &Q, double t, const InsState &x, const Vector3d &u, 
+bool Ins::Noise(Matrix15d &Q, double t, const InsState &x, const Vector6d &u, 
                 double dt, const VectorXd *p) {
 
   double dt2 = dt*dt;
