@@ -10,6 +10,8 @@
 #include <utility>
 #include "function.h"
 
+#define NUMBER_PARAMETERS 6
+
 namespace gcop {
   
   using namespace std;
@@ -129,7 +131,7 @@ namespace gcop {
 
   template <int c> 
     Body3d<c>::Body3d() : 
-    System<Body3dState, 12, c>(Body3dManifold::Instance()),
+    System<Body3dState, 12, c>(Body3dManifold::Instance(), c, NUMBER_PARAMETERS),
     ds(.6, .6, .2), m(1),
     Dw(0,0,0),
     Dv(0,0,0),
@@ -145,7 +147,7 @@ namespace gcop {
   
   template <int c> 
     Body3d<c>::Body3d(const Vector3d &ds, double m) : 
-    System<Body3dState, 12, c>(Body3dManifold::Instance()),
+    System<Body3dState, 12, c>(Body3dManifold::Instance(),c, NUMBER_PARAMETERS),
     ds(ds), m(m),
     Dw(0,0,0),
     Dv(0,0,0),
@@ -160,7 +162,7 @@ namespace gcop {
 
   template <int c> 
     Body3d<c>::Body3d(const Vector3d &ds, double m, const Vector3d &J) : 
-    System<Body3dState, 12, c>(Body3dManifold::Instance()),
+    System<Body3dState, 12, c>(Body3dManifold::Instance(), c, NUMBER_PARAMETERS),
     ds(ds), m(m), J(J),
     Dw(0,0,0),
     Dv(0,0,0),
@@ -274,6 +276,12 @@ template<int c>  Body3d<c>::~Body3d()
     Vector3d Jwb = J.cwiseProduct(wb);
     
     Vector3d fuw = Bu.topRows(3)*u;
+    //Adding external force through parameters:
+     if(p != 0)
+    {
+      assert(p->size() == 6);
+      fuw += (*p).head<3>();
+    }
     Vector3d fwd = Db.transpose()*Jwb - Da.transpose()*Jwa - h*fuw;
     
     Matrix3d Gp;
@@ -296,6 +304,13 @@ template<int c>  Body3d<c>::~Body3d()
     Rb = Ra*chwb;
     
     Vector3d fuv = Bu.bottomRows(3)*u;
+    //Adding external force through parameters:
+    /*if(p != 0)
+    {
+      assert(p->size() == 6);
+      fuv += Bu.bottomRows(3)*(*p);
+    }
+    */
 
     const Matrix3d &I3 = Matrix3d::Identity();
 
@@ -311,10 +326,25 @@ template<int c>  Body3d<c>::~Body3d()
       Mp = I3*m + h/2*(Ra*Dv.asDiagonal());
       Mm = I3*m - h/2*(Ra*Dv.asDiagonal());
 
-      vb = Mp.inverse()*(Mm*va + h*(fp + Ra*fuv));    
+      if(p != 0)
+      {
+        vb = Mp.inverse()*(Mm*va + h*(fp + Ra*fuv + (*p).tail<3>()));    
+      }
+      else
+      {
+        vb = Mp.inverse()*(Mm*va + h*(fp + Ra*fuv));    
+      }
       pb = pa + h*vb;
     } else {
       vb = va + h/m*(fp + Ra*fuv);    
+      if(p != 0)
+      {
+        vb = va + h/m*(fp + Ra*fuv + (*p).tail<3>());    
+      }
+      else
+      {
+        vb = va + h/m*(fp + Ra*fuv);    
+      }
       pb = pa + h*vb;
     }
     
@@ -390,15 +420,34 @@ template<int c>  Body3d<c>::~Body3d()
 
     Vector3d Jwa = J.cwiseProduct(wa);
 
-    Vector3d wb = wa + h*(Jwa.cross(wa) + Dw.cwiseProduct(wa) + Bu.topRows(3)*u).cwiseQuotient(J);
+    Vector3d wb; 
+    if(p!= 0)
+    {
+      wb = wa + h*(Jwa.cross(wa) + Dw.cwiseProduct(wa) + Bu.topRows(3)*u + (*p).tail<3>()).cwiseQuotient(J);//Inside brackets + force
+    }
+    else
+    {
+      wb = wa + h*(Jwa.cross(wa) + Dw.cwiseProduct(wa) + Bu.topRows(3)*u).cwiseQuotient(J);//Inside brackets + force
+    }
     
     Matrix3d chwb;
     so3.cay(chwb, h*wb);
     Rb = Ra*chwb;
     
     Vector3d fuv = Dv.cwiseProduct(Ra.transpose()*va) + Bu.bottomRows(3)*u;
+    /*//Adding external force through parameters:
+    if(p != 0)
+    {
+      assert(p->size() == 6);
+      fuv += Bu.bottomRows(3)*(*p);
+    }
+    */
 
     Vector3d vb = va + h/m*(fp + Ra*fuv);
+    if(p!= 0)
+    {
+      vb += h/m*((*p).tail<3>());
+    }
     
     xb.second.head<3>() = pa + h*vb;
     xb.second.segment<3>(3) = wb;

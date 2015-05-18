@@ -144,6 +144,9 @@ endif (USE_BULLET)
 	add_executable(gnrccarestimation gnrccarestimation.cc)
 	target_link_libraries(gnrccarestimation  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(body3dforceest body3dforceest.cc)
+	target_link_libraries(body3dforceest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
 	add_executable(cecartest cecartest.cc)
 	target_link_libraries(cecartest  gcop_algos gcop_views gcop_systems gcop_est ${ALL_LIBS})
 

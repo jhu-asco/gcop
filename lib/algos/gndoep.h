@@ -226,9 +226,10 @@ struct Functor
      {
        std::cout<<"Input: "<<s.transpose()<<endl;
        std::cout<<"Fvec: "<<fvec.transpose()<<endl;
+       std::cout<<"Cost: "<<0.5*(fvec.transpose()*fvec)<<endl;
        //std::cout<<"Resp: "<<fvec.tail(np).transpose()<<"\t"<<doep->p<<endl;
      }
-       std::cout<<"Cost: "<<0.5*(fvec.transpose()*fvec)<<endl;
+     doep->J = 0.5*(fvec.squaredNorm());//#TODO Directly from  LevinBergMarquadt if possible
      //getchar();
      return 0;
    }
@@ -275,6 +276,10 @@ struct Functor
       s.setZero();//Set the initial noise ws to zero
       const int &np = this->sys.P.n;
       s.tail(np) = this->p;//Set the system parameters to initial guess
+      lm->parameters.maxfev = 1e6;//Maximum nof evaluations is very high
+      info = lm->minimizeInit(s);
+      cout <<"info="<<info <<endl;
+      //getchar();//#DEBUG
     }
 
     /*
@@ -285,9 +290,10 @@ struct Functor
     */
 
     //    lm.parameters.maxfev=10000;
-    info = lm->minimize(s);
+    info = lm->minimizeOneStep(s);
     
     cout <<"info="<<info <<endl;
+    //getchar();//#DEBUG
     // check return values
     // VERIFY_IS_EQUAL(info, 1);
     //   VERIFY_IS_EQUAL(lm.nfev(), 26);

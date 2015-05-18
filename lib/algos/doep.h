@@ -100,6 +100,8 @@ namespace gcop {
     
     double eps;  ///< epsilon used for finite differences
 
+    double J;    ///< Optimal cost at any point of time
+
     Func_type project; ///<Project T to T1 will add jacobians later
 
   };
