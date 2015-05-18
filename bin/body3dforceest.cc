@@ -7,8 +7,9 @@
 #include "utils.h"
 #include "so3.h"
 #include "params.h"
-#include "point3dgps.h"
 #include "gndoep.h"
+#include "sensor.h"
+#include "insmanifold.h"
 
 using namespace std;
 using namespace Eigen;
@@ -16,9 +17,12 @@ using namespace gcop;
 
 Params params;
 
-void projectmanifold(const Body3dState &bodystate, Point3dState &pstate)
+void projectmanifold(const Body3dState &bodystate, InsState &pstate)
 {
-  pstate.q = bodystate.second.head<3>();//Just the translation part
+  pstate.R = bodystate.first;
+  pstate.p = bodystate.second.head<3>();
+  pstate.v = bodystate.second.segment<3>(5);
+  //bg, ba do not care 
 }
 
 void solver_process(Viewer* viewer)
@@ -36,14 +40,15 @@ void solver_process(Viewer* viewer)
   Body3d<> sys;
 
   //Add sensor
-  Point3dGps<6> gps;//Gps sensor with controls
+  Sensor<InsState, 15, 6> imugps(InsManifold::Instance());//Create a default sensor which just copies the InsManifold over
 
   Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
 
   //  Body3dCost<> cost(tf, xf);
-  LqSensorCost<Body3dState, 12, 6, Dynamic, Dynamic, Vector3d, 3> cost(sys, gps.Z);
+  //<Tx, nx, nu, nres, np, Tz, nz>
+  LqSensorCost<Body3dState, 12, 6, Dynamic, Dynamic, InsState, 15> cost(sys, imugps.Z);
 
-  VectorXd R(3);//Z
+  VectorXd R(15);//Z
   if (params.GetVectorXd("R", R))
     cost.R = R.asDiagonal();
 
@@ -85,7 +90,7 @@ void solver_process(Viewer* viewer)
   }
 
   //Sensor
-  vector<Vector3d> zs(N/2);//Same as ts_sensor
+  vector<InsState> zs(N/2);//Same as ts_sensor
   vector<double> ts_sensor(N/2);
 
   //Set sensor times:
@@ -103,13 +108,13 @@ void solver_process(Viewer* viewer)
   mup = p0;//Copy the initial guess to be the same as prior for the parameters
 
   VectorXd pd(6);///<True External forces
-  pd<<0,0,0,0,0.1,-0.1;
+  pd<<0,0,0.05,0,0.1,-0.1;
 
   
   /////Creating the Optimization problem////
 
   //Temporary point3d state:
-  Point3dState projected_state;
+  InsState projected_state;
   int sensor_index = 0;
 
   //First evaluate true trajectory and thus sensor values associated with it:
@@ -125,8 +130,8 @@ void solver_process(Viewer* viewer)
       //Project the state
       projectmanifold(xs[near_index],projected_state);
       //cout<<"Projected state: "<<projected_state.q.transpose()<<endl;
-      gps(zs[sensor_index], ts[near_index], projected_state, us[near_index]);
-      cout<<"Zs ["<<(sensor_index)<<"]: "<<zs[sensor_index].transpose()<<"\tts_sensor: "<<ts_sensor[sensor_index]<<endl;
+      imugps(zs[sensor_index], ts[near_index], projected_state, us[near_index]);
+      cout<<"Zs ["<<(sensor_index)<<"]: "<<zs[sensor_index].p.transpose()<<"\t"<<endl<<zs[sensor_index].R<<endl<<"\tts_sensor: "<<ts_sensor[sensor_index]<<endl;
       sensor_index = sensor_index < (ts_sensor.size()-1)?sensor_index+1:sensor_index;
     }
   }
@@ -140,7 +145,8 @@ void solver_process(Viewer* viewer)
   cost.SetReference(&zs, &mup);//Set reference for zs
 
   //Create Gauss newton estimation problem with initial guess for parameters p0
-  GnDoep<Body3dState, 12, 6, Dynamic, Dynamic, Vector3d, 3, Point3dState, 6> gn(sys, gps, cost, ts, xs, us, p0, ts_sensor, &projectmanifold);  
+  //<Tx, nx, nu, np, nres, Tz, nz, T1=T, nx1=nx>
+  GnDoep<Body3dState, 12, 6, Dynamic, Dynamic, InsState, 15, InsState, 15> gn(sys, imugps, cost, ts, xs, us, p0, ts_sensor, &projectmanifold);  
   getchar();
 
 

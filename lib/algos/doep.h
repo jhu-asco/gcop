@@ -94,7 +94,7 @@ namespace gcop {
 
     std::vector<Vectornd> ws; ///< Internal process noise
 
-    std::vector<Vectorrd> zs; ///< Internal sensor measurements
+    std::vector<Tz> zs; ///< Internal sensor measurements
     
     bool debug;  ///< whether to display debugging info
     
@@ -133,13 +133,14 @@ namespace gcop {
         }
       }
       zs.resize(ts1.size()); //Internal sensor measurements
-      if(nz == Dynamic)
+      /*if(nz == Dynamic)
       {
         for(int i = 0; i<ts1.size(); ++i)
         {
           zs[i].resize(sensor.Z.n);
         }
       }
+      */
       for(int i =0; i<N; ++i)
       {
         ws[i].setZero();//Set the noise to zero when constructing
@@ -160,7 +161,7 @@ namespace gcop {
 
     typedef Matrix<double, nx, 1> Vectornd;
     typedef Matrix<double, nu, 1> Vectorcd;
-    typedef Matrix<double, nz, 1> Vectorrd;
+    //typedef Matrix<double, nz, 1> Vectorrd;
     
    
     int N = us.size();

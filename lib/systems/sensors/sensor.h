@@ -2,6 +2,7 @@
 #define GCOP_SENSOR_H
 
 #include <Eigen/Dense>
+#include <type_traits>
 #include <iostream>
 #include "manifold.h"
 
@@ -21,8 +22,8 @@ namespace gcop {
     int _nx = Dynamic, 
     int _nu = Dynamic, 
     int _np = Dynamic, 
-    typename Tz = VectorXd,
-    int _nz = Dynamic> class Sensor {
+    typename Tz = T,
+    int _nz = _nx> class Sensor {
   public:
 
   typedef Matrix<double, _nx, 1> Vectornd;
@@ -83,6 +84,12 @@ namespace gcop {
                                                        const Vectormd *p, 
                                                        Matrixrnd *dydx, Matrixrcd *dydu,
                                                        Matrixrmd *dydp) {
+    if(std::is_same<Tz, T>::value)//Default Implementation if T and Tz are same
+    {
+        y = (Tz)(*((Tz *)(&x)));//Hacky way of copying pointer over
+        //y = (Tz)x;
+        return true;
+    }
     std::cout << "[W] Sensor::(): unimplemented! Subclasses should override." << std::endl;
     return false;
   }
