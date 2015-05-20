@@ -34,7 +34,7 @@ namespace gcop {
     
   public:
 
-    Mbs(int nb, int c, bool fixed = false);
+    Mbs(int nb, int c, bool fixed = false, int np=0);
 
     virtual ~Mbs();
 
@@ -46,23 +46,23 @@ namespace gcop {
 
 
     double EulerStep(MbsState& xb, double t, const MbsState& xa,
-                     const VectorXd &u, double h,
+                     const VectorXd &u, double h, const VectorXd *p = 0,
                      MatrixXd *A = 0, MatrixXd *B = 0);
 
 
     double HeunStep(MbsState& xb, double t, const MbsState& xa,
-                    const VectorXd &u, double h,
+                    const VectorXd &u, double h, const VectorXd *p = 0,
                     MatrixXd *A = 0, MatrixXd *B = 0);
 
     double TrapStep(MbsState& xb, double t, const MbsState& xa,
-                    const VectorXd &u, double h,
-                    MatrixXd *A, MatrixXd *B);      
+                    const VectorXd &u, double h, const VectorXd *p = 0,
+                    MatrixXd *A = 0, MatrixXd *B = 0);      
 
 
     void NE(VectorXd &e, const VectorXd &vdr, 
             MbsState &xb,               
             double t, const MbsState &xa, 
-            const VectorXd &u, double h);
+            const VectorXd &u, double h, const VectorXd *p = 0);
 
 
     /**
@@ -85,7 +85,7 @@ namespace gcop {
      * @param x state
      */
     void Bias(VectorXd &b,
-              double t, const MbsState &x) const;
+              double t, const MbsState &x, const VectorXd *p = 0) const;
 
     /**
      * Discrete bias
@@ -98,7 +98,7 @@ namespace gcop {
     void DBias(VectorXd &b,
                 double t,
                 const MbsState &xb, 
-                const MbsState &xa, double h);    
+                const MbsState &xa, double h, const VectorXd *p = 0);    
     
     /**
      * Forward kinematics: given base pose and joint angles, update the poses of
@@ -135,7 +135,7 @@ namespace gcop {
      * @param u control inputs
      * @param h time-step
      */
-    void Acc(VectorXd &a, double t, const MbsState& x, const VectorXd &u, double h);
+    void Acc(VectorXd &a, double t, const MbsState& x, const VectorXd &u, double h, const VectorXd *p = 0);
 
     /**
      * Total resulting force on the system from external (e.g. gravity)

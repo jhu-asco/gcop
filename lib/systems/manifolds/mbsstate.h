@@ -24,6 +24,25 @@ namespace gcop {
       r(x.r), dr(x.dr), ub(x.ub), lb(x.lb), 
       zl(x.zl), zu(x.zu), fixed(x.fixed) {
     }
+
+   /*MbsState& operator = (const MbsState &x)
+   {
+     if(this != &x)
+     {
+       this->gs = x.gs;
+       this->vs = x.vs;
+       this->dgs = x.dgs;
+       this->r = x.r;
+       this->dr = x.dr;
+       this->ub = x.ub;
+       this->lb = x.lb;
+       this->zl = x.zl;
+       this->zu = x.zu;
+       this->fixed = x.fixed;
+     }
+     return *this;
+   }
+   */
     
     vector<Matrix4d> gs;        ///< configurations
     vector<Vector6d> vs;        ///< body-fixed velocities

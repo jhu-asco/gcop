@@ -22,6 +22,7 @@ void MbsManifold::Lift(VectorXd &v,
   assert(!std::isnan(xa.gs[0](0,0)));
 
   int nb = xa.r.size() + 1;
+  assert(xb.r.size() == xa.r.size());
   
   if (xa.fixed) {
     v.head(nb - 1) = xb.r - xa.r;

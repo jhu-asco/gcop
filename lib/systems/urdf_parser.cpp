@@ -376,7 +376,7 @@ void findnofactivejoints(boost::shared_ptr<Link> link, int &count)
 			
 	}
 }
-boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, gcop::Matrix4d &gposei_root, string type)
+boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, gcop::Matrix4d &gposei_root, string type, int np)
 {
 	//parse the xml file into a urdf model
 	boost::shared_ptr<ModelInterface> urdfmodel = parseURDF(xml_string);
@@ -401,18 +401,18 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, gcop::Matrix
 	boost::shared_ptr<gcop::Mbs> mbs;
 	if(type == "AIRBASE")
 	{
-		mbs.reset(new gcop::Mbs(nofactivejoints+1,4+nofactivejoints));
+		mbs.reset(new gcop::Mbs(nofactivejoints+1,4+nofactivejoints, false, np));
 		mbs->basetype = mbs->AIRBASE;
 		cout<<"Creating airbase "<<mbs->U.n<<endl;
 	}
 	else if(type == "FLOATBASE")
 	{
-		mbs.reset(new gcop::Mbs(nofactivejoints+1,6 + nofactivejoints));
+		mbs.reset(new gcop::Mbs(nofactivejoints+1,6 + nofactivejoints, false, np));
 		mbs->basetype = mbs->FLOATBASE;
 	}
 	else if(type == "FIXEDBASE")
 	{
-		mbs.reset(new gcop::Mbs(nofactivejoints+1,nofactivejoints,true));
+		mbs.reset(new gcop::Mbs(nofactivejoints+1,nofactivejoints,true, np));
 		mbs->basetype = mbs->FIXEDBASE;
 	}
 	//aggregate and assign rootlink

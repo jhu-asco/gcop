@@ -126,6 +126,7 @@ namespace gcop {
       Psqrt.resize(sys.P.n, sys.P.n);
 
       dp.resize(sys.P.n);
+      dz.resize(Z.n);
     }
 
     R.setIdentity();
