@@ -2,7 +2,7 @@
 STL Demo adapted from Bullet STL Loader
 */
 
-#include "BulletDynamics/btBulletDynamicsCommon.h"
+#include "btBulletDynamicsCommon.h"
 
 #include "GLDebugDrawer.h"
 #include <stdio.h> //printf debugging

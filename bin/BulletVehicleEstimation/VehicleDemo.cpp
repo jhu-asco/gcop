@@ -18,7 +18,7 @@ subject to the following restrictions:
 /// One todo is a basic engine model:
 /// A function that maps user input (throttle) into torque/force applied on the wheels
 /// with gears etc.
-#include "BulletDynamics/btBulletDynamicsCommon.h"
+#include "btBulletDynamicsCommon.h"
 #include "BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h"
 #include "helper_header.h"
 //extern char MyHeightfield[];
