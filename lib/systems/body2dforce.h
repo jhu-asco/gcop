@@ -23,7 +23,7 @@ namespace gcop {
   Body2dForce(bool fextParam = false);
   
   virtual void Set(Vector3d &f, const Body2dState &x, double t, 
-                   const Vector3d &u, double h, const VectorXd *p = 0,
+                   const Vectorcd &u, double h, const VectorXd *p = 0,
                    Matrix36d *A = 0, Matrix3cd *B = 0, Matrix<double, 3, Dynamic> *C = 0);
   
   Vector3d D;      ///< linear damping terms
@@ -41,7 +41,7 @@ namespace gcop {
   
   template<int c>
     void Body2dForce<c>::Set(Vector3d &f, const Body2dState &x, double t, 
-                             const Vector3d &u, double h,  const VectorXd *p,
+                             const Vectorcd &u, double h,  const VectorXd *p,
                              Matrix36d *A, Matrix3cd *B, Matrix<double, 3, Dynamic> *C)
     {
       if (fextParam && p) {
