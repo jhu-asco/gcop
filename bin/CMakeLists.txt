@@ -19,6 +19,10 @@ if (BUILD_TESTS)
 	add_executable(body2dtest body2dtest.cc)
 	target_link_libraries(body2dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
+	add_executable(boattest boattest.cc)
+	target_link_libraries(boattest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
+
 	add_executable(body3dtest body3dtest.cc)
 	target_link_libraries(body3dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 

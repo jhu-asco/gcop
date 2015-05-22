@@ -94,9 +94,11 @@ namespace gcop {
 
   Matrixnd S;     ///< extra noise
 
-  vector<pair<Vectornd, double> > zps;  ///< samples (pair of vector and its likelihood)
+  vector<pair<Vectornd, double> > zps;  ///< N samples (pair of vector and its likelihood)
 
-  vector<double> cs;    ///< costs
+  vector<double> cs;    ///< costs of the N samples
+
+  vector<pair<Vectornd, double> > zpes;  ///< elite samples (pair of vector and its likelihood)
 
   double rho;     ///< quantile: should be b/n .01 and .1 (default is .1)
 
@@ -199,10 +201,10 @@ namespace gcop {
       if (mras) {
         // set b to minimum cost
         if (bAuto) {
-          b = Jmin;
+          b = 10/Jmin;
           /*
           b = std::numeric_limits<double>::max();
-          for (int j = 0; j < cs.size(); ++j) {
+          for (int j = 0; j < cs.size(); ++j) {xo
             if (b > cs[j])
               b = cs[j];
           }
@@ -213,12 +215,17 @@ namespace gcop {
   
       int N = zps.size();
       int Ne = MIN((int)ceil(N*rho), N);
+      zpes.clear();
   
       if (Ne < N) {
         std::sort(zps.begin(), zps.end(), zpSort<_n>);
         std::sort(cs.begin(), cs.end());   // this is redundant but is kept for consistency
-        zps.resize(Ne);
-        cs.resize(Ne);
+        for (int i = 0; i < Ne; ++i)
+          zpes.push_back(zps[i]);
+        // std::copy(zpes.begin(), zps.begin(), zps.begin() + Ne);
+
+        //        zps.resize(Ne);
+        //        cs.resize(Ne);
       }
     }
 
@@ -232,7 +239,8 @@ namespace gcop {
         double cn = 0;
         for (int j = 0; j < N; ++j) {
           pair<Vectornd, double> &zp = zps[j];
-          zp.second = exp(-b*cs[j]);     // pdf
+          //          zp.second = exp(-b*(cs[j] - Jmin)/(Jmax - Jmin));     // pdf
+          zp.second = exp(-b*cs[j]);
           cn += zp.second;               // normalizer
         }
         assert(cn > 0);
@@ -241,10 +249,11 @@ namespace gcop {
     
         gmm.Fit(zps, alpha, 50, &S);
       } else {
-        for (int j = 0; j < N; ++j) 
-          zps[j].second = 1.0/N;             // probability
+        int Ne = zpes.size();
+        for (int j = 0; j < Ne; ++j) 
+          zpes[j].second = 1.0/Ne;             // probability
     
-        gmm.Fit(zps, alpha, 50, &S);
+        gmm.Fit(zpes, alpha, 50, &S);
       }
 
       return gmm.Update();

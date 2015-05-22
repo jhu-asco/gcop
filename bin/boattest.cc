@@ -13,14 +13,14 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Ddp< pair<Matrix3d, Vector3d>, 6, 3> Body2dDdp;
+typedef Ddp< pair<Matrix3d, Vector3d>, 6, 2> Body2dDdp;
 
 Params params;
 
 void solver_process(Viewer* viewer)
 {
   if (viewer)
-    viewer->SetCamera(4.875, 33.875, 0.24999, -0.550001, -6);
+    viewer->SetCamera(-44.875, 35.875, 1.9, 2.450001, -11);
 
   int N = 32;
   double tf = 10;
@@ -33,11 +33,11 @@ void solver_process(Viewer* viewer)
   double h = tf/N;
 
   SE2 &se2 = SE2::Instance();  
-  Body2dForce<> force;
+  Body2dForce<2> force;
   force.D(2)= 5;
   params.GetVector3d("D", force.D);
 
-  Body2d<> sys(&force);
+  Body2d<2> sys(&force);
 
   Body2dState x0;
   VectorXd qv0(6);
@@ -55,7 +55,7 @@ void solver_process(Viewer* viewer)
   }
 
   // cost
-  LqCost<Body2dState, 6, 3> cost(sys, tf, xf);
+  LqCost<Body2dState, 6, 2> cost(sys, tf, xf);
 
   //  Body2dCost cost(sys, tf, xf);  
 
@@ -67,7 +67,7 @@ void solver_process(Viewer* viewer)
   if (params.GetVectorXd("Qf", Qf))
     cost.Qf = Qf.asDiagonal();
   
-  VectorXd R(3);
+  VectorXd R(2);
   if (params.GetVectorXd("R", R)) 
     cost.R = R.asDiagonal();
 
@@ -80,8 +80,8 @@ void solver_process(Viewer* viewer)
   vector<pair<Matrix3d, Vector3d> > xs(N+1, x0);
 
   // controls
-  Vector3d u(0,0,0);
-  vector<Vector3d> us(N, u);
+  Vector2d u(0,0);
+  vector<Vector2d> us(N, u);
   //  for (int i = 0; i < N/2; ++i) {
   //    us[i] = Vector3d(0.01,.1,0);
   //    us[N/2+i] = Vector3d(0.01,-.1,0);
@@ -91,7 +91,7 @@ void solver_process(Viewer* viewer)
   ddp.mu = .01;
   params.GetDouble("mu", ddp.mu);
 
-  Body2dView<> view(sys, &ddp.xs);
+  Body2dView<2> view(sys, &ddp.xs);
   viewer->Add(view);
 
   struct timeval timer;

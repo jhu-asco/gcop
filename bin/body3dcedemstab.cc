@@ -31,16 +31,15 @@ Params params;
 
 class Body3dSampler : public Creator<Body3dState> {
 public:
-  Body3dSampler(int N, Constraint<Body3dState, 12, 6, Dynamic, 1> *con = 0) {
+  Body3dSampler(int N, const Body3dState &xf, Constraint<Body3dState, 12, 6, Dynamic, 1> *con = 0) {
     Matrix<double, 1, 1> g;
+    x = xf;
     for (int i = 0; i < N; ++i) {
       do {
-        x.second[0] = 195;
-        x.second[1] = 195*RND;
-        x.second[2] = 5;      
+        // x.second[1] = 2*xf.second[1]*RND;
         if (con)
           (*con)(g, 0, x);
-      } while (con && g[0] > 0);
+      } while (con && g[0] > -1); // 1 meter away from obstacles
       samples.push_back(x);
     }
   }
@@ -181,7 +180,7 @@ void solver_process(Viewer* viewer)
   int Ns;
   params.GetInt("Ns", Ns);  
 
-  Body3dSampler sampler(Ns, &pqp);
+  Body3dSampler sampler(Ns, xf, &pqp);
   ctp.stoch = true;
 
   Body3dCe ce(sys, cost, ctp, &sampler, ts, xs, us, 0, mu0, P0, S);
@@ -195,8 +194,13 @@ void solver_process(Viewer* viewer)
 
   params.GetDouble("Jub", ce.Jub);  
   params.GetBool("enforceUpperBound", ce.enforceUpperBound);
+  params.GetDouble("enforceUpperBoundFactor", ce.enforceUpperBoundFactor);
+  params.GetBool("mras", ce.ce.mras);
+  params.GetBool("bAuto", ce.ce.bAuto);
+  params.GetDouble("b", ce.ce.b);
 
   Body3dView<> view(sys, &xs);
+  view.renderSystem = false;
   viewer->Add(view);  
   view.rgba[0] = 0; view.rgba[1] = 0; view.rgba[2] = 1;
   
@@ -215,10 +219,15 @@ void solver_process(Viewer* viewer)
   fstr.open("logs/body3dcedemstab.txt", std::ios::out | std::ios::trunc);
   fstr.precision(20);
 
+  getchar();
+
+  if (viewer)
+    viewer->Remove(dslView);
+
   for (int i = 0; i < iters; ++i) {
     timer_start(timer);
     //    rseed(0);
-    srand(0);
+    srand(19);
 
     // save current distro
     Normal<5> ns0 = ce.ce.gmm.ns[0];
@@ -246,6 +255,11 @@ void solver_process(Viewer* viewer)
     for (int j = 0; j < ce.Ns; ++j)  // costs
       fstr << ce.ce.cs[j] << " ";    
     fstr << endl;
+
+    if (viewer)
+      viewer->saveSnapshot = true;
+    getchar();
+
   }
   fstr.close();
 
@@ -267,7 +281,8 @@ int main(int argc, char** argv)
 #ifdef DISP
   Viewer *viewer = new Viewer;
   viewer->Init(&argc, argv);
-  viewer->frameName = "videos/sys";
+  viewer->frameName = "logs/body3d/frames/body3d";
+  viewer->displayName = "logs/body3d/display/body3d";
 
   pthread_t dummy;
   pthread_create( &dummy, NULL, (void *(*) (void *)) solver_process, viewer);

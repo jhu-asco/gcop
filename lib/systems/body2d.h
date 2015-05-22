@@ -97,7 +97,7 @@ namespace gcop {
     
     se2.cay(dg, hxib);
     xb.first = xa.first*dg;
-    
+
     if (A) {
       se2.cay(dg, -hxib);
       Matrix3d Adm;
@@ -117,10 +117,9 @@ namespace gcop {
       
       B->topRows(3) = (h*h)*(dg*fu);
       //  B->bottomRows(3) = (Vector3d(h, h, h).cwiseQuotient(I)).asDiagonal()*fu;
-      B->bottomRows(3) = h*fu;
-      
+      B->bottomRows(3) = h*fu;      
     }
-    
+
     if (C) {
       if (p) {
         assert(C->cols() == p->size() && C->rows() == 6); 
