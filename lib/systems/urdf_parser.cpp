@@ -148,7 +148,7 @@ void combineinertia(boost::shared_ptr<Link> clink, boost::shared_ptr<Link> plink
 	//Using parallel axis theorem:
 	double pmass = plink->inertial->mass, cmass = clink->inertial->mass;
 	//cout<<"pmass "<<pmass<<" cmass "<<cmass<<endl;
-	Vector3d vecfi_pi = gposeci_pi.topRightCorner<3,1>()*(pmass/(cmass + pmass)); 
+	Vector3d vecfi_pi = gposeci_pi.topRightCorner<3,1>()*(cmass/(cmass + pmass)); 
 	Vector3d vecfi_ci = vecfi_pi - gposeci_pi.topRightCorner<3,1>();
 
 	//cout<<"vecfi_pi "<<vecfi_pi.transpose()<<" vecfi_ci "<<vecfi_ci.transpose()<<endl;
@@ -365,7 +365,7 @@ void findnofactivejoints(boost::shared_ptr<Link> link, int &count)
 		if (*child)
 		{
 			boost::shared_ptr<Link> childlink = *child;
-				if((childlink->parent_joint->type == Joint::REVOLUTE)||(childlink->parent_joint->type == Joint::REVOLUTE))
+				if((childlink->parent_joint->type == Joint::REVOLUTE)||(childlink->parent_joint->type == Joint::PRISMATIC))
 					count++;
 			findnofactivejoints(*child,count);
 		}
