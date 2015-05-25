@@ -326,7 +326,7 @@ void Mbs::Bias(VectorXd &b,
     if(p != 0)
     {
       //External parameters provided:
-      if(cs[i].size() == 0)
+      if(links[i].name.compare(end_effector_name) == 0)
       {
         //End effector
         //For now support for only one end effector i.e A chain:
@@ -787,7 +787,21 @@ void Mbs::DBias(VectorXd &b,
     se3.tlnmu(pa, -h*va, I.cwiseProduct(va));
     ps[i] = pb - pa - h*gr;
     //    ps[i] = I.cwiseProduct(vb) - I.cwiseProduct(va) - h*gr;
-
+    if(p != 0)
+    {
+      //External parameters provided:
+      if(links[i].name.compare(end_effector_name) == 0)
+      {
+        //End effector
+        //For now support for only one end effector i.e A chain:
+        assert((*p).size() >= 6);//Make sure there is atleast one wrench
+        Vector6d external_force;
+        external_force.tail<3>() = (x.gs[i].topLeftCorner<3,3>().transpose()*(*p).tail<3>());
+        //Torque://#VERIFY
+        external_force.head<3>() = (x.gs[i].topLeftCorner<3,3>().transpose()*(*p).head<3>());
+        ps[i] = ps[i] - external_force;
+      }
+    }
     if (debug) {
       cout << "i=" << i << endl;
       cout << "va=" << va << endl;

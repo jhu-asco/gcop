@@ -199,6 +199,8 @@ namespace gcop {
     static const int TRAP = 3;    ///< symplectic trapezoidal 2nd order method
     int iters;                    ///< max number of Newton iterations used in symplectic method
 
+    string end_effector_name;///< Name of end effectors to which parameter forces(*p) are applied
+
     bool debug;
   };
 }
