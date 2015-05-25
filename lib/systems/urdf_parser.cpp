@@ -376,7 +376,7 @@ void findnofactivejoints(boost::shared_ptr<Link> link, int &count)
 			
 	}
 }
-boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, gcop::Matrix4d &gposei_root, string type, int np)
+boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, string type, int np)
 {
 	//parse the xml file into a urdf model
 	boost::shared_ptr<ModelInterface> urdfmodel = parseURDF(xml_string);
@@ -444,7 +444,8 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, gcop::Matrix
 	gcop::Vector7d posevec;
 	//Pose ci_v = root_link->inertial->origin.GetInverse()*root_link->visual->origin;
 	posevec<<root_link->inertial->origin.rotation.w,root_link->inertial->origin.rotation.x,root_link->inertial->origin.rotation.y,root_link->inertial->origin.rotation.z,root_link->inertial->origin.position.x,root_link->inertial->origin.position.y,root_link->inertial->origin.position.z;
-	gcop::SE3::Instance().quatxyz2g(gposei_root,posevec);
+
+	gcop::SE3::Instance().quatxyz2g(mbs->pose_inertia_base,posevec);
 
 	cout<<"index: "<<index<<endl;
 	cout<<"Level: -1"<<endl;

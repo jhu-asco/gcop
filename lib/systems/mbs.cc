@@ -31,7 +31,8 @@ Mbs::Mbs(int nb, int c, bool fixed, int np) : nb(nb), fixed(fixed),
                                       ubK(VectorXd::Constant(nb - 1, 0.01)),
                                       ubD(VectorXd::Constant(nb - 1, 0.001)),
                                       fsl(VectorXd::Zero(nb - 1)),
-                                      fsu(VectorXd::Zero(nb - 1))
+                                      fsu(VectorXd::Zero(nb - 1)),
+                                      pose_inertia_base(Matrix4d::Identity())
 {
   //ag << 0, 0, -9.81;
 }
@@ -65,6 +66,10 @@ void Mbs::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
     f[4] = 0;
     f[5] = u[3];
   }
+  //Transform the base forces into inertial frame:
+  static Matrix6d M_inertia_base;
+  se3.Ad(M_inertia_base, pose_inertia_base);
+  f.head<6>() = M_inertia_base.transpose()*f.head<6>();
   
   // this is ok for fixed base also 
   f.tail(nb-1) = u.tail(nb-1) - damping.cwiseProduct(x.dr);    

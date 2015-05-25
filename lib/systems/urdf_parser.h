@@ -60,7 +60,7 @@ namespace gcop_urdf{
   * 
   * np is the number of parameters
   */
-	boost::shared_ptr<gcop::Mbs> mbsgenerator(const std::string &xml_string,gcop::Matrix4d &gposei_root, std::string type = "FLOATBASE", int np = 0);
+	boost::shared_ptr<gcop::Mbs> mbsgenerator(const std::string &xml_string, std::string type = "FLOATBASE", int np = 0);
 
 }
 

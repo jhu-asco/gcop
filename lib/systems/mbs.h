@@ -201,6 +201,8 @@ namespace gcop {
 
     string end_effector_name;///< Name of end effectors to which parameter forces(*p) are applied
 
+    Matrix4d pose_inertia_base;///< Pose of the Inertial frame of the base in the base frame. By default identity
+
     bool debug;
   };
 }
