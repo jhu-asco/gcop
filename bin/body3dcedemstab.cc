@@ -199,27 +199,28 @@ void solver_process(Viewer* viewer)
   params.GetBool("bAuto", ce.ce.bAuto);
   params.GetDouble("b", ce.ce.b);
 
-  Body3dView<> view(sys, &xs);
-  view.renderSystem = false;
-  viewer->Add(view);  
-  view.rgba[0] = 0; view.rgba[1] = 0; view.rgba[2] = 1;
-  
-  Body3dCeView ceview(ce, view);
-  viewer->Add(ceview);
-
   Body3dView<6> dslView(sys, &ctrl.xds);
   dslView.lineWidth=5;
   dslView.rgba[0] = 0;   dslView.rgba[1] = 1;   dslView.rgba[2] = 0;
   if (viewer)
     viewer->Add(dslView);  
 
+  getchar();
+
+
+  Body3dView<> view(sys, &xs);
+  view.renderSystem = false;
+  viewer->Add(view);  
+  view.rgba[0] = 0; view.rgba[1] = 0; view.rgba[2] = 1;
+
+  Body3dCeView ceview(ce, view);
+  viewer->Add(ceview);
+
   struct timeval timer;
 
   fstream fstr;
   fstr.open("logs/body3dcedemstab.txt", std::ios::out | std::ios::trunc);
   fstr.precision(20);
-
-  getchar();
 
   if (viewer)
     viewer->Remove(dslView);
