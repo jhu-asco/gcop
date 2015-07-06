@@ -312,6 +312,10 @@ namespace gcop {
     if (affineNoise) {
       double result = this->Step(xb, t, xa, u, h, p, A, B, C);
       Matrixnd H;
+      if(_nx  == Dynamic)
+      {
+        H.resize(this->X.n, this->X.n);
+      }
       this->NoiseMatrix(H, this->t, this->x, u, h, p);
       this->X.Retract(xb, xb, (H*w));
       if (D)
@@ -349,6 +353,10 @@ namespace gcop {
       if (affineNoise) {
         double result = this->Step(xb, u, h, p, A, B, C);
         Matrixnd H;
+        if(_nx  == Dynamic)
+        {
+          H.resize(this->X.n, this->X.n);
+        }
         this->NoiseMatrix(H, this->t, this->x, u, h, p);
         this->X.Retract(xb, xb, (H*w));
         this->x = xb;//Update internal state

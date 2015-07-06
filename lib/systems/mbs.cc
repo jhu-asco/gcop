@@ -16,8 +16,8 @@
 using namespace gcop;
 
 
-Mbs::Mbs(int nb, int c, bool fixed) : nb(nb), fixed(fixed),
-                                      System(*new MbsManifold(nb, fixed), c), 
+Mbs::Mbs(int nb, int c, bool fixed, int np) : nb(nb), fixed(fixed),
+                                      System(*new MbsManifold(nb, fixed), c, np), 
                                       links(nb),
                                       joints(nb-1), 
                                       pis(nb), cs(nb), se3(SE3::Instance()),
@@ -31,7 +31,8 @@ Mbs::Mbs(int nb, int c, bool fixed) : nb(nb), fixed(fixed),
                                       ubK(VectorXd::Constant(nb - 1, 0.01)),
                                       ubD(VectorXd::Constant(nb - 1, 0.001)),
                                       fsl(VectorXd::Zero(nb - 1)),
-                                      fsu(VectorXd::Zero(nb - 1))
+                                      fsu(VectorXd::Zero(nb - 1)),
+                                      pose_inertia_base(Matrix4d::Identity())
 {
   //ag << 0, 0, -9.81;
 }
@@ -65,6 +66,10 @@ void Mbs::Force(VectorXd &f, double t, const MbsState &x, const VectorXd &u,
     f[4] = 0;
     f[5] = u[3];
   }
+  //Transform the base forces into inertial frame:
+  static Matrix6d M_inertia_base;
+  se3.Ad(M_inertia_base, pose_inertia_base);
+  f.head<6>() = M_inertia_base.transpose()*f.head<6>();
   
   // this is ok for fixed base also 
   f.tail(nb-1) = u.tail(nb-1) - damping.cwiseProduct(x.dr);    
@@ -293,7 +298,7 @@ void Mbs::ID(VectorXd &f,
 
 void Mbs::Bias(VectorXd &b,
                double t,
-               const MbsState &x) const
+               const MbsState &x, const VectorXd *p) const
 {
   
   // assume that Kstep was called so that all velocities are propagated
@@ -322,6 +327,22 @@ void Mbs::Bias(VectorXd &b,
     //    ps[i].head(3) = v.head<3>().cross(mu.head<3>());
     //    ps[i].tail(3) = v.head<3>().cross(mu.tail<3>());
     ps[i] = ps[i] - gr;
+
+    if(p != 0)
+    {
+      //External parameters provided:
+      if(links[i].name.compare(end_effector_name) == 0)
+      {
+        //End effector
+        //For now support for only one end effector i.e A chain:
+        assert((*p).size() >= 6);//Make sure there is atleast one wrench
+        Vector6d external_force;
+        external_force.tail<3>() = (x.gs[i].topLeftCorner<3,3>().transpose()*(*p).tail<3>());
+        //Torque://#VERIFY
+        external_force.head<3>() = (x.gs[i].topLeftCorner<3,3>().transpose()*(*p).head<3>());
+        ps[i] = ps[i] - external_force;
+      }
+    }
 
     if (debug) {
       //cout << "i=" << i << endl;
@@ -355,18 +376,18 @@ void Mbs::Bias(VectorXd &b,
 
 
 double Mbs::HeunStep(MbsState& xb, double t, const MbsState& xa,
-                     const VectorXd &u, double h,
+                     const VectorXd &u, double h, const VectorXd *p,
                      MatrixXd *A, MatrixXd *B)
 {
   VectorXd a(nb+5);
-  Acc(a, t, xa, u, h);
+  Acc(a, t, xa, u, h, p);
 
   MbsState xn(nb);
   xn.vs[0] = xa.vs[0] + h*a.head(6);
   xn.dr = xa.dr + h*a.tail(nb-1);
   KStep(xn, xa, h);
   VectorXd an(nb+5);
-  Acc(an, t+h, xn, u, h);  
+  Acc(an, t+h, xn, u, h, p);  
 
   xb.vs[0] = xa.vs[0] + h/2*(a.head(6) + an.head(6));
   xb.dr = xa.dr + h/2*(a.tail(nb - 1) + an.tail(nb - 1));
@@ -376,13 +397,13 @@ double Mbs::HeunStep(MbsState& xb, double t, const MbsState& xa,
 
 
 double Mbs::EulerStep(MbsState& xb, double t, const MbsState& xa,
-                      const VectorXd &u, double h,
+                      const VectorXd &u, double h, const VectorXd *p,
                       MatrixXd *A, MatrixXd *B)
 {
   int n = nb - 1 + 6*(!fixed);
 
   VectorXd a(n);
-  Acc(a, t, xa, u, h);
+  Acc(a, t, xa, u, h, p);
 	//[DEBUG] Specific statement:
 	/*if(t == 3.1 || t == 3.0)
 	{
@@ -500,7 +521,7 @@ void Mbs::print(const MbsState &x) const
   cout << "dr=" << x.dr.transpose() << endl;
 }
 
-void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u, double h)
+void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u, double h, const VectorXd *p)
 {
 	//[DEBUG] specific to t = 3.1
   int n = nb - 1 + 6*(!fixed);
@@ -510,7 +531,7 @@ void Mbs::Acc(VectorXd &a, double t, const MbsState &x, const VectorXd &u, doubl
   //  M.setIdentity();
 
   VectorXd b(n); // bias
-  Bias(b, t, x);
+  Bias(b, t, x, p);
 
 	/*if(t == 3.1 || t == 3.0)
 		cout<<"Bias_specific: "<<b.transpose()<<endl;//[DEBUG]
@@ -585,11 +606,11 @@ double Mbs::Step(MbsState& xb, double t, const MbsState& xa,
 	//    return System::Step(xb, t, xa, u, h, A, B);
 
 		if (method == EULER)
-			return EulerStep(xb, t, xa, u, h, A, B);
+			return EulerStep(xb, t, xa, u, h, p, A, B);
 		else if (method == HEUN)
-			return HeunStep(xb, t, xa, u, h, A, B);
+			return HeunStep(xb, t, xa, u, h, p, A, B);
 		else if (method == TRAP)
-			return TrapStep(xb, t, xa, u, h, A, B);
+			return TrapStep(xb, t, xa, u, h, p, A, B);
 		else 
 			cout << "[W] Mbs::Step: unsupported method " << method << endl;
 	return 0;
@@ -601,7 +622,7 @@ double Mbs::Step(MbsState& xb, double t, const MbsState& xa,
 
 
 double Mbs::TrapStep(MbsState &xb, double t, const MbsState& xa,
-                     const VectorXd &u, double h,
+                     const VectorXd &u, double h, const VectorXd *p,
                      MatrixXd *A, MatrixXd *B)
 {
   // initialize new velocity with old velocity
@@ -624,7 +645,7 @@ double Mbs::TrapStep(MbsState &xb, double t, const MbsState& xa,
   double eps = 1e-3;
 
   for (int j = 0; j < iters; ++j) {    
-    NE(e, vdr, xb, t, xa, u, h);    
+    NE(e, vdr, xb, t, xa, u, h, p);    
     NewtonEulerJacobian(De, xb, xa, h);
 
     vdr = vdr - De.lu().solve(e);
@@ -635,7 +656,7 @@ double Mbs::TrapStep(MbsState &xb, double t, const MbsState& xa,
       dvdr.setZero();
       dvdr[i] = eps;
       //      NE(em, vdr - dvdr, xb, t, xa, u, h);
-      NE(ep, vdr + dvdr, xb, t, xa, u, h);
+      NE(ep, vdr + dvdr, xb, t, xa, u, h, p);
       
       //      De.col(i) = (ep - em)/(2*eps);
       De.col(i) = (ep - e)/(eps);
@@ -721,14 +742,14 @@ double Mbs::TrapStep(MbsState &xb, double t, const MbsState& xa,
 void Mbs::NE(VectorXd &e, const VectorXd &vdr,
              MbsState &xb,
              double t, const MbsState &xa,
-             const VectorXd &u, double h)
+             const VectorXd &u, double h, const VectorXd *p)
 {
   xb.vs[0] = vdr.head(6);
   xb.dr = vdr.tail(nb-1);
   KStep(xb, xa, h);
   VectorXd bd(nb + 5);
 
-  DBias(bd, t, xb, xa, h);
+  DBias(bd, t, xb, xa, h, p);
 
   VectorXd f(nb + 5);
   Force(f, t, xa, u);  // compute control/external forces
@@ -740,7 +761,7 @@ void Mbs::NE(VectorXd &e, const VectorXd &vdr,
 void Mbs::DBias(VectorXd &b,
                 double t,
                 const MbsState &xb,
-                const MbsState &xa, double h)
+                const MbsState &xa, double h, const VectorXd *p)
 {
   
   // assume that Kstep was called so that all velocities are propagated
@@ -771,7 +792,21 @@ void Mbs::DBias(VectorXd &b,
     se3.tlnmu(pa, -h*va, I.cwiseProduct(va));
     ps[i] = pb - pa - h*gr;
     //    ps[i] = I.cwiseProduct(vb) - I.cwiseProduct(va) - h*gr;
-
+    if(p != 0)
+    {
+      //External parameters provided:
+      if(links[i].name.compare(end_effector_name) == 0)
+      {
+        //End effector
+        //For now support for only one end effector i.e A chain:
+        assert((*p).size() >= 6);//Make sure there is atleast one wrench
+        Vector6d external_force;
+        external_force.tail<3>() = (x.gs[i].topLeftCorner<3,3>().transpose()*(*p).tail<3>());
+        //Torque://#VERIFY
+        external_force.head<3>() = (x.gs[i].topLeftCorner<3,3>().transpose()*(*p).head<3>());
+        ps[i] = ps[i] - external_force;
+      }
+    }
     if (debug) {
       cout << "i=" << i << endl;
       cout << "va=" << va << endl;

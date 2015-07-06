@@ -148,7 +148,7 @@ void combineinertia(boost::shared_ptr<Link> clink, boost::shared_ptr<Link> plink
 	//Using parallel axis theorem:
 	double pmass = plink->inertial->mass, cmass = clink->inertial->mass;
 	//cout<<"pmass "<<pmass<<" cmass "<<cmass<<endl;
-	Vector3d vecfi_pi = gposeci_pi.topRightCorner<3,1>()*(pmass/(cmass + pmass)); 
+	Vector3d vecfi_pi = gposeci_pi.topRightCorner<3,1>()*(cmass/(cmass + pmass)); 
 	Vector3d vecfi_ci = vecfi_pi - gposeci_pi.topRightCorner<3,1>();
 
 	//cout<<"vecfi_pi "<<vecfi_pi.transpose()<<" vecfi_ci "<<vecfi_ci.transpose()<<endl;
@@ -365,7 +365,7 @@ void findnofactivejoints(boost::shared_ptr<Link> link, int &count)
 		if (*child)
 		{
 			boost::shared_ptr<Link> childlink = *child;
-				if((childlink->parent_joint->type == Joint::REVOLUTE)||(childlink->parent_joint->type == Joint::REVOLUTE))
+				if((childlink->parent_joint->type == Joint::REVOLUTE)||(childlink->parent_joint->type == Joint::PRISMATIC))
 					count++;
 			findnofactivejoints(*child,count);
 		}
@@ -376,7 +376,7 @@ void findnofactivejoints(boost::shared_ptr<Link> link, int &count)
 			
 	}
 }
-boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, gcop::Matrix4d &gposei_root, string type)
+boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, string type, int np)
 {
 	//parse the xml file into a urdf model
 	boost::shared_ptr<ModelInterface> urdfmodel = parseURDF(xml_string);
@@ -401,18 +401,18 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, gcop::Matrix
 	boost::shared_ptr<gcop::Mbs> mbs;
 	if(type == "AIRBASE")
 	{
-		mbs.reset(new gcop::Mbs(nofactivejoints+1,4+nofactivejoints));
+		mbs.reset(new gcop::Mbs(nofactivejoints+1,4+nofactivejoints, false, np));
 		mbs->basetype = mbs->AIRBASE;
 		cout<<"Creating airbase "<<mbs->U.n<<endl;
 	}
 	else if(type == "FLOATBASE")
 	{
-		mbs.reset(new gcop::Mbs(nofactivejoints+1,6 + nofactivejoints));
+		mbs.reset(new gcop::Mbs(nofactivejoints+1,6 + nofactivejoints, false, np));
 		mbs->basetype = mbs->FLOATBASE;
 	}
 	else if(type == "FIXEDBASE")
 	{
-		mbs.reset(new gcop::Mbs(nofactivejoints+1,nofactivejoints,true));
+		mbs.reset(new gcop::Mbs(nofactivejoints+1,nofactivejoints,true, np));
 		mbs->basetype = mbs->FIXEDBASE;
 	}
 	//aggregate and assign rootlink
@@ -444,7 +444,8 @@ boost::shared_ptr<gcop::Mbs> mbsgenerator(const string &xml_string, gcop::Matrix
 	gcop::Vector7d posevec;
 	//Pose ci_v = root_link->inertial->origin.GetInverse()*root_link->visual->origin;
 	posevec<<root_link->inertial->origin.rotation.w,root_link->inertial->origin.rotation.x,root_link->inertial->origin.rotation.y,root_link->inertial->origin.rotation.z,root_link->inertial->origin.position.x,root_link->inertial->origin.position.y,root_link->inertial->origin.position.z;
-	gcop::SE3::Instance().quatxyz2g(gposei_root,posevec);
+
+	gcop::SE3::Instance().quatxyz2g(mbs->pose_inertia_base,posevec);
 
 	cout<<"index: "<<index<<endl;
 	cout<<"Level: -1"<<endl;

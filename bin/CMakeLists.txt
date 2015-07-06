@@ -215,6 +215,9 @@ target_link_libraries(gpadd gcop_est gcop_algos gcop_views gcop_systems ${ALL_LI
 add_executable(imuekftest imuekftest.cc)
 target_link_libraries(imuekftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
+add_executable(imumagekftest imumagekftest.cc)
+target_link_libraries(imumagekftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
 add_executable(insekftest insekftest.cc)
 target_link_libraries(insekftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 

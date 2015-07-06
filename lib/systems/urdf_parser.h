@@ -55,7 +55,12 @@ namespace gcop_urdf{
 	void aggregate(boost::shared_ptr<const Link> link, boost::shared_ptr<Link> parentlink,Pose cumpose);
 	gcop::Matrix4d diffpose(Pose &posej_p,Pose &posei_p);
 	void walkTree(boost::shared_ptr<Link> link, int level,int &index,boost::shared_ptr<gcop::Mbs> mbs);
-	boost::shared_ptr<gcop::Mbs> mbsgenerator(const std::string &xml_string,gcop::Matrix4d &gposei_root, std::string type = "FLOATBASE");
+  /**
+  * Creates a Multi body system from urdf
+  * 
+  * np is the number of parameters
+  */
+	boost::shared_ptr<gcop::Mbs> mbsgenerator(const std::string &xml_string, std::string type = "FLOATBASE", int np = 0);
 
 }
 

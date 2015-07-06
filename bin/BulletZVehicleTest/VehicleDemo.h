@@ -26,7 +26,7 @@ class btCollisionShape;
 #include <stdlib.h>
 
 #include "point3dgps.h"
-#include "gndoepv2.h"
+#include "deterministicgndoep.h"
 #include "params.h"
 #include "lqsensorcost.h"
 #include "utils.h"
@@ -41,7 +41,7 @@ using namespace Eigen;
 class VehicleDemo : public GlutDemoApplication
 {
   typedef LqSensorCost<Vector4d, 4, 2, Dynamic, 10, Vector3d, 3> RccarCost;
-  typedef GnDoep1<Vector4d, 4, 2, Dynamic, 10, Vector3d, 3, Point3dState, 6> RccarDoep;
+  typedef GnDoep<Vector4d, 4, 2, Dynamic, 10, Vector3d, 3, Point3dState, 6> RccarDoep;
 
   protected:
     int iters; //Number of iterations
