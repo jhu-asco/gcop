@@ -2,6 +2,7 @@ set(headers
     imusensor.h
     insgps.h
     insimu.h
+    insmag.h
     point3dgps.h
     sensor.h
    )
