@@ -19,6 +19,10 @@ if (BUILD_TESTS)
 	add_executable(body2dtest body2dtest.cc)
 	target_link_libraries(body2dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
+	add_executable(boattest boattest.cc)
+	target_link_libraries(boattest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
+
 	add_executable(body3dtest body3dtest.cc)
 	target_link_libraries(body3dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
@@ -210,6 +214,9 @@ target_link_libraries(gpadd gcop_est gcop_algos gcop_views gcop_systems ${ALL_LI
 
 add_executable(imuekftest imuekftest.cc)
 target_link_libraries(imuekftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
+add_executable(imumagekftest imumagekftest.cc)
+target_link_libraries(imumagekftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
 add_executable(insekftest insekftest.cc)
 target_link_libraries(insekftest gcop_est gcop_algos gcop_views gcop_systems ${ALL_LIBS})

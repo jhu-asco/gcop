@@ -219,7 +219,9 @@ namespace gcop {
 
     double J;    ///< optimal cost
 
-    bool enforceUpperBound; ///< whether to discard any samples with cost > Jub (true by default)
+    bool enforceUpperBound; ///< whether to discard any samples with cost > enforceUpperBoundFactor*Jub (true by default)
+
+    double enforceUpperBoundFactor;  ///< default is 1
 
     bool updateUpperBound; ///< after every iteration Jub is updated to be the current max cost (true by default)
 
@@ -253,7 +255,7 @@ namespace gcop {
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
     ce(N*sys.U.n, 1), Ns(1000), 
     J(numeric_limits<double>::max()), 
-    enforceUpperBound(true), updateUpperBound(true), Jub(numeric_limits<double>::max()),
+    enforceUpperBound(true), enforceUpperBoundFactor(1), updateUpperBound(true), Jub(numeric_limits<double>::max()),
     debug(true), external_render(0), nofevaluations(0)
     {
       // do not use an external tparam, just assume discrete controls are the params
@@ -304,7 +306,7 @@ namespace gcop {
     ts(ts), xs(xs), us(us), dus(us), p(p), xss(xs), uss(us), N(us.size()), 
     ce(tp.ntp, 1), Ns(1000), 
     J(numeric_limits<double>::max()), 
-    enforceUpperBound(true), updateUpperBound(true), Jub(numeric_limits<double>::max()),
+    enforceUpperBound(true), enforceUpperBoundFactor(1), updateUpperBound(true), Jub(numeric_limits<double>::max()),
     debug(true), external_render(0), nofevaluations(0)
     {
 
@@ -346,7 +348,7 @@ namespace gcop {
     ts(ts), xs(xs), us(us), dus(us), p(p), xss(xs), uss(us), N(us.size()), 
     ce(tp.ntp, 1), Ns(1000), 
     J(numeric_limits<double>::max()), 
-    enforceUpperBound(true), updateUpperBound(true), Jub(numeric_limits<double>::max()),
+    enforceUpperBound(true), enforceUpperBoundFactor(1), updateUpperBound(true), Jub(numeric_limits<double>::max()),
     debug(true), external_render(0), nofevaluations(0)
     {
 
@@ -394,7 +396,7 @@ namespace gcop {
     ts(ts), xs(xs), us(us), p(p), dus(dus), xss(xs), uss(us), N(us.size()), 
     ce(tp.ntp, 1), Ns(1000), 
     J(numeric_limits<double>::max()), 
-    enforceUpperBound(true), updateUpperBound(true), Jub(numeric_limits<double>::max()),
+    enforceUpperBound(true), enforceUpperBoundFactor(1), updateUpperBound(true), Jub(numeric_limits<double>::max()),
     debug(true), external_render(0), nofevaluations(0)
     {
       /*
@@ -563,7 +565,7 @@ namespace gcop {
               z2us(uss, z);
               J = Update(xss, uss);
             }
-          } while(enforceUpperBound && J > Jub);
+          } while(enforceUpperBound && J > enforceUpperBoundFactor*Jub);
           
           ce.AddSample(z, J);
           

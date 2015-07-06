@@ -14,6 +14,7 @@ using namespace gcop;
 //typedef ConstraintCost<Body3dState, 4, 2, Dynamic, 1> DiskCost;
 
 
+
 void solver_process(Viewer* viewer)
 {
   viewer->SetCamera(-7.25, 61, -2.8, -2.55, -10);
