@@ -17,6 +17,7 @@ using namespace gcop;
 
 Params params;
 
+
 void projectmanifold(const Body3dState &bodystate, InsState &pstate)
 {
   pstate.R = bodystate.first;
