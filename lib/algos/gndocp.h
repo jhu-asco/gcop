@@ -100,6 +100,8 @@ using ceres::Solve;
      * are updated. 
      */
     void Iterate();
+
+    void Reset();
     Tparam<T, _nx, _nu, _np, _ntp> &tparam;
 
     int info;
@@ -300,11 +302,11 @@ struct Functor
     inputs(tparam.ntp),
     values(cost.ng*xs.size()), s(inputs), 
     functor(0), numDiff(0), lm(0), 
-#ifndef USE_SAMPLE_NUMERICAL_DIFF
+//#ifndef USE_SAMPLE_NUMERICAL_DIFF
     numdiff_stepsize(1e-8)
-#else
-    numdiff_stepsize(1e-4)
-#endif
+//#else
+    //numdiff_stepsize(1e-4)
+//#endif
     {
       if(update)
         this->Update(false);//No need of derivatives
@@ -323,6 +325,13 @@ struct Functor
       delete numDiff;
       delete functor;
     }  
+
+  template <typename T, int _nx, int _nu, int _np, int _ng, int _ntp> 
+    void GnDocp<T, _nx, _nu, _np, _ng, _ntp>::Reset() {
+      delete lm;
+      lm = NULL;
+      return;
+    }
   
   template <typename T, int _nx, int _nu, int _np, int _ng, int _ntp> 
     void GnDocp<T, _nx, _nu, _np, _ng, _ntp>::Iterate() {
@@ -339,6 +348,7 @@ struct Functor
 #endif
       */
       lm->parameters.maxfev = 1e6;//Maximum nof evaluations is very high
+      cout<<"Initializing..."<<endl;
       info = lm->minimizeInit(s);
       cout <<"info="<<info <<endl;
     }
