@@ -245,15 +245,19 @@ struct Functor
                                                 vector<T> &xs, 
                                                 vector<Vectorcd > &us,
                                                 Vectormd &p,
-                                                vector<double> &ts1, 
+                                                vector<double> &ts1,
                                                 Func_type _project,
                                                 bool update) : 
-    Doep<T, _nx, _nu, _np, Tz, _nz, T1, _nx1>(sys, sensor, cost, ts, xs, us, p, ts1, _project, update),
+    Doep<T, _nx, _nu, _np, Tz, _nz, T1, _nx1>(sys, sensor, cost, ts, xs, us, p, ts1, _project, false),
     inputs(us.size()*sys.X.n + sys.P.n),
     values((sys.X.n)*us.size()+(sensor.Z.n)*ts1.size()+sys.P.n), s(inputs), 
     functor(0), numDiff(0), lm(0)
     {
       cout <<"inputs=" <<inputs<<" values= "<<values<< endl;
+      if(update)
+      {
+        this->Update(false);
+      }
     }
   
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz, typename T1, int _nx1> 

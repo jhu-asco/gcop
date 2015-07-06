@@ -7,9 +7,16 @@
 #include "utils.h"
 #include "so3.h"
 #include "params.h"
-#include "gndoep.h"
 #include "sensor.h"
 #include "insmanifold.h"
+
+//#define USE_STOCHASTIC_DYNAMICS
+
+#ifdef USE_STOCHASTIC_DYNAMICS
+#include "gndoep.h"
+#else
+#include "deterministicgndoep.h"
+#endif
 
 using namespace std;
 using namespace Eigen;

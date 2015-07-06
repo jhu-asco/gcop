@@ -6,6 +6,9 @@
 
 #include <unsupported/Eigen/NonLinearOptimization>
 
+/** GnDoep with deterministic dynamics
+*/
+
 namespace gcop {
 
  
@@ -32,7 +35,7 @@ namespace gcop {
     int _nz = Dynamic,
     typename T1 = T,
     int _nx1 = _nx> 
-    class GnDoep1 : public Doep<T, _nx, _nu, _np, Tz, _nz, T1, _nx1> {
+    class GnDoep : public Doep<T, _nx, _nu, _np, Tz, _nz, T1, _nx1> {
     
     typedef Matrix<double, _ng, 1> Vectorgd;
     typedef Matrix<double, _ng, _nx> Matrixgxd;
@@ -90,12 +93,12 @@ namespace gcop {
      */
 
 
-    GnDoep1(System<T, _nx, _nu, _np> &sys, Sensor<T1, _nx1, _nu, _np, Tz, _nz> &sensor,
+    GnDoep(System<T, _nx, _nu, _np> &sys, Sensor<T1, _nx1, _nu, _np, Tz, _nz> &sensor,
            LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz> &cost, 
            vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, Vectormd &p,
            vector<double> &ts1, Func_type _project=NULL, bool update = true);
     
-    virtual ~GnDoep1();
+    virtual ~GnDoep();
 
     /**
      * Perform one DOCP iteration. Internally calls:
@@ -155,7 +158,7 @@ struct Functor
    struct GnCost : Functor<double> {  
    GnCost<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1>(int inputs, int values) : Functor<double>(inputs, values) {};
    
-   GnDoep1<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1> *doep;
+   GnDoep<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1> *doep;
    
    typedef Matrix<double, _nx, 1> Vectornd;
    typedef Matrix<double, _np, 1> Vectormd;
@@ -212,9 +215,11 @@ struct Functor
      {
        std::cout<<"Input: "<<s.transpose()<<endl;
        std::cout<<"Fvec: "<<fvec.transpose()<<endl;
+       std::cout<<"Cost: "<<0.5*(fvec.transpose()*fvec)<<endl;
        //std::cout<<"Resp: "<<fvec.tail(np).transpose()<<"\t"<<doep->p<<endl;
      }
-       std::cout<<"Cost: "<<0.5*(fvec.transpose()*fvec)<<endl;
+     doep->J = 0.5*(fvec.squaredNorm());//#TODO Directly from  LevinBergMarquadt if possible
+     //getchar();
      return 0;
    }
   };
@@ -223,7 +228,7 @@ struct Functor
   using namespace Eigen;
   
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz, typename T1, int _nx1> 
-    GnDoep1<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1>::GnDoep1(System<T, _nx, _nu, _np> &sys, Sensor<T1, _nx1, _nu, _np, Tz, _nz> &sensor,
+    GnDoep<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1>::GnDoep(System<T, _nx, _nu, _np> &sys, Sensor<T1, _nx1, _nu, _np, Tz, _nz> &sensor,
                                                 LqSensorCost<T, _nx, _nu, _np, _ng, Tz, _nz> &cost,
                                                 vector<double> &ts, 
                                                 vector<T> &xs, 
@@ -245,7 +250,7 @@ struct Functor
     }
   
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz, typename T1, int _nx1> 
-    GnDoep1<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1>::~GnDoep1()
+    GnDoep<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1>::~GnDoep()
     {
       delete lm;
       delete numDiff;
@@ -253,7 +258,7 @@ struct Functor
     }  
   
   template <typename T, int _nx, int _nu, int _np, int _ng, typename Tz, int _nz, typename T1, int _nx1> 
-    void GnDoep1<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1>::Iterate() {
+    void GnDoep<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1>::Iterate() {
 
     if (!lm) {
       functor = new GnCost<T, _nx, _nu, _np, _ng, Tz, _nz, T1, _nx1>(inputs, values);
@@ -267,6 +272,10 @@ struct Functor
 
       const int &np = this->sys.P.n;
       s = this->p;//Set the system parameters to initial guess
+
+      lm->parameters.maxfev = 1e6;//Maximum nof evaluations is very high
+      info = lm->minimizeInit(s);
+      cout <<"info="<<info <<endl;
     }
 
     /*
@@ -277,7 +286,7 @@ struct Functor
     */
 
     //    lm.parameters.maxfev=10000;
-    info = lm->minimize(s);
+    info = lm->minimizeOneStep(s);
     
     cout <<"info="<<info <<endl;
     // check return values

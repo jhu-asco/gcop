@@ -21,8 +21,8 @@ namespace gcop {
    * Author2: Gowtham Garimella
    */
   template <typename T, 
-    int nx, 
-    int nu,
+    int nx = Dynamic, 
+    int nu = Dynamic,
     int np = Dynamic> class UniformSplineTparam : public Tparam<T, nx, nu, np> {
     
     typedef Matrix<double, nx, 1> Vectornd;
@@ -103,9 +103,9 @@ namespace gcop {
     UniformSplineTparam<T, nx, nu, np>::UniformSplineTparam(System<T, nx, nu, np> &sys, const VectorXd &tks, int degree) :  Tparam<T, nx, nu, np>(sys, (tks.size()+degree-1)*(sys.U.n)),degree(degree), tks(tks) {
 
       assert(tks.size() >=2);//atleast 1 segments for which above constructor size is valid
-      cout<<"Degree: "<<degree<<endl;
+      //cout<<"Degree: "<<degree<<endl;
       
-      cout<<"tks: "<<tks.transpose()<<endl;
+      //cout<<"tks: "<<tks.transpose()<<endl;
   }
 
   template <typename T, int nx, int nu, int np> 
@@ -114,6 +114,7 @@ namespace gcop {
                                              const vector<T> &xs, 
                                              const vector<Vectorcd> &us,
                                              const Vectormd *p) {
+      s.resize(this->ntp);
       //Find control points(uks) given us
       int nofcontrolpoints = (degree + this->tks.size() - 1);
       int tks_index = 0;
@@ -146,7 +147,7 @@ namespace gcop {
       //cout<<"A: "<<endl<<A<<endl;
       //cout<<"Asquare: "<<endl<<Asquare<<endl;
       //getchar();
-      for(int ind = 0; ind < nu; ind++)
+      for(int ind = 0; ind < (this->sys.U.n); ind++)
       {
         for(int uind = 0; uind < us.size(); uind++)
         {
@@ -160,7 +161,7 @@ namespace gcop {
         //Copy the elements back into vector s:
         for(int sind = 0; sind < nofcontrolpoints; sind++)
         {
-          s(sind*nu + ind) = b(sind);
+          s(sind*(this->sys.U.n) + ind) = b(sind);
         }
       }
       cout<<"s: "<<s.transpose()<<endl;
@@ -202,6 +203,12 @@ namespace gcop {
                                                   const VectorXd &s,
                                                   Vectormd *p) {
     assert(s.size() == (degree + this->tks.size() - 1)*(this->sys.U.n));
+    //cout<<"s.size(): "<<s.size()<<endl;
+    //cout<<"tks.size(): "<<tks.size()<<endl;
+    //cout<<"degree: "<<degree<<endl;
+    //cout<<"sys.U.n: "<<(this->sys.U.n)<<endl;
+    //cout<<"s: "<<s.transpose()<<endl;
+    //getchar();
 
     this->sys.Reset(xs[0],ts[0]);
     int tks_index = 0;
@@ -221,7 +228,9 @@ namespace gcop {
       for(int degree_count = 0; degree_count <= degree; degree_count++)
       {
         //us[i] += basis[degree_count]*s.segment((tks_index+degree_count)*(this->sys.U.n), this->sys.U.n);
-        us[i] += basis[degree_count]*s.segment((tks_index+degree_count)*nu,nu);
+        //cout<<"degree_count: "<<degree_count<<endl;
+        //cout<<"s segment: "<<(tks_index+degree_count)*(this->sys.U.n)<<endl;
+        us[i] += basis[degree_count]*s.segment((tks_index+degree_count)*(this->sys.U.n),(this->sys.U.n));
       }
 
     //  cout<<"ts["<<i<<"]: "<<ts[i]<<endl;
@@ -230,8 +239,8 @@ namespace gcop {
       //cout<<"Xs["<<(i+1)<<"]"<<xs[i+1].transpose()<<endl;//#DEBUG
       //cout<<"us["<<i<<"]"<<us[i].transpose()<<endl;
     }
-    return true;
     //getchar();
+    return true;
   }
 }
 
