@@ -11,6 +11,7 @@ set(sources
     mbstspace.cc
     point3dmanifold.cc
     uuvmanifold.cc
+    gcarmanifold.cc
 #airmmanifold.cc
 )
 
@@ -31,5 +32,6 @@ set(headers
     point3dmanifold.h
     rn.h
     uuvmanifold.h
+    gcarmanifold.h
 #airmmanifold.h
 )

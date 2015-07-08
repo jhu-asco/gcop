@@ -16,6 +16,9 @@ if (BUILD_TESTS)
 	add_executable(gunicycletest gunicycletest.cc)
 	target_link_libraries(gunicycletest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(gcartest gcartest.cc)
+	target_link_libraries(gcartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
 	add_executable(body2dtest body2dtest.cc)
 	target_link_libraries(body2dtest  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 

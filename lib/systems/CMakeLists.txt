@@ -29,6 +29,7 @@ set(sources
     body2dtrack.cc
     body3dtrack.cc
     kinrccar.cc
+    gcar.cc
 )
 
 set(headers
@@ -73,6 +74,7 @@ set(headers
     kinrccar.h
     kinrccarpath.h
     creator.h
+    gcar.h
 )
 
 add_subdirectory (manifolds)
