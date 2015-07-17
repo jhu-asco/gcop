@@ -23,9 +23,9 @@ namespace gcop {
   typedef Matrix<double, 6, 6> Matrix6d;
   typedef Matrix<double, 6, 15> Matrix6x15d;
   typedef Matrix<double, 6, Dynamic> Matrix6Xd;
-  
+
   /**
-   * An INS system
+   * A basic Inertial Navigation System definition of dynamics
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
@@ -46,10 +46,12 @@ namespace gcop {
   double sv; ///< gyro bias white noise stdev (spectral density)
   double su; ///< gyro bias rate-of-change white noise stdev (spectral density)
   double sa; ///< acceleration bias rate-of-change white noise stdev (spectral density)  
-
   double sra; ///< acceleration measurement noise
 
   Vector3d g0;   ///< gravity vector
+
+  bool semiImplicit; ///< whether to use a more accurate semi-implicit update (true by default)
+
   };  
 }
 
