@@ -5,3 +5,7 @@
 3.) If using Bullet make sure you compile bullet with Double Precision (USE_BULLET) on since optimization loses precision if used with float
 
 4.) Use install.bash for compiling the package
+
+5.) Required Dependencies: DSL (https://git.lcsr.jhu.edu/ggarime1/dsl) GSL (libgsl0-dev) Eigen3 (libeigen3-dev)
+
+6.) Optional Dependencies: OpenCV, OpenGL (For bins)
