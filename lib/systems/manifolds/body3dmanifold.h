@@ -28,7 +28,11 @@ namespace gcop {
 
     void dtau(Matrix12d &M, const Vector12d &v);
 
+    void dtauinv(Matrix12d &M, const Vector12d &v);
+
     void Adtau(Matrix12d &M, const Vector12d &v);
+
+    bool useCay;   ///< whether to use the Cayley map instead of exponential
 
   private:
     Body3dManifold();

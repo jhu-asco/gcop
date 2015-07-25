@@ -29,11 +29,6 @@ void solver_process(Viewer* viewer)
 
   Uuv<> sys;
 
-  // create underactuation
-  //  sys.U.lb[5] = -.0001;
-  //  sys.U.ub[5] = .0001;
-  //  sys.U.bnd = true;
-
   params.GetInt("N", N);  
   params.GetDouble("tf", tf);
   params.GetInt("iters", iters);
@@ -42,6 +37,14 @@ void solver_process(Viewer* viewer)
   params.GetVector6d("H", sys.d);
   params.GetVector3d("b", sys.b);
   params.GetVector3d("g", sys.fp);
+
+  // create underactuation
+  params.GetVector6d("ulb", sys.U.lb);
+  params.GetVector6d("uub", sys.U.ub);
+  sys.U.bnd = true;
+
+  //  sys.U.lb[4] = -.0001;
+  //  sys.U.ub[4] = .0001;
 
   double h = tf/N;
 

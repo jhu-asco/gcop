@@ -1,3 +1,11 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #ifndef GCOP_PDDP_H
 #define GCOP_PDDP_H
 
@@ -10,6 +18,11 @@
 
 namespace gcop {
   
+  /**
+   * Parameter-dependent differential dynamic programming 
+   *
+   * Authors: Marin Kobilarov, Matthew Sheckells
+   */
   template <typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic> 
     class PDdp : public Ddp<T, n, c, np> {
     

@@ -50,6 +50,16 @@ void Body2dManifold::dtau(Matrix6d &M, const Vector6d &v)
   M(2,1) = s; M(2,2) = c;
 }
 
+void Body2dManifold::dtauinv(Matrix6d &M, const Vector6d &v)
+{
+  M.setIdentity();
+  double c = cos(-v[0]);
+  double s = sin(-v[0]);
+  M(1,1) = c; M(1,2) = -s;
+  M(2,1) = s; M(2,2) = c;
+}
+
+
 void Body2dManifold::Adtau(Matrix6d &M, const Vector6d &v)
 {
   const double c = cos(v[0]);
@@ -64,4 +74,5 @@ void Body2dManifold::Adtau(Matrix6d &M, const Vector6d &v)
   M(2,0) = -x;
   M(2,1) = s;
   M(2,2) = c;
+
 }

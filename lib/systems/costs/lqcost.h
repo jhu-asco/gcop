@@ -4,6 +4,7 @@
 #include <limits>
 #include "lscost.h"
 #include <iostream>
+#include <type_traits>
 
 namespace gcop {
   
@@ -95,6 +96,7 @@ namespace gcop {
 
     Vectornd dx;      ///< state error (as a tangent vector)
     Vectorcd du;      ///< control error
+    Matrixnd D;       ///< used for computing jacobians
 
     };
   
@@ -112,6 +114,7 @@ namespace gcop {
       Rsqrt.resize(sys.U.n, sys.U.n);
       dx.resize(sys.X.n);
       du.resize(sys.U.n);
+      D.resize(sys.X.n, sys.X.n);
     }
 
     Q.setZero();
@@ -120,6 +123,8 @@ namespace gcop {
     R.setIdentity();
 
     UpdateGains();
+
+    D.setIdentity();
 
     xds = 0;
     uds = 0;
@@ -234,15 +239,28 @@ namespace gcop {
         return std::numeric_limits<double>::max();
       }    
 
-      if (Lx)
+      if (Lx) {
         if (diag)
           *Lx = Qf.diagonal().cwiseProduct(dx);
         else
           *Lx = Qf*dx;
-      
-      if (Lxx)
-        *Lxx = Qf;
-      
+        
+        if (!std::is_same<T, Matrix<double, _nx, 1> >::value) {
+          this->sys.X.dtauinv(D, -dx);
+          *Lx = D.transpose()*(*Lx);
+        }
+
+      }
+      if (Lxx) {
+        if (!std::is_same<T, Matrix<double, _nx, 1> >::value) {
+          assert(Lx); // Lx should also be requested, so D is already computed
+          // sys.X.dtauinv(D, -dx);
+          *Lxx = D.transpose()*Qf*D;
+        } else {
+          *Lxx = Qf;      
+        }
+      }
+
       if (Lu)
         Lu->setZero();
       if (Luu)
@@ -275,15 +293,29 @@ namespace gcop {
         du = u;
       }
 
-      if (Lx)
+      if (Lx) {
         if (diag)
           *Lx = Q.diagonal().cwiseProduct(h*dx);
         else
           *Lx = Q*(h*dx);
 
-      if (Lxx) 
-        *Lxx = h*Q;
-      
+        // if not Euclidean space
+        if (!std::is_same<T, Matrix<double, _nx, 1> >::value) {
+          this->sys.X.dtauinv(D, -dx);
+          *Lx = D.transpose()*(*Lx);
+        }
+
+      }
+      if (Lxx) {
+        if (!std::is_same<T, Matrix<double, _nx, 1> >::value) {
+          assert(Lx); // Lx should also be requested, so D is already computed
+          //          sys.X.dtauinv(D, -dx);
+          *Lxx = h*(D.transpose()*Q*D);
+        } else {          
+          *Lxx = h*Q;
+        }
+      }
+
       if (Lu)
         if (diag)
           *Lu = R.diagonal().cwiseProduct(h*du);

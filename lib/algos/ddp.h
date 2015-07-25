@@ -1,3 +1,11 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #ifndef GCOP_DDP_H
 #define GCOP_DDP_H
 
@@ -10,6 +18,11 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
   
+  /**
+   * Differential Dynamic Programming
+   *
+   * Author: Marin Kobilarov 
+   */
   template <typename T, int nx = Dynamic, int nu = Dynamic, int np = Dynamic> class Ddp :
     public Docp<T, nx, nu, np> {
     

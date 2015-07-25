@@ -36,7 +36,14 @@ namespace gcop {
 
     void dtau(Matrix12d &M, const Vector12d &v);
 
+    void dtauinv(Matrix12d &M, const Vector12d &v);
+
     void Adtau(Matrix12d &M, const Vector12d &v);
+
+    char tauType;                  ///< type of tau map (default is TAU_EXP)
+
+    static const int TAU_EXP = 1;  ///< exponential map
+    static const int TAU_CAY = 2;  ///< Cayley map
 
   private:
     UuvManifold();

@@ -272,6 +272,20 @@ void SE3::dcay(Matrix6d &M, const Vector6d &v) const
   M(5,5) = (v2*v2 + 4)/n;
 }
 
+void SE3::dexpinv(Matrix6d &M, const Vector6d &v) const
+{
+  Matrix6d vh;
+  SE3::Instance().ad(vh, v);
+  M = Matrix6d::Identity() - vh/2 + (vh*vh)/12;
+}
+
+void SE3::dexp(Matrix6d &M, const Vector6d &v) const
+{
+  Matrix6d vh;
+  SE3::Instance().ad(vh, v);
+  M = Matrix6d::Identity() + vh/2 + (vh*vh)/6;
+}
+
 void SE3::q2g(Matrix4d &g, const Vector6d &q) const
 {
   Matrix3d R;

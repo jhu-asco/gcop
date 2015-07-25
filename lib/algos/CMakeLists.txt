@@ -22,6 +22,7 @@ set(headers
       systemce.h
       aspsa.h
       spsa.h
+      visins.h
 )
 
 set(sources
@@ -34,6 +35,7 @@ set(sources
       mbscontroller.cc
       point3dcontroller.cc
       gavoidcontroller.cc
+      visins.cc
 )
 
 IF (DSL_FOUND AND PQP_FOUND)

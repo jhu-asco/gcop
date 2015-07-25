@@ -9,14 +9,8 @@ namespace gcop {
   
   using namespace Eigen;
 
-  //  typedef Insgps<6> FullInsgps;
-  //  typedef Insgps<3> AccInsgps;
-  
   /**
-   * General sensor model 
-   *
-   * Subclasses should provide implementation for the 
-   * sensor function ()
+   * GPS sensor 
    *
    * Author: Marin Kobilarov marin(at)jhu.edu
    */
@@ -39,7 +33,6 @@ namespace gcop {
                   Matrix3x15d *dydx = 0, Matrixrcd *dydu = 0,
                   Matrixrmd *dydp = 0) {
     
-    //    y.template head<3>() = x.first.transpose()*a0 - ba;
     y = x.p;
     
     if (dydx){

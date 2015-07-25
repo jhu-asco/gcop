@@ -28,6 +28,8 @@ set(sources
   snakeview.cc
   demview.cc
   airplaneview.cc
+  insview.cc
+  visinsview.cc
 #  normal2dview.cc
 )
 
@@ -67,4 +69,6 @@ set(headers
   airplaneview.h
   normal2dview.h
   systemceview.h
+  insview.h
+  visinsview.h
 )

@@ -76,7 +76,16 @@ namespace gcop {
     Matrix<double, 3, Dynamic> fp;  // force Jacobian with respect to p
     
     if (p && C)
-    fp.resize(3, p->size());
+      fp.resize(3, p->size());
+    
+    const double &w = xa.second[0];
+    const double &vx = xa.second[1];
+    const double &vy = xa.second[2];
+
+    // biases forces b
+    // startig with the coriolis/centripetal term assuming I=diag(J,m,m)
+    Vector3d b(0, I[1]*w*vy, -I[1]*w*vx);
+    //    Vector3d b(0, 0, 0);
 
     if (force) {
       Vector3d f;
@@ -84,10 +93,10 @@ namespace gcop {
                  A ? &fx : 0,
                  B ? &fu : 0,
                  C ? &fp : 0);
-      xb.second = xa.second + h*f;
-    } else {
-      xb.second = xa.second;
+      b = b + f;
     }
+    xb.second = xa.second + h*b.cwiseQuotient(I);
+    
     
     Vector3d hxib = h*xb.second;
     
@@ -98,7 +107,8 @@ namespace gcop {
     se2.cay(dg, hxib);
     xb.first = xa.first*dg;
 
-    if (A) {
+    if (A) {      
+      /*
       se2.cay(dg, -hxib);
       Matrix3d Adm;
       se2.Ad(Adm, dg);
@@ -109,18 +119,22 @@ namespace gcop {
         A->bottomRows<3>() = h*fx;
       }
       A->bottomRightCorner<3,3>() += Matrix3d::Identity();
+      */
     }
+
     
     if (B) {
+      /*
       // A should've been called too
       assert(A);
       
       B->topRows(3) = (h*h)*(dg*fu);
-      //  B->bottomRows(3) = (Vector3d(h, h, h).cwiseQuotient(I)).asDiagonal()*fu;
       B->bottomRows(3) = h*fu;      
+      */
     }
 
     if (C) {
+      /*
       if (p) {
         assert(C->cols() == p->size() && C->rows() == 6); 
       }
@@ -131,6 +145,7 @@ namespace gcop {
       } else {
         C->setZero();
       }
+      */
     }
     
   return 1;
