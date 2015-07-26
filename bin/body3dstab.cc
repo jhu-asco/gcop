@@ -25,15 +25,15 @@ void solver_process(Viewer* viewer)
 
   Body3d<6> sys;
 
-  Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
+  Body3dState xf;
+  xf.Clear();
 
   // states
   vector<Body3dState> xs(N+1);
   Vector3d e0(1.2, -2, 1);
-  SO3::Instance().exp(xs[0].first, e0);
-  xs[0].second[0] = 5;
-  xs[0].second[1] = 5;
-  xs[0].second[2] = 5;
+  xs[0].Clear();
+  SO3::Instance().exp(xs[0].R, e0);
+  xs[0].p << 5, 5, 5;
   
   //  Body3dDisk disk(Vector3d(-2.5,-2.5), 2, 0);
   //  DiskCost dcost(sys, tf, disk);

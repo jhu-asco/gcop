@@ -1,3 +1,12 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+
 #ifndef GCOP_UUVMANIFOLD_H
 #define GCOP_UUVMANIFOLD_H
 
@@ -13,14 +22,25 @@ namespace gcop {
   typedef Matrix<double, 12, 1> Vector12d;
   typedef Matrix<double, 12, 12> Matrix12d;
   
+
+  /**
+   *  State on SE(3)\times R^6
+   *
+   */
   struct UuvState {
     UuvState() {g.setIdentity(); v.setZero(); }
     virtual ~UuvState() {};
 
-    Matrix4d g;  ///< SE(3)configuration
+    Matrix4d g;  ///< SE(3) configuration
     Vector6d v;  ///< body-fixed velocities
   };
   
+
+  /**
+   * Left-trivialized TSE(3) manifold
+   *
+   * Author: Marin Kobilarov
+   */
   class UuvManifold : public Manifold<UuvState, 12> {
     
   public:

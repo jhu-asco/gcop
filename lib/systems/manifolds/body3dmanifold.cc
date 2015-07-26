@@ -1,3 +1,11 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #include <limits>
 #include "body3dmanifold.h"
 #include "so3.h"
@@ -22,8 +30,8 @@ void Body3dManifold::Lift(Vector12d &v,
                           const Body3dState &xa,
                           const Body3dState &xb) 
 {
-  const Matrix3d &Ra = xa.first;  
-  const Matrix3d &Rb = xb.first;
+  const Matrix3d &Ra = xa.R;  
+  const Matrix3d &Rb = xb.R;
   
   Vector3d eR;
 
@@ -33,7 +41,9 @@ void Body3dManifold::Lift(Vector12d &v,
     SO3::Instance().log(eR, Ra.transpose()*Rb);
   
   v.head<3>() = eR;
-  v.tail<9>() = xb.second - xa.second;
+  v.segment<3>(3) = xb.p - xa.p;
+  v.segment<3>(6) = xb.w - xa.w;
+  v.tail<3>() = xb.v - xa.v;
 }
  
 
@@ -48,8 +58,10 @@ void Body3dManifold::Retract(Body3dState &xb,
   else
     SO3::Instance().exp(dR, v.head<3>());
   
-  xb.first = xa.first*dR;
-  xb.second = xa.second + v.tail<9>();
+  xb.R = xa.R*dR;
+  xb.p = xa.p + v.segment<3>(3);
+  xb.w = xa.w + v.segment<3>(6);
+  xb.v = xa.v + v.tail<3>();
 }
 
 

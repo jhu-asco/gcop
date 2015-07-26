@@ -19,7 +19,7 @@ namespace gcop {
   using namespace Eigen;
   
   template <int c = 6>
-    class Body3dView : public SystemView<pair<Matrix3d, Vector9d>, Matrix<double, c, 1> > {
+    class Body3dView : public SystemView<Body3dState, Matrix<double, c, 1> > {
 
     typedef Matrix<double, c, 1> Vectorcd;
 
@@ -39,16 +39,16 @@ namespace gcop {
      * @param xs trajectory
      */
     Body3dView(const Body3d<c> &sys,
-               vector<pair<Matrix3d, Vector9d> > *xs,
+               vector<Body3dState> *xs,
                vector<Vectorcd> *us = 0);
     
     virtual ~Body3dView();
     
   
-    virtual void Render(const pair<Matrix3d, Vector9d> *x,
+    virtual void Render(const Body3dState *x,
                         const Vectorcd *u = 0);
     
-    void Render(const vector<pair<Matrix3d, Vector9d> > *xs, 
+    void Render(const vector<Body3dState > *xs, 
                 const vector<Vectorcd> *us = 0, 
                 bool rs = true,
                 int is = -1, int ie = -1,
@@ -69,7 +69,7 @@ using namespace Eigen;
 
 template<int c>
 Body3dView<c>::Body3dView(const Body3d<c> &sys) : 
-  SystemView<pair<Matrix3d, Vector9d>, Matrix<double, c, 1> >("Body3d"), sys(sys)
+  SystemView<Body3dState, Matrix<double, c, 1> >("Body3d"), sys(sys)
 {
   this->rgba[0] = .5;
   this->rgba[1] = .5;
@@ -82,9 +82,9 @@ Body3dView<c>::Body3dView(const Body3d<c> &sys) :
 
 template<int c>
 Body3dView<c>::Body3dView(const Body3d<c> &sys,
-                          vector< pair<Matrix3d, Vector9d> > *xs,
+                          vector< Body3dState> *xs,
                           vector<Vectorcd> *us) : 
-SystemView<pair<Matrix3d, Vector9d>, Matrix<double, c, 1> >("Body3d", xs, us), sys(sys)
+SystemView<Body3dState, Matrix<double, c, 1> >("Body3d", xs, us), sys(sys)
 {
   this->rgba[0] = 0.5;
   this->rgba[1] = 0.5;
@@ -102,13 +102,13 @@ Body3dView<c>::~Body3dView()
 }
 
 template<int c>
-void Body3dView<c>::Render(const pair<Matrix3d, Vector9d> *x,
+void Body3dView<c>::Render(const Body3dState *x,
                            const Vectorcd *u)
 {
   //   glColor4f(1,0.5,0.5,0.5);
   
   glPushMatrix();
-  Transform(x->first, x->second.head<3>());
+  Transform(x->R, x->p);
   glScaled(sys.ds[0], sys.ds[1], sys.ds[2]); 
   glutSolidCube(1);
   glPopMatrix();
@@ -116,7 +116,7 @@ void Body3dView<c>::Render(const pair<Matrix3d, Vector9d> *x,
 
 
 template<int c>
-void Body3dView<c>::Render(const vector<pair<Matrix3d, Vector9d> > *xs, 
+void Body3dView<c>::Render(const vector<Body3dState> *xs, 
                            const vector<Vectorcd > *us, 
                            bool rs, 
                            int is, int ie,
@@ -139,8 +139,8 @@ void Body3dView<c>::Render(const vector<pair<Matrix3d, Vector9d> > *xs,
   glLineWidth(this->lineWidth);
   glBegin(GL_LINE_STRIP);
   for (int i = is; i <= ie; i+=dit) {
-    const pair<Matrix3d, Vector9d> &x = (*xs)[i];
-    glVertex3d(x.second[0], x.second[1], x.second[2]);
+    const Body3dState &x = (*xs)[i];
+    glVertex3d(x.p[0], x.p[1], x.p[2]);
   }
   glEnd();
   glLineWidth(1);

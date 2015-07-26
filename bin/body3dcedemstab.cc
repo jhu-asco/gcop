@@ -73,28 +73,26 @@ void solver_process(Viewer* viewer)
   params.GetInt("iters", iters);
 
   // cost 
-  Body3dState x0(Matrix3d::Identity(), Vector9d::Zero());
-  x0.second[0] = 46;
-  x0.second[1] = 82;
-  x0.second[2] = 5;
+  Body3dState x0;
+  x0.Clear();
+  x0.p << 46, 82, 5;
 
-  Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
-  xf.second[0] = 160;
-  xf.second[1] = 125;  
-  xf.second[2] = 5;
+  Body3dState xf;
+  xf.Clear();
+  xf.p << 160, 125, 5;
 
   VectorXd qv0(12);
   params.GetVectorXd("x0", qv0);  
-  SO3::Instance().q2g(x0.first, qv0.head(3));    
-  x0.second = qv0.segment<9>(3);
+  SO3::Instance().q2g(x0.R, qv0.head(3));    
+  x0.p = qv0.segment<3>(3); x0.w = qv0.segment<3>(6); x0.v = qv0.tail<3>(); 
 
   vector<Body3dState> xs(N+1);
   xs[0] = x0;
 
   VectorXd qvf(12);
   params.GetVectorXd("xf", qvf);  
-  SO3::Instance().q2g(xf.first, qvf.head(3));    
-  xf.second = qvf.segment<9>(3);
+  SO3::Instance().q2g(xf.R, qvf.head(3));    
+  xf.p = qvf.segment<3>(3); xf.w = qvf.segment<3>(6); xf.v = qvf.tail<3>(); 
   
   float camParams[5];
   if (viewer) {

@@ -27,9 +27,12 @@ Params params;
 
 void projectmanifold(const Body3dState &bodystate, InsState &pstate)
 {
-  pstate.R = bodystate.first;
-  pstate.p = bodystate.second.head<3>();
-  pstate.v = bodystate.second.segment<3>(5);
+  pstate.R = bodystate.R;
+  pstate.p = bodystate.p;;
+  
+  //  pstate.v = bodystate.second.segment<3>(5);  // @mk: why index is 5, shouldn't it be 6 ?
+  pstate.v = bodystate.v;
+    
   //bg, ba do not care 
 }
 
@@ -50,7 +53,8 @@ void solver_process(Viewer* viewer)
   //Add sensor
   Sensor<InsState, 15, 6> imugps(InsManifold::Instance());//Create a default sensor which just copies the InsManifold over
 
-  Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
+  Body3dState xf;
+  xf.Clear();
 
   //  Body3dCost<> cost(tf, xf);
   //<Tx, nx, nu, nres, np, Tz, nz>
@@ -79,11 +83,10 @@ void solver_process(Viewer* viewer)
   // states
   vector<Body3dState> xs(N+1);
   Vector3d e0(1.2, -2, 1);
-  SO3::Instance().exp(xs[0].first, e0);
-  xs[0].second[0] = 5;
-  xs[0].second[1] = 5;
-  xs[0].second[2] = 5;
-  xs[0].second.tail<6>() = Vector6d::Zero();//Initialize the rem to 0
+  SO3::Instance().exp(xs[0].R, e0);
+  xs[0].p <<  5, 5, 5;
+  xs[0].w.setZero();
+  xs[0].v.setZero();
 
   // controls 
   vector<Vector6d> us(N);

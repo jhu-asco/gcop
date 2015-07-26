@@ -20,8 +20,8 @@ if (BUILD_TESTS)
 	target_link_libraries(gcartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 IF (CERES_FOUND)
-	add_executable(visest visest.cc)
-	target_link_libraries(visest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+#	add_executable(visest visest.cc)
+#	target_link_libraries(visest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 ENDIF (CERES_FOUND)
 
 	add_executable(body2dtest body2dtest.cc)

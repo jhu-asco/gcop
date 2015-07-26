@@ -88,9 +88,10 @@ void heli_process(Viewer* viewer)
   sys.symp = false;
 
   // cost 
-  Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
-  xf.second[0] = .5;
-  xf.second[2] = .4;
+  Body3dState xf;
+  xf.Clear();
+  xf.p << .5, 0, .4;
+
   Body3dCost<4> cost(sys, tf, xf);  
   cost.Qf(0,0) = .1; cost.Qf(1,1) = .1; cost.Qf(2,2) = .1;
   cost.Qf(3,3) = 5; cost.Qf(4,4) = 5; cost.Qf(5,5) = 5;
@@ -107,10 +108,8 @@ void heli_process(Viewer* viewer)
 
   // states
   vector<Body3dState> xs(N+1);
-  xs[0].first.setIdentity();
-  xs[0].second[0] = -5;
-  xs[0].second[1] = 0;
-  xs[0].second[2] = 2;
+  xs[0].Clear();
+  xs[0].p << -5, 0, 2;
 
   // initial controls (e.g. hover at one place)
   vector<Vector4d> us(N);
@@ -146,7 +145,7 @@ void heli_process(Viewer* viewer)
     us.back() = us[us.size()-2];
 
     ddp.Update();
-    cout << xs[0].first << " " << xs[0].second  << endl;
+    cout << xs[0].R << " " << xs[0].p  << endl;
     cout << "Moved forward" << endl;
     //    getchar();
   }

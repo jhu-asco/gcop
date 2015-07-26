@@ -37,7 +37,6 @@ void solver_process(Viewer* viewer)
   vector<Body3dState> xs(N+1);
 
   // cost 
-  Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
 
 
   if (viewer)
@@ -49,21 +48,13 @@ void solver_process(Viewer* viewer)
   //  dem.Dilate(5);
   //  dem.Convolve(.3);
   Body3dState x0;
-
-  x0.first.setIdentity();
-  x0.second[0] = 95;
-  x0.second[1] = 87;
-  x0.second[2] = 3;
-
-  //  xf.second[0] = 165;  
-  //  xf.second[1] = 130;  
-  xf.second[0] = 110;
-  xf.second[1] = 120;  
-
-  xf.second[2] = 3;
-
+  x0.Clear();
+  x0.p << 95, 87, 3;
   xs[0] = x0;
 
+  Body3dState xf;
+  xf.Clear();  
+  xf.p << 110, 120, 3;
 
   DemView dv(dem2);
   //  dv.wire = true;
@@ -132,7 +123,7 @@ void solver_process(Viewer* viewer)
   for (int j = 0; j <M; ++j) {    
     sys.fp << .2*(RND-.5), .2*(RND-.5), 0;
     
-    xs[0].second.head(3) = x0.second.head(3) + 2*Vector3d(RND, RND, RND);
+    xs[0].p = x0.p + 2*Vector3d(RND, RND, RND);
 
     vector<Vector6d> us(N);
     for (int i = 0; i < N; ++i) {
@@ -162,18 +153,18 @@ void solver_process(Viewer* viewer)
     for (int  i = 0; i < N; ++i) {
       Vector4d hu;
       hu.head(3) = us[0].head(3);   
-      hu[3] = (xs[0].first*us[0].tail(3) + Vector3d(0,0,9.81*sys.m)).norm();
+      hu[3] = (xs[0].R*us[0].tail(3) + Vector3d(0,0,9.81*sys.m)).norm();
       //  hus[i] = hu;
       
       // required control force in spatial frame 
-      Vector3d f = xs[0].first*us[0].tail(3) + Vector3d(0,0,9.81*sys.m);
+      Vector3d f = xs[0].R*us[0].tail(3) + Vector3d(0,0,9.81*sys.m);
       Vector3d bz = f/f.norm();
       Vector3d by = bz.cross(Vector3d(1,0,0));
       Vector3d bx = by.cross(bz);
       trajs[j][i] = xs[i];  
-      trajs[j][i].first.col(0) = bx;
-      trajs[j][i].first.col(1) = by;
-      trajs[j][i].first.col(2) = bz;
+      trajs[j][i].R.col(0) = bx;
+      trajs[j][i].R.col(1) = by;
+      trajs[j][i].R.col(2) = bz;
     }
     
     //    

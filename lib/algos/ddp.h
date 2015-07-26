@@ -433,49 +433,33 @@ namespace gcop {
           this->sys.X.Retract(xn, xn, dx);
         } else {
           double h = this->ts[k+1] - t;
-					//Adding nan catching :
-					try
-					{
-						this->sys.Step(xn, un, h, this->p);
-					}
-					catch(std::exception &e)
-					{
-						//[DEBUG] Statement
-						std::cerr << "exception caught: " << e.what() << '\n';
-						std::cout<<" Iteration counter: "<<k<<endl;
-						std::cout<<" u: "<<u.transpose()<<endl;
-						std::cout<<" du: "<<du.transpose()<<endl;
-						//More debug statements:
-						//std::cout<<" a: "<<a<<"\t ku: "<<ku.transpose()<<"\t dx: "<<dx.transpose()<<"\n kux: \n"<<Kux<<endl;
-						//[Culprit dx]
-
-						throw std::runtime_error(std::string("Nan observed"));
-						return;
-					}
-					//cout<<"dx: "<<dx.transpose()<<endl;//[DEBUG]//Previous iteration dx
-					//std::cout<<" du: "<<du.transpose()<<endl;//[DEBUG]
+          //Adding nan catching :
+          try {
+            this->sys.Step(xn, un, h, this->p);
+          }
+          catch(std::exception &e)
+            {
+              //[DEBUG] Statement
+              std::cerr << "exception caught: " << e.what() << '\n';
+              std::cout<<" Iteration counter: "<<k<<endl;
+              std::cout<<" u: "<<u.transpose()<<endl;
+              std::cout<<" du: "<<du.transpose()<<endl;
+              //More debug statements:
+              //std::cout<<" a: "<<a<<"\t ku: "<<ku.transpose()<<"\t dx: "<<dx.transpose()<<"\n kux: \n"<<Kux<<endl;
+              //[Culprit dx]
+              
+              throw std::runtime_error(std::string("Nan observed"));
+              return;
+            }
+          //cout<<"dx: "<<dx.transpose()<<endl;//[DEBUG]//Previous iteration dx
+          //std::cout<<" du: "<<du.transpose()<<endl;//[DEBUG]
+          
           this->sys.X.Lift(dx, this->xs[k+1], xn);
-					/*if((k == 29) || (k == 30) || (k == 31))
-					{
-						//cout dx:
-						cout<<"dx[ "<<(k+1)<<"]:\t"<<dx.transpose()<<endl;
-						cout<<"un[ "<<(k+1)<<"]:\t"<<un.transpose()<<endl;
-						cout<<"du[ "<<k<<"]:\t"<<du.transpose()<<endl;
-						cout<<"Printing states ["<<(k+1)<<"]"<<endl;
-						this->sys.print(this->xs[k+1]);
-						cout<<"Printing xn: "<<endl;
-						this->sys.print(xn);
-						if(k == 31)
-						{
-							//exit(0);
-						}
-					}
-					*/
-					//cout<<"xs[ "<<(k+1)<<"]:\t"<<this->xs[k+1]<<endl;
-					//cout<<"un[ "<<(k+1)<<"]:\t"<<un.transpose()<<endl;
+          //cout<<"xs[ "<<(k+1)<<"]:\t"<<this->xs[k+1]<<endl;
+          //cout<<"un[ "<<(k+1)<<"]:\t"<<un.transpose()<<endl;
           
           //          cout << xn.gs[0] << " " << xn.r << " " << xn.vs[0] << " " << xn.dr << endl;
-
+          
           //          cout << this->xs[k+1].gs[0] << " " << this->xs[k+1].r << " " << this->xs[k+1].vs[0] << " " << this->xs[k+1].dr << endl;
           assert(!std::isnan(dx[0]));
         }

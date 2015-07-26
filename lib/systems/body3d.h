@@ -258,12 +258,12 @@ template<int c>  Body3d<c>::~Body3d()
     
     SO3 &so3 = SO3::Instance();
     
-    const Matrix3d &Ra = xa.first;  
-    const Vector3d &pa = xa.second.head<3>();
-    const Vector3d &wa = xa.second.segment<3>(3);
-    const Vector3d &va = xa.second.tail<3>();
+    const Matrix3d &Ra = xa.R;  
+    const Vector3d &pa = xa.p;
+    const Vector3d &wa = xa.w;
+    const Vector3d &va = xa.v;
     
-    Matrix3d &Rb = xb.first;
+    Matrix3d &Rb = xb.R;
     
     Matrix3d Da, Db;
     
@@ -348,9 +348,9 @@ template<int c>  Body3d<c>::~Body3d()
       pb = pa + h*vb;
     }
     
-    xb.second.head<3>() = pb;
-    xb.second.segment<3>(3) = wb;
-    xb.second.tail<3>() = vb;
+    xb.p = pb;
+    xb.w = wb;
+    xb.v = vb;
 
     //    return 1;
         
@@ -411,12 +411,12 @@ template<int c>  Body3d<c>::~Body3d()
     
     SO3 &so3 = SO3::Instance();
     
-    const Matrix3d &Ra = xa.first;  
-    const Vector3d &pa = xa.second.head<3>();
-    const Vector3d &wa = xa.second.segment<3>(3);
-    const Vector3d &va = xa.second.tail<3>();
+    const Matrix3d &Ra = xa.R;
+    const Vector3d &pa = xa.p;
+    const Vector3d &wa = xa.w;
+    const Vector3d &va = xa.v;
     
-    Matrix3d &Rb = xb.first;
+    Matrix3d &Rb = xb.R;
 
     Vector3d Jwa = J.cwiseProduct(wa);
 
@@ -449,9 +449,9 @@ template<int c>  Body3d<c>::~Body3d()
       vb += h/m*((*p).tail<3>());
     }
     
-    xb.second.head<3>() = pa + h*vb;
-    xb.second.segment<3>(3) = wb;
-    xb.second.tail<3>() = vb;
+    xb.p = pa + h*vb;
+    xb.w = wb;
+    xb.v = vb;
 
     Matrix3d Jwah;
     so3.hat(Jwah, Jwa);
@@ -528,10 +528,10 @@ template<int c>  Body3d<c>::~Body3d()
 
     // Flat outputs are x,y,z, and rpy
     y.resize(6);
-    y.head<3>() = x.second.head<3>();
-    y(3) = so3.roll(x.first);
-    y(4) = so3.pitch(x.first);
-    y(5) = so3.yaw(x.first);
+    y.head<3>() = x.p;
+    y(3) = so3.roll(x.R);
+    y(4) = so3.pitch(x.R);
+    y(5) = so3.yaw(x.R);
   }
 
   template <int c>
@@ -544,16 +544,16 @@ template<int c>  Body3d<c>::~Body3d()
     VectorXd y0 = y[0];
     VectorXd y1 = y[1];
 
-    x.first.setZero();
-    x.second.setZero();
+    //    x.second.setZero();
     u.setZero();
 
-    so3.q2g(x.first, y0.tail<3>());
+    so3.q2g(x.R, y0.tail<3>());
 
-    x.second.head<3>() = y0.head<3>();
-    x.second.tail<3>() = y1.head<3>();
+    x.p = y0.head<3>();
+    x.v = y1.head<3>();
     // TODO: fill in angular velocity and controls
-    x.second(5) = y1(5);
+    x.w[0] = 0; x.w[1] = 0;
+    x.w[2] = y1(5);
   }
 }
 #endif
