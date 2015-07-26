@@ -29,7 +29,7 @@ set(sources
   demview.cc
   airplaneview.cc
   insview.cc
-  visinsview.cc
+#  visinsview.cc
 #  normal2dview.cc
 )
 
@@ -70,5 +70,5 @@ set(headers
   normal2dview.h
   systemceview.h
   insview.h
-  visinsview.h
+#  visinsview.h
 )
