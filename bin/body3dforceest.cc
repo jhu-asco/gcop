@@ -30,7 +30,6 @@ void projectmanifold(const Body3dState &bodystate, InsState &pstate)
   pstate.R = bodystate.R;
   pstate.p = bodystate.p;;
   
-  //  pstate.v = bodystate.second.segment<3>(5);  // @mk: why index is 5, shouldn't it be 6 ?
   pstate.v = bodystate.v;
     
   //bg, ba do not care 
@@ -45,7 +44,7 @@ void solver_process(Viewer* viewer)
   params.GetInt("iters", iters);
 
   int N = 20;
-  double tf = 10;
+  double tf = 2;
   double h = tf/N;
   
   Body3d<> sys;
@@ -120,6 +119,7 @@ void solver_process(Viewer* viewer)
 
   VectorXd pd(6);///<True External forces
   pd<<0,0,0.05,0,0.1,-0.1;
+  //pd<<0,0,0.05,0,0.0,0.0;
 
   
   /////Creating the Optimization problem////
