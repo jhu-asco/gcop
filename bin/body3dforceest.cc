@@ -44,7 +44,11 @@ void solver_process(Viewer* viewer)
   params.GetInt("iters", iters);
 
   int N = 20;
+  params.GetInt("N", N);
+
   double tf = 2;
+  params.GetDouble("tf", tf);
+
   double h = tf/N;
   
   Body3d<> sys;
@@ -119,6 +123,7 @@ void solver_process(Viewer* viewer)
 
   VectorXd pd(6);///<True External forces
   pd<<0,0,0.05,0,0.1,-0.1;
+  params.GetVectorXd("pd", pd); 
   //pd<<0,0,0.05,0,0.0,0.0;
 
   
@@ -129,6 +134,10 @@ void solver_process(Viewer* viewer)
   int sensor_index = 0;
 
   //First evaluate true trajectory and thus sensor values associated with it:
+  //Initialize random seed for adding noise to sensor data:
+  srand(10281048);//Random number
+  Matrix3d rotationmatrix_rand;
+  Vector3d rotation_randvec;
   sys.Reset(xs[0], ts[0]);
   for (int i = 0; i < N; ++i) {
     //Can also add noise here for system
@@ -142,6 +151,21 @@ void solver_process(Viewer* viewer)
       projectmanifold(xs[near_index],projected_state);
       //cout<<"Projected state: "<<projected_state.q.transpose()<<endl;
       imugps(zs[sensor_index], ts[near_index], projected_state, us[near_index]);
+      //Add noise:
+      rotation_randvec.setZero();
+      for(int count = 0; count < 3; count++)
+      {
+        assert(R[count] >= 0.001);
+        rotation_randvec[count] += sqrt(1/R[count])*randn();//Util function  
+
+        assert(R[count+9] >= 0.001);
+        zs[sensor_index].p[count] += sqrt(1/R[count+9])*randn();//Util function  
+
+        assert(R[count+12] >= 0.001);
+        zs[sensor_index].v[count] += sqrt(1/R[count+12])*randn();//Util function  
+      }
+      SO3::Instance().exp(rotationmatrix_rand, rotation_randvec);
+      zs[sensor_index].R *= rotationmatrix_rand;
       cout<<"Zs ["<<(sensor_index)<<"]: "<<zs[sensor_index].p.transpose()<<"\t"<<endl<<zs[sensor_index].R<<endl<<"\tts_sensor: "<<ts_sensor[sensor_index]<<endl;
       sensor_index = sensor_index < (ts_sensor.size()-1)?sensor_index+1:sensor_index;
     }
