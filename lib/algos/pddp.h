@@ -98,6 +98,14 @@ namespace gcop {
     Matrixcd Luu;
     MatrixXd Lxua;
 
+    vector<VectorXd> Lxs;
+    vector<MatrixXd> Lxxs;
+    vector<Vectorcd> Lus;
+    vector<Matrixcd> Luus;
+    VectorXd Lp_all;
+    MatrixXd Lpp_all;
+    vector<MatrixXd> Lpxs;
+
     VectorXd v;
     MatrixXd P;
     
@@ -200,6 +208,14 @@ namespace gcop {
     Lpp.resize(m,m);
     Lpx.resize(m,n);
 
+    Lxs.clear();
+    Lxxs.clear();
+    Lus.clear();
+    Luus.clear();
+    Lpxs.clear();
+    Lp_all.setZero();
+    Lpp_all.setZero();
+
     double L = this->cost.L(t, x, u, 0, &p, 
                             &Lx, &Lxx, 0, 0, 0, 
                             &Lp, &Lpp, &Lpx);
@@ -225,6 +241,13 @@ namespace gcop {
     Lxxa.block(n,0,m,n) = Lpx;
     Lxxa.block(0,n,n,m) = Lpx.transpose();
 
+    Lxs.push_back(Lx);
+    Lxxs.push_back(Lxx);
+    Lus.push_back(Lu);
+    Luus.push_back(Luu);
+    Lp_all = Lp;
+    Lpp_all = Lpp;
+    Lpxs.push_back(Lpx);
     /* 
     cout << "Lxa:" << endl << Lxa << endl;
     cout << "Lx:" << endl << Lx << endl;
@@ -273,8 +296,13 @@ namespace gcop {
       Lxua.setZero();
       Lxua.block(0,0,n,c) = Lxu;
 
-      //      cout << "L=" << L << endl;
-      
+      Lxs.push_back(Lx);
+      Lxxs.push_back(Lxx);
+      Lus.push_back(Lu);
+      Luus.push_back(Luu);
+      Lp_all = Lp;
+      Lpp_all = Lpp;
+      Lpxs.push_back(Lpx);
       
       this->V += L;
       
