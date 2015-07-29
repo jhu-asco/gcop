@@ -50,7 +50,7 @@ namespace gcop {
                                              Matrixgxd *dgdx, Matrixgud *dgdu,
                                              Matrixgpd *dgdp)
     {
-      const Vector3d &p = x.second.head(3); // position
+      const Vector3d &p = x.p; // position
       
       Vector3d v = p - o;
 

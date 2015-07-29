@@ -54,18 +54,24 @@ if (OPENMP_FOUND)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 endif()
 
+# Check 32 bit vs 64 bit for setting Eigen Flags
+if(NOT (CMAKE_SIZEOF_VOID_P EQUAL 8) )
+  message("Detected 32 bit system!.\n\t Enabling Eigen don't align flag!")
+  set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DEIGEN_DONT_ALIGN=1")
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DEIGEN_DONT_ALIGN=1")
+endif(NOT (CMAKE_SIZEOF_VOID_P EQUAL 8) )
+
 #find_package(Eigen REQUIRED)
 #include_directories(${Eigen_INCLUDE_DIRS})
 
-find_package( OpenCV 2.4 COMPONENTS core highgui imgproc calib3d)
-include_directories( ${OpenCV_INCLUDE_DIRS} )
-set(EST_LIBS ${EST_LIBS} ${OpenCV_LIBS})
-message(STATUS "Hello ${OpenCV_LIBS}")
+#find_package( OpenCV 2.4 COMPONENTS core highgui imgproc calib3d)
+#include_directories( ${OpenCV_INCLUDE_DIRS} )
+#set(EST_LIBS ${EST_LIBS} ${OpenCV_LIBS})
+#message(STATUS "Hello ${OpenCV_LIBS}")
 
 find_package(DC1394)
 include_directories(${DC1394_INCLUDE_DIR})
 set(cam_LIBS ${cam_LIBS} ${DC1394_LIBRARIES})
-message(STATUS "Hello2 ${LIBS}")
 
 #find_package(LibUSB REQUIRED)
 #include_directories(${LIBUSB_INCLUDE_DIR})
@@ -128,9 +134,11 @@ if (USE_BULLET)
   #message("Bullet Flags: ${BULLET_C_FLAGS}; ${BULLET_CXX_FLAGS};")
 endif (USE_BULLET)
 
-#FIND_PACKAGE(Ceres)
-#INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
-#set(ALGO_LIBS ${ALGO_LIBS})
+FIND_PACKAGE(Ceres QUIET)
+if (CERES_FOUND)
+  INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
+  set(ALGO_LIBS ${ALGO_LIBS} ${CERES_LIBRARY} ${CERES_LIBRARIES})
+endif (CERES_FOUND)
 
 
 set(ALL_LIBS ${ALGO_LIBS} ${SYS_LIBS} ${VIEWER_LIBS} ${EST_LIBS} ${UTIL_LIBS})

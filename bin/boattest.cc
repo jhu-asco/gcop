@@ -39,6 +39,9 @@ void solver_process(Viewer* viewer)
 
   Body2d<2> sys(&force);
 
+  params.GetVector3d("I", sys.I);
+
+
   Body2dState x0;
   VectorXd qv0(6);
   se2.q2g(x0.first, Vector3d(0, 2, 2));
@@ -82,14 +85,17 @@ void solver_process(Viewer* viewer)
   // controls
   Vector2d u(0,0);
   vector<Vector2d> us(N, u);
-  //  for (int i = 0; i < N/2; ++i) {
-  //    us[i] = Vector3d(0.01,.1,0);
-  //    us[N/2+i] = Vector3d(0.01,-.1,0);
-  //  }  
+  for (int i = 0; i < N/2; ++i) {
+    us[i] = Vector2d(0,1);
+    us[N/2+i] = Vector2d(0,-1);
+  }
 
   Body2dDdp ddp(sys, cost, ts, xs, us);
+
+  
   ddp.mu = .01;
   params.GetDouble("mu", ddp.mu);
+  params.GetDouble("eps", ddp.eps);
 
   Body2dView<2> view(sys, &ddp.xs);
   viewer->Add(view);

@@ -7,6 +7,7 @@ set(sources
   carview.cc
   rccarview.cc
   gunicycleview.cc
+  gcarview.cc
   qrotorview.cc
   hrotorview.cc
   hrotorgeom3dview.cc
@@ -27,6 +28,8 @@ set(sources
   snakeview.cc
   demview.cc
   airplaneview.cc
+  insview.cc
+  #visinsview.cc
 #  normal2dview.cc
 )
 
@@ -40,6 +43,7 @@ set(headers
   carview.h
   rccarview.h
   gunicycleview.h
+  gcarview.h
   body3dview.h
   kinbody3dview.h
   qrotorview.h
@@ -65,4 +69,6 @@ set(headers
   airplaneview.h
   normal2dview.h
   systemceview.h
+  insview.h
+  #visinsview.h
 )

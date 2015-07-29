@@ -45,10 +45,9 @@ void solver_process(Viewer* viewer)
   Body3d<> sys;
 
   // cost 
-  Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
-  xf.second[0] = 0;  
-  xf.second[1] = 0;  
-  xf.second[2] = 5;
+  Body3dState xf;
+  xf.Clear();
+  xf.p << 0, 0, 5;
 
   Body3dCost<6> cost(sys, tf, xf);
 
@@ -72,10 +71,8 @@ void solver_process(Viewer* viewer)
 
   // states
   vector<Body3dState> xs(N+1);
-  xs[0].first.setIdentity();
-  xs[0].second[0] = 20;
-  xs[0].second[1] = 18;
-  xs[0].second[2] = 5;
+  xs[0].Clear();
+  xs[0].p << 20, 18, 5;
 
   // initial controls (e.g. hover at one place)
   vector<Vector6d> us(N);

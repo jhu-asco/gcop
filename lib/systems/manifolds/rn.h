@@ -36,6 +36,8 @@ namespace gcop {
                  const Vectornd &v);
 
     void dtau(Matrixnd &M, const Vectornd &v);
+
+    void dtauinv(Matrixnd &M, const Vectornd &v);
     
     void Adtau(Matrixnd &M, const Vectornd &v);
 
@@ -102,6 +104,12 @@ namespace gcop {
   template <int _n> 
     void Rn<_n>::dtau(Matrix<double, _n, _n> &M, 
                       const Matrix<double, _n, 1> &v) {
+    M.setIdentity();
+  }
+
+  template <int _n> 
+    void Rn<_n>::dtauinv(Matrix<double, _n, _n> &M, 
+                         const Matrix<double, _n, 1> &v) {
     M.setIdentity();
   }
 

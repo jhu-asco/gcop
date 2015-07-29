@@ -31,8 +31,8 @@ Params params;
 void GetTraj(vector<Body3dState> &gxs, Dem &dem, GridSearch &gdsl, const Body3dState &x0, const Body3dState &xf) {
   
   int i0,j0,ig,jg;
-  dem.Point2Index(i0, j0, x0.second[0], x0.second[1]);
-  dem.Point2Index(ig, jg, xf.second[0], xf.second[1]);
+  dem.Point2Index(i0, j0, x0.p[0], x0.p[1]);
+  dem.Point2Index(ig, jg, xf.p[0], xf.p[1]);
   gdsl.SetStart(j0, i0);
   gdsl.SetGoal(jg, ig);
   GridPath path, optPath;
@@ -40,8 +40,8 @@ void GetTraj(vector<Body3dState> &gxs, Dem &dem, GridSearch &gdsl, const Body3dS
   gdsl.OptPath(path, optPath, 2);
   for (int i = 0; i < optPath.count; ++i) {
     Body3dState x = xf;
-    dem.Index2Point(x.second[0], x.second[1], optPath.pos[2*i+1], optPath.pos[2*i]);
-    x.second[2] = x0.second[2];
+    dem.Index2Point(x.p[0], x.p[1], optPath.pos[2*i+1], optPath.pos[2*i]);
+    x.p[2] = x0.p[2];
     
     // if not last point
     Vector3d v(0,0,0);
@@ -50,13 +50,13 @@ void GetTraj(vector<Body3dState> &gxs, Dem &dem, GridSearch &gdsl, const Body3dS
       Vector3d pb;
       dem.Index2Point(pa[0], pa[1], optPath.pos[2*i+1], optPath.pos[2*i]);
       dem.Index2Point(pb[0], pb[1], optPath.pos[2*i+3], optPath.pos[2*i+2]);
-      pa[2] = x0.second[2];
-      pb[2] = x0.second[2];
+      pa[2] = x0.p[2];
+      pb[2] = x0.p[2];
       Vector3d v = pb - pa;
       v = v/v.norm();
       v = v*20;
     }
-    x.second.tail<3>() = v;      
+    x.v = v;      
     gxs.push_back(x);
   }
 }
@@ -82,10 +82,9 @@ void solver_process(Viewer* viewer)
   dem.Convolve(2);
 
   // cost 
-  Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
-  xf.second[0] = 5;  
-  xf.second[1] = 5;  
-  xf.second[2] = 5;
+  Body3dState xf;
+  xf.Clear();
+  xf.p << 5, 5, 5;
 
   Body3dPqpDem pqp(dem, .1);  
   Body3dAvoidController<> ctrl(sys, &xf, 0, &pqp);
@@ -93,37 +92,32 @@ void solver_process(Viewer* viewer)
 
   // states
   vector<Body3dState> xs(N+1);
-  xs[0].first.setIdentity();
-  xs[0].second.setZero();
-  xs[0].second[0] = 20;
-  xs[0].second[1] = 17;
-  xs[0].second[2] = 10;
+  xs[0].Clear();
+  xs[0].p << 20, 17, 10;
   
 #else
 
   // cost 
-  Body3dState x0(Matrix3d::Identity(), Vector9d::Zero());
-  x0.second[0] = 46;
-  x0.second[1] = 82;
-  x0.second[2] = 2;
+  Body3dState x0;
+  x0.Clear();
+  x0.p << 46, 82, 2;
 
-  Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
-  xf.second[0] = 160;
-  xf.second[1] = 125;  
-  xf.second[2] = 2;
+  Body3dState xf;
+  xf.Clear();
+  xf.p << 160, 125, 2;
 
   VectorXd qv0(12);
   params.GetVectorXd("x0", qv0);  
-  SO3::Instance().q2g(x0.first, qv0.head(3));    
-  x0.second = qv0.segment<9>(3);
-
-  vector<Body3dState> xs(N+1);
-  xs[0] = x0;
+  SO3::Instance().q2g(x0.R, qv0.head(3));    
+  x0.p = qv0.segment<3>(3); x0.w = qv0.segment<3>(6); x0.v = qv0.tail<3>(); 
 
   VectorXd qvf(12);
   params.GetVectorXd("xf", qvf);  
-  SO3::Instance().q2g(xf.first, qvf.head(3));    
-  xf.second = qvf.segment<9>(3);
+  SO3::Instance().q2g(xf.R, qvf.head(3));    
+  xf.p = qvf.segment<3>(3); xf.w = qvf.segment<3>(6); xf.v = qvf.tail<3>(); 
+
+  vector<Body3dState> xs(N+1);
+  xs[0] = x0;
   
   float camParams[5];
   if (viewer) {
@@ -203,7 +197,7 @@ void solver_process(Viewer* viewer)
     sys.Step(xs[i+1], t, xs[i], u, h);  
     
     // if close to current waypoint, then move to next
-    Vector3d d = xs[i+1].second.head<3>() - ctrl.stabCtrl.xd->second.head<3>();
+    Vector3d d = xs[i+1].p - ctrl.stabCtrl.xd->p;
     if (d.norm() < 20 && j < gxs.size()-1)
       ++j;
   }

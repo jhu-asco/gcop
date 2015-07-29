@@ -142,7 +142,7 @@ template <typename T, int _nx, int _nu, int _np>
 {
   //  ToBody3dState(xb, x);
   
-  Vector3d p = x.second.head(3);
+  Vector3d p = x.p;
 
   pt[0] = p[0];
   pt[1] = p[1];

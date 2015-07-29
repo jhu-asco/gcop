@@ -45,20 +45,18 @@ void solver_process(Viewer* viewer)
   // system
   Qrotor sys;
 
-  // cost 
-  VectorXd qv0(12);
-  params.GetVectorXd("x0", qv0);
 
   Body3dState x0;
-  SO3::Instance().q2g(x0.first, qv0.head(3));
-  x0.second= qv0.tail(9);
-
-  VectorXd qvf(12);
-  params.GetVectorXd("xf", qvf);  
+  VectorXd qv0(12);
+  params.GetVectorXd("x0", qv0);  
+  SO3::Instance().q2g(x0.R, qv0.head(3));    
+  x0.p = qv0.segment<3>(3); x0.w = qv0.segment<3>(6); x0.v = qv0.tail<3>(); 
 
   Body3dState xf;
-  SO3::Instance().q2g(xf.first, qvf.head(3));
-  xf.second= qvf.tail(9);
+  VectorXd qvf(12);
+  params.GetVectorXd("xf", qvf);  
+  SO3::Instance().q2g(xf.R, qvf.head(3));    
+  xf.p = qvf.segment<3>(3); xf.w = qvf.segment<3>(6); xf.v = qvf.tail<3>(); 
 
   Body3dCost<4> cost(sys, tf, xf);  
 

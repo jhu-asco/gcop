@@ -6,7 +6,7 @@
 #include "rnlqcost.h"
 #include "params.h"
 
-#define USE_SDDP
+//#define USE_SDDP
 
 #ifdef USE_SDDP
 #include "sddp.h"
@@ -94,7 +94,9 @@ void solver_process(Viewer* viewer)
   
   RccarDdp ddp(sys, cost, ts, xs, us);  
   ddp.mu = .01;
+#ifdef USE_SDDP
   params.GetVector2d("scale_du",(ddp.duscale));
+#endif
   params.GetDouble("mu", ddp.mu);
 
   RccarView view(sys, &ddp.xs);

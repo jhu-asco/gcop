@@ -63,12 +63,23 @@ namespace gcop {
 
 
   /**
-   * Right-trivialized derivative of the retraction map dtau(v)
+   * Right-trivialized derivative of the retraction map tau(v)
    *
    * @param M matrix operator
    * @param v Lie algebra element
    */
   virtual void dtau(Matrixnd &M, const Vectornd &v) { M.setIdentity(); };
+
+  /**
+   * Right-trivialized derivative inverse of the retraction map tau(v)
+   * Technically, this is just the matrix inverse of dtau, but it can
+   * be computed in an easy and closed-form for SO(n) and SE(n)
+   *
+   * @param M matrix operator
+   * @param v Lie algebra element
+   */
+  virtual void dtauinv(Matrixnd &M, const Vectornd &v) { M.setIdentity(); };
+
 
   /**
    * Adjoint map of the retraction, i.e. Ad(\tau(v))

@@ -25,7 +25,9 @@ void solver_process(Viewer* viewer)
   Heli sys;
 
   // cost 
-  Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
+  Body3dState xf;
+  xf.Clear();
+
   Body3dCost<4> cost(sys, tf, xf);  
 
   cost.Qf(0,0) = 2; cost.Qf(1,1) = 2; cost.Qf(2,2) = 2;
@@ -43,10 +45,8 @@ void solver_process(Viewer* viewer)
 
   // states
   vector<Body3dState> xs(N+1);
-  xs[0].first.setIdentity();
-  xs[0].second[0] = -5;
-  xs[0].second[1] = 0;
-  xs[0].second[2] = 2;
+  xs[0].Clear();
+  xs[0].p << -5, 0, 2;
 
   // initial controls (e.g. hover at one place)
   vector<Vector4d> us(N);

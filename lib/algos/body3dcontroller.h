@@ -63,7 +63,7 @@ namespace gcop {
   template <int c>   
     bool Body3dController<c>::Body3dController::Set(Vectorcd &u, double t, const Body3dState &x)
     {
-      const Matrix3d& R = x.first;  // rotation
+      const Matrix3d& R = x.R;  // rotation
 
       Vector3d eR;  // error in rotation
       Vector3d ew;  // error in ang vel (body frame)
@@ -71,15 +71,15 @@ namespace gcop {
       Vector3d ev;  // error in lin vel (spatial frame)
 
       if (xd) {
-        SO3::Instance().log(eR, xd->first.transpose()*R);
-        ew = x.second.segment<3>(3) - x.first.transpose()*xd->first*xd->second.segment<3>(3);
-        ex = x.second.head<3>() - xd->second.head<3>();
-        ev = x.second.tail<3>() - xd->second.tail<3>();
+        SO3::Instance().log(eR, xd->R.transpose()*R);
+        ew = x.w - x.R.transpose()*xd->R*xd->w;
+        ex = x.p - xd->p;
+        ev = x.v - xd->v;
       } else {
         SO3::Instance().log(eR, R);
-        ew = x.second.segment<3>(3);
-        ex = x.second.head<3>();
-        ev =  x.second.tail<3>(); 
+        ew = x.w;
+        ex = x.p;
+        ev = x.v;
       }
 
       u.head(3) = -Kp.head<3>().cwiseProduct(eR) - Kd.head<3>().cwiseProduct(ew);
