@@ -55,8 +55,8 @@ namespace gcop {
      *               This is necessary only if xs was not already generated from us.
      */
     Ddp(System<T, nx, nu, np> &sys, Cost<T, nx, nu, np> &cost, 
-         vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
-         Vectorpd *p = 0, bool update = true);
+        vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
+        Vectorpd *p = 0, bool update = true);
     
     virtual ~Ddp();
 
@@ -399,11 +399,10 @@ namespace gcop {
         du = a*ku + Kux*dx;
         un = u + du;
 				//[DEBUG]:
-				/*cout<<"du[ "<<k<<"]:\t"<<du.transpose()<<endl;
-				cout<<"dx[ "<<k<<"]:\t"<<dx.transpose()<<endl;
-				cout<<"ku[ "<<k<<"]:\t"<<ku.transpose()<<endl;
-				cout<<"Kux[ "<<k<<"]:"<<endl<<Kux<<endl;
-				*/
+        //cout<<"du[ "<<k<<"]:\t"<<du.transpose()<<endl;
+	//			cout<<"dx[ "<<k<<"]:\t"<<dx.transpose()<<endl;
+	//			cout<<"ku[ "<<k<<"]:\t"<<ku.transpose()<<endl;
+	//			cout<<"Kux[ "<<k<<"]:"<<endl<<Kux<<endl;
         
         Rn<nu> &U = (Rn<nu>&)this->sys.U;
         if (U.bnd) {
@@ -455,8 +454,10 @@ namespace gcop {
           //std::cout<<" du: "<<du.transpose()<<endl;//[DEBUG]
           
           this->sys.X.Lift(dx, this->xs[k+1], xn);
-          //cout<<"xs[ "<<(k+1)<<"]:\t"<<this->xs[k+1]<<endl;
-          //cout<<"un[ "<<(k+1)<<"]:\t"<<un.transpose()<<endl;
+          
+          //          cout<<"xs[ "<<(k+1)<<"]:\t"<< ((Body2dState&)this->xs[k+1]).first<< " " <<((Body2dState&)this->xs[k+1]).second << endl;
+
+          //          cout<<"un[ "<<(k+1)<<"]:\t"<<un.transpose()<<endl;
           
           //          cout << xn.gs[0] << " " << xn.r << " " << xn.vs[0] << " " << xn.dr << endl;
           

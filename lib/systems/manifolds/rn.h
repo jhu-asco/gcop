@@ -147,11 +147,12 @@ namespace gcop {
       for (int j = 0; j < v.size(); ++j) {
         if (v[j] < this->lb[j]) {
           v[j] = this->lb[j];
-          d[j] = this->lb[j] - v0[j];        } else
+          d[j] = this->lb[j] - v0[j];        
+        } else
           if (v[j] > this->ub[j]) {
             v[j] = this->ub[j];
             d[j] = this->ub[j] - v0[j];
-        }
+          }
       } 
       return true;
     }

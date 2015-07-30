@@ -34,14 +34,22 @@ void solver_process(Viewer* viewer)
 
   SE2 &se2 = SE2::Instance();  
   Body2dForce<2> force;
-  force.D(2)= 5;
+  force.D << 1, .1, 5;
   params.GetVector3d("D", force.D);
-  force.B << 1, -1, 1, 1, 0, 0;
+
+  // B matrix
+  double cr = .3;
+  params.GetDouble("cr", cr);
+  force.B << cr, -cr, 1, 1, 0, 0;
 
   Body2d<2> sys(&force);
   sys.d << 1.16, 0.72;
 
   params.GetVector3d("I", sys.I);
+
+  params.GetVector2d("ulb", sys.U.lb);
+  params.GetVector2d("uub", sys.U.ub);
+  sys.U.bnd = true;
 
   Body2dState x0;
   VectorXd qv0(6);
