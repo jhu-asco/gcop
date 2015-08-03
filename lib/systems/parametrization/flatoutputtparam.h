@@ -34,21 +34,61 @@ namespace gcop {
     typedef Matrix<double, _ntp, 1> Vectorntpd;
 
 	protected:
+		/** Perform (N choose K) operation
+		 * @param n N
+		 * @param k K
+		 */
+    double NChooseK(const int n, const int k)
+    {
+      if(k>n/2)
+      {
+        return NChooseK(n,n-k);
+      }
+      else if(k==1)
+      {
+        return n;
+      }
+      else
+      {
+        double c = 1;
+        for(int i = 1;i<=k;i++)
+        {
+          c *= (((double)n-k+i)/((double)i));
+        }
+        return std::round(c);
+      }
+    }
+		/** Evaluate Bezier curve using knots in s using binomial coefficients algorithm
+		 * @param u input point where bezier curve is evaluated \in (0,1)
+		 * @param start Starting point for P_0
+		 * @param end ending point for P_n
+		 */
+    VectorXd BinomialInterp(vector<VectorXd> &s, double u, int start, int end)
+    { 
+      assert(s.size() > 0);
+      VectorXd ret(s[0].size());
+      ret.setZero();
+      for(int i = 0; i <= end; i++)
+      {
+        ret += NChooseK(end,i)*pow(1-u, end-i)*pow(u,i)*s.at(i);
+      }
+      return ret;
+    }
 		/** Evaluate Bezier curve using knots in s using DeCasteljau algorithm
 		 * @param u input point where bezier curve is evaluated \in (0,1)
 		 * @param start Starting point for recursionP_0
 		 * @param end ending point for recursion P_n
 		 */
-		//VectorXd DeCasteljau(vector<VectorXd> &s, double u, int start, int end);
 		VectorXd DeCasteljau(vector<VectorXd> &s, double u, int start, int end)
 		{
-			if(start == end)
+			//if(start == end)
+			if(end == 0)
 			{
 				return s[start];
 			}
 			else
 			{
-				return ((1-u)*(this->DeCasteljau(s, u, start, end-1)) + u*(this->DeCasteljau(s,u,start+1,end)));
+				return ((1-u)*(this->DeCasteljau(s, u, start, end-1)) + u*(this->DeCasteljau(s,u,start+1,end-1)));
 			}
 		}
 
@@ -110,7 +150,12 @@ namespace gcop {
   };
   
   template <typename T, int nx, int nu, int np, int _ntp> 
-    FlatOutputTparam<T, nx, nu, np, _ntp>::FlatOutputTparam(System<T, nx, nu, np> &sys, int ny_, int numberofknots_, int numberofderivatives_, bool fixfinal_) :  Tparam<T, nx, nu, np, _ntp>(sys, (numberofknots_-(numberofderivatives_+1)-fixfinal_*(numberofderivatives_+1))*ny_),ny(ny_), numberofderivatives(numberofderivatives_), numberofknots(numberofknots_), fixfinal(fixfinal_)  {
+    FlatOutputTparam<T, nx, nu, np, _ntp>::FlatOutputTparam(System<T, nx, nu, np> &sys, int ny_, 
+      int numberofknots_, int numberofderivatives_, bool fixfinal_) :  
+      Tparam<T, nx, nu, np, _ntp>(sys, 
+        (numberofknots_-(numberofderivatives_+1)-fixfinal_*(numberofderivatives_+1))*ny_),
+        ny(ny_), numberofderivatives(numberofderivatives_), numberofknots(numberofknots_), 
+        fixfinal(fixfinal_)  {
 			assert(numberofknots > 0);
 			assert(ny >0);
 			knotsforallderivatives.resize(numberofderivatives+1);
@@ -158,7 +203,7 @@ namespace gcop {
 				for(int count_samples =0; count_samples <= N; count_samples++)
 				{
 					//Evaluate the Bezier curve at given ts using the above knot vector:
-					basis.block((count_samples)*ny, (count_knots)*ny,ny,ny) = (DeCasteljau(knotvector, (ts[count_samples]/tf), 0,numberofknots-1)).asDiagonal();//The evaluation using P = e_i will be B_n,i(u_i)
+					basis.block((count_samples)*ny, (count_knots)*ny,ny,ny) = (BinomialInterp(knotvector, (ts[count_samples]/tf), 0,numberofknots-1)).asDiagonal();//The evaluation using P = e_i will be B_n,i(u_i)
 				}
 			}
 
@@ -168,14 +213,14 @@ namespace gcop {
 				VectorXd flatoutput;
 				(this->sys).StateAndControlsToFlat(flatoutput, xs[count_samples], us[count_samples]);
 				flatoutputs.segment((count_samples)*ny,ny) = flatoutput;
-				cout<<"Flat output["<<count_samples<<"]: "<<flatoutput.transpose()<<endl;
+				//cout<<"Flat output["<<count_samples<<"]: "<<flatoutput.transpose()<<endl;
 			}
 			//Tail or final state:
 			{
 				VectorXd flatoutput;
 				(this->sys).StateAndControlsToFlat(flatoutput, xs[N], us[N-1]);//Copying us[N-1] for us[N] since us[N] does not exist
 				flatoutputs.tail(ny) = flatoutput;
-				cout<<"Flat output["<<N<<"]: "<<flatoutput.transpose()<<endl;
+				//cout<<"Flat output["<<N<<"]: "<<flatoutput.transpose()<<endl;
 			}
 			//getchar();//#DEBUG
 			//cout<<"Basis: "<<endl<<basis<<endl;
@@ -206,14 +251,14 @@ namespace gcop {
           knotsforallderivatives[0][numberofknots-(i+1)] = flatoutputs.segment((flatoutputs.size()-ny*(i+1)), ny);
         }
       }
-      cout<<"flatoutputs.head(ny) " << flatoutputs.head(ny).transpose() << endl; 
-      cout<<"flatoutputs.tail(ny) " << flatoutputs.tail(ny).transpose() << endl; 
+      //cout<<"flatoutputs.head(ny) " << flatoutputs.head(ny).transpose() << endl; 
+      //cout<<"flatoutputs.tail(ny) " << flatoutputs.tail(ny).transpose() << endl; 
       //(this->sys).StateAndControlsToFlat(knotsforallderivatives[0][0], xs[0], us[0]);
 
-			cout<<"s: "<<s.transpose()<<endl;
-			cout<<"s_temp: "<<s_temp.transpose()<<endl;
+			//cout<<"s: "<<s.transpose()<<endl;
+			//cout<<"s_temp: "<<s_temp.transpose()<<endl;
 			//s.setZero();
-                        return true;
+      return true;
 		}
   
   template <typename T, int nx, int nu, int np, int _ntp> 
@@ -227,6 +272,7 @@ namespace gcop {
 			int N = us.size();
 			double tf = ts.back();//Replace this with deltat version #TODO
 			vector<VectorXd> flatoutputsandderivatives(numberofderivatives+1);
+      std::clock_t start = std::clock();
 			Createknotsforallderivatives(s);//Create all the knots before starting evaluation
 			for(int count_ts = 0; count_ts <= N; count_ts++)
 			{
@@ -235,7 +281,9 @@ namespace gcop {
 				{
 					if(numberofknots-count_derivatives>0)//If there are any derivatives to be evaluated then only go further
 					{
-						flatoutputsandderivatives[count_derivatives] = (factor_derivative)*(DeCasteljau(knotsforallderivatives[count_derivatives], (ts[count_ts]/tf), 0, numberofknots-count_derivatives-1));
+						flatoutputsandderivatives[count_derivatives] = 
+              (factor_derivative)*(BinomialInterp(knotsforallderivatives[count_derivatives], 
+              (ts[count_ts]/tf), 0, numberofknots-count_derivatives-1));
 				    //cout<<"flatoutputandderivatives["<<count_derivatives<<"]: "<<flatoutputsandderivatives[count_derivatives]<<endl;
 					}
 					else
