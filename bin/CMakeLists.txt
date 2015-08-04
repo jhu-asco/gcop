@@ -12,7 +12,7 @@ if (BUILD_TESTS)
 
 	add_executable(unicycletest unicycletest.cc)
 	target_link_libraries(unicycletest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
-
+        
 	add_executable(gunicycletest gunicycletest.cc)
 	target_link_libraries(gunicycletest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
@@ -22,6 +22,10 @@ if (BUILD_TESTS)
 IF (CERES_FOUND)
 #	add_executable(visest visest.cc)
 #	target_link_libraries(visest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+	add_executable(dynvisest dynvisest.cc)
+	target_link_libraries(dynvisest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
 ENDIF (CERES_FOUND)
 
 	add_executable(body2dtest body2dtest.cc)

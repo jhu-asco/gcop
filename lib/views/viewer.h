@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 #include <map>
+#include <Eigen/Dense>
 #include "view.h"
 
 namespace gcop {
@@ -75,6 +76,11 @@ class Viewer {
    */
   static void DrawArrow(const double v[3], GLUquadricObj *qobj = 0);
 
+  /**
+   * Render ellipsoid corresponding to matrix P > 0
+   * @param P 3x3 matrix
+   */
+  static void RenderEllipsoid(const Eigen::Matrix3d &P);
 
   /**
    *  Draws text

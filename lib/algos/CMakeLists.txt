@@ -23,6 +23,7 @@ set(headers
       aspsa.h
       spsa.h
 #      visins.h
+      dynvisins.h
 )
 
 set(sources
@@ -36,6 +37,7 @@ set(sources
       point3dcontroller.cc
       gavoidcontroller.cc
 #      visins.cc
+      dynvisins.cc
 )
 
 IF (DSL_FOUND AND PQP_FOUND)
