@@ -9,8 +9,8 @@
 #include "body3d.h"
 #include <Eigen/Dense>
 
-#include <ceres/ceres.h>
-#include <ceres/rotation.h>
+#include "ceres/ceres.h"
+#include "ceres/rotation.h"
 
 namespace gcop {
 
