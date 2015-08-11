@@ -34,7 +34,7 @@ using namespace Eigen;
  * Camera feature data is required since it forms the basis for the representation and 
  * optimization. All likelihood factors are computed in closed form without approximations.
  * 
- * In the current implementation, biases are not optimized.
+ * In the current implementation, biases are not optimized. 
  * 
  * Author: Marin Kobilarov
  */
@@ -72,7 +72,7 @@ public:
   double t;     ///< global time
   double tc;    ///< time at last camera frame
 
-  Body3dState x0;  ///< ins sequence start state (used as a local reference frame)
+  Body3dState x0;  ///< ins sequence start state
 
   Vector3d bg;  ///< acceleration bias
   Vector3d ba;  ///< gyro bias

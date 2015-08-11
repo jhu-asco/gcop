@@ -29,9 +29,6 @@ set(sources
   demview.cc
   airplaneview.cc
   insview.cc
-#  visinsview.cc
-  dynvisinsview.cc
-#  normal2dview.cc
 )
 
 set(headers
@@ -71,6 +68,16 @@ set(headers
   normal2dview.h
   systemceview.h
   insview.h
-#  visinsview.h
+)
+
+
+IF (CERES_FOUND)
+set(headers 
+  ${headers}
   dynvisinsview.h
 )
+set(sources 
+  ${sources}
+  dynvisinsview.cc
+)
+ENDIF (CERES_FOUND)
