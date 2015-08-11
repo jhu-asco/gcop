@@ -288,17 +288,18 @@ template<int c>  Body3d<c>::~Body3d()
       Matrix3d dR;
       SO3::Instance().exp(dR, dt*xa.w);
       xb.R = xa.R*dR;
-      xb.v = xa.v;
       xb.p = xa.p + dt*xa.v;
+      xb.w = xa.w;
       xb.v = xa.v;
       
+
       if (A) {
         Matrix3d D;
         SO3::Instance().dexp(D, -dt*xa.w);
         A->setIdentity();
         A->topLeftCorner<3,3>() = dR.transpose();
-        A->block<3,3>(0,3) = dt*D;           // dR wrt R (trivialized)        
-        A->block<3,3>(6,9).diagonal().setConstant(dt);  // dp drt v        
+        A->block<3,3>(0,6) = dt*D;           // dR wrt w (trivialized)        
+        A->block<3,3>(3,9).diagonal().setConstant(dt);  // dp drt v        
       }
       if (B) {
         B->setZero();
