@@ -10,8 +10,6 @@
 #include <utility>
 #include "function.h"
 
-#define NUMBER_PARAMETERS 6
-
 namespace gcop {
   
   using namespace std;
@@ -22,7 +20,6 @@ namespace gcop {
   typedef Matrix<double, 12, 1> Vector12d;
   typedef Matrix<double, 12, 12> Matrix12d;
   typedef Matrix<double, 12, 6> Matrix12x6d;
-  
   /**
    * A single rigid body system
    *
@@ -37,21 +34,21 @@ namespace gcop {
   typedef Matrix<double, c, c> Matrixcd;
   typedef Matrix<double, 6, c> Matrix6xcd;
   typedef Matrix<double, 12, c> Matrix12xcd;
-  typedef Matrix<double, 12, Dynamic> Matrix12Xd;
+  typedef Matrix<double, 12, Dynamic> Matrixnmd;
+
+  public
   
-  public:
+  Body3d(int np =0);
   
-  Body3d();
+  Body3d(const Vector3d &ds, double m, int np = 0);
   
-  Body3d(const Vector3d &ds, double m);
-  
-  Body3d(const Vector3d &ds, double m, const Vector3d &J);
+  Body3d(const Vector3d &ds, double m, const Vector3d &J, int np = 0);
   
   virtual ~Body3d();
   
   virtual double Step(Body3dState &xb, double t, const Body3dState &xa, 
                       const Vectorcd &u, double h, const VectorXd *p = 0,
-                      Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
+                      Matrix12d *A = 0, Matrix12xcd *B = 0, Matrixnmd *C = 0);
 
   virtual bool NoiseMatrix(Matrix12d &L, double t, const Body3dState &x, 
                            const Vectorcd &u, double h, const VectorXd *p = 0);
@@ -62,11 +59,11 @@ namespace gcop {
   
   double SympStep(double t, Body3dState &xb, const Body3dState &xa, 
                   const Vectorcd &u, double h, const VectorXd *p = 0,
-                  Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
+                  Matrix12d *A = 0, Matrix12xcd *B = 0, Matrixnmd *C = 0);
   
   double EulerStep(double t, Body3dState &xb, const Body3dState &xa, 
                    const Vectorcd &u, double h, const VectorXd *p = 0,
-                   Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);    
+                   Matrix12d *A = 0, Matrix12xcd *B = 0, Matrixnmd *C = 0);    
   
   
 
@@ -135,8 +132,8 @@ namespace gcop {
 
 
   template <int c> 
-    Body3d<c>::Body3d() : 
-    System<Body3dState, 12, c>(Body3dManifold::Instance(), c, NUMBER_PARAMETERS),
+    Body3d<c>::Body3d(int np) : 
+    System<Body3dState, 12, c>(Body3dManifold::Instance(), c, np),
     ds(.6, .6, .2), m(1),
     Dw(0,0,0),
     Dv(0,0,0),
@@ -151,8 +148,8 @@ namespace gcop {
   
   
   template <int c> 
-    Body3d<c>::Body3d(const Vector3d &ds, double m) : 
-    System<Body3dState, 12, c>(Body3dManifold::Instance(),c, NUMBER_PARAMETERS),
+    Body3d<c>::Body3d(const Vector3d &ds, double m, int np) : 
+    System<Body3dState, 12, c>(Body3dManifold::Instance(),c, np),
     ds(ds), m(m),
     Dw(0,0,0),
     Dv(0,0,0),
@@ -166,8 +163,8 @@ namespace gcop {
   }
 
   template <int c> 
-    Body3d<c>::Body3d(const Vector3d &ds, double m, const Vector3d &J) : 
-    System<Body3dState, 12, c>(Body3dManifold::Instance(), c, NUMBER_PARAMETERS),
+    Body3d<c>::Body3d(const Vector3d &ds, double m, const Vector3d &J, int np) : 
+    System<Body3dState, 12, c>(Body3dManifold::Instance(), c, np),
     ds(ds), m(m), J(J),
     Dw(0,0,0),
     Dv(0,0,0),
@@ -280,7 +277,7 @@ template<int c>  Body3d<c>::~Body3d()
   template <int c>
     double Body3d<c>::Step(Body3dState &xb, double t, const Body3dState &xa, 
                            const Matrix<double, c, 1> &u, double dt, const VectorXd *p,
-                           Matrix12d *A, Matrix<double, 12, c> *B, Matrix12Xd *C) {
+                           Matrix12d *A, Matrix<double, 12, c> *B, Matrixnmd *C) {
 
     // in a constant velocity model the dynamics is ignored:
     if (constantVelocity) {
@@ -317,7 +314,7 @@ template<int c>  Body3d<c>::~Body3d()
   template <int c>
     double Body3d<c>::SympStep(double t, Body3dState &xb, const Body3dState &xa, 
                                const Matrix<double, c, 1> &u, double h, const VectorXd *p,
-                               Matrix12d *A, Matrix<double, 12, c> *B, Matrix12Xd *C) {
+                               Matrix12d *A, Matrix<double, 12, c> *B, Matrixnmd *C) {
     // cwiseProduct
     
     SO3 &so3 = SO3::Instance();
@@ -471,7 +468,7 @@ template<int c>  Body3d<c>::~Body3d()
   template <int c>
     double Body3d<c>::EulerStep(double t, Body3dState &xb, const Body3dState &xa, 
                                 const Matrix<double, c, 1> &u, double h, const VectorXd *p,
-                                Matrix12d *A, Matrix<double, 12, c> *B, Matrix12Xd *C) {
+                                Matrix12d *A, Matrix<double, 12, c> *B, Matrixnmd *C) {
     // cwiseProduct
     
     SO3 &so3 = SO3::Instance();

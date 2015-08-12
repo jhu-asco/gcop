@@ -51,7 +51,7 @@ void solver_process(Viewer* viewer)
 
   double h = tf/N;
   
-  Body3d<> sys;
+  Body3d<> sys(6);//Number of Parameters
 
   //Add sensor
   Sensor<InsState, 15, 6> imugps(InsManifold::Instance());//Create a default sensor which just copies the InsManifold over
