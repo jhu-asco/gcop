@@ -36,7 +36,7 @@ namespace gcop {
   typedef Matrix<double, 12, c> Matrix12xcd;
   typedef Matrix<double, 12, Dynamic> Matrixnmd;
 
-  public
+  public:
   
   Body3d(int np =0);
   
