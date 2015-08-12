@@ -5,6 +5,7 @@ set(headers
     insmag.h
     point3dgps.h
     sensor.h
+    body3dsensor.h
    )
 set(sources
 )

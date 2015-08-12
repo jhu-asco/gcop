@@ -19,8 +19,6 @@ set(headers
       systemce.h
       aspsa.h
       spsa.h
-      body2dslam.h
-#      visins.h
 )
 
 set(sources
@@ -31,8 +29,19 @@ set(sources
       mbscontroller.cc
       point3dcontroller.cc
       gavoidcontroller.cc
-#      visins.cc
 )
+
+IF (CERES_FOUND)
+set(headers 
+  ${headers}
+  dynvisins.h
+)
+set(sources 
+  ${sources}
+  dynvisins.cc
+)
+ENDIF (CERES_FOUND)
+
 
 IF (DSL_FOUND AND PQP_FOUND)
 set(headers 
