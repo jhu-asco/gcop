@@ -111,6 +111,23 @@ void hermite2(double c1[2], double c2[2], double c3[2],
   c3[1] = -2*(xf[1]-xi[1]) + c1[1] + vi[1];
 }
 
+void hermite3(double c1[3], double c2[3], double c3[3], 
+              const double xi[3], const double vi[3],
+              const double xf[3])
+{
+  double d[3];
+  MINUS3(d, xf, xi);
+  double vn = NORM3(vi);
+  double dn = NORM3(d);
+  MULT(c1, d, vn/dn);
+  c2[0] = 3*(xf[0]-xi[0])-c1[0]-2*vi[0];
+  c2[1] = 3*(xf[1]-xi[1])-c1[1]-2*vi[1];
+  c2[2] = 3*(xf[2]-xi[2])-c1[2]-2*vi[2];
+  c3[0] = -2*(xf[0]-xi[0]) + c1[0] + vi[0];
+  c3[1] = -2*(xf[1]-xi[1]) + c1[1] + vi[1];
+  c3[2] = -2*(xf[2]-xi[2]) + c1[2] + vi[2];
+}
+
 
 /**
  * Normal distribution likelihood

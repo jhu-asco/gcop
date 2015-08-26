@@ -28,6 +28,8 @@ namespace gcop {
 
     void dtau(Matrix5d &M, const Vector5d &v);
 
+    void dtauinv(Matrix5d &M, const Vector5d &v);
+
     void Adtau(Matrix5d &M, const Vector5d &v);
 
   private:

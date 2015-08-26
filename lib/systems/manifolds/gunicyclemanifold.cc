@@ -50,6 +50,16 @@ void GunicycleManifold::dtau(Matrix5d &M, const Vector5d &v)
   M(2,1) = s; M(2,2) = c;
 }
 
+void GunicycleManifold::dtauinv(Matrix5d &M, const Vector5d &v)
+{
+  M.setIdentity();
+  double c = cos(-v[0]);
+  double s = sin(-v[0]);
+  M(1,1) = c; M(1,2) = -s;
+  M(2,1) = s; M(2,2) = c;
+}
+
+
 void GunicycleManifold::Adtau(Matrix5d &M, const Vector5d &v)
 {
   const double c = cos(v[0]);

@@ -51,6 +51,10 @@ namespace gcop {
     
     void dcayinv(Matrix6d& M, const Vector6d& v) const;
 
+    void dexp(Matrix6d& M, const Vector6d& v) const;
+    
+    void dexpinv(Matrix6d& M, const Vector6d& v) const;
+
     void tlnmu(Vector6d& mup, const Vector6d& v, const Vector6d &mu) const;
 
     void tln(Matrix6d &M, const Vector6d &v) const;

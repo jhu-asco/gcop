@@ -51,9 +51,9 @@ bool Body3dTrackView::RenderFrame(int i)
     glDisable(GL_LIGHTING);
     Vector3d f;
     for (int k =0; k < pg.us.size(); ++k) {
-      f.head<3>() = forceScale*pg.xs[k].first*(pg.us[k]).tail<3>();
+      f.head<3>() = forceScale*pg.xs[k].R*(pg.us[k]).tail<3>();
       glPushMatrix();
-      glTranslated(pg.xs[k].second(0), pg.xs[k].second(1), pg.xs[k].second(2)); 
+      glTranslated(pg.xs[k].p(0), pg.xs[k].p(1), pg.xs[k].p(2)); 
       Viewer::DrawArrow(f.data(),qobj);
       glPopMatrix();
     }
@@ -120,7 +120,7 @@ bool Body3dTrackView::RenderFrame(int i)
       const vector< pair<int,Vector3d> > &J = pg.Js[pg.pis[l]];
       for (int j = 0; j < J.size(); ++j) {
         int k = J[j].first;
-        const Vector3d &x = pg.xs[k].second.segment<3>(0);
+        const Vector3d &x = pg.xs[k].p;
         glVertex3d(pg.p(3*l + i0), pg.p(3*l + i0 + 1), pg.p(3*l + i0 + 2));
         glVertex3d(x[0], x[1], x[2]);
       }

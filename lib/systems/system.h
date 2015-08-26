@@ -234,7 +234,7 @@ namespace gcop {
   /**
    * Noise in the system is modeled as x[i+1] = f(xi,ui,ti,p) + noisematrix(xi,ui,ti,p)*wi
    * This function provides the necessary noise coefficient matrix
-   * @param Q provides the noise matrix
+   * @param L provides the noise matrix
    * @param t current time
    * @param x current state
    * @param u current control
@@ -242,7 +242,7 @@ namespace gcop {
    * @param p parameter (optional)
    * @return true if all arguments are feasible
    */
-  virtual bool NoiseMatrix(Matrixnd &Q, double t, const T &x, const Vectorcd &u, 
+  virtual bool NoiseMatrix(Matrixnd &L, double t, const T &x, const Vectorcd &u, 
                            double h, const Vectormd *p = 0);
   
 
@@ -386,10 +386,10 @@ namespace gcop {
   }
   
   template <typename T, int _nx, int _nu, int _np> 
-    bool System<T, _nx, _nu, _np>::NoiseMatrix(Matrixnd &Q, 
+    bool System<T, _nx, _nu, _np>::NoiseMatrix(Matrixnd &L, 
                                                double t, const T &x, const Vectorcd &u, 
                                                double dt, const Vectormd *p) {
-    Q.setIdentity();
+    L.setIdentity();
     return true;
   }
   

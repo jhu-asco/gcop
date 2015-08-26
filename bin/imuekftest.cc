@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 {
   Imu imu;
 
-  bool mag = false;
+  bool mag = true;
   //  int nz = mag ? 6 : 3;
 
   ImuSensor<3> sensor;

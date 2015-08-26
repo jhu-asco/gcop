@@ -7,10 +7,7 @@ set(headers
       gndoep.h
       deterministicgndoep.h
       pddp.h
-      ba.h
-      body2dslam.h
-      bacost.h
-      body2dslamcost.h
+      ba.h 
       body2dgraph.h
       posegraph2d.h
       controller.h
@@ -26,9 +23,7 @@ set(headers
 
 set(sources
       ba.cc
-      bacost.cc
       body2dslam.cc
-      body2dslamcost.cc
       body2dgraph.cc
       posegraph2d.cc
       mbscontroller.cc
@@ -36,9 +31,32 @@ set(sources
       gavoidcontroller.cc
 )
 
+IF (CERES_FOUND)
+set(headers 
+  ${headers}
+  dynvisins.h
+)
+set(sources 
+  ${sources}
+  dynvisins.cc
+)
+ENDIF (CERES_FOUND)
+
+
 IF (DSL_FOUND AND PQP_FOUND)
 set(headers 
   ${headers}
   body3ddemcontroller.h
 )
 ENDIF (DSL_FOUND AND PQP_FOUND)
+
+IF (CERES_FOUND)
+set(headers
+    ${headers}
+    dynvisins.h
+    )
+set (sources
+    ${sources}
+    dynvisins.cc
+    )
+ENDIF (CERES_FOUND)

@@ -31,12 +31,12 @@ void body3d2quad(Body3dState &x, Vector4d &u,
 {
   u.head(3) = u0.head(3);   
   if (gr)
-    u[3] = (x0.first*u0.tail(3)).norm();
+    u[3] = (x0.R*u0.tail(3)).norm();
   else      
-    u[3] = (x0.first*u0.tail(3) + Vector3d(0,0,9.81*sys.m)).norm();
+    u[3] = (x0.R*u0.tail(3) + Vector3d(0,0,9.81*sys.m)).norm();
   
   // required control force in spatial frame 
-  Vector3d f = x0.first*u0.tail(3);
+  Vector3d f = x0.R*u0.tail(3);
   if (!gr)
     f += Vector3d(0,0,9.81*sys.m);
   
@@ -45,9 +45,9 @@ void body3d2quad(Body3dState &x, Vector4d &u,
   Vector3d bx = by.cross(bz);
 
   x = x0;
-  x.first.col(0) = bx;
-  x.first.col(1) = by;
-  x.first.col(2) = bz;
+  x.R.col(0) = bx;
+  x.R.col(1) = by;
+  x.R.col(2) = bz;
 }
 
 void solver_process(Viewer* viewer)
@@ -83,31 +83,27 @@ void solver_process(Viewer* viewer)
   double wi = 1/(umax*umax);
   sys.U.w << 0, 0, 0, wi, wi, wi; // ellispoidal bound weights
 
-  // states
-  vector<Body3dState> xs(N+1);
-
   // cost 
-  Body3dState x0(Matrix3d::Identity(), Vector9d::Zero());
-  x0.second[0] = 46;
-  x0.second[1] = 82;
-  x0.second[2] = 2;
+  Body3dState x0;
+  x0.Clear();
+  x0.p <<  46, 82, 2;
 
-  Body3dState xf(Matrix3d::Identity(), Vector9d::Zero());
-  xf.second[0] = 160;
-  xf.second[1] = 125;  
-  xf.second[2] = 2;
+  Body3dState xf;
+  xf.Clear();
+  xf.p << 160, 125, 2;
 
   VectorXd qv0(12);
   params.GetVectorXd("x0", qv0);  
-  SO3::Instance().q2g(x0.first, qv0.head(3));    
-  x0.second = qv0.segment<9>(3);
-
-  xs[0] = x0;
+  SO3::Instance().q2g(x0.R, qv0.head(3));    
+  x0.p = qv0.segment<3>(3); x0.w = qv0.segment<3>(6); x0.v = qv0.tail<3>(); 
 
   VectorXd qvf(12);
   params.GetVectorXd("xf", qvf);  
-  SO3::Instance().q2g(xf.first, qvf.head(3));    
-  xf.second = qvf.segment<9>(3);
+  SO3::Instance().q2g(xf.R, qvf.head(3));    
+  xf.p = qvf.segment<3>(3); xf.w = qvf.segment<3>(6); xf.v = qvf.tail<3>(); 
+
+  vector<Body3dState> xs(N+1);
+  xs[0] = x0;
 
   float camParams[5];
   if (viewer) {
@@ -237,7 +233,7 @@ void solver_process(Viewer* viewer)
     }
 
     ddp.Update();
-    cout << xs[0].first << " " << xs[0].second  << endl;
+    // cout << xs[0].first << " " << xs[0].second  << endl;
     cout << "Moved forward" << endl;
     //    getchar();
     hxs.push_back(xs[0]);
@@ -248,7 +244,7 @@ void solver_process(Viewer* viewer)
     body3d2quad(hxs.back(), hus.back(), xs[0], us[0], sys);
 
     if (xfStop) {
-      if ((xs.back().second.head(3) - xf.second.head(3)).norm() < 5) {
+      if ((xs.back().p - xf.p).norm() < 5) {
       for (int k=0; k <xs.size(); ++k) {
         hxs.push_back(xs[k]);
           hts.push_back(hts.back()+h);
@@ -260,7 +256,7 @@ void solver_process(Viewer* viewer)
         break;
       }
     } else {
-      if ((xs[0].second.head(3)-xf.second.head(3)).norm() < 5)
+      if ((xs[0].p - xf.p).norm() < 5)
         break;
     }
   }
@@ -270,11 +266,11 @@ void solver_process(Viewer* viewer)
   fstr.precision(20);
   //  fstr << hxs.size()-1 << " 0" << endl;
   for (int i = 0; i < hxs.size(); ++i) {
-    const Vector3d &p = hxs[i].second.head<3>();
-    fstr << hts[i] << " " << hxs[i].second.tail<6>().transpose() << " ";
+    const Vector3d &p = hxs[i].p;
+    fstr << hts[i] << " " << hxs[i].w.transpose() << " " << hxs[i].v.transpose()  << " ";
 
     Vector3d rpy;
-    SO3::Instance().g2q(rpy, hxs[i].first);
+    SO3::Instance().g2q(rpy, hxs[i].R);
 
     fstr << rpy[0] << " " << rpy[1] << " " << rpy[2] << " ";
     

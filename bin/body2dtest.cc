@@ -20,7 +20,7 @@ Params params;
 void solver_process(Viewer* viewer)
 {
   if (viewer)
-    viewer->SetCamera(4.875, 33.875, 0.24999, -0.550001, -6);
+    viewer->SetCamera(9.6, 41.6, -0.4, 0.35, -11.9);
 
   int N = 32;
   double tf = 10;
@@ -34,10 +34,12 @@ void solver_process(Viewer* viewer)
 
   SE2 &se2 = SE2::Instance();  
   Body2dForce<> force;
-  force.D(2)= 5;
   params.GetVector3d("D", force.D);
 
+
   Body2d<> sys(&force);
+
+  //  params.GetVector3d("I", sys.I);
 
   Body2dState x0;
   VectorXd qv0(6);

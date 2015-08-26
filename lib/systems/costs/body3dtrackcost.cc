@@ -70,10 +70,11 @@ double Body3dTrackCost::L(double t, const Body3dState &x, const Vector6d &u,
   
   //const Matrix3d &g = x.first;
 
-  const Matrix3d &R = x.first; // orientation
-  const Vector3d &xp = x.second.segment<3>(0);     // position
+  const Matrix3d &R = x.R; // orientation
+  const Vector3d &xp = x.p;
 
-  const Vector6d &v = x.second.segment<6>(3);               // velocity
+  Vector6d v;
+  v << x.w, x.v;               // velocity
   
   int N = pg.Is.size() - 1;
   

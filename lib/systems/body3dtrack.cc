@@ -22,7 +22,10 @@ Body3dTrack::Body3dTrack(Body3d<> &sys, int nf, double vd0, double t0, double tf
   Get(x, vd0, t0);
   xs.push_back(x);
   xos.push_back(x);
-  vs.push_back(x.second.segment<6>(3));
+
+  Vector6d v;
+  v << x.w, x.v;  
+  vs.push_back(v);
   cv << 0.05, 0.1, 0.1, 0.1, 0.1, 0.1;
   cw << .5, 2, 2, 2, 2, 2;
 }
@@ -57,7 +60,9 @@ void Body3dTrack::Add(const Vector6d &u, const Body3dState &x, double h)
                 sqrt(cv[4])*random_normal(),
                 sqrt(cv[5])*random_normal();
     
-    vs.push_back(x.second.segment<6>(3) + vn); // set noisy gyro measurements
+    Vector6d v;
+    v << x.w, x.v;
+    vs.push_back(v + vn); // set noisy gyro measurements
   }
 
   sys.Step(xn, t, xos.back(), un, h);
@@ -87,8 +92,8 @@ void Body3dTrack::Add(const Vector6d &u, const Body3dState &x, double h)
 
   //  srand (time(NULL));
   
-  const Matrix3d &R = x.first;
-  const Vector3d &px = x.second.segment<3>(0);
+  const Matrix3d &R = x.R;
+  const Vector3d &px = x.p;
   
   Is.resize(Is.size()+1);
   assert(k == Is.size()-1);
@@ -150,7 +155,9 @@ void Body3dTrack::Add2(const Vector6d &u, const Body3dState &x, double h)
                 sqrt(cv[4])*random_normal(),
                 sqrt(cv[5])*random_normal();
     
-    vs.push_back(x.second.segment<6>(3) + vn); // set noisy gyro measurements
+    Vector6d v;
+    v << x.w, x.v;
+    vs.push_back(v + vn); // set noisy gyro measurements
   }
 
   sys.Step(xn, t, xos.back(), u, h);
@@ -180,8 +187,8 @@ void Body3dTrack::Add2(const Vector6d &u, const Body3dState &x, double h)
 
   //  srand (time(NULL));
   
-  const Matrix3d &R = x.first;
-  const Vector3d &px = x.second.head<3>();
+  const Matrix3d &R = x.R;
+  const Vector3d &px = x.p;
   
   Is.resize(Is.size()+1);
   assert(k == Is.size()-1);
@@ -206,8 +213,8 @@ void Body3dTrack::Add2(const Vector6d &u, const Body3dState &x, double h)
         } else {
           p.conservativeResize(p.size() + 3);
         }
-        const Matrix3d &Rn = xs.back().first;
-        const Vector3d &pxn = xs.back().second.segment<3>(0);
+        const Matrix3d &Rn = xs.back().R;
+        const Vector3d &pxn = xs.back().p;
          
         //cout << "feature z:" << endl << z << endl;
         //cout << "est x:" << endl << pxn << endl << Rn << endl;
@@ -260,8 +267,8 @@ void Body3dTrack::Optp(VectorXd &p, const vector<Body3dState> &xs)
     for (int j = 0; j < J.size(); ++j) {
       int k = J[j].first;
       const Vector3d &z = J[j].second;
-      const Matrix3d &R = xs[k].first;
-      const Vector3d &x = xs[k].second.segment<3>(0);
+      const Matrix3d &R = xs[k].R;
+      const Vector3d &x = xs[k].p;
       pf = pf + x + R*z;
     }
     p.segment<3>(3*extforce + 3*l) = pf/J.size();
@@ -272,13 +279,15 @@ void Body3dTrack::Optp(VectorXd &p, const vector<Body3dState> &xs)
 void Body3dTrack::Get(Body3dState &x, double vd, double t) const
 {
   double a = 1.3*t/tf*2*M_PI;
-  x.first.setIdentity();
-  x.first(0,0) = cos(a+M_PI/2.); x.first(0,1) = -sin(a+M_PI/2.);
-  x.first(1,0) = sin(a+M_PI/2.); x.first(1,1) = cos(a+M_PI/2.);
+  x.R.setIdentity();
+  x.R(0,0) = cos(a+M_PI/2.); x.R(0,1) = -sin(a+M_PI/2.);
+  x.R(1,0) = sin(a+M_PI/2.); x.R(1,1) = cos(a+M_PI/2.);
  
   Vector3d v(vd,0,0);
-  v = x.first*v;
+  v = x.R*v;
  
-  x.second <<  r*cos(a), r*sin(a), 0, 0, 0, 0, v(0), v(1), 0;
+  x.p <<  r*cos(a), r*sin(a), 0;
+  x.w << 0, 0, 0;
+  x.v << v(0), v(1), 0;
   //x.second <<  r*cos(a), r*sin(a), 0, 0, 0, 0, vd, 0, 0;
 }

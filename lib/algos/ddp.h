@@ -1,3 +1,11 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #ifndef GCOP_DDP_H
 #define GCOP_DDP_H
 
@@ -10,6 +18,11 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
   
+  /**
+   * Differential Dynamic Programming
+   *
+   * Author: Marin Kobilarov 
+   */
   template <typename T, int nx = Dynamic, int nu = Dynamic, int np = Dynamic> class Ddp :
     public Docp<T, nx, nu, np> {
     
@@ -42,8 +55,8 @@ namespace gcop {
      *               This is necessary only if xs was not already generated from us.
      */
     Ddp(System<T, nx, nu, np> &sys, Cost<T, nx, nu, np> &cost, 
-         vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
-         Vectorpd *p = 0, bool update = true);
+        vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
+        Vectorpd *p = 0, bool update = true);
     
     virtual ~Ddp();
 
@@ -386,11 +399,10 @@ namespace gcop {
         du = a*ku + Kux*dx;
         un = u + du;
 				//[DEBUG]:
-				/*cout<<"du[ "<<k<<"]:\t"<<du.transpose()<<endl;
-				cout<<"dx[ "<<k<<"]:\t"<<dx.transpose()<<endl;
-				cout<<"ku[ "<<k<<"]:\t"<<ku.transpose()<<endl;
-				cout<<"Kux[ "<<k<<"]:"<<endl<<Kux<<endl;
-				*/
+        //cout<<"du[ "<<k<<"]:\t"<<du.transpose()<<endl;
+	//			cout<<"dx[ "<<k<<"]:\t"<<dx.transpose()<<endl;
+	//			cout<<"ku[ "<<k<<"]:\t"<<ku.transpose()<<endl;
+	//			cout<<"Kux[ "<<k<<"]:"<<endl<<Kux<<endl;
         
         Rn<nu> &U = (Rn<nu>&)this->sys.U;
         if (U.bnd) {
@@ -420,49 +432,35 @@ namespace gcop {
           this->sys.X.Retract(xn, xn, dx);
         } else {
           double h = this->ts[k+1] - t;
-					//Adding nan catching :
-					try
-					{
-						this->sys.Step(xn, un, h, this->p);
-					}
-					catch(std::exception &e)
-					{
-						//[DEBUG] Statement
-						std::cerr << "exception caught: " << e.what() << '\n';
-						std::cout<<" Iteration counter: "<<k<<endl;
-						std::cout<<" u: "<<u.transpose()<<endl;
-						std::cout<<" du: "<<du.transpose()<<endl;
-						//More debug statements:
-						//std::cout<<" a: "<<a<<"\t ku: "<<ku.transpose()<<"\t dx: "<<dx.transpose()<<"\n kux: \n"<<Kux<<endl;
-						//[Culprit dx]
-
-						throw std::runtime_error(std::string("Nan observed"));
-						return;
-					}
-					//cout<<"dx: "<<dx.transpose()<<endl;//[DEBUG]//Previous iteration dx
-					//std::cout<<" du: "<<du.transpose()<<endl;//[DEBUG]
+          //Adding nan catching :
+          try {
+            this->sys.Step(xn, un, h, this->p);
+          }
+          catch(std::exception &e)
+            {
+              //[DEBUG] Statement
+              std::cerr << "exception caught: " << e.what() << '\n';
+              std::cout<<" Iteration counter: "<<k<<endl;
+              std::cout<<" u: "<<u.transpose()<<endl;
+              std::cout<<" du: "<<du.transpose()<<endl;
+              //More debug statements:
+              //std::cout<<" a: "<<a<<"\t ku: "<<ku.transpose()<<"\t dx: "<<dx.transpose()<<"\n kux: \n"<<Kux<<endl;
+              //[Culprit dx]
+              
+              throw std::runtime_error(std::string("Nan observed"));
+              return;
+            }
+          //cout<<"dx: "<<dx.transpose()<<endl;//[DEBUG]//Previous iteration dx
+          //std::cout<<" du: "<<du.transpose()<<endl;//[DEBUG]
+          
           this->sys.X.Lift(dx, this->xs[k+1], xn);
-					/*if((k == 29) || (k == 30) || (k == 31))
-					{
-						//cout dx:
-						cout<<"dx[ "<<(k+1)<<"]:\t"<<dx.transpose()<<endl;
-						cout<<"un[ "<<(k+1)<<"]:\t"<<un.transpose()<<endl;
-						cout<<"du[ "<<k<<"]:\t"<<du.transpose()<<endl;
-						cout<<"Printing states ["<<(k+1)<<"]"<<endl;
-						this->sys.print(this->xs[k+1]);
-						cout<<"Printing xn: "<<endl;
-						this->sys.print(xn);
-						if(k == 31)
-						{
-							//exit(0);
-						}
-					}
-					*/
-					//cout<<"xs[ "<<(k+1)<<"]:\t"<<this->xs[k+1]<<endl;
-					//cout<<"un[ "<<(k+1)<<"]:\t"<<un.transpose()<<endl;
+          
+          //          cout<<"xs[ "<<(k+1)<<"]:\t"<< ((Body2dState&)this->xs[k+1]).first<< " " <<((Body2dState&)this->xs[k+1]).second << endl;
+
+          //          cout<<"un[ "<<(k+1)<<"]:\t"<<un.transpose()<<endl;
           
           //          cout << xn.gs[0] << " " << xn.r << " " << xn.vs[0] << " " << xn.dr << endl;
-
+          
           //          cout << this->xs[k+1].gs[0] << " " << this->xs[k+1].r << " " << this->xs[k+1].vs[0] << " " << this->xs[k+1].dr << endl;
           assert(!std::isnan(dx[0]));
         }

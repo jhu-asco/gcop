@@ -1,3 +1,11 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #ifndef GCOP_PDDP_H
 #define GCOP_PDDP_H
 
@@ -10,6 +18,11 @@
 
 namespace gcop {
   
+  /**
+   * Parameter-dependent differential dynamic programming 
+   *
+   * Authors: Marin Kobilarov, Matthew Sheckells
+   */
   template <typename T, int n = Dynamic, int c = Dynamic, int np = Dynamic> 
     class PDdp : public Ddp<T, n, c, np> {
     
@@ -199,6 +212,9 @@ namespace gcop {
     Lp.resize(m);
     Lpp.resize(m,m);
     Lpx.resize(m,n);
+    
+    cout << "u=" << u.transpose() << endl;
+    //    cout << "x=" << ((Body2dState&)x).first << " " << (x.second << endl;
 
     double L = this->cost.L(t, x, u, 0, &p, 
                             &Lx, &Lxx, 0, 0, 0, 
@@ -296,6 +312,9 @@ namespace gcop {
       
       Qx = Lxa + Aat*v;
       Qu = Lu + Bt*v.head(n);
+      cout << "Lu=" << Lu.transpose() << endl;
+      cout << "Bt=" << Bt << endl;
+      cout << "v=" << v.transpose() << endl;
 
       Qxx = Lxxa + Aat*P*Aa;
       Quu = Luu + Bt*P.block(0,0,n,n)*B;
@@ -398,6 +417,7 @@ namespace gcop {
       if(mu > this->mumax)
         break;
 
+      cout << "Qu=" << Qu.transpose() << endl;
 
       ku = -llt.solve(Qu);
       Kux = -llt.solve(Qux);
@@ -500,8 +520,14 @@ namespace gcop {
       for (int k = 0; k < N; ++k) {
         const Vectorcd &u = this->us[k];
         Vectorcd &du = this->dus[k];
-        
+
+        assert(!std::isnan(dxa[0]));        
+        assert(!std::isnan(a));        
+
+        cout << this->kus[k] << " " << Kuxs[k] << " " << dxa << endl;
+
         du = a*this->kus[k] + Kuxs[k]*dxa;
+        assert(!std::isnan(du[0]));
         un = u + du;
         
         //cout << "k=" << k << endl;

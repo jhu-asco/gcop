@@ -69,8 +69,8 @@ namespace gcop {
     void Body3dDemController<nu>::GetTraj(vector<Body3dState> &xds, const Dem &dem, GridSearch &gdsl, const Body3dState &x0, const Body3dState &xf, double vd) {
     
     int i0,j0,ig,jg;
-    dem.Point2Index(i0, j0, x0.second[0], x0.second[1]);
-    dem.Point2Index(ig, jg, xf.second[0], xf.second[1]);
+    dem.Point2Index(i0, j0, x0.p[0], x0.p[1]);
+    dem.Point2Index(ig, jg, xf.p[0], xf.p[1]);
     gdsl.SetStart(j0, i0);
     gdsl.SetGoal(jg, ig);
     GridPath path, optPath;
@@ -78,8 +78,8 @@ namespace gcop {
     gdsl.OptPath(path, optPath, 2);
     for (int i = 0; i < optPath.count; ++i) {
       Body3dState x = xf;
-      dem.Index2Point(x.second[0], x.second[1], optPath.pos[2*i+1], optPath.pos[2*i]);
-      x.second[2] = x0.second[2];
+      dem.Index2Point(x.p[0], x.p[1], optPath.pos[2*i+1], optPath.pos[2*i]);
+      x.p[2] = x0.p[2];
       
       // if not last point
       Vector3d v(0,0,0);
@@ -88,13 +88,13 @@ namespace gcop {
         Vector3d pb;
         dem.Index2Point(pa[0], pa[1], optPath.pos[2*i-1], optPath.pos[2*i-2]);
         dem.Index2Point(pb[0], pb[1], optPath.pos[2*i+1], optPath.pos[2*i]);
-        pa[2] = x0.second[2];
-        pb[2] = x0.second[2];
+        pa[2] = x0.p[2];
+        pb[2] = x0.p[2];
         v = pb - pa;
         v = v/v.norm();
         v = v*vd;
       }
-      x.second.tail<3>() = v;      
+      x.v = v;      
       xds.push_back(x);
     }
   }
@@ -122,7 +122,7 @@ namespace gcop {
 
       assert(j < xds.size());
       
-      Vector3d d = x.second.head<3>() - xds[j].second.head<3>();//localCtrl.stabCtrl.xd->second.head(3);
+      Vector3d d = x.p - xds[j].p;//localCtrl.stabCtrl.xd->second.head(3);
       if (d.norm() < wpRadius && j < xds.size() - 1)
         ++j;
       

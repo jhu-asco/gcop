@@ -34,7 +34,7 @@ bool GavoidController::Set(Vector6d &u, double t, const Body3dState &x)
   //  cout << "od=" << od << " N=" << N << endl;
       
   //  Vector3d &p = x.second.head<3>(); // position
-  Vector3d v = x.second.tail<3>(); // velocity
+  Vector3d v = x.v; // velocity
 
   double tol = 1e-12;
   
