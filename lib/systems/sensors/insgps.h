@@ -43,6 +43,7 @@ namespace gcop {
     y = x.p;
     
     if (dydx){
+      dydx->setZero();
       dydx->block<3,3>(0,9).setIdentity();
     }
     

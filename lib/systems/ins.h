@@ -32,7 +32,7 @@ namespace gcop {
   class Ins : public System<InsState, 15, 6> {        
   public:
   
-  Ins();    
+  Ins(bool useAcc=true);
   
   virtual ~Ins();
   
@@ -51,7 +51,7 @@ namespace gcop {
   Vector3d g0;   ///< gravity vector
 
   bool semiImplicit; ///< whether to use a more accurate semi-implicit update (true by default)
-
+  bool useAcc_;
   };  
 }
 

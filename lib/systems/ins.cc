@@ -8,7 +8,7 @@ using namespace gcop;
 using namespace Eigen;
 
 
-Ins::Ins() : System<InsState, 15, 6>(InsManifold::Instance()) 
+Ins::Ins(bool useAcc) : System<InsState, 15, 6>(InsManifold::Instance())
 {
   sv = 3*1e-3;
   su  = 3*1e-8;
@@ -18,6 +18,7 @@ Ins::Ins() : System<InsState, 15, 6>(InsManifold::Instance())
   g0 << 0, 0, 9.80665;
 
   semiImplicit = true;
+  useAcc_ = useAcc;
 }
 
 
@@ -41,7 +42,10 @@ double Ins::Step(InsState &xb, double t, const InsState &xa,
   xb.bg = xa.bg;
   xb.ba = xa.ba;
 
-  xb.v = xa.v + dt*(xa.R*a - g0);
+  if(useAcc_)
+    xb.v = xa.v + dt*(xa.R*a - g0);
+  else
+    xb.v = xa.v;
 
   if (semiImplicit)
     xb.p = xa.p + dt*xb.v;
@@ -59,16 +63,22 @@ double Ins::Step(InsState &xb, double t, const InsState &xa,
 
     SO3::Instance().hat(D, a);
 
-    if (semiImplicit) {
+    if (semiImplicit && useAcc_)
+    {
       double dt2 = dt*dt;
       
       A->block<3,3>(9,0) = -dt2*(xa.R*D);   // dp wrt R
       A->block<3,3>(9,6) = -dt2*xa.R;       // dp wrt a
     }
+
     A->block<3,3>(9,12) = dt*Matrix3d::Identity();  // dp drt v
-      
-    A->block<3,3>(12,0) = -dt*(xa.R*D);   // dv wrt R    
+
+    if(useAcc_)
+      A->block<3,3>(12,0) = -dt*(xa.R*D);   // dv wrt R
+
     A->block<3,3>(12,6) = -dt*xa.R;       // dv wrt a
+
+//    std::cout<<"In step A:\n"<<*A<<endl;
   }
   return 0;
 }
@@ -76,6 +86,7 @@ double Ins::Step(InsState &xb, double t, const InsState &xa,
 bool Ins::Noise(Matrix15d &Q, double t, const InsState &x, const Vector6d &u, 
                 double dt, const VectorXd *p) {
 
+  Q.setZero();
   double dt2 = dt*dt;
   double dt3 = dt2*dt;
   double su2 = su*su;
