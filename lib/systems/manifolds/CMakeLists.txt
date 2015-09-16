@@ -1,6 +1,7 @@
 set(sources
     body2dmanifold.cc
     body3dmanifold.cc
+    pose3dmanifold.cc
     gunicyclemanifold.cc
     imumanifold.cc
     insmanifold.cc
@@ -19,6 +20,7 @@ set(headers
     manifold.h
     body2dmanifold.h
     body3dmanifold.h
+    pose3dmanifold.h
     gunicyclemanifold.h
     imumanifold.h
     insmanifold.h

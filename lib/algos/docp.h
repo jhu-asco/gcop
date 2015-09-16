@@ -118,7 +118,7 @@ namespace gcop {
                               bool update) : 
     sys(sys), cost(cost), ts(ts), xs(xs), us(us), p(p),
     As(us.size()), Bs(us.size()), J(std::numeric_limits<double>::max()), 
-    debug(true), eps(1e-3), nofevaluations(0)
+    debug(true), eps(1e-6), nofevaluations(0)
     {
       int N = us.size();
       assert(N > 0);

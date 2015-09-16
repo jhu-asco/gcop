@@ -32,11 +32,14 @@ namespace gcop {
     Vector3d w;    ///< angular velocity
     Vector3d v;    ///< translational velocity
 
+    Matrix12d P;   ///< covariance
+
     void Clear() {
       R.setIdentity();
       p.setZero();
       w.setZero();
       v.setZero();
+      P.setIdentity();
     }
   };
   

@@ -231,6 +231,8 @@ void Run(Viewer* viewer)
       cout << "p " << pg.p.size() << endl;
 
       pddp = new PDdp<Body2dState, 6, 3>(pg.sys, tcost, pg.ts, pg.xs, pg.us, pg.p, 2*pg.extforce);
+      params.GetDouble("eps",pddp->eps);
+    
       pddp->debug = false;
       for (int b=0; b < 4;++b)
         pddp->Iterate();     

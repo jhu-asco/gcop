@@ -10,8 +10,6 @@
 #include <utility>
 #include "function.h"
 
-#define NUMBER_PARAMETERS 6
-
 namespace gcop {
   
   using namespace std;
@@ -22,7 +20,6 @@ namespace gcop {
   typedef Matrix<double, 12, 1> Vector12d;
   typedef Matrix<double, 12, 12> Matrix12d;
   typedef Matrix<double, 12, 6> Matrix12x6d;
-  
   /**
    * A single rigid body system
    *
@@ -37,33 +34,36 @@ namespace gcop {
   typedef Matrix<double, c, c> Matrixcd;
   typedef Matrix<double, 6, c> Matrix6xcd;
   typedef Matrix<double, 12, c> Matrix12xcd;
-  typedef Matrix<double, 12, Dynamic> Matrix12Xd;
-  
+  typedef Matrix<double, 12, Dynamic> Matrixnmd;
+
   public:
   
-  Body3d();
+  Body3d(int np =0);
   
-  Body3d(const Vector3d &ds, double m);
+  Body3d(const Vector3d &ds, double m, int np = 0);
   
-  Body3d(const Vector3d &ds, double m, const Vector3d &J);
+  Body3d(const Vector3d &ds, double m, const Vector3d &J, int np = 0);
   
   virtual ~Body3d();
   
   virtual double Step(Body3dState &xb, double t, const Body3dState &xa, 
                       const Vectorcd &u, double h, const VectorXd *p = 0,
-                      Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
+                      Matrix12d *A = 0, Matrix12xcd *B = 0, Matrixnmd *C = 0);
 
-  virtual bool NoiseMatrix(Matrix12d &Q, double t, const Body3dState &x, 
+  virtual bool NoiseMatrix(Matrix12d &L, double t, const Body3dState &x, 
                            const Vectorcd &u, double h, const VectorXd *p = 0);
+
+  virtual bool Noise(Matrix12d &Q, double t, const Body3dState &x, 
+                     const Vectorcd &u, double h, const VectorXd *p = 0);
   
   
   double SympStep(double t, Body3dState &xb, const Body3dState &xa, 
                   const Vectorcd &u, double h, const VectorXd *p = 0,
-                  Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);
+                  Matrix12d *A = 0, Matrix12xcd *B = 0, Matrixnmd *C = 0);
   
   double EulerStep(double t, Body3dState &xb, const Body3dState &xa, 
                    const Vectorcd &u, double h, const VectorXd *p = 0,
-                   Matrix12d *A = 0, Matrix12xcd *B = 0, Matrix12Xd *C = 0);    
+                   Matrix12d *A = 0, Matrix12xcd *B = 0, Matrixnmd *C = 0);    
   
   
 
@@ -127,21 +127,23 @@ namespace gcop {
 
   double sw;     ///< process noise: standard deviation in torque (zero by default)
   double sv;     ///< process noise: standard deviation in force (zero by default)
-  
+
+
+  bool constantVelocity;  ///< whether to ignore the rigid body dynamics, and use a simple constant velocity model, in which the inputs are ignored, and it is assumed that the body moves with constant velocity subject to a white noise acceleration (false by default)
   };  
   
 
 
   template <int c> 
-    Body3d<c>::Body3d() : 
-    System<Body3dState, 12, c>(Body3dManifold::Instance(), c, NUMBER_PARAMETERS),
+    Body3d<c>::Body3d(int np) : 
+    System<Body3dState, 12, c>(Body3dManifold::Instance(), c, np),
     ds(.6, .6, .2), m(1),
     Dw(0,0,0),
     Dv(0,0,0),
     fp(0,0,0),
     Bu(Matrix<double, 6, c>::Identity()),
     symp(true),
-    sw(0), sv(0) {
+    sw(0), sv(0), constantVelocity(false) {
     
     Compute(J, m, ds);
     Compute(I, m, ds);
@@ -149,30 +151,30 @@ namespace gcop {
   
   
   template <int c> 
-    Body3d<c>::Body3d(const Vector3d &ds, double m) : 
-    System<Body3dState, 12, c>(Body3dManifold::Instance(),c, NUMBER_PARAMETERS),
+    Body3d<c>::Body3d(const Vector3d &ds, double m, int np) : 
+    System<Body3dState, 12, c>(Body3dManifold::Instance(),c, np),
     ds(ds), m(m),
     Dw(0,0,0),
     Dv(0,0,0),
     fp(0,0,0),
     Bu(Matrix<double, 6, c>::Identity()),
     symp(true),
-    sw(0), sv(0) {
+    sw(0), sv(0), constantVelocity(false) {
 
     Compute(J, m, ds);
     Compute(I, m, ds);
   }
 
   template <int c> 
-    Body3d<c>::Body3d(const Vector3d &ds, double m, const Vector3d &J) : 
-    System<Body3dState, 12, c>(Body3dManifold::Instance(), c, NUMBER_PARAMETERS),
+    Body3d<c>::Body3d(const Vector3d &ds, double m, const Vector3d &J, int np) : 
+    System<Body3dState, 12, c>(Body3dManifold::Instance(), c, np),
     ds(ds), m(m), J(J),
     Dw(0,0,0),
     Dv(0,0,0),
     fp(0,0,0),
     Bu(Matrix<double, 6, c>::Identity()),
     symp(true),
-    sw(0), sv(0) {
+    sw(0), sv(0), constantVelocity(false) {
     
   }
 
@@ -199,28 +201,60 @@ template<int c>  Body3d<c>::~Body3d()
 
 
   template <int c> 
-    bool Body3d<c>::NoiseMatrix(Matrix12d &Q, 
+    bool Body3d<c>::NoiseMatrix(Matrix12d &L, 
                                 double t, const Body3dState &x, 
                                 const Vectorcd &u, double dt, 
                                 const VectorXd *p) {    
-    Q.setZero();
+    // @mk: you could use a slighly more accurate noise
+    L.setZero();
     double dt2 = dt*dt/2;
-    Q(0,6) = sw*dt2/J(0);
-    Q(1,7) = sw*dt2/J(1);
-    Q(2,8) = sw*dt2/J(2);
-    Q(3,9) = sv*dt2/m;
-    Q(4,10) = sv*dt2/m;
-    Q(5,11) = sv*dt2/m;
+    L(0,6) = sw*dt2/J(0);
+    L(1,7) = sw*dt2/J(1);
+    L(2,8) = sw*dt2/J(2);
+    L(3,9) = sv*dt2/m;
+    L(4,10) = sv*dt2/m;
+    L(5,11) = sv*dt2/m;
+    
+    L(6,6) = sw*dt/J(0);
+    L(7,7) = sw*dt/J(1);
+    L(8,8) = sw*dt/J(2);
+    L(9,9) = sv*dt/m;
+    L(10,10) = sv*dt/m;
+    L(11,11) = sv*dt/m;
 
-    Q(6,6) = sw*dt/J(0);
-    Q(7,7) = sw*dt/J(1);
-    Q(8,8) = sw*dt/J(2);
-    Q(9,9) = sv*dt/m;
-    Q(10,10) = sv*dt/m;
-    Q(11,11) = sv*dt/m;
     return true;
   }
 
+
+  template <int c> 
+    bool Body3d<c>::Noise(Matrix12d &Q, double t, const Body3dState &x, 
+                          const Vectorcd &u, 
+                          double dt, const VectorXd *p) {
+    
+    if (constantVelocity) {
+      Q.setZero();
+      double dt2 = dt*dt;
+      double dt3 = dt2*dt;
+      
+      // a coarse Euler-type approximation to rotational error propagation
+      double sw2 = sw*sw;
+      Q.topLeftCorner<3,3>().diagonal().setConstant(sw2*dt3/3);
+      Q.block<3,3>(0,3).diagonal().setConstant(sw2*dt2/2);
+      Q.block<3,3>(3,0).diagonal().setConstant(sw2*dt2/2);
+      Q.block<3,3>(3,3).diagonal().setConstant(sw2*dt);    
+      
+      // exact error propagation for position
+      double sv2 = sv*sv;
+      Q.block<3,3>(6,6).diagonal().setConstant(sv2*dt3/3);
+      Q.block<3,3>(6,9).diagonal().setConstant(sv2*dt2/2);
+      Q.block<3,3>(9,6).diagonal().setConstant(sv2*dt2/2);
+      Q.block<3,3>(9,9).diagonal().setConstant(sv2*dt);
+    } else {
+      
+    }
+
+    return true;
+  }
   
   
   static void Gcay(Matrix3d& m1, const Vector3d &w, const Vector3d &J, double h, bool plus = true) {
@@ -245,18 +279,46 @@ template<int c>  Body3d<c>::~Body3d()
 
   template <int c>
     double Body3d<c>::Step(Body3dState &xb, double t, const Body3dState &xa, 
-                           const Matrix<double, c, 1> &u, double h, const VectorXd *p,
-                           Matrix12d *A, Matrix<double, 12, c> *B, Matrix12Xd *C) {
+                           const Matrix<double, c, 1> &u, double dt, const VectorXd *p,
+                           Matrix12d *A, Matrix<double, 12, c> *B, Matrixnmd *C) {
+
+    // in a constant velocity model the dynamics is ignored:
+    if (constantVelocity) {
+
+      Matrix3d dR;
+      SO3::Instance().exp(dR, dt*xa.w);
+      xb.R = xa.R*dR;
+      xb.p = xa.p + dt*xa.v;
+      xb.w = xa.w;
+      xb.v = xa.v;
+      
+
+      if (A) {
+        Matrix3d D;
+        SO3::Instance().dexp(D, -dt*xa.w);
+        A->setIdentity();
+        A->topLeftCorner<3,3>() = dR.transpose();
+        A->block<3,3>(0,6) = dt*D;           // dR wrt w (trivialized)        
+        A->block<3,3>(3,9).diagonal().setConstant(dt);  // dp drt v        
+      }
+      if (B) {
+        B->setZero();
+      }      
+      
+      return 0;
+    }
+    
+    // for regular rigid body dynamics use either a symplectic or a semi-implicit Euler method
     if (symp)
-      return SympStep(t, xb, xa, u, h, p, A, B, C);
+      return SympStep(t, xb, xa, u, dt, p, A, B, C);
     else
-      return EulerStep(t, xb, xa, u, h, p, A, B, C);      
+      return EulerStep(t, xb, xa, u, dt, p, A, B, C);      
   }
   
   template <int c>
     double Body3d<c>::SympStep(double t, Body3dState &xb, const Body3dState &xa, 
                                const Matrix<double, c, 1> &u, double h, const VectorXd *p,
-                               Matrix12d *A, Matrix<double, 12, c> *B, Matrix12Xd *C) {
+                               Matrix12d *A, Matrix<double, 12, c> *B, Matrixnmd *C) {
     // cwiseProduct
     
     SO3 &so3 = SO3::Instance();
@@ -406,10 +468,11 @@ template<int c>  Body3d<c>::~Body3d()
     return 1;
   }
 
+
   template <int c>
     double Body3d<c>::EulerStep(double t, Body3dState &xb, const Body3dState &xa, 
                                 const Matrix<double, c, 1> &u, double h, const VectorXd *p,
-                                Matrix12d *A, Matrix<double, 12, c> *B, Matrix12Xd *C) {
+                                Matrix12d *A, Matrix<double, 12, c> *B, Matrixnmd *C) {
     // cwiseProduct
     
     SO3 &so3 = SO3::Instance();
@@ -581,127 +644,3 @@ template<int c>  Body3d<c>::~Body3d()
   }
 }
 #endif
-
-
-
-/*
-
-for reference: properties that ROS uses
-
-class Geometry
-{
-public:
-  enum {SPHERE, BOX, CYLINDER, MESH} type;
-};
-
-class Sphere : public Geometry
-{
-public:
-  Sphere() { this->clear(); };
-  double radius;
-  void clear()
-  {
-    radius = 0;
-  };
-};
-
-class Box : public Geometry
-{
-public:
-  Box() { this->clear(); };
-  Vector3d dim;
-
-  void clear()
-  {
-    dim << 1, 1, 1;
-  };
-};
-
-class Cylinder : public Geometry
-{
-public:
-  Cylinder() { this->clear(); };
-  double length;
-  double radius;
-  
-  void clear()
-  {
-    length = 0;
-    radius = 0;
-  };
-};
-
-class Mesh : public Geometry
-{
-public:
-  Mesh() { this->clear(); };
-  std::string filename;
-  Vector3d scale;
-
-  void clear()
-  {
-    filename.clear();
-    scale << 1,1,1;
-  };
-  //  bool initXml(TiXmlElement *);
-  //  bool fileExists(std::string filename);
-};
-
-
-class Material
-{
-public:
-  Material() { this->clear(); };
-  std::string name;
-  std::string texture_filename;
-  Vector4d color;
-
-  void clear()
-  {
-    color << .5, .5, .5, .5;
-    texture_filename.clear();
-    name.clear();
-  };
-  //  bool initXml(TiXmlElement* config);
-};
-class Visual
-{
-public:
-  Visual() { this->clear(); };
-  Matrix4d origin;
-  boost::shared_ptr<Geometry> geometry;
-
-  std::string material_name;
-  boost::shared_ptr<Material> material;
-
-  void clear()
-  {
-    origin.setIdentity();
-    material_name.clear();
-    material.reset();
-    geometry.reset();
-    this->group_name.clear();
-  };
-  //  bool initXml(TiXmlElement* config);
-  std::string group_name;
-};
-
-
-class Collision
-{
-public:
-  Collision() { this->clear(); };
-  Matrix4d origin;
-  //  Pose origin;
-  boost::shared_ptr<Geometry> geometry;
-
-  void clear()
-  {
-    origin.setIdentity();
-    geometry.reset();
-    this->group_name.clear();
-  };
-  //  bool initXml(TiXmlElement* config);
-  std::string group_name;
-};
-*/

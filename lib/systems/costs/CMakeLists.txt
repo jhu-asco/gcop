@@ -3,6 +3,8 @@ set(sources
     gunicyclecost.cc
     body2dtrackcost.cc
     body3dtrackcost.cc
+    bacost.cc
+    body2dslamcost.cc
 #airplanecost.cc
    )
 
@@ -27,6 +29,8 @@ set(headers
     kinbody3dtrackcost.h
     kinrccarpathcost.h
     kinbodyprojtrackcost.h
+    bacost.h
+    body2dslamcost.h
 #airplanecost.h
 )
 

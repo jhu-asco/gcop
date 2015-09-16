@@ -220,6 +220,9 @@ namespace gcop {
     Lp.resize(m);
     Lpp.resize(m,m);
     Lpx.resize(m,n);
+    
+    cout << "u=" << u.transpose() << endl;
+    //    cout << "x=" << ((Body2dState&)x).first << " " << (x.second << endl;
 
     Lxs.clear();
     Lxxs.clear();
@@ -337,6 +340,9 @@ namespace gcop {
       
       Qx = Lxa + Aat*v;
       Qu = Lu + Bt*v.head(n);
+      cout << "Lu=" << Lu.transpose() << endl;
+      cout << "Bt=" << Bt << endl;
+      cout << "v=" << v.transpose() << endl;
 
       Qxx = Lxxa + Aat*P*Aa;
       Quu = Luu + Bt*P.block(0,0,n,n)*B;
@@ -439,6 +445,7 @@ namespace gcop {
       if(mu > this->mumax)
         break;
 
+      cout << "Qu=" << Qu.transpose() << endl;
 
       ku = -llt.solve(Qu);
       Kux = -llt.solve(Qux);
@@ -541,8 +548,14 @@ namespace gcop {
       for (int k = 0; k < N; ++k) {
         const Vectorcd &u = this->us[k];
         Vectorcd &du = this->dus[k];
-        
+
+        assert(!std::isnan(dxa[0]));        
+        assert(!std::isnan(a));        
+
+        cout << this->kus[k] << " " << Kuxs[k] << " " << dxa << endl;
+
         du = a*this->kus[k] + Kuxs[k]*dxa;
+        assert(!std::isnan(du[0]));
         un = u + du;
         
         //cout << "k=" << k << endl;
