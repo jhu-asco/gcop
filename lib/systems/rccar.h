@@ -39,10 +39,13 @@ namespace gcop {
                         Matrix4d *A = 0, Matrix42d *B = 0, Matrix4pd *C = 0, Matrix4d *D = 0);
     */
 
+    virtual void StateAndControlsToFlatAndDerivatives(vector<VectorXd> &y, const Vector4d &x, 
+      const std::vector<Vector2d> &u);
 
 		virtual void StateAndControlsToFlat(VectorXd &y, const Vector4d &x, const Vector2d &u);
 
-		virtual void FlatToStateAndControls(Vector4d &x, Vector2d &u, const std::vector<VectorXd> &y);
+		virtual void FlatToStateAndControls(Vector4d &x, std::vector<Vector2d> &u, 
+      const std::vector<VectorXd> &y);
 
     double l; ///< distance between axles    
     double r; ///< Gain on the car acc vs wheel torque

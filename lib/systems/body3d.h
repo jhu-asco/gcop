@@ -80,9 +80,12 @@ namespace gcop {
           double t, const Body3dState &xb, const Body3dState &xa,
           const Vectorcd &u, double h);
   
+  void StateAndControlsToFlatAndDerivatives(vector<VectorXd> &y, const Body3dState &x, 
+    const std::vector<Vectorcd> &u);
   void StateAndControlsToFlat(VectorXd &y, const Body3dState &x, const Vectorcd &u);
   
-  void FlatToStateAndControls(Body3dState &x, Vectorcd &u, const std::vector<VectorXd> &y);
+  void FlatToStateAndControls(Body3dState &x, std::vector<Vectorcd> &u, 
+    const std::vector<VectorXd> &y);
   
   /**
    * Compute moments of inertia J given mass m and dimensions ds
@@ -522,6 +525,26 @@ template<int c>  Body3d<c>::~Body3d()
   }
 
   template <int c>
+    void Body3d<c>::StateAndControlsToFlatAndDerivatives(vector<VectorXd> &y, const Body3dState &x,
+               const std::vector<Vectorcd> &u) {
+    SO3& so3 = SO3::Instance();
+    y.clear();
+    y.resize(2);
+    for(int i = 0; i < y.size(); i++)
+    {
+      y[i].resize(6);
+    }
+
+    // Flat outputs are x,y,z, and rpy
+    y[0].head<3>() = x.p;
+    y[0](3) = so3.roll(x.R);
+    y[0](4) = so3.pitch(x.R);
+    y[0](5) = so3.yaw(x.R);
+    y[1].head<3>() = x.v;
+    y[1].tail<3>() = x.w;
+  }
+
+  template <int c>
     void Body3d<c>::StateAndControlsToFlat(VectorXd &y, const Body3dState &x,
                const Vectorcd &u) {
     SO3& so3 = SO3::Instance();
@@ -535,9 +558,10 @@ template<int c>  Body3d<c>::~Body3d()
   }
 
   template <int c>
-    void Body3d<c>::FlatToStateAndControls(Body3dState &x, Vectorcd &u,
+    void Body3d<c>::FlatToStateAndControls(Body3dState &x, std::vector<Vectorcd> &u,
                const std::vector<VectorXd> &y) {
     assert(y.size() >= 2);
+    u.resize(1);
 
     SO3& so3 = SO3::Instance();
 
@@ -545,14 +569,14 @@ template<int c>  Body3d<c>::~Body3d()
     VectorXd y1 = y[1];
 
     //    x.second.setZero();
-    u.setZero();
+    u[0].setZero();
 
     so3.q2g(x.R, y0.tail<3>());
 
     x.p = y0.head<3>();
     x.v = y1.head<3>();
     // TODO: fill in angular velocity and controls
-    x.w[0] = 0; x.w[1] = 0;
+    x.w[0] = y1(3); x.w[1] = y1(4);
     x.w[2] = y1(5);
   }
 }

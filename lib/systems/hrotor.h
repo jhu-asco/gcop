@@ -19,9 +19,11 @@ namespace gcop {
   class Hrotor : public Body3d<4> {
   public:
     Hrotor();
+    void StateAndControlsToFlatAndDerivatives(vector<VectorXd> &y, 
+                                              const Body3dState &x, const std::vector<Vector4d> &u);
     void StateAndControlsToFlat(VectorXd &y, const Body3dState &x,
                const Vector4d &u);    
-    void FlatToStateAndControls(Body3dState &x, Vector4d &u,
+    void FlatToStateAndControls(Body3dState &x, std::vector<Vector4d> &u,
                const std::vector<VectorXd> &y);
     
     double l;  ///< distance from center of mass to each rotor

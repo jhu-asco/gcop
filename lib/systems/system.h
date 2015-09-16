@@ -247,6 +247,14 @@ namespace gcop {
   
 
   /**
+   * Convert a system state and controls to flat outputs and flat output derivatives for the system.
+   * @param y the generated flat outputs and flat output derivatives
+   * @param x given state
+   * @param u given controls
+   */
+  virtual void StateAndControlsToFlatAndDerivatives(std::vector<VectorXd> &y, 
+                                                    const T &x, const std::vector<Vectorcd> &u);
+  /**
    * Convert a system state and controls to flat outputs for the system.
    * @param y the generated flat outputs
    * @param x given state
@@ -260,7 +268,7 @@ namespace gcop {
    * @param x generated state
    * @param u generated controls
    */
-  virtual void FlatToStateAndControls(T &x, Vectorcd &u, const std::vector<VectorXd> &y);
+  virtual void FlatToStateAndControls(T &x, std::vector<Vectorcd> &u, const std::vector<VectorXd> &y);
 
   Manifold<T, _nx> &X;   ///< state manifold 
   Rn<_nu> U;             ///< control Euclidean manifold
@@ -394,6 +402,14 @@ namespace gcop {
   }
   
   template <typename T, int _nx, int _nu, int _np> 
+    void System<T, _nx, _nu, _np>::StateAndControlsToFlatAndDerivatives(std::vector<VectorXd> &y, 
+                                                          const T &x, 
+                                                          const std::vector<Vectorcd> &u) {
+    y.resize(0);
+    std::cout << "[W] System::StateAndControlsToFlatAndDerivatives: unimplemented! Subclasses should override." << std::endl;
+  }
+
+  template <typename T, int _nx, int _nu, int _np> 
     void System<T, _nx, _nu, _np>::StateAndControlsToFlat(VectorXd &y, const T &x, 
                                                           const Vectorcd &u) {
     y.resize(0);
@@ -401,7 +417,7 @@ namespace gcop {
   }
 
   template <typename T, int _nx, int _nu, int _np> 
-    void System<T, _nx, _nu, _np>::FlatToStateAndControls(T &x, Vectorcd &u, 
+    void System<T, _nx, _nu, _np>::FlatToStateAndControls(T &x, std::vector<Vectorcd> &u, 
                                                           const std::vector<VectorXd> &y) {
     
     std::cout << "[W] System::FlatToStateAndControls: unimplemented! Subclasses should override." << std::endl;
