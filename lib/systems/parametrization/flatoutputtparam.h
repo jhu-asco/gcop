@@ -276,10 +276,10 @@ namespace gcop {
     FlatOutputTparam<T, nx, nu, np, _ntp>::FlatOutputTparam(System<T, nx, nu, np> &sys, int ny_, 
       int numberofknots_, int numberofderivatives_, int fixed_derivatives_, bool fixfinal_) :  
       Tparam<T, nx, nu, np, _ntp>(sys, 
-        (numberofknots_-(1+fixed_derivatives_)-fixfinal_*(1+fixed_derivatives_))*ny_),
+        (numberofknots_-(fixfinal_?2:1)*(1+fixed_derivatives_))*ny_),
         ny(ny_), numberofderivatives(numberofderivatives_), numberofknots(numberofknots_), 
         fixfinal(fixfinal_)  {
-			assert(numberofknots >= (1+fixed_derivatives_)-fixfinal_*(1+fixed_derivatives_));
+			assert(numberofknots >= (fixfinal?2:1)*(1+fixed_derivatives_));
 			assert(ny >0);
       assert(numberofderivatives_ >= fixed_derivatives_);
       fixed_derivatives = fixed_derivatives_; 
@@ -476,7 +476,8 @@ namespace gcop {
                                                   vector<Vectorcd> &us,
                                                   const Vectorntpd &s,
 																									Vectormd *p) {
-			assert(this->ntp == (numberofknots-(1+numberofderivatives)-fixfinal*(1+numberofderivatives))*ny);
+      
+			assert(this->ntp == (numberofknots-(fixfinal?2:1)*(1+fixed_derivatives))*ny);
 			int N = us.size();
 			double tf = ts.back();//Replace this with deltat version #TODO
 			vector<VectorXd> flatoutputsandderivatives(numberofderivatives+1);
