@@ -35,6 +35,7 @@ IF (CERES_FOUND)
 set(headers 
   ${headers}
   dynvisins.h
+  gdocp.h
 )
 set(sources 
   ${sources}
@@ -49,14 +50,3 @@ set(headers
   body3ddemcontroller.h
 )
 ENDIF (DSL_FOUND AND PQP_FOUND)
-
-IF (CERES_FOUND)
-set(headers
-    ${headers}
-    dynvisins.h
-    )
-set (sources
-    ${sources}
-    dynvisins.cc
-    )
-ENDIF (CERES_FOUND)

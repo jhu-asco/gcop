@@ -26,6 +26,13 @@ IF (CERES_FOUND)
 	add_executable(dynvisest dynvisest.cc)
 	target_link_libraries(dynvisest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(qrotorgdocp qrotorgdocp.cc)
+	target_link_libraries(qrotorgdocp  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+	add_executable(particle2dgdocp particle2dgdocp.cc)
+	target_link_libraries(particle2dgdocp  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+
 ENDIF (CERES_FOUND)
 
 	add_executable(body2dtest body2dtest.cc)
