@@ -38,7 +38,7 @@ void solver_process(Viewer* viewer)
   //  sys.U.ub[1] = tan(M_PI/5);
 
   // initial state
-  Vector4d x0(1,1,0,0);
+  Vector4d x0(1,1,0,0.2);
   params.GetVector4d("x0", x0);
 
   // final state
@@ -81,7 +81,7 @@ void solver_process(Viewer* viewer)
 		else
 			us[i] = Vector2d(.01, -.1);
 		base_system->Step(xs[i+1], us[i], ts[i+1]-ts[i]);
-		cout<<"xs["<<i+1<<"]"<<xs[i+1].transpose()<<endl;//#DEBUG
+		cout<<"xs["<<i+1<<"]"<<xs[i].transpose()<<endl;//#DEBUG
 		cout<<"us["<<i<<"]"<<us[i].transpose()<<endl;//#DEBUG
   }
   us[N-1] = Vector2d(0,0);
@@ -95,13 +95,14 @@ void solver_process(Viewer* viewer)
 	int numberofknots = 10;
 	FlatOutputTparam<Vector4d, 4, 2> fp(sys, 2, numberofknots, 2);//4 is the number of knots, 2 is the number of flat outputs, 2 is the number of derivatives needed by the system
 	VectorXd s(numberofknots*2);//ny*numberofknots
+  //s(2) += 2;
 	fp.To(s, ts, xs, us);
 	getchar();
 	//Using the parameters evaluate xs, us:
 	fp.From(ts, xs,us, s);
 	for(int count = 0; count < us.size(); count++)
 	{
-		cout<<"xs["<<count+1<<"]"<<xs[count+1].transpose()<<endl;//#DEBUG
+		cout<<"xs["<<count+1<<"]"<<xs[count].transpose()<<endl;//#DEBUG
 		cout<<"us["<<count<<"]"<<us[count].transpose()<<endl;//#DEBUG
   }
 	getchar();

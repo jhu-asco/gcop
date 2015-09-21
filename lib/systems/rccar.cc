@@ -80,27 +80,51 @@ double Rccar::Step(Vector4d& xb, double t, const Vector4d& xa,
   return 1;
 }
 
+void Rccar::StateAndControlsToFlatAndDerivatives(vector<VectorXd> &y, const Vector4d &x, 
+  const std::vector<Vector2d> &u)
+{
+  assert(u.size() >= 1);
+  y.clear();
+  y.resize(3);
+  for(int i = 0; i < y.size(); i++)
+  {
+    y[i].resize(2);
+  }
+
+  // 0th
+	y[0] = x.head(2);//the first two elements (x,y) are the flat outputs
+  // 1st
+  y[1](0) = x(3)*cos(x(2));
+  y[1](1) = x(3)*sin(x(2));
+  // 2nd
+  y[2](0) = u[0](0)*cos(x(2));
+  y[2](1) = u[0](0)*sin(x(2));
+  
+}
+
 void Rccar::StateAndControlsToFlat(VectorXd &y, const Vector4d &x, const Vector2d &u)
 {
 	y = x.head(2);//the first two elements (x,y) are the flat outputs
 }
 
-void Rccar::FlatToStateAndControls(Vector4d &x, Vector2d &u, const std::vector<VectorXd> &y)
+void Rccar::FlatToStateAndControls(Vector4d &x, std::vector<Vector2d> &u, 
+  const std::vector<VectorXd> &y)
 {
 	assert(y.size() >= 3);//The flat output and derivatives upto second order should be provided
+  u.resize(1);
 	x.head(2) = y[0];//Xand y are copied
 	x(3) = y[1].norm();//yelocity is sqrt(xdot^2 + ydot^2)
 	if(x(3) < 1e-3)//Very small velocity numerical error while finding u_1
 	{
-		u(0) = 0;//Should find the right formula which is stable for small velocities
-		u(1) = 0;
+		u[0](0) = 0;//Should find the right formula which is stable for small velocities
+		u[0](1) = 0;
 		x(2) = 0;
 	}
 	else
 	{
 		int signofv = sgn(x[3]);
 		x(2) = atan2(signofv*y[1][1], signofv*y[1][0]);//thetadot = atan2(ydot,xdot)
-		u(0) = (y[1][0]*y[2][0] + y[1][1]*y[2][1])/((this->r)*x(3));
-		u(1) = (this->l/x(3))*(y[1][0]*y[2][1]-y[1][1]*y[2][0]);
+		u[0](0) = (y[1][0]*y[2][0] + y[1][1]*y[2][1])/((this->r)*x(3));
+		u[0](1) = (this->l/x(3))*(y[1][0]*y[2][1]-y[1][1]*y[2][0]);
 	}
 }

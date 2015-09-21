@@ -586,9 +586,9 @@ namespace gcop {
         }
         
         if (updateUpperBound) {
-          cout << "Jub=" << Jub << " ce.Jmax=" << ce.Jmax << endl;          
+          //cout << "Jub=" << Jub << " ce.Jmax=" << ce.Jmax << endl;          
           Jub = min(Jub, ce.Jmax);
-          cout << "Jub=" << Jub << endl;
+          //cout << "Jub=" << Jub << endl;
         }
       }
 
