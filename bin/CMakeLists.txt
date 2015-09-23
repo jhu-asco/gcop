@@ -26,6 +26,13 @@ IF (CERES_FOUND)
 	add_executable(dynvisest dynvisest.cc)
 	target_link_libraries(dynvisest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(qrotorgdocp qrotorgdocp.cc)
+	target_link_libraries(qrotorgdocp  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+	add_executable(particle2dgdocp particle2dgdocp.cc)
+	target_link_libraries(particle2dgdocp  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+
 ENDIF (CERES_FOUND)
 
 	add_executable(body2dtest body2dtest.cc)
@@ -60,9 +67,6 @@ IF (PQP_FOUND)
 	add_executable(body3drhc body3drhc.cc)
 	target_link_libraries(body3drhc  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
-	add_executable(body3ddemstab body3ddemstab.cc)
-	target_link_libraries(body3ddemstab  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
-
 	add_executable(body3dcestab body3dcestab.cc)
 	target_link_libraries(body3dcestab  gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
@@ -70,6 +74,9 @@ IF (DSL_FOUND)
 
 	add_executable(body3dcedemstab body3dcedemstab.cc)
 	target_link_libraries(body3dcedemstab gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
+	add_executable(body3ddemstab body3ddemstab.cc)
+	target_link_libraries(body3ddemstab  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
 ENDIF (DSL_FOUND)
 

@@ -6,6 +6,6 @@
 
 4.) Use install.bash for compiling the package
 
-5.) Required Dependencies: DSL (https://git.lcsr.jhu.edu/ggarime1/dsl) GSL (libgsl0-dev) Eigen3 (libeigen3-dev)
+5.) Required Dependencies: GSL (libgsl0-dev) Eigen3 (libeigen3-dev)
 
-6.) Optional Dependencies: OpenCV, OpenGL (For bins)
+6.) Optional Dependencies: OpenCV, OpenGL (For bins) DSL (https://github.com/jhu-asco/dsl_gridsearch)
