@@ -54,13 +54,12 @@ namespace gcop {
                      Vectormd *Lp = 0, Matrixmd *Lpp = 0,
                      Matrixmnd *Lpx = 0);
 
-    /*
     bool Res(Vectorgd &g, 
              double t, const T &x, const Vectorcd &u, double h,
              const Vectormd *p = 0,
              Matrixgnd *dgdx = 0, Matrixgcd *dgdu = 0,
              Matrixgmd *dgdp = 0);                 
-    */
+
     Constraint<T, _nx, _nu, _np, _ng> &con;
 
     double b;    ///< penalty coefficient (default is 1)
@@ -79,11 +78,35 @@ namespace gcop {
 
     if (_ng == Dynamic) {
       gp.resize(con.ng);
+      this->ng = con.ng;
     }    
+    else 
+    {
+      this->ng = _ng;
+    }
 
     if (_nx == Dynamic || _ng == Dynamic) {
       dgdx.resize(con.ng, sys.X.n);
     }
+  }
+
+  template <typename T, int _nx, int _nu, int _np, int _ng> 
+    bool  ConstraintCost<T, _nx, _nu, _np, _ng>::Res(Vectorgd &g, 
+             double t, const T &x, const Vectorcd &u, double h,
+             const Vectormd *p,
+             Matrixgnd *dgdx, Matrixgcd *dgdu,
+             Matrixgmd *dgdp)
+  {
+    this->con(this->g, t, x, u, p, dgdx);
+    for (int i = 0; i < con.ng; ++i) {
+      if (this->g[i] < 0) { // if constraint is satisfied then null it
+        this->g[i] = 0;
+        if (dgdx)
+          dgdx->row(i).setZero();
+      }      
+    }
+    g = sqrt(b)*this->g;
+    return true;
   }
   
   template <typename T, int _nx, int _nu, int _np, int _ng> 
@@ -97,7 +120,7 @@ namespace gcop {
                                                     Matrix<double, _np, _nx> *Lpx) {
 
     double q = 234234023411230; 
-    dgdx[0] = q;   // random number
+    dgdx(0,0) = q;   // random number
 
     // only consider state constraints for now
     this->con(this->g, t, x, u, p, Lx ? &dgdx : 0);
@@ -109,7 +132,7 @@ namespace gcop {
     double eps = 1e-3;
 
     // if no jacobians were provided use finite differences
-    if (Lx && fabs(dgdx[0] - q) < 1e-10) {
+    if (Lx && fabs(dgdx(0,0) - q) < 1e-10) {
       
       for (int i = 0; i < this->sys.X.n; ++i) {
         dx.setZero();
