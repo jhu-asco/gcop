@@ -9,13 +9,13 @@ namespace gcop {
     int _nx = Dynamic, 
     int _nu = Dynamic, 
     int _np = Dynamic>
-    class Cylinder : public Constraint<T, _nx, _nu, _np, 1> {
+    class Cylinder : public Constraint<T, _nx, _nu, _np> {
   public:
 
-  typedef Matrix<double, 1, 1> Vectorgd;
-  typedef Matrix<double, 1, _nx> Matrixgxd;
-  typedef Matrix<double, 1, _nu> Matrixgud;
-  typedef Matrix<double, 1, _np> Matrixgpd;
+  typedef Matrix<double, Dynamic, 1> Vectorgd;
+  typedef Matrix<double, Dynamic, _nx> Matrixgxd;
+  typedef Matrix<double, Dynamic, _nu> Matrixgud;
+  typedef Matrix<double, Dynamic, _np> Matrixgpd;
 
   typedef Matrix<double, _nx, 1> Vectornd;
   typedef Matrix<double, _nu, 1> Vectorcd;
@@ -40,8 +40,9 @@ namespace gcop {
   
   template <typename T, int _nx, int _nu, int _np> 
     Cylinder<T, _nx, _nu, _np>::Cylinder(const Vector3d &o, double r, double h, double cr) :
-    Constraint<T, _nx, _nu, _np, 1>(), o(o), r(r), h(h), cr(cr)
+    Constraint<T, _nx, _nu, _np>(1), o(o), r(r), h(h), cr(cr)
   {
+    this->ng = 1;
   }
   
   template <typename T, int _nx, int _nu, int _np> 
@@ -51,24 +52,28 @@ namespace gcop {
                                              Matrixgxd *dgdx, Matrixgud *dgdu,
                                              Matrixgpd *dgdp)
     {
-      const Vector3d &p = x.second.head(3); // position
+      g.resize(1);
+      const Vector3d &p = x.p; // position
       
-      Vector2d v = p.head<2>() - o.head<2>();
+      Vector3d v = p - o;
+      if(p(2) < o(2) + h && p(2) > o(2))
+        v(2) = 0;
 
       double d = v.norm() - cr;  // distance from center of cylinder to system boundary
       
-      if (d < 0) {
-        cout << "ERR: already colliding" << endl;
-      }
+      //if (d < 0) {
+      //  cout << "ERR: already colliding" << endl;
+      //}
 
       g[0] = r - d; // must be negative for non-collision
       
       if (dgdx) {
-        dgdx->Zero();
+        dgdx->resize(1, _nx);
+        dgdx->setZero();
         if (g[0] > 0)
-          dgdx->head(2) = -v/v.norm();
+          dgdx->row(0).head(3) = -v/v.norm();
         else
-          dgdx->head(2) = v/v.norm();
+          dgdx->row(0).head(3) = v/v.norm();
       }
     }
 };

@@ -23,6 +23,7 @@ set(headers
     rnlqsensorcost.h
     sensorcost.h
     multicost.h
+    multilscost.h
     constraintcost.h
     body2dtrackcost.h
     body3dtrackcost.h
