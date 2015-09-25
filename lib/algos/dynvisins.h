@@ -4,6 +4,8 @@
 #include <cmath>
 #include <cstdio>
 #include <iostream>
+#include <map>
+
 
 #include <fstream>
 #include "body3d.h"
@@ -41,17 +43,34 @@ using namespace Eigen;
 class DynVisIns {
 public:
   
-  ceres::Problem problem;
+  struct Point {
+    Vector3d l;              ///< the point 3d coordinates
+    map<int, Vector2d> zs;   ///< map of feature measurements indexed by camera id
+  };
 
-  vector<Vector3d> ls;     ///< 3d points
-  vector<Body3dState> xs;  ///< sequence of states
+  struct Camera {
+    Body3dState x;              ///< the point 3d coordinates
+    vector<int> pntIds;         ///< list of points observed by this camera
+
+    double dt;                 ///< delta t to next camera
+
+    vector<double> ts;        ///< local times (within each segment) at which IMU measurements arrived
+    vector<Vector3d> ws;      ///< accumulated IMU gyro readings from last cam frame
+    vector<Vector3d> as;      ///< accumulated IMU acc readings from last cam frame    
+  };
+  
+  
+  map<int, Point> pnts;   ///< all points
+  
+  int camId;              ///< current camera id (incremented after a frame is added)
+  int camId0;             ///< starting camera id (pointing to begining of window)
+  map<int, Camera> cams;  ///< cameras
+
+  int maxCams;            ///< max length of camera sequence (0 by default indicating no limit)
+
+  ceres::Problem problem;  ///< the ceres problem
 
   double *v;             ///< the full ceres optimization vector
-
-  vector<Vector2d> zs;   ///< all perpsective measurements
-  vector<Vector3d> lus;  ///< all unit-spherical measurements (points in the IMU body frame)
-  vector<int> zInds;     ///< measurements points indices (into ls)
-  vector<int> zCamInds;  ///< measurements camera indices (into xs)
 
   double pxStd;          ///< std dev of pixels
   double sphStd;         ///< induced std dev on spherical measurements
@@ -74,8 +93,8 @@ public:
 
   Body3dState x0;  ///< ins sequence start state
 
-  Vector3d bg;  ///< acceleration bias
-  Vector3d ba;  ///< gyro bias
+  Vector3d bg;  ///< acceleration bias (assumed fixed during optimization window)
+  Vector3d ba;  ///< gyro bias (assumed fixed during optimization window)
 
   bool useImu;     ///< process IMU?
   bool useCam;     ///< process cam? 
@@ -85,16 +104,71 @@ public:
 
   bool optBias;    ///< to optimize over biases?
 
-  bool sphMeas;    ///< use spherical measurements instead of standard pixel perspective measurements?
-
-
-  vector<double> dts;           ///< camera segment delta times
-  vector<vector<double> > tss;  ///< local times (within each segment) at which IMU measurements arrived
-  vector<vector<Vector3d> > wss;  ///< accumulated IMU gyro readings from last cam frame
-  vector<vector<Vector3d> > ass;  ///< accumulated IMU acc readings from last cam frame
-  
+  bool sphMeas;    ///< use spherical measurements instead of standard pixel perspective measurements? (false by default)
+   
   DynVisIns();
   virtual ~DynVisIns();
+
+  
+  /**
+   * Estimate trajectory and points
+   * @return true on success
+   */
+  bool Compute();
+
+  /**
+   * Process camera features
+   * @param t time
+   * @param zs perspective features
+   * @param zInds features indices
+   * @return true on success
+   */
+  bool ProcessCam(double t, const vector<Vector2d> &zs, const vector<int> &zInds);
+
+  /**
+   * Remove a camera frame from sequence
+   * @param id cam id
+   * @return true on success
+   */
+  bool RemoveCamera(int id);
+
+  /**
+   * Remove a point
+   * @param id point id
+   * @return true on success
+   */
+  bool RemovePoint(int id);
+
+
+  /**
+   * Process IMU measurement
+   * @param t time
+   * @param w gyro measurement
+   * @param a acceleration measurement
+   * @return true on success
+   */
+  bool ProcessImu(double t, const Vector3d &w, const Vector3d &a);
+
+
+  bool MakeFeature(Vector2d &z, const Body3dState &x, const Vector3d &l);
+
+  bool MakeFeatures(vector<Vector2d> &zs, 
+                    vector<int> &pntIds,
+                    const Body3dState &x, 
+                    const map<int, Point> &pnts);
+
+  /**
+   * Generate synthetic cam and IMU data and store in a provided "true" system tvi
+   * @param tvi the true VI system
+   * @param ns number segments
+   * @param np number of points
+   * @param ni number of IMU measurements per camera segment
+   */
+  bool GenData(DynVisIns &tvi, int ns, int np, int ni = 2);
+
+  bool SimData(DynVisIns &tvi, int ns, int np, int ni = 2, double dt = .1);
+
+  bool LoadFile(const char* filename);
 
   /**
    * Convert from stl/Eigen data structures to ceres optimization vector
@@ -103,20 +177,24 @@ public:
    */
   bool ToVec(double *v) {
     Vector12d c;
-    for (int i = 0; i < xs.size(); ++i) {
-      FromState(c, xs[i]);
+    map<int, Camera>::iterator camIter;
+    int i = 0;
+    for (camIter = cams.begin(); camIter != cams.end(); ++camIter, ++i) {
+      FromState(c, camIter->second.x);
       memcpy(v + 12*i, c.data(), 12*sizeof(double));
     }
 
-    int i0 = 12*xs.size(); 
-    for (int i = 0; i < ls.size(); ++i) {
-      memcpy(v + i0 + 3*i, ls[i].data(), 3*sizeof(double));
+    int i0 = 12*cams.size(); 
+    map<int, Point>::iterator pntIter;
+    i=0;
+    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter, ++i) {
+      memcpy(v + i0 + 3*i, pntIter->second.l.data(), 3*sizeof(double));
     }
 
-    if (optBias) {
-      memcpy(v + 12*xs.size() + 3*ls.size(), bg.data(), 3*sizeof(double));
-      memcpy(v + 12*xs.size() + 3*ls.size() + 3, ba.data(), 3*sizeof(double));
-    }    
+    //    if (optBias) {
+    //      memcpy(v + 12*xs.size() + 3*ls.size(), bg.data(), 3*sizeof(double));
+    //      memcpy(v + 12*xs.size() + 3*ls.size() + 3, ba.data(), 3*sizeof(double));
+    //    }    
     return true;
   }
   
@@ -127,19 +205,25 @@ public:
    * @return true if success
    */
   bool FromVec(const double *v) {
-    for (int i = 0; i < xs.size(); ++i) {
-      ToState(xs[i], Vector12d(v + 12*i));
+    //    xs.resize(cams.size();
+    map<int, Camera>::iterator camIter;
+    int i=0;
+    for (camIter = cams.begin(); camIter != cams.end(); ++camIter, ++i) {
+      ToState(camIter->second.x, Vector12d(v + 12*i));
+      //      xs[i] = camIter->second.x;
     }
 
-    int i0 = 12*xs.size(); 
-    for (int i = 0; i < ls.size(); ++i) {
-      ls[i] = Vector3d(v + i0 + 3*i);
+    int i0 = 12*cams.size(); 
+    map<int, Point>::iterator pntIter;
+    i = 0;
+    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter, ++i) {
+      pntIter->second.l = Vector3d(v + i0 + 3*i);
     }
 
-    if (optBias) {
-      bg = Vector3d(v + 12*xs.size() + 3*ls.size());
-      ba = Vector3d(v + 12*xs.size() + 3*ls.size() + 3);
-    }
+    //    if (optBias) {
+    //      bg = Vector3d(v + 12*xs.size() + 3*ls.size());
+    //      ba = Vector3d(v + 12*xs.size() + 3*ls.size() + 3);
+    //    }
 
     return true;
   }
@@ -186,39 +270,6 @@ public:
     c.tail<3>() = x.v;
   }
 
-  
-  /**
-   * Estimate trajectory and points
-   * @return true on success
-   */
-  bool Compute();
-
-  /**
-   * Process camera features
-   * @param t time
-   * @param zs perspective features
-   * @param zInds features indices
-   * @return true on success
-   */
-  bool ProcessCam(double t, const vector<Vector2d> &zs, const vector<int> &zInds);
-
-  /**
-   * Process IMU measurement
-   * @param t time
-   * @param w gyro measurement
-   * @param a acceleration measurement
-   * @return true on success
-   */
-  bool ProcessImu(double t, const Vector3d &w, const Vector3d &a);
-
-  /**
-   * Generate synthetic cam and IMU data and store in a provided "true" system tvi
-   * @param tvi the true VI system
-   * @param ni number of IMU measurements per camera segment
-   */
-  bool GenData(DynVisIns &tvi, int ni = 2);
-
-  bool LoadFile(const char* filename);
 };
 
 }

@@ -427,22 +427,31 @@ struct StatePrior {
    * @param x_q 6-dim vector containing orientation and position
    * @param x_v 3-dim vector containing velocity v
    */
-  bool operator()(const double* o_,
+  bool operator()(const double* r_,
                   const double* p_,
-                  const double* w_,
+                  const double* dr_,
                   const double* v_,
                   double* res) const 
   {
     Matrix3d R;
-    SO3::Instance().exp(R, Vector3d(o_));
+    Matrix3d D;
 
-    Vector3d eo;
-    SO3::Instance().log(eo, x0.R.transpose()*R); 
+    Vector3d r(r_);
+    SO3::Instance().exp(R, r);
+
+    Vector3d er;
+    SO3::Instance().log(er, x0.R.transpose()*R); 
 
     Vector12d e;
-    e.head<3>() = eo;
+    e.head<3>() = er;
     e.segment<3>(3) = Vector3d(p_) - x0.p;
-    e.segment<3>(6) = Vector3d(w_) - x0.w;
+    
+    // @mk: this could be optimized to perform the dexpinv to the x0 prior and just 
+    // take the diff in coordinates here:
+    SO3::Instance().dexp(D, -r);
+    Vector3d w = D*Vector3d(dr_); // the body-fixed angular velocity
+
+    e.segment<3>(6) = w - x0.w;
     e.tail<3>() = Vector3d(v_) - x0.v;
     e = W*e;
 
@@ -466,6 +475,8 @@ struct StatePrior {
 
 
 DynVisIns::DynVisIns() : t(-1), tc(-1) {
+
+  maxCams = 0;
 
   v = 0;
   
@@ -498,7 +509,10 @@ DynVisIns::DynVisIns() : t(-1), tc(-1) {
   wStd = .001;    // gyro noise
   aStd = .02;     // acc noise
 
-  g0 << 0,0,9.81;
+  g0 << 0, 0, 9.81;
+
+  camId = -1;
+  camId0 = 0;
 }
 
 DynVisIns::~DynVisIns()
@@ -528,15 +542,17 @@ bool DynVisIns::ProcessImu(double t, const Vector3d &w, const Vector3d &a) {
       
   // accumulate measurements for this last camera segment 
   // only if a camera frame has alrady been added
-  if (useCam && xs.size()) {
+  if (useCam && camId >= 0) {
     assert(t > tc);
-    assert(tss.size());
-    assert(wss.size());
-    assert(ass.size());
+    //    assert(tss.size());
+    //    assert(wss.size());
+    //    assert(ass.size());
 
-    tss.back().push_back(t - tc); // add local time
-    wss.back().push_back(w);    
-    ass.back().push_back(a);    
+    Camera &cam = cams[camId];
+
+    cam.ts.push_back(t - tc); // add local time
+    cam.ws.push_back(w);
+    cam.as.push_back(a);
   }
 
   // update current time
@@ -552,106 +568,139 @@ bool DynVisIns::ProcessImu(double t, const Vector3d &w, const Vector3d &a) {
  * @param zcInds current measured point indices
  * @return true on success
  */
-bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<int> &zcInds) 
+bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<int> &pntIds) 
 {
   assert(useCam);  
-  assert(this->t >= 0); // assume at least one IMU measurement has arrived 
+  //  assert(this->t >= 0); // assume at least one IMU measurement has arrived 
 
-  if (useImu) {
-    double dt = t - this->t;
+  //  if (useImu) {
     //    cout << "dt=" << dt << endl;
-    if (dt < 0) {
-      cout << "[W] DynVisIns::ProcessCam: frame out of sync dt=" << dt << endl;
+    if (t - this->t < 0) {
+      cout << "[W] DynVisIns::ProcessCam: frame out of sync dt=" << t - this->t << endl;
       return false;
     }
+    //  }
 
-    // update global time and camera time
-    this->t = t;
+  Camera cam; // new camera to be added
+  ++camId;
 
-    // if this is not the first cam frame
-    // then add the segment delta-t
-    if (tc > 0) {
-      dts.push_back(t - tc);
-    }
+  // update global time and camera time
+  this->t = t;  
 
-    this->tc = tc;
-
-    // add a new empty sequence of in-between-keyframes IMU measurements
-    // these will be populated with IMU data in ProcessImu
-    vector<double> ts;
-    vector<Vector3d> ws;
-    vector<Vector3d> as;
-    tss.push_back(ts);
-    wss.push_back(ws);
-    ass.push_back(as);
+  // if not first camera then set the total dt b/n last and this camera
+  // and init state to previous cam state
+  if (camId > 0) {
+    cams[camId - 1].dt = t - tc;
+    cam.x = cams[camId - 1].x;
+  } else {
+    cam.dt = 0;
+    cam.x = x0;
   }
-
-  assert(zcs.size() == zcInds.size());
-
-  // push a copy of current state
-  xs.push_back(x0); 
+  
+  this->tc = t;  // WAS =tc
+  
   // above one could use the propagated state x instead of x0 to initialize using IMU dead-reconing -- only a good idea if initial pose is correct, otherwise accelerometer-based odometry will be off
   
   // add to all observations
-  zs.insert(zs.end(), zcs.begin(), zcs.end());
-  
-  for (int i = 0; i < zcs.size(); ++i) {
+  // zs.insert(zs.end(), zcs.begin(), zcs.end());  
 
-    // generate a spherical measurement
-    Vector3d lu((zcs[i][0] - K(0,2))/K(0,0),
-                (zcs[i][1] - K(1,2))/K(1,1),
-                1);    
-    lu = lu/lu.norm(); // unit normal in camera frame      
-    lus.push_back(lu);
-
-    // we assume that all feature id's correspond to different points to be optimized
-    // we allow gaps is the sequence of id's, although this should not be necessary
-    if (zcInds[i] >= ls.size()) {
+  for (int i = 0; i < zcs.size(); ++i) {        
+    //    lus.push_back(lu);
+    
+    int pntId = pntIds[i];
+    const Vector2d &z = zcs[i];
+    
+    // if this is a new point, then add it to point map
+    if (pnts.find(pntId) == pnts.end()) {
+      
+      //    if (zcInds[i] >= ls.size()) {
       // create new points to advance to this id
-      while (zcInds[i] >= ls.size())
-        ls.push_back(Vector3d(1,0,0));
       
-      assert(zcInds[i] == ls.size() - 1);
+      Point pnt;
+      //      pnt.l = Vector3d(1,0,0);
+      // generate a spherical measurement
+      Vector3d lu((zcs[i][0] - K(0,2))/K(0,0),
+                  (zcs[i][1] - K(1,2))/K(1,1),
+                  1);    
+      lu = lu/lu.norm(); // unit normal in camera frame      
       
-      //      Vector3d lc = x.R*Ric*lu; // unit normal in spatial frame
-      //      Vector3d l = 3*lc + x.p; // initial depth is 5
-
-      Vector3d lc = Ric*lu; // unit normal in spatial frame
-      Vector3d l = 3*lc; // initial depth is e.g. 3 assuming one is indoors in a room
+      pnt.l = cam.x.p + cam.x.R*Ric*lu; // unit normal in spatial frame
       
-      ls.back() = l;
+      pnts[pntId] = pnt;
+    } 
 
-      /* covariance of points
-      static Vector3d e3(0, 0, 1);
-      Vector3d b = e3.cross(lc);
-      b = b/b.norm();
-      
-      Matrix3d Rl;
-      Rl.col(0) = lc;
-      Rl.col(1) = b;
-      Rl.col(2) = lc.cross(b);
-      
-      Matrix3d Pl;
-      Pl << 25, 0, 0, 0, .1, 0, 0, 0, .1;
-
-      P.block(15 + i*3, 15 + i*3, 3, 3) = Rl*Pl*Rl.transpose();
-      */
-
-    }
-
-    // add the camera index of this measurement
-    zCamInds.push_back(xs.size() - 1);
-    // add the point index of this measurement
-    zInds.push_back(zcInds[i]);
+    pnts[pntId].zs[camId] = z;
+    
+    /* covariance of points
+       static Vector3d e3(0, 0, 1);
+       Vector3d b = e3.cross(lc);
+       b = b/b.norm();
+       
+       Matrix3d Rl;
+       Rl.col(0) = lc;
+       Rl.col(1) = b;
+       Rl.col(2) = lc.cross(b);
+       
+       Matrix3d Pl;
+       Pl << 25, 0, 0, 0, .1, 0, 0, 0, .1;
+       
+       P.block(15 + i*3, 15 + i*3, 3, 3) = Rl*Pl*Rl.transpose();
+    */
+  
+    cam.pntIds.push_back(pntId);
   }
+  
+  cams[camId] = cam;
+
+  if (maxCams > 0 && cams.size() > maxCams) {
+    assert(cams.size() == maxCams + 1);
+    RemoveCamera(camId0);
+    camId0++;
+  }
+
   return true;
 }
 
 
+bool DynVisIns::RemoveCamera(int id) 
+{
+  map<int, Camera>::iterator camIter = cams.find(id);
+  if (camIter == cams.end()) {
+    cout << "[W] DynVisIns::RemoveCamera: cannot find camera with id#" << id << endl;
+    return false;
+  }
+  Camera &cam = camIter->second;
+
+  // go through all points seen by the camera
+  vector<int>::iterator iter;
+  for (iter = cam.pntIds.begin(); iter != cam.pntIds.end(); ++iter) {
+    int pntId = *iter;
+    Point &pnt = pnts[pntId];
+    pnt.zs.erase(id);  // erase the feature measurement of this point by cam
+    if (!pnt.zs.size())  // if this point now has no measurements then delete it
+      pnts.erase(pntId); 
+  }
+  // remove the camera
+  cams.erase(id);  
+}
+
+bool DynVisIns::RemovePoint(int id) 
+{
+  // TODO
+}
+
+//bool DynVisIns::PopFront()
+//{
+  
+//}
+
 
 bool DynVisIns::Compute() {
-  
-  v = new double[12*xs.size() + 3*ls.size() + (optBias ? 6 : 0)];
+
+  if (v)
+    delete[] v;
+      
+  v = new double[12*cams.size() + 3*pnts.size() + (optBias ? 6 : 0)];
   
   ToVec(v);
   if (useCam) {
@@ -661,86 +710,127 @@ bool DynVisIns::Compute() {
     // we assume a constant ball of radius sphStd, averaged on the u-v plane
     sphStd = pxStd/sqrt(fx*fx + fy*fy)/2;
     
-    assert(this->ls.size());
+    assert(this->pnts.size());
+    
+    
+    // first iterate through points 
+    map<int, Point>::iterator pntIter;
+    //    for (int i = 0; i < lus.size(); ++i) {
+    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
+      int pntId = pntIter->first;
+      Point &pnt = pntIter->second;
+      
+      map<int, Vector2d>::iterator zIter;
+      for (zIter = pnt.zs.begin(); zIter != pnt.zs.end(); ++zIter) {//int i = 0; i < pnt.zs.size(); ++i) {
+        int camId = zIter->first;
+        Vector2d &z = zIter->second;
+        ceres::CostFunction* cost_function =
+          //        sphMeas ?
+          //        SphError::Create(*this, lus[i]) :
+          PerspError::Create(*this, z);
         
-    for (int i = 0; i < lus.size(); ++i) {
-
-      ceres::CostFunction* cost_function =
-        sphMeas ?
-        SphError::Create(*this, lus[i]) :
-        PerspError::Create(*this, zs[i]);
-              
-      double *x = v + 12*zCamInds[i];
-      double *l = v + 12*xs.size() + 3*zInds[i];
-      
-      assert(zCamInds[i] < xs.size());
-      assert(zInds[i] < ls.size());
-      
-
-      //      ceres::LossFunction *loss_function = new ceres::HuberLoss(100.0);
-      //      ceres::LossFunctionWrapper* loss_function(new ceres::HuberLoss(1.0), ceres::TAKE_OWNERSHIP);
-
-      problem.AddResidualBlock(cost_function,
-                               NULL,
-                               x, x + 3, l);
-      
-      // for now restrict point coordinates to [-5,5] meters, assuming we're in a small room
-      problem.SetParameterLowerBound(l, 0, -5);
-      problem.SetParameterLowerBound(l, 1, -5);
-      problem.SetParameterLowerBound(l, 2, -5);
-      problem.SetParameterUpperBound(l, 0, 5);
-      problem.SetParameterUpperBound(l, 1, 5);
-      problem.SetParameterUpperBound(l, 2, 5);      
+        double *x = v + 12*(camId - camId0);
+        double *l = v + 12*cams.size() + 3*pntId;
+        
+        //        assert(zCamInds[i] < xs.size());
+        //        assert(zInds[i] < ls.size());
+        
+        
+        //      ceres::LossFunction *loss_function = new ceres::HuberLoss(100.0);
+        //      ceres::LossFunctionWrapper* loss_function(new ceres::HuberLoss(1.0), ceres::TAKE_OWNERSHIP);
+        
+        problem.AddResidualBlock(cost_function,
+                                 NULL,
+                                 x, x + 3, l);
+        
+        // for now restrict point coordinates to [-5,5] meters, assuming we're in a small room
+        problem.SetParameterLowerBound(l, 0, -5);
+        problem.SetParameterLowerBound(l, 1, -5);
+        problem.SetParameterLowerBound(l, 2, -5);
+        problem.SetParameterUpperBound(l, 0, 5);
+        problem.SetParameterUpperBound(l, 1, 5);
+        problem.SetParameterUpperBound(l, 2, 5);      
+      }
     }
   }
 
   if (useImu) {
-    assert(xs.size() >= tss.size());
-    assert(dts.size() == tss.size());
+    //    assert(xs.size() >= tss.size());
+    //    assert(dts.size() == tss.size());
     
-    for (int i = 0; i < tss.size(); ++i) {
-      vector<double> &ts = tss[i];
-      vector<Vector3d> &ws = wss[i];
-      vector<Vector3d> &as = ass[i];
-      assert(ts.size() == ws.size());
-      assert(ts.size() == as.size());
-      if (ts.size()) {
-        assert(dts[i] > 0);
-        ceres::CostFunction* gyroCost = GyroCubicError::Create(*this, dts[i], ts, ws);
-        
-        double *xa = v + 12*i;
-        double *xb = v + 12*(i+1);
-        
-        problem.AddResidualBlock(gyroCost,
-                                 NULL /* squared loss */,
-                                 xa, xa + 6, xb, xb + 6);
+    map<int, Camera>::iterator camIter;
+    for (camIter = cams.begin(); camIter != cams.end(); ++camIter) {
 
-        ceres::CostFunction* accCost = AccCubicError::Create(*this, dts[i], ts, as);
-        
-        problem.AddResidualBlock(accCost,
-                                 NULL /* squared loss */,
-                                 xa, xa + 3, xa + 6, xa + 9,
-                                 xb, xb + 3, xb + 6, xb + 9);        
-      }
+      int camId = camIter->first;
+      Camera &cam = camIter->second;
+
+      // ignore last frame
+      if (camId == this->camId)
+        continue;
+      
+      cout << "camId=" << camId << endl;
+      assert(cam.ts.size());
+      assert(cam.dt > 0);
+      //    for (int i = 0; i < tss.size(); ++i) {
+      //      vector<double> &ts = tss[i];
+      //      vector<Vector3d> &ws = wss[i];
+      //      vector<Vector3d> &as = ass[i];
+      //      assert(ts.size() == ws.size());
+      //      assert(ts.size() == as.size());
+      
+      ceres::CostFunction* gyroCost = GyroCubicError::Create(*this, cam.dt, cam.ts, cam.ws);
+      
+      double *xa = v + 12*(camId - camId0);
+      double *xb = v + 12*(camId + 1 - camId0);
+      
+      problem.AddResidualBlock(gyroCost,
+                               NULL /* squared loss */,
+                               xa, xa + 6, xb, xb + 6);
+      
+      ceres::CostFunction* accCost = AccCubicError::Create(*this, cam.dt, cam.ts, cam.as);
+      
+      problem.AddResidualBlock(accCost,
+                               NULL /* squared loss */,
+                               xa, xa + 3, xa + 6, xa + 9,
+                               xb, xb + 3, xb + 6, xb + 9);        
       // could also add some box constraints on the state?
     }
   }
-
+  
   if (useDyn) {
     
-    assert(xs.size() == dts.size() + 1);
-    for (int i = 0; i < dts.size(); ++i) {
-      assert(dts[i] > 0);
+    //    assert(xs.size() == dts.size() + 1);
+    map<int, Camera>::iterator camIter;
+    for (camIter = cams.begin(); camIter != cams.end(); ++camIter) {
+
+      // ignore last frame
+      if (camId == this->camId)
+        continue;
       
-      double *xa = v + 12*i;
-      double *xb = v + 12*(i+1);
+      int camId = camIter->first;
+      Camera &cam = camIter->second;
       
-      ceres::CostFunction* rotCost = CvCubicRotError::Create(*this, dts[i]);    
+      assert(cam.dt > 0);
+
+      //    for (int i = 0; i < tss.size(); ++i) {
+      //      vector<double> &ts = tss[i];
+      //      vector<Vector3d> &ws = wss[i];
+      //      vector<Vector3d> &as = ass[i];
+      //      assert(ts.size() == ws.size());
+      //      assert(ts.size() == as.size());
+    
+        //    for (int i = 0; i < dts.size(); ++i) {
+        //      assert(dts[i] > 0);
+      
+      double *xa = v + 12*(camId - camId0);
+      double *xb = v + 12*(camId + 1 - camId0);
+      
+      ceres::CostFunction* rotCost = CvCubicRotError::Create(*this, cam.dt);    
       problem.AddResidualBlock(rotCost,
                                NULL /* squared loss */,
                                xa, xa + 6, xb, xb + 6);
       
-      ceres::CostFunction* posCost = CvCubicPosError::Create(*this, dts[i]);    
+      ceres::CostFunction* posCost = CvCubicPosError::Create(*this, cam.dt);    
       problem.AddResidualBlock(posCost,
                                NULL /* squared loss */,
                                xa + 3, xa + 9, xb + 3, xb + 9);
@@ -772,6 +862,7 @@ bool DynVisIns::Compute() {
   v = 0;
 
   return true;
+  
 }
 
 /*
@@ -787,7 +878,7 @@ void hermite3(Vector3d &c1, Vector3d &c2, Vector3d &c3,
 */
 
 // generate synthetic data
-bool DynVisIns::GenData(DynVisIns &tvi, int ni) 
+  bool DynVisIns::GenData(DynVisIns &tvi, int ns, int np, int ni) 
 {
   fx = 453.23520207;
   fy = 453.72298392;
@@ -797,54 +888,64 @@ bool DynVisIns::GenData(DynVisIns &tvi, int ni)
   K(1,0) = 0; K(1,1) = fy; K(1,2) = cy;
 
   // tvi is the "true" VI estimator
-  vector<Body3dState> &xs = tvi.xs;
-  vector<Vector3d> &ls = tvi.ls;
+  map<int, Camera> &cams = tvi.cams;
+  map<int, Point> &pnts = tvi.pnts;
 
-  this->ls.resize(ls.size());
+  //  this->ls.resize(ls.size());
 
   // generate a grid of features on a plane 3 meters ahead
-  int n1 = sqrt(ls.size());
-  assert(ls.size() == n1*n1);
+  //  int n1 = sqrt(ls.size());
+  //  assert(ls.size() == n1*n1);
+  int n1 = sqrt(np);
+
   for (int i = 0; i < n1; ++i) {
     for (int j = 0; j < n1; ++j) {
-      int ind = i*n1 + j;        
+      int id = i*n1 + j;        
       // true points are at a vertical plane at distance 3 meters forward
-      ls[ind] = Vector3d( 3, ((double)(j-n1/2.0))/n1, ((double)(i-n1/2.0))/n1);
+      Point pnt;
+      pnt.l = Vector3d( 3, ((double)(j-n1/2.0))/n1, ((double)(i-n1/2.0))/n1);
+
+      pnts[id] = pnt;
+      
+      pnt.l /= pnt.l.norm();
 
       // initialize estimator points using unit vectors pointing towards the points
-      this->ls[ind] = ls[ind]/ls[ind].norm();
+      this->pnts[id] = pnt;
     }
   }    
-  cout << "Generated " << ls.size() << " points" << endl;
+  cout << "Generated " << pnts.size() << " points" << endl;
 
   // #of segments
-  int ns = xs.size() - 1;
+  //  int ns = xs.size() - 1;
 
-  double t0 = 0;
+  double t = 0;
   double dt = 1.0/ns;  // time-step of each segment
   
-  // initial state
-  //  Body3dState &x = xs[0];
-  //  x.R.setIdentity();
-  //  x.p << 0, -1, .5;
-  //  x.w << 0, 0, .5;
-  //  x.v << 0, .5, 0;
 
-  this->xs.resize(xs.size());
-  this->tss.resize(xs.size() - 1);
-  this->wss.resize(xs.size() - 1);
-  this->ass.resize(xs.size() - 1);  
+  //  this->xs.resize(xs.size());
+  //  this->tss.resize(xs.size() - 1);
+  //  this->wss.resize(xs.size() - 1);
+  //  this->ass.resize(xs.size() - 1);  
 
   // initialize first state using the prior
-  this->xs[0] = this->x0;
+  Camera cam0;
+  cam0.x = this->x0;  
+  cam0.dt = dt;
+  tvi.camId++;   // is -1 initially
+  cams[tvi.camId] = cam0;
+  this->cams[tvi.camId] = cam0;
 
+  //  tvi.xs.push_back(this->x0);
+
+  // initialize simulated path using x0
   Vector3d r, p, dr, v;
-  FromState(r, p, dr, v, xs[0]);
+  FromState(r, p, dr, v, tvi.x0);
   
   for (int i = 0; i < ns; ++i) {
-    
-    dts.push_back(dt);   // camera segment deltas
-    
+
+    Camera cam;
+    cam.dt = dt;
+            
     // random angular acceleration
     Vector3d aw = dwStd*Vector3d(randn(), randn(), randn());
     Vector3d av = dvStd*Vector3d(randn(), randn(), randn());
@@ -855,9 +956,6 @@ bool DynVisIns::GenData(DynVisIns &tvi, int ni)
     
     // generate IMU measurements
     if (useImu) {                        
-      vector<double> ts;  // local times
-      vector<Vector3d> ws;      
-      vector<Vector3d> as;
       Matrix3d D;
       
       for (int j=1; j <=ni; j++) {
@@ -871,13 +969,14 @@ bool DynVisIns::GenData(DynVisIns &tvi, int ni)
         cv.GetAcc(at, ti);
         
         ToState(xt, rt, pt, drt, vt);
-        ts.push_back(ti);   // add an IMU measurement          
-        ws.push_back(xt.w);   // gyro reading in body frame
-        as.push_back(xt.R.transpose()*(at + g0));  // accel reading in body frame
+        cam.ts.push_back(ti);   // add an IMU measurement          
+        cam.ws.push_back(xt.w);   // gyro reading in body frame
+        cam.as.push_back(xt.R.transpose()*(at + g0));  // accel reading in body frame
       }
-      tss[i] = ts;
-      wss[i] = ws;
-      ass[i] = as;
+      
+      //      tss[i] = ts;
+      //      wss[i] = ws;
+      //      ass[i] = as;
     }
     
     // update pos and vel
@@ -885,41 +984,234 @@ bool DynVisIns::GenData(DynVisIns &tvi, int ni)
     cw.GetVel(dr, dt);
     cv.GetPos(p, dt);
     cv.GetVel(v, dt);      
-    
+
+
     // true state
-    ToState(xs[i+1], r, p, dr, v);
-    
+    ToState(cam.x, r, p, dr, v);
+
+    tvi.camId++;
+    cams[tvi.camId] = cam;
     // init estimator data to first state
-    this->xs[i+1] = this->xs[0];
+    this->camId = tvi.camId;
+    this->cams[this->camId] = cam0;
   }
   
   // generate feature meas
   if (useCam)  {
-    for (int k = 0; k < xs.size(); ++k) {
-      Body3dState &x = xs[k];        
-      for (int j = 0; j < ls.size(); ++j) {
-        Matrix3d R = x.R*Ric;  // camera rotation      
-        Vector3d r = R.transpose()*(ls[j] - x.p);
+    map<int, Camera>::iterator camIter;
+
+    for (camIter = cams.begin(); camIter != cams.end(); ++camIter){
+      int camId = camIter->first;
+      Camera &cam = camIter->second;
+      Body3dState &x = cam.x;
+      map<int, Point>::iterator pntIter;
+      for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
+        int pntId = pntIter->first;
+        Point &pnt = pntIter->second;
+        Matrix3d R = x.R*Ric;  // camera rotation
+        Vector3d r = R.transpose()*(pnt.l - x.p);
         
+        this->pnts[pntId].zs[camId] = K*(r/r[2]);
+
+        cam.pntIds.push_back(pntId);
         // spherical measurements
-        this->lus.push_back(r/r.norm());      
+        //        this->lus.push_back(r/r.norm());      
         
           // pixel measurements
-        this->zs.push_back(K*(r/r[2]));
+        // this->zs.push_back();
         
-        this->zInds.push_back(j);
-        this->zCamInds.push_back(k);
+        // this->zInds.push_back(j);
+        // this->zCamInds.push_back(k);
       }
     }
   }
- 
+
+  /*
+  map<int, Camera>::iterator camIter;
+  for (camIter = this->cams.begin(); camIter != this->cams.end(); ++camIter){
+    int camId = camIter->first;
+    Camera &cam = camIter->second;
+    Body3dState &x = cam.x;
+    cout << "cam id=" << camId << " at pos p=" << cam.x.p.transpose() << endl;
+    map<int, Point>::iterator pntIter;
+    for (pntIter = this->pnts.begin(); pntIter != this->pnts.end(); ++pntIter) {
+      int pntId = pntIter->first;
+      Point &pnt = pntIter->second;
+      cout << "pnt id=" << pntId << " pos=" << pnt.l.transpose() << " ";
+      map<int, Vector2d>::iterator zIter;
+      for (zIter = pnt.zs.begin(); zIter != pnt.zs.end(); ++zIter)
+        cout << " zid= " << zIter->first << " z=" << zIter->second.transpose() << " ";
+    }
+    cout << endl;
+  }
+  */
+  
   // useImu = false;
   
-  cout << "Generated " << lus.size() << " feature measurements" << endl;
-  cout << "Generated " << tss.size() << " IMU segments" << endl;
+  //  cout << "Generated " << pnts.size() << " feature measurements" << endl;
+  //  cout << "Generated " << tss.size() << " IMU segments" << endl;
 
   return true;
 }
+
+
+bool DynVisIns::MakeFeatures(vector<Vector2d> &zs, 
+                             vector<int> &pntIds,
+                             const Body3dState &x, 
+                             const map<int, Point> &pnts)
+{
+  zs.clear();
+  pntIds.clear();
+  map<int, Point>::const_iterator pntIter;
+  for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
+    int pntId = pntIter->first;
+    const Point &pnt = pntIter->second;
+    Vector2d z;
+    MakeFeature(z, x, pnt.l);
+    zs.push_back(z);
+    pntIds.push_back(pntId);
+  }
+  return true;
+}
+
+
+bool DynVisIns::MakeFeature(Vector2d &z, const Body3dState &x, const Vector3d &l)
+{
+  Matrix3d R = x.R*Ric;  // camera rotation
+  Vector3d r = R.transpose()*(l - x.p);
+  z = K*(r/r[2]);
+  return true;
+}
+
+
+bool DynVisIns::SimData(DynVisIns &tvi, int ns, int np, int ni, double dt) 
+{
+  // set camera data
+  fx = 453.23520207;
+  fy = 453.72298392;
+  cx = 391.85891497;
+  cy = 282.24403976;
+  K(0,0) = fx; K(0,1) = 0; K(0,2) = cx;
+  K(1,0) = 0; K(1,1) = fy; K(1,2) = cy;
+
+  // tvi is the "true" VI estimator
+  map<int, Camera> &cams = tvi.cams;
+  map<int, Point> &pnts = tvi.pnts;
+
+  // number of features on each side of grid
+  int n1 = sqrt(np);
+
+  for (int i = 0; i < n1; ++i) {
+    for (int j = 0; j < n1; ++j) {
+      int id = i*n1 + j;        
+      // true points are at a vertical plane at distance 3 meters forward
+      Point pnt;
+      pnt.l = Vector3d( 3, ((double)(j-n1/2.0))/n1, ((double)(i-n1/2.0))/n1);
+      pnts[id] = pnt;
+    }
+  }    
+  cout << "Generated " << pnts.size() << " points" << endl;
+
+  double t = 0;
+  //  double dt = tf/ns;  // time-step of each segment
+
+  // initialize true first state using the true prior
+  Camera cam;
+  cam.x = tvi.x0;
+  cam.dt = dt;
+  tvi.camId++;   // is -1 initially
+  cams[tvi.camId] = cam;
+  //  this->cams[tvi.camId] = cam0;
+
+  vector<Vector2d> zs;
+  vector<int> pntIds;
+
+  MakeFeatures(zs, pntIds, cam.x, pnts);
+  ProcessCam(t, zs, pntIds);
+
+  // initialize simulated path using x0
+  Vector3d r, p, dr, v;
+  FromState(r, p, dr, v, tvi.x0);
+    
+  for (int i = 0; i < ns; ++i) {
+    // random angular acceleration
+    Vector3d aw = dwStd*Vector3d(randn(), randn(), randn());
+    Vector3d av = dvStd*Vector3d(randn(), randn(), randn());
+    Vector3d jerk(0,0,0);  // zero jerk
+    
+    Cubic cw(r, dr, dt); cw.b = aw; cw.c = jerk;
+    Cubic cv(p, v, dt); cv.b = av; cv.c = jerk;
+    
+    // local IMU time-step
+    double dti = dt/(ni+1);
+
+    // generate IMU measurements
+    if (useImu) {                        
+      Matrix3d D;
+      
+      for (int j = 1; j <= ni; j++) {
+        double ti = j*dti; // relative IMU time
+        Body3dState xt;
+        Vector3d rt, pt, drt, vt, at;
+        cw.GetPos(rt, ti);
+        cw.GetVel(drt, ti); 
+        cv.GetPos(pt, ti);
+        cv.GetVel(vt, ti);
+        cv.GetAcc(at, ti);
+        
+        ToState(xt, rt, pt, drt, vt);
+
+        ProcessImu(t + ti, xt.w, xt.R.transpose()*(at + g0));
+      }
+    }
+    // update cam time, pos and vel
+    t += dt;
+    cw.GetPos(r, dt);
+    cw.GetVel(dr, dt);
+    cv.GetPos(p, dt);
+    cv.GetVel(v, dt);      
+    
+    // true state
+    Camera cam;
+    cam.dt = dt;            
+    ToState(cam.x, r, p, dr, v);
+    tvi.camId++;
+    cams[tvi.camId] = cam;
+
+    // process cam
+    MakeFeatures(zs, pntIds, cam.x, pnts);
+    ProcessCam(t, zs, pntIds);
+  }
+
+/*
+  map<int, Camera>::iterator camIter;
+  for (camIter = this->cams.begin(); camIter != this->cams.end(); ++camIter){
+    int camId = camIter->first;
+    Camera &cam = camIter->second;
+    Body3dState &x = cam.x;
+    cout << "cam id=" << camId << " at pos p=" << cam.x.p.transpose() << endl;
+    map<int, Point>::iterator pntIter;
+    for (pntIter = this->pnts.begin(); pntIter != this->pnts.end(); ++pntIter) {
+      int pntId = pntIter->first;
+      Point &pnt = pntIter->second;
+      cout << "pnt id=" << pntId << " pos=" << pnt.l.transpose() << " ";
+      map<int, Vector2d>::iterator zIter;
+      for (zIter = pnt.zs.begin(); zIter != pnt.zs.end(); ++zIter)
+        cout << " zid= " << zIter->first << " z=" << zIter->second.transpose() << " ";
+    }
+    cout << endl;
+  }
+  */
+  
+  // useImu = false;
+  
+  //  cout << "Generated " << pnts.size() << " feature measurements" << endl;
+  //  cout << "Generated " << tss.size() << " IMU segments" << endl;
+
+  return true;
+}
+
+
 
 bool DynVisIns::LoadFile(const char* filename) {
   ifstream file(filename);    
@@ -983,7 +1275,7 @@ bool DynVisIns::LoadFile(const char* filename) {
   } while(!file.eof());
   
   file.close();    
-  cout << "Added " << xs.size() << " frames " << ls.size() << " points, using " << zs.size() << " feature measurements" << endl;
+  cout << "Added " << cams.size() << " frames and " << pnts.size() << " points" << endl;
   
   return true;
 }
