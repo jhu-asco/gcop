@@ -59,7 +59,6 @@ public:
     vector<Vector3d> as;      ///< accumulated IMU acc readings from last cam frame    
   };
   
-  
   map<int, Point> pnts;   ///< all points
   
   int camId;              ///< current camera id (incremented after a frame is added)
@@ -69,6 +68,7 @@ public:
   int maxCams;            ///< max length of camera sequence (0 by default indicating no limit)
 
   ceres::Problem problem;  ///< the ceres problem
+  bool ceresActive;       ///< whether ceres has been called on the current opt vector
 
   double *v;             ///< the full ceres optimization vector
 
@@ -139,6 +139,16 @@ public:
    */
   bool RemovePoint(int id);
 
+  /**
+   * Reset prior on initial state x0 and its covariance to the 
+   * mean and covariance of camera#id  in the current sequence. 
+   * This is called internally by ProcessCam in case when the oldest
+   * frame needs to be dropped to stay within maxCams window; the prior is then
+   * reset to the second camera, before removing the first.
+   * @param id camera id to which the prior will be reset
+   * @return true on success
+   */
+  bool ResetPrior(int id);
 
   /**
    * Process IMU measurement
@@ -165,6 +175,7 @@ public:
    * @param ni number of IMU measurements per camera segment
    */
   bool GenData(DynVisIns &tvi, int ns, int np, int ni = 2);
+
 
   bool SimData(DynVisIns &tvi, int ns, int np, int ni = 2, double dt = .1);
 

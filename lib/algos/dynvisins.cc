@@ -477,6 +477,7 @@ struct StatePrior {
 DynVisIns::DynVisIns() : t(-1), tc(-1) {
 
   maxCams = 0;
+  ceresActive = false;
 
   v = 0;
   
@@ -582,12 +583,12 @@ bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<i
     //  }
 
   Camera cam; // new camera to be added
-  ++camId;
+  ++camId;    // increase global id (it was initialized to -1)
 
   // update global time and camera time
   this->t = t;  
 
-  // if not first camera then set the total dt b/n last and this camera
+  // if not first camera then set delta-t b/n last and this camera
   // and init state to previous cam state
   if (camId > 0) {
     cams[camId - 1].dt = t - tc;
@@ -596,16 +597,12 @@ bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<i
     cam.dt = 0;
     cam.x = x0;
   }
+   // above one could use the propagated state x instead of x0 to initialize using IMU dead-reconing -- only a good idea if initial pose is correct, otherwise accelerometer-based odometry will be off
   
-  this->tc = t;  // WAS =tc
+  this->tc = t;  // update last camera time to to current time
   
-  // above one could use the propagated state x instead of x0 to initialize using IMU dead-reconing -- only a good idea if initial pose is correct, otherwise accelerometer-based odometry will be off
-  
-  // add to all observations
-  // zs.insert(zs.end(), zcs.begin(), zcs.end());  
-
+  // add observations
   for (int i = 0; i < zcs.size(); ++i) {        
-    //    lus.push_back(lu);
     
     int pntId = pntIds[i];
     const Vector2d &z = zcs[i];
@@ -613,16 +610,13 @@ bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<i
     // if this is a new point, then add it to point map
     if (pnts.find(pntId) == pnts.end()) {
       
-      //    if (zcInds[i] >= ls.size()) {
-      // create new points to advance to this id
-      
       Point pnt;
       //      pnt.l = Vector3d(1,0,0);
       // generate a spherical measurement
       Vector3d lu((zcs[i][0] - K(0,2))/K(0,0),
                   (zcs[i][1] - K(1,2))/K(1,1),
                   1);    
-      lu = lu/lu.norm(); // unit normal in camera frame      
+      lu = lu/lu.norm(); // unit normal in camera frame
       
       pnt.l = cam.x.p + cam.x.R*Ric*lu; // unit normal in spatial frame
       
@@ -649,13 +643,21 @@ bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<i
   
     cam.pntIds.push_back(pntId);
   }
-  
+
+  // add camera to map
   cams[camId] = cam;
 
+  // check if within current window
   if (maxCams > 0 && cams.size() > maxCams) {
     assert(cams.size() == maxCams + 1);
+
+    // if prior is used then reset it to the second oldest cam
+    if (usePrior)
+      ResetPrior(camId0 + 1);
+
     RemoveCamera(camId0);
     camId0++;
+    cout << "[I] DynVisIns::ProcessCam: maxCams=" << maxCams << " window reached. Removing first cam." << endl;
   }
 
   return true;
@@ -677,22 +679,75 @@ bool DynVisIns::RemoveCamera(int id)
     int pntId = *iter;
     Point &pnt = pnts[pntId];
     pnt.zs.erase(id);  // erase the feature measurement of this point by cam
-    if (!pnt.zs.size())  // if this point now has no measurements then delete it
+    if (!pnt.zs.size()) { // if this point now has no measurements then delete it
       pnts.erase(pntId); 
+      cout << "[I] DynVisIns::RemoveCam: pnt id#" << pntId << " is invisible and removed." << endl;
+    }
   }
   // remove the camera
-  cams.erase(id);  
+  cams.erase(id);
 }
 
 bool DynVisIns::RemovePoint(int id) 
 {
   // TODO
+  // currently points are being removed dynamically only within ProcessCam if a camera is being removed
 }
 
-//bool DynVisIns::PopFront()
-//{
+bool DynVisIns::ResetPrior(int id)
+{
+  if (!v) {
+    cout << "[W] DynVisIns::ResetPrior: optimization vector not set!" << endl;
+    return false;
+  }
+
+  if (!ceresActive) {
+    cout << "[W] DynVisIns::ResetPrior: ceres is not active!" << endl;
+    return false;
+  }
   
-//}
+  map<int, Camera>::iterator camIter = cams.find(id);
+  if (camIter == cams.end()) {
+    cout << "[W] DynVisIns::ResetPrior: camera id#" << id << " not found." << endl;
+    return false;
+  }
+  Camera &cam = camIter->second;
+  x0 = cam.x;
+  
+  ceres::Covariance::Options options;
+  ceres::Covariance covariance(options);
+  
+  vector<pair<const double*, const double*> > covariance_blocks;
+
+  int ind = (id - camId0)*12;    // index into the CERES opt vector
+
+  //  double *r = this->v + ind;
+  //  double *p = this->v + ind + 3;
+  //  double *dr = this->v + ind + 6;
+  //  double *dp = this->v + ind + 9;
+  
+  // go through pairs of (r,p,dr,dp)
+  for (int i = 0; i < 4; ++i) {
+    for (int j = 0; j < 4; ++j) {
+      double *v1 = this->v + ind + 3*i;
+      double *v2 = this->v + ind + 3*j;
+      covariance_blocks.push_back(make_pair(v1, v2));
+    }
+  }
+  
+  CHECK(covariance.Compute(covariance_blocks, &problem));
+ 
+  // CERES works in row major, while Eigen is column major
+  Matrix<double, 3, 3, RowMajor> M;
+  for (int i = 0; i < 4; ++i) {
+    for (int j = 0; j < 4; ++j) {
+      double *v1 = this->v + ind + 3*i;
+      double *v2 = this->v + ind + 3*j;
+      covariance.GetCovarianceBlock(v1, v2, M.data());
+      x0.P.block<3,3>(3*i, 3*j) = M;
+    }
+  }  
+}
 
 
 bool DynVisIns::Compute() {
@@ -857,9 +912,10 @@ bool DynVisIns::Compute() {
   std::cout << summary.FullReport() << "\n";  
   
   FromVec(v);
+  ceresActive = true;
 
-  delete[] v;
-  v = 0;
+  //  delete[] v;
+  //  v = 0;
 
   return true;
   

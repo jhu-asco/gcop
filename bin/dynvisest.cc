@@ -51,6 +51,9 @@ void solver_process(Viewer* viewer)
   int ni = 2;
   params.GetInt("ni", ni);
 
+  params.GetInt("maxCams", vi.maxCams);
+
+
   double sim_dt = .125;
   double sim_tf = 4;
   params.GetDouble("sim_dt", sim_dt);
@@ -90,7 +93,7 @@ void solver_process(Viewer* viewer)
   cout << "done" << endl;
 
   Vector12d c;
-  DynVisIns::FromState(c, vi.cams[0].x);
+  DynVisIns::FromState(c, vi.cams[vi.camId0].x);
 
   cout << c.transpose() << endl;
 
