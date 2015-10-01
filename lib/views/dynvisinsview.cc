@@ -36,8 +36,7 @@ void DynVisInsView::Render()
     if (!vi.v) {
       glTranslated(p.l[0], p.l[1], p.l[2]);
     } else {
-      int nx = (vi.optBias ? 15 : 9);
-      int ind = nx*vi.cams.size() + 3*j;
+      int ind = 12*vi.cams.size() + 3*j;
       glTranslated(vi.v[ind], vi.v[ind + 1], vi.v[ind + 2]);
     }
     
