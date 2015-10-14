@@ -30,6 +30,11 @@ struct PerspError {
     Vector3d r = R.transpose()*(Vector3d(l_) - p);
 
     Vector2d e = (vi.K*(r/r[2]) - z)/vi.pxStd;
+    //std::cout << "persp e=" << e.transpose() << std::endl;
+    //std::cout << "persp z=" << z.transpose() << std::endl;
+    //std::cout << "persp r=" << r.transpose() << std::endl;
+    //std::cout << "persp l=" << Vector3d(l_).transpose() << std::endl;
+    //std::cout << "persp p=" << p.transpose() << std::endl;
 
     res[0] = e[0]; res[1] = e[1];
     return true;
@@ -70,6 +75,7 @@ struct SphError {
 
     Vector3d r = R.transpose()*(Vector3d(l_) - Vector3d(p_));
     Vector3d e = (r/r.norm()- z)/vi.sphStd;
+    //std::cout << "sph e=" << e.transpose() << std::endl;
     res[0] = e[0]; res[1] = e[1]; res[2] = e[2];
     return true;
   }
@@ -202,6 +208,7 @@ struct GyroCubicError {
 
       // for now just assume noise is spherical and defined in wStd
       Vector3d e = (w - ws[i] + vi.bg)/vi.wStd;
+      //std::cout << "gyro e=" << e.transpose() << std::endl;
       memcpy(res + 3*i, e.data(), 3*sizeof(double));
     }
     return true;
@@ -285,6 +292,7 @@ struct AccCubicError {
       // for now just assume noise is spherical and defined in vi.aStd
       Vector3d e = (a - R*(as[i] - vi.ba) + vi.g0)/vi.aStd;
       //      cout << a.transpose() << as[i].transpose() << (R*as[i]).transpose() << e.transpose() << endl;
+      //std::cout << "acc e=" << e.transpose() << std::endl;
       memcpy(res + 3*i, e.data(), 3*sizeof(double));
     }
     return true;
@@ -455,6 +463,7 @@ struct StatePrior {
     e.tail<3>() = Vector3d(v_) - x0.v;
     e = W*e;
 
+    //std::cout << "prior e=" << e.transpose() << std::endl;
     memcpy(res, e.data(), 12*sizeof(double));
 
     return true;
@@ -474,7 +483,7 @@ struct StatePrior {
 
 
 
-DynVisIns::DynVisIns() : t(-1), tc(-1) {
+DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL) {
 
   maxCams = 0;
   ceresActive = false;
@@ -735,7 +744,8 @@ bool DynVisIns::ResetPrior(int id)
     }
   }
   
-  CHECK(covariance.Compute(covariance_blocks, &problem));
+  assert(problem);
+  CHECK(covariance.Compute(covariance_blocks, problem));
  
   // CERES works in row major, while Eigen is column major
   Matrix<double, 3, 3, RowMajor> M;
@@ -751,6 +761,11 @@ bool DynVisIns::ResetPrior(int id)
 
 
 bool DynVisIns::Compute() {
+
+  if(problem)
+    delete problem;
+
+  problem = new ceres::Problem();
 
   if (v)
     delete[] v;
@@ -794,17 +809,17 @@ bool DynVisIns::Compute() {
         //      ceres::LossFunction *loss_function = new ceres::HuberLoss(100.0);
         //      ceres::LossFunctionWrapper* loss_function(new ceres::HuberLoss(1.0), ceres::TAKE_OWNERSHIP);
         
-        problem.AddResidualBlock(cost_function,
+        problem->AddResidualBlock(cost_function,
                                  NULL,
                                  x, x + 3, l);
         
         // for now restrict point coordinates to [-5,5] meters, assuming we're in a small room
-        problem.SetParameterLowerBound(l, 0, -5);
-        problem.SetParameterLowerBound(l, 1, -5);
-        problem.SetParameterLowerBound(l, 2, -5);
-        problem.SetParameterUpperBound(l, 0, 5);
-        problem.SetParameterUpperBound(l, 1, 5);
-        problem.SetParameterUpperBound(l, 2, 5);      
+        problem->SetParameterLowerBound(l, 0, .1);
+        problem->SetParameterLowerBound(l, 1, -5);
+        problem->SetParameterLowerBound(l, 2, -5);
+        problem->SetParameterUpperBound(l, 0, 5);
+        problem->SetParameterUpperBound(l, 1, 5);
+        problem->SetParameterUpperBound(l, 2, 5);      
       }
     }
   }
@@ -838,13 +853,13 @@ bool DynVisIns::Compute() {
       double *xa = v + 12*(camId - camId0);
       double *xb = v + 12*(camId + 1 - camId0);
       
-      problem.AddResidualBlock(gyroCost,
+      problem->AddResidualBlock(gyroCost,
                                NULL /* squared loss */,
                                xa, xa + 6, xb, xb + 6);
       
       ceres::CostFunction* accCost = AccCubicError::Create(*this, cam.dt, cam.ts, cam.as);
       
-      problem.AddResidualBlock(accCost,
+      problem->AddResidualBlock(accCost,
                                NULL /* squared loss */,
                                xa, xa + 3, xa + 6, xa + 9,
                                xb, xb + 3, xb + 6, xb + 9);        
@@ -881,12 +896,12 @@ bool DynVisIns::Compute() {
       double *xb = v + 12*(camId + 1 - camId0);
       
       ceres::CostFunction* rotCost = CvCubicRotError::Create(*this, cam.dt);    
-      problem.AddResidualBlock(rotCost,
+      problem->AddResidualBlock(rotCost,
                                NULL /* squared loss */,
                                xa, xa + 6, xb, xb + 6);
       
       ceres::CostFunction* posCost = CvCubicPosError::Create(*this, cam.dt);    
-      problem.AddResidualBlock(posCost,
+      problem->AddResidualBlock(posCost,
                                NULL /* squared loss */,
                                xa + 3, xa + 9, xb + 3, xb + 9);
       
@@ -896,7 +911,7 @@ bool DynVisIns::Compute() {
 
   if (usePrior) {
     ceres::CostFunction* cost = StatePrior::Create(*this, x0);
-    problem.AddResidualBlock(cost,
+    problem->AddResidualBlock(cost,
                              NULL,
                              v, v + 3, v + 6, v + 9);
   }
@@ -908,7 +923,7 @@ bool DynVisIns::Compute() {
   options.max_num_iterations = 50;
 
   ceres::Solver::Summary summary;
-  ceres::Solve(options, &problem, &summary);
+  ceres::Solve(options, problem, &summary);
   std::cout << summary.FullReport() << "\n";  
   
   FromVec(v);

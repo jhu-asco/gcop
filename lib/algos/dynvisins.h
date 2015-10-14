@@ -67,7 +67,7 @@ public:
 
   int maxCams;            ///< max length of camera sequence (0 by default indicating no limit)
 
-  ceres::Problem problem;  ///< the ceres problem
+  ceres::Problem* problem;  ///< the ceres problem
   bool ceresActive;       ///< whether ceres has been called on the current opt vector
 
   double *v;             ///< the full ceres optimization vector
