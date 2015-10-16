@@ -487,7 +487,7 @@ DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL) {
 
   maxCams = 0;
   ceresActive = false;
-
+  l_opti_map = 0;
   v = 0;
   
   // initial state / prior info
@@ -769,10 +769,13 @@ bool DynVisIns::Compute() {
 
   if (v)
     delete[] v;
+  if(l_opti_map)
+    delete[] l_opti_map;
       
   v = new double[12*cams.size() + 3*pnts.size() + (optBias ? 6 : 0)];
-  
-  ToVec(v);
+  l_opti_map = new int[pnts.size()];  
+
+  ToVec(v, l_opti_map);
   if (useCam) {
     // for efficiency, instead of computing a projected covariance on the tangent 
     // of the unit sphere, that needs to be recomputed for every measurement
@@ -785,8 +788,8 @@ bool DynVisIns::Compute() {
     
     // first iterate through points 
     map<int, Point>::iterator pntIter;
-    //    for (int i = 0; i < lus.size(); ++i) {
-    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
+    int i = 0;
+    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter, ++i) {
       int pntId = pntIter->first;
       Point &pnt = pntIter->second;
       
@@ -800,7 +803,8 @@ bool DynVisIns::Compute() {
           PerspError::Create(*this, z);
         
         double *x = v + 12*(camId - camId0);
-        double *l = v + 12*cams.size() + 3*pntId;
+        //double *l = v + 12*cams.size() + 3*pntId;
+        double *l = v + 12*cams.size() + 3*i;
         
         //        assert(zCamInds[i] < xs.size());
         //        assert(zInds[i] < ls.size());
@@ -838,7 +842,6 @@ bool DynVisIns::Compute() {
       if (camId == this->camId)
         continue;
       
-      cout << "camId=" << camId << endl;
       assert(cam.ts.size());
       assert(cam.dt > 0);
       //    for (int i = 0; i < tss.size(); ++i) {
@@ -926,7 +929,7 @@ bool DynVisIns::Compute() {
   ceres::Solve(options, problem, &summary);
   std::cout << summary.FullReport() << "\n";  
   
-  FromVec(v);
+  FromVec(v, l_opti_map);
   ceresActive = true;
 
   //  delete[] v;
@@ -1131,6 +1134,8 @@ bool DynVisIns::MakeFeatures(vector<Vector2d> &zs,
                              const Body3dState &x, 
                              const map<int, Point> &pnts)
 {
+  int l = 780;
+  int h = 560;
   zs.clear();
   pntIds.clear();
   map<int, Point>::const_iterator pntIter;
@@ -1139,8 +1144,13 @@ bool DynVisIns::MakeFeatures(vector<Vector2d> &zs,
     const Point &pnt = pntIter->second;
     Vector2d z;
     MakeFeature(z, x, pnt.l);
-    zs.push_back(z);
-    pntIds.push_back(pntId);
+
+    // Check if feature is in camera window
+    if(z(0) >=0 && z(0) <= l && z(1) >= 0 && z(1) <= h)
+    {
+      zs.push_back(z);
+      pntIds.push_back(pntId);
+    }
   }
   return true;
 }
@@ -1177,32 +1187,49 @@ bool DynVisIns::SimData(DynVisIns &tvi, int ns, int np, int ni, double dt)
       int id = i*n1 + j;        
       // true points are at a vertical plane at distance 3 meters forward
       Point pnt;
-      pnt.l = Vector3d( 3, ((double)(j-n1/2.0))/n1, ((double)(i-n1/2.0))/n1);
+      pnt.l = Vector3d( 3, 9*((double)(j-n1/2.0))/n1, 9*((double)(i-n1/2.0))/n1);
       pnts[id] = pnt;
     }
   }    
   cout << "Generated " << pnts.size() << " points" << endl;
 
-  double t = 0;
   //  double dt = tf/ns;  // time-step of each segment
 
   // initialize true first state using the true prior
   Camera cam;
-  cam.x = tvi.x0;
   cam.dt = dt;
-  tvi.camId++;   // is -1 initially
-  cams[tvi.camId] = cam;
-  //  this->cams[tvi.camId] = cam0;
 
   vector<Vector2d> zs;
   vector<int> pntIds;
+  if(tvi.camId == -1)
+  {
+    tvi.t = 0;
+    cam.x = tvi.x0;
+    tvi.camId++;   // is -1 initially
+    cams[tvi.camId] = cam;
 
-  MakeFeatures(zs, pntIds, cam.x, pnts);
-  ProcessCam(t, zs, pntIds);
+    MakeFeatures(zs, pntIds, cam.x, pnts);
+    ProcessCam(tvi.t, zs, pntIds);
+    for(int i = 0; i < pntIds.size(); i++)
+    {
+      std::cout << "ID["<<i<<"]="<<pntIds[i] << std::endl;
+    }
+    std::cout <<"init sim" << std::endl;
+
+  }
+  else
+  {
+    cam = cams[tvi.camId];
+  }
+  double t = tvi.t;
+  std::cout<<"t="<<t<<std::endl;
+  //  this->cams[tvi.camId] = cam0;
+
+
 
   // initialize simulated path using x0
   Vector3d r, p, dr, v;
-  FromState(r, p, dr, v, tvi.x0);
+  FromState(r, p, dr, v, cam.x);
     
   for (int i = 0; i < ns; ++i) {
     // random angular acceleration
@@ -1232,10 +1259,12 @@ bool DynVisIns::SimData(DynVisIns &tvi, int ns, int np, int ni, double dt)
         
         ToState(xt, rt, pt, drt, vt);
 
+        //ProcessImu(tvi.t + ti, xt.w, xt.R.transpose()*(at + g0));
         ProcessImu(t + ti, xt.w, xt.R.transpose()*(at + g0));
       }
     }
     // update cam time, pos and vel
+    //tvi.t += dt;
     t += dt;
     cw.GetPos(r, dt);
     cw.GetVel(dr, dt);
@@ -1251,9 +1280,15 @@ bool DynVisIns::SimData(DynVisIns &tvi, int ns, int np, int ni, double dt)
 
     // process cam
     MakeFeatures(zs, pntIds, cam.x, pnts);
+    for(int j = 0; j < pntIds.size(); j++)
+    {
+      std::cout << "ID["<<j<<"]="<<pntIds[j] << std::endl;
+    }
+    //ProcessCam(tvi.t, zs, pntIds);
     ProcessCam(t, zs, pntIds);
   }
 
+  tvi.t = t;
 /*
   map<int, Camera>::iterator camIter;
   for (camIter = this->cams.begin(); camIter != this->cams.end(); ++camIter){
