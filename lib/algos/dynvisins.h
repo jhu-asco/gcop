@@ -71,7 +71,6 @@ public:
   bool ceresActive;       ///< whether ceres has been called on the current opt vector
 
   double *v;             ///< the full ceres optimization vector
-  int *l_opti_map;       ///< maps optimization vector points to point IDs
 
   double pxStd;          ///< std dev of pixels
   double sphStd;         ///< induced std dev on spherical measurements
@@ -187,7 +186,7 @@ public:
    * @param v ceres optimization vector
    * @return true if success
    */
-  bool ToVec(double *v, int *l_map) {
+  bool ToVec(double *v, vector<int>& l_map) {
     Vector12d c;
     map<int, Camera>::iterator camIter;
     int i = 0;
@@ -199,9 +198,14 @@ public:
     int i0 = 12*cams.size(); 
     map<int, Point>::iterator pntIter;
     i=0;
-    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter, ++i) {
-      memcpy(v + i0 + 3*i, pntIter->second.l.data(), 3*sizeof(double));
-      l_map[i] = pntIter->first;
+    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
+      // Only consider points with at least two observations
+      if(pntIter->second.zs.size() > 1)
+      {
+        memcpy(v + i0 + 3*i, pntIter->second.l.data(), 3*sizeof(double));
+        l_map.at(i) = pntIter->first;
+        ++i;
+      }
     }
 
     //    if (optBias) {
@@ -217,7 +221,7 @@ public:
    * @param v ceres optimization vector
    * @return true if success
    */
-  bool FromVec(const double *v, const int *l_map) {
+  bool FromVec(const double *v, const vector<int>& l_map) {
     //    xs.resize(cams.size();
     map<int, Camera>::iterator camIter;
     int i=0;
@@ -230,8 +234,8 @@ public:
     //map<int, Point>::iterator pntIter;
     //i = 0;
     //for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter, ++i) {
-    for (int i = 0; i < pnts.size(); ++i) {
-      pnts[l_map[i]].l = Vector3d(v + i0 + 3*i);
+    for (int i = 0; i < l_map.size(); ++i) {
+      pnts[l_map.at(i)].l = Vector3d(v + i0 + 3*i);
     }
 
     //    if (optBias) {

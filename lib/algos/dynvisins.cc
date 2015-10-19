@@ -487,7 +487,6 @@ DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL) {
 
   maxCams = 0;
   ceresActive = false;
-  l_opti_map = 0;
   v = 0;
   
   // initial state / prior info
@@ -724,6 +723,9 @@ bool DynVisIns::ResetPrior(int id)
   x0 = cam.x;
   
   ceres::Covariance::Options options;
+  // Options below are way too slow...but they take care of rank-deficient Jacobian.
+  //options.algorithm_type = ceres::DENSE_SVD;
+  //options.null_space_rank = -1;
   ceres::Covariance covariance(options);
   
   vector<pair<const double*, const double*> > covariance_blocks;
@@ -745,7 +747,11 @@ bool DynVisIns::ResetPrior(int id)
   }
   
   assert(problem);
-  CHECK(covariance.Compute(covariance_blocks, problem));
+  //CHECK(covariance.Compute(covariance_blocks, problem));
+  if(!covariance.Compute(covariance_blocks, problem))
+  {
+    cout << "[W] DynVisIns::ResetPrior: jacobian is rank deficcient." << endl;
+  } 
  
   // CERES works in row major, while Eigen is column major
   Matrix<double, 3, 3, RowMajor> M;
@@ -769,11 +775,20 @@ bool DynVisIns::Compute() {
 
   if (v)
     delete[] v;
-  if(l_opti_map)
-    delete[] l_opti_map;
       
-  v = new double[12*cams.size() + 3*pnts.size() + (optBias ? 6 : 0)];
-  l_opti_map = new int[pnts.size()];  
+  int n_good_pnts = 0;
+  map<int, Point>::iterator gpntIter;
+  for (gpntIter = pnts.begin(); gpntIter != pnts.end(); ++gpntIter) {
+    // only consider points with >1 observations
+    if(gpntIter->second.zs.size() > 1)
+    {
+      n_good_pnts++;
+    }
+  }
+
+  //v = new double[12*cams.size() + 3*pnts.size() + (optBias ? 6 : 0)];
+  v = new double[12*cams.size() + 3*n_good_pnts + (optBias ? 6 : 0)];
+  std::vector<int> l_opti_map(n_good_pnts);  
 
   ToVec(v, l_opti_map);
   if (useCam) {
@@ -789,10 +804,15 @@ bool DynVisIns::Compute() {
     // first iterate through points 
     map<int, Point>::iterator pntIter;
     int i = 0;
-    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter, ++i) {
+    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
       int pntId = pntIter->first;
       Point &pnt = pntIter->second;
-      
+      if(pnt.zs.size() <= 1)
+      {
+        cout << "[I] DynVisIns::Compute: pntId=" << pntId << " only has one observation...skipping." << endl;
+        continue;
+      }
+      //std::cout << "pnt #" << pntId << " obs=" << pnt.zs.size() << std::endl;
       map<int, Vector2d>::iterator zIter;
       for (zIter = pnt.zs.begin(); zIter != pnt.zs.end(); ++zIter) {//int i = 0; i < pnt.zs.size(); ++i) {
         int camId = zIter->first;
@@ -803,7 +823,6 @@ bool DynVisIns::Compute() {
           PerspError::Create(*this, z);
         
         double *x = v + 12*(camId - camId0);
-        //double *l = v + 12*cams.size() + 3*pntId;
         double *l = v + 12*cams.size() + 3*i;
         
         //        assert(zCamInds[i] < xs.size());
@@ -817,14 +836,15 @@ bool DynVisIns::Compute() {
                                  NULL,
                                  x, x + 3, l);
         
-        // for now restrict point coordinates to [-5,5] meters, assuming we're in a small room
-        problem->SetParameterLowerBound(l, 0, .1);
-        problem->SetParameterLowerBound(l, 1, -5);
-        problem->SetParameterLowerBound(l, 2, -5);
-        problem->SetParameterUpperBound(l, 0, 5);
-        problem->SetParameterUpperBound(l, 1, 5);
-        problem->SetParameterUpperBound(l, 2, 5);      
+        // for now restrict point coordinates to [-20,20] meters, assuming we're in a small room
+        problem->SetParameterLowerBound(l, 0, -20);
+        problem->SetParameterLowerBound(l, 1, -20);
+        problem->SetParameterLowerBound(l, 2, -20);
+        problem->SetParameterUpperBound(l, 0, 20);
+        problem->SetParameterUpperBound(l, 1, 20);
+        problem->SetParameterUpperBound(l, 2, 20);      
       }
+      ++i;
     }
   }
 
