@@ -738,6 +738,7 @@ bool DynVisIns::ResetPrior(int id)
   //  double *dp = this->v + ind + 9;
   
   // go through pairs of (r,p,dr,dp)
+  assert(useDyn || useImu);
   for (int i = 0; i < 4; ++i) {
     for (int j = 0; j < 4; ++j) {
       double *v1 = this->v + ind + 3*i;
@@ -896,12 +897,13 @@ bool DynVisIns::Compute() {
     map<int, Camera>::iterator camIter;
     for (camIter = cams.begin(); camIter != cams.end(); ++camIter) {
 
-      // ignore last frame
-      if (camId == this->camId)
-        continue;
       
       int camId = camIter->first;
       Camera &cam = camIter->second;
+
+      // ignore last frame
+      if (camId == this->camId)
+        continue;
       
       assert(cam.dt > 0);
 
