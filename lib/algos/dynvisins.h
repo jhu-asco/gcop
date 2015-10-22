@@ -99,6 +99,8 @@ public:
   bool useImu;     ///< process IMU?
   bool useCam;     ///< process cam? 
   bool useDyn;     ///< use dynamics?
+  bool useAnalyticJacs;     ///< use analyic jacobians?
+  bool useCay;      ///< use cayley map instead of exponential map?
 
   bool usePrior;   ///< whether to enforce prior using x0
 
@@ -246,44 +248,68 @@ public:
     return true;
   }
 
-  static void ToState(Body3dState &x, 
+  void ToState(Body3dState &x, 
                       const Vector3d &r,
                       const Vector3d &p,
                       const Vector3d &dr,
                       const Vector3d &v) {
-    SO3::Instance().exp(x.R, r);
-    x.p = p;
     Matrix3d D;
-    SO3::Instance().dexp(D, -r);
+    if(useCay)
+    {
+      SO3::Instance().cay(x.R, r);
+      SO3::Instance().dcay(D, -r);
+    }
+    else
+    {
+      SO3::Instance().exp(x.R, r);
+      SO3::Instance().dexp(D, -r);
+    }
+    x.p = p;
     x.w = D*dr;
     x.v = v;
   }
 
-  static void ToState(Body3dState &x, const Vector12d &c) {
+  void ToState(Body3dState &x, const Vector12d &c) {
     ToState(x, c.head<3>(), c.segment<3>(3), c.segment<3>(6), c.tail<3>());
   }
 
 
     
-  static void FromState(Vector3d &r, Vector3d &p, Vector3d &dr, Vector3d &v,
+  void FromState(Vector3d &r, Vector3d &p, Vector3d &dr, Vector3d &v,
                         const Body3dState &x) {
-    SO3::Instance().log(r, x.R);
-    p = x.p;
     Matrix3d D;
-    SO3::Instance().dexpinv(D, -r);
+    if(useCay)
+    {
+      SO3::Instance().cayinv(r, x.R);
+      SO3::Instance().dcayinv(D, -r);
+    }
+    else
+    {
+      SO3::Instance().log(r, x.R);
+      SO3::Instance().dexpinv(D, -r);
+    }
+    p = x.p;
     dr = D*x.w;
     v = x.v;
   }
 
-  static void FromState(Vector12d &c, const Body3dState &x) {
+  void FromState(Vector12d &c, const Body3dState &x) {
     //    FromState(c.head<3>(), c.segment<3>(3), c.segment<3>(6), c.tail<3>(), x);
     
     Vector3d r;
-    SO3::Instance().log(r, x.R);
+    Matrix3d D;
+    if(useCay)
+    {
+      SO3::Instance().cayinv(r, x.R);
+      SO3::Instance().dcayinv(D, -r);
+    }
+    else
+    {
+      SO3::Instance().log(r, x.R);
+      SO3::Instance().dexpinv(D, -r);
+    }
     c.head<3>() = r;
     c.segment<3>(3) = x.p;
-    Matrix3d D;
-    SO3::Instance().dexpinv(D, -r);
     c.segment<3>(6) = D*x.w;
     c.tail<3>() = x.v;
   }

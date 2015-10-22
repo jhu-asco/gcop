@@ -22,8 +22,14 @@ struct PerspError {
                   double* res) const 
   {
     Matrix3d dR;
-    SO3::Instance().exp(dR, Vector3d(o_));
-
+    if(vi.useCay) 
+    {
+      SO3::Instance().cay(dR, Vector3d(o_));
+    }
+    else
+    {
+      SO3::Instance().exp(dR, Vector3d(o_));
+    }
     Matrix3d R = dR*vi.Ric;  // camera rotation
 
     Vector3d p(p_);
@@ -49,6 +55,83 @@ struct PerspError {
   Vector2d z;
 };
 
+/**
+ * Standard perspective projection residual error.  Uses analytic Jacobian.
+ */
+struct AnalyticPerspError : public ceres::SizedCostFunction<2, 3, 3, 3>{
+  AnalyticPerspError(const DynVisIns &vi, const Vector2d &z)
+    : vi(vi), z(z) {}
+  
+  virtual ~AnalyticPerspError() {}
+
+  /**
+   * @param parameters parameters to cost function: 3-dim rotation exp coordinates, 3-dim position, 3-dim feature position in 3d
+   * @param res 2-dim vector residual
+   * @param jacs 2x9-dim matrix jacobian
+   */
+  virtual bool Evaluate(double const* const* parameters,
+                        double* res,
+                        double** jacs) const 
+  {
+    Vector3d p(parameters[1]);
+    Vector3d l(parameters[2]);
+    
+    Matrix3d dR;
+    if(vi.useCay)
+    {
+      SO3::Instance().cay(dR, Vector3d(parameters[0]));
+    }
+    else
+    {
+      SO3::Instance().exp(dR, Vector3d(parameters[0]));
+    }
+    Matrix3d R = dR*vi.Ric;  // camera rotation
+
+    Vector3d r = R.transpose()*(l - p);
+
+    Vector2d e = (vi.K*(r/r[2]) - z)/vi.pxStd;
+
+    res[0] = e[0]; res[1] = e[1];
+
+    // Compute the Jacobian if asked for.
+    if (jacs != NULL && jacs[0] != NULL && jacs[1] != NULL && jacs[2] != NULL) {
+      const double fx = vi.K(0,0);
+      const double fy = vi.K(1,1);
+      const double fx_div_r2 = fx/r[2];
+      const double fy_div_r2 = fy/r[2];
+      const double r2sq = r[2]*r[2];
+      const double fxr0_div_r2sq = fx*r[0]/r2sq;
+      const double fyr1_div_r2sq = fy*r[1]/r2sq;
+      Vector3d Rx = R.col(0);
+      Vector3d Ry = R.col(1);
+      Vector3d Rz = R.col(2);
+   
+      // de/dl
+      Vector3d dexdl = (fx_div_r2*Rx - fxr0_div_r2sq * Rz)/vi.pxStd;  
+      Vector3d deydl = (fy_div_r2*Ry - fyr1_div_r2sq * Rz)/vi.pxStd;  
+      jacs[2][0] = dexdl[0]; jacs[2][1] = dexdl[1]; jacs[2][2] = dexdl[2];
+      jacs[2][3] = deydl[0]; jacs[2][4] = deydl[1]; jacs[2][5] = deydl[2];
+
+      //de_x/dp is -de_x/dl
+      jacs[1][0] = -dexdl[0]; jacs[1][1] = -dexdl[1]; jacs[1][2] = -dexdl[2];
+      jacs[1][3] = -deydl[0]; jacs[1][4] = -deydl[1]; jacs[1][5] = -deydl[2];
+ 
+      // de/dR
+      Matrix3d drhat;
+      SO3::Instance().hat(drhat, dR.transpose()*(l-p));
+      Matrix3d drdR = vi.Ric.transpose()*drhat;
+
+      Vector3d dexdR = (fx_div_r2*drdR.row(0) - fxr0_div_r2sq * drdR.row(2))/vi.pxStd; 
+      Vector3d deydR = (fy_div_r2*drdR.row(1) - fyr1_div_r2sq * drdR.row(2))/vi.pxStd; 
+      jacs[0][0] = dexdR[0]; jacs[0][1] = dexdR[1]; jacs[0][2] = dexdR[2];
+      jacs[0][3] = deydR[0]; jacs[0][4] = deydR[1]; jacs[0][5] = deydR[2];
+    }
+    return true;
+  }
+
+  const DynVisIns &vi;
+  Vector2d z;
+};
 
 /**
  * Unit-spherical projection residual error, 
@@ -70,7 +153,14 @@ struct SphError {
                   double* res) const 
   {
     Matrix3d dR;  
-    SO3::Instance().exp(dR, Vector3d(o_));
+    if(vi.useCay)
+    {
+      SO3::Instance().cay(dR, Vector3d(o_));
+    }
+    else
+    {
+      SO3::Instance().exp(dR, Vector3d(o_));
+    }
     Matrix3d R = dR*vi.Ric;  // camera rotation
 
     Vector3d r = R.transpose()*(Vector3d(l_) - Vector3d(p_));
@@ -126,6 +216,62 @@ public:
       return false;
     v = v0 + t*b + t*t*c;
     return true;
+  }
+
+  void GetDPosDp0(Matrix3d& DpDp0, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DpDp0 = (1+ (t*t/2)*(-6/dt2) + (t*t*t/3)*(-6/(dt2*dt)*(-1)))*I3;
+  }
+
+  void GetDPosDp1(Matrix3d& DvDp1, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DvDp1 = ((t*t/2)*(6/dt2) + (t*t*t/3)*(-6/(dt2*dt)))*I3;
+  }
+
+  void GetDPosDv0(Matrix3d& DvDv0, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DvDv0 = (t + (t*t/2)*(6/dt2*(-dt)+(2/dt)) + (t*t*t/3)*(-6/(dt2*dt)*(-dt)+ 3/dt2*(-1) ))*I3;
+  }
+
+  void GetDPosDv1(Matrix3d& DvDv1, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DvDv1 = ((t*t/2)*(-2/dt) + (t*t*t/3)*(3/dt2))*I3;
+  }
+ 
+  void GetDVelDp0(Matrix3d& DvDp0, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DvDp0 = (-6*t/dt2 + t*t*(-6/(dt2*dt)*(-1)))*I3;
+  }
+
+  void GetDVelDp1(Matrix3d& DvDp1, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DvDp1 = (6*t/dt2 + t*t*(-6/(dt2*dt)))*I3;
+  }
+
+  void GetDVelDv0(Matrix3d& DvDv0, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DvDv0 = (1 + t*(6/dt2*(-dt)+(2/dt)) + t*t*(-6/(dt2*dt)*(-dt)+ 3/dt2*(-1) ))*I3;
+  }
+
+  void GetDVelDv1(Matrix3d& DvDv1, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DvDv1 = (t*(-2/dt) + t*t*(3/dt2))*I3;
   }
 
   bool GetAcc(Vector3d &a, double t) {
@@ -203,7 +349,14 @@ struct GyroCubicError {
       cub.GetPos(r, t);  // get exp coord
       cub.GetVel(dr, t); // get exp coord vel
 
-      SO3::Instance().dexp(D, -r);
+      if(vi.useCay)
+      {
+        SO3::Instance().dcay(D, -r);
+      }
+      else
+      {
+        SO3::Instance().dexp(D, -r);
+      }
       Vector3d w = D*dr; // the body-fixed angular velocity
 
       // for now just assume noise is spherical and defined in wStd
@@ -228,6 +381,178 @@ struct GyroCubicError {
   const vector<Vector3d> ws;  ///< sequence of angular measurements  
 };
 
+/**
+ * Gyro error, assuming segment is parametrized as a cubic spline.  Produces analytic jacobians.
+ */
+struct AnalyticGyroCubicError : public ceres::CostFunction{
+  /**
+   * @param vi 
+   * @param dt delta-t for this segment
+   * @param ts local times for each measurement
+   * @param ws the sequence of measurements in this segment
+   */
+  AnalyticGyroCubicError(const DynVisIns &vi, 
+                 double dt,
+                 const vector<double> &ts,
+                 const vector<Vector3d> &ws)
+    : vi(vi), dt(dt), ts(ts), ws(ws)
+  {
+    assert(dt > 0);
+    assert(ts.size() == ws.size());
+    set_num_residuals(3*ws.size());
+    vector<ceres::int32>* p_block_sizes = mutable_parameter_block_sizes();
+    p_block_sizes->resize(4);
+    for(int i = 0; i < 4; i++)
+      (*p_block_sizes)[i] = 3;
+  }
+
+  /**
+   * Computes IMU error between two states xa and xb
+   * @param parameters exponential rotation, angular velocity at start of segment and exponential rotation, angular velocity at end of segment
+   * @param res residual for all gyro measurements within segment
+   * @param jacs jacobian of residuals for each parameter block
+   */
+  virtual bool Evaluate(double const* const* parameters,
+                        double* res,
+                        double** jacs) const 
+  {
+    Vector3d ra(parameters[0]);
+    Vector3d dra(parameters[1]);
+    Vector3d rb(parameters[2]);
+    Vector3d drb(parameters[3]);
+
+    Cubic cub(ra, dra, rb, drb, dt);
+    Vector3d r, dr;
+    Matrix3d D;
+
+    for (int i = 0; i < ws.size(); ++i) {      
+    
+      const double &t = ts[i];
+      cub.GetPos(r, t);  // get exp coord
+      cub.GetVel(dr, t); // get exp coord vel
+
+      if(vi.useCay)
+      {
+        SO3::Instance().dcay(D, -r);
+      }
+      else
+      {
+        SO3::Instance().dexp(D, -r);
+      }
+      Vector3d w = D*dr; // the body-fixed angular velocity
+
+      // for now just assume noise is spherical and defined in wStd
+      Vector3d e = (w - ws[i] + vi.bg)/vi.wStd;
+      //std::cout << "gyro e=" << e.transpose() << std::endl;
+      memcpy(res + 3*i, e.data(), 3*sizeof(double));
+
+      if(jacs != NULL && jacs[0] != NULL && jacs[1] != NULL && jacs[2] != NULL && jacs[3] != NULL)
+      {
+        Eigen::Matrix3d dD_dr1, dD_dr2, dD_dr3;
+        SO3::Instance().ddcay(dD_dr1, dD_dr2, dD_dr3, -r); 
+        Eigen::Matrix3d dD1_dr, dD2_dr, dD3_dr;
+        dD1_dr.row(0) = dD_dr1.row(0);
+        dD1_dr.row(1) = dD_dr2.row(0);
+        dD1_dr.row(2) = dD_dr3.row(0);
+
+        dD2_dr.row(0) = dD_dr1.row(1);
+        dD2_dr.row(1) = dD_dr2.row(1); 
+        dD2_dr.row(2) = dD_dr3.row(1);
+
+        dD3_dr.row(0) = dD_dr1.row(2);
+        dD3_dr.row(1) = dD_dr2.row(2);
+        dD3_dr.row(2) = dD_dr3.row(2);
+
+        //de/dra
+        {
+          Eigen::Matrix3d dr_dra, ddr_dra;
+          cub.GetDPosDp0(dr_dra, t);
+          cub.GetDVelDp0(ddr_dra, t);
+
+          Eigen::Matrix3d de_dra;
+          de_dra.row(0) = (-dD1_dr*dr_dra*dr).transpose() + Vector3d(1,0,0).transpose()*D*ddr_dra;
+          de_dra.row(1) = (-dD2_dr*dr_dra*dr).transpose() + Vector3d(0,1,0).transpose()*D*ddr_dra;
+          de_dra.row(2) = (-dD3_dr*dr_dra*dr).transpose() + Vector3d(0,0,1).transpose()*D*ddr_dra;
+          de_dra = de_dra/vi.wStd; 
+
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[0][(3*i+j)*3+k] = de_dra(j,k); //de_dra has res on the rows and param on the cols
+            }
+          }
+        }
+        //de/ddra
+        {
+          Eigen::Matrix3d dr_ddra, ddr_ddra;
+          cub.GetDPosDv0(dr_ddra, t);
+          cub.GetDVelDv0(ddr_ddra, t);
+
+          Eigen::Matrix3d de_ddra;
+          de_ddra.row(0) = (-dD1_dr*dr_ddra*dr).transpose() + Vector3d(1,0,0).transpose()*D*ddr_ddra;
+          de_ddra.row(1) = (-dD2_dr*dr_ddra*dr).transpose() + Vector3d(0,1,0).transpose()*D*ddr_ddra;
+          de_ddra.row(2) = (-dD3_dr*dr_ddra*dr).transpose() + Vector3d(0,0,1).transpose()*D*ddr_ddra;
+          de_ddra = de_ddra/vi.wStd; 
+
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[1][(3*i+j)*3+k] = de_ddra(j,k); //de_ddra has res on the rows and param on the cols
+            }
+          }
+        }
+        //de/drb
+        {
+          Eigen::Matrix3d dr_drb, ddr_drb;
+          cub.GetDPosDp1(dr_drb, t);
+          cub.GetDVelDp1(ddr_drb, t);
+
+          Eigen::Matrix3d de_drb;
+          de_drb.row(0) = (-dD1_dr*dr_drb*dr).transpose() + Vector3d(1,0,0).transpose()*D*ddr_drb;
+          de_drb.row(1) = (-dD2_dr*dr_drb*dr).transpose() + Vector3d(0,1,0).transpose()*D*ddr_drb;
+          de_drb.row(2) = (-dD3_dr*dr_drb*dr).transpose() + Vector3d(0,0,1).transpose()*D*ddr_drb;
+          de_drb = de_drb/vi.wStd; 
+
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[2][(3*i+j)*3+k] = de_drb(j,k); //de_drb has res on the rows and param on the cols
+            }
+          }
+        }
+        //de/ddrb
+        {
+          Eigen::Matrix3d dr_ddrb, ddr_ddrb;
+          cub.GetDPosDv1(dr_ddrb, t);
+          cub.GetDVelDv1(ddr_ddrb, t);
+
+          Eigen::Matrix3d de_ddrb;
+          de_ddrb.row(0) = (-dD1_dr*dr_ddrb*dr).transpose() + Vector3d(1,0,0).transpose()*D*ddr_ddrb;
+          de_ddrb.row(1) = (-dD2_dr*dr_ddrb*dr).transpose() + Vector3d(0,1,0).transpose()*D*ddr_ddrb;
+          de_ddrb.row(2) = (-dD3_dr*dr_ddrb*dr).transpose() + Vector3d(0,0,1).transpose()*D*ddr_ddrb;
+          de_ddrb = de_ddrb/vi.wStd; 
+
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[3][(3*i+j)*3+k] = de_ddrb(j,k); //de_ddrb has res on the rows and param on the cols
+            }
+          }
+        }
+      }
+    }
+    return true;
+  }
+  
+  const DynVisIns &vi;
+  double dt;                  ///< total time for this segment
+  const vector<double> ts;    ///< sequence of relative times at which gyro measurements arrived
+  const vector<Vector3d> ws;  ///< sequence of angular measurements  
+};
 
 /**
  * Accelerometer error, assuming segment is parametrized as a cubic spline
@@ -286,7 +611,14 @@ struct AccCubicError {
       const double &t = ts[i];
 
       cr.GetPos(r, t);
-      SO3::Instance().exp(R, r);
+      if(vi.useCay)
+      {
+        SO3::Instance().cay(R, r);
+      }
+      else
+      {
+        SO3::Instance().exp(R, r);
+      }
       cp.GetAcc(a, t);
             
       // for now just assume noise is spherical and defined in vi.aStd
@@ -445,18 +777,39 @@ struct StatePrior {
     Matrix3d D;
 
     Vector3d r(r_);
-    SO3::Instance().exp(R, r);
+    if(vi.useCay)
+    {
+      SO3::Instance().cay(R, r);
+    }
+    else
+    {
+      SO3::Instance().exp(R, r);
+    }
 
     Vector3d er;
-    SO3::Instance().log(er, x0.R.transpose()*R); 
-
+    if(vi.useCay)
+    {
+      SO3::Instance().cayinv(er, x0.R.transpose()*R); 
+    }
+    else
+    {
+      SO3::Instance().log(er, x0.R.transpose()*R); 
+    }
+   
     Vector12d e;
     e.head<3>() = er;
     e.segment<3>(3) = Vector3d(p_) - x0.p;
     
     // @mk: this could be optimized to perform the dexpinv to the x0 prior and just 
     // take the diff in coordinates here:
-    SO3::Instance().dexp(D, -r);
+    if(vi.useCay)
+    {
+      SO3::Instance().dcay(D, -r);
+    }
+    else
+    {
+      SO3::Instance().dexp(D, -r);
+    }
     Vector3d w = D*Vector3d(dr_); // the body-fixed angular velocity
 
     e.segment<3>(6) = w - x0.w;
@@ -503,6 +856,8 @@ DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL) {
   useCam = true;
   useDyn = true;
   usePrior = true;
+  useCay = false;
+  useAnalyticJacs = false;
 
   optBias = false;
 
@@ -769,6 +1124,12 @@ bool DynVisIns::ResetPrior(int id)
 
 bool DynVisIns::Compute() {
 
+  if(useAnalyticJacs && !useCay)
+  {
+    cout << "[E] DynVisIns::Compute: must use cayley map if using analytic jacobians.  Jacobians are taken with respect to cayley map." << endl;
+    assert(useCay);
+  }
+
   if(problem)
     delete problem;
 
@@ -818,10 +1179,18 @@ bool DynVisIns::Compute() {
       for (zIter = pnt.zs.begin(); zIter != pnt.zs.end(); ++zIter) {//int i = 0; i < pnt.zs.size(); ++i) {
         int camId = zIter->first;
         Vector2d &z = zIter->second;
-        ceres::CostFunction* cost_function =
-          //        sphMeas ?
-          //        SphError::Create(*this, lus[i]) :
-          PerspError::Create(*this, z);
+        ceres::CostFunction* cost_function;
+        if(useAnalyticJacs)
+        {
+          cost_function = new AnalyticPerspError(*this, z);
+        }
+        else
+        {
+          cost_function =
+            //        sphMeas ?
+            //        SphError::Create(*this, lus[i]) :
+            PerspError::Create(*this, z);
+        }
         
         double *x = v + 12*(camId - camId0);
         double *l = v + 12*cams.size() + 3*i;
@@ -872,7 +1241,15 @@ bool DynVisIns::Compute() {
       //      assert(ts.size() == ws.size());
       //      assert(ts.size() == as.size());
       
-      ceres::CostFunction* gyroCost = GyroCubicError::Create(*this, cam.dt, cam.ts, cam.ws);
+      ceres::CostFunction* gyroCost;
+      if(useAnalyticJacs)
+      {
+        gyroCost = new AnalyticGyroCubicError(*this, cam.dt, cam.ts, cam.ws);
+      }
+      else
+      {
+        gyroCost = GyroCubicError::Create(*this, cam.dt, cam.ts, cam.ws);
+      }
       
       double *xa = v + 12*(camId - camId0);
       double *xb = v + 12*(camId + 1 - camId0);

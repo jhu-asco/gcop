@@ -141,6 +141,31 @@ void SO3::cayinv(Vector3d &v, const Matrix3d& g) const
   v = -2*v;
 }
 
+void SO3::ddcay(Matrix3d &dmdv1, Matrix3d &dmdv2, Matrix3d &dmdv3, const Vector3d &v) const
+{
+  const double& v1 = v[0];
+  const double& v2 = v[1];
+  const double& v3 = v[2];
+  double d = v1*v1 + v2*v2 + v3*v3 + 4;
+
+  double dddv1 = -2*v1/(d*d);
+  double dddv2 = -2*v2/(d*d);
+  double dddv3 = -2*v3/(d*d);
+  
+  dmdv1 <<   4*dddv1,  -(2*v3)*dddv1,  (2*v2)*dddv1,
+      (2*v3)*dddv1, 4*dddv1,  -((2*v1)*dddv1 + (2)/d),
+     -(2*v2)*dddv1, (2*v1)*dddv1 + (2)/d,  4*dddv1;
+ 
+  dmdv2 << 4*dddv2, -(2*v3)*dddv2, (2*v2)*dddv2 + (2)/d,
+        (2*v3)*dddv2, 4*dddv2,   -(2*v1)*dddv2,
+        -((2*v2)*dddv2 + (2)/d), (2*v1)*dddv2,  4*dddv2;
+    
+  dmdv3 << 4*dddv3, -((2)/d + (2*v3)*dddv3),  (2*v2)*dddv3,
+        (2)/d + (2*v3)*dddv3, 4*dddv3,   -(2*v1)*dddv3,
+        -(2*v2)*dddv3, (2*v1)*dddv3,  4*dddv3;
+
+
+}
 
 void SO3::dcay(Matrix3d &m, const Vector3d &v) const
 {  
