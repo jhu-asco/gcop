@@ -218,6 +218,13 @@ public:
     return true;
   }
 
+  bool GetAcc(Vector3d &a, double t) {
+    if (t > dt)
+      return false;
+    a = b + 2*t*c;
+    return true;
+  }
+
   void GetDPosDp0(Matrix3d& DpDp0, double t)
   {
     Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
@@ -274,11 +281,32 @@ public:
     DvDv1 = (t*(-2/dt) + t*t*(3/dt2))*I3;
   }
 
-  bool GetAcc(Vector3d &a, double t) {
-    if (t > dt)
-      return false;
-    a = b + 2*t*c;
-    return true;
+  void GetDAccDp0(Matrix3d& DaDp0, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DaDp0 = (-6/dt2 + 2*t*(-6/(dt2*dt)*(-1)))*I3;
+  }
+
+  void GetDAccDp1(Matrix3d& DaDp1, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DaDp1 = (6/dt2 + 2*t*(-6/(dt2*dt)))*I3;
+  }
+
+  void GetDAccDv0(Matrix3d& DaDv0, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DaDv0 = ((6/dt2*(-dt)+(2/dt)) + 2*t*(-6/(dt2*dt)*(-dt)+ 3/dt2*(-1) ))*I3;
+  }
+
+  void GetDAccDv1(Matrix3d& DaDv1, double t)
+  {
+    Matrix3d I3 = Eigen::Matrix3d::Identity(3,3);
+    double dt2 = dt*dt;
+    DaDv1 = ((-2/dt) + 2*t*(3/dt2))*I3;
   }
   
   /**
@@ -636,6 +664,203 @@ struct AccCubicError {
                                      const vector<Vector3d> &as) {
     return new ceres::NumericDiffCostFunction<AccCubicError, ceres::CENTRAL, ceres::DYNAMIC, 3, 3, 3, 3, 3, 3, 3, 3>(
                                                                                                         new AccCubicError(vi, dt, ts, as), ceres::TAKE_OWNERSHIP, as.size()*3);
+  }
+  
+  const DynVisIns &vi;
+  double dt;                  ///< total time for this segment
+  const vector<double> ts;    ///< sequence of relative times at which gyro measurements arrived
+  const vector<Vector3d> as;  ///< sequence of angular measurements
+};
+
+/**
+ * Accelerometer error, assuming segment is parametrized as a cubic spline.  
+ * Provides analytic jacobians.
+ */
+struct AnalyticAccCubicError : public ceres::CostFunction {
+
+  /**
+   * @param vi 
+   * @param dt delta-t for this segment
+   * @param ts local times for each measurement (should be in [0,dt])
+   * @param as the sequence of measurements in this segment
+   */
+  AnalyticAccCubicError(const DynVisIns &vi, 
+                double dt,
+                const vector<double> &ts,
+                const vector<Vector3d> &as)
+    : vi(vi), dt(dt), ts(ts), as(as)
+  {
+    assert(dt > 0);
+    assert(ts.size() == as.size());
+    set_num_residuals(3*as.size());
+    vector<ceres::int32>* p_block_sizes = mutable_parameter_block_sizes();
+    p_block_sizes->resize(8);
+    for(int i = 0; i < p_block_sizes->size(); i++)
+      (*p_block_sizes)[i] = 3;
+  }
+  
+  /**
+   * Computes accelrometer error between two states xa and xb.  Provides residual jacobians.
+   * @param parameters ra, pa, dra, va, rb, pb, drb, vb 
+   * @param res residual for all accelerometer measurements within segment
+   * @param jacs jacobian for residuals with respect to parameters
+   */
+  virtual bool Evaluate(double const* const* parameters,
+                        double* res,
+                        double** jacs) const 
+  {
+
+    Vector3d ra(parameters[0]);
+    Vector3d pa(parameters[1]);
+    Vector3d dra(parameters[2]);
+    Vector3d va(parameters[3]);
+    Vector3d rb(parameters[4]);
+    Vector3d pb(parameters[5]);
+    Vector3d drb(parameters[6]);
+    Vector3d vb(parameters[7]);
+
+    Cubic cr(ra, dra, rb, drb, dt);
+    Cubic cp(pa, va, pb, vb, dt);
+
+    Vector3d r, a;
+    Matrix3d R;
+    
+    for (int i = 0; i < as.size(); ++i) {      
+      const double &t = ts[i];
+
+      cr.GetPos(r, t);
+      if(vi.useCay)
+      {
+        SO3::Instance().cay(R, r);
+      }
+      else
+      {
+        SO3::Instance().exp(R, r);
+      }
+      cp.GetAcc(a, t);
+      Vector3d az = R*(as[i] - vi.ba);
+      // for now just assume noise is spherical and defined in vi.aStd
+      Vector3d e = (a - az + vi.g0)/vi.aStd;
+      //      cout << a.transpose() << as[i].transpose() << (R*as[i]).transpose() << e.transpose() << endl;
+      //std::cout << "acc e=" << e.transpose() << std::endl;
+      memcpy(res + 3*i, e.data(), 3*sizeof(double));
+
+      if(jacs != NULL && jacs[0] != NULL && jacs[1] != NULL && jacs[2] != NULL && jacs[3] != NULL 
+        && jacs[4] != NULL && jacs[5] != NULL && jacs[6] != NULL && jacs[7] != NULL)
+      {
+        Matrix3d azh;
+        SO3::Instance().hat(azh, az);
+        Matrix3d dR;
+        SO3::Instance().dcay(dR,r);
+        // de/dra
+        {
+          Matrix3d DrDra;
+          cr.GetDPosDp0(DrDra, t);
+          Matrix3d de_dra = azh*dR*DrDra/vi.aStd;
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[0][(3*i+j)*3+k] = de_dra(j,k); 
+            }
+          }
+        }
+        // de/dpa
+        {
+          Matrix3d DaDp0;
+          cp.GetDAccDp0(DaDp0, t);
+          Matrix3d de_dpa = DaDp0/vi.aStd;
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[1][(3*i+j)*3+k] = de_dpa(j,k); 
+            }
+          }
+        }
+        
+        // de/ddra
+        {
+          Matrix3d DrDdra;
+          cr.GetDPosDv0(DrDdra, t);
+          Matrix3d de_ddra = azh*dR*DrDdra/vi.aStd;
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[2][(3*i+j)*3+k] = de_ddra(j,k); 
+            }
+          }
+        }
+        // de/dva
+        {
+          Matrix3d DaDv0;
+          cp.GetDAccDv0(DaDv0, t);
+          Matrix3d de_dva = DaDv0/vi.aStd;
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[3][(3*i+j)*3+k] = de_dva(j,k); 
+            }
+          }
+        }
+        // de/drb
+        {
+          Matrix3d DrDrb;
+          cr.GetDPosDp1(DrDrb, t);
+          Matrix3d de_drb = azh*dR*DrDrb/vi.aStd;
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[4][(3*i+j)*3+k] = de_drb(j,k); 
+            }
+          }
+        }
+        // de/dpb
+        {
+          Matrix3d DaDp1;
+          cp.GetDAccDp1(DaDp1, t);
+          Matrix3d de_dpb = DaDp1/vi.aStd;
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[5][(3*i+j)*3+k] = de_dpb(j,k); 
+            }
+          }
+        }
+        // de/ddrb
+        {
+          Matrix3d DrDdrb;
+          cr.GetDPosDv1(DrDdrb, t);
+          Matrix3d de_ddrb = azh*dR*DrDdrb/vi.aStd;
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[6][(3*i+j)*3+k] = de_ddrb(j,k); 
+            }
+          }
+        }
+        // de/dvb
+        {
+          Matrix3d DaDv1;
+          cp.GetDAccDv1(DaDv1, t);
+          Matrix3d de_dvb = DaDv1/vi.aStd;
+          for(int j = 0; j < 3; j++)
+          {
+            for(int k = 0; k < 3; k++)
+            {
+              jacs[7][(3*i+j)*3+k] = de_dvb(j,k); 
+            }
+          }
+        }
+      
+      }
+    }
+    return true;
   }
   
   const DynVisIns &vi;
@@ -1258,7 +1483,15 @@ bool DynVisIns::Compute() {
                                NULL /* squared loss */,
                                xa, xa + 6, xb, xb + 6);
       
-      ceres::CostFunction* accCost = AccCubicError::Create(*this, cam.dt, cam.ts, cam.as);
+      ceres::CostFunction* accCost;
+      if(useAnalyticJacs)
+      {
+        accCost = new AnalyticAccCubicError(*this, cam.dt, cam.ts, cam.as);
+      }
+      else
+      {
+        accCost = AccCubicError::Create(*this, cam.dt, cam.ts, cam.as);
+      }
       
       problem->AddResidualBlock(accCost,
                                NULL /* squared loss */,
