@@ -45,6 +45,8 @@ public:
   
   struct Point {
     Vector3d l;              ///< the point 3d coordinates
+    Matrix3d P;              ///< the covariance matrix of the point 3d coordinates
+    bool usePrior;           ///< should a prior be set based on the point covariance?
     map<int, Vector2d> zs;   ///< map of feature measurements indexed by camera id
   };
 
@@ -71,6 +73,9 @@ public:
   bool ceresActive;       ///< whether ceres has been called on the current opt vector
 
   double *v;             ///< the full ceres optimization vector
+  std::vector<int> *l_opti_map;             ///< maps pnts in optimization vector back to pntIds
+  int num_opti_cams;     ///< number of cameras used in the last optimization
+  int n_good_pnts;        ///< number of good points in the last optimization
 
   double pxStd;          ///< std dev of pixels
   double sphStd;         ///< induced std dev on spherical measurements
@@ -99,14 +104,16 @@ public:
   bool useImu;     ///< process IMU?
   bool useCam;     ///< process cam? 
   bool useDyn;     ///< use dynamics?
-  bool useAnalyticJacs;     ///< use analyic jacobians?
+  bool useAnalyticJacs;     ///< use analytic jacobians?
   bool useCay;      ///< use cayley map instead of exponential map?
 
   bool usePrior;   ///< whether to enforce prior using x0
+  bool useFeatPrior;   ///< whether to enforce feature prior
 
   bool optBias;    ///< to optimize over biases?
 
   bool sphMeas;    ///< use spherical measurements instead of standard pixel perspective measurements? (false by default)
+  double maxIterations; ///< maximum number of solver iterations
    
   DynVisIns();
   virtual ~DynVisIns();
@@ -130,9 +137,10 @@ public:
   /**
    * Remove a camera frame from sequence
    * @param id cam id
+   * @param pnt_zs_removed optional output argument which is holds ids of points which had measurements removed yet are still present in the optimization.
    * @return true on success
    */
-  bool RemoveCamera(int id);
+  bool RemoveCamera(int id, std::set<int>* pnt_zs_removed = NULL);
 
   /**
    * Remove a point
@@ -148,9 +156,10 @@ public:
    * frame needs to be dropped to stay within maxCams window; the prior is then
    * reset to the second camera, before removing the first.
    * @param id camera id to which the prior will be reset
+   * @param pnts point ids on which the prior will be reset
    * @return true on success
    */
-  bool ResetPrior(int id);
+  bool ResetPrior(int id, std::set<int>* pnts = NULL);
 
   /**
    * Process IMU measurement
@@ -188,7 +197,7 @@ public:
    * @param v ceres optimization vector
    * @return true if success
    */
-  bool ToVec(double *v, vector<int>& l_map) {
+  bool ToVec(double *v, vector<int>* l_map) {
     Vector12d c;
     map<int, Camera>::iterator camIter;
     int i = 0;
@@ -205,7 +214,7 @@ public:
       if(pntIter->second.zs.size() > 1)
       {
         memcpy(v + i0 + 3*i, pntIter->second.l.data(), 3*sizeof(double));
-        l_map.at(i) = pntIter->first;
+        l_map->at(i) = pntIter->first;
         ++i;
       }
     }
@@ -223,7 +232,7 @@ public:
    * @param v ceres optimization vector
    * @return true if success
    */
-  bool FromVec(const double *v, const vector<int>& l_map) {
+  bool FromVec(const double *v, const vector<int>* l_map) {
     //    xs.resize(cams.size();
     map<int, Camera>::iterator camIter;
     int i=0;
@@ -236,8 +245,8 @@ public:
     //map<int, Point>::iterator pntIter;
     //i = 0;
     //for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter, ++i) {
-    for (int i = 0; i < l_map.size(); ++i) {
-      pnts[l_map.at(i)].l = Vector3d(v + i0 + 3*i);
+    for (int i = 0; i < l_map->size(); ++i) {
+      pnts[l_map->at(i)].l = Vector3d(v + i0 + 3*i);
     }
 
     //    if (optBias) {

@@ -21,6 +21,7 @@ void solver_process(Viewer* viewer)
   params.GetBool("useCam", vi.useCam);
   params.GetBool("useDyn", vi.useDyn);
   params.GetBool("usePrior", vi.usePrior);
+  params.GetBool("useFeatPrior", vi.useFeatPrior);
   params.GetBool("useAnlJacs", vi.useAnalyticJacs);
   params.GetBool("useCay", vi.useCay);
 

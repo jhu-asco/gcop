@@ -1059,10 +1059,56 @@ struct StatePrior {
   Matrix12d W;         ///< residual weight matrix W is such that W'*W=inv(P0)
 };
 
+/** 
+ * Prior residual on a feature
+ */
+struct FeaturePrior {
+  /**
+   * @param vi visual-inertial estimator
+   * @param x0 prior mean
+   * @param P0 prior covariance
+   */
+  FeaturePrior(DynVisIns &vi, 
+             const DynVisIns::Point &p)
+    : vi(vi), p(p)
+  {    
+    LLT<Matrix3d> llt(p.P.inverse());   // assume P0>0
+    this->W = llt.matrixU();   // the weight matrix W such that W'*W=inv(P0)
+  }
+  
+  /**
+   * Computes feature prior error
+   * @param l_ 3-dim vector containing feature coordinates
+   * @param res 3-dim vector containing residual
+   */
+  bool operator()(const double* l_,
+                  double* res) const 
+  {
+    Vector3d l(l_);
 
+    Vector3d e;
+    e = W*(l-p.l);
 
-DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL) {
+    memcpy(res, e.data(), 3*sizeof(double));
 
+    return true;
+  }
+  
+  static ceres::CostFunction* Create(DynVisIns &vi, 
+                                     const DynVisIns::Point &p) {
+    return (new ceres::NumericDiffCostFunction<FeaturePrior, ceres::CENTRAL, 3, 3>(
+                                                                                           new FeaturePrior(vi, p)));
+    
+  }
+
+  DynVisIns &vi;       ///< visual-inertial estimator
+  DynVisIns::Point p;      ///< prior feature position
+  Matrix3d W;         ///< residual weight matrix W is such that W'*W=inv(P0)
+};
+
+DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL), l_opti_map(NULL), n_good_pnts(0) {
+  
+  maxIterations = 50;
   maxCams = 0;
   ceresActive = false;
   v = 0;
@@ -1081,6 +1127,7 @@ DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL) {
   useCam = true;
   useDyn = true;
   usePrior = true;
+  useFeatPrior = false;
   useCay = false;
   useAnalyticJacs = false;
 
@@ -1199,6 +1246,7 @@ bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<i
     if (pnts.find(pntId) == pnts.end()) {
       
       Point pnt;
+      pnt.usePrior = false;
       //      pnt.l = Vector3d(1,0,0);
       // generate a spherical measurement
       Vector3d lu((zcs[i][0] - K(0,2))/K(0,0),
@@ -1235,7 +1283,19 @@ bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<i
   // add camera to map
   cams[camId] = cam;
 
+  // This is expensive if we add multiple cameras between calls to compute.  Instead, 
+  // only remove cameras once compute is called and reset the prior only once.  Also, set a prior
+  // on features from the removed cameras that are still present in the optimization.
+  // Foreach camera removed
+  //   Foreach feature seen by camera
+  //     Remove camera meaurement from feature measurement list
+  //     If last measurement
+  //       Remove feature from set
+  //     Else
+  //       Add feature to set
+
   // check if within current window
+  /*
   if (maxCams > 0 && cams.size() > maxCams) {
     assert(cams.size() == maxCams + 1);
 
@@ -1247,12 +1307,14 @@ bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<i
     camId0++;
     cout << "[I] DynVisIns::ProcessCam: maxCams=" << maxCams << " window reached. Removing first cam." << endl;
   }
+  */
 
   return true;
 }
 
-
-bool DynVisIns::RemoveCamera(int id) 
+// pnt_zs_removed keeps a set of all the points which had measurements removed yet are still
+//   present in the optimization.
+bool DynVisIns::RemoveCamera(int id, std::set<int>* pnt_zs_removed) 
 {
   map<int, Camera>::iterator camIter = cams.find(id);
   if (camIter == cams.end()) {
@@ -1267,8 +1329,12 @@ bool DynVisIns::RemoveCamera(int id)
     int pntId = *iter;
     Point &pnt = pnts[pntId];
     pnt.zs.erase(id);  // erase the feature measurement of this point by cam
+    if(pnt_zs_removed)
+      pnt_zs_removed->insert(pntId);
     if (!pnt.zs.size()) { // if this point now has no measurements then delete it
       pnts.erase(pntId); 
+      if(pnt_zs_removed)
+        pnt_zs_removed->erase(pntId);
       cout << "[I] DynVisIns::RemoveCam: pnt id#" << pntId << " is invisible and removed." << endl;
     }
   }
@@ -1282,7 +1348,7 @@ bool DynVisIns::RemovePoint(int id)
   // currently points are being removed dynamically only within ProcessCam if a camera is being removed
 }
 
-bool DynVisIns::ResetPrior(int id)
+bool DynVisIns::ResetPrior(int id, std::set<int>* pnt_ids)
 {
   if (!v) {
     cout << "[W] DynVisIns::ResetPrior: optimization vector not set!" << endl;
@@ -1326,6 +1392,30 @@ bool DynVisIns::ResetPrior(int id)
       covariance_blocks.push_back(make_pair(v1, v2));
     }
   }
+
+  std::vector<int> v_pt_idxs;
+  if(pnt_ids)
+  {
+    set<int>::iterator pntIter;
+    for(pntIter = pnt_ids->begin(); pntIter != pnt_ids->end(); pntIter++)
+    {
+      // TODO: could have an inverse map available to avoid this search...
+      int v_pt_idx;
+      for(v_pt_idx = 0; v_pt_idx < l_opti_map->size(); ++v_pt_idx)
+      {
+        if(l_opti_map->at(v_pt_idx) == *pntIter)
+          break;
+      }
+      if(v_pt_idx == l_opti_map->size())
+      {
+        cout << "[W] DynVisIns::ResetPrior: failed to find ptId " << *pntIter << " in previous optimization vector...skipping." << endl;
+        continue;
+      }
+      double *vpt = this->v + 12*num_opti_cams + v_pt_idx*3;
+      covariance_blocks.push_back(make_pair(vpt,vpt));
+      v_pt_idxs.push_back(v_pt_idx);
+    }
+  }  
   
   assert(problem);
   //CHECK(covariance.Compute(covariance_blocks, problem));
@@ -1344,6 +1434,19 @@ bool DynVisIns::ResetPrior(int id)
       x0.P.block<3,3>(3*i, 3*j) = M;
     }
   }  
+  
+  if(pnt_ids)
+  {
+    Matrix<double, 3, 3, RowMajor> M;
+    for (int i = 0; i < v_pt_idxs.size(); ++i) {
+      double *vpt = this->v + 12*num_opti_cams + v_pt_idxs[i]*3;
+      covariance.GetCovarianceBlock(vpt, vpt, M.data());
+      //cout << "[I] DynVisIns::ResetPrior: set pt " << l_opti_map->at(v_pt_idxs[i]) 
+      //  << " prior to " << std::endl << M << std::endl;
+      pnts[l_opti_map->at(v_pt_idxs[i])].P = M;
+      pnts[l_opti_map->at(v_pt_idxs[i])].usePrior = true;
+    }  
+  }
 }
 
 
@@ -1355,6 +1458,40 @@ bool DynVisIns::Compute() {
     assert(useCay);
   }
 
+  // check if cams within current window
+  // reset feature and state priors if removing cams
+  if (maxCams > 0 && cams.size() > maxCams) {
+    //assert(cams.size() == maxCams + 1);
+    std::set<int> pnt_zs_removed;
+    int newCamId0 = cams.size() - maxCams + camId0;
+    cout << "[I] DynVisIns::Compute: maxCams=" << maxCams << " window reached. Removing " 
+      << cams.size() - maxCams << " cams. New cam id0=" << newCamId0 << endl;
+    for(int i = camId0; i < newCamId0; ++i)
+    {
+      if(useFeatPrior)
+      {
+        RemoveCamera(i, &pnt_zs_removed);
+      }
+      else
+      {
+        RemoveCamera(i);
+      }
+    }
+
+    // if prior is used then reset it to cam at the end of the new window
+    if (usePrior)
+    {
+      if(useFeatPrior)
+      {
+        ResetPrior(newCamId0, &pnt_zs_removed);
+      }
+      {
+        ResetPrior(newCamId0);
+      }
+    }
+    camId0 = newCamId0;
+  }
+ 
   if(problem)
     delete problem;
 
@@ -1362,8 +1499,10 @@ bool DynVisIns::Compute() {
 
   if (v)
     delete[] v;
+  if (l_opti_map)
+    delete l_opti_map;
       
-  int n_good_pnts = 0;
+  n_good_pnts = 0;
   map<int, Point>::iterator gpntIter;
   for (gpntIter = pnts.begin(); gpntIter != pnts.end(); ++gpntIter) {
     // only consider points with >1 observations
@@ -1375,7 +1514,8 @@ bool DynVisIns::Compute() {
 
   //v = new double[12*cams.size() + 3*pnts.size() + (optBias ? 6 : 0)];
   v = new double[12*cams.size() + 3*n_good_pnts + (optBias ? 6 : 0)];
-  std::vector<int> l_opti_map(n_good_pnts);  
+  l_opti_map = new std::vector<int>(n_good_pnts);  
+  num_opti_cams = cams.size();
 
   ToVec(v, l_opti_map);
   if (useCam) {
@@ -1399,6 +1539,16 @@ bool DynVisIns::Compute() {
         cout << "[I] DynVisIns::Compute: pntId=" << pntId << " only has one observation...skipping." << endl;
         continue;
       }
+      double *l = v + 12*cams.size() + 3*i;
+
+      if(useFeatPrior && pnt.usePrior)
+      {
+        ceres::CostFunction* cost = FeaturePrior::Create(*this, pnt);
+        problem->AddResidualBlock(cost,
+                                 NULL,
+                                 l);
+      }
+
       //std::cout << "pnt #" << pntId << " obs=" << pnt.zs.size() << std::endl;
       map<int, Vector2d>::iterator zIter;
       for (zIter = pnt.zs.begin(); zIter != pnt.zs.end(); ++zIter) {//int i = 0; i < pnt.zs.size(); ++i) {
@@ -1418,7 +1568,6 @@ bool DynVisIns::Compute() {
         }
         
         double *x = v + 12*(camId - camId0);
-        double *l = v + 12*cams.size() + 3*i;
         
         //        assert(zCamInds[i] < xs.size());
         //        assert(zInds[i] < ls.size());
@@ -1555,7 +1704,7 @@ bool DynVisIns::Compute() {
   // options.linear_solver_type = ceres::DENSE_SCHUR;
   options.linear_solver_type = ceres::SPARSE_NORMAL_CHOLESKY;
   options.minimizer_progress_to_stdout = true;
-  options.max_num_iterations = 50;
+  options.max_num_iterations = maxIterations;
 
   ceres::Solver::Summary summary;
   ceres::Solve(options, problem, &summary);
