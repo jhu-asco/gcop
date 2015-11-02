@@ -1111,6 +1111,8 @@ DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL), l_opti_map(NULL), n_good_
   maxIterations = 50;
   maxCams = 0;
   ceresActive = false;
+  useHuberLoss = true;
+  checkPtActiveFlag = false;
   v = 0;
   
   // initial state / prior info
@@ -1247,6 +1249,7 @@ bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<i
       
       Point pnt;
       pnt.usePrior = false;
+      pnt.active = false;
       //      pnt.l = Vector3d(1,0,0);
       // generate a spherical measurement
       Vector3d lu((zcs[i][0] - K(0,2))/K(0,0),
@@ -1460,7 +1463,7 @@ bool DynVisIns::Compute() {
 
   // check if cams within current window
   // reset feature and state priors if removing cams
-  if (maxCams > 0 && cams.size() > maxCams) {
+  if  (maxCams > 0 && v && cams.size() > maxCams) {
     //assert(cams.size() == maxCams + 1);
     std::set<int> pnt_zs_removed;
     int newCamId0 = cams.size() - maxCams + camId0;
@@ -1485,6 +1488,7 @@ bool DynVisIns::Compute() {
       {
         ResetPrior(newCamId0, &pnt_zs_removed);
       }
+      else
       {
         ResetPrior(newCamId0);
       }
@@ -1492,6 +1496,25 @@ bool DynVisIns::Compute() {
     camId0 = newCamId0;
   }
  
+      
+  n_good_pnts = 0;
+  vector<pair<int,Point&>> gpoints;
+  map<int, Point>::iterator gpntIter;
+  for (gpntIter = pnts.begin(); gpntIter != pnts.end(); ++gpntIter) {
+    // only consider points with >1 observations
+    if(gpntIter->second.zs.size() > 1 && (!checkPtActiveFlag || gpntIter->second.active))
+    {
+      gpoints.push_back(pair<int,Point&>(gpntIter->first, gpntIter->second));
+    }
+  }
+  n_good_pnts = gpoints.size();
+
+  if(n_good_pnts < 4)
+  {
+    cout << "[E] DynVisIns::Compute: fewer than 4 good points...aborting optimization." << endl;
+    return false;
+  }
+
   if(problem)
     delete problem;
 
@@ -1501,18 +1524,7 @@ bool DynVisIns::Compute() {
     delete[] v;
   if (l_opti_map)
     delete l_opti_map;
-      
-  n_good_pnts = 0;
-  map<int, Point>::iterator gpntIter;
-  for (gpntIter = pnts.begin(); gpntIter != pnts.end(); ++gpntIter) {
-    // only consider points with >1 observations
-    if(gpntIter->second.zs.size() > 1)
-    {
-      n_good_pnts++;
-    }
-  }
 
-  //v = new double[12*cams.size() + 3*pnts.size() + (optBias ? 6 : 0)];
   v = new double[12*cams.size() + 3*n_good_pnts + (optBias ? 6 : 0)];
   l_opti_map = new std::vector<int>(n_good_pnts);  
   num_opti_cams = cams.size();
@@ -1529,14 +1541,20 @@ bool DynVisIns::Compute() {
     
     
     // first iterate through points 
-    map<int, Point>::iterator pntIter;
-    int i = 0;
-    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
-      int pntId = pntIter->first;
-      Point &pnt = pntIter->second;
+    //map<int, Point>::iterator pntIter;
+    //int i = 0;
+    //for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
+    for (int i = 0; i < gpoints.size(); i++) {
+      int pntId = gpoints[i].first;
+      Point &pnt = gpoints[i].second;
       if(pnt.zs.size() <= 1)
       {
         cout << "[I] DynVisIns::Compute: pntId=" << pntId << " only has one observation...skipping." << endl;
+        continue;
+      }
+      if(checkPtActiveFlag && !pnt.active)
+      {
+        cout << "[I] DynVisIns::Compute: pntId=" << pntId << " not active...skipping." << endl;
         continue;
       }
       double *l = v + 12*cams.size() + 3*i;
@@ -1575,11 +1593,19 @@ bool DynVisIns::Compute() {
         
         //      ceres::LossFunction *loss_function = new ceres::HuberLoss(100.0);
         //      ceres::LossFunctionWrapper* loss_function(new ceres::HuberLoss(1.0), ceres::TAKE_OWNERSHIP);
-        
-        problem->AddResidualBlock(cost_function,
-                                 NULL,
-                                 x, x + 3, l);
-        
+        if(useHuberLoss)
+        {  
+          problem->AddResidualBlock(cost_function,
+                                   new ceres::HuberLoss(2.0),
+                                   x, x + 3, l);
+        }
+        else
+        {
+          problem->AddResidualBlock(cost_function,
+                                   NULL,
+                                   x, x + 3, l);
+        }
+
         // for now restrict point coordinates to [-20,20] meters, assuming we're in a small room
         problem->SetParameterLowerBound(l, 0, -20);
         problem->SetParameterLowerBound(l, 1, -20);
@@ -1588,7 +1614,7 @@ bool DynVisIns::Compute() {
         problem->SetParameterUpperBound(l, 1, 20);
         problem->SetParameterUpperBound(l, 2, 20);      
       }
-      ++i;
+      //++i;
     }
   }
 

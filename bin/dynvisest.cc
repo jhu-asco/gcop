@@ -24,6 +24,7 @@ void solver_process(Viewer* viewer)
   params.GetBool("useFeatPrior", vi.useFeatPrior);
   params.GetBool("useAnlJacs", vi.useAnalyticJacs);
   params.GetBool("useCay", vi.useCay);
+  params.GetBool("useHuberLoss", vi.useHuberLoss);
 
   params.GetBool("optBias", vi.optBias);
 

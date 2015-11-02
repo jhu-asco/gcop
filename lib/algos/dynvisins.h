@@ -47,6 +47,7 @@ public:
     Vector3d l;              ///< the point 3d coordinates
     Matrix3d P;              ///< the covariance matrix of the point 3d coordinates
     bool usePrior;           ///< should a prior be set based on the point covariance?
+    bool active;           ///< should this point be used in the optimization?
     map<int, Vector2d> zs;   ///< map of feature measurements indexed by camera id
   };
 
@@ -106,13 +107,12 @@ public:
   bool useDyn;     ///< use dynamics?
   bool useAnalyticJacs;     ///< use analytic jacobians?
   bool useCay;      ///< use cayley map instead of exponential map?
-
   bool usePrior;   ///< whether to enforce prior using x0
   bool useFeatPrior;   ///< whether to enforce feature prior
-
+  bool useHuberLoss;   ///< use huber loss for feature residuals?
   bool optBias;    ///< to optimize over biases?
-
   bool sphMeas;    ///< use spherical measurements instead of standard pixel perspective measurements? (false by default)
+  bool checkPtActiveFlag; ///< should the active flag of points be checked?
   double maxIterations; ///< maximum number of solver iterations
    
   DynVisIns();
@@ -211,7 +211,7 @@ public:
     i=0;
     for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
       // Only consider points with at least two observations
-      if(pntIter->second.zs.size() > 1)
+      if(pntIter->second.zs.size() > 1  && (!checkPtActiveFlag || pntIter->second.active))
       {
         memcpy(v + i0 + 3*i, pntIter->second.l.data(), 3*sizeof(double));
         l_map->at(i) = pntIter->first;
