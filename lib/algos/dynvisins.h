@@ -48,7 +48,8 @@ public:
     Matrix3d P;              ///< the covariance matrix of the point 3d coordinates
     bool usePrior;           ///< should a prior be set based on the point covariance?
     bool active;           ///< should this point be used in the optimization?
-    map<int, Vector2d> zs;   ///< map of feature measurements indexed by camera id
+    map<int, Vector2d> zs;   ///< map of 2d feature measurements indexed by camera id
+    map<int, Vector3d> z3ds;   ///< map of 3d feature measurements indexed by camera id
   };
 
   struct Camera {
@@ -79,6 +80,7 @@ public:
   int n_good_pnts;        ///< number of good points in the last optimization
 
   double pxStd;          ///< std dev of pixels
+  double stereoStd;      ///< std dev of stereo measurements
   double sphStd;         ///< induced std dev on spherical measurements
   
   double dwStd;           ///< standard deviation for white noise angular accel
@@ -133,6 +135,15 @@ public:
    * @return true on success
    */
   bool ProcessCam(double t, const vector<Vector2d> &zs, const vector<int> &zInds);
+
+  /**
+   * Process stereo camera features
+   * @param t time
+   * @param zs 3d features
+   * @param zInds features indices
+   * @return true on success
+   */
+  bool ProcessStereoCam(double t, const vector<Vector3d> &z3ds, const vector<int> &zInds);
 
   /**
    * Remove a camera frame from sequence

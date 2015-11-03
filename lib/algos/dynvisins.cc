@@ -4,6 +4,52 @@
 using namespace gcop;
 
 /**
+ * Standard stereo camera residual error
+ */
+struct StereoError {
+  StereoError(const DynVisIns &vi, const Vector3d &z)
+    : vi(vi), z(z) {}
+  
+  /**
+   * @param o_ 3-dim rotation exp coordinates
+   * @param p_ 3-dim position
+   * @param l 3-dim feature position in 3d
+   * @param res 2-dim vector residual
+   */
+  bool operator()(const double* o_,
+                  const double* p_,
+                  const double* l_,
+                  double* res) const 
+  {
+    Matrix3d dR;
+    if(vi.useCay) 
+    {
+      SO3::Instance().cay(dR, Vector3d(o_));
+    }
+    else
+    {
+      SO3::Instance().exp(dR, Vector3d(o_));
+    }
+    Matrix3d R = dR*vi.Ric;  // camera rotation
+
+    Vector3d p(p_);
+    Vector3d r = R.transpose()*(Vector3d(l_) - p);
+
+    Vector3d e = (r - z)/vi.stereoStd;
+
+    res[0] = e[0]; res[1] = e[1]; res[2] = e[2];
+    return true;
+  }
+  
+  static ceres::CostFunction* Create(const DynVisIns &vi, const Vector3d &z) {
+    return (new ceres::NumericDiffCostFunction<StereoError, ceres::CENTRAL, 3, 3, 3, 3>(
+                                                                                       new StereoError(vi, z)));
+  }
+  
+  const DynVisIns &vi;
+  Vector3d z;
+};
+/**
  * Standard perspective projection residual error
  */
 struct PerspError {
@@ -1315,6 +1361,69 @@ bool DynVisIns::ProcessCam(double t, const vector<Vector2d> &zcs, const vector<i
   return true;
 }
 
+/**
+ * Process stereo feature data
+ * @param t time
+ * @param zcs current measured points
+ * @param zcInds current measured point indices
+ * @return true on success
+ */
+bool DynVisIns::ProcessStereoCam(double t, const vector<Vector3d> &zcs, const vector<int> &pntIds) 
+{
+  assert(useCam);  
+
+  if (t - this->t < 0) {
+    cout << "[W] DynVisIns::ProcessStereoCam: frame out of sync dt=" << t - this->t << endl;
+    return false;
+  }
+
+  Camera cam; // new camera to be added
+  ++camId;    // increase global id (it was initialized to -1)
+
+  // update global time and camera time
+  this->t = t;  
+
+  // if not first camera then set delta-t b/n last and this camera
+  // and init state to previous cam state
+  if (camId > 0) {
+    cams[camId - 1].dt = t - tc;
+    cam.x = cams[camId - 1].x;
+  } else {
+    cam.dt = 0;
+    cam.x = x0;
+  }
+   // above one could use the propagated state x instead of x0 to initialize using IMU dead-reconing -- only a good idea if initial pose is correct, otherwise accelerometer-based odometry will be off
+  
+  this->tc = t;  // update last camera time to to current time
+  
+  // add observations
+  for (int i = 0; i < zcs.size(); ++i) {        
+    
+    int pntId = pntIds[i];
+    const Vector3d &z = zcs[i];
+    
+    // if this is a new point, then add it to point map
+    if (pnts.find(pntId) == pnts.end()) {
+      
+      Point pnt;
+      pnt.usePrior = false;
+      pnt.active = false;
+      
+      pnt.l = cam.x.p + cam.x.R*Ric*z; // unit normal in spatial frame
+      
+      pnts[pntId] = pnt;
+    } 
+
+    pnts[pntId].z3ds[camId] = z;
+    cam.pntIds.push_back(pntId);
+  }
+
+  // add camera to map
+  cams[camId] = cam;
+
+  return true;
+}
+
 // pnt_zs_removed keeps a set of all the points which had measurements removed yet are still
 //   present in the optimization.
 bool DynVisIns::RemoveCamera(int id, std::set<int>* pnt_zs_removed) 
@@ -1411,7 +1520,7 @@ bool DynVisIns::ResetPrior(int id, std::set<int>* pnt_ids)
       }
       if(v_pt_idx == l_opti_map->size())
       {
-        cout << "[W] DynVisIns::ResetPrior: failed to find ptId " << *pntIter << " in previous optimization vector...skipping." << endl;
+        cout << "[W] DynVisIns::ResetPrior: failed to find ptId " << *pntIter << " in previous optimization vector (this could be because it was never set to active)...skipping." << endl;
         continue;
       }
       double *vpt = this->v + 12*num_opti_cams + v_pt_idx*3;
@@ -1584,6 +1693,54 @@ bool DynVisIns::Compute() {
             //        SphError::Create(*this, lus[i]) :
             PerspError::Create(*this, z);
         }
+        
+        double *x = v + 12*(camId - camId0);
+        
+        //        assert(zCamInds[i] < xs.size());
+        //        assert(zInds[i] < ls.size());
+        
+        
+        //      ceres::LossFunction *loss_function = new ceres::HuberLoss(100.0);
+        //      ceres::LossFunctionWrapper* loss_function(new ceres::HuberLoss(1.0), ceres::TAKE_OWNERSHIP);
+        if(useHuberLoss)
+        {  
+          problem->AddResidualBlock(cost_function,
+                                   new ceres::HuberLoss(2.0),
+                                   x, x + 3, l);
+        }
+        else
+        {
+          problem->AddResidualBlock(cost_function,
+                                   NULL,
+                                   x, x + 3, l);
+        }
+
+        // for now restrict point coordinates to [-20,20] meters, assuming we're in a small room
+        problem->SetParameterLowerBound(l, 0, -20);
+        problem->SetParameterLowerBound(l, 1, -20);
+        problem->SetParameterLowerBound(l, 2, -20);
+        problem->SetParameterUpperBound(l, 0, 20);
+        problem->SetParameterUpperBound(l, 1, 20);
+        problem->SetParameterUpperBound(l, 2, 20);      
+      }
+
+      map<int, Vector3d>::iterator z3dIter;
+      for (z3dIter = pnt.z3ds.begin(); z3dIter != pnt.z3ds.end(); ++z3dIter) 
+      {
+        int camId = z3dIter->first;
+        Vector3d &z = z3dIter->second;
+        ceres::CostFunction* cost_function;
+        //if(useAnalyticJacs)
+        //{
+        //  cost_function = new AnalyticPerspError(*this, z);
+        //}
+        //else
+        //{
+          cost_function =
+            //        sphMeas ?
+            //        SphError::Create(*this, lus[i]) :
+            StereoError::Create(*this, z);
+        //}
         
         double *x = v + 12*(camId - camId0);
         
