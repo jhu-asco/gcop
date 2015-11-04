@@ -116,6 +116,7 @@ public:
   bool sphMeas;    ///< use spherical measurements instead of standard pixel perspective measurements? (false by default)
   bool checkPtActiveFlag; ///< should the active flag of points be checked?
   double maxIterations; ///< maximum number of solver iterations
+  int minPnts;   ///< min points needed to do optimization
    
   DynVisIns();
   virtual ~DynVisIns();

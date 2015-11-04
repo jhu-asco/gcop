@@ -1156,6 +1156,7 @@ DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL), l_opti_map(NULL), n_good_
   
   maxIterations = 50;
   maxCams = 0;
+  minPnts = 20;
   ceresActive = false;
   useHuberLoss = true;
   checkPtActiveFlag = false;
@@ -1618,9 +1619,10 @@ bool DynVisIns::Compute() {
   }
   n_good_pnts = gpoints.size();
 
-  if(n_good_pnts < 4)
+  if(n_good_pnts < minPnts)
   {
-    cout << "[E] DynVisIns::Compute: fewer than 4 good points...aborting optimization." << endl;
+    cout << "[E] DynVisIns::Compute: fewer than " << minPnts 
+      << " good points...aborting optimization." << endl;
     return false;
   }
 
