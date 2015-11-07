@@ -334,6 +334,8 @@ public:
     c.segment<3>(6) = D*x.w;
     c.tail<3>() = x.v;
   }
+private:
+  void RemoveBadPoints();
 
 };
 

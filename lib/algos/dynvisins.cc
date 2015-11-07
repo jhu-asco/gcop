@@ -1156,7 +1156,7 @@ DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL), l_opti_map(NULL), n_good_
   
   maxIterations = 50;
   maxCams = 0;
-  minPnts = 20;
+  minPnts = 3;
   ceresActive = false;
   useHuberLoss = true;
   checkPtActiveFlag = false;
@@ -1425,6 +1425,32 @@ bool DynVisIns::ProcessStereoCam(double t, const vector<Vector3d> &zcs, const ve
   return true;
 }
 
+void DynVisIns::RemoveBadPoints()
+{
+  map<int, Camera>::iterator camIter;
+  for(camIter = cams.begin(); camIter != cams.end(); camIter++)
+  {
+    Camera &cam = camIter->second;
+    Matrix3d R = cam.x.R*Ric;
+    // go through all points seen by the camera
+    vector<int>::iterator iter;
+    for (iter = cam.pntIds.begin(); iter != cam.pntIds.end(); ++iter) {
+      int pntId = *iter;
+      Point &pnt = pnts[pntId];
+      // ignore inactive points
+      if((!pnt.active && checkPtActiveFlag) || pnt.zs.size() <=1)
+        continue;
+      // remove point if behind camera
+      if((R.transpose()*(pnt.l - cam.x.p))(2) < 0)
+      {
+        pnts.erase(pntId); 
+        cout << "[I] DynVisIns::RemoveCam: pnt id#" << pntId 
+          << " is observed behind a camera and removed." << endl;
+      }
+    }
+  }
+}
+
 // pnt_zs_removed keeps a set of all the points which had measurements removed yet are still
 //   present in the optimization.
 bool DynVisIns::RemoveCamera(int id, std::set<int>* pnt_zs_removed) 
@@ -1605,7 +1631,8 @@ bool DynVisIns::Compute() {
     }
     camId0 = newCamId0;
   }
- 
+
+  RemoveBadPoints();
       
   n_good_pnts = 0;
   vector<pair<int,Point&>> gpoints;
