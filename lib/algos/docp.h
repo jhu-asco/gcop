@@ -79,6 +79,8 @@ namespace gcop {
      * @param der whether to update derivatives (A and B matrices)
      */
     void Update(bool der = true);
+
+    double ComputeCost();
     
     System<T, nx, nu, np> &sys;    ///< dynamical system 
 
@@ -141,6 +143,21 @@ namespace gcop {
     Docp<T, nx, nu, np>::~Docp()
     {
     }
+
+  
+  template <typename T, int nx, int nu, int np> 
+    double Docp<T, nx, nu, np>::ComputeCost() {
+    double t = this->ts.back();
+    double J = this->cost.L(t, this->xs.back(), this->us.back(), 0);
+    for (int k = us.size() - 1; k >=0; --k) {      
+      t = this->ts[k];
+      double h = this->ts[k+1] - t;
+      double L = this->cost.L(t, this->xs[k], this->us[k], h);
+      J += L;
+    }    
+    return J;
+  }
+
   
   template <typename T, int nx, int nu, int np> 
     void Docp<T, nx, nu, np>::Update(bool der) {
@@ -157,13 +174,13 @@ namespace gcop {
     
     //    cout << "SIZE=" << ((MbsState*)&xav)->r.size() << endl;
     
-    if (nx == Dynamic) {
+    if (der && nx == Dynamic) {
       dx.resize(sys.X.n);
       dfp.resize(sys.X.n);
       dfm.resize(sys.X.n);
     }
     
-    if (nu == Dynamic)
+    if (der && nu == Dynamic)
       du.resize(sys.U.n);    
 
     int N = us.size();

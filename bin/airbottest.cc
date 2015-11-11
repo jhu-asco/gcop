@@ -158,12 +158,14 @@ void solver_process(Viewer* viewer)
     // getchar();
   }
 
-  int Nd;
+  /*
+  int Nd = 16;
   params.GetInt("Nd", Nd);
   vector<MbsState> xds(Nd+1, x0);  
   int d = N/Nd;
   for (int i=Nd, j = N; i>=0 && j>= 0; --i, j-=d)
     xds[i] = xs[j];
+  */
 
   //  xs = xds;
   

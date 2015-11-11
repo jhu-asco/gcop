@@ -32,7 +32,6 @@ namespace gcop {
     double l2;  ///< second link length
     double x1;  ///< relative offset to second motor in x direction
     
-
   };
 }
 

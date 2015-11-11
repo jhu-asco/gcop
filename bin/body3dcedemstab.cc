@@ -36,7 +36,7 @@ public:
     x = xf;
     for (int i = 0; i < N; ++i) {
       do {
-        // x.second[1] = 2*xf.second[1]*RND;
+        x.p(1) = 2*xf.p(1)*RND;
         if (con)
           (*con)(g, 0, x);
       } while (con && g[0] > -1); // 1 meter away from obstacles
