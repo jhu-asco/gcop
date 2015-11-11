@@ -94,6 +94,7 @@ void solver_process(Viewer* viewer)
   if (viewer)
     viewer->Add(view);  
 
+
   struct timeval timer;
   //  ddp.debug = false; // turn off debug for speed
 

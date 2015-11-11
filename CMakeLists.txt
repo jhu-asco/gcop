@@ -66,7 +66,10 @@ endif(NOT (CMAKE_SIZEOF_VOID_P EQUAL 8) )
 
 find_package( OpenCV 2.4 COMPONENTS core highgui imgproc calib3d)
 IF (OpenCV_FOUND)
+  message("OpenCV_DIRS: ${OpenCV_INCLUDE_DIRS}")
+  message("OpenCV_LIBS: ${OpenCV_LIBS}")
   include_directories( ${OpenCV_INCLUDE_DIRS} )
+  include_directories( /usr/local/include/opencv2)
   set(EST_LIBS ${EST_LIBS} ${OpenCV_LIBS})
 ENDIF (OpenCV_FOUND)
 

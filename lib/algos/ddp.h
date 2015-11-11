@@ -103,10 +103,16 @@ namespace gcop {
     double V;
     Vector2d dV;
 
-    double s1;   ///< Armijo/Bertsekas step-size control factor s1
-    double s2;   ///< Armijo/Bertsekas step-size control factor s2
-    double b1;   ///< Armijo/Bertsekas step-size control factor b1
-    double b2;   ///< Armijo/Bertsekas step-size control factor b2
+    double sigma; ///< Armijo sigma factor (0.1 by default)
+    double beta;  ///< Armijo beta factor  (0.25 by default)
+
+    double amin;  ///< minimum step-size: end line-search if a<amin (default is 1e-10)
+    double cVmin; ///< cost-change minimum: end line-search if V_a - V < cVmin (default is 1-10)
+    
+    double s1;   ///< Armijo-Goldstein step-size control factor s1
+    double s2;   ///< Armijo-Goldstein step-size control factor s2
+    double b1;   ///< Armijo-Goldstein step-size control factor b1
+    double b2;   ///< Armijo-Goldstein step-size control factor b2
     
     char type;   ///< type of algorithm (choices are PURE, DDP, LQS), LQS is default. In the current implementation second-order expansion of the dynamics is ignored, so DDP and LQS are identical. Both LQS and DDP are implemented using the true nonlinear dynamics integration in the Forward step, while PURE uses the linearized version in order to match exactly the true Newton step. 
     
@@ -187,6 +193,7 @@ namespace gcop {
     N(us.size()), 
     mu(1e-3), mu0(1e-3), dmu0(2), mumax(1e6), a(1), 
     dus(N), kus(N), Kuxs(N), 
+    sigma(0.1), beta(.25), amin(1e-10), cVmin(1e-10),
     s1(0.1), s2(0.5), b1(0.25), b2(2),
     type(LQS)
     {
@@ -375,11 +382,13 @@ namespace gcop {
     typedef Matrix<double, nu, nu> Matrixcd;  
     
     // measured change in V
-    double dVm = 1;
+    double cV = 1;
     
     double a = this->a;
+
+    bool acc = false;
     
-    while (dVm > 0) {
+    while (1) {
 
       Vectornd dx = VectorXd::Zero(this->sys.X.n);
       dx.setZero();//Redundancy
@@ -407,17 +416,6 @@ namespace gcop {
         Rn<nu> &U = (Rn<nu>&)this->sys.U;
         if (U.bnd) {
           U.Bound(un, du, u);
-          /*
-          for (int j = 0; j < u.size(); ++j) 
-            if (un[j] < U.lb[j]) {
-              un[j] = U.lb[j];
-              du[j] = un[j] - u[j];
-            } else
-              if (un[j] > U.ub[j]) {
-                un[j] = U.ub[j];
-                du[j] = un[j] - u[j];
-              }
-          */
         }
         
         const double &t = this->ts[k];
@@ -468,33 +466,59 @@ namespace gcop {
       
       double L = this->cost.L(this->ts[N], xn, un, 0);
       Vm += L;
+      cV = Vm - V;
       
       if (this->debug)
         cout << "[I] Ddp::Forward: measured V=" << Vm << endl;
       
-      dVm = Vm - V;
+      //      cout << "V-Vm=" << V-Vm << " dV[0]=" << dV[0] << " a=" << a << endl;
+     
+      if (a < amin || fabs(cV) < cVmin)
+        break;
+
+      if (V - Vm < -sigma*a*dV[0]) {
+        a *= beta;
+        continue;
+      } else {
+        break;
+      }
+
       
-      if (dVm > 0) {
+      // the rest below is currently not activated
+
+      // if step is still not acceptable
+      if (acc)
+        break;            
+
+      // Armijo-Goldstein
+      if (cV > 0) {
         a *= b1;
         if (a < 1e-12)
           break;
         if (this->debug)
           cout << "[I] Ddp::Forward: step-size reduced a=" << a << endl;
-        
+
+        acc = false;
         continue;
       }
-      
-      double r = dVm/(a*dV[0] + a*a*dV[1]);
+
+      double r = cV/(a*dV[0] + a*a*dV[1]);
+      //      double r = cV/(a*dV[0]);
       if (r < s1)
         a = b1*a;
       else 
         if (r >= s2) 
-          a = b2*a;    
-    
+          a = b2*a;
+        else
+          break;
+
+      if (a < 1e-12)
+        break;
+      
       if (this->debug)
         cout << "[I] Ddp::Forward: step-size a=" << a << endl;    
     }
-    this->J = V + dVm;//Set the optimal cost after one iteration
+    this->J = V + cV;//Set the optimal cost after one iteration
   }
 
   template <typename T, int nx, int nu, int np> 
