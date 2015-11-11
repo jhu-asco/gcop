@@ -1547,7 +1547,12 @@ bool DynVisIns::ResetPrior(int id, std::set<int>* pnt_ids)
       }
       if(v_pt_idx == l_opti_map->size())
       {
-        cout << "[W] DynVisIns::ResetPrior: failed to find ptId " << *pntIter << " in previous optimization vector (this could be because it was never set to active)...skipping." << endl;
+        if(pnts.find(*pntIter) != pnts.end() && pnts[*pntIter].active)
+        {
+          cout << "[W] DynVisIns::ResetPrior: failed to find ptId " << *pntIter 
+            << " in previous optimization vector (pnt.active = "<< pnts[*pntIter].active 
+            << ")...skipping." << endl;
+        }
         continue;
       }
       double *vpt = this->v + 12*num_opti_cams + v_pt_idx*3;
