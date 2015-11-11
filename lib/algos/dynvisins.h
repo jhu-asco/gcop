@@ -45,7 +45,11 @@ public:
   
   struct Point {
     Vector3d l;              ///< the point 3d coordinates
-    map<int, Vector2d> zs;   ///< map of feature measurements indexed by camera id
+    Matrix3d P;              ///< the covariance matrix of the point 3d coordinates
+    bool usePrior;           ///< should a prior be set based on the point covariance?
+    bool active;           ///< should this point be used in the optimization?
+    map<int, Vector2d> zs;   ///< map of 2d feature measurements indexed by camera id
+    map<int, Vector3d> z3ds;   ///< map of 3d feature measurements indexed by camera id
   };
 
   struct Camera {
@@ -71,9 +75,12 @@ public:
   bool ceresActive;       ///< whether ceres has been called on the current opt vector
 
   double *v;             ///< the full ceres optimization vector
-  int *l_opti_map;       ///< maps optimization vector points to point IDs
+  std::vector<int> *l_opti_map;             ///< maps pnts in optimization vector back to pntIds
+  int num_opti_cams;     ///< number of cameras used in the last optimization
+  int n_good_pnts;        ///< number of good points in the last optimization
 
   double pxStd;          ///< std dev of pixels
+  double stereoStd;      ///< std dev of stereo measurements
   double sphStd;         ///< induced std dev on spherical measurements
   
   double dwStd;           ///< standard deviation for white noise angular accel
@@ -100,12 +107,16 @@ public:
   bool useImu;     ///< process IMU?
   bool useCam;     ///< process cam? 
   bool useDyn;     ///< use dynamics?
-
+  bool useAnalyticJacs;     ///< use analytic jacobians?
+  bool useCay;      ///< use cayley map instead of exponential map?
   bool usePrior;   ///< whether to enforce prior using x0
-
+  bool useFeatPrior;   ///< whether to enforce feature prior
+  bool useHuberLoss;   ///< use huber loss for feature residuals?
   bool optBias;    ///< to optimize over biases?
-
   bool sphMeas;    ///< use spherical measurements instead of standard pixel perspective measurements? (false by default)
+  bool checkPtActiveFlag; ///< should the active flag of points be checked?
+  double maxIterations; ///< maximum number of solver iterations
+  int minPnts;   ///< min points needed to do optimization
    
   DynVisIns();
   virtual ~DynVisIns();
@@ -127,11 +138,21 @@ public:
   bool ProcessCam(double t, const vector<Vector2d> &zs, const vector<int> &zInds);
 
   /**
-   * Remove a camera frame from sequence
-   * @param id cam id
+   * Process stereo camera features
+   * @param t time
+   * @param zs 3d features
+   * @param zInds features indices
    * @return true on success
    */
-  bool RemoveCamera(int id);
+  bool ProcessStereoCam(double t, const vector<Vector3d> &z3ds, const vector<int> &zInds);
+
+  /**
+   * Remove a camera frame from sequence
+   * @param id cam id
+   * @param pnt_zs_removed optional output argument which is holds ids of points which had measurements removed yet are still present in the optimization.
+   * @return true on success
+   */
+  bool RemoveCamera(int id, std::set<int>* pnt_zs_removed = NULL);
 
   /**
    * Remove a point
@@ -147,9 +168,10 @@ public:
    * frame needs to be dropped to stay within maxCams window; the prior is then
    * reset to the second camera, before removing the first.
    * @param id camera id to which the prior will be reset
+   * @param pnts point ids on which the prior will be reset
    * @return true on success
    */
-  bool ResetPrior(int id);
+  bool ResetPrior(int id, std::set<int>* pnts = NULL);
 
   /**
    * Process IMU measurement
@@ -187,7 +209,7 @@ public:
    * @param v ceres optimization vector
    * @return true if success
    */
-  bool ToVec(double *v, int *l_map) {
+  bool ToVec(double *v, vector<int>* l_map) {
     Vector12d c;
     map<int, Camera>::iterator camIter;
     int i = 0;
@@ -199,9 +221,14 @@ public:
     int i0 = 12*cams.size(); 
     map<int, Point>::iterator pntIter;
     i=0;
-    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter, ++i) {
-      memcpy(v + i0 + 3*i, pntIter->second.l.data(), 3*sizeof(double));
-      l_map[i] = pntIter->first;
+    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
+      // Only consider points with at least two observations
+      if(pntIter->second.zs.size() > 1  && (!checkPtActiveFlag || pntIter->second.active))
+      {
+        memcpy(v + i0 + 3*i, pntIter->second.l.data(), 3*sizeof(double));
+        l_map->at(i) = pntIter->first;
+        ++i;
+      }
     }
 
     //    if (optBias) {
@@ -217,7 +244,7 @@ public:
    * @param v ceres optimization vector
    * @return true if success
    */
-  bool FromVec(const double *v, const int *l_map) {
+  bool FromVec(const double *v, const vector<int>* l_map) {
     //    xs.resize(cams.size();
     map<int, Camera>::iterator camIter;
     int i=0;
@@ -230,8 +257,8 @@ public:
     //map<int, Point>::iterator pntIter;
     //i = 0;
     //for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter, ++i) {
-    for (int i = 0; i < pnts.size(); ++i) {
-      pnts[l_map[i]].l = Vector3d(v + i0 + 3*i);
+    for (int i = 0; i < l_map->size(); ++i) {
+      pnts[l_map->at(i)].l = Vector3d(v + i0 + 3*i);
     }
 
     //    if (optBias) {
@@ -242,47 +269,73 @@ public:
     return true;
   }
 
-  static void ToState(Body3dState &x, 
+  void ToState(Body3dState &x, 
                       const Vector3d &r,
                       const Vector3d &p,
                       const Vector3d &dr,
                       const Vector3d &v) {
-    SO3::Instance().exp(x.R, r);
-    x.p = p;
     Matrix3d D;
-    SO3::Instance().dexp(D, -r);
+    if(useCay)
+    {
+      SO3::Instance().cay(x.R, r);
+      SO3::Instance().dcay(D, -r);
+    }
+    else
+    {
+      SO3::Instance().exp(x.R, r);
+      SO3::Instance().dexp(D, -r);
+    }
+    x.p = p;
     x.w = D*dr;
     x.v = v;
   }
 
-  static void ToState(Body3dState &x, const Vector12d &c) {
+  void ToState(Body3dState &x, const Vector12d &c) {
     ToState(x, c.head<3>(), c.segment<3>(3), c.segment<3>(6), c.tail<3>());
   }
 
 
     
-  static void FromState(Vector3d &r, Vector3d &p, Vector3d &dr, Vector3d &v,
+  void FromState(Vector3d &r, Vector3d &p, Vector3d &dr, Vector3d &v,
                         const Body3dState &x) {
-    SO3::Instance().log(r, x.R);
-    p = x.p;
     Matrix3d D;
-    SO3::Instance().dexpinv(D, -r);
+    if(useCay)
+    {
+      SO3::Instance().cayinv(r, x.R);
+      SO3::Instance().dcayinv(D, -r);
+    }
+    else
+    {
+      SO3::Instance().log(r, x.R);
+      SO3::Instance().dexpinv(D, -r);
+    }
+    p = x.p;
     dr = D*x.w;
     v = x.v;
   }
 
-  static void FromState(Vector12d &c, const Body3dState &x) {
+  void FromState(Vector12d &c, const Body3dState &x) {
     //    FromState(c.head<3>(), c.segment<3>(3), c.segment<3>(6), c.tail<3>(), x);
     
     Vector3d r;
-    SO3::Instance().log(r, x.R);
+    Matrix3d D;
+    if(useCay)
+    {
+      SO3::Instance().cayinv(r, x.R);
+      SO3::Instance().dcayinv(D, -r);
+    }
+    else
+    {
+      SO3::Instance().log(r, x.R);
+      SO3::Instance().dexpinv(D, -r);
+    }
     c.head<3>() = r;
     c.segment<3>(3) = x.p;
-    Matrix3d D;
-    SO3::Instance().dexpinv(D, -r);
     c.segment<3>(6) = D*x.w;
     c.tail<3>() = x.v;
   }
+private:
+  void RemoveBadPoints();
 
 };
 
