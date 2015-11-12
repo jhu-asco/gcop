@@ -36,6 +36,8 @@ namespace gcop {
     
     void cayinv(Vector3d& v, const Matrix3d& m) const;
 
+    void ddcay(Matrix3d &dmdv1, Matrix3d &dmdv2, Matrix3d &dmdv3, const Vector3d &v) const;
+
     void dcay(Matrix3d& m, const Vector3d& v) const;
     
     void dcayinv(Matrix3d& m, const Vector3d& v) const;

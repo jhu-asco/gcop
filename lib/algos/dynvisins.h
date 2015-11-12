@@ -4,6 +4,8 @@
 #include <cmath>
 #include <cstdio>
 #include <iostream>
+#include <map>
+
 
 #include <fstream>
 #include "body3d.h"
@@ -41,19 +43,44 @@ using namespace Eigen;
 class DynVisIns {
 public:
   
-  ceres::Problem problem;
+  struct Point {
+    Vector3d l;              ///< the point 3d coordinates
+    Matrix3d P;              ///< the covariance matrix of the point 3d coordinates
+    bool usePrior;           ///< should a prior be set based on the point covariance?
+    bool active;           ///< should this point be used in the optimization?
+    map<int, Vector2d> zs;   ///< map of 2d feature measurements indexed by camera id
+    map<int, Vector3d> z3ds;   ///< map of 3d feature measurements indexed by camera id
+  };
 
-  vector<Vector3d> ls;     ///< 3d points
-  vector<Body3dState> xs;  ///< sequence of states
+  struct Camera {
+    Body3dState x;              ///< the point 3d coordinates
+    vector<int> pntIds;         ///< list of points observed by this camera
+
+    double dt;                 ///< delta t to next camera
+
+    vector<double> ts;        ///< local times (within each segment) at which IMU measurements arrived
+    vector<Vector3d> ws;      ///< accumulated IMU gyro readings from last cam frame
+    vector<Vector3d> as;      ///< accumulated IMU acc readings from last cam frame    
+  };
+  
+  map<int, Point> pnts;   ///< all points
+  
+  int camId;              ///< current camera id (incremented after a frame is added)
+  int camId0;             ///< starting camera id (pointing to begining of window)
+  map<int, Camera> cams;  ///< cameras
+
+  int maxCams;            ///< max length of camera sequence (0 by default indicating no limit)
+
+  ceres::Problem* problem;  ///< the ceres problem
+  bool ceresActive;       ///< whether ceres has been called on the current opt vector
 
   double *v;             ///< the full ceres optimization vector
-
-  vector<Vector2d> zs;   ///< all perpsective measurements
-  vector<Vector3d> lus;  ///< all unit-spherical measurements (points in the IMU body frame)
-  vector<int> zInds;     ///< measurements points indices (into ls)
-  vector<int> zCamInds;  ///< measurements camera indices (into xs)
+  std::vector<int> *l_opti_map;             ///< maps pnts in optimization vector back to pntIds
+  int num_opti_cams;     ///< number of cameras used in the last optimization
+  int n_good_pnts;        ///< number of good points in the last optimization
 
   double pxStd;          ///< std dev of pixels
+  double stereoStd;      ///< std dev of stereo measurements
   double sphStd;         ///< induced std dev on spherical measurements
   
   double dwStd;           ///< standard deviation for white noise angular accel
@@ -74,117 +101,25 @@ public:
 
   Body3dState x0;  ///< ins sequence start state
 
-  Vector3d bg;  ///< acceleration bias
-  Vector3d ba;  ///< gyro bias
+  Vector3d bg;  ///< acceleration bias (assumed fixed during optimization window)
+  Vector3d ba;  ///< gyro bias (assumed fixed during optimization window)
 
   bool useImu;     ///< process IMU?
   bool useCam;     ///< process cam? 
   bool useDyn;     ///< use dynamics?
-
+  bool useAnalyticJacs;     ///< use analytic jacobians?
+  bool useCay;      ///< use cayley map instead of exponential map?
   bool usePrior;   ///< whether to enforce prior using x0
-
+  bool useFeatPrior;   ///< whether to enforce feature prior
+  bool useHuberLoss;   ///< use huber loss for feature residuals?
   bool optBias;    ///< to optimize over biases?
-
-  bool sphMeas;    ///< use spherical measurements instead of standard pixel perspective measurements?
-
-
-  vector<double> dts;           ///< camera segment delta times
-  vector<vector<double> > tss;  ///< local times (within each segment) at which IMU measurements arrived
-  vector<vector<Vector3d> > wss;  ///< accumulated IMU gyro readings from last cam frame
-  vector<vector<Vector3d> > ass;  ///< accumulated IMU acc readings from last cam frame
-  
+  bool sphMeas;    ///< use spherical measurements instead of standard pixel perspective measurements? (false by default)
+  bool checkPtActiveFlag; ///< should the active flag of points be checked?
+  double maxIterations; ///< maximum number of solver iterations
+  int minPnts;   ///< min points needed to do optimization
+   
   DynVisIns();
   virtual ~DynVisIns();
-
-  /**
-   * Convert from stl/Eigen data structures to ceres optimization vector
-   * @param v ceres optimization vector
-   * @return true if success
-   */
-  bool ToVec(double *v) {
-    Vector12d c;
-    for (int i = 0; i < xs.size(); ++i) {
-      FromState(c, xs[i]);
-      memcpy(v + 12*i, c.data(), 12*sizeof(double));
-    }
-
-    int i0 = 12*xs.size(); 
-    for (int i = 0; i < ls.size(); ++i) {
-      memcpy(v + i0 + 3*i, ls[i].data(), 3*sizeof(double));
-    }
-
-    if (optBias) {
-      memcpy(v + 12*xs.size() + 3*ls.size(), bg.data(), 3*sizeof(double));
-      memcpy(v + 12*xs.size() + 3*ls.size() + 3, ba.data(), 3*sizeof(double));
-    }    
-    return true;
-  }
-  
-
-  /**
-   * Convert from ceres optimization vector to stl/Eigen data structures
-   * @param v ceres optimization vector
-   * @return true if success
-   */
-  bool FromVec(const double *v) {
-    for (int i = 0; i < xs.size(); ++i) {
-      ToState(xs[i], Vector12d(v + 12*i));
-    }
-
-    int i0 = 12*xs.size(); 
-    for (int i = 0; i < ls.size(); ++i) {
-      ls[i] = Vector3d(v + i0 + 3*i);
-    }
-
-    if (optBias) {
-      bg = Vector3d(v + 12*xs.size() + 3*ls.size());
-      ba = Vector3d(v + 12*xs.size() + 3*ls.size() + 3);
-    }
-
-    return true;
-  }
-
-  static void ToState(Body3dState &x, 
-                      const Vector3d &r,
-                      const Vector3d &p,
-                      const Vector3d &dr,
-                      const Vector3d &v) {
-    SO3::Instance().exp(x.R, r);
-    x.p = p;
-    Matrix3d D;
-    SO3::Instance().dexp(D, -r);
-    x.w = D*dr;
-    x.v = v;
-  }
-
-  static void ToState(Body3dState &x, const Vector12d &c) {
-    ToState(x, c.head<3>(), c.segment<3>(3), c.segment<3>(6), c.tail<3>());
-  }
-
-
-    
-  static void FromState(Vector3d &r, Vector3d &p, Vector3d &dr, Vector3d &v,
-                        const Body3dState &x) {
-    SO3::Instance().log(r, x.R);
-    p = x.p;
-    Matrix3d D;
-    SO3::Instance().dexpinv(D, -r);
-    dr = D*x.w;
-    v = x.v;
-  }
-
-  static void FromState(Vector12d &c, const Body3dState &x) {
-    //    FromState(c.head<3>(), c.segment<3>(3), c.segment<3>(6), c.tail<3>(), x);
-    
-    Vector3d r;
-    SO3::Instance().log(r, x.R);
-    c.head<3>() = r;
-    c.segment<3>(3) = x.p;
-    Matrix3d D;
-    SO3::Instance().dexpinv(D, -r);
-    c.segment<3>(6) = D*x.w;
-    c.tail<3>() = x.v;
-  }
 
   
   /**
@@ -203,6 +138,42 @@ public:
   bool ProcessCam(double t, const vector<Vector2d> &zs, const vector<int> &zInds);
 
   /**
+   * Process stereo camera features
+   * @param t time
+   * @param zs 3d features
+   * @param zInds features indices
+   * @return true on success
+   */
+  bool ProcessStereoCam(double t, const vector<Vector3d> &z3ds, const vector<int> &zInds);
+
+  /**
+   * Remove a camera frame from sequence
+   * @param id cam id
+   * @param pnt_zs_removed optional output argument which is holds ids of points which had measurements removed yet are still present in the optimization.
+   * @return true on success
+   */
+  bool RemoveCamera(int id, std::set<int>* pnt_zs_removed = NULL);
+
+  /**
+   * Remove a point
+   * @param id point id
+   * @return true on success
+   */
+  bool RemovePoint(int id);
+
+  /**
+   * Reset prior on initial state x0 and its covariance to the 
+   * mean and covariance of camera#id  in the current sequence. 
+   * This is called internally by ProcessCam in case when the oldest
+   * frame needs to be dropped to stay within maxCams window; the prior is then
+   * reset to the second camera, before removing the first.
+   * @param id camera id to which the prior will be reset
+   * @param pnts point ids on which the prior will be reset
+   * @return true on success
+   */
+  bool ResetPrior(int id, std::set<int>* pnts = NULL);
+
+  /**
    * Process IMU measurement
    * @param t time
    * @param w gyro measurement
@@ -211,14 +182,161 @@ public:
    */
   bool ProcessImu(double t, const Vector3d &w, const Vector3d &a);
 
+
+  bool MakeFeature(Vector2d &z, const Body3dState &x, const Vector3d &l);
+
+  bool MakeFeatures(vector<Vector2d> &zs, 
+                    vector<int> &pntIds,
+                    const Body3dState &x, 
+                    const map<int, Point> &pnts);
+
   /**
    * Generate synthetic cam and IMU data and store in a provided "true" system tvi
    * @param tvi the true VI system
+   * @param ns number segments
+   * @param np number of points
    * @param ni number of IMU measurements per camera segment
    */
-  bool GenData(DynVisIns &tvi, int ni = 2);
+  bool GenData(DynVisIns &tvi, int ns, int np, int ni = 2);
+
+
+  bool SimData(DynVisIns &tvi, int ns, int np, int ni = 2, double dt = .1);
 
   bool LoadFile(const char* filename);
+
+  /**
+   * Convert from stl/Eigen data structures to ceres optimization vector
+   * @param v ceres optimization vector
+   * @return true if success
+   */
+  bool ToVec(double *v, vector<int>* l_map) {
+    Vector12d c;
+    map<int, Camera>::iterator camIter;
+    int i = 0;
+    for (camIter = cams.begin(); camIter != cams.end(); ++camIter, ++i) {
+      FromState(c, camIter->second.x);
+      memcpy(v + 12*i, c.data(), 12*sizeof(double));
+    }
+
+    int i0 = 12*cams.size(); 
+    map<int, Point>::iterator pntIter;
+    i=0;
+    for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
+      // Only consider points with at least two observations
+      if(pntIter->second.zs.size() > 1  && (!checkPtActiveFlag || pntIter->second.active))
+      {
+        memcpy(v + i0 + 3*i, pntIter->second.l.data(), 3*sizeof(double));
+        l_map->at(i) = pntIter->first;
+        ++i;
+      }
+    }
+
+    //    if (optBias) {
+    //      memcpy(v + 12*xs.size() + 3*ls.size(), bg.data(), 3*sizeof(double));
+    //      memcpy(v + 12*xs.size() + 3*ls.size() + 3, ba.data(), 3*sizeof(double));
+    //    }    
+    return true;
+  }
+  
+
+  /**
+   * Convert from ceres optimization vector to stl/Eigen data structures
+   * @param v ceres optimization vector
+   * @return true if success
+   */
+  bool FromVec(const double *v, const vector<int>* l_map) {
+    //    xs.resize(cams.size();
+    map<int, Camera>::iterator camIter;
+    int i=0;
+    for (camIter = cams.begin(); camIter != cams.end(); ++camIter, ++i) {
+      ToState(camIter->second.x, Vector12d(v + 12*i));
+      //      xs[i] = camIter->second.x;
+    }
+
+    int i0 = 12*cams.size(); 
+    //map<int, Point>::iterator pntIter;
+    //i = 0;
+    //for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter, ++i) {
+    for (int i = 0; i < l_map->size(); ++i) {
+      pnts[l_map->at(i)].l = Vector3d(v + i0 + 3*i);
+    }
+
+    //    if (optBias) {
+    //      bg = Vector3d(v + 12*xs.size() + 3*ls.size());
+    //      ba = Vector3d(v + 12*xs.size() + 3*ls.size() + 3);
+    //    }
+
+    return true;
+  }
+
+  void ToState(Body3dState &x, 
+                      const Vector3d &r,
+                      const Vector3d &p,
+                      const Vector3d &dr,
+                      const Vector3d &v) {
+    Matrix3d D;
+    if(useCay)
+    {
+      SO3::Instance().cay(x.R, r);
+      SO3::Instance().dcay(D, -r);
+    }
+    else
+    {
+      SO3::Instance().exp(x.R, r);
+      SO3::Instance().dexp(D, -r);
+    }
+    x.p = p;
+    x.w = D*dr;
+    x.v = v;
+  }
+
+  void ToState(Body3dState &x, const Vector12d &c) {
+    ToState(x, c.head<3>(), c.segment<3>(3), c.segment<3>(6), c.tail<3>());
+  }
+
+
+    
+  void FromState(Vector3d &r, Vector3d &p, Vector3d &dr, Vector3d &v,
+                        const Body3dState &x) {
+    Matrix3d D;
+    if(useCay)
+    {
+      SO3::Instance().cayinv(r, x.R);
+      SO3::Instance().dcayinv(D, -r);
+    }
+    else
+    {
+      SO3::Instance().log(r, x.R);
+      SO3::Instance().dexpinv(D, -r);
+    }
+    p = x.p;
+    dr = D*x.w;
+    v = x.v;
+  }
+
+  void FromState(Vector12d &c, const Body3dState &x) {
+    //    FromState(c.head<3>(), c.segment<3>(3), c.segment<3>(6), c.tail<3>(), x);
+    
+    Vector3d r;
+    Matrix3d D;
+    if(useCay)
+    {
+      SO3::Instance().cayinv(r, x.R);
+      SO3::Instance().dcayinv(D, -r);
+    }
+    else
+    {
+      SO3::Instance().log(r, x.R);
+      SO3::Instance().dexpinv(D, -r);
+    }
+    c.head<3>() = r;
+    c.segment<3>(3) = x.p;
+    c.segment<3>(6) = D*x.w;
+    c.tail<3>() = x.v;
+  }
+private:
+  void RemoveBadPoints();
+
 };
 
 }

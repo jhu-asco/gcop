@@ -4,6 +4,7 @@ set(sources
 set(headers 
   shell.h
   cylinder.h
+  constraint.h
 )
 
 IF (PQP_FOUND)

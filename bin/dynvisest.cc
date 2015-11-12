@@ -21,6 +21,10 @@ void solver_process(Viewer* viewer)
   params.GetBool("useCam", vi.useCam);
   params.GetBool("useDyn", vi.useDyn);
   params.GetBool("usePrior", vi.usePrior);
+  params.GetBool("useFeatPrior", vi.useFeatPrior);
+  params.GetBool("useAnlJacs", vi.useAnalyticJacs);
+  params.GetBool("useCay", vi.useCay);
+  params.GetBool("useHuberLoss", vi.useHuberLoss);
 
   params.GetBool("optBias", vi.optBias);
 
@@ -36,7 +40,7 @@ void solver_process(Viewer* viewer)
 
   VectorXd c0(12);
   if (params.GetVectorXd("x0", c0))
-    DynVisIns::ToState(vi.x0, c0);
+    vi.ToState(vi.x0, c0);
 
   VectorXd P0d(12);
   if (params.GetVectorXd("P0", P0d))
@@ -51,35 +55,66 @@ void solver_process(Viewer* viewer)
   int ni = 2;
   params.GetInt("ni", ni);
 
+  int sim_iters = 2;
+  params.GetInt("sim_iters", sim_iters);
+
+  params.GetInt("maxCams", vi.maxCams);
+
+
+  double sim_dt = .125;
+  double sim_tf = 4;
+  params.GetDouble("sim_dt", sim_dt);
+  params.GetDouble("sim_tf", sim_tf);
+
   DynVisIns tvi;
+  tvi.useCay = vi.useCay;
 
   DynVisInsView tview(tvi);
   tview.bodyView.rgba[0] = 1;
   tview.bodyView.rgba[1] = 0;
   tview.bodyView.rgba[2] = 0;
+
+
   if (sim) {
-    tvi.xs = vector<Body3dState>(25);
-    tvi.ls = vector<Vector3d>(36);
+    //    tvi.xs = vector<Body3dState>(25);
+    //    tvi.ls = vector<Vector3d>(36);
     
     VectorXd sim_c0(12);
     if (params.GetVectorXd("sim_x0", sim_c0))
-      DynVisIns::ToState(tvi.xs[0], sim_c0);
+      vi.ToState(tvi.x0, sim_c0);
 
-    vi.GenData(tvi, ni);
-    viewer->Add(tview);    
+    int ns = (int)(sim_tf/sim_dt);
+
+    vi.SimData(tvi, ns, 81, ni, sim_dt);
+    viewer->Add(tview);
+    getchar();
+    vi.Compute();
+
+    for(int i = 0; i < sim_iters-1; i++)
+    {
+      getchar();
+      vi.SimData(tvi, ns, 81, ni, sim_dt);
+      vi.Compute();
+    }
   } else {
     if (!vi.LoadFile(g_argv[1])) {
       std::cerr << "ERROR: unable to open file " << g_argv[1] << "\n";
       return;
     }
+    getchar();
+    getchar();
+    vi.Compute();
   }
 
-  getchar();
-
-  vi.Compute();
   cout << "done" << endl;
-  
-  for (int i = 0; i<vi.xs.size(); ++i) {
+
+  Vector12d c;
+  vi.FromState(c, vi.cams[vi.camId0].x);
+
+  cout << c.transpose() << endl;
+
+  /*
+  for (int i = 0; i< vi.xs.size(); ++i) {
     if (i < tvi.xs.size()) {
       Vector3d e;
       SO3::Instance().log(e, tvi.xs[i].R);
@@ -93,12 +128,13 @@ void solver_process(Viewer* viewer)
     //    else
     //      cout << Matrix<double, 9, 1>(vi.v + 9*i).transpose() << endl;
   }
+  */
 
-  for (int i = 0; i<vi.ls.size(); ++i) {
-    cout << vi.ls[i].transpose() << endl;
+  //  for (int i = 0; i<vi.ls.size(); ++i) {
+    //    cout << vi.ls[i].transpose() << endl;
     //    int i0 = vi.optBias ? vi.xs.size()*15 : vi.xs.size()*9;
     //    cout << Vector3d(vi.v + i0 + 3*i).transpose() << endl;
-  }
+  //  }
   while(1)
     usleep(10000);  
 }

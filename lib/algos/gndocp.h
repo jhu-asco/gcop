@@ -89,7 +89,7 @@ using ceres::Solve;
      *               This is necessary only if xs was not already generated from us.
      */
     GnDocp(System<T, _nx, _nu, _np> &sys, 
-           LqCost<T, _nx, _nu, _np, _ng> &cost, Tparam<T, _nx, _nu, _np, _ntp> &tparam,
+           LsCost<T, _nx, _nu, _np, _ng> &cost, Tparam<T, _nx, _nu, _np, _ntp> &tparam,
            vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
            Vectormd *p = 0, bool update = true);
     
@@ -200,7 +200,7 @@ struct Functor
         const T& x = docp->xs[k];
         const Vectorcd& u = docp->us[k];
         
-        ((LqCost<T, _nx, _nu, _np, _ng>&)docp->cost).Res(g, t, x, u, h, docp->p);
+        ((LsCost<T, _nx, _nu, _np, _ng>&)docp->cost).Res(g, t, x, u, h, docp->p);
         //double cost_debug = ((LqCost<T, _nx, _nu, _np, _ng>&)docp->cost).L(t, x, u, h, docp->p);
         memcpy(fvec.data() + i, g.data(), g.size()*sizeof(double));
         i += g.size();
@@ -219,7 +219,7 @@ struct Functor
         */
       }
       
-      ((LqCost<T, _nx, _nu, _np, _ng>&)docp->cost).Res(g, 
+      ((LsCost<T, _nx, _nu, _np, _ng>&)docp->cost).Res(g, 
                                                        docp->ts.back(), 
                                                        docp->xs.back(), 
                                                        docp->us.back(), 0);
@@ -268,17 +268,17 @@ struct Functor
         const T& x = docp.xs[k];
         const Vectorcd& u = docp.us[k];
 
-        ((LqCost<T, _nx, _nu>&)docp.cost).ResX(rx, t, x, h);
+        ((LsCost<T, _nx, _nu>&)docp.cost).ResX(rx, t, x, h);
         memcpy(residuals + i, rx.data(), rx.size()*sizeof(double));
         i += rx.size();
 
-        ((LqCost<T, _nx, _nu>&)docp.cost).ResU(ru, t, u, h);
+        ((LsCost<T, _nx, _nu>&)docp.cost).ResU(ru, t, u, h);
         memcpy(residuals + i, ru.data(), ru.size()*sizeof(double));
         i += ru.size();
       }
       if (docp.ts.size() > 1) {
         double h = docp.ts.back() - docp.ts[docp.ts.size() - 2];
-        ((LqCost<T, _nx, _nu>&)docp.cost).ResX(rx, docp.ts.back(), docp.xs.back(), h);
+        ((LsCost<T, _nx, _nu>&)docp.cost).ResX(rx, docp.ts.back(), docp.xs.back(), h);
         memcpy(residuals + i, rx.data(), rx.size()*sizeof(double));
       }
       return true;
@@ -291,7 +291,7 @@ struct Functor
   
   template <typename T, int _nx, int _nu, int _np, int _ng, int _ntp> 
     GnDocp<T, _nx, _nu, _np, _ng, _ntp>::GnDocp(System<T, _nx, _nu, _np> &sys, 
-                                                LqCost<T, _nx, _nu, _np, _ng> &cost,
+                                                LsCost<T, _nx, _nu, _np, _ng> &cost,
                                                 Tparam<T, _nx, _nu, _np, _ntp> &tparam,
                                                 vector<double> &ts, 
                                                 vector<T> &xs, 
@@ -373,7 +373,7 @@ struct Functor
     //  google::InitGoogleLogging(argv[0]);
 
   int npar = this->sys.U.n*this->us.size();
-  int nres = ((LqCost<T, _nx, _nu, _np, _ng>&)cost).gn*this->xs.size();
+  int nres = ((LsCost<T, _nx, _nu, _np, _ng>&)cost).gn*this->xs.size();
 
   // The variable to solve for with its initial value. It will be
   // mutated in place by the solver.
