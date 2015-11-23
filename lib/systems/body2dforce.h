@@ -29,14 +29,16 @@ namespace gcop {
   Vector3d D;      ///< damping terms
   Matrix3cd B;     ///< constant control input transformation
   Vector3d fext;   ///< constant external force
-
+	Vector3d D_rev;  ///<Damping terms for the reverse motion. USed only when isdampDiff flag is set to true.
+	
   bool fextParam;  ///< treat the (x,y) forces in fext as a parameter
-  bool dampParam;  
+  bool dampParam;
+  bool isdampDiff;  
   };
 
   template<int c>
     Body2dForce<c>::Body2dForce(bool fextParam, bool dampParam) : 
-    D(0, 0, 0), fext(0, 0, 0), fextParam(fextParam), dampParam(dampParam)
+    D(0, 0, 0), fext(0, 0, 0), fextParam(fextParam), dampParam(dampParam), isdampDiff(false), D_rev(0, 0, 0)
     {
       B.setIdentity();
     }
@@ -59,9 +61,17 @@ namespace gcop {
       Vector3d fb; // body-fixed external force
       fb[0] = fext[0];
       fb.tail<2>() = x.first.topLeftCorner<2,2>().transpose()*fext.tail<2>();    
-
+			
       const Vector3d& v = x.second;
-      f = this->B*u - D.cwiseProduct(v.cwiseAbs().cwiseProduct(v)) + fb;
+      const double &vx = x.second[1];
+			
+			Vector3d D_touse = D;
+      if(isdampDiff && vx<0) {
+      	D_touse=D_rev;
+      }
+      
+
+      f = this->B*u - D_touse.cwiseProduct(v.cwiseAbs().cwiseProduct(v)) + fb;
       
       if (A) {
         /*
