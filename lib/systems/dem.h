@@ -77,8 +77,9 @@ namespace gcop {
      * @param p point 3x1 array
      * @param i i-index
      * @param j j-index
+     * @return true if within bounds
      */
-    virtual void Get(double *p, int i, int j) const;    
+    virtual bool Get(double *p, int i, int j) const;    
 
     /**
      * Set height at point at index (i,j)
@@ -181,6 +182,8 @@ namespace gcop {
     double *normals;   ///< normals    
 
     double eps;        ///< numerical tolerance for interpolation
+
+    double zinv;       ///< invalid value to return if out of bounds
   };
 
 

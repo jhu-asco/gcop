@@ -41,6 +41,22 @@ namespace gcop {
       v.setZero();
       P.setIdentity();
     }
+    
+    /**
+     * Set the position
+     * @return position vector
+     */
+    virtual Vector3d& Position() {
+      return p;
+    }
+    
+    /**
+     * Get rotation matrix
+     * @return rotation matrix
+     */
+    virtual Matrix3d& Rotation() {
+      return R;
+    }    
   };
   
   class Body3dManifold : public Manifold<Body3dState, 12> {

@@ -11,22 +11,43 @@ namespace gcop {
   
   typedef Matrix<double, 4, 1> Vector4d;
   typedef Matrix<double, 4, 4> Matrix4d;
-  typedef pair<Matrix3d, double> M3V1d;
+
+  class GcarState {
+  public:
+    GcarState(bool clear = true) {
+      if (clear)
+        Clear();
+    }
+
+    virtual ~GcarState() {
+    }
+
+    void Clear() {
+      g.setIdentity();
+      v = 0;
+    }
+
+    Matrix3d g; ///< SE(2) pose
+    double v;   ///< forward velocity   
+  };
   
-  class GcarManifold : public Manifold<M3V1d, 4> {
+  class GcarManifold : public Manifold<GcarState, 4> {
   public:
     
     static GcarManifold& Instance();
     
     void Lift(Vector4d &dx,
-              const M3V1d &xa,
-              const M3V1d &xb);      
+              const GcarState &xa,
+              const GcarState &xb);      
 
-    void Retract(M3V1d &xb,
-                 const M3V1d &xa,
+    void Retract(GcarState &xb,
+                 const GcarState &xa,
                  const Vector4d &dx);    
 
+
     void dtau(Matrix4d &M, const Vector4d &v);
+
+    void dtauinv(Matrix4d &M, const Vector4d &v);
 
     void Adtau(Matrix4d &M, const Vector4d &v);
 

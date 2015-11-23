@@ -99,7 +99,7 @@ void solver_process(Viewer* viewer)
 
   VectorXd qvf(12);
   params.GetVectorXd("xf", qvf);  
-  SO3::Instance().q2g(xf.R, qvf.head(3));    
+  SO3::Instance().q2g(xf.R, qvf.head(3));
   xf.p = qvf.segment<3>(3); xf.w = qvf.segment<3>(6); xf.v = qvf.tail<3>(); 
 
   vector<Body3dState> xs(N+1);
