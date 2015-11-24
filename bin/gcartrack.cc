@@ -135,6 +135,12 @@ void solver_process(Viewer* viewer)
   viewer->Add(gview);
   gview.renderSystem = false;
 
+  // current (i.e. the system at the current time) view
+  GcarView cview(sys);
+  cview.x = &xs[0];
+  cview.rgba[0] = 0;  cview.rgba[1] = 0;  cview.rgba[2] =1;
+  viewer->Add(cview);
+
   getchar();
 
   struct timeval timer;
@@ -143,14 +149,14 @@ void solver_process(Viewer* viewer)
     GcarDdp ddp(sys, mcost, ts, xs, us);
     // ddp.mu = 1;    
     ddp.debug = false; // turn off debug for speed
-      
+
     for (int i = 0; i < 50; ++i) {      
       timer_start(timer);
       ddp.Iterate();
       long te = timer_us(timer);      
       //      cout << "Iteration #" << i << " took: " << te << " us." << endl;    
     }
-    getchar();  
+    getchar();
     
     t = t + h;
     xs[0] = xs[1];
@@ -179,7 +185,7 @@ void solver_process(Viewer* viewer)
   
   cout << "done!" << endl;
   while(1)
-    usleep(10);    
+    usleep(10);
 }
 
 
