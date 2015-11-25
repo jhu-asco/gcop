@@ -114,6 +114,7 @@ public:
   bool useHuberLoss;   ///< use huber loss for feature residuals?
   bool optBias;    ///< to optimize over biases?
   bool sphMeas;    ///< use spherical measurements instead of standard pixel perspective measurements? (false by default)
+  bool removeBehind;   ///< remove points behind cameras
   bool checkPtActiveFlag; ///< should the active flag of points be checked?
   double maxIterations; ///< maximum number of solver iterations
   int minPnts;   ///< min points needed to do optimization
@@ -223,7 +224,8 @@ public:
     i=0;
     for (pntIter = pnts.begin(); pntIter != pnts.end(); ++pntIter) {
       // Only consider points with at least two observations
-      if(pntIter->second.zs.size() > 1  && (!checkPtActiveFlag || pntIter->second.active))
+      if((pntIter->second.zs.size() > 1 || pntIter->second.z3ds.size() > 1)  
+        && (!checkPtActiveFlag || pntIter->second.active))
       {
         memcpy(v + i0 + 3*i, pntIter->second.l.data(), 3*sizeof(double));
         l_map->at(i) = pntIter->first;

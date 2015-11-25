@@ -13,8 +13,8 @@ struct StereoError {
   /**
    * @param o_ 3-dim rotation exp coordinates
    * @param p_ 3-dim position
-   * @param l 3-dim feature position in 3d
-   * @param res 2-dim vector residual
+   * @param l_ 3-dim feature position in 3d
+   * @param res 3-dim vector residual
    */
   bool operator()(const double* o_,
                   const double* p_,
@@ -1153,12 +1153,13 @@ struct FeaturePrior {
 };
 
 DynVisIns::DynVisIns() : t(-1), tc(-1), problem(NULL), l_opti_map(NULL), n_good_pnts(0) {
-  
+  stereoStd = .05; 
   maxIterations = 50;
   maxCams = 0;
   minPnts = 3;
   ceresActive = false;
   useHuberLoss = true;
+  removeBehind = false;
   checkPtActiveFlag = false;
   v = 0;
   
@@ -1410,7 +1411,7 @@ bool DynVisIns::ProcessStereoCam(double t, const vector<Vector3d> &zcs, const ve
       pnt.usePrior = false;
       pnt.active = false;
       
-      pnt.l = cam.x.p + cam.x.R*Ric*z; // unit normal in spatial frame
+      pnt.l = cam.x.p + cam.x.R*Ric*z; // in spatial frame
       
       pnts[pntId] = pnt;
     } 
@@ -1438,14 +1439,17 @@ void DynVisIns::RemoveBadPoints()
       int pntId = *iter;
       Point &pnt = pnts[pntId];
       // ignore inactive points
-      if((!pnt.active && checkPtActiveFlag) || pnt.zs.size() <=1)
+      if((!pnt.active && checkPtActiveFlag) || pnt.zs.size() <=1 || pnt.z3ds.size() <=1)
         continue;
-      // remove point if behind camera
-      if((R.transpose()*(pnt.l - cam.x.p))(2) < 0)
+      if(removeBehind)
       {
-        pnts.erase(pntId); 
-        cout << "[I] DynVisIns::RemoveCam: pnt id#" << pntId 
-          << " is observed behind a camera and removed." << endl;
+        // remove point if behind camera
+        if((R.transpose()*(pnt.l - cam.x.p))(2) < 0)
+        {
+          pnts.erase(pntId); 
+          cout << "[I] DynVisIns::RemoveCam: pnt id#" << pntId 
+            << " is observed behind a camera and removed." << endl;
+        }
       }
     }
   }
@@ -1470,7 +1474,7 @@ bool DynVisIns::RemoveCamera(int id, std::set<int>* pnt_zs_removed)
     pnt.zs.erase(id);  // erase the feature measurement of this point by cam
     if(pnt_zs_removed)
       pnt_zs_removed->insert(pntId);
-    if (!pnt.zs.size()) { // if this point now has no measurements then delete it
+    if (!pnt.zs.size() && !pnt.z3ds.size()) { // if this point now has no measurements then delete it
       pnts.erase(pntId); 
       if(pnt_zs_removed)
         pnt_zs_removed->erase(pntId);
@@ -1644,7 +1648,8 @@ bool DynVisIns::Compute() {
   map<int, Point>::iterator gpntIter;
   for (gpntIter = pnts.begin(); gpntIter != pnts.end(); ++gpntIter) {
     // only consider points with >1 observations
-    if(gpntIter->second.zs.size() > 1 && (!checkPtActiveFlag || gpntIter->second.active))
+    if((gpntIter->second.zs.size() > 1 || gpntIter->second.z3ds.size() > 1)  
+      && (!checkPtActiveFlag || gpntIter->second.active))
     {
       gpoints.push_back(pair<int,Point&>(gpntIter->first, gpntIter->second));
     }
@@ -1690,7 +1695,7 @@ bool DynVisIns::Compute() {
     for (int i = 0; i < gpoints.size(); i++) {
       int pntId = gpoints[i].first;
       Point &pnt = gpoints[i].second;
-      if(pnt.zs.size() <= 1)
+      if(pnt.zs.size() <= 1 && pnt.z3ds.size() <= 1) 
       {
         cout << "[I] DynVisIns::Compute: pntId=" << pntId << " only has one observation...skipping." << endl;
         continue;
@@ -1798,12 +1803,12 @@ bool DynVisIns::Compute() {
         }
 
         // for now restrict point coordinates to [-20,20] meters, assuming we're in a small room
-        problem->SetParameterLowerBound(l, 0, -20);
-        problem->SetParameterLowerBound(l, 1, -20);
-        problem->SetParameterLowerBound(l, 2, -20);
-        problem->SetParameterUpperBound(l, 0, 20);
-        problem->SetParameterUpperBound(l, 1, 20);
-        problem->SetParameterUpperBound(l, 2, 20);      
+        //problem->SetParameterLowerBound(l, 0, -20);
+        //problem->SetParameterLowerBound(l, 1, -20);
+        //problem->SetParameterLowerBound(l, 2, -20);
+        //problem->SetParameterUpperBound(l, 0, 20);
+        //problem->SetParameterUpperBound(l, 1, 20);
+        //problem->SetParameterUpperBound(l, 2, 20);      
       }
       //++i;
     }
