@@ -22,9 +22,10 @@ if (BUILD_TESTS)
 	add_executable(gcartrack gcartrack.cc)
 	target_link_libraries(gcartrack  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+IF (PQP_FOUND)
 	add_executable(gcardemtrack gcardemtrack.cc)
 	target_link_libraries(gcardemtrack  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
-
+ENDIF (PQP_FOUND)
 
 
 IF (CERES_FOUND)
