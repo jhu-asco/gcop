@@ -25,10 +25,12 @@ void solver_process(Viewer* viewer)
 
   int N = 64;        // number of segments
   double tf = 10;    // time horizon
-  int iters = 30;
 
-  Uuv<> sys;
+  int iters = 30;    // DDP iterations
 
+  Uuv<> sys;         // default UUV system
+
+  // see config file, e.g. jhurov.cfg for description of the parameters
   params.GetInt("N", N);  
   params.GetDouble("tf", tf);
   params.GetInt("iters", iters);
@@ -38,16 +40,18 @@ void solver_process(Viewer* viewer)
   params.GetVector3d("b", sys.b);
   params.GetVector3d("g", sys.fp);
 
-  // create underactuation
   params.GetVector6d("ulb", sys.U.lb);
   params.GetVector6d("uub", sys.U.ub);
   sys.U.bnd = true;
 
+  // create underactuation
   //  sys.U.lb[4] = -.0001;
   //  sys.U.ub[4] = .0001;
 
+  // time-step
   double h = tf/N;
 
+  // initial state
   UuvState x0;
   VectorXd qv0(12);
   if (params.GetVectorXd("x0", qv0)) {
@@ -55,6 +59,7 @@ void solver_process(Viewer* viewer)
     x0.v = qv0.tail<6>();
   }
 
+  // final state
   UuvState xf;
   VectorXd qvf(12);
   if (params.GetVectorXd("xf", qvf)) {
@@ -63,7 +68,7 @@ void solver_process(Viewer* viewer)
   }
 
 
-  //  UuvCost<> cost(tf, xf);
+  //  linear quadratic cost
   LqCost<UuvState, 12, 6> cost(sys, tf, xf);
 
   VectorXd Q(12);
@@ -80,7 +85,6 @@ void solver_process(Viewer* viewer)
 
 
   // times
-
   vector<double> ts(N+1);
   for (int k = 0; k <=N; ++k)
     ts[k] = k*h;
@@ -89,7 +93,7 @@ void solver_process(Viewer* viewer)
   vector<UuvState> xs(N+1);
   xs[0] = x0;
 
-  // controls 
+  // initial controls, e.g. set to zero
   vector<Vector6d> us(N);
   for (int i = 0; i < N/2; ++i) {
     for (int j = 0; j < 3; ++j) {

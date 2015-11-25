@@ -11,7 +11,7 @@ using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
-typedef Ddp<pair<Matrix3d, double>, 4, 2> GcarDdp;
+typedef Ddp<GcarState, 4, 2> GcarDdp;
 
 void solver_process(Viewer* viewer)
 {
@@ -25,9 +25,9 @@ void solver_process(Viewer* viewer)
   SE2 &se2 = SE2::Instance();  
   Gcar sys;
 
-  M3V1d xf(se2.Id, 0);
+  GcarState xf;
 
-  LqCost< M3V1d, 4, 2> cost(sys, tf, xf);
+  LqCost< GcarState, 4, 2> cost(sys, tf, xf);
   cost.Q.setZero();
   cost.R(0,0) = .005;
   cost.R(1,1) = .001;
@@ -38,10 +38,9 @@ void solver_process(Viewer* viewer)
     ts[k] = k*h;
 
   // states
-  vector<pair<Matrix3d, double> > xs(N+1);
+  vector<GcarState> xs(N+1);
   Vector3d q0(0, 2, -1);
-  se2.q2g(xs[0].first, q0);
-  xs[0].second = 0;
+  se2.q2g(xs[0].g, q0); // set initial pose
 
   // controls
   vector<Vector2d> us(N);
@@ -52,7 +51,7 @@ void solver_process(Viewer* viewer)
   }
   
   GcarDdp ddp(sys, cost, ts, xs, us);
-  ddp.mu = 1;
+  //  ddp.mu = 1;
 
   GcarView view(sys, &ddp.xs, &ddp.us);
   viewer->Add(view);

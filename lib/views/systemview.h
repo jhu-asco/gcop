@@ -25,13 +25,24 @@ namespace gcop {
   public:
     
     /**
-     * Create a view for a single state s
+     * Create a view for a trajectory
      * @param name name
-     * @param s rigid body state
+     * @param xs trajectory
+     * @param us controls
      */
     SystemView(const char *name = 0, 
                vector<Tx> *xs = 0,
                vector<Tu> *us = 0);
+
+    /**
+     * Create a view for a single state 
+     * @param name name
+     * @param x system state
+     * @param u system control
+     */
+    SystemView(const char *name, 
+               Tx &x,
+               Tu *u = 0);
 
     virtual ~SystemView();
 
@@ -65,19 +76,22 @@ namespace gcop {
      */
     void SetColor(const double rgba[4]);
 
-    vector<Tx> *xs;  ///< trajectory to render
-    vector<Tu> *us;  ///< controls to render
+    vector<Tx> *xs;  ///< dynamic trajectory to render
+    vector<Tu> *us;  ///< dynamic controls to render
+
+    Tx *x;  ///< a single static state to render
+    Tu *u;  ///< a single static control to render
     
-    int dis;                   ///< when rendering a trajectory only render a body corresponding to every di-th state (default is 1)
+    int dis;                  ///< when rendering a trajectory only render a body corresponding to every di-th state (default is 1)
     
-    int dit;                   ///< when rendering a trajectory only put a point at every di-th state (default is 1)
+    int dit;                  ///< when rendering a trajectory only put a point at every di-th state (default is 1)
     
-    double rgba[4];            ///< color
+    double rgba[4];           ///< color
 
     double lineWidth;         ///< trajectory line width (default is 1)
 
     bool renderSystem;        ///< whether to render the physical system (e.g. a body)
-    bool renderForces;       ///< whether to render forces
+    bool renderForces;        ///< whether to render forces
   };
 
   
@@ -85,6 +99,25 @@ namespace gcop {
     SystemView<Tx,Tu>::SystemView(const char *name, vector<Tx> *xs, vector<Tu> *us) : View(name),
     xs(xs),
     us(us),
+    x(0),
+    u(0),
+    dis(1),
+    dit(1),
+    lineWidth(1),
+    renderSystem(true),
+    renderForces(false) {
+    rgba[0] = 1;
+    rgba[1] = 1;
+    rgba[2] = 1;
+    rgba[3] = 0;
+  }
+
+  template <typename Tx, typename Tu>
+    SystemView<Tx,Tu>::SystemView(const char *name, Tx &x, Tu *us) : View(name),
+    xs(0),
+    us(0),
+    x(&x),
+    u(u),
     dis(1),
     dit(1),
     lineWidth(1),
@@ -116,6 +149,9 @@ namespace gcop {
     if (xs)
       Render(xs, us, renderSystem, 0, xs->size()-1, dis, dit); 
     
+    if (x)
+      Render(x, u);
+    
     //  glDisable(GL_BLEND);
   }
   
@@ -145,7 +181,10 @@ namespace gcop {
       // more states left
       return true;
     }
-    
+
+    if (x) {
+      Render(x, u);
+    }
     //  glDisable(GL_BLEND);
     
     return false;

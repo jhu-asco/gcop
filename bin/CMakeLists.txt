@@ -19,6 +19,14 @@ if (BUILD_TESTS)
 	add_executable(gcartest gcartest.cc)
 	target_link_libraries(gcartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(gcartrack gcartrack.cc)
+	target_link_libraries(gcartrack  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+	add_executable(gcardemtrack gcardemtrack.cc)
+	target_link_libraries(gcardemtrack  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
+
+
 IF (CERES_FOUND)
 #	add_executable(visest visest.cc)
 #	target_link_libraries(visest gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
