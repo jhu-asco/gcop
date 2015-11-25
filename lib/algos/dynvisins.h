@@ -232,6 +232,7 @@ public:
         ++i;
       }
     }
+    assert(i == l_map->size());
 
     //    if (optBias) {
     //      memcpy(v + 12*xs.size() + 3*ls.size(), bg.data(), 3*sizeof(double));

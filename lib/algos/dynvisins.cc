@@ -1472,6 +1472,7 @@ bool DynVisIns::RemoveCamera(int id, std::set<int>* pnt_zs_removed)
     int pntId = *iter;
     Point &pnt = pnts[pntId];
     pnt.zs.erase(id);  // erase the feature measurement of this point by cam
+    pnt.z3ds.erase(id);  // erase the feature measurement of this point by cam
     if(pnt_zs_removed)
       pnt_zs_removed->insert(pntId);
     if (!pnt.zs.size() && !pnt.z3ds.size()) { // if this point now has no measurements then delete it
@@ -1614,6 +1615,12 @@ bool DynVisIns::Compute() {
     int newCamId0 = cams.size() - maxCams + camId0;
     cout << "[I] DynVisIns::Compute: maxCams=" << maxCams << " window reached. Removing " 
       << cams.size() - maxCams << " cams. New cam id0=" << newCamId0 << endl;
+    if(usePrior && cams.size() - maxCams >= maxCams)
+    {
+      std::cout << "[E] DynVisIns::Compute: cannot remove all cams from previous optimization and still set a prior."
+        << std::endl;
+       return false;
+    }
     for(int i = camId0; i < newCamId0; ++i)
     {
       if(useFeatPrior)
@@ -1643,6 +1650,7 @@ bool DynVisIns::Compute() {
 
   RemoveBadPoints();
       
+  // Find all points to be used in optimization
   n_good_pnts = 0;
   vector<pair<int,Point&>> gpoints;
   map<int, Point>::iterator gpntIter;
@@ -1755,12 +1763,12 @@ bool DynVisIns::Compute() {
         }
 
         // for now restrict point coordinates to [-20,20] meters, assuming we're in a small room
-        problem->SetParameterLowerBound(l, 0, -20);
-        problem->SetParameterLowerBound(l, 1, -20);
-        problem->SetParameterLowerBound(l, 2, -20);
-        problem->SetParameterUpperBound(l, 0, 20);
-        problem->SetParameterUpperBound(l, 1, 20);
-        problem->SetParameterUpperBound(l, 2, 20);      
+        problem->SetParameterLowerBound(l, 0, -200);
+        problem->SetParameterLowerBound(l, 1, -200);
+        problem->SetParameterLowerBound(l, 2, -200);
+        problem->SetParameterUpperBound(l, 0, 200);
+        problem->SetParameterUpperBound(l, 1, 200);
+        problem->SetParameterUpperBound(l, 2, 200);      
       }
 
       map<int, Vector3d>::iterator z3dIter;
