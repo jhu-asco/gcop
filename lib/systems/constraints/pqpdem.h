@@ -5,15 +5,20 @@
 #include "dem.h"
 #include "PQP/PQP.h"
 #include "body3dmanifold.h"
+#include <type_traits>
+
 
 namespace gcop {
-  
+
   template <typename T = VectorXd,
     int _nx = Dynamic, 
     int _nu = Dynamic, 
     int _np = Dynamic>
     class PqpDem : public Constraint<T, _nx, _nu, _np, 1> {
   public:
+
+  // function mapping from T to Body3dState and returning the workspace dimension of T (either 2 or 3)
+  typedef std::function< int(Body3dState&, const T& ) > ToBody3dState;
   
   typedef Matrix<double, 1, 1> Vectorgd;
   typedef Matrix<double, 1, _nx> Matrixgxd;
@@ -22,8 +27,7 @@ namespace gcop {
   
   typedef Matrix<double, _nx, 1> Vectornd;
   typedef Matrix<double, _nu, 1> Vectorcd;
-  typedef Matrix<double, _np, 1> Vectormd;
-  
+  typedef Matrix<double, _np, 1> Vectormd;  
   
   PqpDem(const Dem& dem, double cr = 0.1, double sd = 0.0);
   virtual ~PqpDem();
@@ -62,6 +66,7 @@ namespace gcop {
   
   Body3dState xb;  ///< body state for collision purposes
   
+  ToBody3dState func;
   };
 
   
@@ -140,12 +145,19 @@ template <typename T, int _nx, int _nu, int _np>
                                               Matrixgxd *dgdx, Matrixgud *dgdu,
                                               Matrixgpd *dgdp)
 {
-  //  ToBody3dState(xb, x);
+  Vector3d p;
+  int dim = 3;
   
-  Vector3d p = x.p;
-
+  if (!std::is_same<T, Body3dState>::value) {
+    //    assert(func);
+    dim = func(xb, x);
+    p = xb.p;
+  } else {
+    p = ((const Body3dState&)x).p;
+  }
+  
   pt[0] = p[0];
-  pt[1] = p[1];
+  pt[1]  = p[1];
   pt[2] = p[2];
 
   int res = PQP_Distance(&dres, pR, pt, pm, dR, dt, dm, 0.0, 0.0);
@@ -157,6 +169,9 @@ template <typename T, int _nx, int _nu, int _np>
 
   double d = dres.Distance();
   assert(d>=0);
+
+  cout << "dist=" << d << endl;
+
 
   // subtract safety distance
   d = MAX(0, d - sd);
@@ -179,14 +194,22 @@ template <typename T, int _nx, int _nu, int _np>
     Vector3d p2(dres.P2());
     Vector3d dp = p2 - p;
     dp.normalize();
-    dgdx->segment(3,3) = dp;
-    //    dgdx->head(3).normalize();
-
-    //    MINUS3(g, q, dres.P2());
-    //    double gn = NORM3(g);
-    //    DIV3(g,g,gn);
-    if (in) {
-      dgdx->segment(3,3) = -dp;
+    if (dim == 3) {
+      dgdx->segment(3,3) = dp;
+      //    dgdx->head(3).normalize();
+      
+      //    MINUS3(g, q, dres.P2());
+      //    double gn = NORM3(g);
+      //    DIV3(g,g,gn);
+      if (in) {
+        dgdx->segment(3,3) = -dp;
+      }
+    } 
+    if (dim==2) {
+      dgdx->segment(1,2) = dp.head<2>();
+      if (in) {
+        dgdx->segment(1,2) = -dp.head<2>();
+      }
     }
   }
 

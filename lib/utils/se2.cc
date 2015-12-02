@@ -114,8 +114,8 @@ void SE2::exp(Matrix3d &m, const Vector3d &v) const
   const double &w = v[0];
 
   if (fabs(w) < tol) {
-    m(0,0) = 1; m(0,1) = 0; m(0,2) = v(2);
-    m(1,0) = 0; m(1,1) = 1; m(1,2) = v(3);
+    m(0,0) = 1; m(0,1) = 0; m(0,2) = v(1);
+    m(1,0) = 0; m(1,1) = 1; m(1,2) = v(2);
     m(2,0) = 0; m(2,1) = 0; m(2,2) = 1;
     return;
   }

@@ -120,7 +120,7 @@ void solver_process(Viewer* viewer)
   cout << "done!" << endl;
   cout << "Click on window and press 'a' to animate." << endl;
   while(1)
-    usleep(10);    
+    usleep(10);
 }
 
 

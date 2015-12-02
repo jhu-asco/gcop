@@ -6,6 +6,7 @@
 #include "utils.h"
 #include "lqcost.h"
 #include "params.h"
+#include "cylinderview.h"
 
 using namespace std;
 using namespace Eigen;
@@ -126,7 +127,8 @@ void solver_process(Viewer* viewer)
   params.GetVectorXd("gp", gp);
   cout << "gp=" << gp << endl;
   g.topRightCorner<3,1>() = gp;
-  CylinderView bv(.05, 1, &g);
+  //  Cylinder cyl();
+  CylinderView bv(.05,1, &g);
   viewer->Add(bv);
 
 	//Lets print stuff to compare:

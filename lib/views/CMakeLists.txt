@@ -29,6 +29,7 @@ set(sources
   demview.cc
   airplaneview.cc
   insview.cc
+  diskview.cc
 )
 
 set(headers
@@ -68,6 +69,7 @@ set(headers
   normal2dview.h
   systemceview.h
   insview.h
+  diskview.h
 )
 
 

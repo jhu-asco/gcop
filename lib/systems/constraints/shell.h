@@ -59,7 +59,7 @@ namespace gcop {
       if (d < 0) {
         cout << "ERR: already colliding" << endl;
       }
-
+      
       g[0] = r - d; // must be negative for non-collision
       
       if (dgdx) {
