@@ -19,6 +19,9 @@ namespace gcop {
         Clear();
     }
 
+    GcarState(Matrix3d gin,double vin):g(gin),v(vin) {
+    }
+
     virtual ~GcarState() {
     }
 
