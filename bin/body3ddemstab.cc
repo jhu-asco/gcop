@@ -10,7 +10,7 @@
 #include "pqpdem.h"
 #include "params.h"
 #include "dsl/gridsearch.h"
-#include "dsl/distedgecost.h"
+#include "dsl/gridcost.h"
 
 /*
   Tests Gyroscopic obstacle avoidance for a rigid body in a geometric terrain
@@ -38,18 +38,18 @@ void GetTraj(vector<Body3dState> &gxs, Dem &dem, GridSearch &gdsl, const Body3dS
   GridPath path, optPath;
   gdsl.Plan(path);
   gdsl.OptPath(path, optPath, 2);
-  for (int i = 0; i < optPath.count; ++i) {
+  for (int i = 0; i < optPath.cells.size(); ++i) {
     Body3dState x = xf;
-    dem.Index2Point(x.p[0], x.p[1], optPath.pos[2*i+1], optPath.pos[2*i]);
+    dem.Index2Point(x.p[0], x.p[1], optPath.cells[i][1], optPath.cells[i][0]);
     x.p[2] = x0.p[2];
     
     // if not last point
     Vector3d v(0,0,0);
-    if (i < optPath.count - 1) {
+    if (i < optPath.cells.size() - 1) {
       Vector3d pa;
       Vector3d pb;
-      dem.Index2Point(pa[0], pa[1], optPath.pos[2*i+1], optPath.pos[2*i]);
-      dem.Index2Point(pb[0], pb[1], optPath.pos[2*i+3], optPath.pos[2*i+2]);
+      dem.Index2Point(pa[0], pa[1], optPath.cells[i][1], optPath.cells[i][0]);
+      dem.Index2Point(pb[0], pb[1], optPath.cells[i+1][1], optPath.cells[i+1][0]);
       pa[2] = x0.p[2];
       pb[2] = x0.p[2];
       Vector3d v = pb - pa;
@@ -174,7 +174,8 @@ void solver_process(Viewer* viewer)
   double temp2[50000];
 
   vector<Body3dState> gxs;
-  GridSearch gdsl(dem.nj, dem.ni, new DistEdgeCost(), dem.data);
+  GridCost gridcost;
+  GridSearch gdsl(dem.nj, dem.ni, gridcost, dem.data);
   GetTraj(gxs, dem, gdsl, x0, xf);
   
   Body3dView<6> dslView(sys, &gxs);
