@@ -3,7 +3,7 @@
 #include <iostream>
 //#include <Eigen/Sparse>
 //#include <unsupported/Eigen/src/SparseExtra/UmfPackSupport.h>
-#include "gsl/gsl_cdf.h"
+//#include "gsl/gsl_cdf.h"
 #include "utils.h"
 
 #include "gp.h"
