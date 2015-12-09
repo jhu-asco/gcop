@@ -51,16 +51,34 @@ namespace gcop {
      * @param ts (N+1) sequence of discrete times
      * @param xs (N+1) sequence of discrete states
      * @param us (N) sequence of control inputs
+     * @param p parameters (optional)
      * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
      *               This is necessary only if xs was not already generated from us.
      */
     Ddp(System<T, nx, nu, np> &sys, Cost<T, nx, nu, np> &cost, 
         vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
         Vectorpd *p = 0, bool update = true);
+
+
+    /**
+     * Create an optimal control problem using a system, a cost, and 
+     * a trajectory given by a sequence of times, states, and controls. 
+     * The times ts must be given, the initial state xs[0] must be set, and
+     * the controls us will be used as an initial guess for the optimization.
+     *
+     * After initialization, every call to Iterate() will optimize the 
+     * controls us and states xs and modify them accordingly. Problems involving
+     * time-optimization will also modify the sequence of times ts.
+     * 
+     * @param traj trajectory
+     * @param cost cost
+     * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
+     *               This is necessary only if xs was not already generated from us.
+     */
+    Ddp(Trajectory<T, nx, nu, np> &traj, Cost<T, nx, nu, np> &cost, bool update = true);
     
     virtual ~Ddp();
-
-
+   
     /**
      * Perform one DDP iteration. Internally calls:
      *
@@ -120,50 +138,6 @@ namespace gcop {
     static const char DDP = 1;      ///< DDP version of algorithm
     static const char LQS = 2;      ///< Linear-Quadratic Subproblem version of algorithm due to Dreyfus / Dunn&Bertsekas / Pantoja
     
-    /*
-    class Fx : public Function<T, n, n> {
-    public:
-    Fx(System &sys) :
-      Function<T>(sys.U.nspace), sys(sys) {
-      }
-      
-      void F(Vectornd &f, const T &x) {
-
-        
-        sys.X.L
-        this->xa = xa;
-        sys.FK(this->xa);
-        sys.ID(f, t, *xb, this->xa, *u, h);
-      }
-      
-      Mbs &sys;
-      
-      double t;
-      const MbsState *xb;
-      const Vectorcd *u;
-      double h;
-    };
-
-    class Fu : public Function<VectorXd> {
-    public:
-    Fu(Mbs &sys) :
-      Function<VectorXd>(sys.U), sys(sys) {
-      }
-      
-      void F(VectorXd &f, const VectorXd &u) {
-        sys.ID(f, t, *xb, *xa, u, h);
-      }
-      
-      Mbs &sys;
-      
-      double t;
-      const MbsState *xa;
-      const MbsState *xb;
-      double h;
-    };
-
-    */
-
     bool pd(const Matrixnd &P) {
       LLT<Matrixnd> llt;     
       llt.compute(P);
@@ -182,6 +156,12 @@ namespace gcop {
   using namespace std;
   using namespace Eigen;
   
+  template <typename T, int nx, int nu, int np> 
+    Ddp<T, nx, nu, np>::Ddp(Trajectory<T, nx, nu, np> &traj, 
+                            Cost<T, nx, nu, np> &cost, 
+                            bool update) : Ddp(traj.sys, cost, traj.ts, traj.xs, traj.us, traj.p, update) {
+  }
+
   template <typename T, int nx, int nu, int np> 
     Ddp<T, nx, nu, np>::Ddp(System<T, nx, nu, np> &sys, 
                             Cost<T, nx, nu, np> &cost, 

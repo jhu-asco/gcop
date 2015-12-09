@@ -5,8 +5,8 @@
 #include "body3dview.h"
 #include "utils.h"
 #include "body3dcost.h"
-#include "demview.h"
-#include "shell.h"
+#include "sphereview.h"
+#include "sphereconstraint.h"
 #include "constraintcost.h"
 #include "multicost.h"
 
@@ -15,27 +15,20 @@ using namespace Eigen;
 using namespace gcop;
 
 typedef Ddp<Body3dState, 12, 6> Body3dDdp;
-typedef Shell<Body3dState, 12, 6> Body3dShell;
-typedef ConstraintCost<Body3dState, 12, 6, Dynamic, 1> ShellCost;
+typedef SphereConstraint<Body3dState, 12, 6> Body3dSphereConstraint;
+typedef ConstraintCost<Body3dState, 12, 6, Dynamic, 1> SphereConstraintCost;
+
+int Body3dStateToVector3d(Vector3d &p, const Body3dState &x)
+{
+  p = x.p;
+  return 3;  // index where position coordinates start (state is (R,p,w,v) so this means 3)
+}
 
 
 void solver_process(Viewer* viewer)
 {
-  //  if (viewer)
-  //    viewer->SetCamera(3.25, 48, -1.15, -1.35, -2.25);
-
-  //  viewer->SetCamera(1, 23, -98.2, -77, -49);
-  //  viewer->SetCamera(.87, 23, -57.2, -64, 3.7);
-  //  Dem dem("maps/pic2.ppm", .25, 30);
-
   if (viewer)
-    viewer->SetCamera(4.5, 45, -10, -8, -10);
-  Dem dem("maps/simple.ppm", .5, 10);
-  dem.Convolve(1);
-
-  DemView dv(dem);
-  //  if (viewer)
-  //    viewer->Add(dv);
+    viewer->SetCamera(4.5, 45, -7.5, -6.9, -21);
 
   int N = 64;      // discrete trajectory segments
   double tf = 15;   // time-horizon
@@ -47,7 +40,7 @@ void solver_process(Viewer* viewer)
   // cost 
   Body3dState xf;
   xf.Clear();
-  xf.p << 0, 0, 5;
+  xf.p << 0, 0, 0;
 
   Body3dCost<6> cost(sys, tf, xf);
 
@@ -60,9 +53,8 @@ void solver_process(Viewer* viewer)
 
   cost.Qf = s*cost.Qf;
   
-  cost.R(0,0) = .05; cost.R(1,1) = .05; cost.R(2,2) = .05; cost.R(3,3) = .1;
-
-  cost.R = cost.R;
+  cost.R(0,0) = .05; cost.R(1,1) = .05; cost.R(2,2) = .05; 
+  cost.R(3,3) = .1; cost.R(4,4) = .1; cost.R(5,5) = .1;
   
   // times
   vector<double> ts(N+1);
@@ -72,31 +64,36 @@ void solver_process(Viewer* viewer)
   // states
   vector<Body3dState> xs(N+1);
   xs[0].Clear();
-  xs[0].p << 20, 18, 5;
+  xs[0].p << 20, 19, 5;
 
   // initial controls (e.g. hover at one place)
   vector<Vector6d> us(N);
   for (int i = 0; i < N; ++i) {
     us[i].setZero();
-    //    us[i][3] = 9.81*sys.m;
   }
 
   double temp[50000];
 
-  Body3dShell pqp(Vector3d(10,10,5), 3, 0);
+  Sphere sphere(Vector3d(10,10,2.5), 3);
+  Body3dSphereConstraint constraint(sphere, 0);
+  constraint.func = Body3dStateToVector3d;
+
+  SphereView sview(sphere);
+  if (viewer)
+    viewer->Add(sview);
 
   double temp2[50000];
 
-  ShellCost pqpcost(sys, tf, pqp);
-  
+  SphereConstraintCost scost(sys, tf, constraint);
+  scost.b = 50;
+
   MultiCost<Body3dState, 12, 6> mcost(sys, tf);
   mcost.costs.push_back(&cost);   
-  mcost.costs.push_back(&pqpcost);
+  mcost.costs.push_back(&scost);
     
   Body3dDdp ddp(sys, mcost, ts, xs, us);
-  ddp.eps = 1e-3;
+  //ddp.eps = 1e-3;
   ddp.mu = 1;
-
 
   Body3dView<6> view(sys, &ddp.xs);
   if (viewer)
@@ -113,7 +110,7 @@ void solver_process(Viewer* viewer)
     long te = timer_us(timer);
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
     getchar();
-    pqpcost.b = 5;
+    scost.b = 50;
   }
 
   cout << "done!" << endl;

@@ -6,11 +6,12 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef GCOP_SYSTEM_H
-#define GCOP_SYSTEM_H
+#ifndef GCOP_TRAJECTORY_H
+#define GCOP_TRAJECTORY_H
 
 #include <Eigen/Dense>
 #include <vector>
+#include "system.h"
 
 namespace gcop {
   
@@ -30,20 +31,25 @@ namespace gcop {
   typedef Matrix<double, _nu, 1> Vectorud;
   typedef Matrix<double, _np, 1> Vectorpd;
   
+  /**
+   * Create a trajectory using a system and a given number of time segments
+   * @param sys systems
+   * @param N time-segments
+   */
   Trajectory(const System<T, _nx, _nu, _np> &sys, int N);
   
-  const System<T, _nx, _nu, _np> &sys;  ///< system 
-  vector<double> ts;                    ///< sequence of (N+1) times
-  vector<T> xs;                         ///< sequence of (N+1) states
-  vector<Vectorud> us;                  ///< sequence of (N) control inputs (regarded as paremetrizing the control signal along the i-th segment, for i=0,...,N-1) e.g. constant control during the interval \f$[t_k,t_{k+1}]\f$
+  const System<T, _nx, _nu, _np> &sys;       ///< system 
+  std::vector<double> ts;                    ///< sequence of (N+1) times
+  std::vector<T> xs;                         ///< sequence of (N+1) states
+  std::vector<Vectorud> us;                  ///< sequence of (N) control inputs (regarded as paremetrizing the control signal along the i-th segment, for i=0,...,N-1) e.g. constant control during the interval \f$[t_k,t_{k+1}]\f$
   Vectorpd *p;                          ///< system parameters (optional, set to zero by default)
   
   };
-
+  
   template <typename T, int _nx, int _nu, int _np> 
     Trajectory<T, _nx, _nu, _np>::Trajectory(const System<T, _nx, _nu, _np> &sys, int N) : 
     sys(sys), ts(N+1), xs(N+1), us(N), p(0)
-    {      
+    {    
     }  
 }
 

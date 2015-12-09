@@ -60,6 +60,6 @@ double Gcar::Step(GcarState& xb, double t, const GcarState& xa,
     B->topRightCorner<3,2>() = m*F;
     (*B)(3,0) = r*h; (*B)(3,1) = 0;
   }
-    */
+     */
   return 1;
 }

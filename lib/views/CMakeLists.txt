@@ -30,6 +30,7 @@ set(sources
   airplaneview.cc
   insview.cc
   diskview.cc
+  sphereview.cc
 )
 
 set(headers
@@ -70,6 +71,7 @@ set(headers
   systemceview.h
   insview.h
   diskview.h
+  sphereview.h
 )
 
 

@@ -178,9 +178,6 @@ void solver_process(Viewer* viewer)
     gview.Unlock();
 
   }
-  //  for (int k = 0; k <= N; ++k)
-  //    cout << ddp.xs[k] << "|" << endl;  
-  //  cout << "xf=" << ddp.xs.back() << endl;
   
   
   cout << "done!" << endl;
