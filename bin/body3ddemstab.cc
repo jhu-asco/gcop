@@ -11,6 +11,8 @@
 #include "params.h"
 #include "dsl/gridsearch.h"
 #include "dsl/gridcost.h"
+#include "dsl/grid2d.h"
+#include "dsl/grid2dconnectivity.h"
 
 /*
   Tests Gyroscopic obstacle avoidance for a rigid body in a geometric terrain
@@ -28,19 +30,20 @@ Params params;
 
 
 // produce a geometric trajectory b/n x0 and xf on a dem using grid D*-Lite
-void GetTraj(vector<Body3dState> &gxs, Dem &dem, GridSearch &gdsl, const Body3dState &x0, const Body3dState &xf) {
+void GetTraj(vector<Body3dState> &gxs, Dem &dem, GridSearch<2> &gdsl,
+   const Body3dState &x0, const Body3dState &xf) {
   
   int i0,j0,ig,jg;
   dem.Point2Index(i0, j0, x0.p[0], x0.p[1]);
   dem.Point2Index(ig, jg, xf.p[0], xf.p[1]);
-  gdsl.SetStart(j0, i0);
-  gdsl.SetGoal(jg, ig);
-  GridPath path, optPath;
+  gdsl.SetStart(Vector2d(j0, i0));
+  gdsl.SetGoal(Vector2d(jg, ig));
+  GridPath<2> path, optPath;
   gdsl.Plan(path);
   gdsl.OptPath(path, optPath, 2);
   for (int i = 0; i < optPath.cells.size(); ++i) {
     Body3dState x = xf;
-    dem.Index2Point(x.p[0], x.p[1], optPath.cells[i][1], optPath.cells[i][0]);
+    dem.Index2Point(x.p[0], x.p[1], optPath.cells[i].c[1], optPath.cells[i].c[0]);
     x.p[2] = x0.p[2];
     
     // if not last point
@@ -48,8 +51,8 @@ void GetTraj(vector<Body3dState> &gxs, Dem &dem, GridSearch &gdsl, const Body3dS
     if (i < optPath.cells.size() - 1) {
       Vector3d pa;
       Vector3d pb;
-      dem.Index2Point(pa[0], pa[1], optPath.cells[i][1], optPath.cells[i][0]);
-      dem.Index2Point(pb[0], pb[1], optPath.cells[i+1][1], optPath.cells[i+1][0]);
+      dem.Index2Point(pa[0], pa[1], optPath.cells[i].c[1], optPath.cells[i].c[0]);
+      dem.Index2Point(pb[0], pb[1], optPath.cells[i+1].c[1], optPath.cells[i+1].c[0]);
       pa[2] = x0.p[2];
       pb[2] = x0.p[2];
       Vector3d v = pb - pa;
@@ -174,8 +177,10 @@ void solver_process(Viewer* viewer)
   double temp2[50000];
 
   vector<Body3dState> gxs;
-  GridCost gridcost;
-  GridSearch gdsl(dem.nj, dem.ni, gridcost, dem.data);
+  Grid2d grid(dem.nj, dem.ni, dem.data, 1, 1, 1, 1);
+  Grid2dConnectivity grid_connectivity(grid);
+  GridCost<2> gridcost;
+  GridSearch<2> gdsl(grid, grid_connectivity, gridcost);
   GetTraj(gxs, dem, gdsl, x0, xf);
   
   Body3dView<6> dslView(sys, &gxs);

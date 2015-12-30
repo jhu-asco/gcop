@@ -4,6 +4,8 @@
 
 #include "dsl/gridsearch.h"
 #include "dsl/gridcost.h"
+#include "dsl/grid2d.h"
+#include "dsl/grid2dconnectivity.h"
 #include "body3davoidcontroller.h"
 #include "pqpdem.h"
 #include "controller.h"
@@ -52,13 +54,16 @@ namespace gcop {
   
   //  virtual bool SetContext(const Body3dPqpDem &c);
   
-  void GetTraj(vector<Body3dState> &xds, const Dem &dem, GridSearch &gdsl, const Body3dState &x0, const Body3dState &xf, double vd);
+  void GetTraj(vector<Body3dState> &xds, const Dem &dem, 
+    GridSearch<2> &gdsl, const Body3dState &x0, const Body3dState &xf, double vd);
   
   const Body3dState &x0;               ///< start state
   Body3dPqpDem &dem;                   ///< gidital elevation map
   Body3dAvoidController<nu> localCtrl; ///< local avoidance controller
-  GridSearch dsl;                      ///< global grid search
-  GridCost gridcost;                   ///< grid cost
+  GridSearch<2> dsl;                      ///< global grid search
+  GridCost<2> gridcost;                   ///< grid cost
+  Grid2dConnectivity grid_connectivity;
+  Grid2d grid;
   vector<Body3dState> xds;             ///< computed sequence of waypoints
   double vd;                           ///< desired forward velocity
   int j;                               ///< waypoint index
@@ -67,19 +72,20 @@ namespace gcop {
 
   
   template <int nu>   
-    void Body3dDemController<nu>::GetTraj(vector<Body3dState> &xds, const Dem &dem, GridSearch &gdsl, const Body3dState &x0, const Body3dState &xf, double vd) {
+    void Body3dDemController<nu>::GetTraj(vector<Body3dState> &xds, const Dem &dem, GridSearch<2> &gdsl,
+       const Body3dState &x0, const Body3dState &xf, double vd) {
     
     int i0,j0,ig,jg;
     dem.Point2Index(i0, j0, x0.p[0], x0.p[1]);
     dem.Point2Index(ig, jg, xf.p[0], xf.p[1]);
-    gdsl.SetStart(j0, i0);
-    gdsl.SetGoal(jg, ig);
-    GridPath path, optPath;
+    gdsl.SetStart(Vector2d(j0, i0));
+    gdsl.SetGoal(Vector2d(jg, ig));
+    GridPath<2> path, optPath;
     gdsl.Plan(path);
     gdsl.OptPath(path, optPath, 2);
     for (int i = 0; i < optPath.cells.size(); ++i) {
       Body3dState x = xf;
-      dem.Index2Point(x.p[0], x.p[1], optPath.cells[i][1], optPath.cells[i][0]);
+      dem.Index2Point(x.p[0], x.p[1], optPath.cells[i].c[1], optPath.cells[i].c[0]);
       x.p[2] = x0.p[2];
       
       // if not last point
@@ -87,8 +93,8 @@ namespace gcop {
       if (i > 0) {
         Vector3d pa;
         Vector3d pb;
-        dem.Index2Point(pa[0], pa[1], optPath.cells[i-1][1], optPath.cells[i-1][0]);
-        dem.Index2Point(pb[0], pb[1], optPath.cells[i][1], optPath.cells[i][0]);
+        dem.Index2Point(pa[0], pa[1], optPath.cells[i-1].c[1], optPath.cells[i-1].c[0]);
+        dem.Index2Point(pb[0], pb[1], optPath.cells[i].c[1], optPath.cells[i].c[0]);
         pa[2] = x0.p[2];
         pb[2] = x0.p[2];
         v = pb - pa;
@@ -107,7 +113,10 @@ namespace gcop {
                                                  Body3dState *xf,
                                                  Body3dPqpDem &dem,
                                                  double vd) :
-    x0(x0), dem(dem), localCtrl(sys, xf, 0, &dem), dsl(dem.dem.nj, dem.dem.ni, gridcost, dem.dem.data), vd(vd), j(0), wpRadius(10)
+    x0(x0), dem(dem), localCtrl(sys, xf, 0, &dem), 
+    grid(dem.dem.nj, dem.dem.ni, dem.dem.data, 1, 1, 1, 1),
+    grid_connectivity(grid), 
+    dsl(grid, grid_connectivity, gridcost), vd(vd), j(0), wpRadius(10)
     {
     }
 

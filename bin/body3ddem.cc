@@ -90,7 +90,7 @@ void solver_process(Viewer* viewer)
 
   double temp[50000];
 
-  Body3dPqpDem pqp(dem, .1);
+  Body3dPqpDem pqp(dem, 1);
 
   double temp2[50000];
 
