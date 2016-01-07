@@ -6,6 +6,13 @@
 
 4.) Use install.bash for compiling the package
 
-5.) Required Dependencies: GSL (libgsl0-dev) Eigen3 (libeigen3-dev)
+5.) Required Dependencies: GSL (libgsl0-dev) Eigen3(>= 3.1) (libeigen3-dev) For Ubuntu 12.04 see below INSTRUCTIONS
 
-6.) Optional Dependencies: OpenCV, OpenGL (For bins) DSL (https://github.com/jhu-asco/dsl_gridsearch)
+6.) Optional Dependencies: OpenCV(>= 2.4), OpenGL (For bins) DSL (https://github.com/jhu-asco/dsl), Ceres(http://ceres-solver.org/)
+
+7.) For Ubuntu 12.04 install Ceres version 1.9.0. Ceres also depends on glog which can be installed from https://github.com/google/glog . For Ubuntu 14.04 glog can be installed as " sudo apt-get install libgoogle-glog-dev "
+
+8.) For Ubuntu 12.04 you cannot libeigen3-dev as it will install Eigen 3.0.5. So you have to install from source. We tested with Eigen 3.2.7 and works fine (http://bitbucket.org/eigen/eigen/get/3.2.7.tar.gz)
+
+9.) Compilers Tested ON g++ 4.6.3 g++ 4.8.4
+

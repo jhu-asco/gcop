@@ -5,7 +5,7 @@
 #include "viewer.h"
 #include "particle2dview.h"
 #include "utils.h"
-#include "disk.h"
+#include "diskconstraint.h"
 #include "constraintcost.h"
 #include "multicost.h"
 
@@ -14,8 +14,8 @@ using namespace Eigen;
 using namespace gcop;
 
 typedef GDocp<Vector4d, 4, 2> Particle2dGDocp;
-typedef Disk<Vector4d, 4, 2> Particle2dDisk;
-typedef ConstraintCost<Vector4d, 4, 2, Dynamic, 1> DiskCost;
+typedef DiskConstraint<Vector4d, 4, 2> Particle2dDiskConstraint;
+typedef ConstraintCost<Vector4d, 4, 2, Dynamic, 1> DiskConstraintCost;
 
 
 void solver_process(Viewer* viewer)
@@ -51,8 +51,9 @@ void solver_process(Viewer* viewer)
     us[N/2+i] = Vector2d(-.05, -.025);
   }
   
-  Particle2dDisk disk(Vector2d(-2.5,-2.5), 2, 0);
-  DiskCost dcost(sys, tf, disk);
+  Disk disk(Vector2d(-2.5,-2.5), 2);
+  Particle2dDiskConstraint constraint(disk, 0);
+  DiskConstraintCost dcost(sys, tf, constraint);
   
   MultiCost<Vector4d, 4, 2> mcost(sys, tf);
   mcost.costs.push_back(&cost);   

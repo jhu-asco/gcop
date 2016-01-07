@@ -14,7 +14,7 @@
 #include <type_traits>
 #include <algorithm>
 #include <iterator>
-#include "system.h"
+#include "trajectory.h"
 #include "cost.h"
 #include <cmath>
 #include "rn.h"
@@ -66,6 +66,24 @@ namespace gcop {
     Docp(System<T, nx, nu, np> &sys, Cost<T, nx, nu, np> &cost, 
          vector<double> &ts, vector<T> &xs, vector<Vectorcd> &us, 
          Vectormd *p = 0, bool update = true);
+
+    /**
+     * Create a discrete optimal control problem using a system, a cost, and 
+     * a trajectory given by a sequence of times, states, and controls. 
+     * The times ts must be given, the initial state xs[0] must be set, and
+     * the controls us will be used as an initial guess for the optimization.
+     *
+     * After initialization, every call to Iterate() will optimize the 
+     * controls us and states xs and modify them accordingly. Problems involving
+     * time-optimization will also modify the sequence of times ts.
+     * 
+     * @param trajectory system trajectory
+     * @param cost cost
+     * @param update whether to update trajectory xs using initial state xs[0] and inputs us.
+     *               This is necessary only if xs was not already generated from us.
+     */
+    Docp(Trajectory<T, nx, nu, np> &traj, Cost<T, nx, nu, np> &cost, 
+         bool update = true);
     
     virtual ~Docp();
 
@@ -138,6 +156,12 @@ namespace gcop {
         Update();
       }
     }
+
+  template <typename T, int nx, int nu, int np> 
+    Docp<T, nx, nu, np>::Docp(Trajectory<T, nx, nu, np> &traj, 
+                              Cost<T, nx, nu, np> &cost, 
+                              bool update) : Docp(traj.sys, cost, traj.ts, traj.xs, traj.us, traj.p, update) {
+  }
   
   template <typename T, int nx, int nu, int np> 
     Docp<T, nx, nu, np>::~Docp()

@@ -12,7 +12,7 @@ using namespace gcop;
 using namespace std;
 
 Dem::Dem(const Dem &dem) :
-  w(dem.w), h(dem.h), cs(dem.cs), ds(dem.ds), ni(dem.ni), nj(dem.nj), eps(dem.eps)
+  w(dem.w), h(dem.h), cs(dem.cs), ds(dem.ds), ni(dem.ni), nj(dem.nj), eps(dem.eps), zinv(dem.zinv)
 {
   memcpy(o, dem.o, 3*sizeof(double));
   data = new double[nj*ni];
@@ -22,13 +22,13 @@ Dem::Dem(const Dem &dem) :
   memcpy(normals, dem.normals, nj*ni*3*sizeof(double));
 }
 
-Dem::Dem() : w(0), h(0), cs(0), ds(0), ni(0), nj(0), data(0), odata(0), normals(0), eps(1e-10)
+Dem::Dem() : w(0), h(0), cs(0), ds(0), ni(0), nj(0), data(0), odata(0), normals(0), eps(1e-10), zinv(0)
 {
   memset(this->o, 0, 3*sizeof(double));
 }
 
 Dem::Dem(double w, double h, double cs, double ds, const double *o) :
-  w(w), h(h), cs(cs), ds(ds), eps(1e-10)
+  w(w), h(h), cs(cs), ds(ds), eps(1e-10), zinv(0)
 {
   if (o)
     memcpy(this->o, o, 3*sizeof(double));
@@ -43,7 +43,7 @@ Dem::Dem(double w, double h, double cs, double ds, const double *o) :
 
 
 Dem::Dem(const char *fname, double cs, double ds, const double *o) :
-  w(0), h(0), cs(cs), ds(ds), eps(1e-10)
+  w(0), h(0), cs(cs), ds(ds), eps(1e-10), zinv(0)
 {
   if (o)
     memcpy(this->o, o, 3*sizeof(double));
@@ -92,11 +92,11 @@ double Dem::bilinterp(const double* z, int w, int h, double xi, double yi, doubl
 
 
   if (x1 < 0 || x1 >= w || y1 < 0 || y1 >= h) {     
-    fprintf(stderr, "Error - dem:bilinterp - invalid (x1,y1)=(%d,%d) (w=%d, h=%d)\n", x1,y1,w, h);
+    //    fprintf(stderr, "Error - dem:bilinterp - invalid (x1,y1)=(%d,%d) (w=%d, h=%d)\n", x1,y1,w, h);
     return 0;
   }
   if (x2 < 0 || x2 >= w || y2 < 0 || y2 >= h) {
-    fprintf(stderr, "Error - dem:bilinterp - invalid (x2,y2)=(%d,%d) (w=%d, h=%d)\n", x2,y2, w, h);
+    //    fprintf(stderr, "Error - dem:bilinterp - invalid (x2,y2)=(%d,%d) (w=%d, h=%d)\n", x2,y2, w, h);
     return 0;
   }
 
@@ -323,17 +323,18 @@ void Dem::Index2Point(double &x, double &y, int i, int j) const
 }
 
 
-void Dem::Get(double *p, int i, int j) const
+bool Dem::Get(double *p, int i, int j) const
 {
   if (i < 0 || i >= ni ||
       j < 0 || j >= nj) {
     std::cerr << "Warning: Dem::Get: invalid (i,j)=(" << i << "," << j << ")" << std::endl;
-    return;
+    return false;
   }
 
   p[0] = j*cs + o[0];
   p[1] = h - i*cs + o[1];
   p[2] = data[i*nj + j] + o[2];
+  return true;
 }
 
 void Dem::Scale(double s)

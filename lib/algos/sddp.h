@@ -764,7 +764,7 @@ namespace gcop {
               //Make sure Qud is not smaller than some threshold:
               //dusmatrix(count1,count)  = duscale(count_u)*uniform_dist(randgenerator);
               //if(Qud[count1][count_u]<(1.0/(duscale[count_u]*duscale[count_u])))
-              assert((du_sigma[count1][count_u] < 0.21)&&(du_sigma[count1][count_u]>0.00009));
+              ////////////assert((du_sigma[count1][count_u] < 0.21)&&(du_sigma[count1][count_u]>0.00009));
               us1[count_u] = us1[count_u] + du_sigma[count1][count_u]*normal_dist(randgenerator);
               //else
                 //us1[count_u] = us1[count_u] + (1.0/sqrt(Qud[count1][count_u]))*normal_dist(randgenerator);

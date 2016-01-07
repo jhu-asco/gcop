@@ -12,7 +12,7 @@ using namespace gcop;
 using namespace Eigen;
 
 GcarView::GcarView(const Gcar &sys, 
-                   vector< pair<Matrix3d, double> > *xs,
+                   vector< GcarState > *xs,
                    vector<Vector2d> *us) : 
   SystemView("Gcar", xs, us), sys(sys)
 {
@@ -31,16 +31,16 @@ GcarView::~GcarView()
 }
 
 
-void GcarView::Render(const pair<Matrix3d, double> *x,
+void GcarView::Render(const GcarState *x,
                            const Vector2d *u)
 {
   Vector3d q;
-  SE2::Instance().g2q(q, x->first);
+  SE2::Instance().g2q(q, x->g);
   const double &theta = q[0];
   const double &px = q[1];
   const double &py = q[2];
-  //  const double &w = x->second[0];
-  const double &v = x->second;
+  //  const double &w = x->v[0];
+  const double &v = x->v;
 
   double phi = u ? atan((*u)[1]) : 0;
   double d = sys.l;
@@ -96,7 +96,7 @@ void GcarView::Render(const pair<Matrix3d, double> *x,
 }
 
 
-void GcarView::Render(const vector<pair<Matrix3d, double> > *xs,
+void GcarView::Render(const vector<GcarState > *xs,
                            const vector<Vector2d> *us,
                            bool rs, 
                            int is, int ie,
@@ -119,8 +119,8 @@ void GcarView::Render(const vector<pair<Matrix3d, double> > *xs,
   glLineWidth(lineWidth);
   glBegin(GL_LINE_STRIP);
   for (int i = is; i <= ie; i+=dit) {
-    const pair<Matrix3d, double> &x = (*xs)[i];
-    glVertex3d(x.first(0,2), x.first(1,2), 0);
+    const GcarState &x = (*xs)[i];
+    glVertex3d(x.g(0,2), x.g(1,2), 0);
   }
   glEnd();
   glLineWidth(1);
@@ -134,7 +134,7 @@ void GcarView::Render(const vector<pair<Matrix3d, double> > *xs,
 
   if (rs) {    
     for (int i = 1; i < xs->size(); i+=dis) {
-      if (i < us->size())
+      if (us && i < us->size())
         Render(&(*xs)[i], &(*us)[i]);
       else
         Render(&(*xs)[i]);

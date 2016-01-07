@@ -12,7 +12,7 @@
 #include "pqpdem.h"
 #include "systemceview.h"
 #include "dsl/gridsearch.h"
-#include "dsl/distedgecost.h"
+#include "dsl/gridcost.h"
 
 
 using namespace std;

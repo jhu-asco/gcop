@@ -7,7 +7,7 @@
 namespace gcop {
   using namespace Eigen;
 
-  class GcarView : public SystemView<pair<Matrix3d, double>, Vector2d> {
+  class GcarView : public SystemView<GcarState, Vector2d> {
   public:
     /**
      *  Create a particle view of trajectory traj
@@ -15,16 +15,16 @@ namespace gcop {
      * @param xs trajectory
      */
     GcarView(const Gcar &sys,
-                  vector<pair<Matrix3d, double> > *xs = 0,
+                  vector<GcarState> *xs = 0,
                   vector<Vector2d> *us = 0);
 
     virtual ~GcarView();
     
     
-    void Render(const pair<Matrix3d, double> *x,
+    void Render(const GcarState *x,
                 const Vector2d *u = 0);
     
-    void Render(const vector<pair<Matrix3d, double> > *xs, 
+    void Render(const vector<GcarState> *xs, 
                 const vector<Vector2d> *us, 
                 bool rs = true,
                 int is = -1, int ie = -1,
