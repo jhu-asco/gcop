@@ -63,7 +63,6 @@ namespace gcop {
                                              const vector<Vectorcd> &us,
                                              const Vectormd *p) {
     int j =0;//Iterator for tks
-    cout<<"s.size: "<<s.size()<<endl;
     for(int i = 0;i < us.size(); ++i)
     {
       if ((ts[i] - tks[j]) >= 0)
@@ -71,13 +70,12 @@ namespace gcop {
         if(j < tks.size())
         {
           s.segment(j*(this->sys.U.n), this->sys.U.n) = us[i];
-          cout<<"s["<<j<<"]: "<<us[i].transpose()<<endl;
+          //          cout<<"s["<<j<<"]: "<<us[i].transpose()<<endl;
           j++;
         }
       }
     }
     s.tail(this->sys.U.n) = us[us.size()-1];
-    cout<<"s: "<<s.transpose()<<endl;
     return true;
     //s.setConstant(.001);
   }

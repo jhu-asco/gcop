@@ -34,6 +34,7 @@ set(sources
 
 set(headers
     system.h
+    trajectory.h
     system_extstep.h
     particle2d.h
     unicycle.h
