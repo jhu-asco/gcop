@@ -168,7 +168,7 @@ namespace gcop {
       //}
       
       Vectornd d = x - mu;
-      return -d.dot(Pinv*d)/2/norm;
+      return -d.dot(Pinv*d) - (2*norm);
     }
 
   template<int _n>

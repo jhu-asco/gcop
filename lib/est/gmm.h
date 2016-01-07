@@ -258,7 +258,7 @@ namespace gcop {
             cout << psj[i] << " ";
 #endif
           }    
-#ifdef DEBUF
+#ifdef DEBUG
           cout << endl;
 #endif
         }  
@@ -300,6 +300,7 @@ namespace gcop {
         }
 
         if (maxd < tol) {
+          Update();
           //cout << "[W] Gmm::Fit: tolerance " << maxd << " reached after " << l << " iterations!" << endl;
           break;
         }
