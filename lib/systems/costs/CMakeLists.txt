@@ -32,6 +32,7 @@ set(headers
     kinbodyprojtrackcost.h
     bacost.h
     body2dslamcost.h
+    qrotoridmodelcost.h
 #airplanecost.h
 )
 

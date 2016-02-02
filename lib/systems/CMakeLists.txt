@@ -47,6 +47,7 @@ set(headers
     uuv.h
     joint.h
     qrotor.h
+    qrotoridmodel.h
     hrotor.h
     heli.h
     kinbody2d.h

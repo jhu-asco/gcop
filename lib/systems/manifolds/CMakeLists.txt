@@ -35,5 +35,6 @@ set(headers
     rn.h
     uuvmanifold.h
     gcarmanifold.h
+    qrotoridmanifold.h
 #airmmanifold.h
 )

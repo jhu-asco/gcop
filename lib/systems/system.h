@@ -306,7 +306,8 @@ namespace gcop {
     double System<T, _nx, _nu, _np>::Step(T& xb, double t, const T& xa,
                                           const Vectorcd &u, double h, const Vectormd *p,
                                           Matrixnd *A, Matrix<double, _nx, _nu> *B, 
-                                          Matrix<double, _nx, _np> *C) {      
+                                          Matrix<double, _nx, _np> *C) {
+    std::cout<<"Step not implemented"<<std::endl;
     return 0;
   }
   
