@@ -81,12 +81,13 @@ void solver_process()
   for (int i = 0; i < N; ++i) {
     us[i].tail(3).setZero();
     us[i][0] = (9.81/sys.kt);
+    us[i][3] =  0.05*cos((double(i)/N)*2*M_PI);
   }
     
   QrotorDdp ddp(sys, cost, ts, xs, us);
   ddp.mu = .01;
 
-  struct timeval timer;
+  /*struct timeval timer;
   //  ddp.debug = false; // turn off debug for speed
   for (int i = 0; i < 100; ++i) {
     timer_start(timer);
@@ -95,6 +96,7 @@ void solver_process()
     cout << "Iteration #" << i << ": took " << te << " us." << endl;        
     //getchar();
   }
+  */
 
   //Display Current states:
   cout<<"Index Pos Vel rpy Omega commandedrpy"<<endl;
@@ -103,7 +105,7 @@ void solver_process()
     //  sys.Step(xs[i+1],i*h,xs[i],us[i],h,0,0,0,0);
       Vector3d rpy;
       so3.g2q(rpy, xs[i].R);
-      cout<<i<<" "<<xs[i].p.transpose()<<" "<<xs[i].v.transpose()<<" "<<rpy.transpose()<<" "<<xs[i].w.transpose()<<" "<<xs[i].u.transpose()<<endl;
+      cout<<i<<" "<<xs[i].p.transpose()<<" "<<xs[i].v.transpose()<<" "<<rpy.transpose()<<" "<<xs[i].w.transpose()<<" "<<xs[i].u.transpose()<<" "<<us[i].transpose()<<endl;
   }
 
   cout << "done!" << endl;

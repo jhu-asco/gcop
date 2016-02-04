@@ -5,7 +5,7 @@ set(headers
   uniformsplinetparam.h
   flatoutputtparam.h
   tparam.h
-  trajectory.h
+  #trajectory.h
 )
 set(sources
 )

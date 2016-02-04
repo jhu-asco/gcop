@@ -26,12 +26,14 @@ namespace gcop {
       Vector3d kp;///< Proportional gains for rpy control
       Vector3d kd;///< Derivative gains for rpy control
       Vector3d a0;///< Offsets in global acceleration due to wind etc (Add offsets in torque later)
+      //, kp(5,5,5)
+      //, kd(7,7,7)
     public:
       QRotorIDModel():System<QRotorIDState,15,4,10>(QRotorIDManifold::Instance())
                       , so3(SO3::Instance())
-                      , kt(0.1595)
-                      , kp(2,2,1)
-                      , kd(3,3,2.4)
+                      , kt(0.16)
+                      , kp(6.76,7.14,7.27)
+                      , kd(5.65,5.62,5.62)
                       , e3(0,0,1)
                       , a0(0,0,0)
                       , g(0,0,-9.81)
@@ -63,7 +65,7 @@ namespace gcop {
           xb.p = xa.p + 0.5*(xb.v + xa.v)*h;
           Vector3d w_avg = 0.5*(xb.w + xa.w);
           Matrix3d dR;
-          so3.exp(dR,w_avg);
+          so3.exp(dR,w_avg*h);
           xb.R = xa.R*dR;
           xb.u = xa.u + u.tail<3>()*h;
           //Specify A,B,C also TODO
