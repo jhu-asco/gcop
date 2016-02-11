@@ -26,31 +26,47 @@ namespace gcop {
       Vector3d kp;///< Proportional gains for rpy control
       Vector3d kd;///< Derivative gains for rpy control
       Vector3d a0;///< Offsets in global acceleration due to wind etc (Add offsets in torque later)
+      Vector3d acc;///< Internal acceleration computed from last Step function
       //, kp(5,5,5)
       //, kd(7,7,7)
     public:
       QRotorIDModel():System<QRotorIDState,15,4,10>(QRotorIDManifold::Instance())
                       , so3(SO3::Instance())
                       , kt(0.16)
-                      , kp(6.76,7.14,7.27)
-                      , kd(5.65,5.62,5.62)
+                      , kp(10,10,1.0)
+                      , kd(6,6,5)
                       , e3(0,0,1)
                       , a0(0,0,0)
                       , g(0,0,-9.81)
+                      , acc(0,0,0)
       {
       }
       double Step(QRotorIDState &xb, double t, const QRotorIDState &xa, const Vectorcd &u, double h, const Vectormd *p, Matrixnd *A, Matrixncd *B, Matrixnmd *C)
       {
           Vector3d rpy;
           so3.g2q(rpy,xa.R);
-          Vector3d erpy = rpy - xa.u;
-          Vector3d eomega = xa.w - u.tail<3>();
+          Vector3d rpy_cmd = xa.u + u.tail<3>()*h;
+          for(int i = 0; i < 3; i++)
+          {
+            rpy_cmd[i] = rpy_cmd[i]>M_PI?(rpy_cmd[i]-2*M_PI):(rpy_cmd[i]<-M_PI)?(rpy_cmd[i]+2*M_PI):rpy_cmd[i];
+          }
+          Vector3d erpy = rpy - rpy_cmd;
+          for(int i = 0; i < 3; i++)
+          {
+            erpy[i] = erpy[i]>M_PI?(-erpy[i]+2*M_PI):(erpy[i]<-M_PI)?(-erpy[i]-2*M_PI):erpy[i];
+          }
+          Matrix3d Mrpy;//Convert omega to rpydot
+          Mrpy<<1, sin(rpy(0))*tan(rpy(1)), cos(rpy(0))*tan(rpy(1)),
+                0, cos(rpy(0)),             -sin(rpy(0)),
+                0, sin(rpy(0))*(1/cos(rpy(1))), cos(rpy(0))*(1/cos(rpy(1)));
+          Vector3d erpydot = Mrpy*xa.w - u.tail<3>();
           if(p == 0)//No Parameters provided
           {
+              acc = (kt*u(0))*(xa.R * e3) + g + a0;
               //Translational Part
-              xb.v = xa.v + h*((kt*u(0))*(xa.R * e3) + g + a0);
+              xb.v = xa.v + h*(acc);
               //Rotational Part
-              Vector3d omegadot = -kp.cwiseProduct(erpy) - kd.cwiseProduct(eomega);
+              Vector3d omegadot = -kp.cwiseProduct(erpy) - kd.cwiseProduct(erpydot);
               xb.w = xa.w + omegadot*h;
           }
           else
@@ -59,7 +75,7 @@ namespace gcop {
             //Translational Part
             xb.v = xa.v + h*(((*p)(0)*u(0))*(xa.R * e3) + g + p->tail<3>());
             //Rotational Part
-            Vector3d omegadot = -p->segment<3>(1).cwiseProduct(erpy) - p->segment<3>(4).cwiseProduct(eomega);
+            Vector3d omegadot = -p->segment<3>(1).cwiseProduct(erpy) - p->segment<3>(4).cwiseProduct(erpydot);
             xb.w = xa.w + omegadot*h;
           }
           xb.p = xa.p + 0.5*(xb.v + xa.v)*h;
@@ -67,7 +83,7 @@ namespace gcop {
           Matrix3d dR;
           so3.exp(dR,w_avg*h);
           xb.R = xa.R*dR;
-          xb.u = xa.u + u.tail<3>()*h;
+          xb.u = rpy_cmd;
           //Specify A,B,C also TODO
       }
   };

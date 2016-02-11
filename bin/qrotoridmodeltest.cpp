@@ -81,7 +81,7 @@ void solver_process()
   for (int i = 0; i < N; ++i) {
     us[i].tail(3).setZero();
     us[i][0] = (9.81/sys.kt);
-    us[i][3] =  0.05*cos((double(i)/N)*2*M_PI);
+    us[i][3] =  0.1*cos((double(i)/N)*2*M_PI+M_PI/2);
   }
     
   QrotorDdp ddp(sys, cost, ts, xs, us);
