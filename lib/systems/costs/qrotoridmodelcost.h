@@ -22,7 +22,7 @@ namespace gcop {
    *
    * Author: Marin Kobilarov
    */
-  class QRotorIDModelCost : public LqCost<QRotorIDState, 15, 4, 10, 20> {
+  class QRotorIDModelCost : public LqCost<QRotorIDState, 15, 4, 13, 19> {
     
     typedef Matrix<double, 4, 1> Vectorcd;
     typedef Matrix<double, 4, 4> Matrixcd;
@@ -32,7 +32,7 @@ namespace gcop {
   public:
     
     QRotorIDModelCost(QRotorIDModel &sys, double tf, const QRotorIDState &xf, bool diag = true)
-        : LqCost<QRotorIDState, 15, 4, 10, 20>(sys, tf, xf, diag) {
+        : LqCost<QRotorIDState, 15, 4, 13, 19>(sys, tf, xf, diag) {
 
     this->Qf(0,0) = .5;
     this->Qf(1,1) = .5;
@@ -52,6 +52,7 @@ namespace gcop {
     this->Qf(14,14) = 0;
 
     this->R.diagonal() = Matrix<double, 4, 1>::Constant(.1);
+    this->UpdateGains();
   }
   };
 }

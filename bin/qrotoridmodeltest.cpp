@@ -1,28 +1,25 @@
 #include <iomanip>
 #include <iostream>
 #include "utils.h"
+#include "qrotoridgndocp.h"
 #include "qrotoridmodelcost.h"
 #include "params.h"
 
 
-//#define USE_SDDP
+#define USE_SPLINEPARAM
 
-#ifdef USE_SDDP
-#include "sddp.h"
+#ifdef USE_SPLINEPARAM
+#include "uniformsplinetparam.h"
 #else
-#include "ddp.h"
+#include "controltparam.h"
 #endif
+
 
 using namespace std;
 using namespace Eigen;
 using namespace gcop;
 
 
-#ifdef USE_SDDP
-typedef SDdp<QRotorIDState, 15, 4, 10> QrotorDdp;
-#else
-typedef Ddp<QRotorIDState, 15, 4, 10> QrotorDdp;
-#endif
 
 Params params;
 
@@ -59,14 +56,24 @@ void solver_process()
   VectorXd Q(15);
   VectorXd R(4);  
   VectorXd Qf(15);
+  VectorXd x0_std(15);
+  VectorXd p_std(13);
+  VectorXd obs(7);
+  Matrix<double,13,1> p_mean;
 
   params.GetVectorXd("Q", Q);  
   params.GetVectorXd("R", R);
   params.GetVectorXd("Qf", Qf);
+  params.GetVectorXd("obs",obs);
 
   cost.Q = Q.asDiagonal();
   cost.R = R.asDiagonal();
   cost.Qf = Qf.asDiagonal();
+
+  vector<Obstacle> obstacles(1);
+  obstacles[0].set(obs);
+
+  cost.UpdateGains();
 
   // times
   vector<double> ts(N+1);
@@ -80,23 +87,66 @@ void solver_process()
   vector<Vector4d> us(N);
   for (int i = 0; i < N; ++i) {
     us[i].tail(3).setZero();
-    us[i][0] = (9.81/sys.kt);
-    us[i][3] =  0.1*cos((double(i)/N)*2*M_PI+M_PI/2);
+    us[i][0] = (9.81/sys.kt)+0.1;
   }
-    
-  QrotorDdp ddp(sys, cost, ts, xs, us);
-  ddp.mu = .01;
 
-  /*struct timeval timer;
+  int Nk = N/5;//Number of segments
+  VectorXd tks(Nk+1);
+  //vector<double> tks(Nk+1);
+  for (int k = 0; k <=Nk; ++k)
+    tks[k] = k*(tf/Nk);
+
+#ifdef USE_SPLINEPARAM
+  UniformSplineTparam<QRotorIDState, 15, 4,13 > ctp(sys, tks,2);//Second order spline
+#else
+  ControlTparam<QRotorIDState, 15, 4, 13> ctp(sys, tks);
+#endif
+
+  p_mean<<sys.kt, sys.kp, sys.kd, sys.a0, sys.tau0;//Straight params from system
+
+  QRotorIdGnDocp gn(sys, cost, ctp, ts, xs, us, &p_mean);
+
+  /*for(int i = 0; i < (N+1); i++)
+  {
+    cout<<ts[i]<<"\t"<<xs[i].p.transpose()<<endl;
+  }
+  return;
+  */
+
+
+  //Generate Stdev of Trajectories using current control:
+  params.GetVectorXd("x0_std", x0_std);
+  params.GetVectorXd("p_std", p_std);
+  gn.stdev_initial_state = x0_std.asDiagonal();
+  gn.stdev_params = p_std.asDiagonal();
+
+  //Add one obstacle:
+  gn.AddObstacles(obstacles);
+
+  gn.GenerateStdev();
+
+  cout<<"Generated Stdev: "<<endl;
+  /*for(int i = 0; i <=N; i++)
+  {
+     cout<<ts[i]<<"\t"<<gn.sample_mean_params.col(i).transpose()<<"\t"<<gn.xs_std.col(i).transpose()<<endl;
+  }
+
+  return;////DEBUG
+  */
+
+
+  struct timeval timer;
   //  ddp.debug = false; // turn off debug for speed
-  for (int i = 0; i < 100; ++i) {
+  for (int i = 0; i < 10; ++i) {
     timer_start(timer);
-    ddp.Iterate();
+    gn.Iterate();
+    gn.ko = 5*gn.ko;
+    gn.Reset();
     long te = timer_us(timer);
-    cout << "Iteration #" << i << ": took " << te << " us." << endl;        
+    cout<<gn.J<<endl;
+//    cout << "Iteration #" << i << ": took " << te << " us." << endl;        
     //getchar();
   }
-  */
 
   //Display Current states:
   cout<<"Index Pos Vel rpy Omega commandedrpy"<<endl;

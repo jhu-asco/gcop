@@ -41,6 +41,9 @@ IF (CERES_FOUND)
 	add_executable(particle2dgdocp particle2dgdocp.cc)
 	target_link_libraries(particle2dgdocp  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+  add_executable(qrotorsystemidtest qrotorsystemidtest.cc)
+  target_link_libraries(qrotorsystemidtest  gcop_algos gcop_est gcop_views gcop_systems  ${ALL_LIBS})
+
 
 ENDIF (CERES_FOUND)
 

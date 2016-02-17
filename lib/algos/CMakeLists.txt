@@ -19,6 +19,7 @@ set(headers
       systemce.h
       aspsa.h
       spsa.h
+      qrotoridgndocp.h
 )
 
 set(sources
@@ -35,7 +36,6 @@ IF (CERES_FOUND)
 set(headers 
   ${headers}
   dynvisins.h
-  gdocp.h
 )
 set(sources 
   ${sources}
