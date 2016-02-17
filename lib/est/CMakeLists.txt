@@ -15,10 +15,10 @@ set(sources
   gp.cc
 )
 
-if(OPENCV_FOUND)
-  set(headers ${headers} camera.h)
-  set(sources ${sources} camera.cc)
-endif(OPENCV_FOUND)
+#if(OPENCV_FOUND)
+#  set(headers ${headers} camera.h)
+#  set(sources ${sources} camera.cc)
+#endif(OPENCV_FOUND)
 
 if(CERES_FOUND)
   set(headers ${headers} qrotorsystemid.h)
