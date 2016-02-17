@@ -16,3 +16,5 @@
 
 9.) Compilers Tested ON g++ 4.6.3 g++ 4.8.4
 
+10.) Ceres Should be version 1.10 or higher. DO NOT sudo apt-get install ceres on Ubuntu. Even if you did download ceres from source (http://ceres-solver.org/)
+

@@ -37,10 +37,16 @@ namespace gcop {
               const QRotorIDState &xa,
               const QRotorIDState &xb)
     {
-        Vector12d vref = v.head<12>();
+        Vector12d vref;
         body_manifold.Lift(vref, xa, xb);
         v.head<12>() = vref;
-        v.tail<3>() = xb.u - xa.u;
+        Vector3d v_tail;
+        v_tail = xb.u - xa.u;
+        for(int i = 0; i < 3; i++)
+        {
+          v_tail(i) = (v_tail(i) > M_PI)?(v_tail(i) - 2*M_PI):(v_tail(i) < -M_PI)?(v_tail(i)+2*M_PI):v_tail(i);
+        }
+        v.tail<3>() = v_tail;
     }
 
     void Retract(QRotorIDState &xb,
@@ -49,6 +55,10 @@ namespace gcop {
     {
         body_manifold.Retract(xb,xa,v.head(12));
         xb.u = xa.u + v.tail<3>();
+        for(int i = 0; i < 3; i++)
+        {
+          xb.u(i) = (xb.u(i) > M_PI)?(xb.u(i) - 2*M_PI):(xb.u(i) < -M_PI)?(xb.u(i)+2*M_PI):xb.u(i);
+        }
     }
 
     void dtau(Matrix15d &M, const Vector15d &v)

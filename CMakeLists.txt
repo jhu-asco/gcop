@@ -4,7 +4,7 @@ project (gcop)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 #ADD_DEFINITIONS(-g -O -std=c++0x -pthread)
-ADD_DEFINITIONS(-g -O -std=c++0x -pthread -Wl,--no-undefined  -I/usr/include/eigen3)
+ADD_DEFINITIONS(-O -std=c++0x -pthread -Wl,--no-undefined  -I/usr/include/eigen3)
 #ADD_DEFINITIONS(-g -O -pthread)
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Robotic Planning and Control")
@@ -141,10 +141,11 @@ if (USE_BULLET)
   #message("Bullet Flags: ${BULLET_C_FLAGS}; ${BULLET_CXX_FLAGS};")
 endif (USE_BULLET)
 
-FIND_PACKAGE(Ceres QUIET)
+FIND_PACKAGE(Ceres 1.10 QUIET)
 if (CERES_FOUND)
   INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
   set(ALGO_LIBS ${ALGO_LIBS} ${CERES_LIBRARY} ${CERES_LIBRARIES})
+  set(EST_LIBS ${EST_LIBS} ${CERES_LIBRARY} ${CERES_LIBRARIES})
 endif (CERES_FOUND)
 
 

@@ -123,16 +123,16 @@ void Params::Parse(char *line)
 
 void Params::Load(FILE *file)
 {
-  char line[256];
-  while(fgets(line, 256, file)) {
+  char line[GCOP_PARAMS_MBL];
+  while(fgets(line, GCOP_PARAMS_MBL, file)) {
     Parse(line);
   }
 }
 
 void Params::Load(iostream &io)
 {
-  char line[256];
-  while(io.getline(line, 256)) {
+  char line[GCOP_PARAMS_MBL];
+  while(io.getline(line, GCOP_PARAMS_MBL)) {
     Parse(line);        
   }
 }
@@ -376,6 +376,38 @@ void Params::SetMatrix6d(const char *name, const Matrix6d &m)
   valueMap[name] = s.str();
 }
 
+bool Params::GetMatrix7d(const char *name, Matrix7d &m) const
+{
+  std::map<string, string>::const_iterator si = valueMap.find(name);
+  if (si == valueMap.end()) {
+    return false;
+  }
+
+  vector<string> tokens;
+  Tokenize(si->second, tokens, ", ");
+
+  if (tokens.size() != 49) {
+    cout << "[E] Params::GetMatrix7d: expecting 49 doubles, got: " << tokens.size() << endl;
+    return false;
+  }
+
+  vector<string>::iterator it;
+  int i = 0, j = 0;
+  for (it = tokens.begin(); it != tokens.end(); ++it) {
+    string str = *it;
+    replace(str, string("pi"), string("3.141592"));  
+    // row
+    
+    m(i,j) = atof(str.c_str());
+    
+    j++;
+    if (j==7) {
+      i++;
+      j = 0;
+    }
+  }
+  return true;
+}
 
 bool Params::GetMatrix6d(const char *name, Matrix6d &m) const
 {
