@@ -118,10 +118,14 @@ void solver_process()
       x0.u = x0_prior.segment<3>(12);
   }
 
+  Matrix7d stdev_gains;
+  Vector6d mean_offsets;
+  Matrix6d stdev_offsets;
+
   //Create QRotorSystemID:
   QRotorSystemID system_id;
   params.GetDouble("offsets_period",system_id.offsets_timeperiod);
-  system_id.EstimateParameters(systemid_measurements, x0);
+  system_id.EstimateParameters(systemid_measurements, x0, &stdev_gains, &mean_offsets, &stdev_offsets);
 }
 
 

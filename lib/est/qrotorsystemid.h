@@ -36,14 +36,16 @@ class QRotorSystemID
 {
 public:
     QRotorSystemID();
+    typedef Matrix<double,7,7> Matrix7d;
+    typedef Matrix<double,6,6> Matrix6d;
 
-    void EstimateParameters(const vector<QRotorSystemIDMeasurement> &inputs, QRotorIDState &initial_state);
+    void EstimateParameters(const vector<QRotorSystemIDMeasurement> &inputs, QRotorIDState &initial_state, Matrix7d *stdev_gains = 0, Vector6d *offsets = 0, Matrix6d *stdev_offsets = 0);
 public:
     MatrixXd offsets_matrix;///< Offsets matrix from Optimization
     Vector7d qrotor_gains;///< Parameter vector of kt, kp, kd
-    Matrix<double,7,7> qrotor_gains_residualgain;///< Inverse Square root of covariance of qrotor_gains
+    Matrix7d qrotor_gains_residualgain;///< Inverse Square root of covariance of qrotor_gains
     Vector6d offsets_prior;///< Prior on offsets
-    Matrix<double,6,6> offsets_prior_residualgain;///< Inverse square root of covariance of offsets
+    Matrix6d offsets_prior_residualgain;///< Inverse square root of covariance of offsets
     Vector15d stdev_initial_state_prior;///< stdeviation on initial state prior
     double stdev_position;///< Stdeviation on position measurement
     double stdev_rpy;///< Stdeviation on rpy measurement
@@ -52,6 +54,7 @@ public:
 
 protected:
     ceres::Solver::Options options;
+    ceres::Covariance::Options cov_options;
     ceres::Solver::Summary summary;
     /**
       * Standard stereo camera residual error

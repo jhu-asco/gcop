@@ -30,7 +30,7 @@ QRotorSystemID::QRotorSystemID():qrotor_gains(7), offsets_timeperiod(0.1)
     options.minimizer_progress_to_stdout = true;
 }
 
-void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> &inputs, QRotorIDState &initial_state){
+void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> &inputs, QRotorIDState &initial_state, Matrix7d *stdev_gains, Vector6d *offsets, Matrix6d *stdev_offsets){
   ceres::Problem problem;
   ceres::CostFunction *measurement_error_inst = MeasurementError::Create(inputs,initial_state,*this);
   //Create Prior for params:
@@ -82,10 +82,48 @@ void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> 
   //cout<<"Offsets: "<<endl<<offsets_matrix<<endl;
   //Mean of Offsets:
   //Map<MatrixXd> offsets_matrix(offsets_prior_guess,number_offsets,6);
-  Vector6d mean_offsets = offsets_matrix.rowwise().mean().transpose();
-  std::cout<<"Mean offsets: "<<mean_offsets.transpose()<<std::endl;
-  MatrixXd centered = offsets_matrix.colwise() - mean_offsets;
-  MatrixXd cov = (centered * centered.adjoint()) / double(offsets_matrix.cols() - 1);
-  cout<<cov<<endl;
-  //Evaluate Covariance of computed parameters TODO
+  if(offsets!= NULL)
+  {
+    Vector6d mean_offsets = offsets_matrix.rowwise().mean().transpose();
+    std::cout<<"Mean offsets: "<<mean_offsets.transpose()<<std::endl;
+    *offsets  = mean_offsets;
+    if(stdev_offsets != NULL)
+    {
+      MatrixXd centered = offsets_matrix.colwise() - mean_offsets;
+      Matrix6d cov = (centered * centered.adjoint()) / double(offsets_matrix.cols() - 1);
+      cout<<"Covariance Offsets: "<<endl;
+      cout<<cov<<endl;
+      //Compute Stdev
+      SelfAdjointEigenSolver<Matrix6d> es(cov);
+      *stdev_offsets = es.operatorSqrt();
+      cout<<"Stdev Offsets"<<endl<<(*stdev_offsets)<<endl;
+    }
+  }
+    //Evaluate Covariance of computed parameters TODO
+    vector<pair<const double *,const double *> >covariance_blocks;
+    covariance_blocks.push_back(make_pair(parameter_blocks[1], parameter_blocks[1]));//Corresponding to Gains
+    ceres::Covariance covariance(cov_options);
+    bool cov_res = covariance.Compute(covariance_blocks,&problem);
+    if(!cov_res)
+    {
+      std::cout<<"Covariance Not Found"<<std::endl;
+    }
+    else
+    {
+        Matrix<double,7,7,RowMajor> cov_gains;
+        covariance.GetCovarianceBlock(parameter_blocks[1],parameter_blocks[1],cov_gains.data());
+        cout<<"Covariance of Gains: "<<endl<<cov_gains<<endl;
+        SelfAdjointEigenSolver<Matrix7d> es(cov_gains);
+        if(stdev_gains != NULL)
+        {
+          (*stdev_gains) = es.operatorSqrt();
+          cout<<"Stdev_Gains: "<<endl<<(*stdev_gains)<<endl;
+          qrotor_gains_residualgain = (*stdev_gains).inverse();//Inverse of stdev is the gains
+        }
+        else
+        {
+            qrotor_gains_residualgain = es.operatorInverseSqrt();
+        }
+        cout<<"Qrotor Residual Gains"<<endl<<qrotor_gains_residualgain<<endl;
+    }
 }
