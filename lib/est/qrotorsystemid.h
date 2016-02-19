@@ -56,6 +56,7 @@ protected:
     ceres::Solver::Options options;
     ceres::Covariance::Options cov_options;
     ceres::Solver::Summary summary;
+    const IOFormat CSVFormat;
     /**
       * Standard stereo camera residual error
       */

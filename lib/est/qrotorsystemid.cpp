@@ -7,7 +7,7 @@ using namespace Eigen;
 
 QRotorIDModel QRotorSystemID::sys_;//Static member initialization
 
-QRotorSystemID::QRotorSystemID():qrotor_gains(7), offsets_timeperiod(0.1)
+QRotorSystemID::QRotorSystemID():qrotor_gains(7), offsets_timeperiod(0.1), CSVFormat(StreamPrecision, DontAlignCols, ", ", "\n")
 {
     //Parameters for DJI
     //qrotor_gains<<sys_.kt, sys_.kp, sys_.kd;//kt, kp, kd
@@ -59,8 +59,8 @@ void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> 
   //Guess for Offsets:
   offsets_matrix.resize(6, number_offsets);
   offsets_matrix.colwise() = offsets_prior;
-  cout<<"Offsets: "<<endl<<offsets_matrix<<endl;
-  /*double *offsets_prior_guess = (double*)malloc(6*number_offsets*sizeof(double));
+  /*cout<<"Offsets: "<<endl<<offsets_matrix<<endl;
+  double *offsets_prior_guess = (double*)malloc(6*number_offsets*sizeof(double));
   double *offsets_prior_ref = offsets_prior_guess;
   for(int j = 0; j < number_offsets; j++)
   {
@@ -79,25 +79,25 @@ void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> 
 
   std::cout << summary.FullReport() << "\n";
   std::cout<<"Important Params: "<<std::endl;
-  std::cout<<qrotor_gains.transpose()<<std::endl;
+  std::cout<<qrotor_gains.transpose().format(CSVFormat)<<std::endl;
   //cout<<"Offsets: "<<endl<<offsets_matrix<<endl;
   //Mean of Offsets:
   //Map<MatrixXd> offsets_matrix(offsets_prior_guess,number_offsets,6);
   if(offsets!= NULL)
   {
     Vector6d mean_offsets = offsets_matrix.rowwise().mean().transpose();
-    std::cout<<"Mean offsets: "<<mean_offsets.transpose()<<std::endl;
+    std::cout<<"Mean offsets: "<<mean_offsets.transpose().format(CSVFormat)<<std::endl;
     *offsets  = mean_offsets;
     if(stdev_offsets != NULL)
     {
       MatrixXd centered = offsets_matrix.colwise() - mean_offsets;
       Matrix6d cov = (centered * centered.adjoint()) / double(offsets_matrix.cols() - 1);
-      cout<<"Covariance Offsets: "<<endl;
-      cout<<cov<<endl;
+      //cout<<"Covariance Offsets: "<<endl;
+      //cout<<cov<<endl;
       //Compute Stdev
       SelfAdjointEigenSolver<Matrix6d> es(cov);
       *stdev_offsets = es.operatorSqrt();
-      cout<<"Stdev Offsets"<<endl<<(*stdev_offsets)<<endl;
+      cout<<"Stdev Offsets"<<endl<<(*stdev_offsets).format(CSVFormat)<<endl;
     }
   }
     //Evaluate Covariance of computed parameters TODO
@@ -113,12 +113,12 @@ void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> 
     {
         Matrix<double,7,7,RowMajor> cov_gains;
         covariance.GetCovarianceBlock(parameter_blocks[1],parameter_blocks[1],cov_gains.data());
-        cout<<"Covariance of Gains: "<<endl<<cov_gains<<endl;
+        //cout<<"Covariance of Gains: "<<endl<<cov_gains<<endl;
         SelfAdjointEigenSolver<Matrix7d> es(cov_gains);
         if(stdev_gains != NULL)
         {
           (*stdev_gains) = es.operatorSqrt();
-          cout<<"Stdev_Gains: "<<endl<<(*stdev_gains)<<endl;
+          cout<<"Stdev_Gains: "<<endl<<(*stdev_gains).format(CSVFormat)<<endl;
           qrotor_gains_residualgain = (*stdev_gains).inverse();//Inverse of stdev is the gains
         }
         else

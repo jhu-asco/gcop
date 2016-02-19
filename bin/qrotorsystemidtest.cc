@@ -5,6 +5,7 @@
 #include "qrotorsystemid.h"
 #include "params.h"
 #include <fstream>
+#include <string>
 
 using namespace std;
 using namespace Eigen;
@@ -82,28 +83,24 @@ void solver_process()
       {
         //Read data into systemid_measurements:
         QRotorSystemIDMeasurement measurement;
-        if(!getline(ifile,temp,','))
+        if(!getline(ifile,temp))//Get string until \n
           break;
-        measurement.t = stod(temp);
-        for(int i = 0; i < 3; i++)
-        {
-          getline(ifile,temp,',');
-          measurement.position[i] = stod(temp);
-        }
-        for(int i = 0; i < 3; i++)
-        {
-          getline(ifile,temp,',');
-          measurement.rpy[i] = stod(temp);
-        }
-        for(int i = 0; i < 3; i++)
-        {
-          getline(ifile,temp,',');
-          measurement.control[i] = stod(temp);
-        }
-        //Get upto new line
-        getline(ifile,temp);
-        measurement.control[3] = stod(temp);
 
+        stringstream ss(temp);//Make string stream out of the temp string
+        ss>>measurement.t;
+        for(int i = 0; i < 3; i++)
+        {
+          ss>>measurement.position[i];
+        }
+        for(int i = 0; i < 3; i++)
+        {
+          ss>>measurement.rpy[i];
+        }
+        for(int i = 0; i < 4; i++)
+        {
+          ss>>measurement.control[i];
+        }
+        
         systemid_measurements.push_back(measurement);
         cout<<measurement.t<<" "<<measurement.position.transpose()<<" "<<measurement.rpy.transpose()<<" "<<measurement.control.transpose()<<endl;
       }
