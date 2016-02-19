@@ -14,7 +14,7 @@ QRotorSystemID::QRotorSystemID():qrotor_gains(7), offsets_timeperiod(0.1)
     qrotor_gains<<0.16,10,10,1, 5,5,5;
     //Vector7d residualgain_vector;
     Vector7d residualgain_stdev;
-    residualgain_stdev<<0.15, 0.1,0.1,0.5, 5,5,5;
+    residualgain_stdev<<0.15, 0.1,0.1,0.5, 2,2,2;
     //residualgain_vector<<0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01;
     qrotor_gains_residualgain = residualgain_stdev.cwiseInverse().asDiagonal();
     offsets_prior<<-0.4, -0.22, 0, 0, 0, -0.01;
@@ -23,7 +23,8 @@ QRotorSystemID::QRotorSystemID():qrotor_gains(7), offsets_timeperiod(0.1)
     //offsets_residualgain_vector<<0.1855, 0.2691, 0.2069, 0.1440, 0.0710, 0.0871;
     offsets_residualgain_vector<< 2, 2, 2, 10,10,10;
     offsets_prior_residualgain = offsets_residualgain_vector.asDiagonal();
-    stdev_initial_state_prior<<0.05,0.05,0.05, 0.05,0.05,0.05, ONEDEG,ONEDEG,ONEDEG, ONEDEG,ONEDEG,ONEDEG, ONEDEG,ONEDEG,ONEDEG;
+    //stdev_initial_state_prior<<0.05,0.05,0.05, 0.05,0.05,0.05, ONEDEG,ONEDEG,ONEDEG, ONEDEG,ONEDEG,ONEDEG, ONEDEG,ONEDEG,ONEDEG;
+    stdev_initial_state_prior<<0.05,0.05,0.05, 0.1,0.1,0.1, 2*ONEDEG,2*ONEDEG,2*ONEDEG, 10*ONEDEG,10*ONEDEG,10*ONEDEG, ONEDEG,ONEDEG,ONEDEG;
     stdev_position = 0.2;
     stdev_rpy = 4*ONEDEG;
     options.linear_solver_type = ceres::DENSE_SCHUR;

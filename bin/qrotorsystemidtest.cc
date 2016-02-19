@@ -108,14 +108,10 @@ void solver_process()
         cout<<measurement.t<<" "<<measurement.position.transpose()<<" "<<measurement.rpy.transpose()<<" "<<measurement.control.transpose()<<endl;
       }
       //Get x0:
-      VectorXd x0_prior(15);
-      params.GetVectorXd("x0_prior",x0_prior);
-      x0.p = x0_prior.head<3>();
-      x0.v = x0_prior.segment<3>(3);
-      const Vector3d &rpy = x0_prior.segment<3>(6);
+      x0.Clear();
+      x0.p = systemid_measurements[0].position;
+      const Vector3d &rpy = systemid_measurements[0].rpy;
       so3.q2g(x0.R,rpy);
-      x0.w = x0_prior.segment<3>(9);
-      x0.u = x0_prior.segment<3>(12);
   }
 
   Matrix7d stdev_gains;
