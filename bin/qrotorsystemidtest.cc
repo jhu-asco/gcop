@@ -109,6 +109,7 @@ void solver_process()
       x0.p = systemid_measurements[0].position;
       const Vector3d &rpy = systemid_measurements[0].rpy;
       so3.q2g(x0.R,rpy);
+      x0.u<<0,0,rpy(2);//0,0,yaw
   }
 
   Matrix7d stdev_gains;

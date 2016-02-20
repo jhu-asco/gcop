@@ -125,7 +125,10 @@ protected:
             if((current_meas.t - offsets_prevtime) >= parent_.offsets_timeperiod)
             {
                 offsets_ref = offsets_ref + 6;
-                memcpy(offsets_dest_ref,offsets_ref,6*sizeof(double));
+
+                for(int i = 0; i < 6; i++)
+                  sys_params[7+i] = offsets_ref[i];//kt, kp, kd etc
+                //memcpy(offsets_dest_ref,offsets_ref,6*sizeof(double));
                 offsets_prevtime = current_meas.t;
                 //offset_count++;
                 //cout<<"Offset count: "<<offset_count<<endl;//DEBUG
