@@ -170,6 +170,8 @@ namespace gcop {
 
     int number_obstacles;///< Number of obstacles
 
+    int max_iters;///< Maximum number of gn steps in an iteration
+
     protected:
 
     vector<Obstacle> obstacles;///< vector of obstacles
@@ -299,7 +301,7 @@ struct Functor
     inputs(tparam.ntp),
     values((cost.ng)*xs.size()), s(inputs),//Values is increased by one more to add obstacle avoidance term
     functor(0), numDiff(0), lm(0),
-    numdiff_stepsize(1e-8), ko(0.01)
+    numdiff_stepsize(1e-8), ko(0.01), max_iters(200), number_obstacles(0)
     {
       ++(this->nofevaluations);
 
@@ -422,7 +424,7 @@ struct Functor
     }
 
     //tparam.From(ts,xs,us,s,p);
-    for(int count = 0; count < 200; count++)
+    for(int count = 0; count < max_iters; count++)
     {
       info = lm->minimizeOneStep(s);
       if(info != -1 && info != -2)
