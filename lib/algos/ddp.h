@@ -347,7 +347,7 @@ namespace gcop {
       dV[1] += ku.dot(Quu*ku/2);
     }
     
-    //    if (debug)
+    if (this->debug)
     cout << "[I] Ddp::Backward: current V=" << V << endl;    
   }
 
