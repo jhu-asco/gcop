@@ -55,8 +55,8 @@ namespace gcop {
           Vector3d erpy = rpy - rpy_cmd;
           for(int i = 0; i < 3; i++)
           {
-            erpy[i] = erpy[i]>M_PI?(-erpy[i]+2*M_PI):(erpy[i]<-M_PI)?(-erpy[i]-2*M_PI):erpy[i];
-          }
+            erpy[i] = erpy[i]>M_PI?(erpy[i]-2*M_PI):(erpy[i]<-M_PI)?(erpy[i]+2*M_PI):erpy[i];
+          } 
           Matrix3d Mrpy;//Convert omega to rpydot
           Mrpy<<1, sin(rpy(0))*tan(rpy(1)), cos(rpy(0))*tan(rpy(1)),
                 0, cos(rpy(0)),             -sin(rpy(0)),

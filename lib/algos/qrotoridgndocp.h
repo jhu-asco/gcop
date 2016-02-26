@@ -37,10 +37,10 @@ namespace gcop {
       /**
        * @brief Distance  between the current position and Obstacle
        * @param pos Current Quad Position
-       * @param stdev
+       * @param invcov
        * @return
        */
-      void Distance(const Vector3d &pos, const Vector3d &stdev, double &ko, double *res_ref)
+      void Distance(const Vector3d &pos, const Matrix3d &invcov, double &ko, double *res_ref)
       {
           Vector3d error = center - pos;
           if(id == 0 || id == 1)
@@ -48,10 +48,16 @@ namespace gcop {
           else
             error = (error.dot(axis))*axis;//Only care about component along axis
           double scale_ellipsoid;
-          if(stdev.norm() > 1e-10)
-            scale_ellipsoid= sqrt((error.cwiseQuotient(2*stdev).array().square()).sum());
-          else
-            scale_ellipsoid = 1e10;//Avoids numerical issues
+
+          scale_ellipsoid = 0.5*sqrt(error.transpose()*invcov*error);//2 Stdeviations
+          if(std::isinf(scale_ellipsoid) || !isfinite(scale_ellipsoid))
+          {
+            cout<<"Received Nan or Inf on scale ellipsoid"<<endl;
+            scale_ellipsoid = 1e10;
+          }
+          //scale_ellipsoid= sqrt((error.cwiseQuotient(2*stdev).array().square()).sum());
+          //scale_ellipsoid = error.norm()/(2*stdev.maxCoeff());//Consider this as a sphere conservative estimate
+
           double scale_radius = radius/error.norm();
           double scale_error = 1 - 1.0/scale_ellipsoid - scale_radius;
           Map<Vector3d> dist_vec(res_ref);
@@ -156,13 +162,15 @@ namespace gcop {
 
     Matrixnd stdev_initial_state;///< Covariance of initial state
 
-    Matrix<double,3,Dynamic> xs_std;///< Stdeviation of posn from sampling
+    vector<Matrix3d> xs_invcov;///< Inverse of Covariance of posn from sampling for Obstacle detection
 
     Matrix<double,3,Dynamic> sample_mean_params;///< Sample of mean trajectory
 
     double ko;///< Obstacle Avoidance Gain
 
     int number_obstacles;///< Number of obstacles
+
+    int max_iters;///< Maximum number of gn steps in an iteration
 
     protected:
 
@@ -228,6 +236,7 @@ struct Functor
        //docp->GenerateStdev();//Generate Mean and Stdev of trajectory
 
      double *fvec_ref = fvec.data();
+     //Can parallelize this
       for (int k = 0; k < docp->us.size(); ++k) {
         const double &t = docp->ts[k];
         double h = docp->ts[k+1] - t;
@@ -243,7 +252,7 @@ struct Functor
         {
             //const Vector3d &pos = docp->sample_mean_params.col(k);
             const Vector3d &pos = x.p;
-            const Vector3d &std = docp->xs_std.col(k);
+            const Matrix3d &std = docp->xs_invcov.at(k);
             docp->obstacles[obs_ind].Distance(pos, std, docp->ko, fvec_ref);
             fvec_ref = fvec_ref+3;
         }
@@ -261,7 +270,7 @@ struct Functor
       {
         //const Vector3d &pos = docp->sample_mean_params.col(docp->us.size());
         const Vector3d &pos = docp->xs.back().p;
-        const Vector3d &std = docp->xs_std.col(docp->us.size());
+        const Matrix3d &std = docp->xs_invcov.back();
         docp->obstacles[obs_ind].Distance(pos, std, docp->ko, fvec_ref);
         fvec_ref = fvec_ref + 3;
       }
@@ -292,7 +301,7 @@ struct Functor
     inputs(tparam.ntp),
     values((cost.ng)*xs.size()), s(inputs),//Values is increased by one more to add obstacle avoidance term
     functor(0), numDiff(0), lm(0),
-    numdiff_stepsize(1e-8), ko(0.01)
+    numdiff_stepsize(1e-8), ko(0.01), max_iters(200), number_obstacles(0)
     {
       ++(this->nofevaluations);
 
@@ -304,7 +313,7 @@ struct Functor
       cout <<"ntp=" <<tparam.ntp << endl;
 
       sample_mean_params.resize(3,xs.size());
-      xs_std.resize(3,xs.size());
+      xs_invcov.resize(xs.size());
       stdev_initial_state.setZero();
       stdev_params.setZero();
     }
@@ -365,6 +374,7 @@ struct Functor
         xs[0] = mean_initial_state;
         *(this->p) = mean_params;
         this->Update(false);//Update states using current control and parameters
+#pragma omp parallel for
         for(int j = 0; j < N; j++)
         {
           sample_mean_params.col(j) = xs[j].p;
@@ -373,9 +383,16 @@ struct Functor
         Map<VectorXd> sample_mean_params_map(sample_mean_params.data(),3*N);
         //Trajectory Mean:
         VectorXd sample_mean = scales[2]*sample_xs.rowwise().sum() + scales[1]*sample_mean_params_map;
-        //Create a Map for filling xs_std
-        Map<VectorXd> xs_std_map(xs_std.data(),3*N);//xs_std_map shares data with xs_std
-        xs_std_map = (scales[2]*(((sample_xs.colwise() - sample_mean).array().square()).rowwise().sum())  + scales[3]*((sample_mean_params_map - sample_mean).array().square()) ).array().sqrt();//Stdeviation of xs
+        //Center Samples:
+        sample_xs = sample_xs.colwise() - sample_mean;
+#pragma omp parallel for
+        for(int j = 0; j < N; j++)
+        {
+          xs_invcov[j] = (scales[2]*sample_xs.middleRows<3>(3*j)*sample_xs.middleRows<3>(3*j).transpose()+ scales[3]*(sample_mean_params.col(j)-sample_mean.segment<3>(3*j))*(sample_mean_params.col(j)-sample_mean.segment<3>(3*j)).transpose()).selfadjointView<Upper>() ;
+          xs_invcov[j] = xs_invcov[j].inverse().eval();//Invert covariance
+        }
+        //Map<VectorXd> xs_std_map(xs_std.data(),3*N);//xs_std_map shares data with xs_std
+        //xs_std_map = (scales[2]*(((sample_xs.colwise() - sample_mean).array().square()).rowwise().sum())  + scales[3]*((sample_mean_params_map - sample_mean).array().square()) ).array().sqrt();//Stdeviation of xs
         //DEBUG:
         //cout<<"Xs_std: "<<xs_std.col(0).transpose()<<endl;
     }
@@ -407,7 +424,7 @@ struct Functor
     }
 
     //tparam.From(ts,xs,us,s,p);
-    for(int count = 0; count < 200; count++)
+    for(int count = 0; count < max_iters; count++)
     {
       info = lm->minimizeOneStep(s);
       if(info != -1 && info != -2)
