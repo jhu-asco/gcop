@@ -60,7 +60,7 @@ class Params
   bool GetDouble(const char *name, double &v) const;
 
   void SetVectorXd(const char *name, const VectorXd &v);
-  bool GetVectorXd(const char *name, VectorXd &v) const;
+  bool GetVectorXd(const char *name, Ref<VectorXd> v) const;
 
   void SetVector2d(const char *name, const Vector2d &v);
   bool GetVector2d(const char *name, Vector2d &v) const;

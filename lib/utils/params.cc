@@ -457,7 +457,7 @@ void Params::SetVectorXd(const char *name, const VectorXd &v)
   valueMap[name] = s.str();
 }
 
-bool Params::GetVectorXd(const char *name, VectorXd &v) const
+bool Params::GetVectorXd(const char *name, Ref<VectorXd> v) const
 {
   std::map<string, string>::const_iterator i = valueMap.find(name);
   if (i == valueMap.end()) {
