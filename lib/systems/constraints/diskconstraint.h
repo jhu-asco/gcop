@@ -69,9 +69,9 @@ namespace gcop {
 
       double d = v.norm() - cr;  // distance from center of disk to system boundary
       
-      if (d < 0) {
-        cout << "[W] Disk:(): in collision, distance is d=" << d << endl;
-      }
+//      if (d < 0) {
+//        cout << "[W] Disk:(): in collision, distance is d=" << d << endl;
+//      }
 
       g[0] = disk.r - d; // must be negative for non-collision
       
