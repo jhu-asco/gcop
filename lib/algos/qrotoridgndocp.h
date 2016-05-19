@@ -136,6 +136,13 @@ namespace gcop {
     void AddObstacles(vector<Obstacle> &obs);
 
     /**
+     * @brief Add an obstacle to the gndocp problem
+     * @param obs
+     */
+    void SetObstaclePos(const int &index, const Vector3d &center);
+
+
+    /**
      * @brief GenerateStdev : Generates xs mean and stdeviation from sampling the uncertainity in initial state and parameters
      * @param alpha Scaling parameter on how far the samples from mean
      * @param kappa Secondary scaling parameter usually set to zero
@@ -402,6 +409,14 @@ struct Functor
         values = values +3*(obs.size() - obstacles.size())*(this->xs.size());
         obstacles = obs;//Copy Obstacles
         number_obstacles = obstacles.size();
+    }
+
+    void QRotorIdGnDocp::SetObstaclePos(const int &index, const Vector3d &center)
+    {
+        if(index < obstacles.size())
+        {
+          obstacles[index].center = center;
+        }
     }
   
     void QRotorIdGnDocp::Iterate() {

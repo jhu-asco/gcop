@@ -34,6 +34,8 @@ struct QRotorSystemIDMeasurement {
 
 class QRotorSystemID
 {
+protected:
+    double lambda_regularization_;
 public:
     QRotorSystemID();
     typedef Matrix<double,7,7> Matrix7d;
