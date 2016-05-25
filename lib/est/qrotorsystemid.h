@@ -53,6 +53,7 @@ public:
     double stdev_rpy;///< Stdeviation on rpy measurement
     double offsets_timeperiod;///< Time periof for offsets
     static QRotorIDModel sys_;///< Reference system for which parameters are optimized over
+    bool verbose;///< To print debug outputs or not
 
 protected:
     ceres::Solver::Options options;
