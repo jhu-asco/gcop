@@ -132,7 +132,9 @@ void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> 
           if(verbose)
             cout<<"Stdev_Gains: "<<endl<<(*stdev_gains).format(CSVFormat)<<endl;
           //qrotor_gains_residualgain.diagonal() = (*stdev_gains).diagonal().cwiseInverse();
+          (*stdev_gains)(0,0) += 0.02;//Hacky regularization for now so it converges to actual thrust faster next time
           qrotor_gains_residualgain = (*stdev_gains).inverse();//Inverse of stdev is the gains
+          (*stdev_gains)(0,0) -= 0.02;//Not for MPC
         }
         else
         {
