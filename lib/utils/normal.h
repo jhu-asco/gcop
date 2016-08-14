@@ -1,9 +1,18 @@
+// This file is part of libgcop, a library for Geometric Control, Optimization, and Planning (GCOP)
+//
+// Copyright (C) 2004-2014 Marin Kobilarov <marin(at)jhu.edu>
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 #ifndef GCOP_NORMAL_H
 #define GCOP_NORMAL_H
 
 #include <Eigen/Dense>
 #include <vector>
 #include "utils.h"
+#include <iostream>
 
 namespace gcop {
   
@@ -37,6 +46,13 @@ namespace gcop {
    * @return likelihood of sample
    */
   double L(const Vectornd &x) const;
+
+  /**
+   * Compute log likelihood of element x
+   * @param x n-dimensional vector
+   * @return likelihood of sample
+   */
+  double logL(const Vectornd &x) const;
   
   
   /**
@@ -58,6 +74,11 @@ namespace gcop {
    * @param a smoothing parameter [ mu_new = a*mu + (1-a)*mu_old ], equation to 1 by default
    */
   void Fit(const vector<pair<Vectornd, double> > xps, double a = 1);
+
+  void Print(std::ostream &os) const;
+
+  template<int _m>
+  friend std::ostream& operator<<(std::ostream &os, const Normal<_m> n);
   
   Vectornd mu;     ///< mean
   Matrixnd P;      ///< covariance
@@ -139,13 +160,23 @@ namespace gcop {
     {
     }
 
+  template<int _n>
+    double Normal<_n>::logL(const Vectornd &x) const
+    {
+      //if (!pd) {
+      //  cout << "[W] Normal::L: not positive definite!" << endl;
+      //}
+      
+      Vectornd d = x - mu;
+      return -d.dot(Pinv*d) - (2*norm);
+    }
 
   template<int _n>
     double Normal<_n>::L(const Vectornd &x) const
     {
-      if (!pd) {
-        cout << "[W] Normal::L: not positive definite!" << endl;
-      }
+      //if (!pd) {
+      //  cout << "[W] Normal::L: not positive definite!" << endl;
+      //}
       
       Vectornd d = x - mu;
       return exp(-d.dot(Pinv*d))/2/norm;
@@ -193,6 +224,16 @@ namespace gcop {
     void Normal<_n>::Fit(const vector<pair<Vectornd, double> > xws, double a)
     {
       int N = xws.size();
+
+      // sanity check
+      {
+        double weight_sum;
+        for (auto &pair: xws) {
+          weight_sum += pair.second;
+        }
+        //std::cout << "weights added up to " << weight_sum << std::endl;
+        assert(fabs(weight_sum - 1) < 1e-5);
+      }
       
       Vectornd mu;
       if (_n == Dynamic)
@@ -232,6 +273,22 @@ namespace gcop {
         this->P = a*P + (1-a)*this->P;
       }
     }  
+
+  template<int _n>
+  void Normal<_n>::Print(std::ostream &os) const {
+    os <<"mu=";
+    for (int i = 0; i < mu.size(); ++i) {
+      os << mu(i) << ",";
+    }
+    os << std::endl;
+  }
+
+  template<int _n>
+  std::ostream& operator<<(std::ostream &os, const Normal<_n> n) {
+    n.Print(os);
+    return os;
+  }
+
 }
 
 
