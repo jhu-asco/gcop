@@ -12,6 +12,8 @@ QRotorSystemID::QRotorSystemID():qrotor_gains(7), offsets_timeperiod(0.1), CSVFo
     //Parameters for DJI
     //qrotor_gains<<sys_.kt, sys_.kp, sys_.kd;//kt, kp, kd
     qrotor_gains<<0.15,4,4,4, 10,10,10;
+    qrotor_gains_lb<<0.1, 1, 1, 0.5, 1, 1, 1;
+    qrotor_gains_ub<<0.3, 20, 20, 20, 20, 20, 20;
     //Vector7d residualgain_vector;
     Vector7d residualgain_stdev;
     residualgain_stdev<<0.2, 0.1,0.1,0.1, 0.1,0.1,0.1;
@@ -32,7 +34,18 @@ QRotorSystemID::QRotorSystemID():qrotor_gains(7), offsets_timeperiod(0.1), CSVFo
     options.minimizer_progress_to_stdout = false;//Quiet mode
 }
 
-void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> &inputs, QRotorIDState &initial_state, Matrix7d *stdev_gains, Vector6d *offsets, Matrix6d *stdev_offsets){
+bool QRotorSystemID::VerifyParams()
+{
+  for(int i = 0; i < 7; ++i)
+  {
+    if(qrotor_gains[i] - qrotor_gains_lb[i] < 0 || qrotor_gains[i] - qrotor_gains_ub[i] > 0)
+      return false;
+  }
+  return true;
+}
+
+bool QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> &inputs, QRotorIDState &initial_state, Matrix7d *stdev_gains, Vector6d *offsets, Matrix6d *stdev_offsets){
+  bool res = VerifyParams();
   ceres::Problem problem;
   ceres::CostFunction *measurement_error_inst = MeasurementError::Create(inputs,initial_state,*this);
   //Create Prior for params:
@@ -81,20 +94,20 @@ void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> 
   problem.AddResidualBlock(measurement_error_inst,NULL,parameter_blocks);
 
   ceres::Solve(options,&problem,&summary);
+  qrotor_gains = qrotor_newgains;//Update Prior
+  res &= VerifyParams();
 
-  if(verbose)
+  if(verbose || !res)
   {
     std::cout << summary.FullReport() << "\n";
     std::cout<<"Important Params: "<<std::endl;
     std::cout<<qrotor_newgains.transpose().format(CSVFormat)<<std::endl;
   }
-  qrotor_gains = qrotor_newgains;//Update Prior
   //cout<<"Offsets: "<<endl<<offsets_matrix<<endl;
   //Mean of Offsets:
   //Map<MatrixXd> offsets_matrix(offsets_prior_guess,number_offsets,6);
   if(offsets!= NULL)
-  {
-    Vector6d mean_offsets = offsets_matrix.rowwise().mean().transpose();
+  { Vector6d mean_offsets = offsets_matrix.rowwise().mean().transpose();
     if(verbose)
       std::cout<<"Mean offsets: "<<mean_offsets.transpose().format(CSVFormat)<<std::endl;
     *offsets  = mean_offsets;
@@ -107,7 +120,7 @@ void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> 
       //Compute Stdev
       SelfAdjointEigenSolver<Matrix6d> es(cov);
       *stdev_offsets = es.operatorSqrt();
-      if(verbose)
+      if(verbose || !res)
         cout<<"Stdev Offsets"<<endl<<(*stdev_offsets).format(CSVFormat)<<endl;
     }
   }
@@ -129,7 +142,7 @@ void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> 
         if(stdev_gains != NULL)
         {
           (*stdev_gains) = es.operatorSqrt();
-          if(verbose)
+          if(verbose || !res)
             cout<<"Stdev_Gains: "<<endl<<(*stdev_gains).format(CSVFormat)<<endl;
           //qrotor_gains_residualgain.diagonal() = (*stdev_gains).diagonal().cwiseInverse();
           (*stdev_gains)(0,0) += 0.02;//Hacky regularization for now so it converges to actual thrust faster next time
@@ -142,4 +155,5 @@ void QRotorSystemID::EstimateParameters(const vector<QRotorSystemIDMeasurement> 
         }
         //cout<<"Qrotor Residual Gains"<<endl<<qrotor_gains_residualgain<<endl;
     }
+    return res;
 }
