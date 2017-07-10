@@ -224,7 +224,7 @@ namespace gcop {
                                             Matrix<double, _np, 1> *Lp, Matrix<double, _np, _np> *Lpp,
                                             Matrix<double, _np, _nx> *Lpx) {
     
-    int k = round(t/h);
+    int k = (h > 0.0) ? round(t/h) : 0 ;
     
         // check if final state
     if (t > this->tf - 1e-10) {
