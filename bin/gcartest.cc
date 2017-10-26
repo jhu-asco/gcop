@@ -6,6 +6,7 @@
 #include "utils.h"
 #include "se2.h"
 #include "lqcost.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

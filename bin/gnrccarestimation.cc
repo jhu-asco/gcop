@@ -8,6 +8,7 @@
 #include "params.h"
 #include "point3dgps.h"
 #include "gndoep.h"
+#include "unistd.h"
 
 //#include "controltparam.h"
 

@@ -10,6 +10,7 @@
 #include "multicost.h"
 #include "diskconstraint.h"
 #include "diskview.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

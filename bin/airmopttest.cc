@@ -5,6 +5,7 @@
 #include "airmview.h"
 #include "utils.h"
 #include "lqcost.h"
+#include <unistd.h>
 
 using namespace std;
 using namespace Eigen;

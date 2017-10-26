@@ -5,6 +5,7 @@
 #include "utils.h"
 #include "body3dcost.h"
 #include "params.h"
+#include "unistd.h"
 
 
 //#define USE_SDDP

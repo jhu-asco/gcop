@@ -5,6 +5,7 @@
 #include "heliview.h"
 #include "utils.h"
 #include "body3dcost.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

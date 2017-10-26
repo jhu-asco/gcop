@@ -10,6 +10,7 @@
 #include "constraintcost.h"
 #include "multicost.h"
 #include "demview.h"
+#include "unistd.h"
 
 
 using namespace std;

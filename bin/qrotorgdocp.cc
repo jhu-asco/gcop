@@ -6,6 +6,7 @@
 #include "body3dcost.h"
 #include "params.h"
 #include "glog/logging.h"
+#include "unistd.h"
 
 
 //#define USE_SGDOCP

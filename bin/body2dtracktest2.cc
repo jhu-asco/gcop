@@ -9,6 +9,7 @@
 #include "body2dcost.h"
 #include "params.h"
 #include "body2dtrackview.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;
