@@ -11,6 +11,7 @@
 #include "multicost.h"
 
 #include "qrotorview.h"
+#include "unistd.h"
 
 
 using namespace std;

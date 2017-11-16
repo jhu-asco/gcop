@@ -7,6 +7,7 @@
 #include "se3.h"
 #include "lqcost.h"
 #include "params.h"
+#include <unistd.h>
 
 #define DISP
 

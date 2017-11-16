@@ -9,6 +9,7 @@
 #include "utils.h"
 #include "se2.h"
 #include "rnlqcost.h"
+#include "unistd.h"
 
 
 using namespace std;

@@ -8,6 +8,7 @@
 #include "kinbody3dcost.h"
 #include "params.h"
 #include "kinbody3dtrackview.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

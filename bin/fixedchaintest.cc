@@ -8,6 +8,7 @@
 #include "params.h"
 #include "mbscontroller.h"
 #include "se3.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

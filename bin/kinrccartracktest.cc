@@ -9,6 +9,7 @@
 #include "params.h"
 #include "kinbody3dtrackview.h"
 #include "kinrccar.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

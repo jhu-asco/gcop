@@ -6,6 +6,7 @@
 #include "utils.h"
 #include "rnlqcost.h"
 #include "params.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

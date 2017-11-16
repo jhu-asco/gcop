@@ -3,6 +3,7 @@
 #include "viewer.h"
 #include "chainview.h"
 #include "utils.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

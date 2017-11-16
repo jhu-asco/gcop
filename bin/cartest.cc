@@ -5,6 +5,7 @@
 #include "carview.h"
 #include "utils.h"
 #include "rnlqcost.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

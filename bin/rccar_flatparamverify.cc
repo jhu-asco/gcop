@@ -6,6 +6,7 @@
 #include "rnlqcost.h"
 #include "params.h"
 #include "flatoutputtparam.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

@@ -8,6 +8,7 @@
 #include "diskconstraint.h"
 #include "constraintcost.h"
 #include "multicost.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

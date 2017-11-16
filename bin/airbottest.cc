@@ -7,6 +7,7 @@
 #include "lqcost.h"
 #include "params.h"
 #include "cylinderview.h"
+#include "unistd.h"
 
 using namespace std;
 using namespace Eigen;

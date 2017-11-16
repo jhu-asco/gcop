@@ -4,6 +4,7 @@
 #include "hrotorview.h"
 #include "utils.h"
 #include "body3dcost.h"
+#include "unistd.h"
 
 //#define USE_SDDP
 

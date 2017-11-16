@@ -4,6 +4,7 @@
 #include "point3dcontroller.h"
 #include "utils.h"
 #include "disk.h"
+#include <unistd.h>
 
 using namespace std;
 using namespace Eigen;

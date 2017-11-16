@@ -9,6 +9,7 @@
 #include "params.h"
 #include "sensor.h"
 #include "insmanifold.h"
+#include "unistd.h"
 
 //#define USE_STOCHASTIC_DYNAMICS
 
