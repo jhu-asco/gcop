@@ -290,7 +290,7 @@ namespace gcop {
             // df = xbv - xb
             sys.X.Lift(dfm, xb, xbv);
 
-            Bs[k].col(i) = (dfp - dfm)/eps;
+            Bs[k].col(i) = (dfp - dfm)/(2 * eps);
           }
           sys.Reset(xs[k+1],ts[k+1]);//Reset the internal state
          // cout<<"Bs["<<k<<"]: "<<endl<<Bs[k]<<endl;
