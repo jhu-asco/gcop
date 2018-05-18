@@ -79,6 +79,16 @@ set(headers
     gcar.h
 )
 
+if (casadi_FOUND)
+  set(headers ${headers}
+      casadi_system.h
+      quad_casadi_system.h
+      )
+   set(sources ${sources}
+       quad_casadi_system.cpp
+      )
+endif()
+
 add_subdirectory (manifolds)
 add_subdirectory (costs)
 add_subdirectory (parametrization)

@@ -154,6 +154,11 @@ ENDIF (PQP_FOUND)
 	add_executable(rccartest rccartest.cc)
 	target_link_libraries(rccartest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+if (casadi_FOUND)
+	add_executable(qrotor_casadi_test qrotor_casadi_test.cc)
+	target_link_libraries(qrotor_casadi_test  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+endif (casadi_FOUND)
+
 	add_executable(rccar_flatparamverify rccar_flatparamverify.cc)
 	target_link_libraries(rccar_flatparamverify gcop_algos gcop_views gcop_systems ${ALL_LIBS})
 
