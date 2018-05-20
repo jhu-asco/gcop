@@ -1,6 +1,6 @@
+#include "lqcost.h"
 #include "params.h"
 #include "quad_casadi_system.h"
-#include "rnlqcost.h"
 #include "unistd.h"
 #include <Eigen/Dense>
 #include <iomanip>
@@ -19,53 +19,62 @@ using namespace Eigen;
 using namespace gcop;
 
 #ifdef USE_SDDP
-typedef SDdp<> QRotorDdp;
+typedef SDdp<VectorXd> QRotorDdp;
 #else
-typedef Ddp<> QRotorDdp;
+typedef Ddp<VectorXd> QRotorDdp;
 #endif
 
-Params params;
+// Params params;
 
 void solver_process() {
 
-  int N = 64;    // number of segments
-  double tf = 5; // time horizon
+  int N = 100;   // number of segments
+  double tf = 1; // time horizon
 
-  int iters = 30;
+  int iters = 50;
+  bool use_code_generation = true;
 
-  params.GetInt("N", N);
+  /*params.GetInt("N", N);
   params.GetDouble("tf", tf);
 
   params.GetInt("iters", iters);
+  */
 
   double h = tf / N; // time step
+  Eigen::VectorXd sys_params(7); // kt, kp, kd
+  sys_params << 0.16, 10, 10, 10, 5, 5, 2;
 
-  Rccar sys;
+  QuadCasadiSystem sys(sys_params, use_code_generation);
+  sys.instantiateStepFunction();
 
   //  sys.U.lb[1] = tan(-M_PI/5);
   //  sys.U.ub[1] = tan(M_PI/5);
 
   // initial state
-  Vector4d x0(1, 1, 0, 0);
-  params.GetVector4d("x0", x0);
+  VectorXd x0(15);
+  // xyz,  rpy,  vxyz,  rpydot,  rpyd
+  x0 << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
 
   // final state
-  Vector4d xf(0, 0, 0, 0);
-  params.GetVector4d("xf", xf);
+  VectorXd xf(15);
+  // xyz,  rpy,  vxyz,  rpydot,  rpyd
+  xf << 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
 
   // cost
-  RnLqCost<4, 2> cost(sys, tf, xf);
-  VectorXd Q(4);
-  if (params.GetVectorXd("Q", Q))
-    cost.Q = Q.asDiagonal();
+  LqCost<VectorXd> cost(sys, tf, xf);
+  VectorXd Q(15);
+  Q.setZero();
+  // Q.segment<3>(3) = Vector3d::Ones();
+  cost.Q = Q.asDiagonal();
 
-  VectorXd Qf(4);
-  if (params.GetVectorXd("Qf", Qf))
-    cost.Qf = Qf.asDiagonal();
+  VectorXd Qf(15);
+  Qf << 100, 100, 100, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.1, 0.1, 0.1;
 
-  VectorXd R(2);
-  if (params.GetVectorXd("R", R))
-    cost.R = R.asDiagonal();
+  cost.Qf = Qf.asDiagonal();
+
+  VectorXd R(4);
+  R << 1e-4, 0.1, 0.1, 0.1;
+  cost.R = R.asDiagonal();
 
   // times
   vector<double> ts(N + 1);
@@ -73,67 +82,59 @@ void solver_process() {
     ts[k] = k * h;
 
   // states
-  vector<Vector4d> xs(N + 1);
+  vector<VectorXd> xs(N + 1);
   // initial state
   xs[0] = x0;
 
   // initial controls
-  vector<Vector2d> us(N);
-  for (int i = 0; i < N / 2; ++i) {
-    us[i] = Vector2d(.01, .1);
-    us[N / 2 + i] = Vector2d(.01, -.1);
+  vector<VectorXd> us(N);
+  for (int i = 0; i < N; ++i) {
+    us[i].resize(4);
+    us[i] << 9.81 / 0.16, 0, 0, 0;
   }
-  us[N - 1] = Vector2d(0, 0);
 
-  RccarDdp ddp(sys, cost, ts, xs, us);
-  ddp.mu = .01;
+  QRotorDdp ddp(sys, cost, ts, xs, us);
+  ddp.mu = 1e-3;
 #ifdef USE_SDDP
-  params.GetVector2d("scale_du", (ddp.duscale));
+  ddp.duscale.resize(4);
+  ddp.duscale << 0.01, 0.1, 0.1, 0.1;
 #endif
-  params.GetDouble("mu", ddp.mu);
+  // ddp.mu = 1e-3;
 
-  RccarView view(sys, &ddp.xs);
-
-  viewer->Add(view);
-
-  struct timeval timer;
+  // struct timeval timer;
   // ddp.debug = false; // turn off debug for speed
   //  getchar();
 
-  timer_start(timer);
+  // timer_start(timer);
   for (int i = 0; i < iters; ++i) {
     ddp.Iterate();
     //    getchar();
   }
 
-  long te = timer_us(timer);
-  cout << "Iterations" << iters << " took: " << te << " us." << endl;
+  // long te = timer_us(timer);
+  // cout << "Iterations" << iters << " took: " << te << " us." << endl;
   //  getchar();
 
-  cout << xs[N] << endl;
+  cout << "Final state: " << endl;
+  cout << xs[N].transpose() << endl;
 
   //  xs[1][3]  velocity
   // atan(us[0][1]) steering angle
 
   cout << "done!" << endl;
-  while (1)
-    usleep(10);
 }
 
 #define DISP
 
 int main(int argc, char **argv) {
 
-  if (argc > 1)
+  /*if (argc > 1)
     params.Load(argv[1]);
   else
     params.Load("../../bin/rccar.cfg");
+    */
 
   solver_process();
-
-#ifdef DISP
-  viewer->Start();
-#endif
 
   return 0;
 }
