@@ -8,9 +8,11 @@ using namespace Eigen;
 class QuadCasadiSystem : public CasadiSystem<> {
 private:
   Rn<> state_manifold_;
+  bool generate_gradients_;
 
 public:
-  QuadCasadiSystem(VectorXd parameters, bool use_code_generation = false);
+  QuadCasadiSystem(VectorXd parameters, bool use_code_generation = false,
+                   bool generate_gradients = true);
   cs::Function casadi_step();
   cs::Function computeBodyZAxes();
 };

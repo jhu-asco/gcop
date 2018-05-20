@@ -5,9 +5,10 @@ using namespace Eigen;
 using namespace casadi;
 
 QuadCasadiSystem::QuadCasadiSystem(VectorXd parameters,
-                                   bool use_code_generation)
+                                   bool use_code_generation,
+                                   bool generate_gradients)
     : CasadiSystem<>(state_manifold_, parameters, 4, 7, use_code_generation),
-      state_manifold_(15) {
+      state_manifold_(15), generate_gradients_(generate_gradients) {
   // States: p, rpy, v, rpydot, rpyd
   // Controls: ut, rpyd (4)
   // Parameters kt, kp_rpy, kd_rpy
@@ -65,14 +66,15 @@ Function QuadCasadiSystem::casadi_step() {
   MX rpy_dot_next = rpy_dot_i + dt * rpyddot;
   MX rpy_next = rpy_i + 0.5 * dt * (rpy_dot_next + rpy_dot_i);
   MX rpy_desired_next = rpy_desired_i + dt * rpy_dot_desired;
+  // Resulting state
   MX Xn = vertcat(std::vector<MX>{p_next, rpy_next, v_next, rpy_dot_next,
                                   rpy_desired_next});
-  MX A = MX::jacobian(Xn, X);
-  MX B = MX::jacobian(Xn, u);
-  MX C = MX::jacobian(Xn, p);
 
-  // Integrator
-  // return Function("quad_step", {t, dt, X, u, p}, {Xn, A, B, C});
-  // return Function("quad_step", {t, dt, X, u, p}, {Xn});
-  return Function("quad_step", {t, dt, X, u, p}, {Xn, A, B});
+  if (generate_gradients_) {
+    MX A = MX::jacobian(Xn, X);
+    MX B = MX::jacobian(Xn, u);
+    return Function("quad_step", {t, dt, X, u, p}, {Xn, A, B});
+  }
+
+  return Function("quad_step", {t, dt, X, u, p}, {Xn});
 }
