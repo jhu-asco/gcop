@@ -23,10 +23,18 @@ template <typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic,
           int _np = Dynamic>
 class CasadiSystem : public System<T, _nx, _nu, _np> {
 private:
-  using Base = System<T, _nx, _nu, _np>;
-  static int compile_count;
+  using Base = System<T, _nx, _nu, _np>; ///< Base class
 
 public:
+  /**
+ * @brief CasadiSystem constructor
+ * @param X  The state manifold
+ * @param p  The default parameters for the system
+ * @param nu The control size. Only relevant if _nu is Dynamic
+ * @param np The parameter vector size. Only relevant if _np is Dynamic
+ * @param use_code_generation  If true will compile the casadi function into a
+ * shared library on the fly
+ */
   CasadiSystem(Manifold<T, _nx> &X, typename Base::Vectormd p, int nu = 0,
                int np = 0, bool use_code_generation = false)
       : Base(X, nu, np), default_parameters_(p),
@@ -41,6 +49,10 @@ public:
   */
   virtual cs::Function casadi_step() = 0;
 
+  /**
+   * @brief instantiateStepFunction generate the shared library or create the
+   * step function
+   */
   void instantiateStepFunction() {
     step_function_ = casadi_step();
     if (use_code_generation_) {
@@ -55,6 +67,20 @@ public:
     step_function_instantiated_ = true;
   }
 
+  /**
+   * @brief Step Perform a single step of the dynamics
+   * @param xb  The state at the next step
+   * @param t The curren time
+   * @param xa The current state of the system
+   * @param u  The current control
+   * @param h  The time step for integration
+   * @param p  The parameters of the system. If not provided will use default
+   * parameters
+   * @param A The jacobian wrt current state is returned if provided
+   * @param B The jacobian wrt control is returned if provided
+   * @param C The jacobian wrt parameters p is returned if provided
+   * @return
+   */
   double Step(T &xb, double t, const T &xa, const typename Base::Vectorcd &u,
               double h, const typename Base::Vectormd *p = 0,
               typename Base::Matrixnd *A = 0, typename Base::Matrixncd *B = 0,
@@ -96,6 +122,12 @@ public:
     }
   }
 
+  /**
+   * @brief convertDMToEigen Helper function to convert casadi matrix to Eigen
+   * matrix
+   * @param in A casadi matrix can also be a vector if ncols = 1
+   * @return  Eigen Matrix with same data as casadi matrix
+   */
   static Eigen::MatrixXd convertDMToEigen(const cs::DM &in) {
     int rows = in.rows();
     int cols = in.columns();
@@ -105,6 +137,12 @@ public:
     return out;
   }
 
+  /**
+   * @brief convertEigenToDM Helper function to convert Eigen matrix to casadi
+   * matrix
+   * @param in An eigen matrix
+   * @return A casadi matrix
+   */
   static cs::DM convertEigenToDM(const Eigen::MatrixXd &in) {
     int rows = in.rows();
     int cols = in.cols();
@@ -114,10 +152,12 @@ public:
   }
 
 private:
-  typename Base::Vectormd default_parameters_;
-  bool step_function_instantiated_;
-  cs::Function step_function_;
-  bool use_code_generation_;
+  typename Base::Vectormd default_parameters_; ///< Default system parameters
+  bool step_function_instantiated_; ///< Flag to check if casadi step function
+                                    /// is created
+  cs::Function step_function_;      ///< The instantiated step function
+  bool use_code_generation_; ///< Flag to specify whether code generation should
+                             /// be used
 };
 }
 
