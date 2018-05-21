@@ -5,14 +5,16 @@ using namespace Eigen;
 using namespace casadi;
 
 QuadCasadiSystem::QuadCasadiSystem(VectorXd parameters,
+                                   Vector3d kp_rpy,
+                                   Vector3d kd_rpy,
                                    bool use_code_generation,
                                    bool generate_gradients)
-    : CasadiSystem<>(state_manifold_, parameters, 4, 7, use_code_generation),
-      state_manifold_(15), generate_gradients_(generate_gradients) {
+    : CasadiSystem<>(state_manifold_, parameters, 4, 1, use_code_generation),
+      state_manifold_(15), generate_gradients_(generate_gradients),
+      kp_rpy_(kp_rpy), kd_rpy_(kd_rpy) {
   // States: p, rpy, v, rpydot, rpyd
   // Controls: ut, rpyd (4)
-  // Parameters kt, kp_rpy, kd_rpy
-  casadi_assert(parameters.size() == 7, "Size of parameters should be 7");
+  casadi_assert(parameters.size() == 1, "Size of parameters should be 1");
 }
 
 Function QuadCasadiSystem::computeBodyZAxes() {
@@ -47,9 +49,8 @@ Function QuadCasadiSystem::casadi_step() {
 
   // Internal params
   MX kt = MX::sym("kt", 1);         // thrust gain
-  MX kp_rpy = MX::sym("kp_rpy", 3); // Proportional gains rpy
-  MX kd_rpy = MX::sym("kd_rpy", 3); // Derivative gains on rpydot
-  MX p = vertcat(kt, kp_rpy, kd_rpy);
+  DM kp_rpy = convertEigenToDM(kp_rpy_); // Proportional gains rpy
+  DM kd_rpy = convertEigenToDM(kd_rpy_); // Derivative gains on rpydot
   MX g = MX({0, 0, -9.81});
 
   // Constants
@@ -73,8 +74,8 @@ Function QuadCasadiSystem::casadi_step() {
   if (generate_gradients_) {
     MX A = MX::jacobian(Xn, X);
     MX B = MX::jacobian(Xn, u);
-    return Function("quad_step", {t, dt, X, u, p}, {Xn, A, B});
+    return Function("quad_step", {t, dt, X, u, kt}, {Xn, A, B});
   }
 
-  return Function("quad_step", {t, dt, X, u, p}, {Xn});
+  return Function("quad_step", {t, dt, X, u, kt}, {Xn});
 }

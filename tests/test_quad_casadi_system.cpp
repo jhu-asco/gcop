@@ -10,9 +10,11 @@ using namespace gcop;
 class TestQuadCasadiSystem : public testing::Test {
 protected:
   virtual void SetUp() {
-    parameters.resize(7);
-    parameters << 0.16, 10, 10, 0, 5, 5, 2;
-    quad_system.reset(new QuadCasadiSystem(parameters));
+    parameters.resize(1);
+    parameters << 0.16;
+    kp_rpy<< 10, 10, 0;
+    kd_rpy<< 5, 5, 2;
+    quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy));
     quad_system->instantiateStepFunction();
   }
   template <class T> void assertVector(casadi::DM input, T expected_value) {
@@ -25,12 +27,14 @@ protected:
   }
   std::unique_ptr<QuadCasadiSystem> quad_system;
   Eigen::VectorXd parameters;
+  Eigen::Vector3d kp_rpy;
+  Eigen::Vector3d kd_rpy;
 };
 
 TEST_F(TestQuadCasadiSystem, Initialize) {}
 
 TEST_F(TestQuadCasadiSystem, InitializeCodeGen) {
-  quad_system.reset(new QuadCasadiSystem(parameters, true));
+  quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, true));
   quad_system->instantiateStepFunction();
 }
 
@@ -52,7 +56,7 @@ TEST_F(TestQuadCasadiSystem, TestBodyZAxes) {
 
 TEST_F(TestQuadCasadiSystem, TestStep) {
   // Use code generation
-  quad_system.reset(new QuadCasadiSystem(parameters, true));
+  quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, true));
   quad_system->instantiateStepFunction();
   Eigen::VectorXd xa(15);
   // p,                rpy,         v,         rpydot,     rpyd

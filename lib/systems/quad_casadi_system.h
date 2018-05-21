@@ -13,12 +13,14 @@ using namespace Eigen;
  * rotational dynamics. The state of the system is given by
  * (xyz, rpy, vxyz, rpydot, rpy_desired) and control is given by (ut,
  * rpy_desired_dot)
- * The parameters for the system are given by (kt, kp_rpy, kd_rpy);
+ * The parameters for the system are given by (kt);
  */
 class QuadCasadiSystem : public CasadiSystem<> {
 private:
   Rn<> state_manifold_;     ///< The dynamic state manifold
   bool generate_gradients_; ///< Flag to specify whether generate gradients
+  Vector3d kp_rpy_;///< Proportional gain for rpy controller
+  Vector3d kd_rpy_;///< Derivative gain for rpy controller
 
 public:
   /**
@@ -28,7 +30,8 @@ public:
    * @param generate_gradients Whether to generate gradients from the step
    * function.
    */
-  QuadCasadiSystem(VectorXd parameters, bool use_code_generation = false,
+  QuadCasadiSystem(VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy,
+                   bool use_code_generation = false,
                    bool generate_gradients = true);
   /**
    * @brief casadi_step symbolic function that integrates the system and

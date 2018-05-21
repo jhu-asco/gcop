@@ -19,10 +19,14 @@ void solver_process() {
   bool use_code_generation = true;
 
   double h = tf / N; // time step
-  Eigen::VectorXd sys_params(7); // kt, kp, kd
-  sys_params << 0.16, 10, 10, 10, 5, 5, 2;
+  Eigen::VectorXd sys_params(1); // kt, kp, kd
+  sys_params << 0.16;
+  Eigen::Vector3d kp_rpy;
+  kp_rpy<<10, 10, 10;
+  Eigen::Vector3d kd_rpy;
+  kd_rpy<<5, 5, 2;
 
-  QuadCasadiSystem sys(sys_params, use_code_generation);
+  QuadCasadiSystem sys(sys_params, kp_rpy, kd_rpy, use_code_generation);
   sys.instantiateStepFunction();
 
   // initial state
