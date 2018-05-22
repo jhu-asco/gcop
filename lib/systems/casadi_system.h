@@ -86,7 +86,7 @@ public:
               typename Base::Matrixnd *A = 0, typename Base::Matrixncd *B = 0,
               typename Base::Matrixnmd *C = 0) {
 
-    // Prepare inputs h, t,xa,u,p
+    // Prepare inputs t, h, xa,u,p
     std::vector<cs::DM> args;
     args.push_back(cs::DM(t));
     args.push_back(cs::DM(h));
