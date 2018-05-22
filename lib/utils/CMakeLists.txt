@@ -25,4 +25,5 @@ set(headers
   normal.h
   bulletworld.h
   samplenumericaldiff.h
+  load_eigen_matrix.h
   )
