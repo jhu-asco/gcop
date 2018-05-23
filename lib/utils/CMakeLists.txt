@@ -27,3 +27,12 @@ set(headers
   samplenumericaldiff.h
   load_eigen_matrix.h
   )
+
+if (casadi_FOUND)
+  set(headers ${headers}
+        casadi_fully_connected_layer.h
+        eigen_casadi_conversions.h
+        fully_connected_layer.h)
+  set(sources ${sources}
+      fully_connected_layer.cpp)
+endif (casadi_FOUND)
