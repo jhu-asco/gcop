@@ -30,8 +30,8 @@ cs::MX FullyConnectedLayer::transform(casadi::MX x_in) {
   return out;
 }
 
-cs::MX FullyConnectedLayer::linearTransform(cs::MX x, cs::DM weights,
-                                            cs::DM biases) {
+cs::MX FullyConnectedLayer::linearTransform(cs::MX x, cs::MX weights,
+                                            cs::MX biases) {
   cs::MX out = cs::MX::mtimes(weights, x);
   if (!use_batch_normalization_) {
     out = out + biases;
@@ -39,12 +39,12 @@ cs::MX FullyConnectedLayer::linearTransform(cs::MX x, cs::DM weights,
   return out;
 }
 
-cs::MX FullyConnectedLayer::batchNorm(cs::MX x, cs::DM gamma, cs::DM beta,
-                                      cs::DM moving_average,
-                                      cs::DM moving_variance,
+cs::MX FullyConnectedLayer::batchNorm(cs::MX x, cs::MX gamma, cs::MX beta,
+                                      cs::MX moving_average,
+                                      cs::MX moving_variance,
                                       double batch_norm_eps) {
   cs::MX gamma_inv_stdev =
-      gamma / (cs::DM::sqrt(moving_variance + batch_norm_eps));
+      gamma / (cs::MX::sqrt(moving_variance + batch_norm_eps));
   cs::MX shift = (beta - gamma_inv_stdev * moving_average);
   cs::MX scaled_y = (gamma_inv_stdev)*x + shift;
   return scaled_y;
@@ -62,7 +62,7 @@ cs::MX FullyConnectedLayer::activation(casadi::MX x_in, Activation activation) {
   case Activation::relu:
     int rows = x_in.rows();
     int cols = x_in.columns();
-    out = cs::MX::fmax(cs::DM::zeros(rows, cols), x_in);
+    out = cs::MX::fmax(cs::MX::zeros(rows, cols), x_in);
   }
   return out;
 }

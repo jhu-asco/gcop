@@ -6,6 +6,18 @@
 #include <string>
 
 namespace gcop {
+/**
+ * @brief loadEigenMatrix Load an eigen matrix from a file.
+ *
+ * The file contains number of rows and columns of the matrix in first two lines
+ * The third line contains a comma separated data of the matrix in row-major
+ * format
+ * i.e the data is stored row by row
+ * @param in_file_path The file path to load the data from
+ * @return An eigen matrix. Throws an exception if file does not exist or if
+ * exact
+ * amount of data not present
+ */
 Eigen::MatrixXd loadEigenMatrix(std::string in_file_path) {
   std::ifstream ifile(in_file_path);
   if (!ifile.good())

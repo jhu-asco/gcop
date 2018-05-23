@@ -7,10 +7,6 @@
 #include <chrono>
 
 namespace gcop {
-TEST(TestFullyConnectedLayer, Constructor) {
-  FullyConnectedLayer layer;
-  SUCCEED();
-}
 
 TEST(TestFullyConnectedLayer, addPrefixToFilePath) {
   FullyConnectedLayer layer;
