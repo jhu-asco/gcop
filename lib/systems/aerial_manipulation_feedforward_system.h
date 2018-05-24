@@ -29,7 +29,7 @@ public:
    */
   AerialManipulationFeedforwardSystem(VectorXd parameters, Vector3d kp_rpy,
                                       Vector3d kd_rpy, Vector2d kp_ja,
-                                      Vector2d kd_ja, bool use_code_generation);
+                                      Vector2d kd_ja, bool use_code_generation=false);
 
   /**
    * @brief Aerial manipulation step function.
