@@ -4,14 +4,11 @@ using namespace gcop;
 using namespace Eigen;
 using namespace casadi;
 
-QuadCasadiSystem::QuadCasadiSystem(VectorXd parameters,
-                                   Vector3d kp_rpy,
-                                   Vector3d kd_rpy,
-                                   bool use_code_generation,
-                                   bool generate_gradients)
-    : CasadiSystem<>(state_manifold_, parameters, 4, 1, use_code_generation),
-      state_manifold_(15), generate_gradients_(generate_gradients),
-      kp_rpy_(kp_rpy), kd_rpy_(kd_rpy) {
+QuadCasadiSystem::QuadCasadiSystem(VectorXd parameters, Vector3d kp_rpy,
+                                   Vector3d kd_rpy, bool use_code_generation)
+    : CasadiSystem<>(state_manifold_, parameters, 4, 1, true, false,
+                     use_code_generation),
+      state_manifold_(15), kp_rpy_(kp_rpy), kd_rpy_(kd_rpy) {
   // States: p, rpy, v, rpydot, rpyd
   // Controls: ut, rpyd (4)
   casadi_assert(parameters.size() == 1, "Size of parameters should be 1");
@@ -28,54 +25,51 @@ Function QuadCasadiSystem::computeBodyZAxes() {
   return Function("compute_body_z_axes", {rpy}, {z_axis});
 }
 
-Function QuadCasadiSystem::casadi_step() {
-  MX t = MX::sym("t", 1);   // Current time
-  MX dt = MX::sym("dt", 1); // time step
+cs::MX QuadCasadiSystem::casadi_step(MX, MX h, MX xa, MX u, MX p) {
 
   // Controls
-  MX ut = MX::sym("ut", 1);                      // Thrust command
-  MX rpy_dot_desired = MX::sym("rpydot_des", 3); // Desired rpy dot
-  MX u = vertcat(ut, rpy_dot_desired);
+  // Assuming offset is [o1, o2, o3,..., on] then n-1 vectors
+  // are generated of sizes [oi-o(i-1)] starting from oi.
+  std::vector<MX> u_splits = MX::vertsplit(u, {0, 1, 4});
+  MX ut = u_splits.at(0);              // Thrust command
+  MX rpy_dot_desired = u_splits.at(1); // Desired rpy dot
 
   // State
-  MX p_i = MX::sym("p_i", 3);                     // initial position
-  MX rpy_i = MX::sym("rpy_i", 3);                 // initial rpy
-  MX v_i = MX::sym("v_i", 3);                     // initial velocity
-  MX rpy_dot_i = MX::sym("rpy_dot_i", 3);         // initial rpydot
-  MX rpy_desired_i = MX::sym("rpy_desired_i", 3); // initial rpy_desired
-
-  MX X =
-      vertcat(std::vector<MX>{p_i, rpy_i, v_i, rpy_dot_i, rpy_desired_i}); // 15
+  std::vector<MX> x_splits = MX::vertsplit(xa, {0, 3, 6, 9, 12, 15});
+  MX p_i = x_splits.at(0);           // initial position
+  MX rpy_i = x_splits.at(1);         // initial rpy
+  MX v_i = x_splits.at(2);           // initial velocity
+  MX rpy_dot_i = x_splits.at(3);     // initial rpydot
+  MX rpy_desired_i = x_splits.at(4); // initial rpy_desired
 
   // Internal params
-  MX kt = MX::sym("kt", 1);         // thrust gain
-  DM kp_rpy = convertEigenToDM(kp_rpy_); // Proportional gains rpy
-  DM kd_rpy = convertEigenToDM(kd_rpy_); // Derivative gains on rpydot
+  MX kt = p; // thrust gain
+  DM kp_rpy = eigen_casadi_conversions::convertEigenToDM(
+      kp_rpy_); // Proportional gains rpy
+  DM kd_rpy = eigen_casadi_conversions::convertEigenToDM(
+      kd_rpy_); // Derivative gains on rpydot
   MX g = MX({0, 0, -9.81});
 
   // Constants
   Function body_z_axis_comp = computeBodyZAxes();
   MX z_axis = body_z_axis_comp(std::vector<MX>{rpy_i}).at(0);
-  MX acc = kt * u(0) * z_axis + g;
+  MX acc = kt * ut * z_axis + g;
   // Translational dynamics
-  MX v_next = v_i + dt * acc;
-  MX p_next = p_i + 0.5 * dt * (v_next + v_i);
+  MX v_next = v_i + h * acc;
+  MX p_next = p_i + 0.5 * h * (v_next + v_i);
   // Rotational dynamics
   MX e_rpy = (rpy_desired_i - rpy_i);
   MX e_rpy_dot = (rpy_dot_desired - rpy_dot_i);
   MX rpyddot = kp_rpy * e_rpy + kd_rpy * e_rpy_dot;
-  MX rpy_dot_next = rpy_dot_i + dt * rpyddot;
-  MX rpy_next = rpy_i + 0.5 * dt * (rpy_dot_next + rpy_dot_i);
-  MX rpy_desired_next = rpy_desired_i + dt * rpy_dot_desired;
+  MX rpy_dot_next = rpy_dot_i + h * rpyddot;
+  MX rpy_next = rpy_i + 0.5 * h * (rpy_dot_next + rpy_dot_i);
+  MX rpy_desired_next = rpy_desired_i + h * rpy_dot_desired;
   // Resulting state
-  MX Xn = vertcat(std::vector<MX>{p_next, rpy_next, v_next, rpy_dot_next,
+  MX xb = vertcat(std::vector<MX>{p_next, rpy_next, v_next, rpy_dot_next,
                                   rpy_desired_next});
+  return xb;
+}
 
-  if (generate_gradients_) {
-    MX A = MX::jacobian(Xn, X);
-    MX B = MX::jacobian(Xn, u);
-    return Function("quad_step", {t, dt, X, u, kt}, {Xn, A, B});
-  }
-
-  return Function("quad_step", {t, dt, X, u, kt}, {Xn});
+std::string QuadCasadiSystem::casadi_step_name() {
+  return "quad_step";
 }

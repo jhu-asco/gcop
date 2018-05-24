@@ -18,7 +18,6 @@ using namespace Eigen;
 class QuadCasadiSystem : public CasadiSystem<> {
 private:
   Rn<> state_manifold_;     ///< The dynamic state manifold
-  bool generate_gradients_; ///< Flag to specify whether generate gradients
   Vector3d kp_rpy_;///< Proportional gain for rpy controller
   Vector3d kd_rpy_;///< Derivative gain for rpy controller
 
@@ -27,18 +26,27 @@ public:
    * @brief QuadCasadiSystem Constructor
    * @param parameters The default system parameters (kt, kprpy, kdrpy)
    * @param use_code_generation Flag to decide
-   * @param generate_gradients Whether to generate gradients from the step
    * function.
    */
   QuadCasadiSystem(VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy,
-                   bool use_code_generation = false,
-                   bool generate_gradients = true);
+                   bool use_code_generation = false);
   /**
-   * @brief casadi_step symbolic function that integrates the system and
-   * produces gradients
-   * @return casadi function
+   * @brief casadi_step
+   * @param t Current time
+   * @param h Time step
+   * @param xa Current state
+   * @param u Current control
+   * @param p Parameter
+   * @return Next state
    */
-  cs::Function casadi_step();
+  cs::MX casadi_step(cs::MX, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
+
+  /**
+  * @brief The name the step function
+  *
+  * @return name of step function
+  */
+  std::string casadi_step_name();
   /**
    * @brief computeBodyZAxes Helper function to compute body z axis given the
    * roll pitch and yaw of the system

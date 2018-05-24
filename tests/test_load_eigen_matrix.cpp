@@ -2,8 +2,24 @@
 #include <Eigen/Dense>
 #include <gtest/gtest.h>
 
+TEST(LoadEigen, UnknownFile) {
+  ASSERT_THROW(gcop::loadEigenMatrix("unknown_file"), std::runtime_error);
+}
+
+TEST(LoadEigen, NegativeCols) {
+  // Data path defined in CMakelists
+  ASSERT_THROW(gcop::loadEigenMatrix(std::string(DATA_PATH) +
+                                     "/test_model_vars/kd_rpy_negative_col"),
+               std::runtime_error);
+}
+
+TEST(LoadEigen, WrongData) {
+  ASSERT_THROW(gcop::loadEigenMatrix(std::string(DATA_PATH) +
+                                     "/test_model_vars/kd_rpy_wrong_data"),
+               std::runtime_error);
+}
+
 TEST(LoadEigen, VectorXd) {
-  std::cout << "DATA_PATH: " << DATA_PATH << std::endl;
   Eigen::VectorXd rpy_gains =
       gcop::loadEigenMatrix(std::string(DATA_PATH) + "/test_model_vars/kd_rpy");
   ASSERT_EQ(rpy_gains.rows(), 3);
