@@ -11,30 +11,45 @@ AerialManipulationFeedforwardSystem::AerialManipulationFeedforwardSystem(
       quad_system_(parameters, kp_rpy, kd_rpy, false), state_manifold_(21),
       kp_ja_(kp_ja), kd_ja_(kd_ja) {}
 
-MX AerialManipulationFeedforwardSystem::joint_step(MX h, MX xa, MX u) {
-  std::vector<MX> x_splits = MX::vertsplit(xa, {0, 2, 4, 6});
-  MX joint_angles = x_splits.at(0);
-  MX joint_velocities = x_splits.at(1);
-  MX joint_angles_desired = x_splits.at(2);
-  // Controls
-  MX joint_velocities_desired = u;
+AerialManipulationFeedforwardSystem::JointStates
+AerialManipulationFeedforwardSystem::generateJointStates(MX x) {
+  std::vector<MX> x_splits = MX::vertsplit(x, {0, 2, 4, 6});
+  JointStates states;
+  states.joint_angles = x_splits.at(0);
+  states.joint_velocities = x_splits.at(1);
+  states.joint_angles_desired = x_splits.at(2);
+  return states;
+}
+
+MX AerialManipulationFeedforwardSystem::jointInputs(
+    AerialManipulationFeedforwardSystem::JointStates &joint_states,
+    MX joint_velocities_desired) {
   // Gains
   DM kp = eigen_casadi_conversions::convertEigenToDM(
       kp_ja_); // Proportional gains joint angles
   DM kd = eigen_casadi_conversions::convertEigenToDM(
       kd_ja_); // Derivative gains on joint velocities
-  // Joint dynamics
-  MX e_joint_angles = (joint_angles_desired - joint_angles);
-  MX e_joint_velocities = (joint_velocities_desired - joint_velocities);
+  // Joint PID control
+  MX e_joint_angles =
+      (joint_states.joint_angles_desired - joint_states.joint_angles);
+  MX e_joint_velocities =
+      (joint_velocities_desired - joint_states.joint_velocities);
   MX joint_accelerations = kp * e_joint_angles + kd * e_joint_velocities;
-  MX joint_velocities_next = joint_velocities + h * joint_accelerations;
+  return joint_accelerations;
+}
+
+MX AerialManipulationFeedforwardSystem::secondOrderStateUpdate(
+    MX h, AerialManipulationFeedforwardSystem::JointStates &joint_states,
+    MX joint_velocities_desired, MX joint_accelerations) {
+  MX joint_velocities_next =
+      joint_states.joint_velocities + h * joint_accelerations;
   MX joint_angles_next =
-      joint_angles + 0.5 * h * (joint_velocities_next + joint_velocities);
+      joint_states.joint_angles +
+      0.5 * h * (joint_velocities_next + joint_states.joint_velocities);
   MX joint_angles_desired_next =
-      joint_angles_desired + h * joint_velocities_desired;
-  MX xb = vertcat(std::vector<MX>{joint_angles_next, joint_velocities_next,
-                              joint_angles_desired_next});
-  return xb;
+      joint_states.joint_angles_desired + h * joint_velocities_desired;
+  return vertcat(std::vector<MX>{joint_angles_next, joint_velocities_next,
+                                 joint_angles_desired_next});
 }
 
 MX AerialManipulationFeedforwardSystem::casadiStep(MX t, MX h, MX xa, MX u,
@@ -46,11 +61,13 @@ MX AerialManipulationFeedforwardSystem::casadiStep(MX t, MX h, MX xa, MX u,
   // State
   std::vector<MX> x_splits = MX::vertsplit(xa, {0, 15, 21});
   MX quad_states = x_splits.at(0);
-  MX joint_states = x_splits.at(1);
+  JointStates joint_states = generateJointStates(x_splits.at(1));
   // Quad dynamics
   MX quad_xb = quad_system_.casadiStep(t, h, quad_states, quad_controls, p);
   // Joint dynamics
-  MX joint_xb = joint_step(h, joint_states, joint_velocities_desired);
+  MX joint_accelerations = jointInputs(joint_states, joint_velocities_desired);
+  MX joint_xb = secondOrderStateUpdate(
+      h, joint_states, joint_velocities_desired, joint_accelerations);
 
   // Resulting state
   MX xb =

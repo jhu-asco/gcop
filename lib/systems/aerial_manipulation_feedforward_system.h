@@ -17,6 +17,12 @@ private:
   Vector2d kd_ja_;               ///< Derivative Joint gain
   QuadCasadiSystem quad_system_; ///< Feedforward Quad system
 public:
+  struct JointStates {
+    cs::MX joint_angles;
+    cs::MX joint_velocities;
+    cs::MX joint_angles_desired;
+  };
+
   /**
    * @brief Constructor
    * @param parameters The default parameter vector (thrust gain only for now)
@@ -44,15 +50,14 @@ public:
    */
   cs::MX casadiStep(cs::MX t, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
 
-  /**
-   * @brief Joint dynamics feedforward model
-   * @param h The time step
-   * @param xa The current state i.e the joint angles, velocities and desired
-   *           joint angles
-   * @param u  The current controls i.e the desired joint velocities
-   * @return The next joint state
-   */
-  cs::MX joint_step(cs::MX h, cs::MX xa, cs::MX u);
+  JointStates generateJointStates(cs::MX x);
+
+  cs::MX jointInputs(JointStates &joint_states,
+                     cs::MX joint_velocities_desired);
+
+  cs::MX secondOrderStateUpdate(cs::MX h, JointStates &joint_states,
+                                cs::MX joint_velocities_desired,
+                                cs::MX joint_accelerations);
 
   /**
    * @brief casadiStepName

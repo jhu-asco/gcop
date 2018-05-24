@@ -22,6 +22,23 @@ private:
   Vector3d kd_rpy_;///< Derivative gain for rpy controller
 
 public:
+  struct States {
+    cs::MX p;
+    cs::MX rpy;
+    cs::MX v;
+    cs::MX rpy_dot;
+    cs::MX rpy_desired;
+  };
+
+  struct Controls {
+    cs::MX ut;
+    cs::MX rpy_dot_desired;
+  };
+  struct FeedforwardInputs {
+    cs::MX acc;
+    cs::MX rpy_ddot;
+  };
+
   /**
    * @brief QuadCasadiSystem Constructor
    * @param parameters The default system parameters (kt, kprpy, kdrpy)
@@ -30,6 +47,16 @@ public:
    */
   QuadCasadiSystem(VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy,
                    bool use_code_generation = false);
+
+  FeedforwardInputs computeFeedforwardInputs(States &x_splits,
+                                             Controls &u_splits, cs::MX p);
+
+  cs::MX secondOrderStateUpdate(cs::MX h, States &x_splits, Controls &u_splits,
+                                FeedforwardInputs feedforward_inputs);
+
+  States generateStates(cs::MX x);
+
+  Controls generateControls(cs::MX u);
 
   /**
    * @brief casadi_step

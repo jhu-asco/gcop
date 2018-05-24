@@ -86,12 +86,14 @@ if (casadi_FOUND)
       casadi_system.h
       quad_casadi_system.h
       aerial_manipulation_feedforward_system.h
+      airm_residual_network_model.h
       )
    set(sources ${sources}
        quad_casadi_system.cpp
        fully_connected_layer.cpp
        eigen_casadi_conversions.cpp
        aerial_manipulation_feedforward_system.cpp
+       airm_residual_network_model.cpp
       )
 endif()
 
