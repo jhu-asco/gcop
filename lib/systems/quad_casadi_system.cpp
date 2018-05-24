@@ -25,7 +25,7 @@ Function QuadCasadiSystem::computeBodyZAxes() {
   return Function("compute_body_z_axes", {rpy}, {z_axis});
 }
 
-cs::MX QuadCasadiSystem::casadi_step(MX, MX h, MX xa, MX u, MX p) {
+cs::MX QuadCasadiSystem::casadiStep(MX, MX h, MX xa, MX u, MX p) {
 
   // Controls
   // Assuming offset is [o1, o2, o3,..., on] then n-1 vectors
@@ -70,6 +70,4 @@ cs::MX QuadCasadiSystem::casadi_step(MX, MX h, MX xa, MX u, MX p) {
   return xb;
 }
 
-std::string QuadCasadiSystem::casadi_step_name() {
-  return "quad_step";
-}
+std::string QuadCasadiSystem::casadiStepName() { return "quad_step"; }

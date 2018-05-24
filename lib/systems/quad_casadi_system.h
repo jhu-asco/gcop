@@ -30,6 +30,7 @@ public:
    */
   QuadCasadiSystem(VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy,
                    bool use_code_generation = false);
+
   /**
    * @brief casadi_step
    * @param t Current time
@@ -39,14 +40,14 @@ public:
    * @param p Parameter
    * @return Next state
    */
-  cs::MX casadi_step(cs::MX, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
+  cs::MX casadiStep(cs::MX, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
 
   /**
   * @brief The name the step function
   *
   * @return name of step function
   */
-  std::string casadi_step_name();
+  std::string casadiStepName();
   /**
    * @brief computeBodyZAxes Helper function to compute body z axis given the
    * roll pitch and yaw of the system

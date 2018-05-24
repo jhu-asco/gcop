@@ -42,7 +42,7 @@ public:
    * @param p  The parameters are the quad parameters i.e thrust gain
    * @return The next state
    */
-  cs::MX casadi_step(cs::MX t, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
+  cs::MX casadiStep(cs::MX t, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
 
   /**
    * @brief Joint dynamics feedforward model
@@ -55,10 +55,10 @@ public:
   cs::MX joint_step(cs::MX h, cs::MX xa, cs::MX u);
 
   /**
-   * @brief casadi_step_name
+   * @brief casadiStepName
    * @return The step name
    */
-  std::string casadi_step_name();
+  std::string casadiStepName();
 };
 }
 

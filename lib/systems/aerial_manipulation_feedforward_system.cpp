@@ -37,8 +37,8 @@ MX AerialManipulationFeedforwardSystem::joint_step(MX h, MX xa, MX u) {
   return xb;
 }
 
-MX AerialManipulationFeedforwardSystem::casadi_step(MX t, MX h, MX xa, MX u,
-                                                    MX p) {
+MX AerialManipulationFeedforwardSystem::casadiStep(MX t, MX h, MX xa, MX u,
+                                                   MX p) {
   // Controls [quad_controls, jad_dot]
   std::vector<MX> u_splits = MX::vertsplit(u, {0, 4, 6});
   MX quad_controls = u_splits.at(0);
@@ -48,7 +48,7 @@ MX AerialManipulationFeedforwardSystem::casadi_step(MX t, MX h, MX xa, MX u,
   MX quad_states = x_splits.at(0);
   MX joint_states = x_splits.at(1);
   // Quad dynamics
-  MX quad_xb = quad_system_.casadi_step(t, h, quad_states, quad_controls, p);
+  MX quad_xb = quad_system_.casadiStep(t, h, quad_states, quad_controls, p);
   // Joint dynamics
   MX joint_xb = joint_step(h, joint_states, joint_velocities_desired);
 
@@ -58,6 +58,6 @@ MX AerialManipulationFeedforwardSystem::casadi_step(MX t, MX h, MX xa, MX u,
   return xb;
 }
 
-std::string AerialManipulationFeedforwardSystem::casadi_step_name() {
+std::string AerialManipulationFeedforwardSystem::casadiStepName() {
   return "airm_ff";
 }

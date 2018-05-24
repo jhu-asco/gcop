@@ -47,7 +47,7 @@ public:
         step_function_instantiated_(false) {}
 
   /**
-   * @brief casadi_step
+   * @brief casadiStep
    * @param t Current time
    * @param h Time step
    * @param xa Current state
@@ -55,8 +55,8 @@ public:
    * @param p Parameter
    * @return Next state
    */
-  virtual cs::MX casadi_step(cs::MX t, cs::MX h, cs::MX xa, cs::MX u,
-                             cs::MX p) = 0;
+  virtual cs::MX casadiStep(cs::MX t, cs::MX h, cs::MX xa, cs::MX u,
+                            cs::MX p) = 0;
 
   /**
   * @brief The name used to generate the function.
@@ -65,7 +65,7 @@ public:
   *
   * @return casadi step name
   */
-  virtual std::string casadi_step_name() = 0;
+  virtual std::string casadiStepName() = 0;
 
   /**
    * @brief instantiateStepFunction generate the shared library or create the
@@ -77,7 +77,7 @@ public:
     cs::MX xa = cs::MX::sym("xa", this->X.n);
     cs::MX u = cs::MX::sym("xa", this->U.n);
     cs::MX p = cs::MX::sym("xa", this->np);
-    cs::MX xb = casadi_step(t, h, xa, u, p);
+    cs::MX xb = casadiStep(t, h, xa, u, p);
     std::vector<cs::MX> args_out;
     args_out.push_back(xb); // xb
     if (generate_state_gradients_) {
@@ -87,7 +87,7 @@ public:
     if (generate_parameter_gradients_) {
       args_out.push_back(cs::MX::jacobian(xb, p));
     }
-    std::string step_name = casadi_step_name();
+    std::string step_name = casadiStepName();
     step_function_ = cs::Function(step_name.c_str(), {t, h, xa, u, p}, args_out);
     if (use_code_generation_) {
       string function_name = step_function_.name();
