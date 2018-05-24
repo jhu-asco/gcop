@@ -81,11 +81,15 @@ set(headers
 
 if (casadi_FOUND)
   set(headers ${headers}
+      eigen_casadi_conversions.h
+      fully_connected_layer.h
       casadi_system.h
       quad_casadi_system.h
       )
    set(sources ${sources}
        quad_casadi_system.cpp
+       fully_connected_layer.cpp
+       eigen_casadi_conversions.cpp
       )
 endif()
 

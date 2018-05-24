@@ -59,6 +59,15 @@ public:
                              cs::MX p) = 0;
 
   /**
+  * @brief The name used to generate the function.
+  *
+  * Used to distinguish from other casadi functions.
+  *
+  * @return casadi step name
+  */
+  virtual std::string casadi_step_name() = 0;
+
+  /**
    * @brief instantiateStepFunction generate the shared library or create the
    * step function
    */
@@ -78,7 +87,8 @@ public:
     if (generate_parameter_gradients_) {
       args_out.push_back(cs::MX::jacobian(xb, p));
     }
-    step_function_ = cs::Function("quad_step", {t, h, xa, u, p}, args_out);
+    std::string step_name = casadi_step_name();
+    step_function_ = cs::Function(step_name.c_str(), {t, h, xa, u, p}, args_out);
     if (use_code_generation_) {
       string function_name = step_function_.name();
       step_function_.generate(function_name);

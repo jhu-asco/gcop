@@ -69,3 +69,7 @@ cs::MX QuadCasadiSystem::casadi_step(MX, MX h, MX xa, MX u, MX p) {
                                   rpy_desired_next});
   return xb;
 }
+
+std::string QuadCasadiSystem::casadi_step_name() {
+  return "quad_step";
+}

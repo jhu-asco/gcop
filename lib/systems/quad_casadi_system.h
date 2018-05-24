@@ -40,6 +40,13 @@ public:
    * @return Next state
    */
   cs::MX casadi_step(cs::MX, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
+
+  /**
+  * @brief The name the step function
+  *
+  * @return name of step function
+  */
+  std::string casadi_step_name();
   /**
    * @brief computeBodyZAxes Helper function to compute body z axis given the
    * roll pitch and yaw of the system
