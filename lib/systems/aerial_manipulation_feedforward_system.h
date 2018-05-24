@@ -38,14 +38,22 @@ public:
    * @param t The current time
    * @param h The time step
    * @param xa The current state i.e (quad state(15) + joint state (6)).
-   *           The joint state consists of joint angles, velocities and desired
-   *           joint angles
    * @param u  The current controls i.e (quad controls (4) + joint controls(2))
-   *           The joint controls are the desired joint velocities
    * @param p  The parameters are the quad parameters i.e thrust gain
    * @return The next state
    */
   cs::MX casadi_step(cs::MX t, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
+
+  /**
+   * @brief Joint dynamics feedforward model
+   * @param h The time step
+   * @param xa The current state i.e the joint angles, velocities and desired
+   *           joint angles
+   * @param u  The current controls i.e the desired joint velocities
+   * @return The next joint state
+   */
+  cs::MX joint_step(cs::MX h, cs::MX xa, cs::MX u);
+
   /**
    * @brief casadi_step_name
    * @return The step name
