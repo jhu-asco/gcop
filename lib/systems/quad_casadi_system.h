@@ -16,11 +16,6 @@ using namespace Eigen;
  * The parameters for the system are given by (kt);
  */
 class QuadCasadiSystem : public CasadiSystem<> {
-private:
-  Rn<> state_manifold_;     ///< The dynamic state manifold
-  Vector3d kp_rpy_;///< Proportional gain for rpy controller
-  Vector3d kd_rpy_;///< Derivative gain for rpy controller
-
 public:
   /**
    * @brief QuadCasadiSystem Constructor
@@ -53,6 +48,11 @@ public:
    * @return A function to compute body z axis given rpy of the system
    */
   cs::Function computeBodyZAxes();
+
+private:
+  Rn<> state_manifold_; ///< The dynamic state manifold
+  Vector3d kp_rpy_;     ///< Proportional gain for rpy controller
+  Vector3d kd_rpy_;     ///< Derivative gain for rpy controller
 };
 }
 
