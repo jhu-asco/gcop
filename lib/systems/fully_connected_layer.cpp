@@ -17,8 +17,6 @@ FullyConnectedLayer::FullyConnectedLayer(std::string variable_folder_path,
   loadParameters(variable_folder_path, layer_prefix, scope_name);
 }
 
-FullyConnectedLayer::FullyConnectedLayer() {}
-
 cs::MX FullyConnectedLayer::transform(casadi::MX x_in) {
   cs::MX y = linearTransform(x_in, weights_, biases_);
   cs::MX yout = y;

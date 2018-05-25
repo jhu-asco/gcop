@@ -25,6 +25,7 @@ template <typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic,
 class CasadiSystem : public System<T, _nx, _nu, _np> {
 private:
   using Base = System<T, _nx, _nu, _np>; ///< Base class
+  using Vectormd = typename Base::Vectormd; ///< Base class parameter typedef
 
 public:
   /**
@@ -36,8 +37,8 @@ public:
  * @param use_code_generation  If true will compile the casadi function into a
  * shared library on the fly
  */
-  CasadiSystem(Manifold<T, _nx> &X, typename Base::Vectormd p, int nu = 0,
-               int np = 0, bool generate_state_gradients = false,
+  CasadiSystem(Manifold<T, _nx> &X, Vectormd p, int nu = 0, int np = 0,
+               bool generate_state_gradients = false,
                bool generate_parameter_gradients = false,
                bool use_code_generation = false)
       : Base(X, nu, np), default_parameters_(p),
@@ -116,8 +117,8 @@ public:
    * @return
    */
   double Step(T &xb, double t, const T &xa, const typename Base::Vectorcd &u,
-              double h, const typename Base::Vectormd *p = 0,
-              typename Base::Matrixnd *A = 0, typename Base::Matrixncd *B = 0,
+              double h, const Vectormd *p = 0, typename Base::Matrixnd *A = 0,
+              typename Base::Matrixncd *B = 0,
               typename Base::Matrixnmd *C = 0) {
 
     // Prepare inputs t, h, xa,u,p
@@ -162,7 +163,7 @@ private:
   /**
    * @brief Default system parameters
    */
-  typename Base::Vectormd default_parameters_;
+  Vectormd default_parameters_;
   /**
    * @brief Flag to check if casadi step function is created
    */
