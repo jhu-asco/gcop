@@ -2,6 +2,7 @@
 #define GCOP_CASADI_SYSTEM_H
 
 #include "gcop_conversions.h"
+#include "loop_timer.h"
 #include "system.h"
 #include <Eigen/Dense>
 #include <assert.h>
@@ -121,6 +122,7 @@ public:
               typename Base::Matrixncd *B = 0,
               typename Base::Matrixnmd *C = 0) {
 
+    copy_loop_timer_.loop_start();
     // Prepare inputs t, h, xa,u,p
     std::vector<cs::DM> args;
     args.push_back(cs::DM(t));
@@ -132,7 +134,13 @@ public:
     } else {
       args.push_back(conversions::convertEigenToDM(*p));
     }
+    copy_loop_timer_.loop_pause();
+
+    fun_loop_timer_.loop_start();
     std::vector<cs::DM> result = step_function_(args);
+    fun_loop_timer_.loop_end();
+
+    copy_loop_timer_.loop_start();
     if (result.size() == 0 || result.size() > 4) {
       throw std::runtime_error(
           "The output of the casadi function should be between 1 and 4");
@@ -157,6 +165,7 @@ public:
         (*C) = conversions::convertDMToEigen(result.at(ind));
       }
     }
+    copy_loop_timer_.loop_end();
   }
 
 private:
@@ -184,6 +193,10 @@ private:
    * @brief Flag to specify whether code generation should be used
    */
   bool use_code_generation_;
+
+public:
+  LoopTimer copy_loop_timer_;
+  LoopTimer fun_loop_timer_;
 };
 }
 

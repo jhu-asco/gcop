@@ -49,15 +49,20 @@ TEST_F(TestAirmResidualNetworkModel, TestStep) {
   u << 9.81 / 0.18, 0, 0, 0.1, 0, 0;
   double h = 0.02;
   int N = 3.0 / h; // tf/h
-  auto t0 = std::chrono::high_resolution_clock::now();
+  LoopTimer overall_loop_timer;
   for (int i = 0; i < N; ++i) {
+    overall_loop_timer.loop_start();
     airm_model->Step(xb, 0, xa, u, h, 0, &A, &B);
     xa = xb;
+    overall_loop_timer.loop_end();
   }
-  double dt = std::chrono::duration<double>(
-                  std::chrono::high_resolution_clock::now() - t0)
-                  .count();
-  std::cout << "Dt: " << dt << std::endl;
+  std::cout << "Copy loop average time: "
+            << (airm_model->copy_loop_timer_).average_loop_period()
+            << std::endl;
+  std::cout << "Function loop average time: "
+            << (airm_model->fun_loop_timer_).average_loop_period() << std::endl;
+  std::cout << "Overall loop average time: "
+            << (overall_loop_timer).average_loop_period() << std::endl;
   // rp
   ASSERT_NEAR(xb(3), 0.2, 0.1);
   ASSERT_NEAR(xb(4), -0.2, 0.1);

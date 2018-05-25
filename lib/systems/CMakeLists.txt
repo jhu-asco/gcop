@@ -30,6 +30,7 @@ set(sources
     body3dtrack.cc
     kinrccar.cc
     gcar.cc
+    loop_timer.cpp
 )
 
 set(headers
@@ -77,6 +78,7 @@ set(headers
     kinrccarpath.h
     creator.h
     gcar.h
+    loop_timer.h
 )
 
 if (casadi_FOUND)
