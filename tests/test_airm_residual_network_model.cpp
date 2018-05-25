@@ -16,9 +16,9 @@ protected:
     kd_ja << 5, 10;
     std::string folder_path =
         (std::string(DATA_PATH) + "/tensorflow_model_vars/");
-    airm_model.reset(new AirmResidualNetworkModel(parameters, kp_rpy, kd_rpy,
-                                                  kp_ja, kd_ja, 3, folder_path,
-                                                  Activation::tanh, true));
+    airm_model.reset(new AirmResidualNetworkModel(
+        parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, 0.7, 3, folder_path,
+        Activation::tanh, true));
     airm_model->instantiateStepFunction();
   }
   template <class T> void assertVector(casadi::DM input, T expected_value) {
@@ -47,7 +47,7 @@ TEST_F(TestAirmResidualNetworkModel, TestStep) {
   Eigen::VectorXd u(6);
   Eigen::MatrixXd A, B;
   u << 9.81 / 0.18, 0, 0, 0.1, 0, 0;
-  double h = 0.01;
+  double h = 0.02;
   int N = 3.0 / h; // tf/h
   auto t0 = std::chrono::high_resolution_clock::now();
   for (int i = 0; i < N; ++i) {

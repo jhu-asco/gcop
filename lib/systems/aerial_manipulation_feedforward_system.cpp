@@ -5,11 +5,11 @@ using namespace casadi;
 
 AerialManipulationFeedforwardSystem::AerialManipulationFeedforwardSystem(
     VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy, Vector2d kp_ja,
-    Vector2d kd_ja, bool use_code_generation)
+    Vector2d kd_ja, double max_joint_velocity, bool use_code_generation)
     : CasadiSystem<>(state_manifold_, parameters, 6, 1, true, false,
                      use_code_generation),
       quad_system_(parameters, kp_rpy, kd_rpy, false), state_manifold_(21),
-      kp_ja_(kp_ja), kd_ja_(kd_ja) {}
+      kp_ja_(kp_ja), kd_ja_(kd_ja), max_joint_velocity_(max_joint_velocity) {}
 
 AerialManipulationFeedforwardSystem::JointStates
 AerialManipulationFeedforwardSystem::generateJointStates(MX x) {
@@ -43,6 +43,13 @@ MX AerialManipulationFeedforwardSystem::secondOrderStateUpdate(
     MX joint_velocities_desired, MX joint_accelerations) {
   MX joint_velocities_next =
       joint_states.joint_velocities + h * joint_accelerations;
+  //  Clip joint velocities
+  cs::MX constant_bnd = cs::DM::ones(2);
+  joint_velocities_next =
+      MX::fmax(-max_joint_velocity_ * constant_bnd, joint_velocities_next);
+  joint_velocities_next =
+      MX::fmin(max_joint_velocity_ * constant_bnd, joint_velocities_next);
+  // clip joint velocities
   MX joint_angles_next =
       joint_states.joint_angles +
       0.5 * h * (joint_velocities_next + joint_states.joint_velocities);

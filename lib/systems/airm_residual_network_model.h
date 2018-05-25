@@ -24,7 +24,8 @@ private:
 public:
   AirmResidualNetworkModel(VectorXd parameters, Vector3d kp_rpy,
                            Vector3d kd_rpy, Vector2d kp_ja, Vector2d kd_ja,
-                           int n_layers, std::string nn_weights_folder_path,
+                           double max_joint_velocity, int n_layers,
+                           std::string nn_weights_folder_path,
                            Activation activation = Activation::tanh,
                            bool use_code_generation = false);
 

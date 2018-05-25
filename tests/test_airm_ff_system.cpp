@@ -16,7 +16,8 @@ protected:
     kd_rpy<< 5, 5, 2;
     kp_ja<<10, 15;
     kd_ja<<5, 10;
-    airm_system.reset(new AerialManipulationFeedforwardSystem(parameters, kp_rpy, kd_rpy, kp_ja, kd_ja));
+    airm_system.reset(new AerialManipulationFeedforwardSystem(
+        parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, 0.7));
     airm_system->instantiateStepFunction();
   }
   template <class T> void assertVector(casadi::DM input, T expected_value) {
@@ -46,7 +47,7 @@ TEST_F(TestAerialManipulationFeedforwardSystem, InitializeCodeGen) {
 TEST_F(TestAerialManipulationFeedforwardSystem, TestStep) {
   // Use code generation
   airm_system.reset(new AerialManipulationFeedforwardSystem(
-      parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, true));
+      parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, 0.7, true));
   airm_system->instantiateStepFunction();
   Eigen::VectorXd xa(21);
   // p,                rpy,         v,         rpydot,     rpyd,          ja,       jv,        jad;

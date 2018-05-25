@@ -12,10 +12,11 @@ namespace gcop {
  */
 class AerialManipulationFeedforwardSystem : public CasadiSystem<> {
 private:
+  QuadCasadiSystem quad_system_; ///< Feedforward Quad system
   Rn<> state_manifold_;          ///< The dynamic state manifold
   Vector2d kp_ja_;               ///< Proportional Joint gains
   Vector2d kd_ja_;               ///< Derivative Joint gain
-  QuadCasadiSystem quad_system_; ///< Feedforward Quad system
+  double max_joint_velocity_;    ///< Max joint velocity
 public:
   struct JointStates {
     cs::MX joint_angles;
@@ -35,7 +36,8 @@ public:
    */
   AerialManipulationFeedforwardSystem(VectorXd parameters, Vector3d kp_rpy,
                                       Vector3d kd_rpy, Vector2d kp_ja,
-                                      Vector2d kd_ja, bool use_code_generation=false);
+                                      Vector2d kd_ja, double max_joint_velocity,
+                                      bool use_code_generation = false);
 
   /**
    * @brief Aerial manipulation step function.

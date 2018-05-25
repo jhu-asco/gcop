@@ -7,12 +7,13 @@ using namespace casadi;
 
 AirmResidualNetworkModel::AirmResidualNetworkModel(
     VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy, Vector2d kp_ja,
-    Vector2d kd_ja, int n_layers, std::string nn_weights_folder_path,
-    gcop::Activation activation, bool use_code_generation)
+    Vector2d kd_ja, double max_joint_velocity, int n_layers,
+    std::string nn_weights_folder_path, gcop::Activation activation,
+    bool use_code_generation)
     : CasadiSystem<>(state_manifold_, parameters, 6, 1, true, false,
                      use_code_generation),
-      state_manifold_(21),
-      airm_system_(parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, false),
+      state_manifold_(21), airm_system_(parameters, kp_rpy, kd_rpy, kp_ja,
+                                        kd_ja, max_joint_velocity, false),
       quad_system_(parameters, kp_rpy, kd_rpy, false) {
   std::cout << "Loading layers..." << std::endl;
   if (n_layers <= 1) {
