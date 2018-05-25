@@ -11,28 +11,53 @@ AirmResidualNetworkModel::AirmResidualNetworkModel(
     gcop::Activation activation, bool use_code_generation)
     : CasadiSystem<>(state_manifold_, parameters, 6, 1, true, false,
                      use_code_generation),
+      state_manifold_(21),
       airm_system_(parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, false),
       quad_system_(parameters, kp_rpy, kd_rpy, false) {
+  std::cout << "Loading layers..." << std::endl;
   if (n_layers <= 1) {
     throw std::runtime_error("The number of layers should be greater than 1.\n "
                              "The last layer corresponds to linear transform "
-                             "without any activatin function/batch "
+                             "without any activation function/batch "
                              "normalization");
   }
-  for (int i = 0; i < n_layers; ++i) {
-    nn_layers_.emplace_back(nn_weights_folder_path, "residual_dynami",
+  for (int i = 0; i < n_layers - 1; ++i) {
+    std::cout << "Loading layer: " << i << std::endl;
+    nn_layers_.emplace_back(nn_weights_folder_path, "residual_dynamics",
                             std::to_string(i), true, activation);
   }
-  nn_layers_.emplace_back(nn_weights_folder_path, "residual_dynami", "final",
+  nn_layers_.emplace_back(nn_weights_folder_path, "residual_dynamics", "final",
                           false, Activation::none);
 }
 
-MX AirmResidualNetworkModel::findResidualInputs(MX input) {
+MX AirmResidualNetworkModel::propagateNetwork(MX input) {
   cs::MX temp = input;
   for (auto &layer : nn_layers_) {
     temp = layer.transform(temp);
   }
   return temp;
+}
+
+void AirmResidualNetworkModel::generateResidualInputs(QuadInputs &quad_inputs,
+                                                      MX &joint_accelerations,
+                                                      MX quad_states,
+                                                      MX joint_states,
+                                                      MX controls, MX p) {
+  // Update Feedforward using network
+  // ff inputs   + state+kt     + controls
+  // 3 + 3 + 2   + 15 + 1 + 6   + 6 = 36
+  MX network_input = vertcat(std::vector<MX>{
+      quad_inputs.acc, quad_inputs.rpy_ddot, joint_accelerations, quad_states,
+      p, joint_states, controls});
+  MX res_feedforward_input =
+      propagateNetwork(network_input); // split into delta quad feedforward
+                                       // inputs and joint accelerations
+  // Update Feedforward using output from residual network
+  std::vector<MX> res_input_split =
+      MX::vertsplit(res_feedforward_input, {0, 3, 6, 8});
+  quad_inputs.acc = quad_inputs.acc + res_input_split.at(0);
+  quad_inputs.rpy_ddot = quad_inputs.rpy_ddot + res_input_split.at(1);
+  joint_accelerations = joint_accelerations + res_input_split.at(2);
 }
 
 MX AirmResidualNetworkModel::casadiStep(MX, MX h, MX xa, MX u, MX p) {
@@ -49,23 +74,9 @@ MX AirmResidualNetworkModel::casadiStep(MX, MX h, MX xa, MX u, MX p) {
       airm_system_.jointInputs(joint_states, joint_velocities_desired);
   QuadInputs quad_feedforward_inputs =
       quad_system_.computeFeedforwardInputs(quad_states, quad_controls, p);
-  // Update Feedforward using network
-  // ff inputs   + state+kt     + controls
-  // 3 + 3 + 2   + 15 + 1 + 6   + 6 = 36
-  MX network_input = vertcat(std::vector<MX>{
-      quad_feedforward_inputs.acc, quad_feedforward_inputs.rpy_ddot,
-      joint_accelerations, x_splits.at(0), p, x_splits.at(1), u});
-  MX res_feedforward_input =
-      findResidualInputs(network_input); // split into delta quad feedforward
-                                         // inputs and joint accelerations
-  // Update Feedforward using output from residual network
-  std::vector<MX> res_input_split =
-      MX::vertsplit(res_feedforward_input, {0, 3, 6, 8});
-  quad_feedforward_inputs.acc =
-      quad_feedforward_inputs.acc + res_input_split.at(0);
-  quad_feedforward_inputs.rpy_ddot =
-      quad_feedforward_inputs.rpy_ddot + res_input_split.at(1);
-  joint_accelerations = joint_accelerations + res_input_split.at(2);
+
+  generateResidualInputs(quad_feedforward_inputs, joint_accelerations,
+                         x_splits.at(0), x_splits.at(1), u, p);
   // Integrate
   MX quad_xb = quad_system_.secondOrderStateUpdate(
       h, quad_states, quad_controls, quad_feedforward_inputs);

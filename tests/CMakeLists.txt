@@ -24,6 +24,11 @@ if (BUILD_TESTS)
     target_compile_definitions(test_fully_connected_layer PUBLIC DATA_PATH="${CMAKE_SOURCE_DIR}/data")
     target_link_libraries(test_fully_connected_layer gcop_systems ${SYS_LIBS} ${UTIL_LIBS} ${GTEST_BOTH_LIBRARIES})
     add_test(test_fully_connected_layer test_fully_connected_layer)
+
+    add_executable(test_airm_residual_network_model test_airm_residual_network_model.cpp)
+    target_compile_definitions(test_airm_residual_network_model PUBLIC DATA_PATH="${CMAKE_SOURCE_DIR}/data")
+    target_link_libraries(test_airm_residual_network_model gcop_systems ${SYS_LIBS} ${UTIL_LIBS} ${GTEST_BOTH_LIBRARIES})
+    add_test(test_airm_residual_network_model test_airm_residual_network_model)
   endif (casadi_FOUND)
 endif (BUILD_TESTS)
 
