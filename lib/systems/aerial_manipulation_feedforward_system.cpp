@@ -25,9 +25,9 @@ MX AerialManipulationFeedforwardSystem::jointInputs(
     AerialManipulationFeedforwardSystem::JointStates &joint_states,
     MX joint_velocities_desired) {
   // Gains
-  DM kp = eigen_casadi_conversions::convertEigenToDM(
-      kp_ja_); // Proportional gains joint angles
-  DM kd = eigen_casadi_conversions::convertEigenToDM(
+  DM kp =
+      conversions::convertEigenToDM(kp_ja_); // Proportional gains joint angles
+  DM kd = conversions::convertEigenToDM(
       kd_ja_); // Derivative gains on joint velocities
   // Joint PID control
   MX e_joint_angles =

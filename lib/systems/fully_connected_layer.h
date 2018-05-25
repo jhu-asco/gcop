@@ -52,8 +52,10 @@ public:
    * batch normalization
    */
   FullyConnectedLayer(std::string variable_folder_path, std::string scope_name,
-                      std::string layer_prefix, bool use_batch_normalization,
-                      Activation activation, double batch_norm_eps = 0.001);
+                      std::string layer_prefix,
+                      bool use_batch_normalization = true,
+                      Activation activation = Activation::tanh,
+                      double batch_norm_eps = 0.001);
   /**
    * @brief transform input vector to output vector
    *
@@ -116,7 +118,7 @@ private:
    * @brief FullyConnectedLayer
    * Private Constructor for testing private functions
    */
-  FullyConnectedLayer();
+  FullyConnectedLayer() = default;
   /**
    * @brief loadParameters
    *

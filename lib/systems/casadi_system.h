@@ -1,7 +1,7 @@
 #ifndef GCOP_CASADI_SYSTEM_H
 #define GCOP_CASADI_SYSTEM_H
 
-#include "eigen_casadi_conversions.h"
+#include "gcop_conversions.h"
 #include "system.h"
 #include <Eigen/Dense>
 #include <assert.h>
@@ -25,6 +25,7 @@ template <typename T = VectorXd, int _nx = Dynamic, int _nu = Dynamic,
 class CasadiSystem : public System<T, _nx, _nu, _np> {
 private:
   using Base = System<T, _nx, _nu, _np>; ///< Base class
+  using Vectormd = typename Base::Vectormd; ///< Base class parameter typedef
 
 public:
   /**
@@ -36,8 +37,8 @@ public:
  * @param use_code_generation  If true will compile the casadi function into a
  * shared library on the fly
  */
-  CasadiSystem(Manifold<T, _nx> &X, typename Base::Vectormd p, int nu = 0,
-               int np = 0, bool generate_state_gradients = false,
+  CasadiSystem(Manifold<T, _nx> &X, Vectormd p, int nu = 0, int np = 0,
+               bool generate_state_gradients = false,
                bool generate_parameter_gradients = false,
                bool use_code_generation = false)
       : Base(X, nu, np), default_parameters_(p),
@@ -116,21 +117,20 @@ public:
    * @return
    */
   double Step(T &xb, double t, const T &xa, const typename Base::Vectorcd &u,
-              double h, const typename Base::Vectormd *p = 0,
-              typename Base::Matrixnd *A = 0, typename Base::Matrixncd *B = 0,
+              double h, const Vectormd *p = 0, typename Base::Matrixnd *A = 0,
+              typename Base::Matrixncd *B = 0,
               typename Base::Matrixnmd *C = 0) {
 
     // Prepare inputs t, h, xa,u,p
     std::vector<cs::DM> args;
     args.push_back(cs::DM(t));
     args.push_back(cs::DM(h));
-    args.push_back(eigen_casadi_conversions::convertEigenToDM(xa));
-    args.push_back(eigen_casadi_conversions::convertEigenToDM(u));
+    args.push_back(conversions::convertEigenToDM(xa));
+    args.push_back(conversions::convertEigenToDM(u));
     if (p == 0) {
-      args.push_back(
-          eigen_casadi_conversions::convertEigenToDM(default_parameters_));
+      args.push_back(conversions::convertEigenToDM(default_parameters_));
     } else {
-      args.push_back(eigen_casadi_conversions::convertEigenToDM(*p));
+      args.push_back(conversions::convertEigenToDM(*p));
     }
     std::vector<cs::DM> result = step_function_(args);
     if (result.size() == 0 || result.size() > 4) {
@@ -138,14 +138,14 @@ public:
           "The output of the casadi function should be between 1 and 4");
     }
     // Extract results, xb,
-    xb = eigen_casadi_conversions::convertDMToEigen(result.at(0));
+    xb = conversions::convertDMToEigen(result.at(0));
 
     if (generate_state_gradients_) {
       if (A != 0) {
-        (*A) = eigen_casadi_conversions::convertDMToEigen(result.at(1));
+        (*A) = conversions::convertDMToEigen(result.at(1));
       }
       if (B != 0) {
-        (*B) = eigen_casadi_conversions::convertDMToEigen(result.at(2));
+        (*B) = conversions::convertDMToEigen(result.at(2));
       }
     }
     if (generate_parameter_gradients_) {
@@ -154,7 +154,7 @@ public:
         if (!generate_state_gradients_) {
           ind = 1;
         }
-        (*C) = eigen_casadi_conversions::convertDMToEigen(result.at(ind));
+        (*C) = conversions::convertDMToEigen(result.at(ind));
       }
     }
   }
@@ -163,7 +163,7 @@ private:
   /**
    * @brief Default system parameters
    */
-  typename Base::Vectormd default_parameters_;
+  Vectormd default_parameters_;
   /**
    * @brief Flag to check if casadi step function is created
    */

@@ -1,5 +1,5 @@
 #include "fully_connected_layer.h"
-#include "eigen_casadi_conversions.h"
+#include "gcop_conversions.h"
 #include "load_eigen_matrix.h"
 #include <Eigen/Dense>
 #include <sys/stat.h>
@@ -16,8 +16,6 @@ FullyConnectedLayer::FullyConnectedLayer(std::string variable_folder_path,
       batch_norm_eps_(batch_norm_eps), activation_(activation) {
   loadParameters(variable_folder_path, layer_prefix, scope_name);
 }
-
-FullyConnectedLayer::FullyConnectedLayer() {}
 
 cs::MX FullyConnectedLayer::transform(casadi::MX x_in) {
   cs::MX y = linearTransform(x_in, weights_, biases_);
@@ -115,5 +113,5 @@ std::string FullyConnectedLayer::addPrefixToFilePath(std::string scope_name,
 
 casadi::DM FullyConnectedLayer::loadDMFromFile(std::string file_path) {
   Eigen::MatrixXd mat = loadEigenMatrix(file_path);
-  return eigen_casadi_conversions::convertEigenToDM(mat);
+  return conversions::convertEigenToDM(mat);
 }

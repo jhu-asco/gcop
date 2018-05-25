@@ -1,5 +1,5 @@
-#include "eigen_casadi_conversions.h"
 #include "fully_connected_layer.h"
+#include "gcop_conversions.h"
 #include "load_eigen_matrix.h"
 #include "gtest/gtest.h"
 #include <Eigen/Dense>
@@ -53,10 +53,9 @@ TEST(TestFullyConnectedLayer, testTransform) {
           .transpose();
   int N = inputs.cols();
   for (int i = 0; i < N; ++i) {
-    args[0] = eigen_casadi_conversions::convertEigenToDM(inputs.col(i));
+    args[0] = conversions::convertEigenToDM(inputs.col(i));
     auto out_args = f(args);
-    Eigen::VectorXd cs_out =
-        eigen_casadi_conversions::convertDMToEigen(out_args.at(0));
+    Eigen::VectorXd cs_out = conversions::convertDMToEigen(out_args.at(0));
     Eigen::VectorXd tf_out = outputs.col(i);
     ASSERT_EQ(cs_out.rows(), tf_out.rows());
     int Nr = cs_out.rows();

@@ -4,7 +4,7 @@
 #include <casadi/casadi.hpp>
 
 namespace gcop {
-namespace eigen_casadi_conversions {
+namespace conversions {
 namespace cs = casadi;
 /**
  * @brief convertDMToEigen Helper function to convert casadi matrix to Eigen
