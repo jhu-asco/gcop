@@ -1,5 +1,5 @@
 #include "fully_connected_layer.h"
-#include "eigen_casadi_conversions.h"
+#include "gcop_conversions.h"
 #include "load_eigen_matrix.h"
 #include <Eigen/Dense>
 #include <sys/stat.h>
@@ -115,5 +115,5 @@ std::string FullyConnectedLayer::addPrefixToFilePath(std::string scope_name,
 
 casadi::DM FullyConnectedLayer::loadDMFromFile(std::string file_path) {
   Eigen::MatrixXd mat = loadEigenMatrix(file_path);
-  return eigen_casadi_conversions::convertEigenToDM(mat);
+  return conversions::convertEigenToDM(mat);
 }

@@ -1,12 +1,14 @@
-#include "eigen_casadi_conversions.h"
+#include "gcop_conversions.h"
 #include <Eigen/Dense>
 #include <casadi/casadi.hpp>
 #include <gtest/gtest.h>
 
+using namespace gcop;
+
 TEST(EigenConversionToDM, Vector3d) {
   Eigen::Vector3d input = Eigen::Vector3d::Zero();
   input(1) = 1.0;
-  casadi::DM output = gcop::eigen_casadi_conversions::convertEigenToDM(input);
+  casadi::DM output = conversions::convertEigenToDM(input);
   std::vector<double> elems = output.get_elements();
   // verify output is same as input
   for (int i = 0; i < 3; ++i) {
@@ -17,7 +19,7 @@ TEST(EigenConversionToDM, Vector3d) {
 TEST(EigenConversionToDM, VectorXd) {
   Eigen::VectorXd input(20);
   input.setRandom();
-  casadi::DM output = gcop::eigen_casadi_conversions::convertEigenToDM(input);
+  casadi::DM output = conversions::convertEigenToDM(input);
   std::vector<double> elems = output.get_elements();
   // verify output is same as input
   for (int i = 0; i < 3; ++i) {
@@ -28,7 +30,7 @@ TEST(EigenConversionToDM, VectorXd) {
 TEST(EigenConversionToDM, Matrix3d) {
   Eigen::Matrix3d input;
   input.setRandom();
-  casadi::DM output = gcop::eigen_casadi_conversions::convertEigenToDM(input);
+  casadi::DM output = conversions::convertEigenToDM(input);
   std::vector<double> elems = output.get_elements();
   auto row_vec = output.get_row();
   int ncols = 3;
@@ -47,7 +49,7 @@ TEST(EigenConversionToDM, MatrixXd) {
   int ncols = 10;
   Eigen::MatrixXd input(nrows, ncols);
   input.setRandom();
-  casadi::DM output = gcop::eigen_casadi_conversions::convertEigenToDM(input);
+  casadi::DM output = conversions::convertEigenToDM(input);
   std::vector<double> elems = output.get_elements();
   auto row_vec = output.get_row();
   for (int col_ind = 0; col_ind < ncols; ++col_ind) {
@@ -61,8 +63,7 @@ TEST(EigenConversionToDM, MatrixXd) {
 
 TEST(DMConversionToEigen, Vector3d) {
   casadi::DM input = casadi::DM::rand(3, 1);
-  Eigen::Vector3d output =
-      gcop::eigen_casadi_conversions::convertDMToEigen(input);
+  Eigen::Vector3d output = conversions::convertDMToEigen(input);
   std::vector<double> elems = input.get_elements();
   // verify output is same as input
   for (int i = 0; i < 3; ++i) {
@@ -74,8 +75,7 @@ TEST(DMConversionToEigen, MatrixXd) {
   int nrows = 12;
   int ncols = 10;
   casadi::DM input = casadi::DM::rand(nrows, ncols);
-  Eigen::MatrixXd output =
-      gcop::eigen_casadi_conversions::convertDMToEigen(input);
+  Eigen::MatrixXd output = conversions::convertDMToEigen(input);
   std::vector<double> elems = input.get_elements();
   auto row_vec = input.get_row();
   for (int col_ind = 0; col_ind < ncols; ++col_ind) {
@@ -99,8 +99,7 @@ TEST(DMConversionToEigen, SparseMatrixXd) {
   for (int i = 0; i < 4; ++i) {
     input.ptr()[i] = 5.0;
   }
-  Eigen::MatrixXd output =
-      gcop::eigen_casadi_conversions::convertDMToEigen(input);
+  Eigen::MatrixXd output = conversions::convertDMToEigen(input);
   std::vector<double> elems = input.get_nonzeros();
   auto row_vec = sinput.get_row();
   auto col_vec = sinput.get_col();

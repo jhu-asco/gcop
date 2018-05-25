@@ -44,10 +44,9 @@ cs::MX QuadCasadiSystem::casadi_step(MX, MX h, MX xa, MX u, MX p) {
 
   // Internal params
   MX kt = p; // thrust gain
-  DM kp_rpy = eigen_casadi_conversions::convertEigenToDM(
-      kp_rpy_); // Proportional gains rpy
-  DM kd_rpy = eigen_casadi_conversions::convertEigenToDM(
-      kd_rpy_); // Derivative gains on rpydot
+  DM kp_rpy = conversions::convertEigenToDM(kp_rpy_); // Proportional gains rpy
+  DM kd_rpy =
+      conversions::convertEigenToDM(kd_rpy_); // Derivative gains on rpydot
   MX g = MX({0, 0, -9.81});
 
   // Constants
