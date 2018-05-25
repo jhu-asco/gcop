@@ -16,9 +16,7 @@ QuadCasadiSystem::QuadCasadiSystem(VectorXd parameters, Vector3d kp_rpy,
 
 QuadCasadiSystem::FeedforwardInputs
 QuadCasadiSystem::computeFeedforwardInputs(States &x_splits, Controls &u_splits,
-                                           MX p) {
-  // Internal params
-  MX kt = p; // thrust gain
+                                           const MX &kt) {
   // Constants
   DM kp_rpy = conversions::convertEigenToDM(kp_rpy_); // Proportional gains rpy
   DM kd_rpy =
@@ -27,8 +25,7 @@ QuadCasadiSystem::computeFeedforwardInputs(States &x_splits, Controls &u_splits,
   // Output
   FeedforwardInputs inputs;
   // Acc input
-  Function body_z_axis_comp = computeBodyZAxes();
-  MX z_axis = body_z_axis_comp(std::vector<MX>{x_splits.rpy}).at(0);
+  MX z_axis = computeBodyZAxes(x_splits.rpy);
   inputs.acc = kt * u_splits.ut * z_axis + g;
   // rpyddot input
   MX e_rpy = (x_splits.rpy_desired - x_splits.rpy);
@@ -38,8 +35,8 @@ QuadCasadiSystem::computeFeedforwardInputs(States &x_splits, Controls &u_splits,
 }
 
 MX QuadCasadiSystem::secondOrderStateUpdate(
-    cs::MX h, States &x_splits, Controls &u_splits,
-    FeedforwardInputs feedforward_inputs) {
+    const MX &h, const States &x_splits, const Controls &u_splits,
+    const FeedforwardInputs &feedforward_inputs) {
   // Translational dynamics
   MX v_next = x_splits.v + h * feedforward_inputs.acc;
   MX p_next = x_splits.p + 0.5 * h * (v_next + x_splits.v);
@@ -52,7 +49,7 @@ MX QuadCasadiSystem::secondOrderStateUpdate(
                                  rpy_desired_next});
 }
 
-QuadCasadiSystem::States QuadCasadiSystem::generateStates(MX x) {
+QuadCasadiSystem::States QuadCasadiSystem::generateStates(const MX &x) {
   // State
   std::vector<MX> x_splits = MX::vertsplit(x, {0, 3, 6, 9, 12, 15});
   States state;
@@ -64,7 +61,7 @@ QuadCasadiSystem::States QuadCasadiSystem::generateStates(MX x) {
   return state;
 }
 
-QuadCasadiSystem::Controls QuadCasadiSystem::generateControls(MX u) {
+QuadCasadiSystem::Controls QuadCasadiSystem::generateControls(const MX &u) {
   // Controls
   // Assuming offset is [o1, o2, o3,..., on] then n-1 vectors
   // are generated of sizes [oi-o(i-1)] starting from oi.
@@ -75,18 +72,18 @@ QuadCasadiSystem::Controls QuadCasadiSystem::generateControls(MX u) {
   return controls;
 }
 
-Function QuadCasadiSystem::computeBodyZAxes() {
-  MX rpy = MX::sym("rpy", 3);
+MX QuadCasadiSystem::computeBodyZAxes(const MX &rpy) {
   MX c_rpy = MX::cos(rpy);
   MX s_rpy = MX::sin(rpy);
   MX temp = c_rpy(0) * s_rpy(1);
   MX z_axis =
       vertcat(temp * c_rpy(2) + s_rpy(0) * s_rpy(2),
               temp * s_rpy(2) - s_rpy(0) * c_rpy(2), c_rpy(0) * c_rpy(1));
-  return Function("compute_body_z_axes", {rpy}, {z_axis});
+  return z_axis;
 }
 
-cs::MX QuadCasadiSystem::casadiStep(MX, MX h, MX xa, MX u, MX p) {
+cs::MX QuadCasadiSystem::casadiStep(const MX &, const MX &h, const MX &xa,
+                                    const MX &u, const MX &p) {
   States x_splits = generateStates(xa);
   Controls u_splits = generateControls(u);
   FeedforwardInputs inputs = computeFeedforwardInputs(x_splits, u_splits, p);

@@ -12,7 +12,7 @@ AerialManipulationFeedforwardSystem::AerialManipulationFeedforwardSystem(
       kp_ja_(kp_ja), kd_ja_(kd_ja), max_joint_velocity_(max_joint_velocity) {}
 
 AerialManipulationFeedforwardSystem::JointStates
-AerialManipulationFeedforwardSystem::generateJointStates(MX x) {
+AerialManipulationFeedforwardSystem::generateJointStates(const MX &x) {
   std::vector<MX> x_splits = MX::vertsplit(x, {0, 2, 4, 6});
   JointStates states;
   states.joint_angles = x_splits.at(0);
@@ -22,8 +22,7 @@ AerialManipulationFeedforwardSystem::generateJointStates(MX x) {
 }
 
 MX AerialManipulationFeedforwardSystem::jointInputs(
-    AerialManipulationFeedforwardSystem::JointStates &joint_states,
-    MX joint_velocities_desired) {
+    const JointStates &joint_states, const MX &joint_velocities_desired) {
   // Gains
   DM kp =
       conversions::convertEigenToDM(kp_ja_); // Proportional gains joint angles
@@ -39,8 +38,8 @@ MX AerialManipulationFeedforwardSystem::jointInputs(
 }
 
 MX AerialManipulationFeedforwardSystem::secondOrderStateUpdate(
-    MX h, AerialManipulationFeedforwardSystem::JointStates &joint_states,
-    MX joint_velocities_desired, MX joint_accelerations) {
+    const MX &h, const JointStates &joint_states,
+    const MX &joint_velocities_desired, const MX &joint_accelerations) {
   MX joint_velocities_next =
       joint_states.joint_velocities + h * joint_accelerations;
   //  Clip joint velocities
@@ -59,8 +58,9 @@ MX AerialManipulationFeedforwardSystem::secondOrderStateUpdate(
                                  joint_angles_desired_next});
 }
 
-MX AerialManipulationFeedforwardSystem::casadiStep(MX t, MX h, MX xa, MX u,
-                                                   MX p) {
+MX AerialManipulationFeedforwardSystem::casadiStep(const MX &t, const MX &h,
+                                                   const MX &xa, const MX &u,
+                                                   const MX &p) {
   // Controls [quad_controls, jad_dot]
   std::vector<MX> u_splits = MX::vertsplit(u, {0, 4, 6});
   MX quad_controls = u_splits.at(0);

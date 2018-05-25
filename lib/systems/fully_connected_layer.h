@@ -63,7 +63,7 @@ public:
    * @param x_in Input vector can be a MX symbol or a DM
    * @return output vector
    */
-  cs::MX transform(cs::MX x_in);
+  cs::MX transform(const cs::MX &x_in);
 
   /**
    * @brief linearTransform
@@ -74,7 +74,8 @@ public:
    * @param biases The biases
    * @return The transformed matrix
    */
-  cs::MX linearTransform(cs::MX x, cs::MX weights, cs::MX biases);
+  cs::MX linearTransform(const cs::MX &x, const cs::MX &weights,
+                         const cs::MX &biases);
 
   /**
    * @brief batchNorm
@@ -88,8 +89,9 @@ public:
    * @param batch_norm_eps A small constant to add to variance
    * @return The batch normalized input
    */
-  cs::MX batchNorm(cs::MX x, cs::MX gamma, cs::MX beta, cs::MX moving_average,
-                   cs::MX moving_variance, double batch_norm_eps);
+  cs::MX batchNorm(const cs::MX &x, const cs::MX &gamma, const cs::MX &beta,
+                   const cs::MX &moving_average, const cs::MX &moving_variance,
+                   const double &batch_norm_eps);
 
   /**
    * @brief activation
@@ -100,7 +102,7 @@ public:
    * Activation enum
    * @return The activated inputs
    */
-  cs::MX activation(cs::MX x_in, Activation activation);
+  cs::MX activation(const cs::MX &x_in, const Activation &activation);
 
   /**
    * @brief loadDMFromFile

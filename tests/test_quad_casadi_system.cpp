@@ -39,7 +39,9 @@ TEST_F(TestQuadCasadiSystem, InitializeCodeGen) {
 }
 
 TEST_F(TestQuadCasadiSystem, TestBodyZAxes) {
-  casadi::Function z_axes_fun = quad_system->computeBodyZAxes();
+  casadi::MX rpy_sym = casadi::MX::sym("rpy", 3);
+  casadi::MX body_z_axis = quad_system->computeBodyZAxes(rpy_sym);
+  casadi::Function z_axes_fun("body_z_axis_comp", {rpy_sym}, {body_z_axis});
   // flat
   casadi::DM rpy = std::vector<double>({0, 0, 1});
   casadi::DM z_axis = z_axes_fun(std::vector<casadi::DM>{rpy}).at(0);

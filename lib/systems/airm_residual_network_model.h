@@ -29,15 +29,17 @@ public:
                            Activation activation = Activation::tanh,
                            bool use_code_generation = false);
 
-  casadi::MX propagateNetwork(casadi::MX input);
+  void propagateNetwork(casadi::MX &input);
 
-  casadi::MX casadiStep(casadi::MX, casadi::MX h, casadi::MX xa, casadi::MX u,
-                        casadi::MX p);
+  casadi::MX casadiStep(const casadi::MX &, const casadi::MX &h,
+                        const casadi::MX &xa, const casadi::MX &u,
+                        const casadi::MX &p);
   std::string casadiStepName();
   void generateResidualInputs(QuadInputs &quad_inputs,
                               casadi::MX &joint_accelerations,
-                              casadi::MX quad_states, casadi::MX joint_states,
-                              casadi::MX controls, casadi::MX p);
+                              const casadi::MX &quad_states,
+                              const casadi::MX &joint_states,
+                              const casadi::MX &controls, const casadi::MX &p);
 };
 }
 

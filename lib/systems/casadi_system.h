@@ -56,8 +56,8 @@ public:
    * @param p Parameter
    * @return Next state
    */
-  virtual cs::MX casadiStep(cs::MX t, cs::MX h, cs::MX xa, cs::MX u,
-                            cs::MX p) = 0;
+  virtual cs::MX casadiStep(const cs::MX &t, const cs::MX &h, const cs::MX &xa,
+                            const cs::MX &u, const cs::MX &p) = 0;
 
   /**
   * @brief The name used to generate the function.

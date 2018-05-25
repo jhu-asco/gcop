@@ -31,37 +31,32 @@ AirmResidualNetworkModel::AirmResidualNetworkModel(
                           false, Activation::none);
 }
 
-MX AirmResidualNetworkModel::propagateNetwork(MX input) {
-  cs::MX temp = input;
+void AirmResidualNetworkModel::propagateNetwork(MX &input) {
   for (auto &layer : nn_layers_) {
-    temp = layer.transform(temp);
+    input = layer.transform(input);
   }
-  return temp;
 }
 
-void AirmResidualNetworkModel::generateResidualInputs(QuadInputs &quad_inputs,
-                                                      MX &joint_accelerations,
-                                                      MX quad_states,
-                                                      MX joint_states,
-                                                      MX controls, MX p) {
+void AirmResidualNetworkModel::generateResidualInputs(
+    QuadInputs &quad_inputs, MX &joint_accelerations, const MX &quad_states,
+    const MX &joint_states, const MX &controls, const MX &p) {
   // Update Feedforward using network
   // ff inputs   + state+kt     + controls
   // 3 + 3 + 2   + 15 + 1 + 6   + 6 = 36
-  MX network_input = vertcat(std::vector<MX>{
+  MX network_vec = vertcat(std::vector<MX>{
       quad_inputs.acc, quad_inputs.rpy_ddot, joint_accelerations, quad_states,
       p, joint_states, controls});
-  MX res_feedforward_input =
-      propagateNetwork(network_input); // split into delta quad feedforward
-                                       // inputs and joint accelerations
+  propagateNetwork(network_vec); // split into delta quad feedforward
+                                 // inputs and joint accelerations
   // Update Feedforward using output from residual network
-  std::vector<MX> res_input_split =
-      MX::vertsplit(res_feedforward_input, {0, 3, 6, 8});
+  std::vector<MX> res_input_split = MX::vertsplit(network_vec, {0, 3, 6, 8});
   quad_inputs.acc = quad_inputs.acc + res_input_split.at(0);
   quad_inputs.rpy_ddot = quad_inputs.rpy_ddot + res_input_split.at(1);
   joint_accelerations = joint_accelerations + res_input_split.at(2);
 }
 
-MX AirmResidualNetworkModel::casadiStep(MX, MX h, MX xa, MX u, MX p) {
+MX AirmResidualNetworkModel::casadiStep(const MX &, const MX &h, const MX &xa,
+                                        const MX &u, const MX &p) {
   // Controls [quad_controls, jad_dot]
   std::vector<MX> u_splits = MX::vertsplit(u, {0, 4, 6});
   QuadControls quad_controls = quad_system_.generateControls(u_splits.at(0));

@@ -17,7 +17,7 @@ FullyConnectedLayer::FullyConnectedLayer(std::string variable_folder_path,
   loadParameters(variable_folder_path, layer_prefix, scope_name);
 }
 
-cs::MX FullyConnectedLayer::transform(casadi::MX x_in) {
+cs::MX FullyConnectedLayer::transform(const casadi::MX &x_in) {
   cs::MX y = linearTransform(x_in, weights_, biases_);
   cs::MX yout = y;
   if (use_batch_normalization_) {
@@ -28,8 +28,9 @@ cs::MX FullyConnectedLayer::transform(casadi::MX x_in) {
   return out;
 }
 
-cs::MX FullyConnectedLayer::linearTransform(cs::MX x, cs::MX weights,
-                                            cs::MX biases) {
+cs::MX FullyConnectedLayer::linearTransform(const cs::MX &x,
+                                            const cs::MX &weights,
+                                            const cs::MX &biases) {
   cs::MX out = cs::MX::mtimes(weights, x);
   if (!use_batch_normalization_) {
     out = out + biases;
@@ -37,10 +38,11 @@ cs::MX FullyConnectedLayer::linearTransform(cs::MX x, cs::MX weights,
   return out;
 }
 
-cs::MX FullyConnectedLayer::batchNorm(cs::MX x, cs::MX gamma, cs::MX beta,
-                                      cs::MX moving_average,
-                                      cs::MX moving_variance,
-                                      double batch_norm_eps) {
+cs::MX FullyConnectedLayer::batchNorm(const cs::MX &x, const cs::MX &gamma,
+                                      const cs::MX &beta,
+                                      const cs::MX &moving_average,
+                                      const cs::MX &moving_variance,
+                                      const double &batch_norm_eps) {
   cs::MX gamma_inv_stdev =
       gamma / (cs::MX::sqrt(moving_variance + batch_norm_eps));
   cs::MX shift = (beta - gamma_inv_stdev * moving_average);
@@ -48,7 +50,8 @@ cs::MX FullyConnectedLayer::batchNorm(cs::MX x, cs::MX gamma, cs::MX beta,
   return scaled_y;
 }
 
-cs::MX FullyConnectedLayer::activation(casadi::MX x_in, Activation activation) {
+cs::MX FullyConnectedLayer::activation(const casadi::MX &x_in,
+                                       const Activation &activation) {
   cs::MX out;
   switch (activation) {
   case Activation::none:

@@ -50,16 +50,18 @@ public:
    * @param p  The parameters are the quad parameters i.e thrust gain
    * @return The next state
    */
-  cs::MX casadiStep(cs::MX t, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
+  cs::MX casadiStep(const cs::MX &t, const cs::MX &h, const cs::MX &xa,
+                    const cs::MX &u, const cs::MX &p);
 
-  JointStates generateJointStates(cs::MX x);
+  JointStates generateJointStates(const cs::MX &x);
 
-  cs::MX jointInputs(JointStates &joint_states,
-                     cs::MX joint_velocities_desired);
+  cs::MX jointInputs(const JointStates &joint_states,
+                     const cs::MX &joint_velocities_desired);
 
-  cs::MX secondOrderStateUpdate(cs::MX h, JointStates &joint_states,
-                                cs::MX joint_velocities_desired,
-                                cs::MX joint_accelerations);
+  cs::MX secondOrderStateUpdate(const cs::MX &h,
+                                const JointStates &joint_states,
+                                const cs::MX &joint_velocities_desired,
+                                const cs::MX &joint_accelerations);
 
   /**
    * @brief casadiStepName

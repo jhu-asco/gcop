@@ -44,14 +44,16 @@ public:
                    bool use_code_generation = false);
 
   FeedforwardInputs computeFeedforwardInputs(States &x_splits,
-                                             Controls &u_splits, cs::MX p);
+                                             Controls &u_splits,
+                                             const cs::MX &kt);
 
-  cs::MX secondOrderStateUpdate(cs::MX h, States &x_splits, Controls &u_splits,
-                                FeedforwardInputs feedforward_inputs);
+  cs::MX secondOrderStateUpdate(const cs::MX &h, const States &x_splits,
+                                const Controls &u_splits,
+                                const FeedforwardInputs &feedforward_inputs);
 
-  States generateStates(cs::MX x);
+  States generateStates(const cs::MX &x);
 
-  Controls generateControls(cs::MX u);
+  Controls generateControls(const cs::MX &u);
 
   /**
    * @brief casadi_step
@@ -62,7 +64,8 @@ public:
    * @param p Parameter
    * @return Next state
    */
-  cs::MX casadiStep(cs::MX, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
+  cs::MX casadiStep(const cs::MX &, const cs::MX &h, const cs::MX &xa,
+                    const cs::MX &u, const cs::MX &p);
 
   /**
   * @brief The name the step function
@@ -75,7 +78,7 @@ public:
    * roll pitch and yaw of the system
    * @return A function to compute body z axis given rpy of the system
    */
-  cs::Function computeBodyZAxes();
+  cs::MX computeBodyZAxes(const cs::MX &rpy);
 
 private:
   Rn<> state_manifold_; ///< The dynamic state manifold
