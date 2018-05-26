@@ -14,11 +14,14 @@ protected:
     kd_rpy << 8, 6, 3.5;
     kp_ja << 11, 11;
     kd_ja << 5, 10;
+    double max_joint_vel = 0.7;
+    int n_layers = 3;
+
     std::string folder_path =
         (std::string(DATA_PATH) + "/tensorflow_model_vars/");
     airm_model.reset(new AirmResidualNetworkModel(
-        parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, 0.7, 3, folder_path,
-        Activation::tanh, true));
+        parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, max_joint_vel, n_layers,
+        folder_path, Activation::tanh, true));
     airm_model->instantiateStepFunction();
   }
   template <class T> void assertVector(casadi::DM input, T expected_value) {
