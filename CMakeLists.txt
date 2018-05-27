@@ -54,6 +54,19 @@ if (OPENMP_FOUND)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 endif()
 
+enable_testing()
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+find_package(casadi)
+
+if (casadi_FOUND)
+  message("Found CASADI")
+  include_directories(${CASADI_INCLUDE_DIRS})
+  link_directories( ${CASADI_LIBRARY_DIRS})
+  set(SYS_LIBS ${SYS_LIBS} ${CASADI_LIBRARIES})
+endif()
+
 # Check 32 bit vs 64 bit for setting Eigen Flags
 if(NOT (CMAKE_SIZEOF_VOID_P EQUAL 8) )
   message("Detected 32 bit system!.\n\t Enabling Eigen don't align flag!")
@@ -167,6 +180,7 @@ include_directories(
 
 add_subdirectory (lib) 
 add_subdirectory (bin)
+add_subdirectory (tests)
 #add_subdirectory (docs)
 
 #SET(CPACK_PACKAGE_EXECUTABLES test "An Example Trajectory Planner")

@@ -79,6 +79,20 @@ set(headers
     gcar.h
 )
 
+if (casadi_FOUND)
+  set(headers ${headers}
+      gcop_conversions.h
+      fully_connected_layer.h
+      casadi_system.h
+      quad_casadi_system.h
+      )
+   set(sources ${sources}
+       quad_casadi_system.cpp
+       fully_connected_layer.cpp
+       gcop_conversions.cpp
+      )
+endif()
+
 add_subdirectory (manifolds)
 add_subdirectory (costs)
 add_subdirectory (parametrization)

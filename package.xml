@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>gcop</name>
+  <version>1.0.0</version>
+  <description>Geometric Controls Optimization and Planning (GCOP) package</description>
+
+  <maintainer email="ggarime1@jhu.edu">Gowtham Garimella</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>cmake</buildtool_depend>
+</package>
