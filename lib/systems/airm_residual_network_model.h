@@ -29,7 +29,7 @@ public:
                            Activation activation = Activation::tanh,
                            bool use_code_generation = false);
 
-  void propagateNetwork(casadi::MX &input);
+  casadi::MX propagateNetwork(casadi::MX &input);
 
   casadi::MX casadiStep(const casadi::MX &, const casadi::MX &h,
                         const casadi::MX &xa, const casadi::MX &u,

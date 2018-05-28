@@ -77,8 +77,8 @@ public:
     cs::MX t = cs::MX::sym("t", 1);
     cs::MX h = cs::MX::sym("h", 1);
     cs::MX xa = cs::MX::sym("xa", this->X.n);
-    cs::MX u = cs::MX::sym("xa", this->U.n);
-    cs::MX p = cs::MX::sym("xa", this->np);
+    cs::MX u = cs::MX::sym("u", this->U.n);
+    cs::MX p = cs::MX::sym("p", this->np);
     cs::MX xb = casadiStep(t, h, xa, u, p);
     std::vector<cs::MX> args_out;
     args_out.push_back(xb); // xb

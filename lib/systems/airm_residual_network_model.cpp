@@ -16,11 +16,12 @@ AirmResidualNetworkModel::AirmResidualNetworkModel(
                                         kd_ja, max_joint_velocity, false),
       quad_system_(parameters, kp_rpy, kd_rpy, false) {
   std::cout << "Loading layers..." << std::endl;
-  if (n_layers <= 1) {
-    throw std::runtime_error("The number of layers should be greater than 1.\n "
-                             "The last layer corresponds to linear transform "
-                             "without any activation function/batch "
-                             "normalization");
+  if (n_layers < 1) {
+    throw std::runtime_error(
+        "The number of layers should be greater than equal to 1.\n "
+        "The last layer corresponds to linear transform "
+        "without any activation function/batch "
+        "normalization");
   }
   for (int i = 0; i < n_layers - 1; ++i) {
     std::cout << "Loading layer: " << i << std::endl;
@@ -31,10 +32,12 @@ AirmResidualNetworkModel::AirmResidualNetworkModel(
                           false, Activation::none);
 }
 
-void AirmResidualNetworkModel::propagateNetwork(MX &input) {
+MX AirmResidualNetworkModel::propagateNetwork(MX &input) {
+  MX output = input;
   for (auto &layer : nn_layers_) {
-    input = layer.transform(input);
+    output = layer.transform(output);
   }
+  return output;
 }
 
 void AirmResidualNetworkModel::generateResidualInputs(
@@ -46,10 +49,11 @@ void AirmResidualNetworkModel::generateResidualInputs(
   MX network_vec = vertcat(std::vector<MX>{
       quad_inputs.acc, quad_inputs.rpy_ddot, joint_accelerations, quad_states,
       p, joint_states, controls});
-  propagateNetwork(network_vec); // split into delta quad feedforward
-                                 // inputs and joint accelerations
+  MX res_vec =
+      propagateNetwork(network_vec); // split into delta quad feedforward
+                                     // inputs and joint accelerations
   // Update Feedforward using output from residual network
-  std::vector<MX> res_input_split = MX::vertsplit(network_vec, {0, 3, 6, 8});
+  std::vector<MX> res_input_split = MX::vertsplit(res_vec, {0, 3, 6, 8});
   quad_inputs.acc = quad_inputs.acc + res_input_split.at(0);
   quad_inputs.rpy_ddot = quad_inputs.rpy_ddot + res_input_split.at(1);
   joint_accelerations = joint_accelerations + res_input_split.at(2);
