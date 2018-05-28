@@ -195,7 +195,17 @@ private:
   bool use_code_generation_;
 
 public:
+  /**
+   * @brief copy_loop_timer_
+   *
+   * Timer to find the time taken in copying inputs to outputs
+   */
   LoopTimer copy_loop_timer_;
+  /**
+   * @brief fun_loop_timer_
+   *
+   * Timer that evaluates the time taken in function evaluation
+   */
   LoopTimer fun_loop_timer_;
 };
 }
