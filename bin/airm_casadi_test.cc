@@ -1,6 +1,7 @@
 #include "aerial_manipulation_feedforward_system.h"
 #include "airm_residual_network_model.h"
 #include "ddp.h"
+#include "load_eigen_matrix.h"
 #include "loop_timer.h"
 #include "lqcost.h"
 #include <Eigen/Dense>
@@ -22,17 +23,17 @@ typedef Ddp<VectorXd> AirmDdp;
 
 void solver_process() {
 
-  int N = 100;   // number of segments
-  double tf = 2; // time horizon
+  int N = 50;    // number of segments
+  double tf = 1; // time horizon
 
   int iters = 50;
   bool use_code_generation = true;
 
   double h = tf / N;                     // time step
   Eigen::VectorXd dynamic_parameters(1); // kt
-  dynamic_parameters << 0.18;
+  dynamic_parameters << 0.15;
   Eigen::Vector3d kp_rpy;
-  kp_rpy << 10, 10, 10;
+  kp_rpy << 10, 10, 0;
   Eigen::Vector3d kd_rpy;
   kd_rpy << 5, 5, 2;
   Eigen::Vector2d kp_ja;
@@ -41,8 +42,15 @@ void solver_process() {
   kd_rpy << 5, 5;
 #ifdef USE_NN_MODEL
   std::string folder_path =
-      (std::string(DATA_PATH) + "/tensorflow_model_vars/");
-  double max_joint_vel = 0.8;
+      (std::string(DATA_PATH) + "/tensorflow_model_vars_16_8_tanh/");
+  Eigen::VectorXd kp_rp = loadEigenMatrix(folder_path + "/rpy_gains_kp_0");
+  kp_rpy[0] = kp_rp[0];
+  kp_rpy[1] = kp_rp[1];
+  kp_rpy[2] = 0;
+  kd_rpy = loadEigenMatrix(folder_path + "/rpy_gains_kd_0");
+  kp_ja = loadEigenMatrix(folder_path + "/joint_gains_kp_0");
+  kd_ja = loadEigenMatrix(folder_path + "/joint_gains_kd_0");
+  double max_joint_vel = 0.7;
   int n_layers = 3;
   AirmResidualNetworkModel sys(dynamic_parameters, kp_rpy, kd_rpy, kp_ja, kd_ja,
                                max_joint_vel, n_layers, folder_path,
