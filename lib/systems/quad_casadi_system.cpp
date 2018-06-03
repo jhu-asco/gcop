@@ -15,8 +15,8 @@ QuadCasadiSystem::QuadCasadiSystem(VectorXd parameters, Vector3d kp_rpy,
 }
 
 QuadCasadiSystem::FeedforwardInputs
-QuadCasadiSystem::computeFeedforwardInputs(States &x_splits, Controls &u_splits,
-                                           const MX &kt) {
+QuadCasadiSystem::computeFeedforwardInputs(States &x_splits,
+                                           Controls &u_splits) {
   // Constants
   DM kp_rpy = conversions::convertEigenToDM(kp_rpy_); // Proportional gains rpy
   DM kd_rpy =
@@ -26,7 +26,8 @@ QuadCasadiSystem::computeFeedforwardInputs(States &x_splits, Controls &u_splits,
   FeedforwardInputs inputs;
   // Acc input
   MX z_axis = computeBodyZAxes(x_splits.rpy);
-  inputs.acc = kt * u_splits.ut * z_axis + g;
+  // inputs.acc = kt * u_splits.ut * z_axis + g;
+  inputs.acc = 9.81 * u_splits.ut * z_axis + g;
   // rpyddot input
   MX e_rpy = (x_splits.rpy_desired - x_splits.rpy);
   MX e_rpy_dot = (u_splits.rpy_dot_desired - x_splits.rpy_dot);
@@ -86,7 +87,7 @@ cs::MX QuadCasadiSystem::casadiStep(const MX &, const MX &h, const MX &xa,
                                     const MX &u, const MX &p) {
   States x_splits = generateStates(xa);
   Controls u_splits = generateControls(u);
-  FeedforwardInputs inputs = computeFeedforwardInputs(x_splits, u_splits, p);
+  FeedforwardInputs inputs = computeFeedforwardInputs(x_splits, u_splits);
   cs::MX xb = secondOrderStateUpdate(h, x_splits, u_splits, inputs);
   return xb;
 }

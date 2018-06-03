@@ -92,15 +92,18 @@ public:
     std::string step_name = casadiStepName();
     step_function_ = cs::Function(step_name.c_str(), {t, h, xa, u, p}, args_out);
     if (use_code_generation_) {
+      std::cout << "Generating code" << std::endl;
       string function_name = step_function_.name();
       step_function_.generate(function_name);
       string compile_command = ("gcc -fPIC -shared -O3 " + function_name +
                                 ".c -o " + function_name + ".so");
       int flag = std::system(compile_command.c_str());
       casadi_assert(flag == 0, "Compilation failed");
+      std::cout << "Creating external function" << std::endl;
       step_function_ = cs::external(function_name);
     }
     step_function_instantiated_ = true;
+    std::cout << "Done instantiating function" << std::endl;
   }
 
   /**

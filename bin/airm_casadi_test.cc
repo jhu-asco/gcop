@@ -37,9 +37,9 @@ void solver_process() {
   Eigen::Vector3d kd_rpy;
   kd_rpy << 5, 5, 2;
   Eigen::Vector2d kp_ja;
-  kd_rpy << 10, 10;
+  kp_ja << 10, 10;
   Eigen::Vector2d kd_ja;
-  kd_rpy << 5, 5;
+  kd_ja << 5, 5;
 #ifdef USE_NN_MODEL
   std::string folder_path =
       (std::string(DATA_PATH) + "/tensorflow_model_vars_16_8_tanh/");
@@ -88,7 +88,7 @@ void solver_process() {
   cost.Qf = Qf.asDiagonal();
 
   VectorXd R(6);
-  R << 1e-4, 0.1, 0.1, 0.1, 0.1, 0.1;
+  R << 1, 0.1, 0.1, 0.1, 0.1, 0.1;
   cost.R = R.asDiagonal();
 
   LoopTimer loop_timer;
@@ -107,7 +107,7 @@ void solver_process() {
   vector<VectorXd> us(N);
   for (int i = 0; i < N; ++i) {
     us[i].resize(6);
-    us[i] << 9.81 / 0.16, 0, 0, 0, 0, 0;
+    us[i] << 1.0, 0, 0, 0, 0, 0;
   }
 
   AirmDdp ddp(sys, cost, ts, xs, us);

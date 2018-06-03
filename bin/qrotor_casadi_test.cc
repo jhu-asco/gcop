@@ -68,7 +68,7 @@ void solver_process() {
   vector<VectorXd> us(N);
   for (int i = 0; i < N; ++i) {
     us[i].resize(4);
-    us[i] << 9.81 / 0.16, 0, 0, 0;
+    us[i] << 1.0, 0, 0, 0;
   }
 
   QRotorDdp ddp(sys, cost, ts, xs, us);

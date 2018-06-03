@@ -62,7 +62,8 @@ TEST_F(TestAerialManipulationFeedforwardSystem, TestAgainstTensorflow) {
       xa[i - 1] = extended_state[i];
     }
   }
-  parameters[0] = extended_state[15];
+  double kt = extended_state[15];
+  parameters[0] = kt;
   Eigen::VectorXd kp_rp = loadEigenMatrix(folder_path + "/rpy_gains_kp_0");
   kp_rpy[0] = kp_rp[0];
   kp_rpy[1] = kp_rp[1];
@@ -95,7 +96,8 @@ TEST_F(TestAerialManipulationFeedforwardSystem, TestAgainstTensorflow) {
     Eigen::Vector2d jad_curr(u1[4], u1[5]);
     Eigen::Vector2d jad_dot = (jad_curr - jad_prev) / 0.02;
     jad_prev = jad_curr;
-    u << u1[3], rpyd_dot[0], rpyd_dot[1], rpyd_dot[2], jad_dot[0], jad_dot[1];
+    u << (u1[3] * kt / 9.81), rpyd_dot[0], rpyd_dot[1], rpyd_dot[2], jad_dot[0],
+        jad_dot[1];
     airm_system->Step(xb, 0, xa, u, h);
     Eigen::VectorXd predicted_sens = model_predictions.row(i);
     Eigen::VectorXd measured_sens(8);
@@ -117,7 +119,7 @@ TEST_F(TestAerialManipulationFeedforwardSystem, TestStep) {
   Eigen::VectorXd xb(21);
   Eigen::VectorXd u(6);
   Eigen::MatrixXd A, B;
-  u << 9.81 / 0.16, 0, 0, 0.1, 0, 0;
+  u << 1, 0, 0, 0.1, 0, 0;
   double h = 0.01;
   int N = 3.0 / h; // tf/h
   auto t0 = std::chrono::high_resolution_clock::now();

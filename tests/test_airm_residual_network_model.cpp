@@ -69,8 +69,9 @@ protected:
         xa[i - 1] = extended_state[i];
       }
     }
-    parameters[0] = extended_state[15];
-    std::cout << "kt: " << parameters[0] << std::endl;
+    double kt = extended_state[15];
+    parameters[0] = kt;
+    std::cout << "kt: " << kt << std::endl;
     Eigen::VectorXd kp_rp = loadEigenMatrix(folder_path + "/rpy_gains_kp_0");
     kp_rpy[0] = kp_rp[0];
     kp_rpy[1] = kp_rp[1];
@@ -105,7 +106,10 @@ protected:
       Eigen::Vector2d jad_curr(u1[4], u1[5]);
       Eigen::Vector2d jad_dot = (jad_curr - jad_prev) / 0.02;
       jad_prev = jad_curr;
-      u << u1[3], rpyd_dot[0], rpyd_dot[1], rpyd_dot[2], jad_dot[0], jad_dot[1];
+      u << (u1[3] * kt / 9.81), rpyd_dot[0], rpyd_dot[1], rpyd_dot[2],
+          jad_dot[0], jad_dot[1];
+      // u << u1[3], rpyd_dot[0], rpyd_dot[1], rpyd_dot[2], jad_dot[0],
+      // jad_dot[1];
       airm_model->Step(xb, 0, xa, u, h);
       // Verify xb is the same as prediction
       Eigen::VectorXd predicted_sens = model_predictions.row(i);
@@ -128,7 +132,7 @@ TEST_F(TestAirmResidualNetworkModel, TestStep) {
   Eigen::VectorXd xb(21);
   Eigen::VectorXd u(6);
   Eigen::MatrixXd A, B;
-  u << 9.81 / 0.18, 0, 0, 0.1, 0, 0;
+  u << 1, 0, 0, 0.1, 0, 0;
   double h = 0.02;
   int N = 3.0 / h; // tf/h
   LoopTimer overall_loop_timer;

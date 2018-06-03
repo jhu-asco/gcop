@@ -44,8 +44,7 @@ public:
                    bool use_code_generation = false);
 
   FeedforwardInputs computeFeedforwardInputs(States &x_splits,
-                                             Controls &u_splits,
-                                             const cs::MX &kt);
+                                             Controls &u_splits);
 
   cs::MX secondOrderStateUpdate(const cs::MX &h, const States &x_splits,
                                 const Controls &u_splits,

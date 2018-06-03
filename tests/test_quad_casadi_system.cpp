@@ -66,7 +66,7 @@ TEST_F(TestQuadCasadiSystem, TestStep) {
   Eigen::VectorXd xb(15);
   Eigen::VectorXd u(4);
   Eigen::MatrixXd A, B;
-  u << 9.81 / 0.16, 0, 0, 0.1;
+  u << 1, 0, 0, 0.1;
   double h = 0.01;
   int N = 3.0 / h; // tf/h
   auto t0 = std::chrono::high_resolution_clock::now();

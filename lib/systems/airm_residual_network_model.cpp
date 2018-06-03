@@ -28,8 +28,10 @@ AirmResidualNetworkModel::AirmResidualNetworkModel(
     nn_layers_.emplace_back(nn_weights_folder_path, "residual_dynamics",
                             std::to_string(i), true, activation);
   }
+  std::cout << "Loading final layer" << std::endl;
   nn_layers_.emplace_back(nn_weights_folder_path, "residual_dynamics", "final",
                           false, Activation::none);
+  std::cout << "Done loading layers" << std::endl;
 }
 
 MX AirmResidualNetworkModel::propagateNetwork(MX &input) {
@@ -42,13 +44,16 @@ MX AirmResidualNetworkModel::propagateNetwork(MX &input) {
 
 void AirmResidualNetworkModel::generateResidualInputs(
     QuadInputs &quad_inputs, MX &joint_accelerations, const MX &quad_states,
-    const MX &joint_states, const MX &controls, const MX &p) {
+    const MX &joint_states, const QuadControls &quad_controls,
+    const MX &joint_desired_velocities, const MX &p) {
   // Update Feedforward using network
   // ff inputs   + state+kt     + controls
   // 3 + 3 + 2   + 15 + 1 + 6   + 6 = 36
+  MX ut_updated = (quad_controls.ut * 9.81) / p;
   MX network_vec = vertcat(std::vector<MX>{
       quad_inputs.acc, quad_inputs.rpy_ddot, joint_accelerations, quad_states,
-      p, joint_states, controls});
+      p, joint_states, ut_updated, quad_controls.rpy_dot_desired,
+      joint_desired_velocities});
   MX res_vec =
       propagateNetwork(network_vec); // split into delta quad feedforward
                                      // inputs and joint accelerations
@@ -73,10 +78,11 @@ MX AirmResidualNetworkModel::casadiStep(const MX &, const MX &h, const MX &xa,
   MX joint_accelerations =
       airm_system_.jointInputs(joint_states, joint_velocities_desired);
   QuadInputs quad_feedforward_inputs =
-      quad_system_.computeFeedforwardInputs(quad_states, quad_controls, p);
+      quad_system_.computeFeedforwardInputs(quad_states, quad_controls);
 
   generateResidualInputs(quad_feedforward_inputs, joint_accelerations,
-                         x_splits.at(0), x_splits.at(1), u, p);
+                         x_splits.at(0), x_splits.at(1), quad_controls,
+                         joint_velocities_desired, p);
   // Integrate
   MX quad_xb = quad_system_.secondOrderStateUpdate(
       h, quad_states, quad_controls, quad_feedforward_inputs);

@@ -100,7 +100,9 @@ public:
                               casadi::MX &joint_accelerations,
                               const casadi::MX &quad_states,
                               const casadi::MX &joint_states,
-                              const casadi::MX &controls, const casadi::MX &p);
+                              const QuadControls &quad_controls,
+                              const casadi::MX &joint_desired_velocities,
+                              const casadi::MX &p);
 };
 }
 
