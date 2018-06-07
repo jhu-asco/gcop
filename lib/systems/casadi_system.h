@@ -95,7 +95,7 @@ public:
       std::cout << "Generating code" << std::endl;
       string function_name = step_function_.name();
       step_function_.generate(function_name);
-      string compile_command = ("gcc -fPIC -shared -O3 " + function_name +
+      string compile_command = ("gcc -fPIC -shared -O3 -march=corei7 " + function_name +
                                 ".c -o " + function_name + ".so");
       int flag = std::system(compile_command.c_str());
       casadi_assert(flag == 0, "Compilation failed");
