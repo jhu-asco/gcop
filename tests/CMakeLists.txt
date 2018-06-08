@@ -1,7 +1,7 @@
 link_directories(${GCOP_BINARY_DIR}/lib) 
 # Use these dependency libs when linking with gcop
 # EST_LIBS VIEWER_LIBS SYS_LIBS  UTIL_LIBS  ALGO_LIBS ALL_LIBS
-message(${SYS_LIBS})
+message("SYS_LIBS: ${SYS_LIBS}")
 if (BUILD_TESTS)
   add_executable(test_load_eigen_matrix test_load_eigen_matrix.cpp)
   target_compile_definitions(test_load_eigen_matrix PUBLIC DATA_PATH="${CMAKE_SOURCE_DIR}/data")
