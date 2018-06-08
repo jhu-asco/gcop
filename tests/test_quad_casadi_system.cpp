@@ -14,7 +14,11 @@ protected:
     parameters << 0.16;
     kp_rpy<< 10, 10, 0;
     kd_rpy<< 5, 5, 2;
-    quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy));
+    ub.resize(4);
+    lb.resize(4);
+    ub << 1.2, 0.3, 0.3, 0.3;
+    lb = -ub;
+    quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, lb, ub));
     quad_system->instantiateStepFunction();
   }
   template <class T> void assertVector(casadi::DM input, T expected_value) {
@@ -29,12 +33,15 @@ protected:
   Eigen::VectorXd parameters;
   Eigen::Vector3d kp_rpy;
   Eigen::Vector3d kd_rpy;
+  Eigen::VectorXd lb;
+  Eigen::VectorXd ub;
 };
 
 TEST_F(TestQuadCasadiSystem, Initialize) {}
 
 TEST_F(TestQuadCasadiSystem, InitializeCodeGen) {
-  quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, true));
+  quad_system.reset(
+      new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, lb, ub, true));
   quad_system->instantiateStepFunction();
 }
 
@@ -58,7 +65,8 @@ TEST_F(TestQuadCasadiSystem, TestBodyZAxes) {
 
 TEST_F(TestQuadCasadiSystem, TestStep) {
   // Use code generation
-  quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, true));
+  quad_system.reset(
+      new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, lb, ub, true));
   quad_system->instantiateStepFunction();
   Eigen::VectorXd xa(15);
   // p,                rpy,         v,         rpydot,     rpyd

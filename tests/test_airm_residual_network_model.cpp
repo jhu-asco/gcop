@@ -16,6 +16,9 @@ protected:
     kd_rpy << 8, 6, 3.5;
     kp_ja << 11, 11;
     kd_ja << 5, 10;
+    ub.resize(6);
+    ub << 1.2, 0.3, 0.3, 0.3, 0.7, 0.7;
+    lb = -ub;
     double max_joint_vel = 0.7;
     int n_layers = 3;
 
@@ -23,7 +26,7 @@ protected:
         (std::string(DATA_PATH) + "/tensorflow_model_vars_16_8_tanh/");
     airm_model.reset(new AirmResidualNetworkModel(
         parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, max_joint_vel, n_layers,
-        folder_path, Activation::tanh, false));
+        folder_path, lb, ub, Activation::tanh, false));
     airm_model->instantiateStepFunction();
   }
   template <class T>
@@ -41,6 +44,8 @@ protected:
   Eigen::Vector3d kd_rpy;
   Eigen::Vector2d kp_ja;
   Eigen::Vector2d kd_ja;
+  Eigen::VectorXd lb;
+  Eigen::VectorXd ub;
 
   void testTrajectory(Activation activation) {
     // Get parameters states, controls, predicted values
@@ -84,7 +89,7 @@ protected:
     int n_layers = 3;
     airm_model.reset(new AirmResidualNetworkModel(
         parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, max_joint_vel, n_layers,
-        folder_path, activation, false));
+        folder_path, lb, ub, activation, false));
     airm_model->instantiateStepFunction();
     // Load model data
     Eigen::MatrixXd model_predictions = loadEigenMatrix(

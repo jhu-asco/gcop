@@ -41,7 +41,7 @@ public:
    * function.
    */
   QuadCasadiSystem(VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy,
-                   bool use_code_generation = false);
+                   VectorXd lb, VectorXd ub, bool use_code_generation = false);
 
   FeedforwardInputs computeFeedforwardInputs(States &x_splits,
                                              Controls &u_splits);

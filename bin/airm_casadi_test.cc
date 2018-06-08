@@ -40,6 +40,9 @@ void solver_process() {
   kp_ja << 10, 10;
   Eigen::Vector2d kd_ja;
   kd_ja << 5, 5;
+  Eigen::VectorXd ub(6);
+  ub << 1.2, 0.3, 0.3, 0.3, 0.7, 0.7;
+  Eigen::VectorXd lb = -ub;
 #ifdef USE_NN_MODEL
   std::string folder_path =
       (std::string(DATA_PATH) + "/tensorflow_model_vars_16_8_tanh/");
@@ -53,11 +56,11 @@ void solver_process() {
   double max_joint_vel = 0.7;
   int n_layers = 3;
   AirmResidualNetworkModel sys(dynamic_parameters, kp_rpy, kd_rpy, kp_ja, kd_ja,
-                               max_joint_vel, n_layers, folder_path,
+                               max_joint_vel, n_layers, folder_path, lb, ub,
                                Activation::tanh, use_code_generation);
 #else
   AerialManipulationFeedforwardSystem sys(dynamic_parameters, kp_rpy, kd_rpy,
-                                          kp_ja, kd_ja, 0.7,
+                                          kp_ja, kd_ja, 0.7, lb, ub,
                                           use_code_generation);
 #endif
 

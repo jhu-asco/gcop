@@ -25,8 +25,12 @@ void solver_process() {
   kp_rpy<<10, 10, 10;
   Eigen::Vector3d kd_rpy;
   kd_rpy<<5, 5, 2;
+  Eigen::VectorXd ub(4);
+  ub << 1.2, 0.3, 0.3, 0.3;
+  Eigen::VectorXd lb;
+  lb = -ub;
 
-  QuadCasadiSystem sys(sys_params, kp_rpy, kd_rpy, use_code_generation);
+  QuadCasadiSystem sys(sys_params, kp_rpy, kd_rpy, lb, ub, use_code_generation);
   sys.instantiateStepFunction();
 
   // initial state

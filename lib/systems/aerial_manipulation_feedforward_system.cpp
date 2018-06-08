@@ -5,11 +5,19 @@ using namespace casadi;
 
 AerialManipulationFeedforwardSystem::AerialManipulationFeedforwardSystem(
     VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy, Vector2d kp_ja,
-    Vector2d kd_ja, double max_joint_velocity, bool use_code_generation)
+    Vector2d kd_ja, double max_joint_velocity, VectorXd lb, VectorXd ub,
+    bool use_code_generation)
     : CasadiSystem<>(state_manifold_, parameters, 6, 1, true, false,
                      use_code_generation),
-      quad_system_(parameters, kp_rpy, kd_rpy, false), state_manifold_(21),
-      kp_ja_(kp_ja), kd_ja_(kd_ja), max_joint_velocity_(max_joint_velocity) {}
+      quad_system_(parameters, kp_rpy, kd_rpy, lb.segment<4>(0),
+                   ub.segment<4>(0), false),
+      state_manifold_(21), kp_ja_(kp_ja), kd_ja_(kd_ja),
+      max_joint_velocity_(max_joint_velocity) {
+  // Set control bounds
+  (this->U).lb = lb;
+  (this->U).ub = ub;
+  (this->U).bnd = true;
+}
 
 AerialManipulationFeedforwardSystem::JointStates
 AerialManipulationFeedforwardSystem::generateJointStates(const MX &x) {

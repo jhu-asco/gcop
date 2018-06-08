@@ -8,13 +8,15 @@ using namespace casadi;
 AirmResidualNetworkModel::AirmResidualNetworkModel(
     VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy, Vector2d kp_ja,
     Vector2d kd_ja, double max_joint_velocity, int n_layers,
-    std::string nn_weights_folder_path, gcop::Activation activation,
-    bool use_code_generation)
+    std::string nn_weights_folder_path, VectorXd lb, VectorXd ub,
+    gcop::Activation activation, bool use_code_generation)
     : CasadiSystem<>(state_manifold_, parameters, 6, 1, true, false,
                      use_code_generation),
-      state_manifold_(21), airm_system_(parameters, kp_rpy, kd_rpy, kp_ja,
-                                        kd_ja, max_joint_velocity, false),
-      quad_system_(parameters, kp_rpy, kd_rpy, false) {
+      state_manifold_(21),
+      airm_system_(parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, max_joint_velocity,
+                   lb, ub, false),
+      quad_system_(parameters, kp_rpy, kd_rpy, lb.segment<6>(0),
+                   ub.segment<6>(0), false) {
   std::cout << "Loading layers..." << std::endl;
   if (n_layers < 1) {
     throw std::runtime_error(
@@ -32,6 +34,11 @@ AirmResidualNetworkModel::AirmResidualNetworkModel(
   nn_layers_.emplace_back(nn_weights_folder_path, "residual_dynamics", "final",
                           false, Activation::none);
   std::cout << "Done loading layers" << std::endl;
+  std::cout << "Setting control bounds" << std::endl;
+  // Set control bounds
+  (this->U).lb = lb;
+  (this->U).ub = ub;
+  (this->U).bnd = true;
 }
 
 MX AirmResidualNetworkModel::propagateNetwork(MX &input) {

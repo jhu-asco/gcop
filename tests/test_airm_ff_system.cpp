@@ -17,8 +17,11 @@ protected:
     kd_rpy<< 5, 5, 2;
     kp_ja<<10, 15;
     kd_ja<<5, 10;
+    ub.resize(6);
+    ub << 1.2, 0.3, 0.3, 0.3, 0.7, 0.7;
+    lb = -ub;
     airm_system.reset(new AerialManipulationFeedforwardSystem(
-        parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, 0.7));
+        parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, 0.7, lb, ub));
     airm_system->instantiateStepFunction();
   }
   template <class T> void assertVector(casadi::DM input, T expected_value) {
@@ -35,13 +38,15 @@ protected:
   Eigen::Vector3d kd_rpy;
   Eigen::Vector2d kp_ja;
   Eigen::Vector2d kd_ja;
+  Eigen::VectorXd lb;
+  Eigen::VectorXd ub;
 };
 
 TEST_F(TestAerialManipulationFeedforwardSystem, Initialize) {}
 
 TEST_F(TestAerialManipulationFeedforwardSystem, InitializeCodeGen) {
   airm_system.reset(new AerialManipulationFeedforwardSystem(
-      parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, true));
+      parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, 0.7, lb, ub, true));
   airm_system->instantiateStepFunction();
 }
 
@@ -74,7 +79,7 @@ TEST_F(TestAerialManipulationFeedforwardSystem, TestAgainstTensorflow) {
   // Constants
   double max_joint_vel = 0.7;
   airm_system.reset(new AerialManipulationFeedforwardSystem(
-      parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, max_joint_vel, true));
+      parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, max_joint_vel, lb, ub, true));
   airm_system->instantiateStepFunction();
   // Load model data
   Eigen::MatrixXd model_predictions =
@@ -111,7 +116,7 @@ TEST_F(TestAerialManipulationFeedforwardSystem, TestAgainstTensorflow) {
 TEST_F(TestAerialManipulationFeedforwardSystem, TestStep) {
   // Use code generation
   airm_system.reset(new AerialManipulationFeedforwardSystem(
-      parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, 0.7, true));
+      parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, 0.7, lb, ub, true));
   airm_system->instantiateStepFunction();
   Eigen::VectorXd xa(21);
   // p,                rpy,         v,         rpydot,     rpyd,          ja,       jv,        jad;

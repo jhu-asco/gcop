@@ -5,13 +5,18 @@ using namespace Eigen;
 using namespace casadi;
 
 QuadCasadiSystem::QuadCasadiSystem(VectorXd parameters, Vector3d kp_rpy,
-                                   Vector3d kd_rpy, bool use_code_generation)
+                                   Vector3d kd_rpy, VectorXd lb, VectorXd ub,
+                                   bool use_code_generation)
     : CasadiSystem<>(state_manifold_, parameters, 4, 1, true, false,
                      use_code_generation),
       state_manifold_(15), kp_rpy_(kp_rpy), kd_rpy_(kd_rpy) {
   // States: p, rpy, v, rpydot, rpyd
   // Controls: ut, rpyd (4)
   casadi_assert(parameters.size() == 1, "Size of parameters should be 1");
+  // Set control bounds
+  (this->U).lb = lb;
+  (this->U).ub = ub;
+  (this->U).bnd = true;
 }
 
 QuadCasadiSystem::FeedforwardInputs
