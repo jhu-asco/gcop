@@ -22,6 +22,8 @@ private:
    * @brief nn_layers_ Fully connected layers
    */
   std::vector<FullyConnectedLayer> nn_layers_;
+
+  double yaw_offset_;
   /**
    * Struct that holds joint angles, velocities, desired angles.
    */
@@ -60,7 +62,8 @@ public:
                            std::string nn_weights_folder_path, VectorXd lb,
                            VectorXd ub,
                            Activation activation = Activation::tanh,
-                           bool use_code_generation = false);
+                           bool use_code_generation = false,
+                           double yaw_offset = 0);
 
   /**
    * @brief propagate the input through a series of fully connected layers
@@ -103,7 +106,8 @@ public:
                               const casadi::MX &joint_states,
                               const QuadControls &quad_controls,
                               const casadi::MX &joint_desired_velocities,
-                              const casadi::MX &p);
+                              const casadi::MX &p,
+                              const double &yaw_offset = 0);
 };
 }
 

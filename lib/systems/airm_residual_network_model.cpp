@@ -9,14 +9,15 @@ AirmResidualNetworkModel::AirmResidualNetworkModel(
     VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy, Vector2d kp_ja,
     Vector2d kd_ja, double max_joint_velocity, int n_layers,
     std::string nn_weights_folder_path, VectorXd lb, VectorXd ub,
-    gcop::Activation activation, bool use_code_generation)
+    gcop::Activation activation, bool use_code_generation, double yaw_offset)
     : CasadiSystem<>(state_manifold_, parameters, 6, 1, true, false,
                      use_code_generation),
       state_manifold_(21),
       airm_system_(parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, max_joint_velocity,
                    lb, ub, false),
       quad_system_(parameters, kp_rpy, kd_rpy, lb.segment<6>(0),
-                   ub.segment<6>(0), false) {
+                   ub.segment<6>(0), false),
+      yaw_offset_(yaw_offset) {
   std::cout << "Loading layers..." << std::endl;
   if (n_layers < 1) {
     throw std::runtime_error(
@@ -52,7 +53,7 @@ MX AirmResidualNetworkModel::propagateNetwork(MX &input) {
 void AirmResidualNetworkModel::generateResidualInputs(
     QuadInputs &quad_inputs, MX &joint_accelerations, const MX &quad_states,
     const MX &joint_states, const QuadControls &quad_controls,
-    const MX &joint_desired_velocities, const MX &p) {
+    const MX &joint_desired_velocities, const MX &p, const double &yaw_offset) {
   // Update Feedforward using network
   // ff inputs   + state+kt     + controls
   // 3 + 3 + 2   + 15 + 1 + 6   + 6 = 36
@@ -61,6 +62,8 @@ void AirmResidualNetworkModel::generateResidualInputs(
       quad_inputs.acc, quad_inputs.rpy_ddot, joint_accelerations, quad_states,
       p, joint_states, ut_updated, quad_controls.rpy_dot_desired,
       joint_desired_velocities});
+  // Offset for y
+  network_vec(13) = network_vec(13) - yaw_offset;
   MX res_vec =
       propagateNetwork(network_vec); // split into delta quad feedforward
                                      // inputs and joint accelerations
@@ -89,7 +92,7 @@ MX AirmResidualNetworkModel::casadiStep(const MX &, const MX &h, const MX &xa,
 
   generateResidualInputs(quad_feedforward_inputs, joint_accelerations,
                          x_splits.at(0), x_splits.at(1), quad_controls,
-                         joint_velocities_desired, p);
+                         joint_velocities_desired, p, yaw_offset_);
   // Integrate
   MX quad_xb = quad_system_.secondOrderStateUpdate(
       h, quad_states, quad_controls, quad_feedforward_inputs);
