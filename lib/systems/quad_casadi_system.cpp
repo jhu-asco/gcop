@@ -57,13 +57,12 @@ MX QuadCasadiSystem::secondOrderStateUpdate(
 
 QuadCasadiSystem::States QuadCasadiSystem::generateStates(const MX &x) {
   // State
-  std::vector<MX> x_splits = MX::vertsplit(x, {0, 3, 6, 9, 12, 15});
   States state;
-  state.p = x_splits.at(0);           // initial position
-  state.rpy = x_splits.at(1);         // initial rpy
-  state.v = x_splits.at(2);           // initial velocity
-  state.rpy_dot = x_splits.at(3);     // initial rpydot
-  state.rpy_desired = x_splits.at(4); // initial rpy_desired
+  state.p = x(cs::Slice(0, 3));             // initial position
+  state.rpy = x(cs::Slice(3, 6));           // initial rpy
+  state.v = x(cs::Slice(6, 9));             // initial velocity
+  state.rpy_dot = x(cs::Slice(9, 12));      // initial rpydot
+  state.rpy_desired = x(cs::Slice(12, 15)); // initial rpy_desired
   return state;
 }
 
@@ -71,10 +70,9 @@ QuadCasadiSystem::Controls QuadCasadiSystem::generateControls(const MX &u) {
   // Controls
   // Assuming offset is [o1, o2, o3,..., on] then n-1 vectors
   // are generated of sizes [oi-o(i-1)] starting from oi.
-  std::vector<MX> u_splits = MX::vertsplit(u, {0, 1, 4});
   Controls controls;
-  controls.ut = u_splits.at(0);              // Thrust command
-  controls.rpy_dot_desired = u_splits.at(1); // Desired rpy dot
+  controls.ut = u(cs::Slice(0, 1));              // Thrust command
+  controls.rpy_dot_desired = u(cs::Slice(1, 4)); // Desired rpy dot
   return controls;
 }
 

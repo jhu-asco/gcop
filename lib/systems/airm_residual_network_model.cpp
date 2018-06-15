@@ -52,47 +52,42 @@ MX AirmResidualNetworkModel::propagateNetwork(MX &input) {
 
 void AirmResidualNetworkModel::generateResidualInputs(
     QuadInputs &quad_inputs, MX &joint_accelerations, const MX &quad_states,
-    const MX &joint_states, const QuadControls &quad_controls,
-    const MX &joint_desired_velocities, const MX &p, const double &yaw_offset) {
+    const MX &joint_states, const MX &controls, const MX &p,
+    const double &yaw_offset) {
   // Update Feedforward using network
   // ff inputs   + state+kt     + controls
-  // 3 + 3 + 2   + 15 + 1 + 6   + 6 = 36
-  MX ut_updated = (quad_controls.ut * 9.81) / p;
+  // 3 + 3 + 2   + 13 + 1 + 6   + 6 = 34
   MX network_vec = vertcat(std::vector<MX>{
-      quad_inputs.acc, quad_inputs.rpy_ddot, joint_accelerations, quad_states,
-      p, joint_states, ut_updated, quad_controls.rpy_dot_desired,
-      joint_desired_velocities});
-  // Offset for y
-  network_vec(13) = network_vec(13) - yaw_offset;
+      quad_inputs.acc, quad_inputs.rpy_ddot, joint_accelerations,
+      quad_states(cs::Slice(2, 15)), p, joint_states, controls});
   MX res_vec =
       propagateNetwork(network_vec); // split into delta quad feedforward
                                      // inputs and joint accelerations
   // Update Feedforward using output from residual network
-  std::vector<MX> res_input_split = MX::vertsplit(res_vec, {0, 3, 6, 8});
-  quad_inputs.acc = quad_inputs.acc + res_input_split.at(0);
-  quad_inputs.rpy_ddot = quad_inputs.rpy_ddot + res_input_split.at(1);
-  joint_accelerations = joint_accelerations + res_input_split.at(2);
+  quad_inputs.acc = quad_inputs.acc + res_vec(cs::Slice(0, 3));
+  quad_inputs.rpy_ddot = quad_inputs.rpy_ddot + res_vec(cs::Slice(3, 6));
+  joint_accelerations = joint_accelerations + res_vec(cs::Slice(6, 8));
 }
 
 MX AirmResidualNetworkModel::casadiStep(const MX &, const MX &h, const MX &xa,
                                         const MX &u, const MX &p) {
   // Controls [quad_controls, jad_dot]
-  std::vector<MX> u_splits = MX::vertsplit(u, {0, 4, 6});
-  QuadControls quad_controls = quad_system_.generateControls(u_splits.at(0));
-  MX joint_velocities_desired = u_splits.at(1);
+  QuadControls quad_controls =
+      quad_system_.generateControls(u(cs::Slice(0, 4)));
+  const MX &joint_velocities_desired = u(cs::Slice(4, 6));
   // State
-  std::vector<MX> x_splits = MX::vertsplit(xa, {0, 15, 21});
-  QuadStates quad_states = quad_system_.generateStates(x_splits.at(0));
-  JointStates joint_states = airm_system_.generateJointStates(x_splits.at(1));
+  const MX &x0 = xa(cs::Slice(0, 15));
+  const MX &x1 = xa(cs::Slice(15, 21));
+  QuadStates quad_states = quad_system_.generateStates(x0);
+  JointStates joint_states = airm_system_.generateJointStates(x1);
   // Feedforward
   MX joint_accelerations =
       airm_system_.jointInputs(joint_states, joint_velocities_desired);
   QuadInputs quad_feedforward_inputs =
       quad_system_.computeFeedforwardInputs(quad_states, quad_controls);
 
-  generateResidualInputs(quad_feedforward_inputs, joint_accelerations,
-                         x_splits.at(0), x_splits.at(1), quad_controls,
-                         joint_velocities_desired, p, yaw_offset_);
+  generateResidualInputs(quad_feedforward_inputs, joint_accelerations, x0, x1,
+                         u, p, yaw_offset_);
   // Integrate
   MX quad_xb = quad_system_.secondOrderStateUpdate(
       h, quad_states, quad_controls, quad_feedforward_inputs);

@@ -23,8 +23,8 @@ typedef Ddp<VectorXd> AirmDdp;
 
 void solver_process() {
 
-  int N = 50;    // number of segments
-  double tf = 1; // time horizon
+  int N = 100;   // number of segments
+  double tf = 2; // time horizon
 
   int iters = 50;
   bool use_code_generation = true;
@@ -41,8 +41,9 @@ void solver_process() {
   Eigen::Vector2d kd_ja;
   kd_ja << 5, 5;
   Eigen::VectorXd ub(6);
-  ub << 1.2, 0.3, 0.3, 0.3, 0.7, 0.7;
+  ub << 1.2, 0.6, 0.6, 0.6, 0.7, 0.7;
   Eigen::VectorXd lb = -ub;
+  lb[0] = 0.8;
 #ifdef USE_NN_MODEL
   std::string folder_path =
       (std::string(DATA_PATH) + "/tensorflow_model_vars_16_8_tanh/");
@@ -84,14 +85,13 @@ void solver_process() {
   cost.Q = Q.asDiagonal();
 
   VectorXd Qf(21);
-  // Joint angles not working
-  Qf << 10, 10, 10, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.1, 0.1, 0.1, 10,
-      10, 1, 1, 0.1, 0.1;
+  Qf << 100, 100, 100, 800, 800, 800, 100, 100, 100, 100, 100, 100, 0.1, 0.1,
+      0.1, 400, 400, 100, 100, 400, 400;
 
   cost.Qf = Qf.asDiagonal();
 
   VectorXd R(6);
-  R << 1, 0.1, 0.1, 0.1, 0.1, 0.1;
+  R << 6, 4.0, 4.0, 4.0, 4.0, 4.0;
   cost.R = R.asDiagonal();
 
   LoopTimer loop_timer;

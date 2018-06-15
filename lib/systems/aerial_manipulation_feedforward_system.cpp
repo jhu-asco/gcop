@@ -21,11 +21,10 @@ AerialManipulationFeedforwardSystem::AerialManipulationFeedforwardSystem(
 
 AerialManipulationFeedforwardSystem::JointStates
 AerialManipulationFeedforwardSystem::generateJointStates(const MX &x) {
-  std::vector<MX> x_splits = MX::vertsplit(x, {0, 2, 4, 6});
   JointStates states;
-  states.joint_angles = x_splits.at(0);
-  states.joint_velocities = x_splits.at(1);
-  states.joint_angles_desired = x_splits.at(2);
+  states.joint_angles = x(cs::Slice(0, 2));
+  states.joint_velocities = x(cs::Slice(2, 4));
+  states.joint_angles_desired = x(cs::Slice(4, 6));
   return states;
 }
 
@@ -70,13 +69,11 @@ MX AerialManipulationFeedforwardSystem::casadiStep(const MX &t, const MX &h,
                                                    const MX &xa, const MX &u,
                                                    const MX &p) {
   // Controls [quad_controls, jad_dot]
-  std::vector<MX> u_splits = MX::vertsplit(u, {0, 4, 6});
-  MX quad_controls = u_splits.at(0);
-  MX joint_velocities_desired = u_splits.at(1);
+  MX quad_controls = u(cs::Slice(0, 4));
+  MX joint_velocities_desired = u(cs::Slice(4, 6));
   // State
-  std::vector<MX> x_splits = MX::vertsplit(xa, {0, 15, 21});
-  MX quad_states = x_splits.at(0);
-  JointStates joint_states = generateJointStates(x_splits.at(1));
+  MX quad_states = xa(cs::Slice(0, 15));
+  JointStates joint_states = generateJointStates(xa(cs::Slice(15, 21)));
   // Quad dynamics
   MX quad_xb = quad_system_.casadiStep(t, h, quad_states, quad_controls, p);
   // Joint dynamics

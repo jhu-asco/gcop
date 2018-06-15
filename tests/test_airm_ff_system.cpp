@@ -109,7 +109,7 @@ TEST_F(TestAerialManipulationFeedforwardSystem, TestAgainstTensorflow) {
     measured_sens << xb[0], xb[1], xb[2], xb[3], xb[4], xb[5], xb[15], xb[16];
     xa = xb;
     for (int i = 0; i < 8; ++i) {
-      ASSERT_NEAR(predicted_sens[i], measured_sens[i], 1e-6);
+      ASSERT_NEAR(predicted_sens[i], measured_sens[i], 1e-5);
     }
   }
 }
