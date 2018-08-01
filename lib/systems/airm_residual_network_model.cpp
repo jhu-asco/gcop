@@ -10,6 +10,17 @@ AirmResidualNetworkModel::AirmResidualNetworkModel(
     Vector2d kd_ja, double max_joint_velocity, int n_layers,
     std::string nn_weights_folder_path, VectorXd lb, VectorXd ub,
     gcop::Activation activation, bool use_code_generation, double yaw_offset)
+    : AirmResidualNetworkModel(
+          parameters, kp_rpy, kd_rpy, kp_ja, kd_ja, max_joint_velocity,
+          AirmResidualNetworkModel::loadFullyConnectedLayers(
+              n_layers, nn_weights_folder_path, activation),
+          lb, ub, use_code_generation, yaw_offset) {}
+
+AirmResidualNetworkModel::AirmResidualNetworkModel(
+    VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy, Vector2d kp_ja,
+    Vector2d kd_ja, double max_joint_velocity,
+    std::vector<FullyConnectedLayer> nn_layers, VectorXd lb, VectorXd ub,
+    bool use_code_generation, double yaw_offset)
     : CasadiSystem<>(state_manifold_, parameters, 6, 1, true, false,
                      use_code_generation),
       state_manifold_(21),
@@ -17,7 +28,18 @@ AirmResidualNetworkModel::AirmResidualNetworkModel(
                    lb, ub, false),
       quad_system_(parameters, kp_rpy, kd_rpy, lb.segment<6>(0),
                    ub.segment<6>(0), false),
-      yaw_offset_(yaw_offset) {
+      nn_layers_(nn_layers), yaw_offset_(yaw_offset) {
+  std::cout << "Setting control bounds" << std::endl;
+  // Set control bounds
+  (this->U).lb = lb;
+  (this->U).ub = ub;
+  (this->U).bnd = true;
+}
+
+std::vector<FullyConnectedLayer>
+AirmResidualNetworkModel::loadFullyConnectedLayers(
+    int n_layers, std::string nn_weights_folder_path, Activation activation) {
+  std::vector<FullyConnectedLayer> nn_layers;
   std::cout << "Loading layers..." << std::endl;
   if (n_layers < 1) {
     throw std::runtime_error(
@@ -28,18 +50,14 @@ AirmResidualNetworkModel::AirmResidualNetworkModel(
   }
   for (int i = 0; i < n_layers - 1; ++i) {
     std::cout << "Loading layer: " << i << std::endl;
-    nn_layers_.emplace_back(nn_weights_folder_path, "residual_dynamics",
-                            std::to_string(i), true, activation);
+    nn_layers.emplace_back(nn_weights_folder_path, "residual_dynamics",
+                           std::to_string(i), true, activation);
   }
   std::cout << "Loading final layer" << std::endl;
-  nn_layers_.emplace_back(nn_weights_folder_path, "residual_dynamics", "final",
-                          false, Activation::none);
+  nn_layers.emplace_back(nn_weights_folder_path, "residual_dynamics", "final",
+                         false, Activation::none);
   std::cout << "Done loading layers" << std::endl;
-  std::cout << "Setting control bounds" << std::endl;
-  // Set control bounds
-  (this->U).lb = lb;
-  (this->U).ub = ub;
-  (this->U).bnd = true;
+  return nn_layers;
 }
 
 MX AirmResidualNetworkModel::propagateNetwork(MX &input) {

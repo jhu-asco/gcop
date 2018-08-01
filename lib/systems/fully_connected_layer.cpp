@@ -1,7 +1,6 @@
 #include "fully_connected_layer.h"
 #include "gcop_conversions.h"
 #include "load_eigen_matrix.h"
-#include <Eigen/Dense>
 #include <sys/stat.h>
 
 using namespace gcop;
@@ -15,6 +14,30 @@ FullyConnectedLayer::FullyConnectedLayer(std::string variable_folder_path,
     : use_batch_normalization_(use_batch_normalization),
       batch_norm_eps_(batch_norm_eps), activation_(activation) {
   loadParameters(variable_folder_path, layer_prefix, scope_name);
+}
+
+FullyConnectedLayer::FullyConnectedLayer(const Eigen::MatrixXd &weights,
+                                         const Eigen::MatrixXd &beta,
+                                         const Eigen::MatrixXd &gamma,
+                                         const Eigen::MatrixXd &moving_average,
+                                         const Eigen::MatrixXd &moving_variance,
+                                         Activation activation,
+                                         double batch_norm_eps)
+    : use_batch_normalization_(true), batch_norm_eps_(batch_norm_eps),
+      activation_(activation) {
+  weights_ = conversions::convertEigenToDM(weights);
+  beta_ = conversions::convertEigenToDM(beta);
+  gamma_ = conversions::convertEigenToDM(gamma);
+  moving_average_ = conversions::convertEigenToDM(moving_average);
+  moving_variance_ = conversions::convertEigenToDM(moving_variance);
+}
+
+FullyConnectedLayer::FullyConnectedLayer(const Eigen::MatrixXd &weights,
+                                         const Eigen::MatrixXd &biases,
+                                         Activation activation)
+    : use_batch_normalization_(false), activation_(activation) {
+  weights_ = conversions::convertEigenToDM(weights);
+  biases_ = conversions::convertEigenToDM(biases);
 }
 
 cs::MX FullyConnectedLayer::transform(const casadi::MX &x_in) {

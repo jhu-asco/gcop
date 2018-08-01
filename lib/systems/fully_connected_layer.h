@@ -1,5 +1,6 @@
 #ifndef FULLYCONNECTEDLAYER_H
 #define FULLYCONNECTEDLAYER_H
+#include <Eigen/Dense>
 #include <casadi/casadi.hpp>
 #include <gtest/gtest.h>
 
@@ -56,6 +57,21 @@ public:
                       bool use_batch_normalization = true,
                       Activation activation = Activation::tanh,
                       double batch_norm_eps = 0.001);
+  /**
+  * Constructor for custom weights and batch normalization
+  */
+  FullyConnectedLayer(const Eigen::MatrixXd &weights,
+                      const Eigen::MatrixXd &beta, const Eigen::MatrixXd &gamma,
+                      const Eigen::MatrixXd &moving_average,
+                      const Eigen::MatrixXd &moving_variance,
+                      Activation activation = Activation::tanh,
+                      double batch_norm_eps = 0.001);
+  /**
+  * Constructor for custom weights and biases without batch normalization
+  */
+  FullyConnectedLayer(const Eigen::MatrixXd &weights,
+                      const Eigen::MatrixXd &biases,
+                      Activation activation = Activation::tanh);
   /**
    * @brief transform input vector to output vector
    *

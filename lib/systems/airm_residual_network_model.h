@@ -66,6 +66,17 @@ public:
                            double yaw_offset = 0);
 
   /**
+  * Specialized constructor with inputs as fully connected layers
+  */
+  AirmResidualNetworkModel(VectorXd parameters, Vector3d kp_rpy,
+                           Vector3d kd_rpy, Vector2d kp_ja, Vector2d kd_ja,
+                           double max_joint_velocity,
+                           std::vector<FullyConnectedLayer> nn_layers,
+                           VectorXd lb, VectorXd ub,
+                           bool use_code_generation = false,
+                           double yaw_offset = 0);
+
+  /**
    * @brief propagate the input through a series of fully connected layers
    * @param input Input vector to the network
    * @return output of the several layers
@@ -106,6 +117,22 @@ public:
                               const casadi::MX &joint_states,
                               const casadi::MX &controls, const casadi::MX &p,
                               const double &yaw_offset = 0);
+  /**
+  * @brief create a vector of fully connected layers given a folder path to the
+  * weights
+  *
+  * and biases for each of the layers.
+  *
+  * @param n_layers The number of layers including the final linear activation
+  * layer
+  * @param nn_weights_folder_path  Path to all the weights and biases
+  * @param activation activation function used by fully connected layers
+  *
+  * @return vector of fully connected layers
+  */
+  static std::vector<FullyConnectedLayer>
+  loadFullyConnectedLayers(int n_layers, std::string nn_weights_folder_path,
+                           Activation activation);
 };
 }
 
