@@ -19,6 +19,7 @@ SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSIO
 ## Options for building this Project:
 option(BUILD_TESTS "BUILD_TESTS" ON)
 option(USE_BULLET "USE_BULLET" OFF)
+option(USE_CASADI "USE_CASADI" OFF)
 # Will add more like disabling est if not needed etc
 #option(USE_VIEWER "USE_VIEWER" ON)
 #option(DISABLE_EST "DISABLE_ESTIMATION" OFF)
@@ -58,7 +59,11 @@ enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-find_package(casadi)
+if (USE_CASADI)
+  find_package(casadi)
+else (USE_CASADI)
+  unset(casadi_FOUND)
+endif()
 
 if (casadi_FOUND)
   message("Found CASADI")
