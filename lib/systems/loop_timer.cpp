@@ -20,7 +20,7 @@ void LoopTimer::loop_pause() {
   if (!loop_start_) {
     throw std::runtime_error("Loop did not start");
   }
-  dt_loop = std::chrono::duration<double>(
+  dt_loop += std::chrono::duration<double>(
       std::chrono::high_resolution_clock::now() - t0);
   loop_pause_ = true;
 }

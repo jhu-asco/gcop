@@ -7,6 +7,11 @@ if (BUILD_TESTS)
   target_compile_definitions(test_load_eigen_matrix PUBLIC DATA_PATH="${CMAKE_SOURCE_DIR}/data")
   target_link_libraries(test_load_eigen_matrix ${SYS_LIBS} ${GTEST_BOTH_LIBRARIES})
   add_test(test_load_eigen_matrix test_load_eigen_matrix)
+
+  add_executable(test_loop_timer test_loop_timer.cpp)
+  target_link_libraries(test_loop_timer gcop_systems ${SYS_LIBS} ${UTIL_LIBS} ${GTEST_BOTH_LIBRARIES})
+  add_test(test_loop_timer test_loop_timer)
+
   if (casadi_FOUND)
     add_executable(test_casadi_system test_casadi_system.cc)
     target_link_libraries(test_casadi_system gcop_systems ${SYS_LIBS} ${UTIL_LIBS} ${GTEST_BOTH_LIBRARIES})

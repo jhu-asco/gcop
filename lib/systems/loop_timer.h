@@ -12,7 +12,7 @@ public:
   /**
    * @brief loop_start
    *
-   * Starts a timer. Resents internal t0
+   * Starts a timer. Resets internal t0
    * if the timer is called after loop_end
    * If timer is called after loop_pause, does not reset t0
    * If neither loop_pause or loop_end are called, the
