@@ -30,6 +30,7 @@ set(sources
     body3dtrack.cc
     kinrccar.cc
     gcar.cc
+    loop_timer.cpp
 )
 
 set(headers
@@ -77,6 +78,7 @@ set(headers
     kinrccarpath.h
     creator.h
     gcar.h
+    loop_timer.h
 )
 
 if (casadi_FOUND)
@@ -85,11 +87,15 @@ if (casadi_FOUND)
       fully_connected_layer.h
       casadi_system.h
       quad_casadi_system.h
+      aerial_manipulation_feedforward_system.h
+      airm_residual_network_model.h
       )
    set(sources ${sources}
        quad_casadi_system.cpp
        fully_connected_layer.cpp
        gcop_conversions.cpp
+       aerial_manipulation_feedforward_system.cpp
+       airm_residual_network_model.cpp
       )
 endif()
 

@@ -17,6 +17,23 @@ using namespace Eigen;
  */
 class QuadCasadiSystem : public CasadiSystem<> {
 public:
+  struct States {
+    cs::MX p;
+    cs::MX rpy;
+    cs::MX v;
+    cs::MX rpy_dot;
+    cs::MX rpy_desired;
+  };
+
+  struct Controls {
+    cs::MX ut;
+    cs::MX rpy_dot_desired;
+  };
+  struct FeedforwardInputs {
+    cs::MX acc;
+    cs::MX rpy_ddot;
+  };
+
   /**
    * @brief QuadCasadiSystem Constructor
    * @param parameters The default system parameters (kt, kprpy, kdrpy)
@@ -24,7 +41,19 @@ public:
    * function.
    */
   QuadCasadiSystem(VectorXd parameters, Vector3d kp_rpy, Vector3d kd_rpy,
-                   bool use_code_generation = false);
+                   VectorXd lb, VectorXd ub, bool use_code_generation = false);
+
+  FeedforwardInputs computeFeedforwardInputs(States &x_splits,
+                                             Controls &u_splits);
+
+  cs::MX secondOrderStateUpdate(const cs::MX &h, const States &x_splits,
+                                const Controls &u_splits,
+                                const FeedforwardInputs &feedforward_inputs);
+
+  States generateStates(const cs::MX &x);
+
+  Controls generateControls(const cs::MX &u);
+
   /**
    * @brief casadi_step
    * @param t Current time
@@ -34,20 +63,21 @@ public:
    * @param p Parameter
    * @return Next state
    */
-  cs::MX casadi_step(cs::MX, cs::MX h, cs::MX xa, cs::MX u, cs::MX p);
+  cs::MX casadiStep(const cs::MX &, const cs::MX &h, const cs::MX &xa,
+                    const cs::MX &u, const cs::MX &p);
 
   /**
   * @brief The name the step function
   *
   * @return name of step function
   */
-  std::string casadi_step_name();
+  std::string casadiStepName();
   /**
    * @brief computeBodyZAxes Helper function to compute body z axis given the
    * roll pitch and yaw of the system
    * @return A function to compute body z axis given rpy of the system
    */
-  cs::Function computeBodyZAxes();
+  cs::MX computeBodyZAxes(const cs::MX &rpy);
 
 private:
   Rn<> state_manifold_; ///< The dynamic state manifold
