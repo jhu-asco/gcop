@@ -14,7 +14,11 @@ protected:
     parameters << 0.16;
     kp_rpy<< 10, 10, 0;
     kd_rpy<< 5, 5, 2;
-    quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy));
+    ub.resize(4);
+    lb.resize(4);
+    ub << 1.2, 0.3, 0.3, 0.3;
+    lb = -ub;
+    quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, lb, ub));
     quad_system->instantiateStepFunction();
   }
   template <class T> void assertVector(casadi::DM input, T expected_value) {
@@ -29,17 +33,22 @@ protected:
   Eigen::VectorXd parameters;
   Eigen::Vector3d kp_rpy;
   Eigen::Vector3d kd_rpy;
+  Eigen::VectorXd lb;
+  Eigen::VectorXd ub;
 };
 
 TEST_F(TestQuadCasadiSystem, Initialize) {}
 
 TEST_F(TestQuadCasadiSystem, InitializeCodeGen) {
-  quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, true));
+  quad_system.reset(
+      new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, lb, ub, true));
   quad_system->instantiateStepFunction();
 }
 
 TEST_F(TestQuadCasadiSystem, TestBodyZAxes) {
-  casadi::Function z_axes_fun = quad_system->computeBodyZAxes();
+  casadi::MX rpy_sym = casadi::MX::sym("rpy", 3);
+  casadi::MX body_z_axis = quad_system->computeBodyZAxes(rpy_sym);
+  casadi::Function z_axes_fun("body_z_axis_comp", {rpy_sym}, {body_z_axis});
   // flat
   casadi::DM rpy = std::vector<double>({0, 0, 1});
   casadi::DM z_axis = z_axes_fun(std::vector<casadi::DM>{rpy}).at(0);
@@ -56,7 +65,8 @@ TEST_F(TestQuadCasadiSystem, TestBodyZAxes) {
 
 TEST_F(TestQuadCasadiSystem, TestStep) {
   // Use code generation
-  quad_system.reset(new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, true));
+  quad_system.reset(
+      new QuadCasadiSystem(parameters, kp_rpy, kd_rpy, lb, ub, true));
   quad_system->instantiateStepFunction();
   Eigen::VectorXd xa(15);
   // p,                rpy,         v,         rpydot,     rpyd
@@ -64,18 +74,25 @@ TEST_F(TestQuadCasadiSystem, TestStep) {
   Eigen::VectorXd xb(15);
   Eigen::VectorXd u(4);
   Eigen::MatrixXd A, B;
-  u << 9.81 / 0.16, 0, 0, 0.1;
+  u << 1, 0, 0, 0.1;
   double h = 0.01;
   int N = 3.0 / h; // tf/h
   auto t0 = std::chrono::high_resolution_clock::now();
+  LoopTimer overall_loop_timer;
   for (int i = 0; i < N; ++i) {
+    overall_loop_timer.loop_start();
     quad_system->Step(xb, 0, xa, u, h, 0, &A, &B);
     xa = xb;
+    overall_loop_timer.loop_end();
   }
-  double dt = std::chrono::duration<double>(
-                  std::chrono::high_resolution_clock::now() - t0)
-                  .count();
-  std::cout << "Dt: " << dt << std::endl;
+  std::cout << "Copy loop average time: "
+            << (quad_system->copy_loop_timer_).average_loop_period()
+            << std::endl;
+  std::cout << "Function loop average time: "
+            << (quad_system->fun_loop_timer_).average_loop_period()
+            << std::endl;
+  std::cout << "Overall loop average time: "
+            << (overall_loop_timer).average_loop_period() << std::endl;
   // rp
   ASSERT_NEAR(xb(3), 0.2, 0.01);
   ASSERT_NEAR(xb(4), -0.2, 0.01);

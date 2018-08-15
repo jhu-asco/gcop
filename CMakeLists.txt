@@ -4,7 +4,7 @@ project (gcop)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 #ADD_DEFINITIONS(-g -O -std=c++0x -pthread)
-ADD_DEFINITIONS(-std=c++0x -pthread -Wl,--no-undefined  -I/usr/include/eigen3)
+ADD_DEFINITIONS(-std=c++0x -pthread -Wl,--no-undefined  -I/usr/include/eigen3 -O3 -march=corei7 -ffast-math)
 #ADD_DEFINITIONS(-g -O -pthread)
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Robotic Planning and Control")
