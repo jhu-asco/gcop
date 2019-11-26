@@ -11,6 +11,8 @@ set(headers
   diskconstraint.h
   sphereconstraint.h
   constraint.h
+  groundplane.h
+  yawvelfollow.h
 )
 
 IF (PQP_FOUND)
