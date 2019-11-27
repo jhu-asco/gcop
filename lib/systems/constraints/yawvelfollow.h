@@ -37,7 +37,7 @@ namespace gcop {
   
   template <typename T, int _nx, int _nu, int _np> 
     YawVelFollow<T, _nx, _nu, _np>::YawVelFollow() :
-    Constraint<T, _nx, _nu, _np>(1), h(h), cr(cr)
+    Constraint<T, _nx, _nu, _np>(1)
   {
     this->ng = 1;
   }
@@ -53,7 +53,7 @@ namespace gcop {
       const Vector3d &vel = x.v; // velocity
       const Matrix3d &Rot = x.R; // Rotation Matrix
      
-      double yaw = atan2(Rot[1][0],Rot[0][0]);//Current yaw
+      double yaw = atan2(Rot(1,0),Rot(0,0));//Current yaw
       double yaw_d = atan2(vel[1],vel[0]);//Velocity following yaw
 
       double d = yaw - yaw_d;  // distance between angles
@@ -74,15 +74,15 @@ namespace gcop {
         //0,1,2 are log(R), 9,10,11 are velocity
         double partial_dx = 2*d;
         Vector3d eR;
-        SO3::Instance().log(eR,R);
+        SO3::Instance().log(eR,Rot);
         double theta = eR.norm();
         Vector3d dthetadeR = eR/theta;
-        double R_squared = R[0][0]*R[0][0] + R[1][0]*R[1][0]
-        Vector3d temp(0, 2*eR[1], 2*eR[2]);
-        Vector3d dR00deR = (eR[1]*eR[1] + eR[2]*eR[2])(-sin(theta)*dthetadeR) + (cos(theta)-1)*temp;
+        double R_squared = Rot(0,0)*Rot(0,0) + Rot(1,0)*Rot(1,0);
+	Vector3d temp = Vector3d(0, 2*eR[1], 2*eR[2]);
+        Vector3d dR00deR = (eR[1]*eR[1] + eR[2]*eR[2])*(-sin(theta)*dthetadeR) + (cos(theta)-1)*temp;
         Vector3d temp2(-eR[1]*(cos(theta)-1), -eR[0]*(cos(theta) -1), sin(theta));
         Vector3d dR10deR = (eR[2]*cos(theta) + eR[0]*eR[1]*sin(theta))*dthetadeR + temp2;
-        dqdx->row(0).head(3) = partial_dx*((R[0][0]/R_squared)*dR10deR - (R[1][0]/R_squared)*dR00deR);
+        dgdx->row(0).head(3) = partial_dx*((Rot(0,0)/R_squared)*dR10deR - (Rot(1,0)/R_squared)*dR00deR);
         double vel_squared = vel[0]*vel[0] + vel[1]*vel[1];
         dgdx->row(0)[9] = partial_dx*(vel[1]/vel_squared);
         dgdx->row(0)[10] = partial_dx*(-vel[0]/vel_squared);
