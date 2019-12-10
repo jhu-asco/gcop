@@ -36,7 +36,7 @@ namespace gcop {
    * @param X the state manifold which is used to perform addition/subtraction of states
    * @param tf time horizon: when the cost function L is called it will internally check whether its argument t is equation to tf and return the terminal cost
    */
-  YawCost(System<T, _nx, _nu, _np> &sys, double tf, Vector3d targ);
+  YawCost(System<T, _nx, _nu, _np> &sys, double tf, const Vector3d &targ);
   
   /**
    * Cost function L
@@ -59,6 +59,7 @@ namespace gcop {
                    Matrixmnd *Lpx = 0);  
 
   Vector3d target;
+  const Vector3d e = Vector3d::UnitX();
   double gain;
   
   };
@@ -66,9 +67,8 @@ namespace gcop {
 
   template <typename T, int _nx, int _nu, int _np> 
     YawCost<T, _nx, _nu, _np>::YawCost(System<T, _nx, _nu, _np> &sys, 
-                                           double tf, Vector3d t) : Cost<T, _nx, _nu, _np>(sys, tf) {
-    target = t;
-    gain = 1;
+                                       double tf, const Vector3d &targ) : 
+       Cost<T, _nx, _nu, _np>(sys, tf), target(targ), gain(1) {
   }  
   
   template <typename T, int _nx, int _nu, int _np> 
@@ -80,7 +80,6 @@ namespace gcop {
                                           Vectormd *Lp, Matrixmd *Lpp,
                                           Matrixmnd *Lpx) {
     cout << "Yaw L Called" << endl;
-    Vector3d e(1,0,0);
     Vector3d df = target - x.p;
     cout << "target: " << target << endl;
     cout << "pos: " << x.p << endl;
@@ -89,12 +88,13 @@ namespace gcop {
     cout << "df: " << df << endl;
     double dnorm = df.norm();
     cout << "df Norm: " << dnorm << endl;
+    if (dnorm < 1e-10) {
+      return 0;
+    }
     double dx = df(0);
     double dy = df(1);
     df = df/df.norm();
     double c = gain*(1 - (x.R*e).dot(df));
-    if (dnorm < 1e-10)
-    { return c; }
     Matrix3d ehat;
     SO3::Instance().hat(ehat, e);
     Matrix3d ddfdp;
@@ -119,8 +119,8 @@ namespace gcop {
     if (Lx){
     cout << "Yaw Lx Called" << endl;
       Lx->setZero();
-      Vector3d dLdR = c*(ehat.transpose()*x.R.transpose()*df);
-      Vector3d dLdp = -c*(ddfdp.transpose()*x.R*e);
+      Vector3d dLdR = gain*(ehat.transpose()*x.R.transpose()*df);
+      Vector3d dLdp = -gain*(ddfdp.transpose()*x.R*e);
       Lx->head(3) = dLdR;
       Lx->segment(3,3) = dLdp;
     }
@@ -129,10 +129,10 @@ namespace gcop {
       Lxx->setZero();
       Matrix3d RTdfhat;
       SO3::Instance().hat(RTdfhat,x.R.transpose()*df);
-      Matrix3d d2LdR2 = -c*ehat*RTdfhat;
-      Matrix3d d2LdRdp = c*(ehat.transpose()*x.R.transpose()*ddfdp);
-      Matrix3d d2LdpdR = c*(ddfdp.transpose()*x.R*ehat);
-      Matrix3d d2Ldp2 = -c*(Rstack*d2dfdp2);
+      Matrix3d d2LdR2 = -gain*ehat*RTdfhat;
+      Matrix3d d2LdRdp = gain*(ehat.transpose()*x.R.transpose()*ddfdp);
+      Matrix3d d2LdpdR = gain*(ddfdp.transpose()*x.R*ehat);
+      Matrix3d d2Ldp2 = -gain*(Rstack*d2dfdp2);
       Lxx->topLeftCorner(3,3) = d2LdR2;
       Lxx->block(0,3,3,3) = d2LdRdp;
       Lxx->block(3,0,3,3) = d2LdpdR;
