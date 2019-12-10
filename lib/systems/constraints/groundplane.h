@@ -3,6 +3,10 @@
 
 #include "constraint.h"
 
+//A cost for use with GCOP.  Implements a planar constraint above a certain height.
+//Ensures that the system "T" has a height above h+cr, 
+//where h is the plane height, and cr is the collision radius
+
 namespace gcop {
   
   template <typename T = VectorXd,
@@ -57,10 +61,6 @@ namespace gcop {
 
       double d = v - cr;  // distance from center of cylinder to system boundary
       
-      //if (d < 0) {
-      //  cout << "ERR: already colliding" << endl;
-      //}
-
       g[0] = -d; // must be negative for non-collision
       
       if (dgdx) {
@@ -69,7 +69,11 @@ namespace gcop {
         //THIS IS A BUG.  For states that are not Body3dState, it won't necessarily work.
         //It assumes that the position indices of the x vector are 3,4,5, but other states use 0,1,2
         //DO NOT TRUST 
-        dgdx->row(0)[5] = -1;
+        if (std::is_same<T, Body3dState>::value){
+          dgdx->row(0)[5] = -1;
+        } else {
+          dgdx->row(0)[2] = -1;
+        }
       }
     }
 };

@@ -12,7 +12,7 @@ set(headers
   sphereconstraint.h
   constraint.h
   groundplane.h
-  yawvelfollow.h
+  yawvelocityconstraint.h
 )
 
 IF (PQP_FOUND)

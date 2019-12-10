@@ -3,6 +3,7 @@
 
 #include "constraint.h"
 #include <math.h>
+#include <assert.h>
 #include "so3.h"
 
 namespace gcop {
@@ -11,7 +12,7 @@ namespace gcop {
     int _nx = Dynamic, 
     int _nu = Dynamic, 
     int _np = Dynamic>
-    class YawVelFollow : public Constraint<T, _nx, _nu, _np> {
+    class YawVelocityConstraint : public Constraint<T, _nx, _nu, _np> {
   public:
 
   typedef Matrix<double, Dynamic, 1> Vectorgd;
@@ -24,7 +25,7 @@ namespace gcop {
   typedef Matrix<double, _np, 1> Vectormd;
 
 
-  YawVelFollow();
+  YawVelocityConstraint();
   
   bool operator()(Vectorgd &g,
                   double t, const T &x, const Vectorcd &u,
@@ -36,14 +37,14 @@ namespace gcop {
   
   
   template <typename T, int _nx, int _nu, int _np> 
-    YawVelFollow<T, _nx, _nu, _np>::YawVelFollow() :
+    YawVelocityConstraint<T, _nx, _nu, _np>::YawVelocityConstraint() :
     Constraint<T, _nx, _nu, _np>(1)
   {
     this->ng = 1;
   }
   
   template <typename T, int _nx, int _nu, int _np> 
-    bool YawVelFollow<T, _nx, _nu, _np>::operator()(Vectorgd &g,
+    bool YawVelocityConstraint<T, _nx, _nu, _np>::operator()(Vectorgd &g,
                                              double t, const T &x, const Vectorcd &u,
                                              const Vectormd *rho, 
                                              Matrixgxd *dgdx, Matrixgud *dgdu,
@@ -70,8 +71,9 @@ namespace gcop {
           d += 2*M_PI;
         }
       }
+      assert(d > -M_PI && d < M_PI);
 
-      g[0] = d*d; // must be 0 for non-collision
+      g[0] = 0.5*d*d; // must be 0 for non-collision
       if (dgdx) {
         dgdx->resize(1, _nx);
         dgdx->setZero();
@@ -93,7 +95,7 @@ namespace gcop {
         if (theta < 1e-10) {//Derivative is 0
           return true;
         }
-        double partial_dx = 2*d;
+        double partial_dx = d;
         Vector3d dThetadeR = eR/theta;
         Vector3d temp(0,2*eR[1],2*eR[2]);
         Vector3d dR0deR = (eR[1]*eR[1] + eR[2]*eR[2])*(-sin(theta))*dThetadeR + (cos(theta)-1)*temp;

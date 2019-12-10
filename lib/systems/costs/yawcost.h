@@ -80,7 +80,7 @@ namespace gcop {
                                           Vectormd *Lp, Matrixmd *Lpp,
                                           Matrixmnd *Lpx) {
     cout << "Yaw L Called" << endl;
-    Vector3d e(0,0,1);
+    Vector3d e(1,0,0);
     Vector3d df = target - x.p;
     cout << "target: " << target << endl;
     cout << "pos: " << x.p << endl;
