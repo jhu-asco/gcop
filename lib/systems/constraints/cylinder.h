@@ -70,10 +70,18 @@ namespace gcop {
       if (dgdx) {
         dgdx->resize(1, _nx);
         dgdx->setZero();
-        if (g[0] > 0)
-          dgdx->row(0).head(3) = -v/v.norm();
-        else
-          dgdx->row(0).head(3) = v/v.norm();
+        //This check accounts for the different indices of the position in the vectorized state
+        if (std::is_same<T, Body3dState>::value){
+          if (g[0] > 0)
+            dgdx->row(0).segment(3,3) = -v/v.norm();
+          else
+            dgdx->row(0).segment(3,3) = v/v.norm();
+        } else {
+          if (g[0] > 0)
+            dgdx->row(0).head(3) = -v/v.norm();
+          else
+            dgdx->row(0).head(3) = v/v.norm();
+        }
       }
     }
 };
