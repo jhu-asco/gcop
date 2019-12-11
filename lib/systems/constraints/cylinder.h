@@ -70,9 +70,7 @@ namespace gcop {
       if (dgdx) {
         dgdx->resize(1, _nx);
         dgdx->setZero();
-        //THIS IS A BUG.  For states that are not Body3dState, it won't necessarily work.
-        //It assumes that the position indices of the x vector are 3,4,5, but other states use 0,1,2
-        //DO NOT TRUST 
+        //This check accounts for the different indices of the position in the vectorized state
         if (std::is_same<T, Body3dState>::value){
           if (g[0] > 0)
             dgdx->row(0).segment(3,3) = -v/v.norm();
