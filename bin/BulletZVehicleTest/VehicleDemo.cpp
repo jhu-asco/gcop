@@ -28,6 +28,7 @@ subject to the following restrictions:
 
 #include "GlutStuff.h"
 #include "VehicleDemo.h"
+#include <unistd.h>
 
 using namespace gcop;
 using namespace Eigen;

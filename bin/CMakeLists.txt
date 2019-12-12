@@ -115,6 +115,9 @@ ENDIF (PQP_FOUND)
 	add_executable(body3dshell body3dshell.cc)
 	target_link_libraries(body3dshell  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(eye_rcm eye_rcm.cc)
+	target_link_libraries(eye_rcm gcop_algos gcop_views gcop_systems ${ALL_LIBS})
+
 	add_executable(helitest helitest.cc)
 	target_link_libraries(helitest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
