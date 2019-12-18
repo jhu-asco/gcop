@@ -65,6 +65,9 @@ ENDIF (CERES_FOUND)
 	add_executable(qrotortest qrotortest.cc)
 	target_link_libraries(qrotortest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 
+	add_executable(qrotoryawtest qrotoryawtest.cc)
+	target_link_libraries(qrotoryawtest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
+
   add_executable(qrotoridmodeltest qrotoridmodeltest.cpp)
   target_link_libraries(qrotoridmodeltest  gcop_algos gcop_views gcop_systems  ${ALL_LIBS})
 

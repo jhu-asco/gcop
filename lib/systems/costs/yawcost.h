@@ -5,6 +5,8 @@
 #include <iostream>
 #include "cost.h"
 #include "so3.h"
+#include <iomanip>
+#include <iostream>
 
 namespace gcop {
 
@@ -61,9 +63,69 @@ namespace gcop {
   Vector3d target;
   const Vector3d e = Vector3d::UnitX();
   double gain;
-  
+  //bool useFinite;
+
+  double simple_c(const T &x);
+  void pop_Lx(const T &x, double h, Matrix<double, _nx, 1> *Lx);
   };
 
+  template <typename T, int _nx, int _nu, int _np> 
+    double YawCost<T, _nx, _nu, _np>::simple_c(const T& x) {
+
+    Vector3d df = target - x.p;
+    //df(2) = 0;
+    double dnorm = df.norm();
+    if (dnorm < 1e-10) {
+      return 0;
+    }
+    df = df/df.norm();
+    return (gain*(1 - (x.R*e).dot(df)));
+  }
+  template <typename T, int _nx, int _nu, int _np>
+    void YawCost<T, _nx, _nu, _np>::pop_Lx(const T& x, double h, Matrix<double, _nx, 1> *Lx){
+      Vector3d df = target - x.p;
+      //df(2) = 0;
+      double dnorm = df.norm();
+      if (dnorm < 1e-10) {
+        return;
+      }
+      double dx = df(0);
+      double dy = df(1);
+      double dz = df(2);
+      df = df/df.norm();
+      double c = simple_c(x);
+      Matrix3d ehat;
+      SO3::Instance().hat(ehat, e);
+      Matrix3d ddfdp;
+      ddfdp << (dy*dy + dz*dz), (-dx*dy), (-dx*dz),
+               (-dx*dy), (dx*dx + dz*dz), (-dy*dz),
+               (-dx*dz), (-dy*dz), (dx*dx + dy*dy);
+      ddfdp = ddfdp/(dnorm*dnorm*dnorm);
+      Vector3d dLdR = gain*(ehat.transpose()*x.R.transpose()*df);
+      Vector3d dLdp = gain*(ddfdp.transpose()*x.R*e);
+      Lx->setZero();
+      Lx->head(3) = dLdR;
+      Lx->segment(3,3) = dLdp;
+      /*double c = simple_c(x);
+      double eps = 1e-10;
+      Vectornd dx;
+      for (int i = 0; i < Cost<T, _nx, _nu, _np>::sys.X.n; ++i ) {
+        //Set dx to eps in the the i-th dim
+        dx.setZero();
+        dx[i] = eps;
+        //Calculate using dx
+        T xtemp;
+        Cost<T, _nx, _nu, _np>::sys.X.Retract(xtemp,x,dx);//xtemp = xa+dx
+        Cost<T, _nx, _nu, _np>::sys.Rec(xtemp,h);//Reconstruct
+        double dpos = simple_c(xtemp) - c;//dpos = c(xtemp) - c(x)
+        //Calculate using -dx
+        Cost<T, _nx, _nu, _np>::sys.X.Retract(xtemp,x,-dx);//xtemp = xa+dx
+        Cost<T, _nx, _nu, _np>::sys.Rec(xtemp,h);//Reconstruct
+        double dneg = simple_c(xtemp) - c;//dneg = c(xtemp) - c(x)
+        //Set Lx[i]
+        (*Lx)[i] = (dpos - dneg)/(2*eps);
+      }*/
+  }
 
   template <typename T, int _nx, int _nu, int _np> 
     YawCost<T, _nx, _nu, _np>::YawCost(System<T, _nx, _nu, _np> &sys, 
@@ -79,64 +141,109 @@ namespace gcop {
                                           Matrix<double, _nx, _nu> *Lxu,
                                           Vectormd *Lp, Matrixmd *Lpp,
                                           Matrixmnd *Lpx) {
-    cout << "Yaw L Called" << endl;
     Vector3d df = target - x.p;
-    cout << "target: " << target << endl;
-    cout << "pos: " << x.p << endl;
-    cout << "df: " << df << endl;
-    df(2) = 0;
-    cout << "df: " << df << endl;
+    //df(2) = 0;
     double dnorm = df.norm();
-    cout << "df Norm: " << dnorm << endl;
     if (dnorm < 1e-10) {
       return 0;
     }
     double dx = df(0);
     double dy = df(1);
+    double dz = df(2);
     df = df/df.norm();
-    double c = gain*(1 - (x.R*e).dot(df));
+    double c = simple_c(x);
     Matrix3d ehat;
     SO3::Instance().hat(ehat, e);
     Matrix3d ddfdp;
-    ddfdp << ((-1/dnorm) + dx*dx/(dnorm*dnorm*dnorm)), (dx*dy)/(dnorm*dnorm*dnorm), 0,
-             (dx*dy)/(dnorm*dnorm*dnorm), ((-1/dnorm) + dy*dy/(dnorm*dnorm*dnorm)), 0,
-             0, 0, 0;
+    ddfdp << (dy*dy + dz*dz), (-dx*dy), (-dx*dz),
+             (-dx*dy), (dx*dx + dz*dz), (-dy*dz),
+             (-dx*dz), (-dy*dz), (dx*dx + dy*dy);
+    ddfdp = ddfdp/(dnorm*dnorm*dnorm);
     MatrixXd d2dfdp2(9,3);
-    d2dfdp2 << (Matrix2d()<<(3*dx/(dnorm*dnorm*dnorm) - 3*(dx*dx*dx)/(dnorm*dnorm*dnorm*dnorm*dnorm)),
-                            (dy/(dnorm*dnorm*dnorm) - 3*(dx*dx*dy)/(dnorm*dnorm*dnorm*dnorm*dnorm)),
-                            (dy/(dnorm*dnorm*dnorm) - 3*(dx*dx*dy)/(dnorm*dnorm*dnorm*dnorm*dnorm)),
-                            (dx/(dnorm*dnorm*dnorm) - 3*(dx*dy*dy)/(dnorm*dnorm*dnorm*dnorm*dnorm))).finished(),
-               MatrixXd::Zero(2,1), MatrixXd::Zero(1,3),
-               (Matrix2d()<<(dy/(dnorm*dnorm*dnorm) - 3*(dx*dx*dy)/(dnorm*dnorm*dnorm*dnorm*dnorm)),
-                             (dx/(dnorm*dnorm*dnorm) - 3*(dx*dy*dy)/(dnorm*dnorm*dnorm*dnorm*dnorm)),
-                             (dx/(dnorm*dnorm*dnorm) - 3*(dx*dx*dx)/(dnorm*dnorm*dnorm*dnorm*dnorm)),
-                             (3*dy/(dnorm*dnorm*dnorm) - 3*(dx*dx*dy)/(dnorm*dnorm*dnorm*dnorm*dnorm))).finished(),
-               MatrixXd::Zero(2,1), MatrixXd::Zero(4,3);
+    d2dfdp2 << -(3*dx*(dy*dy + dz*dz)), -(dy*(-2*dx*dx + dy*dy + dz*dz)), -(dz*(-2*dx*dx + dy*dy + dz*dz)),
+               -(dy*(-2*dx*dx + dy*dy + dz*dz)), -(dx*(dx*dx - 2*dy*dy + dz*dz)), (3*dx*dy*dz),
+               -(dz*(-2*dx*dx + dy*dy + dz*dz)), (3*dx*dy*dz), -(dx*(dx*dx + dy*dy - 2*dz*dz)),
+               -(dy*(-2*dx*dx + dy*dy + dz*dz)), -(dx*(dx*dx - 2*dy*dy + dz*dz)), (3*dx*dy*dz),
+               -(dx*(dx*dx - 2*dy*dy + dz*dz)), -(3*dy*(dx*dx + dz*dz)), -(dz*(dx*dx - 2*dy*dy + dz*dz)),
+               (3*dx*dy*dz), -(dz*(dx*dx - 2*dy*dy + dz*dz)), -(dy*(dx*dx + dy*dy - 2*dz*dz)),
+               -(dz*(-2*dx*dx + dy*dy + dz*dz)), (3*dx*dy*dz), -(dx*(dx*dx + dy*dy - 2*dz*dz)),
+               (3*dx*dy*dz), -(dz*(dx*dx - 2*dy*dy + dz*dz)), -(dy*(dx*dx + dy*dy - 2*dz*dz)),
+               -(dx*(dx*dx + dy*dy - 2*dz*dz)), -(dy*(dx*dx + dy*dy - 2*dz*dz)),-(3*dz*(dx*dx + dy*dy));
+    d2dfdp2 = d2dfdp2/(dnorm*dnorm*dnorm*dnorm*dnorm);
     MatrixXd Rstack(3,9);
     Rstack << (x.R*e).transpose(), MatrixXd::Zero(1,6),
               MatrixXd::Zero(1,3), (x.R*e).transpose(), MatrixXd::Zero(1,3),
-              MatrixXd::Zero(1,9);
+              MatrixXd::Zero(1,6), (x.R*e).transpose();
     if (Lx){
-    cout << "Yaw Lx Called" << endl;
-      Lx->setZero();
+      pop_Lx(x,h,Lx);
+      //Analytical Lx
+      //Matrix<double, _nx, 1> LxTrue;
+      /*LxTrue.setZero();
       Vector3d dLdR = gain*(ehat.transpose()*x.R.transpose()*df);
-      Vector3d dLdp = -gain*(ddfdp.transpose()*x.R*e);
-      Lx->head(3) = dLdR;
-      Lx->segment(3,3) = dLdp;
+      Vector3d dLdp = gain*(ddfdp.transpose()*x.R*e);
+      LxTrue.head(3) = dLdR;
+      LxTrue.segment(3,3) = dLdp;*/
+      //Finite
+      //Matrix<double, _nx, 1> LxF;
+      //finite_Lx(x,h,&LxF);
+      //if (!useFinite) {
+      //  (*Lx) = LxTrue;
+      //} else {
+      //  (*Lx) = LxF;
+      //}
+      //cout << "LxA: " << endl << LxTrue << endl;
+      //cout << "LxF: " << endl << LxF << endl;
+      //cout << "Lx: " << endl << (*Lx) << endl;
     }
     if (Lxx){
-    cout << "Yaw Lxx Called" << endl;
-      Lxx->setZero();
+      /*
+      //Analytical
+      Matrix<double, _nx, _nx> LxxTrue;
+      LxxTrue.setZero();
       Matrix3d RTdfhat;
       SO3::Instance().hat(RTdfhat,x.R.transpose()*df);
       Matrix3d d2LdR2 = -gain*ehat*RTdfhat;
-      Matrix3d d2LdRdp = gain*(ehat.transpose()*x.R.transpose()*ddfdp);
-      Matrix3d d2LdpdR = gain*(ddfdp.transpose()*x.R*ehat);
+      Matrix3d d2LdRdp = -gain*(ehat.transpose()*x.R.transpose()*ddfdp);
+      Matrix3d d2LdpdR = -gain*(ddfdp.transpose()*x.R*ehat);
       Matrix3d d2Ldp2 = -gain*(Rstack*d2dfdp2);
-      Lxx->topLeftCorner(3,3) = d2LdR2;
-      Lxx->block(0,3,3,3) = d2LdRdp;
-      Lxx->block(3,0,3,3) = d2LdpdR;
-      Lxx->block(3,3,3,3) = d2Ldp2;
+      LxxTrue.topLeftCorner(3,3) = d2LdR2;
+      LxxTrue.block(0,3,3,3) = d2LdRdp;
+      LxxTrue.block(3,0,3,3) = d2LdpdR;
+      LxxTrue.block(3,3,3,3) = d2Ldp2;
+      //Finite
+      Matrix<double, _nx, _nx> LxxF;
+      LxxF.setZero();
+      double eps = 1e-10;
+      Vectornd dx;
+      for (int i = 0; i < Cost<T, _nx, _nu, _np>::sys.X.n; ++i ) {
+        //Set dx to eps in the the i-th dim
+        dx.setZero();
+        dx[i] = eps;
+        //Calculate using dx
+        T xtemp;
+        Cost<T, _nx, _nu, _np>::sys.X.Retract(xtemp,x,dx);//xtemp = xa+dx
+        Cost<T, _nx, _nu, _np>::sys.Rec(xtemp,h);//Reconstruct
+        Matrix<double, _nx, 1> Lpos;
+        pop_Lx(xtemp,h, &Lpos);
+        Lpos = Lpos - (*Lx);
+        //Calculate using -dx
+        Cost<T, _nx, _nu, _np>::sys.X.Retract(xtemp,x,-dx);//xtemp = xa+dx
+        Cost<T, _nx, _nu, _np>::sys.Rec(xtemp,h);//Reconstruct
+        Matrix<double, _nx, 1> Lneg;
+        pop_Lx(xtemp,h, &Lneg);
+        Lneg = Lneg - (*Lx);
+        //Set Lx[i]
+        LxxF.col(i) = (Lpos - Lneg)/(2*eps);
+      }
+      if(!useFinite) {
+        (*Lxx) = LxxTrue;
+      } else {
+        (*Lxx) = LxxF;
+      }
+      cout << "LxxA: " << endl << LxxTrue << endl;
+      cout << "LxxF: " << endl << LxxF << endl;
+      cout << "Lxx: " << endl << (*Lxx) << endl;*/
+      Lxx->setIdentity();
     }
     if (Lu)
       Lu->setZero();
@@ -151,7 +258,7 @@ namespace gcop {
     if (Lpx)
       Lpx->setZero();
 
-    cout << "Yaw L Returned" << endl;
+    //cout << "Yaw L Returned: " << c << endl;
     return c;
   }
 }
