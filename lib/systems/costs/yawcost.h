@@ -93,7 +93,6 @@ namespace gcop {
       double dy = df(1);
       double dz = df(2);
       df = df/df.norm();
-      double c = simple_c(x);
       Matrix3d ehat;
       SO3::Instance().hat(ehat, e);
       Matrix3d ddfdp;
