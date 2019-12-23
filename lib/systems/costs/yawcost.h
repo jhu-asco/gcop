@@ -84,7 +84,7 @@ namespace gcop {
   template <typename T, int _nx, int _nu, int _np>
     void YawCost<T, _nx, _nu, _np>::pop_Lx(const T& x, double h, Matrix<double, _nx, 1> *Lx){
       Vector3d df = target - x.p;
-      //df(2) = 0;
+      df(2) = 0;
       double dnorm = df.norm();
       if (dnorm < 1e-10) {
         return;
