@@ -66,14 +66,14 @@ namespace gcop {
   //bool useFinite;
 
   double simple_c(const T &x);
-  void pop_Lx(const T &x, double h, Matrix<double, _nx, 1> *Lx);
+  void pop_Lx(const T &x, Matrix<double, _nx, 1> *Lx);
   };
 
   template <typename T, int _nx, int _nu, int _np> 
     double YawCost<T, _nx, _nu, _np>::simple_c(const T& x) {
 
     Vector3d df = target - x.p;
-    //df(2) = 0;
+    df(2) = 0;
     double dnorm = df.norm();
     if (dnorm < 1e-10) {
       return 0;
@@ -82,7 +82,7 @@ namespace gcop {
     return (gain*(1 - (x.R*e).dot(df)));
   }
   template <typename T, int _nx, int _nu, int _np>
-    void YawCost<T, _nx, _nu, _np>::pop_Lx(const T& x, double h, Matrix<double, _nx, 1> *Lx){
+    void YawCost<T, _nx, _nu, _np>::pop_Lx(const T& x, Matrix<double, _nx, 1> *Lx){
       Vector3d df = target - x.p;
       df(2) = 0;
       double dnorm = df.norm();
@@ -141,16 +141,16 @@ namespace gcop {
                                           Vectormd *Lp, Matrixmd *Lpp,
                                           Matrixmnd *Lpx) {
     Vector3d df = target - x.p;
-    //df(2) = 0;
+    df(2) = 0;
     double dnorm = df.norm();
     if (dnorm < 1e-10) {
       return 0;
     }
-    double dx = df(0);
+    double c = h*simple_c(x);
+    /*double dx = df(0);
     double dy = df(1);
     double dz = df(2);
     df = df/df.norm();
-    double c = simple_c(x);
     Matrix3d ehat;
     SO3::Instance().hat(ehat, e);
     Matrix3d ddfdp;
@@ -172,9 +172,10 @@ namespace gcop {
     MatrixXd Rstack(3,9);
     Rstack << (x.R*e).transpose(), MatrixXd::Zero(1,6),
               MatrixXd::Zero(1,3), (x.R*e).transpose(), MatrixXd::Zero(1,3),
-              MatrixXd::Zero(1,6), (x.R*e).transpose();
+              MatrixXd::Zero(1,6), (x.R*e).transpose();*/
     if (Lx){
-      pop_Lx(x,h,Lx);
+      pop_Lx(x,Lx);
+      (*Lx) = (*Lx)*h;
       //Analytical Lx
       //Matrix<double, _nx, 1> LxTrue;
       /*LxTrue.setZero();
@@ -195,6 +196,7 @@ namespace gcop {
       //cout << "Lx: " << endl << (*Lx) << endl;
     }
     if (Lxx){
+      Lxx->setIdentity();
       /*
       //Analytical
       Matrix<double, _nx, _nx> LxxTrue;
@@ -242,7 +244,6 @@ namespace gcop {
       cout << "LxxA: " << endl << LxxTrue << endl;
       cout << "LxxF: " << endl << LxxF << endl;
       cout << "Lxx: " << endl << (*Lxx) << endl;*/
-      Lxx->setIdentity();
     }
     if (Lu)
       Lu->setZero();
