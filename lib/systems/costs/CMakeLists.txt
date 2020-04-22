@@ -34,6 +34,7 @@ set(headers
     body2dslamcost.h
     qrotoridmodelcost.h
     yawcost.h
+    rpcost.h
 #airplanecost.h
 )
 

@@ -13,6 +13,7 @@ set(headers
   constraint.h
   groundplane.h
   yawvelocityconstraint.h
+  direction_constraint.h
 )
 
 IF (PQP_FOUND)
