@@ -11,6 +11,7 @@ set(sources
 set(headers
     body2dcost.h
     body3dcost.h
+    body3dwaypointcost.h
     kinbody3dcost.h
     cost.h
     gunicyclecost.h
