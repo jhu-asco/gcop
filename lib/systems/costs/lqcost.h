@@ -228,7 +228,6 @@ namespace gcop {
     
         // check if final state
     if (t > this->tf - 1e-10) {
-
       if (xds) {
         this->sys.X.Lift(dx, xds->back(), x); // difference (on a vector space we have dx = x - xf)
       } else {
