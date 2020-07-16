@@ -122,9 +122,13 @@ namespace gcop {
 	    if ((t > wp_time - 1e-5) && (t < wp_time + 1e-5)) {
 		    //cout << "Time " << t << "Triggered wp time " << wp_time << endl;
 		    Body3dState goal = goal_list[ii];
-		    Body3dCost<4> temp(m_system,t,goal);
+		    Body3dCost<4> temp(m_system,t+1e-11,goal);
 		    temp.Qf = Q;
-		    return temp.L(t,x,u,h,p,Lx,Lxx,Lu,Luu,Lxu,Lp,Lpp,Lpx);
+                    double temp_L = temp.L(t,x,u,h,p,Lx,Lxx,Lu,Luu,Lxu,Lp,Lpp,Lpx);
+                    if (std::isnan(temp_L)) {
+                      cout << "WaypointCost threw NaN" << endl;
+                    }
+		    return temp_L;
 	    }
     }
     //If here, we reached the end of time_list
