@@ -3,10 +3,10 @@
 
 #include <Eigen/Dense>
 #include "se3.h"
+#include <vector>
 
 namespace gcop {
   
-  using namespace std;
   using namespace Eigen;
   
   // state dimension for nb-body system
@@ -44,14 +44,14 @@ namespace gcop {
    }
    */
     
-    vector<Matrix4d> gs;        ///< configurations
-    vector<Vector6d> vs;        ///< body-fixed velocities
-    vector<Matrix4d> dgs;       ///< relative xforms from b/n bodies
+    std::vector<Matrix4d> gs;        ///< configurations
+    std::vector<Vector6d> vs;        ///< body-fixed velocities
+    std::vector<Matrix4d> dgs;       ///< relative xforms from b/n bodies
     
     VectorXd r;  ///< joint angles
     VectorXd dr; ///< joint velocities
-    vector<bool> ub; ///< at upper bound
-    vector<bool> lb; ///< at lower bound
+    std::vector<bool> ub; ///< at upper bound
+    std::vector<bool> lb; ///< at lower bound
 
     VectorXd zl;  ///< lower bound spring
     VectorXd zu;  ///< upper bound spring
