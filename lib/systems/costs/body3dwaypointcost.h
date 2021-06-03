@@ -126,7 +126,10 @@ namespace gcop {
 		    temp.Qf = Q;
                     double temp_L = temp.L(t,x,u,h,p,Lx,Lxx,Lu,Luu,Lxu,Lp,Lpp,Lpx);
                     if (std::isnan(temp_L)) {
+                      cout << "NaN t: " << t << endl;
                       cout << "WaypointCost threw NaN" << endl;
+                      cout << "x: " << endl << "R: " << endl << x.R << endl << "p: " << endl << x.p << endl << "w: " << endl << x.w << endl << "v: " << endl << x.v << endl;
+                      cout << "xf: " << endl << "R: " << endl << goal.R << endl << "p: " << endl << goal.p << endl << "w: " << endl << goal.w << endl << "v: " << endl << goal.v << endl;
                     }
 		    return temp_L;
 	    }
