@@ -227,8 +227,8 @@ namespace gcop {
     int k = (h > 0.0) ? round(t/h) : 0 ;
     
         // check if final state
+    //cout << "t: " << t << endl;
     if (t > this->tf - 1e-10) {
-
       if (xds) {
         this->sys.X.Lift(dx, xds->back(), x); // difference (on a vector space we have dx = x - xf)
       } else {
@@ -268,10 +268,20 @@ namespace gcop {
       if (Lxu)
         Lxu->setZero();    
       
+      double retVal = 0;
       if (diag)
-        return dx.dot(Qf.diagonal().cwiseProduct(dx))/2;
+        retVal = dx.dot(Qf.diagonal().cwiseProduct(dx))/2;
+        //return dx.dot(Qf.diagonal().cwiseProduct(dx))/2;
       else
-        return dx.dot(Qf*dx)/2;
+        retVal = dx.dot(Qf*dx)/2;
+        //return dx.dot(Qf*dx)/2;
+      if (std::isnan(retVal)){
+        cout << "Retval is NaN" << endl;
+        cout << "t: " << t << endl;
+        cout << "dx: " << dx << endl;
+        cout << "Qf: " << Qf << endl;
+      }
+      return retVal;
       
     } else {
 
