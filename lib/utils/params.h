@@ -5,6 +5,7 @@
 #include <cstring>
 #include <iostream>
 #include <Eigen/Dense>
+#include <vector>
 
 /*
  *  Provides storage and retrieval for arbitrary 
