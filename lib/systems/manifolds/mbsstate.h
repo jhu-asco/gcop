@@ -4,6 +4,7 @@
 #include <Eigen/Dense>
 #include "se3.h"
 #include <vector>
+
 namespace gcop {
   
   using namespace std;

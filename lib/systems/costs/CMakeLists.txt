@@ -11,6 +11,7 @@ set(sources
 set(headers
     body2dcost.h
     body3dcost.h
+    body3dwaypointcost.h
     kinbody3dcost.h
     cost.h
     gunicyclecost.h
@@ -33,6 +34,8 @@ set(headers
     bacost.h
     body2dslamcost.h
     qrotoridmodelcost.h
+    yawcost.h
+    rpcost.h
 #airplanecost.h
 )
 
