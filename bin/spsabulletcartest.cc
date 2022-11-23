@@ -8,6 +8,7 @@
 #include "params.h"
 #include "bulletrccar.h"
 #include "bulletworld.h"
+#include <unistd.h>
 
 using namespace std;
 using namespace Eigen;
